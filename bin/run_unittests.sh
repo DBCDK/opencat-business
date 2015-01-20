@@ -3,8 +3,8 @@
 SHELL_CMD=dbc-jsshell
 DISTRIBUTIONS_PATH="../distributions"
 
-LOG_FILE="jstest.log"
-LOG_LEVEL="debug"
+LOG_FILE=jstest.log
+LOG_LEVEL=debug
 
 modules=( "common/src/entrypoints/update"
           "common/src/validation"
@@ -20,4 +20,4 @@ do
     search_args=$search_args"-a file:$DISTRIBUTIONS_PATH/$i "
 done
 
-$SHELL_CMD $search_args "-l $LOG_FILE -L $LOG_LEVEL -c main()" run_unittests.js
+$SHELL_CMD "$search_args -l $LOG_FILE -L $LOG_LEVEL -c main() run_unittests.js"
