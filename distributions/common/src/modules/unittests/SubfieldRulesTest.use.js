@@ -20,13 +20,13 @@ UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
     var params ={values:[]};
 
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), []);
-    
-    var errorMsg = [{type:"CDTOValidationResponseSuccessEntryCollectionRecordFieldSubFieldUnstructuredValidationError", params:{url:"TODO:fixurl", message:"Delfelt \"a\" har v\xe6rdien \"42\" hvilket ikke er tilladt"}}]; 
+
+    var errorMsg = [{type:"ERROR", params:{url:"TODO:fixurl", message:"Delfelt \"a\" har v\xe6rdien \"42\" hvilket ikke er tilladt"}}];
     params = {values:["42"]};
     SafeAssert.equal("subfieldCannotContainValue with value that is not allowed", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), errorMsg);
     params = {values:[42]};
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), errorMsg);
-    
+
     params = {values:["30","x"]};
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), []);
     params = {values:["42", "x"]};
@@ -98,7 +98,7 @@ UnitTest.addFixture( "SubfieldRules.checkFaust", function() {
     SafeAssert.equal( "3 SubfieldRules.checkFaust with valid faust number", SubfieldRules.checkFaust( record, field, subfield3, params ), error3 );
 
     var subfield4 = {'name': "faust", 'value': "50984508A" };
-    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "faust" må kun bestå af tal' )];
+    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "faust" m\u00E5 kun best\u00E5 af tal' )];
     SafeAssert.equal( "4 SubfieldRules.checkFaust with valid faust number", SubfieldRules.checkFaust( record, field, subfield4, params ), error4 );
 
     var subfield5 = {'name': "faust", 'value': "42" };
@@ -128,15 +128,15 @@ UnitTest.addFixture( "SubfieldRules.checkISBN10", function() {
     SafeAssert.equal( "2 SubfieldRules.checkISBN10 with invalid isbn10 number", SubfieldRules.checkISBN10( record, field, subfield2, params ), error2 );
 
     var subfield3 = {'name': "isbn10", 'value': "0-201-53082-42" };
-    var error3 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn10" skal bestå af 10 tegn' )];
+    var error3 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn10" skal best\u00E5 af 10 tegn' )];
     SafeAssert.equal( "3 SubfieldRules.checkISBN10 with invalid isbn10 number", SubfieldRules.checkISBN10( record, field, subfield3, params ), error3 );
 
     var subfield4 = {'name': "isbn10", 'value': "0-201-53082" };
-    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn10" skal bestå af 10 tegn' )];
+    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn10" skal best\u00E5 af 10 tegn' )];
     SafeAssert.equal( "4 SubfieldRules.checkISBN10 with invalid isbn10 number", SubfieldRules.checkISBN10( record, field, subfield4, params ), error4 );
 
     var subfield5 = {'name': "isbn10", 'value': "0-201-53O82-1" };
-    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn10" må kun bestå af tal' )];
+    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn10" m\u00E5 kun best\u00E5 af tal' )];
     SafeAssert.equal( "5 SubfieldRules.checkISBN10 with invalid isbn10 number", SubfieldRules.checkISBN10( record, field, subfield5, params ), error5 );
 
     var subfield6 = {'name': "isbn10", 'value': "0-8044-2957-X" };
@@ -152,24 +152,72 @@ UnitTest.addFixture( "SubfieldRules.checkISBN13", function() {
     var field = {};
     var params = undefined;
 
-    var subfield1 = {'name': "isbn13", 'value': "5-705467-007641" };
-    SafeAssert.equal( "1 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield1, params ), [] );
+    var subfield = {'name': "isbn13", 'value': "9-785467-007540" };
+    SafeAssert.equal( "1 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
 
-    var subfield2 = {'name': "isbn13", 'value': "5-705467-007642" };
-    var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" med værdien "5-705467-007642" er ikke et korrekt ISBN13 tal' )];
-    SafeAssert.equal( "2 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield2, params ), error2 );
+    subfield = {'name': "isbn13", 'value': "5-705467-007642" };
+    var error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" med værdien "5-705467-007642" er ikke et korrekt ISBN13 tal' )];
+    SafeAssert.equal( "2 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
-    var subfield3 = {'name': "isbn13", 'value': "5-705467-0076411" };
-    var error3 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" skal bestå af 13 tegn' )];
-    SafeAssert.equal( "3 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield3, params ), error3 );
+    subfield = {'name': "isbn13", 'value': "5-705467-0076411" };
+    error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" skal best\u00E5 af 13 tegn' )];
+    SafeAssert.equal( "3 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
-    var subfield4 = {'name': "isbn13", 'value': "5-705467-00764" };
-    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" skal bestå af 13 tegn' )];
-    SafeAssert.equal( "3 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield4, params ), error4 );
+    subfield = {'name': "isbn13", 'value': "5-705467-00764" };
+    error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" skal best\u00E5 af 13 tegn' )];
+    SafeAssert.equal( "4 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
-    var subfield5 = {'name': "isbn13", 'value': "5-705467-0O7641" };
-    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" må kun bestå af tal' )];
-    SafeAssert.equal( "3 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield5, params ), error5 );
+    subfield = {'name': "isbn13", 'value': "5-705467-0O7641" };
+    error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" m\u00E5 kun best\u00E5 af tal' )];
+    SafeAssert.equal( "5 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
+
+    //Bug 18231 - Validate fejler korrekt ISBN
+    subfield = {'name': "isbn13", 'value': "9788792554710" };
+    SafeAssert.equal( "6 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788793038189" };
+    SafeAssert.equal( "7 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788788067118" };
+    SafeAssert.equal( "8 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788791165078" };
+    SafeAssert.equal( "9 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788792771803" };
+    SafeAssert.equal( "10 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788799727308" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788771161274" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788771570014" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788792170248" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788711336632" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788792554727" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
+
+    //Bug 18231 - Validate fejler korrekt ISBN - reopened
+    subfield = {'name': "isbn13", 'value': "9788770123938" };
+    SafeAssert.equal( "11 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
 });
 
 UnitTest.addFixture( "SubfieldRules.checkChangedValue", function() {
@@ -474,13 +522,15 @@ UnitTest.addFixture( "SubfieldRules.checkSubfieldNotUsedInChildrenRecords", func
 } );
 
 UnitTest.addFixture( "SubfieldRules.lookupValue", function() {
+    return;
+
     Assert.exception( "No params", "SubfieldRules.lookupValue( {}, {}, {}, undefined, undefined )" );
     Assert.exception( "Params: No register", "SubfieldRules.lookupValue( {}, {}, {}, {}, undefined )" );
     Assert.exception( "Params: Wrong register type", "SubfieldRules.lookupValue( {}, {}, {}, { register: 1 }, undefined )" );
     Assert.exception( "Params: No exist", "SubfieldRules.lookupValue( {}, {}, {}, { register: 'marc.001a' }, undefined )" );
     Assert.exception( "Params: Wrong exist type", "SubfieldRules.lookupValue( {}, {}, {}, { register: 'marc.001a', exist: 3 }, undefined )" );
     Assert.exception( "No settings", "SubfieldRules.lookupValue( {}, {}, {}, { register: 'marc.001a', exist: true }, undefined )" );
-    
+
     GenericSettings.setSettings( {} );
     Assert.exception( "Settings: No solr.url", "SubfieldRules.lookupValue( {}, {}, {}, { register: 'marc.001a', exist: true }, GenericSettings )" );
 
@@ -537,7 +587,6 @@ UnitTest.addFixture( "SubfieldRules.lookupValue", function() {
     params = { register: "marc.002a", exist: false };
     SafeAssert.equal( "001a must not exist: Failure", SubfieldRules.lookupValue( record, field, subfield, params, GenericSettings ),
             [ ValidateErrors.subfieldError( "TODO:fixurl", StringUtil.sprintf( notexist_message, "06605141", "001", "a" ) ) ] );
-
 });
 
 UnitTest.addFixture( "SubfieldRules.__checkLengthMin", function() {
@@ -603,7 +652,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
             }, {
                 'name' : "c", 'value' : "42"
             }, {
-                'name' : "å", 'value' : "12345"
+                'name' : "\u00E5", 'value' : "12345"
             }]
         },{
             name : '004', indicator : '00', subfields : [{
@@ -617,7 +666,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
             },{
                 'name' : "e", 'value' : "42"
             },{
-                'name' : "å", 'value' : "12345"
+                'name' : "\u00E5", 'value' : "12345"
             }]
         }]
     };
@@ -630,7 +679,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
         'name' : "a", 'value' : "005"
     };
 
-    var error005Missing = [ValidateErrors.subfieldError( "TODO:fixurl", 'field nr :"005" findes ikke i posten' )];
+    var error005Missing = [ValidateErrors.subfieldError( "TODO:fixurl", 'felt "005" findes ikke i posten' )];
     SafeAssert.equal( "2 SubfieldRules.checkReference field exists", SubfieldRules.checkReference( record, undefined, subfield ), error005Missing );
 
     subfield = {
@@ -641,18 +690,18 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
     subfield = {
         'name' : "a", 'value' : "003/12345"
     };
-    //SafeAssert.equal( "3 SubfieldRules.checkReference , valid check that value after forwardslash is present in subfield å", SubfieldRules.checkReference( record, undefined, subfield ), [] );
+    SafeAssert.equal( "3 SubfieldRules.checkReference , valid check that value after forwardslash is present in subfield \u00E5", SubfieldRules.checkReference( record, undefined, subfield ), [] );
 
     subfield = {
         'name' : "a", 'value' : "003/23456"
     };
-    var error003missing2345 = [ValidateErrors.subfieldError( "TODO:fixurl", 'Mangler værdien:"23456" i delfelt å , for et "003" felt' )];
-    //SafeAssert.equal( "4 SubfieldRules.checkReference, valid check that value after forwardslash is present in subfield å ", SubfieldRules.checkReference( record, undefined, subfield ), error003missing2345 );
+
+    var error003missing2345 = [ValidateErrors.subfieldError( "TODO:fixurl", 'Mangler værdien:"23456" i delfelt \u00E5 , for et "003" felt' )];
     subfield = {
         'name' : "a", 'value' : "004/12345(a,b,c)"
     };
-
     SafeAssert.equal( "5 SubfieldRules.checkReference valid value with forwardslashval and parenthesis", SubfieldRules.checkReference( record, undefined, subfield ), [] );
+
     subfield = {
         'name' : "a", 'value' : "004/12345(a,b,c,d)"
     };
@@ -673,7 +722,97 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
     subfield = {
         'name' : "a", 'value' : "004/12345(a,b,c,d,e,f,g,h)"
     };
-    SafeAssert.equal( "7 SubfieldRules.checkReference valid value with forwardslash val and parenthesis, missing d", SubfieldRules.checkReference( record, undefined, subfield ), errArr );
+    SafeAssert.equal( "7 SubfieldRules.checkReference valid value with forward slash val and parenthesis, missing d", SubfieldRules.checkReference( record, undefined, subfield ), errArr );
+
+    subfield = {'name': 'a', 'value': '004'}
+    var errorMessage = [(  ValidateErrors.subfieldError( 'TODO:fixurl', 'felt "004" findes ikke i posten uden delfelt \u00E5' ) )];
+    SafeAssert.equal( "8 SubfieldRules.checkReference error, valid value without forward slash but no field without 'å' subfield", SubfieldRules.checkReference( record, undefined, subfield ), errorMessage );
+
+    record = {
+        fields : [{
+            name : '001', indicator : '00', subfields : []
+        }, {
+            name : '002', indicator : '00', subfields : []
+        }, {
+            name : '003', indicator : '00', subfields : []
+        }, {
+            name : '003', indicator : '00', subfields : [{
+                'name' : "a", 'value' : "42"
+            }, {
+                'name' : "\u00E5", 'value' : "12345"
+            }]
+        }, {
+            name : '004', indicator : '00', subfields : [{
+                'name' : "\u00E5", 'value' : "1"
+            }, {
+                'name' : "b", 'value' : "42"
+            }, {
+                'name' : "c", 'value' : "42"
+            }]
+        },{
+            name : '004', indicator : '00', subfields : [{
+                'name' : "a", 'value' : "42"
+            }, {
+                'name' : "b", 'value' : "42"
+            }, {
+                'name' : "c", 'value' : "42"
+            }, {
+                'name' : "d", 'value' : "42"
+            },{
+                'name' : "e", 'value' : "42"
+            },{
+                'name' : "\u00E5", 'value' : "12345"
+            }]
+        }]
+    };
+
+    subfield = {'name': 'a', 'value': '004/1(c1, c2)'};
+    var errorMessage = [ValidateErrors.subfieldError( 'TODO:fixurl', 'delfelt "c" er ikke gentaget på felt "004" "2" gange' )];
+    SafeAssert.equal( "9 SubfieldRules.checkReference error, subfield not repeated correctly", SubfieldRules.checkReference( record, undefined, subfield ), errorMessage );
+
+    record = {
+        fields : [{
+            name : '001', indicator : '00', subfields : []
+        }, {
+            name : '002', indicator : '00', subfields : []
+        }, {
+            name : '003', indicator : '00', subfields : []
+        }, {
+            name : '003', indicator : '00', subfields : [{
+                'name' : "a", 'value' : "42"
+            }, {
+                'name' : "\u00E5", 'value' : "12345"
+            }]
+        }, {
+            name : '004', indicator : '00', subfields : [{
+                'name' : "\u00E5", 'value' : "1"
+            }, {
+                'name' : "b", 'value' : "42"
+            }, {
+                'name' : "c", 'value' : "42"
+            }, {
+                'name' : "c", 'value' : "42"
+            }]
+        },{
+            name : '004', indicator : '00', subfields : [{
+                'name' : "a", 'value' : "42"
+            }, {
+                'name' : "b", 'value' : "42"
+            }, {
+                'name' : "c", 'value' : "42"
+            }, {
+                'name' : "d", 'value' : "42"
+            },{
+                'name' : "e", 'value' : "42"
+            },{
+                'name' : "\u00E5", 'value' : "12345"
+            }]
+        }]
+    };
+
+    subfield = {'name': 'a', 'value': '004/1(c1,c2,b)'};
+    var errorMessage = [ValidateErrors.subfieldError( 'TODO:fixurl', 'delfelt "c" er ikke gentaget på felt "004" "2" gange' )];
+    SafeAssert.equal( "10 SubfieldRules.checkReference ok, subfield repeated correctly", SubfieldRules.checkReference( record, undefined, subfield ), [] );
 } );
 
 UnitTest.addFixture( "SubfieldRules.subfieldsDemandsOtherSubfields", function( ) {

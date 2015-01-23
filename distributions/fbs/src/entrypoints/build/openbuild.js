@@ -14,10 +14,11 @@ function getBuildSchemas() {
     return JSON.stringify( TemplateContainer.getTemplateNames() ); 
 }
 //-----------------------------------------------------------------------------
-function checkTemplate( name ) {
+function checkTemplate( name, settings ) {
     var result;
     try {
-        result = TemplateContainer.get( name ) !== undefined;
+        TemplateContainer.setSettings( settings );
+        result = TemplateContainer.getUnoptimized( name ) !== undefined;
     } catch ( exception ) {
         // It is ok for the TemplateContainer.get to trow, it means that the 
         // template does not exist and we can then return false.
@@ -27,9 +28,10 @@ function checkTemplate( name ) {
 }
 
 //-----------------------------------------------------------------------------
-function buildRecord( templateName, record, faustNumber ) {
+function buildRecord( templateName, record, faustNumber, settings ) {
     var result;
     var templateProvider = function() {
+        TemplateContainer.setSettings( settings );
         return TemplateContainer.getUnoptimized( templateName );
     };
     var faustProvider = function() {

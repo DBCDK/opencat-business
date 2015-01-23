@@ -59,7 +59,6 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6.htm",
             "subfields": {
                 "a": {
-                    "mandatory": true,
                     "repeatable": false,
                     "rules": [
                         {
@@ -313,7 +312,7 @@
                     "type": "FieldRules.subfieldConditionalMandatory",
                     "params": {
                         "subfieldConditional": "v",
-                        "value": "0",
+                        "values": [ "0" ],
                         "subfieldMandatory": "a"
                     }
                 },
@@ -321,7 +320,7 @@
                     "type": "FieldRules.subfieldConditionalMandatory",
                     "params": {
                         "subfieldConditional": "v",
-                        "value": "1",
+                        "values": [ "1" ],
                         "subfieldMandatory": "a"
                     }
                 }
@@ -1701,15 +1700,9 @@
         "256":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3f.htm",
             "subfields":{
-            	"A":{
-                    "repeatable": false
-                    },
                 "a":{
                     "repeatable":false
                 },
-                "B":{
-                    "repeatable": false
-                    },
                 "b":{
                     "repeatable":false
                 },
@@ -1839,6 +1832,9 @@
                 "&":{
                     "repeatable":false
                 },
+                "\u00E5":{
+					"repeatable": false
+				},
                 "A":{
                     "repeatable":false
                 },
@@ -3852,6 +3848,9 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b.htm",
             "subfields":{
                 "&":{},
+                "\u00E5":{
+					"repeatable": false
+				},
                 "A":{
                     "repeatable":false
                 },
@@ -3907,7 +3906,6 @@
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{
-                "&":{},
                 "a":{},
                 "b":{},
                 "c":{},

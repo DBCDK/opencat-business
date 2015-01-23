@@ -9,6 +9,8 @@ use( "Solr" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
 
+use( "Print" );
+
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'SubfieldRules' ];
 
@@ -22,21 +24,21 @@ EXPORTED_SYMBOLS = [ 'SubfieldRules' ];
  */
 var SubfieldRules = function() {
 
-    
+
     /**
      * subfieldCannotContainValue checks that if a given subfield does not contain the value from params
-     * @syntax SubfieldRules.subfieldConditionalMandatoryField( record, field, subfield, params )
+     * @syntax SubfieldRules.subfieldCannotContainValue( record, field, subfield, params )
      * @param {object} record
      * @param {object} field
      * @param {object} subfield
-     * @param {object} Object containing a property names values with an array of string values that the subfield may not contain 
+     * @param {object} Object containing a property names values with an array of string values that the subfield may not contain
      * @return Array which is either empty or contains an error
      * @name SubfieldRules.subfieldCannotContainValue
      * @method
      */
 
     function subfieldCannotContainValue( record, field, subfield, params ) {
-        Log.trace( "SubfieldRules.subfieldConditionalMandatoryField" );
+        Log.trace( "SubfieldRules.subfieldCannotContainValue" );
         ValueCheck.check( "params.values", params.values );
         ValueCheck.check( "params", params.values ).instanceOf( Array );
         var ret = [];
@@ -51,9 +53,9 @@ var SubfieldRules = function() {
         return ret;
     }
 
-    
+
     /**
-     * subfieldsDemandsMandatoryField checks that if a given subfield contains the value from params
+     * subfieldConditionalMandatoryField checks that if a given subfield contains the value from params
      * then the field from params is mandatory
      * @syntax SubfieldRules.subfieldConditionalMandatoryField( record, field, subfield, params )
      * @param {object} record
@@ -110,13 +112,13 @@ var SubfieldRules = function() {
         return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
     }
 
-   /**
+    /**
      * CheckReference is used to check if the fields contains correct references
      * the function is invoked with a subfield which contains one of three forms of a formatted string
      * 1  = 700
      * 2  = 700/12
      * 3  = 700/12(a,b,c)
-     * 1 ) its checked wheter a 700 field exists
+     * 1 ) its checked whether a 700 field exists with no å subfield
      * 2 ) field must exists and subfield å must contain the value after the backslash
      * 3 ) rule 1 + 2 and the field with the correct value in å must also contain the subfields denoted in the paranthesis
      * url Danmarc2 : http://www.kat-format.dk/danMARC2/Danmarc2.99.htm#pgfId=1575494
@@ -132,7 +134,6 @@ var SubfieldRules = function() {
      */
     function checkReference( record, field, subfield, params ) {
         Log.trace( "SubfieldRules.checkReference" );
-
         var ret = [];
 
         var fieldNameToCheck = subfield.value.slice( 0, 3 );// String
@@ -140,10 +141,26 @@ var SubfieldRules = function() {
         var forwardslashValue = getValueFromForwardSlash( subfield.value ); // { containsValidValue: Boolean, Value: String }
         var subfieldValuesToCheck = getValuesToCheckFromparenthesis( subfield.value );// Array: String
         var containsParenthesisValues = subfieldValuesToCheck.length > 0;
+        var errorMessage;
 
         if ( fields.length < 1 ) {
-            var errorMessage = 'field nr :"' + fieldNameToCheck + '" findes ikke i posten';
+            errorMessage = 'felt "' + fieldNameToCheck + '" findes ikke i posten';
             return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
+        }
+
+        // if the reference value is only 3 chars long the field referenced must exist without an å subfield
+        if ( subfield.value.length === 3 ) {
+            var subfieldWithoutAA = false;
+            for ( var i = 0; i < fields.length && subfieldWithoutAA === false; ++i ) {
+                if ( subfieldExistOnfield( fields[i], '\u00E5' ) === false ) {
+                    subfieldWithoutAA = true;
+                }
+            }
+
+            if ( subfieldWithoutAA === false ) {
+                errorMessage = 'felt "' + fieldNameToCheck + '" findes ikke i posten uden delfelt \u00E5';
+                return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
+            }
         }
 
         if ( forwardslashValue.containsValidValue === true ) {
@@ -170,9 +187,20 @@ var SubfieldRules = function() {
                 found[fieldsWithSubfield[i].subfields[j].name] = true;
             }
             subfieldValuesToCheck.forEach( function( val ) {
-                if ( !found.hasOwnProperty( val ) ) {
-                    var errorMessage = 'I nummer "' + (i+1) +'", felt :"' + fieldsWithSubfield[0].name + '" mangler delfeltet "' + val + '"';
-                    ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
+                val = val.trim();
+                if ( val.length > 1 ) {
+                    var nbr = val.slice( 1 );
+                    var subfield = val.slice( 0, 1 );
+                    var count = countSubfieldOccurrences( fieldsWithSubfield[i], subfield );
+                    if ( count < nbr ) {
+                        var errorMessage = 'delfelt "' + subfield +'" er ikke gentaget på felt "' + fieldsWithSubfield[i].name + '" "' + nbr + '" gange';
+                        ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
+                    }
+                } else {
+                    if ( !found.hasOwnProperty( val ) ) {
+                        var errorMessage = 'I nummer "' + (i+1) +'", felt :"' + fieldsWithSubfield[0].name + '" mangler delfeltet "' + val + '"';
+                        ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
+                    }
                 }
             } );
         }
@@ -188,7 +216,7 @@ var SubfieldRules = function() {
         var ret = [];
         for ( var i = 0; i < fields.length; ++i ) {
             for ( var j = 0; j < fields[i].subfields.length; ++j ) {
-                if ( fields[i].subfields[j].name === 'å' ) {
+                if ( fields[i].subfields[j].name === '\u00E5' ) {
                     if ( fields[i].subfields[j].value === matchValue ) {
                         ret.push( fields[i] );
                     }
@@ -241,6 +269,32 @@ var SubfieldRules = function() {
         }
         return ret;
     }
+
+    // helper function that checks if a subfield with a given value exists on the field
+    function subfieldExistOnfield( field, subfieldName ) {
+        Log.trace( "SubfieldRules.getValueToCheck" );
+        var ret = false;
+        for ( var i = 0 ; i < field.subfields.length && ret === false ; ++i ) {
+            if ( field.subfields[i].name === subfieldName ) {
+                ret = true;
+            }
+        }
+        return ret;
+    }
+
+    // helper function to count number of specific subfield occurrences
+    function countSubfieldOccurrences( field, subfieldName ) {
+        Log.trace( "SubfieldRules.countSubfieldOccurrences" );
+        var ret = 0;
+        for ( var i = 0 ; i < field.subfields.length ; ++i ) {
+            if ( field.subfields[i].name === subfieldName ) {
+                ret++;
+            } else {
+            }
+        }
+        return ret;
+    }
+
     /**
      * checkLength is used to check the length of the value of a subfield,
      * an error is returned if the field is not validated
@@ -330,7 +384,7 @@ var SubfieldRules = function() {
         var subfieldValue = subfield['value'].replace(/\s/g,"");
         var subfieldName = subfield['name'];
         if ( !isNumber( subfieldValue ) ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" må kun bestå af tal' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" m\u00E5 kun best\u00E5 af tal' ) );
         } else if ( subfieldValue.length < FAUST_MIN_LENGTH ) {
             result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" er mindre end ' + FAUST_MIN_LENGTH + ' tegn langt' ) );
         } else {
@@ -394,9 +448,9 @@ var SubfieldRules = function() {
         var subfieldName = subfield['name'];
         if ( !isNumber( subfieldValue.substring( 0, subfieldValue.length - 2 ) ) ||
                 (!isNumber(subfieldValue.substring( subfieldValue.length - 1 ) ) && subfieldValue.substring( subfieldValue.length - 1 ).toLowerCase() !== 'x' ) ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" må kun bestå af tal' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" m\u00E5 kun best\u00E5 af tal' ) );
         } else if ( subfieldValue.length !== 10 ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" skal bestå af 10 tegn' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" skal best\u00E5 af 10 tegn' ) );
         } else {
             // we must iterate the ISBN10 number string and multiply each number
             // with numbers 10 to 1.
@@ -445,39 +499,39 @@ var SubfieldRules = function() {
         var subfieldValue = subfield['value'].replace(/-/g,"");
         var subfieldName = subfield['name'];
         if ( !isNumber( subfieldValue ) ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" må kun bestå af tal' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" m\u00E5 kun best\u00E5 af tal' ) );
         } else if ( subfieldValue.length !== 13 ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" skal bestå af 13 tegn' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" skal best\u00E5 af 13 tegn' ) );
         } else {
-            var oddSum = 0;
-            var evenSum = 0;
+            var productSum = 0;
+            var singleWeight = [1, 3];
+            var weight = [];
+            while ( subfieldValue.length > weight.length ) {
+                weight = singleWeight.concat( weight );
+            }
             for ( var i = 0; i < ( subfieldValue.length - 1 ); ++i ) {
-                // we must iterate over values string and add all even digits
-                // together and all odd digits together except the last digits
-                // which is a checksum digit.
-                // next we multiply the even digits with 3 and add the odd digits.
-                // 10 - (((even digits * 3) + (odd digits)) % 10) = last digit
-                // we must add one because arrays are zero indexed
+                // Algorithm: http://en.wikipedia.org/wiki/International_Standard_Book_Number#Check_digits
+                // We must iterate over all number and multiply them with n
+                // where n alternates between 1 and 3.
+                // Next all numbers must be added and that number modulo 10
+                // must equal the last digit.
                 // example:
-                // 1. ISBN13 =             5-705467-007641
-                // 2. checksum =           1
-                // 3. clean & trimmed =    5 7 0 5 4 6 7 0 0 7 6 4 1
-                // 4. odd                  5 + 0 + 4 + 7 + 0 + 6   = 22
-                // 5. even                   7 + 5 + 6 + 0 + 7 + 4 = 29
-                // 6. even * 3 =           29 * 3 = 87
-                // 7. product sum =        109 = odd + ( even * 3 )
-                // 8. product sum % 10 =   109 % 10 = 9
-                // 9. validation           10 - 9 = 1 (checksum)
-                if ( ( i + 1 ) % 2 === 0) {
-                    evenSum += parseInt( subfieldValue.charAt( i ) ); // 5
-                } else {
-                    oddSum += parseInt( subfieldValue.charAt( i ) ); // 4
-                }
+                // 1. ISBN13 =             9-788793-038189
+                // 2. checksum =           9
+                // 3. clean & trimmed =    9 7 8 8 7 9 3 0 3 8 1 8 9
+                // 4. multiply with        1 3 1 3 1 3 1 3 1 3 1 3
+                // 5. result =             9+21+8+24+7+27+3+0+3+24+1+24 = 151
+                // 6. product sum % 10 =   151 % 10 = 1
+                // 7. validation           10 - 9 = 1 (checksum)
+                productSum += parseInt( subfieldValue.charAt( i ) ) * weight[i]; //4
             }
             var checksum = parseInt( subfieldValue.charAt( subfieldValue.length - 1 ) ); // 2
-            var productSum = oddSum + ( evenSum * 3 ); // 7
-            var productSumModSum = productSum % 10; // 8
-            if ( 10 - productSumModSum !== checksum ) { // 9
+            var x13 = ( 10 - productSum  % 10 ) % 10;
+            //printn("productSum % 10               =", productSum % 10 );
+            //printn("10 - productSum  % 10         =", 10 - productSum % 10 );
+            //printn("( 10 - productSum  % 10 ) % 10=", ( 10 - productSum  % 10 ) % 10 );
+            //printn("subfieldvalue=", subfieldValue, ", checksum=", checksum, ",x13=", x13);
+            if ( checksum !== x13 ) { // 7
                 result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" med værdien "' + subfield['value'] + '" er ikke et korrekt ISBN13 tal' ) );
             }
         }
@@ -507,7 +561,7 @@ var SubfieldRules = function() {
         	var marcRecord = DanMarc2Converter.convertToDanMarc2( record );
         	var recId = marcRecord.getValue( /001/, /a/ );
             var libNo = marcRecord.getValue( /001/, /b/ );
-        	
+
 	        if( !RawRepoClient.recordExists( recId, libNo ) ) {
 	        	Log.debug( "Record is new!" )
 	        	return [];
@@ -724,7 +778,7 @@ var SubfieldRules = function() {
     return {
         'subfieldsDemandsOtherSubfields' : subfieldsDemandsOtherSubfields,
         'subfieldConditionalMandatoryField' :  subfieldConditionalMandatoryField,
-        'subfieldCannotContainValue' : subfieldCannotContainValue,    
+        'subfieldCannotContainValue' : subfieldCannotContainValue,
         'checkReference' :checkReference,
         'checkLength': checkLength,
         'checkValue': checkValue,

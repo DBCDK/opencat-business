@@ -1,0 +1,10 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "indent":"true",
+      "q":"marc.002a:76605141",
+      "wt":"json"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }}

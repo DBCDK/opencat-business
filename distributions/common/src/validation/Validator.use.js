@@ -12,7 +12,7 @@ EXPORTED_SYMBOLS = [ 'Validator' ];
  * Module to optimize a template.
  * 
  * @namespace
- * @name TemplateOptimizer
+ * @name Validator
  * 
  */
 var Validator = function() {
@@ -61,7 +61,10 @@ var Validator = function() {
                     try {
                         Log.info("Run rule " + uneval(rule.type) + " on record");
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
-                        result = result.concat(rule.type(record, rule.params, settings));
+
+                        var valErrors = rule.type( record, rule.params, settings );
+                        valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
+                        result = result.concat( valErrors );
                     }
                     catch( ex ) {
                         throw StringUtil.sprintf( "Ved validering af posten: %s", ex );
@@ -120,7 +123,10 @@ var Validator = function() {
                     try {
                         Log.info("Run rule " + uneval(rule.type) + " on field " + field.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
-                        result = result.concat(rule.type(record, field, rule.params, settings));
+
+                        var valErrors = rule.type(record, field, rule.params, settings );
+                        valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
+                        result = result.concat( valErrors );
                     }
                     catch( ex ) {
                         throw StringUtil.sprintf( "Ved validering af felt '%s': %s", field.name, ex );
@@ -183,7 +189,10 @@ var Validator = function() {
                     try {
                         Log.info("Run rule " + uneval(rule.type) + " on subfield " + field.name + subfield.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
-                        result = result.concat(rule.type(record, field, subfield, rule.params, settings));
+
+                        var valErrors = rule.type(record, field, subfield, rule.params, settings );
+                        valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
+                        result = result.concat( valErrors );
                     }
                     catch( ex ) {
                         throw StringUtil.sprintf( "Ved validering af delfelt '%s%s': %s", field.name, subfield.name, ex );
@@ -199,7 +208,25 @@ var Validator = function() {
         finally {
             Log.trace( "Exit - Validator.validateSubfield()" );
         }
-    };
+    }
+
+    function __updateErrorTypeOnValidationResults( rule, valErrors ) {
+        Log.trace( "Enter - Validator.__updateErrorTypeOnValidationResults" );
+
+        try {
+            if (rule.hasOwnProperty("errorType")) {
+                for (var i = 0; i < valErrors.length; i++) {
+                    Log.trace( "Update validation error with type: ", rule.errorType );
+                    valErrors[i].type = rule.errorType;
+                }
+            }
+
+            return valErrors;
+        }
+        finally {
+            Log.trace( "Exit - Validator.__updateErrorTypeOnValidationResults" );
+        }
+    }
 
     return {
         'validateRecord': validateRecord,

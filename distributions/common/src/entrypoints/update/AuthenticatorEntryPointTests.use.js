@@ -11,13 +11,14 @@ UnitTest.addFixture( "AuthenticatorEntryPoint.authenticateRecord", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700100\n" +
+        "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n"
     );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
 
     Assert.equalValue( "Local record",
-                       AuthenticatorEntryPoint.authenticateRecord( JSON.stringify( record ), "netpunkt", "700100" ), true );
+                       AuthenticatorEntryPoint.authenticateRecord( JSON.stringify( record ), "netpunkt", "700400" ),
+                       JSON.stringify( FBSAuthenticator.authenticateRecord( marcRecord, "netpunkt", "700400" ) ) );
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -27,15 +28,17 @@ UnitTest.addFixture( "AuthenticatorEntryPoint.authenticateRecord", function() {
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
 
     Assert.equalValue( "Common record",
-                       AuthenticatorEntryPoint.authenticateRecord( JSON.stringify( record ), "netpunkt", "700100" ), false );
+                       AuthenticatorEntryPoint.authenticateRecord( JSON.stringify( record ), "netpunkt", "700400" ),
+                       JSON.stringify( FBSAuthenticator.authenticateRecord( marcRecord, "netpunkt", "700400" ) ) );
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 780300\n" +
+        "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n"
     );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
 
-    Assert.equalValue( "Local record from other library",
-                       AuthenticatorEntryPoint.authenticateRecord( JSON.stringify( record ), "netpunkt", "700100" ), false );
+    Assert.equalValue( "Unknown library",
+                       AuthenticatorEntryPoint.authenticateRecord( JSON.stringify( record ), "netpunkt", "999900" ),
+                       JSON.stringify( [ ValidateErrors.recordError( "", "Der eksisterer ikke en authenticator for denne post eller bruger." ) ] ) );
 } );

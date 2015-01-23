@@ -27,13 +27,13 @@ var FieldRules = function( ) {
      * @name FieldRules.fieldMustContainSubfield
      * @method
      */
-    
+
     function fieldMustContainSubfield( record, field, params ) {
         Log.trace( "FieldRules.fieldMustContainSubfield" );
         ValueCheck.check( "record.fields", record.fields ).instanceOf( Array );
         ValueCheck.check( "field", field );
         ValueCheck.check( "field.name", field.name );
-        
+
         var subfieldLength = field.subfields.length;
 
         if (subfieldLength > 0 ) {
@@ -57,7 +57,7 @@ var FieldRules = function( ) {
         Log.trace( "FieldRules.upperCaseCheck" );
         var ret = [];
         for ( var i = 0; i < field.subfields.length; i++ ) {
-            var name = field.subfields[i].name
+            var name = field.subfields[i].name;
             if ( name.toUpperCase( ) === name ) {// its uppercase
                 if ( field.subfields[i + 1] === undefined || name !== field.subfields[i + 1].name.toUpperCase( ) || field.subfields[i + 1].name.toUpperCase( ) === field.subfields[i + 1] ) {
                     var errorMessage = 'Delfeltet : "' + name + '" skal efterf\xf8lges af et "' + name.toLowerCase( ) + '" i felt "' + field.name + '"';
@@ -116,6 +116,7 @@ var FieldRules = function( ) {
         message = 'Tilstedev\xe6relsen af felt "' + field.name + '" kr\xe6ver at felt : "' + params.field + '" og delfelt : "' + params.subfields + '" findes i posten';
         return [ValidateErrors.recordError( ( params.field, params.template ), message )];
     }
+
     // helper function
     // function that returns only the fields we are interested in
     // takes a fieldName and a record
@@ -318,7 +319,7 @@ var FieldRules = function( ) {
             return [ValidateErrors.fieldError( "TODO:url", errorMessage )];
         }
         return [];
-       
+
         function inArray( listOfValues, valToCheck ) {
             for ( var i = 0; i < listOfValues.length; ++i ) {
                 printn ("listOfValues[i] " + listOfValues[i]);
@@ -330,6 +331,7 @@ var FieldRules = function( ) {
             }
         }
     }
+
     /**
      * exclusiveSubfield is used to validate that if subfield 'a' is present, then none
      * of 'i', 't', 'e', 'x' or 'b' must be present
@@ -342,7 +344,7 @@ var FieldRules = function( ) {
      * @method
      */
     function exclusiveSubfield( record, field, params ) {
-        Log.trace( "FieldRules.ExclusiveSubfield" );
+        Log.trace( "FieldRules.exclusiveSubfield" );
 
         // first count all subfields
         var counts = {};
@@ -371,6 +373,51 @@ var FieldRules = function( ) {
         return result;
     }
 
+    /**
+     * subfieldHasValueDemandsOtherSubfield is used to validate that if field x has subfield y with value z
+     * then field a and subfield b are mandatory.
+     * @syntax FieldRules.subfieldHasValueDemandsOtherSubfield(  record, field, params  )
+     * @param {object} record
+     * @param {object} field
+     * @param {object} params Object with properties subfieldConditional, subfieldConditionalValue, fieldMandatory, subfieldMandatory
+     *                        e.g. { 'subfieldConditional': 'y', 'subfieldConditionalValue': 'z', 'fieldMandatory': 'a', 'subfieldMandatory': 'b' }
+     * @return {object}
+     * @name FieldRules.exclusiveSubfield
+     * @method
+     */
+    function subfieldHasValueDemandsOtherSubfield( record, field, params ) {
+        Log.trace( "FieldRules.subfieldHasValueDemandsOtherSubfield" );
+        ValueCheck.check( "params.subfieldConditional", params.subfieldConditional );
+        ValueCheck.check( "params.subfieldConditionalValue", params.subfieldConditionalValue );
+        ValueCheck.check( "params.fieldMandatory", params.fieldMandatory );
+        ValueCheck.check( "params.subfieldMandatory", params.subfieldMandatory );
+
+        var result = [];
+        for ( var i = 0 ; i < field.subfields.length ; ++i  ) {
+            if ( field.subfields[i].name === params.subfieldConditional && field.subfields[i].value === params.subfieldConditionalValue ) {
+                var conditionalField = getFields( record, params.fieldMandatory );
+                var errorMsg = 'delfelt "' + params.subfieldConditional + '" på felt "' + field.name + '" har værdien "' + params.subfieldConditionalValue + '", derfor er felt "' + params.fieldMandatory + '" og delfelt "' + params.subfieldMandatory + '" obligatorisk';
+                var foundSubfield = false;
+                if ( conditionalField.length > 0 ) {
+                    for ( var i = 0 ; i < conditionalField.length ; ++i ) {
+                        for ( var j = 0 ; j < conditionalField[i].subfields.length ; ++j  ) {
+                            if ( conditionalField[i].subfields[j].name === params.subfieldMandatory ) {
+                                foundSubfield = true;
+                            }
+                        }
+                    }
+                    if ( foundSubfield === false ) {
+                        result.push( ValidateErrors.fieldError( "TODO:fixurl", errorMsg ) );
+                    }
+                } else {
+                    result.push( ValidateErrors.fieldError( "TODO:fixurl", errorMsg ) );
+                }
+                break;
+            }
+        }
+        return result;
+    }
+
     return {
         'upperCaseCheck' : upperCaseCheck,
         'fieldDemandsOtherFieldAndSubfield' : fieldDemandsOtherFieldAndSubfield,
@@ -380,7 +427,8 @@ var FieldRules = function( ) {
         'subfieldConditionalMandatory' : subfieldConditionalMandatory,
         'repeatableSubfields' : repeatableSubfields,
         'exclusiveSubfield' : exclusiveSubfield,
-        'fieldMustContainSubfield' : fieldMustContainSubfield
+        'fieldMustContainSubfield' : fieldMustContainSubfield,
+        'subfieldHasValueDemandsOtherSubfield' : subfieldHasValueDemandsOtherSubfield
     };
 }( );
 
@@ -664,7 +712,7 @@ UnitTest.addFixture( "subfieldConditionalMandatory", function( ) {
     };
     SafeAssert.equal( "6 Test of subfieldConditionalMandatory", FieldRules.subfieldConditionalMandatory( record, field, params ), [] );
 
-    
+
     params = {
         'subfieldConditional' : 'a', 'values' : ['a1Val', 'b1Val', 'c1Val'], 'subfieldMandatory' : 'd'
     };
@@ -750,7 +798,7 @@ UnitTest.addFixture( "FieldRules.upperCaseCheck", function( ) {
 
 UnitTest.addFixture( "FieldRules.fieldMustContainSubfield", function( ) {
     var record = {};
-    
+
     var fieldA003 = {
         "name" : '003', "indicator" : '00', subfields : [{
             'name' : "A", 'value' : "42"
@@ -764,9 +812,62 @@ UnitTest.addFixture( "FieldRules.fieldMustContainSubfield", function( ) {
     fieldA003 = {
         "name" : '003', "indicator" : '00', subfields : []
     };
-    
+
     var errMsg = ['Feltet : "' + "003" + '" skal indeholde delfelter"'];
 
     record.fields = [fieldA003];
     SafeAssert.equal( "1 FieldRules.fieldMustContainSubfield with valid but empty field ", FieldRules.fieldMustContainSubfield( record, fieldA003 ), errMsg );
+} );
+
+UnitTest.addFixture( "FieldRules.subfieldHasValueDemandsOtherSubfield" , function() {
+    var record = {};
+    var field1 = {
+        "name": "001", "indicator": "00", subfields: [{
+            "name": "a", "value": "b"
+        }, {
+            "name": "c", "value": "42"
+        }]
+    };
+    record.fields = [field1];
+    var field2 = {
+        "name": "002", "indicator": "00", subfields: [{
+            "name": "d", "value": "e"
+        }, {
+            "name": "f", "value": "g"
+        }]
+    };
+    record.fields = [field2];
+    var params = { "subfieldConditional": "a", "subfieldConditionalValue": "b", "fieldMandatory": "002", "subfieldMandatory": "d" };
+    SafeAssert.equal( "1 subfieldHasValueDemandsOtherSubfield - ok", FieldRules.subfieldHasValueDemandsOtherSubfield( record, field1, params ), [] );
+
+    record = {};
+    record.fields = [field1];
+    var field3 = {
+        "name": "003", "indicator": "00", subfields: [{
+            "name": "d", "value": "e"
+        }, {
+            "name": "f", "value": "g"
+        }]
+    };
+    record.fields = [field3];
+    var errorMsg = [ValidateErrors.fieldError( "TODO:fixurl", 'delfelt "a" på felt "001" har værdien "b", derfor er felt "002" og delfelt "d" obligatorisk' )];
+    SafeAssert.equal( "2 subfieldHasValueDemandsOtherSubfield - not ok", FieldRules.subfieldHasValueDemandsOtherSubfield( record, field1, params ), errorMsg );
+
+    record = {};
+    record.fields = [field1];
+    var field4 = {
+        "name": "002", "indicator": "00", subfields: [{
+            "name": "e", "value": "d"
+        }, {
+            "name": "f", "value": "g"
+        }]
+    };
+    record.fields = [field4];
+    var errorMsg = [ValidateErrors.fieldError( "TODO:fixurl", 'delfelt "a" på felt "001" har værdien "b", derfor er felt "002" og delfelt "d" obligatorisk' )];
+    SafeAssert.equal( "3 subfieldHasValueDemandsOtherSubfield - not ok", FieldRules.subfieldHasValueDemandsOtherSubfield( record, field1, params ), errorMsg );
+
+    record = {};
+    record.fields = [field1];
+    var errorMsg = [ValidateErrors.fieldError( "TODO:fixurl", 'delfelt "a" på felt "001" har værdien "b", derfor er felt "002" og delfelt "d" obligatorisk' )];
+    SafeAssert.equal( "4 subfieldHasValueDemandsOtherSubfield - not ok", FieldRules.subfieldHasValueDemandsOtherSubfield( record, field1, params ), errorMsg );
 } );

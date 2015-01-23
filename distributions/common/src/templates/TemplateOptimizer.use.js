@@ -17,6 +17,11 @@ EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
  * 
  */
 var TemplateOptimizer = function() {
+    var VALID_ERROR_TYPES = [
+        "WARNING",
+        "ERROR"
+    ];
+
     /**
      * Optimizes a template and returns the result.
      * 
@@ -223,6 +228,7 @@ var TemplateOptimizer = function() {
                     type: convertRuleTypeNameToFunction( rules[ i ].type ),
                     params: rules[ i ].params
                 };
+                __checkRule( rules[ i], rules[ i].type );
                 Log.info( "Case 1: Obj " + uneval( obj ) );
                 
                 res.push( obj );
@@ -257,9 +263,10 @@ var TemplateOptimizer = function() {
             case "FieldRules.subfieldsMandatory": return FieldRules.subfieldsMandatory;
             case "FieldRules.subfieldMandatoryIfSubfieldNotPresent": return FieldRules.subfieldMandatoryIfSubfieldNotPresent;
             case "FieldRules.subfieldConditionalMandatory": return FieldRules.subfieldConditionalMandatory;
+            case "FieldRules.subfieldHasValueDemandsOtherSubfield": return FieldRules.subfieldHasValueDemandsOtherSubfield;
             case "FieldRules.repeatableSubfields": return FieldRules.repeatableSubfields;
             case "FieldRules.exclusiveSubfield": return FieldRules.exclusiveSubfield;
-            
+
             case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldRules.subfieldsDemandsOtherSubfields;
             case "SubfieldRules.checkReference": return SubfieldRules.checkReference;
             case "SubfieldRules.checkLength": return SubfieldRules.checkLength;
@@ -274,6 +281,20 @@ var TemplateOptimizer = function() {
             
             default:
                 throw ( "Valideringsreglen '" + typeName + "' findes ikke." );
+        }
+    }
+
+    function __checkRule( rule, ruleName ) {
+        Log.trace( "Enter - TemplateOptimizer.__validateRule" );
+
+        try {
+            if( rule.hasOwnProperty( "errorType" ) && VALID_ERROR_TYPES.indexOf( rule.errorType ) == -1 ) {
+                throw StringUtil.sprintf( "Valideringsreglen '%s' anvender fejltypen '%s' som er ukendt. Skal v\u00E6re en af v\u00E6rdierne: '%s'",
+                                          ruleName, rule.errorType, VALID_ERROR_TYPES.join( ", " ) );
+            }
+        }
+        finally {
+            Log.trace( "Exit - TemplateOptimizer.__validateRule" );
         }
     }
     

@@ -7,14 +7,48 @@ UnitTest.doTests = function() {
     return true;
 };
 
-// Include iScrum modules
+// Include build modules
+use( "Builder" );
+
+// Include update modules
 use( "AuthenticatorEntryPointTests" );
 use( "ClassificationData_UnitTests" );
-use( "UpdaterEntryPoint" );
+use( "DBCAuthenticatorTests" );
+use( "FBSAuthenticatorTests" );
+use( "NoteAndSubjectExtentionsHandlerTests" );
+use( "RawRepoMergerTests" );
 
-// Including unittests modules
+// Include common modules
+use( "DanMarc2ConverterTest" );
+use( "RawRepoClientTest" );
+use( "SolrTest" );
+
+// Include common unittest modules
+use( "GenericSettingsTest" );
+use( "RawRepoClientCoreTest" );
+use( "SubfieldRulesTest" );
+use( "ValidatorTest" );
+
+// Include template modules
+use( "TemplateContainerTest" );
+use( "TemplateLoader" );
+use( "TemplateOptimizer" );
+use( "TemplateUrl" );
+
+// Include validation modules
+use( "FieldRules" );
+use( "RecordRules" );
+use( "RecordRulesConflictingSubfieldsTest" );
+use( "SubfieldRules" );
+use( "ValidateErrors" );
+use( "Validator" );
+
+use( "TemplatesTest" );
 
 function main() {
+    var curDir = new Packages.java.io.File( "." );
+    print( "Current directory: ", curDir.getAbsolutePath(), "\n" );
+
     UnitTest.outputXml = true;
     System.writeFile( "TEST-JavaScriptTest.xml", UnitTest.report() + "\n" );
     UnitTest.outputXml = false;

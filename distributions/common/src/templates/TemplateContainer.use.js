@@ -30,70 +30,46 @@ var TemplateContainer = function() {
      * @return {Array} An Array with the names of the templates.
      */
     function getTemplateNames() {
-    	Log.trace( "Enter - getTemplateNames()" );
-    	
-    	try {
-	    	var rootDir = new Packages.java.io.File( StringUtil.sprintf( "%s/%s/templates", settings.get( 'javascript.basedir' ), settings.get( 'javascript.install.name' ) ) ); 
-	    	var files = rootDir.listFiles();
-	    	var result = [];
-	    	
-	    	Log.debug( "Using install dir: ", rootDir.getAbsolutePath() );
-	    	
-	    	for( var i = 0; i < files.length; i++ ) {
-	    		if( !files[i].isFile() ) {
-	    			continue;
-	    		}
-	    		
-	    		var filepath = files[i].getAbsolutePath();
-	    		var filename = files[i].getName();
-	    		
-	    		if( !filename.endsWith( "json" ) ) {
-	    			continue;
-	    		}
-	    		
-	    		Log.debug( "Checking file: ", filename, " -> ", filepath );
-	    		
-	    		var schema = { schemaName: "", schemaInfo: "" };
-	    		
-	    		schema.schemaName = filename.substr( 0, filename.lastIndexOf( "." ) );
-	    		var templateObj = JSON.parse( System.readFile( filepath ) );
-	    		if( templateObj.hasOwnProperty( 'description' ) ) {
-	    			schema.schemaInfo = templateObj.description;
-	    		}
-	    		
-	    		Log.debug( "Found template '", schema.schemaName, "' -> '", schema.schemaInfo, "'" );
-	    		result.push( schema );
-	    	}
-	    	
-	    	return result;
-	    }
-	    finally {
-	    	Log.trace( "Exit - getTemplateNames()" );
-	    }
-    	/*
-        return [ 
-            {
-                schemaName: "bog",
-                schemaInfo: "Enkeltst\u00E5ende post for en bog"
-            },
-            {
-                schemaName: "bogbind",
-                schemaInfo: "Bindpost for en bog"
-            },
-            {
-                schemaName: "bogsektion",
-                schemaInfo: "Sektionspost for en bog"
-            },
-            {
-                schemaName: "boghoved",
-                schemaInfo: "Hovedpost for en bog"
-            },
-            {
-                schemaName: "lokalpost",
-                schemaInfo: "Validering af lokalpost eller p\u00E5h\u00E6ngspost"
+        Log.trace("Enter - getTemplateNames()");
+
+        try {
+            var rootDir = new Packages.java.io.File(StringUtil.sprintf("%s/distributions/%s/templates", settings.get('javascript.basedir'), settings.get('javascript.install.name')));
+            var files = rootDir.listFiles();
+            var result = [];
+
+            Log.debug("Using install dir: ", rootDir.getAbsolutePath());
+
+            for (var i = 0; i < files.length; i++) {
+                if (!files[i].isFile()) {
+                    continue;
+                }
+
+                var filepath = files[i].getAbsolutePath();
+                var filename = files[i].getName();
+
+                if (!filename.endsWith("json")) {
+                    continue;
+                }
+
+                Log.debug("Checking file: ", filename, " -> ", filepath);
+
+                var schema = {schemaName: "", schemaInfo: ""};
+
+                schema.schemaName = filename.substr(0, filename.lastIndexOf("."));
+                var templateObj = JSON.parse(System.readFile(filepath));
+                if (templateObj.hasOwnProperty('description')) {
+                    schema.schemaInfo = templateObj.description;
+                }
+
+                Log.debug("Found template '", schema.schemaName, "' -> '", schema.schemaInfo, "'");
+                result.push(schema);
             }
-        ];
-        */
+
+            return result;
+        }
+        finally {
+            Log.trace("Exit - getTemplateNames()");
+        }
     }
 
     /**
@@ -109,7 +85,7 @@ var TemplateContainer = function() {
      */
     function loadTemplate( name ) {
         return TemplateOptimizer.optimize( loadTemplateUnoptimized( name, settings ) );
-    };
+    }
 
     /**
      * Returns the optimized template by name.
@@ -126,10 +102,10 @@ var TemplateContainer = function() {
             if( result !== undefined ) {
                 templates[ name ] = result;
             }
-        };
+        }
         
         return result;
-    };
+    }
 
     /**
      * Helper function to koads a template from a json file and returns it.
@@ -143,57 +119,58 @@ var TemplateContainer = function() {
      *         the requested template. Or undefined in case of an error. 
      */
     function __loadUnoptimizedTemplate( name ) {
-    	Log.trace( "Enter - __loadUnoptimizedTemplate( name, settings )" );
-    	
+    	Log.trace( "Enter - __loadUnoptimizedTemplate( name )" );
+
     	try {
 	        var result = templatesUnoptimized[ name ];
-	        
+
 	        if( result === undefined ) {
-				
+
 	            if( !settings.containsKey( 'javascript.basedir' ) ) {
 	                throw "Settings does not contain the key 'javascript.basedir'";
 	            }
 	            if( !settings.containsKey( 'javascript.install.name' ) ) {
 	                throw "Settings does not contain the key 'javascript.install.name'";
 	            }
-	            
-	            var templateFileNamePattern = "%s/%s/templates/%s.json";
+
+	            var templateFileNamePattern = "%s/distributions/%s/templates/%s.json";
 	            var templateContent = null;
             	var filename = "";
 	            try {
 	            	// Load template from 'install.name' directory.
 	            	filename = StringUtil.sprintf( templateFileNamePattern, settings.get( 'javascript.basedir' ), settings.get( 'javascript.install.name' ), name );
+                    Log.info( "Trying to load template file: ", filename );
+
 	            	templateContent = System.readFile( filename );
-	            	Log.info( "Using template file: " + filename );
 	            }
 	            catch( ex ) {
 	            	Log.debug( "Unable to load template file: ", ex );
-	            	
+
 	            	// Load template from 'common' directory.
 	            	filename = StringUtil.sprintf( templateFileNamePattern, settings.get( 'javascript.basedir' ), "common", name );
 	            	templateContent = System.readFile( filename );
-	            	Log.info( "Using template file: " + filename );	            	
+	            	Log.info( "Using template file: " + filename );
 	            }
-	
+
 	            if ( templateContent !== null ) {
 	                result = JSON.parse( templateContent );
 	            }
 	            else {
 	            	throw StringUtil.sprintf( "Unable to read content from '%s'", filename );
 	            }
-	            
+
 	            if( result !== undefined ) {
 	                templatesUnoptimized[ name ] = result;
 	            }
-	        };
-	        
+	        }
+
 	        return result;
 		}
 		finally {
 			Log.trace( "Exit - __loadUnoptimizedTemplate( name, settings )" );
 		}
     }
-    
+
     /**
      * Loads a template from a json file and returns it.
      * 
@@ -223,23 +200,23 @@ var TemplateContainer = function() {
             if( result !== undefined ) {
                 templatesUnoptimized[ name ] = result;
             }
-        };
+        }
         
         return result;
-    };
+    }
 
     // Function used to test templates, DO NOT USE
     function testLoadOfTemplateDoNotUse( name ) {
         var template = TemplateLoader.load( name, __testLoadOptimizedTemplateDoNotUse );
         var res = TemplateOptimizer.optimize( template );
         return res;
-    };
+    }
 
     function __testLoadOptimizedTemplateDoNotUse( name ) {
         var stringContent = System.readFile( name + ".json" );
         var jsonContent = JSON.parse(stringContent);
         return jsonContent;
-    };
+    }
 
 
     return {
@@ -250,15 +227,6 @@ var TemplateContainer = function() {
         'loadTemplateUnoptimized': loadTemplateUnoptimized,
         'getUnoptimized': getUnoptimized,
         'testLoadOfTemplateDoNotUse': testLoadOfTemplateDoNotUse
-    };
+    }
     
 }();
-
-//-----------------------------------------------------------------------------
-UnitTest.addFixture( "Test TemplateContainer.get", function() {
-    var temp = TemplateContainer.get( "us-book" );
-    Assert.that( "1", temp !== undefined );    
-    Assert.that( "2", temp.fields !== undefined );    
-    Assert.that( "3", temp.fields[ "001" ] !== undefined );    
-    Assert.that( "4", temp.fields[ "001" ].mandatory === undefined );    
-});

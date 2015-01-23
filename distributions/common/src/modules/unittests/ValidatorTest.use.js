@@ -107,8 +107,32 @@ UnitTest.addFixture( "Validator.validateRecord", function() {
             }
         ]
     };
-    Assert.equalValue( "Test 2", Validator.validateRecord( record, function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.subfieldError( "url", "message" ) ] );    
+    Assert.equalValue( "Validate record with error", Validator.validateRecord( record, function() { return template; }, GenericSettings ),
+                                                    [ ValidateErrors.subfieldError( "url", "message" ) ] );
+
+    template = {
+        fields: {
+            "001": {
+                subfields: {
+                    "a": {}
+                }
+            }
+        },
+        rules: [
+            {
+                type: function( record, params ) {
+                    return [ ValidateErrors.subfieldError( "url", "message" ) ];
+                },
+                errorType: "WARNING"
+            }
+        ]
+    };
+
+    var valWarning = ValidateErrors.subfieldError( "url", "message" );
+    valWarning.type = "WARNING";
+    Assert.equalValue( "Validate record with warnings",
+                       Validator.validateRecord( record, function() { return template; }, GenericSettings ),
+                       [ valWarning ] );
 } );
 
 //-----------------------------------------------------------------------------
