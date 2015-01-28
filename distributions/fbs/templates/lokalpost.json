@@ -18,7 +18,7 @@
             "sorting": "abcdefgot",
             "subfields": {
                 "a": "DanMarc2.fields.001.subfields.a",
-                "b": "Lister.fields.codes.subfields.libraries.001b",
+                "b": "Lister.fields.codes.subfields.libraries.001b_lokal",
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
                 "e": "DanMarc2.fields.001.subfields.e",
