@@ -5,7 +5,6 @@ use( "ValidateErrors" );
 use( "ValueCheck" );
 use( "Exception" );
 use( "Log" );
-
 //-----------------------------------------------------------------------------
 /**
  * Module for validation rules for an entire record.
@@ -254,6 +253,52 @@ var RecordRules = function( ) {
         }
     }
 
+    /**
+     * Verifies that if one of the fields from params is present, all must be present.
+     * @syntax RecordRules.allFieldsMandatoryIfOneExist( record, params )
+     * @param {object} record
+     * @param {object} params must contain a key 'fields' with an array of fields that must be present
+     * params example:
+     * {'fields': ['008','009','038','039','100','110','239','245','652']}
+     * @return {object}
+     * @name RecordRules.allFieldsMandatoryIfOneExist
+     * @method
+     */
+    function allFieldsMandatoryIfOneExist( record, params) {
+        Log.trace( "Enter - RecordRules.allFieldsMandatoryIfOneExist" );
+        try {
+            ValueCheck.checkThat( "params", params ).type( "object" );
+            ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
+
+            var result = [];
+            var totalFieldsFound = 0;
+            var foundFields = [];
+            var field;
+            var totalFieldsToCheckFor = params.fields.length;
+            for ( var i = 0 ; i < totalFieldsToCheckFor ; ++i ) {
+                field = params.fields[i];
+                if ( __recordContainsField( record, field ) ) {
+                    totalFieldsFound += 1;
+                    foundFields.push( { name: field, value: true } );
+                } else {
+                    foundFields.push( { name: field, value: false } );
+                }
+            }
+            if ( totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor ) {
+                foundFields.forEach( function(f){
+                    if ( f.value === false ) {
+                        var message = StringUtil.sprintf( "Felt %s blev ikke fundet", f.name );
+                        result.push( ValidateErrors.recordError( "TODO:fixurl", message ) );
+                    }
+                });
+            }
+            return result;
+        } finally {
+            Log.trace( "Exit - RecordRules.allFieldsMandatoryIfOneExist" );
+        }
+
+    }
+
     function __recordContainsField( record, fieldName ) {
         Log.trace ( "RecordRules.__recordContainsField" );
         for ( var i = 0; i < record.fields.length; ++i ) {
@@ -271,7 +316,8 @@ var RecordRules = function( ) {
         'repeatableFields': repeatableFields,
         'conflictingFields' : conflictingFields,
         'conflictingSubfields': conflictingSubfields,
-        'optionalFields' : optionalFields
+        'optionalFields' : optionalFields,
+        'allFieldsMandatoryIfOneExist' : allFieldsMandatoryIfOneExist
     };
 
 }( );
@@ -520,4 +566,58 @@ UnitTest.addFixture( "Test RecordRules.recordSorted", function( ) {
     };
     SafeAssert.equal( "4 testing with valid record", RecordRules.recordSorted( recordGood, {} ), [] );
 
+} );
+UnitTest.addFixture( "RecordRules.allFieldsMandatoryIfOneExist", function( ) {
+
+    var record = {
+        fields : [{
+            'name' : '001'
+        }, {
+            'name' : '002'
+        }, {
+            'name' : '003'
+        }, {
+            'name' : '004'
+        }]
+    };
+    var params = { fields: [ '001', '002', '003', '004' ]};
+    var expectedResult = [];
+    var actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
+    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 1", actualResult, expectedResult );
+
+    record = {
+        fields : [{
+            'name' : '001'
+        }, {
+            'name' : '002'
+        }, {
+            'name' : '004'
+        }]
+    };
+    expectedResult = [ValidateErrors.recordError( "TODO:fixurl", "Felt 003 blev ikke fundet" )];
+    actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
+    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 2", actualResult, expectedResult );
+
+    record = {
+        fields : [{
+            'name' : '042'
+        }]
+    };
+    expectedResult = [];
+    actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
+    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 3", actualResult, expectedResult );
+
+    var record = {
+        fields : [{
+            'name' : '001'
+        }, {
+            'name' : '004'
+        }]
+    };
+    expectedResult = [
+        ValidateErrors.recordError( "TODO:fixurl", "Felt 002 blev ikke fundet" ),
+        ValidateErrors.recordError( "TODO:fixurl", "Felt 003 blev ikke fundet" ),
+    ];
+    actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
+    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 4", actualResult, expectedResult );
 } );
