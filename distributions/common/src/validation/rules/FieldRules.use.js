@@ -204,17 +204,9 @@ var FieldRules = function( ) {
         Log.trace( "FieldRules.subfieldsMandatory" );
         ValueCheck.check( "params.subfields", params.subfields ).instanceOf( Array );
         var result = [];
-        for ( var i = 0; i < field.subfields.length; ++i ) {
-            var indexOfParam = params.subfields.indexOf( field.subfields[i].name );
-            if ( indexOfParam !== -1 ) {
-                // each subfield that matches has its value deleted from the array
-                params.subfields[indexOfParam] = undefined;
-            }
-        }
-        for ( var ii = 0; ii < params.subfields.length; ++ii ) {
-            if ( params.subfields[ii] !== undefined ) {
-                var errorMessage = 'subfield "' + params.subfields[ii] + '" mangler i feltet';
-                result.push( ValidateErrors.fieldError( "TODO:url", errorMessage ) );
+        for ( var i = 0; i < params.subfields.length; ++i ) {
+            if ( __doesFieldContainSubfield( field, params.subfields[i] ) === false ) {
+                result.push( ValidateErrors.fieldError( "TODO:url", 'Delfelt "' + params.subfields[i] + '" mangler i felt "' + field.name + '"' ) );
             }
         }
         return result;
@@ -505,7 +497,7 @@ UnitTest.addFixture( "subfieldsMandatory", function( ) {
     };
     SafeAssert.equal( "1 testing with valid " + paramsA.subfields + " param", [], FieldRules.subfieldsMandatory( record, field, paramsA ) );
 
-    var errorMessage = 'subfield \"f\" mangler i feltet';
+    var errorMessage = 'Delfelt "f" mangler i felt "001"';
     var errorFmissing = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
     var paramsF = {
         'subfields' : ['f']
@@ -524,9 +516,9 @@ UnitTest.addFixture( "subfieldsMandatory", function( ) {
     SafeAssert.equal( "4 testing with NON valid  " + paramsABF.subfields + " param", errorFmissing, FieldRules.subfieldsMandatory( record, field, paramsABF ) );
 
     var errorXY = [];
-    errorMessage = "subfield \"x\" mangler i feltet";
+    errorMessage = 'Delfelt "x" mangler i felt "001"';
     errorXY.push( ValidateErrors.fieldError( "TODO:url", errorMessage ) );
-    errorMessage = "subfield \"y\" mangler i feltet";
+    errorMessage = 'Delfelt "y" mangler i felt "001"';
     errorXY.push( ValidateErrors.fieldError( "TODO:url", errorMessage ) );
     var paramsAXY = {
         'subfields' : ['a', 'x', 'y']
