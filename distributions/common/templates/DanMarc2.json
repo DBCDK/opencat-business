@@ -930,7 +930,8 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.2e.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true
+                    "mandatory":true,
+                    "repeatable":false
                 }
             }
         },
@@ -938,7 +939,8 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.2f.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true
+                    "mandatory":true,
+                    "repeatable":false
                 }
             }
         },
@@ -1360,6 +1362,9 @@
                     "repeatable": false
                     },
                 "a":{
+					"repeatable": false
+				},
+                "\u00E5":{
 					"repeatable": false
 				},
 				"\u00D8":{},
