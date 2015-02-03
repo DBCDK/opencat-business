@@ -1586,7 +1586,12 @@
 					"repeatable": false
 				},
                 "z":{}
-            }
+            },
+			"rules": [
+			    {
+			        "type": "FieldRules.upperCaseCheck"
+			    }
+			]
         },
         "247":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3b.htm",
@@ -3025,7 +3030,20 @@
                 "r":{
 					"repeatable": false
 				}
-            }
+            },
+			"rules": [
+    			{
+			        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+			        "params": { 
+            			"subfield": "m",
+            			"not_presented_subfield": [ "652o" ]
+			        },
+			        "params": { 
+            			"subfield": "o",
+            			"not_presented_subfield": [ "652m" ]
+			        }
+			    }
+			]			
         },
         "654":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
@@ -3106,7 +3124,20 @@
                 "r":{
 					"repeatable": false
 				}
-            }
+            },
+			"rules": [
+    			{
+			        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+			        "params": { 
+            			"subfield": "m",
+            			"not_presented_subfield": [ "654o" ]
+			        },
+			        "params": { 
+            			"subfield": "o",
+            			"not_presented_subfield": [ "654m" ]
+			        }
+			    }
+			]			
         },
         "655":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7b.htm",
