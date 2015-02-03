@@ -191,6 +191,21 @@
                 "h": "DanMarc2.fields.009.subfields.h"
             }
         },
+        "014":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "rules":[{
+                            "type":"SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+            }
+        },
         "017":"DanMarc2.fields.017",
         "021":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.15.htm",            
