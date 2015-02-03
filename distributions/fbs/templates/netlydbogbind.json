@@ -201,7 +201,7 @@
                             "type":"SubfieldRules.checkFaust"
                         }
                     ]
-                },
+                }
             }
         },
         "017": "DanMarc2.fields.017",
