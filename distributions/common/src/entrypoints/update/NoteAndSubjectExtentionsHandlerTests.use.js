@@ -9,22 +9,40 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.isNationalCommonRecord", f
 
     record = new Record();
 
-    record.fromString( "004 00 *a xxx" );
+    record.fromString(
+        "004 00 *a xxx\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "Not 032", NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ), false );
 
-    record.fromString( "032 00 *x xxx" );
+    record.fromString(
+        "032 00 *x xxx\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "032: No *a", NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ), false );
 
-    record.fromString( "032 00 *a xxx" );
+    record.fromString(
+        "032 00 *a xxx\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "032: *a and no *x", NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ), true );
 
-    record.fromString( "032 00 *a xxx *x BKM201417" );
+    record.fromString(
+        "032 00 *a xxx *x BKM201417\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "032: *a and *x BKM", NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ), false );
 
-    record.fromString( "032 00 *a xxx *x NET201417" );
+    record.fromString(
+        "032 00 *a xxx *x NET201417\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "032: *a and *x NET", NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ), false );
 
-    record.fromString( "032 00 *a xxx *x SF201417" );
+    record.fromString(
+        "032 00 *a xxx *x SF201417\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "032: *a and *x SF", NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ), false );
 } );
 
@@ -45,7 +63,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "No existing record in rawrepo",
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ), [] );
@@ -55,7 +74,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
     Assert.equalValue( "National common record with no changes",
@@ -67,7 +87,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -76,7 +97,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *b 700400 *a 1 234 567 8 \n" +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "National common record with no changes, but with different order of subfields",
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ), [] );
@@ -87,7 +109,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -97,7 +120,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a xxx\n" +
-        "666 00 *0 *e emneord\n"
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "New extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ), [] );
@@ -108,7 +132,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *& 751000 *a xxx\n"
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -117,7 +142,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *a yyy\n"
+        "504 00 *a yyy\n" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "Edit extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ), [] );
@@ -128,7 +154,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *& 751000 *a xxx\n"
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -136,7 +163,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
     record.fromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
-        "032 00 *a xxx *x\n"
+        "032 00 *a xxx *x\n" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "Delete extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ), [] );
@@ -147,7 +175,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *& 751000 *a xxx\n"
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -157,7 +186,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
-        "504 00 *a xxx\n"
+        "504 00 *a xxx\n" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "New non extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ),
@@ -170,7 +200,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
-        "504 00 *& 751000 *a xxx\n"
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -180,7 +211,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a yyy *x\n" +
-        "504 00 *a xxx\n"
+        "504 00 *a xxx\n" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "Edit non extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ),
@@ -193,7 +225,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
-        "504 00 *& 751000 *a xxx\n"
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -202,7 +235,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *a xxx\n"
+        "504 00 *a xxx\n" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "Delete non extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ),
@@ -210,7 +244,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
     RawRepoClientCore.clear();
 } );
 
-UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.updateExtentions", function() {
+UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo", function() {
     var curRecord;
     var record;
 
@@ -220,24 +254,26 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.updateExtentions", functio
         "004 00 *a e *r n"
     );
     Assert.equalValue( "Not national common record",
-        NoteAndSubjectExtentionsHandler.changeUpdateRecordForUpdate( record, "700400" ), record );
+        NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "700400" ), record );
 
     record = new Record();
     record.fromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "No existing record in rawrepo",
-        NoteAndSubjectExtentionsHandler.changeUpdateRecordForUpdate( record, "700400" ), record );
+        NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "700400" ), record );
 
     curRecord = new Record();
     curRecord.fromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord"
+        "666 00 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -246,9 +282,10 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.updateExtentions", functio
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *& 700400 *0 *e emneord"
+        "666 00 *& 700400 *0 *e emneord" +
+        "996 00 *a DBC"
     );
     Assert.equalValue( "National common record with no changes",
-        NoteAndSubjectExtentionsHandler.changeUpdateRecordForUpdate( curRecord, "700400" ), record );
+        NoteAndSubjectExtentionsHandler.recordDataForRawRepo( curRecord, "700400" ), record );
     RawRepoClientCore.clear();
 } );

@@ -41,9 +41,18 @@ var RawRepoClientCore = function() {
      * @name RawRepoCore#addRecord
      */
     function addRecord( marcRecord ) {
-        var key = generateKey( marcRecord.getValue( /001/, /a/ ), 
-                               marcRecord.getValue( /001/, /b/ ) );
-        records[ key ] = marcRecord;
+        Log.trace( "Enter - RawRepoClientCore.addRecord" );
+
+        try {
+            var key = generateKey(marcRecord.getValue(/001/, /a/),
+                marcRecord.getValue(/001/, /b/));
+
+            Log.debug( "Add record [", key, "]" );
+            records[key] = marcRecord;
+        }
+        finally {
+            Log.trace( "Exit - RawRepoClientCore.addRecord" );
+        }
     }
 
     /**

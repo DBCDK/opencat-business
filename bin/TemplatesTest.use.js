@@ -17,8 +17,16 @@ UnitTest.addFixture( "TemplatesTest.testTemplates", function() {
 
         var tempNames = TemplateContainer.getTemplateNames();
         for( var i = 0; i < tempNames.length; i++ ) {
-            print( StringUtil.sprintf( "Testing template %s/%s\n", installName, tempNames[i].schemaName ) );
-            TemplateContainer.get( tempNames[i].schemaName );
+            var templateName = StringUtil.sprintf( "%s/%s", installName, tempNames[i].schemaName );
+            print( StringUtil.sprintf( "Testing template %s\n", templateName ) );
+
+            try {
+                TemplateContainer.get( tempNames[i].schemaName );
+                Assert.equalValue( templateName, true, true );
+            }
+            catch( ex ) {
+                Assert.equalValue( templateName, ex, "" );
+            }
         }
     }
 

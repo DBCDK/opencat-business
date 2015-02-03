@@ -122,38 +122,33 @@ var UpdaterEntryPoint = function() {
     }
 
     /**
-     * Changes the records content when it is being updated.
+     * Converts a record to the actual records that should be stored in the RawRepo.
      *
-     * @param {String}   dbcRecord The DBC record as a json.
+     * @param {String} record The record as a json.
      *
-     * @returns {String} A json with the new record content.
+     * @returns {Array} A list of records as json strings.
      */
-    function changeUpdateRecordForUpdate( dbcRecord, userId, groupId ) {
-        var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( dbcRecord ) );
+    function recordDataForRawRepo( record, userId, groupId ) {
+        Log.trace( "Enter - UpdaterEntryPoint.recordDataForRawRepo" );
 
-        if( !marc.existField( /001/ ) ) {
-            return dbcRecord;
+        try {
+            var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
+
+            var records = AuthenticatorEntryPoint.recordDataForRawRepo( marc, userId, groupId );
+            var result = [];
+
+            for( var i = 0; i < records.length; i++ ) {
+                var curRecord = records[ i ];
+                curRecord = RecordUtil.addOrReplaceSubfield( curRecord, "001", "c", RecordUtil.currentAjustmentTime() );
+
+                result.push( JSON.stringify( DanMarc2Converter.convertFromDanMarc2( curRecord ) ) );
+            }
+
+            return result;
         }
-
-        var date = new Date();
-        var dateStr = StringUtil.sprintf( "%4s%2s%2s%2s%2s%2s",
-                                          date.getFullYear(), date.getMonth() + 1, date.getDate(),
-                                          date.getHours(), date.getMinutes(), date.getSeconds() );
-        dateStr = replaceAll( dateStr, " ", "0" );
-        marc.field( "001" ).append( "c", dateStr, true );
-        marc = AuthenticatorEntryPoint.changeUpdateRecordForUpdate( marc, userId, groupId );
-
-        return JSON.stringify( DanMarc2Converter.convertFromDanMarc2( marc ) );
-    }
-
-    // helper function for replacing all instancen
-    // this is copied from the answer and result of:
-    // http://stackoverflow.com/questions/1144783/replacing-all-occurrences-of-a-string-in-javascript
-    function escapeRegExp(string) {
-        return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-    }
-    function replaceAll(string, find, replace) {
-        return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+        finally {
+            Log.trace( "Exit - UpdaterEntryPoint.recordDataForRawRepo" );
+        }
     }
 
     return {
@@ -162,7 +157,7 @@ var UpdaterEntryPoint = function() {
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
-        'changeUpdateRecordForUpdate': changeUpdateRecordForUpdate
+        'recordDataForRawRepo': recordDataForRawRepo
     };
 
 }();

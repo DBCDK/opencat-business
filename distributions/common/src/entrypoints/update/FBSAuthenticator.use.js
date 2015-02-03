@@ -2,6 +2,7 @@
 use( "Log" );
 use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClient" );
+use( "UpdateConstants" );
 use( "ValidateErrors" );
 
 //-----------------------------------------------------------------------------
@@ -78,7 +79,7 @@ var FBSAuthenticator = function() {
         Log.trace( "Enter - FBSAuthenticator.authenticateRecord()" );
 
         try {
-            var agencyId = record.getValue(/001/, /b/);
+            var agencyId = record.getValue( /001/, /b/ );
 
             if (agencyId === groupId) {
                 return [];
@@ -89,7 +90,7 @@ var FBSAuthenticator = function() {
             }
 
             var recId = record.getValue(/001/, /a/);
-            return [ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' har ikke ret til at opdatere posten '%s'", groupId, recId))];
+            return [ValidateErrors.recordError("", StringUtil.sprintf( "Du har ikke ret til at rette posten '%s' da den er ejet af et andet bibliotek.", recId))];
         }
         finally {
             Log.trace( "Exit - FBSAuthenticator.authenticateRecord()" );
@@ -116,26 +117,43 @@ var FBSAuthenticator = function() {
         try {
             var recId = record.getValue(/001/, /a/);
             var agencyId = record.getValue( /001/, /b/ );
+            var owner = record.getValue( /996/, /a/ );
+
+            Log.info( "Record agency: ", agencyId );
+            Log.info( "New owner: ", owner );
 
             if( !RawRepoClient.recordExists( recId, agencyId ) ) {
-                if( record.matchValue( /996/, /a/, RegExp( groupId ) ) ) {
-                    return [];
+                Log.debug( "Checking authentication for new common record." );
+                if( owner === "" ) {
+                    return [ValidateErrors.recordError("", "Du har ikke ret til at oprette en f\xe6llesskabspost")];
                 }
 
-                return [ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' har ikke ret til at oprette posten '%s'", groupId, recId))];
+                if( owner !== groupId ) {
+                    return [ValidateErrors.recordError("", "Du har ikke ret til at oprette en f\xe6llesskabspost for et andet bibliotek.")];
+                }
+
+                return [];
+            }
+
+            Log.debug( "Checking authentication for updating existing common record." );
+            if( owner === "" ) {
+                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere f\xe6llesskabsposten")];
+            }
+
+            if( owner !== groupId ) {
+                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere f\xe6llesskabsposten for et andet bibliotek.")];
             }
 
             var curRecord = RawRepoClient.fetchRecord( recId, agencyId );
-            var curOwner = curRecord.getValue( /s10/, /a/ );
-            if( !( curOwner === "RET" || AGENCY_IDS.indexOf( curOwner ) > -1 ) ) {
-                Log.info( "Authentication error. Current owner: ", curOwner, " Agency: ", groupId );
-                return [ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' har ikke ret til at opdatere posten '%s'", groupId, recId))];
-            }
+            var curOwner = curRecord.getValue( /996/, /a/ );
 
-            var newOwner = record.getValue( /996/, /a/ );
-            if( newOwner !== groupId ) {
-                Log.info( "Owner has changed: ", curOwner, " !== ", newOwner );
-                return [ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' har ikke ret til at opdatere posten '%s' for andre biblioteker end '%s'", groupId, recId, groupId ))];
+            Log.info( "Current owner: ", curOwner );
+
+            if( curOwner === "DBC" ) {
+                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som er ejet af DBC")];
+            }
+            if( curOwner !== "RET" && AGENCY_IDS.indexOf( curOwner ) === -1 ) {
+                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som ikke er ejet af et folkebibliotek.")];
             }
 
             return NoteAndSubjectExtentionsHandler.authenticateExtentions( record, groupId );
@@ -146,25 +164,48 @@ var FBSAuthenticator = function() {
     }
 
     /**
-     * Changes the content of a record for update.
+     * Converts a record to the actual records that should be stored in the RawRepo.
      *
-     * @param record Record
-     * @param userId User id - not used.
-     * @param groupId Group id - not used.
+     * @param {Record} record The record.
      *
-     * @returns {Record} A new record with the new content.
-     *
-     * @name DBCAuthenticator#changeUpdateRecordForUpdate
+     * @returns {Array} A list of records of type Record.
      */
-    function changeUpdateRecordForUpdate( record, userId, groupId ) {
-        record = NoteAndSubjectExtentionsHandler.changeUpdateRecordForUpdate( record, userId, groupId );
-        return RawRepoMerge.mergeRawRepoRecord( record );
+    function recordDataForRawRepo( record, userId, groupId ) {
+        Log.trace( "Enter - FBSAuthenticator.recordDataForRawRepo()" );
+
+        try {
+            var correctedRecord = NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, userId, groupId );
+            var owner = correctedRecord.getValue( /996/, /a/ );
+            if( owner === "" ) {
+                Log.debug( "No owner in record." );
+                return [ correctedRecord ];
+            }
+
+            var recId = correctedRecord.getValue( /001/, /a/ );
+
+            if( !RawRepoClient.recordExists( recId, UpdateConstants.DBC_ENRICHMENT_AGENCYID ) ) {
+                Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.DBC_ENRICHMENT_AGENCYID, "] does not exist." );
+                return [ correctedRecord ];
+            }
+
+            Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.DBC_ENRICHMENT_AGENCYID, "found." );
+
+            var dbcEnrichmentRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.DBC_ENRICHMENT_AGENCYID );
+
+            Log.debug( "Replace s10 in DBC enrichment record with: ", owner );
+            dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "s10", "a", owner );
+
+            return [ correctedRecord, dbcEnrichmentRecord ];
+        }
+        finally {
+            Log.trace( "Exit - FBSAuthenticator.recordDataForRawRepo()" );
+        }
     }
-    
+
     return {
         'canAuthenticate': canAuthenticate,
         'authenticateRecord': authenticateRecord,
-        'changeUpdateRecordForUpdate': changeUpdateRecordForUpdate
+        'recordDataForRawRepo': recordDataForRawRepo
     }
 
 }();

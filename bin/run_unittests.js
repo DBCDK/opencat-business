@@ -12,11 +12,13 @@ use( "Builder" );
 
 // Include update modules
 use( "AuthenticatorEntryPointTests" );
+use( "BasisSplitterTests" );
 use( "ClassificationData_UnitTests" );
 use( "DBCAuthenticatorTests" );
 use( "FBSAuthenticatorTests" );
 use( "NoteAndSubjectExtentionsHandlerTests" );
 use( "RawRepoMergerTests" );
+use( "RecordSorterTests" );
 
 // Include common modules
 use( "DanMarc2ConverterTest" );

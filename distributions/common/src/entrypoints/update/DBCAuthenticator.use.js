@@ -48,21 +48,6 @@ var DBCAuthenticator = function() {
         Log.trace( "Enter - DBCAuthenticator.authenticateRecord()" );
 
         try {
-            var recId = record.getValue(/001/, /a/);
-            var agencyId = record.getValue( /001/, /b/ );
-
-            if( !RawRepoClient.recordExists( recId, agencyId ) ) {
-                return [];
-            }
-
-            var curRecord = RawRepoClient.fetchRecord( recId, agencyId );
-            var curOwner = curRecord.getValue( /s10/, /a/ );
-            var newOwner = record.getValue( /996/, /a/ );
-            if( curOwner !== newOwner ) {
-                Log.info( "Owner has changed: ", curOwner, " !== ", newOwner );
-                return [ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' m\u00E5 ikke \u00E6ndret v\u00E6rdien af felt 996a i posten '%s'", groupId, recId))];
-            }
-
             return [];
         }
         finally {
@@ -72,23 +57,26 @@ var DBCAuthenticator = function() {
     }
 
     /**
-     * Changes the content of a record for update.
+     * Converts a record to the actual records that should be stored in the RawRepo.
      *
-     * @param record Record
-     * @param userId User id - not used.
-     * @param groupId Group id - not used.
+     * @param {Record} record The record.
      *
-     * @returns {Record} A new record with the new content.
-     *
-     * @name DBCAuthenticator#changeUpdateRecordForUpdate
+     * @returns {Array} A list of records of type Record.
      */
-    function changeUpdateRecordForUpdate( record, userId, groupId ) {
-        return RawRepoMerge.mergeRawRepoRecord( record );
+    function recordDataForRawRepo( record, userId, groupId ) {
+        Log.trace( "Enter - DBCAuthenticator.recordDataForRawRepo()" );
+
+        try {
+            return BasisSplitter.splitCompleteBasisRecord( record );
+        }
+        finally {
+            Log.trace( "Exit - DBCAuthenticator.recordDataForRawRepo()" );
+        }
     }
 
     return {
         'canAuthenticate': canAuthenticate,
         'authenticateRecord': authenticateRecord,
-        'changeUpdateRecordForUpdate': changeUpdateRecordForUpdate
+        'recordDataForRawRepo': recordDataForRawRepo
     }
 }();

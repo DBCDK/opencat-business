@@ -62,42 +62,35 @@ var AuthenticatorEntryPoint = function() {
     }
 
     /**
-     * Changes the content of a record for update.
+     * Converts a record to the actual records that should be stored in the RawRepo.
      *
-     * The actual implementation is placed in a list of authenticators. The first authenticator
-     * that can authenticate the record is used. The others are ignored.
+     * @param {Record} record The record.
      *
-     * @param record Record
-     * @param userId User id.
-     * @param groupId Group id.
-     *
-     * @returns {Record} A new record with the new content.
-     *
-     * @name AuthenticatorEntryPoint#changeUpdateRecordForUpdate
+     * @returns {Array} A list of records of type Record.
      */
-    function changeUpdateRecordForUpdate( record, userId, groupId ) {
-        Log.trace( "Enter - AuthenticatorEntryPoint.changeUpdateRecordForUpdate()" );
+    function recordDataForRawRepo( record, userId, groupId ) {
+        Log.trace( "Enter - AuthenticatorEntryPoint.recordDataForRawRepo()" );
 
         try {
             for( var i = 0; i < authenticators.length; i++ ) {
                 var authenticator = authenticators[ i ];
                 if( authenticator.canAuthenticate( record, userId, groupId ) === true ) {
-                    return authenticator.changeUpdateRecordForUpdate( record, userId, groupId );
+                    return authenticator.recordDataForRawRepo( record, userId, groupId );
                 }
             }
 
             Log.warn( "Der eksisterer ikke en authenticator for denne post eller bruger." );
             Log.warn( "User/group: ", userId, " / ", groupId );
             Log.warn( "Posten:\n", record );
-            return record;
+            return [ record ];
         }
         finally {
-            Log.trace( "Exit - AuthenticatorEntryPoint.changeUpdateRecordForUpdate()" );
+            Log.trace( "Exit - AuthenticatorEntryPoint.recordDataForRawRepo()" );
         }
     }
 
     return {
         'authenticateRecord': authenticateRecord,
-        'changeUpdateRecordForUpdate': changeUpdateRecordForUpdate
+        'recordDataForRawRepo': recordDataForRawRepo
     }
 }();

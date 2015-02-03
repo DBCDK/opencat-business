@@ -48,6 +48,6 @@ function correctLibraryExtendedRecord( dbcRecord, libraryRecord ) {
     return UpdaterEntryPoint.correctLibraryExtendedRecord( dbcRecord, libraryRecord );    
 }
 
-function changeUpdateRecordForUpdate( dbcRecord ) {
-    return UpdaterEntryPoint.changeUpdateRecordForUpdate( dbcRecord );
+function recordDataForRawRepo( dbcRecord ) {
+    return UpdaterEntryPoint.recordDataForRawRepo( dbcRecord );
 }

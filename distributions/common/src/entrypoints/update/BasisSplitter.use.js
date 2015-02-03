@@ -1,0 +1,61 @@
+//-----------------------------------------------------------------------------
+use( "Log" );
+use( "Marc" );
+use( "RecordUtil" );
+
+//-----------------------------------------------------------------------------
+EXPORTED_SYMBOLS = [ 'BasisSplitter' ];
+
+//-----------------------------------------------------------------------------
+/**
+ * Module split a complete basis record into common and enrightment records.
+ *
+ * @namespace
+ * @name BasisSplitter
+ */
+var BasisSplitter = function() {
+    var DBC_AGENCY_ID = "010100";
+    var DBC_FIELDS = /[a-z].*/;
+
+    function splitCompleteBasisRecord( record ) {
+        Log.trace( "Enter - BasisSplitter.splitCompleteBasisRecord" );
+
+        try {
+            var dbcRecord = new Record();
+            var commonRecord = new Record();
+
+            for( var i = 0; i < record.size(); i++ ) {
+                var field = record.field( i );
+
+                if( field.name === "001" ) {
+                    var dbcField = field.clone();
+                    dbcField.append( "b", DBC_AGENCY_ID, true );
+
+                    dbcRecord.append( dbcField );
+                }
+
+                if( DBC_FIELDS.test( field.name ) ) {
+                    dbcRecord.append( field );
+                }
+                else {
+                    commonRecord.append( field );
+                }
+            }
+
+            if( dbcRecord.existField( /s10/ ) ) {
+                var owner = dbcRecord.getValue( /s10/, /a/ );
+
+                commonRecord = RecordUtil.addOrReplaceSubfield( commonRecord, "996", "a", owner );
+            }
+
+            return [ commonRecord, dbcRecord ];
+        }
+        finally {
+            Log.trace( "Exit - BasisSplitter.splitCompleteBasisRecord" );
+        }
+    }
+
+    return {
+        'splitCompleteBasisRecord': splitCompleteBasisRecord
+    }
+}();

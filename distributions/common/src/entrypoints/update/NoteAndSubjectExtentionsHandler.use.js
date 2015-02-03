@@ -81,8 +81,8 @@ var NoteAndSubjectExtentionsHandler = function() {
      *
      * @name NoteAndSubjectExtentionsHandler#changeUpdateRecordForUpdate
      */
-    function changeUpdateRecordForUpdate( record, userId, groupId ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.changeUpdateRecordForUpdate" );
+    function recordDataForRawRepo( record, userId, groupId ) {
+        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo" );
 
         try {
             var recId = record.getValue(/001/, /a/);
@@ -105,7 +105,7 @@ var NoteAndSubjectExtentionsHandler = function() {
             return record;
         }
         finally {
-            Log.trace( "Enter - NoteAndSubjectExtentionsHandler.changeUpdateRecordForUpdate" );
+            Log.trace( "Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo" );
         }
     }
 
@@ -122,6 +122,10 @@ var NoteAndSubjectExtentionsHandler = function() {
         Log.trace( "Enter - NoteAndSubjectExtentionsHandler.isNationalCommonRecord" );
 
         try {
+            if( !record.matchValue( /996/, /a/, /DBC/ ) ) {
+                return false;
+            }
+
             for (var i = 0; i < record.size(); i++) {
                 if (__isFieldNationalCommonRecord(record.field(i))) {
                     return true;
@@ -284,7 +288,7 @@ var NoteAndSubjectExtentionsHandler = function() {
 
     return {
         'authenticateExtentions': authenticateExtentions,
-        'changeUpdateRecordForUpdate': changeUpdateRecordForUpdate,
+        'recordDataForRawRepo': recordDataForRawRepo,
         'isNationalCommonRecord': isNationalCommonRecord
     }
 
