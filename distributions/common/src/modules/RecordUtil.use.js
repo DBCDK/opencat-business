@@ -94,6 +94,18 @@ var RecordUtil = function() {
         }
     }
 
+    function equalIds( rec1, rec2 ) {
+        Log.trace( "Enter - RecordUtil.equalIds" );
+
+        try {
+            return rec1.getValue( /001/, /a/ ) === rec2.getValue( /001/, /a/ ) &&
+                   rec1.getValue( /001/, /b/ ) === rec2.getValue( /001/, /b/ );
+        }
+        finally {
+            Log.trace( "Exit - RecordUtil.equalIds" );
+        }
+    }
+
     //-----------------------------------------------------------------------------
     //                  Helper functions
     //-----------------------------------------------------------------------------
@@ -109,7 +121,8 @@ var RecordUtil = function() {
     return {
         'addOrReplaceSubfield': addOrReplaceSubfield,
         'currentAjustmentTime': currentAjustmentTime,
-        'createFromString': createFromString
+        'createFromString': createFromString,
+        'equalIds': equalIds
     }
 
 }();

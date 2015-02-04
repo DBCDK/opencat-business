@@ -39,6 +39,7 @@ use( "TemplateUrl" );
 
 // Include validation modules
 use( "FieldRules" );
+use( "MandatorySubfieldInVolumeWorkRuleTest" );
 use( "RecordRules" );
 use( "RecordRulesConflictingSubfieldsTest" );
 use( "SubfieldRules" );

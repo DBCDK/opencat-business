@@ -2,6 +2,7 @@
 use( "RecordRules" );
 use( "FieldRules" );
 use( "SubfieldRules" );
+use( "MandatorySubfieldInVolumeWorkRule" );
 //use( "TemplateUrl");
 use( "UnitTest" );
 // TODO : change names accordingly og become very ill.
@@ -271,6 +272,7 @@ var TemplateOptimizer = function() {
             case "FieldRules.subfieldHasValueDemandsOtherSubfield": return FieldRules.subfieldHasValueDemandsOtherSubfield;
             case "FieldRules.repeatableSubfields": return FieldRules.repeatableSubfields;
             case "FieldRules.exclusiveSubfield": return FieldRules.exclusiveSubfield;
+            case "FieldRules.mandatorySubfieldInVolumeWork": return MandatorySubfieldInVolumeWorkRule.validateField;
 
             case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldRules.subfieldsDemandsOtherSubfields;
             case "SubfieldRules.checkReference": return SubfieldRules.checkReference;
