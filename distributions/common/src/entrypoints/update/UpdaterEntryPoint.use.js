@@ -4,6 +4,7 @@ use( "DanMarc2Converter" );
 use( "ClassificationData" );
 use( "Log" );
 use( "Marc" );
+use( "RecordUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'UpdaterEntryPoint' ];
