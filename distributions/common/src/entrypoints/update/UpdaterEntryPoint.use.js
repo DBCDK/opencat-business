@@ -142,10 +142,10 @@ var UpdaterEntryPoint = function() {
                 var curRecord = records[ i ];
                 curRecord = RecordUtil.addOrReplaceSubfield( curRecord, "001", "c", RecordUtil.currentAjustmentTime() );
 
-                result.push( JSON.stringify( DanMarc2Converter.convertFromDanMarc2( curRecord ) ) );
+                result.push( DanMarc2Converter.convertFromDanMarc2( curRecord ) );
             }
 
-            return result;
+            return JSON.stringify( result );
         }
         finally {
             Log.trace( "Exit - UpdaterEntryPoint.recordDataForRawRepo" );
