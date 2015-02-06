@@ -228,25 +228,15 @@ var TemplateOptimizer = function() {
         var res = [];
 
         for( var i = 0; i < rules.length; i++ ) {
+            var obj = rules[ i ];
+
             if( typeof( rules[ i ].type ) === "string" ) {
-                var obj = {
-                    type: convertRuleTypeNameToFunction( rules[ i ].type ),
-                    params: rules[ i ].params
-                };
+                obj.type = convertRuleTypeNameToFunction(rules[i].type);
+
                 __checkRule( rules[ i], rules[ i].type );
-                Log.info( "Case 1: Obj " + uneval( obj ) );
-
-                res.push( obj );
             }
-            else {
-                var obj = {
-                    type: rules[ i ].type,
-                    params: rules[ i ].params
-                };
-                Log.info( "Case 2: Obj " + uneval( obj ) );
 
-                res.push( obj );
-            }
+            res.push( obj );
         }
 
         return res;
@@ -576,8 +566,7 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
         ] };
     Assert.equalValue( "subfield with rules and defs with rules", TemplateOptimizer.optimizeSubfield( sf, defs ), [
             {
-                type: SubfieldRules.checkISBN10,
-                params: undefined
+                type: SubfieldRules.checkISBN10
             }
         ] );
 });

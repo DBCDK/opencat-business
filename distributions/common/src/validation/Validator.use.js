@@ -214,6 +214,9 @@ var Validator = function() {
         Log.trace( "Enter - Validator.__updateErrorTypeOnValidationResults" );
 
         try {
+            Log.debug( "rule: ", uneval( rule ) );
+            Log.debug( "valErrors: ", uneval( valErrors ) );
+
             if (rule.hasOwnProperty("errorType")) {
                 for (var i = 0; i < valErrors.length; i++) {
                     Log.trace( "Update validation error with type: ", rule.errorType );
