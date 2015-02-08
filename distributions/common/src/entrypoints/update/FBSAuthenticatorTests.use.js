@@ -275,6 +275,192 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
         FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
         [ ValidateErrors.recordError( "", "Du har ikke ret til at opdatere en f\xe6llesskabspost som ikke er ejet af et folkebibliotek." ) ] );
     RawRepoClientCore.clear();
+
+    //-----------------------------------------------------------------------------
+    //                  Test update national common record
+    //-----------------------------------------------------------------------------
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = curRecord.clone();
+    Assert.equalValue( "National common record with no changes",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *b 870970 *a 1 234 567 8 \n" +
+        "004 00 *r n *a e\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "National common record with no changes, but with different order of subfields",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *a xxx\n" +
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "New extension field",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *a yyy\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "Edit extension field",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "Delete extension field",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "300 00 *a xxx *x\n" +
+        "504 00 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "New non extension field",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "300 00 *a xxx *x\n" +
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "300 00 *a yyy *x\n" +
+        "504 00 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "Edit non extension field",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "300 00 *a xxx *x\n" +
+        "504 00 *& 751000 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *a xxx\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "Delete non extension field",
+        FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
+    RawRepoClientCore.clear();
+
 } );
 
 UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {

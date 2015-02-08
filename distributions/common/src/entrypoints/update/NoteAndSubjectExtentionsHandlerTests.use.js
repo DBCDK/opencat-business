@@ -60,10 +60,10 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord" +
+        "666 00 *0 *e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue( "No existing record in rawrepo",
@@ -71,10 +71,10 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord" +
+        "666 00 *0 *e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
@@ -84,20 +84,20 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord" +
+        "666 00 *0 *e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
     record = new Record();
     record.fromString(
-        "001 00 *b 700400 *a 1 234 567 8 \n" +
+        "001 00 *b 870970 *a 1 234 567 8 \n" +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord" +
+        "666 00 *0 *e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue( "National common record with no changes, but with different order of subfields",
@@ -106,17 +106,17 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord" +
+        "666 00 *0 *e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a xxx\n" +
@@ -129,7 +129,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -139,7 +139,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a yyy\n" +
@@ -151,7 +151,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -161,7 +161,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "996 00 *a DBC"
@@ -172,7 +172,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -182,7 +182,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -196,7 +196,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -207,7 +207,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a yyy *x\n" +
@@ -221,7 +221,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -232,7 +232,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a xxx\n" +
@@ -250,7 +250,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo", fun
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n"
     );
     Assert.equalValue( "Not national common record",
@@ -258,7 +258,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo", fun
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord" +
@@ -269,7 +269,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo", fun
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord" +
@@ -279,7 +279,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo", fun
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 1 234 567 8 *b 870970\n" +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *& 700400 *0 *e emneord" +

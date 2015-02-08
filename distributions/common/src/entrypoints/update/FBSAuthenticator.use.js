@@ -115,6 +115,10 @@ var FBSAuthenticator = function() {
         Log.trace( "Enter - FBSAuthenticator.__authenticateCommonRecord()" );
 
         try {
+            if( NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ) === true ) {
+                return NoteAndSubjectExtentionsHandler.authenticateExtentions( record, groupId );
+            }
+
             var recId = record.getValue(/001/, /a/);
             var agencyId = record.getValue( /001/, /b/ );
             var owner = record.getValue( /996/, /a/ );
@@ -156,7 +160,7 @@ var FBSAuthenticator = function() {
                 return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som ikke er ejet af et folkebibliotek.")];
             }
 
-            return NoteAndSubjectExtentionsHandler.authenticateExtentions( record, groupId );
+            return [];
         }
         finally {
             Log.trace( "Exit - FBSAuthenticator.__authenticateCommonRecord()" );
