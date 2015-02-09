@@ -2,6 +2,7 @@
 use( "Log" );
 use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClient" );
+use( "RecordUtil" );
 use( "UpdateConstants" );
 use( "ValidateErrors" );
 
