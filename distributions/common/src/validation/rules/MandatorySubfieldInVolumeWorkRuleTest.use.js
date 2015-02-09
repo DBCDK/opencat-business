@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------------------
 use( "MandatorySubfieldInVolumeWorkRule" );
+use( "RawRepoClientCore" );
 use( "RecordUtil" );
 use( "UnitTest" );
 
