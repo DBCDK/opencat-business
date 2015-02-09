@@ -1,11 +1,10 @@
 //-----------------------------------------------------------------------------
-use( "RecordRules" );
 use( "FieldRules" );
-use( "SubfieldRules" );
 use( "MandatorySubfieldInVolumeWorkRule" );
-//use( "TemplateUrl");
+use( "RecordRules" );
+use( "SubfieldRules" );
 use( "UnitTest" );
-// TODO : change names accordingly og become very ill.
+
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
 
