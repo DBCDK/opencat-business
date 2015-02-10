@@ -722,7 +722,7 @@ var SubfieldRules = function() {
 
             var hits = 0;
             if( subfield.value !== "" ) {
-                hits = Solr.numFound( url, params.register + ":" + subfield.value );
+                hits = Solr.numFound( url, StringUtil.sprintf( "%s:\"%s\"", params.register, subfield.value ) );
             }
 
             if( params.exist === true && hits === 0 ) {
