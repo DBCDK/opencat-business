@@ -198,9 +198,8 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory": true,
             "repeatable": false,
-            "sorting": "tuazbcdefghijklmnoqrxwv&",
+            "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
-                "&":{},
                 "t": {
                     "repeatable": false,
                     "values": [ "m", "s", "p", "a", "h" ]                    
@@ -1797,6 +1796,9 @@
         "300":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
             "subfields":{
+                "\u00E5":{
+					"repeatable": false
+				},
                 "N":{},
                 "n":{},
                 "A":{},
@@ -2954,7 +2956,9 @@
         "652":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "subfields":{
-                "&":{},
+                "\u00E5":{
+					"repeatable": false
+				},
                 "m":{
 					"repeatable": false
 				},
@@ -2962,9 +2966,7 @@
 					"repeatable": false
 				},
                 "i":{},
-                "v":{
-					"repeatable": false
-				},
+                "v":{},
                 "A":{
 					"repeatable": false
 				},
@@ -3010,9 +3012,6 @@
                 "b":{
 					"repeatable": false
 				},
-                "\u00E5":{
-					"repeatable": false
-				},
                 "0":{},
                 "1":{},
                 "z":{
@@ -3032,17 +3031,20 @@
 				}
             },
 			"rules": [
+			    {
+    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+			        "params": { 
+			            "subfield": "m",
+			            "not_presented_subfield": [ "652o" ]
+        			}
+    			},
     			{
-			        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-			        "params": { 
-            			"subfield": "m",
-            			"not_presented_subfield": [ "652o" ]
-			        },
-			        "params": { 
+        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+        			"params": { 
             			"subfield": "o",
             			"not_presented_subfield": [ "652m" ]
-			        }
-			    }
+        			}
+    			}
 			]			
         },
         "654":{
@@ -3126,17 +3128,20 @@
 				}
             },
 			"rules": [
+			    {
+    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+			        "params": { 
+			            "subfield": "m",
+			            "not_presented_subfield": [ "652o" ]
+        			}
+    			},
     			{
-			        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-			        "params": { 
-            			"subfield": "m",
-            			"not_presented_subfield": [ "654o" ]
-			        },
-			        "params": { 
+        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+        			"params": { 
             			"subfield": "o",
-            			"not_presented_subfield": [ "654m" ]
-			        }
-			    }
+            			"not_presented_subfield": [ "652m" ]
+        			}
+    			}
 			]			
         },
         "655":{

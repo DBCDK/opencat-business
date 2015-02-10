@@ -795,8 +795,31 @@
                 "\u00E5":"DanMarc2.fields.945.subfields.\u00E5"
             }
         },  
-             
-       "996":{
+        "990":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a3.htm",
+            "subfields":{
+                "a":{
+                    "repeatable":false
+                },
+                "o":{},
+                "x":{},
+                "r":{},
+                "b":{},
+                "c":{},
+                "m":{},
+                "k":{},
+                "p":{},
+                "q":{},
+                "s":{},
+                "t":{},
+                "n":{},
+                "u":{
+                    "repeatable":false,
+                    "values": [ "nt", "nu", "op" ]
+                }
+            }
+        },
+        "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
 			"mandatory":true,
             "repeatable":false,

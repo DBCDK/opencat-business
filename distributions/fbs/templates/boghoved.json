@@ -70,7 +70,9 @@
             "repeatable":false,
             "sorting":"uazbcdefghijklmorxv&",
             "subfields":{
-                "&": "DanMarc2.fields.008.subfields.&",
+                "&": {
+                    "repeatable": false
+				},
 				"u": "DanMarc2.fields.008.subfields.u",
                 "a": {
                     "repeatable": false,
@@ -425,7 +427,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "mandatory":true,
             "subfields":{
-                "&":"DanMarc2.fields.652.subfields.&",
+                "\u00E5":"DanMarc2.fields.652.subfields.\u00E5",
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
@@ -445,14 +447,29 @@
                 "t":"DanMarc2.fields.652.subfields.t",
                 "B":"DanMarc2.fields.652.subfields.B",
                 "b":"DanMarc2.fields.652.subfields.b",
-                "\u00E5":"DanMarc2.fields.652.subfields.\u00E5",
                 "0":"DanMarc2.fields.652.subfields.0",
 				"z":"DanMarc2.fields.652.subfields.z",
                 "n":"DanMarc2.fields.652.subfields.n",
                 "o":"DanMarc2.fields.652.subfields.o",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
-            }
+            },
+			"rules": [
+			    {
+    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+			        "params": { 
+			            "subfield": "m",
+			            "not_presented_subfield": [ "652o" ]
+        			}
+    			},
+    			{
+        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+        			"params": { 
+            			"subfield": "o",
+            			"not_presented_subfield": [ "652m" ]
+        			}
+    			}
+			]			
         },
         "654":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
@@ -484,9 +501,25 @@
                 "o":"DanMarc2.fields.652.subfields.o",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
-            }
+            },
+			"rules": [
+			    {
+    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+			        "params": { 
+			            "subfield": "m",
+			            "not_presented_subfield": [ "652o" ]
+        			}
+    			},
+    			{
+        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+        			"params": { 
+            			"subfield": "o",
+            			"not_presented_subfield": [ "652m" ]
+        			}
+    			}
+			]			
         },
-         "666":{
+        "666":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
             "subfields":{
                 "&":"DanMarc2.fields.666.subfields.&",

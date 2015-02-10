@@ -196,7 +196,9 @@
             "repeatable": false,
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
-                "&": "DanMarc2.fields.008.subfields.&",
+                "&": {
+                    "repeatable": false
+				},
                 "t": {
                     "repeatable": false,
                     "values": [ "m", "s", "p", "a", "h" ]                    
@@ -871,7 +873,6 @@
                 },
                 "b":{},
                 "c":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "d":{
@@ -4606,6 +4607,10 @@
                 "b":{},
                 "c":{},
                 "m":{},
+                "k":{},
+                "p":{},
+                "q":{},
+                "s":{},
                 "t":{},
                 "n":{},
                 "u":{
@@ -4760,6 +4765,11 @@
                 "b": {},
                 "c": {},
                 "n": {}
+            }
+        },
+        "e98": {
+            "subfields": {
+                "a": {}
             }
         },
         "e99": {
