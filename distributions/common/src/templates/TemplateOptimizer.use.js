@@ -262,6 +262,7 @@ var TemplateOptimizer = function() {
             case "FieldRules.repeatableSubfields": return FieldRules.repeatableSubfields;
             case "FieldRules.exclusiveSubfield": return FieldRules.exclusiveSubfield;
             case "FieldRules.mandatorySubfieldInVolumeWork": return MandatorySubfieldInVolumeWorkRule.validateField;
+            case "FieldRules.upperCaseCheck": return FieldRules.upperCaseCheck;
 
             case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldRules.subfieldsDemandsOtherSubfields;
             case "SubfieldRules.checkReference": return SubfieldRules.checkReference;
