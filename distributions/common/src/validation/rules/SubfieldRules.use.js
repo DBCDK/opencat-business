@@ -9,8 +9,6 @@ use( "Solr" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
 
-use( "Print" );
-
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'SubfieldRules' ];
 
@@ -116,11 +114,11 @@ var SubfieldRules = function() {
      * CheckReference is used to check if the fields contains correct references
      * the function is invoked with a subfield which contains one of three forms of a formatted string
      * 1  = 700
-     * 2  = 700/12
-     * 3  = 700/12(a,b,c)
+     * 2  = 700/1
+     * 3  = 700/1(a,b,c)
      * 1 ) its checked whether a 700 field exists with no å subfield
      * 2 ) field must exists and subfield å must contain the value after the backslash
-     * 3 ) rule 1 + 2 and the field with the correct value in å must also contain the subfields denoted in the paranthesis
+     * 3 ) rule 2 + 3 and the field with the correct value in å must also contain the subfields denoted in the paranthesis
      * url Danmarc2 : http://www.kat-format.dk/danMARC2/Danmarc2.99.htm#pgfId=1575494
      *
      * @syntax SubfieldRules.checkReference( record, field, subfield, params )

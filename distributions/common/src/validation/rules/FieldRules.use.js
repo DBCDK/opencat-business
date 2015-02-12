@@ -212,83 +212,6 @@ var FieldRules = function( ) {
         return result;
     }
 
-    /**
-     * Makes a subfield mandatory if another subfield is not presented in the field.
-     *
-     * @syntax FieldRules.subfieldMandatoryIfSubfieldNotPresent( record, field, params )
-     * @param {object} record The record that contains the field.
-     * @param {object} field  The field to validate.
-     * @param {object} params Object with two properties: 'subfield' and 'not_presented_subfield'.
-     *                        'subfield' is the name of the subfield that should be mandatory.
-     *                        Ex. "m". 'not_presented_subfield' is the list og field/subfield that
-     *                        should not be presented in the record for 'subfield' to be mandatory.
-     *                        The 'not_presented_subfield' list should be formatted as field/subfield, ex.
-     *                        ["652m", "666abc", "123z"].
-     * @return {Array} Array of validation errors.
-     * @example FieldRules.subfieldMandatoryIfSubfieldNotPresent( record, field, params )
-     * @name FieldRules.subfieldMandatoryIfSubfieldNotPresent
-     * @method
-     */
-    function subfieldMandatoryIfSubfieldNotPresent( record, field, params ) {
-        Log.trace( "Enter - FieldRules.subfieldMandatoryIfSubfieldNotPresent( record, field, params )" );
-
-        try {
-            Log.trace( "Params = " + uneval( params ) );
-            ValueCheck.checkThat( "params", params ).type( "object" );
-            ValueCheck.check( "params.subfield", params['subfield'] ).type( "string" );
-            ValueCheck.check( "params.not_presented_subfield", params['not_presented_subfield'] ).instanceOf( Array );
-
-            for( var i = 0; i < field.subfields.length; i++ ) {
-                if( field.subfields[i].name === params.subfield ) {
-                    return [];
-                }
-            }
-
-            params.not_presented_subfield.forEach( function ( fieldSubfield ) {
-                if( fieldSubfield.length < 4 ) {
-                    // TODO: FIXME hvad hulen står der her?!?!
-                    Log.debug( "params.not_presented_subfield is not a field/subfield: %s in param %s", fieldSubfield, params.subfields );
-                    throw StringUtil.sprintf( "params.not_presented_subfield is not a field/subfield: %s in param %s", params.not_presented_subfield, params.subfields );
-                }
-            });
-
-            var foundFieldAndSubfields = 0;
-            params.not_presented_subfield.forEach( function ( fieldSubfield ) {
-                var fieldName = fieldSubfield.substring( 0, 3 );
-                var subfieldNames = fieldSubfield.substring( 3 );
-                var recordField = __getFieldFromRecord( record, fieldName );
-                if ( recordField.status === true ) {
-                    for ( var j = 0 ; j < subfieldNames.length ; ++j ) {
-                        if ( __doesFieldContainSubfield( recordField.field, subfieldNames.substring( j, 1 ) ) ) {
-                            foundFieldAndSubfields += 1;
-                        }
-                    }
-                }
-            });
-
-            var result = [];
-            if ( foundFieldAndSubfields === 0 ) {
-                var errorMessage = StringUtil.sprintf( 'Delfelt "%s" mangler i felt "%s".', params.subfield, field.name );
-                result.push( ValidateErrors.fieldError( "TODO:url", errorMessage ) );
-            }
-            return result;
-        }
-        finally {
-            Log.trace( "Exit - FieldRules.subfieldMandatoryIfSubfieldNotPresent( record, field, params )" );
-        }
-    }
-
-    // Helper function for getting at specific field from the record
-    function __getFieldFromRecord( record, fieldName ) {
-        Log.trace ( "RecordRules.__getFieldFromRecord" );
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName ) {
-                return { field: record.fields[i], status: true };
-            }
-        }
-        return { status: false };
-    }
-
     // Helper function for determining is a subfield exists on a field
     function __doesFieldContainSubfield( field, subfieldName ) {
         Log.trace ( "RecordRules.__doesFieldContainSubfield" );
@@ -299,7 +222,6 @@ var FieldRules = function( ) {
         }
         return false;
     }
-
 
     /**
      * checks that if a specified subfield has a specific value, then another given subfield is mandatory
@@ -437,7 +359,6 @@ var FieldRules = function( ) {
         'fieldDemandsOtherFieldAndSubfield' : fieldDemandsOtherFieldAndSubfield,
         'fieldsIndicator' : fieldsIndicator,
         'subfieldsMandatory' : subfieldsMandatory,
-        'subfieldMandatoryIfSubfieldNotPresent': subfieldMandatoryIfSubfieldNotPresent,
         'subfieldConditionalMandatory' : subfieldConditionalMandatory,
         'repeatableSubfields' : repeatableSubfields,
         'exclusiveSubfield' : exclusiveSubfield,
@@ -606,94 +527,6 @@ UnitTest.addFixture( "exclusiveSubfield", function( ) {
         }]
     };
     SafeAssert.equal( "4 exclusiveSubfield test ok", FieldRules.exclusiveSubfield( record, field4, undefined ), [] );
-
-} );
-
-UnitTest.addFixture( "FieldRules.subfieldMandatoryIfSubfieldNotPresent", function() {
-    var exceptCallFormat = "FieldRules.subfieldMandatoryIfSubfieldNotPresent( %s, %s, %s )";
-
-    var recordArg = null;
-    var fieldArg = {
-        name: "001", indicator: "00",
-        subfields: [ { name: "a", value: "xx" } ]
-    };
-    var paramsArg = { subfield: "m", not_presented_subfield: ["652m"] };
-    Assert.exception( "records is null", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-
-    recordArg = {
-        fields: [
-            {
-                name: "001", indicator: "00",
-                subfields: [ { name: "a", value: "xx" } ]
-            }
-        ]
-    };
-    fieldArg = null;
-    paramsArg = { subfield: "m", not_presented_subfield: ["652m"] };
-    Assert.exception( "field is null", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-
-    recordArg = {
-        fields: [
-            {
-                name: "001", indicator: "00",
-                subfields: [ { name: "a", value: "xx" } ]
-            }
-        ]
-    };
-    fieldArg = recordArg.fields[0];
-    paramsArg = null;
-    Assert.exception( "params is null", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = undefined;
-    Assert.exception( "params is undefined", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = {};
-    Assert.exception( "params is empty object", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = { not_presented_subfield: "652m" };
-    Assert.exception( "params.subfield is undefined", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = { subfield: 45, not_presented_subfield: ["652m"] };
-    Assert.exception( "params.subfield is not string", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = { subfield: "m" };
-    Assert.exception( "params.not_presented_subfield is undefined", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = { subfield: "m", not_presented_subfield: 47 };
-    Assert.exception( "params.not_presented_subfield is not array", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-    paramsArg = { subfield: "m", not_presented_subfield: ["042"] };
-    Assert.exception( "params.not_presented_subfield is not field/subfield", StringUtil.sprintf( exceptCallFormat, uneval( recordArg ), uneval( fieldArg ), uneval( paramsArg ) ) );
-
-    recordArg = {
-        fields: [
-            {
-                name: "001", indicator: "00",
-                subfields: [ { name: "a", value: "xx" } ]
-            }
-        ]
-    };
-    fieldArg = recordArg.fields[0];
-    paramsArg = { subfield: "a", not_presented_subfield: ["001b"] };
-    SafeAssert.equal( "001a: Mandatory without 001b",
-                      FieldRules.subfieldMandatoryIfSubfieldNotPresent( recordArg, fieldArg, paramsArg ), [] );
-    paramsArg = { subfield: "m", not_presented_subfield: ["001a"] };
-    SafeAssert.equal( "001m: Not mandatory with 001a",
-                      FieldRules.subfieldMandatoryIfSubfieldNotPresent( recordArg, fieldArg, paramsArg ), [] );
-    paramsArg = { subfield: "m", not_presented_subfield: ["001b"] };
-    SafeAssert.equal( "001m: Mandatory without 001b",
-                      FieldRules.subfieldMandatoryIfSubfieldNotPresent( recordArg, fieldArg, paramsArg ),
-                      [ ValidateErrors.fieldError( "TODO:url", 'Delfelt "m" mangler i felt "001".' ) ] );
-
-    recordArg = {
-        fields: [
-            { name: "001", indicator: "00",
-              subfields: [ { name: "a", value: "xx" } ] },
-            { name: "002", indicator: "00",
-              subfields: [ { name: "a", value: "xx" } ] },
-            { name: "003", indicator: "00",
-              subfields: [ { name: "a", value: "xx" } ] }
-        ]
-    };
-    fieldArg = recordArg.fields[0];
-    paramsArg = { subfield: "a", not_presented_subfield: ["042abc", "002z", "001b"] };
-    SafeAssert.equal( "Test 1", FieldRules.subfieldMandatoryIfSubfieldNotPresent( recordArg, fieldArg, paramsArg ), [] );
-
-    paramsArg = { subfield: "m", not_presented_subfield: ["042abc", "002z", "001a"] };
-    SafeAssert.equal( "Test 1", FieldRules.subfieldMandatoryIfSubfieldNotPresent( recordArg, fieldArg, paramsArg ), [] );
 
 } );
 

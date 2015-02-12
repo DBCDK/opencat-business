@@ -7,7 +7,7 @@
 use( "SafeAssert" );
 use( "SubfieldRules" );
 use( "UnitTest" );
-use ( 'GenericSettings' )
+use ( 'GenericSettings' );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
@@ -31,7 +31,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), []);
     params = {values:["42", "x"]};
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), errorMsg);
-})
+});
 
 UnitTest.addFixture( "SubfieldRules.checkLength", function() {
     var record = {};
@@ -724,7 +724,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
     };
     SafeAssert.equal( "7 SubfieldRules.checkReference valid value with forward slash val and parenthesis, missing d", SubfieldRules.checkReference( record, undefined, subfield ), errArr );
 
-    subfield = {'name': 'a', 'value': '004'}
+    subfield = {'name': 'a', 'value': '004'};
     var errorMessage = [(  ValidateErrors.subfieldError( 'TODO:fixurl', 'felt "004" findes ikke i posten uden delfelt \u00E5' ) )];
     SafeAssert.equal( "8 SubfieldRules.checkReference error, valid value without forward slash but no field without 'å' subfield", SubfieldRules.checkReference( record, undefined, subfield ), errorMessage );
 

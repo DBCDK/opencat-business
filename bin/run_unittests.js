@@ -42,6 +42,7 @@ use( "FieldRules" );
 use( "MandatorySubfieldInVolumeWorkRuleTest" );
 use( "RecordRules" );
 use( "RecordRulesConflictingSubfieldsTest" );
+use( "SubfieldMandatoryIfSubfieldNotPresentRuleTest" );
 use( "SubfieldRules" );
 use( "ValidateErrors" );
 use( "Validator" );

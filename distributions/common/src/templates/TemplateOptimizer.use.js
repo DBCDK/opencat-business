@@ -2,6 +2,7 @@
 use( "FieldRules" );
 use( "MandatorySubfieldInVolumeWorkRule" );
 use( "RecordRules" );
+use( "SubfieldMandatoryIfSubfieldNotPresentRule" );
 use( "SubfieldRules" );
 use( "UnitTest" );
 
@@ -256,7 +257,7 @@ var TemplateOptimizer = function() {
 
             case "FieldRules.fieldsIndicator": return FieldRules.fieldsIndicator;
             case "FieldRules.subfieldsMandatory": return FieldRules.subfieldsMandatory;
-            case "FieldRules.subfieldMandatoryIfSubfieldNotPresent": return FieldRules.subfieldMandatoryIfSubfieldNotPresent;
+            case "FieldRules.subfieldMandatoryIfSubfieldNotPresent": return SubfieldMandatoryIfSubfieldNotPresentRule.validateField;
             case "FieldRules.subfieldConditionalMandatory": return FieldRules.subfieldConditionalMandatory;
             case "FieldRules.subfieldHasValueDemandsOtherSubfield": return FieldRules.subfieldHasValueDemandsOtherSubfield;
             case "FieldRules.repeatableSubfields": return FieldRules.repeatableSubfields;
