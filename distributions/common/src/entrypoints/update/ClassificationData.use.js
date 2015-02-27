@@ -130,12 +130,12 @@ var ClassificationData = function() {
         Log.info( "    dbcRecord: " + dbcRecord );
         Log.info( "    libraryRecord: " + libraryRecord );
         var record = libraryRecord.clone();
-        
-        dbcRecord.eachField( classificationFields, function( field ) {
-           if( !record.existField( new RegExp( field.name ) ) ) {
-               record.append( field );
-           } 
-        });
+
+        if( !hasClassificationData( libraryRecord ) ) {
+            dbcRecord.eachField(classificationFields, function (field) {
+                record.append(field);
+            } );
+        }
         
         Log.info( "Exit - ClassificationData.updateClassificationsInRecord(): " + record );
         return record;

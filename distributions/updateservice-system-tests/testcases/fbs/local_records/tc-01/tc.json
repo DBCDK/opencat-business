@@ -1,0 +1,13 @@
+{
+    "templateName": "film",
+    "authentication": {
+        "groupIdAut": "723000",
+        "userIdAut": "netpunkt",
+        "passwordAut": "20Koster"
+    },
+    "headers": {
+        "x-forwarded-for": "127.12.14.16, 127.37.185.18",
+        "x-forwarded-host": "oss-services.dbc.dk, oss-services.dbc.dk",
+        "x-forwarded-server": "oss-services.dbc.dk, update.osssvc.beweb.dbc.dk"
+    }
+}

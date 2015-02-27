@@ -103,21 +103,27 @@ var DanMarc2Converter = function() {
         var result = {
             fields: []
         };
-        
+
+        Log.trace( "Try to convert record:\n", record );
+
         try {
             ValueCheck.checkThat( "record", record ).instanceOf( Record );
             
 	        record.eachField( /./, function( field ) {
 	            var objField = {
-	                name: field.name,
-	                indicator: field.indicator,
+	                name: field.name.toString() + '',
+	                indicator: field.indicator.toString() + '',
 	                subfields: []
 	            };
 	            
 	            field.eachSubField( /./, function( field, subfield ) {
-	            	objField.subfields.push( { name: subfield.name, value: subfield.value } );
+	            	objField.subfields.push( {
+                        name: subfield.name.toString() + '',
+                        value: subfield.value.toString() + ''
+                    } );
 	            });
-	            
+
+                Log.trace( "Add field ", objField.name, ": ", JSON.stringify( objField ) );
 	            result.fields.push( objField );
 	        } );
 	        	        

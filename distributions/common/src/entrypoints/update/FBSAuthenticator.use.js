@@ -179,6 +179,25 @@ var FBSAuthenticator = function() {
         Log.trace( "Enter - FBSAuthenticator.recordDataForRawRepo()" );
 
         try {
+            var agencyId = record.getValue( /001/, /b/ );
+
+            if( agencyId === groupId ) {
+                return [ record ];
+            }
+
+            if (agencyId === COMMON_AGENCYID) {
+                return __recordDataForRawRepoCommonRecord( record, userId, groupId );
+            }
+        }
+        finally {
+            Log.trace( "Exit - FBSAuthenticator.recordDataForRawRepo()" );
+        }
+    }
+
+    function __recordDataForRawRepoCommonRecord( record, userId, groupId ) {
+        Log.trace( "Enter - FBSAuthenticator.__recordDataForRawRepoCommonRecord" );
+
+        try {
             var correctedRecord = NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, userId, groupId );
             var owner = correctedRecord.getValue( /996/, /a/ );
             if( owner === "" ) {
@@ -203,7 +222,7 @@ var FBSAuthenticator = function() {
             return [ correctedRecord, dbcEnrichmentRecord ];
         }
         finally {
-            Log.trace( "Exit - FBSAuthenticator.recordDataForRawRepo()" );
+            Log.trace( "Exit - FBSAuthenticator.__recordDataForRawRepoCommonRecord" );
         }
     }
 

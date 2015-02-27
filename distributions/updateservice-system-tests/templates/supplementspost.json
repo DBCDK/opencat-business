@@ -23,14 +23,7 @@
                     "rules": [
                         {
                             "type": "SubfieldRules.checkFaust"
-                        },
-						{
-        					"type": "SubfieldRules.lookupValue",
-       						"params": { 
-            				"register": "marc.001a",
-            				"exist": true
-        					}
-    					}
+                        }
                     ]
                 },
                 "b": "Lister.fields.codes.subfields.libraries.001b",
