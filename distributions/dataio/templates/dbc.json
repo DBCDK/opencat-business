@@ -37,7 +37,15 @@
                 },
                 "d": {
                     "mandatory": true,
-                    "repeatable": false
+                    "repeatable": false,
+                    "rules": [{
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 8,
+                                "max": 8
+                            }
+                        }
+                    ]
                 },
                 "f": {
                     "mandatory": true,
@@ -106,90 +114,8 @@
                 "x": {}
             }
         },
-        "005": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8.htm",
-            "repeatable": false,
-            "subfields": {
-                "h": {
-                    "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i",
-            					"j", "k", "l", "m", "n", "o", "p", "q", "r",
-								"s", "t", "u", "v", "w", "x", "y" ]
-                },
-                "i": {
-                    "values": [ "a", "b", "c", "d", "e", "g", "h", "i", "j", "k", "l", "o" ]
-                },
-                "j": {
-                    "values": [ "a", "b", "c" ]
-                },
-                "k": {
-                    "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "z" ]
-                },
-                "l": {
-                    "values": [ "a", "b" ]
-                },
-                "r": {
-                    "repeatable": false,
-                    "values": [ "a" ]
-                },
-                "v": {
-                    "repeatable": false,
-                    "values": [ "g", "v" ]
-                },
-                "z": {
-                    "repeatable": false,
-                    "values": [ "d", "f", "g", "k", "m", "n", "o", "p", "q", "x" ]
-                }
-            }
-        },
-        "006": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},
-                "b": {
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},
-                "c": {
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},
-                "d": {
-                    "repeatable": false,
-                    "values": [ "0", "7", "11", "15" ]
-				},
-                "e": {
-                    "repeatable": false
-				},
-                "2": {
-                    "repeatable": false,
-                    "values": [ "a", "b", "c", "d", "e" ]
-                }
-            }
-        },
+		"005": "DanMarc2.fields.005",
+        "006": "DanMarc2.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory": true,
@@ -306,88 +232,11 @@
                 }
             }
         },
-        "009":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
-            "repeatable":false,
-            "subfields":{
-                "a": "Lister.fields.codes.subfields.general_mattype",
-                "g": "Lister.fields.codes.subfields.specific_mattype",
-                "b": "Lister.fields.codes.subfields.general_mattype",
-                "h": "Lister.fields.codes.subfields.specific_mattype"
-			}
-        },
-        "010":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.b.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{},
-                "b":{},
-                "c":{
-					"rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 14,
-                                "max": 14
-                            }
-                        }
-                    ]
-				},
-                "d":{
-					"rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},
-                "e":{},
-                "f":{
-                    "values": [ "a", "b", "c", "d" ]
-				},
-                "g":{},
-                "t":{}
-            }
-        },
-        "011":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.c.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "rules":[{
-                            "type":"SubfieldRules.checkFaust"
-                        }
-                    ]
-                }
-            }
-        },
-        "012":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.d.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "repeatable":false
-                },
-                "b":{
-                    "repeatable":false
-                }
-            }
-        },
-        "013":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.e.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                            "type":"SubfieldRules.checkFaust"
-                        }
-                    ]
-                }
-            }
-        },
+        "009": "DanMarc2.fields.009",
+        "010": "DanMarc2.fields.010",
+        "011": "DanMarc2.fields.011",
+        "012": "DanMarc2.fields.012",
+        "013": "DanMarc2.fields.013",
         "014":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
             "repeatable":false,
@@ -455,18 +304,7 @@
                 }
             }
         },
-        "020":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.14.htm",
-            "subfields":{
-                "a": "Lister.fields.codes.subfields.language.repeat",
-                "b":{},
-                "x":{},
-                "2":{
-                    "repeatable":false,
-                    "rules":[ { "type":"SubfieldRules.checkISBN13" } ]
-                }
-            }
-        },
+		"020": "DanMarc2.fields.020",
         "021":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.15.htm",
             "subfields":{

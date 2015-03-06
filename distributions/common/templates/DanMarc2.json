@@ -34,7 +34,15 @@
                     "repeatable": false
                 },
                 "d": {
-                    "repeatable": false
+                    "repeatable": false,
+                    "rules": [{
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 8,
+                                "max": 8
+                            }
+                        }
+                    ]
                 },
                 "e": {
                     "repeatable": false
