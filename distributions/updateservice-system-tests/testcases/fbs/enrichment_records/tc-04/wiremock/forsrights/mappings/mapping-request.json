@@ -1,0 +1,21 @@
+{
+  "request" : {
+    "url" : "/",
+    "method" : "POST",
+    "bodyPatterns" : [ {
+      "equalTo" : "<?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Body><forsRightsRequest xmlns=\"http://oss.dbc.dk/ns/forsrights\"><userIdAut>netpunkt</userIdAut><groupIdAut>723000</groupIdAut><passwordAut>20Koster</passwordAut><ipAddress>127.12.14.16</ipAddress></forsRightsRequest></S:Body></S:Envelope>"
+    } ]
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-response.xml",
+    "headers" : {
+      "Date" : "Wed, 22 Oct 2014 12:38:32 GMT",
+      "Server" : "Apache",
+      "Content-Length" : "3970",
+      "Keep-Alive" : "timeout=15, max=100",
+      "Connection" : "Keep-Alive",
+      "Content-Type" : "text/xml"
+    }
+  }
+}

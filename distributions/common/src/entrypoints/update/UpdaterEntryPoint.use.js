@@ -26,9 +26,18 @@ var UpdaterEntryPoint = function() {
      * @return {Boolean} true if classification data exists in the record, false otherwise.
      */
     function hasClassificationData( jsonMarc ) {
-        var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( jsonMarc ) );
+        Log.trace( "Enter - UpdaterEntryPoint.hasClassificationData()" );
 
-        return ClassificationData.hasClassificationData( marc );
+        var result;
+        try {
+            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonMarc));
+
+            result = ClassificationData.hasClassificationData(marc);
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - UpdaterEntryPoint.hasClassificationData():" + result );
+        }
     }
 
     /**
@@ -40,10 +49,19 @@ var UpdaterEntryPoint = function() {
      * @return {Boolean} true if the classifications has changed, false otherwise.
      */
     function hasClassificationsChanged( oldRecord, newRecord ) {
-        var oldMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( oldRecord ) );
-        var newMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( newRecord ) );
+        Log.trace( "Enter - UpdaterEntryPoint.hasClassificationsChanged()" );
 
-        return ClassificationData.hasClassificationsChanged( oldMarc, newMarc );
+        var result;
+        try {
+            var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
+            var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
+
+            result = ClassificationData.hasClassificationsChanged(oldMarc, newMarc);
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - UpdaterEntryPoint.hasClassificationsChanged(): " + result );
+        }
     }
 
     /**
@@ -55,26 +73,35 @@ var UpdaterEntryPoint = function() {
      * @return {String} A json with the new record.
      */
     function createLibraryExtendedRecord( dbcRecord, libraryId ) {
-        var dbcMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( dbcRecord ) );
-        var result = new Record;
+        Log.trace( "Enter - UpdaterEntryPoint.createLibraryExtendedRecord()" );
 
-        var curDate = new Date();
-        var curDateStr = curDate.getFullYear().toString() +
-                         curDate.getMonth().toString() +
-                         curDate.getDay().toString();
-        var curTimeStr = curDate.getHours().toString() +
-                         curDate.getMinutes().toString() +
-                         curDate.getSeconds().toString();
+        var result;
+        try {
+            var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
+            result = new Record;
 
-        var idField = new Field( "001", "00" );
-        idField.append( new Subfield( "a", dbcMarc.getValue( /001/, /a/ ) ) );
-        idField.append( new Subfield( "b", libraryId.toString() ) );
-        idField.append( new Subfield( "c", curDateStr + curTimeStr ) );
-        idField.append( new Subfield( "d", curDateStr ) );
-        idField.append( new Subfield( "f", "a" ) );
-        result.append( idField );
+            var curDate = new Date();
+            var curDateStr = curDate.getFullYear().toString() +
+                curDate.getMonth().toString() +
+                curDate.getDay().toString();
+            var curTimeStr = curDate.getHours().toString() +
+                curDate.getMinutes().toString() +
+                curDate.getSeconds().toString();
 
-        return updateLibraryExtendedRecord( dbcRecord, JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) ) );
+            var idField = new Field("001", "00");
+            idField.append(new Subfield("a", dbcMarc.getValue(/001/, /a/)));
+            idField.append(new Subfield("b", libraryId.toString()));
+            idField.append(new Subfield("c", curDateStr + curTimeStr));
+            idField.append(new Subfield("d", curDateStr));
+            idField.append(new Subfield("f", "a"));
+            result.append(idField);
+
+            result = updateLibraryExtendedRecord(dbcRecord, JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result)));
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - UpdaterEntryPoint.createLibraryExtendedRecord(): " + result );
+        }
     }
 
     /**
@@ -87,39 +114,50 @@ var UpdaterEntryPoint = function() {
      * @return {String} A json with the updated record.
      */
     function updateLibraryExtendedRecord( dbcRecord, libraryRecord ) {
-        var dbcMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( dbcRecord ) );
-        var libraryMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( libraryRecord ) );
+        Log.trace( "Enter - UpdaterEntryPoint.updateLibraryExtendedRecord()" );
 
-        return JSON.stringify( DanMarc2Converter.convertFromDanMarc2( ClassificationData.updateClassificationsInRecord( dbcMarc, libraryMarc ) ) );
+        var result;
+        try {
+            var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
+            var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
+
+            result = __correctEnrichmentRecordIfEmpty(ClassificationData.updateClassificationsInRecord(dbcMarc, libraryMarc));
+            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
+        }
+        finally {
+            Log.trace( "Exit - UpdaterEntryPoint.updateLibraryExtendedRecord(): " + result );
+        }
     }
 
     function correctLibraryExtendedRecord( dbcRecord, libraryRecord ) {
         Log.info( "Enter - ClassificationData.__hasFieldChanged()" );
-        var dbcMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( dbcRecord ) );
-        var libraryMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( libraryRecord ) );
 
-        Log.info( "    dbcMarc: " + dbcMarc );
-        Log.info( "    libraryMarc: " + libraryMarc );
+        try {
+            var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
+            var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
 
-        if( ClassificationData.hasClassificationData( dbcMarc ) ) {
-            if( !ClassificationData.hasClassificationsChanged( dbcMarc, libraryMarc ) ) {
-                Log.info( "Classifications is the same. Removing it from library record." );
-                libraryMarc = ClassificationData.removeClassificationsFromRecord( libraryMarc );
+            Log.info("    dbcMarc: " + dbcMarc);
+            Log.info("    libraryMarc: " + libraryMarc);
+
+            if (ClassificationData.hasClassificationData(dbcMarc)) {
+                if (!ClassificationData.hasClassificationsChanged(dbcMarc, libraryMarc)) {
+                    Log.info("Classifications is the same. Removing it from library record.");
+                    libraryMarc = ClassificationData.removeClassificationsFromRecord(libraryMarc);
+                }
+                else {
+                    Log.info("Classifications has changed.");
+                }
             }
             else {
-                Log.info( "Classifications has changed." );
+                Log.info("Common record has no classifications.");
             }
-        }
-        else {
-            Log.info( "Common record has no classifications." );
-        }
 
-        if( libraryMarc.size() === 1 && libraryMarc.field( 0 ).name === "001" ) {
-            libraryMarc = new Record();
+            var record = __correctEnrichmentRecordIfEmpty(libraryMarc);
+            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(record));
         }
-
-        Log.info( "Exit - ClassificationData.correctLibraryExtendedRecord(): " + libraryMarc );
-        return JSON.stringify( DanMarc2Converter.convertFromDanMarc2( libraryMarc ) );
+        finally {
+            Log.info("Exit - ClassificationData.correctLibraryExtendedRecord()" );
+        }
     }
 
     /**
@@ -155,6 +193,29 @@ var UpdaterEntryPoint = function() {
         }
         finally {
             Log.trace( "Exit - UpdaterEntryPoint.recordDataForRawRepo" );
+        }
+    }
+
+    function __correctEnrichmentRecordIfEmpty( record ) {
+        Log.trace( "Enter - UpdaterEntryPoint.__correctEnrichmentRecordIfEmpty" );
+
+        Log.debug( "Record: ", record.toString() );
+        var result = record;
+        try {
+            for( var i = 0; i < record.size(); i++ ) {
+                var field = record.field( i );
+                if( !( field.name === "001" || field.name === "996" ) ) {
+                    Log.debug( "Return full record." );
+                    return result;
+                }
+            }
+
+            result = new Record;
+            Log.debug( "Return empty record." );
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - UpdaterEntryPoint.__correctEnrichmentRecordIfEmpty: " + result.toString() );
         }
     }
 
