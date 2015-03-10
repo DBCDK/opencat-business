@@ -434,7 +434,7 @@
     	"rules":[
 		    {
         		"type": "RecordRules.allFieldsMandatoryIfOneExist",
-		        "errorType": "ERROR",
+		        "errorType": "WARNING",
 		   		"params": { 
 					"fields": [ "008", "009", "038", "100", "245", "652" ] 
 				}
