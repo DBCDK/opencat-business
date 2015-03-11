@@ -10,27 +10,27 @@ UnitTest.addFixture( "BasisSplitter.splitCompleteBasisRecord", function() {
     var commonRecord;
     var actual;
 
-    record = RecordUtil.createFromString( "001 00 *a 1 234 567 8 *b 870970" );
-    commonRecord = record.clone();
+    record = RecordUtil.createFromString( StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", UpdateConstants.COMMON_AGENCYID ) );
+    commonRecord = RecordUtil.createFromString( StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", UpdateConstants.RAWREPO_COMMON_AGENCYID ) );
     enrightmentRecord = record.clone();
-    enrightmentRecord.field( "001" ).subfield( "b" ).value = "010100";
+    enrightmentRecord.field( "001" ).subfield( "b" ).value = UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID;
 
     actual = BasisSplitter.splitCompleteBasisRecord( record );
     Assert.equalValue( "Simple split with *b: Common record", actual[ 0 ].toString(), commonRecord.toString() );
     Assert.equalValue( "Simple split with *b: Enrightment record", actual[ 1 ].toString(), enrightmentRecord.toString() );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *r n *a e\n" +
         "s10 00 *a text\n"
     );
     commonRecord = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *r n *a e\n" +
         "996 00 *a text\n"
     );
     enrightmentRecord = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 010100\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         "s10 00 *a text\n"
     );
 

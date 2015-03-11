@@ -2,6 +2,7 @@
 use( "Log" );
 use( "Marc" );
 use( "RecordUtil" );
+use( "UpdateConstants" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'BasisSplitter' ];
@@ -14,7 +15,6 @@ EXPORTED_SYMBOLS = [ 'BasisSplitter' ];
  * @name BasisSplitter
  */
 var BasisSplitter = function() {
-    var DBC_AGENCY_ID = "010100";
     var DBC_FIELDS = /[a-z].*/;
 
     function splitCompleteBasisRecord( record ) {
@@ -29,16 +29,20 @@ var BasisSplitter = function() {
 
                 if( field.name === "001" ) {
                     var dbcField = field.clone();
-                    dbcField.append( "b", DBC_AGENCY_ID, true );
-
+                    dbcField.append( "b", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, true );
                     dbcRecord.append( dbcField );
-                }
 
-                if( DBC_FIELDS.test( field.name ) ) {
-                    dbcRecord.append( field );
+                    var commonField = field.clone();
+                    commonField.append( "b", UpdateConstants.RAWREPO_COMMON_AGENCYID, true );
+                    commonRecord.append( commonField );
                 }
                 else {
-                    commonRecord.append( field );
+                    if (DBC_FIELDS.test(field.name)) {
+                        dbcRecord.append(field);
+                    }
+                    else {
+                        commonRecord.append(field);
+                    }
                 }
             }
 

@@ -9,8 +9,13 @@ var UpdateConstants = {
     //-----------------------------------------------------------------------------
 
     COMMON_AGENCYID: "870970",
-    DBC_ENRICHMENT_AGENCYID: "010100",
-    DBC_AGENCY_IDS: [ "870970", "010100" ],
+
+    RAWREPO_COMMON_AGENCYID: "191919",
+    RAWREPO_DBC_ENRICHMENT_AGENCY_ID: "870970",
+
+    DBC_LOGIN_AGENCY_ID: "010100",
+
+    DBC_AGENCY_IDS: [ "010100" ],
     FBS_AGENCY_IDS: [
         "700400", "710100", "714700", "715100", "715300", "715500",
         "715700", "715900", "716100", "716300", "716500", "716700", "716900",
@@ -33,16 +38,5 @@ var UpdateConstants = {
     //                  Fields
     //-----------------------------------------------------------------------------
 
-    ID_FIELD: "001",
-    ID_SUBFIELD: "a",
-    AGENCY_ID_SUBFIELD: "b",
-    ADJUSTMENT_TIME_SUBFIELD: "c",
-
-    EXTENTABLE_NOTE_FIELDS: /504|530|531|600|610|631|666|770|780|795/,
-    DBC_OWNER_FIELD: "s10",
-    COMMON_OWNER_FIELD: "996",
-    OWNER_SUBFIELD: "a",
-
-    RET_OWNER_VALUE: "RET",
-    DBC_OWNER_VALUE: "DBC"
+    EXTENTABLE_NOTE_FIELDS: /504|530|531|600|610|631|666|770|780|795/
 };

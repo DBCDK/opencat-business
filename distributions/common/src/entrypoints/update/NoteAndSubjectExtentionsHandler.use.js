@@ -16,8 +16,6 @@ EXPORTED_SYMBOLS = [ 'NoteAndSubjectExtentionsHandler' ];
  * @name NoteAndSubjectExtentionsHandler
  */
 var NoteAndSubjectExtentionsHandler = function() {
-    var extentableFields = /504|530|531|600|610|631|666|770|780|795/;
-
     /**
      * Authenticates extentions in a record.
      *
@@ -34,19 +32,19 @@ var NoteAndSubjectExtentionsHandler = function() {
 
         try {
             var recId = record.getValue(/001/, /a/);
-            var agencyId = record.getValue(/001/, /b/);
-            if (!RawRepoClient.recordExists(recId, agencyId)) {
+            if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
                 return [];
             }
 
-            var curRecord = RawRepoClient.fetchRecord(recId, agencyId);
+            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
+            curRecord.field( "001" ).subfield( "b" ).value = record.getValue( /001/, /b/ );
             if (!isNationalCommonRecord(curRecord)) {
                 return [];
             }
 
             var authResult = [];
             record.eachField(/./, function (field) {
-                if (!extentableFields.test(field.name)) {
+                if (!UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
                     if (__isFieldChangedInOtherRecord(field, curRecord)) {
                         authResult.push(ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' har ikke ret til at rette/tilføje feltet '%s' i posten '%s'", groupId, field.name, recId)));
                     }
@@ -54,7 +52,7 @@ var NoteAndSubjectExtentionsHandler = function() {
             });
 
             curRecord.eachField(/./, function (field) {
-                if (!extentableFields.test(field.name)) {
+                if (!UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
                     if (__isFieldChangedInOtherRecord(field, record)) {
                         if( curRecord.count( field.name ) !== record.count( field.name ) ) {
                             authResult.push(ValidateErrors.recordError("", StringUtil.sprintf("Brugeren '%s' har ikke ret til at slette feltet '%s' i posten '%s'", groupId, field.name, recId)));
@@ -86,18 +84,17 @@ var NoteAndSubjectExtentionsHandler = function() {
 
         try {
             var recId = record.getValue(/001/, /a/);
-            var agencyId = record.getValue(/001/, /b/);
-            if (!RawRepoClient.recordExists(recId, agencyId)) {
+            if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
                 return record;
             }
 
-            var curRecord = RawRepoClient.fetchRecord(recId, agencyId);
+            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
             if (!isNationalCommonRecord(curRecord)) {
                 return record;
             }
 
             record.eachField(/./, function (field) {
-                if (extentableFields.test(field.name)) {
+                if (UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
                     field.insert( 0, "&", groupId );
                 }
             });

@@ -17,7 +17,6 @@ use( "ClassificationData_UnitTests" );
 use( "DBCAuthenticatorTests" );
 use( "FBSAuthenticatorTests" );
 use( "NoteAndSubjectExtentionsHandlerTests" );
-use( "RawRepoMergerTests" );
 use( "RecordSorterTests" );
 
 // Include common modules

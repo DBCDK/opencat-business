@@ -18,25 +18,6 @@ EXPORTED_SYMBOLS = [ 'FBSAuthenticator' ];
  * @name FBSAuthenticator
  */
 var FBSAuthenticator = function() {
-    var AGENCY_IDS = [
-        "700400", "710100", "714700", "715100", "715300", "715500",
-        "715700", "715900", "716100", "716300", "716500", "716700", "716900",
-        "717300", "717500", "718300", "718500", "718700", "719000", "720100",
-        "721000", "721700", "721900", "722300", "723000", "724000", "725000",
-        "725300", "725900", "726000", "726500", "726900", "727000", "730600",
-        "731600", "732000", "732600", "732900", "733000", "733600", "734000",
-        "735000", "736000", "737000", "737600", "739000", "740000", "741000",
-        "742000", "743000", "744000", "745000", "746100", "747900", "748000",
-        "748200", "749200", "751000", "753000", "754000", "755000", "756100",
-        "757300", "757500", "758000", "760700", "761500", "762100", "763000",
-        "765700", "766100", "766500", "767100", "770600", "770700", "771000",
-        "772700", "773000", "774000", "774100", "774600", "775100", "775600",
-        "776000", "776600", "777300", "777900", "778700", "779100", "781000",
-        "781300", "782000", "782500", "784000", "784600", "784900", "785100",
-        "786000", "400700", "790900"
-    ];
-    var COMMON_AGENCYID = "870970";
-
     /**
      * Checks if this record can be authenticated by this authenticator.
      *
@@ -54,7 +35,7 @@ var FBSAuthenticator = function() {
         Log.trace( "Enter - FBSAuthenticator.canAuthenticate()" );
 
         try {
-            var result = AGENCY_IDS.indexOf( groupId ) > -1;
+            var result = UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) > -1;
 
             Log.trace( "Will FBSAuthenticator authenticate group '", groupId, "' for this record." );
             return result;
@@ -86,7 +67,7 @@ var FBSAuthenticator = function() {
                 return [];
             }
 
-            if (agencyId === COMMON_AGENCYID) {
+            if (agencyId === UpdateConstants.COMMON_AGENCYID ) {
                 return __authenticateCommonRecord(record, groupId);
             }
 
@@ -127,7 +108,7 @@ var FBSAuthenticator = function() {
             Log.info( "Record agency: ", agencyId );
             Log.info( "New owner: ", owner );
 
-            if( !RawRepoClient.recordExists( recId, agencyId ) ) {
+            if( !RawRepoClient.recordExists( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID ) ) {
                 Log.debug( "Checking authentication for new common record." );
                 if( owner === "" ) {
                     return [ValidateErrors.recordError("", "Du har ikke ret til at oprette en f\xe6llesskabspost")];
@@ -149,7 +130,7 @@ var FBSAuthenticator = function() {
                 return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere f\xe6llesskabsposten for et andet bibliotek.")];
             }
 
-            var curRecord = RawRepoClient.fetchRecord( recId, agencyId );
+            var curRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID );
             var curOwner = curRecord.getValue( /996/, /a/ );
 
             Log.info( "Current owner: ", curOwner );
@@ -157,7 +138,7 @@ var FBSAuthenticator = function() {
             if( curOwner === "DBC" ) {
                 return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som er ejet af DBC")];
             }
-            if( curOwner !== "RET" && AGENCY_IDS.indexOf( curOwner ) === -1 ) {
+            if( curOwner !== "RET" && UpdateConstants.FBS_AGENCY_IDS.indexOf( curOwner ) === -1 ) {
                 return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som ikke er ejet af et folkebibliotek.")];
             }
 
@@ -185,7 +166,7 @@ var FBSAuthenticator = function() {
                 return [ record ];
             }
 
-            if (agencyId === COMMON_AGENCYID) {
+            if (agencyId === UpdateConstants.COMMON_AGENCYID) {
                 return __recordDataForRawRepoCommonRecord( record, userId, groupId );
             }
         }
@@ -207,14 +188,14 @@ var FBSAuthenticator = function() {
 
             var recId = correctedRecord.getValue( /001/, /a/ );
 
-            if( !RawRepoClient.recordExists( recId, UpdateConstants.DBC_ENRICHMENT_AGENCYID ) ) {
+            if( !RawRepoClient.recordExists( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) ) {
                 Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.DBC_ENRICHMENT_AGENCYID, "] does not exist." );
                 return [ correctedRecord ];
             }
 
-            Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.DBC_ENRICHMENT_AGENCYID, "found." );
+            Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, "found." );
 
-            var dbcEnrichmentRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.DBC_ENRICHMENT_AGENCYID );
+            var dbcEnrichmentRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID );
 
             Log.debug( "Replace s10 in DBC enrichment record with: ", owner );
             dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "s10", "a", owner );

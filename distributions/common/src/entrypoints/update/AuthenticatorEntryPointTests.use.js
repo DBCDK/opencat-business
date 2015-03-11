@@ -22,7 +22,7 @@ UnitTest.addFixture( "AuthenticatorEntryPoint.authenticateRecord", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n"
     );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );

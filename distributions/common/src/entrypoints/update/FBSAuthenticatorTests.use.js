@@ -11,8 +11,6 @@ UnitTest.addFixture( "FBSAuthenticator.canAuthenticate", function() {
 } );
 
 UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
-    var COMMON_RECORD_AGENCY_ID = "870970";
-    var DBC_RECORD_AGENCY_ID = "010100";
     var FBS_RECORD_AGENCY_ID = "714700";
     var OTHER_FBS_RECORD_AGENCY_ID = "726500";
 
@@ -78,7 +76,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n"
     );
     Assert.equalValue( "Creation of common record",
@@ -87,7 +85,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
@@ -97,7 +95,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
@@ -111,13 +109,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", DBC_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
@@ -125,7 +123,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
@@ -137,13 +135,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", DBC_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
@@ -151,7 +149,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
@@ -163,13 +161,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", DBC_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
@@ -177,7 +175,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
@@ -192,13 +190,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", DBC_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         "s10 00 *a RET"
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "996 00 *a RET"
     );
@@ -206,7 +204,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
@@ -222,13 +220,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", DBC_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         "s10 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "996 00 *a DBC"
     );
@@ -236,7 +234,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
@@ -252,13 +250,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", DBC_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
         "s10 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", COMMON_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "996 00 *a 200300"
     );
@@ -266,7 +264,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
@@ -282,7 +280,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -290,7 +288,13 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     RawRepoClientCore.addRecord( curRecord );
 
-    record = curRecord.clone();
+    record = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord\n" +
+        "996 00 *a DBC"
+    );
     Assert.equalValue( "National common record with no changes",
         FBSAuthenticator.authenticateRecord( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
@@ -298,7 +302,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -308,7 +312,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *b 870970 *a 1 234 567 8 \n" +
+        StringUtil.sprintf( "001 00 *b %s *a 1 234 567 8 \n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -321,7 +325,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -331,7 +335,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a xxx\n" +
@@ -345,7 +349,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -355,7 +359,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a yyy\n" +
@@ -368,7 +372,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -378,7 +382,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "996 00 *a DBC"
@@ -390,7 +394,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -400,7 +404,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -414,7 +418,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -425,7 +429,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a yyy *x\n" +
@@ -439,7 +443,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     curRecord = new Record();
     curRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -450,7 +454,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a xxx\n" +
@@ -555,7 +559,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
     RawRepoClientCore.addRecord( curRecord );
 
     curRecord = RecordUtil.createFromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", UpdateConstants.DBC_ENRICHMENT_AGENCYID )
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -563,13 +567,13 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a titel\n" +
-        StringUtil.sprintf( "996 00 *a %s\n", UpdateConstants.FBS_RECORD_AGENCY_ID )
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
     expected = [
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
-            StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.DBC_ENRICHMENT_AGENCYID ) +
-            StringUtil.sprintf( "s10 00 *a %s\n", UpdateConstants.FBS_RECORD_AGENCY_ID )
+            StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
         )
     ];
     Assert.equalValue( "Update record and DBC enrichment. DBC enrichment has no s10",
@@ -584,8 +588,8 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
     RawRepoClientCore.addRecord( curRecord );
 
     curRecord = RecordUtil.createFromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.DBC_ENRICHMENT_AGENCYID ) +
-        StringUtil.sprintf( "s10 00 *a %s\n", UpdateConstants.DBC_ENRICHMENT_AGENCYID )
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -593,13 +597,13 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "245 00 *a titel\n" +
-        StringUtil.sprintf( "996 00 *a %s\n", UpdateConstants.FBS_RECORD_AGENCY_ID )
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
     expected = [
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
-            StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.DBC_ENRICHMENT_AGENCYID ) +
-            StringUtil.sprintf( "s10 00 *a %s\n", UpdateConstants.FBS_RECORD_AGENCY_ID )
+            StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
         )
     ];
     Assert.equalValue( "Update record and DBC enrichment. s10 is updated.",

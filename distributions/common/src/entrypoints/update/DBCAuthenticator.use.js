@@ -14,8 +14,6 @@ EXPORTED_SYMBOLS = [ 'DBCAuthenticator' ];
  * @name DBCAuthenticator
  */
 var DBCAuthenticator = function() {
-    var AGENCY_IDS = [ "870970", "010100" ];
-
     /**
      * Checks if this record can be authenticated by this authenticator.
      *
@@ -30,7 +28,7 @@ var DBCAuthenticator = function() {
      * @name DBCAuthenticator#canAuthenticate
      */
     function canAuthenticate( record, userId, groupId ) {
-        return AGENCY_IDS.indexOf( groupId ) > -1;
+        return UpdateConstants.DBC_AGENCY_IDS.indexOf( groupId ) > -1;
     }
 
     /**
