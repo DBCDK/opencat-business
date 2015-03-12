@@ -1,0 +1,11 @@
+[
+    {
+        "name": "dbc-valid-book",
+        "description": "Tester skabelonen 'dbc' kan validere en bog",
+        "request": {
+            "templateName": "dbc",
+            "record": "book.marc"
+        },
+        "validation": []
+    }
+]
