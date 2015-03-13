@@ -1,0 +1,689 @@
+[
+    {
+        "name": "bog-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'bog'",
+        "request": {
+            "templateName": "bog",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"652\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "bogbind-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'bogbind'",
+        "request": {
+            "templateName": "bogbind",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"014\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "boghoved-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'boghoved'",
+        "request": {
+            "templateName": "boghoved",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"652\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "bogsektion-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'bogsektion'",
+        "request": {
+            "templateName": "bogsektion",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "film-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'film'",
+        "request": {
+            "templateName": "film",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"260\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"300\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"652\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "filmbind-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'filmbind'",
+        "request": {
+            "templateName": "filmbind",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"014\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"260\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"300\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "filmhoved-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'filmhoved'",
+        "request": {
+            "templateName": "filmhoved",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"260\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"300\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"652\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "lokalpost-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'lokalpost'",
+        "request": {
+            "templateName": "lokalpost",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "musik-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'musik'",
+        "request": {
+            "templateName": "musik",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "netlydbog-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'netlydbog'",
+        "request": {
+            "templateName": "netlydbog",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"652\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "netlydbogbind-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'netlydbogbind'",
+        "request": {
+            "templateName": "netlydbogbind",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"014\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    },
+    {
+        "name": "netlydboghoved-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'netlydboghoved'",
+        "request": {
+            "templateName": "netlydboghoved",
+            "record": "empty.marc"
+        },
+        "validation": [
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"001\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"004\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"008\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"009\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"245\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"652\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                }
+            },
+            {
+                "type" : "ERROR",
+                "params" : {
+                    "message" : "Field \"996\" mangler i posten",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                }
+            }
+        ]
+    }
+]
