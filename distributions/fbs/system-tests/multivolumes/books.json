@@ -1,0 +1,46 @@
+[
+    {
+        "name": "main-book",
+        "description": "Tester en komplet hovedpost",
+        "request": {
+            "templateName": "boghoved",
+            "record": "main.marc"
+        },
+        "validation": []
+    },
+    {
+        "name": "volume-book-no-main",
+        "description": "Tester en komplet bindpost uden hovedpost i rawrepo",
+        "request": {
+            "templateName": "bogbind",
+            "record": "volume.marc"
+        },
+        "validation": []
+    },
+    {
+        "name": "volume-book-with-main",
+        "description": "Tester en komplet bindpost med hovedpost i rawrepo",
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "main.marc"
+                }
+            ]
+        },
+        "request": {
+            "templateName": "bogbind",
+            "record": "volume.marc"
+        },
+        "validation": [
+            {
+                "type": "ERROR",
+                "params": {
+                    "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                    "message": "Delfelt 008o må ikke anvendes i posten '5 161 764 9', da delfeltet allerede er anvendt i flerbindsværket.",
+                    "fieldno": 3,
+                    "subfieldno": 5
+                }
+            }
+        ]
+    }
+]

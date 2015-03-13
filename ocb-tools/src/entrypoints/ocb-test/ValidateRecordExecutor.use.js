@@ -1,23 +1,106 @@
 //-----------------------------------------------------------------------------
+use( "RawRepoClientCore" );
+use( "ReadFile" );
+use( "RecordUtil" );
+use( "SolrCore" );
 use( "ValidatorEntryPoint" );
 use( "Log" );
 
 //-----------------------------------------------------------------------------
-/**
- * Validates a record with a given template.
- *
- * @param {String} templateName The name of the template to use.
- * @param {String} record       The record to validator as a json.
- *
- * @return {String} A json string with an array of validation errors.
- */
-function validateRecord( templateName, record, settings ) {
-    Log.trace( "Enter - validateRecord()" );
+var ValidateRecordExecutor = function() {
+    /**
+     * Validates a record with a given template.
+     *
+     * @param {String} tc      Testcase
+     * @param {String} record  The record to validator as a json.
+     *
+     * @return {String} A json string with an array of validation errors.
+     */
+    function validateRecord( tc, record, settings ) {
+        Log.trace( "Enter - ValidateRecordExecutor.validateRecord()" );
 
-    try {
-        return ValidatorEntryPoint.validateRecord( templateName, record, settings );
+        try {
+            Log.debug( "Testcase: ", tc.name, " - ", tc.description );
+            Log.debug( "File: ", tc.file.absolutePath );
+
+            __setupRawRepo( tc );
+            __setupSolr( tc );
+
+            return ValidatorEntryPoint.validateRecord( tc.request.templateName, record, settings );
+        }
+        catch( ex ) {
+            return JSON.stringify( [ ValidateErrors.recordError( "", StringUtil.sprintf( "Systemfejl ved validering af testcase: %s", ex ) ) ] );
+        }
+        finally {
+            Log.trace( "Exit - ValidateRecordExecutor.validateRecord()" );
+        }
     }
-    finally {
-        Log.trace( "Exit - validateRecord()" );
+
+    function __setupRawRepo( tc ) {
+        Log.trace( "Enter - ValidateRecordExecutor.__setupRawRepo()" );
+
+        try {
+            RawRepoClientCore.clear();
+
+            if( tc.setup !== null ) {
+                if( tc.setup.rawrepo !== null ) {
+                    var records = tc.setup.rawrepo;
+                    for (var i = 0; i < records.size(); i++) {
+                        var recordFilename = tc.file.parent + "/" + records.get(i).record;
+                        var recordContent = System.readFile( recordFilename );
+
+                        Log.debug( "Adding record to rawrepo: ", recordFilename );
+                        RawRepoClientCore.addRecord( RecordUtil.createFromString( recordContent ) );
+                    }
+                }
+                else {
+                    Log.debug( "tc.setup.rawrepo is (null)" );
+                }
+            }
+            else {
+                Log.debug("tc.setup is (null)");
+            }
+        }
+        finally {
+            Log.trace( "Exit - ValidateRecordExecutor.__setupRawRepo()" );
+        }
     }
+
+    function __setupSolr( tc ) {
+        Log.trace( "Enter - ValidateRecordExecutor.__setupSolr()" );
+
+        try {
+            SolrCore.clear();
+
+            if( tc.setup !== null ) {
+                if( tc.setup.solr !== null ) {
+                    var queries = tc.setup.solr;
+                    for (var i = 0; i < queries.size(); i++) {
+                        var item = queries.get( i );
+
+                        Log.debug( "Adding query to Solr: ", item.query, " -> ", item.numFound );
+                        SolrCore.addQuery( item.query, item.numFound );
+                    }
+                }
+                else {
+                    Log.debug( "tc.setup.solr is (null)" );
+                }
+            }
+            else {
+                Log.debug( "tc.setup is (null)" );
+            }
+        }
+        finally {
+            Log.trace( "Exit - ValidateRecordExecutor.__setupSolr()" );
+        }
+    }
+
+    return {
+        'validateRecord': validateRecord
+    }
+}();
+
+//-----------------------------------------------------------------------------
+function validateRecord( tc, record, settings ) {
+    return ValidateRecordExecutor.validateRecord( tc, record, settings );
 }
