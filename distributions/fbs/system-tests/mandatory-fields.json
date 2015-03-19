@@ -3,6 +3,11 @@
         "name": "bog-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'bog'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "bog",
             "record": "empty.marc"
         },
@@ -62,6 +67,11 @@
         "name": "bogbind-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'bogbind'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "bogbind",
             "record": "empty.marc"
         },
@@ -114,6 +124,11 @@
         "name": "boghoved-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'boghoved'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "boghoved",
             "record": "empty.marc"
         },
@@ -173,6 +188,11 @@
         "name": "bogsektion-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'bogsektion'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "bogsektion",
             "record": "empty.marc"
         },
@@ -218,6 +238,11 @@
         "name": "film-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'film'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "film",
             "record": "empty.marc"
         },
@@ -291,6 +316,11 @@
         "name": "filmbind-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'filmbind'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "filmbind",
             "record": "empty.marc"
         },
@@ -364,6 +394,11 @@
         "name": "filmhoved-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'filmhoved'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "filmhoved",
             "record": "empty.marc"
         },
@@ -437,6 +472,11 @@
         "name": "lokalpost-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'lokalpost'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "lokalpost",
             "record": "empty.marc"
         },
@@ -482,6 +522,11 @@
         "name": "musik-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'musik'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "musik",
             "record": "empty.marc"
         },
@@ -520,6 +565,11 @@
         "name": "netlydbog-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'netlydbog'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "netlydbog",
             "record": "empty.marc"
         },
@@ -579,6 +629,11 @@
         "name": "netlydbogbind-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'netlydbogbind'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "netlydbogbind",
             "record": "empty.marc"
         },
@@ -631,6 +686,11 @@
         "name": "netlydboghoved-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'netlydboghoved'",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "netlydboghoved",
             "record": "empty.marc"
         },

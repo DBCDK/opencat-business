@@ -3,6 +3,11 @@
         "name": "dbc-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'dbc'",
         "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "dbc",
             "record": "empty.marc"
         },
@@ -41,6 +46,11 @@
         "name": "netpublikation-mandatory-fields",
         "description": "Tester obligatoriske felter i skabelonen 'netpublikation'",
         "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "netpublikation",
             "record": "empty.marc"
         },

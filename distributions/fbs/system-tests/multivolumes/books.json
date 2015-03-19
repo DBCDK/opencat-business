@@ -3,6 +3,11 @@
         "name": "main-book",
         "description": "Tester en komplet hovedpost",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "boghoved",
             "record": "main.marc"
         },
@@ -12,6 +17,11 @@
         "name": "volume-book-no-main",
         "description": "Tester en komplet bindpost uden hovedpost i rawrepo",
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "bogbind",
             "record": "volume.marc"
         },
@@ -28,6 +38,11 @@
             ]
         },
         "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "bogbind",
             "record": "volume.marc"
         },

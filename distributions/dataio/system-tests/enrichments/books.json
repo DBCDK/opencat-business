@@ -11,6 +11,11 @@
             ]
         },
         "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "supplementspost",
             "record": "book.marc"
         },
@@ -38,6 +43,11 @@
             ]
         },
         "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
             "templateName": "supplementspost",
             "record": "book.marc"
         },
