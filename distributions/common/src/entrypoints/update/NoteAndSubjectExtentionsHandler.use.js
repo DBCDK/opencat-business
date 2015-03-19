@@ -2,6 +2,7 @@
 use( "Log" );
 use( "Marc" );
 use( "RawRepoClient" );
+use( "UpdateConstants" );
 use( "ValidateErrors" );
 
 //-----------------------------------------------------------------------------
