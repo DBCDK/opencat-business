@@ -31,7 +31,6 @@ use( "SubfieldRulesTest" );
 use( "ValidatorTest" );
 
 // Include template modules
-use( "TemplateContainerTest" );
 use( "TemplateLoader" );
 use( "TemplateOptimizer" );
 use( "TemplateUrl" );
