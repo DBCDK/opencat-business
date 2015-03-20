@@ -26,7 +26,7 @@
                         },
 						{
         					"type": "SubfieldRules.lookupValue",
-       						"params": { 
+       						"params": {
 	            				"register": "marc.001a",
     	        				"exist": true
         					}
@@ -86,13 +86,13 @@
                 "t":{
                     "repeatable": false,
 					"mandatory": true,
-                    "values": [ "m", "s", "p", "a", "h" ]                    
-				}, 
+                    "values": [ "m", "s", "p", "a", "h" ]
+				},
                 "u": "DanMarc2.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
                 "z": "DanMarc2.fields.008.subfields.z",
                 "b": "DanMarc2.fields.008.subfields.b",
-                "c": "DanMarc2.fields.008.subfields.c", 
+                "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
                 "e": "DanMarc2.fields.008.subfields.e",
                 "f": "DanMarc2.fields.008.subfields.f",
@@ -101,7 +101,7 @@
                 "i": "DanMarc2.fields.008.subfields.i",
                 "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l", 
+                "l": "DanMarc2.fields.008.subfields.l",
 				"m": "DanMarc2.fields.008.subfields.m",
                 "n": "DanMarc2.fields.008.subfields.n",
                 "o": "DanMarc2.fields.008.subfields.o",
@@ -183,7 +183,7 @@
         "222": "DanMarc2.fields.222",
         "239": "DanMarc2.fields.239",
         "240": "DanMarc2.fields.240",
-        "241": "DanMarc2.fields.241",    
+        "241": "DanMarc2.fields.241",
         "242": "DanMarc2.fields.242",
         "243": "DanMarc2.fields.243",
         "245":{
@@ -376,7 +376,7 @@
 					"repeatable": false
 				}
             }
-        }, 
+        },
 		"654": "DanMarc2.fields.654",
         "655": "DanMarc2.fields.655",
         "660": "DanMarc2.fields.660",
@@ -430,27 +430,18 @@
             "subfields":{
                 "a":"Lister.fields.codes.subfields.libraries.996a"
             }
-        },
-    	"rules":[
-		    {
-        		"type": "RecordRules.allFieldsMandatoryIfOneExist",
-		        "errorType": "WARNING",
-		   		"params": { 
-					"fields": [ "008", "009", "038", "100", "245", "652" ] 
-				}
-    		},
-			{
-    	        "type":"RecordRules.conflictingFields",
-        	    "params":{
-            	    "fields":[ "100", "110" ]
-            	}
-	        },
-			{
-        		"type": "RecordRules.conflictingSubfields",
-        		"params": { 
-					"subfields": [ "652m", "654m" ] 
-				}
-    		}
-    	]
-	}
+        }
+	},
+    "rules": [
+        {
+          "type": "RecordRules.allFieldsMandatoryIfOneExist",
+          "params": { "fields": [ "008", "009", "038", "100", "245", "652" ] }
+        }, {
+          "type":"RecordRules.conflictingFields",
+          "params": { "fields": [ "100", "110" ] }
+        }, {
+          "type": "RecordRules.conflictingSubfields",
+          "params": { "subfields": [ "652m", "654m" ] }
+        }
+    ]
 }
