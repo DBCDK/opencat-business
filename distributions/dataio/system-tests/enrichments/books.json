@@ -28,6 +28,30 @@
                     "fieldno" : 1,
                     "subfieldno" : 1
                 }
+            }, {
+            "type" : "ERROR",
+            "params" : {
+              "message" : "Felt 009 blev ikke fundet",
+              "url" : "TODO:fixurl"
+              }
+            }, {
+              "type" : "ERROR",
+              "params" : {
+                "message" : "Felt 038 blev ikke fundet",
+                "url" : "TODO:fixurl"
+              }
+            }, {
+              "type" : "ERROR",
+              "params" : {
+                "message" : "Felt 100 blev ikke fundet",
+                "url" : "TODO:fixurl"
+              }
+            }, {
+              "type" : "ERROR",
+              "params" : {
+                "message" : "Felt 652 blev ikke fundet",
+                "url" : "TODO:fixurl"
+              }
             }
         ]
     },
@@ -52,6 +76,31 @@
             "record": "book.marc"
         },
         "validation": [
+          {
+            "type" : "ERROR",
+            "params" : {
+              "message" : "Felt 009 blev ikke fundet",
+              "url" : "TODO:fixurl"
+            }
+          }, {
+            "type" : "ERROR",
+            "params" : {
+              "message" : "Felt 038 blev ikke fundet",
+              "url" : "TODO:fixurl"
+            }
+          }, {
+            "type" : "ERROR",
+            "params" : {
+              "message" : "Felt 100 blev ikke fundet",
+              "url" : "TODO:fixurl"
+            }
+          }, {
+            "type" : "ERROR",
+            "params" : {
+              "message" : "Felt 652 blev ikke fundet",
+              "url" : "TODO:fixurl"
+            }
+          }
         ]
     }
 ]
