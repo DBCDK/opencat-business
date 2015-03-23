@@ -33,7 +33,9 @@
         "setup": {
             "rawrepo": [
                 {
-                    "record": "main.marc"
+                    "record": "main.marc",
+                    "type": "COMMON",
+                    "deleted": false
                 }
             ]
         },
