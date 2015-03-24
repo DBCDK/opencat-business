@@ -1,54 +1,7 @@
 [
     {
-        "name": "enrichment-common-do-not-exist",
-        "description": "Tester en påhængspost til en fællespost som ikke eksistere",
-        "setup": {
-            "solr": [
-                {
-                    "query": "marc.001a:\"5 158 641 7\"",
-                    "numFound": 0
-                }
-            ]
-        },
-        "request": {
-            "authentication": {
-                "group": "010100",
-                "user": "netpunkt",
-                "password": "20Koster"
-            },
-            "templateName": "supplementspost",
-            "record": "book.marc"
-        },
-        "validation": [
-            {
-                "type" : "ERROR",
-                "params" : {
-                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
-                    "message" : "Værdien 5 158 641 7 (delfelt 001a) kan ikke findes i en eksisterende post.",
-                    "fieldno" : 1,
-                    "subfieldno" : 1
-                }
-            }
-        ]
-    },
-    {
-        "name": "enrichment-common-do-exist",
-        "description": "Tester en påhængspost til en fællespost som findes",
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "common.marc",
-                    "type": "COMMON",
-                    "deleted": false
-                }
-            ],
-            "solr": [
-                {
-                    "query": "marc.001a:\"5 158 641 7\"",
-                    "numFound": 1
-                }
-            ]
-        },
+        "name": "enrichment",
+        "description": "Validering af en påhængspost",
         "request": {
             "authentication": {
                 "group": "010100",
