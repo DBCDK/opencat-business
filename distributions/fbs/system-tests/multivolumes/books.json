@@ -11,7 +11,9 @@
             "templateName": "boghoved",
             "record": "main.marc"
         },
-        "validation": []
+        "expected": {
+            "validation": []
+        }
     },
     {
         "name": "volume-book-no-main",
@@ -25,7 +27,9 @@
             "templateName": "bogbind",
             "record": "volume.marc"
         },
-        "validation": []
+        "expected": {
+            "validation": []
+        }
     },
     {
         "name": "volume-book-with-main",
@@ -48,16 +52,18 @@
             "templateName": "bogbind",
             "record": "volume.marc"
         },
-        "validation": [
-            {
-                "type": "ERROR",
-                "params": {
-                    "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                    "message": "Delfelt 008o må ikke anvendes i posten '5 161 764 9', da delfeltet allerede er anvendt i flerbindsværket.",
-                    "fieldno": 3,
-                    "subfieldno": 5
+        "expected": {
+            "validation": [
+                {
+                    "type": "ERROR",
+                    "params": {
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "message": "Delfelt 008o må ikke anvendes i posten '5 161 764 9', da delfeltet allerede er anvendt i flerbindsværket.",
+                        "fieldno": 3,
+                        "subfieldno": 5
+                    }
                 }
-            }
-        ]
+            ]
+        }
     }
 ]

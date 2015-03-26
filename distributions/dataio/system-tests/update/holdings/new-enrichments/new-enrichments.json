@@ -1,0 +1,75 @@
+[
+    {
+        "name": "basis-new-enrichments-no-existing",
+        "description": "Automatisk oprettelse af påhængsposter for biblioteker med beholdninger, uden eksisterende påhængsposter.",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 700400, 700500, 700600 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "result-fbs-700400.marc",
+                            "result-fbs-700500.marc",
+                            "result-fbs-700600.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-700400.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-700500.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-700600.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

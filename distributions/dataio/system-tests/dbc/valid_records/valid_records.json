@@ -11,6 +11,26 @@
             "templateName": "dbc",
             "record": "book.marc"
         },
-        "validation": []
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
     }
 ]

@@ -11,6 +11,8 @@
             "templateName": "supplementspost",
             "record": "book.marc"
         },
-        "validation": []
+        "expected": {
+            "validation": []
+        }
     }
 ]
