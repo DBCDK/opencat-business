@@ -1,7 +1,7 @@
 [
     {
-        "name": "basis-new-enrichments-no-existing",
-        "description": "Automatisk oprettelse af påhængsposter for biblioteker med beholdninger, uden eksisterende påhængsposter.",
+        "name": "basis-no-changes-in-classifications",
+        "description": "Ingen ændringer i opstillingsdata med beholdninger for biblioteker uden påhængsposter.",
         "request": {
             "authentication": {
                 "group": "010100",
@@ -37,33 +37,10 @@
                         "type": "COMMON",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [
-                            "rawrepo-dbc-enrichment.marc",
-                            "result-fbs-700400.marc",
-                            "result-fbs-700500.marc",
-                            "result-fbs-700600.marc"
-                        ]
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc"  ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-700400.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-700500.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-700600.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

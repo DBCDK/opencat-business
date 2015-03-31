@@ -1,7 +1,7 @@
 [
     {
-        "name": "dbc-valid-book",
-        "description": "Tester skabelonen 'dbc' kan validere en bog",
+        "name": "dbc-update-new-book",
+        "description": "Tester skabelonen 'dbc' kan opdatere en ny bog",
         "request": {
             "authentication": {
                 "group": "010100",
