@@ -1,0 +1,127 @@
+[
+    {
+        "name": "fbs-update-enrichment-record",
+        "description": "Tester opdatering af eksisterende påhængspost",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "supplementspost",
+            "record": "full-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "full-request.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "full-request.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-update-empty-enrichment-record",
+        "description": "Tester opdatering af eksisterende påhængspost, med en ny tom post",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "supplementspost",
+            "record": "empty-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "result-deleted-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]

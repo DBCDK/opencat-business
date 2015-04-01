@@ -1,0 +1,55 @@
+[
+    {
+        "name": "fbs-new-locale-record",
+        "description": "Tester oprettelse af ny lokal post",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "film",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "LOCALE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
