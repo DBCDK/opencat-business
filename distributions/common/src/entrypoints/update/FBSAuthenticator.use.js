@@ -194,12 +194,17 @@ var FBSAuthenticator = function() {
 
             if( !RawRepoClient.recordExists( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) ) {
                 Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.DBC_ENRICHMENT_AGENCYID, "] does not exist." );
-                return [ correctedRecord ];
+                dbcEnrichmentRecord = new Record;
+
+                var idField = record.field( "001" ).clone();
+                idField.subfield( "b" ).value = UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID;
+
+                dbcEnrichmentRecord.append( idField );
             }
-
-            Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, "found." );
-
-            dbcEnrichmentRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID );
+            else {
+                Log.debug("DBC enrichment record [", recId, ":", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, "found.");
+                dbcEnrichmentRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID);
+            }
 
             Log.debug( "Replace s10 in DBC enrichment record with: ", owner );
             dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "s10", "a", owner );
