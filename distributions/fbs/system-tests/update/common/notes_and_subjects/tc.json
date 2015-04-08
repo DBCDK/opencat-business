@@ -1,0 +1,52 @@
+[
+    {
+        "name": "fbs-new-subjects-to-common-record",
+        "bugs": [ "18331", "18345" ],
+        "description": "Tester tilføjelse af noter/emneord til fællesskabspost",
+        "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

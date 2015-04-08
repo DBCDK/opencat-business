@@ -65,7 +65,7 @@ var DanMarc2Converter = function() {
 	            ValueCheck.checkThat( "obj.fields[ " + i + " ].indicator", objField.indicator ).type( 'string' );
 	            ValueCheck.checkThat( "obj.fields[ " + i + " ].subfields", objField.subfields ).instanceOf( Array );
 	        	
-	        	var field = new Field( objField.name, objField.indicator );
+	        	var field = new Field( objField.name.toString() + '', objField.indicator.toString() + '' );
 	            
 	            for( var j = 0; j < objField.subfields.length; j++ ) {
 	                var objSubfield = objField.subfields[ j ];
@@ -74,7 +74,7 @@ var DanMarc2Converter = function() {
 	                ValueCheck.checkThat( "obj.fields[ " + i + " ].subfields[ " + j + "].name", objSubfield.name ).type( 'string' );
 	                ValueCheck.checkThat( "obj.fields[ " + i + " ].subfields[ " + j + "].value", objSubfield.value ).type( 'string' );
 
-	                field.append( new Subfield( objSubfield.name, objSubfield.value ) );
+	                field.append( new Subfield( objSubfield.name.toString() + '', objSubfield.value.toString() + '' ) );
 	            }
 	            
 	            result.append( field );

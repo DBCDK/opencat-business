@@ -178,8 +178,12 @@ var FBSAuthenticator = function() {
     function __recordDataForRawRepoCommonRecord( record, userId, groupId ) {
         Log.trace( "Enter - FBSAuthenticator.__recordDataForRawRepoCommonRecord" );
 
+        var correctedRecord = null;
+        var dbcEnrichmentRecord = null;
         try {
-            var correctedRecord = NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, userId, groupId );
+            RecordUtil.addOrReplaceSubfield( record, "001", "b", UpdateConstants.RAWREPO_COMMON_AGENCYID );
+
+            correctedRecord = NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, userId, groupId );
             var owner = correctedRecord.getValue( /996/, /a/ );
             if( owner === "" ) {
                 Log.debug( "No owner in record." );
@@ -195,7 +199,7 @@ var FBSAuthenticator = function() {
 
             Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, "found." );
 
-            var dbcEnrichmentRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID );
+            dbcEnrichmentRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID );
 
             Log.debug( "Replace s10 in DBC enrichment record with: ", owner );
             dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "s10", "a", owner );
@@ -203,6 +207,8 @@ var FBSAuthenticator = function() {
             return [ correctedRecord, dbcEnrichmentRecord ];
         }
         finally {
+            Log.trace( "  correctedRecord:\n", correctedRecord );
+            Log.trace( "  dbcEnrichmentRecord:\n", dbcEnrichmentRecord );
             Log.trace( "Exit - FBSAuthenticator.__recordDataForRawRepoCommonRecord" );
         }
     }

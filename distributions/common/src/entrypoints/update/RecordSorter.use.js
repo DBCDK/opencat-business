@@ -32,7 +32,7 @@ var RecordSorter = function() {
             var result = new Record();
             for( var i = 0; i < record.size(); i++ ) {
                 var recordField = record.field( i );
-                if( field.name < recordField.name ) {
+                if( field.name < recordField.name && !isFieldAppended ) {
                     result.append( field );
                     isFieldAppended = true;
                 }

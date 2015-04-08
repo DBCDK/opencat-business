@@ -610,4 +610,84 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         FBSAuthenticator.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ).toString(),
         expected.toString() );
     RawRepoClientCore.clear();
+
+    //-----------------------------------------------------------------------------
+    //              Test FBS updating common DBC record with notes
+    //-----------------------------------------------------------------------------
+
+    curRecord = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 68519659 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *r n *a e\n" +
+        "008 00 *t m *u f *a 2010 *b dk *d å *d y *l dan *x 06 *v 0\n" +
+        "009 00 *a a *g xx\n" +
+        "021 00 *c Hf.\n" +
+        "032 00 *x ACC201205 *a DBF201213\n" +
+        "100 00 *a Svendsen *h Kurt Villy *4 aut\n" +
+        "245 00 *a Følg gammelnissen Uffe på en ny lokalhistorisk rundtur i Hadsten og omegn *c en julehistorie i 31 afsnit\n" +
+        "260 00 *a [Hadsten] *b Hadsten-PingvinNyt.dk *c 2010\n" +
+        "300 00 *a 46 sider *b ill. (nogle i farver)\n" +
+        "512 00 *i Kolumnetitel *t PingvinNyt julekalenderen 2010\n" +
+        "521 00 *& REX *b 1. oplag *c 2010\n" +
+        "652 00 *m 46.4 *b Hadsten\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    RawRepoClientCore.addRecord( RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 68519659 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        "d08 00 *o wnn *o kpn *k ahf\n" +
+        "d09 00 *z REX201213\n" +
+        "s12 00 *t TeamBMV201210\n" +
+        "z98 00 *a Minus korrekturprint\n" +
+        "z99 00 *a ahf"
+    ) );
+
+    record = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 68519659 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *r n *a e\n" +
+        "008 00 *t m *u f *a 2010 *b dk *d å *d y *l dan *x 06 *v 0\n" +
+        "009 00 *a a *g xx\n" +
+        "021 00 *c Hf.\n" +
+        "032 00 *x ACC201205 *a DBF201213\n" +
+        "100 00 *a Svendsen *h Kurt Villy *4 aut\n" +
+        "245 00 *a Følg gammelnissen Uffe på en ny lokalhistorisk rundtur i Hadsten og omegn *c en julehistorie i 31 afsnit\n" +
+        "260 00 *a [Hadsten] *b Hadsten-PingvinNyt.dk *c 2010\n" +
+        "300 00 *a 46 sider *b ill. (nogle i farver)\n" +
+        "504 00 *a DETTE ER EN BERIGENDE NOTE\n" +
+        "512 00 *i Kolumnetitel *t PingvinNyt julekalenderen 2010\n" +
+        "521 00 *& REX *b 1. oplag *c 2010\n" +
+        "652 00 *m 46.4 *b Hadsten\n" +
+        "666 00 *f DETTE ER ET BERIGENDE EMNEORD\n" +
+        "996 00 *a DBC"
+    );
+
+    expected = [ RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 68519659 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *r n *a e\n" +
+        "008 00 *t m *u f *a 2010 *b dk *d å *d y *l dan *x 06 *v 0\n" +
+        "009 00 *a a *g xx\n" +
+        "021 00 *c Hf.\n" +
+        "032 00 *x ACC201205 *a DBF201213\n" +
+        "100 00 *a Svendsen *h Kurt Villy *4 aut\n" +
+        "245 00 *a Følg gammelnissen Uffe på en ny lokalhistorisk rundtur i Hadsten og omegn *c en julehistorie i 31 afsnit\n" +
+        "260 00 *a [Hadsten] *b Hadsten-PingvinNyt.dk *c 2010\n" +
+        "300 00 *a 46 sider *b ill. (nogle i farver)\n" +
+        StringUtil.sprintf( "504 00 *& %s *a DETTE ER EN BERIGENDE NOTE\n", FBS_RECORD_AGENCY_ID ) +
+        "512 00 *i Kolumnetitel *t PingvinNyt julekalenderen 2010\n" +
+        "521 00 *& REX *b 1. oplag *c 2010\n" +
+        "652 00 *m 46.4 *b Hadsten\n" +
+        StringUtil.sprintf( "666 00 *& %s*f DETTE ER ET BERIGENDE EMNEORD\n", FBS_RECORD_AGENCY_ID ) +
+        "996 00 *a DBC" ),
+        RecordUtil.createFromString(
+            StringUtil.sprintf( "001 00 *a 68519659 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            "d08 00 *o wnn *o kpn *k ahf\n" +
+            "d09 00 *z REX201213\n" +
+            "s10 00 *a DBC\n" +
+            "s12 00 *t TeamBMV201210\n" +
+            "z98 00 *a Minus korrekturprint\n" +
+            "z99 00 *a ahf" )
+    ];
+    Assert.equalValue( "FBS updating common DBC record with notes",
+        FBSAuthenticator.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ).toString(),
+        expected.toString() );
+    RawRepoClientCore.clear();
 } );

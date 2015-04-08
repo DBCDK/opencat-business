@@ -172,6 +172,7 @@ var UpdaterEntryPoint = function() {
 
         try {
             var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
+            Log.trace( "Record:\n", uneval( marc ) );
 
             var records = AuthenticatorEntryPoint.recordDataForRawRepo( marc, userId, groupId );
             var result = [];

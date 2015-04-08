@@ -4,6 +4,7 @@ use( "Marc" );
 use( "RawRepoClient" );
 use( "UpdateConstants" );
 use( "ValidateErrors" );
+use( "Print" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'NoteAndSubjectExtentionsHandler' ];
@@ -29,18 +30,19 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#authenticateExtentions
      */
     function authenticateExtentions( record, groupId ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.authenticateExtentions" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.authenticateExtentions( %s, %s )", uneval( record ), uneval( groupId ) ) );
 
+        var result = null;
         try {
             var recId = record.getValue(/001/, /a/);
             if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
-                return [];
+                return result = [];
             }
 
             var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
             curRecord.field( "001" ).subfield( "b" ).value = record.getValue( /001/, /b/ );
             if (!isNationalCommonRecord(curRecord)) {
-                return [];
+                return result = [];
             }
 
             var authResult = [];
@@ -62,10 +64,10 @@ var NoteAndSubjectExtentionsHandler = function() {
                 }
             });
 
-            return authResult;
+            return result = authResult;
         }
         finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.authenticateExtentions" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.authenticateExtentions(): ", result );
         }
     }
 
@@ -81,17 +83,19 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#changeUpdateRecordForUpdate
      */
     function recordDataForRawRepo( record, userId, groupId ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo( %s, %s, %s )", record, userId, groupId ) );
 
+        var result = null;
         try {
             var recId = record.getValue(/001/, /a/);
+
             if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
-                return record;
+                return result = record;
             }
 
             var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
             if (!isNationalCommonRecord(curRecord)) {
-                return record;
+                return result = record;
             }
 
             record.eachField(/./, function (field) {
@@ -100,10 +104,10 @@ var NoteAndSubjectExtentionsHandler = function() {
                 }
             });
 
-            return record;
+            return result = record;
         }
         finally {
-            Log.trace( "Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.recordDataForRawRepo():", result );
         }
     }
 
@@ -117,23 +121,24 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#isNationalCommonRecord
      */
     function isNationalCommonRecord( record ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.isNationalCommonRecord" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.isNationalCommonRecord( %s )", record ) );
 
+        var result = null;
         try {
             if( !record.matchValue( /996/, /a/, /DBC/ ) ) {
-                return false;
+                return result = false;
             }
 
             for (var i = 0; i < record.size(); i++) {
                 if (__isFieldNationalCommonRecord(record.field(i))) {
-                    return true;
+                    return result = true;
                 }
             }
 
-            return false;
+            return result = false;
         }
         finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.isNationalCommonRecord" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.isNationalCommonRecord(): ", result );
         }
     }
 
@@ -148,21 +153,26 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#__isFieldNationalCommonRecord
      */
     function __isFieldNationalCommonRecord( field ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord( %s )", field ) );
 
+        var result = null;
         try {
-            if (field.name !== "032") {
+            var fieldName = field.name.toString() + '';
+            if ( fieldName !== "032") {
+                result = StringUtil.sprintf( "x1: '%s': false", fieldName );
                 return false;
             }
 
             if (!field.exists(/a/)) {
+                result = "x2: false";
                 return false;
             }
 
+            result = "x3: " + !field.matchValue(/x/, /BKM*|NET*|SF*/);
             return !field.matchValue(/x/, /BKM*|NET*|SF*/);
         }
         finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord(): ", result );
         }
     }
 
@@ -178,19 +188,31 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#__isFieldChangedInOtherRecord
      */
     function __isFieldChangedInOtherRecord( field, record ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord( %s, %s )", field, record ) );
 
+        var result = null;
         try {
-            for (var i = 0; i < record.size(); i++) {
-                if (__isFieldsEqual(field, record.field(i))) {
-                    return false;
+            var compareRecord = record;
+            if( field.name === "001" ) {
+                compareRecord = record.clone();
+                if( field.exists( /c/ ) ) {
+                    RecordUtil.addOrReplaceSubfield( compareRecord, "001", "c", field.getValue( /c/ ) );
+                }
+                if( field.exists( /d/ ) ) {
+                    RecordUtil.addOrReplaceSubfield( compareRecord, "001", "d", field.getValue( /d/ ) );
                 }
             }
 
-            return true;
+            for( var i = 0; i < compareRecord.size(); i++ ) {
+                if( __isFieldsEqual( field, compareRecord.field( i ) ) ) {
+                    return result = false;
+                }
+            }
+
+            return result = true;
         }
         finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord(): ", result );
         }
     }
 
@@ -206,19 +228,25 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#__isFieldsEqual
      */
     function __isFieldsEqual( srcField, destField ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.__isFieldsEqual" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__isFieldsEqual( %s, %s )", srcField, destField ) );
 
+        var result = null;
         try {
+            Log.debug( "srcField.name: '", srcField.name, "'" );
+            Log.debug( "typeof( srcField.name ): ", typeof( srcField.name ) );
+            Log.debug( "srcField.name === \"001\": ", srcField.name === "001" );
+            Log.debug( "srcField.name === '001': ", srcField.name === '001' );
+
             if (srcField.name !== destField.name) {
-                return false;
+                return result = false;
             }
 
             if (srcField.indicator !== destField.indicator) {
-                return false;
+                return result = false;
             }
 
             if (srcField.size() !== destField.size()) {
-                return false;
+                return result = false;
             }
 
             var srcSubfields = [];
@@ -233,17 +261,17 @@ var NoteAndSubjectExtentionsHandler = function() {
 
             for (i = 0; i < srcSubfields.length; i++) {
                 if (srcSubfields[i].name !== destSubfields[i].name) {
-                    return false;
+                    return result = false;
                 }
                 if (srcSubfields[i].value !== destSubfields[i].value) {
-                    return false;
+                    return result = false;
                 }
             }
 
             return true;
         }
         finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldsEqual" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldsEqual(): ", result );
         }
     }
 
@@ -259,28 +287,29 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @name NoteAndSubjectExtentionsHandler#__sortSubfield
      */
     function __sortSubfield( a, b ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.__sortSubfield" );
+        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__sortSubfield( %s, %s )", a, b ) );
 
+        var result = null;
         try {
             if (a.name < b.name) {
-                return -1;
+                return result = -1;
             }
             else if (a.name > b.name) {
-                return 1;
+                return result = 1;
             }
             else {
                 if (a.value < b.value) {
-                    return -1;
+                    return result = -1;
                 }
                 else if (a.value > b.value) {
-                    return 1;
+                    return result = 1;
                 }
             }
 
-            return 0;
+            return result = 0;
         }
         finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__sortSubfield" );
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__sortSubfield(): ", result );
         }
     }
 
