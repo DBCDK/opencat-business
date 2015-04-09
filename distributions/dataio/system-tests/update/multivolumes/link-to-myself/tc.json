@@ -1,0 +1,55 @@
+[
+    {
+        "name": "basis-link-to-myself-volume",
+        "description": "Tester innk til sig selv (014a = 001a)",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "children": [ "rawrepo-volume.marc" ],
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-volume-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "message" : "Posten {58442895|870970} må ikke pege på sig selv i 014a"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+]
