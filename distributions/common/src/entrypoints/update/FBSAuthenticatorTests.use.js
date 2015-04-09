@@ -506,7 +506,13 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         "504 00 *a note\n" +
         StringUtil.sprintf( "996 00 *a %s", FBS_RECORD_AGENCY_ID )
     );
-    expected = [ NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ) ];
+    expected = [
+        NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        RecordUtil.createFromString(
+            StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            StringUtil.sprintf( "s10 00 *a %s", FBS_RECORD_AGENCY_ID )
+        )
+    ];
     Assert.equalValue( "New record with notes & 996a",
                        FBSAuthenticator.recordDataForRawRepo( record, "netpunkt", FBS_RECORD_AGENCY_ID ).toString(),
                        expected.toString() );
