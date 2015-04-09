@@ -559,7 +559,7 @@ UnitTest.addFixture( "SubfieldRules.lookupValue", function() {
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[ 0 ];
     subfield = field.subfields[ 0 ];
-    params = { register: "marc.002a", exist: true };
+    var params = { register: "marc.002a", exist: true };
     SafeAssert.equal( "001a must exist: OK", SubfieldRules.lookupValue( record, field, subfield, params, GenericSettings ), [] );
 
     marcRecord = new Record();
@@ -875,7 +875,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldConditionalMandatoryField", function
         'name' : "b", 'value' : "not42"
     };
 
-    params = { 'subfieldValue': '42', 'fieldMandatory': '010' };
+    var params = { 'subfieldValue': '42', 'fieldMandatory': '010' };
     SafeAssert.equal( "1 SubfieldRules.subfieldConditionalMandatoryField valid value", SubfieldRules.subfieldConditionalMandatoryField( rec, fieldab, subfield, params ), [] );
 
     subfield = {
