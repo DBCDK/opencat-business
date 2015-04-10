@@ -118,7 +118,7 @@
                         "record": "result-deleted-fbs-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": true,
-                        "enqueued": false
+                        "enqueued": true
                     }
                 ]
             }

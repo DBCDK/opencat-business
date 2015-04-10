@@ -1,6 +1,7 @@
 [
     {
         "name": "fbs-up-enrich-no-change-classification-del",
+        "bugs": [ "18515" ],
         "description": "Tester opdatering af eksisterende påhængspost uden ændringer i opstilling som medfører sletning",
         "request": {
             "authentication": {
@@ -54,7 +55,7 @@
                         "record": "result-fbs-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": true,
-                        "enqueued": false
+                        "enqueued": true
                     }
                 ]
             }
