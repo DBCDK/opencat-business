@@ -39,19 +39,16 @@ var LoopUpRecord = function () {
             if ( typeof params === "string" ) {
                 agencyId = params;
             }
-
             if ( RawRepoClient.recordExists( recordId, agencyId ) ) {
                 return [];
             } else {
                 return [ValidateErrors.subfieldError( "", StringUtil.sprintf( "Recorden med id %s og agencyId %s findes ikke i rawrepo.", recordId, agencyId ) )];
-                ;
             }
         }
         finally {
             Log.trace( "Exit - LoopUpRecord.checkForRecord()" );
         }
     }
-
     return {
         'checkForRecord': checkForRecord
     };
