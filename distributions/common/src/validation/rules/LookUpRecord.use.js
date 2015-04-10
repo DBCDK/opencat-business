@@ -23,11 +23,19 @@ var LoopUpRecord = function () {
             ValueCheck.check( "record", record ).type( "object" );
             ValueCheck.check( "field", field ).type( "object" );
 
-            var fieldVals = {
-                agencyId : "";
-                recordId : "";
-            }
+            var agencyId = "";
+            var recordId = "";
 
+            field.subfields.forEach( function ( subfieldVal ) {
+                switch ( subfieldVal.name ) {
+                    case "a":
+                        recordId = subfieldVal.value;
+                        break;
+                    case "b":
+                        agencyId = subfieldVal.value;
+                        break;
+                }
+            } );
             if ( typeof params === "string" ) {
                 agencyId = params;
             }
@@ -35,43 +43,18 @@ var LoopUpRecord = function () {
             if ( RawRepoClient.recordExists( recordId, agencyId ) ) {
                 return [];
             } else {
-                return [ValidateErrors.subfieldError("", StringUtil.sprintf("Recorden med id %s og agencyId %s findes ikke i rawrepo.", recordId, agencyId))];;
+                return [ValidateErrors.subfieldError( "", StringUtil.sprintf( "Recorden med id %s og agencyId %s findes ikke i rawrepo.", recordId, agencyId ) )];
+                ;
             }
         }
         finally {
             Log.trace( "Exit - LoopUpRecord.checkForRecord()" );
         }
-    };
-//-----------------------------------------------------------------------------
-//  Helper functions
-//-----------------------------------------------------------------------------
-
-    function getVal001aAndb ( field, fieldVals ) {
-        field.subfields.forEach( function ( subfieldVal ) {
-            switch ( subfieldVal.name ) {
-                case "a":
-                    fieldVals.recordId = subfieldVal.value;
-                    break;
-                case "b":
-                    fieldVals.agencyId = subfieldVal.value;
-                    break;
-            }
-        } );
-        return fieldVals;
-    }
-
-    function getVal001a ( field, fieldVals ) {
-        field.subfields.forEach( function ( subfieldVal ) {
-            if ( subfieldVal.name === "a" ) {
-                fieldVals.recordId = subfieldVal.value;
-                return fieldVals
-            }
-        };
     }
 
     return {
-            'checkForRecord' : checkForRecord
-        };
+        'checkForRecord': checkForRecord
+    };
 }();
 
 //-----------------------------------------------------------------------------
