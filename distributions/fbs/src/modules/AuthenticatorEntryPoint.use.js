@@ -1,5 +1,8 @@
 //-----------------------------------------------------------------------------
+use( "DanMarc2Converter" );
 use( "Log" );
+use( "Marc" );
+use( "MarcClasses" );
 use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClient" );
 use( "RecordUtil" );
@@ -7,44 +10,17 @@ use( "UpdateConstants" );
 use( "ValidateErrors" );
 
 //-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'FBSAuthenticator' ];
+EXPORTED_SYMBOLS = [ 'AuthenticatorEntryPoint' ];
 
 //-----------------------------------------------------------------------------
 /**
- * Module to authenticate and change records for update when they are updated
- * by an user from a FBS library.
+ * Module to contain entry points for the authenticator API between Java and
+ * JavaScript.
  *
  * @namespace
- * @name FBSAuthenticator
+ * @name AuthenticatorEntryPoint
  */
-var FBSAuthenticator = function() {
-    /**
-     * Checks if this record can be authenticated by this authenticator.
-     *
-     * It simply checks if groupId contains a FBS agency id.
-     *
-     * @param record Record - Not used.
-     * @param userId User id - Not used.
-     * @param groupId Group id.
-     *
-     * @returns {Boolean} True / False.
-     *
-     * @name FBSAuthenticator#canAuthenticate
-     */
-    function canAuthenticate( record, userId, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.canAuthenticate()" );
-
-        try {
-            var result = UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) > -1;
-
-            Log.trace( "Will FBSAuthenticator authenticate group '", groupId, "' for this record." );
-            return result;
-        }
-        finally {
-            Log.trace( "Enter - FBSAuthenticator.canAuthenticate()" );
-        }
-    }
-
+var AuthenticatorEntryPoint = function() {
     /**
      * Authenticates a record.
      *
@@ -55,27 +31,40 @@ var FBSAuthenticator = function() {
      * @returns {Array} Array of authentication errors. We use the same structure
      *                  as for validation errors.
      *
-     * @name FBSAuthenticator#authenticateRecord
+     * @name AuthenticatorEntryPoint#authenticateRecord
      */
     function authenticateRecord( record, userId, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.authenticateRecord()" );
+        return JSON.stringify( __authenticateRecord( record, userId, groupId ) );
+    }
+
+    function __authenticateRecord( record, userId, groupId ) {
+        Log.trace( "Enter - AuthenticatorEntryPoint.__authenticateRecord()" );
 
         try {
-            var agencyId = record.getValue( /001/, /b/ );
+            if( UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) == -1 ) {
+                Log.warn( "Unknown record/user." );
+                Log.warn( "User/group: ", userId, " / ", groupId );
+                Log.warn( "Posten:\n", record );
+
+                return [ ValidateErrors.recordError( "", "Ukendt post eller bruger." ) ];
+            }
+
+            var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
+            var agencyId = marc.getValue( /001/, /b/ );
 
             if (agencyId === groupId) {
                 return [];
             }
 
             if (agencyId === UpdateConstants.COMMON_AGENCYID ) {
-                return __authenticateCommonRecord(record, groupId);
+                return __authenticateCommonRecord( marc, groupId );
             }
 
-            var recId = record.getValue(/001/, /a/);
+            var recId = marc.getValue(/001/, /a/);
             return [ValidateErrors.recordError("", StringUtil.sprintf( "Du har ikke ret til at rette posten '%s' da den er ejet af et andet bibliotek.", recId))];
         }
         finally {
-            Log.trace( "Exit - FBSAuthenticator.authenticateRecord()" );
+            Log.trace( "Exit - AuthenticatorEntryPoint.__authenticateRecord()" );
         }
     }
 
@@ -91,10 +80,10 @@ var FBSAuthenticator = function() {
      *                  as for validation errors.
      *
      * @private
-     * @name FBSAuthenticator#__authenticateCommonRecord
+     * @name AuthenticatorEntryPoint#__authenticateCommonRecord
      */
     function __authenticateCommonRecord( record, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.__authenticateCommonRecord()" );
+        Log.trace( "Enter - AuthenticatorEntryPoint.__authenticateCommonRecord()" );
 
         try {
             if( NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ) === true ) {
@@ -145,7 +134,7 @@ var FBSAuthenticator = function() {
             return [];
         }
         finally {
-            Log.trace( "Exit - FBSAuthenticator.__authenticateCommonRecord()" );
+            Log.trace( "Exit - AuthenticatorEntryPoint.__authenticateCommonRecord()" );
         }
     }
 
@@ -157,26 +146,38 @@ var FBSAuthenticator = function() {
      * @returns {Array} A list of records of type Record.
      */
     function recordDataForRawRepo( record, userId, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.recordDataForRawRepo()" );
+        Log.trace( "Enter - AuthenticatorEntryPoint.recordDataForRawRepo()" );
 
         try {
-            var agencyId = record.getValue( /001/, /b/ );
+            try {
+                if( UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) == -1 ) {
+                    Log.warn( "Unknown record/user." );
+                    Log.warn( "User/group: ", userId, " / ", groupId );
+                    Log.warn( "Posten:\n", record );
+                    return [ record ];
+                }
 
-            if( agencyId === groupId ) {
-                return [ record ];
+                var agencyId = record.getValue( /001/, /b/ );
+
+                if( agencyId === groupId ) {
+                    return [ record ];
+                }
+
+                if (agencyId === UpdateConstants.COMMON_AGENCYID) {
+                    return __recordDataForRawRepoCommonRecord( record, userId, groupId );
+                }
             }
-
-            if (agencyId === UpdateConstants.COMMON_AGENCYID) {
-                return __recordDataForRawRepoCommonRecord( record, userId, groupId );
+            finally {
+                Log.trace( "Exit - AuthenticatorEntryPoint.recordDataForRawRepo()" );
             }
         }
         finally {
-            Log.trace( "Exit - FBSAuthenticator.recordDataForRawRepo()" );
+            Log.trace( "Exit - AuthenticatorEntryPoint.recordDataForRawRepo()" );
         }
     }
 
     function __recordDataForRawRepoCommonRecord( record, userId, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.__recordDataForRawRepoCommonRecord" );
+        Log.trace( "Enter - AuthenticatorEntryPoint.__recordDataForRawRepoCommonRecord" );
 
         var correctedRecord = null;
         var dbcEnrichmentRecord = null;
@@ -214,14 +215,12 @@ var FBSAuthenticator = function() {
         finally {
             Log.trace( "  correctedRecord:\n", correctedRecord );
             Log.trace( "  dbcEnrichmentRecord:\n", dbcEnrichmentRecord );
-            Log.trace( "Exit - FBSAuthenticator.__recordDataForRawRepoCommonRecord" );
+            Log.trace( "Exit - AuthenticatorEntryPoint.__recordDataForRawRepoCommonRecord" );
         }
     }
 
     return {
-        'canAuthenticate': canAuthenticate,
         'authenticateRecord': authenticateRecord,
         'recordDataForRawRepo': recordDataForRawRepo
     }
-
 }();
