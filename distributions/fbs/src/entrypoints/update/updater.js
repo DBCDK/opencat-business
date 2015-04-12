@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------------
-use( "UpdaterEntryPoint" );
+use( "FBSUpdaterEntryPoint" );
 
 //-----------------------------------------------------------------------------
 
 function hasClassificationData( marc ) {
-    return UpdaterEntryPoint.hasClassificationData( marc );    
+    return FBSUpdaterEntryPoint.hasClassificationData( marc );    
 }
 
 /**
@@ -16,7 +16,7 @@ function hasClassificationData( marc ) {
  * @return {Boolean} true if the classifications has changed, false otherwise.
  */
 function hasClassificationsChanged( oldRecord, newRecord ) {
-    return UpdaterEntryPoint.hasClassificationsChanged( oldRecord, newRecord );
+    return FBSUpdaterEntryPoint.hasClassificationsChanged( oldRecord, newRecord );
 }
 
 /**
@@ -28,7 +28,7 @@ function hasClassificationsChanged( oldRecord, newRecord ) {
  * @return {String} A json with the new record.
  */
 function createLibraryExtendedRecord( dbcRecord, libraryId ) {
-    return UpdaterEntryPoint.createLibraryExtendedRecord( dbcRecord, libraryId );
+    return FBSUpdaterEntryPoint.createLibraryExtendedRecord( dbcRecord, libraryId );
 }
 
 /**
@@ -41,13 +41,13 @@ function createLibraryExtendedRecord( dbcRecord, libraryId ) {
  * @return {String} A json with the updated record.
  */
 function updateLibraryExtendedRecord( dbcRecord, libraryRecord ) {
-    return UpdaterEntryPoint.updateLibraryExtendedRecord( dbcRecord, libraryRecord );
+    return FBSUpdaterEntryPoint.updateLibraryExtendedRecord( dbcRecord, libraryRecord );
 }
 
 function correctLibraryExtendedRecord( dbcRecord, libraryRecord ) {
-    return UpdaterEntryPoint.correctLibraryExtendedRecord( dbcRecord, libraryRecord );    
+    return FBSUpdaterEntryPoint.correctLibraryExtendedRecord( dbcRecord, libraryRecord );    
 }
 
 function recordDataForRawRepo( dbcRecord, userId, groupId ) {
-    return UpdaterEntryPoint.recordDataForRawRepo( dbcRecord, userId, groupId );
+    return FBSUpdaterEntryPoint.recordDataForRawRepo( dbcRecord, userId, groupId );
 }

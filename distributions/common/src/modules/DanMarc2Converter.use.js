@@ -51,13 +51,13 @@ var DanMarc2Converter = function() {
      * @name DanMarc2Converter#convertToDanMarc2
      */
     function convertToDanMarc2( obj ) {
-        Log.trace( "Enter - DanMarc2Converter.convertToDanMarc2()" );
+        Log.trace( "Enter - DanMarc2Converter.convertToDanMarc2( " + uneval( obj ) + " " );
 
-        ValueCheck.checkThat( "obj", obj ).type( "object" );        
-        ValueCheck.checkThat( "obj.fields", obj.fields ).instanceOf( Array );
-        
         var result = new Record();        
         try {
+            ValueCheck.checkThat( "obj", obj ).type( "object" );
+            ValueCheck.checkThat( "obj.fields", obj.fields ).instanceOf( Array );
+
 	        for( var i = 0; i < obj.fields.length; i++ ) {
 	        	var objField = obj.fields[ i ];
 	            ValueCheck.checkThat( "obj.fields[ " + i + " ]", objField ).type( 'object' );
@@ -81,6 +81,10 @@ var DanMarc2Converter = function() {
 	        }
 	        
 	        return result;
+        }
+        catch( ex ) {
+            Log.debug( "Catch exception: ", ex );
+            throw ex;
         }
         finally {
         	Log.info( "Exit - DanMarc2Converter.convertToDanMarc2() - " + result.toString() );
