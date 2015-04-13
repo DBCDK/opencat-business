@@ -3,8 +3,8 @@ use( "RawRepoClientCore" );
 use( "ReadFile" );
 use( "RecordUtil" );
 use( "SolrCore" );
-use( "ValidatorEntryPoint" );
 use( "Log" );
+use( "ValidateErrors" );
 
 //-----------------------------------------------------------------------------
 var ValidateRecordExecutor = function() {
@@ -26,7 +26,14 @@ var ValidateRecordExecutor = function() {
             __setupRawRepo( tc );
             __setupSolr( tc );
 
-            return ValidatorEntryPoint.validateRecord( tc.request.templateName, record, settings );
+            if( tc.distributionName == "dataio" ) {
+                use( "DBCValidatorEntryPoint" );
+                return DBCValidatorEntryPoint.validateRecord( tc.request.templateName, record, settings );
+            }
+            else if( tc.distributionName == "fbs" ) {
+                use( "FBSValidatorEntryPoint" );
+                return FBSValidatorEntryPoint.validateRecord( tc.request.templateName, record, settings );
+            }
         }
         catch( ex ) {
             return JSON.stringify( [ ValidateErrors.recordError( "", StringUtil.sprintf( "Systemfejl ved validering af testcase: %s", ex ) ) ] );

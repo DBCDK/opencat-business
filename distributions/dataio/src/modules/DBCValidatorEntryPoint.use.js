@@ -3,7 +3,7 @@ use( "TemplateContainer" );
 use( "Validator" );
 
 //-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'ValidatorEntryPoint' ];
+EXPORTED_SYMBOLS = [ 'DBCValidatorEntryPoint' ];
 
 //-----------------------------------------------------------------------------
 /**
@@ -11,9 +11,9 @@ EXPORTED_SYMBOLS = [ 'ValidatorEntryPoint' ];
  * JavaScript.
  *
  * @namespace
- * @name ValidatorEntryPoint
+ * @name DBCValidatorEntryPoint
  */
-var ValidatorEntryPoint = function() {
+var DBCValidatorEntryPoint = function() {
     /**
      * Gets the names of the templates as an Array
      *
