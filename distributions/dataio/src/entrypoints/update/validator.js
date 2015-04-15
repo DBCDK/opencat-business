@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
-use( "TemplateContainer" );
-use( "Validator" );
+use( "DBCValidatorEntryPoint" );
 
 //-----------------------------------------------------------------------------
 
@@ -11,9 +10,7 @@ use( "Validator" );
  *                as an Array.
  */
 function getValidateSchemas( settings ) {
-	TemplateContainer.setSettings( settings );
-	
-    return JSON.stringify( TemplateContainer.getTemplateNames( settings ) ); 
+	return DBCValidatorEntryPoint.getValidateSchemas( settings );
 }
 
 /**
@@ -24,24 +21,7 @@ function getValidateSchemas( settings ) {
  * @return {Boolean} true if the template exists, false otherwise.
  */
 function checkTemplate( name, settings ) {
-    Log.trace( StringUtil.sprintf( "Enter - checkTemplate( '%s' )", name ) );
-
-    var result = null;
-    try {
-    	TemplateContainer.setSettings( settings );
-    	
-        result = TemplateContainer.getUnoptimized( name ) !== undefined;
-        return result;
-    }
-    catch( ex ) {
-    	Log.debug( "Caught exception -> returning false. The exception was: ", ex );
-    	
-    	result = false;
-    	return result;
-    }
-    finally {
-        Log.trace( "Exit - checkTemplate(): " + result );
-    }
+    return DBCValidatorEntryPoint.checkTemplate( name, settings );
 }
 
 /**
@@ -53,27 +33,5 @@ function checkTemplate( name, settings ) {
  * @return {String} A json string with an array of validation errors.
  */
 function validateRecord( templateName, record, settings ) {
-    Log.trace( "Enter - validateRecord()" );
-
-    try {
-        var rec = JSON.parse( record );
-        var templateProvider = function () {
-        	TemplateContainer.setSettings( settings );
-            return TemplateContainer.get( templateName );
-        };
-
-        var result = null;
-
-        try {
-            result = Validator.validateRecord( rec, templateProvider, settings );
-        }
-        catch( ex ) {
-            result = [ ValidateErrors.recordError( "", StringUtil.sprintf( "Systemfejl ved validering: %s", ex ) ) ];
-        }
-
-        return JSON.stringify( result );
-    }
-    finally {
-        Log.trace( "Exit - validateRecord()" );
-    }
+    return DBCValidatorEntryPoint.validateRecord( templateName, record, settings );
 }

@@ -14,52 +14,52 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"652\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '652' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -80,45 +80,45 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"014\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '014' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -139,52 +139,52 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"652\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '652' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -205,38 +205,38 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -257,66 +257,66 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"260\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '260' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"300\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '300' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"652\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '652' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -337,66 +337,66 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"014\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '014' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"260\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '260' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"300\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '300' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -417,66 +417,66 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"260\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '260' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"300\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '300' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"652\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '652' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -497,38 +497,38 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -549,31 +549,31 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 }
             ]
@@ -594,52 +594,52 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"652\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '652' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -660,45 +660,45 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"014\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '014' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]
@@ -719,52 +719,52 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"001\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '001' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"004\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '004' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"008\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '008' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"009\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '009' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"245\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '245' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"652\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '652' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 },
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "message" : "Field \"996\" mangler i posten",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "message": "Felt '996' mangler i posten",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
                     }
                 }
             ]

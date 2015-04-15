@@ -1,10 +1,15 @@
-EXPORTED_SYMBOLS = ['RecordRules'];
 //-----------------------------------------------------------------------------
+use( "Exception" );
+use( "Log" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "TemplateUrl" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
-use( "Exception" );
-use( "Log" );
+
+//-----------------------------------------------------------------------------
+EXPORTED_SYMBOLS = ['RecordRules'];
+
 //-----------------------------------------------------------------------------
 /**
  * Module for validation rules for an entire record.
@@ -15,6 +20,7 @@ use( "Log" );
  */
 
 var RecordRules = function( ) {
+    var BUNDLE_NAME = "recordrules";
 
     /**
      * Checks if the fields are lexically sorted
@@ -26,18 +32,27 @@ var RecordRules = function( ) {
      * @method
      */
     function recordSorted ( record, params ) {
-        Log.trace ( "RecordRules.recordSorted");
-        ValueCheck.check( "record.fields", record.fields ).instanceOf( Array );
-        var ret = [];
-        var previous = "000";
-        for ( var i = 0 ; i < record.fields.length ; ++i ) {
-            if ( record.fields[i].name < previous ) {
-                var message = 'Felt "' + record.fields[i].name + '" har forkert position i posten';
-                return [ValidateErrors.recordError( TemplateUrl.getUrlForField( record.fields[i].name, params.template ), message )];
+        Log.trace ( "Enter - RecordRules.recordSorted( ", record, ", ", params, " )" );
+
+        try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+            ValueCheck.check("record.fields", record.fields).instanceOf(Array);
+
+            var result = [];
+            var previous = "000";
+            for (var i = 0; i < record.fields.length; ++i) {
+                if (record.fields[i].name < previous) {
+                    var message = ResourceBundle.getStringFormat( bundle, "record.sorted.error", record.fields[i].name );
+                    return result = [ValidateErrors.recordError(TemplateUrl.getUrlForField(record.fields[i].name, params.template), message)];
+                }
+                previous = record.fields[i].name;
             }
-            previous = record.fields[i].name;
+            return result;
         }
-        return [];
+        finally {
+            Log.trace( "Exit - RecordRules.recordSorted(): ", result );
+        }
     }
 
     /**
@@ -51,6 +66,7 @@ var RecordRules = function( ) {
      */
     function idFieldExists( record, params ) {
         Log.trace ( "RecordRules.idFieldExists");
+
         // ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
         if ( record !== undefined && record.fields !== undefined ) {
             for ( var i = 0; i < record.fields.length; i++ ) {
@@ -60,6 +76,7 @@ var RecordRules = function( ) {
                 }
             }
         }
+
         return [ValidateErrors.recordError( "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869", "Felt 001 er obligatorisk." )];
     }
 
@@ -74,16 +91,24 @@ var RecordRules = function( ) {
      * @method
      */
     function fieldsMandatory( record, params ) {
-        Log.trace ( "RecordRules.fieldsMandatory" );
-        ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
+        Log.trace ( "Enter - RecordRules.fieldsMandatory( ", record, ", ", params, " )" );
+
         var result = [];
-        for ( var i = 0 ; i < params.fields.length ; ++i ) {
-            if ( __recordContainsField( record, params.fields[i] ) !== true ) {
-                result.push( ValidateErrors.recordError( TemplateUrl.getUrlForField( params.fields[i], params.template ),
-                    'Field "' + params.fields[i] + '" mangler i posten' ) );
+        try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+            ValueCheck.check("params.fields", params.fields).instanceOf(Array);
+            for (var i = 0; i < params.fields.length; ++i) {
+                if (__recordContainsField(record, params.fields[i]) !== true) {
+                    result.push(ValidateErrors.recordError(TemplateUrl.getUrlForField(params.fields[i], params.template),
+                                ResourceBundle.getStringFormat( bundle, "field.mandatory.error", params.fields[i] ) ) );
+                }
             }
+            return result;
         }
-        return result;
+        finally {
+            Log.trace ( "Exit - RecordRules.fieldsMandatory(): ", result );
+        }
     }
 
     /**
@@ -98,30 +123,38 @@ var RecordRules = function( ) {
      * @method
      */
     function conflictingFields( record, params ) {
-        Log.trace( "RecordRules.conflictingFields" );
+        Log.trace ( "Enter - RecordRules.conflictingFields( ", record, ", ", params, " )" );
 
-        ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
-        var foundFields = {};
         var result = [];
-        for ( var i = 0; i < record.fields.length; i++ ) {
-            if ( !foundFields.hasOwnProperty( foundFields[record.fields[i].name] ) ) {
-                foundFields[record.fields[i].name] = 1;
-            } else {
-                foundFields[record.fields[i].name]++;
-            }
-        }
-        var found = {'counter' : 0 };
-        for ( var j = 0; j < params.fields.length; ++j ) {
-            if ( foundFields.hasOwnProperty( params.fields[j] ) ) {
-                found.counter++;
-                if ( found.counter > 1 ) {
-                    result.push (ValidateErrors.recordError( "", 'Følgende felt er til stede: "' + params.fields[j] + '" sammen med "' + found.name + '"' ));
+        try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+            ValueCheck.check("params.fields", params.fields).instanceOf(Array);
+            var foundFields = {};
+            var result = [];
+            for (var i = 0; i < record.fields.length; i++) {
+                if (!foundFields.hasOwnProperty(foundFields[record.fields[i].name])) {
+                    foundFields[record.fields[i].name] = 1;
                 } else {
-                    found.name = params.fields[j];
+                    foundFields[record.fields[i].name]++;
                 }
             }
+            var found = {'counter': 0};
+            for (var j = 0; j < params.fields.length; ++j) {
+                if (foundFields.hasOwnProperty(params.fields[j])) {
+                    found.counter++;
+                    if (found.counter > 1) {
+                        result.push(ValidateErrors.recordError("", ResourceBundle.getStringFormat( bundle, "fields.conflicting.error", params.fields[j], found.name ) ) );
+                    } else {
+                        found.name = params.fields[j];
+                    }
+                }
+            }
+            return result;
         }
-        return result;
+        finally {
+            Log.trace ( "Exit - RecordRules.conflictingFields(): ", result );
+        }
     }
 
     /**
@@ -134,20 +167,29 @@ var RecordRules = function( ) {
      * @method
      */
     function optionalFields( record, params ) {
-        Log.trace( "RecordRules.optionalFields" );
-        ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
-        var positiveFields = params;
-        var negativeFields = [];
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( positiveFields.fields.indexOf( record.fields[i].name ) === -1 ) {
-                negativeFields.push( record.fields[i].name );
-            }
-        }
+        Log.trace ( "Enter - RecordRules.optionalFields( ", record, ", ", params, " )" );
+
         var result = [];
-        if ( negativeFields.length > 0 ) {
-            result = [ValidateErrors.recordError( "", 'Følgende felter må ikke være i posten: "' + negativeFields + '"' )];
+        try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+            ValueCheck.check("params.fields", params.fields).instanceOf(Array);
+
+            var positiveFields = params;
+            var negativeFields = [];
+            for (var i = 0; i < record.fields.length; ++i) {
+                if (positiveFields.fields.indexOf(record.fields[i].name) === -1) {
+                    negativeFields.push(record.fields[i].name);
+                }
+            }
+            if (negativeFields.length > 0) {
+                result = [ValidateErrors.recordError("", ResourceBundle.getStringFormat( bundle, "fields.optional.error", negativeFields ) ) ];
+            }
+            return result;
         }
-        return result;
+        finally {
+            Log.trace ( "Enter - RecordRules.optionalFields(): ", result );
+        }
     }
 
     /**
@@ -164,32 +206,41 @@ var RecordRules = function( ) {
      * @method
      */
     function repeatableFields( record, params ) {
-        Log.trace( "RecordRules.repeatableFields" );
-        ValueCheck.check( "params.fields", params['fields'] ).instanceOf( Array );
+        Log.trace ( "Enter - RecordRules.repeatableFields( ", record, ", ", params, " )" );
 
-        var foundFields = {};
         var result = [];
-        for ( var i = 0; i < record.fields.length; i++ ) {
-            if ( !foundFields.hasOwnProperty( record['fields'][i]['name'] ) ) {
-                foundFields[record['fields'][i]['name']] = 1;
-            } else {
-                foundFields[record['fields'][i]['name']]++;
-            }
-        }
-        var paramsFields = params['fields'];
-        var paramsValues = {};
-        for ( var j = 0; j < paramsFields.length; ++j ) {
-            paramsValues[paramsFields[j]] = 1;
-        }
-        // saves an iteration , via Object.keys
-        for (var key in foundFields ) {
-            if  ( foundFields.hasOwnProperty ( key ) ) {
-                if  ( paramsValues[key] === undefined && foundFields[key] > 1 ){
-                    result.push( ValidateErrors.recordError( "TODO:fixurl", 'Feltet "' + key  + '" er til stede ' + foundFields[key]+ ' gange, men må ikke gentages' ) );
+        try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+            ValueCheck.check("params.fields", params['fields']).instanceOf(Array);
+
+            var foundFields = {};
+            var result = [];
+            for (var i = 0; i < record.fields.length; i++) {
+                if (!foundFields.hasOwnProperty(record['fields'][i]['name'])) {
+                    foundFields[record['fields'][i]['name']] = 1;
+                } else {
+                    foundFields[record['fields'][i]['name']]++;
                 }
             }
+            var paramsFields = params['fields'];
+            var paramsValues = {};
+            for (var j = 0; j < paramsFields.length; ++j) {
+                paramsValues[paramsFields[j]] = 1;
+            }
+            // saves an iteration , via Object.keys
+            for (var key in foundFields) {
+                if (foundFields.hasOwnProperty(key)) {
+                    if (paramsValues[key] === undefined && foundFields[key] > 1) {
+                        result.push(ValidateErrors.recordError("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "fields.repeatable.error", key, foundFields[key] ) ) );
+                    }
+                }
+            }
+            return result;
         }
-        return result;
+        finally {
+            Log.trace ( "Exit - RecordRules.repeatableFields(): ", result );
+        }
     }
 
     /**
@@ -208,9 +259,12 @@ var RecordRules = function( ) {
      * @method
      */
     function conflictingSubfields( record, params ) {
-        Log.trace( "Enter - RecordRules.conflictingSubfields" );
+        Log.trace ( "Enter - RecordRules.conflictingSubfields( ", record, ", ", params, " )" );
 
+        var result = [];
         try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
             ValueCheck.checkThat( "params", params ).type( "object" );
             ValueCheck.check( "params.subfields", params.subfields ).instanceOf( Array );
 
@@ -224,8 +278,8 @@ var RecordRules = function( ) {
             for( var i = 0; i < params.subfields.length; i++ ) {
                 var arg = params.subfields[ i ];
                 if( arg.length !== 4 ) {
-                    Log.debug( "Argument is not a field/subfield: %s in param %s", arg, params.subfields );
-                    throw StringUtil.sprintf( "Argument is not a field/subfield: %s in param %s", arg, params.subfields );
+                    Log.debug( ResourceBundle.getString( bundle, "conflictingSubfields.params.subfields.error" ), arg, params.subfields );
+                    throw ResourceBundle.getStringFormat( bundle, "conflictingSubfields.params.subfields.error", arg, params.subfields );
                 }
                 var fieldName = arg.substr( 0, 3 );
                 var subfieldName = arg[ 3 ];
@@ -241,15 +295,15 @@ var RecordRules = function( ) {
                 });
 
                 if( foundSubfields.length > 1 ) {
-                    var message = StringUtil.sprintf( "Delfelt %s m\u00E5 ikke anvendes sammen med delfelt %s", foundSubfields[0], foundSubfields[1] );
-                    return [ ValidateErrors.recordError( "TODO:fixurl", message ) ];
+                    var message = ResourceBundle.getStringFormat( bundle, "conflictingSubfields.validation.error", foundSubfields[0], foundSubfields[1] );
+                    return result = [ ValidateErrors.recordError( "TODO:fixurl", message ) ];
                 }
             }
 
-            return [];
+            return result;
         }
         finally {
-            Log.trace( "Exit - RecordRules.conflictingSubfields" );
+            Log.trace( "Exit - RecordRules.conflictingSubfields(): ", result );
         }
     }
 
@@ -265,12 +319,15 @@ var RecordRules = function( ) {
      * @method
      */
     function allFieldsMandatoryIfOneExist( record, params) {
-        Log.trace( "Enter - RecordRules.allFieldsMandatoryIfOneExist" );
+        Log.trace ( "Enter - RecordRules.allFieldsMandatoryIfOneExist( ", record, ", ", params, " )" );
+
+        var result = [];
         try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
             ValueCheck.checkThat( "params", params ).type( "object" );
             ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
 
-            var result = [];
             var totalFieldsFound = 0;
             var foundFields = [];
             var field;
@@ -287,14 +344,14 @@ var RecordRules = function( ) {
             if ( totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor ) {
                 foundFields.forEach( function(f){
                     if ( f.value === false ) {
-                        var message = StringUtil.sprintf( "Felt %s blev ikke fundet", f.name );
+                        var message = ResourceBundle.getStringFormat( bundle, "field.mandatory.error", f.name );
                         result.push( ValidateErrors.recordError( "TODO:fixurl", message ) );
                     }
                 });
             }
             return result;
         } finally {
-            Log.trace( "Exit - RecordRules.allFieldsMandatoryIfOneExist" );
+            Log.trace( "Exit - RecordRules.allFieldsMandatoryIfOneExist(): ", result );
         }
 
     }
@@ -310,6 +367,7 @@ var RecordRules = function( ) {
     }
 
     return {
+        'BUNDLE_NAME': BUNDLE_NAME,
         'recordSorted' : recordSorted,
         'idFieldExists' : idFieldExists,
         'fieldsMandatory' : fieldsMandatory,
@@ -321,303 +379,3 @@ var RecordRules = function( ) {
     };
 
 }( );
-
-//-----------------------------------------------------------------------------
-use( "UnitTest" );
-use( "SafeAssert" );
-
-UnitTest.addFixture( "Test RecordRules.idFieldExists", function( ) {
-    Assert.equalValue( "Empty object", [ValidateErrors.recordError( "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869", "Felt 001 er obligatorisk." )], RecordRules.idFieldExists( {} ) );
-    Assert.equalValue( "Empty record", [ValidateErrors.recordError( "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869", "Felt 001 er obligatorisk." )], RecordRules.idFieldExists( {
-        fields : []
-    } ) );
-    Assert.equalValue( "Valid record", [], RecordRules.idFieldExists( {
-        fields : [{
-            name : "001",
-            indicator : "00",
-            subfields : [{
-                name : "a",
-                value : "1 234 567 8"
-            }]
-        }]
-    } ) );
-} );
-
-UnitTest.addFixture( "Test RecordRules.fieldsMandatory", function( ) {
-    var record = {
-        fields : [{
-            name : '001',
-            indicator : '00',
-            subfields : []
-        }, {
-            name : '002',
-            indicator : '00',
-            subfields : []
-        }, {
-            name : '003',
-            indicator : '00',
-            subfields : []
-        }]
-    };
-
-    var params00123 = {
-        'fields' : ['001', '002', '003']
-    };
-    SafeAssert.equal( "1 testing with valid " + params00123 + " param", RecordRules.fieldsMandatory( record, params00123 ), [] );
-
-    var errorMissing004 = [ValidateErrors.recordError( "", 'Field "004" mangler i posten' )];
-    var params00124 = { 'fields' : ['001', '002', '004'] };
-    SafeAssert.equal( "2 testing with invalid " + params00124 + " param", RecordRules.fieldsMandatory( record, params00124 ), errorMissing004 );
-
-    var errorMissing000 = ValidateErrors.recordError( "", 'Field "000" mangler i posten' );
-    var errorMissing005 = ValidateErrors.recordError( "", 'Field "005" mangler i posten' );
-    errorMissing004 = ValidateErrors.recordError( "", 'Field "004" mangler i posten' );
-    var errors = [errorMissing000, errorMissing005, errorMissing004];
-    var params00054 = {
-        'fields' : ['000', '005', '004']
-    };
-    SafeAssert.equal( "3 testing with invalid " + errors + " param", RecordRules.fieldsMandatory( record, params00054 ), errors );
-} );
-
-UnitTest.addFixture( "Test RecordRules.conflictingFields", function( ) {
-    var record = {
-        fields : [{
-            name : '001'
-        }, {
-            name : '002'
-        }, {
-            name : '003'
-        }, {
-            name : '004'
-        }, {
-            name : '005'
-        }, {
-            name : '006'
-        }, {
-            name : '007'
-        }, {
-            name : '008'
-        }, {
-            name : '009'
-        }, {
-            name : '010'
-        }]
-    };
-    var recordFieldUndef = {
-        fields : undefined
-    };
-    var recordUndef = undefined;
-
-    var params1 = {'fields' : ['001'] };
-    SafeAssert.equal( "1 testing with valid " + params1 + " param", RecordRules.conflictingFields( record, params1 ), [] );
-
-    var params2 = {'fields' : []};
-    Assert.exception( "2 testing with empty param", 'RecordRules.conflictingFields(record, params2)' );
-
-    var params3 = {'fields' : ['001']};
-    Assert.exception( "3 testing with empty record.fields", 'RecordRules.conflictingFields(recordFieldUndef, params3)' );
-
-    var params4 = {'fields' : ['001']};
-    Assert.exception( "4 testing with empty record", 'RecordRules.conflictingFields(recordUndef, params4)' );
-
-    var params5 = {'fields' : ['001', '002', '003']};
-    var errorVal5 = ValidateErrors.recordError( "", 'Følgende felt er til stede: "002" sammen med "001"' );
-    var errorVal6 = ValidateErrors.recordError( "", 'Følgende felt er til stede: "003" sammen med "001"' );
-    var errorTooMany = [errorVal5,errorVal6];
-    SafeAssert.equal( "length of value to short 1", RecordRules.conflictingFields( record, params5 ), errorTooMany);
-
-    var params6 = {'fields' : ['001', '011', '012', '013', '014', '015', '016']};
-    SafeAssert.equal( "length of value to short 2", RecordRules.conflictingFields( record, params6 ), [] );
-} );
-
-UnitTest.addFixture( "Test RecordRules.optionalFields", function( ) {
-    var record = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '002'
-        }, {
-            'name' : '003'
-        }, {
-            'name' : '004'
-        }, {
-            'name' : '005'
-        }, {
-            'name' : '006'
-        }, {
-            'name' : '007'
-        }, {
-            'name' : '008'
-        }, {
-            'name' : '009'
-        }, {
-            'name' : '010'
-        }]
-    };
-    var recordFieldUndef = {
-        fields : undefined
-    };
-
-    var params1 = {'fields' : ['001', '002', '003', '004', '005', '006', '007', '008', '009', '010']};
-    SafeAssert.equal( "1 testing with valid params", RecordRules.optionalFields( record, params1 ), [] );
-
-    var params2 = {'fields' : ['001', '002', '003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015', '016', '017', '018', '019', '020']};
-    SafeAssert.equal( "2 testing with valid params", RecordRules.optionalFields( record, params2 ), [] );
-
-    var params3 = {'fields' : ['001', '002', '003', '004', '005', '006', '007', '008', '009']};
-    var error3 = [ValidateErrors.recordError( "", 'Følgende felter må ikke være i posten: "010"' )];
-    SafeAssert.equal( "3 testing with valid params", RecordRules.optionalFields( record, params3 ), error3 );
-
-    var params4 = [];
-    Assert.exception( "4 testing with empty params", 'RecordRules.optionalFields(record, params4)' );
-
-    var params5 = {'fields' : ['001', '002', '003', '004', '005', '006', '007', '008', '009', '010']};
-    SafeAssert.equal( "5 testing with empty record", RecordRules.optionalFields( record, params5 ), [] );
-} );
-
-UnitTest.addFixture( "Test RecordRules.repeatableFields", function( ) {
-    var record1 = {'fields': [{'name': '001'}, {'name': '002'}, {'name': '003'}, {'name': '003'}]};
-    var params1 = {'fields': ['003']};
-    SafeAssert.equal( "1 testing with valid params and data", RecordRules.repeatableFields( record1, params1 ), [] );
-
-    var record2 = {'fields': [{'name': '001'}, {'name': '002'}, {'name': '003'}, {'name': '003'}, {'name': '003'}]};
-    var params2 = {'fields': ['001','004']};
-    var error2 = [ValidateErrors.recordError( "TODO:fixurl", 'Feltet "003" er til stede 3 gange, men må ikke gentages' )];
-    SafeAssert.equal( "2 testing with valid params, error in data", RecordRules.repeatableFields( record2, params2 ), error2 );
-
-    var record3 = {'fields': [{'name': '001'}, {'name': '002'}, {'name': '002'}, {'name': '002'}, {'name': '003'},
-        {'name': '004'}, {'name': '004'}, {'name': '005'}, {'name': '006'}, {'name': '007'},
-        {'name': '008'}, {'name': '009'}, {'name': '010'}, {'name': '010'}, {'name': '010'}]};
-    var params3 = {'fields': ['002','004','010']};
-    SafeAssert.equal( "3 testing with valid params and data", RecordRules.repeatableFields( record3, params3 ), [] );
-
-    var record4 = {'fields': [{'name': '001'}]};
-    var params4 = {'fields': ['002','003','004','005','006','007','008','009','010']};
-    SafeAssert.equal( "4 testing with valid params and data", RecordRules.repeatableFields( record4, params4 ), [] );
-
-    var record5 = {'fields': [{'name': '001'}, {'name': '002'}, {'name': '002'}, {'name': '002'},
-        {'name': '003'}, {'name': '003'}, {'name': '006'}, {'name': '006'}]};
-    var params5 = {'fields': ['001','004','005']};
-    var error5 = [];
-    error5.push(ValidateErrors.recordError( "TODO:fixurl", 'Feltet "002" er til stede 3 gange, men må ikke gentages' ));
-    error5.push(ValidateErrors.recordError( "TODO:fixurl", 'Feltet "003" er til stede 2 gange, men må ikke gentages' ));
-    error5.push(ValidateErrors.recordError( "TODO:fixurl", 'Feltet "006" er til stede 2 gange, men må ikke gentages' ));
-    SafeAssert.equal( "5 testing with valid params, error in data", RecordRules.repeatableFields( record5, params5 ), error5 );
-
-    var record6 = {'fields': [{'name': '001'}, {'name': '002'}, {'name': '003'}]};
-    var params6 = {'fields': []};
-    SafeAssert.equal( "6 testing with valid params and data", RecordRules.repeatableFields( record6, params6 ), [] );
-} );
-
-UnitTest.addFixture( "RecordRules.conflictingSubfields", function( ) {
-    var record1 = {'fields': [{'name': '001'}, {'name': '002'}, {'name': '003'}, {'name': '003'}]};
-    var params1 = {'fields': ['003']};
-} );
-
-UnitTest.addFixture( "Test RecordRules.recordSorted", function( ) {
-    var recordCorrect = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '002'
-        }, {
-            'name' : '003'
-        }]
-    };
-
-    SafeAssert.equal( "1 testing with valid record", RecordRules.recordSorted( recordCorrect, {}), [] );
-
-    var recordBad = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '003'
-        }, {
-            'name' : '002'
-        }]
-    };
-    var errMsg = [ValidateErrors.recordError( "", 'Felt \"002\" har forkert position i posten' )];
-    SafeAssert.equal( "2 testing with invalid record", RecordRules.recordSorted( recordBad, {} ), errMsg );
-
-    var recordBad = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '003'
-        }, {
-            'name' : '002'
-        }, {
-            'name' : '001'
-        }]
-    };
-    var errMsg = [ValidateErrors.recordError( "", 'Felt \"002\" har forkert position i posten' )];
-    SafeAssert.equal( "3 testing with invalid record", RecordRules.recordSorted( recordBad, {} ), errMsg );
-
-    var recordGood = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '001'
-        }, {
-            'name' : '001'
-        }, {
-            'name' : '001'
-        }]
-    };
-    SafeAssert.equal( "4 testing with valid record", RecordRules.recordSorted( recordGood, {} ), [] );
-
-} );
-UnitTest.addFixture( "RecordRules.allFieldsMandatoryIfOneExist", function( ) {
-
-    var record = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '002'
-        }, {
-            'name' : '003'
-        }, {
-            'name' : '004'
-        }]
-    };
-    var params = { fields: [ '001', '002', '003', '004' ]};
-    var expectedResult = [];
-    var actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
-    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 1", actualResult, expectedResult );
-
-    record = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '002'
-        }, {
-            'name' : '004'
-        }]
-    };
-    expectedResult = [ValidateErrors.recordError( "TODO:fixurl", "Felt 003 blev ikke fundet" )];
-    actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
-    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 2", actualResult, expectedResult );
-
-    record = {
-        fields : [{
-            'name' : '042'
-        }]
-    };
-    expectedResult = [];
-    actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
-    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 3", actualResult, expectedResult );
-
-    var record = {
-        fields : [{
-            'name' : '001'
-        }, {
-            'name' : '004'
-        }]
-    };
-    expectedResult = [
-        ValidateErrors.recordError( "TODO:fixurl", "Felt 002 blev ikke fundet" ),
-        ValidateErrors.recordError( "TODO:fixurl", "Felt 003 blev ikke fundet" ),
-    ];
-    actualResult = RecordRules.allFieldsMandatoryIfOneExist( record, params );
-    SafeAssert.equal( "RecordRules.allFieldsMandatoryIfOneExist 4", actualResult, expectedResult );
-} );

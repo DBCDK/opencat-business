@@ -4,8 +4,9 @@
  */
 
 //-----------------------------------------------------------------------------
-use( "UnitTest" );
 use( "GenericSettings" );
+use( "Log" );
+use( "UnitTest" );
 use( "Validator" );
 
 //-----------------------------------------------------------------------------
@@ -137,6 +138,8 @@ UnitTest.addFixture( "Validator.validateRecord", function() {
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "Validator.validateField", function() {
+    var bundle = ResourceBundleFactory.getBundle( Validator.BUNDLE_NAME );
+
     var record = {
         fields: [ 
             {
@@ -152,9 +155,9 @@ UnitTest.addFixture( "Validator.validateField", function() {
         ]
     };
     var template = { fields: {}, rules: [] };
-    
-    Assert.equalValue( "Test 1", Validator.validateField( record, record.fields[ 0 ], function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.fieldError( "", "Felt '001' kan ikke anvendes i denne skabelon." ) ] );    
+
+    Assert.equalValue( "Test 1", Validator.validateField( record, record.fields[ 0 ], function() { return template; }, GenericSettings ),
+                                                       [ ValidateErrors.fieldError( "", ResourceBundle.getStringFormat( bundle, "wrong.field", "001" ) ) ] );
 
     template = {
         fields: {
@@ -193,6 +196,8 @@ UnitTest.addFixture( "Validator.validateField", function() {
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "Validator.validateSubfield", function() {
+    var bundle = ResourceBundleFactory.getBundle( Validator.BUNDLE_NAME );
+
     var record = {
         fields: [ 
             {
@@ -215,7 +220,7 @@ UnitTest.addFixture( "Validator.validateSubfield", function() {
     
     Assert.equalValue( "Test 1", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 0 ], 
                                                        function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.fieldError( "", "Felt '001' kan ikke anvendes i denne skabelon." ) ] );    
+                                                       [ ValidateErrors.fieldError( "", ResourceBundle.getStringFormat( bundle, "wrong.field", "001" ) ) ] );
 
     template = {
         fields: {
@@ -229,7 +234,7 @@ UnitTest.addFixture( "Validator.validateSubfield", function() {
     };
     Assert.equalValue( "Test 2", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 1 ], 
                                                        function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.subfieldError( "", "Delfelt 'a' kan ikke anvendes paa felt '001' i denne skabelon." ) ] );    
+                                                       [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "wrong.subfield", "a", "001" ) ) ] );
 
     template = {
         fields: {

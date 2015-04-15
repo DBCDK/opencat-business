@@ -1,8 +1,11 @@
 //-----------------------------------------------------------------------------
-use( "ValidateErrors" );
-use( "ReadFile" );
-use( "TemplateOptimizer" );
 use( "Print" );
+use( "ReadFile" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
+use( "StringUtil" );
+use( "TemplateOptimizer" );
+use( "ValidateErrors" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'Validator' ];
@@ -16,6 +19,8 @@ EXPORTED_SYMBOLS = [ 'Validator' ];
  * 
  */
 var Validator = function() {
+    var BUNDLE_NAME = "validator";
+
     /**
      * Validates an entire record.
      * 
@@ -29,6 +34,7 @@ var Validator = function() {
         Log.trace( "Enter - Validator.validateRecord()" );
 
         try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
             Log.info("Record:\n" + JSON.stringify(record, undefined, 4));
 
             var result = [];
@@ -67,7 +73,7 @@ var Validator = function() {
                         result = result.concat( valErrors );
                     }
                     catch( ex ) {
-                        throw StringUtil.sprintf( "Ved validering af posten: %s", ex );
+                        throw ResourceBundle.getStringFormat( bundle, "record.execute.error", ex );
                     }
                 }
             }
@@ -96,12 +102,14 @@ var Validator = function() {
         Log.trace( "Enter - Validator.validateField()" );
 
         try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
             var result = [];
             var template = templateProvider();
 
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
-                return [ValidateErrors.fieldError("", "Felt '" + field.name + "' kan ikke anvendes i denne skabelon.")];
+                return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat( bundle, "wrong.field", field.name ) ) ];
             };
 
             if (field.subfields !== undefined) {
@@ -129,7 +137,7 @@ var Validator = function() {
                         result = result.concat( valErrors );
                     }
                     catch( ex ) {
-                        throw StringUtil.sprintf( "Ved validering af felt '%s': %s", field.name, ex );
+                        throw ResourceBundle.getStringFormat( bundle, "field.execute.error", field.name, ex );
                     }
                 }
             }
@@ -163,14 +171,15 @@ var Validator = function() {
         Log.trace( "Enter - Validator.validateSubfield()" );
 
         try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
             var result = [];
             var template = templateProvider();
 
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
-                return [ValidateErrors.fieldError("", "Felt '" + field.name + "' kan ikke anvendes i denne skabelon.")];
-            }
-            ;
+                return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat( bundle, "wrong.field", field.name ) ) ];
+            };
 
             // Skip validation if subfield.name is upper case.
             if (subfield.name !== subfield.name.toLowerCase()) {
@@ -178,7 +187,7 @@ var Validator = function() {
             }
             var templateSubfield = templateField.subfields[subfield.name];
             if (templateSubfield === undefined) {
-                return [ValidateErrors.subfieldError("", "Delfelt '" + subfield.name + "' kan ikke anvendes paa felt '" + field.name + "' i denne skabelon.")];
+                return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( bundle, "wrong.subfield", subfield.name, field.name ) ) ];
             }
             ;
 
@@ -195,7 +204,7 @@ var Validator = function() {
                         result = result.concat( valErrors );
                     }
                     catch( ex ) {
-                        throw StringUtil.sprintf( "Ved validering af delfelt '%s%s': %s", field.name, subfield.name, ex );
+                        throw ResourceBundle.getStringFormat( bundle, "subfield.execute.error", field.name, subfield.name, ex );
                     }
                 }
             }
@@ -232,6 +241,7 @@ var Validator = function() {
     }
 
     return {
+        'BUNDLE_NAME': BUNDLE_NAME,
         'validateRecord': validateRecord,
         'validateField': validateField,
         'validateSubfield': validateSubfield

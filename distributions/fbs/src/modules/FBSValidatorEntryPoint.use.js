@@ -75,6 +75,7 @@ var FBSValidatorEntryPoint = function() {
             var result = null;
 
             try {
+                ResourceBundleFactory.setDistributionPaths( settings.get( 'javascript.basedir' ), settings.get( 'javascript.install.name' ) );
                 result = Validator.validateRecord( rec, templateProvider, settings );
             }
             catch( ex ) {
