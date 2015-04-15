@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "DanMarc2Converter" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "SafeAssert" );
 use( "UnitTest" );
 
@@ -40,6 +42,8 @@ UnitTest.addFixture( "RecordRules.conflictingSubfields.invalidArguments", functi
 });
 
 UnitTest.addFixture( "RecordRules.conflictingSubfields", function() {
+    var bundle = ResourceBundleFactory.getBundle( RecordRules.BUNDLE_NAME );
+
     var record = {};
     var params = {};
 
@@ -128,5 +132,5 @@ UnitTest.addFixture( "RecordRules.conflictingSubfields", function() {
     };
     params = { subfields: [ "653m", "654m" ] };
     SafeAssert.equal( "Two subfields: Last found", RecordRules.conflictingSubfields( record, params ),
-                      [ ValidateErrors.recordError( "TODO:fixurl", "Delfelt 653m m\u00E5 ikke anvendes sammen med delfelt 654m" ) ] );
+                      [ ValidateErrors.recordError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "conflictingSubfields.validation.error", "653m", "654m" ) ) ] );
 } );
