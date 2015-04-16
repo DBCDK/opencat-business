@@ -90,7 +90,7 @@ var FieldRules = function( ) {
         ValueCheck.check( "params.subfields", params.subfields ).instanceOf( Array );
 
         var message = "";
-        var collectedFields = getFields( record, params.field )
+        var collectedFields = __getFields( record, params.field )
 
         if ( collectedFields.length === 0 ) {
             message = 'Tilstedev\xe6relsen af felt "' + field.name + '" kr\xe6ver at felt : "' + params.field + '" og delfelt : "' + params.subfields + '" findes i posten';
@@ -121,7 +121,7 @@ var FieldRules = function( ) {
     // function that returns only the fields we are interested in
     // takes a fieldName and a record
     // and returns the fields that matches the name
-    function getFields( record, fieldName ) {
+    function __getFields( record, fieldName ) {
         var ret = [];
         for ( var i = 0; i < record.fields.length; ++i ) {
             if ( record.fields[i].name === fieldName )
@@ -331,7 +331,7 @@ var FieldRules = function( ) {
         var result = [];
         for ( var i = 0 ; i < field.subfields.length ; ++i  ) {
             if ( field.subfields[i].name === params.subfieldConditional && field.subfields[i].value === params.subfieldConditionalValue ) {
-                var conditionalField = getFields( record, params.fieldMandatory );
+                var conditionalField = __getFields( record, params.fieldMandatory );
                 var errorMsg = 'delfelt "' + params.subfieldConditional + '" på felt "' + field.name + '" har værdien "' + params.subfieldConditionalValue + '", derfor er felt "' + params.fieldMandatory + '" og delfelt "' + params.subfieldMandatory + '" obligatorisk';
                 var foundSubfield = false;
                 if ( conditionalField.length > 0 ) {
