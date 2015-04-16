@@ -10,7 +10,7 @@ EXPORTED_SYMBOLS = [ 'FBSClassificationData' ];
 
 //-----------------------------------------------------------------------------
 var FBSClassificationData = function() {
-    var CLASSIFICATION_FIELDS = ClassificationData.CLASSIFICATION_FIELDS;
+    var CLASSIFICATION_FIELDS = /004|008|009|038|039|100|110|239|245|652/;
 
     function hasClassificationData( marc ) {
         return ClassificationData.hasClassificationData( marc );
