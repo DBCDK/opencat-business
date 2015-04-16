@@ -1,7 +1,8 @@
 [
     {
-        "name": "fbs-new-enrichment-record",
-        "description": "Tester oprettelse af ny påhængspost",
+        "name": "local-classification-subfield-change",
+        "bugs": [ "#1484" ],
+        "description": "Tilføjelse af lokalt delfelt til felt med opstilling",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -17,7 +18,9 @@
                     "record": "rawrepo-common.marc",
                     "type": "COMMON",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
@@ -46,7 +49,7 @@
                         "deleted": false
                     },
                     {
-                        "record": "request.marc",
+                        "record": "result-fbs-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

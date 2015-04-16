@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "FBSAuthenticator" );
 use( "DanMarc2Converter" );
-use( "ClassificationData" );
+use( "FBSClassificationData" );
 use( "Log" );
 use( "Marc" );
 use( "RecordUtil" );
@@ -32,7 +32,7 @@ var FBSUpdaterEntryPoint = function() {
         try {
             var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonMarc));
 
-            result = ClassificationData.hasClassificationData(marc);
+            result = FBSClassificationData.hasClassificationData(marc);
             return result;
         }
         finally {
@@ -56,7 +56,7 @@ var FBSUpdaterEntryPoint = function() {
             var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
             var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
 
-            result = ClassificationData.hasClassificationsChanged(oldMarc, newMarc);
+            result = FBSClassificationData.hasClassificationsChanged(oldMarc, newMarc);
             return result;
         }
         finally {
@@ -121,7 +121,7 @@ var FBSUpdaterEntryPoint = function() {
             var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
             var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
 
-            result = __correctEnrichmentRecordIfEmpty(ClassificationData.updateClassificationsInRecord(dbcMarc, libraryMarc));
+            result = __correctEnrichmentRecordIfEmpty(FBSClassificationData.updateClassificationsInRecord(dbcMarc, libraryMarc));
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
         }
         finally {
@@ -130,7 +130,7 @@ var FBSUpdaterEntryPoint = function() {
     }
 
     function correctLibraryExtendedRecord( dbcRecord, libraryRecord ) {
-        Log.info( "Enter - ClassificationData.__hasFieldChanged()" );
+        Log.info( "Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
 
         try {
             var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
@@ -139,10 +139,10 @@ var FBSUpdaterEntryPoint = function() {
             Log.info("    dbcMarc: " + dbcMarc);
             Log.info("    libraryMarc: " + libraryMarc);
 
-            if (ClassificationData.hasClassificationData(dbcMarc)) {
-                if (!ClassificationData.hasClassificationsChanged(dbcMarc, libraryMarc)) {
+            if (FBSClassificationData.hasClassificationData(dbcMarc)) {
+                if (!FBSClassificationData.hasClassificationsChanged(dbcMarc, libraryMarc)) {
                     Log.info("Classifications is the same. Removing it from library record.");
-                    libraryMarc = ClassificationData.removeClassificationsFromRecord(libraryMarc);
+                    libraryMarc = FBSClassificationData.removeClassificationsFromRecord(libraryMarc);
                 }
                 else {
                     Log.info("Classifications has changed.");
@@ -156,7 +156,7 @@ var FBSUpdaterEntryPoint = function() {
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(record));
         }
         finally {
-            Log.info("Exit - ClassificationData.correctLibraryExtendedRecord()" );
+            Log.info("Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
         }
     }
 

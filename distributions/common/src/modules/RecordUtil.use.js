@@ -94,6 +94,26 @@ var RecordUtil = function() {
         }
     }
 
+    /**
+     * Creates a Field from a String.
+     *
+     * @param {String} s Marc field in line format.
+     *
+     * @returns {Field} The new field.
+     *
+     * @name RecordUtil#createFieldFromString
+     */
+    function createFieldFromString( s ) {
+        Log.trace( "Enter - RecordUtil.createFieldFromString" );
+
+        try {
+            return createFromString( s ).field( 0 );
+        }
+        finally {
+            Log.trace( "Exit - RecordUtil.createFieldFromString" );
+        }
+    }
+
     function equalIds( rec1, rec2 ) {
         Log.trace( "Enter - RecordUtil.equalIds" );
 
@@ -122,6 +142,7 @@ var RecordUtil = function() {
         'addOrReplaceSubfield': addOrReplaceSubfield,
         'currentAjustmentTime': currentAjustmentTime,
         'createFromString': createFromString,
+        'createFieldFromString': createFieldFromString,
         'equalIds': equalIds
     }
 

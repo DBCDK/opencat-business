@@ -9,10 +9,10 @@ EXPORTED_SYMBOLS = [ 'ClassificationData' ];
 
 //-----------------------------------------------------------------------------
 var ClassificationData = function() {
-    var classificationFields = /004|008|009|038|039|100|110|239|245|652/;
+    var CLASSIFICATION_FIELDS = /004|008|009|038|039|100|110|239|245|652/;
     
     function hasClassificationData( marc ) {
-        return marc.existField( classificationFields );
+        return marc.existField( CLASSIFICATION_FIELDS );
     }
     
     function hasClassificationsChanged( oldMarc, newMarc ) {
@@ -132,7 +132,7 @@ var ClassificationData = function() {
         var record = libraryRecord.clone();
 
         if( !hasClassificationData( libraryRecord ) ) {
-            dbcRecord.eachField(classificationFields, function (field) {
+            dbcRecord.eachField(CLASSIFICATION_FIELDS, function (field) {
                 record.append(field);
             } );
         }
@@ -147,7 +147,7 @@ var ClassificationData = function() {
         
         var result = new Record;
         record.eachField( /./, function( field ) {
-            if( !classificationFields.test( field.name ) ) {
+            if( !CLASSIFICATION_FIELDS.test( field.name ) ) {
                 result.append( field );
             }
         });
@@ -343,6 +343,7 @@ var ClassificationData = function() {
     }
     
     return {
+        'CLASSIFICATION_FIELDS': CLASSIFICATION_FIELDS,
         'hasClassificationData': hasClassificationData,
         'hasClassificationsChanged': hasClassificationsChanged,
         'updateClassificationsInRecord': updateClassificationsInRecord,

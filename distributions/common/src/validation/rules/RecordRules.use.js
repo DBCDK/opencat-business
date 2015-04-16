@@ -98,8 +98,10 @@ var RecordRules = function( ) {
             var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
 
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
+            Log.debug( "Checking fields: ", params.fields );
             for (var i = 0; i < params.fields.length; ++i) {
                 if (__recordContainsField(record, params.fields[i]) !== true) {
+                    Log.debug( "Fields: ", params.fields[i], " was not found in record:\n", uneval( record ) );
                     result.push(ValidateErrors.recordError(TemplateUrl.getUrlForField(params.fields[i], params.template),
                                 ResourceBundle.getStringFormat( bundle, "field.mandatory.error", params.fields[i] ) ) );
                 }
