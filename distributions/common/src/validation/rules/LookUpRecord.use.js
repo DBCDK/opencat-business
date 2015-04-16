@@ -22,7 +22,6 @@ var LookUpRecord = function () {
      */
     function validateSubfield ( record, field, subfield, params, settings ) {
         Log.trace( "Enter - LoopUpRecord.validateSubfield()" );
-        use ("Print");
         try {
             ValueCheck.check( "record", record ).type( "object" );
             ValueCheck.check( "field", field ).type( "object" );
@@ -44,34 +43,58 @@ var LookUpRecord = function () {
             if ( params !== undefined && typeof params.agencyId === "string" ) {
                 agencyId = params.agencyId;
             }
-
             var record = RawRepoClient.fetchRecord( recordId, agencyId );
-
             if ( record === undefined ) {
                 return [ValidateErrors.subfieldError( "", StringUtil.sprintf( "Recorden med id %s og agencyId %s findes ikke i forvejen.", recordId, agencyId ) )];
             }
-            if ( __checkParams( params ) ) {
-                if (!__fieldAndSubfieldMandatoryAndHaveValues( record, params ) ) {
+            if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) || params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                var checkParamsResult = __checkParams( params );
+
+                if ( checkParamsResult.length > 0 ) {
+                    return checkParamsResult;
+                }
+                if ( !__fieldAndSubfieldMandatoryAndHaveValues( record, params ) ) {
                     return [ValidateErrors.subfieldError( "", StringUtil.sprintf( "Recorden med id %s og agencyId %s har ikke en af f\u00f8lgende v\u00E6rdier %s i %s.", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) )];
                 }
             }
             return [];
-        } finally {
+        }
+        finally {
             Log.trace( "Exit - LoopUpRecord.validateSubfield()" );
         }
     }
 
-    //-----------------------------------------------------------------------------
-    // Helper functions
-    //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Helper functions
+//-----------------------------------------------------------------------------
     function __checkParams ( params ) {
-        Log.trace( "Enter - LoopUpRecord.__checkParams" );
+        Log.trace( "Enter - LookUpRecord.__checkParams" );
         try {
-            return params.hasOwnProperty( "requiredFieldAndSubfield" )
-                && params.hasOwnProperty( "allowedSubfieldValues" )
-                && params.allowedSubfieldValues instanceof Array
+            var ret = [];
+            if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) && params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                if ( typeof params.requiredFieldAndSubfield !== "string" ) {
+                    ret.push( ValidateErrors.subfieldError( "", "Params attributten requiredFieldAndSubfield er ikke af typen string" ) );
+                    Log.warn( "requiredFieldAndSubfield has errornous value" );
+                }
+                if ( !Array.isArray(params.allowedSubfieldValues) ) {
+                    ret.push( ValidateErrors.subfieldError( "", "Params attributten allowedSubfieldValues er ikke af typen array" ) );
+                    Log.warn( "allowedSubfieldValues is not of type array" );
+                } else if ( params.allowedSubfieldValues.length < 1 ) {
+                    ret.push( ValidateErrors.subfieldError( "", "Params attributten allowedSubfieldValues skal minimum indeholde een v\u00E6rdi" ) );
+                    Log.warn( "allowedSubfieldValues is empty" );
+                }
+            } else {
+                if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) && !params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                    ret.push( ValidateErrors.subfieldError( "", "Params attributten requiredFieldAndSubfield er angivet men allowedSubfieldValues mangler" ) );
+                    Log.warn( "allowedSubfieldValues is missing" );
+                } else if ( !params.hasOwnProperty( "requiredFieldAndSubfield" ) && params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                    ret.push( ValidateErrors.subfieldError( "", "Params attributten allowedSubfieldValues er angivet men requiredFieldAndSubfield mangler" ) );
+                    Log.warn( "allowedSubfieldValues is missing" );
+                }
+            }
+            return ret;
         } finally {
-            Log.trace( "Exit - LoopUpRecord.LoopUpRecord.__checkParams()" );
+            Log.trace( "Exit - LookupRecord.__checkParams()" );
         }
     }
 
@@ -82,7 +105,7 @@ var LookUpRecord = function () {
             var subFieldFromParams = params.requiredFieldAndSubfield.substring( 3, 4 );
             var expAllowedValsFromParams = new RegExp( params.allowedSubfieldValues.join( "|" ) );
 
-            return marcRecord.matchValue( fieldNrFromParams, subFieldFromParams, expAllowedValsFromParams);
+            return marcRecord.matchValue( fieldNrFromParams, subFieldFromParams, expAllowedValsFromParams );
         }
         finally {
             Log.trace( "Exit - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues" );
@@ -90,9 +113,9 @@ var LookUpRecord = function () {
     }
 
 
-    //-----------------------------------------------------------------------------
-    // End helper functions
-    //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// End helper functions
+//-----------------------------------------------------------------------------
 
     return {
         'validateSubfield': validateSubfield

@@ -169,4 +169,69 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
 
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }]
+        }]
+    };
+
+    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"]  };
+    var errorMessage = 'Params attributten allowedSubfieldValues er angivet men requiredFieldAndSubfield mangler';
+    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "med valid allowedSubfieldValues mangler requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
+
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }]
+        }]
+    };
+
+    var params = {"agencyId" :"b1Val", "requiredFieldAndSubfield" : "005a" };
+    var errorMessage = 'Params attributten requiredFieldAndSubfield er angivet men allowedSubfieldValues mangler';
+    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "med valid requiredFieldAndSubfield mangler allowedSubfieldValues " ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
+
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }]
+        }]
+    };
+
+    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" :{} ,"requiredFieldAndSubfield" : "005a" };
+    var errorMessage = 'Params attributten allowedSubfieldValues er ikke af typen array';
+    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
+
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }]
+        }]
+    };
+
+    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" :[] ,"requiredFieldAndSubfield" : "005a" };
+    var errorMessage = 'Params attributten allowedSubfieldValues skal minimum indeholde een v\u00E6rdi';
+    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
+
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }]
+        }]
+    };
+
+    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"] ,"requiredFieldAndSubfield" : {} };
+    var errorMessage = 'Params attributten requiredFieldAndSubfield er ikke af typen string';
+    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valid requiredFieldAndSubfield type" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
+
 } );
