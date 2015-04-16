@@ -8,12 +8,9 @@ use ( "LookUpRecord");
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "LookUpRecord", function( ) {
-    use ("Print");
-
 
     // creating the record in rawrepo
     var trueMarcRec = new Record( );
-    printn ("trueMarcRec pre : " , trueMarcRec.toString()  );
     var field001 = new Field( "001", "00" );
     field001.append ( new Subfield ( "a", "a1Val" ));
     field001.append (new Subfield ( "b", "b1Val" ));
@@ -23,7 +20,6 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     field004.append (new Subfield ( "a", "a2" ));
     field004.append (new Subfield ( "b", "b1" ));
     trueMarcRec.append (field004);
-    printn ("trueMarcRec post : " , trueMarcRec.toString());
     RawRepoClientCore.addRecord( trueMarcRec );
 
 
