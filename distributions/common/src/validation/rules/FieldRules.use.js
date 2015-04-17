@@ -17,32 +17,6 @@ use( "Log" );
 var FieldRules = function( ) {
 
     /**
-     * fieldMustContainSubfield is used to check whether a field contains subfield
-     * will return an error if the field has no subfields
-     * @syntax FieldRules.upperCaseCheck( record, field, subfield, params )
-     * @param {object} record
-     * @param {object} field
-     * @param {object} params is not used
-     * @return {object}
-     * @name FieldRules.fieldMustContainSubfield
-     * @method
-     */
-
-    function fieldMustContainSubfield( record, field, params ) {
-        Log.trace( "FieldRules.fieldMustContainSubfield" );
-        ValueCheck.check( "record.fields", record.fields ).instanceOf( Array );
-        ValueCheck.check( "field", field );
-        ValueCheck.check( "field.name", field.name );
-
-        var subfieldLength = field.subfields.length;
-
-        if (subfieldLength > 0 ) {
-            return [];
-        }
-        return ['Feltet : "' + field.name + '" skal indeholde delfelter"'];
-    }
-
-    /**
      * upperCaseCheck is used to check whether a subfield order is correct
      * meaning, a subfield uppercase name must be preceeded by a subfield with the same lowercase name
      * @syntax FieldRules.upperCaseCheck( record, field, subfield, params )
@@ -362,7 +336,6 @@ var FieldRules = function( ) {
         'subfieldConditionalMandatory' : subfieldConditionalMandatory,
         'repeatableSubfields' : repeatableSubfields,
         'exclusiveSubfield' : exclusiveSubfield,
-        'fieldMustContainSubfield' : fieldMustContainSubfield,
         'subfieldHasValueDemandsOtherSubfield' : subfieldHasValueDemandsOtherSubfield
     };
 }( );
@@ -657,29 +630,6 @@ UnitTest.addFixture( "FieldRules.upperCaseCheck", function( ) {
     message = 'Delfeltet : "A" skal efterf\xf8lges af et "a" i felt "003"';
     var errNoTrailingA = [ValidateErrors.fieldError( 'TODO:fixurl', message )];
     SafeAssert.equal( "2 FieldRules.upperCaseCheck value", FieldRules.upperCaseCheck( record, fieldaA ), errNoTrailingA );
-} );
-
-UnitTest.addFixture( "FieldRules.fieldMustContainSubfield", function( ) {
-    var record = {};
-
-    var fieldA003 = {
-        "name" : '003', "indicator" : '00', subfields : [{
-            'name' : "A", 'value' : "42"
-        }, {
-            'name' : "a", 'value' : "42"
-        }]
-    };
-    record.fields = [fieldA003];
-    SafeAssert.equal( "1 FieldRules.fieldMustContainSubfield with valid field", FieldRules.fieldMustContainSubfield( record, fieldA003 ), [] );
-
-    fieldA003 = {
-        "name" : '003', "indicator" : '00', subfields : []
-    };
-
-    var errMsg = ['Feltet : "' + "003" + '" skal indeholde delfelter"'];
-
-    record.fields = [fieldA003];
-    SafeAssert.equal( "1 FieldRules.fieldMustContainSubfield with valid but empty field ", FieldRules.fieldMustContainSubfield( record, fieldA003 ), errMsg );
 } );
 
 UnitTest.addFixture( "FieldRules.subfieldHasValueDemandsOtherSubfield" , function() {
