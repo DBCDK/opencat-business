@@ -19,7 +19,7 @@ EXPORTED_SYMBOLS = [ 'Validator' ];
  * 
  */
 var Validator = function() {
-    var BUNDLE_NAME = "validator";
+    var BUNDLE_NAME = "validation";
 
     /**
      * Validates an entire record.

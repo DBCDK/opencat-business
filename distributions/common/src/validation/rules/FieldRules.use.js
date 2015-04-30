@@ -18,7 +18,7 @@ EXPORTED_SYMBOLS = ['FieldRules'];
  *
  */
 var FieldRules = function( ) {
-    var BUNDLE_NAME = "fieldrules";
+    var BUNDLE_NAME = "validation";
 
     /**
      * upperCaseCheck is used to check whether a subfield order is correct

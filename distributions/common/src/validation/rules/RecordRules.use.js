@@ -20,7 +20,7 @@ EXPORTED_SYMBOLS = ['RecordRules'];
  */
 
 var RecordRules = function( ) {
-    var BUNDLE_NAME = "recordrules";
+    var BUNDLE_NAME = "validation";
 
     /**
      * Checks if the fields are lexically sorted
