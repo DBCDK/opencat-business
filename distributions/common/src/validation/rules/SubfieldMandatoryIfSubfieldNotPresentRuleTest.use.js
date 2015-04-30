@@ -6,6 +6,8 @@ use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "SubfieldMandatoryIfSubfieldNotPresentRule.validateField", function() {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldMandatoryIfSubfieldNotPresentRule.BUNDLE_NAME );
+
     var exceptCallFormat = "SubfieldMandatoryIfSubfieldNotPresentRule.validateField( %s, %s, %s )";
 
     var recordArg = null;
@@ -69,7 +71,7 @@ UnitTest.addFixture( "SubfieldMandatoryIfSubfieldNotPresentRule.validateField", 
     SafeAssert.equal( "001m: Not mandatory with 001a", SubfieldMandatoryIfSubfieldNotPresentRule.validateField( recordArg, fieldArg, paramsArg ), [] );
     paramsArg = { subfield: "m", not_presented_subfield: ["001b"] };
     SafeAssert.equal( "001m: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField( recordArg, fieldArg, paramsArg ),
-        [ ValidateErrors.fieldError( "TODO:url", 'Delfelt "m" mangler i felt "001".' ) ] );
+        [ ValidateErrors.fieldError( "TODO:url", ResourceBundle.getStringFormat( bundle, "mandatory.subfields.rule.error", "m", "001" ) ) ] );
 
     recordArg = {
         fields: [

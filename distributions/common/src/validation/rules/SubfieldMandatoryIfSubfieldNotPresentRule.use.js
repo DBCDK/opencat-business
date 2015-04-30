@@ -9,6 +9,7 @@ EXPORTED_SYMBOLS = [ 'SubfieldMandatoryIfSubfieldNotPresentRule' ];
 
 //-----------------------------------------------------------------------------
 var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
+    var BUNDLE_NAME = "validation";
 
     /**
      * Makes a subfield mandatory if another subfield is not presented in the field.
@@ -53,7 +54,9 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
 
             var result = [];
             if ( !foundFieldAndSubfields ) {
-                var errorMessage = StringUtil.sprintf( 'Delfelt "%s" mangler i felt "%s".', params.subfield, field.name );
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+                var errorMessage = ResourceBundle.getStringFormat( bundle, "mandatory.subfields.rule.error", params.subfield, field.name );
                 result.push( ValidateErrors.fieldError( "TODO:url", errorMessage ) );
             }
             return result;
@@ -121,6 +124,7 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
     }
 
     return {
+        'BUNDLE_NAME': BUNDLE_NAME,
         'validateField': validateField
     }
 }();
