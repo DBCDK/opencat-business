@@ -890,7 +890,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldConditionalMandatoryField", function
         'name' : "b", 'value' : "42"
     };
 
-    var errMsg = 'Delfelt "b" har værdien "42" og felt "011" er derfor obligatorisk';
+    var errMsg = ResourceBundle.getStringFormat( SubfieldRules.__bundle, "mandatory.field.conditional.rule.error", "b", "42", "011" );
     var err = [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )];
     params = {'subfieldValue': '42', 'fieldMandatory': '011' };
     SafeAssert.equal( "3 SubfieldRules.subfieldConditionalMandatoryField valid value but nonexisting conditional subfield", SubfieldRules.subfieldConditionalMandatoryField( rec, fieldab, subfield, params ), err );

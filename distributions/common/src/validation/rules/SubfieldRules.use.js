@@ -82,7 +82,7 @@ var SubfieldRules = function() {
                     return [];
                 }
             }
-            var errorMessage = 'Delfelt "' + subfield.name + '" har værdien "' + params.subfieldValue + '" og felt "' + params.fieldMandatory + '" er derfor obligatorisk';
+            var errorMessage = ResourceBundle.getStringFormat( __bundle, "mandatory.field.conditional.rule.error", subfield.name, params.subfieldValue, params.fieldMandatory );
             return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
         }
         return [];
