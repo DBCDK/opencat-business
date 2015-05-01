@@ -190,6 +190,8 @@ var SubfieldRules = function() {
     // checks if the fields supplied does not contain the subfields in the subfieldValuesToCheck
     function checkSubFieldValues( fieldsWithSubfield, subfieldValuesToCheck ) {
         var ret = [];
+        var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
         var found = {};
         for ( var i = 0; i < fieldsWithSubfield.length; ++i ) {
             for ( var j = 0; j < fieldsWithSubfield[i].subfields.length; ++j ) {
@@ -202,12 +204,12 @@ var SubfieldRules = function() {
                     var subfield = val.slice( 0, 1 );
                     var count = countSubfieldOccurrences( fieldsWithSubfield[i], subfield );
                     if ( count < nbr ) {
-                        var errorMessage = 'delfelt "' + subfield +'" er ikke gentaget på felt "' + fieldsWithSubfield[i].name + '" "' + nbr + '" gange';
+                        var errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfield[i].name, nbr );
                         ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
                     }
                 } else {
                     if ( !found.hasOwnProperty( val ) ) {
-                        var errorMessage = 'I nummer "' + (i+1) +'", felt :"' + fieldsWithSubfield[0].name + '" mangler delfeltet "' + val + '"';
+                        var errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfield[0].name, val );
                         ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
                     }
                 }

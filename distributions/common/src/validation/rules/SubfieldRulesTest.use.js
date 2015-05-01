@@ -710,18 +710,18 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
     subfield = {
         'name' : "a", 'value' : "004/12345(a,b,c,d)"
     };
-    var err004MissingD = [ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "1", felt :"004" mangler delfeltet "d"')];
+    var err004MissingD = [ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 1, "004", "d" ) )];
     SafeAssert.equal( "6 SubfieldRules.checkReference valid value with forwardslash val and parenthesis, missing d", SubfieldRules.checkReference( record, undefined, subfield ), err004MissingD );
 
-    var errD = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "1", felt :"004" mangler delfeltet "d"');
-    var errE = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "1", felt :"004" mangler delfeltet "e"');
-    var errF = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "1", felt :"004" mangler delfeltet "f"');
-    var errG = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "1", felt :"004" mangler delfeltet "g"');
-    var errH = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "1", felt :"004" mangler delfeltet "h"');
+    var errD = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 1, "004", "d" ) );
+    var errE = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 1, "004", "e" ) );
+    var errF = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 1, "004", "f" ) );
+    var errG = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 1, "004", "g" ) );
+    var errH = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 1, "004", "h" ) );
 
-    var errFTwo = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "2", felt :"004" mangler delfeltet "f"');
-    var errGTwo = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "2", felt :"004" mangler delfeltet "g"');
-    var errHTwo = ValidateErrors.subfieldError ("TODO:fixurl",'I nummer "2", felt :"004" mangler delfeltet "h"');
+    var errFTwo = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 2, "004", "f" ) );
+    var errGTwo = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 2, "004", "g" ) );
+    var errHTwo = ValidateErrors.subfieldError ("TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", 2, "004", "h" ) );
 
     var errArr = [errD,errE,errF,errG,errH,errFTwo,errGTwo,errHTwo];
     subfield = {
@@ -772,7 +772,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
     };
 
     subfield = {'name': 'a', 'value': '004/1(c1, c2)'};
-    var errorMessage = [ValidateErrors.subfieldError( 'TODO:fixurl', 'delfelt "c" er ikke gentaget på felt "004" "2" gange' )];
+    var errorMessage = [ValidateErrors.subfieldError( 'TODO:fixurl', ResourceBundle.getStringFormat( bundle, "check.ref.subfield.not.repeated", "c", "004", 2 ) ) ];
     SafeAssert.equal( "9 SubfieldRules.checkReference error, subfield not repeated correctly", SubfieldRules.checkReference( record, undefined, subfield ), errorMessage );
 
     record = {
