@@ -820,8 +820,9 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
 } );
 
 UnitTest.addFixture( "SubfieldRules.subfieldsDemandsOtherSubfields", function( ) {
-    var record = {
-    };
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
+    var record = {};
     var fieldab = {
         "name" : '003', "indicator" : '00', subfields : [{
             'name' : "a", 'value' : "42"
@@ -851,7 +852,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldsDemandsOtherSubfields", function( )
     subfield = {
         'name' : "a", 'value' : ""
     };
-    var errMsg = 'Feltet "003" skal indeholde andre delfelter end delfelt "a"';
+    var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.demands.other.subfields.rule.error", "003", "a" );
     var errContainsBandA = [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )];
     SafeAssert.equal( "3 SubfieldRules.subfieldsDemandsOtherSubfields valid value", SubfieldRules.subfieldsDemandsOtherSubfields( record, fielda, subfield ), errContainsBandA );
 });
