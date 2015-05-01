@@ -4,10 +4,12 @@
  */
 
 //-----------------------------------------------------------------------------
+use( "ResourceBundle" );
 use( "SafeAssert" );
 use( "SubfieldRules" );
 use( "UnitTest" );
 use ( 'GenericSettings' );
+
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
@@ -21,7 +23,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
 
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), []);
 
-    var errorMsg = [{type:"ERROR", params:{url:"TODO:fixurl", message:"Delfelt \"a\" har v\xe6rdien \"42\" hvilket ikke er tilladt"}}];
+    var errorMsg = [{type:"ERROR", params:{url:"TODO:fixurl", message: ResourceBundle.getStringFormat( SubfieldRules.__bundle, "subfield.cannot.contain.value.rule.error", "a", "42" ) } } ];
     params = {values:["42"]};
     SafeAssert.equal("subfieldCannotContainValue with value that is not allowed", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), errorMsg);
     params = {values:[42]};

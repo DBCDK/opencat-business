@@ -5,6 +5,8 @@ use( "Log" );
 use( "Marc" );
 use( "RawRepoClient" );
 use( "RecordRules" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "Solr" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
@@ -21,6 +23,7 @@ EXPORTED_SYMBOLS = [ 'SubfieldRules' ];
  * @file SubfieldRules is part of the jsValidation, and validates on subfield level
  */
 var SubfieldRules = function() {
+    var __bundle = ResourceBundleFactory.getBundle( "validation" );
 
 
     /**
@@ -44,7 +47,7 @@ var SubfieldRules = function() {
         // eg 1 equals '1'
         params.values.forEach( function( value ) {
             if ( subfield.value == value) {
-                var errorMessage = 'Delfelt "' + subfield.name + '" har v\xe6rdien "' + subfield.value + '" hvilket ikke er tilladt';
+                var errorMessage = ResourceBundle.getStringFormat( __bundle, "subfield.cannot.contain.value.rule.error", subfield.name, subfield.value );
                 ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
             }
         } );
@@ -789,7 +792,8 @@ var SubfieldRules = function() {
         'lookupValue': lookupValue,
         '__checkLengthMin': checkLengthMin, // exported for unittest
         '__checkLengthMax': checkLengthMax, // exported for unittest
-        '__isNumber': isNumber              // exported for unittest
+        '__isNumber': isNumber,             // exported for unittest
+        '__bundle': __bundle                // exported for unittest
     };
 }();
 
