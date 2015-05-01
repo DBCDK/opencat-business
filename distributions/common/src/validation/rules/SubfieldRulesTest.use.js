@@ -67,6 +67,8 @@ UnitTest.addFixture( "SubfieldRules.checkLength", function() {
 });
 
 UnitTest.addFixture( "SubfieldRules.checkValue", function() {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var record = {};
     var field = {};
     var subfield = {
@@ -78,11 +80,11 @@ UnitTest.addFixture( "SubfieldRules.checkValue", function() {
     SafeAssert.equal("value is correct", SubfieldRules.checkValue(record, field, subfield, paramsHasValue), []);
 
     var paramsNoValues = {'values': []};
-    var errorVal1 = [ValidateErrors.subfieldError( "TODO:fixurl", 'værdien er "870970" og er ikke end del af de valide værdier: ""' )];
+    var errorVal1 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.value.rule.error", "870970", "" ) ) ];
     SafeAssert.equal("value is not correct", SubfieldRules.checkValue(record, field, subfield, paramsNoValues), errorVal1);
 
     var paramsNoMatchingValues = {'values': [1, 2, 3, 4, 5]};
-    var errorVal2 = [ValidateErrors.subfieldError( "TODO:fixurl", 'værdien er "870970" og er ikke end del af de valide værdier: "1", "2", "3", "4", "5"' )];
+    var errorVal2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.value.rule.error", "870970", paramsNoMatchingValues.values.join( "', '" ) ) ) ];
     SafeAssert.equal("value is not correct", SubfieldRules.checkValue(record, field, subfield, paramsNoMatchingValues), errorVal2);
 });
 

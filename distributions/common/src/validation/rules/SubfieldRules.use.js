@@ -370,7 +370,10 @@ var SubfieldRules = function() {
                 return [];
             }
         }
-        var errorMessage = 'værdien er "' + subfield.value + '" og er ikke end del af de valide værdier: "' + params.values.join('", "') + '"';
+
+        var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+        var errorMessage = ResourceBundle.getStringFormat( bundle, "check.value.rule.error", subfield.value, params.values.join("', '") );
         return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
     }
 
