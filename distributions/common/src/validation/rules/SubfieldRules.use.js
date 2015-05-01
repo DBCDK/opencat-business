@@ -150,8 +150,10 @@ var SubfieldRules = function() {
         var containsParenthesisValues = subfieldValuesToCheck.length > 0;
         var errorMessage;
 
+        var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
         if ( fields.length < 1 ) {
-            errorMessage = 'felt "' + fieldNameToCheck + '" findes ikke i posten';
+            errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.field", fieldNameToCheck );
             return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
         }
 
@@ -165,7 +167,7 @@ var SubfieldRules = function() {
             }
 
             if ( subfieldWithoutAA === false ) {
-                errorMessage = 'felt "' + fieldNameToCheck + '" findes ikke i posten uden delfelt \u00E5';
+                errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield.å", fieldNameToCheck );
                 return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
             }
         }
@@ -177,7 +179,7 @@ var SubfieldRules = function() {
                     ret = ret.concat( checkSubFieldValues( fieldsWithSubfield, subfieldValuesToCheck ) );
                 }
             } else {
-                errorMessage = 'Mangler værdien:"' + forwardslashValue.value + '" i delfelt \u00E5 , for et "' + fields[0].name + '" felt';
+                errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.value", forwardslashValue.value, fields[0].name );
                 ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
             }
         }

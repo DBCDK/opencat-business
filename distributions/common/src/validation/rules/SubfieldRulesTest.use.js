@@ -634,6 +634,7 @@ UnitTest.addFixture( "SubfieldRules.__isNumber", function() {
 } );
 
 UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
 
     var record = {
         fields : [{
@@ -683,7 +684,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
         'name' : "a", 'value' : "005"
     };
 
-    var error005Missing = [ValidateErrors.subfieldError( "TODO:fixurl", 'felt "005" findes ikke i posten' )];
+    var error005Missing = [ ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.ref.missing.field", "005" ) ) ];
     SafeAssert.equal( "2 SubfieldRules.checkReference field exists", SubfieldRules.checkReference( record, undefined, subfield ), error005Missing );
 
     subfield = {
@@ -729,7 +730,7 @@ UnitTest.addFixture( "SubfieldRules.checkReference", function( ) {
     SafeAssert.equal( "7 SubfieldRules.checkReference valid value with forward slash val and parenthesis, missing d", SubfieldRules.checkReference( record, undefined, subfield ), errArr );
 
     subfield = {'name': 'a', 'value': '004'};
-    var errorMessage = [(  ValidateErrors.subfieldError( 'TODO:fixurl', 'felt "004" findes ikke i posten uden delfelt \u00E5' ) )];
+    var errorMessage = [ ( ValidateErrors.subfieldError( 'TODO:fixurl', ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield.å", "004" ) ) ) ];
     SafeAssert.equal( "8 SubfieldRules.checkReference error, valid value without forward slash but no field without 'å' subfield", SubfieldRules.checkReference( record, undefined, subfield ), errorMessage );
 
     record = {
