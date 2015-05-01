@@ -11,7 +11,7 @@ EXPORTED_SYMBOLS = [ 'MandatorySubfieldInVolumeWorkRule' ];
 
 //-----------------------------------------------------------------------------
 var MandatorySubfieldInVolumeWorkRule = function() {
-    var __bundle = ResourceBundleFactory.getBundle( "validation" );
+    var __BUNDLE_NAME = "validation";
 
     function validateField( record, field, params, settings ) {
         Log.trace( "Enter - MandatorySubfieldInVolumeWorkRule.validateField()" );
@@ -44,17 +44,18 @@ var MandatorySubfieldInVolumeWorkRule = function() {
         Log.trace( "Enter - MandatorySubfieldInVolumeWorkRule.__validateHeadRecord()" );
 
         try {
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
             var volumes = __getVolumeRecords( record );
 
             if( volumes.length === 0 ) {
                 if( !__checkSubfieldIsUsed( [ record ], field, params.subfield)) {
-                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( __bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield ) ) ];
+                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield ) ) ];
                 }
             }
 
             for( var i = 0; i < volumes.length; i++ ) {
                 if( !__checkSubfieldIsUsed( [ volumes[i], record ], field, params.subfield)) {
-                    return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( __bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield ) ) ];
+                    return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield ) ) ];
                 }
             }
 
@@ -78,7 +79,9 @@ var MandatorySubfieldInVolumeWorkRule = function() {
 
             var headRecord = RawRepoClient.fetchRecord( parentId, agencyId );
             if( !__checkSubfieldIsUsed( [ headRecord, record ], field, params.subfield)) {
-                return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( __bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield ) ) ];
+                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+                return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield ) ) ];
             }
 
             return [];
@@ -175,7 +178,7 @@ var MandatorySubfieldInVolumeWorkRule = function() {
 
     return {
         'validateField': validateField,
-        '__bundle': __bundle
+        '__BUNDLE_NAME': __BUNDLE_NAME
     }
 
 }();

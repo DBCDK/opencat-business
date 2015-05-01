@@ -36,6 +36,7 @@ UnitTest.addFixture( "MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord
     }
 
     var record;
+    var bundle = ResourceBundleFactory.getBundle( MandatorySubfieldInVolumeWorkRule.__BUNDLE_NAME );
 
     record = DanMarc2Converter.convertFromDanMarc2( RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
@@ -51,7 +52,7 @@ UnitTest.addFixture( "MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord
     ) );
     Assert.equalValue( "Head record with no children: Missing subfield",
                        callRule( record, record.fields[2], { subfield: "t" } ),
-                       [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( MandatorySubfieldInVolumeWorkRule.__bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
+                       [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
 
     RawRepoClientCore.addRecord( RecordUtil.createFromString(
         "001 00 *a 2 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
@@ -120,7 +121,7 @@ UnitTest.addFixture( "MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord
     ) );
     Assert.equalValue( "Update Head record: Remove subfield. Subfield missing in one volume",
                        callRule( record, record.fields[2], { subfield: "t" } ),
-                       [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( MandatorySubfieldInVolumeWorkRule.__bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
+                       [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
     RawRepoClientCore.clear();
 } );
 
@@ -130,6 +131,7 @@ UnitTest.addFixture( "MandatorySubfieldInVolumeWorkRule.validateField.VolumeReco
     }
 
     var record;
+    var bundle = ResourceBundleFactory.getBundle( MandatorySubfieldInVolumeWorkRule.__BUNDLE_NAME );
 
     RawRepoClientCore.addRecord( RecordUtil.createFromString(
         "001 00 *a 2 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
@@ -143,7 +145,7 @@ UnitTest.addFixture( "MandatorySubfieldInVolumeWorkRule.validateField.VolumeReco
     ) );
     Assert.equalValue( "Volume record: Missing subfield",
         callRule( record, record.fields[2], { subfield: "t" } ),
-        [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( MandatorySubfieldInVolumeWorkRule.__bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
+        [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord( RecordUtil.createFromString(
@@ -209,6 +211,6 @@ UnitTest.addFixture( "MandatorySubfieldInVolumeWorkRule.validateField.VolumeReco
     ) );
     Assert.equalValue( "Mandatory subfield removed from volume record",
         callRule( record, record.fields[2], { subfield: "t" } ),
-        [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( MandatorySubfieldInVolumeWorkRule.__bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
+        [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "volume.work.mandatory.subfield.rule.error", "008", "t" ) ) ] );
     RawRepoClientCore.clear();
 } );

@@ -23,8 +23,7 @@ EXPORTED_SYMBOLS = [ 'SubfieldRules' ];
  * @file SubfieldRules is part of the jsValidation, and validates on subfield level
  */
 var SubfieldRules = function() {
-    var __bundle = ResourceBundleFactory.getBundle( "validation" );
-
+    var __BUNDLE_NAME = "validation";
 
     /**
      * subfieldCannotContainValue checks that if a given subfield does not contain the value from params
@@ -47,7 +46,9 @@ var SubfieldRules = function() {
         // eg 1 equals '1'
         params.values.forEach( function( value ) {
             if ( subfield.value == value) {
-                var errorMessage = ResourceBundle.getStringFormat( __bundle, "subfield.cannot.contain.value.rule.error", subfield.name, subfield.value );
+                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+                var errorMessage = ResourceBundle.getStringFormat( bundle, "subfield.cannot.contain.value.rule.error", subfield.name, subfield.value );
                 ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
             }
         } );
@@ -82,7 +83,10 @@ var SubfieldRules = function() {
                     return [];
                 }
             }
-            var errorMessage = ResourceBundle.getStringFormat( __bundle, "mandatory.field.conditional.rule.error", subfield.name, params.subfieldValue, params.fieldMandatory );
+
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+            var errorMessage = ResourceBundle.getStringFormat( bundle, "mandatory.field.conditional.rule.error", subfield.name, params.subfieldValue, params.fieldMandatory );
             return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
         }
         return [];
@@ -109,7 +113,8 @@ var SubfieldRules = function() {
                 return [];
             }
         }
-        var errorMessage = 'Feltet "' +field.name + '" skal indeholde andre delfelter end delfelt "' + subfield.name +'"' ;
+
+        var errorMessage = 'Feltet "' + field.name + '" skal indeholde andre delfelter end delfelt "' + subfield.name +'"' ;
         return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
     }
 
@@ -793,7 +798,7 @@ var SubfieldRules = function() {
         '__checkLengthMin': checkLengthMin, // exported for unittest
         '__checkLengthMax': checkLengthMax, // exported for unittest
         '__isNumber': isNumber,             // exported for unittest
-        '__bundle': __bundle                // exported for unittest
+        '__BUNDLE_NAME': __BUNDLE_NAME      // exported for unittest
     };
 }();
 

@@ -13,6 +13,8 @@ use ( 'GenericSettings' );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var record = {};
     var field = {};
     var subfield = {
@@ -23,7 +25,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
 
     SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), []);
 
-    var errorMsg = [{type:"ERROR", params:{url:"TODO:fixurl", message: ResourceBundle.getStringFormat( SubfieldRules.__bundle, "subfield.cannot.contain.value.rule.error", "a", "42" ) } } ];
+    var errorMsg = [{type:"ERROR", params:{url:"TODO:fixurl", message: ResourceBundle.getStringFormat( bundle, "subfield.cannot.contain.value.rule.error", "a", "42" ) } } ];
     params = {values:["42"]};
     SafeAssert.equal("subfieldCannotContainValue with value that is not allowed", SubfieldRules.subfieldCannotContainValue(record, field, subfield, params), errorMsg);
     params = {values:[42]};
@@ -855,6 +857,8 @@ UnitTest.addFixture( "SubfieldRules.subfieldsDemandsOtherSubfields", function( )
 });
 
 UnitTest.addFixture( "SubfieldRules.subfieldConditionalMandatoryField", function( ) {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
    var rec = {
         fields : [{
             name : '001', indicator : '00', subfields : []
@@ -890,7 +894,7 @@ UnitTest.addFixture( "SubfieldRules.subfieldConditionalMandatoryField", function
         'name' : "b", 'value' : "42"
     };
 
-    var errMsg = ResourceBundle.getStringFormat( SubfieldRules.__bundle, "mandatory.field.conditional.rule.error", "b", "42", "011" );
+    var errMsg = ResourceBundle.getStringFormat( bundle, "mandatory.field.conditional.rule.error", "b", "42", "011" );
     var err = [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )];
     params = {'subfieldValue': '42', 'fieldMandatory': '011' };
     SafeAssert.equal( "3 SubfieldRules.subfieldConditionalMandatoryField valid value but nonexisting conditional subfield", SubfieldRules.subfieldConditionalMandatoryField( rec, fieldab, subfield, params ), err );
