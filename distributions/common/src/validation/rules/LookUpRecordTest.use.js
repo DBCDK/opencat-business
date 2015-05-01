@@ -8,6 +8,7 @@ use ( "LookUpRecord");
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "LookUpRecord", function( ) {
+    var bundle = ResourceBundleFactory.getBundle( LookUpRecord.__BUNDLE_NAME );
 
     // creating the record in rawrepo
     var trueMarcRec = new Record( );
@@ -35,7 +36,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
         }]
     };
 
-    var errorMessage = 'Recorden med id awrong og agencyId bwrong findes ikke i forvejen.';
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "awrong", "bwrong" );
     var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "001a og 001b mismatch , findes ikke i repo" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
 
@@ -67,7 +68,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
         }]
     };
 
-    var errorMessage = 'Recorden med id awrong og agencyId b1Val findes ikke i forvejen.';
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "awrong", "b1Val" );
     var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "001 a mismatch" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
 
@@ -83,7 +84,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
         }]
     };
 
-    var errorMessage = 'Recorden med id a1Val og agencyId bwrong findes ikke i forvejen.';
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "a1Val", "bwrong" );
     var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "001 b mismatch" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
 
@@ -100,7 +101,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     };
 
     var params = {"agencyId" :"paramsNoMatch"};
-    var errorMessage = 'Recorden med id a1Val og agencyId paramsNoMatch findes ikke i forvejen.';
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "a1Val", "paramsNoMatch" );
     var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "med ikke matchende params" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), errors1a );
 
@@ -139,7 +140,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     };
 
     var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["nonValidValue1" ,"nonValidValue2" ,"nonValidValue3"] ,"requiredFieldAndSubfield" : "004a" };
-    var errorMessage = 'Recorden med id a1Val og agencyId b1Val har ikke en af f\u00f8lgende v\u00E6rdier nonValidValue1,nonValidValue2,nonValidValue3 i 004a.';
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", "a1Val", "b1Val", "nonValidValue1,nonValidValue2,nonValidValue3", "004a" );
     var err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "med ikke valide allowedSubfieldValues men valid requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
 
@@ -152,8 +153,6 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     };
 
     var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["nonValidValue1" ,"nonValidValue2" ,"a2"] ,"requiredFieldAndSubfield" : "004a" };
-    var errorMessage = 'Recorden med id a1Val og agencyId b1Val har ikke en af f\u00f8lgende v\u00E6rdier a1,a2,a3 i 005a.';
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "med valid allowedSubfieldValues og valid requiredFieldAndSubfield med check af andet subfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), [] );
 
     var record = {
@@ -165,7 +164,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     };
 
     var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"] ,"requiredFieldAndSubfield" : "005a" };
-    var errorMessage = 'Recorden med id a1Val og agencyId b1Val har ikke en af f\u00f8lgende v\u00E6rdier a1,a2,a3 i 005a.';
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", "a1Val", "b1Val", "a1,a2,a3", "005a" );
     err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
     SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
 

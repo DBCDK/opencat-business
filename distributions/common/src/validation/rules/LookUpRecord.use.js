@@ -1,11 +1,17 @@
 //-----------------------------------------------------------------------------
 use( "Log" );
 use( "RawRepoClient" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
+
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['LookUpRecord'];
+
 //-----------------------------------------------------------------------------
 var LookUpRecord = function () {
+    var __BUNDLE_NAME = "validation";
+
     /**
      * validateSubfield
      * @syntax
@@ -27,6 +33,8 @@ var LookUpRecord = function () {
             ValueCheck.check( "field", field ).type( "object" );
             ValueCheck.check( "params", params ).type( "object" );
 
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
             var recordId = "";
             var agencyId = "";
 
@@ -45,7 +53,7 @@ var LookUpRecord = function () {
             }
             var record = RawRepoClient.fetchRecord( recordId, agencyId );
             if ( record === undefined ) {
-                return [ValidateErrors.subfieldError( "", StringUtil.sprintf( "Recorden med id %s og agencyId %s findes ikke i forvejen.", recordId, agencyId ) )];
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId, agencyId ) ) ];
             }
             if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) || params.hasOwnProperty( "allowedSubfieldValues" ) ) {
                 var checkParamsResult = __checkParams( params );
@@ -54,7 +62,7 @@ var LookUpRecord = function () {
                     return checkParamsResult;
                 }
                 if ( !__fieldAndSubfieldMandatoryAndHaveValues( record, params ) ) {
-                    return [ValidateErrors.subfieldError( "", StringUtil.sprintf( "Recorden med id %s og agencyId %s har ikke en af f\u00f8lgende v\u00E6rdier %s i %s.", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) )];
+                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) ) ];
                 }
             }
             return [];
@@ -118,6 +126,7 @@ var LookUpRecord = function () {
 //-----------------------------------------------------------------------------
 
     return {
-        'validateSubfield': validateSubfield
+        'validateSubfield': validateSubfield,
+        '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }();
