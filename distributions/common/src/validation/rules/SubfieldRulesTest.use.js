@@ -89,6 +89,8 @@ UnitTest.addFixture( "SubfieldRules.checkValue", function() {
 });
 
 UnitTest.addFixture( "SubfieldRules.checkFaust", function() {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var record = {};
     var field = {};
     var params = undefined;
@@ -100,15 +102,15 @@ UnitTest.addFixture( "SubfieldRules.checkFaust", function() {
     SafeAssert.equal( "2 SubfieldRules.checkFaust with valid faust number", SubfieldRules.checkFaust( record, field, subfield2, params ), [] );
 
     var subfield3 = {'name': "faust", 'value': "50984507" };
-    var error3 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "faust" med værdien "50984507" er ikke et gyldigt faustnummer' )];
+    var error3 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.faust.error", subfield3.name, subfield3.value ) ) ];
     SafeAssert.equal( "3 SubfieldRules.checkFaust with valid faust number", SubfieldRules.checkFaust( record, field, subfield3, params ), error3 );
 
     var subfield4 = {'name': "faust", 'value': "50984508A" };
-    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "faust" m\u00E5 kun best\u00E5 af tal' )];
+    var error4 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.faust.digit.error", subfield4.name ) ) ];
     SafeAssert.equal( "4 SubfieldRules.checkFaust with valid faust number", SubfieldRules.checkFaust( record, field, subfield4, params ), error4 );
 
     var subfield5 = {'name': "faust", 'value': "42" };
-    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "faust" er mindre end 8 tegn langt' )];
+    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.faust.length.error", subfield5.name, 8 ) ) ];
     SafeAssert.equal( "5 SubfieldRules.checkFaust with valid faust number", SubfieldRules.checkFaust( record, field, subfield5, params ), error5 );
 
     var subfield6 = {'name': "faust", 'value': "5098 4508" };

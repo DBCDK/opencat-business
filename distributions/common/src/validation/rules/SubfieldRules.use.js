@@ -392,15 +392,17 @@ var SubfieldRules = function() {
     function checkFaust( record, field, subfield, params ) {
         Log.trace( "SubfieldRules.checkFaust" );
 
+        var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
         //ValueCheck.checkUndefined( "params", params );
         var FAUST_MIN_LENGTH = 8;
         var result = [];
         var subfieldValue = subfield['value'].replace(/\s/g,"");
         var subfieldName = subfield['name'];
         if ( !isNumber( subfieldValue ) ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" m\u00E5 kun best\u00E5 af tal' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.faust.digit.error", subfieldName ) ) );
         } else if ( subfieldValue.length < FAUST_MIN_LENGTH ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" er mindre end ' + FAUST_MIN_LENGTH + ' tegn langt' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.faust.length.error", subfieldName, FAUST_MIN_LENGTH ) ) );
         } else {
             var singleWeight = [7, 6, 5, 4, 3, 2];
             var weight = [];
@@ -435,7 +437,7 @@ var SubfieldRules = function() {
             value = value % 11; // 13
             var checksumValue = parseInt( subfieldValue.charAt( subfieldValue.length - 1 ) );
             if ( value + checksumValue !== 11 && value !== 0 ) { // 14
-                result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" med værdien "' + subfieldValue + '" er ikke et gyldigt faustnummer' ) );
+                result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.faust.error", subfieldName, subfieldValue ) ) );
             }
         }
         return result;
