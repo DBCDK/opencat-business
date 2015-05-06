@@ -469,6 +469,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
 
 UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
     var FBS_RECORD_AGENCY_ID = "714700";
+    var OTHER_FBS_RECORD_AGENCY_ID = "726500";
 
     var curRecord;
     var record;
@@ -632,6 +633,43 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         )
     ];
     Assert.equalValue( "Update record and DBC enrichment. s10 is updated.",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ).toString(),
+        expected.toString() );
+    RawRepoClientCore.clear();
+
+    curRecord = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *r n *a e\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    curRecord = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a titel\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+    );
+    internalRecord = record.clone();
+    RecordUtil.addOrReplaceSubfield( internalRecord, "001", "b", UpdateConstants.RAWREPO_COMMON_AGENCYID );
+
+    var expectedNotesRecord = NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID );
+    var expectedOwnershipRecord = UpdateOwnership.mergeRecord( expectedNotesRecord, RawRepoClientCore.fetchRecord( "1 234 567 8", UpdateConstants.RAWREPO_COMMON_AGENCYID ) );
+
+    expected = [
+        expectedOwnershipRecord,
+        RecordUtil.createFromString(
+            StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+        )
+    ];
+    Assert.equalValue( "Update common record with new FBS owner.",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ).toString(),
         expected.toString() );
     RawRepoClientCore.clear();

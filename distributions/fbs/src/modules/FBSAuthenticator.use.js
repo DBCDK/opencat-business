@@ -7,6 +7,7 @@ use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClient" );
 use( "RecordUtil" );
 use( "UpdateConstants" );
+use( "UpdateOwnership" );
 use( "ValidateErrors" );
 
 //-----------------------------------------------------------------------------
@@ -192,6 +193,18 @@ var FBSAuthenticator = function() {
             RecordUtil.addOrReplaceSubfield( record, "001", "b", UpdateConstants.RAWREPO_COMMON_AGENCYID );
 
             correctedRecord = NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, userId, groupId );
+
+            var recId = correctedRecord.getValue( /001/, /a/ );
+            var agencyId = UpdateConstants.RAWREPO_COMMON_AGENCYID;
+            var curRecord;
+            if( RawRepoClient.recordExists( recId, agencyId ) ) {
+                curRecord = RawRepoClient.fetchRecord( recId, agencyId );
+            }
+            else {
+                curRecord = undefined;
+            }
+            correctedRecord = UpdateOwnership.mergeRecord( correctedRecord, curRecord );
+
             var owner = correctedRecord.getValue( /996/, /a/ );
             if( owner === "" ) {
                 Log.debug( "No owner in record." );

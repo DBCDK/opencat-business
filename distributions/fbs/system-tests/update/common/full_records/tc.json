@@ -18,7 +18,7 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "result-common.marc",
+                        "record": "result-new-common.marc",
                         "type": "COMMON",
                         "deleted": false,
                         "enqueued": true,
@@ -68,7 +68,7 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "result-common.marc",
+                        "record": "result-edit-common.marc",
                         "type": "COMMON",
                         "deleted": false,
                         "enqueued": true,
