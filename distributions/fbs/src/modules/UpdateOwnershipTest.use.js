@@ -54,6 +54,32 @@ UnitTest.addFixture( "UpdateOwnership.mergeRecord", function() {
     record = RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *r n *a e\n" +
+        "996 00 *a 700400"
+    );
+    curRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "004 00 *r n *a e\n" +
+        "996 00 *a 700400 *o 700150"
+    );
+    expected = curRecord.clone();
+    SafeAssert.equal( "Update record. Current record: 996a (Same value) with 996o", UpdateOwnership.mergeRecord( record, curRecord ).toString(), expected.toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "004 00 *r n *a e\n" +
+        "996 00 *a 700400"
+    );
+    curRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "004 00 *r n *a e\n" +
+        "996 00 *a 700400 *m 500400 *m 600500 *o 700150"
+    );
+    expected = curRecord.clone();
+    SafeAssert.equal( "Update record. Current record: 996a (Same value) with 996m/o", UpdateOwnership.mergeRecord( record, curRecord ).toString(), expected.toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "004 00 *r n *a e\n" +
         "996 00 *a 726500"
     );
     curRecord = RecordUtil.createFromString(
