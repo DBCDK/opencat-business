@@ -1,0 +1,427 @@
+<marcx:record xmlns:marcx="info:lc/xmlns/marcxchange-v1" format="danMARC2" type="Bibliographic">
+    <marcx:leader>00000n 2200000 4500</marcx:leader>
+    <marcx:datafield ind1="0" ind2="0" tag="001">
+        <marcx:subfield code="a">
+            5 113 668 3
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            870970
+        </marcx:subfield>
+        <marcx:subfield code="c">
+            20140813180328
+        </marcx:subfield>
+        <marcx:subfield code="d">
+            20140603
+        </marcx:subfield>
+        <marcx:subfield code="f">
+            a
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="004">
+        <marcx:subfield code="r">
+            n
+        </marcx:subfield>
+        <marcx:subfield code="a">
+            e
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="008">
+        <marcx:subfield code="t">
+            m
+        </marcx:subfield>
+        <marcx:subfield code="u">
+            f
+        </marcx:subfield>
+        <marcx:subfield code="a">
+            2014
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            dk
+        </marcx:subfield>
+        <marcx:subfield code="d">
+            y
+        </marcx:subfield>
+        <marcx:subfield code="k">
+            b
+        </marcx:subfield>
+        <marcx:subfield code="l">
+            dan
+        </marcx:subfield>
+        <marcx:subfield code="o">
+            b
+        </marcx:subfield>
+        <marcx:subfield code="x">
+            02
+        </marcx:subfield>
+        <marcx:subfield code="v">
+            0
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="009">
+        <marcx:subfield code="a">
+            a
+        </marcx:subfield>
+        <marcx:subfield code="g">
+            xx
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="021">
+        <marcx:subfield code="e">
+            9788771183658
+        </marcx:subfield>
+        <marcx:subfield code="c">
+            ib.
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="032">
+        <marcx:subfield code="x">
+            ACC201423
+        </marcx:subfield>
+        <marcx:subfield code="a">
+            DBF201429
+        </marcx:subfield>
+        <marcx:subfield code="x">
+            BKM201429
+        </marcx:subfield>
+        <marcx:subfield code="x">
+            BKR201434
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="041">
+        <marcx:subfield code="a">
+            dan
+        </marcx:subfield>
+        <marcx:subfield code="c">
+            swe
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="100">
+        <marcx:subfield code="4">
+            aut
+        </marcx:subfield>
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="a">
+            Illugi Jo&#776;kulsson
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="241">
+        <marcx:subfield code="a">
+            Zlatan - den han a&#776;r
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="245">
+        <marcx:subfield code="a">
+            Zlatan - som han er
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="250">
+        <marcx:subfield code="a">
+            1. udgave
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            ÷
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="260">
+        <marcx:subfield code="&amp;">
+            1
+        </marcx:subfield>
+        <marcx:subfield code="a">
+            Frederiksberg
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            Frydenlund
+        </marcx:subfield>
+        <marcx:subfield code="c">
+            2014
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="300">
+        <marcx:subfield code="a">
+            61 sider
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            ill. i farver
+        </marcx:subfield>
+        <marcx:subfield code="c">
+            29 cm
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="504">
+        <marcx:subfield code="&amp;">
+            1
+        </marcx:subfield>
+        <marcx:subfield code="a">
+            Om fodboldspilleren Zlatan Ibrahimovic (f. 1981)
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="521">
+        <marcx:subfield code="&amp;">
+            REX
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            1. oplag
+        </marcx:subfield>
+        <marcx:subfield code="c">
+            2014
+        </marcx:subfield>
+        <marcx:subfield code="k">
+            u. st.
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="600">
+        <marcx:subfield code="1"/>
+        <marcx:subfield code="a">
+            Ibrahimovic
+        </marcx:subfield>
+        <marcx:subfield code="h">
+            Zlatan
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="652">
+        <marcx:subfield code="m">
+            79.71
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="652">
+        <marcx:subfield code="p">
+            99.4
+        </marcx:subfield>
+        <marcx:subfield code="a">
+            Ibrahimovic
+        </marcx:subfield>
+        <marcx:subfield code="h">
+            Zlatan
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="e">
+            Sverige
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="f">
+            fodbold
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="f">
+            fodboldspillere
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="i">
+            1980-1989
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="i">
+            2000-2009
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="i">
+            2010-2019
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="o">
+            biografier
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">
+            for 10 a&#778;r
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">
+            for 11 a&#778;r
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">
+            for 12 a&#778;r
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">
+            for 13 a&#778;r
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="666">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">
+            for 14 a&#778;r
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="720">
+        <marcx:subfield code="o">
+            Else Skytte Christensen
+        </marcx:subfield>
+        <marcx:subfield code="4">
+            trl
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="900">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="a">
+            Jo&#776;kulsson
+        </marcx:subfield>
+        <marcx:subfield code="h">
+            Illugi
+        </marcx:subfield>
+        <marcx:subfield code="z">
+            100
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="990">
+        <marcx:subfield code="r">
+            201434
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            b
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            s
+        </marcx:subfield>
+        <marcx:subfield code="m">
+            Navneform rettet fra: Jo&#776;kulsson, Illugi
+        </marcx:subfield>
+        <marcx:subfield code="m">
+            Rettelse
+        </marcx:subfield>
+        <marcx:subfield code="u">
+            nt
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="990">
+        <marcx:subfield code="o">
+            201429
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            l
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            b
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            s
+        </marcx:subfield>
+        <marcx:subfield code="u">
+            nt
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="d08">
+        <marcx:subfield code="o">
+            hni
+        </marcx:subfield>
+        <marcx:subfield code="o">
+            crp
+        </marcx:subfield>
+        <marcx:subfield code="k">
+            dra
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="d09">
+        <marcx:subfield code="z">
+            REX201431
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="d31">
+        <marcx:subfield code="b">
+            217
+        </marcx:subfield>
+        <marcx:subfield code="h">
+            285
+        </marcx:subfield>
+        <marcx:subfield code="t">
+            8
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="d32">
+        <marcx:subfield code="b">
+            211
+        </marcx:subfield>
+        <marcx:subfield code="h">
+            280
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="d35">
+        <marcx:subfield code="a">
+            P
+        </marcx:subfield>
+        <marcx:subfield code="i">
+            02
+        </marcx:subfield>
+        <marcx:subfield code="n">
+            06
+        </marcx:subfield>
+        <marcx:subfield code="p">
+            01
+        </marcx:subfield>
+        <marcx:subfield code="q">
+            06
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="f06">
+        <marcx:subfield code="b">
+            b
+        </marcx:subfield>
+        <marcx:subfield code="b">
+            s
+        </marcx:subfield>
+        <marcx:subfield code="m">
+            Navneform rettet fra: Jo&#776;kulsson, Illugi
+        </marcx:subfield>
+        <marcx:subfield code="m">
+            Rettelse
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="n50">
+        <marcx:subfield code="a">
+            20140813
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="n51">
+        <marcx:subfield code="a">
+            20140709
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="n55">
+        <marcx:subfield code="a">
+            20140603
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="s10">
+        <marcx:subfield code="a">
+            DBC
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="s12">
+        <marcx:subfield code="t">
+            TeamBLY201427
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="z98">
+        <marcx:subfield code="a">
+            Minus korrekturprint
+        </marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="z99">
+        <marcx:subfield code="a">
+            loa
+        </marcx:subfield>
+    </marcx:datafield>
+</marcx:record>
