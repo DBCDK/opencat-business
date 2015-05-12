@@ -373,6 +373,8 @@ UnitTest.addFixture( "SubfieldRules.checkSubfieldNotUsedInParentRecord", functio
         return SubfieldRules.checkSubfieldNotUsedInParentRecord( record, field, subfield, undefined, undefined );
     }
 
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     // Case: No parent record.
     var marcRecord = new Record();
     marcRecord.fromString(
@@ -443,9 +445,7 @@ UnitTest.addFixture( "SubfieldRules.checkSubfieldNotUsedInParentRecord", functio
     field = record.fields[3];
     subfield = field.subfields[0];
 
-    var message = StringUtil.sprintf( "Delfelt %s m\u00E5 ikke anvendes i posten '%s', da " +
-                                      "delfeltet allerede er anvendt i flerbindsv\u00E6rket.",
-                                      "008t", "1 234 567 8" );
+    var message = ResourceBundle.getStringFormat( bundle, "subfield.in.parent.record.error", "008", "t", "1 234 567 8" );
     SafeAssert.equal( "Parent record: Subfield is used in parent record", callRule( record, field, subfield ), [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ] );
 } );
 

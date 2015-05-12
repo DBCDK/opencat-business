@@ -647,9 +647,9 @@ var SubfieldRules = function() {
             // Load parent record and check if this subfield is used.
 	        var parentRecord = RawRepoClient.fetchRecord( recId, libNo );
             if( parentRecord.existField( new MatchField( RegExp( field.name ), undefined, RegExp( subfield.name ) ) ) ) {
-                var message = StringUtil.sprintf( "Delfelt %s%s m\u00E5 ikke anvendes i posten '%s', da " +
-                                                  "delfeltet allerede er anvendt i flerbindsv\u00E6rket.",
-                                                  field.name, subfield.name, recId );
+                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+                var message = ResourceBundle.getStringFormat( bundle, "subfield.in.parent.record.error", field.name, subfield.name, recId );
+
                 return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];
             }
 
