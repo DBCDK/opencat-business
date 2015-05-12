@@ -146,7 +146,7 @@ UnitTest.addFixture( "SubfieldRules.checkISBN10", function() {
     SafeAssert.equal( "4 SubfieldRules.checkISBN10 with invalid isbn10 number", SubfieldRules.checkISBN10( record, field, subfield4, params ), error4 );
 
     var subfield5 = {'name': "isbn10", 'value': "0-201-53O82-1" };
-    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.numbers.error", "isbn10" ) )];
+    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", "isbn10" ) )];
     SafeAssert.equal( "5 SubfieldRules.checkISBN10 with invalid isbn10 number", SubfieldRules.checkISBN10( record, field, subfield5, params ), error5 );
 
     var subfield6 = {'name': "isbn10", 'value': "0-8044-2957-X" };
@@ -158,6 +158,8 @@ UnitTest.addFixture( "SubfieldRules.checkISBN10", function() {
 });
 
 UnitTest.addFixture( "SubfieldRules.checkISBN13", function() {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var record = {};
     var field = {};
     var params = undefined;
@@ -166,19 +168,19 @@ UnitTest.addFixture( "SubfieldRules.checkISBN13", function() {
     SafeAssert.equal( "1 SubfieldRules.checkISBN13 with valid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), [] );
 
     subfield = {'name': "isbn13", 'value': "5-705467-007642" };
-    var error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" med værdien "5-705467-007642" er ikke et korrekt ISBN13 tal' )];
+    var error = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn13.invalid.error", "isbn13", "5-705467-007642" ) ) ];
     SafeAssert.equal( "2 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
     subfield = {'name': "isbn13", 'value': "5-705467-0076411" };
-    error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" skal best\u00E5 af 13 tegn' )];
+    error = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn13.length.error", "isbn13" ) )];
     SafeAssert.equal( "3 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
     subfield = {'name': "isbn13", 'value': "5-705467-00764" };
-    error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" skal best\u00E5 af 13 tegn' )];
+    error = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn13.length.error", "isbn13" ) )];
     SafeAssert.equal( "4 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
     subfield = {'name': "isbn13", 'value': "5-705467-0O7641" };
-    error = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "isbn13" m\u00E5 kun best\u00E5 af tal' )];
+    error = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", "isbn13" ) )];
     SafeAssert.equal( "5 SubfieldRules.checkISBN13 with invalid isbn13 number", SubfieldRules.checkISBN13( record, field, subfield, params ), error );
 
     //Bug 18231 - Validate fejler korrekt ISBN
