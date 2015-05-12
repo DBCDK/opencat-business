@@ -454,6 +454,7 @@ UnitTest.addFixture( "SubfieldRules.checkSubfieldNotUsedInChildrenRecords", func
         return SubfieldRules.checkSubfieldNotUsedInChildrenRecords( record, field, subfield, undefined, undefined );
     }
 
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
 
     // Case: No children.
     RawRepoClientCore.clear();
@@ -532,7 +533,7 @@ UnitTest.addFixture( "SubfieldRules.checkSubfieldNotUsedInChildrenRecords", func
     field = record.fields[2];
     subfield = field.subfields[0];
     SafeAssert.equal( "Subfield used in one child record", callRule( record, field, subfield ),
-                      [ ValidateErrors.subfieldError( "TODO:fixurl", "Delfelt 008t m\u00E5 kun anvendes i en post i et flerbindsv\u00E6k" ) ] );
+                      [ ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "subfield.in.children.record.error", "008", "t" ) ) ] );
 } );
 
 UnitTest.addFixture( "SubfieldRules.lookupValue", function() {

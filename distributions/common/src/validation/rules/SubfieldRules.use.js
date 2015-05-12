@@ -681,8 +681,9 @@ var SubfieldRules = function() {
             for( var i = 0; i < children.length; i++ ) {
                 var rec = children[ i ];
                 if( rec.existField( new MatchField( RegExp( field.name ), undefined, RegExp( subfield.name ) ) ) ) {
-                    var message = StringUtil.sprintf( "Delfelt %s%s m\u00E5 kun anvendes i en post i et flerbindsv\u00E6k",
-                        field.name, subfield.name );
+                    var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+                    var message = ResourceBundle.getStringFormat( bundle, "subfield.in.children.record.error", field.name, subfield.name );
+
                     Log.trace( "Found error in record [", recId, ":", libNo, "]: ", message );
                     return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];
                 }
