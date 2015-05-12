@@ -537,8 +537,6 @@ UnitTest.addFixture( "SubfieldRules.checkSubfieldNotUsedInChildrenRecords", func
 } );
 
 UnitTest.addFixture( "SubfieldRules.lookupValue", function() {
-    return;
-
     Assert.exception( "No params", "SubfieldRules.lookupValue( {}, {}, {}, undefined, undefined )" );
     Assert.exception( "Params: No register", "SubfieldRules.lookupValue( {}, {}, {}, {}, undefined )" );
     Assert.exception( "Params: Wrong register type", "SubfieldRules.lookupValue( {}, {}, {}, { register: 1 }, undefined )" );
@@ -557,6 +555,7 @@ UnitTest.addFixture( "SubfieldRules.lookupValue", function() {
     settings[ 'solr.url' ] = 37;
     GenericSettings.setSettings( settings );
     Assert.exception( "Settings: solr.url has wrong type", "SubfieldRules.lookupValue( {}, {}, {}, { register: 'marc.001a', exist: true }, GenericSettings )" );
+    return;
 
     settings[ 'solr.url' ] = "http://localhost:12100/solr/raw-repo-index";
     GenericSettings.setSettings( settings );

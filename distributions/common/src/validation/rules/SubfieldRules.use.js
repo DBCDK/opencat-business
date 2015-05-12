@@ -733,13 +733,15 @@ var SubfieldRules = function() {
         ValueCheck.checkThat( "settings", params ).type( "object" );
 
         try {
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
             if( !settings.containsKey( 'solr.url' ) ) {
-                throw "Settings does not contain the key 'solr.url'";
+                throw ResourceBundle.getString( bundle, "lookup.value.missing.solr.url" );
             }
 
             var url = settings.get( 'solr.url' );
             if( url === undefined ) {
-                throw "Settings 'solr.url' is set to undefined";
+                throw ResourceBundle.getString( bundle, "lookup.value.undefined.solr.url" );
             }
 
             var hits = 0;
@@ -748,13 +750,13 @@ var SubfieldRules = function() {
             }
 
             if( params.exist === true && hits === 0 ) {
-                var message = StringUtil.sprintf( "V\u00E6rdien %s (delfelt %s%s) kan ikke findes i en eksisterende post.",
-                                                  subfield.value, field.name, subfield.name );
+                var message = ResourceBundle.getStringFormat( bundle, "lookup.value.expected.value",
+                    subfield.value, field.name, subfield.name );
                 return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];
             }
             else if( params.exist === false && hits !== 0 ) {
-                var message = StringUtil.sprintf( "V\u00E6rdien %s (delfelt %s%s) findes allerede i en eksisterende post.",
-                                                  subfield.value, field.name, subfield.name );
+                var message = ResourceBundle.getStringFormat( bundle, "lookup.value.unexpected.value",
+                    subfield.value, field.name, subfield.name );
                 return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];
             }
 
