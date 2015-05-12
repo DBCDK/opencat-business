@@ -458,15 +458,17 @@ var SubfieldRules = function() {
     function checkISBN10( record, field, subfield, params ) {
         Log.trace( "SubfieldRules.checkISBN10" );
 
+        var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
         //ValueCheck.checkUndefined( "params", params );
         var result = [];
         var subfieldValue = subfield['value'].replace(/-/g,""); // removes dashes
         var subfieldName = subfield['name'];
         if ( !isNumber( subfieldValue.substring( 0, subfieldValue.length - 2 ) ) ||
                 (!isNumber(subfieldValue.substring( subfieldValue.length - 1 ) ) && subfieldValue.substring( subfieldValue.length - 1 ).toLowerCase() !== 'x' ) ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" m\u00E5 kun best\u00E5 af tal' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.numbers.error", subfieldName ) ) );
         } else if ( subfieldValue.length !== 10 ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" skal best\u00E5 af 10 tegn' ) );
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.length.error", subfieldName ) ) );
         } else {
             // we must iterate the ISBN10 number string and multiply each number
             // with numbers 10 to 1.
@@ -489,7 +491,7 @@ var SubfieldRules = function() {
                 value += parseInt( subfieldValue.charAt( subfieldValue.length - 1 ) ); // 4, 5, 6
             }
             if ( value % 11 !== 0 ) { // 7
-                result.push( ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "' + subfieldName + '" med værdien "' + subfield['value'] + '" er ikke et korrekt ISBN10 tal' ) );
+                result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.invalid.error", subfieldName, subfield['value'] ) ) );
             }
         }
         return result;
