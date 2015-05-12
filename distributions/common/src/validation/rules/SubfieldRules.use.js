@@ -773,7 +773,9 @@ var SubfieldRules = function() {
         var subfieldName = subfield['name'];
         var paramsMin = params['min'];
         if ( subfieldValueLength < paramsMin ) {
-            var errorMessage = 'delfelt "' + subfieldName + '" er mindre end "' + paramsMin + '" tegn langt';
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.length.min.error", subfieldName, paramsMin );
             var error = ValidateErrors.subfieldError( "TODO:fixurl", errorMessage );
             return [error];
         }
@@ -785,7 +787,9 @@ var SubfieldRules = function() {
         var subfieldName = subfield['name'];
         var paramsMax = params['max'];
         if ( subfieldValueLength > paramsMax ) {
-            var errorMessage = 'delfelt "' + subfieldName + '" er mere end "' + paramsMax + '" tegn langt';
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.length.max.error", subfieldName, paramsMax );
             var error = ValidateErrors.subfieldError( "TODO:fixurl", errorMessage );
             return [error];
         }

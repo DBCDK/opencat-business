@@ -38,6 +38,8 @@ UnitTest.addFixture( "SubfieldRules.subfieldCannotContainValue", function() {
 });
 
 UnitTest.addFixture( "SubfieldRules.checkLength", function() {
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var record = {};
     var field = {};
     var subfield = {
@@ -58,11 +60,11 @@ UnitTest.addFixture( "SubfieldRules.checkLength", function() {
     Assert.exception("checkLength no parameters", 'SubfieldRules.checkLength(record, field, subfield, noParams)');
 
     var paramsValueTooShort = {'min': 4};
-    var errorVal1 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "a" er mindre end "4" tegn langt' )];
+    var errorVal1 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.length.min.error", "a", 4 ) )];
     SafeAssert.equal("length of value to short", SubfieldRules.checkLength(record, field, subfield, paramsValueTooShort), errorVal1);
 
     var paramsValueTooLong = {'max': 1};
-    var errorVal2 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "a" er mere end "1" tegn langt' )];
+    var errorVal2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.length.max.error", "a", 1 ) )];
     SafeAssert.equal("length of value to short", SubfieldRules.checkLength(record, field, subfield, paramsValueTooLong), errorVal2);
 });
 
@@ -609,11 +611,13 @@ UnitTest.addFixture( "SubfieldRules.__checkLengthMin", function() {
         'value': "42"
     };
 
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var params1 = {'min': 1};
     SafeAssert.equal( "1 SubfieldRules.__checkLengthMin, ok test", SubfieldRules.__checkLengthMin( subfield, params1 ), [] );
 
     var params2 = {'min': 42};
-    var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "a" er mindre end "42" tegn langt' )];
+    var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.length.min.error", "a", 42 ) ) ];
     SafeAssert.equal( "2 SubfieldRules.__checkLengthMin, error test", SubfieldRules.__checkLengthMin( subfield, params2 ), error2 );
 } );
 
@@ -623,11 +627,13 @@ UnitTest.addFixture( "SubfieldRules.__checkLengthMax", function() {
         'value': "42"
     };
 
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
     var params1 = {'max': 42};
     SafeAssert.equal( "1 SubfieldRules.__checkLengthMax, ok test", SubfieldRules.__checkLengthMax( subfield, params1 ), [] );
 
     var params2 = {'max': 1};
-    var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", 'delfelt "a" er mere end "1" tegn langt' )];
+    var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.length.max.error", "a", 1 ) ) ];
     SafeAssert.equal( "2 SubfieldRules.__checkLengthMax, error test", SubfieldRules.__checkLengthMax( subfield, params2 ), error2 );
 } );
 
