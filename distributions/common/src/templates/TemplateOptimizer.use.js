@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "FieldRules" );
 use( "MandatorySubfieldInVolumeWorkRule" );
+use( "LookUpRecord" );
 use( "RecordRules" );
 use( "SubfieldMandatoryIfSubfieldNotPresentRule" );
 use( "SubfieldRules" );
@@ -275,6 +276,7 @@ var TemplateOptimizer = function() {
             case "SubfieldRules.checkChangedValue": return SubfieldRules.checkChangedValue;
             case "SubfieldRules.checkSubfieldNotUsedInParentRecord": return SubfieldRules.checkSubfieldNotUsedInParentRecord;
             case "SubfieldRules.checkSubfieldNotUsedInChildrenRecords": return SubfieldRules.checkSubfieldNotUsedInChildrenRecords;
+            case "SubfieldRules.lookupRecord": return LookUpRecord.validateSubfield;
             case "SubfieldRules.lookupValue": return SubfieldRules.lookupValue;
 
             default:
