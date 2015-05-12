@@ -594,8 +594,8 @@ var SubfieldRules = function() {
 	        var oldValue = oldRecord.getValue( new RegExp( field.name ), new RegExp( subfield.name ) );
 	        Log.debug( field.name + subfield.name + ": " + oldValue + " -> " + subfield.value );
 	        if( params.fromValues.indexOf( oldValue ) > -1 && params.toValues.indexOf( subfield.value ) > -1 ) {
-	        	var msg = StringUtil.sprintf( "Posttypen (felt %s%s) m\u00E5 ikke \u00E6ndre sig fra %s til %s",
-						  field.name, subfield.name, oldValue, subfield.value );
+                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+	        	var msg = ResourceBundle.getStringFormat( bundle, "check.changed.value.error", field.name, subfield.name, oldValue, subfield.value );
 
 				Log.debug( "Found validation error: " + msg );
 				return [ ValidateErrors.subfieldError( "TODO:fixurl", msg ) ];

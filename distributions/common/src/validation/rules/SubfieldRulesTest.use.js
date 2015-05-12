@@ -234,7 +234,9 @@ UnitTest.addFixture( "SubfieldRules.checkISBN13", function() {
 
 UnitTest.addFixture( "SubfieldRules.checkChangedValue", function() {
     var params;
-    var msg_format = "Posttypen (felt 004a) m\u00E5 ikke \u00E6ndre sig fra %s til %s";
+    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+
+    var msg_format = ResourceBundle.getStringFormat( bundle, "check.changed.value.error", "004", "a", "%s", "%s" );
 
     params = { toValues: [], fromValues: [] };
     SafeAssert.equal( "Empty param values", SubfieldRules.checkChangedValue( { fields: [] }, {}, {}, params ), [] );
