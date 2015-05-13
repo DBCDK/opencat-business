@@ -58,7 +58,7 @@
                     "type": "ERROR",
                     "params": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                        "message": "Delfelt 008o må ikke anvendes i posten '5 161 764 9', da delfeltet allerede er anvendt i flerbindsværket.",
+                        "message": "Delfelt 008o må ikke anvendes i posten '5 161 764 9', da delfeltet allerede er anvendt i flerbindsværket",
                         "fieldno": 3,
                         "subfieldno": 5
                     }
