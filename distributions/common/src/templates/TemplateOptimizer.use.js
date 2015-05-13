@@ -279,8 +279,11 @@ var TemplateOptimizer = function() {
             case "SubfieldRules.lookupRecord": return LookUpRecord.validateSubfield;
             case "SubfieldRules.lookupValue": return SubfieldRules.lookupValue;
 
-            default:
-                throw ( "Valideringsreglen '" + typeName + "' findes ikke." );
+            default: {
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+                throw ResourceBundle.getStringFormat( bundle, "validation.rule.unknown", typeName );
+            }
         }
     }
 
@@ -289,8 +292,9 @@ var TemplateOptimizer = function() {
 
         try {
             if( rule.hasOwnProperty( "errorType" ) && VALID_ERROR_TYPES.indexOf( rule.errorType ) == -1 ) {
-                throw StringUtil.sprintf( "Valideringsreglen '%s' anvender fejltypen '%s' som er ukendt. Skal v\u00E6re en af v\u00E6rdierne: '%s'",
-                                          ruleName, rule.errorType, VALID_ERROR_TYPES.join( ", " ) );
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+                throw ResourceBundle.getStringFormat( bundle, "invalid.validation.error.type", ruleName, rule.errorType, VALID_ERROR_TYPES.join( ", " ) );
             }
         }
         finally {

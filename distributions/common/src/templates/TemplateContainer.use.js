@@ -1,5 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "ReadFile" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "TemplateOptimizer" );
 use( "TemplateLoader" );
 use( "UnitTest" );
@@ -16,6 +18,8 @@ EXPORTED_SYMBOLS = [ 'TemplateContainer' ];
  * 
  */
 var TemplateContainer = function() {
+    var BUNDLE_NAME = "templates";
+
     var templates = {};
     var templatesUnoptimized = {};
     var settings;
@@ -125,12 +129,13 @@ var TemplateContainer = function() {
 	        var result = templatesUnoptimized[ name ];
 
 	        if( result === undefined ) {
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
 
 	            if( !settings.containsKey( 'javascript.basedir' ) ) {
-	                throw "Settings does not contain the key 'javascript.basedir'";
+	                throw ResourceBundle.getStringFormat( bundle, "templates.settings.missing.key", "javascript.basedir" );
 	            }
 	            if( !settings.containsKey( 'javascript.install.name' ) ) {
-	                throw "Settings does not contain the key 'javascript.install.name'";
+                    throw ResourceBundle.getStringFormat( bundle, "templates.settings.missing.key", "javascript.install.name" );
 	            }
 
 	            var templateFileNamePattern = "%s/distributions/%s/templates/%s.json";
