@@ -2,6 +2,6 @@
 use( "DBCAuthenticator" );
 
 //-----------------------------------------------------------------------------
-function authenticateRecord( record, userId, groupId ) {
-    return DBCAuthenticator.authenticateRecord( record, userId, groupId );
+function authenticateRecord( record, userId, groupId, settings ) {
+    return DBCAuthenticator.authenticateRecord( record, userId, groupId, settings );
 }

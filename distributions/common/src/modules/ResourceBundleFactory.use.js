@@ -14,6 +14,10 @@ var ResourceBundleFactory = function() {
     // Cache over loaded bundle. Name --> Bundle
     var bundles = {};
 
+    function init( settings ) {
+        setDistributionPaths( settings.get( 'javascript.basedir' ), settings.get( 'javascript.install.name' ) );
+    }
+
     function getBundle( bundleName ) {
         return getBundleByLocale( bundleName, DEFAULT_LOCALE );
     }
@@ -81,6 +85,7 @@ var ResourceBundleFactory = function() {
     }
 
     return {
+        'init': init,
         'setResourcePaths': setResourcePaths,
         'setDistributionPaths': setDistributionPaths,
         'getBundle': getBundle,

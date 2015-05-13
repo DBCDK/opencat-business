@@ -6,6 +6,7 @@ use( "MarcClasses" );
 use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClient" );
 use( "RecordUtil" );
+use( "ResourceBundleFactory" );
 use( "UpdateConstants" );
 use( "UpdateOwnership" );
 use( "ValidateErrors" );
@@ -34,7 +35,8 @@ var FBSAuthenticator = function() {
      *
      * @name FBSAuthenticator#authenticateRecord
      */
-    function authenticateRecord( record, userId, groupId ) {
+    function authenticateRecord( record, userId, groupId, settings ) {
+        ResourceBundleFactory.init( settings );
         return JSON.stringify( __authenticateRecord( JSON.parse( record ), userId, groupId ) );
     }
 

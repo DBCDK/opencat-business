@@ -21,6 +21,7 @@ var DBCValidatorEntryPoint = function() {
      *                as an Array.
      */
     function getValidateSchemas( settings ) {
+        ResourceBundleFactory.init( settings );
         TemplateContainer.setSettings( settings );
 
         return JSON.stringify( TemplateContainer.getTemplateNames( settings ) );
@@ -38,6 +39,7 @@ var DBCValidatorEntryPoint = function() {
 
         var result = null;
         try {
+            ResourceBundleFactory.init( settings );
             TemplateContainer.setSettings( settings );
 
             result = TemplateContainer.getUnoptimized( name ) !== undefined;
@@ -75,7 +77,7 @@ var DBCValidatorEntryPoint = function() {
             var result = null;
 
             try {
-                ResourceBundleFactory.setDistributionPaths( settings.get( 'javascript.basedir' ), settings.get( 'javascript.install.name' ) );
+                ResourceBundleFactory.init( settings );
                 result = Validator.validateRecord( rec, templateProvider, settings );
             }
             catch( ex ) {

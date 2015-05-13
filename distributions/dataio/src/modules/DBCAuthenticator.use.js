@@ -4,6 +4,8 @@ use( "DanMarc2Converter" );
 use( "Log" );
 use( "Marc" );
 use( "MarcClasses" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "UpdateConstants" );
 use( "ValidateErrors" );
 
@@ -19,6 +21,8 @@ EXPORTED_SYMBOLS = [ 'DBCAuthenticator' ];
  * @name DBCAuthenticator
  */
 var DBCAuthenticator = function() {
+    var BUNDLE_NAME = "auth";
+
     /**
      * Authenticates a record.
      *
@@ -31,16 +35,20 @@ var DBCAuthenticator = function() {
      *
      * @name DBCAuthenticator#authenticateRecord
      */
-    function authenticateRecord( record, userId, groupId ) {
+    function authenticateRecord( record, userId, groupId, settings ) {
         Log.trace( "Enter - DBCAuthenticator.authenticateRecord()" );
 
         try {
+            ResourceBundleFactory.init( settings );
+
             if( UpdateConstants.DBC_AGENCY_IDS.indexOf( groupId ) == -1 ) {
                 Log.warn( "Unknown record/user." );
                 Log.warn( "User/group: ", userId, " / ", groupId );
                 Log.warn( "Posten:\n", record );
 
-                return JSON.stringify( [ ValidateErrors.recordError( "", "Ukendt post eller bruger." ) ] );
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+                return JSON.stringify( [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "unknown.user.error", groupId ) ) ] );
             }
 
             return JSON.stringify( [] );
