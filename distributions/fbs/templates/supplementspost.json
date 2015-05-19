@@ -428,12 +428,15 @@
     "rules": [
         {
           "type": "RecordRules.allFieldsMandatoryIfOneExist",
-          "params": { "fields": [ "008", "009", "038", "100", "245", "652" ] }
+		  "errorType": "WARNING",
+          "params": { "fields": [ "008", "009", "038", "039", "100", "239", "245", "652" ] }
         }, {
           "type":"RecordRules.conflictingFields",
+		  "errorType": "ERROR",
           "params": { "fields": [ "100", "110" ] }
         }, {
           "type": "RecordRules.conflictingSubfields",
+		  "errorType": "ERROR",
           "params": { "subfields": [ "652m", "654m" ] }
         }
     ]
