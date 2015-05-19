@@ -6,6 +6,7 @@ use( "MarcClasses" );
 use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClient" );
 use( "RecordUtil" );
+use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "UpdateConstants" );
 use( "UpdateOwnership" );
@@ -23,6 +24,8 @@ EXPORTED_SYMBOLS = [ 'FBSAuthenticator' ];
  * @name FBSAuthenticator
  */
 var FBSAuthenticator = function() {
+    var __BUNDLE_NAME = "fbs-auth";
+
     /**
      * Authenticates a record.
      *
@@ -36,7 +39,10 @@ var FBSAuthenticator = function() {
      * @name FBSAuthenticator#authenticateRecord
      */
     function authenticateRecord( record, userId, groupId, settings ) {
-        ResourceBundleFactory.init( settings );
+        if( settings !== undefined ) {
+            ResourceBundleFactory.init( settings );
+        }
+
         return JSON.stringify( __authenticateRecord( JSON.parse( record ), userId, groupId ) );
     }
 
@@ -44,12 +50,14 @@ var FBSAuthenticator = function() {
         Log.trace( "Enter - FBSAuthenticator.__authenticateRecord()" );
 
         try {
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
             if( UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) === -1 ) {
                 Log.warn( "Unknown record/user." );
                 Log.warn( "User/group: ", userId, " / ", groupId );
                 Log.warn( "Posten:\n", record );
 
-                return [ ValidateErrors.recordError( "", "Ukendt post eller bruger." ) ];
+                return [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "unknown.user.error", groupId ) ) ];
             }
 
             var marc = DanMarc2Converter.convertToDanMarc2( record );
@@ -64,7 +72,7 @@ var FBSAuthenticator = function() {
             }
 
             var recId = marc.getValue(/001/, /a/);
-            return [ValidateErrors.recordError("", StringUtil.sprintf( "Du har ikke ret til at rette posten '%s' da den er ejet af et andet bibliotek.", recId))];
+            return [ValidateErrors.recordError("", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", recId ) ) ];
         }
         finally {
             Log.trace( "Exit - FBSAuthenticator.__authenticateRecord()" );
@@ -93,6 +101,8 @@ var FBSAuthenticator = function() {
                 return NoteAndSubjectExtentionsHandler.authenticateExtentions( record, groupId );
             }
 
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
             var recId = record.getValue(/001/, /a/);
             var agencyId = record.getValue( /001/, /b/ );
             var owner = record.getValue( /996/, /a/ );
@@ -103,11 +113,11 @@ var FBSAuthenticator = function() {
             if( !RawRepoClient.recordExists( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID ) ) {
                 Log.debug( "Checking authentication for new common record." );
                 if( owner === "" ) {
-                    return [ValidateErrors.recordError("", "Du har ikke ret til at oprette en f\xe6llesskabspost")];
+                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "create.common.record.error" ) ) ];
                 }
 
                 if( owner !== groupId ) {
-                    return [ValidateErrors.recordError("", "Du har ikke ret til at oprette en f\xe6llesskabspost for et andet bibliotek.")];
+                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "create.common.record.other.library.error" ) ) ];
                 }
 
                 return [];
@@ -115,11 +125,11 @@ var FBSAuthenticator = function() {
 
             Log.debug( "Checking authentication for updating existing common record." );
             if( owner === "" ) {
-                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere f\xe6llesskabsposten")];
+                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.error" ) ) ];
             }
 
             if( owner !== groupId ) {
-                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere f\xe6llesskabsposten for et andet bibliotek.")];
+                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
             }
 
             var curRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID );
@@ -128,10 +138,10 @@ var FBSAuthenticator = function() {
             Log.info( "Current owner: ", curOwner );
 
             if( curOwner === "DBC" ) {
-                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som er ejet af DBC")];
+                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.dbc.error" ) ) ];
             }
             if( curOwner !== "RET" && UpdateConstants.FBS_AGENCY_IDS.indexOf( curOwner ) === -1 ) {
-                return [ValidateErrors.recordError("", "Du har ikke ret til at opdatere en f\xe6llesskabspost som ikke er ejet af et folkebibliotek.")];
+                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ];
             }
 
             return [];
@@ -243,6 +253,7 @@ var FBSAuthenticator = function() {
 
     return {
         'authenticateRecord': authenticateRecord,
-        'recordDataForRawRepo': recordDataForRawRepo
+        'recordDataForRawRepo': recordDataForRawRepo,
+        '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }();

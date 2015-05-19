@@ -9,6 +9,8 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     var FBS_RECORD_AGENCY_ID = "714700";
     var OTHER_FBS_RECORD_AGENCY_ID = "726500";
 
+    var bundle = ResourceBundleFactory.getBundle( FBSAuthenticator.__BUNDLE_NAME );
+
     var curRecord;
     var record;
 
@@ -67,7 +69,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update FBS library's local record",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", "Du har ikke ret til at rette posten '1 234 567 8' da den er ejet af et andet bibliotek." ) ] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", "1 234 567 8" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
@@ -81,7 +83,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Creation of common record",
                        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-                       [ ValidateErrors.recordError( "", "Du har ikke ret til at oprette en f\xe6llesskabspost" ) ] );
+                       [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "create.common.record.error" ) ) ] );
 
     record = new Record();
     record.fromString(
@@ -101,7 +103,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Creation of common FBS-record for other library",
                        callFunction( record, "netpunkt", "700400" ),
-                       [ ValidateErrors.recordError( "", "Du har ikke ret til at oprette en f\xe6llesskabspost for et andet bibliotek." ) ] );
+                       [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "create.common.record.other.library.error" ) ) ] );
 
     //-----------------------------------------------------------------------------
     //                  Test update common FBS record
@@ -181,7 +183,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common record for another FBS library",
                        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-                       [ ValidateErrors.recordError( "", "Du har ikke ret til at opdatere f\xe6llesskabsposten for et andet bibliotek." ) ] );
+                       [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
@@ -241,7 +243,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common DBC record for this FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", "Du har ikke ret til at opdatere en f\xe6llesskabspost som er ejet af DBC" ) ] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.owner.dbc.error" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
@@ -271,7 +273,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common DBC record for this FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", "Du har ikke ret til at opdatere en f\xe6llesskabspost som ikke er ejet af et folkebibliotek." ) ] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
