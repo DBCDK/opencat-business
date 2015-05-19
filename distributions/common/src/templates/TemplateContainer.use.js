@@ -158,7 +158,14 @@ var TemplateContainer = function() {
 	            }
 
 	            if ( templateContent !== null ) {
-	                result = JSON.parse( templateContent );
+                    try {
+                        result = JSON.parse(templateContent);
+                    }
+                    catch( ex ) {
+                        var message = StringUtil.sprintf( "Syntax error in file '%s': %s", filename, ex );
+                        Log.error( message );
+                        throw message;
+                    }
 	            }
 	            else {
 	            	throw StringUtil.sprintf( "Unable to read content from '%s'", filename );
