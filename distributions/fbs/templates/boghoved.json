@@ -56,8 +56,8 @@
 		    			{
 		        			"type": "SubfieldRules.checkChangedValue",
 		        			"params": { 
-			            		"fromValues": [ "h" ],
-			            		"toValues": [ "s", "b", "e" ]
+			            		"fromValues": [ "e", "b", "s" ],
+			            		"toValues": [ "h" ]
 			       			}	
 		    			}
 					]
