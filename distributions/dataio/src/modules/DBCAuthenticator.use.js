@@ -21,7 +21,7 @@ EXPORTED_SYMBOLS = [ 'DBCAuthenticator' ];
  * @name DBCAuthenticator
  */
 var DBCAuthenticator = function() {
-    var BUNDLE_NAME = "auth";
+    var BUNDLE_NAME = "dbc-auth";
 
     /**
      * Authenticates a record.
@@ -39,7 +39,9 @@ var DBCAuthenticator = function() {
         Log.trace( "Enter - DBCAuthenticator.authenticateRecord()" );
 
         try {
-            ResourceBundleFactory.init( settings );
+            if( settings !== undefined ) {
+                ResourceBundleFactory.init( settings );
+            }
 
             if( UpdateConstants.DBC_AGENCY_IDS.indexOf( groupId ) == -1 ) {
                 Log.warn( "Unknown record/user." );

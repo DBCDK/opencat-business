@@ -1,6 +1,9 @@
 //-----------------------------------------------------------------------------
+use( "FBSAuthenticator" );
 use( "NoteAndSubjectExtentionsHandler" );
 use( "RawRepoClientCore" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
 use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
@@ -47,6 +50,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.isNationalCommonRecord", f
 } );
 
 UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", function() {
+    var bundle = ResourceBundleFactory.getBundle( FBSAuthenticator.__BUNDLE_NAME );
     var curRecord;
     var record;
 
@@ -191,7 +195,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
     );
     Assert.equalValue( "New non extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ),
-                       [ ValidateErrors.recordError( "", "Brugeren '700400' har ikke ret til at rette/tilføje feltet '300' i posten '1 234 567 8'" ) ] );
+                       [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8" ) ) ] );
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -216,7 +220,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
     );
     Assert.equalValue( "Edit non extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ),
-                       [ ValidateErrors.recordError( "", "Brugeren '700400' har ikke ret til at rette/tilføje feltet '300' i posten '1 234 567 8'" ) ] );
+                       [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8" ) ) ] );
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -240,7 +244,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.authenticateExtentions", f
     );
     Assert.equalValue( "Delete non extension field",
                        NoteAndSubjectExtentionsHandler.authenticateExtentions( record, "700400" ),
-                       [ ValidateErrors.recordError( "", "Brugeren '700400' har ikke ret til at slette feltet '300' i posten '1 234 567 8'" ) ] );
+                       [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8" ) ) ] );
     RawRepoClientCore.clear();
 } );
 
