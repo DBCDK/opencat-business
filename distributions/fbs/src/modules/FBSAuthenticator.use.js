@@ -39,11 +39,22 @@ var FBSAuthenticator = function() {
      * @name FBSAuthenticator#authenticateRecord
      */
     function authenticateRecord( record, userId, groupId, settings ) {
-        if( settings !== undefined ) {
-            ResourceBundleFactory.init( settings );
-        }
+        Log.trace( "Enter - FBSAuthenticator.authenticateRecord( ", record, ", ", userId, ", ", groupId, ", ", settings, " )" );
 
-        return JSON.stringify( __authenticateRecord( JSON.parse( record ), userId, groupId ) );
+        var result = "";
+        try {
+            if (settings !== undefined) {
+                ResourceBundleFactory.init(settings);
+            }
+
+            return result = JSON.stringify(__authenticateRecord(JSON.parse(record), userId, groupId));
+        }
+        catch( ex ) {
+            Log.trace( "Catched exception: ", ex );
+        }
+        finally {
+            Log.trace( "Exit - FBSAuthenticator.authenticateRecord(): result" );
+        }
     }
 
     function __authenticateRecord( record, userId, groupId ) {
