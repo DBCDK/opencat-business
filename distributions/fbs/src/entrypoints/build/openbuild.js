@@ -6,21 +6,22 @@ use( "TemplateContainer" );
 //-----------------------------------------------------------------------------
 /**
  * Gets the names of the templates as an Array
- * 
+ *
  * @return {JSON} A json with the names of the templates. The names is returned
  *                as an Array.
  */
 function getBuildSchemas() {
-    return JSON.stringify( TemplateContainer.getTemplateNames() ); 
+    return JSON.stringify( TemplateContainer.getTemplateNames() );
 }
 //-----------------------------------------------------------------------------
 function checkTemplate( name, settings ) {
     var result;
     try {
+        ResourceBundleFactory.init( settings );
         TemplateContainer.setSettings( settings );
         result = TemplateContainer.getUnoptimized( name ) !== undefined;
     } catch ( exception ) {
-        // It is ok for the TemplateContainer.get to trow, it means that the 
+        // It is ok for the TemplateContainer.get to trow, it means that the
         // template does not exist and we can then return false.
         result = false;
     }
@@ -31,6 +32,7 @@ function checkTemplate( name, settings ) {
 function buildRecord( templateName, record, faustNumber, settings ) {
     var result;
     var templateProvider = function() {
+        ResourceBundleFactory.init( settings );
         TemplateContainer.setSettings( settings );
         return TemplateContainer.getUnoptimized( templateName );
     };
@@ -48,5 +50,5 @@ function buildRecord( templateName, record, faustNumber, settings ) {
         result = Builder.convertRecord( templateProvider, rec, faustProvider );
     }
     return JSON.stringify( result );
-};
+}
 //-----------------------------------------------------------------------------
