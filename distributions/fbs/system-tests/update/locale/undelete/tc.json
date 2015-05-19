@@ -1,0 +1,39 @@
+[
+    {
+        "name": "fbs-undelete-locale-record",
+        "bugs": [ "#1521" ],
+        "description": "Tester genoplivning af slettet påhængspost",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokalpost",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo.marc",
+                    "type": "LOCALE",
+                    "deleted": true
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "request.marc",
+                        "type": "LOCALE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

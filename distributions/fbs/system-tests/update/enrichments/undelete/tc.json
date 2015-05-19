@@ -1,0 +1,66 @@
+[
+    {
+        "name": "fbs-undelete-enrichment-record",
+        "bugs": [ "#1521" ],
+        "description": "Tester genoplivning af slettet påhængspost",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "supplementspost",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": true
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "request.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
