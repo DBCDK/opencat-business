@@ -113,7 +113,7 @@
                 },
                 "n": {
                     "repeatable": false,
-                    "values": [ "w" ]
+                    "values": [ "m", "n", "u", "t", "w", "x", "y", "z" ]
                 },
                 "x": {}
             }
@@ -789,9 +789,7 @@
 					"jaa", "bef", "bea", "und", "dau", "jul", "fil", "tes", 
 					"mmo", "hib", "mub" ]
                 },
-                "b":{
-                    "repeatable":false
-                }
+                "b": "Lister.fields.codes.subfields.country.music",
             }
         },
         "041":{
@@ -810,7 +808,6 @@
         "042":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",
             "subfields":{
-            	"&":{},
                 "a":{
                     "repeatable":false
 				},
@@ -1184,20 +1181,17 @@
 					"repeatable": false
 				},
                 "F":{
-                    "repeatable": false
-                },
+					"repeatable": false
+				},
                 "f":{
 					"repeatable": false
 				},
                 "C":{
-                    "repeatable": false
-                },
+					"repeatable": false
+				},
                 "c":{
 					"repeatable": false
 				},
-                "B":{
-                    "repeatable": false
-                },
                 "b":{
 					"repeatable": false
 				},
@@ -2189,7 +2183,6 @@
         "526":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.5a.htm",
             "subfields":{
-               "&":{},
                "a":{
                     "repeatable":false
                 },
@@ -2605,7 +2598,6 @@
         "600":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6d.htm",
             "subfields":{
-                "&":{},
                 "A":{
 					"repeatable": false
 				},
@@ -2635,9 +2627,6 @@
                     "repeatable": false
                 },
                 "f":{
-                    "repeatable": false
-                },
-                "C":{
                     "repeatable": false
                 },
                 "c":{
@@ -2684,35 +2673,19 @@
                 "a":{
 					"repeatable": false
 				},
-               "E":{
-                    "repeatable": false
-                },
                 "e":{
 					"repeatable": false
 				},
-                "C":{},
                 "c":{},
-                "S":{
-                    "repeatable": false
-                },
                 "s":{
 					"repeatable": false
 				},
-                "I":{
-                    "repeatable": false
-                },
                 "i":{
 					"repeatable": false
 				},
-                "K":{
-                    "repeatable": false
-                },
                 "k":{
 					"repeatable": false
 				},
-                "J":{
-                    "repeatable": false
-                },
                 "j":{
 					"repeatable": false
 				},
@@ -2793,7 +2766,6 @@
         "630":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.72.htm",
             "subfields":{
-                "&":{},
                 "A":{},
                 "a":{},
                 "B":{},
@@ -2815,7 +2787,6 @@
         "631":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73.htm",
             "subfields":{
-                "&":{},
                 "A":{},
                 "a":{},
                 "B":{},
@@ -2834,7 +2805,6 @@
         "632":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73a.htm",
             "subfields":{
-                "&":{},
                 "a":{
 					"repeatable": false
 				},
