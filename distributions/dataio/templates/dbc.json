@@ -103,7 +103,6 @@
                 "w": "DanMarc2.fields.008.subfields.w",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v": "DanMarc2.fields.008.subfields.v"
-                }
             }
         },
         "009": "DanMarc2.fields.009",
@@ -426,7 +425,7 @@
             "subfields":{
                 "&":{},
                 "a": "DanMarc2.fields.555.subfields.a",
-                "\u00E5": "DanMarc2.fields.555.subfields.\u00E5""
+                "\u00E5": "DanMarc2.fields.555.subfields.\u00E5"
             }
         },
         "557": "DanMarc2.fields.557",
