@@ -2830,9 +2830,7 @@
         "633":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.74.htm",
             "subfields":{
-            	"A":{
-					"repeatable": false
-				},
+            	"A":{},
                 "a":{},
                 "u":{},
                 "\u00E5":{},
@@ -3116,14 +3114,14 @@
     			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
 			        "params": { 
 			            "subfield": "m",
-			            "not_presented_subfield": [ "652o" ]
+			            "not_presented_subfield": [ "654o" ]
         			}
     			},
     			{
         			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
         			"params": { 
             			"subfield": "o",
-            			"not_presented_subfield": [ "652m" ]
+            			"not_presented_subfield": [ "654m" ]
         			}
     			}
 			]			
@@ -3236,6 +3234,9 @@
         "666":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
             "subfields":{
+                "\u00E5":{
+					"repeatable": false
+				},
                 "F":{},
                 "f":{},
                 "T":{},
@@ -3257,9 +3258,6 @@
                 "o":{},
                 "U":{},
                 "u":{},
-                "\u00E5":{
-					"repeatable": false
-				},
                 "0":{
 					"repeatable": false
 				},
@@ -3342,6 +3340,9 @@
         "700":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",
             "subfields":{
+                "\u00E5":{
+					"repeatable": false
+				},
                 "A":{
 					"repeatable": false
 				},
@@ -3415,9 +3416,6 @@
 					"repeatable": false,
 					"values": [ "1" ]
 				},
-                "\u00E5":{
-					"repeatable": false
-				},
                 "0":{
 					"repeatable": false
 				},
@@ -3434,6 +3432,9 @@
         "710":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.84.htm",
             "subfields":{
+                "\u00E5":{
+					"repeatable": false
+				},
                 "A":{
 					"repeatable": false
 				},
@@ -3502,9 +3503,6 @@
                 "g":{
 					"repeatable": false,
 					"values": [ "1" ]
-				},
-                "\u00E5":{
-					"repeatable": false
 				},
                 "0":{
 					"repeatable": false
@@ -3609,6 +3607,9 @@
         "740":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.86.htm",
             "subfields":{
+                "\u00E5":{
+                    "repeatable":false
+                },
             	"A":{
                     "repeatable":false
                 },
@@ -3662,9 +3663,6 @@
                 "w":{
                     "repeatable":false
                 },
-                "\u00E5":{
-                    "repeatable":false
-                },
                 "0":{
                     "repeatable":false
                 },
@@ -3676,6 +3674,9 @@
         "745":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
             "subfields":{
+                "\u00E5":{
+					"repeatable": false
+				},
                 "i":{
                     "repeatable":false,
                     "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
@@ -3702,6 +3703,10 @@
         "770":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.88.htm",
             "subfields":{
+                "\u00E5":{
+                    "mandatory":true,
+                    "repeatable":false
+                },
                 "A":{
 					"repeatable": false
 				},
@@ -3739,10 +3744,6 @@
                 "c":{
                     "repeatable":false
                 },
-                "\u00E5":{
-                    "mandatory":true,
-                    "repeatable":false
-                },
                 "0":{
                     "repeatable":false
                 },
@@ -3759,6 +3760,10 @@
         "780":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.89.htm",
             "subfields":{
+                "\u00E5":{
+                    "mandatory":true,
+					"repeatable": false
+				},
                 "A":{
 					"repeatable": false
 				},
@@ -3797,10 +3802,6 @@
                 "j":{
 					"repeatable": false
 				},
-                "\u00E5":{
-                    "mandatory":true,
-					"repeatable": false
-				},
                 "0":{
 					"repeatable": false
 				},
@@ -3817,6 +3818,9 @@
         "795":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8a.htm",
             "subfields":{
+                "\u00E5":{
+					"repeatable": false
+				},
                 "A":{},
                 "a":{},
                 "b":{},
@@ -3854,9 +3858,6 @@
                 "t":{},
                 "z":{},
                 "y":{
-					"repeatable": false
-				},
-                "\u00E5":{
 					"repeatable": false
 				},
                 "0":{
