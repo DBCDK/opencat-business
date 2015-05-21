@@ -70,7 +70,7 @@ var TemplateLoader = function() {
      */
 
     function __getObjectFromTemplate ( name, templateProvider ) {
-        Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate" );
+        Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", templateProvider, " )" );
         try {
             var index = name.indexOf( "." );
             var templateName = name.substring( 0, index );
@@ -92,7 +92,7 @@ var TemplateLoader = function() {
      * @name TemplateLoader#getObjectByName
      */
     function getObjectByName ( name, object ) {
-        Log.trace( "Enter - TemplateLoader.__getObjectByName" );
+        Log.trace( "Enter - TemplateLoader.getObjectByName( '", name, "' ", object, " )" );
         try {
             return __getObjectByName( name, name, object );
         } finally {
@@ -108,10 +108,10 @@ var TemplateLoader = function() {
      * @param {String} name The name of the property to return.
      * @param {Object} object The object that contains the property. Directly or indirectly.
      *  
-     * @name TemplateLoader#getObjectByName
+     * @name TemplateLoader#__getObjectByName
      */
     function __getObjectByName ( fullName, name, object ) {
-        Log.trace( "Enter - TemplateLoader.__getObjectByName" );
+        Log.trace( "Enter - TemplateLoader.__getObjectByName( '", fullName, "', '", name, "', ", object, " )" );
         try {
             if ( object === null ) {
             }
