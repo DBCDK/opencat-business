@@ -1,0 +1,183 @@
+[
+    {
+        "name": "fbs-delete-enrichment-record-no-holdings",
+        "bugs": [ "#1521" ],
+        "description": "Tester sletning af påhængspost uden beholdninger",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "supplementspost",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '039' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                },
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '239' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                }
+            ],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '039' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    },
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '239' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-delete-enrichment-record-holdings",
+        "bugs": [ "#1521" ],
+        "description": "Tester sletning af påhængspost uden beholdninger",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "supplementspost",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 723000 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '039' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                },
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '239' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                }
+            ],
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "params": {
+                            "message": "Påhængsposten må ikke slettes, da der findes beholdninger på posten"
+                        }
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "rawrepo-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]
