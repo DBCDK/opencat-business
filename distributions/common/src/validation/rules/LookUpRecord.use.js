@@ -23,7 +23,7 @@ var LookUpRecord = function () {
      * requiredFieldAndSubfield : String containing the field and subfield the record from rawrepo must contain , formatted in the following fashion 004a
      * allowedSubfieldValues : Array containing the allowed values of the subfield
      * @return Array which is either empty or contains an error
-     * @name SubfieldRules.subfieldCannotContainValue
+     * @name LookUpRecord
      * @method
      */
     function validateSubfield ( record, field, subfield, params, settings ) {

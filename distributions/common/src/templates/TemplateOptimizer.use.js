@@ -255,6 +255,7 @@ var TemplateOptimizer = function() {
             case "RecordRules.conflictingSubfields": return RecordRules.conflictingSubfields;
             case "RecordRules.optionalFields": return RecordRules.optionalFields;
             case "RecordRules.allFieldsMandatoryIfOneExist": return RecordRules.allFieldsMandatoryIfOneExist;
+            case "RecordRules.FieldDemandsOtherFields": return  FieldDemandsOtherFields.validateFields;
 
             case "FieldRules.fieldsIndicator": return FieldRules.fieldsIndicator;
             case "FieldRules.subfieldsMandatory": return FieldRules.subfieldsMandatory;
