@@ -524,6 +524,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            "004 00 *r n *a e\n" +
             StringUtil.sprintf( "s10 00 *a %s", FBS_RECORD_AGENCY_ID )
         )
     ];
@@ -599,6 +600,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            "004 00 *r n *a e\n" +
             StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
         )
     ];
@@ -631,6 +633,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            "004 00 *r n *a e\n" +
             StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
         )
     ];
@@ -668,6 +671,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         expectedOwnershipRecord,
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            "004 00 *r n *a e\n" +
             StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
         )
     ];
@@ -744,6 +748,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         "996 00 *a DBC" ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 68519659 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+            "004 00 *r n *a e\n" +
             "d08 00 *o wnn *o kpn *k ahf\n" +
             "d09 00 *z REX201213\n" +
             "s10 00 *a DBC\n" +

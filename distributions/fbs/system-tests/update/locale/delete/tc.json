@@ -66,7 +66,7 @@
                     {
                         "type": "ERROR",
                         "params": {
-                            "message": "Lokalposten må ikke slettes, da der findes beholdninger på posten"
+                            "message": "Posten må ikke slettes da der er beholding på"
                         }
                     }
                 ],

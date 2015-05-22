@@ -250,6 +250,18 @@ var FBSAuthenticator = function() {
                 dbcEnrichmentRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID);
             }
 
+            var recordStatus = correctedRecord.getValue( /004/, /r/ );
+            if( recordStatus !== "" ) {
+                Log.debug( "Replace 004 *r in DBC enrichment record with: ", recordStatus );
+                dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "004", "r", recordStatus );
+            }
+
+            var recordType = correctedRecord.getValue( /004/, /a/ );
+            if( recordType !== "" ) {
+                Log.debug( "Replace 004 *a in DBC enrichment record with: ", recordType );
+                dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "004", "a", recordType );
+            }
+
             Log.debug( "Replace s10 in DBC enrichment record with: ", owner );
             dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "s10", "a", owner );
 

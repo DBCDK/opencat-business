@@ -37,7 +37,11 @@ var BasisSplitter = function() {
                     commonRecord.append( commonField );
                 }
                 else {
-                    if (DBC_FIELDS.test(field.name)) {
+                    if( field.name === "004" ) {
+                        dbcRecord.append( field );
+                        commonRecord.append( field );
+                    }
+                    else if (DBC_FIELDS.test(field.name)) {
                         dbcRecord.append(field);
                     }
                     else {

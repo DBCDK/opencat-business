@@ -1,0 +1,232 @@
+[
+    {
+        "name": "basis-delete-volume-no-holdings",
+        "description": "Sletning af et eksisterende bind (uden beholdning) til eksisterende hovedpost",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "delete-volume-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "children": [ "rawrepo-volume.marc" ],
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-volume-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ],
+                        "children": []
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "result-delete-volume.marc",
+                        "type": "COMMON",
+                        "deleted": true,
+                        "enqueued": true,
+                        "enrichments": []
+                    },
+                    {
+                        "record": "result-delete-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "basis-delete-volume-holdings",
+        "description": "Sletning af et eksisterende bind (med beholdning) til eksisterende hovedpost",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "delete-volume-request.marc"
+        },
+        "setup": {
+            "holdings": [ 723000 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "children": [ "rawrepo-volume.marc" ],
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-volume-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "message" : "Posten må ikke slettes da der er beholding på"
+                        }
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "children": [ "rawrepo-volume.marc" ],
+                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "basis-delete-main-with-volumes",
+        "description": "Sletning af hovedpost med eksisterende bind",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "delete-main-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "children": [ "rawrepo-volume.marc" ],
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume.marc",
+                    "type": "COMMON",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-volume-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "message" : "Posten '58442615' kan ikke slettes, da der er posten på et lavere niveau som referere til den"
+                        }
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "children": [ "rawrepo-volume.marc" ],
+                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume.marc",
+                        "type": "COMMON",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]
