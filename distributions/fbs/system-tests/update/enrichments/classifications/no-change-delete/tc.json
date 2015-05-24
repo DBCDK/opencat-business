@@ -1,7 +1,9 @@
 [
     {
         "name": "fbs-up-enrich-del-same-order",
-        "bugs": [ "18515" ],
+        "bugs": [
+            "18515"
+        ],
         "description": "Tester opdatering af eksisterende påhængspost uden ændringer i opstilling som medfører sletning",
         "request": {
             "authentication": {
@@ -36,15 +38,47 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": [
+                {
+                    "type": "WARNING",
+                    "params": {
+                        "message": "Felt '039' mangler i posten",
+                        "url": "TODO:fixurl"
+                    }
+                },
+                {
+                    "type": "WARNING",
+                    "params": {
+                        "message": "Felt '239' mangler i posten",
+                        "url": "TODO:fixurl"
+                    }
+                }
+            ],
             "update": {
-                "errors": [],
+                "errors": [
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '039' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    },
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '239' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    }
+                ],
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
                         "type": "COMMON",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",
@@ -63,7 +97,9 @@
     },
     {
         "name": "fbs-up-enrich-del-new-order",
-        "bugs": [ "#1484" ],
+        "bugs": [
+            "#1484"
+        ],
         "description": "Tester opdatering af eksisterende påhængspost uden ændringer (men med delfelter i anden rækkefølge) i opstilling som medfører sletning",
         "request": {
             "authentication": {
@@ -98,15 +134,47 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": [
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '039' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                },
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '239' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                }
+            ],
             "update": {
-                "errors": [],
+                "errors": [
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '039' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    },
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '239' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    }
+                ],
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
                         "type": "COMMON",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",

@@ -27,9 +27,39 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": [
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '039' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                },
+                {
+                    "type" : "WARNING",
+                    "params" : {
+                        "message" : "Felt '239' mangler i posten",
+                        "url" : "TODO:fixurl"
+                    }
+                }
+            ],
             "update": {
-                "errors": [],
+                "errors": [
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '039' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    },
+                    {
+                        "type" : "WARNING",
+                        "params" : {
+                            "message" : "Felt '239' mangler i posten",
+                            "url" : "TODO:fixurl"
+                        }
+                    }
+                ],
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
