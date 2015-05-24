@@ -346,7 +346,7 @@ var RecordRules = function( ) {
             if ( totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor ) {
                 foundFields.forEach( function(f){
                     if ( f.value === false ) {
-                        var message = ResourceB undle.getStringFormat( bundle, "field.mandatory.error", f.name );
+                        var message = ResourceBundle.getStringFormat( bundle, "field.mandatory.error", f.name );
                         result.push( ValidateErrors.recordError( "TODO:fixurl", message ) );
                     }
                 });
