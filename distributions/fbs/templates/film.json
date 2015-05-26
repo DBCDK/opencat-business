@@ -1,4 +1,5 @@
 {
+	"description": "Skabelon til katalogisering af film på fysiske medier (dvd, videobånd m.m.) - enkeltstående post.",
     "defaults":{
         "field":{
             "indicator":"00",
@@ -489,17 +490,7 @@
                 "2":"DanMarc2.fields.610.subfields.2"
             }
         },
-        "630":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.72.htm",
-            "mandatory":false,            
-            "repeatable":true,
-            "subfields":{
-                "A":"DanMarc2.fields.630.subfields.A",
-                "a":"DanMarc2.fields.630.subfields.a",
-                "\u00E5":"DanMarc2.fields.700.subfields.\u00E5",
-                "2":"DanMarc2.fields.630.subfields.2"
-            }
-        },
+        "630": "DanMarc2.fields.630",
         "631":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73.htm",
             "subfields":{
@@ -775,22 +766,7 @@
                 "7":"DanMarc2.fields.795.subfields.7"
             }
         },
-        "840":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8b.htm",           
-            "subfields":{
-                "&": {
-                    "repeatable": false
-				},
-                "A":"DanMarc2.fields.840.subfields.A",
-                "a":"DanMarc2.fields.840.subfields.a",                
-                "\u00f8":"DanMarc2.fields.840.subfields.\u00f8",                
-                "z":"DanMarc2.fields.840.subfields.z",
-                "V":"DanMarc2.fields.840.subfields.V",
-                "v":"DanMarc2.fields.840.subfields.v",
-                "0":"DanMarc2.fields.840.subfields.0",
-                "1":"DanMarc2.fields.840.subfields.1"
-            }
-        },        
+        "840": "DanMarc2.fields.840",        
         "880": "DanMarc2.fields.880",
         "900":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",            
