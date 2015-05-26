@@ -3749,7 +3749,16 @@
                 "5":{
                     "repeatable":false
                 },
-                "6":{}
+                "6":{},
+				"rules": [
+				    {
+				        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+				        "params": { 
+				            "field": "795",
+			    	        "subfields": [ "a" ]
+				        }
+				    }
+				]
             }
         },
         "780":{
@@ -3807,7 +3816,16 @@
                 "5":{
 					"repeatable": false
 				},
-                "6":{}
+                "6":{},
+				"rules": [
+				    {
+				        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+				        "params": { 
+				            "field": "795",
+			    	        "subfields": [ "a" ]
+				        }
+				    }
+				]
             }
         },
         "795":{
