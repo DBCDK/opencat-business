@@ -24,7 +24,7 @@ var FieldDemandsOtherFields = function () {
      * demands: Array of the fields that must be present if either of the fields in sources is present
      * example params { "sources": [ "008", "009", "038", "039", "100", "239", "245", "652" ] , "demands": [ "008", "009", "245", "652" ] }
      * @return Array which is either empty or contains an error
-     * @name FieldDemandsOtherFields
+     * @name FieldDemandsOtherFields.validateFields
      * @method validateFields
      */
     function validateFields ( record, field, subfield, params, settings ) {
