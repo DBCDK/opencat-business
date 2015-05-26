@@ -1,5 +1,5 @@
 {
-	"description":"Skabelon til optrettelse af lokalpost - alle materialetyper."
+	"description":"Skabelon til optrettelse af lokalpost - alle materialetyper.",
     "defaults":{
         "field":{
             "indicator":"00",
