@@ -1,5 +1,5 @@
 {
-	"description": "Skabelon til netlydbog - bindpost.",
+	"description": "Skabelon til onlinelydbog - bindpost.",
     "defaults":{
         "field":{
             "indicator":"00",
