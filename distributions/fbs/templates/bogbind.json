@@ -1,4 +1,5 @@
 {
+	"description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.",
     "defaults":{
         "field":{
             "indicator":"00",

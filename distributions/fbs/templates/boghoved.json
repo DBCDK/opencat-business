@@ -1,4 +1,5 @@
 {
+	"description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - hovedpost.",
     "defaults":{
         "field":{
             "indicator":"00",
@@ -316,7 +317,29 @@
         "250": "DanMarc2.fields.250",
 		"255": "DanMarc2.fields.255",
 		"256": "DanMarc2.fields.256",
-        "260": "DanMarc2.fields.260",
+        "260":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
+            "subfields":{
+                "&":{
+                    "repeatable":false
+                },
+                "a": "DanMarc2.fields.260.subfields.a",
+                "d": "DanMarc2.fields.260.subfields.d",
+                "f": "DanMarc2.fields.260.subfields.f",
+                "g": "DanMarc2.fields.260.subfields.g",
+                "p": "DanMarc2.fields.260.subfields.p",
+                "e": "DanMarc2.fields.260.subfields.e",
+                "B": "DanMarc2.fields.260.subfields.B",
+                "b": "DanMarc2.fields.260.subfields.b",
+                "c": "DanMarc2.fields.260.subfields.c",
+                "k": "DanMarc2.fields.260.subfields.k",
+                "r": "DanMarc2.fields.260.subfields.r",
+                "s": "DanMarc2.fields.260.subfields.s",
+                "t": "DanMarc2.fields.260.subfields.t",
+                "x": "DanMarc2.fields.260.subfields.x",
+                "j": "DanMarc2.fields.260.subfields.j"
+			}
+        },
         "300": "DanMarc2.fields.300",
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
