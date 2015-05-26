@@ -1,4 +1,5 @@
 {
+	"description":"Skabelon til supplementspost - enkelstående post eller hovedpost.",
     "defaults":{
         "field":{
             "indicator":"00",
@@ -60,7 +61,7 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "e", "h", "s", "b", "i" ]
+                    "values": [ "e", "h", "i" ]
                 },
                 "n": {
                     "repeatable": false,
@@ -75,7 +76,9 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
-                "&":{},
+                "&":{
+                    "repeatable": false
+                },
                 "t":{
                     "repeatable": false,
 					"mandatory": true,
@@ -217,8 +220,6 @@
                 "w": "DanMarc2.fields.245.subfields.w",
                 "Y": "DanMarc2.fields.245.subfields.Y",
                 "y": "DanMarc2.fields.245.subfields.y",
-                "G": "DanMarc2.fields.245.subfields.G",
-                "g": "DanMarc2.fields.245.subfields.g",
                 "z": "DanMarc2.fields.245.subfields.z"
             },
 			"rules": [
@@ -290,86 +291,7 @@
         "645": "DanMarc2.fields.645",
         "650": "DanMarc2.fields.650",
         "651": "DanMarc2.fields.651",
-        "652":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "subfields":{
-                "m":{
-					"repeatable": false
-				},
-                "p":{
-					"repeatable": false
-				},
-                "i":{},
-                "v":{
-					"repeatable": false
-				},
-                "A":{
-					"repeatable": false
-				},
-                "a":{
-					"repeatable": false
-				},
-                 "H":{
-                    "repeatable": false
-                },
-                "h":{
-					"repeatable": false
-				},
-                "k":{
-					"repeatable": false
-				},
-                "E":{
-					"repeatable": false
-				},
-                "e":{
-					"repeatable": false
-				},
-                 "F":{
-                    "repeatable": false
-                },
-                "f":{
-					"repeatable": false
-				},
-                 "C":{
-                    "repeatable": false
-                },
-                "c":{
-					"repeatable": false
-				},
-                 "T":{
-                    "repeatable": false
-                },
-                "t":{
-					"repeatable": false
-				},
-                 "B":{
-                    "repeatable": false
-                },
-                "b":{
-					"repeatable": false
-				},
-                "\u00E5":{
-					"repeatable": false
-				},
-                "0":{},
-                "1":{},
-                "z":{
-					"repeatable": false
-				},
-                "n":{
-					"repeatable": false
-				},
-                "o":{
-					"repeatable": false
-				},
-                "q":{
-					"repeatable": false
-				},
-                "r":{
-					"repeatable": false
-				}
-            }
-        },
+        "652": "DanMarc2.fields.652",
 		"654": "DanMarc2.fields.654",
         "655": "DanMarc2.fields.655",
         "660": "DanMarc2.fields.660",
@@ -428,8 +350,8 @@
     "rules": [
         {
           "type": "RecordRules.allFieldsMandatoryIfOneExist",
-		  "errorType": "WARNING",
-          "params": { "fields": [ "008", "009", "038", "039", "100", "239", "245", "652" ] }
+		  "errorType": "ERROR",
+          "params": { "fields": [ "008", "009", "245", "652" ] }
         }, {
           "type":"RecordRules.conflictingFields",
 		  "errorType": "ERROR",
