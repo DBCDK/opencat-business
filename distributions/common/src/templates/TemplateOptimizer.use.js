@@ -1,4 +1,6 @@
 //-----------------------------------------------------------------------------
+//use
+//-----------------------------------------------------------------------------
 use( "FieldRules" );
 use( "MandatorySubfieldInVolumeWorkRule" );
 use( "LookUpRecord" );
@@ -6,11 +8,12 @@ use( "RecordRules" );
 use( "SubfieldMandatoryIfSubfieldNotPresentRule" );
 use( "SubfieldRules" );
 use( "UnitTest" );
+use ("FieldDemandsOtherFields");
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
-
 //-----------------------------------------------------------------------------
+
 /**
  * Module to optimize a template.
  *
@@ -18,6 +21,7 @@ EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
  * @name TemplateOptimizer
  *
  */
+
 var TemplateOptimizer = function() {
     var VALID_ERROR_TYPES = [
         "WARNING",
