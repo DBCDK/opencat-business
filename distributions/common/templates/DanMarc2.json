@@ -2686,6 +2686,9 @@
                 "s":{
 					"repeatable": false
 				},
+                "I":{
+					"repeatable": false
+				},
                 "i":{
 					"repeatable": false
 				},
@@ -2693,6 +2696,9 @@
 					"repeatable": false
 				},
                 "k":{
+					"repeatable": false
+				},
+                "J":{
 					"repeatable": false
 				},
                 "j":{
