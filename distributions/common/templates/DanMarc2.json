@@ -2672,6 +2672,9 @@
                 "a":{
 					"repeatable": false
 				},
+                "E":{
+					"repeatable": false
+				},
                 "e":{
 					"repeatable": false
 				},
