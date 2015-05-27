@@ -2769,6 +2769,7 @@
         "630":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.72.htm",
             "subfields":{
+                "\u00E5":{},
                 "A":{},
                 "a":{},
                 "B":{},
@@ -2783,13 +2784,13 @@
                 "t":{},
                 "U":{},
                 "u":{},
-                "\u00E5":{},
                 "2":{}
             }
         },
         "631":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73.htm",
             "subfields":{
+                "\u00E5":{},
                 "A":{},
                 "a":{},
                 "B":{},
