@@ -202,7 +202,14 @@
                     "repeatable":false,
                     "rules":[{
                             "type":"SubfieldRules.checkFaust"
-                        }
+                        },
+					    {
+    					    "type": "SubfieldRules.lookupRecord",
+					        "params": {
+            					"requiredFieldAndSubfield": "004a",
+            					"allowedSubfieldValues": [ "h", "s" ]
+        					}
+    					}
                     ]
                 }
             }
