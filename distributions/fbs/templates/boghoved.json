@@ -585,7 +585,9 @@
         "610":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6e.htm",
             "subfields":{
-                "&":"DanMarc2.fields.610.subfields.&",
+                "&":{
+                    "repeatable":false
+                },
                 "A":"DanMarc2.fields.610.subfields.A",
                 "a":"DanMarc2.fields.610.subfields.a",
                 "E":"DanMarc2.fields.610.subfields.E",
