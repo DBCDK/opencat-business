@@ -51,17 +51,17 @@ var LookUpRecord = function () {
             if ( params !== undefined && typeof params.agencyId === "string" ) {
                 agencyId = params.agencyId;
             }
-            var record = RawRepoClient.fetchRecord( recordId, agencyId );
-            if ( record === undefined ) {
+            if ( !RawRepoClientCore.recordExists ( recordId, agencyId ) ) {
                 return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId, agencyId ) ) ];
             }
+
             if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) || params.hasOwnProperty( "allowedSubfieldValues" ) ) {
                 var checkParamsResult = __checkParams( params, bundle );
 
                 if ( checkParamsResult.length > 0 ) {
                     return checkParamsResult;
                 }
-                if ( !__fieldAndSubfieldMandatoryAndHaveValues( record, params ) ) {
+                if ( !__fieldAndSubfieldMandatoryAndHaveValues( RawRepoClient.fetchRecord( recordId, agencyId ) , params ) ) {
                     return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) ) ];
                 }
             }

@@ -24,21 +24,19 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     RawRepoClientCore.addRecord( trueMarcRec );
 
 
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "awrong"
-            }, {
-                name: "b", value: "bwrong"
-            }, {
-                name: "c", value: "c1Val"
-            }]
-        }]
-    };
+    var record = {};
+    var fields = {
+        name: '001', indicator: '00', subfields: [{
+            name: "a", value: "awrong"
+        }, {
+            name: "b", value: "bwrong"
+        }, {
+            name: "c", value: "c1Val"
+        }] };
 
     var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "awrong", "bwrong" );
     var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "001a og 001b mismatch , findes ikke i repo" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
+    SafeAssert.equal( "001a og 001b mismatch , findes ikke i repo" ,  LookUpRecord.validateSubfield( record, fields, {}, {}), errors1a );
 
 
     record = {
