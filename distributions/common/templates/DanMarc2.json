@@ -560,15 +560,7 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.17.htm",
             "subfields":{
                 "a":{
-                    "repeatable":false,
-                    "rules":[{
-                            "type":"SubfieldRules.checkLength",
-                            "params":{
-                                "min":13,
-                                "max":13
-                            }
-                        }
-                    ]
+                    "repeatable":false
                 },
                 "b":{
                     "repeatable":false,
