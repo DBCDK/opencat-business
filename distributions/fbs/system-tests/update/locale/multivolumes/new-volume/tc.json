@@ -1,0 +1,44 @@
+[
+    {
+        "name": "fbs-new-locale-volume",
+        "description": "Oprettelse af et nyt lokalt bind til eksisterende lokal hovedpost",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokalpost",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "LOCALE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "LOCALE",
+                        "deleted": false,
+                        "children": [ "request.marc" ]
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "LOCALE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
