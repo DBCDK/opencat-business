@@ -12,9 +12,9 @@ var FieldDemandsOtherFields = function () {
     var __BUNDLE_NAME = "validation";
 
     /**
-     * validateRecord
+     * validateFields
      * Function that takes two arrays as parameters, demands and sources.
-     * If any of the fieldnames in sources is present in the record, then all of the fields in the demands array must be present.
+     * If any of the fieldnames in sources is present in the record, then all of the fields in the demands array must be presen.
      * @syntax
      * @param {object} record
      * @param {object} field
@@ -24,11 +24,11 @@ var FieldDemandsOtherFields = function () {
      * demands: Array of the fields that must be present if either of the fields in sources is present
      * example params { "sources": [ "008", "009", "038", "039", "100", "239", "245", "652" ] , "demands": [ "008", "009", "245", "652" ] }
      * @return Array which is either empty or contains an error
-     * @name FieldDemandsOtherFields.validateRecord
-     * @method validateRecord
+     * @name FieldDemandsOtherFields.validateFields
+     * @method validateFields
      */
-    function validateRecord ( record, field, subfield, params, settings ) {
-        Log.trace( "Enter - FieldDemandsOtherFields.validateRecord" );
+    function validateFields ( record, field, subfield, params, settings ) {
+        Log.trace( "Enter - FieldDemandsOtherFields.validateFields" );
         try {
 
             ValueCheck.check( "record", record ).type( "object" );
@@ -43,7 +43,7 @@ var FieldDemandsOtherFields = function () {
             var fieldNamesAskeys = __getFieldNamesAskeys( record );
             return __checkFields( fieldNamesAskeys, params, bundle );
         } finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.validateRecord" );
+            Log.trace( "Exit - FieldDemandsOtherFields.validateFields" );
         }
     }
 
@@ -140,7 +140,8 @@ var FieldDemandsOtherFields = function () {
 // End helper functions
 //-----------------------------------------------------------------------------
     return {
-        'validateRecord': validateRecord,
+        'validateFields': validateFields,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
-}();
+}
+();
