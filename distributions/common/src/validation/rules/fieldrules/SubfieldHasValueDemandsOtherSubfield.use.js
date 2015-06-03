@@ -16,7 +16,7 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
     /**
      * subfieldHasValueDemandsOtherSubfield is used to validate that if field x has subfield y with value z
      * then field a and subfield b are mandatory.
-     * @syntax SubfieldHasValueDemandsOtherSubfield.validateFields(  record, field, params  )
+     * @syntax SubfieldHasValueDemandsOtherSubfield.validateField(  record, field, params  )
      * @param {object} record
      * @param {object} field
      * @param {object} params Object with properties subfieldConditional, subfieldConditionalValue, fieldMandatory, subfieldMandatory
@@ -25,8 +25,8 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
      * @name FieldRules.exclusiveSubfield
      * @method
      */
-    function validateFields ( record, field, params ) {
-        Log.trace( "Enter -- SubfieldHasValueDemandsOtherSubfield.validateFields" );
+    function validateField ( record, field, params ) {
+        Log.trace( "Enter -- SubfieldHasValueDemandsOtherSubfield.validateField" );
         ValueCheck.check( "params.subfieldConditional", params.subfieldConditional );
         ValueCheck.check( "params.subfieldConditionalValue", params.subfieldConditionalValue );
         ValueCheck.check( "params.fieldMandatory", params.fieldMandatory );
@@ -60,7 +60,7 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
             }
             return result;
         } finally {
-            Log.trace( "Enter -- SubfieldHasValueDemandsOtherSubfield.validateFields" );
+            Log.trace( "Enter -- SubfieldHasValueDemandsOtherSubfield.validateField" );
         }
     }
 
@@ -80,6 +80,6 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
 
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields': validateFields
+        'validateField': validateField
     };
 }();

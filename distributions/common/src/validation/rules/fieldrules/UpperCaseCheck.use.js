@@ -15,16 +15,16 @@ var UpperCaseCheck = function () {
     /**
      * upperCaseCheck is used to check whether a subfield order is correct
      * meaning, a subfield uppercase name must be preceeded by a subfield with the same lowercase name
-     * @syntax UpperCaseCheck.validateFields( record, field, subfield, params )
+     * @syntax UpperCaseCheck.validateField( record, field, subfield, params )
      * @param {object} record
      * @param {object} field
      * @param {object} params is not used
      * @return {object}
-     * @name UpperCaseCheck.validateFields
+     * @name UpperCaseCheck.validateField
      * @method
      */
-    function validateFields( record, field, params, settings ) {
-        Log.trace( "Enter - UpperCaseCheck.validateFields( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField( record, field, params, settings ) {
+        Log.trace( "Enter - UpperCaseCheck.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
 
         var result = [];
         try {
@@ -42,11 +42,11 @@ var UpperCaseCheck = function () {
             return result;
         }
         finally {
-            Log.trace( "Exit - UpperCaseCheck.validateFields(): ", result );
+            Log.trace( "Exit - UpperCaseCheck.validateField(): ", result );
         }
     }
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields' : validateFields
+        'validateField' : validateField
     };
 }();

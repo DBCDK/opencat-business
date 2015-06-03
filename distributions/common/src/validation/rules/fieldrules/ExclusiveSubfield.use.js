@@ -16,16 +16,16 @@ var ExclusiveSubfield = function () {
     /**
      * exclusiveSubfield is used to validate that if subfield 'a' is present, then none
      * of 'i', 't', 'e', 'x' or 'b' must be present
-     * @syntax ExclusiveSubfield.validateFields(  record, field, params  )
+     * @syntax ExclusiveSubfield.validateField(  record, field, params  )
      * @param {object} record
      * @param {object} field
      * @param {object} params is not used, i.e. must be undefined
      * @return {object}
-     * @name ExclusiveSubfield.validateFields
+     * @name ExclusiveSubfield.validateField
      * @method
      */
-    function validateFields ( record, field, params ) {
-        Log.trace( "Enter -- ExclusiveSubfield.validateFields" );
+    function validateField ( record, field, params ) {
+        Log.trace( "Enter -- ExclusiveSubfield.validateField" );
         try {
             // first count all subfields
             var counts = {};
@@ -54,11 +54,11 @@ var ExclusiveSubfield = function () {
             }
             return result;
         } finally {
-            Log.trace( "Exit -- ExclusiveSubfield.validateFields" );
+            Log.trace( "Exit -- ExclusiveSubfield.validateField" );
         }
     }
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields': validateFields
+        'validateField': validateField
     };
 }();

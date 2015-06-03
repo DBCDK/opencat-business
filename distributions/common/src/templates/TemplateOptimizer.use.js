@@ -282,9 +282,9 @@ var TemplateOptimizer = function() {
             case "SubfieldRules.checkISBN13": return SubfieldRules.checkISBN13;
             case "SubfieldRules.checkChangedValue": return SubfieldRules.checkChangedValue;
             case "SubfieldRules.checkSubfieldNotUsedInParentRecord": return SubfieldRules.checkSubfieldNotUsedInParentRecord;
-            case "SubfieldRules.checkSubfieldNotUsedInChildrenRecords": return SubfieldRules.checkSubfieldNotUsedInChildrenRecords;
+            case "SubfieldRules.checkSubfieldNotUsedInChildrenRecords": return CheckSubfieldNotUsedInChildrenRecords.validateSubfield();
             case "SubfieldRules.lookupRecord": return LookUpRecord.validateSubfield;
-            case "SubfieldRules.lookupValue": return SubfieldRules.lookupValue;
+            case "SubfieldRules.lookupValue": return LookUpValue.validateSubfield;
 
             default: {
                 var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );

@@ -15,16 +15,16 @@ var FieldsIndicator = function () {
     /**
      * fieldsIndicator checks whether an indicate has the value corresponding to the value given in params
      *
-     * @syntax FieldsIndicator.validateFields( record, field, params )
+     * @syntax FieldsIndicator.validateField( record, field, params )
      * @param {object} record
      * @param {object} field
      * @param {object} params must contain a property 'indicator' with the valid indicator, e.g. { 'indicator': "00" }
      * @return {object}
-     * @name FieldsIndicator.validateFields
+     * @name FieldsIndicator.validateField
      * @method
      */
-    function validateFields( record, field, params, settings ) {
-        Log.trace( "Enter - FieldsIndicator.validateFields( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField( record, field, params, settings ) {
+        Log.trace( "Enter - FieldsIndicator.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
 
         var result = [];
         try {
@@ -38,11 +38,11 @@ var FieldsIndicator = function () {
             return result = [error];
         }
         finally {
-            Log.trace( "Exit - FieldsIndicator.validateFields(): ", result );
+            Log.trace( "Exit - FieldsIndicator.validateField(): ", result );
         }
     }
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields' : validateFields
+        'validateField' : validateField
     };
 }();

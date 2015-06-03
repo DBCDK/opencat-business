@@ -14,17 +14,17 @@ var SubfieldsMandatory = function () {
 
     /**
      * checks whether a subfield exists in the given field
-     * @syntax SubfieldsMandatory.validateFields( record, field, params )
+     * @syntax SubfieldsMandatory.validateField( record, field, params )
      * @param {object} record
      * @param {object} field
      * @param {object} params Object with property subfields as an Array of names of mandatory subfields, e.g. { 'subfields': ['a', 'c'] }
      * @return {object}
-     * @example SubfieldsMandatory.validateFields( record, field, params )
-     * @name SubfieldsMandatory.validateFields
+     * @example SubfieldsMandatory.validateField( record, field, params )
+     * @name SubfieldsMandatory.validateField
      * @method
      */
-    function validateFields( record, field, params, settings ) {
-        Log.trace( "Enter - SubfieldsMandatory.validateFields( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField( record, field, params, settings ) {
+        Log.trace( "Enter - SubfieldsMandatory.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
 
         var result = [];
         try {
@@ -38,7 +38,7 @@ var SubfieldsMandatory = function () {
             return result;
         }
         finally {
-            Log.trace( "Exit - SubfieldsMandatory.validateFields(): ", result );
+            Log.trace( "Exit - SubfieldsMandatory.validateField(): ", result );
         }
     }
 
@@ -54,6 +54,6 @@ var SubfieldsMandatory = function () {
     }
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields' : validateFields
+        'validateField' : validateField
     };
 }();

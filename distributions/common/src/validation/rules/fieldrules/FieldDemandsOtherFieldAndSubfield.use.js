@@ -14,7 +14,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
     var BUNDLE_NAME = "validation";
     /**
      * Function that checks if a field exists then another field must exists and contain the subfields from params.
-     * @syntax FieldDemandsOtherFieldAndSubfield.validateFields(  record , params  )
+     * @syntax FieldDemandsOtherFieldAndSubfield.validateField(  record , params  )
      * @param {Object} record The record as a json.
      * @param {Object} object
      * Param example :
@@ -22,12 +22,12 @@ var FieldDemandsOtherFieldAndSubfield = function () {
      *     field : '096',
      *     subfields : ['z']
      * }
-     * @name FieldDemandsOtherFieldAndSubfield.validateFields
+     * @name FieldDemandsOtherFieldAndSubfield.validateField
      * @returns an array which contains errors if any is present.
      * @method
      */
-    function validateFields ( record, field, params, settings ) {
-        Log.trace( "Enter - FieldDemandsOtherFieldAndSubfield.validateFields( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField ( record, field, params, settings ) {
+        Log.trace( "Enter - FieldDemandsOtherFieldAndSubfield.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
 
         var result = null;
         try {
@@ -67,7 +67,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             return result = [ ValidateErrors.fieldError( "", message ) ];
         }
         finally {
-            Log.trace( "Exit - FieldDemandsOtherFieldAndSubfield.validateFields(): ", result );
+            Log.trace( "Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result );
         }
     }
 
@@ -85,6 +85,6 @@ var FieldDemandsOtherFieldAndSubfield = function () {
     }
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields' : validateFields
+        'validateField' : validateField
     };
 }();

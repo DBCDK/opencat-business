@@ -14,17 +14,17 @@ var SubfieldConditionalMandatory = function () {
     var BUNDLE_NAME = "validation";
     /**
      * checks that if a specified subfield has a specific value, then another given subfield is mandatory
-     * @syntax SubfieldConditionalMandatory.validateFields( record, field, params )
+     * @syntax SubfieldConditionalMandatory.validateField( record, field, params )
      * @param {object} record
      * @param {object} field
      * @param {object} params Object with properties subfieldConditional, value, subfieldMandatory, e.g. { 'subfieldConditional': 'v', 'values': '0', 'subfieldMandatory': 'a' }
      * @return {object}
-     * @example SubfieldConditionalMandatory.validateFields( record, field, params )
-     * @name SubfieldConditionalMandatory.validateFields
+     * @example SubfieldConditionalMandatory.validateField( record, field, params )
+     * @name SubfieldConditionalMandatory.validateField
      * @method
      */
-    function validateFields ( record, field, params ) {
-        Log.trace( "Enter SubfieldConditionalMandatory.validateFields" );
+    function validateField ( record, field, params ) {
+        Log.trace( "Enter SubfieldConditionalMandatory.validateField" );
         try {
             ValueCheck.check( "params.subfieldConditional", params.subfieldConditional );
             ValueCheck.check( "params.values", params.values );
@@ -49,7 +49,7 @@ var SubfieldConditionalMandatory = function () {
             }
             return [];
         } finally {
-            Log.trace( "Exit SubfieldConditionalMandatory.validateFields" );
+            Log.trace( "Exit SubfieldConditionalMandatory.validateField" );
         }
 //-----------------------------------------------------------------------------
 // Helper functions
@@ -65,6 +65,6 @@ var SubfieldConditionalMandatory = function () {
     }
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateFields' : validateFields
+        'validateField' : validateField
     };
 }();
