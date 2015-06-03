@@ -60,7 +60,6 @@ UnitTest.addFixture( CheckReference.validateSubfield, function( ) {
     var subfield = {
         'name' : "z", 'value' : "710"
     };
-    // TODO ask ljl about this , makes no sense, atleast in regards to the error message.
     SafeAssert.equal( "1 CheckReference.validateSubfield field exists and with a 710 field with danish aa", CheckReference.validateSubfield( record, undefined, subfield ), [] );
 
     var record = {

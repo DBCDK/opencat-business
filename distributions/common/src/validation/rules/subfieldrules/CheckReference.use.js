@@ -74,35 +74,6 @@ var CheckReference = function () {
         }
     }
 
-    function __checkFieldsNotContainingDanishaa ( fields, fieldNameToCheck, bundle ) {
-        Log.trace( "Enter --- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa" );
-        try {
-            for ( var i = 0; i < fields.length; ++i ) {
-                if ( __fieldHasSubFieldDanishaa( fields[i] ) ) {
-                    return [(  ValidateErrors.subfieldError( 'TODO:fixurl', ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield.å", fieldNameToCheck ) ) )];
-                }
-            }
-            return [];
-        } finally {
-            Log.trace( "Exit--- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa" );
-        }
-    }
-
-    // helper function that checks if a subfield with a given value exists on the field
-    function __fieldHasSubFieldDanishaa ( field ) {
-        Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
-        try {
-            for ( var i = 0; i < field.subfields.length; ++i ) {
-                if ( field.subfields[i].name === '\u00E5') {
-                    return true;
-                }
-            }
-            return false;
-        } finally {
-            Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
-        }
-    }
-
     // helper function which returns an array of errors
     // checks if the fields supplied does not contain the subfields in the subfieldValuesToCheck
     function __checkSubFieldValues ( fieldsWithSubfieldDanishaa, subfieldValuesToCheck ) {
