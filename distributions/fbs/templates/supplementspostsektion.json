@@ -366,7 +366,7 @@
 	"rules": [
  	    {
     	    "type": "RecordRules.fieldDemandsOtherFields",
-        	"params": { "source": [ "008", "239", "245" ] , "demands": [ "008", "245" ] }
+        	"params": { "sources": [ "008", "239", "245" ] , "demands": [ "008", "245" ] }
 	    }
     ]
 }

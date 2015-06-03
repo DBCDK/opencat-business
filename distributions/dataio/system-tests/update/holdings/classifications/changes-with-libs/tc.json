@@ -38,14 +38,14 @@
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [
-                            "rawrepo-dbc-enrichment.marc",
+                            "result-dbc-enrichment.marc",
                             "result-fbs-700400.marc",
                             "result-fbs-700500.marc",
                             "result-fbs-700600.marc"
                         ]
                     },
                     {
-                        "record": "rawrepo-dbc-enrichment.marc",
+                        "record": "result-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

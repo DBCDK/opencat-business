@@ -48,6 +48,19 @@ var LookUpRecord = function () {
                         break;
                 }
             } );
+            if( agencyId !== "" ) {
+                record.fields.forEach(function (fieldVal) {
+                    if (fieldVal.name === "001") {
+                        fieldVal.subfields.forEach(function (subfieldVal) {
+                            if (subfieldVal.name === "b") {
+                                agencyId = subfieldVal.value;
+                                return;
+                            }
+                        })
+                    }
+                });
+            }
+
             if ( params !== undefined && typeof params.agencyId === "string" ) {
                 agencyId = params.agencyId;
             }

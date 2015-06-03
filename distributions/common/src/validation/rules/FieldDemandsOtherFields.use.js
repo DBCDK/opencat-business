@@ -27,12 +27,11 @@ var FieldDemandsOtherFields = function () {
      * @name FieldDemandsOtherFields.validateFields
      * @method validateFields
      */
-    function validateFields ( record, field, subfield, params, settings ) {
+    function validateFields ( record, params, settings ) {
         Log.trace( "Enter - FieldDemandsOtherFields.validateFields" );
         try {
 
             ValueCheck.check( "record", record ).type( "object" );
-            ValueCheck.check( "field", field ).type( "object" );
             ValueCheck.check( "params", params ).type( "object" );
 
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );

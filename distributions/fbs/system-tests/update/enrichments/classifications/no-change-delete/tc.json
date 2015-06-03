@@ -38,39 +38,9 @@
             ]
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "WARNING",
-                    "params": {
-                        "message": "Felt '039' mangler i posten",
-                        "url": "TODO:fixurl"
-                    }
-                },
-                {
-                    "type": "WARNING",
-                    "params": {
-                        "message": "Felt '239' mangler i posten",
-                        "url": "TODO:fixurl"
-                    }
-                }
-            ],
+            "validation": [],
             "update": {
-                "errors": [
-                    {
-                        "type" : "WARNING",
-                        "params" : {
-                            "message" : "Felt '039' mangler i posten",
-                            "url" : "TODO:fixurl"
-                        }
-                    },
-                    {
-                        "type" : "WARNING",
-                        "params" : {
-                            "message" : "Felt '239' mangler i posten",
-                            "url" : "TODO:fixurl"
-                        }
-                    }
-                ],
+                "errors": [],
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
@@ -134,39 +104,9 @@
             ]
         },
         "expected": {
-            "validation": [
-                {
-                    "type" : "WARNING",
-                    "params" : {
-                        "message" : "Felt '039' mangler i posten",
-                        "url" : "TODO:fixurl"
-                    }
-                },
-                {
-                    "type" : "WARNING",
-                    "params" : {
-                        "message" : "Felt '239' mangler i posten",
-                        "url" : "TODO:fixurl"
-                    }
-                }
-            ],
+            "validation": [],
             "update": {
-                "errors": [
-                    {
-                        "type" : "WARNING",
-                        "params" : {
-                            "message" : "Felt '039' mangler i posten",
-                            "url" : "TODO:fixurl"
-                        }
-                    },
-                    {
-                        "type" : "WARNING",
-                        "params" : {
-                            "message" : "Felt '239' mangler i posten",
-                            "url" : "TODO:fixurl"
-                        }
-                    }
-                ],
+                "errors": [],
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",

@@ -14,17 +14,54 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "WARNING",
-                    "params" : {
-                        "message" : "Felt '039' mangler i posten",
-                        "url" : "TODO:fixurl"
+                    "type": "ERROR",
+                    "params": {
+                        "fieldno": 1,
+                        "subfieldno": 1,
+                        "message": "Posten med faustnr '5 158 641 7' og biblioteksnr '191919' findes ikke i forvejen",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
                 {
-                    "type" : "WARNING",
-                    "params" : {
-                        "message" : "Felt '239' mangler i posten",
-                        "url" : "TODO:fixurl"
+                    "type": "ERROR",
+                    "params": {
+                        "fieldno": 2,
+                        "subfieldno": 2,
+                        "message": "Værdien 'b' er ikke end del af de valide værdier: 'e', 'i'",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    }
+                },
+                {
+                    "type": "ERROR",
+                    "params": {
+                        "fieldno": 5,
+                        "message": "Felt '014' kan ikke anvendes i denne skabelon.",
+                        "url": ""
+                    }
+                },
+                {
+                    "type": "ERROR",
+                    "params": {
+                        "fieldno": 10,
+                        "subfieldno": 1,
+                        "message": "Delfelt 'g' kan ikke anvendes paa felt '245' i denne skabelon.",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                    }
+                },
+                {
+                    "type": "ERROR",
+                    "params": {
+                        "fieldno": 15,
+                        "message": "Delfelt 'm' mangler i felt '652'",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
+                    }
+                },
+                {
+                    "type": "ERROR",
+                    "params": {
+                        "fieldno": 15,
+                        "message": "Delfelt 'o' mangler i felt '652'",
+                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm"
                     }
                 }
             ]

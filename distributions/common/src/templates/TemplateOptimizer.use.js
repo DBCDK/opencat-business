@@ -23,6 +23,8 @@ EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
  */
 
 var TemplateOptimizer = function() {
+    var __BUNDLE_NAME = "templates";
+
     var VALID_ERROR_TYPES = [
         "WARNING",
         "ERROR"
@@ -259,7 +261,7 @@ var TemplateOptimizer = function() {
             case "RecordRules.conflictingSubfields": return RecordRules.conflictingSubfields;
             case "RecordRules.optionalFields": return RecordRules.optionalFields;
             case "RecordRules.allFieldsMandatoryIfOneExist": return RecordRules.allFieldsMandatoryIfOneExist;
-            case "RecordRules.FieldDemandsOtherFields": return  FieldDemandsOtherFields.validateFields;
+            case "RecordRules.fieldDemandsOtherFields": return  FieldDemandsOtherFields.validateFields;
 
             case "FieldRules.fieldsIndicator": return FieldRules.fieldsIndicator;
             case "FieldRules.subfieldsMandatory": return FieldRules.subfieldsMandatory;
@@ -285,7 +287,7 @@ var TemplateOptimizer = function() {
             case "SubfieldRules.lookupValue": return SubfieldRules.lookupValue;
 
             default: {
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
                 throw ResourceBundle.getStringFormat( bundle, "validation.rule.unknown", typeName );
             }
@@ -297,7 +299,7 @@ var TemplateOptimizer = function() {
 
         try {
             if( rule.hasOwnProperty( "errorType" ) && VALID_ERROR_TYPES.indexOf( rule.errorType ) == -1 ) {
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
                 throw ResourceBundle.getStringFormat( bundle, "invalid.validation.error.type", ruleName, rule.errorType, VALID_ERROR_TYPES.join( ", " ) );
             }
