@@ -34,80 +34,101 @@ var CheckReference = function () {
     function validateSubfield ( record, field, subfield, params ) {
         Log.trace( "Enter --- CheckReference.validateSubfield" );
         try {
-            var ret = [];
-
-            var fieldNameToCheck = subfield.value.slice( 0, 3 );// String
-            var fields = __getFields( record, fieldNameToCheck ); // array of fields which matches the firldNameToCheck
-            var forwardslashValue = __getValueFromForwardSlash( subfield.value ); // { containsValidValue: Boolean, Value: String }
-            var subfieldValuesToCheck = __getValuesToCheckFromparenthesis( subfield.value );// Array: String
-            var containsParenthesisValues = subfieldValuesToCheck.length > 0;
-            var errorMessage;
-
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
-            if ( fields.length < 1 ) {
+            var fieldNameToCheck = subfield.value.slice( 0, 3 );// String
+            // array of fields which matches the fieldNameToCheck
+            // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
+            var matchingFields = __getFields( record, fieldNameToCheck );
+            var errorMessage;
+
+            if ( matchingFields.length < 1 ) {
                 errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.field", fieldNameToCheck );
                 return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
             }
-
-            // if the reference value is only 3 chars long the field referenced must exist without an å subfield
+            // if the reference value is only 3 chars we are done
+            // meaning we a subfield formatted like this : 700 with no forwardSlash or parenthesis involved
             if ( subfield.value.length === 3 ) {
-                var subfieldWithoutAA = false;
-                for ( var i = 0; i < fields.length && subfieldWithoutAA === false; ++i ) {
-                    if ( __subfieldExistOnfield( fields[i], '\u00E5' ) === false ) {
-                        subfieldWithoutAA = true;
-                    }
-                }
-
-                if ( subfieldWithoutAA === false ) {
-                    errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield.å", fieldNameToCheck );
-                    return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
-                }
+                return [];
             }
 
-            if ( forwardslashValue.containsValidValue === true ) {
-                var fieldsWithSubfield = __matchValueFromForwardSlashToSubfieldValue( forwardslashValue.value, fields );
-                if ( fieldsWithSubfield.length > 0 ) {
-                    if ( containsParenthesisValues === true ) {
-                        ret = ret.concat( __checkSubFieldValues( fieldsWithSubfield, subfieldValuesToCheck ) );
-                    }
-                } else {
-                    errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.value", forwardslashValue.value, fields[0].name );
-                    ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
-                }
+            var forwardslashValue = __getValueFromForwardSlash( subfield.value ); // { containsValidValue: Boolean, Value: String }
+            // if the forwardslashvalue doesnt contain a valid value, the subfield.value is formatted without a a forward slash and no parenthesis
+            if ( forwardslashValue.containsValidValue === false ) {
+                return []
             }
-            return ret;
+
+            var fieldsWithSubfieldContainingDanishaa = __matchValueFromForwardSlashToSubfieldValue( forwardslashValue.value, matchingFields );
+            if ( fieldsWithSubfieldContainingDanishaa.length > 0 ) {
+                var subfieldValuesToCheck = __getValuesToCheckFromparenthesis( subfield.value );// Array: String
+                if ( subfieldValuesToCheck.length > 0 ) {
+                    return ( __checkSubFieldValues( fieldsWithSubfieldContainingDanishaa, subfieldValuesToCheck ) );
+                }
+            } else {
+                errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.value", forwardslashValue.value, matchingFields[0].name );
+                return [( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
+            }
+            return [];
         } finally {
             Log.trace( "Exit --- CheckReference.validateSubfield" );
         }
     }
 
+    function __checkFieldsNotContainingDanishaa ( fields, fieldNameToCheck, bundle ) {
+        Log.trace( "Enter --- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa" );
+        try {
+            for ( var i = 0; i < fields.length; ++i ) {
+                if ( __fieldHasSubFieldDanishaa( fields[i] ) ) {
+                    return [(  ValidateErrors.subfieldError( 'TODO:fixurl', ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield.å", fieldNameToCheck ) ) )];
+                }
+            }
+            return [];
+        } finally {
+            Log.trace( "Exit--- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa" );
+        }
+    }
+
+    // helper function that checks if a subfield with a given value exists on the field
+    function __fieldHasSubFieldDanishaa ( field ) {
+        Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
+        try {
+            for ( var i = 0; i < field.subfields.length; ++i ) {
+                if ( field.subfields[i].name === '\u00E5') {
+                    return true;
+                }
+            }
+            return false;
+        } finally {
+            Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
+        }
+    }
+
     // helper function which returns an array of errors
     // checks if the fields supplied does not contain the subfields in the subfieldValuesToCheck
-    function __checkSubFieldValues ( fieldsWithSubfield, subfieldValuesToCheck ) {
+    function __checkSubFieldValues ( fieldsWithSubfieldDanishaa, subfieldValuesToCheck ) {
         Log.trace( "Enter --- CheckReference.validateSubfield.__checkSubFieldValues" );
         try {
             var ret = [];
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
             var found = {};
-            for ( var i = 0; i < fieldsWithSubfield.length; ++i ) {
-                for ( var j = 0; j < fieldsWithSubfield[i].subfields.length; ++j ) {
-                    found[fieldsWithSubfield[i].subfields[j].name] = true;
+            for ( var i = 0; i < fieldsWithSubfieldDanishaa.length; ++i ) {
+                for ( var j = 0; j < fieldsWithSubfieldDanishaa[i].subfields.length; ++j ) {
+                    found[fieldsWithSubfieldDanishaa[i].subfields[j].name] = true;
                 }
                 subfieldValuesToCheck.forEach( function ( val ) {
-                    val = val.trim();
+                    var val = val.trim();
                     if ( val.length > 1 ) {
                         var nbr = val.slice( 1 );
                         var subfield = val.slice( 0, 1 );
-                        var count = __countSubfieldOccurrences( fieldsWithSubfield[i], subfield );
+                        var count = __countSubfieldOccurrences( fieldsWithSubfieldDanishaa[i], subfield );
                         if ( count < nbr ) {
-                            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfield[i].name, nbr );
+                            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr );
                             ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
                         }
                     } else {
                         if ( !found.hasOwnProperty( val ) ) {
-                            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfield[0].name, val );
+                            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, val );
                             ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
                         }
                     }
@@ -187,7 +208,7 @@ var CheckReference = function () {
     // function that checks wheter an paranthesis is present
     // if it is , an array of the values in the paranthesis is returned.
     // if not an empty array will be returned
-    function __getValuesToCheckFromparenthesis ( subfieldValue ) {
+    function  __getValuesToCheckFromparenthesis ( subfieldValue ) {
         Log.trace( "Enter --- CheckReference.validateSubfield.__getValuesToCheckFromparenthesis" );
         try {
             var indexStartParenthesis = subfieldValue.indexOf( "(" );
@@ -201,21 +222,7 @@ var CheckReference = function () {
         }
     }
 
-    // helper function that checks if a subfield with a given value exists on the field
-    function __subfieldExistOnfield ( field, subfieldName ) {
-        Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
-        try {
-            var ret = false;
-            for ( var i = 0; i < field.subfields.length && ret === false; ++i ) {
-                if ( field.subfields[i].name === subfieldName ) {
-                    ret = true;
-                }
-            }
-            return ret;
-        } finally {
-            Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
-        }
-    }
+
 
     // helper function to count number of specific subfield occurrences
     function __countSubfieldOccurrences ( field, subfieldName ) {
@@ -225,7 +232,6 @@ var CheckReference = function () {
             for ( var i = 0; i < field.subfields.length; ++i ) {
                 if ( field.subfields[i].name === subfieldName ) {
                     ret++;
-                } else {
                 }
             }
             return ret;

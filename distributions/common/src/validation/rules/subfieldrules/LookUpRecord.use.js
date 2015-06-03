@@ -1,234 +1,147 @@
 //-----------------------------------------------------------------------------
-use( "SafeAssert" );
-use( "RawRepoClient" );
-use( "UnitTest" );
 use( "Log" );
-use( "Marc" );
-use ( "LookUpRecord");
+use( "RawRepoClient" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
+use( "ValidateErrors" );
+
+//-----------------------------------------------------------------------------
+EXPORTED_SYMBOLS = ['LookUpRecord'];
+
+//-----------------------------------------------------------------------------
+var LookUpRecord = function () {
+    var __BUNDLE_NAME = "validation";
+
+    /**
+     * validateSubfield
+     * @syntax
+     * @param {object} record
+     * @param {object} field
+     * @param {object} subfield
+     * @param {object} Object with the following properties.
+     * agencyId : if omitted the value from field 001 subfield b will be used instead.
+     * requiredFieldAndSubfield : String containing the field and subfield the record from rawrepo must contain , formatted in the following fashion 004a
+     * allowedSubfieldValues : Array containing the allowed values of the subfield
+     * @return Array which is either empty or contains an error
+     * @name LookUpRecord
+     * @method
+     */
+    function validateSubfield ( record, field, subfield, params, settings ) {
+        Log.trace( "Enter - LoopUpRecord.validateSubfield()" );
+        try {
+            ValueCheck.check( "record", record ).type( "object" );
+            ValueCheck.check( "field", field ).type( "object" );
+            ValueCheck.check( "params", params ).type( "object" );
+
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+            var recordId = "";
+            var agencyId = "";
+
+            field.subfields.forEach( function ( subfieldVal ) {
+                switch ( subfieldVal.name ) {
+                    case "a":
+                        recordId = subfieldVal.value;
+                        break;
+                    case "b":
+                        agencyId = subfieldVal.value;
+                        break;
+                }
+            } );
+            if( agencyId !== "" ) {
+                record.fields.forEach(function (fieldVal) {
+                    if (fieldVal.name === "001") {
+                        fieldVal.subfields.forEach(function (subfieldVal) {
+                            if (subfieldVal.name === "b") {
+                                agencyId = subfieldVal.value;
+                                return;
+                            }
+                        })
+                    }
+                });
+            }
+
+            if ( params !== undefined && typeof params.agencyId === "string" ) {
+                agencyId = params.agencyId;
+            }
+            if ( !RawRepoClientCore.recordExists ( recordId, agencyId ) ) {
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId, agencyId ) ) ];
+            }
+
+            if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) || params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                var checkParamsResult = __checkParams( params, bundle );
+
+                if ( checkParamsResult.length > 0 ) {
+                    return checkParamsResult;
+                }
+                if ( !__fieldAndSubfieldMandatoryAndHaveValues( RawRepoClient.fetchRecord( recordId, agencyId ) , params ) ) {
+                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) ) ];
+                }
+            }
+            return [];
+        }
+        finally {
+            Log.trace( "Exit - LoopUpRecord.validateSubfield()" );
+        }
+    }
+
+//-----------------------------------------------------------------------------
+// Helper functions
+//-----------------------------------------------------------------------------
+    function __checkParams ( params , bundle) {
+        Log.trace( "Enter - LookUpRecord.__checkParams" );
+        try {
+            var ret = [];
+            if ( !params.hasOwnProperty( "requiredFieldAndSubfield" ) && !params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                Log.warn( "requiredFieldAndSubfield and allowedSubfieldValues is missing" );
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.missing.sources.and.demands" ) )];
+            }
+            if ( !params.hasOwnProperty( "allowedSubfieldValues" ) ) {
+                Log.warn( "allowedSubfieldValues is missing" );
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.allowedSubfieldValues" ) )];
+            }
+            if ( !params.hasOwnProperty( "requiredFieldAndSubfield" ) )  {
+                Log.warn( "allowedSubfieldValues is missing" );
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.requiredFieldAndSubfield" ) )];
+            }
+            if ( typeof params.requiredFieldAndSubfield !== "string" ) {
+                Log.warn( "requiredFieldAndSubfield has errornous value" );
+                ret.push( ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.requiredFieldAndSubfield.not.string" ) ) );
+            }
+            if ( !Array.isArray( params.allowedSubfieldValues ) ) {
+                Log.warn( "allowedSubfieldValues is not of type array" );
+                ret.push( ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.allowedSubfieldValues.not.array" ) ) );
+            } else if ( Array.isArray( params.allowedSubfieldValues ) &&  params.allowedSubfieldValues.length < 1 ) {
+                Log.warn( "allowedSubfieldValues is empty" );
+                ret.push( ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.allowedSubfieldValues.no.items" ) ) );
+            }
+            return ret;
+        } finally {
+            Log.trace( "Exit - LookupRecord.__checkParams()" );
+        }
+    }
+
+    function __fieldAndSubfieldMandatoryAndHaveValues ( marcRecord, params ) {
+        Log.trace( "Enter - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues()" );
+        try {
+            var fieldNrFromParams = params.requiredFieldAndSubfield.substring( 0, 3 );
+            var subFieldFromParams = params.requiredFieldAndSubfield.substring( 3, 4 );
+            var expAllowedValsFromParams = new RegExp( params.allowedSubfieldValues.join( "|" ) );
+
+            return marcRecord.matchValue( fieldNrFromParams, subFieldFromParams, expAllowedValsFromParams );
+        }
+        finally {
+            Log.trace( "Exit - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues" );
+        }
+    }
+
+
+//-----------------------------------------------------------------------------
+// End helper functions
 //-----------------------------------------------------------------------------
 
-UnitTest.addFixture( "LookUpRecord", function( ) {
-    var bundle = ResourceBundleFactory.getBundle( LookUpRecord.__BUNDLE_NAME );
-
-    // creating the record in rawrepo
-    var trueMarcRec = new Record( );
-    var field001 = new Field( "001", "00" );
-    field001.append ( new Subfield ( "a", "a1Val" ));
-    field001.append (new Subfield ( "b", "b1Val" ));
-    trueMarcRec.append (field001);
-    var field004 = new Field( "004", "00" );
-    field004.append ( new Subfield ( "a", "a1" ));
-    field004.append (new Subfield ( "a", "a2" ));
-    field004.append (new Subfield ( "b", "b1" ));
-    trueMarcRec.append (field004);
-    RawRepoClientCore.addRecord( trueMarcRec );
-
-
-    var record = {};
-    var fields = {
-        name: '001', indicator: '00', subfields: [{
-            name: "a", value: "awrong"
-        }, {
-            name: "b", value: "bwrong"
-        }, {
-            name: "c", value: "c1Val"
-        }] };
-
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "awrong", "bwrong" );
-    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "001a og 001b mismatch , findes ikke i repo" ,  LookUpRecord.validateSubfield( record, fields, {}, {}), errors1a );
-
-
-    record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }, {
-                name: "b", value: "b1Val"
-            }, {
-                name: "c", value: "c1Val"
-            }]
-        }]
-    };
-
-    SafeAssert.equal( "Record findes i repo" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), [] );
-
-
-    record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "awrong"
-            }, {
-                name: "b", value: "b1Val"
-            }, {
-                name: "c", value: "c1Val"
-            }]
-        }]
-    };
-
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "awrong", "b1Val" );
-    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "001 a mismatch" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
-
-    record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }, {
-                name: "b", value: "bwrong"
-            }, {
-                name: "c", value: "c1Val"
-            }]
-        }]
-    };
-
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "a1Val", "bwrong" );
-    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "001 b mismatch" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
-
-    record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }, {
-                name: "b", value: "b1Val"
-            }, {
-                name: "c", value: "c1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"paramsNoMatch"};
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "a1Val", "paramsNoMatch" );
-    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med ikke matchende params" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), errors1a );
-
-
-    record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val"};
-    SafeAssert.equal( "med matchende params" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), [] );
-
-
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"] ,"requiredFieldAndSubfield" : "004a" };
-    SafeAssert.equal( "med valide allowedSubfieldValues og requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), [] );
-
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["nonValidValue1" ,"nonValidValue2" ,"nonValidValue3"] ,"requiredFieldAndSubfield" : "004a" };
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", "a1Val", "b1Val", "nonValidValue1,nonValidValue2,nonValidValue3", "004a" );
-    var err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med ikke valide allowedSubfieldValues men valid requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["nonValidValue1" ,"nonValidValue2" ,"a2"] ,"requiredFieldAndSubfield" : "004a" };
-    SafeAssert.equal( "med valid allowedSubfieldValues og valid requiredFieldAndSubfield med check af andet subfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), [] );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"] ,"requiredFieldAndSubfield" : "005a" };
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", "a1Val", "b1Val", "a1,a2,a3", "005a" );
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"]  };
-    var errorMessage = 'Params attributten allowedSubfieldValues er angivet men requiredFieldAndSubfield mangler';
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med valid allowedSubfieldValues mangler requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "requiredFieldAndSubfield" : "005a" };
-    var errorMessage = 'Params attributten requiredFieldAndSubfield er angivet men allowedSubfieldValues mangler';
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med valid requiredFieldAndSubfield mangler allowedSubfieldValues " ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" :{} ,"requiredFieldAndSubfield" : "005a" };
-    var errorMessage = 'Params attributten allowedSubfieldValues er ikke af typen array';
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" :[] ,"requiredFieldAndSubfield" : "005a" };
-    var errorMessage = 'Params attributten allowedSubfieldValues skal minimum indeholde een v\u00E6rdi';
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-    var record = {
-        fields: [{
-            name: '001', indicator: '00', subfields: [{
-                name: "a", value: "a1Val"
-            }]
-        }]
-    };
-
-    var params = {"agencyId" :"b1Val", "allowedSubfieldValues" : ["a1" ,"a2" ,"a3"] ,"requiredFieldAndSubfield" : {} };
-    var errorMessage = 'Params attributten requiredFieldAndSubfield er ikke af typen string';
-    err = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "med valid allowedSubfieldValues men ikke valid requiredFieldAndSubfield type" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, params), err );
-
-} );
+    return {
+        'validateSubfield': validateSubfield,
+        '__BUNDLE_NAME': __BUNDLE_NAME
+    }
+}();
