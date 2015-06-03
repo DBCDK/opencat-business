@@ -1,0 +1,90 @@
+//-----------------------------------------------------------------------------
+use( "Exception" );
+use( "Log" );
+use( "ResourceBundle" );
+use( "ResourceBundleFactory" );
+use( "ValidateErrors" );
+use( "ValueCheck" );
+
+//-----------------------------------------------------------------------------
+EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
+//-----------------------------------------------------------------------------
+
+var FieldDemandsOtherFieldAndSubfield = function () {
+    var BUNDLE_NAME = "validation";
+    /**
+     * Function that checks if a field exists then another field must exists and contain the subfields from params.
+     * @syntax FieldDemandsOtherFieldAndSubfield.validateFields(  record , params  )
+     * @param {Object} record The record as a json.
+     * @param {Object} object
+     * Param example :
+     * params = {
+     *     field : '096',
+     *     subfields : ['z']
+     * }
+     * @name FieldDemandsOtherFieldAndSubfield.validateFields
+     * @returns an array which contains errors if any is present.
+     * @method
+     */
+    function validateFields ( record, field, params, settings ) {
+        Log.trace( "Enter - FieldDemandsOtherFieldAndSubfield.validateFields( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+
+        var result = null;
+        try {
+            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+
+            ValueCheck.check("record.fields", record.fields).instanceOf(Array);
+            ValueCheck.check("params.field", params.field);
+            ValueCheck.check("field", field);
+            ValueCheck.check("field.name", field.name);
+            ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
+
+            var message = "";
+            var collectedFields = __getFields(record, params.field);
+
+            if (collectedFields.length === 0) {
+                message = ResourceBundle.getStringFormat( bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields );
+                return result = [ValidateErrors.fieldError( "", message ) ];
+            } else {
+
+                for (var i = 0; i < collectedFields.length; ++i) {
+                    var collectedSubFields = {};
+                    for (var j = 0; j < collectedFields[i].subfields.length; ++j) {
+                        collectedSubFields[collectedFields[i].subfields[j]] = true;
+                    }
+                    var ct = 0;
+                    for (var k = 0; k < params.subfields.length; ++k) {
+                        if (collectedSubFields.hasOwnProperty(params.subfields[k])) {
+                            ct++;
+                        }
+                        if (ct === params.subfields.length) {
+                            return result = [];
+                        }
+                    }
+                }
+            }
+            message = ResourceBundle.getStringFormat( bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields );
+            return result = [ ValidateErrors.fieldError( "", message ) ];
+        }
+        finally {
+            Log.trace( "Exit - FieldDemandsOtherFieldAndSubfield.validateFields(): ", result );
+        }
+    }
+
+    // helper function
+    // function that returns only the fields we are interested in
+    // takes a fieldName and a record
+    // and returns the fields that matches the name
+    function __getFields( record, fieldName ) {
+        var ret = [];
+        for ( var i = 0; i < record.fields.length; ++i ) {
+            if ( record.fields[i].name === fieldName )
+                ret.push( record.fields[i] );
+        }
+        return ret;
+    }
+    return {
+        'BUNDLE_NAME': BUNDLE_NAME,
+        'validateFields' : validateFields
+    };
+}();
