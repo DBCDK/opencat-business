@@ -60,7 +60,8 @@ UnitTest.addFixture( CheckReference.validateSubfield, function( ) {
     var subfield = {
         'name' : "z", 'value' : "710"
     };
-    SafeAssert.equal( "1 CheckReference.validateSubfield field exists and with a 710 field with danish aa", CheckReference.validateSubfield( record, undefined, subfield ), [] );
+    var err = [{type:"ERROR", params:{url:"TODO:fixurl", message:"Felt '710' findes ikke i posten uden et delfelt \u00E5"}}];
+    SafeAssert.equal( "1 CheckReference.validateSubfield field exists and with a 710 field with danish aa", CheckReference.validateSubfield( record, undefined, subfield ), err );
 
     var record = {
         fields : [{
@@ -156,7 +157,8 @@ UnitTest.addFixture( CheckReference.validateSubfield, function( ) {
     SafeAssert.equal( "7 CheckReference.validateSubfield valid value with forward slash val and parenthesis, missing d", CheckReference.validateSubfield( record, undefined, subfield ), errArr );
 
     subfield = {'name': 'a', 'value': '004'};
-    SafeAssert.equal( "8 CheckReference.validateSubfield error, valid value without forward slash but no field without 'å' subfield", CheckReference.validateSubfield( record, undefined, subfield ), [] );
+    var err = [{type:"ERROR", params:{url:"TODO:fixurl", message:"Felt '004' findes ikke i posten uden et delfelt \u00E5"}}];
+    SafeAssert.equal( "8 CheckReference.validateSubfield error, valid value without forward slash but no field without 'å' subfield", CheckReference.validateSubfield( record, undefined, subfield ), err );
 
     record = {
         fields : [{

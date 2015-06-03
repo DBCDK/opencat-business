@@ -46,10 +46,15 @@ var CheckReference = function () {
                 errorMessage = ResourceBundle.getStringFormat( bundle, "check.ref.missing.field", fieldNameToCheck );
                 return [(  ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) )];
             }
-            // if the reference value is only 3 chars we are done
-            // meaning we a subfield formatted like this : 700 with no forwardSlash or parenthesis involved
+            // if the lenght og the subfield val is only 3 , we have a subfield val matching case 1, meaning its a pure field name eg : 710
             if ( subfield.value.length === 3 ) {
-                return [];
+                var hasDanishaaErrors = __checkFieldsNotContainingDanishaa(matchingFields, fieldNameToCheck, bundle)
+                if ( hasDanishaaErrors.length > 0 ) {
+                    return hasDanishaaErrors;
+                }
+                else {
+                    return [];
+                }
             }
 
             var forwardslashValue = __getValueFromForwardSlash( subfield.value ); // { containsValidValue: Boolean, Value: String }
@@ -71,6 +76,35 @@ var CheckReference = function () {
             return [];
         } finally {
             Log.trace( "Exit --- CheckReference.validateSubfield" );
+        }
+    }
+
+    function __checkFieldsNotContainingDanishaa ( fields, fieldNameToCheck, bundle ) {
+        Log.trace( "Enter --- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa" );
+        try {
+            for ( var i = 0; i < fields.length; ++i ) {
+                if ( __fieldHasSubFieldDanishaa( fields[i] ) ) {
+                    return [(  ValidateErrors.subfieldError( 'TODO:fixurl', ResourceBundle.getStringFormat( bundle, "check.ref.missing.subfield.å", fieldNameToCheck ) ) )];
+                }
+            }
+            return [];
+        } finally {
+            Log.trace( "Exit--- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa" );
+        }
+    }
+
+    // helper function that checks if a subfield with a given value exists on the field
+    function __fieldHasSubFieldDanishaa ( field ) {
+        Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
+        try {
+            for ( var i = 0; i < field.subfields.length; ++i ) {
+                if ( field.subfields[i].name === '\u00E5') {
+                    return true;
+                }
+            }
+            return false;
+        } finally {
+            Log.trace( "Enter --- CheckReference.validateSubfield.__subfieldExistOnfield" );
         }
     }
 
