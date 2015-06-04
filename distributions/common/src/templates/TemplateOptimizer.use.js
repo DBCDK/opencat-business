@@ -1,14 +1,7 @@
 //-----------------------------------------------------------------------------
 //use
 //-----------------------------------------------------------------------------
-use( "FieldRules" );
-use( "MandatorySubfieldInVolumeWorkRule" );
-use( "LookUpRecord" );
-use( "RecordRules" );
-use( "SubfieldMandatoryIfSubfieldNotPresentRule" );
-use( "SubfieldRules" );
 use( "UnitTest" );
-use ("FieldDemandsOtherFields");
 
 //subfield rules
 use("CheckSubfieldNotUsedInChildrenRecords");
@@ -29,9 +22,25 @@ use("CheckSubfieldNotUsedInParentRecord");
 use("CheckReference");
 
 //field rules
+use("FieldDemandsOtherFieldAndSubfield");
+use("SubfieldConditionalMandatory");
+use("UpperCaseCheck");
+use("RepeatableSubfields");
+use("ExclusiveSubfield");
+use("SubfieldHasValueDemandsOtherSubfield");
+use("FieldsIndicator");
+use("SubfieldsMandatory");
 
 //record rules
-
+use("OptionalFields");
+use("ConflictingFields");
+use("RecordSorted");
+use("RepeatableFields");
+use("IdFieldExists");
+use("ConflictingSubfields");
+use("FieldDemandsOtherFields");
+use("AllFieldsMandatoryIfOneExist");
+use("FieldsMandatory");
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
@@ -97,7 +106,7 @@ var TemplateOptimizer = function() {
 
         if( mandatoryNames.length > 0 ) {
             result.rules.push( {
-                type: RecordRules.fieldsMandatory,
+                type: FieldsMandatory.validateRecord,
                 params: {
                     fields: mandatoryNames
                 }
@@ -106,7 +115,7 @@ var TemplateOptimizer = function() {
 
         if( repeatableNames.length > 0 ) {
             result.rules.push( {
-                type: RecordRules.repeatableFields,
+                type: RepeatableFields.validateRecord,
                 params: {
                     fields: repeatableNames
                 }
@@ -163,7 +172,7 @@ var TemplateOptimizer = function() {
         }
         if( mandatoryNames.length > 0 ) {
             result.rules.push( {
-                type: FieldRules.subfieldsMandatory,
+                type: SubfieldsMandatory.validateField,
                 params: {
                     subfields: mandatoryNames
                 }
@@ -172,7 +181,7 @@ var TemplateOptimizer = function() {
 
         if( repeatableNames.length > 0 ) {
             result.rules.push( {
-                type: FieldRules.repeatableSubfields,
+                type: RepeatableSubfields.validateField,
                 params: {
                     subfields: repeatableNames
                 }
@@ -276,31 +285,31 @@ var TemplateOptimizer = function() {
         Log.info( "convertRuleTypeNameToFunction( " + typeName + " )" );
         switch( typeName ) {
 
-            case "RecordRules.fieldsPosition": return RecordRules.fieldsPosition;
-            case "RecordRules.idFieldExists": return RecordRules.idFieldExists;
-            case "RecordRules.fieldsMandatory": return RecordRules.fieldsMandatory;
-            case "RecordRules.repeatableFields": return RecordRules.repeatableFields;
-            case "RecordRules.conflictingFields": return RecordRules.conflictingFields;
-            case "RecordRules.conflictingSubfields": return RecordRules.conflictingSubfields;
-            case "RecordRules.optionalFields": return RecordRules.optionalFields;
-            case "RecordRules.allFieldsMandatoryIfOneExist": return RecordRules.allFieldsMandatoryIfOneExist;
+            case "RecordRules.fieldsPosition": return FieldsPosition.validateRecord;
+            case "RecordRules.idFieldExists": return IdFieldExists.validateRecord;
+            case "RecordRules.fieldsMandatory": return FieldsMandatory.validateRecord;
+            case "RecordRules.repeatableFields": return RepeatableFields.validateRecord;
+            case "RecordRules.conflictingFields": return ConflictingFields.validateRecord;
+            case "RecordRules.conflictingSubfields": return ConflictingSubfields.validateRecord;
+            case "RecordRules.optionalFields": return OptionalFieldsvalidateRecord.validateRecord;
+            case "RecordRules.allFieldsMandatoryIfOneExist": return AllFieldsMandatoryIfOneExist.validateRecord;
             case "RecordRules.fieldDemandsOtherFields": return  FieldDemandsOtherFields.validateFields;
 
-            case "FieldRules.fieldsIndicator": return FieldRules.fieldsIndicator;
-            case "FieldRules.subfieldsMandatory": return FieldRules.subfieldsMandatory;
+            case "FieldRules.fieldsIndicator": return FieldsIndicator.validateField;
+            case "FieldRules.subfieldsMandatory": return SubfieldsMandatory.validateField;
             case "FieldRules.subfieldMandatoryIfSubfieldNotPresent": return SubfieldMandatoryIfSubfieldNotPresentRule.validateField;
-            case "FieldRules.subfieldConditionalMandatory": return FieldRules.subfieldConditionalMandatory;
-            case "FieldRules.subfieldHasValueDemandsOtherSubfield": return FieldRules.subfieldHasValueDemandsOtherSubfield;
-            case "FieldRules.repeatableSubfields": return FieldRules.repeatableSubfields;
-            case "FieldRules.exclusiveSubfield": return FieldRules.exclusiveSubfield;
+            case "FieldRules.subfieldConditionalMandatory": return SubfieldConditionalMandatory.validateField;
+            case "FieldRules.subfieldHasValueDemandsOtherSubfield": return SubfieldHasValueDemandsOtherSubfield.validateField;
+            case "FieldRules.repeatableSubfields": return RepeatableSubfields.validateField;
+            case "FieldRules.exclusiveSubfield": return ExclusiveSubfield.validateField;
             case "FieldRules.mandatorySubfieldInVolumeWork": return MandatorySubfieldInVolumeWorkRule.validateField;
-            case "FieldRules.upperCaseCheck": return FieldRules.upperCaseCheck;
+            case "FieldRules.upperCaseCheck": return UpperCaseCheck.validateField;
 
             case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldsDemandsOtherSubfields.validateSubfield;
             case "SubfieldRules.checkReference": return CheckReference.validateSubfield;
             case "SubfieldRules.checkLength": return CheckLength.validateSubfield;
             case "SubfieldRules.checkValue": return CheckValue.validateSubfield;
-            case "SubfieldRules.checkFaust": return SubfieldRules.checkFaust;
+            case "SubfieldRules.checkFaust": return CheckFaust.validateSubfield;
             //case "SubfieldRules.checkFaust": return CheckFaust.validateSubfield;
             case "SubfieldRules.checkISBN10": return CheckISBN10.validateSubfield;
             case "SubfieldRules.checkISBN13": return CheckISBN13.validateSubfield;
@@ -383,13 +392,13 @@ UnitTest.addFixture( "TemplateOptimizer.optimize", function() {
                 "002": TemplateOptimizer.optimizeField( template.fields[ "002" ], template.defaults.field, template.defaults.subfield  )
             },
             rules: [ {
-                type: RecordRules.fieldsMandatory,
+                type: FieldsMandatory.validateRecord,
                 params: {
                     fields: [ "001" ]
                 }
             },
             {
-                type: RecordRules.repeatableFields,
+                type: RepeatableFields.validateRecord,
                 params: {
                     fields: [ "002" ]
                 }
@@ -399,7 +408,7 @@ UnitTest.addFixture( "TemplateOptimizer.optimize", function() {
     //Assert.equalValue( "Template with mandatory/repeatable fields", actual.rules.length, 2 );
 
     template.rules = [ {
-        type: RecordRules.fieldsMandatory,
+        type: FieldsMandatory.validateRecord,
         params: {
             fields: [ "001" ]
         }
@@ -410,19 +419,19 @@ UnitTest.addFixture( "TemplateOptimizer.optimize", function() {
                 "002": TemplateOptimizer.optimizeField( template.fields[ "002" ], template.defaults.field, template.defaults.subfield  )
             },
             rules: [ {
-                type: RecordRules.fieldsMandatory,
+                type: FieldsMandatory.validateRecord,
                 params: {
                     fields: [ "001" ]
                 }
             },
             {
-                type: RecordRules.fieldsMandatory,
+                type: FieldsMandatory.validateRecord,
                 params: {
                     fields: [ "001" ]
                 }
             },
             {
-                type: RecordRules.repeatableFields,
+                type: RepeatableFields.validateRecord,
                 params: {
                     fields: [ "002" ]
                 }
@@ -467,7 +476,7 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeField", function() {
         {
             url: undefined,
             rules: [ {
-                type: FieldRules.repeatableSubfields,
+                type: RepeatableSubfields.validateField,
                 params: {
                     subfields: [ "d" ]
                 }
@@ -493,13 +502,13 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeField", function() {
         url: undefined,
         rules: [
             {
-                type: FieldRules.subfieldsMandatory,
+                type: SubfieldsMandatory.validateField,
                 params: {
                     subfields: [ "a", "b" ]
                 }
             },
             {
-                type: FieldRules.repeatableSubfields,
+                type: RepeatableSubfields.validateField,
                 params: {
                     subfields: [ "c", "d" ]
                 }

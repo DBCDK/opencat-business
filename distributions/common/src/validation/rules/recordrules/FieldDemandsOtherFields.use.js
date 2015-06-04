@@ -27,7 +27,7 @@ var FieldDemandsOtherFields = function () {
      * @name FieldDemandsOtherFields.validateFields
      * @method validateFields
      */
-    function validateFields ( record, field, subfield, params, settings ) {
+    function validateField ( record, field, subfield, params, settings ) {
         Log.trace( "Enter - FieldDemandsOtherFields.validateFields" );
         try {
 
@@ -140,7 +140,7 @@ var FieldDemandsOtherFields = function () {
 // End helper functions
 //-----------------------------------------------------------------------------
     return {
-        'validateFields': validateFields,
+        'validateField': validateField,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }
