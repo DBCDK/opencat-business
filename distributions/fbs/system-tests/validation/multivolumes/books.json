@@ -48,7 +48,7 @@
             "rawrepo": [
                 {
                     "record": "main.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false
                 }
             ]

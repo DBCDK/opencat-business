@@ -15,7 +15,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "children": [ "rawrepo-volume.marc" ],
                     "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
@@ -27,7 +27,7 @@
                 },
                 {
                     "record": "rawrepo-volume.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
                 },
@@ -45,7 +45,7 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-main.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ],
                         "children": []
@@ -57,7 +57,7 @@
                     },
                     {
                         "record": "result-delete-volume.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": true,
                         "enqueued": true,
                         "enrichments": []
@@ -89,7 +89,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "children": [ "rawrepo-volume.marc" ],
                     "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
@@ -101,7 +101,7 @@
                 },
                 {
                     "record": "rawrepo-volume.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
                 },
@@ -126,7 +126,7 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-main.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "children": [ "rawrepo-volume.marc" ],
                         "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
@@ -138,7 +138,7 @@
                     },
                     {
                         "record": "rawrepo-volume.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
                     },
@@ -167,7 +167,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "children": [ "rawrepo-volume.marc" ],
                     "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
@@ -179,7 +179,7 @@
                 },
                 {
                     "record": "rawrepo-volume.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
                 },
@@ -204,7 +204,7 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-main.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "children": [ "rawrepo-volume.marc" ],
                         "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
@@ -216,7 +216,7 @@
                     },
                     {
                         "record": "rawrepo-volume.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
                     },

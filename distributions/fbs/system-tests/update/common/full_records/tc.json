@@ -19,7 +19,7 @@
                 "rawrepo": [
                     {
                         "record": "result-new-common.marc",
-                        "type": "COMMON",
+                        "type": "DECENTRALE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dbc-enrichment.marc" ]
@@ -51,7 +51,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
-                    "type": "COMMON",
+                    "type": "DECENTRALE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
                 },
@@ -69,7 +69,7 @@
                 "rawrepo": [
                     {
                         "record": "result-edit-common.marc",
-                        "type": "COMMON",
+                        "type": "DECENTRALE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dbc-enrichment.marc" ]

@@ -15,7 +15,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "children": [ "rawrepo-volume.marc" ],
                     "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
@@ -27,7 +27,7 @@
                 },
                 {
                     "record": "rawrepo-volume.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
                 },

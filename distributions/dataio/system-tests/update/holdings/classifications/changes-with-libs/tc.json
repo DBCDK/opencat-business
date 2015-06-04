@@ -16,7 +16,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
                 },
@@ -34,7 +34,7 @@
                 "rawrepo": [
                     {
                         "record": "result-common.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [

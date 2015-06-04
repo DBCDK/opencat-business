@@ -15,13 +15,13 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
-                    "type": "LOCALE",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "children": [ "rawrepo-volume.marc" ]
                 },
                 {
                     "record": "rawrepo-volume.marc",
-                    "type": "LOCALE",
+                    "type": "MARCXCHANGE",
                     "deleted": false
                 }
             ]
@@ -33,12 +33,12 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-main.marc",
-                        "type": "LOCALE",
+                        "type": "MARCXCHANGE",
                         "deleted": false
                     },
                     {
                         "record": "result-volume.marc",
-                        "type": "LOCALE",
+                        "type": "MARCXCHANGE",
                         "deleted": true,
                         "enqueued": true
                     }

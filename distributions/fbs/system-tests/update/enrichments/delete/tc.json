@@ -16,7 +16,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [
                         "rawrepo-dbc-enrichment.marc",
@@ -42,7 +42,7 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
                             "rawrepo-dbc-enrichment.marc"
@@ -81,7 +81,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
-                    "type": "COMMON",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [
                         "rawrepo-dbc-enrichment.marc",
@@ -114,7 +114,7 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
                             "rawrepo-dbc-enrichment.marc",

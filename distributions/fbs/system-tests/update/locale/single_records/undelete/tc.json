@@ -16,7 +16,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo.marc",
-                    "type": "LOCALE",
+                    "type": "MARCXCHANGE",
                     "deleted": true
                 }
             ]
@@ -28,7 +28,7 @@
                 "rawrepo": [
                     {
                         "record": "request.marc",
-                        "type": "LOCALE",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true
                     }

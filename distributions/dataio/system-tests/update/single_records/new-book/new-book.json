@@ -18,7 +18,7 @@
                 "rawrepo": [
                     {
                         "record": "result-common.marc",
-                        "type": "COMMON",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dbc-enrichment.marc" ]
