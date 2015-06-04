@@ -10,6 +10,29 @@ use( "SubfieldRules" );
 use( "UnitTest" );
 use ("FieldDemandsOtherFields");
 
+//subfield rules
+use("CheckSubfieldNotUsedInChildrenRecords");
+use("LookupValue");
+use("SubfieldMandatoryIfSubfieldNotPresentRule");
+use("CheckISBN10");
+use("CheckISBN13");
+use("LookUpRecord");
+use("CheckValue");
+use("MandatorySubfieldInVolumeWorkRule");
+use("CheckLength");
+use("CheckFaust");
+use("SubfieldConditionalMandatoryField");
+use("CheckChangedValue");
+use("SubfieldCannotContainValue");
+use("SubfieldsDemandsOtherSubfields");
+use("CheckSubfieldNotUsedInParentRecord");
+use("CheckReference");
+
+//field rules
+
+//record rules
+
+
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
 //-----------------------------------------------------------------------------
@@ -273,16 +296,17 @@ var TemplateOptimizer = function() {
             case "FieldRules.mandatorySubfieldInVolumeWork": return MandatorySubfieldInVolumeWorkRule.validateField;
             case "FieldRules.upperCaseCheck": return FieldRules.upperCaseCheck;
 
-            case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldRules.subfieldsDemandsOtherSubfields;
-            case "SubfieldRules.checkReference": return SubfieldRules.checkReference;
-            case "SubfieldRules.checkLength": return SubfieldRules.checkLength;
-            case "SubfieldRules.checkValue": return SubfieldRules.checkValue;
+            case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldsDemandsOtherSubfields.validateSubfield;
+            case "SubfieldRules.checkReference": return CheckReference.validateSubfield;
+            case "SubfieldRules.checkLength": return CheckLength.validateSubfield;
+            case "SubfieldRules.checkValue": return CheckValue.validateSubfield;
             case "SubfieldRules.checkFaust": return SubfieldRules.checkFaust;
-            case "SubfieldRules.checkISBN10": return SubfieldRules.checkISBN10;
-            case "SubfieldRules.checkISBN13": return SubfieldRules.checkISBN13;
-            case "SubfieldRules.checkChangedValue": return SubfieldRules.checkChangedValue;
-            case "SubfieldRules.checkSubfieldNotUsedInParentRecord": return SubfieldRules.checkSubfieldNotUsedInParentRecord;
-            case "SubfieldRules.checkSubfieldNotUsedInChildrenRecords": return CheckSubfieldNotUsedInChildrenRecords.validateSubfield();
+            //case "SubfieldRules.checkFaust": return CheckFaust.validateSubfield;
+            case "SubfieldRules.checkISBN10": return CheckISBN10.validateSubfield;
+            case "SubfieldRules.checkISBN13": return CheckISBN13.validateSubfield;
+            case "SubfieldRules.checkChangedValue": return CheckChangedValue.validateSubfield;
+            case "SubfieldRules.checkSubfieldNotUsedInParentRecord": return CheckSubfieldNotUsedInParentRecord.validateSubfield;
+            case "SubfieldRules.checkSubfieldNotUsedInChildrenRecords": return CheckSubfieldNotUsedInChildrenRecords.validateSubfield;
             case "SubfieldRules.lookupRecord": return LookUpRecord.validateSubfield;
             case "SubfieldRules.lookupValue": return LookUpValue.validateSubfield;
 

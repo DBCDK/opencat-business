@@ -56,7 +56,7 @@ var CheckSubfieldNotUsedInChildrenRecords = function () {
 
 
     return {
-        'validateSubfield': validateSubfield,
+        'validateSubfield' : validateSubfield,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }();
