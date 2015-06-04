@@ -31,7 +31,6 @@ var SubfieldsDemandsOtherSubfields = function () {
                     return [];
                 }
             }
-
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
             var errorMessage = ResourceBundle.getStringFormat( bundle, "subfield.demands.other.subfields.rule.error", field.name, subfield.name );
             return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];

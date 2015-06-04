@@ -5,6 +5,7 @@ use( "ResourceBundleFactory" );
 use( "TemplateUrl" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
+use( "ValidationUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['AllFieldsMandatoryIfOneExist'];
@@ -39,7 +40,7 @@ var AllFieldsMandatoryIfOneExist = function( ) {
             var totalFieldsToCheckFor = params.fields.length;
             for ( var i = 0 ; i < totalFieldsToCheckFor ; ++i ) {
                 field = params.fields[i];
-                if ( __recordContainsField( record, field ) ) {
+                if ( ValidationUtil.recordContainsField ( record, field ) ) {
                     totalFieldsFound += 1;
                     foundFields.push( { name: field, value: true } );
                 } else {
@@ -59,15 +60,7 @@ var AllFieldsMandatoryIfOneExist = function( ) {
             Log.trace( "Exit - RecordRules.allFieldsMandatoryIfOneExist(): ", result );
         }
     }
-    function __recordContainsField( record, fieldName ) {
-        Log.trace ( "RecordRules.__recordContainsField" );
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName ) {
-                return true;
-            }
-        }
-        return false;
-    }
+
     return {"validateRecord" : validateRecord,
             "__BUNDLE_NAME"  : BUNDLE_NAME
     };

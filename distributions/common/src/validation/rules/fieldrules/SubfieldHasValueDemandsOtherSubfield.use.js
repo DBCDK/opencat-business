@@ -5,6 +5,7 @@ use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
+use( "ValidationUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['SubfieldHasValueDemandsOtherSubfield'];
@@ -37,7 +38,7 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
             var result = [];
             for ( var i = 0; i < field.subfields.length; ++i ) {
                 if ( field.subfields[i].name === params.subfieldConditional && field.subfields[i].value === params.subfieldConditionalValue ) {
-                    var conditionalField = __getFields( record, params.fieldMandatory );
+                    var conditionalField = ValidationUtil.getFields( record, params.fieldMandatory );
                     // TODO move this
                     var errorMsg = ResourceBundle.getStringFormat( bundle, "subfield.has.value.demands.other.subfield.rule.error", params.subfieldConditional, field.name, params.subfieldConditionalValue, params.fieldMandatory, params.subfieldMandatory );
                     var foundSubfield = false;
@@ -62,20 +63,6 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
         } finally {
             Log.trace( "Enter -- SubfieldHasValueDemandsOtherSubfield.validateField" );
         }
-    }
-
-    // TODO , duplicate
-    // helper function
-    // function that returns only the fields we are interested in
-    // takes a fieldName and a record
-    // and returns the fields that matches the name
-    function __getFields ( record, fieldName ) {
-        var ret = [];
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName )
-                ret.push( record.fields[i] );
-        }
-        return ret;
     }
 
     return {

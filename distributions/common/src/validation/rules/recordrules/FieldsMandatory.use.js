@@ -5,6 +5,7 @@ use( "ResourceBundleFactory" );
 use( "TemplateUrl" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
+use( "ValidationUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FieldsMandatory'];
@@ -29,7 +30,7 @@ var FieldsMandatory= function( ) {
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
             Log.debug( "Checking fields: ", params.fields );
             for (var i = 0; i < params.fields.length; ++i) {
-                if (__recordContainsField(record, params.fields[i]) !== true) {
+                if (ValidationUtil.recordContainsField (record, params.fields[i]) !== true) {
                     Log.debug( "Fields: ", params.fields[i], " was not found in record:\n", uneval( record ) );
                     result.push(ValidateErrors.recordError(TemplateUrl.getUrlForField(params.fields[i], params.template),
                         ResourceBundle.getStringFormat( bundle, "field.mandatory.error", params.fields[i] ) ) );
@@ -42,15 +43,7 @@ var FieldsMandatory= function( ) {
         }
     }
 
-    function __recordContainsField( record, fieldName ) {
-        Log.trace ( "RecordRules.__recordContainsField" );
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName ) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     return {
         "validateRecord": validateRecord,

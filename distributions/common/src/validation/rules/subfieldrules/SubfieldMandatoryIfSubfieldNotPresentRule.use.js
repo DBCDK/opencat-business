@@ -3,6 +3,7 @@ use( "Log" );
 use( "ValueCheck" );
 use( "ValidateErrors" );
 use( "Print" );
+use( "Print" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'SubfieldMandatoryIfSubfieldNotPresentRule' ];
@@ -37,8 +38,8 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
             ValueCheck.check( "params.subfield", params['subfield'] ).type( "string" );
             ValueCheck.check( "params.not_presented_subfield", params['not_presented_subfield'] ).instanceOf( Array );
 
-            var fieldsFromRecord = __getFieldsFromRecord( record, field.name );
-            if ( __isSubfieldPresentInFields( fieldsFromRecord.fields, params.subfield ) ) {
+            var fieldsFromRecord = ValidationUtil.getFields ( record, field.name );
+            if ( __isSubfieldPresentInFields( fieldsFromRecord, params.subfield ) ) {
                 return [];
             }
 
@@ -70,7 +71,7 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
     function __isSubfieldPresentInFields( fieldsFromRecord, subfieldName ) {
         Log.trace ( "SubfieldMandatoryIfSubfieldNotPresentRule.__isSubfieldPresentInFields" );
         for ( var i = 0; i < fieldsFromRecord.length ; ++i ) {
-            if ( __doesFieldContainSubfield( fieldsFromRecord[i], subfieldName ) ) {
+            if ( ValidationUtil.doesFieldContainSubfield ( fieldsFromRecord[i], subfieldName ) ) {
                 return true;
             }
         }
@@ -88,7 +89,7 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
             if ( recordFields.status === true ) {
                 recordFields.fields.forEach( function( field ) {
                     for ( var j = 0; j < subfieldNames.length; ++j ) {
-                        if ( __doesFieldContainSubfield( field, subfieldNames.substring( j, 1 ) ) ) {
+                        if ( ValidationUtil.doesFieldContainSubfield( field, subfieldNames.substring( j, 1 ) ) ) {
                             res = true;
                             return;
                         }
@@ -99,29 +100,9 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
         return res;
     }
 
-    // Helper function for getting all the fieldName fields from the record
-    function __getFieldsFromRecord( record, fieldName ) {
-        Log.trace ( "SubfieldMandatoryIfSubfieldNotPresentRule.__getFieldsFromRecord" );
-        var res = { fields: [], status: false };
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName ) {
-                res.status = true;
-                res.fields.push( record.fields[i] );
-            }
-        }
-        return res;
-    }
 
-    // Helper function for determining is a subfield exists on a field
-    function __doesFieldContainSubfield( field, subfieldName ) {
-        Log.trace ( "RecordRules.__doesFieldContainSubfield" );
-        for ( var i = 0 ; i < field.subfields.length ; ++i ) {
-            if ( field.subfields[i].name === subfieldName ) {
-                return true;
-            }
-        }
-        return false;
-    }
+
+
 
     return {
         'BUNDLE_NAME': BUNDLE_NAME,

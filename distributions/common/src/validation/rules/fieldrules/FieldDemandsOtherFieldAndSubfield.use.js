@@ -5,6 +5,7 @@ use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
 use( "ValueCheck" );
+use( "ValidationUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
@@ -40,7 +41,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             var message = "";
-            var collectedFields = __getFields(record, params.field);
+            var collectedFields = ValidationUtil.getFields(record, params.field);
 
             if (collectedFields.length === 0) {
                 message = ResourceBundle.getStringFormat( bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields );
@@ -71,18 +72,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
         }
     }
 
-    // helper function
-    // function that returns only the fields we are interested in
-    // takes a fieldName and a record
-    // and returns the fields that matches the name
-    function __getFields( record, fieldName ) {
-        var ret = [];
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName )
-                ret.push( record.fields[i] );
-        }
-        return ret;
-    }
+
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
         'validateField' : validateField

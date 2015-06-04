@@ -3,6 +3,7 @@ use( "Log" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
+use( "ValidationUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['CheckReference'];
@@ -39,7 +40,7 @@ var CheckReference = function () {
             var fieldNameToCheck = subfield.value.slice( 0, 3 );// String
             // array of fields which matches the fieldNameToCheck
             // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
-            var matchingFields = __getFields( record, fieldNameToCheck );
+            var matchingFields = ValidationUtil.getFields( record, fieldNameToCheck );
             var errorMessage;
 
             if ( matchingFields.length < 1 ) {
@@ -166,25 +167,6 @@ var CheckReference = function () {
             return ret;
         } finally {
             Log.trace( "Exit --- CheckReference.validateSubfield.__matchValueFromForwardSlashToSubfieldValue" );
-        }
-    }
-
-    // helper function
-    // function that returns only the fields we are interested in
-    // takes a fieldName and a record
-    // and returns the fields that matches the name
-    function __getFields ( record, fieldName ) {
-        Log.trace( "Exit --- CheckReference.validateSubfield.__getFields" );
-        try {
-            var ret = [];
-            for ( var i = 0; i < record.fields.length; ++i ) {
-                if ( record.fields[i].name === fieldName ) {
-                    ret.push( record.fields[i] );
-                }
-            }
-            return ret;
-        } finally {
-            Log.trace( "Enter --- CheckReference.validateSubfield.__getFields" );
         }
     }
 
