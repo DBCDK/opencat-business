@@ -591,6 +591,7 @@
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "mandatory":true,
+            "sorting":"åmnopqrivzAaHhkEeFfCcTtBb",
             "subfields":{
                 "\u00E5":"DanMarc2.fields.652.subfields.\u00E5",
                 "m":"DanMarc2.fields.652.subfields.m",
