@@ -71,7 +71,10 @@ var ResourceBundleFactory = function() {
         var result = null;
         try {
             result = new Packages.java.util.Properties();
-            result.load( new Packages.java.io.FileReader( path + "/" + filename ) );
+            var fis = new Packages.java.io.FileInputStream( path + "/" + filename );
+            var reader = new Packages.java.io.InputStreamReader( fis, "UTF-8" );
+            Log.debug( "Properties encoding: ", reader.getEncoding() );
+            result.load( reader );
 
             return result;
         }
