@@ -268,9 +268,7 @@ var TemplateOptimizer = function() {
 
         for( var i = 0; i < rules.length; i++ ) {
             var obj = rules[ i ];
-            Log.error  ("mvs hest convertTypeNameOfAllRules : ", rules[ i].toSource());
             if( typeof( rules[ i ].type ) === "string" ) {
-            Log.error  ("mvs hest convertTypeNameOfAllRules it is string: ");
                 obj.type = convertRuleTypeNameToFunction(rules[i].type);
 
                 __checkRule( rules[ i], rules[ i].type );

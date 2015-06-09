@@ -63,8 +63,6 @@ var Validator = function() {
             if (template.rules instanceof Array) {
                 for (var k = 0; k < template.rules.length; k++) {
                     var rule = template.rules[k];
-                    Log.error ("mvs hest rule  : " , rule)
-                    Log.error ("mvs hest rule  : " , rule.toSource())
 
                     try {
                         //Log.info("Run rule " + uneval(rule.type) + " on record");
