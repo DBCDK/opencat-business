@@ -315,6 +315,7 @@
             "subfields":{
                 "B":"DanMarc2.fields.260.subfields.B",
 				"b":"DanMarc2.fields.260.subfields.b",
+                "g": "DanMarc2.fields.260.subfields.g",
                 "p":"DanMarc2.fields.260.subfields.p",
                 "e":"DanMarc2.fields.260.subfields.e",
                 "c":"DanMarc2.fields.260.subfields.c",
