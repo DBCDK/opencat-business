@@ -3,6 +3,8 @@ use( "Log" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
+use( "DanMarc2Converter");
+use( "RawRepoClient");
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['CheckChangedValue'];

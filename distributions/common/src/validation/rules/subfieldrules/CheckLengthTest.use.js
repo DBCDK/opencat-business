@@ -11,7 +11,7 @@ use ( 'GenericSettings' );
 use( "CheckLength" );
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "CheckLength.validateSubfield", function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( CheckLength.__BUNDLE_NAME );
 
     var record = {};
     var field = {};
@@ -47,14 +47,14 @@ UnitTest.addFixture( "SubfieldRules.__checkLengthMin", function() {
         'value': "42"
     };
 
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( CheckLength.__BUNDLE_NAME );
 
     var params1 = {'min': 1};
-    SafeAssert.equal( "1 SubfieldRules.__checkLengthMin, ok test", SubfieldRules.__checkLengthMin( subfield, params1 ), [] );
+    SafeAssert.equal( "1 SubfieldRules.__checkLengthMin, ok test", CheckLength.__checkLengthMin( subfield, params1 ), [] );
 
     var params2 = {'min': 42};
     var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.length.min.error", "a", 42 ) ) ];
-    SafeAssert.equal( "2 SubfieldRules.__checkLengthMin, error test", SubfieldRules.__checkLengthMin( subfield, params2 ), error2 );
+    SafeAssert.equal( "2 SubfieldRules.__checkLengthMin, error test", CheckLength.__checkLengthMin( subfield, params2 ), error2 );
 } );
 
 UnitTest.addFixture( "SubfieldRules.__checkLengthMax", function() {
@@ -63,12 +63,12 @@ UnitTest.addFixture( "SubfieldRules.__checkLengthMax", function() {
         'value': "42"
     };
 
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( CheckLength.__BUNDLE_NAME );
 
     var params1 = {'max': 42};
-    SafeAssert.equal( "1 SubfieldRules.__checkLengthMax, ok test", SubfieldRules.__checkLengthMax( subfield, params1 ), [] );
+    SafeAssert.equal( "1 SubfieldRules.__checkLengthMax, ok test", CheckLength.__checkLengthMax( subfield, params1 ), [] );
 
     var params2 = {'max': 1};
     var error2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.length.max.error", "a", 1 ) ) ];
-    SafeAssert.equal( "2 SubfieldRules.__checkLengthMax, error test", SubfieldRules.__checkLengthMax( subfield, params2 ), error2 );
+    SafeAssert.equal( "2 SubfieldRules.__checkLengthMax, error test", CheckLength.__checkLengthMax( subfield, params2 ), error2 );
 } );

@@ -12,7 +12,7 @@ use( "CheckFaust" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "CheckFaust.validateSubfield", function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( CheckFaust.__BUNDLE_NAME );
 
     var record = {};
     var field = {};

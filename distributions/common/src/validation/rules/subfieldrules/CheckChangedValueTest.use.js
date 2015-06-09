@@ -13,7 +13,7 @@ use( "CheckChangedValue" );
 
 UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
     var params;
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( CheckChangedValue.__BUNDLE_NAME );
 
     var msg_format = ResourceBundle.getStringFormat( bundle, "check.changed.value.error", "004", "a", "%s", "%s" );
 

@@ -5,7 +5,7 @@ use( "SubfieldHasValueDemandsOtherSubfield" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldHasValueDemandsOtherSubfield" , function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldHasValueDemandsOtherSubfield.BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( SubfieldHasValueDemandsOtherSubfield.__BUNDLE_NAME );
 
     var record = {};
     var field1 = {

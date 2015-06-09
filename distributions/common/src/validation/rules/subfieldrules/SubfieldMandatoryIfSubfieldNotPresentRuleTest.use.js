@@ -6,7 +6,7 @@ use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "SubfieldMandatoryIfSubfieldNotPresentRule.validateField", function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldMandatoryIfSubfieldNotPresentRule.BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( SubfieldMandatoryIfSubfieldNotPresentRule.__BUNDLE_NAME );
 
     var exceptCallFormat = "SubfieldMandatoryIfSubfieldNotPresentRule.validateField( %s, %s, %s )";
 

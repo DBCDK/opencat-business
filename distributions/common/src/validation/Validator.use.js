@@ -35,7 +35,7 @@ var Validator = function() {
 
         try {
             var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-            Log.info("Record:\n" + JSON.stringify(record, undefined, 4));
+            //Log.info("Record:\n" + JSON.stringify(record, undefined, 4));
 
             var result = [];
             var template = templateProvider();
@@ -50,7 +50,7 @@ var Validator = function() {
                     var subResult = validateField(record, record.fields[i], templateProvider, settings);
 
                     for (var j = 0; j < subResult.length; j++) {
-                        Log.info("err: " + uneval(subResult[j]));
+                        //Log.info("err: " + uneval(subResult[j]));
                         subResult[j].params.fieldno = i + 1;
                     }
                     result = result.concat(subResult);
@@ -63,11 +63,12 @@ var Validator = function() {
             if (template.rules instanceof Array) {
                 for (var k = 0; k < template.rules.length; k++) {
                     var rule = template.rules[k];
+                    Log.error ("mvs hest rule  : " , rule)
+                    Log.error ("mvs hest rule  : " , rule.toSource())
 
                     try {
-                        Log.info("Run rule " + uneval(rule.type) + " on record");
+                        //Log.info("Run rule " + uneval(rule.type) + " on record");
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
-
                         var valErrors = rule.type( record, rule.params, settings );
                         valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
                         result = result.concat( valErrors );
@@ -117,7 +118,7 @@ var Validator = function() {
                     var subResult = validateSubfield(record, field, field.subfields[i], templateProvider, settings);
 
                     for (var j = 0; j < subResult.length; j++) {
-                        Log.info("err: " + uneval(subResult[j]));
+                        //Log.info("err: " + uneval(subResult[j]));
                         subResult[j].params.subfieldno = i + 1;
                     }
                     result = result.concat(subResult);
@@ -129,7 +130,7 @@ var Validator = function() {
                     var rule = templateField.rules[i];
 
                     try {
-                        Log.info("Run rule " + uneval(rule.type) + " on field " + field.name);
+                        //Log.info("Run rule " + uneval(rule.type) + " on field " + field.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
                         var valErrors = rule.type(record, field, rule.params, settings );
@@ -196,7 +197,7 @@ var Validator = function() {
                     var rule = templateSubfield[i];
 
                     try {
-                        Log.info("Run rule " + uneval(rule.type) + " on subfield " + field.name + subfield.name);
+                        //Log.info("Run rule " + uneval(rule.type) + " on subfield " + field.name + subfield.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
                         var valErrors = rule.type(record, field, subfield, rule.params, settings );
@@ -223,8 +224,8 @@ var Validator = function() {
         Log.trace( "Enter - Validator.__updateErrorTypeOnValidationResults" );
 
         try {
-            Log.debug( "rule: ", uneval( rule ) );
-            Log.debug( "valErrors: ", uneval( valErrors ) );
+            //Log.debug( "rule: ", uneval( rule ) );
+            //Log.debug( "valErrors: ", uneval( valErrors ) );
 
             if (rule.hasOwnProperty("errorType")) {
                 for (var i = 0; i < valErrors.length; i++) {

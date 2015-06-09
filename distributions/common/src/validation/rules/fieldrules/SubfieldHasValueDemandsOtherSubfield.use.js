@@ -66,7 +66,7 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
     }
 
     return {
-        'BUNDLE_NAME': BUNDLE_NAME,
+        '__BUNDLE_NAME': BUNDLE_NAME,
         'validateField': validateField
     };
 }();

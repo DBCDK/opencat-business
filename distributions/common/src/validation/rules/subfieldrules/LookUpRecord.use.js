@@ -4,6 +4,7 @@ use( "RawRepoClient" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
+use( "ValidationUtil" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['LookUpRecord'];
@@ -28,54 +29,43 @@ var LookUpRecord = function () {
      */
     function validateSubfield ( record, field, subfield, params, settings ) {
         Log.trace( "Enter - LoopUpRecord.validateSubfield()" );
+
         try {
             ValueCheck.check( "record", record ).type( "object" );
             ValueCheck.check( "field", field ).type( "object" );
             ValueCheck.check( "params", params ).type( "object" );
-
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
-            var recordId = "";
+            var recordId = ValidationUtil.getFirstSubfieldValue( field.subfields, "a" );
+            if ( !recordId ) {
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.a.from.field.param", field.name ) )];
+            }
+
             var agencyId = "";
-
-            field.subfields.forEach( function ( subfieldVal ) {
-                switch ( subfieldVal.name ) {
-                    case "a":
-                        recordId = subfieldVal.value;
-                        break;
-                    case "b":
-                        agencyId = subfieldVal.value;
-                        break;
-                }
-            } );
-            if( agencyId !== "" ) {
-                record.fields.forEach(function (fieldVal) {
-                    if (fieldVal.name === "001") {
-                        fieldVal.subfields.forEach(function (subfieldVal) {
-                            if (subfieldVal.name === "b") {
-                                agencyId = subfieldVal.value;
-                                return;
-                            }
-                        })
-                    }
-                });
-            }
-
-            if ( params !== undefined && typeof params.agencyId === "string" ) {
+            if ( params.hasOwnProperty( "agencyId" ) ) {
                 agencyId = params.agencyId;
-            }
-            if ( !RawRepoClientCore.recordExists ( recordId, agencyId ) ) {
-                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId, agencyId ) ) ];
+            } else {
+                var field001 = ValidationUtil.getFirstField( record, "001" );
+                if ( !field001 ) {
+                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.001.field") )];
+                }
+                var agencyId = ValidationUtil.getFirstSubfieldValue( field001.subfields, "b" );
+                if ( !agencyId ) {
+                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.001.b.subfield") )];
+                }
             }
 
+            if ( !RawRepoClientCore.recordExists( recordId, agencyId ) ) {
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId, agencyId ) )];
+            }
             if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) || params.hasOwnProperty( "allowedSubfieldValues" ) ) {
                 var checkParamsResult = __checkParams( params, bundle );
 
                 if ( checkParamsResult.length > 0 ) {
                     return checkParamsResult;
                 }
-                if ( !__fieldAndSubfieldMandatoryAndHaveValues( RawRepoClient.fetchRecord( recordId, agencyId ) , params ) ) {
-                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) ) ];
+                if ( !__fieldAndSubfieldMandatoryAndHaveValues( RawRepoClient.fetchRecord( recordId, agencyId ), params ) ) {
+                    return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.values", recordId, agencyId, params.allowedSubfieldValues, params.requiredFieldAndSubfield ) )];
                 }
             }
             return [];
@@ -88,7 +78,7 @@ var LookUpRecord = function () {
 //-----------------------------------------------------------------------------
 // Helper functions
 //-----------------------------------------------------------------------------
-    function __checkParams ( params , bundle) {
+    function __checkParams ( params, bundle ) {
         Log.trace( "Enter - LookUpRecord.__checkParams" );
         try {
             var ret = [];
@@ -100,7 +90,7 @@ var LookUpRecord = function () {
                 Log.warn( "allowedSubfieldValues is missing" );
                 return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.allowedSubfieldValues" ) )];
             }
-            if ( !params.hasOwnProperty( "requiredFieldAndSubfield" ) )  {
+            if ( !params.hasOwnProperty( "requiredFieldAndSubfield" ) ) {
                 Log.warn( "allowedSubfieldValues is missing" );
                 return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.requiredFieldAndSubfield" ) )];
             }
@@ -111,7 +101,7 @@ var LookUpRecord = function () {
             if ( !Array.isArray( params.allowedSubfieldValues ) ) {
                 Log.warn( "allowedSubfieldValues is not of type array" );
                 ret.push( ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.allowedSubfieldValues.not.array" ) ) );
-            } else if ( Array.isArray( params.allowedSubfieldValues ) &&  params.allowedSubfieldValues.length < 1 ) {
+            } else if ( Array.isArray( params.allowedSubfieldValues ) && params.allowedSubfieldValues.length < 1 ) {
                 Log.warn( "allowedSubfieldValues is empty" );
                 ret.push( ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.missing.value.allowedSubfieldValues.no.items" ) ) );
             }

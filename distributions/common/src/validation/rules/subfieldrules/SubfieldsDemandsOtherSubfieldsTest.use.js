@@ -12,7 +12,7 @@ use( "SubfieldsDemandsOtherSubfields" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldsDemandsOtherSubfields.validateSubfield", function( ) {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( SubfieldsDemandsOtherSubfields.__BUNDLE_NAME );
 
     var record = {};
     var fieldab = {

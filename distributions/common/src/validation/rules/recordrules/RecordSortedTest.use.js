@@ -6,7 +6,7 @@ use ( "RecordSorted");
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "Test RecordSorted.validateRecord", function( ) {
-    var bundle = ResourceBundleFactory.getBundle( RecordRules.BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( RecordSorted.__BUNDLE_NAME );
 
     var recordCorrect = {
         fields : [{

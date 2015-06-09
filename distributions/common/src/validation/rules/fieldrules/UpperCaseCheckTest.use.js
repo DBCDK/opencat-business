@@ -5,7 +5,7 @@ use( "UpperCaseCheck" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "UpperCaseCheck", function( ) {
-    var bundle = ResourceBundleFactory.getBundle( FieldRules.BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( UpperCaseCheck.__BUNDLE_NAME );
 
     var message = '';
     var params = {};

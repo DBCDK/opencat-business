@@ -12,7 +12,7 @@ use( "CheckISBN10" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "CheckISBN10.validateSubfield", function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( CheckISBN10.__BUNDLE_NAME );
 
     var record = {};
     var field = {};

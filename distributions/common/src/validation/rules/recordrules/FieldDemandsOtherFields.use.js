@@ -27,12 +27,10 @@ var FieldDemandsOtherFields = function () {
      * @name FieldDemandsOtherFields.validateFields
      * @method validateFields
      */
-    function validateField ( record, field, subfield, params, settings ) {
-        Log.trace( "Enter - FieldDemandsOtherFields.validateFields" );
+    function validateRecord ( record, params) {
+        Log.trace( "Enter - FieldDemandsOtherFields.validateRecord" );
         try {
-
             ValueCheck.check( "record", record ).type( "object" );
-            ValueCheck.check( "field", field ).type( "object" );
             ValueCheck.check( "params", params ).type( "object" );
 
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
@@ -43,7 +41,7 @@ var FieldDemandsOtherFields = function () {
             var fieldNamesAskeys = __getFieldNamesAskeys( record );
             return __checkFields( fieldNamesAskeys, params, bundle );
         } finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.validateFields" );
+            Log.trace( "Exit - FieldDemandsOtherFields.validateRecord" );
         }
     }
 
@@ -140,7 +138,7 @@ var FieldDemandsOtherFields = function () {
 // End helper functions
 //-----------------------------------------------------------------------------
     return {
-        'validateField': validateField,
+        'validateRecord': validateRecord,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }

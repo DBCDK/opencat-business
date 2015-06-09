@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 use( "Print" );
-use( "RecordRules" );
 use( "TemplateOptimizer" );
 use( "UnitTest" );
 

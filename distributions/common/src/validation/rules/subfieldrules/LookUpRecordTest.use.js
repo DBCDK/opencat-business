@@ -24,19 +24,108 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
     RawRepoClientCore.addRecord( trueMarcRec );
 
 
-    var record = {};
-    var fields = {
-        name: '001', indicator: '00', subfields: [{
-            name: "a", value: "awrong"
+
+    var record = {
+        fields: [{
+            name: '014', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }]
+    };
+
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.001.field" );
+    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "missing 001 field in record" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
+
+
+    var record = {
+        fields: [{
+            name: '014', indicator: '00', subfields: [{
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }]
+    };
+
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.a.from.field.param", "014");
+    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "missing subfield a in field param" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
+
+
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "awrong"
+            },  {
+                name: "c", value: "c1Val"
+            }]
         }, {
-            name: "b", value: "bwrong"
+            name: '014', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }]
+    };
+
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.missing.001.b.subfield");
+    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "missing subfield a in field param" ,  LookUpRecord.validateSubfield( record, record.fields[1], {}, {}), errors1a );
+
+
+
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "awrong"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
         }, {
-            name: "c", value: "c1Val"
-        }] };
+            name: '014', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }]
+    };
+
+    var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "a1Val", "bwrong" );
+    var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
+    SafeAssert.equal( "Rule on field 014 with no match in rawrepo" ,  LookUpRecord.validateSubfield( record, record.fields[1], {}, {}), errors1a );
+    var params = {"agencyId" :"bwrong"};
+    SafeAssert.equal( "Rule on field 014 with params but not no match in rawrepo" ,  LookUpRecord.validateSubfield( record, record.fields[1], {}, params ), errors1a );
+    var params = {"agencyId" :"b1Val"};
+    SafeAssert.equal( "Rule on field 014 with params and match rawrepo" ,  LookUpRecord.validateSubfield( record, record.fields[1], {}, params ), [] );
+
+
+
+
+    var record = { fields : [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "awrong"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }]
+};
 
     var errorMessage = ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", "awrong", "bwrong" );
     var errors1a = [{type:"ERROR", params:{url:"", message:errorMessage}}];
-    SafeAssert.equal( "001a og 001b mismatch , findes ikke i repo" ,  LookUpRecord.validateSubfield( record, fields, {}, {}), errors1a );
+    SafeAssert.equal( "001a og 001b mismatch , findes ikke i repo" ,  LookUpRecord.validateSubfield( record, record.fields[0], {}, {}), errors1a );
 
 
     record = {

@@ -263,13 +263,14 @@ var TemplateOptimizer = function() {
      * @returns {Array}
      */
     function convertTypeNameOfAllRules( rules ) {
-        Log.info( "convertTypeNameOfAllRules" );
+        Log.info( "Enter --- convertTypeNameOfAllRules" );
         var res = [];
 
         for( var i = 0; i < rules.length; i++ ) {
             var obj = rules[ i ];
-
+            Log.error  ("mvs hest convertTypeNameOfAllRules : ", rules[ i].toSource());
             if( typeof( rules[ i ].type ) === "string" ) {
+            Log.error  ("mvs hest convertTypeNameOfAllRules it is string: ");
                 obj.type = convertRuleTypeNameToFunction(rules[i].type);
 
                 __checkRule( rules[ i], rules[ i].type );
@@ -293,7 +294,7 @@ var TemplateOptimizer = function() {
             case "RecordRules.conflictingSubfields": return ConflictingSubfields.validateRecord;
             case "RecordRules.optionalFields": return OptionalFieldsvalidateRecord.validateRecord;
             case "RecordRules.allFieldsMandatoryIfOneExist": return AllFieldsMandatoryIfOneExist.validateRecord;
-            case "RecordRules.fieldDemandsOtherFields": return  FieldDemandsOtherFields.validateFields;
+            case "RecordRules.fieldDemandsOtherFields": return  FieldDemandsOtherFields.validateRecord;
 
             case "FieldRules.fieldsIndicator": return FieldsIndicator.validateField;
             case "FieldRules.subfieldsMandatory": return SubfieldsMandatory.validateField;
@@ -329,6 +330,7 @@ var TemplateOptimizer = function() {
 
     function __checkRule( rule, ruleName ) {
         Log.trace( "Enter - TemplateOptimizer.__validateRule" );
+        Log.trace( "Enter - TemplateOptimizer.__validateRule",  ruleName );
 
         try {
             if( rule.hasOwnProperty( "errorType" ) && VALID_ERROR_TYPES.indexOf( rule.errorType ) == -1 ) {

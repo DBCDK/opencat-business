@@ -12,7 +12,7 @@ use( "SubfieldCannotContainValue" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldCannotContainValue.validateSubfield", function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldRules.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( SubfieldCannotContainValue.__BUNDLE_NAME );
 
     var record = {};
     var field = {};
