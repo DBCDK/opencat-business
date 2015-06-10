@@ -38,8 +38,7 @@ var FieldDemandsOtherFields = function () {
             if ( checkedParams.length > 0 ) {
                 return checkedParams;
             }
-            var fieldNamesAskeys = __getFieldNamesAskeys( record );
-            return __checkFields( fieldNamesAskeys, params, bundle );
+            return __checkFields( ValidationUtil.getFieldNamesAsKeys( record ), params, bundle );
         } finally {
             Log.trace( "Exit - FieldDemandsOtherFields.validateRecord" );
         }
@@ -77,21 +76,6 @@ var FieldDemandsOtherFields = function () {
         }
         finally {
             Log.trace( "Exit - FieldDemandsOtherFields.__checkFields" );
-        }
-    }
-// -----------------------------------------------------------------------------
-// __getFieldNamesAskeys
-//-----------------------------------------------------------------------------
-    function __getFieldNamesAskeys ( record ) {
-        Log.trace( "Enter - FieldDemandsOtherFields.__getFieldNamesAskeys" );
-        try {
-            var ret = {}
-            record.fields.forEach( function ( field ) {
-                Object.defineProperty( ret, field.name, { enumerable: true } );
-            })
-            return ret;
-        } finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.__getFieldNamesAskeys" );
         }
     }
 // -----------------------------------------------------------------------------

@@ -7,7 +7,7 @@ use ( "AllFieldsMandatoryIfOneExist");
 
 UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( AllFieldsMandatoryIfOneExist.__BUNDLE_NAME );
-
+    var params = { fields: [ '001', '002', '003', '004' ]};
     var record = {
         fields : [{
             'name' : '001'
@@ -19,7 +19,7 @@ UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) 
             'name' : '004'
         }]
     };
-    var params = { fields: [ '001', '002', '003', '004' ]};
+
     var expectedResult = [];
     var actualResult = AllFieldsMandatoryIfOneExist.validateRecord( record, params );
     SafeAssert.equal( "AllFieldsMandatoryIfOneExist.validateRecord 1", actualResult, expectedResult );

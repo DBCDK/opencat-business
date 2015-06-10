@@ -10,7 +10,7 @@ use( "ValidationUtil" );
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['AllFieldsMandatoryIfOneExist'];
 //-----------------------------------------------------------------------------
-var AllFieldsMandatoryIfOneExist = function( ) {
+var AllFieldsMandatoryIfOneExist = function () {
     var BUNDLE_NAME = "validation";
 
     /**
@@ -24,8 +24,8 @@ var AllFieldsMandatoryIfOneExist = function( ) {
      * @name RecordRules.allFieldsMandatoryIfOneExist
      * @method
      */
-    function validateRecord( record, params) {
-        Log.trace ( "Enter - RecordRules.allFieldsMandatoryIfOneExist( ", record, ", ", params, " )" );
+    function validateRecord ( record, params ) {
+        Log.trace( "Enter - RecordRules.allFieldsMandatoryIfOneExist( ", record, ", ", params, " )" );
 
         var result = [];
         try {
@@ -36,24 +36,22 @@ var AllFieldsMandatoryIfOneExist = function( ) {
 
             var totalFieldsFound = 0;
             var foundFields = [];
-            var field;
             var totalFieldsToCheckFor = params.fields.length;
-            for ( var i = 0 ; i < totalFieldsToCheckFor ; ++i ) {
-                field = params.fields[i];
-                if ( ValidationUtil.recordContainsField ( record, field ) ) {
+            var fieldAsKeys = ValidationUtil.getFieldNamesAsKeys( record );
+
+            for ( var i = 0; i < totalFieldsToCheckFor; ++i ) {
+                var fieldName = params.fields[i];
+                if ( fieldAsKeys.hasOwnProperty( fieldName ) ) {
                     totalFieldsFound += 1;
-                    foundFields.push( { name: field, value: true } );
                 } else {
-                    foundFields.push( { name: field, value: false } );
+                    foundFields.push( fieldName );
                 }
             }
             if ( totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor ) {
-                foundFields.forEach( function(f){
-                    if ( f.value === false ) {
-                        var message = ResourceBundle.getStringFormat( bundle, "field.mandatory.error", f.name );
-                        result.push( ValidateErrors.recordError( "TODO:fixurl", message ) );
-                    }
-                });
+                foundFields.forEach( function ( f ) {
+                    var message = ResourceBundle.getStringFormat( bundle, "field.mandatory.error", f );
+                    result.push( ValidateErrors.recordError( "TODO:fixurl", message ) );
+                } );
             }
             return result;
         } finally {
@@ -61,7 +59,8 @@ var AllFieldsMandatoryIfOneExist = function( ) {
         }
     }
 
-    return {"validateRecord" : validateRecord,
-            "__BUNDLE_NAME"  : BUNDLE_NAME
+    return {
+        "validateRecord": validateRecord,
+        "__BUNDLE_NAME": BUNDLE_NAME
     };
 }();

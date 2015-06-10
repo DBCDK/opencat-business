@@ -156,3 +156,39 @@ UnitTest.addFixture( "ValidationUtil.getFirstSubfieldValue", function() {
     SafeAssert.equal( "1 ValidationUtil.getFirstSubfieldValue", ValidationUtil.getFirstSubfieldValue(subfields, "b"), "b1");
 
 } );
+
+UnitTest.addFixture( "ValidationUtil.getFieldNamesAsKeys", function() {
+    var record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "awrong"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }, {
+            name: '001', indicator: '00', subfields: [{
+                name: "a", value: "a2"
+            }, {
+                name: "b", value: "b2"
+            }, {
+                name: "k", value: "k2"
+            }]
+        },{
+            name: '014', indicator: '00', subfields: [{
+                name: "a", value: "a1Val"
+            }, {
+                name: "b", value: "bwrong"
+            }, {
+                name: "c", value: "c1Val"
+            }]
+        }]
+    };
+
+
+    var expectedVal = {"001" : record.fields[0], "014" : record.fields[2] }
+    SafeAssert.equal( "1 ValidationUtil.recordContainsField", ValidationUtil.getFieldNamesAsKeys(record), expectedVal );
+
+
+} );

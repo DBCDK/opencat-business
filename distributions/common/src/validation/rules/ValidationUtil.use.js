@@ -104,7 +104,31 @@ var ValidationUtil = function () {
         return false;
     }
 
-    return {"getFirstSubfieldValue": getFirstSubfieldValue,
+    /**
+     * getFieldNamesAsKeys
+     * @syntax
+     * @param {Object} record Obj
+     * @return obj with field names as key as with the first found field as value
+     * @name getFieldNamesAsKeys
+     * @method
+     */
+    function getFieldNamesAsKeys ( record ) {
+        Log.trace( "Enter - ValidationUtil.getFieldNamesAsKeys" );
+        try {
+            var ret = {};
+            record.fields.forEach( function ( field ) {
+                if ( !ret.hasOwnProperty( (field.name ) ) ) {
+                    Object.defineProperty( ret, field.name, {enumerable: true, value: field} );
+                }
+            } );
+            return ret;
+        } finally {
+            Log.trace( "Exit - FieldDemandsOtherFields.__getFieldNamesAskeys" );
+        }
+    }
+
+    return {"getFieldNamesAsKeys" : getFieldNamesAsKeys ,
+            "getFirstSubfieldValue": getFirstSubfieldValue,
             "getFirstField" : getFirstField,
             "isNumber": isNumber,
             "doesFieldContainSubfield" : doesFieldContainSubfield,
