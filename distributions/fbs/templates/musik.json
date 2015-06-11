@@ -697,7 +697,7 @@
         "795":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8a.htm",
             "subfields":{
-                "/u00E5":{
+                "\u00E5":{
                     "mandatory": true,
                     "repeatable": false
                 },
