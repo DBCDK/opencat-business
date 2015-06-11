@@ -1,6 +1,6 @@
 [
     {
-        "name": "ny-netlydboghoved",
+        "name": "fbs-test-opret-common-netlydboghoved",
         "bugs": [ "18522" ],
         "description": "Tester oprettelse af ny netlydboghoved fællesskabspost fra et FBS-bibliotek",
         "request": {

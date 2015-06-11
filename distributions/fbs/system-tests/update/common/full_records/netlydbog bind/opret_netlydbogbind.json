@@ -1,16 +1,23 @@
 [
     {
-        "name": "fbs-test-opret-common-netlydbog",
+        "name": "fbs-test-opret-common-netlydbogbind",
         "bugs": [ "18522" ],
-        "description": "Tester oprettelse af ny netlydbog fællesskabspost fra et FBS-bibliotek",
+        "description": "Tester oprettelse af ny netlydbogbind fællesskabspost fra et FBS-bibliotek",
         "request": {
             "authentication": {
                 "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "netlydbog",
+            "templateName": "netlydbogbind",
             "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "existinghead.marc"
+                }
+            ]
         },
         "expected": {
             "validation": [],
