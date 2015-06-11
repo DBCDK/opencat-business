@@ -106,7 +106,14 @@ var NoteAndSubjectExtentionsHandler = function() {
 
             record.eachField(/./, function (field) {
                 if (UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
-                    field.insert( 0, "&", groupId );
+                    if( __isFieldChangedInOtherRecord( field, curRecord ) ) {
+                        if( field.exists( /&/ ) ) {
+                            field.append( "&", groupId, true );
+                        }
+                        else {
+                            field.insert(0, "&", groupId);
+                        }
+                    }
                 }
             });
 
