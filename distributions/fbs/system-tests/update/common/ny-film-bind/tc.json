@@ -12,6 +12,13 @@
             "templateName": "filmbind",
             "record": "request.marc"
         },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "existinghead.marc"
+                }
+            ]
+        },
         "expected": {
             "validation": [],
             "update": {
