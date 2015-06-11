@@ -1,0 +1,37 @@
+[
+    {
+        "name": "fbs-test-opret-common-record",
+        "bugs": [ "18522" ],
+        "description": "Tester oprettelse af ny netlydbog fællesskabspost fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "netlydbog",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-new-common.marc",
+                        "type": "DECENTRALE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
