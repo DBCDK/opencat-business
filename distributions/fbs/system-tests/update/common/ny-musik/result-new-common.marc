@@ -1,0 +1,55 @@
+001 00 *a 5 177 204 0 *b 191919 *c 20150610203744 *d 20150604 *f a
+004 00 *r n *a e
+005 00 *h e
+008 00 *t s *u f *a 2015 *b dk *l dan *v 0
+009 00 *a s *g xc *b a *h xx
+023 00 *b 5707471040386
+039 00 *a mub
+100 00 *a Kalle B *f DJ
+245 00 *a Pippelipop 2 *j Kalle B med Pelle Leth ... [et al.]
+260 00 *b Bastyk Musik *c p 2015
+300 00 *n 1 cd *d 1 bilag
+531 00 *a Indhold:
+534 00 *a Med sangtekster
+538 00 *f Bastyk *g BASTYK 02
+652 00 *m 78.69
+666 00  *m børnemusik *m børnesange *n vokal *p 2010-2019 *l Danmark
+666 00  *u for børn
+700 00 *å 5 *a Andersen *h Mike
+700 00 *å 3 *a Ashibah
+700 00 *a Belli *h Peter
+700 00 *a Buttenschøn *h Thomas
+700 00 *a Groove *h Julie
+700 00 *å 2 *a Julie Maria
+700 00 *a Leth *h Pelle
+700 00 *å 6 *a Lydmor
+700 00 *a Ny *h Viggo
+700 00 *a Remar *h Morten
+700 00 *å 4 *a Simon T
+700 00 *a Stjerne *h Christoffer
+700 00 *å 1 *a Szhirley
+700 00 *a Vedersø *h Frederik
+795 00 *å 11 *a Barrøvsindianer *i tekst og melodi: Kalle B *i produktion, musik: Christoffer Stjerne *e featuring Szhirley & Christoffer Stjerne
+795 00 *å 12 *a Duen *i tekst og melodi: Kalle B *i produktion, musik: Pelle Leth *e feat. Thomas Buttenschøn
+795 00 *å 13 *a Grøntsagspaladset *i tekst og melodi: Kalle B *i produktion, musik: Pelle Leth *e feat. Julie Maria
+795 00 *å 14 *a S.O.M.M.E.R. *i tekst og melodi: Kalle B *i produktion, musik: Lasse Lyngbo *e feat. Julie Groove og Morten Remar
+795 00 *å 15 *a Slikkelas *i tekst og melodi: Kalle B *i produktion, musik: Christoffer Stjerne *e feat. Ashibah og Simon T
+795 00 *å 16 *a Det kan da godt være, måske *i tekst og melodi: Kalle B *i produktion, musik: Ebbe Frej *e feat. Peter Belli
+795 00 *å 17 *a Spiller bas *i tekst og melodi: Kalle B *i produktion, musik: Dennis Ahlgren *e feat. Mike Andersen
+795 00 *å 18 *a DumDumDikkeDetDavDav *i tekst og melodi: Kalle B *i produktion, musik: Stefan Kvamm
+795 00 *å 19 *a Tandbørstehit *i tekst og melodi: Kalle B *i produktion, musik: Pelle Leth *e feat. Frederik Vedersø og Viggo Ny
+795 00 *å 20 *a Hva' vil du være? *i tekst og melodi: Kalle B *i produktion, musik: Mads Björn *e feat. Lydmor *i med Emil Falk
+795 00 *å 99 *y 0 *a Sommer
+900 00 *a Rasmussen *h Szhirley *z 700/1
+900 00 *a Shirley *z 700/1
+900 00 *a Haim *h Shirley *z 700/1
+900 00 *a Barkou Larsen *h Julie Maria *z 700/2
+900 00 *a Larsen *h Julie Maria Barkou *z 700/2
+900 00 *a El-¤Habashy *h Sarah *z 700/3
+900 00 *a El Habashy *h Sarah *z 700/3
+900 00 *a Tjell *h Simon *z 700/4
+900 00 *a Dybdal Andersen *h Mikkel *z 700/5
+900 00 *a Andersen *h Mikkel Dybdal *z 700/5
+900 00 *a Rossander *h Jenny *z 700/6
+900 00 *a Bremer *h Kalle *z 100
+996 00 *a710100
