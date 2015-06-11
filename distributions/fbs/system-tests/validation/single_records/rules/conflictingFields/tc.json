@@ -1,0 +1,29 @@
+[
+  {
+    "name": "conflictingFields",
+    "bugs": [
+      ""
+    ],
+    "description": "Tester valideringsregel conflictingFields på bog fællesskabspost fra et FBS-bibliotek",
+    "request": {
+      "authentication": {
+        "group": "710100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "bog",
+      "record": "bog.marc"
+    },
+    "expected": {
+      "validation": [
+        {
+          "type": "ERROR",
+          "params": {
+            "message": "Følgende felt er til stede: '110' sammen med '100'",
+            "url": ""
+          }
+        }
+      ]
+    }
+  }
+]
