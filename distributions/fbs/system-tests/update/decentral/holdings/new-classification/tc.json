@@ -1,0 +1,71 @@
+[
+    {
+        "name": "fbs-decentral-new-classification-holdings",
+        "description": "Opdater eksisterende decentral post (beholdninger for 3 biblioteker) med ny opstilling ",
+        "bugs": [ "18680" ],
+        "request": {
+            "authentication": {
+                "group": "700400",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 700400, 700500, 700600 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "DECENTRALE",
+                    "deleted": false,
+                    "enrichments": [
+                        "result-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "DECENTRALE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "result-dbc-enrichment.marc",
+                            "result-fbs-700500.marc",
+                            "result-fbs-700600.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-700500.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-700600.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
