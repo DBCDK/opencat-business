@@ -40,6 +40,17 @@ var CheckSubfieldNotUsedInParentRecord = function () {
             var recId = marcRecord.getValue( /014/, /a/ );
             var libNo = marcRecord.getValue( /001/, /b/ );
 
+            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+
+            if( !ValidationUtil.isNumber( libNo ) ) {
+                var msg = ResourceBundle.getString( bundle, "agencyid.not.a.number" );
+                return [ ValidateErrors.subfieldError( "TODO:fixurl", msg ) ];
+            }
+
+            if( libNo === UpdateConstants.COMMON_AGENCYID ) {
+                libNo = UpdateConstants.RAWREPO_COMMON_AGENCYID;
+            }
+
             // If parent record does not exist then we are fine.
             if( !RawRepoClient.recordExists( recId, libNo ) ) {
                 Log.debug( "Parent record does not exist!" );
@@ -49,7 +60,6 @@ var CheckSubfieldNotUsedInParentRecord = function () {
             // Load parent record and check if this subfield is used.
             var parentRecord = RawRepoClient.fetchRecord( recId, libNo );
             if( parentRecord.existField( new MatchField( RegExp( field.name ), undefined, RegExp( subfield.name ) ) ) ) {
-                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
                 var message = ResourceBundle.getStringFormat( bundle, "subfield.in.parent.record.error", field.name, subfield.name, recId );
 
                 return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];

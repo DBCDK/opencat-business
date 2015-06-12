@@ -33,7 +33,7 @@
 		"params" : {
 		    "fieldno" : 4,
 		    "subfieldno" : 1,
-		    "message" : "Posten med faustnr '5 161 764 9' og biblioteksnr '870970' findes ikke i forvejen",
+		    "message" : "Posten med faustnr '5 161 764 9' findes ikke i forvejen",
 		    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm"
 		}
 	    } ]
@@ -46,7 +46,7 @@
         "setup": {
             "rawrepo": [
                 {
-                    "record": "main.marc",
+                    "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false
                 }
@@ -72,7 +72,7 @@
                         "subfieldno": 5
                     }
                 }
-                        ]
+            ]
         }
     }
 ]

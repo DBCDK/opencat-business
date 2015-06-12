@@ -6,6 +6,7 @@
 // -----------------------------------------------------------------------------
 use( "Log" );
 use( "StringUtil" );
+use( "ValidationUtil" );
 use( "ValueCheck" );
 
 // -----------------------------------------------------------------------------
@@ -81,8 +82,7 @@ var RawRepoClientCore = function() {
      * @name RawRepoCore#recordExists
      */
     function recordExists( recordId, libraryNo ) {
-        ValueCheck.checkThat( "recordId", recordId ).type( 'string' );
-        ValueCheck.checkThat( "libraryNo", libraryNo ).type( 'string' );
+        __checkRecordIds( recordId, libraryNo );
 
         return records[ generateKey( recordId, libraryNo ) ] !== undefined;
     }
@@ -101,8 +101,7 @@ var RawRepoClientCore = function() {
      * @name RawRepoCore#fetchRecord
      */
     function fetchRecord( recordId, libraryNo ) {
-        ValueCheck.checkThat( "recordId", recordId ).type( 'string' );
-        ValueCheck.checkThat( "libraryNo", libraryNo ).type( 'string' );
+        __checkRecordIds( recordId, libraryNo );
 
         return records[ generateKey( recordId, libraryNo ) ];
     }
@@ -124,8 +123,7 @@ var RawRepoClientCore = function() {
         Log.trace( "Enter - RawRepoClientCore.getRelationsChildren" );
 
         try {
-            ValueCheck.checkThat( "recordId", recordId ).type( 'string' );
-            ValueCheck.checkThat( "libraryNo", libraryNo ).type( 'string' );
+            __checkRecordIds( recordId, libraryNo );
 
             var result = [];
 
@@ -167,6 +165,15 @@ var RawRepoClientCore = function() {
      */
     function generateKey( recordId, libraryNo ) {
         return recordId + ":" + libraryNo;
+    }
+
+    function __checkRecordIds( recordId, agencyId ) {
+        ValueCheck.checkThat( "recordId", recordId ).type( 'string' );
+        ValueCheck.checkThat( "agencyId", agencyId ).type( 'string' );
+
+        if( !ValidationUtil.isNumber( agencyId ) ) {
+            throw "The value '" + agencyId + "' is not a number";
+        }
     }
 
     return {

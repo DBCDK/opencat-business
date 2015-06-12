@@ -45,12 +45,15 @@ UnitTest.addFixture( "CheckSubfieldNotUsedInParentRecord.validateSubfield", func
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[3];
     subfield = field.subfields[0];
-    SafeAssert.equal( "Parent record: 001b Not-A-Number", callRule( record, field, subfield ), [] );
+
+    var message = ResourceBundle.getString( bundle, "agencyid.not.a.number" );
+    SafeAssert.equal( "Parent record: 001b Not-A-Number", callRule( record, field, subfield ),
+        [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ]);
 
     // Case: Parent record -> Subfield not used.
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 1 234 567 8 *b 191919 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n"
     );
     RawRepoClientCore.clear();
@@ -68,15 +71,15 @@ UnitTest.addFixture( "CheckSubfieldNotUsedInParentRecord.validateSubfield", func
     field = record.fields[3];
     subfield = field.subfields[0];
     SafeAssert.equal( "Parent record: Subfield not used", callRule( record, field, subfield ), [] );
+    RawRepoClientCore.clear();
 
     // Case: Parent record -> Subfield is used in parent record.
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 1 234 567 8 *b 191919 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n" +
         "008 00 *t xx"
     );
-    RawRepoClientCore.clear();
     RawRepoClientCore.addRecord( marcRecord );
 
     marcRecord = new Record();
@@ -91,6 +94,6 @@ UnitTest.addFixture( "CheckSubfieldNotUsedInParentRecord.validateSubfield", func
     field = record.fields[3];
     subfield = field.subfields[0];
 
-    var message = ResourceBundle.getStringFormat( bundle, "subfield.in.parent.record.error", "008", "t", "1 234 567 8" );
+    message = ResourceBundle.getStringFormat( bundle, "subfield.in.parent.record.error", "008", "t", "1 234 567 8" );
     SafeAssert.equal( "Parent record: Subfield is used in parent record", callRule( record, field, subfield ), [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ] );
 } );

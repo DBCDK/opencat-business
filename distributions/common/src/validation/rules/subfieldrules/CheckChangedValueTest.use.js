@@ -18,10 +18,12 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
     var msg_format = ResourceBundle.getStringFormat( bundle, "check.changed.value.error", "004", "a", "%s", "%s" );
 
     params = { toValues: [], fromValues: [] };
-    SafeAssert.equal( "Empty param values", CheckChangedValue.validateSubfield( { fields: [] }, {}, {}, params ), [] );
+    SafeAssert.equal( "Empty param values", CheckChangedValue.validateSubfield( { fields: [] }, {}, {}, params ),
+        [ ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getString( bundle, "agencyid.not.a.number" ) ) ] );
 
     params = { toValues: [ "e", "b" ], fromValues: [ "s", "h" ] };
-    SafeAssert.equal( "Params with new empty record", CheckChangedValue.validateSubfield( { fields: [] }, {}, {}, params ), [] );
+    SafeAssert.equal( "Params with new empty record", CheckChangedValue.validateSubfield( { fields: [] }, {}, {}, params ),
+        [ ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getString( bundle, "agencyid.not.a.number" ) ) ] );
 
     var record = {};
     var field = {};
@@ -37,7 +39,8 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
     field = record.fields[ 1 ];
     subfield = field.subfields[ 0 ];
     params = { fromValues: [ "e", "b" ], toValues: [ "s", "h" ] };
-    SafeAssert.equal( "001b is NaN", CheckChangedValue.validateSubfield( record, field, subfield, params ), [] );
+    SafeAssert.equal( "001b is NaN", CheckChangedValue.validateSubfield( record, field, subfield, params ),
+        [ ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getString( bundle, "agencyid.not.a.number" ) ) ] );
 
     marcRecord = new Record();
     marcRecord.fromString(

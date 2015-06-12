@@ -15,7 +15,9 @@
         "setup": {
             "rawrepo": [
                 {
-                    "record": "existinghead.marc"
+                    "record": "existinghead.marc",
+                    "type": "DECENTRALE",
+                    "deleted": false
                 }
             ]
         },
@@ -24,6 +26,12 @@
             "update": {
                 "errors": [],
                 "rawrepo": [
+                    {
+                        "record": "existinghead.marc",
+                        "type": "DECENTRALE",
+                        "deleted": false,
+                        "children": [ "result-new-common.marc" ]
+                    },
                     {
                         "record": "result-new-common.marc",
                         "type": "DECENTRALE",

@@ -18,7 +18,7 @@
                     "params": {
                         "fieldno": 1,
                         "subfieldno": 1,
-                        "message": "Posten med faustnr '5 158 641 7' og biblioteksnr '191919' findes ikke i forvejen",
+                        "message": "Posten med faustnr '5 158 641 7' findes ikke i forvejen",
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 },
