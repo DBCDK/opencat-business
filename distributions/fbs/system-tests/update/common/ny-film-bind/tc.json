@@ -15,7 +15,9 @@
         "setup": {
             "rawrepo": [
                 {
-                    "record": "existinghead.marc"
+                    "record": "existinghead.marc",
+                    "type": "DECENTRALE",
+                    "deleted": false
                 }
             ]
         },
@@ -41,5 +43,4 @@
             }
         }
     }
-
 ]
