@@ -16,7 +16,7 @@
             "rawrepo": [
                 {
                     "record": "existinghead.marc",
-                    "type": "DECENTRALE",
+                    "type": "MARCXCHANGE",
                     "deleted": false
                 }
             ]
@@ -28,13 +28,13 @@
                 "rawrepo": [
                     {
                         "record": "existinghead.marc",
-                        "type": "DECENTRALE",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "children": [ "result-new-common.marc" ]
                     },
                     {
                         "record": "result-new-common.marc",
-                        "type": "DECENTRALE",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dbc-enrichment.marc" ]

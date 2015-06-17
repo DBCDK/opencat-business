@@ -17,7 +17,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
-                    "type": "DECENTRALE",
+                    "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [
                         "result-dbc-enrichment.marc"
@@ -37,7 +37,7 @@
                 "rawrepo": [
                     {
                         "record": "result-common.marc",
-                        "type": "DECENTRALE",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [

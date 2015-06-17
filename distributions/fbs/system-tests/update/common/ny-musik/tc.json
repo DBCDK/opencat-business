@@ -19,7 +19,7 @@
                 "rawrepo": [
                     {
                         "record": "result-new-common.marc",
-                        "type": "DECENTRALE",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dbc-enrichment.marc" ]
