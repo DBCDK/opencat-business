@@ -1,0 +1,45 @@
+[
+    {
+        "name": "checkChangedValue",
+        "bugs": [
+            ""
+        ],
+        "description": "Tester omkatalogisering fra boghoved til bogbind",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bogbind",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-update-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "ERROR",
+                    "params" : {
+                        "fieldno" : 3,
+                        "subfieldno" : 2,
+                        "message" : "Delfelt 004a må ikke ændre sig fra s til b",
+                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    }
+                }
+            ]
+        }
+    }
+]

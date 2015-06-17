@@ -36,6 +36,9 @@ var CheckChangedValue = function () {
             var marcRecord = DanMarc2Converter.convertToDanMarc2( record );
             var recId = marcRecord.getValue( /001/, /a/ );
             var libNo = marcRecord.getValue( /001/, /b/ );
+            if( libNo === UpdateConstants.COMMON_AGENCYID ) {
+                libNo = UpdateConstants.RAWREPO_COMMON_AGENCYID;
+            }
 
             var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 

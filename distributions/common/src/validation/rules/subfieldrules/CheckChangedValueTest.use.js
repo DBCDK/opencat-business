@@ -66,11 +66,18 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 1 234 567 8 *b 191919\n" +
         "004 00 *a e"
     );
     RawRepoClientCore.clear();
     RawRepoClientCore.addRecord( marcRecord );
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e"
+    );
+
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[ 1 ];
     subfield = field.subfields[ 0 ];
@@ -79,16 +86,20 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 1 234 567 8 *b 191919\n" +
         "004 00 *a i"
     );
     RawRepoClientCore.clear();
     RawRepoClientCore.addRecord( marcRecord );
 
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e"
+    );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[ 1 ];
     subfield = field.subfields[ 0 ];
-    subfield.value = "e";
     params = { fromValues: [ "e", "b" ], toValues: [ "s", "h" ] };
 
     SafeAssert.equal( "Update record with unknown old value and unknown new value",
@@ -97,16 +108,21 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 1 234 567 8 *b 191919\n" +
         "004 00 *a b"
     );
     RawRepoClientCore.clear();
     RawRepoClientCore.addRecord( marcRecord );
 
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e"
+    );
+
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[ 1 ];
     subfield = field.subfields[ 0 ];
-    subfield.value = "e";
     params = { fromValues: [ "e", "b" ], toValues: [ "s", "h" ] };
 
     SafeAssert.equal( "Update record with known old value and unknown new value",
@@ -115,16 +131,20 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 1 234 567 8 *b 191919\n" +
         "004 00 *a i"
     );
     RawRepoClientCore.clear();
     RawRepoClientCore.addRecord( marcRecord );
 
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a h"
+    );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[ 1 ];
     subfield = field.subfields[ 0 ];
-    subfield.value = "h";
     params = { fromValues: [ "e", "b" ], toValues: [ "s", "h" ] };
 
     SafeAssert.equal( "Update record with unknown old value and known new value",
@@ -133,19 +153,23 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 1 234 567 8 *b 191919\n" +
         "004 00 *a e"
     );
     RawRepoClientCore.clear();
     RawRepoClientCore.addRecord( marcRecord );
 
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a s"
+    );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[ 1 ];
     subfield = field.subfields[ 0 ];
-    subfield.value = "s";
     params = { fromValues: [ "e", "b" ], toValues: [ "s", "h" ] };
 
     SafeAssert.equal( "Update record with wrong record type",
         CheckChangedValue.validateSubfield( record, field, subfield, params ),
-        [ ValidateErrors.subfieldError( "TODO:fixurl", StringUtil.sprintf( msg_format, "e", "s" ) ) ] );
+        [ ValidateErrors.subfieldError( "TODO:fixurl", StringUtil.sprintf( msg_format, "e", "s" )  ) ] );
 });

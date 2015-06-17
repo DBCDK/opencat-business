@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<marcx:record xmlns:marcx="info:lc/xmlns/marcxchange-v1" format="danMARC2" type="Bibliographic">
+    <marcx:leader>00000c    2200000   4500</marcx:leader>
+    <marcx:datafield ind1="0" ind2="0" tag="001">
+        <marcx:subfield code="a">40565906</marcx:subfield>
+        <marcx:subfield code="b">191919</marcx:subfield>
+        <marcx:subfield code="c">20080529102532</marcx:subfield>
+        <marcx:subfield code="d">20080529</marcx:subfield>
+        <marcx:subfield code="f">a</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="004">
+        <marcx:subfield code="r">c</marcx:subfield>
+        <marcx:subfield code="a">h</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="008">
+        <marcx:subfield code="b">de</marcx:subfield>
+        <marcx:subfield code="l">ger</marcx:subfield>
+        <marcx:subfield code="v">0</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="009">
+        <marcx:subfield code="a">a</marcx:subfield>
+        <marcx:subfield code="g">xx</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="021">
+        <marcx:subfield code="a">3-7618-1100-4</marcx:subfield>
+        <marcx:subfield code="b">Bärenreiter</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="021">
+        <marcx:subfield code="a">3-476-41022-6</marcx:subfield>
+        <marcx:subfield code="b">Metzler</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="245">
+        <marcx:subfield code="a">Die ¤Musik in Geschichte und Gegenwart</marcx:subfield>
+        <marcx:subfield code="c">allgemeine Enzyklopädie der Musik</marcx:subfield>
+        <marcx:subfield code="ø">Ved Ludwig Finscher</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="250">
+        <marcx:subfield code="a">2. neubearbeitete Ausgabe</marcx:subfield>
+        <marcx:subfield code="b">2. Ausgabe</marcx:subfield>
+        <marcx:subfield code="c">begründet von Friedrich Blume</marcx:subfield>
+        <marcx:subfield code="c">herausgegeben von \Ludwig Finscher\</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="260">
+        <marcx:subfield code="a">Kassel</marcx:subfield>
+        <marcx:subfield code="b">Bärenreiter</marcx:subfield>
+        <marcx:subfield code="a">Stuttgart</marcx:subfield>
+        <marcx:subfield code="b">Metzler</marcx:subfield>
+        <marcx:subfield code="c">1994-</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="512">
+        <marcx:subfield code="a">Omslagstitel: MGG</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="532">
+        <marcx:subfield code="a">Litteraturhenvisninger</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="652">
+        <marcx:subfield code="m">78</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="700">
+        <marcx:subfield code="a">Blume</marcx:subfield>
+        <marcx:subfield code="h">Friedrich</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="700">
+        <marcx:subfield code="a">Finscher</marcx:subfield>
+        <marcx:subfield code="h">Ludwig</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="745">
+        <marcx:subfield code="a">MGG</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield ind1="0" ind2="0" tag="996">
+        <marcx:subfield code="a">710100</marcx:subfield>
+    </marcx:datafield>
+</marcx:record>
