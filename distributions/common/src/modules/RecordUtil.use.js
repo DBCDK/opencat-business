@@ -51,6 +51,26 @@ var RecordUtil = function() {
     }
 
     /**
+     * Calculates the current ajustment date that follows the danMARC2
+     * format for field 001d.
+     *
+     * @returns {String} The current ajustment time.
+     */
+    function currentAjustmentDate() {
+        Log.trace( "Enter - RecordUtil.currentAjustmentDate" );
+
+        try {
+            var curDate = new Date();
+            var ajustmentDateStr = StringUtil.sprintf( "%4s%2s%2s",
+                curDate.getFullYear(), curDate.getMonth() + 1, curDate.getDate() );
+            return __replaceAll( ajustmentDateStr, " ", "0" );
+        }
+        finally {
+            Log.trace( "Exit - RecordUtil.currentAjustmentDate" );
+        }
+    }
+
+    /**
      * Calculates the current ajustment time that follows the danMARC2
      * format for field 001c.
      *
@@ -140,6 +160,7 @@ var RecordUtil = function() {
 
     return {
         'addOrReplaceSubfield': addOrReplaceSubfield,
+        'currentAjustmentDate': currentAjustmentDate,
         'currentAjustmentTime': currentAjustmentTime,
         'createFromString': createFromString,
         'createFieldFromString': createFieldFromString,

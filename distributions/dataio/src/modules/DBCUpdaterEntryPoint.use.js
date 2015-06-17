@@ -80,19 +80,11 @@ var DBCUpdaterEntryPoint = function() {
             var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
             result = new Record;
 
-            var curDate = new Date();
-            var curDateStr = curDate.getFullYear().toString() +
-                curDate.getMonth().toString() +
-                curDate.getDay().toString();
-            var curTimeStr = curDate.getHours().toString() +
-                curDate.getMinutes().toString() +
-                curDate.getSeconds().toString();
-
             var idField = new Field("001", "00");
             idField.append(new Subfield("a", dbcMarc.getValue(/001/, /a/)));
             idField.append(new Subfield("b", libraryId.toString()));
-            idField.append(new Subfield("c", curDateStr + curTimeStr));
-            idField.append(new Subfield("d", curDateStr));
+            idField.append(new Subfield("c", RecordUtil.currentAjustmentTime() ) );
+            idField.append(new Subfield("d", RecordUtil.currentAjustmentDate() ) );
             idField.append(new Subfield("f", "a"));
             result.append(idField);
 
