@@ -57,8 +57,8 @@
 		    			{
 		        			"type": "SubfieldRules.checkChangedValue",
 		        			"params": { 
-			            		"fromValues": [ "e" ],
-			            		"toValues": [ "s", "h" ]
+			            		"fromValues": [ "s", "h" ],
+			            		"toValues": [ "e" ]
 			       			}	
 		    			}
 					]
@@ -195,23 +195,23 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.34.htm",
             "repeatable": false,
             "subfields":{
-                "A": "DanMarc2.fields.100.subfields.1",
-                "a": "DanMarc2.fields.100.subfields.1",
-                "E": "DanMarc2.fields.100.subfields.1",
-                "e": "DanMarc2.fields.100.subfields.1",
-                "C": "DanMarc2.fields.100.subfields.1",
-                "c": "DanMarc2.fields.100.subfields.1",
-                "S": "DanMarc2.fields.100.subfields.1",
-                "s": "DanMarc2.fields.100.subfields.1",
-                "I": "DanMarc2.fields.100.subfields.1",
-                "i": "DanMarc2.fields.100.subfields.1",
-                "K": "DanMarc2.fields.100.subfields.1",
-                "k": "DanMarc2.fields.100.subfields.1",
-                "J": "DanMarc2.fields.100.subfields.1",
-                "j": "DanMarc2.fields.100.subfields.1",
-                "0": "DanMarc2.fields.100.subfields.1",
-                "1": "DanMarc2.fields.100.subfields.1",
-                "4": "Lister.fields.codes.subfields.relator_code"
+                "A": "DanMarc2.fields.110.subfields.A",
+                "a": "DanMarc2.fields.110.subfields.a",
+                "E": "DanMarc2.fields.110.subfields.E",
+                "e": "DanMarc2.fields.110.subfields.e",
+                "C": "DanMarc2.fields.110.subfields.C",
+                "c": "DanMarc2.fields.110.subfields.c",
+                "S": "DanMarc2.fields.110.subfields.S",
+                "s": "DanMarc2.fields.110.subfields.s",
+                "I": "DanMarc2.fields.110.subfields.I",
+                "i": "DanMarc2.fields.110.subfields.i",
+                "K": "DanMarc2.fields.110.subfields.K",
+                "k": "DanMarc2.fields.110.subfields.k",
+                "J": "DanMarc2.fields.110.subfields.J",
+                "j": "DanMarc2.fields.110.subfields.j",
+                "0": "DanMarc2.fields.110.subfields.0",
+                "1": "DanMarc2.fields.110.subfields.1",
+                "4": "DanMarc2.fields.110.subfields.4"
             }
         },
 		"210": "DanMarc2.fields.210",
