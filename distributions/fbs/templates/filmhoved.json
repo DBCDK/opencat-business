@@ -151,7 +151,6 @@
                 },
                 "l": "DanMarc2.fields.008.subfields.l",                                                                              
                 "u": {
-                    "mandatory":true,
                     "repeatable":false,
                     "values":[ "f", "u", "r" ]
                 },                

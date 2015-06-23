@@ -95,12 +95,10 @@
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "DanMarc2.fields.008.subfields.l",                                                              
                 "t":{
-                    "mandatory":true,
                     "repeatable":false,
                     "values":[ "m", "s" ]
                 },
                 "u": {
-                    "mandatory":true,
                     "repeatable":false,
                     "values":[ "f", "u", "r" ]
                 },                
