@@ -67,48 +67,13 @@
             }
         },
         "006":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",           
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
             "subfields": {
-                "a": {
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},
-				"b": {
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},             
-                "c": {
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
-                        }
-                    ]
-				},
-				"d": {
-                    "repeatable": false,
-                    "values": [ "0", "7", "11", "15" ]
-				},
-                "e": {
-                    "repeatable": false
-				},
+                "a": "DanMarc2.fields.006.subfields.a",
+                "b": "DanMarc2.fields.006.subfields.b",
+                "c": "DanMarc2.fields.006.subfields.c",
+                "d": "DanMarc2.fields.006.subfields.d",
+                "e": "DanMarc2.fields.006.subfields.e",
                 "2": {
                     "repeatable": false,
                     "values": [ "b", "d", "e" ]
