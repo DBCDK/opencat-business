@@ -114,12 +114,27 @@
 						}
                     ]
                 },
-                "l": "DanMarc2.fields.008.subfields.l",                                                                              
+                "k": "DanMarc2.fields.008.subfields.k",
+                "l": "DanMarc2.fields.008.subfields.l",
                 "u": {
                     "repeatable":false,
                     "values":[ "f", "u", "r" ]
-                },                
-                "z": "DanMarc2.fields.008.subfields.z",
+                },
+                "z": {
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 4,
+                                "max": 4
+                            }
+                        },
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v":{
                     "mandatory": true,
