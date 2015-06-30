@@ -509,7 +509,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "mandatory":true,
             "subfields":{
-                "&":"DanMarc2.fields.652.subfields.&",
+                "&":{},
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
