@@ -1,4 +1,4 @@
-{
+    {
 	"description": "Skabelon til katalogisering af fysiske bøger - enkeltstående post.",
     "defaults":{
         "field":{
@@ -193,7 +193,7 @@
         },
         "110":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.34.htm",
-            "repeatable": false,
+            "repeatable":    false,
             "subfields":{
                 "A": "DanMarc2.fields.110.subfields.A",
                 "a": "DanMarc2.fields.110.subfields.a",

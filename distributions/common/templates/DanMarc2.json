@@ -109,7 +109,7 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "e", "h", "s", "b", "i" ]
+                     "values": [ "e", "h", "s", "b", "i" ]
                 },
                 "n": {
                     "repeatable": false,
@@ -176,6 +176,7 @@
                                 "max": 8
                             }
                         }
+
                     ]
 				},
                 "c": {
@@ -1263,7 +1264,7 @@
                 "5":{
 					"repeatable": false
 				},
-                "6":{}
+                    "6":{}
             }
         },
         "210":{
