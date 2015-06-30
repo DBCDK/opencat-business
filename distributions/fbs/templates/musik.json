@@ -410,6 +410,7 @@
             },
 			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },
+
         "530":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.5c.htm",
             "subfields":{
@@ -432,6 +433,7 @@
             },
 			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },
+        "529": "DanMarc2.fields.529",
         "531":"DanMarc2.fields.531",
         "534":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.5f.htm",
