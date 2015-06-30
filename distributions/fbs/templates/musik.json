@@ -274,10 +274,13 @@
             }
         },
         "250": {
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3d.htm",            
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3d.htm",
             "repeatable":false,
+            "sorting":"abx",
             "subfields":{
-                "a":"DanMarc2.fields.250.subfields.a"                
+                "a":"DanMarc2.fields.250.subfields.a",
+                "b":"DanMarc2.fields.250.subfields.b",
+                "x":"DanMarc2.fields.250.subfields.x"
             }
         },
 		"260":{
