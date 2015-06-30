@@ -84,7 +84,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"tuazbcdefghijklmoqrxv&",
+            "sorting":"tuazbklxv",
             "subfields":{
 				"t":{
                 	"repeatable": false,
@@ -92,8 +92,10 @@
                 },
                 "u": {
                     "repeatable": false,
-                    "values": ["?", "f", "u" ]
+                    "values": ["f", "u", "r" ]
                 },
+                "z": "DanMarc2.fields.008.subfields.z",
+                "x": "DanMarc2.fields.008.subfields.x",
                 "a": "DanMarc2.fields.008.subfields.a",                
                 "b": "DanMarc2.fields.008.subfields.b",
                 "k": "DanMarc2.fields.008.subfields.k",
