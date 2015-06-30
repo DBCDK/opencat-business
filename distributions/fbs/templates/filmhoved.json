@@ -283,8 +283,38 @@
                 "d":"DanMarc2.fields.300.subfields.d",
                 "e":"DanMarc2.fields.300.subfields.e"
             }
-        },        
-        "440": "DanMarc2.fields.440",        
+        },
+        "440":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.47.htm",
+            "subfields":{
+                "&":{
+                    "repeatable":false
+                },
+                "\u00E5": "DanMarc2.fields.440.subfields.\u00E5",
+                "A": "DanMarc2.fields.440.subfields.A",
+                "a": "DanMarc2.fields.440.subfields.a",
+                "\u00D8": "DanMarc2.fields.440.subfields.\u00D8",
+                "\u00f8": "DanMarc2.fields.440.subfields.\u00f8",
+                "\u00C6": "DanMarc2.fields.440.subfields.\u00C6",
+                "\u00E6": "DanMarc2.fields.440.subfields.\u00E6",
+                "N": "DanMarc2.fields.440.subfields.N",
+                "n": "DanMarc2.fields.440.subfields.n",
+                "O": "DanMarc2.fields.440.subfields.O",
+                "o": "DanMarc2.fields.440.subfields.o",
+                "c": "DanMarc2.fields.440.subfields.c",
+                "e": "DanMarc2.fields.440.subfields.e",
+                "p": "DanMarc2.fields.440.subfields.p",
+                "q": "DanMarc2.fields.440.subfields.q",
+                "r": "DanMarc2.fields.440.subfields.r",
+                "s": "DanMarc2.fields.440.subfields.s",
+                "t": "DanMarc2.fields.440.subfields.t",
+                "z": "DanMarc2.fields.440.subfields.z",
+                "V": "DanMarc2.fields.440.subfields.V",
+                "v": "DanMarc2.fields.440.subfields.v",
+                "0": "DanMarc2.fields.440.subfields.0",
+                "1": "DanMarc2.fields.440.subfields.1"
+            }
+        },
         "504":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.4c.htm",            
             "subfields":{
@@ -294,7 +324,15 @@
                 "a":"DanMarc2.fields.504.subfields.a"
             }
         },
-        "505": "DanMarc2.fields.505",        
+        "505":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.4d.htm",
+            "subfields":{
+                "&": {
+                    "repeatable": false
+                },
+                "a": "DanMarc2.fields.505.subfields.a"
+            }
+        },
         "507": "DanMarc2.fields.507",
         "508": "DanMarc2.fields.508",        
         "512": "DanMarc2.fields.512",
