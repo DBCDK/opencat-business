@@ -183,9 +183,15 @@
         },
         "041":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
-            "sorting":"apbcde",
+            "repeatable":false,
+            "sorting":"asbcpeu",
             "subfields":{
-                "a": "DanMarc2.fields.041.subfields.a",                
+                "a": "DanMarc2.fields.041.subfields.a",
+                "b": "DanMarc2.fields.041.subfields.b",
+                "c": "DanMarc2.fields.041.subfields.c",
+                "e": "DanMarc2.fields.041.subfields.e",
+                "p": "DanMarc2.fields.041.subfields.p",
+                "s": "DanMarc2.fields.041.subfields.s",
                 "u": "DanMarc2.fields.041.subfields.u"
             }
         },
@@ -197,8 +203,6 @@
                 "a":"DanMarc2.fields.100.subfields.a",
                 "H":"DanMarc2.fields.100.subfields.H",
                 "h":"DanMarc2.fields.100.subfields.h",
-                "K":"DanMarc2.fields.100.subfields.K",
-                "k":"DanMarc2.fields.100.subfields.k",
                 "E":"DanMarc2.fields.100.subfields.E",
                 "e":"DanMarc2.fields.100.subfields.e",
                 "F":"DanMarc2.fields.100.subfields.F",
@@ -206,6 +210,7 @@
                 "C":"DanMarc2.fields.100.subfields.C",
                 "c":"DanMarc2.fields.100.subfields.c",
                 "0":"DanMarc2.fields.100.subfields.0",
+                "1": "DanMarc2.fields.100.subfields.1",
                 "4":"DanMarc2.fields.100.subfields.4"
             }
         },
