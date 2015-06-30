@@ -205,21 +205,25 @@
             "repeatable":false,
             "sorting":"apcuefx\u00f8",
             "subfields":{
+                "&":{
+                    "repeatable":false
+                },
                 "A":"DanMarc2.fields.245.subfields.A",
                 "a":{
                     "mandatory":true
                 },
-                "b":"DanMarc2.fields.245.subfields.b",               
-                "\u00f8":"DanMarc2.fields.245.subfields.\u00f8",                                  
+                "b":"DanMarc2.fields.245.subfields.b",
+                "\u00D8":"DanMarc2.fields.245.subfields.\u00D8",
+                "\u00f8":"DanMarc2.fields.245.subfields.\u00f8",
                 "c":"DanMarc2.fields.245.subfields.c",
                 "U":"DanMarc2.fields.245.subfields.U",
                 "u":"DanMarc2.fields.245.subfields.u",
                 "e":"DanMarc2.fields.245.subfields.e",
                 "f":"DanMarc2.fields.245.subfields.f",
                 "P":"DanMarc2.fields.245.subfields.P",
-                "p":"DanMarc2.fields.245.subfields.p",               
+                "p":"DanMarc2.fields.245.subfields.p",
                 "X":"DanMarc2.fields.245.subfields.X",
-                "x":"DanMarc2.fields.245.subfields.x"              
+                "x":"DanMarc2.fields.245.subfields.x"
             }
         },
         "250": {
