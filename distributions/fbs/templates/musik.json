@@ -705,6 +705,8 @@
             "subfields":{
                 "A":"DanMarc2.fields.910.subfields.A",
                 "a":"DanMarc2.fields.910.subfields.a",
+                "C": "DanMarc2.fields.910.subfields.C",
+                "c": "DanMarc2.fields.910.subfields.c",
                 "E":"DanMarc2.fields.910.subfields.E",
                 "e":"DanMarc2.fields.910.subfields.e",
                 "x":"DanMarc2.fields.910.subfields.x",
