@@ -339,24 +339,17 @@
         "520":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.56.htm",            
             "subfields":{
-                "&": {
-                    "repeatable": false
-				},
-                "a":{
-                     "repeatable":false
+                "&":{
+                    "repeatable":false
                 },
-                "i":{
-                    "repeatable":false,
-                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
-				},
+                "a":"DanMarc2.fields.520.subfields.a",
+                "i":"DanMarc2.fields.520.subfields.i",
                 "T":"DanMarc2.fields.520.subfields.T",
                 "t":"DanMarc2.fields.520.subfields.t",
                 "e":"DanMarc2.fields.520.subfields.e",
                 "d":"DanMarc2.fields.520.subfields.d",
                 "n":"DanMarc2.fields.520.subfields.n",
-                "b":"DanMarc2.fields.520.subfields.b",
-                "u":"DanMarc2.fields.520.subfields.u",
-                "y":"DanMarc2.fields.520.subfields.y"                                
+                "b":"DanMarc2.fields.520.subfields.b"
             },
 			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },
