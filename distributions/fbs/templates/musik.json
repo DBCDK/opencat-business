@@ -538,6 +538,7 @@
                 "&":{
                     "repeatable":false
                 },
+                "\u00E5":"DanMarc2.fields.666.subfields.\u00E5",
                 "F":"DanMarc2.fields.666.subfields.F",
                 "f":"DanMarc2.fields.666.subfields.f",
                 "T":"DanMarc2.fields.666.subfields.T",
