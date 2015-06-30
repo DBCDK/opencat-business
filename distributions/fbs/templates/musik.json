@@ -133,12 +133,12 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "s" ]
+                    "values":["a", "m", "r", "s" ]
                 },
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "tb", "th", "xc", "xd", "xh", "xk", "xx" ]
+                    "values":[ "nh", "tb", "th", "to", "xc", "xd", "xg", "xh", "xi", "xj", "xk", "xx" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
