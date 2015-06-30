@@ -254,6 +254,9 @@
             "mandatory":true,
             "repeatable":false,
             "subfields":{
+                "&":{
+                    "repeatable":false
+                },
                 "a":"DanMarc2.fields.260.subfields.a",
                 "d":"DanMarc2.fields.260.subfields.d",
                 "f":"DanMarc2.fields.260.subfields.f",
