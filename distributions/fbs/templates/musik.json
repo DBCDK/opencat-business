@@ -220,9 +220,12 @@
             "subfields":{
                 "A":"DanMarc2.fields.110.subfields.A",
                 "a":"DanMarc2.fields.110.subfields.a",
+                "C": "DanMarc2.fields.110.subfields.C",
+                "c": "DanMarc2.fields.110.subfields.c",
                 "E":"DanMarc2.fields.110.subfields.E",
                 "e":"DanMarc2.fields.110.subfields.e",
                 "0":"DanMarc2.fields.110.subfields.0",
+                "1": "DanMarc2.fields.110.subfields.1",
                 "4":"DanMarc2.fields.100.subfields.4"				
             }
         },
