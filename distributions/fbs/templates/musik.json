@@ -666,7 +666,9 @@
                 "t":"DanMarc2.fields.795.subfields.t",
                 "y":"DanMarc2.fields.795.subfields.y",
                 "z":"DanMarc2.fields.795.subfields.z",
-                "&":"DanMarc2.fields.795.subfields.&",
+                "\u00D8":"DanMarc2.fields.795.subfields.\u00D8",
+                "\u00f8":"DanMarc2.fields.795.subfields.\u00D8",
+                "&":{},
                 "0":"DanMarc2.fields.795.subfields.0",
                 "1":"DanMarc2.fields.795.subfields.1",
                 "7":"DanMarc2.fields.795.subfields.7"
