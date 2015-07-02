@@ -10,7 +10,7 @@
                 "password": "20Koster"
             },
             "templateName": "musik",
-            "record": "request-klassisk.marc"
+            "record": "request.marc"
         },
         "expected": {
             "validation": [],
@@ -19,11 +19,11 @@
                 "rawrepo": [
 
                     {
-                        "record": "result-klassisk-new-common.marc",
+                        "record": "result-new-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "result-klassisk-enrichment.marc" ]
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
                     },
                     {
                         "record": "result-dbc-enrichment.marc",
