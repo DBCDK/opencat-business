@@ -17,7 +17,6 @@
             "update": {
                 "errors": [],
                 "rawrepo": [
-
                     {
                         "record": "result-new-common.marc",
                         "type": "MARCXCHANGE",
