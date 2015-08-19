@@ -10,23 +10,27 @@ EXPORTED_SYMBOLS = [ 'FBSClassificationData' ];
 
 //-----------------------------------------------------------------------------
 var FBSClassificationData = function() {
-    var CLASSIFICATION_FIELDS = /004|008|009|038|039|100|110|239|245|652/;
-
-    function hasClassificationData( marc ) {
-        return ClassificationData.hasClassificationData( marc );
+    function create( fieldsRegExp )  {
+        return {
+            fields: fieldsRegExp
+        }
     }
 
-    function hasClassificationsChanged( oldMarc, newMarc ) {
+    function hasClassificationData( instance, marc ) {
+        return ClassificationData.hasClassificationData( instance, marc );
+    }
+
+    function hasClassificationsChanged( instance, oldMarc, newMarc ) {
         Log.trace( "Enter - FBSClassificationData.hasClassificationsChanged( ", oldMarc, ", ", newMarc, " )" );
 
         var result = null;
         try {
-            var lookup = RecordLookupField.createFromRecord( oldMarc, CLASSIFICATION_FIELDS );
+            var lookup = RecordLookupField.createFromRecord( oldMarc, instance.fields );
 
             for( var i = 0; i < newMarc.numberOfFields(); i++ ) {
                 var newField = newMarc.field( i );
 
-                if( !CLASSIFICATION_FIELDS.test( newField.name ) ) {
+                if( !instance.fields.test( newField.name ) ) {
                     continue;
                 }
 
@@ -44,15 +48,16 @@ var FBSClassificationData = function() {
         }
     }
 
-    function updateClassificationsInRecord( dbcRecord, libraryRecord ) {
-        return ClassificationData.updateClassificationsInRecord( dbcRecord, libraryRecord );
+    function updateClassificationsInRecord( instance, dbcRecord, libraryRecord ) {
+        return ClassificationData.updateClassificationsInRecord( instance, dbcRecord, libraryRecord );
     }
 
-    function removeClassificationsFromRecord( record ) {
-        return ClassificationData.removeClassificationsFromRecord( record );
+    function removeClassificationsFromRecord( instance, record ) {
+        return ClassificationData.removeClassificationsFromRecord( instance, record );
     }
 
     return {
+        'create': create,
         'hasClassificationData': hasClassificationData,
         'hasClassificationsChanged': hasClassificationsChanged,
         'updateClassificationsInRecord': updateClassificationsInRecord,

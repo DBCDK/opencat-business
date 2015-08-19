@@ -1,6 +1,8 @@
 //-----------------------------------------------------------------------------
-use( "DBCAuthenticator" );
 use( "DanMarc2Converter" );
+use( "DBCAuthenticator" );
+use( "DefaultEnrichmentRecordHandler" );
+use( "DefaultRawRepoRecordHandler" );
 use( "ClassificationData" );
 use( "Log" );
 use( "Marc" );
@@ -21,18 +23,19 @@ var DBCUpdaterEntryPoint = function() {
     /**
      * Checks if a record contains any classification data
      *
-     * @param {String} jsonMarc The record as a json.
+     * @param {String} jsonRecord The record as a json.
      *
      * @return {Boolean} true if classification data exists in the record, false otherwise.
      */
-    function hasClassificationData( jsonMarc ) {
+    function hasClassificationData( jsonRecord ) {
         Log.trace( "Enter - DBCUpdaterEntryPoint.hasClassificationData()" );
 
         var result;
         try {
-            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonMarc));
+            var instance = ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
+            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
 
-            result = ClassificationData.hasClassificationData(marc);
+            result = ClassificationData.hasClassificationData( instance, marc);
             return result;
         }
         finally {
@@ -53,10 +56,11 @@ var DBCUpdaterEntryPoint = function() {
 
         var result;
         try {
+            var instance = ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
             var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
             var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
 
-            result = ClassificationData.hasClassificationsChanged(oldMarc, newMarc);
+            result = ClassificationData.hasClassificationsChanged( instance, oldMarc, newMarc);
             return result;
         }
         finally {
@@ -78,17 +82,12 @@ var DBCUpdaterEntryPoint = function() {
         var result;
         try {
             var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
-            result = new Record;
 
-            var idField = new Field("001", "00");
-            idField.append(new Subfield("a", dbcMarc.getValue(/001/, /a/)));
-            idField.append(new Subfield("b", libraryId.toString()));
-            idField.append(new Subfield("c", RecordUtil.currentAjustmentTime() ) );
-            idField.append(new Subfield("d", RecordUtil.currentAjustmentDate() ) );
-            idField.append(new Subfield("f", "a"));
-            result.append(idField);
+            var classificationsInstance = ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
+            var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
 
-            result = updateLibraryExtendedRecord(dbcRecord, JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result)));
+            result = DefaultEnrichmentRecordHandler.createRecord( instance, dbcMarc, libraryId );
+            result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
             return result;
         }
         finally {
@@ -113,8 +112,12 @@ var DBCUpdaterEntryPoint = function() {
             var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
             var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
 
-            result = __correctEnrichmentRecordIfEmpty(ClassificationData.updateClassificationsInRecord(dbcMarc, libraryMarc));
-            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
+            var classificationsInstance = ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
+            var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
+
+            result = DefaultEnrichmentRecordHandler.updateRecord( instance, dbcMarc, libraryMarc );
+            result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
+            return result;
         }
         finally {
             Log.trace( "Exit - DBCUpdaterEntryPoint.updateLibraryExtendedRecord(): " + result );
@@ -124,31 +127,20 @@ var DBCUpdaterEntryPoint = function() {
     function correctLibraryExtendedRecord( dbcRecord, libraryRecord ) {
         Log.info( "Enter - ClassificationData.__hasFieldChanged()" );
 
+        var result;
         try {
             var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
             var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
 
-            Log.info("    dbcMarc: " + dbcMarc);
-            Log.info("    libraryMarc: " + libraryMarc);
+            var classificationsInstance = ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
+            var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
 
-            if (ClassificationData.hasClassificationData(dbcMarc)) {
-                if (!ClassificationData.hasClassificationsChanged(dbcMarc, libraryMarc)) {
-                    Log.info("Classifications is the same. Removing it from library record.");
-                    libraryMarc = ClassificationData.removeClassificationsFromRecord(libraryMarc);
-                }
-                else {
-                    Log.info("Classifications has changed.");
-                }
-            }
-            else {
-                Log.info("Common record has no classifications.");
-            }
-
-            var record = __correctEnrichmentRecordIfEmpty(libraryMarc);
-            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(record));
+            result = DefaultEnrichmentRecordHandler.correctRecord( instance, dbcMarc, libraryMarc );
+            result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
+            return result;
         }
         finally {
-            Log.info("Exit - ClassificationData.correctLibraryExtendedRecord()" );
+            Log.info("Exit - ClassificationData.correctLibraryExtendedRecord(): " + result );
         }
     }
 
@@ -166,14 +158,13 @@ var DBCUpdaterEntryPoint = function() {
             var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
             Log.trace( "Record:\n", uneval( marc ) );
 
-            var records = DBCAuthenticator.recordDataForRawRepo( marc, userId, groupId );
+            var instance = DefaultRawRepoRecordHandler.create( DBCAuthenticator );
+
+            var records = DefaultRawRepoRecordHandler.recordDataForRawRepo( instance, marc, userId, groupId );
             var result = [];
 
             for( var i = 0; i < records.length; i++ ) {
                 var curRecord = records[ i ];
-                curRecord = RecordUtil.addOrReplaceSubfield( curRecord, "001", "c", RecordUtil.currentAjustmentTime() );
-                Log.debug( "curRecord:\n", curRecord );
-
                 var resultRecord = DanMarc2Converter.convertFromDanMarc2( curRecord );
                 var resultRecordAsJson = JSON.stringify( resultRecord );
                 Log.debug( "Adding resultRecord: ", resultRecordAsJson );
@@ -186,29 +177,6 @@ var DBCUpdaterEntryPoint = function() {
         }
         finally {
             Log.trace( "Exit - DBCUpdaterEntryPoint.recordDataForRawRepo" );
-        }
-    }
-
-    function __correctEnrichmentRecordIfEmpty( record ) {
-        Log.trace( "Enter - DBCUpdaterEntryPoint.__correctEnrichmentRecordIfEmpty" );
-
-        Log.debug( "Record: ", record.toString() );
-        var result = record;
-        try {
-            for( var i = 0; i < record.size(); i++ ) {
-                var field = record.field( i );
-                if( !( field.name === "001" || field.name === "996" ) ) {
-                    Log.debug( "Return full record." );
-                    return result;
-                }
-            }
-
-            result = new Record;
-            Log.debug( "Return empty record." );
-            return result;
-        }
-        finally {
-            Log.trace( "Exit - DBCUpdaterEntryPoint.__correctEnrichmentRecordIfEmpty: " + result.toString() );
         }
     }
 

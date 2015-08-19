@@ -9,13 +9,17 @@ EXPORTED_SYMBOLS = [ 'ClassificationData' ];
 
 //-----------------------------------------------------------------------------
 var ClassificationData = function() {
-    var CLASSIFICATION_FIELDS = /004|008|009|038|039|100|110|239|245|652/;
-    
-    function hasClassificationData( marc ) {
-        return marc.existField( CLASSIFICATION_FIELDS );
+    function create( fieldsRegExp )  {
+        return {
+            fields: fieldsRegExp
+        }
+    }
+
+    function hasClassificationData( instance, marc ) {
+        return marc.existField( instance.fields );
     }
     
-    function hasClassificationsChanged( oldMarc, newMarc ) {
+    function hasClassificationsChanged( instance, oldMarc, newMarc ) {
         Log.info( "Enter - ClassificationData.hasClassificationsChanged()" );
         Log.info( "    oldMarc: " + oldMarc );
         Log.info( "    newMarc: " + newMarc );
@@ -125,14 +129,14 @@ var ClassificationData = function() {
         return false;        
     }
     
-    function updateClassificationsInRecord( dbcRecord, libraryRecord ) {
+    function updateClassificationsInRecord( instance, dbcRecord, libraryRecord ) {
         Log.info( "Enter - ClassificationData.updateClassificationsInRecord()" );
         Log.info( "    dbcRecord: " + dbcRecord );
         Log.info( "    libraryRecord: " + libraryRecord );
         var record = libraryRecord.clone();
 
-        if( !hasClassificationData( libraryRecord ) ) {
-            dbcRecord.eachField(CLASSIFICATION_FIELDS, function (field) {
+        if( !hasClassificationData( instance, libraryRecord ) ) {
+            dbcRecord.eachField( instance.fields, function (field) {
                 record.append(field);
             } );
         }
@@ -141,13 +145,13 @@ var ClassificationData = function() {
         return record;
     }
     
-    function removeClassificationsFromRecord( record ) {
+    function removeClassificationsFromRecord( instance, record ) {
         Log.info( "Enter - ClassificationData.updateClassificationsInRecord()" );
         Log.info( "    record: " + record );
         
         var result = new Record;
         record.eachField( /./, function( field ) {
-            if( !CLASSIFICATION_FIELDS.test( field.name ) ) {
+            if( !instance.fields.test( field.name ) ) {
                 result.append( field );
             }
         });
@@ -343,7 +347,7 @@ var ClassificationData = function() {
     }
     
     return {
-        'CLASSIFICATION_FIELDS': CLASSIFICATION_FIELDS,
+        'create': create,
         'hasClassificationData': hasClassificationData,
         'hasClassificationsChanged': hasClassificationsChanged,
         'updateClassificationsInRecord': updateClassificationsInRecord,
