@@ -195,7 +195,7 @@ var FBSUpdaterEntryPoint = function() {
             var instance;
 
             if( RecordUtil.isChangedFromVolumeToSingle( currentRecord, newRecord ) ) {
-                var classificationsInstance = FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CHANGE_CLASSIFICATION_FIELDS );
+                var classificationsInstance = FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS );
                 instance = SingleVolumeClassificationData.create( classificationsInstance, FBSClassificationData );
             }
             else {

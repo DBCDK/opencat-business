@@ -196,7 +196,7 @@ var DBCUpdaterEntryPoint = function() {
             var instance;
 
             if( RecordUtil.isChangedFromVolumeToSingle( currentRecord, newRecord ) ) {
-                var classificationsInstance = ClassificationData.create( UpdateConstants.SINGLE_VOLUME_CHANGE_CLASSIFICATION_FIELDS );
+                var classificationsInstance = ClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS );
                 instance = SingleVolumeClassificationData.create( classificationsInstance, ClassificationData );
             }
             else {
