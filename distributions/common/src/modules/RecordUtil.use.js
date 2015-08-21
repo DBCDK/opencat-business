@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "Log" );
 use( "Marc" );
+use( "RawRepoClient" );
 use( "RecordSorter" );
 
 //-----------------------------------------------------------------------------
@@ -146,6 +147,60 @@ var RecordUtil = function() {
         }
     }
 
+    function isChangedFromVolumeToSingle( oldRecord, newRecord ) {
+        Log.trace( "Enter - RecordUtil.isChangedFromVolumeToSingle()" );
+
+        try {
+            var result;
+
+            Log.debug( "New Record: " + newRecord.toString() );
+            if( newRecord.matchValue( /004/, /a/, /e/ ) ) {
+                if( oldRecord !== undefined ) {
+                    Log.debug( "oldRecord: " + oldRecord.toString() );
+                    return result = oldRecord.matchValue(/004/, /a/, /b/);
+                }
+            }
+
+            return result = false;
+        }
+        finally {
+            Log.trace( "Exit - RecordUtil.isChangedFromVolumeToSingle(): " + result );
+        }
+    }
+
+    function fetchCurrentRecord( record ) {
+        Log.info( "Enter - RecordUtil.__fetchParentRecord()" );
+
+        var result = undefined;
+        try {
+            Log.debug( "Record: " + record );
+
+            var recId = record.getValue( /001/, /a/ );
+            var libNo = record.getValue( /001/, /b/ );
+
+            return result = fetchRecord( recId, libNo );
+        }
+        finally {
+            Log.trace( "Enter - RecordUtil.__fetchParentRecord(): " + result );
+        }
+    }
+
+    function fetchRecord( recId, libNo ) {
+        Log.info( "Enter - RecordUtil.__fetchRecord()" );
+
+        var result = undefined;
+        try {
+            if( RawRepoClient.recordExists( recId, libNo ) ) {
+                result = RawRepoClient.fetchRecord( recId, libNo );
+            }
+
+            return result;
+        }
+        finally {
+            Log.trace( "Enter - RecordUtil.__fetchRecord(): " + result );
+        }
+    }
+
     //-----------------------------------------------------------------------------
     //                  Helper functions
     //-----------------------------------------------------------------------------
@@ -164,7 +219,10 @@ var RecordUtil = function() {
         'currentAjustmentTime': currentAjustmentTime,
         'createFromString': createFromString,
         'createFieldFromString': createFieldFromString,
-        'equalIds': equalIds
+        'equalIds': equalIds,
+        'isChangedFromVolumeToSingle': isChangedFromVolumeToSingle,
+        'fetchCurrentRecord': fetchCurrentRecord,
+        'fetchRecord': fetchRecord
     }
 
 }();

@@ -8,7 +8,7 @@ use( "Log" );
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "ClassificationData.hasClassificationData", function() {
     function callFunction( jsonObj ) {
-        return ClassificationData.hasClassificationData( ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS ), DanMarc2Converter.convertToDanMarc2( jsonObj ) );
+        return ClassificationData.hasClassificationData( ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS ), DanMarc2Converter.convertToDanMarc2( jsonObj ) );
     };
     
     function callWithFields( fields ) {
@@ -41,7 +41,7 @@ UnitTest.addFixture( "ClassificationData.hasClassificationData", function() {
 
 UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() {
     function callFunction( oldMarc, newMarc ) {
-        return ClassificationData.hasClassificationsChanged( ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS ),
+        return ClassificationData.hasClassificationsChanged( ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS ),
                                                              DanMarc2Converter.convertToDanMarc2( oldMarc ),
                                                              DanMarc2Converter.convertToDanMarc2( newMarc ) );
     };
@@ -502,7 +502,7 @@ UnitTest.addFixture( "ClassificationData.removeClassificationsFromRecord", funct
         ]
     };
     
-    var result = ClassificationData.removeClassificationsFromRecord( ClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS ), DanMarc2Converter.convertToDanMarc2( record ) );
+    var result = ClassificationData.removeClassificationsFromRecord( ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS ), DanMarc2Converter.convertToDanMarc2( record ) );
     
     Assert.equalValue( "Remove fields", result.size(), 1 ); 
 } );

@@ -16,7 +16,18 @@ var ClassificationData = function() {
     }
 
     function hasClassificationData( instance, marc ) {
-        return marc.existField( instance.fields );
+        Log.trace( "Enter - ClassificationData.hasClassificationData()" );
+
+        var result = null;
+        try {
+            Log.trace( "Fields: " + instance.fields );
+            Log.trace( "Record: " + marc );
+
+            return result = marc.existField(instance.fields);
+        }
+        finally {
+            Log.trace( "Exit - ClassificationData.hasClassificationData(): " + result );
+        }
     }
     
     function hasClassificationsChanged( instance, oldMarc, newMarc ) {
@@ -129,20 +140,28 @@ var ClassificationData = function() {
         return false;        
     }
     
-    function updateClassificationsInRecord( instance, dbcRecord, libraryRecord ) {
+    function updateClassificationsInRecord( instance, currentCommonMarc, updatingCommonMarc, libraryRecord ) {
         Log.info( "Enter - ClassificationData.updateClassificationsInRecord()" );
-        Log.info( "    dbcRecord: " + dbcRecord );
-        Log.info( "    libraryRecord: " + libraryRecord );
-        var record = libraryRecord.clone();
 
-        if( !hasClassificationData( instance, libraryRecord ) ) {
-            dbcRecord.eachField( instance.fields, function (field) {
-                record.append(field);
-            } );
+        var result;
+        try {
+            Log.info("    currentCommonMarc: " + currentCommonMarc);
+            Log.info("    updatingCommonMarc: " + updatingCommonMarc);
+            Log.info("    libraryRecord: " + libraryRecord);
+
+            result = libraryRecord.clone();
+
+            if (!hasClassificationData(instance, libraryRecord)) {
+                currentCommonMarc.eachField(instance.fields, function (field) {
+                    result.append(field);
+                });
+            }
+
+            return result;
         }
-        
-        Log.info( "Exit - ClassificationData.updateClassificationsInRecord(): " + record );
-        return record;
+        finally {
+            Log.info("Exit - ClassificationData.updateClassificationsInRecord(): " + result );
+        }
     }
     
     function removeClassificationsFromRecord( instance, record ) {

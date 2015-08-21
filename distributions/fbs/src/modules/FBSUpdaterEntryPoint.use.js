@@ -32,7 +32,7 @@ var FBSUpdaterEntryPoint = function() {
 
         var result;
         try {
-            var instance = FBSClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
+            var instance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
             var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
 
             result = FBSClassificationData.hasClassificationData( instance, marc);
@@ -56,11 +56,16 @@ var FBSUpdaterEntryPoint = function() {
 
         var result;
         try {
-            var instance = FBSClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
             var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
             var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
+            var instance = __createClassificationInstance( oldMarc, newMarc );
 
-            result = FBSClassificationData.hasClassificationsChanged( instance, oldMarc, newMarc);
+            if( RecordUtil.isChangedFromVolumeToSingle( oldMarc, newMarc ) ) {
+                result = SingleVolumeClassificationData.hasClassificationsChanged( instance, oldMarc, newMarc );
+            }
+            else {
+                result = FBSClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
+            }
             return result;
         }
         finally {
@@ -71,22 +76,23 @@ var FBSUpdaterEntryPoint = function() {
     /**
      * Creates a new library extended record based on a DBC record.
      *
-     * @param {String} dbcRecord The DBC record as a json.
-     * @param {int}    libraryId Library id for the local library.
+     * @param {String} currentCommonRecord  The current common record as a json.
+     * @param {String} updatingCommonRecord The common record begin updated as a json.
+     * @param {int}    agencyId Library id for the local library.
      *
      * @return {String} A json with the new record.
      */
-    function createLibraryExtendedRecord( dbcRecord, libraryId ) {
+    function createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, agencyId ) {
         Log.trace( "Enter - FBSUpdaterEntryPoint.createLibraryExtendedRecord()" );
 
         var result;
         try {
-            var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
+            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( currentCommonRecord ) );
+            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( updatingCommonRecord ) );
 
-            var classificationsInstance = FBSClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
-            var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
+            var instance = __createEnrichmentRecordHandlerInstance( currentCommonMarc, updatingCommonMarc );
 
-            result = DefaultEnrichmentRecordHandler.createRecord( instance, dbcMarc, libraryId );
+            result = DefaultEnrichmentRecordHandler.createRecord( instance, currentCommonMarc, updatingCommonMarc, agencyId );
             result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
             return result;
         }
@@ -99,23 +105,24 @@ var FBSUpdaterEntryPoint = function() {
      * Updates a library extended record with the classifications from
      * a DBC record.
      *
-     * @param {String} dbcRecord The DBC record as a json.
-     * @param {String} libraryRecord The library record to update as a json.
+     * @param {String} currentCommonRecord  The current common record as a json.
+     * @param {String} updatingCommonRecord The common record begin updated as a json.
+     * @param {String} enrichmentRecord The library record to update as a json.
      *
      * @return {String} A json with the updated record.
      */
-    function updateLibraryExtendedRecord( dbcRecord, libraryRecord ) {
+    function updateLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, enrichmentRecord ) {
         Log.trace( "Enter - FBSUpdaterEntryPoint.updateLibraryExtendedRecord()" );
 
         var result;
         try {
-            var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
-            var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
+            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( currentCommonRecord ) );
+            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( updatingCommonRecord ) );
+            var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
 
-            var classificationsInstance = FBSClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
-            var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
+            var instance = __createEnrichmentRecordHandlerInstance( currentCommonMarc, updatingCommonMarc );
 
-            result = DefaultEnrichmentRecordHandler.updateRecord( instance, dbcMarc, libraryMarc );
+            result = DefaultEnrichmentRecordHandler.updateRecord( instance, currentCommonMarc, updatingCommonMarc, enrichmentMarc );
             result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
             return result;
         }
@@ -124,22 +131,24 @@ var FBSUpdaterEntryPoint = function() {
         }
     }
 
-    function correctLibraryExtendedRecord( dbcRecord, libraryRecord ) {
+    function correctLibraryExtendedRecord( commonRecord, enrichmentRecord ) {
         Log.info( "Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
 
+        var result;
         try {
-            var dbcMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(dbcRecord));
-            var libraryMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(libraryRecord));
+            var commonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( commonRecord ) );
+            var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
 
-            var classificationsInstance = FBSClassificationData.create( UpdateConstants.CLASSIFICATION_FIELDS );
+            Log.trace( "Create instance with FBSClassificationData" );
+            var classificationsInstance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
             var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
 
-            result = DefaultEnrichmentRecordHandler.correctRecord( instance, dbcMarc, libraryMarc );
+            result = DefaultEnrichmentRecordHandler.correctRecord( instance, commonMarc, enrichmentMarc );
             result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
             return result;
         }
         finally {
-            Log.info("Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
+            Log.info("Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result );
         }
     }
 
@@ -176,6 +185,51 @@ var FBSUpdaterEntryPoint = function() {
         }
         finally {
             Log.trace( "Exit - FBSUpdaterEntryPoint.recordDataForRawRepo" );
+        }
+    }
+
+    function __createClassificationInstance( currentRecord, newRecord ) {
+        Log.trace( "Enter - FBSUpdaterEntryPoint.__createClassificationInstance" );
+
+        try {
+            var instance;
+
+            if( RecordUtil.isChangedFromVolumeToSingle( currentRecord, newRecord ) ) {
+                var classificationsInstance = FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CHANGE_CLASSIFICATION_FIELDS );
+                instance = SingleVolumeClassificationData.create( classificationsInstance, FBSClassificationData );
+            }
+            else {
+                instance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
+            }
+
+            return instance;
+        }
+        finally {
+            Log.trace( "Exit - FBSUpdaterEntryPoint.__createClassificationInstance" );
+        }
+    }
+
+    function __createEnrichmentRecordHandlerInstance( currentCommonRecord, updatingCommonRecord ) {
+        Log.trace( "Enter - FBSUpdaterEntryPoint.__createClassificationInstance" );
+
+        try {
+            var instance;
+
+            if( RecordUtil.isChangedFromVolumeToSingle( currentCommonRecord, updatingCommonRecord ) ) {
+                Log.trace( "Create instance with SingleVolumeClassificationData" );
+                var classificationsInstance = SingleVolumeClassificationData.create( FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS ), FBSClassificationData );
+                instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, SingleVolumeClassificationData );
+            }
+            else {
+                Log.trace( "Create instance with FBSClassificationData" );
+                var classificationsInstance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
+                instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
+            }
+
+            return instance;
+        }
+        finally {
+            Log.trace( "Exit - FBSUpdaterEntryPoint.__createClassificationInstance" );
         }
     }
 

@@ -55,6 +55,7 @@ var UpdateConstants = {
     //                  Fields
     //-----------------------------------------------------------------------------
 
-    CLASSIFICATION_FIELDS: /004|008|009|038|039|100|110|239|245|652/,
+    DEFAULT_CLASSIFICATION_FIELDS: /004|008|009|038|039|100|110|239|245|652/,
+    SINGLE_VOLUME_CLASSIFICATION_FIELDS: /004|009|038|039|100|110|239|245|652/,
     EXTENTABLE_NOTE_FIELDS: /504|530|531|600|610|631|666|770|780|795/
 };

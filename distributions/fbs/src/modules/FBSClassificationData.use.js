@@ -14,6 +14,8 @@ var FBSClassificationData = function() {
         return {
             fields: fieldsRegExp
         }
+        var that = ClassificationData.create( fieldsRegExp);
+        that.hasClassificationsChanged = funciton()
     }
 
     function hasClassificationData( instance, marc ) {
@@ -48,8 +50,8 @@ var FBSClassificationData = function() {
         }
     }
 
-    function updateClassificationsInRecord( instance, dbcRecord, libraryRecord ) {
-        return ClassificationData.updateClassificationsInRecord( instance, dbcRecord, libraryRecord );
+    function updateClassificationsInRecord( instance, currentCommonMarc, updatingCommonMarc, libraryRecord ) {
+        return ClassificationData.updateClassificationsInRecord( instance, currentCommonMarc, updatingCommonMarc, libraryRecord );
     }
 
     function removeClassificationsFromRecord( instance, record ) {

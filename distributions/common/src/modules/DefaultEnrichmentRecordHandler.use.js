@@ -33,7 +33,7 @@ var DefaultEnrichmentRecordHandler = function() {
      *
      * @return {Record} The new enrichment record.
      */
-    function createRecord( instance, commonRecord, agencyId ) {
+    function createRecord( instance, currentCommonRecord, updatingCommonMarc, agencyId ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.createRecord()" );
 
         var result;
@@ -41,14 +41,14 @@ var DefaultEnrichmentRecordHandler = function() {
             result = new Record;
 
             var idField = new Field("001", "00");
-            idField.append(new Subfield("a", commonRecord.getValue(/001/, /a/)));
+            idField.append(new Subfield("a", updatingCommonMarc.getValue(/001/, /a/)));
             idField.append(new Subfield("b", agencyId.toString()));
             idField.append(new Subfield("c", RecordUtil.currentAjustmentTime() ) );
             idField.append(new Subfield("d", RecordUtil.currentAjustmentDate() ) );
             idField.append(new Subfield("f", "a"));
             result.append(idField);
 
-            result = updateRecord(instance, commonRecord, result );
+            result = updateRecord(instance, currentCommonRecord, updatingCommonMarc, result );
             return result;
         }
         finally {
@@ -66,12 +66,12 @@ var DefaultEnrichmentRecordHandler = function() {
      *
      * @return {Record} The new enrichment record.
      */
-    function updateRecord( instance, commonRecord, enrichmentRecord ) {
+    function updateRecord( instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.updateRecord()" );
 
         var result;
         try {
-            result = __correctRecordIfEmpty( instance.classifications.module.updateClassificationsInRecord( instance.classifications.instance, commonRecord, enrichmentRecord ) );
+            result = __correctRecordIfEmpty( instance.classifications.module.updateClassificationsInRecord( instance.classifications.instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord ) );
             return result;
         }
         finally {
