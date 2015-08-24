@@ -31,8 +31,7 @@ UnitTest.addFixture( "BasisSplitter.splitCompleteBasisRecord", function() {
     );
     enrightmentRecord = RecordUtil.createFromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        "004 00 *r n *a e\n" +
-        "s10 00 *a text\n"
+        "004 00 *r n *a e\n"
     );
 
     actual = BasisSplitter.splitCompleteBasisRecord( record );

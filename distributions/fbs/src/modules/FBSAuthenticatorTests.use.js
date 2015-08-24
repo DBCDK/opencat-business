@@ -524,8 +524,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-            "004 00 *r n *a e\n" +
-            StringUtil.sprintf( "s10 00 *a %s", FBS_RECORD_AGENCY_ID )
+            "004 00 *r n *a e\n"
         )
     ];
     Assert.equalValue( "New record with notes & 996a",
@@ -600,8 +599,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-            "004 00 *r n *a e\n" +
-            StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+            "004 00 *r n *a e\n"
         )
     ];
     Assert.equalValue( "Update record and DBC enrichment. DBC enrichment has no s10",
@@ -616,8 +614,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
     RawRepoClientCore.addRecord( curRecord );
 
     curRecord = RecordUtil.createFromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        StringUtil.sprintf( "s10 00 *a %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID )
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -633,8 +630,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( internalRecord, "netpunkt", FBS_RECORD_AGENCY_ID ),
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-            "004 00 *r n *a e\n" +
-            StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+            "004 00 *r n *a e"
         )
     ];
     Assert.equalValue( "Update record and DBC enrichment. s10 is updated.",
@@ -650,8 +646,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
     RawRepoClientCore.addRecord( curRecord );
 
     curRecord = RecordUtil.createFromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
 
@@ -671,8 +666,7 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
         expectedOwnershipRecord,
         RecordUtil.createFromString(
             StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-            "004 00 *r n *a e\n" +
-            StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+            "004 00 *r n *a e\n"
         )
     ];
     Assert.equalValue( "Update common record with new FBS owner.",
@@ -751,7 +745,6 @@ UnitTest.addFixture( "FBSAuthenticator.recordDataForRawRepo", function() {
             "004 00 *r n *a e\n" +
             "d08 00 *o wnn *o kpn *k ahf\n" +
             "d09 00 *z REX201213\n" +
-            "s10 00 *a DBC\n" +
             "s12 00 *t TeamBMV201210\n" +
             "z98 00 *a Minus korrekturprint\n" +
             "z99 00 *a ahf" )

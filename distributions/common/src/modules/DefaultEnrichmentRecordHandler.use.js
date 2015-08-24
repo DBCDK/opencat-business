@@ -119,6 +119,11 @@ var DefaultEnrichmentRecordHandler = function() {
         Log.debug( "Record: ", record.toString() );
         var result = record;
         try {
+            if( record.getValue( /001/, /b/ ) === UpdateConstants.COMMON_AGENCYID ) {
+                Log.debug( "Return full record for " + UpdateConstants.COMMON_AGENCYID );
+                return record;
+            }
+
             for( var i = 0; i < record.size(); i++ ) {
                 var field = record.field( i );
                 if( !( field.name === "001" || field.name === "996" ) ) {

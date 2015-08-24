@@ -41,6 +41,9 @@ var BasisSplitter = function() {
                         dbcRecord.append( field );
                         commonRecord.append( field );
                     }
+                    else if( field.name === "s10" ) {
+                        continue;
+                    }
                     else if (DBC_FIELDS.test(field.name)) {
                         dbcRecord.append(field);
                     }
@@ -50,8 +53,8 @@ var BasisSplitter = function() {
                 }
             }
 
-            if( dbcRecord.existField( /s10/ ) ) {
-                var owner = dbcRecord.getValue( /s10/, /a/ );
+            if( record.existField( /s10/ ) ) {
+                var owner = record.getValue( /s10/, /a/ );
 
                 commonRecord = RecordUtil.addOrReplaceSubfield( commonRecord, "996", "a", owner );
             }

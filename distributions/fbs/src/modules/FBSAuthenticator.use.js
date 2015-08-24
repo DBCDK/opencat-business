@@ -262,9 +262,6 @@ var FBSAuthenticator = function() {
                 dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "004", "a", recordType );
             }
 
-            Log.debug( "Replace s10 in DBC enrichment record with: ", owner );
-            dbcEnrichmentRecord = RecordUtil.addOrReplaceSubfield( dbcEnrichmentRecord, "s10", "a", owner );
-
             return [ correctedRecord, dbcEnrichmentRecord ];
         }
         finally {
