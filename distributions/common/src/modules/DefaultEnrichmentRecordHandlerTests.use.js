@@ -14,8 +14,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.create", function() {
             classifications: {
                 instance: classificationsInstance,
                 module: ClassificationData
-            },
-            bundle: ResourceBundleFactory.getBundle( "enrichments" )
+            }
         }
     );
 } );
@@ -31,6 +30,8 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     }
 
     function noResult( instance, fieldname, value ) {
+        var bundle = ResourceBundleFactory.getBundle( "enrichments" );
+
         return {
             status: "FAILED_UPDATE_INTERNAL_ERROR",
             serviceError:null,
@@ -40,7 +41,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
                     urlForDocumentation: null,
                     ordinalPositionOfField: null,
                     ordinalPositionOfSubField:null,
-                    message: ResourceBundle.getStringFormat( instance.bundle, "do.not.create.enrichments.reason", fieldname, value )
+                    message: ResourceBundle.getStringFormat( bundle, "do.not.create.enrichments.reason", fieldname, value )
                 }
             ]
         }
