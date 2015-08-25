@@ -75,6 +75,35 @@ var DBCUpdaterEntryPoint = function() {
     }
 
     /**
+     * Checks if we chould create enrichment records for a common record.
+     *
+     * @param {Object} settings             JNDI settings.
+     * @param {String} currentCommonRecord  The current common record as a json.
+     * @param {String} updatingCommonRecord The common record begin updated as a json.
+     *
+     * @return {String} A json with the value of a ServiceResult instance.
+     */
+    function shouldCreateEnrichmentRecords( settings, currentCommonRecord, updatingCommonRecord ) {
+        Log.trace( "Enter - DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords()" );
+
+        var result;
+        try {
+            ResourceBundleFactory.init( settings );
+            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( currentCommonRecord ) );
+            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( updatingCommonRecord ) );
+
+            var instance = __createEnrichmentRecordHandlerInstance( currentCommonMarc, updatingCommonMarc );
+
+            result = DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentCommonMarc, updatingCommonMarc );
+            result = JSON.stringify( result );
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords(): " + result );
+        }
+    }
+
+    /**
      * Creates a new library extended record based on a DBC record.
      *
      * @param {String} currentCommonRecord  The current common record as a json.
@@ -237,6 +266,7 @@ var DBCUpdaterEntryPoint = function() {
     return {
         'hasClassificationData': hasClassificationData,
         'hasClassificationsChanged': hasClassificationsChanged,
+        'shouldCreateEnrichmentRecords': shouldCreateEnrichmentRecords,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,

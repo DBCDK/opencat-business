@@ -19,6 +19,10 @@ function hasClassificationsChanged( oldRecord, newRecord ) {
     return FBSUpdaterEntryPoint.hasClassificationsChanged( oldRecord, newRecord );
 }
 
+function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord ) {
+    return FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord );
+}
+
 /**
  * Creates a new library extended record based on a DBC record.
  *

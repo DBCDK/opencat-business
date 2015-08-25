@@ -19,6 +19,10 @@ function hasClassificationsChanged( oldRecord, newRecord ) {
     return DBCUpdaterEntryPoint.hasClassificationsChanged( oldRecord, newRecord );
 }
 
+function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord ) {
+    return DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord );
+}
+
 /**
  * Creates a new library extended record based on a DBC record.
  *

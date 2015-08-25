@@ -2,6 +2,8 @@
 use( "Log" );
 use( "Marc" );
 use( "RecordUtil" );
+use( "ResourceBundleFactory" );
+use( "ResourceBundle" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'DefaultEnrichmentRecordHandler' ];
@@ -20,9 +22,61 @@ var DefaultEnrichmentRecordHandler = function() {
             classifications: {
                 instance: classificationDataInstance,
                 module: classificationDataModule
-            }
+            },
+            bundle: ResourceBundleFactory.getBundle( "enrichments" )
         }
     }
+
+    /**
+     * Checks if we chould create enrichment records for a common record.
+     *
+     * @param {Object} instance Instance returned by create().
+     * @param {String} currentCommonRecord  The current common record as a json.
+     * @param {String} updatingCommonRecord The common record begin updated as a json.
+     *
+     * @return {Object} A ServiceResult instance.
+     */
+    function shouldCreateRecords( instance, currentCommonRecord, updatingCommonRecord ) {
+        Log.trace( "Enter - DefaultEnrichmentRecordHandler.shouldCreateRecords()" );
+
+        function yesResult() {
+            return {
+                status: "OK",
+                serviceError: null,
+                entries:[]
+            };
+        }
+
+        function noResult( reason ) {
+            return {
+                status: "FAILED_UPDATE_INTERNAL_ERROR",
+                serviceError:null,
+                entries: [
+                    {
+                        warningOrError: "ERROR",
+                        urlForDocumentation: null,
+                        ordinalPositionOfField: null,
+                        ordinalPositionOfSubField:null,
+                        message: reason
+                    }
+                ]
+            }
+        }
+
+        var result = yesResult();
+        try {
+            if( updatingCommonRecord.matchValue( /652/, /m/, /ny\stitel|Uden\sklassem\xe6rke/i ) ) {
+                var value = updatingCommonRecord.getValue( /652/, /m/, "," );
+                result = noResult( ResourceBundle.getStringFormat( instance.bundle, "do.not.create.enrichments.reason", "652m", value ) );
+            }
+
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - DefaultEnrichmentRecordHandler.shouldCreateRecords(): " + result );
+        }
+    }
+
 
     /**
      * Creates a new enrichment record based on a common record.
@@ -143,6 +197,7 @@ var DefaultEnrichmentRecordHandler = function() {
 
     return {
         'create': create,
+        'shouldCreateRecords': shouldCreateRecords,
         'createRecord': createRecord,
         'updateRecord': updateRecord,
         'correctRecord': correctRecord
