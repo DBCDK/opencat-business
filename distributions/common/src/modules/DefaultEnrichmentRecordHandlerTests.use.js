@@ -81,4 +81,26 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     Assert.equalValue( "Complete record: 652m=Uden klassem\xe6rke",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
         noResult( instance, "652m", record.getValue( /652/, /m/ ) ) );
+
+    record = RecordUtil.createFromString( [
+        "001 00 *a 1 234 567 8 *b 191919",
+        "004 00 *a e *r n",
+        "014 00 *a 2 345 678 9",
+        "032 00 *a DBF999999",
+        "245 00 *a titel",
+    ].join( "\n" ) );
+    Assert.equalValue( "Complete record: 032a=DBF999999",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
+        noResult( instance, "032a", record.getValue( /032/, /a/ ) ) );
+
+    record = RecordUtil.createFromString( [
+        "001 00 *a 1 234 567 8 *b 191919",
+        "004 00 *a e *r n",
+        "014 00 *a 2 345 678 9",
+        "032 00 *x DBF999999",
+        "245 00 *a titel",
+    ].join( "\n" ) );
+    Assert.equalValue( "Complete record: 032x=DBF999999",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
+        noResult( instance, "032x", record.getValue( /032/, /x/ ) ) );
 } );

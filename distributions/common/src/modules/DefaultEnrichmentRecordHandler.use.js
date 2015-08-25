@@ -22,8 +22,7 @@ var DefaultEnrichmentRecordHandler = function() {
             classifications: {
                 instance: classificationDataInstance,
                 module: classificationDataModule
-            },
-            bundle: ResourceBundleFactory.getBundle( "enrichments" )
+            }
         }
     }
 
@@ -38,6 +37,30 @@ var DefaultEnrichmentRecordHandler = function() {
      */
     function shouldCreateRecords( instance, currentCommonRecord, updatingCommonRecord ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.shouldCreateRecords()" );
+
+        var result;
+        try {
+            var dk5Codes = /ny\stitel|Uden\sklassem\xe6rke/i;
+            var catCodes = /(DBF|DLF|DBI|DMF|DMO|DPF|BKM|GBF|GMO|GPF|FPF|DBR|UTI)999999/i;
+
+            result = __shouldCreateRecords( instance, updatingCommonRecord, "032", "a", catCodes );
+
+            if( result.status === "OK" ) {
+                result = __shouldCreateRecords( instance, updatingCommonRecord, "032", "x", catCodes );
+            }
+            if( result.status === "OK" ) {
+                result = __shouldCreateRecords( instance, updatingCommonRecord, "652", "m", dk5Codes );
+            }
+
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - DefaultEnrichmentRecordHandler.shouldCreateRecords(): " + result );
+        }
+    }
+
+    function __shouldCreateRecords( instance, record, field, subfield, checkValue ) {
+        Log.trace( "Enter - DefaultEnrichmentRecordHandler.__shouldCreateRecords()" );
 
         function yesResult() {
             return {
@@ -65,18 +88,22 @@ var DefaultEnrichmentRecordHandler = function() {
 
         var result = yesResult();
         try {
-            if( updatingCommonRecord.matchValue( /652/, /m/, /ny\stitel|Uden\sklassem\xe6rke/i ) ) {
-                var value = updatingCommonRecord.getValue( /652/, /m/, "," );
-                result = noResult( ResourceBundle.getStringFormat( instance.bundle, "do.not.create.enrichments.reason", "652m", value ) );
+            var fieldRx = RegExp( field );
+            var subfieldRx = RegExp( subfield );
+
+            if( record.matchValue( fieldRx, subfieldRx, checkValue ) ) {
+                var value = record.getValue( fieldRx, subfieldRx, "," );
+                var bundle = ResourceBundleFactory.getBundle( "enrichments" );
+
+                result = noResult( ResourceBundle.getStringFormat( bundle, "do.not.create.enrichments.reason", field + subfield, value ) );
             }
 
             return result;
         }
         finally {
-            Log.trace( "Exit - DefaultEnrichmentRecordHandler.shouldCreateRecords(): " + result );
+            Log.trace( "Exit - DefaultEnrichmentRecordHandler.__shouldCreateRecords() " + result );
         }
     }
-
 
     /**
      * Creates a new enrichment record based on a common record.

@@ -1,0 +1,32 @@
+001 00 *a 51886712 *b 191919 *c 20150824124020 *d 20150814 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2015 *b dk *d å *d y *l dan *o s *x 02 *v 0
+009 00 *a a *g xx
+021 00 *e 9788740604474 *c hf.
+032 00 *x ACC201533 *a DBF999999 *x BKM999999
+042 00 *c 17
+100 00 *0 *a Søndergꜳrd *h Per Strꜳrup *4 aut
+900 00 *a Strꜳrup Søndergꜳrd *h Per *z 100
+245 00 *a København
+250 00 *a 1. udgave *b ÷
+260 00 *& 1 *a Ꜳrhus *b Turbine *c 2015
+300 00 *a 16 sider *b ill. i farver
+440 00 *0 *a Min første bog *ø Ꜳrhus
+521 00 *b 1. oplag *c 2015 *k tr. i udl.
+526 00 *a Hertil findes lærervejledning og opgaver på seriens hjemmeside
+530 00 *& 1 *a Indhold: En stor by ; Lille, gammel og kendt ; Sjov i byen ; Gå og cykle ; Uro og fred ; Dronning og prins
+532 00 *& 1 *a Med litteraturhenvisninger og links
+652 00 *m 46.3
+666 00 *0 *e København
+666 00 *0 *u for 6 år
+666 00 *0 *u for 7 år
+666 00 *0 *u for 8 år
+666 00 *0 *u let at læse
+666 00 *0 *u for begynderlæsere
+720 00 *o Peter Bejder *4 edt
+720 00 *o Lars C. Hansen *4 dkbea
+720 00 *o Ole Steen *4 ill
+945 00 *a Min første bog *ø Turbine *z 440
+945 00 *a Min 1. bog *z 440
+945 00 *a Min første bog-serien *z 440
+996 00 *a DBC
