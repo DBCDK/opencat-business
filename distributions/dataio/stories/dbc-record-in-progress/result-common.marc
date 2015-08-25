@@ -1,0 +1,23 @@
+001 00 *a 51905520 *b 191919 *c 20150826120850 *d 20150825 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2015 *b dk *d y *l eng *n a *x 04 *v 5 *w 1
+009 00 *a a *g xe
+021 00 *e 9788792490377
+032 00 *a DBF201537 *x ACC201535 *x ARK201536
+245 00 *a Indifferent - just like you *c a psychosocial approach promoting the inclusion of persons with disabilities
+260 00 *b International Federation of Red Cross and Red Crescent Societies Reference Centre for Psychosocial Support (PS Centre) *c 2015
+300 00 *a 89 sider *b ill. (nogle i farver)
+512 00 *a Beskrivelsen baseret på det fysiske forlæg
+532 00 *& 1 *a Med litteraturhenvisninger og links
+652 00 *m 38.7
+700 01 *a Juul Rasmussen *h Tina *6 68529379 *4 aut *g 1
+900 00 *a Rasmussen *h Tina Juul
+710 00 *a International Federation Reference Centre for Psychosocial Support
+720 00 *o Lingo24 *4 trl
+720 00 *o Wendy Ager *4 dktek *g 1
+720 00 *o Alexander Christi *4 ill
+856 00 *z Adgangsmåde: Internet *u http://pscentre.org/wp-content/uploads/1744_psc_pid_bog_T2-lo.pdf *y PDF-format
+910 00 *a International Federation of Red Cross and Red Crescent Societies *c Reference Centre for Psychosocial Support *z 710
+910 00 *a Reference Centre for Psychosocial Support *z 710
+910 00 *a PS Centre *z 710
+996 00 *a DBC
