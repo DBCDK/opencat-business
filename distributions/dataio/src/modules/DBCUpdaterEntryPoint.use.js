@@ -240,11 +240,10 @@ var DBCUpdaterEntryPoint = function() {
     }
 
     function __createEnrichmentRecordHandlerInstance( currentCommonRecord, updatingCommonRecord ) {
-        Log.trace( "Enter - DBCUpdaterEntryPoint.__createClassificationInstance" );
+        Log.trace( "Enter - DBCUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance" );
 
+        var instance;
         try {
-            var instance;
-
             if( RecordUtil.isChangedFromVolumeToSingle( currentCommonRecord, updatingCommonRecord ) ) {
                 Log.trace( "Create instance with SingleVolumeClassificationData" );
                 var classificationsInstance = SingleVolumeClassificationData.create( ClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS ), ClassificationData );
@@ -259,7 +258,7 @@ var DBCUpdaterEntryPoint = function() {
             return instance;
         }
         finally {
-            Log.trace( "Exit - DBCUpdaterEntryPoint.__createClassificationInstance" );
+            Log.trace( "Exit - DBCUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance(): " + instance );
         }
     }
 

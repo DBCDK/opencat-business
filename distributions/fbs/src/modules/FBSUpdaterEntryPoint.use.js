@@ -239,11 +239,10 @@ var FBSUpdaterEntryPoint = function() {
     }
 
     function __createEnrichmentRecordHandlerInstance( currentCommonRecord, updatingCommonRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.__createClassificationInstance" );
+        Log.trace( "Enter - FBSUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance" );
 
+        var instance;
         try {
-            var instance;
-
             if( RecordUtil.isChangedFromVolumeToSingle( currentCommonRecord, updatingCommonRecord ) ) {
                 Log.trace( "Create instance with SingleVolumeClassificationData" );
                 var classificationsInstance = SingleVolumeClassificationData.create( FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS ), FBSClassificationData );
@@ -258,7 +257,7 @@ var FBSUpdaterEntryPoint = function() {
             return instance;
         }
         finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.__createClassificationInstance" );
+            Log.trace( "Exit - FBSUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance() " + instance );
         }
     }
 

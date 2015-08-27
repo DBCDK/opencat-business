@@ -104,23 +104,6 @@ var SingleVolumeClassificationData = function() {
         }
     }
 
-    function __fetchCurrentRecord( record ) {
-        Log.info( "Enter - SingleVolumeClassificationData.__fetchParentRecord()" );
-
-        var result = undefined;
-        try {
-            Log.debug( "Record: " + record );
-
-            var recId = record.getValue( /001/, /a/ );
-            var libNo = record.getValue( /001/, /b/ );
-
-            return result = __fetchRecord( recId, libNo );
-        }
-        finally {
-            Log.trace( "Exit - SingleVolumeClassificationData.__fetchParentRecord(): " + result );
-        }
-    }
-
     function __fetchParentRecord( record ) {
         Log.info( "Enter - SingleVolumeClassificationData.__fetchParentRecord()" );
 
