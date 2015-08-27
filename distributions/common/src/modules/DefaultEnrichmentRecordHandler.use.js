@@ -50,7 +50,7 @@ var DefaultEnrichmentRecordHandler = function() {
                 result = __shouldCreateRecords( instance, updatingCommonRecord, "032", "x", catCodes );
             }
             if( result.status === "OK" ) {
-                result = __shouldCreateRecords( instance, updatingCommonRecord, "652", "m", dk5Codes );
+                result = __shouldCreateRecords( instance, currentCommonRecord, "652", "m", dk5Codes );
             }
 
             if( result.status === "OK" ) {

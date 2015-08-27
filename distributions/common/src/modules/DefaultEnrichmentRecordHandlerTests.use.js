@@ -36,6 +36,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     var classificationsInstance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
     var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
 
+    var currentRecord;
     var record = new Record;
     Assert.equalValue( "Empty record", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
 
@@ -47,34 +48,46 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     ].join( "\n" ) );
     Assert.equalValue( "Complete record", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
 
-    record = RecordUtil.createFromString( [
+    currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
         "014 00 *a 2 345 678 9",
         "245 00 *a titel",
         "652 00 *m Ny TiTel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record: 652m=Ny titel",
-                       DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
-                       noResult( "652m", record.getValue( /652/, /m/ ) ) );
-
     record = RecordUtil.createFromString( [
+        "001 00 *a 1 234 567 8 *b 191919",
+        "004 00 *a e *r n",
+        "014 00 *a 2 345 678 9",
+        "245 00 *a titel",
+    ].join( "\n" ) );
+    Assert.equalValue( "Complete record: 652m=Ny titel",
+                       DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
+                       noResult( "652m", currentRecord.getValue( /652/, /m/ ) ) );
+
+    currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
         "014 00 *a 2 345 678 9",
         "245 00 *a titel",
         "652 00 *m Uden klassem\xe6rke"
     ].join( "\n" ) );
+    record = RecordUtil.createFromString( [
+        "001 00 *a 1 234 567 8 *b 191919",
+        "004 00 *a e *r n",
+        "014 00 *a 2 345 678 9",
+        "245 00 *a titel"
+    ].join( "\n" ) );
     Assert.equalValue( "Complete record: 652m=Uden klassem\xe6rke",
-        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
-        noResult( "652m", record.getValue( /652/, /m/ ) ) );
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
+        noResult( "652m", currentRecord.getValue( /652/, /m/ ) ) );
 
     record = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
         "014 00 *a 2 345 678 9",
         "032 00 *a DBF999999",
-        "245 00 *a titel",
+        "245 00 *a titel"
     ].join( "\n" ) );
     Assert.equalValue( "Complete record: 032a=DBF999999",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
@@ -110,7 +123,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     Assert.equalValue( "Complete record in production", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), noResultInProduction() );
 
     Log.trace( "Enter - Testcase" );
-    var currentRecord = RecordUtil.createFromString( [
+    currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
         "014 00 *a 2 345 678 9",
