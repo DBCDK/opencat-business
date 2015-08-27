@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "Log" );
 use( "Marc" );
+use( "RecordProduction" );
 use( "RecordUtil" );
 use( "ResourceBundleFactory" );
 use( "ResourceBundle" );
@@ -52,6 +53,40 @@ var DefaultEnrichmentRecordHandler = function() {
                 result = __shouldCreateRecords( instance, updatingCommonRecord, "652", "m", dk5Codes );
             }
 
+            if( result.status === "OK" ) {
+                if( updatingCommonRecord.matchValue( /008/, /u/, /r/) ) {
+                    var oldValues = __collectProductionCodes( currentCommonRecord );
+                    var newValues = __collectProductionCodes( updatingCommonRecord );
+
+                    oldValues.sort();
+                    newValues.sort();
+
+                    Log.debug( "oldValues: ", oldValues );
+                    Log.debug( "newValues: ", newValues );
+
+                    if( oldValues.length !== newValues.length ) {
+                        Log.debug( "oldValues.length !== newValues.length" );
+                        return result;
+                    }
+                    else {
+                        Log.debug( "oldValues.length === newValues.length" );
+                        for( var i = 0; i < oldValues.length; i++ ) {
+                            if( oldValues[i] !== newValues[i] ) {
+                                Log.debug( "oldValues[i] !== newValues[i]: ", oldValues[i], " !== ", newValues[i] );
+                                return result;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if( result.status === "OK" ) {
+                if( RecordProduction.checkRecord( new Date, updatingCommonRecord ) ) {
+                    var bundle = ResourceBundleFactory.getBundle( "enrichments" );
+                    result = __shouldCreateRecordsNoResult( ResourceBundle.getString( bundle, "do.not.create.enrichments.inproduction.reason" ) );
+                }
+            }
+
             return result;
         }
         finally {
@@ -59,34 +94,34 @@ var DefaultEnrichmentRecordHandler = function() {
         }
     }
 
+    function __shouldCreateRecordsYesResult() {
+        return {
+            status: "OK",
+            serviceError: null,
+            entries:[]
+        };
+    }
+
+    function __shouldCreateRecordsNoResult( reason ) {
+        return {
+            status: "FAILED_UPDATE_INTERNAL_ERROR",
+            serviceError:null,
+            entries: [
+                {
+                    warningOrError: "ERROR",
+                    urlForDocumentation: null,
+                    ordinalPositionOfField: null,
+                    ordinalPositionOfSubField:null,
+                    message: reason
+                }
+            ]
+        }
+    }
+
     function __shouldCreateRecords( instance, record, field, subfield, checkValue ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.__shouldCreateRecords()" );
 
-        function yesResult() {
-            return {
-                status: "OK",
-                serviceError: null,
-                entries:[]
-            };
-        }
-
-        function noResult( reason ) {
-            return {
-                status: "FAILED_UPDATE_INTERNAL_ERROR",
-                serviceError:null,
-                entries: [
-                    {
-                        warningOrError: "ERROR",
-                        urlForDocumentation: null,
-                        ordinalPositionOfField: null,
-                        ordinalPositionOfSubField:null,
-                        message: reason
-                    }
-                ]
-            }
-        }
-
-        var result = yesResult();
+        var result = __shouldCreateRecordsYesResult();
         try {
             var fieldRx = RegExp( field );
             var subfieldRx = RegExp( subfield );
@@ -95,13 +130,31 @@ var DefaultEnrichmentRecordHandler = function() {
                 var value = record.getValue( fieldRx, subfieldRx, "," );
                 var bundle = ResourceBundleFactory.getBundle( "enrichments" );
 
-                result = noResult( ResourceBundle.getStringFormat( bundle, "do.not.create.enrichments.reason", field + subfield, value ) );
+                result = __shouldCreateRecordsNoResult( ResourceBundle.getStringFormat( bundle, "do.not.create.enrichments.reason", field + subfield, value ) );
             }
 
             return result;
         }
         finally {
             Log.trace( "Exit - DefaultEnrichmentRecordHandler.__shouldCreateRecords() " + result );
+        }
+    }
+
+    function __collectProductionCodes( record ) {
+        Log.trace( "Enter - DefaultEnrichmentRecordHandler.__collectProductionCodes()" );
+
+        var result = [];
+        try {
+            record.eachField( /032/, function( field ) {
+                field.eachSubField( /a|x/, function( field, subfield ) {
+                    result.push( subfield.name + ": " + subfield.value );
+                } )
+            } );
+
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - DefaultEnrichmentRecordHandler.__collectProductionCodes(): " + result );
         }
     }
 
@@ -225,6 +278,8 @@ var DefaultEnrichmentRecordHandler = function() {
     return {
         'create': create,
         'shouldCreateRecords': shouldCreateRecords,
+        '__shouldCreateRecordsYesResult': __shouldCreateRecordsYesResult,
+        '__shouldCreateRecordsNoResult': __shouldCreateRecordsNoResult,
         'createRecord': createRecord,
         'updateRecord': updateRecord,
         'correctRecord': correctRecord
