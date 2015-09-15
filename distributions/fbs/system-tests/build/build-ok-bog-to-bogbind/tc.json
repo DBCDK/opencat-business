@@ -1,0 +1,14 @@
+[
+  {
+    "name": "build-ok-bog-to-bogbind-from-populated-bog",
+    "description": "Tester build OK ud fra bog skabelonen for et FBS-bibliotek",
+    "request": {
+      "templateName": "bogbind",
+      "record": "input.marc"
+    },
+    "expected": {
+      "error": "",
+      "record": "result.marc"
+    }
+  }
+]

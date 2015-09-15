@@ -45,7 +45,7 @@ var Builder = function() {
             }
         }
         return result;
-    };
+    }
 
     /**
      * buildRecord constructs a record from the template given as a parameter
@@ -91,7 +91,7 @@ var Builder = function() {
         // sort the new record before returning it
         result = sortRecord( result );
         return result;
-    };
+    }
 
     // function to sort the record fields
     function sortRecord( record ) {
@@ -101,7 +101,7 @@ var Builder = function() {
         };
         result.fields = record.fields.sort(sortRecordFunction);
         return result;
-    };
+    }
 
     // sort function used by sortRecord
     // function( a, b ) { return a.name.localeCompare(b.name); }
@@ -109,7 +109,7 @@ var Builder = function() {
         Log.trace( "sortRecordFunction" );
         var result = a.name.localeCompare(b.name);
         return result;
-    };
+    }
 
     // convertField converts a field to the type indicated by the template, by
     // either removing not allowed subfields and adding mandatory subfields.
@@ -137,7 +137,7 @@ var Builder = function() {
             newField.subfields = newSubfields.concat( missingSubfields );
         }
         return newField;
-    };
+    }
 
     // verifyIndicator adds the indicator value of '00' if none is present
     function verifyIndicator( template, field ) {
@@ -148,9 +148,9 @@ var Builder = function() {
                 ( indicator !== undefined && newField !== undefined &&
                         ( newField.indicator === undefined || newField.indicator === "" ) ) ) {
             newField.indicator = indicator;
-        } 
+        }
         return newField;
-    };
+    }
 
     // getIndicatorFromUnoptimizedTemplate returns the default indicator value
     // from an unoptimized template
@@ -161,7 +161,7 @@ var Builder = function() {
             indicator = template["defaults"]["field"]["indicator"];
         }
         return indicator;
-    };
+    }
 
     // buildMissingFields returns a list of mandatory fields not used in the original record
     function buildMissingFields( template, faustProvider, mandatoryFields ) {
@@ -175,7 +175,7 @@ var Builder = function() {
             }
         }
         return result;
-    };
+    }
 
     // convertSubfields converts the subfields on a field to match the template
     // given as an argument by removing fields not allowed and indicating the
@@ -214,7 +214,7 @@ var Builder = function() {
         result["subfields"] = newSubfields;
         result["mandatorySubfields"] = mandatorySubfieldsObject;
         return result;
-    };
+    }
 
     // buildMissingSubfields builds a list of the mandatory subfields not used
     // in the original field
@@ -229,7 +229,7 @@ var Builder = function() {
             }
         }
         return newSubfields;
-    };
+    }
 
     // buildField constructs a single field using the field name given as a parameter.
     // If it is field 001 being constructed, the faust number (fstNumber) is also used.
@@ -242,7 +242,7 @@ var Builder = function() {
             "indicator": indicator,
             "subfields": []
         };
-        
+
         var newSubfield;
         if ( mandatorySubfields !== undefined ) {
             for ( var i = 0; i < mandatorySubfields.length; i++ ) {
@@ -251,7 +251,7 @@ var Builder = function() {
             }
         }
         return field;
-    };
+    }
 
     // buildSubfield constructs a single subfield using the subfield name given
     // as a parameter.
@@ -274,7 +274,7 @@ var Builder = function() {
             }
         }
         return subfield;
-    };
+    }
 
     // getMandatoryFieldsFromTemplate returns an array of mandatory fields,
     // if any, from the template given as a parameter.
@@ -291,7 +291,7 @@ var Builder = function() {
             }
         }
         return mandatoryFields;
-    };
+    }
 
     // getMandatorySubfieldsFromTemplate returns an array of mandatory subfields,
     // if any, from the template and field name given as parameters.
@@ -310,13 +310,13 @@ var Builder = function() {
             }
         }
         return mandatorySubfields;
-    };
+    }
 
     function getMandatoryDefaultValueFromUnoptimizedTemplate( template, type ) {
         Log.trace( "getMandatoryDefaultValueFromUnoptimizedTemplate" );
         var mandatoryValue = template["defaults"][type]["mandatory"];
         return mandatoryValue;
-    };
+    }
 
     // converts an array to an object
     // ex: in  = ["001", "002", "003"], 1
@@ -333,7 +333,7 @@ var Builder = function() {
             result = undefined;
         }
         return result;
-    };
+    }
 
     // returns a list of subfields present in the template under a specifiec field
     function subfieldsInTemplate( template, field ) {
@@ -345,7 +345,7 @@ var Builder = function() {
             }
         }
         return result;
-    };
+    }
 
     // returns true if parameter is not undefined and a function
     function isFunction( functionObject ) {
@@ -353,7 +353,7 @@ var Builder = function() {
         var res = false;
         if ( functionObject !== undefined && functionObject instanceof Function ) {
             res = true;
-        }            
+        }
         return res;
     }
 
@@ -2276,7 +2276,7 @@ UnitTest.addFixture( "Builder.__buildMissingFields", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "002": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                         "mandatory": true,
@@ -2318,7 +2318,7 @@ UnitTest.addFixture( "Builder.__buildMissingFields", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "003": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                         "mandatory": true,
@@ -2360,7 +2360,7 @@ UnitTest.addFixture( "Builder.__buildMissingFields", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "004": {
                         "url": "",
                         "mandatory": true,
@@ -2522,7 +2522,7 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "002": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                         "mandatory": true,
@@ -2564,7 +2564,7 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "003": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                         "mandatory": true,
@@ -2606,7 +2606,7 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "004": {
                         "url": "",
                         "mandatory": true,
@@ -2906,7 +2906,7 @@ UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "002": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                         "mandatory": true,
@@ -2948,7 +2948,7 @@ UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "003": {
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                         "mandatory": true,
@@ -2990,7 +2990,7 @@ UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
                                 ]
                             }
                         }
-                    }, 
+                    },
                     "004": {
                         "url": "",
                         "mandatory": true,
@@ -3045,7 +3045,7 @@ UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
             };
 
     var subfieldsObj = {"a": false, "b": false, "c": false, "d": false, "f": false, "g": false, "h": false, "j": false};
-    
+
     SafeAssert.equal( "1 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "001" ), subfieldsObj );
     SafeAssert.equal( "2 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "042" ), {} );
     subfieldsObj = {"r": false, "a": false};
@@ -3054,7 +3054,7 @@ UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
 
 UnitTest.addFixture( "Builder.__isFunction", function() {
     var template = {};
-    var templateProvider = function() {return template; };        
+    var templateProvider = function() {return template; };
 
     SafeAssert.equal( "1 __isFunction test", Builder.__isFunction( templateProvider ), true );
     SafeAssert.equal( "2 __isFunction test", Builder.__isFunction( template ), false );

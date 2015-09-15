@@ -1,0 +1,38 @@
+[
+  {
+    "name": "build-ok-from-empty-bog",
+    "description": "Tester build OK ud fra bog skabelonen for et FBS-bibliotek",
+    "request": {
+      "templateName": "bog",
+      "record": ""
+    },
+    "expected": {
+      "error": "",
+      "record": "result-bog.marc"
+    }
+  },
+  {
+    "name": "build-ok-from-empty-boghoved",
+    "description": "Tester build OK ud fra boghoved skabelonen for et FBS-bibliotek",
+    "request": {
+      "templateName": "boghoved",
+      "record": ""
+    },
+    "expected": {
+      "error": "",
+      "record": "result-boghoved.marc"
+    }
+  },
+  {
+    "name": "build-ok-from-empty-bogbind",
+    "description": "Tester build OK ud fra bogbind skabelonen for et FBS-bibliotek",
+    "request": {
+      "templateName": "bogbind",
+      "record": ""
+    },
+    "expected": {
+      "error": "",
+      "record": "result-bogbind.marc"
+    }
+  }
+]

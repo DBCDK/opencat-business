@@ -1,0 +1,14 @@
+[
+  {
+    "name": "wrong-schema",
+    "description": "Tester build med en forkert skabelonen",
+    "request": {
+      "templateName": "b0g",
+      "record": ""
+    },
+    "expected": {
+      "error": "FAILED_INVALID_SCHEMA",
+      "record": ""
+    }
+  }
+]

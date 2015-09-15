@@ -35,7 +35,6 @@ UnitTest.addFixture( "BasisSplitter.splitCompleteBasisRecord", function() {
     );
 
     actual = BasisSplitter.splitCompleteBasisRecord( record );
-    print( actual[ 1 ].toString() );
     Assert.equalValue( "Split with no 996: Common record", actual[ 0 ].toString(), commonRecord.toString() );
     Assert.equalValue( "Split with no 996: Enrightment record", actual[ 1 ].toString(), enrightmentRecord.toString() );
 } );
