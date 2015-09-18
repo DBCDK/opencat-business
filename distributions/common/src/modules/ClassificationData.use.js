@@ -70,7 +70,7 @@ var ClassificationData = function() {
         }
 
         if( instance.fields.test( "100" ) ) {
-            if (__hasFieldByNameChanged(oldMarc, newMarc, "100", __stripValue, /c/)) {
+            if (__hasFieldByNameChanged(oldMarc, newMarc, "100", __stripValue, /0|c/)) {
                 Log.info("Exit - ClassificationData.hasClassificationsChanged(): true");
                 return true;
             }
