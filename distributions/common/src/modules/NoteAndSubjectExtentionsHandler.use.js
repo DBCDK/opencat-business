@@ -2,6 +2,7 @@
 use( "FBSAuthenticator" );
 use( "Log" );
 use( "Marc" );
+use( "OpenAgencyClient" );
 use( "RawRepoClient" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
@@ -50,8 +51,15 @@ var NoteAndSubjectExtentionsHandler = function() {
             var bundle = ResourceBundleFactory.getBundle( FBSAuthenticator.__BUNDLE_NAME );
 
             var authResult = [];
+
+            var extentableFields = UpdateConstants.EXTENTABLE_NOTE_FIELDS;
+            if( OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_COMMON_SUBJECTS ) ) {
+                extentableFields += "|" + UpdateConstants.EXTENTABLE_SUBJECT_FIELDS;
+            }
+
+            var extentableFieldsRx = RegExp( extentableFields );
             record.eachField(/./, function (field) {
-                if (!UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
+                if( !( extentableFieldsRx.test(field.name) ) ) {
                     if (__isFieldChangedInOtherRecord(field, curRecord)) {
                         var message = ResourceBundle.getStringFormat( bundle, "notes.subjects.edit.field.error", groupId, field.name, recId );
                         authResult.push(ValidateErrors.recordError("", message ) );
@@ -60,7 +68,7 @@ var NoteAndSubjectExtentionsHandler = function() {
             });
 
             curRecord.eachField(/./, function (field) {
-                if (!UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
+                if( !extentableFieldsRx.test(field.name) ) {
                     if (__isFieldChangedInOtherRecord(field, record)) {
                         if( curRecord.count( field.name ) !== record.count( field.name ) ) {
                             var message = ResourceBundle.getStringFormat( bundle, "notes.subjects.delete.field.error", groupId, field.name, recId );
@@ -104,8 +112,14 @@ var NoteAndSubjectExtentionsHandler = function() {
                 return result = record;
             }
 
+            var extentableFields = UpdateConstants.EXTENTABLE_NOTE_FIELDS;
+            if( OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_COMMON_SUBJECTS ) ) {
+                extentableFields += "|" + UpdateConstants.EXTENTABLE_SUBJECT_FIELDS;
+            }
+
+            var extentableFieldsRx = RegExp( extentableFields );
             record.eachField(/./, function (field) {
-                if (UpdateConstants.EXTENTABLE_NOTE_FIELDS.test(field.name)) {
+                if (extentableFieldsRx.test(field.name)) {
                     if( __isFieldChangedInOtherRecord( field, curRecord ) ) {
                         if( field.exists( /&/ ) ) {
                             field.append( "&", groupId, true );
