@@ -8,9 +8,32 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
     var curRecord;
     var record;
 
+    function callFunction( record, userId, groupId, settings ) {
+        Log.trace( "Enter - DBCAuthenticatorTests.authenticateRecord.callFunction()" );
+
+        try {
+            Log.debug( "Tracepoint 1" );
+            var recordObject = DanMarc2Converter.convertFromDanMarc2(record);
+
+            Log.debug( "Tracepoint 2" );
+            var recordJson = JSON.stringify(recordObject);
+
+            Log.debug( "Tracepoint 3" );
+            var result = DBCAuthenticator.authenticateRecord(recordJson, userId, groupId, settings);
+
+            Log.debug( "Tracepoint 4" );
+            return JSON.parse( result );
+        }
+        finally {
+            Log.trace( "Exit - DBCAuthenticatorTests.authenticateRecord.callFunction()" );
+        }
+    }
+
     //-----------------------------------------------------------------------------
     //                  Test new records
     //-----------------------------------------------------------------------------
+
+    OpenAgencyClientCore.addFeatures( UpdateConstants.DBC_LOGIN_AGENCY_ID, [ UpdateConstants.AUTH_ROOT_FEATURE ] );
 
     record = new Record();
     record.fromString(
@@ -18,8 +41,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         "004 00 *a e *r n"
     );
     Assert.equalValue( "New record without authentication",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
-        [] );
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ), [] );
 
     record = new Record();
     record.fromString(
@@ -28,7 +50,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         StringUtil.sprintf( "s10 00 *a %s", UpdateConstants.COMMON_AGENCYID )
     );
     Assert.equalValue( "New record with s10",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ),
         [] );
 
     record = new Record();
@@ -38,7 +60,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         StringUtil.sprintf( "996 00 *a %s", UpdateConstants.COMMON_AGENCYID )
     );
     Assert.equalValue( "New record with 996",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ),
         [] );
 
     //-----------------------------------------------------------------------------
@@ -58,8 +80,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         "004 00 *a e *r n"
     );
     Assert.equalValue( "Update record without authentication in current or new record",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
-        [] );
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ), [] );
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -82,7 +103,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         "004 00 *a e *r n"
     );
     Assert.equalValue( "Update record with s10/996 in current record",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ),
         [] );
     RawRepoClientCore.clear();
 
@@ -107,7 +128,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         StringUtil.sprintf( "s10 00 *a %s", UpdateConstants.COMMON_AGENCYID )
     );
     Assert.equalValue( "Update record with s10/996 in current record. Only s10 is presented and unchanged in new record.",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ),
         [] );
     RawRepoClientCore.clear();
 
@@ -132,7 +153,7 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         StringUtil.sprintf( "996 00 *a %s", UpdateConstants.COMMON_AGENCYID )
     );
     Assert.equalValue( "Update record with s10/996 in current record. Only 996 is presented and unchanged in new record.",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ),
         [] );
     RawRepoClientCore.clear();
 
@@ -158,7 +179,9 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         StringUtil.sprintf( "s10 00 *a %s", UpdateConstants.COMMON_AGENCYID )
     );
     Assert.equalValue( "Update record with s10/996 in current record. 996/s10 is presented and unchanged in new record.",
-        JSON.parse( DBCAuthenticator.authenticateRecord( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ) ),
+        callFunction( record, "netpunkt", UpdateConstants.DBC_LOGIN_AGENCY_ID ),
         [] );
     RawRepoClientCore.clear();
+
+    OpenAgencyClientCore.clearFeatures();
 } );

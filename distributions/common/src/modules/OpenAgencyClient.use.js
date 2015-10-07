@@ -23,7 +23,7 @@ var OpenAgencyClient = function() {
             return result = OpenAgencyClientCore.hasFeature( agencyId, featureName );
         }
         finally {
-            Log.trace( "Exit - OpenAgencyClientCore.hasFeature(): " + result );
+            Log.trace( "Exit - OpenAgencyClient.hasFeature(): " + result );
         }
 
     }

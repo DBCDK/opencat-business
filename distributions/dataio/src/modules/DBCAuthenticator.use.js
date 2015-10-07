@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 use( "BasisSplitter" );
 use( "DanMarc2Converter" );
+use( "DefaultAuthenticator" );
 use( "Log" );
 use( "Marc" );
 use( "MarcClasses" );
@@ -38,22 +39,18 @@ var DBCAuthenticator = function() {
     function authenticateRecord( record, userId, groupId, settings ) {
         Log.trace( "Enter - DBCAuthenticator.authenticateRecord()" );
 
+        var result = undefined;
         try {
             if( settings !== undefined ) {
                 ResourceBundleFactory.init( settings );
             }
 
-            if( UpdateConstants.DBC_AGENCY_IDS.indexOf( groupId ) == -1 ) {
-                Log.warn( "Unknown record/user." );
-                Log.warn( "User/group: ", userId, " / ", groupId );
-                Log.warn( "Posten:\n", record );
+            var authenticator = DefaultAuthenticator.create( UpdateConstants.DBC_AGENCY_IDS );
 
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var marcRecord = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
+            var result = authenticator.authenticateRecord( marcRecord, userId, groupId );
 
-                return JSON.stringify( [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "unknown.user.error", groupId ) ) ] );
-            }
-
-            return JSON.stringify( [] );
+            return JSON.stringify( result );
         }
         finally {
             Log.trace( "Exit - DBCAuthenticator.authenticateRecord()" );

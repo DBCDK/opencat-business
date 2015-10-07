@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------------------
 use( "DanMarc2Converter" );
+use( "DefaultAuthenticator" );
 use( "Log" );
 use( "Marc" );
 use( "MarcClasses" );
@@ -41,124 +42,21 @@ var FBSAuthenticator = function() {
     function authenticateRecord( record, userId, groupId, settings ) {
         Log.trace( "Enter - FBSAuthenticator.authenticateRecord( ", record, ", ", userId, ", ", groupId, ", ", settings, " )" );
 
-        var result = "";
+        var result = undefined;
         try {
-            if (settings !== undefined) {
-                ResourceBundleFactory.init(settings);
+            if( settings !== undefined ) {
+                ResourceBundleFactory.init( settings );
             }
 
-            return result = JSON.stringify(__authenticateRecord(JSON.parse(record), userId, groupId));
-        }
-        catch( ex ) {
-            Log.trace( "Catched exception: ", ex );
+            var authenticator = DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS );
+
+            var marcRecord = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
+            var result = authenticator.authenticateRecord( marcRecord, userId, groupId );
+
+            return JSON.stringify( result );
         }
         finally {
             Log.trace( "Exit - FBSAuthenticator.authenticateRecord(): result" );
-        }
-    }
-
-    function __authenticateRecord( record, userId, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.__authenticateRecord()" );
-
-        try {
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-
-            if( UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) === -1 ) {
-                Log.warn( "Unknown record/user." );
-                Log.warn( "User/group: ", userId, " / ", groupId );
-                Log.warn( "Posten:\n", record );
-
-                return [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "unknown.user.error", groupId ) ) ];
-            }
-
-            var marc = DanMarc2Converter.convertToDanMarc2( record );
-            var agencyId = marc.getValue( /001/, /b/ );
-
-            if (agencyId === groupId) {
-                return [];
-            }
-
-            if (agencyId === UpdateConstants.COMMON_AGENCYID ) {
-                return __authenticateCommonRecord( marc, groupId );
-            }
-
-            var recId = marc.getValue(/001/, /a/);
-            return [ValidateErrors.recordError("", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", recId ) ) ];
-        }
-        finally {
-            Log.trace( "Exit - FBSAuthenticator.__authenticateRecord()" );
-        }
-    }
-
-    /**
-     * Helper function.
-     *
-     * Handles the special case then a FBS library updates a common DBC record.
-     *
-     * @param record Record
-     * @param groupId Group id.
-     *
-     * @returns {Array} Array of authentication errors. We use the same structure
-     *                  as for validation errors.
-     *
-     * @private
-     * @name FBSAuthenticator#__authenticateCommonRecord
-     */
-    function __authenticateCommonRecord( record, groupId ) {
-        Log.trace( "Enter - FBSAuthenticator.__authenticateCommonRecord()" );
-
-        try {
-            if( NoteAndSubjectExtentionsHandler.isNationalCommonRecord( record ) === true ) {
-                return NoteAndSubjectExtentionsHandler.authenticateExtentions( record, groupId );
-            }
-
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-
-            var recId = record.getValue(/001/, /a/);
-            var agencyId = record.getValue( /001/, /b/ );
-            var owner = record.getValue( /996/, /a/ );
-
-            Log.info( "Record agency: ", agencyId );
-            Log.info( "New owner: ", owner );
-
-            if( !RawRepoClient.recordExists( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID ) ) {
-                Log.debug( "Checking authentication for new common record." );
-                if( owner === "" ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "create.common.record.error" ) ) ];
-                }
-
-                if( owner !== groupId ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "create.common.record.other.library.error" ) ) ];
-                }
-
-                return [];
-            }
-
-            Log.debug( "Checking authentication for updating existing common record." );
-            if( owner === "" ) {
-                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.error" ) ) ];
-            }
-
-            if( owner !== groupId ) {
-                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
-            }
-
-            var curRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID );
-            var curOwner = curRecord.getValue( /996/, /a/ );
-
-            Log.info( "Current owner: ", curOwner );
-
-            if( curOwner === "DBC" ) {
-                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.dbc.error" ) ) ];
-            }
-            if( curOwner !== "RET" && UpdateConstants.FBS_AGENCY_IDS.indexOf( curOwner ) === -1 ) {
-                return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ];
-            }
-
-            return [];
-        }
-        finally {
-            Log.trace( "Exit - FBSAuthenticator.__authenticateCommonRecord()" );
         }
     }
 

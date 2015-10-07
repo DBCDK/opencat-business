@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-use( "FBSAuthenticator" );
+use( "DefaultAuthenticator" );
 use( "Log" );
 use( "Marc" );
 use( "OpenAgencyClient" );
@@ -48,7 +48,7 @@ var NoteAndSubjectExtentionsHandler = function() {
                 return result = [];
             }
 
-            var bundle = ResourceBundleFactory.getBundle( FBSAuthenticator.__BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle( DefaultAuthenticator.__BUNDLE_NAME );
 
             var authResult = [];
 
