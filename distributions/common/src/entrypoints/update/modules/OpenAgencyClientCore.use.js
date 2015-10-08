@@ -17,7 +17,7 @@ var OpenAgencyClientCore = function() {
         var result;
         try {
             var context = new Packages.javax.naming.InitialContext();
-            var serviceProvider = context.lookup( "java:global/updateservice/updateservice-ws-1.0-SNAPSHOT/OpenAgencyService" );
+            var serviceProvider = context.lookup( "java:global/updateservice-app-1.0-SNAPSHOT/updateservice-ws-1.0-SNAPSHOT/OpenAgencyService" );
 
             return result = serviceProvider.hasFeature( agencyId, features[ featureName ] );
         }
