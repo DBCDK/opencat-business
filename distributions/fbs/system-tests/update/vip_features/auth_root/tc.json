@@ -1,0 +1,59 @@
+[
+    {
+        "name": "fbs-vip-auth-root-off",
+        "description": "Tester featuren 'auth_root' is off",
+        "request": {
+            "authentication": {
+                "group": "700400",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "message" : "Du har ikke ret til at opdatere en fællesskabspost for et andet bibliotek",
+                            "url" : ""
+                        }
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]
