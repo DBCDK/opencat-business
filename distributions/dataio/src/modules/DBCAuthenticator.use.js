@@ -48,12 +48,12 @@ var DBCAuthenticator = function() {
             var authenticator = DefaultAuthenticator.create( UpdateConstants.DBC_AGENCY_IDS );
 
             var marcRecord = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
-            var result = authenticator.authenticateRecord( marcRecord, userId, groupId );
+            result = authenticator.authenticateRecord( marcRecord, userId, groupId );
 
             return JSON.stringify( result );
         }
         finally {
-            Log.trace( "Exit - DBCAuthenticator.authenticateRecord()" );
+            Log.trace( "Exit - DBCAuthenticator.authenticateRecord(): " + result );
         }
     }
 

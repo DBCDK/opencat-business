@@ -12,16 +12,10 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
         Log.trace( "Enter - DBCAuthenticatorTests.authenticateRecord.callFunction()" );
 
         try {
-            Log.debug( "Tracepoint 1" );
             var recordObject = DanMarc2Converter.convertFromDanMarc2(record);
-
-            Log.debug( "Tracepoint 2" );
             var recordJson = JSON.stringify(recordObject);
-
-            Log.debug( "Tracepoint 3" );
             var result = DBCAuthenticator.authenticateRecord(recordJson, userId, groupId, settings);
 
-            Log.debug( "Tracepoint 4" );
             return JSON.parse( result );
         }
         finally {
