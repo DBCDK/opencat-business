@@ -13,14 +13,14 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 700400, 700500, 700600 ],
+            "holdings": [ 715100, 715300, 715500 ],
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [
-                        "result-dbc-enrichment.marc"
+                        "rawrepo-dbc-enrichment.marc"
                     ]
                 },
                 {
@@ -42,8 +42,9 @@
                         "enqueued": true,
                         "enrichments": [
                             "result-dbc-enrichment.marc",
-                            "result-fbs-700500.marc",
-                            "result-fbs-700600.marc"
+                            "result-fbs-715100.marc",
+                            "result-fbs-715300.marc",
+                            "result-fbs-715500.marc"
                         ]
                     },
                     {
@@ -53,13 +54,19 @@
                         "enqueued": true
                     },
                     {
-                        "record": "result-fbs-700500.marc",
+                        "record": "result-fbs-715100.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
                     },
                     {
-                        "record": "result-fbs-700600.marc",
+                        "record": "result-fbs-715300.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-715500.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

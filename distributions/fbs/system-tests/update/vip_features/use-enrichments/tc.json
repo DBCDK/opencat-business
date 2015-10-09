@@ -1,24 +1,27 @@
 [
     {
-        "name": "basis-change-in-classifications-new-enrichments",
-        "description": "Ændringer i opstillingsdata med beholdninger for biblioteker uden påhængsposter.",
+        "name": "ffu-change-in-classifications",
+        "description": "Opdater eksisterende decentral post (beholdninger for 3 biblioteker) med ny opstilling ",
+        "bugs": [],
         "request": {
             "authentication": {
-                "group": "010100",
+                "group": "830160",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dbc",
+            "templateName": "bog",
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 715100, 715300, 715500 ],
+            "holdings": [ 700400 ],
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
@@ -38,32 +41,11 @@
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [
-                            "result-dbc-enrichment.marc",
-                            "result-fbs-715100.marc",
-                            "result-fbs-715300.marc",
-                            "result-fbs-715500.marc"
+                            "result-dbc-enrichment.marc"
                         ]
                     },
                     {
                         "record": "result-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-715100.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-715300.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-715500.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
