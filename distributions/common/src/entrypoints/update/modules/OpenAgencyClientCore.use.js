@@ -8,6 +8,7 @@ EXPORTED_SYMBOLS = [ 'OpenAgencyClientCore' ];
 var OpenAgencyClientCore = function() {
     var features = {
         auth_root: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_ROOT,
+        auth_common_notes: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_NOTES,
         auth_common_subjects: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_SUBJECTS
     };
 

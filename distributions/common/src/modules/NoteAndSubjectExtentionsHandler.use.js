@@ -52,14 +52,9 @@ var NoteAndSubjectExtentionsHandler = function() {
 
             var authResult = [];
 
-            var extentableFields = UpdateConstants.EXTENTABLE_NOTE_FIELDS;
-            if( OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_COMMON_SUBJECTS ) ) {
-                extentableFields += "|" + UpdateConstants.EXTENTABLE_SUBJECT_FIELDS;
-            }
-
-            var extentableFieldsRx = RegExp( extentableFields );
+            var extentableFieldsRx = __createExtentableFieldsRx( groupId );
             record.eachField(/./, function (field) {
-                if( !( extentableFieldsRx.test(field.name) ) ) {
+                if( !( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) ) ) {
                     if (__isFieldChangedInOtherRecord(field, curRecord)) {
                         var message = ResourceBundle.getStringFormat( bundle, "notes.subjects.edit.field.error", groupId, field.name, recId );
                         authResult.push(ValidateErrors.recordError("", message ) );
@@ -68,7 +63,7 @@ var NoteAndSubjectExtentionsHandler = function() {
             });
 
             curRecord.eachField(/./, function (field) {
-                if( !extentableFieldsRx.test(field.name) ) {
+                if( !( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) ) ) {
                     if (__isFieldChangedInOtherRecord(field, record)) {
                         if( curRecord.count( field.name ) !== record.count( field.name ) ) {
                             var message = ResourceBundle.getStringFormat( bundle, "notes.subjects.delete.field.error", groupId, field.name, recId );
@@ -112,14 +107,9 @@ var NoteAndSubjectExtentionsHandler = function() {
                 return result = record;
             }
 
-            var extentableFields = UpdateConstants.EXTENTABLE_NOTE_FIELDS;
-            if( OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_COMMON_SUBJECTS ) ) {
-                extentableFields += "|" + UpdateConstants.EXTENTABLE_SUBJECT_FIELDS;
-            }
-
-            var extentableFieldsRx = RegExp( extentableFields );
+            var extentableFieldsRx = __createExtentableFieldsRx( groupId );
             record.eachField(/./, function (field) {
-                if (extentableFieldsRx.test(field.name)) {
+                if( extentableFieldsRx !== undefined && extentableFieldsRx.test( field.name ) ) {
                     if( __isFieldChangedInOtherRecord( field, curRecord ) ) {
                         if( field.exists( /&/ ) ) {
                             field.append( "&", groupId, true );
@@ -166,6 +156,34 @@ var NoteAndSubjectExtentionsHandler = function() {
         }
         finally {
             Log.trace( "Exit - NoteAndSubjectExtentionsHandler.isNationalCommonRecord(): ", result );
+        }
+    }
+
+    function __createExtentableFieldsRx( agencyId ) {
+        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx()" );
+
+        var result = undefined;
+        try {
+            var extentableFields = "";
+
+            if( OpenAgencyClient.hasFeature( agencyId, UpdateConstants.AUTH_COMMON_NOTES ) ) {
+                extentableFields += UpdateConstants.EXTENTABLE_NOTE_FIELDS;
+            }
+
+            if( OpenAgencyClient.hasFeature( agencyId, UpdateConstants.AUTH_COMMON_SUBJECTS ) ) {
+                if( extentableFields !== "" ) {
+                    extentableFields += "|";
+                }
+
+                extentableFields += UpdateConstants.EXTENTABLE_SUBJECT_FIELDS;
+            }
+
+            if( extentableFields !== "" ) {
+                return result = RegExp( extentableFields );
+            }
+        }
+        finally {
+            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx(): " + result );
         }
     }
 
