@@ -1,10 +1,11 @@
 [
     {
-        "name": "fbs-vip-auth-root-off",
-        "description": "Tester featuren 'auth_root' is off",
+        "name": "fbs-vip-auth-dbc-records-off",
+        "bugs": [],
+        "description": "Tester featuren 'auth_dbc_records' is on",
         "request": {
             "authentication": {
-                "group": "830160",
+                "group": "761500",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -33,7 +34,7 @@
                     {
                         "type" : "ERROR",
                         "params" : {
-                            "message" : "Du har ikke ret til at opdatere en fællesskabspost for et andet bibliotek",
+                            "message" : "Du har ikke ret til at opdatere en fællesskabspost som er ejet af DBC",
                             "url" : ""
                         }
                     }
@@ -43,14 +44,12 @@
                         "record": "rawrepo-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enqueued": false,
                         "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": false
+                        "deleted": false
                     }
                 ]
             }

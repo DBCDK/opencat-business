@@ -62,7 +62,8 @@ var UpdateConstants = {
     EXTENTABLE_NOTE_FIELDS: "504|530",
     EXTENTABLE_SUBJECT_FIELDS: "600|610|630|666",
 
-    AUTH_ROOT_FEATURE: "auth_root",
+    AUTH_DBC_RECORDS: "auth_dbc_records",
     AUTH_COMMON_SUBJECTS: "auth_common_subjects",
-    AUTH_COMMON_NOTES: "auth_common_notes"
+    AUTH_COMMON_NOTES: "auth_common_notes",
+    AUTH_ROOT_FEATURE: "auth_root"
 };

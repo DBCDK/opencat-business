@@ -106,24 +106,32 @@ var DefaultAuthenticator = function() {
                 }
 
                 Log.debug( "Checking authentication for updating existing common record." );
-                if( owner === "" ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.error" ) ) ];
-                }
-
-                if( owner !== groupId ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
-                }
-
                 var curRecord = RawRepoClient.fetchRecord( recId, UpdateConstants.RAWREPO_COMMON_AGENCYID );
                 var curOwner = curRecord.getValue( /996/, /a/ );
 
                 Log.info( "Current owner: ", curOwner );
 
                 if( curOwner === "DBC" ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.dbc.error" ) ) ];
+                    if( !OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_DBC_RECORDS ) ) {
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.dbc.error"))];
+                    }
+
+                    return [];
                 }
-                if( curOwner !== "RET" && agencyIds.indexOf( curOwner ) === -1 ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ];
+                if( curOwner === "RET" ) {
+                    if( agencyIds.indexOf( curOwner ) === -1 ) {
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.other.library.error"))];
+                    }
+
+                    return [];
+                }
+
+                if( owner === "" ) {
+                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.error" ) ) ];
+                }
+
+                if( owner !== groupId ) {
+                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
                 }
 
                 return [];
