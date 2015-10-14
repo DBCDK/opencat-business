@@ -33,7 +33,7 @@
                     {
                         "type" : "ERROR",
                         "params" : {
-                            "message" : "Du har ikke ret til at opdatere en fællesskabspost for et andet bibliotek",
+                            "message" : "Du har ikke ret til at give ejerskabet for en folkebiblioteksejet fællesskabspost til et andet bibliotek",
                             "url" : ""
                         }
                     }

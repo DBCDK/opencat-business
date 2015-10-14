@@ -20,6 +20,8 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
         return JSON.parse( FBSAuthenticator.authenticateRecord( JSON.stringify( record ), userId, groupId ) );
     }
 
+    OpenAgencyClientCore.addFeatures( OTHER_FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ] );
+
     //-----------------------------------------------------------------------------
     //                  Test new FBS record
     //-----------------------------------------------------------------------------
@@ -158,7 +160,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common record for this FBS library. The record was owned by another FBS library.",
                         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-                        [] );
+                        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.take.public.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -183,8 +185,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common record for another FBS library",
                        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-                       [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
-    RawRepoClientCore.clear();
+                       [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.give.public.library.error" ) ) ] );
 
     //-----------------------------------------------------------------------------
     //                  Test update common RET record
@@ -273,7 +274,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common FBS record for this FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
@@ -467,4 +468,5 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
     RawRepoClientCore.clear();
 
+    OpenAgencyClientCore.clearFeatures();
 } );

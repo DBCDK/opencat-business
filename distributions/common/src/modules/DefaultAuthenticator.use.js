@@ -130,19 +130,19 @@ var DefaultAuthenticator = function() {
                     return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.error" ) ) ];
                 }
 
-                if( agencyIds.indexOf( groupId ) > -1 ) {
-                    if( agencyIds.indexOf( curOwner ) > -1 ) {
-                        if( groupId === owner ) {
-                            return [];
-                        }
-
-                        return [ ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
+                if( OpenAgencyClient.hasFeature( curOwner, UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ) ) {
+                    if( owner !== groupId ) {
+                        return [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.give.public.library.error" ) ) ];
                     }
 
-                    return [ ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ];
+                    if( !OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ) ) {
+                        return [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.take.public.library.error" ) ) ];
+                    }
+
+                    return [];
                 }
 
-                if( curOwner !== groupId ) {
+                if( !( owner === groupId && groupId === curOwner ) ) {
                     return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.other.library.error"))];
                 }
 

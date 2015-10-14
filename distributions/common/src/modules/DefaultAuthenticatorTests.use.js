@@ -1,51 +1,9 @@
 //-----------------------------------------------------------------------------
 use( "DefaultAuthenticator" );
 use( "RawRepoClientCore" );
+use( "RecordUtil" );
 use( "UnitTest" );
 use( "UpdateConstants" );
-
-//-----------------------------------------------------------------------------
-UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_root", function() {
-    var FBS_RECORD_AGENCY_ID = "714700";
-    var OTHER_FBS_RECORD_AGENCY_ID = "726500";
-
-    var bundle = ResourceBundleFactory.getBundle( DefaultAuthenticator.__BUNDLE_NAME );
-
-    var curRecord;
-    var record;
-
-    function callFunction( marcRecord, userId, groupId ) {
-        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
-    }
-
-    //-----------------------------------------------------------------------------
-    //                  Test update FBS record
-    //-----------------------------------------------------------------------------
-
-    curRecord = new Record();
-    curRecord.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", OTHER_FBS_RECORD_AGENCY_ID ) +
-        "004 00 *a e *r n\n"
-    );
-    RawRepoClientCore.addRecord( curRecord );
-
-    record = new Record();
-    record.fromString(
-        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", OTHER_FBS_RECORD_AGENCY_ID ) +
-        "004 00 *a e *r n\n" +
-        "245 00 *a new title"
-    );
-    Assert.equalValue( "Update FBS library's local record",
-        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", "1 234 567 8" ) ) ] );
-
-    OpenAgencyClientCore.addFeatures( FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_ROOT_FEATURE ] );
-    Assert.equalValue( "Update FBS library's local record ( with auth_root )",
-        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ), [] );
-
-    RawRepoClientCore.clear();
-    OpenAgencyClientCore.clearFeatures();
-} );
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
@@ -60,6 +18,8 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
     function callFunction( marcRecord, userId, groupId ) {
         return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
     }
+
+    OpenAgencyClientCore.addFeatures( OTHER_FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ] );
 
     //-----------------------------------------------------------------------------
     //                  Test new FBS record
@@ -199,7 +159,7 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common record for this FBS library. The record was owned by another FBS library.",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.take.public.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -224,7 +184,7 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common record for another FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.give.public.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
@@ -312,9 +272,9 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
-    Assert.equalValue( "Update of common DBC record for this FBS library",
+    Assert.equalValue( "Update of common non-FBS record for this FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ] );
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
@@ -508,4 +468,179 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
         NoteAndSubjectExtentionsHandler.authenticateExtentions( record, FBS_RECORD_AGENCY_ID ) );
     RawRepoClientCore.clear();
 
+    OpenAgencyClientCore.clearFeatures();
+} );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_root", function() {
+    var FBS_RECORD_AGENCY_ID = "714700";
+    var OTHER_FBS_RECORD_AGENCY_ID = "726500";
+
+    var bundle = ResourceBundleFactory.getBundle( DefaultAuthenticator.__BUNDLE_NAME );
+
+    var curRecord;
+    var record;
+
+    function callFunction( marcRecord, userId, groupId ) {
+        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Test update FBS record
+    //-----------------------------------------------------------------------------
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", OTHER_FBS_RECORD_AGENCY_ID ) +
+        "004 00 *a e *r n\n"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", OTHER_FBS_RECORD_AGENCY_ID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a new title"
+    );
+    Assert.equalValue( "Update FBS library's local record",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", "1 234 567 8" ) ) ] );
+
+    OpenAgencyClientCore.addFeatures( FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_ROOT_FEATURE ] );
+    Assert.equalValue( "Update FBS library's local record ( with auth_root )",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ), [] );
+
+    RawRepoClientCore.clear();
+    OpenAgencyClientCore.clearFeatures();
+} );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_public_lib_common_record", function() {
+    var FBS_RECORD_AGENCY_ID = "714700";
+    var OTHER_FBS_RECORD_AGENCY_ID = "726500";
+
+    var bundle = ResourceBundleFactory.getBundle( DefaultAuthenticator.__BUNDLE_NAME );
+
+    var curRecord;
+    var record;
+
+    function callFunction( marcRecord, userId, groupId ) {
+        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
+    }
+
+    OpenAgencyClientCore.addFeatures( FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ] );
+    OpenAgencyClientCore.addFeatures( OTHER_FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ] );
+
+    //-----------------------------------------------------------------------------
+    //                  Test update common FBS record
+    //-----------------------------------------------------------------------------
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a title\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    Assert.equalValue( "Update of common record for this FBS library",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        [] );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a title\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    Assert.equalValue( "Update of common record for this FBS library. The record was owned by another FBS library.",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        [] );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+    );
+    Assert.equalValue( "Update of common record for another FBS library",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.give.public.library.error" ) ) ] );
+    RawRepoClientCore.clear();
+
+    //-----------------------------------------------------------------------------
+    //                  Test update common non-FBS record
+    //-----------------------------------------------------------------------------
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        "s10 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "996 00 *a 200300"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a title\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    Assert.equalValue( "Update of common non-FBS record for this FBS library",
+        callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
+    RawRepoClientCore.clear();
+
+    OpenAgencyClientCore.clearFeatures();
 } );

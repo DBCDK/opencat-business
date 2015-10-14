@@ -5,7 +5,7 @@
         "description": "Tester oprettelse af ny fællesskabspost fra et FBS-bibliotek",
         "request": {
             "authentication": {
-                "group": "710100",
+                "group": "714700",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -40,7 +40,7 @@
         "description": "Tester oprettelse af ny fællesskabspost fra et FBS-bibliotek",
         "request": {
             "authentication": {
-                "group": "710100",
+                "group": "714700",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

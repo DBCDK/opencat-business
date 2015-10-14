@@ -65,5 +65,6 @@ var UpdateConstants = {
     AUTH_DBC_RECORDS: "auth_dbc_records",
     AUTH_COMMON_SUBJECTS: "auth_common_subjects",
     AUTH_COMMON_NOTES: "auth_common_notes",
+    AUTH_PUBLIC_LIB_COMMON_RECORD: "auth_public_lib_common_record",
     AUTH_ROOT_FEATURE: "auth_root"
 };
