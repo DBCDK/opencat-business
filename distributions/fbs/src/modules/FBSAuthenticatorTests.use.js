@@ -271,7 +271,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
         "245 00 *a title\n" +
         StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
-    Assert.equalValue( "Update of common DBC record for this FBS library",
+    Assert.equalValue( "Update of common FBS record for this FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
         [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ] );
     RawRepoClientCore.clear();

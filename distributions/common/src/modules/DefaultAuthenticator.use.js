@@ -119,7 +119,7 @@ var DefaultAuthenticator = function() {
                     return [];
                 }
                 if( curOwner === "RET" ) {
-                    if( agencyIds.indexOf( curOwner ) === -1 ) {
+                    if( agencyIds.indexOf( groupId ) === -1 ) {
                         return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.other.library.error"))];
                     }
 
@@ -130,8 +130,20 @@ var DefaultAuthenticator = function() {
                     return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.error" ) ) ];
                 }
 
-                if( owner !== groupId ) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
+                if( agencyIds.indexOf( groupId ) > -1 ) {
+                    if( agencyIds.indexOf( curOwner ) > -1 ) {
+                        if( groupId === owner ) {
+                            return [];
+                        }
+
+                        return [ ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ];
+                    }
+
+                    return [ ValidateErrors.recordError("", ResourceBundle.getString( bundle, "update.common.record.owner.other.library.error" ) ) ];
+                }
+
+                if( curOwner !== groupId ) {
+                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.other.library.error"))];
                 }
 
                 return [];
