@@ -11,6 +11,7 @@ var OpenAgencyClientCore = function() {
         auth_common_subjects: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_SUBJECTS,
         auth_dbc_records: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_DBC_RECORDS,
         auth_public_lib_common_record: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_PUBLIC_LIB_COMMON_RECORD,
+        auth_ret_record: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_RET_RECORD,
         auth_root: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_ROOT
     };
 

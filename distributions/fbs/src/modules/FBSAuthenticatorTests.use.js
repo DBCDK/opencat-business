@@ -214,7 +214,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     );
     Assert.equalValue( "Update of common RET record for this FBS library",
         callFunction( record, "netpunkt", FBS_RECORD_AGENCY_ID ),
-        [] );
+        [ ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error")) ] );
     RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------

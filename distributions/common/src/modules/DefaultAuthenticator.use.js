@@ -119,8 +119,8 @@ var DefaultAuthenticator = function() {
                     return [];
                 }
                 if( curOwner === "RET" ) {
-                    if( agencyIds.indexOf( groupId ) === -1 ) {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.other.library.error"))];
+                    if( !OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_RET_RECORD ) ) {
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
                     }
 
                     return [];
