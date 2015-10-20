@@ -162,7 +162,7 @@ var DBCUpdaterEntryPoint = function() {
     }
 
     function correctLibraryExtendedRecord( commonRecord, enrichmentRecord ) {
-        Log.info( "Enter - DBCUpdaterEntryPoint.correctLibraryExtendedRecord()" );
+        Log.trace( "Enter - DBCUpdaterEntryPoint.correctLibraryExtendedRecord()" );
 
         var result;
         try {
@@ -178,7 +178,7 @@ var DBCUpdaterEntryPoint = function() {
             return result;
         }
         finally {
-            Log.info("Exit - DBCUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result );
+            Log.trace("Exit - DBCUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result );
         }
     }
 

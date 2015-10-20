@@ -161,7 +161,7 @@ var FBSUpdaterEntryPoint = function() {
     }
 
     function correctLibraryExtendedRecord( commonRecord, enrichmentRecord ) {
-        Log.info( "Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
+        Log.trace( "Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
 
         var result;
         try {
@@ -177,7 +177,7 @@ var FBSUpdaterEntryPoint = function() {
             return result;
         }
         finally {
-            Log.info("Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result );
+            Log.trace("Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result );
         }
     }
 

@@ -214,11 +214,11 @@ var DefaultEnrichmentRecordHandler = function() {
     }
 
     function correctRecord( instance, commonRecord, enrichmentRecord ) {
-        Log.info( "Enter - DefaultEnrichmentRecordHandler.correctRecord()" );
+        Log.trace( "Enter - DefaultEnrichmentRecordHandler.correctRecord()" );
 
         try {
-            Log.info("    commonRecord: " + commonRecord );
-            Log.info("    enrichmentRecord: " + enrichmentRecord );
+            Log.trace("    commonRecord: " + commonRecord );
+            Log.trace("    enrichmentRecord: " + enrichmentRecord );
 
             var result = null;
 
@@ -243,7 +243,7 @@ var DefaultEnrichmentRecordHandler = function() {
             return record;
         }
         finally {
-            Log.info("Exit - DefaultEnrichmentRecordHandler.correctRecord()" );
+            Log.trace("Exit - DefaultEnrichmentRecordHandler.correctRecord()" );
         }
     }
 

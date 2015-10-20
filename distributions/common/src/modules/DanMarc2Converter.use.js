@@ -87,7 +87,7 @@ var DanMarc2Converter = function() {
             throw ex;
         }
         finally {
-        	Log.info( "Exit - DanMarc2Converter.convertToDanMarc2() - " + result.toString() );
+        	Log.trace( "Exit - DanMarc2Converter.convertToDanMarc2() - " + result.toString() );
         }
     }
 
