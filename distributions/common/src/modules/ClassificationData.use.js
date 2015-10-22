@@ -196,17 +196,23 @@ var ClassificationData = function() {
     
     function removeClassificationsFromRecord( instance, record ) {
         Log.trace( "Enter - ClassificationData.updateClassificationsInRecord()" );
-        Log.trace( "    record: " + record );
-        
-        var result = new Record;
-        record.eachField( /./, function( field ) {
-            if( !instance.fields.test( field.name ) ) {
-                result.append( field );
-            }
-        });
-        
-        Log.trace( "Exit - ClassificationData.updateClassificationsInRecord(): " + result );
-        return result;
+
+        var result = undefined;
+        try {
+            Log.trace("    record: " + record);
+
+            var result = new Record;
+            record.eachField(/./, function (field) {
+                if (!instance.fields.test(field.name)) {
+                    result.append(field);
+                }
+            });
+
+            return result;
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.updateClassificationsInRecord(): " + result);
+        }
     }
     
     /**
@@ -220,104 +226,121 @@ var ClassificationData = function() {
      */
     function __createSubRecord( record, fieldmatcher ) {
         Log.trace( "Enter - ClassificationData.__createSubRecord()" );
-        Log.trace( "    record: " + record );
-        Log.trace( "    fieldmatcher: " + fieldmatcher );
-        var result = new Record;
-        
-        record.eachField( fieldmatcher, function( field ) { 
-            result.append( field ); 
-        } );
-        
-        Log.trace( "Exit - ClassificationData.createSubRecord(): " + result );
-        return result;
+
+        var result = undefined;
+        try {
+            Log.trace("    record: " + record);
+            Log.trace("    fieldmatcher: " + fieldmatcher);
+            var result = new Record;
+
+            record.eachField(fieldmatcher, function (field) {
+                result.append(field);
+            });
+
+            return result;
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.__createSubRecord(): " + result);
+        }
     }
     
     function __hasRecordChanged( oldRecord, newRecord, valueFunc ) {
         Log.trace( "Enter - ClassificationData.__hasRecordChanged()" );
-        Log.trace( "    oldRecord: " + oldRecord );
-        Log.trace( "    newRecord: " + newRecord );
-        
-        if( oldRecord.size() !== newRecord.size() ) {
-            return true;
-        }
-        
-        var result = false;
-        
-        oldRecord.eachField( /./, function( oldField ) {
-            if( result === true ) {
-                return;
-            };
-            
-            var isFieldChanged = true;
-            
-            newRecord.eachField( /./, function( newField ) {
-                if( !__hasFieldChanged( oldField, newField, valueFunc ) ) {
-                    isFieldChanged = false;
-                }
-            } );
-            
-            if( isFieldChanged ) {
-                result = true;
+
+        var result = undefined;
+        try {
+            Log.trace("    oldRecord: " + oldRecord);
+            Log.trace("    newRecord: " + newRecord);
+
+            if (oldRecord.size() !== newRecord.size()) {
+                return result = true;
             }
-        });
-        
-        Log.trace( "Exit - ClassificationData.__hasRecordChanged(): " + result );
-        return result;        
+
+            result = false;
+
+            oldRecord.eachField(/./, function (oldField) {
+                if (result === true) {
+                    return result;
+                }
+
+                var isFieldChanged = true;
+
+                newRecord.eachField(/./, function (newField) {
+                    if (!__hasFieldChanged(oldField, newField, valueFunc)) {
+                        isFieldChanged = false;
+                    }
+                });
+
+                if (isFieldChanged) {
+                    result = true;
+                }
+            });
+
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - ClassificationData.__hasRecordChanged(): " + result );
+        }
     }
     
     function __hasFieldChanged( oldField, newField, valueFunc, ignoreSubfieldsMatcher ) {
         Log.trace( "Enter - ClassificationData.__hasFieldChanged()" );
-        Log.trace( "    oldField: " + oldField );
-        Log.trace( "    newField: " + newField );
-        Log.trace( "    ignoreSubfieldsMatcher: " + ignoreSubfieldsMatcher );
-        
-        if( oldField === undefined && newField === undefined ) {
-            return false;
-        }
-        else if( oldField !== undefined && newField === undefined ) {
-            return true;
-        }
-        else if( oldField === undefined && newField !== undefined ) {
-            return true;
-        }
-        
-        var msf = getMatchSubField( ignoreSubfieldsMatcher );
-        if( ignoreSubfieldsMatcher === undefined ) {
-            msf = { 
-                matchSubField: function( f, sf ) {
-                    return false;
-                }
-            };
-        }
-        
-        if( oldField.size() !== newField.size() ) {
-            Log.trace( "Exit - ClassificationData.__hasFieldChanged(): true" );
-            return true;
-        }
-        
-        var result = false;
-        oldField.eachSubField( /./, function( field, subfield ) {
-            if( result ) {
-                return;
-            }
-            
-            if( msf.matchSubField( field, subfield ) ) {
-                return;
-            }
-            
-            var sfMatcher = { 
-                matchSubField: function( f, sf ) {
-                    return sf.name === subfield.name && valueFunc( sf.value ) === valueFunc( subfield.value );
-                } 
-            };
-            
-            if( !newField.exists( sfMatcher ) ) {
-                result = true;
-            }            
-        });
 
-        Log.trace( "Exit - ClassificationData.__hasFieldChanged(): " + result );
-        return result;        
+        var result = undefined;
+        try {
+            Log.trace("    oldField: " + oldField);
+            Log.trace("    newField: " + newField);
+            Log.trace("    ignoreSubfieldsMatcher: " + ignoreSubfieldsMatcher);
+
+            if (oldField === undefined && newField === undefined) {
+                return result = false;
+            }
+            else if (oldField !== undefined && newField === undefined) {
+                return result = true;
+            }
+            else if (oldField === undefined && newField !== undefined) {
+                return result = true;
+            }
+
+            var msf = getMatchSubField(ignoreSubfieldsMatcher);
+            if (ignoreSubfieldsMatcher === undefined) {
+                msf = {
+                    matchSubField: function (f, sf) {
+                        return false;
+                    }
+                };
+            }
+
+            if (oldField.size() !== newField.size()) {
+                return result = true;
+            }
+
+            var result = false;
+            oldField.eachSubField(/./, function (field, subfield) {
+                if (result) {
+                    return;
+                }
+
+                if (msf.matchSubField(field, subfield)) {
+                    return;
+                }
+
+                var sfMatcher = {
+                    matchSubField: function (f, sf) {
+                        return sf.name === subfield.name && valueFunc(sf.value) === valueFunc(subfield.value);
+                    }
+                };
+
+                if (!newField.exists(sfMatcher)) {
+                    result = true;
+                }
+            });
+
+            return result;
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.__hasFieldChanged(): " + result);
+        }
     }
     
     function __hasFieldByNameChanged( oldMarc, newMarc, fieldname, valueFunc, ignoreSubfieldsMatcher ) {
@@ -336,44 +359,60 @@ var ClassificationData = function() {
     
     function __hasSubfieldChangedMatcher( oldMarc, newMarc, fieldmatcher, subfieldmatcher, oldValueMatcher, newValueMatcher ) {
         Log.trace( "Enter - ClassificationData.__hasSubfieldChangedMatcher()" );
-        Log.trace( "    oldMarc: " + oldMarc );
-        Log.trace( "    newMarc: " + newMarc );
-        Log.trace( "    fieldmatcher: " + fieldmatcher );
-        Log.trace( "    subfieldmatcher: " + subfieldmatcher );
-        Log.trace( "    oldValueMatcher: " + oldValueMatcher );
-        Log.trace( "    newValueMatcher: " + newValueMatcher );
 
-        var result = oldMarc.matchValue( fieldmatcher, subfieldmatcher, oldValueMatcher ) && 
-                     newMarc.matchValue( fieldmatcher, subfieldmatcher, newValueMatcher );
-             
-        Log.trace( "Exit - ClassificationData.__hasSubfieldChangedMatcher(): " + result );
-        return result;
+        var result = undefined;
+        try {
+            Log.trace("    oldMarc: " + oldMarc);
+            Log.trace("    newMarc: " + newMarc);
+            Log.trace("    fieldmatcher: " + fieldmatcher);
+            Log.trace("    subfieldmatcher: " + subfieldmatcher);
+            Log.trace("    oldValueMatcher: " + oldValueMatcher);
+            Log.trace("    newValueMatcher: " + newValueMatcher);
+
+            var result = oldMarc.matchValue(fieldmatcher, subfieldmatcher, oldValueMatcher) &&
+                newMarc.matchValue(fieldmatcher, subfieldmatcher, newValueMatcher);
+
+            return result;
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.__hasSubfieldChangedMatcher(): " + result);
+        }
     }
     
     function __hasSubfieldJustChanged( oldMarc, newMarc, valueFunc, fieldmatcher, subfieldmatcher ) {
         Log.trace( "Enter - ClassificationData.__hasSubfieldJustChanged()" );
-        Log.trace( "    oldMarc: " + oldMarc );
-        Log.trace( "    newMarc: " + newMarc );
-        Log.trace( "    fieldmatcher: " + fieldmatcher );
-        Log.trace( "    subfieldmatcher: " + subfieldmatcher );
 
-        var result = valueFunc( oldMarc.getValue( fieldmatcher, subfieldmatcher ) ) !== valueFunc( newMarc.getValue( fieldmatcher, subfieldmatcher ) );
-        Log.trace( "Exit - ClassificationData.__hasSubfieldJustChanged():" + result );
-        return result;
+        var result = undefined;
+        try {
+            Log.trace("    oldMarc: " + oldMarc);
+            Log.trace("    newMarc: " + newMarc);
+            Log.trace("    fieldmatcher: " + fieldmatcher);
+            Log.trace("    subfieldmatcher: " + subfieldmatcher);
+
+            return result = valueFunc(oldMarc.getValue(fieldmatcher, subfieldmatcher)) !== valueFunc(newMarc.getValue(fieldmatcher, subfieldmatcher));
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.__hasSubfieldJustChanged():" + result);
+        }
     }
 
     function __hasStripedValueChanged( a, b, len ) {
         Log.trace( "Enter - ClassificationData.__hasStripedValueChanged()" );
-        Log.trace( "    a: " + a );
-        Log.trace( "    b: " + b );
-        Log.trace( "    len: " + len );
 
-        a = __stripValue( a.substr( 0, len ) );
-        b = __stripValue( b.substr( 0, len ) );
-        
-        var result = a !== b
-        Log.trace( "Exit - ClassificationData.__hasStripedValueChanged():" + result );
-        return result;
+        var result = undefined;
+        try {
+            Log.trace("    a: " + a);
+            Log.trace("    b: " + b);
+            Log.trace("    len: " + len);
+
+            a = __stripValue(a.substr(0, len));
+            b = __stripValue(b.substr(0, len));
+
+            return result = a !== b
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.__hasStripedValueChanged():" + result);
+        }
     }
     
     function __value( v ) {
@@ -382,12 +421,17 @@ var ClassificationData = function() {
     
     function __stripValue( v ) {
         Log.trace( "Enter - ClassificationData.__stripValue()" );
-        Log.trace( "    v: " + v );
 
-        v = v.replace( /\s|\[|\]|\u00A4/g, "" );
-        
-        Log.trace( "Exit - ClassificationData.__stripValue():" + v );
-        return v;
+        try {
+            Log.trace("    v: " + v);
+
+            v = v.replace(/\s|\[|\]|\u00A4/g, "");
+
+            return v;
+        }
+        finally {
+            Log.trace("Exit - ClassificationData.__stripValue():" + v);
+        }
     }
 
     function __stripValueLength10( v ) {
