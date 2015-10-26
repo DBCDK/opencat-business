@@ -311,10 +311,6 @@ var ClassificationData = function() {
                 };
             }
 
-            if (oldField.size() !== newField.size()) {
-                return result = true;
-            }
-
             var result = false;
             oldField.eachSubField(/./, function (field, subfield) {
                 if (result) {

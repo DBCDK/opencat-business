@@ -325,7 +325,33 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     //              Changes values in non classification data
     //-------------------------------------------------------------------------
 
-    Assert.equalValue( "666f xx -> xy", callSubfieldChanged( "666", "f", "xx", "xy" ), false ); 
+    Assert.equalValue( "666f xx -> xy", callSubfieldChanged( "666", "f", "xx", "xy" ), false );
+
+    //-------------------------------------------------------------------------
+    //              Empty subfields in classification field
+    //-------------------------------------------------------------------------
+
+    oldRecord = {
+        fields: [
+            {
+                name: "100", indicator: "00",
+                subfields: [ { name: "a", value: "Oscar K." } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "100", indicator: "00",
+                subfields: [
+                    { name: "a", value: "Oscar K." },
+                    { name: "h", value: "" }
+                ]
+            }
+        ]
+    };
+
+    Assert.equalValue( "Empty subfields in classification field", callFunction( oldRecord, newRecord ), false );
 
     //-------------------------------------------------------------------------
     //              Added new classification field
