@@ -1,7 +1,7 @@
 [
     {
-        "name": "fbs-delete-locale-volume",
-        "description": "Sletning af eksisterende lokalt bind til eksisterende lokal hovedpost",
+        "name": "fbs-delete-locale-last-volume",
+        "description": "Sletning af det sidste eksisterende lokalt bind til eksisterende lokal hovedpost",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -32,9 +32,10 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "rawrepo-main.marc",
+                        "record": "result-main.marc",
                         "type": "MARCXCHANGE",
-                        "deleted": false
+                        "deleted": true,
+                        "enqueued": true
                     },
                     {
                         "record": "result-volume.marc",
