@@ -304,6 +304,7 @@ var TemplateOptimizer = function() {
             case "FieldRules.mandatorySubfieldInVolumeWork": return MandatorySubfieldInVolumeWorkRule.validateField;
             case "FieldRules.upperCaseCheck": return UpperCaseCheck.validateField;
 
+            case "SubfieldRules.subfieldCannotContainValue": return SubfieldCannotContainValue.validateSubfield;
             case "SubfieldRules.subfieldsDemandsOtherSubfields": return SubfieldsDemandsOtherSubfields.validateSubfield;
             case "SubfieldRules.checkReference": return CheckReference.validateSubfield;
             case "SubfieldRules.checkLength": return CheckLength.validateSubfield;

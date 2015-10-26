@@ -4,34 +4,66 @@
  */
 
 //-----------------------------------------------------------------------------
+use( "DanMarc2Converter" );
+use( "GenericSettings" );
+use( "RecordUtil" );
 use( "ResourceBundle" );
 use( "SafeAssert" );
-use( "UnitTest" );
-use ( 'GenericSettings' );
 use( "SubfieldCannotContainValue" );
+use( "UnitTest" );
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "SubfieldCannotContainValue.validateSubfield", function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldCannotContainValue.__BUNDLE_NAME );
+    Log.trace( "Enter - TestFixture: SubfieldCannotContainValue.validateSubfield");
 
-    var record = {};
-    var field = {};
-    var subfield = {
-        'name': "a",
-        'value': "42"
-    };
-    var params ={values:[]};
+    try {
+        var bundle = ResourceBundleFactory.getBundle(SubfieldCannotContainValue.__BUNDLE_NAME);
 
-    SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);
+        var record;
+        var field;
+        var subfield;
+        var error;
+        var params;
 
-    var errorMsg = [{type:"ERROR", params:{url:"TODO:fixurl", message: ResourceBundle.getStringFormat( bundle, "subfield.cannot.contain.value.rule.error", "a", "42" ) } } ];
-    params = {values:["42"]};
-    SafeAssert.equal("subfieldCannotContainValue with value that is not allowed", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
-    params = {values:[42]};
-    SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+        record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 50984508 *b 710100 *c 42"));
+        field = record.fields[0];
+        subfield = field.subfields[2];
+        var errorMsg = [{
+            type: "ERROR",
+            params: {
+                url: "TODO:fixurl",
+                message: ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", "c", "42")
+            }
+        }];
 
-    params = {values:["30","x"]};
-    SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);
-    params = {values:["42", "x"]};
-    SafeAssert.equal("subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+        params = {values: []};
+        SafeAssert.equal("1. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);
+
+        params = {values: ["42"]};
+        SafeAssert.equal("2. subfieldCannotContainValue with value that is not allowed", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+
+        params = {values: [42]};
+        SafeAssert.equal("3. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+
+        params = {values: ["30", "x"]};
+        SafeAssert.equal("4. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);
+
+        params = {values: ["42", "x"]};
+        SafeAssert.equal("5. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+
+        params = {values: ["42", "x"]};
+        SafeAssert.equal("6. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+
+        params = {values: ["42", "x"]};
+        SafeAssert.equal("7. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
+
+        params = {values: ["42", "x"], notcondition: {subfield: "001b", value: "710100"}};
+        SafeAssert.equal("8. subfieldCannotContainValue meet condition", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);
+
+        params = {values: ["42", "x"], notcondition: {subfield: "001b", value: "870970"}};
+        SafeAssert.equal("9. subfieldCannotContainValue does not meet condition", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg );
+    }
+    finally {
+        Log.trace( "Exit - TestFixture: SubfieldCannotContainValue.validateSubfield");
+    }
 });

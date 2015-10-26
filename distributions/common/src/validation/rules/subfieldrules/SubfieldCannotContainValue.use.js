@@ -16,7 +16,10 @@ var SubfieldCannotContainValue = function () {
      * @param {object} record
      * @param {object} field
      * @param {object} subfield
-     * @param {object} Object containing a property names values with an array of string values that the subfield may not contain
+     * @param {object} Object containing a property 'values' with an array of string values that the subfield
+     *                 may not contain. The property 'condition' is an Object with properties 'subfield' and 'value'.
+     *                 'condition.subfield' is a subfield name like '001b' that will need to contain the value from
+     *                 'condition.value' before the subfields value is validated against the property 'values'.
      * @return Array which is either empty or contains an error
      * @name SubfieldRules.subfieldCannotContainValue
      * @method
@@ -27,6 +30,35 @@ var SubfieldCannotContainValue = function () {
         ValueCheck.check( "params", params.values ).instanceOf( Array );
 
         try {
+            if( params.notcondition !== undefined ) {
+                ValueCheck.check( "params.notcondition", params.notcondition ).type( "object" );
+                ValueCheck.check( "params.notcondition.subfield", params.notcondition.subfield ).type( 'string' );
+                ValueCheck.check( "params.notcondition.value", params.notcondition.value ).type( 'string' );
+
+                var fieldname = params.notcondition.subfield.substr( 0, 3 );
+                var subfieldname = params.notcondition.subfield.substr( 3, 1 );
+
+                var foundCondition = false;
+                Log.debug( "Record: " + JSON.stringify( record ) );
+                for( var i = 0; i < record.fields.length; i++ ) {
+                    if( record.fields[i].name === fieldname ) {
+                        for (var j = 0; j < record.fields[i].subfields.length; j++) {
+
+                            if( record.fields[i].subfields[j].name === subfieldname &&
+                                record.fields[i].subfields[j].value === params.notcondition.value )
+                            {
+                                foundCondition = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if( foundCondition ) {
+                    return [];
+                }
+            }
+
             var ret = [];
             // implicit cast here as we want to check for both strings and ints
             // eg 1 equals '1'
