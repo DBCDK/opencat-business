@@ -110,13 +110,11 @@ var NoteAndSubjectExtentionsHandler = function() {
             var extentableFieldsRx = __createExtentableFieldsRx( groupId );
             record.eachField(/./, function (field) {
                 if( extentableFieldsRx !== undefined && extentableFieldsRx.test( field.name ) ) {
-                    if( __isFieldChangedInOtherRecord( field, curRecord ) ) {
-                        if( field.exists( /&/ ) ) {
-                            field.append( "&", groupId, true );
-                        }
-                        else {
-                            field.insert(0, "&", groupId);
-                        }
+                    if( field.exists( /&/ ) ) {
+                        field.append( "&", groupId, true );
+                    }
+                    else if( __isFieldChangedInOtherRecord( field, curRecord ) ) {
+                        field.insert(0, "&", groupId);
                     }
                 }
             });

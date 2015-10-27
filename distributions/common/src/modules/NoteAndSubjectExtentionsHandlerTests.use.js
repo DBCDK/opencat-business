@@ -991,7 +991,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *& 700100 *0 *e emneord 1\n" +
+        "666 00 *& 700400 *0 *e emneord 1\n" +
         "666 00 *& 700400 *0 *e emneord 2\n" +
         "996 00 *a DBC"
     );
@@ -1067,6 +1067,43 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400").toString(), expected.toString() );
     RawRepoClientCore.clear();
 
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord 1\n" +
+        "666 00 *& 700800 *0 *e emneord 2\n" +
+        "666 00 *& 700800 *0 *e emneord 3\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord 1\n" +
+        "666 00 *& 700800 *0 *e emneord 2\n" +
+        "666 00 *& 700800 *0 *e emneord 4\n" +
+        "996 00 *a DBC"
+    );
+
+    expected = new Record();
+    expected.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "666 00 *0 *e emneord 1\n" +
+        "666 00 *& 700400 *0 *e emneord 2\n" +
+        "666 00 *& 700400 *0 *e emneord 4\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "National common record with edit/existing subject extention for other library",
+        NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400").toString(), expected.toString() );
+    RawRepoClientCore.clear();
+
     OpenAgencyClientCore.clearFeatures();
 } );
 
@@ -1090,7 +1127,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord" +
+        "504 00 *0 *e note" +
         "996 00 *a DBC"
     );
     Assert.equalValue( "No existing record in rawrepo",
@@ -1101,7 +1138,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord\n" +
+        "504 00 *0 *e note\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
@@ -1111,7 +1148,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord\n" +
+        "504 00 *0 *e note\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue( "National common record with no changes",
@@ -1123,7 +1160,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
+        "504 00 *0 *e note 1\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
@@ -1133,8 +1170,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *0 *e emneord 2\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *0 *e note 2\n" +
         "996 00 *a DBC"
     );
 
@@ -1143,11 +1180,11 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700400 *0 *e emneord 2\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 2\n" +
         "996 00 *a DBC"
     );
-    Assert.equalValue( "National common record with new subject extention",
+    Assert.equalValue( "National common record with new note extention",
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400" ).toString(), expected.toString() );
     RawRepoClientCore.clear();
 
@@ -1156,7 +1193,7 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *& 700100 *0 *e emneord 1\n" +
+        "504 00 *& 700100 *0 *e note 1\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
@@ -1166,8 +1203,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *& 700100 *0 *e emneord 1\n" +
-        "504 00 *0 *e emneord 2\n" +
+        "504 00 *& 700100 *0 *e note 1\n" +
+        "504 00 *0 *e note 2\n" +
         "996 00 *a DBC"
     );
 
@@ -1176,11 +1213,11 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *& 700100 *0 *e emneord 1\n" +
-        "504 00 *& 700400 *0 *e emneord 2\n" +
+        "504 00 *& 700400 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 2\n" +
         "996 00 *a DBC"
     );
-    Assert.equalValue( "National common record with new subject extention with existing extentions",
+    Assert.equalValue( "National common record with new note extention with existing extentions",
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400" ).toString(), expected.toString() );
     RawRepoClientCore.clear();
 
@@ -1189,8 +1226,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700400 *0 *e emneord 2\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 2\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
@@ -1200,8 +1237,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700400 *0 *e emneord 3\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 3\n" +
         "996 00 *a DBC"
     );
 
@@ -1210,11 +1247,11 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700400 *0 *e emneord 3\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 3\n" +
         "996 00 *a DBC"
     );
-    Assert.equalValue( "National common record with edit subject extention for same library",
+    Assert.equalValue( "National common record with edit note extention for same library",
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400" ).toString(), expected.toString() );
     RawRepoClientCore.clear();
 
@@ -1223,8 +1260,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700800 *0 *e emneord 2\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700800 *0 *e note 2\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
@@ -1234,8 +1271,8 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700800 *0 *e emneord 3\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700800 *0 *e note 3\n" +
         "996 00 *a DBC"
     );
 
@@ -1244,11 +1281,48 @@ UnitTest.addFixture( "NoteAndSubjectExtentionsHandler.recordDataForRawRepo.auth_
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "504 00 *0 *e emneord 1\n" +
-        "504 00 *& 700400 *0 *e emneord 3\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 3\n" +
         "996 00 *a DBC"
     );
-    Assert.equalValue( "National common record with edit subject extention for other library",
+    Assert.equalValue( "National common record with edit note extention for other library",
+        NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400").toString(), expected.toString() );
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700800 *0 *e note 2\n" +
+        "504 00 *& 700800 *0 *e note 3\n" +
+        "996 00 *a DBC"
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700800 *0 *e note 2\n" +
+        "504 00 *& 700800 *0 *e note 4\n" +
+        "996 00 *a DBC"
+    );
+
+    expected = new Record();
+    expected.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "032 00 *a xxx *x\n" +
+        "504 00 *0 *e note 1\n" +
+        "504 00 *& 700400 *0 *e note 2\n" +
+        "504 00 *& 700400 *0 *e note 4\n" +
+        "996 00 *a DBC"
+    );
+    Assert.equalValue( "National common record with edit/existing note extention for other library",
         NoteAndSubjectExtentionsHandler.recordDataForRawRepo( record, "netpunkt", "700400").toString(), expected.toString() );
     RawRepoClientCore.clear();
 
