@@ -7,6 +7,7 @@ use( "FBSClassificationData" );
 use( "Log" );
 use( "Marc" );
 use( "RecordUtil" );
+use( "SingleVolumeClassificationData" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'FBSUpdaterEntryPoint' ];
