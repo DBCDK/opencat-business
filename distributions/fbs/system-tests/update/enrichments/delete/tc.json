@@ -103,22 +103,14 @@
         "expected": {
             "validation": [],
             "update": {
-                "errors": [
-                    {
-                        "type": "ERROR",
-                        "params": {
-                            "message": "Posten må ikke slettes da der er beholding på"
-                        }
-                    }
-                ],
+                "errors": [],
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
-                            "rawrepo-dbc-enrichment.marc",
-                            "rawrepo-fbs-enrichment.marc"
+                            "rawrepo-dbc-enrichment.marc"
                         ]
                     },
                     {
@@ -127,9 +119,10 @@
                         "deleted": false
                     },
                     {
-                        "record": "rawrepo-fbs-enrichment.marc",
+                        "record": "result-fbs-enrichment.marc",
                         "type": "ENRICHMENT",
-                        "deleted": false
+                        "deleted": true,
+                        "enqueued": true
                     }
                 ]
             }
