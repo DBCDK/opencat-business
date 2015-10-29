@@ -75,7 +75,7 @@ var FBSAuthenticator = function() {
             return result;
         }
         finally {
-            Log.trace( StringUtil.sprintf( "Enter - FBSAuthenticator.recordDataForRawRepo( %s )", result ) );
+            Log.trace( StringUtil.sprintf( "Exit - FBSAuthenticator.recordDataForRawRepo( %s )", result ) );
         }
     }
 
@@ -99,6 +99,8 @@ var FBSAuthenticator = function() {
             if (agencyId === UpdateConstants.COMMON_AGENCYID) {
                 return __recordDataForRawRepoCommonRecord( record, userId, groupId );
             }
+
+            return [];
         }
         finally {
             Log.trace( "Exit - FBSAuthenticator.__recordDataForRawRepo()" );
