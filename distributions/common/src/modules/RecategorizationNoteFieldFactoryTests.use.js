@@ -10,23 +10,13 @@ use( "UpdateConstants" );
 use( "Log" );
 
 //-----------------------------------------------------------------------------
-UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField.basic", function() {
+UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function() {
+    //-----------------------------------------------------------------------------
+    //                  Helper functions
+    //-----------------------------------------------------------------------------
+
     function callFunction( currentRecord, updatingRecord ) {
-        return RecategorizationNoteFieldFactory.newNoteField( currentRecord, updatingRecord );
-    }
-
-    Assert.equalValue( "Empty records", callFunction( new Record, new Record ), undefined );
-} );
-
-//-----------------------------------------------------------------------------
-UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField.038", function() {
-    function callFunction( record ) {
-        var result = RecategorizationNoteFieldFactory.newNoteField( record );
-
-        if( result === undefined || result === null ) {
-            return uneval( result );
-        }
-
+        var result = RecategorizationNoteFieldFactory.newNoteField( currentRecord, updatingRecord );
         return result;
     }
 
@@ -35,7 +25,7 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField.038", functi
 
         var result = undefined;
         try {
-            result = new Field("504", "00");
+            result = new Field( RecategorizationNoteFieldFactory.__FIELD_NAME, "00");
             result.append("i", message);
 
             return result;
@@ -45,23 +35,65 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField.038", functi
         }
     }
 
+    function formatMaterialMessage( bundle, code ) {
+        return ResourceBundle.getStringFormat( bundle, "note.material", ResourceBundle.getString( bundle, code ) );
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Variables
+    //-----------------------------------------------------------------------------
+
     var bundle = ResourceBundleFactory.getBundle( RecategorizationNoteFieldFactory.__BUNDLE_NAME );
 
     var record;
     var message;
+
+    //-----------------------------------------------------------------------------
+    //                  Test basic cases
+    //-----------------------------------------------------------------------------
+
+    Assert.equalValue( "Empty records", callFunction( new Record, new Record ), undefined );
+
+    //-----------------------------------------------------------------------------
+    //                  Test 038 field
+    //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 191919\n" +
         "038 00 *a dr"
     );
 
-    message = ResourceBundle.getStringFormat( bundle, "note.material", ResourceBundle.getString( bundle, "code.038.dr" ) );
+    message = formatMaterialMessage( bundle, "code.038a.dr" );
+    Assert.equalValue( "038a found", callFunction( record, record ).toString(), createNote( message ).toString() );
 
-    var actual = callFunction( record );
-    Log.debug( "callFunction()" );
+    //-----------------------------------------------------------------------------
+    //                  Test 039 field
+    //-----------------------------------------------------------------------------
 
-    var expected = createNote( message );
-    Log.debug( "createNote( message )" );
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "039 00 *a fol"
+    );
 
-    Assert.equalValue( "038a found", actual.toString(), expected.toString() );
+    message = formatMaterialMessage( bundle, "code.039a.fol" );
+    Assert.equalValue( "039a found", callFunction( record, record ).toString(), createNote( message ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "039 00 *b dk"
+    );
+
+    message = formatMaterialMessage( bundle, "code.039b.dk" );
+    Assert.equalValue( "039b found", callFunction( record, record ).toString(), createNote( message ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "039 00 *a fol *b dk"
+    );
+
+    message = formatMaterialMessage( bundle, "code.039a.fol" );
+    var country = ResourceBundle.getString( bundle, "code.039b.dk" );
+
+    message += ". " + RecategorizationNoteFieldFactory.__formatValueWithUpperCase( country );
+    Assert.equalValue( "039a/b found", callFunction( record, record ).toString(), createNote( message ).toString() );
 } );
