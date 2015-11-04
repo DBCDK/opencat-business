@@ -38,6 +38,7 @@ var RecategorizationNoteFieldFactory = function() {
 
             result = new Field( __FIELD_NAME, "00" );
             __addClassifications( currentRecord, result );
+            __addCreator( currentRecord, result );
 
             return result;
         }
@@ -67,10 +68,82 @@ var RecategorizationNoteFieldFactory = function() {
 
                 var message = ResourceBundle.getStringFormat( bundle, "note.material", __formatValues( values ) );
 
-                noteField.append( "i", message );
+                noteField.append( "i", message.trim() );
             }
             finally {
                 Log.trace( "Exit - RecategorizationNoteFieldFactory.__addClassifications()" );
+            }
+        }
+
+        function __addCreator( record, noteField ) {
+            Log.trace( "Enter - RecategorizationNoteFieldFactory.__addCreator()" );
+
+            try {
+                var bundle = __loadBundle();
+
+                var creator = "";
+                record.eachField( /100/, function( field ) {
+                    field.eachSubField( /a|h|k|e|f/, function( field, subfield ) {
+                        if( subfield.name === "e" ) {
+                            creator += " " + subfield.value + " ";
+                        }
+                        else if( subfield.name === "f" ) {
+                            creator += "(" + subfield.value + ")";
+                        }
+                        else {
+                            if( creator === "" ) {
+                                creator += subfield.value;
+                            }
+                            else {
+                                creator += ", " + subfield.value;
+                            }
+                        }
+                    })
+                });
+
+                function appendCreator( value, sep ) {
+                    if( creator === "" ) {
+                        creator += value;
+                    }
+                    else {
+                        creator += sep + " " + value;
+                    }
+                }
+
+                record.eachField( /110/, function( field ) {
+                    var inGroup = false;
+
+                    field.eachSubField( /s|a|c|e|i|k|j/, function( field, subfield ) {
+                        if( /s|a|c/.test( subfield.name ) ) {
+                            if( inGroup ) {
+                                appendCreator( "", ")" );
+
+                            }
+                            appendCreator( subfield.value, ". " );
+                        }
+                        else if( subfield.name === "e" ) {
+                            if( inGroup ) {
+                                appendCreator( "", ")" );
+                            }
+                            appendCreator( "(" + subfield.value + ")", " " );
+                        }
+                        else {
+                            if( !inGroup ) {
+                                appendCreator( "", "(" );
+                                inGroup = true;
+                            }
+
+                            appendCreator( subfield.value, " : " );
+                        }
+                    })
+                });
+
+                if( creator !== "" ) {
+                    noteField.append("d", creator.trim() );
+                }
+            }
+            finally {
+                Log.trace( "Exit - RecategorizationNoteFieldFactory.__addCreator()" );
             }
         }
     }
