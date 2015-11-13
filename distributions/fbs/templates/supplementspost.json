@@ -469,6 +469,12 @@
             "subfields":{
                 "a":"Lister.fields.codes.subfields.libraries.996a"
             }
+        },
+        "y08": {
+            "subfields": {
+                "a": {}
+
+            }
         }
 	},
 	"rules": [
