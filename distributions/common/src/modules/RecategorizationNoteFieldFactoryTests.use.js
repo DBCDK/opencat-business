@@ -33,6 +33,12 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
             if( parts.creator !== undefined ) {
                 result.append( "d", parts.creator.trim() );
             }
+            if( parts.title !== undefined ) {
+                result.append( "t", parts.title.trim() );
+            }
+            if( parts.category !== undefined ) {
+                result.append( "b", parts.category.trim() );
+            }
 
             return result;
         }
@@ -100,7 +106,7 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
     parts = { recategorization: formatMaterialMessage( bundle, "code.039a.fol" ) };
 
     var country = ResourceBundle.getString( bundle, "code.039b.dk" );
-    parts.recategorization += ". " + RecategorizationNoteFieldFactory.__formatValueWithUpperCase( country );
+    parts.recategorization += ". " + RecategorizationNoteFieldFactory.__PrettyCase( country );
 
     Assert.equalValue( "039a/b found", callFunction( record, record ).toString(), createNote( parts ).toString() );
 
@@ -166,4 +172,57 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
         creator: "Nordic Prosody (4 : 1986 : Middelfart)"
     };
     Assert.equalValue( "110ac found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    //-----------------------------------------------------------------------------
+    //                  Test 239 field
+    //-----------------------------------------------------------------------------
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "239 00 *a Troelsen *h Jens"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        creator: "Troelsen, Jens"
+    };
+    Assert.equalValue( "239ah found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "239 00 *a Margrethe *E 2 *e II *f dronning af Danmark"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        creator: "Margrethe II (dronning af Danmark)"
+    };
+    Assert.equalValue( "239aef found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "239 00 *t Kvartet for 2 violiner, viola og violoncel nr. 3 *u Grido *ø Arditti-Kvartetten, London"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Kvartet for 2 violiner, viola og violoncel nr. 3 (Arditti-Kvartetten, London)"
+    };
+    Assert.equalValue( "239tø found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    //-----------------------------------------------------------------------------
+    //                  Test 009/652 field
+    //-----------------------------------------------------------------------------
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        category: ResourceBundle.getStringFormat( bundle, "note.category.dk5", "47.44 Barcelona" ) + " " +
+                  ResourceBundle.getString( bundle, "note.category.reason.general" )
+    };
+    Assert.equalValue( "652mb found", callFunction( record, record ).toString(), createNote( parts ).toString() );
 } );
