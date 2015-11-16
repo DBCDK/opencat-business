@@ -17,7 +17,7 @@ UnitTest.addFixture( "RecategorizationNoteFieldProvider.loadFieldRecursiveReplac
     //                  Variables
     //-----------------------------------------------------------------------------
 
-    var bundle = ResourceBundleFactory.getBundle( RecategorizationNoteFieldFactory.__BUNDLE_NAME );
+    var bundle = ResourceBundleFactory.getBundle( "categorization-codes" );
     var record;
     var expected;
 
