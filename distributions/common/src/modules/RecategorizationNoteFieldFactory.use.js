@@ -3,6 +3,7 @@ use( "ISBDFieldFormater" );
 use( "Marc" );
 use( "MarcClasses" );
 use( "RawRepoClient" );
+use( "RecategorizationNoteFieldProvider" );
 use( "Log" );
 
 //-----------------------------------------------------------------------------
@@ -38,9 +39,9 @@ var RecategorizationNoteFieldFactory = function() {
             }
 
             result = new Field(__FIELD_NAME, "00");
-            __addClassifications(updatingRecord, result);
-            __addCreator(updatingRecord, result);
-            __addTitle(updatingRecord, result);
+            __addClassifications(currentRecord, result);
+            __addCreator(currentRecord, result);
+            __addTitle(currentRecord, result);
             __addCategory(currentRecord, updatingRecord, result);
 
             return result;
@@ -56,23 +57,25 @@ var RecategorizationNoteFieldFactory = function() {
         try {
             var bundle = __loadBundle();
 
-            var field = undefined;
+            var field;
             var spec = undefined;
 
-            if (record.existField(/038/)) {
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "038", /a/ );
+            if( field !== undefined ) {
                 spec = {sepSpec: [], valueSpec: {}};
-                field = __loadField(record, "038", /a/);
             }
-            else if (record.existField(/039/)) {
-                spec = {
-                    sepSpec: [
-                        {pattern: /ab$/, midSep: ". ", midValueFunction: __PrettyCase }
-                    ],
-                    valueSpec: {
-                    }
-                };
+            else {
+                field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "039", /a|b/ );
 
-                field = __loadField(record, "039", /a|b/);
+                if( field !== undefined ) {
+                    spec = {
+                        sepSpec: [
+                            {pattern: /ab$/, midSep: ". ", midValueFunction: __PrettyCase }
+                        ],
+                        valueSpec: {
+                        }
+                    };
+                }
             }
 
             if( field !== undefined && spec !== undefined ) {
@@ -96,10 +99,11 @@ var RecategorizationNoteFieldFactory = function() {
         Log.trace("Enter - RecategorizationNoteFieldFactory.__addCreator()");
 
         try {
-            var field = undefined;
+            var field;
             var spec = undefined;
 
-            if (record.existField(/100/)) {
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "100", /a|h|k|e|f/ );
+            if( field !== undefined ) {
                 spec = {
                     sepSpec: [
                         { pattern: /[ahk][ahk]/, midSep: ", " },
@@ -107,12 +111,19 @@ var RecategorizationNoteFieldFactory = function() {
                         { pattern: /[ef]./, midSep: " " }
                     ],
                     valueSpec: {
-                        f: function( v ) { return "(" + v + ")"; }
+                        f: __Brackets
                     }
                 };
-                field = __loadField(record, "100", /a|h|k|e|f/);
+
+                Log.debug("Formating field: ", field);
+                var message = ISBDFieldFormater.formatField( field, spec );
+
+                noteField.append("d", message.trim());
+                return;
             }
-            else if (record.existField(/110/)) {
+
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "110", /s|a|c|e|i|k|j/ );
+            if( field !== undefined ) {
                 spec = {
                     sepSpec: [
                         {pattern: /[sac][sac]$/, midSep: ". "},
@@ -123,12 +134,19 @@ var RecategorizationNoteFieldFactory = function() {
                         {pattern: /.e/, midSep: " " }
                     ],
                     valueSpec: {
-                        e: function( v ) { return "(" + v + ")" }
+                        e: __Brackets
                     }
                 };
-                field = __loadField(record, "110", /s|a|c|e|i|k|j/);
+
+                Log.debug("Formating field: ", field);
+                var message = ISBDFieldFormater.formatField( field, spec );
+
+                noteField.append("d", message.trim());
+                return;
             }
-            else if (record.existField(/239/)) {
+
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "239", /a|h|k|e|f/ );
+            if( field !== undefined ) {
                 spec = {
                     sepSpec: [
                         { pattern: /[ahk][ahk]/, midSep: ", " },
@@ -136,18 +154,17 @@ var RecategorizationNoteFieldFactory = function() {
                         { pattern: /[ef]./, midSep: " " }
                     ],
                     valueSpec: {
-                        f: function( v ) { return "(" + v + ")"; }
+                        f: __Brackets
                     }
                 };
-                field = __loadField(record, "239", /a|h|k|e|f/);
-            }
 
-            if( field !== undefined && spec !== undefined ) {
                 Log.debug("Formating field: ", field);
                 var message = ISBDFieldFormater.formatField( field, spec );
 
                 noteField.append("d", message.trim());
+                return;
             }
+
         }
         finally {
             Log.trace("Exit - RecategorizationNoteFieldFactory.__addCreator()");
@@ -158,24 +175,64 @@ var RecategorizationNoteFieldFactory = function() {
         Log.trace("Enter - RecategorizationNoteFieldFactory.__addTitle()");
 
         try {
-            var field = undefined;
+            var field;
             var spec = undefined;
 
-            if (record.existField(/239/)) {
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "239", /t|ø/ );
+            if( field !== undefined ) {
                 spec = {
                     sepSpec: [
                         { pattern: /[tø][tø]/, midSep: " " }
                     ],
                     valueSpec: {
-                        ø: function( v ) { return "(" + v + ")"; }
+                        ø: __Brackets
                     }
                 };
-                field = __loadField(record, "239", /t|ø/);
-            }
 
-            if( field !== undefined && spec !== undefined ) {
                 Log.debug("Formating field: ", field);
                 var message = ISBDFieldFormater.formatField( field, spec );
+
+                noteField.append("t", message.trim());
+                return;
+            }
+
+            if( record.getValue( /014/, /a/ ) !== "" ) {
+                field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( record, "245", /[anogmøæy]/ );
+                spec = {
+                    sepSpec: [
+                        { pattern: /a[ang]$/, midSep: ". " },
+                        { pattern: /na$|ga$/, midSep: " : " }
+                    ],
+                    valueSpec: {
+                    }
+                };
+
+                if( field !== undefined ) {
+                    Log.debug("Formating field: ", field);
+                    var message = ISBDFieldFormater.formatField(field, spec);
+
+                    noteField.append("t", message.trim());
+                }
+                return;
+            }
+
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "245", /[anogmøæy]/ );
+            spec = {
+                sepSpec: [
+                    { pattern: /[anog][^mæøy]/, midSep: ". " },
+                    { pattern: /.[møæ]/, midSep: " " },
+                    { pattern: /.y/, midSep: " -- " }
+                ],
+                valueSpec: {
+                    m: __Brackets,
+                    ø: __Brackets,
+                    æ: __Brackets
+                }
+            };
+
+            if( field !== undefined ) {
+                Log.debug("Formating field: ", field);
+                var message = ISBDFieldFormater.formatField(field, spec);
 
                 noteField.append("t", message.trim());
             }
@@ -189,12 +246,13 @@ var RecategorizationNoteFieldFactory = function() {
         Log.trace("Enter - RecategorizationNoteFieldFactory.__addCategory()");
 
         try {
-            var field = undefined;
+            var field;
             var spec = undefined;
 
             var message = "";
 
-            if (updatingRecord.existField(/652/)) {
+            field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( updatingRecord, "652", /m|n|z|o|a|b|h|e|f/ );
+            if( field !== undefined ) {
                 spec = {
                     sepSpec: [
                         { pattern: /[ahk][ah]/, midSep: ", " },
@@ -208,30 +266,25 @@ var RecategorizationNoteFieldFactory = function() {
                     valueSpec: {
                     }
                 };
-                field = __loadMergeField(updatingRecord, "652", /m|n|z|o|a|b|h|e|f/);
 
-                if( field !== undefined && spec !== undefined ) {
-                    Log.debug("Formating field: ", field);
-                    message = ResourceBundle.getStringFormat( __loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField( field, spec ) );
-                }
+                Log.debug("Formating field: ", field);
+                message = ResourceBundle.getStringFormat( __loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField( field, spec ) );
             }
 
-            if (updatingRecord.existField(/009/)) {
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), updatingRecord, "009", /a|g/ );
+            if( field !== undefined ) {
                 spec = {
                     sepSpec: [
                         { pattern: /ag/, midSep: " " },
                         { pattern: /ga/, midSep: "+" }
                     ],
                     valueSpec: {
-                        g: function( v ) { return "(" + v + ")"; }
+                        g: __Brackets
                     }
                 };
-                field = __loadField(updatingRecord, "009", /a|g/);
 
-                if( field !== undefined && spec !== undefined ) {
-                    Log.debug("Formating field: ", field);
-                    message += ResourceBundle.getStringFormat( __loadBundle(), "note.category.type", ISBDFieldFormater.formatField( field, spec ) );
-                }
+                Log.debug("Formating field: ", field);
+                message += ResourceBundle.getStringFormat( __loadBundle(), "note.category.type", ISBDFieldFormater.formatField( field, spec ) );
             }
 
             if( message !== "" ) {
@@ -272,70 +325,12 @@ var RecategorizationNoteFieldFactory = function() {
         return ResourceBundleFactory.getBundle( __BUNDLE_NAME );
     }
 
-    function __loadBundleValue( bundle, field, subfield ) {
-        var key = StringUtil.sprintf( "code.%s%s.%s", field.name, subfield.name, subfield.value );
-
-        if( ResourceBundle.containsKey( bundle, key ) ) {
-            return ResourceBundle.getString( bundle, key );
-        }
-        else {
-            return subfield.value;
-        }
-    }
-
-    function __loadField( record, fieldname, subfieldmatcher ) {
-        Log.trace( "Enter - RecategorizationNoteFieldFactory.__loadField( '", record, "', '", fieldname, "' )" );
-
-        var result = undefined;
-        try {
-            var field = record.field( fieldname );
-
-            result = new Field( fieldname, "00" );
-            for( var i = 0; i < field.count(); i++ ) {
-                var subfield = field.subfield(i);
-
-                if( subfieldmatcher.test( subfield.name ) ) {
-                    result.append( subfield.name, __loadBundleValue( __loadBundle(), field, subfield ) );
-                }
-            }
-
-            if( result.count() === 0 ) {
-                return undefined;
-            }
-
-            return result;
-        }
-        finally {
-            Log.trace( "Exit - RecategorizationNoteFieldFactory.__loadField(): ", result );
-        }
-    }
-
-    function __loadMergeField( record, fieldname, subfieldmatcher ) {
-        Log.trace( "Enter - RecategorizationNoteFieldFactory.__loadField( '", record, "', '", fieldname, "' )" );
-
-        var result = undefined;
-        try {
-            result = new Field( fieldname, "00" );
-
-            record.eachField( RegExp( fieldname ), function( field ) {
-                field.eachSubField( subfieldmatcher, function( field, subfield ) {
-                    result.append( subfield );
-                })
-            });
-
-            if( result.count() === 0 ) {
-                return undefined;
-            }
-
-            return result;
-        }
-        finally {
-            Log.trace( "Exit - RecategorizationNoteFieldFactory.__loadField(): ", result );
-        }
-    }
-
     function __PrettyCase( value ) {
         return value.substr( 0, 1 ).toUpperCase() + value.substr( 1 );
+    }
+
+    function __Brackets( value ) {
+        return "(" + value + ")";
     }
 
     return {

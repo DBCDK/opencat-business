@@ -7,7 +7,6 @@ use( "DefaultRawRepoRecordHandler" );
 use( "Log" );
 use( "Marc" );
 use( "RecordUtil" );
-use( "SingleVolumeClassificationData" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'DBCUpdaterEntryPoint' ];
@@ -61,12 +60,7 @@ var DBCUpdaterEntryPoint = function() {
             var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
             var instance = __createClassificationInstance( oldMarc, newMarc );
 
-            if( RecordUtil.isChangedFromVolumeToSingle( oldMarc, newMarc ) ) {
-                result = SingleVolumeClassificationData.hasClassificationsChanged( instance, oldMarc, newMarc );
-            }
-            else {
-                result = ClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
-            }
+            result = ClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
             return result;
         }
         finally {
@@ -224,14 +218,7 @@ var DBCUpdaterEntryPoint = function() {
         try {
             var instance;
 
-            if( RecordUtil.isChangedFromVolumeToSingle( currentRecord, newRecord ) ) {
-                var classificationsInstance = ClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS );
-                instance = SingleVolumeClassificationData.create( classificationsInstance, ClassificationData );
-            }
-            else {
-                instance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-            }
-
+            instance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
             return instance;
         }
         finally {
@@ -244,16 +231,9 @@ var DBCUpdaterEntryPoint = function() {
 
         var instance;
         try {
-            if( RecordUtil.isChangedFromVolumeToSingle( currentCommonRecord, updatingCommonRecord ) ) {
-                Log.trace( "Create instance with SingleVolumeClassificationData" );
-                var classificationsInstance = SingleVolumeClassificationData.create( ClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS ), ClassificationData );
-                instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, SingleVolumeClassificationData );
-            }
-            else {
-                Log.trace( "Create instance with ClassificationData" );
-                var classificationsInstance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-                instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
-            }
+            Log.trace( "Create instance with ClassificationData" );
+            var classificationsInstance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
+            instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
 
             return instance;
         }

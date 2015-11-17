@@ -7,7 +7,6 @@ use( "FBSClassificationData" );
 use( "Log" );
 use( "Marc" );
 use( "RecordUtil" );
-use( "SingleVolumeClassificationData" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'FBSUpdaterEntryPoint' ];
@@ -61,12 +60,7 @@ var FBSUpdaterEntryPoint = function() {
             var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
             var instance = __createClassificationInstance( oldMarc, newMarc );
 
-            if( RecordUtil.isChangedFromVolumeToSingle( oldMarc, newMarc ) ) {
-                result = SingleVolumeClassificationData.hasClassificationsChanged( instance, oldMarc, newMarc );
-            }
-            else {
-                result = FBSClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
-            }
+            result = FBSClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
             return result;
         }
         finally {
@@ -224,13 +218,7 @@ var FBSUpdaterEntryPoint = function() {
         try {
             var instance;
 
-            if( RecordUtil.isChangedFromVolumeToSingle( currentRecord, newRecord ) ) {
-                var classificationsInstance = FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS );
-                instance = SingleVolumeClassificationData.create( classificationsInstance, FBSClassificationData );
-            }
-            else {
-                instance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-            }
+            instance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
 
             return instance;
         }
@@ -244,16 +232,9 @@ var FBSUpdaterEntryPoint = function() {
 
         var instance;
         try {
-            if( RecordUtil.isChangedFromVolumeToSingle( currentCommonRecord, updatingCommonRecord ) ) {
-                Log.trace( "Create instance with SingleVolumeClassificationData" );
-                var classificationsInstance = SingleVolumeClassificationData.create( FBSClassificationData.create( UpdateConstants.SINGLE_VOLUME_CLASSIFICATION_FIELDS ), FBSClassificationData );
-                instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, SingleVolumeClassificationData );
-            }
-            else {
-                Log.trace( "Create instance with FBSClassificationData" );
-                var classificationsInstance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-                instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
-            }
+            Log.trace( "Create instance with FBSClassificationData" );
+            var classificationsInstance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
+            instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
 
             return instance;
         }

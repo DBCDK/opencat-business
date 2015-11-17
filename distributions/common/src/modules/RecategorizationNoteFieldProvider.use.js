@@ -34,13 +34,58 @@ var RecategorizationNoteFieldProvider = function() {
             }
 
             if( result.count() === 0 ) {
-                return undefined;
+                var parentId = record.getValue( /014/, /a/ );
+                var agencyId = record.getValue( /001/, /b/ );
+
+                if( RawRepoClient.recordExists( parentId, agencyId ) ) {
+                    var parentRecord = RawRepoClient.fetchRecord( parentId, agencyId );
+                    return result = loadFieldRecursiveReplaceValue( bundle, parentRecord, fieldname, subfieldmatcher );
+                }
+
+                return result = undefined;
             }
 
             return result;
         }
         finally {
             Log.trace( "Exit - RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue(): ", result );
+        }
+    }
+
+    function loadMergeFieldRecursive( record, fieldname, subfieldmatcher ) {
+        Log.trace( "Enter - RecategorizationNoteFieldProvider.loadMergeFieldRecursive( '", record, "', '", fieldname, "' )" );
+
+        var result = undefined;
+        try {
+            result = new Field( fieldname, "00" );
+
+            var parentId = record.getValue( /014/, /a/ );
+            var agencyId = record.getValue( /001/, /b/ );
+
+            if( parentId !== "" && RawRepoClient.recordExists( parentId, agencyId ) ) {
+                var field = loadMergeFieldRecursive( RawRepoClient.fetchRecord( parentId, agencyId ), fieldname, subfieldmatcher );
+
+                if( field !== undefined ) {
+                    field.eachSubField(/./, function (field, subfield) {
+                        result.append(subfield);
+                    })
+                }
+            }
+
+            record.eachField( RegExp( fieldname ), function( field ) {
+                field.eachSubField( subfieldmatcher, function( field, subfield ) {
+                    result.append( subfield );
+                })
+            });
+
+            if( result.count() === 0 ) {
+                return result = undefined;
+            }
+
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - RecategorizationNoteFieldProvider.loadMergeFieldRecursive(): ", result );
         }
     }
 
@@ -56,6 +101,7 @@ var RecategorizationNoteFieldProvider = function() {
     }
 
     return {
-        'loadFieldRecursiveReplaceValue': loadFieldRecursiveReplaceValue
+        'loadFieldRecursiveReplaceValue': loadFieldRecursiveReplaceValue,
+        'loadMergeFieldRecursive': loadMergeFieldRecursive
     }
 }();

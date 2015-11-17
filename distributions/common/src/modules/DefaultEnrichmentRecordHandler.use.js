@@ -1,4 +1,5 @@
 //-----------------------------------------------------------------------------
+use( "RecategorizationNoteFieldFactory" );
 use( "Log" );
 use( "Marc" );
 use( "RecordProduction" );
@@ -205,7 +206,23 @@ var DefaultEnrichmentRecordHandler = function() {
 
         var result;
         try {
-            result = __correctRecordIfEmpty( instance.classifications.module.updateClassificationsInRecord( instance.classifications.instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord ) );
+            var record = instance.classifications.module.updateClassificationsInRecord( instance.classifications.instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord );
+
+            if( __isRecategorization( currentCommonMarc, updatingCommonMarc ) ) {
+                var field = RecategorizationNoteFieldFactory.newNoteField( currentCommonMarc, updatingCommonMarc );
+                if( field !== undefined ) {
+                    record = RecordSorter.insertField( record, field );
+                }
+            }
+
+            record.removeAll( "004" );
+            updatingCommonMarc.eachField( /004/, function( field ) {
+                field.eachSubField( /./, function( field, subfield ) {
+                    record = RecordUtil.addOrReplaceSubfield( record, field.name, subfield.name, subfield.value );
+                })
+            } );
+
+            result = __correctRecordIfEmpty( record );
             return result;
         }
         finally {
@@ -272,6 +289,38 @@ var DefaultEnrichmentRecordHandler = function() {
         }
         finally {
             Log.trace( "Exit - DefaultEnrichmentRecordHandler.__correctRecordIfEmpty: " + result.toString() );
+        }
+    }
+
+    function __isRecategorization( currentCommonRecord, updatingCommonRecord ) {
+        Log.trace( "Enter - DefaultEnrichmentRecordHandler.__isRecategorization()" );
+
+        var result = undefined;
+        try {
+            if( updatingCommonRecord.matchValue( /004/, /a/, /e/ ) ) {
+                if( currentCommonRecord.matchValue( /004/, /a/, /b/ ) ) {
+                    return result = true;
+                }
+            }
+
+            if( updatingCommonRecord.matchValue( /004/, /a/, /b/ ) ) {
+                if( currentCommonRecord.matchValue( /004/, /a/, /e/ ) ) {
+                    return result = true;
+                }
+            }
+
+            if( updatingCommonRecord.matchValue( /008/, /t/, /p/ ) ) {
+                return result = true;
+            }
+
+            if( currentCommonRecord.matchValue( /008/, /t/, /p/ ) ) {
+                return result = true;
+            }
+
+            return result = false;
+        }
+        finally {
+            Log.trace( "Exit - DefaultEnrichmentRecordHandler.__isRecategorization(): ", result );
         }
     }
 

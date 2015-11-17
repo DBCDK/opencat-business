@@ -211,6 +211,83 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
     Assert.equalValue( "239tø found", callFunction( record, record ).toString(), createNote( parts ).toString() );
 
     //-----------------------------------------------------------------------------
+    //                  Test 245 field
+    //-----------------------------------------------------------------------------
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "245 00 *a Skatteret *n Speciel del"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Skatteret. Speciel del"
+    };
+    Assert.equalValue( "Single: 245an found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "245 00 *a Skat *o Erhverv"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Skat. Erhverv"
+    };
+    Assert.equalValue( "Single: 245ao found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "245 00 *a Lego dimensions *e produced by TT Games *ø Xbox One"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Lego dimensions (Xbox One)"
+    };
+    Assert.equalValue( "Single: 245aeø found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "245 00 *a Verden handler - etisk og fair? *y Lærervejledning"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Verden handler - etisk og fair? -- Lærervejledning"
+    };
+    Assert.equalValue( "Single: 245ay found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    RawRepoClientCore.addRecord(
+        RecordUtil.createFromString(
+            "001 00 *a 3 234 567 8 *b 191919\n" +
+            "004 00 *r n *a h\n" +
+            "245 00 *a Danmarks kirker"
+        )
+    );
+    RawRepoClientCore.addRecord(
+        RecordUtil.createFromString(
+            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "004 00 *r n *a s\n" +
+            "014 00 *a 3 234 567 8\n" +
+            "245 00 *n [Bind] 18 *a Ringkøbing Amt *f mit deutschen Resümees"
+        )
+    );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a b\n" +
+        "014 00 *a 2 234 567 8\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Danmarks kirker. [Bind] 18 : Ringkøbing Amt. 5. bind, hft. 30 : Brændekilde, Bellinge, Stenløse, Fangel"
+    };
+    Assert.equalValue( "652mb found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
+    //-----------------------------------------------------------------------------
     //                  Test 009/652 field
     //-----------------------------------------------------------------------------
 
