@@ -48,7 +48,7 @@ var FBSAuthenticator = function() {
                 ResourceBundleFactory.init( settings );
             }
 
-            var authenticator = DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS );
+            var authenticator = DefaultAuthenticator.create();
 
             var marcRecord = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
             var result = authenticator.authenticateRecord( marcRecord, userId, groupId );
@@ -83,13 +83,6 @@ var FBSAuthenticator = function() {
         Log.trace( "Enter - FBSAuthenticator.__recordDataForRawRepo()" );
 
         try {
-            if( UpdateConstants.FBS_AGENCY_IDS.indexOf( groupId ) == -1 ) {
-                Log.warn( "Unknown record/user." );
-                Log.warn( "User/group: ", userId, " / ", groupId );
-                Log.warn( "Posten:\n", record );
-                return [ record ];
-            }
-
             var agencyId = record.getValue( /001/, /b/ );
 
             if( agencyId === groupId ) {

@@ -16,7 +16,7 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord", function() {
     var record;
 
     function callFunction( marcRecord, userId, groupId ) {
-        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
+        return DefaultAuthenticator.create().authenticateRecord( marcRecord, userId, groupId );
     }
 
     OpenAgencyClientCore.addFeatures( OTHER_FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ] );
@@ -482,7 +482,7 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_ret_record", 
     var record;
 
     function callFunction( marcRecord, userId, groupId ) {
-        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
+        return DefaultAuthenticator.create().authenticateRecord( marcRecord, userId, groupId );
     }
 
     OpenAgencyClientCore.addFeatures( FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_RET_RECORD ] );
@@ -532,7 +532,7 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_root", functi
     var record;
 
     function callFunction( marcRecord, userId, groupId ) {
-        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
+        return DefaultAuthenticator.create().authenticateRecord( marcRecord, userId, groupId );
     }
 
     //-----------------------------------------------------------------------------
@@ -575,7 +575,7 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_public_lib_co
     var record;
 
     function callFunction( marcRecord, userId, groupId ) {
-        return DefaultAuthenticator.create( UpdateConstants.FBS_AGENCY_IDS ).authenticateRecord( marcRecord, userId, groupId );
+        return DefaultAuthenticator.create().authenticateRecord( marcRecord, userId, groupId );
     }
 
     OpenAgencyClientCore.addFeatures( FBS_RECORD_AGENCY_ID, [ UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD ] );

@@ -25,22 +25,13 @@ var DefaultAuthenticator = function() {
      *
      * @returns {DefaultAuthenticator} The new instance.
      */
-    function create( agencyIds ) {
-        var agencyIds = agencyIds;
+    function create() {
         var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
         function authenticateRecord( record, userId, groupId ) {
             Log.trace( "Enter - DefaultAuthenticator.authenticateRecord()" );
 
             try {
-                if( agencyIds.indexOf( groupId ) === -1 ) {
-                    Log.warn( "Unknown record/user." );
-                    Log.warn( "User/group: ", userId, " / ", groupId );
-                    Log.warn( "Posten:\n", record );
-
-                    return [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "unknown.user.error", groupId ) ) ];
-                }
-
                 var agencyId = record.getValue( /001/, /b/ );
 
                 if( OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_ROOT_FEATURE ) ) {

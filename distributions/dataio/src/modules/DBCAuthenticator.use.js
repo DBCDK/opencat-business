@@ -45,7 +45,7 @@ var DBCAuthenticator = function() {
                 ResourceBundleFactory.init( settings );
             }
 
-            var authenticator = DefaultAuthenticator.create( UpdateConstants.DBC_AGENCY_IDS );
+            var authenticator = DefaultAuthenticator.create();
 
             var marcRecord = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
             result = authenticator.authenticateRecord( marcRecord, userId, groupId );
@@ -68,13 +68,6 @@ var DBCAuthenticator = function() {
         Log.trace( "Enter - DBCAuthenticator.recordDataForRawRepo()" );
 
         try {
-            if( UpdateConstants.DBC_AGENCY_IDS.indexOf( groupId ) == -1 ) {
-                Log.warn( "Unknown record/user." );
-                Log.warn( "User/group: ", userId, " / ", groupId );
-                Log.warn( "Posten:\n", record );
-                return [ record ];
-            }
-
             return BasisSplitter.splitCompleteBasisRecord( record );
         }
         finally {
