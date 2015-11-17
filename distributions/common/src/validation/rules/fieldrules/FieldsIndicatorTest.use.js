@@ -2,34 +2,70 @@
 use( "UnitTest" );
 use( "SafeAssert" );
 use( "FieldsIndicator" );
+
 //-----------------------------------------------------------------------------
-UnitTest.addFixture( "FieldsIndicator", function( ) {
+UnitTest.addFixture( "FieldsIndicator.string", function( ) {
     var bundle = ResourceBundleFactory.getBundle( FieldsIndicator.BUNDLE_NAME );
+    var bundleKey = "field.indicator.string.error";
 
     var record = {};
     var field = {
         name : '001', indicator : '00', subfields : []
     };
 
-    var params00 = {
+    var params = {
         indicator : "00"
     };
 
-    SafeAssert.equal( "00: is 00", [], FieldsIndicator.validateField( record, field, params00 ) );
+    SafeAssert.equal( "00: is 00", [], FieldsIndicator.validateField( record, field, params ) );
 
-    var errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.error", "00", "XX" );
-    var errorXX = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
-    var params01 = {
+    var errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, "00", "XX" );
+    var error = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
+    var params = {
         indicator : "XX"
     };
-    SafeAssert.equal( "00: is not XX", errorXX, FieldsIndicator.validateField( record, field, params01 ) );
+    SafeAssert.equal( "00: is not XX", error, FieldsIndicator.validateField( record, field, params ) );
 
-    var paramsEmpty = {
+    var params = {
         indicator : ""
     };
 
-    errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.error", "00", "" );
+    errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, "00", "" );
     var errorEmpty = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
-    SafeAssert.equal( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, paramsEmpty ) );
+    SafeAssert.equal( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, params ) );
+
+} );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "FieldsIndicator.array", function( ) {
+    var bundle = ResourceBundleFactory.getBundle( FieldsIndicator.BUNDLE_NAME );
+    var bundleKey = "field.indicator.array.error";
+
+    var record = {};
+    var field = {
+        name : '001', indicator : '00', subfields : []
+    };
+
+    var params = {
+        indicator : [ "00" ]
+    };
+
+    SafeAssert.equal( "00: is 00", [], FieldsIndicator.validateField( record, field, params ) );
+
+    params = {
+        indicator :[ "XX", "XY" ]
+    };
+
+    var errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, field.indicator, params.indicator.join( ", " ) );
+    var error = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
+    SafeAssert.equal( "00: is not XX", error, FieldsIndicator.validateField( record, field, params ) );
+
+    params = {
+        indicator : [ "" ]
+    };
+
+    errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, "00", params.indicator.join( ", " ) );
+    var errorEmpty = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
+    SafeAssert.equal( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, params ) );
 
 } );

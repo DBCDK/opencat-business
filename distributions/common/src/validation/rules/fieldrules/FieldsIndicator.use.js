@@ -29,13 +29,26 @@ var FieldsIndicator = function () {
         var result = [];
         try {
             ValueCheck.check("params.indicator", params.indicator);
-            if (field.indicator === params.indicator) {
-                return result;
+            if( typeof( params.indicator ) === "string" ) {
+                if (field.indicator === params.indicator) {
+                    return result;
+                }
+
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+                var errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.string.error", field.indicator, params.indicator );
+                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
+                return result = [error];
             }
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-            var errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.error", field.indicator, params.indicator );
-            var error = ValidateErrors.fieldError("TODO:url", errorMessage);
-            return result = [error];
+            else {
+                if( params.indicator.indexOf( field.indicator ) > -1 ) {
+                    return result = [];
+                }
+
+                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+                var errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.array.error", field.indicator, params.indicator.join( ", " ) );
+                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
+                return result = [error];
+            }
         }
         finally {
             Log.trace( "Exit - FieldsIndicator.validateField(): ", result );
