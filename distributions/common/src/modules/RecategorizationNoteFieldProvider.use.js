@@ -2,6 +2,7 @@
 use( "Marc" );
 use( "MarcClasses" );
 use( "RawRepoClient" );
+use( "RecordLookupField" );
 use( "Log" );
 
 //-----------------------------------------------------------------------------
@@ -37,9 +38,11 @@ var RecategorizationNoteFieldProvider = function() {
                 var parentId = record.getValue( /014/, /a/ );
                 var agencyId = record.getValue( /001/, /b/ );
 
-                if( RawRepoClient.recordExists( parentId, agencyId ) ) {
-                    var parentRecord = RawRepoClient.fetchRecord( parentId, agencyId );
-                    return result = loadFieldRecursiveReplaceValue( bundle, parentRecord, fieldname, subfieldmatcher );
+                if( parentId !== "" && agencyId !== "" ) {
+                    if( RawRepoClient.recordExists( parentId, agencyId ) ) {
+                        var parentRecord = RawRepoClient.fetchRecord( parentId, agencyId );
+                        return result = loadFieldRecursiveReplaceValue( bundle, parentRecord, fieldname, subfieldmatcher );
+                    }
                 }
 
                 return result = undefined;

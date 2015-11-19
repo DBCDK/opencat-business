@@ -38,6 +38,29 @@ var RecordLookupField = function () {
         }
     }
 
+    function createFromField( field ) {
+        Log.trace("Enter - RecordLookupField.createFromField( ", field, " )");
+
+        var result = {};
+        try {
+            if( !result.hasOwnProperty( field.name ) ) {
+                result[ field.name ] = [];
+
+                result[ field.name ].push( {
+                    indicator: field.indicator,
+                    subfields: __extractSubfieldsInSortedOrder( field )
+                } );
+            }
+
+            return result;
+        }
+
+        finally
+        {
+            Log.trace( "Exit - RecordLookupField.createFromRecord() ", result );
+        }
+    }
+
     function containsField( instance, field ) {
         Log.trace("Enter - RecordLookupField.containsField( ", instance, ", ", field, " )");
 
@@ -140,6 +163,7 @@ var RecordLookupField = function () {
 
     return {
         'createFromRecord': createFromRecord,
+        'createFromField': createFromField,
         'containsField': containsField
     };
 }();
