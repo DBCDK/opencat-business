@@ -178,14 +178,14 @@ var RecategorizationNoteFieldFactory = function() {
             var field;
             var spec = undefined;
 
-            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "239", /t|ø/ );
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "239", /t|\u00F8/ );
             if( field !== undefined ) {
                 spec = {
                     sepSpec: [
-                        { pattern: /[tø][tø]/, midSep: " " }
+                        { pattern: /[t\u00F8][t\u00F8]/, midSep: " " }
                     ],
                     valueSpec: {
-                        ø: __Brackets
+                        \u00F8: __Brackets
                     }
                 };
 
@@ -197,7 +197,7 @@ var RecategorizationNoteFieldFactory = function() {
             }
 
             if( record.getValue( /014/, /a/ ) !== "" ) {
-                field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( record, "245", /[anogmøæy]/ );
+                field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( record, "245", /[anogm\u00F8\u00E6y]/ );
                 spec = {
                     sepSpec: [
                         { pattern: /a[ang]$/, midSep: ". " },
@@ -216,17 +216,17 @@ var RecategorizationNoteFieldFactory = function() {
                 return;
             }
 
-            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "245", /[anogmøæy]/ );
+            field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "245", /[anogm\u00F8\u00E6y]/ );
             spec = {
                 sepSpec: [
-                    { pattern: /[anog][^mæøy]/, midSep: ". " },
-                    { pattern: /.[møæ]/, midSep: " " },
+                    { pattern: /[anog][^m\u00E6\u00F8y]/, midSep: ". " },
+                    { pattern: /.[m\u00F8\u00E6]/, midSep: " " },
                     { pattern: /.y/, midSep: " -- " }
                 ],
                 valueSpec: {
                     m: __Brackets,
-                    ø: __Brackets,
-                    æ: __Brackets
+                    \u00F8: __Brackets,
+                    \u00E6: __Brackets
                 }
             };
 
