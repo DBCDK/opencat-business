@@ -4897,6 +4897,7 @@
         },
         "860":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8d.htm",
+            "indicator": [ "00", "01", "03", "04", "06", "07" ],
             "subfields":{
                 "\u00E5":{
 					"repeatable": false
@@ -4928,6 +4929,7 @@
         },
         "861":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8e.htm",
+            "indicator": [ "00", "01", "02", "03", "04", "05", "06", "07" ],
             "subfields":{
                 "\u00E5":{
 					"repeatable": false
@@ -4959,6 +4961,7 @@
         },
         "863":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8f.htm",
+            "indicator": [ "00", "01", "02" ],
             "subfields":{
                 "\u00E5":{
 					"repeatable": false
@@ -5543,9 +5546,6 @@
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
-                "\u00E5":{
-                	"repeatable":false
-                },
                 "2":{
                     "repeatable":false
                 }
@@ -5568,9 +5568,6 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":{
-                	"repeatable":false
                 },
                 "2":{
                     "repeatable":false
@@ -5597,9 +5594,6 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":{
-                	"repeatable":false
                 },
                 "2":{
                     "repeatable":false
@@ -5688,9 +5682,6 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":{
-                    "repeatable":false
                 }
             }
         },
@@ -5712,9 +5703,6 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":{
-                    "repeatable":false
                 }
             }
         },
@@ -5746,9 +5734,6 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":{
-                    "repeatable":false
                 }
             }
         },
