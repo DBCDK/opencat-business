@@ -350,7 +350,16 @@
                 "w":"DanMarc2.fields.245.subfields.w",
                 "Y":"DanMarc2.fields.245.subfields.Y",
                 "y":"DanMarc2.fields.245.subfields.y"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "g",
+                        "not_presented_subfield": [ "245a" ]
+                    }
+                }
+            ]
         },
         "250": "DanMarc2.fields.250",
         "260":{
