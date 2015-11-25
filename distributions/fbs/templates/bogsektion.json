@@ -192,8 +192,6 @@
                 "&":{
                     "repeatable":false
                 },
-                "G":"DanMarc2.fields.245.subfields.G",
-                "g":"DanMarc2.fields.245.subfields.g",
                 "A":"DanMarc2.fields.245.subfields.A",
                 "a":"DanMarc2.fields.245.subfields.a",
                 "b":"DanMarc2.fields.245.subfields.b",
@@ -217,7 +215,16 @@
                 "w":"DanMarc2.fields.245.subfields.w",
                 "Y":"DanMarc2.fields.245.subfields.Y",
                 "y":"DanMarc2.fields.245.subfields.y"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "n",
+                        "not_presented_subfield": [ "245a" ]
+                    }
+                }
+            ]
         },
         "250": "DanMarc2.fields.250",
 		"255": "DanMarc2.fields.255",
