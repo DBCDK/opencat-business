@@ -108,9 +108,11 @@
                 },
                 "n": {
                     "repeatable": false,
-                    "values": [ "m", "n", "u", "t", "w", "x", "y", "z" ]
+                    "values": [ "w" ]
                 },
-                "x": {}
+                "x": {
+                    "values": [ "m", "n", "u", "t", "w", "x", "y", "z" ]
+                }
             }
         },
         "005": {
@@ -1544,7 +1546,8 @@
 					"repeatable": false
 				},
                 "\u00E6":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
 				},
                 "N":{},
                 "n":{},
@@ -1568,13 +1571,16 @@
                 "s":{},
                 "t":{},
                 "X":{},
-                "x":{},
+                "x":{
+                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
+                },
                 "w":{},
                 "Y":{
                     "repeatable": false
                     },
                 "y":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
 				},
                 "G":{
 					"repeatable": false
