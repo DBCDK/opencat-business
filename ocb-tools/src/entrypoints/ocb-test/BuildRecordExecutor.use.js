@@ -1,5 +1,6 @@
 use("Builder");
 use("Log");
+use( "TemplateContainer" );
 use("Util");
 
 var BuildRecordExecutor = function () {
