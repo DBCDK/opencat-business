@@ -20,7 +20,7 @@ var RawRepoClientCore = function() {
 
 		var result = false;
     	try {
-	    	result = new Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists( recordId, libraryNo ).booleanValue();
+			result = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists( recordId, libraryNo ).booleanValue();
 	        return result;
     	}
     	catch( ex ) {
@@ -36,7 +36,7 @@ var RawRepoClientCore = function() {
     	Log.trace( "Enter RawRepoClientCore.fetchRecord()" );
     
     	try {
-    		var record = new Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.fetchRecord( recordId, libraryNo ); 
+    		var record = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.fetchRecord( recordId, libraryNo );
 	    	var result = __convertRecord( record );
 
 	    	Log.trace( "Exit RawRepoClientCore.fetchRecord(): " + result );
@@ -57,7 +57,7 @@ var RawRepoClientCore = function() {
 		try {
 			var result = [];
 
-			var records = new Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.getRelationsChildren( recordId, libraryNo );
+			var records = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.getRelationsChildren( recordId, libraryNo );
 			for( var i = 0; i < records.size(); i++ ) {
 				result.push( __convertRecord( records.get( i ) ) );
 			}

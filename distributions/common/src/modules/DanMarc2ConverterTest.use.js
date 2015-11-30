@@ -14,48 +14,46 @@ UnitTest.addFixture( "DanMarc2Converter.convertToDanMarc2.invalidArguments", fun
      */
 
     var exceptCallFormat = "DanMarc2Converter.convertToDanMarc2( %s )";
+    var exceptArg;
 
-    var exceptArg = null;
-    Assert.exception( "obj is null", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
-
-    exceptArg = undefined;
-    Assert.exception( "obj is undefined", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "obj is null", StringUtil.sprintf( exceptCallFormat, "null" ) );
+    Assert.exception( "obj is undefined", StringUtil.sprintf( exceptCallFormat, "undefined" ) );
 
     exceptArg = {};
-    Assert.exception( "Empty record", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "Empty record", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: 7 };
-    Assert.exception( "Wrong fields type", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "Wrong fields type", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ 7 ] };
-    Assert.exception( "Wrong field type", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "Wrong field type", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ {} ] };
-    Assert.exception( "Empty field", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "Empty field", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: 17 } ] };
-    Assert.exception( "field.name is non string", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.name is non string", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: 5 } ] };
-    Assert.exception( "field.indicator is non string", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.indicator is non string", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: "00", subfields: 32 } ] };
-    Assert.exception( "field.subfields is non array", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.subfields is non array", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: "00", subfields: [ 7 ] } ] };
-    Assert.exception( "field.subfields[i] is non object", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.subfields[i] is non object", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: "00", subfields: [ {} ] } ] };
-    Assert.exception( "field.subfields[i].name is undefined", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.subfields[i].name is undefined", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: "00", subfields: [ { name: 7 } ] } ] };
-    Assert.exception( "field.subfields[i].name is non string", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.subfields[i].name is non string", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: "00", subfields: [ { name: "a" } ] } ] };
-    Assert.exception( "field.subfields[i].value is undefined", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.subfields[i].value is undefined", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 
     exceptArg = { fields: [ { name: "001", indicator: "00", subfields: [ { name: "a", value: 22 } ] } ] };
-    Assert.exception( "field.subfields[i].value is non string", StringUtil.sprintf( exceptCallFormat, uneval( exceptArg ) ) );
+    Assert.exception( "field.subfields[i].value is non string", StringUtil.sprintf( exceptCallFormat, JSON.stringify( exceptArg ) ) );
 } );
 
 UnitTest.addFixture( "DanMarc2Converter.convertToDanMarc2.validArguments", function() {

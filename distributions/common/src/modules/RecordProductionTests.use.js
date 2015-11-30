@@ -56,12 +56,14 @@ UnitTest.addFixture( "RecordProduction.__extractWeekAndYear", function() {
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "RecordProduction.__calculateFirstProductionDate", function() {
-    var SimpleDateFormat = Packages.java.text.SimpleDateFormat;
-    var sdf = new SimpleDateFormat( "dd/MM-yyyy");
+    try {
+        var expected = new Date(2007, 5, 1);
+        SafeAssert.equal("Week: 23, 2007", RecordProduction.__calculateFirstProductionDate( 23, 2007 ), expected);
 
-    var expected = new Date( 2007, 5, 1 );
-    SafeAssert.equal( "Week: 23, 2007", sdf.format( RecordProduction.__calculateFirstProductionDate( 23, 2007 ) ), sdf.format( expected ) );
-
-    expected = new Date( 2006, 11, 29 );
-    SafeAssert.equal( "Week: 1, 2007", sdf.format( RecordProduction.__calculateFirstProductionDate( 1, 2007 ) ), sdf.format( expected ) );
+        expected = new Date(2006, 11, 29);
+        SafeAssert.equal("Week: 1, 2007", RecordProduction.__calculateFirstProductionDate( 1, 2007 ), expected);
+    }
+    catch( e ) {
+        e.printStackTrace();
+    }
 } );

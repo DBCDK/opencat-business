@@ -69,7 +69,11 @@ var Validator = function() {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
                         var valErrors = rule.type( record, rule.params, settings );
                         valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
+
+                        Log.debug( "Record rules before errors: ", JSON.stringify( result ) );
+                        Log.debug( "Record rules errors: ", JSON.stringify( valErrors ) );
                         result = result.concat( valErrors );
+                        Log.debug( "Record rules after errors: ", JSON.stringify( result ) );
                     }
                     catch( ex ) {
                         throw ResourceBundle.getStringFormat( bundle, "record.execute.error", ex );
