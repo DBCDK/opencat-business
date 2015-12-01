@@ -172,7 +172,14 @@
                 "u": "DanMarc2.fields.096.subfields.u",
                 "z":{
                     "mandatory": true,
-                    "repeatable": false
+                    "repeatable": false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 6,
+                            "max": 6
+                        }
+                    }]
                 }
             }
         },
