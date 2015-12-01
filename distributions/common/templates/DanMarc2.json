@@ -1096,7 +1096,14 @@
 					"repeatable": false
 				},
                 "z":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 6,
+                            "max": 6
+                        }
+                    }]
 				}
 			}
         },
@@ -5770,7 +5777,14 @@
 					"repeatable": false
 				},
                 "y":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 6,
+                            "max": 6
+                        }
+                    }]
                 },
                 "u":{
                     "repeatable":false
