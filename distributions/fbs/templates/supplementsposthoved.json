@@ -464,7 +464,6 @@
         "991": "DanMarc2.fields.991",
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "mandatory": true,
             "subfields":{
                 "a":"Lister.fields.codes.subfields.libraries.996a"
             }
