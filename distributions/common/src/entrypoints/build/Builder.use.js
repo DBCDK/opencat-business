@@ -36,7 +36,7 @@ var Builder = function() {
         // TODO: check om template er ok, ellers kast op, slet senere tjeks
         var template = templateProvider();
 
-        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template );
+        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template ).sort();
         var newField;
         if ( mandatoryFields !== undefined ) {
             for ( var i = 0; i < mandatoryFields.length; i++ ) {
