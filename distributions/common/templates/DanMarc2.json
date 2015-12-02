@@ -173,7 +173,6 @@
                                 "max": 8
                             }
                         }
-
                     ]
 				},
                 "c": {
@@ -3876,23 +3875,7 @@
                 "r":{
 					"repeatable": false
 				}
-            },
-			"rules": [
-			    {
-    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-			        "params": { 
-			            "subfield": "m",
-			            "not_presented_subfield": [ "652o" ]
-        			}
-    			},
-    			{
-        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-        			"params": { 
-            			"subfield": "o",
-            			"not_presented_subfield": [ "652m" ]
-        			}
-    			}
-			]			
+            }
         },
         "654":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
@@ -3975,23 +3958,7 @@
                 "r":{
 					"repeatable": false
 				}
-            },
-			"rules": [
-			    {
-    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-			        "params": { 
-			            "subfield": "m",
-			            "not_presented_subfield": [ "654o" ]
-        			}
-    			},
-    			{
-        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-        			"params": { 
-            			"subfield": "o",
-            			"not_presented_subfield": [ "654m" ]
-        			}
-    			}
-			]			
+            }
         },
         "655":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7b.htm",
