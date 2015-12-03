@@ -40,45 +40,26 @@
                     "repeatable": false,
                     "values": [ "300000" ]
                 },
-                "c": {
-                    "repeatable": false
-                },
+                "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
-                "f": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "values": [ "a" ]
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "o": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                }
+                "f": "DanMarc2.fields.001.subfields.f",
+                "g": "DanMarc2.fields.001.subfields.g",
+                "o": "DanMarc2.fields.001.subfields.o",
+                "t": "DanMarc2.fields.001.subfields.t"
             }
         },
         "004": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
             "repeatable": false,
             "subfields": {
-                "r": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "values": [ "n", "c", "d" ]
-                },
+                "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
                     "values": [ "s" ]
                 },
-                "n": {
-                    "repeatable": false,
-                    "values": [ "w" ]
-                },
-                "x": {}
+                "n": "DanMarc2.fields.004.subfields.n",
+                "x": "DanMarc2.fields.004.subfields.x"
             }
         },
         "005": "DanMarc2.fields.005",
@@ -187,20 +168,6 @@
                 "x":{
                     "repeatable":false,
                     "values": [ "ANM", "DEB", "FOR", "SMS" ]
-                }
-            }
-        },
-        "016":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.11.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
                 }
             }
         },
@@ -446,7 +413,6 @@
         "y08": {
             "subfields": {
                 "a": {}
-
             }
         }
 	}

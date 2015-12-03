@@ -11,6 +11,15 @@
             "repeatable":true
         }
     },
+    "rules": [
+        {
+            "type": "RecordRules.fieldDemandsOtherFields",
+            "params": {
+                "sources": [ "008", "239", "245" ] ,
+                "demands": [ "008", "245" ]
+            }
+        }
+    ],
     "fields": {
         "001": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -517,14 +526,7 @@
         "y08": {
             "subfields": {
                 "a": {}
-
             }
         }
-	},
-	"rules": [
- 	    {
-    	    "type": "RecordRules.fieldDemandsOtherFields",
-        	"params": { "sources": [ "008", "239", "245" ] , "demands": [ "008", "245" ] }
-	    }
-    ]
+	}
 }

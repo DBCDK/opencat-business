@@ -987,19 +987,5 @@
                 "o":"Lister.fields.codes.subfields.libraries.996o"
             }
         }
-    },
-    "rules":[
-		{
-            "type":"RecordRules.conflictingFields",
-            "params":{
-                "fields":[ "100", "110" ]
-            }
-        },
-		{
-        	"type": "RecordRules.conflictingSubfields",
-        	"params": { 
-				"subfields": [ "652m", "652o", "654m", "654o" ]  
-			}
-    	}
-    ]
+    }
 }

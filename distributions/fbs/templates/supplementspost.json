@@ -21,7 +21,19 @@
         {
             "type": "RecordRules.conflictingSubfields",
             "params": {
-                "subfields": [ "652m", "652o", "654m", "654o" ]
+                "subfields": [
+                    "652m",
+                    "652o",
+                    "654m",
+                    "654o"
+                ]
+            }
+        },
+        {
+            "type": "RecordRules.fieldDemandsOtherFields",
+            "params": {
+                "sources": [ "008", "009", "038", "039", "100", "239", "245", "652" ],
+                "demands": [ "008", "009", "245", "652" ]
             }
         }
     ],
@@ -470,17 +482,7 @@
         "y08": {
             "subfields": {
                 "a": {}
-
             }
         }
-	},
-	"rules": [
-    	{
-        	"type": "RecordRules.fieldDemandsOtherFields",
-        	"params": {
-                "sources": [ "008", "009", "038", "039", "100", "239", "245", "652" ],
-                "demands": [ "008", "009", "245", "652" ]
-            }
-    	}
-	]
+	}
 }
