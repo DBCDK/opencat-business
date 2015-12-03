@@ -11,6 +11,20 @@
             "repeatable":true
         }
     },
+    "rules":[
+        {
+            "type":"RecordRules.conflictingFields",
+            "params": {
+                "fields":[ "100", "110" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "652m", "652o", "654m", "654o" ]
+            }
+        }
+    ],
     "fields":{
         "001": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -672,23 +686,24 @@
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
             },
-			"rules": [
-			    {
-    			    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-			        "params": { 
-			            "subfield": "m",
-			            "not_presented_subfield": [ "652o" ]
-        			}
-    			},
-    			{
-        			"type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-        			"params": { 
-            			"subfield": "o",
-            			"not_presented_subfield": [ "652m" ]
-        			}
-    			}
-			]			
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "m",
+                        "not_presented_subfield": [ "652o" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "o",
+                        "not_presented_subfield": [ "652m" ]
+                    }
+                }
+            ]
         },
+        "654":"DanMarc2.fields.654",
         "666":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
             "subfields":{
