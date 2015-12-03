@@ -609,30 +609,6 @@
                 "\u00E5": "DanMarc2.fields.631.subfields.\u00E5",
                 "8": "DanMarc2.fields.631.subfields.8"
             }
-        },                   
-        "666":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",            
-            "subfields":{
-                "&": {
-                    "repeatable": false
-				},
-                "F":"DanMarc2.fields.666.subfields.F",
-                "f":"DanMarc2.fields.666.subfields.f",
-                "T":"DanMarc2.fields.666.subfields.T",
-                "t":"DanMarc2.fields.666.subfields.t",
-                "E":"DanMarc2.fields.666.subfields.E",
-                "e":"DanMarc2.fields.666.subfields.e",
-                "S":"DanMarc2.fields.666.subfields.S",
-                "s":"DanMarc2.fields.666.subfields.s",
-                "R":"DanMarc2.fields.666.subfields.R",
-                "r":"DanMarc2.fields.666.subfields.r",
-                "Q":"DanMarc2.fields.666.subfields.Q",
-                "q":"DanMarc2.fields.666.subfields.q",
-                "i":"DanMarc2.fields.666.subfields.i",
-                "o":"DanMarc2.fields.666.subfields.o",
-                "u":"DanMarc2.fields.666.subfields.u",
-                "0":"DanMarc2.fields.666.subfields.0"
-            }
         },
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
@@ -659,6 +635,30 @@
                 "0":"DanMarc2.fields.652.subfields.0",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
+            }
+        },
+        "666":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",            
+            "subfields":{
+                "&": {
+                    "repeatable": false
+				},
+                "F":"DanMarc2.fields.666.subfields.F",
+                "f":"DanMarc2.fields.666.subfields.f",
+                "T":"DanMarc2.fields.666.subfields.T",
+                "t":"DanMarc2.fields.666.subfields.t",
+                "E":"DanMarc2.fields.666.subfields.E",
+                "e":"DanMarc2.fields.666.subfields.e",
+                "S":"DanMarc2.fields.666.subfields.S",
+                "s":"DanMarc2.fields.666.subfields.s",
+                "R":"DanMarc2.fields.666.subfields.R",
+                "r":"DanMarc2.fields.666.subfields.r",
+                "Q":"DanMarc2.fields.666.subfields.Q",
+                "q":"DanMarc2.fields.666.subfields.q",
+                "i":"DanMarc2.fields.666.subfields.i",
+                "o":"DanMarc2.fields.666.subfields.o",
+                "u":"DanMarc2.fields.666.subfields.u",
+                "0":"DanMarc2.fields.666.subfields.0"
             }
         },
         "700":{
