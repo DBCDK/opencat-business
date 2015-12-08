@@ -509,8 +509,77 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     Assert.equalValue( "652m xx -> xy", callSubfieldChanged( "652", "m", "xx", "xy" ), true ); 
     Assert.equalValue( "652o xx -> xx", callSubfieldChanged( "652", "o", "xx", "xx" ), false ); 
     Assert.equalValue( "652o xx -> x[[x", callSubfieldChanged( "652", "o", "xx", "x[[x" ), false ); 
-    Assert.equalValue( "652o xx -> xy", callSubfieldChanged( "652", "o", "xx", "xy" ), true ); 
-    
+    Assert.equalValue( "652o xx -> xy", callSubfieldChanged( "652", "o", "xx", "xy" ), true );
+
+    //-------------------------------------------------------------------------
+    //              Ignored subfields
+    //-------------------------------------------------------------------------
+
+    oldRecord = {
+        fields: [
+            {
+                name: "100", indicator: "00",
+                subfields: [ { name: "a", value: "Oscar K." } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "100", indicator: "00",
+                subfields: [
+                    { name: "a", value: "Oscar K." },
+                    { name: "4", value: "xxx" }
+                ]
+            }
+        ]
+    };
+
+    Assert.equalValue( "Ignore subfield 4 in 100", callFunction( oldRecord, newRecord ), false );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "110", indicator: "00",
+                subfields: [ { name: "a", value: "Oscar K." } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "110", indicator: "00",
+                subfields: [
+                    { name: "a", value: "Oscar K." },
+                    { name: "4", value: "xxx" }
+                ]
+            }
+        ]
+    };
+
+    Assert.equalValue( "Ignore subfield 4 in 110", callFunction( oldRecord, newRecord ), false );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "a", value: "Oscar K." } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [
+                    { name: "a", value: "Oscar K." },
+                    { name: "4", value: "xxx" }
+                ]
+            }
+        ]
+    };
+
+    Assert.equalValue( "Ignore subfield 4 in 239", callFunction( oldRecord, newRecord ), false );
 } );
 
 UnitTest.addFixture( "ClassificationData.removeClassificationsFromRecord", function() {

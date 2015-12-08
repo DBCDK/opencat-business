@@ -81,14 +81,14 @@ var ClassificationData = function() {
             }
 
             if (instance.fields.test("110")) {
-                if (__hasFieldByNameChanged(oldMarc, newMarc, "110", __stripValue)) {
+                if (__hasFieldByNameChanged(oldMarc, newMarc, "110", __stripValue, /4/ ) ) {
                     reason = "110";
                     return result = true;
                 }
             }
 
             if (instance.fields.test("239")) {
-                if (__hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /c/)) {
+                if (__hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /4|c/)) {
                     reason = "239c";
                     return result = true;
                 }
@@ -323,6 +323,10 @@ var ClassificationData = function() {
 
                 var sfMatcher = {
                     matchSubField: function (f, sf) {
+                        if( subfield.value === "" ) {
+                            return true;
+                        }
+
                         return sf.name === subfield.name && valueFunc(sf.value) === valueFunc(subfield.value);
                     }
                 };
@@ -340,17 +344,31 @@ var ClassificationData = function() {
     }
     
     function __hasFieldByNameChanged( oldMarc, newMarc, fieldname, valueFunc, ignoreSubfieldsMatcher ) {
-        var oldField = undefined;
-        var newField = undefined;
-        
-        if( oldMarc.existField( new RegExp( fieldname ) ) ) {
-            oldField = oldMarc.field( fieldname );
+        Log.trace( "Enter - ClassificationData.__hasFieldByNameChanged()" );
+
+        var result = undefined;
+        try {
+            var oldField = undefined;
+            var newField = undefined;
+
+            if (oldMarc.existField(new RegExp(fieldname))) {
+                oldField = oldMarc.field(fieldname);
+            }
+            if (newMarc.existField(new RegExp(fieldname))) {
+                newField = newMarc.field(fieldname);
+            }
+
+            Log.debug( "fieldname: ", fieldname );
+            Log.debug( "ignoreSubfieldsMatcher: ", uneval( ignoreSubfieldsMatcher ) );
+            Log.debug( "oldField: ", oldField === undefined ? "undefined" : oldField.toString() );
+            Log.debug( "newField: ", newField === undefined ? "undefined" : newField.toString() );
+
+            return result = __hasFieldChanged(oldField, newField, valueFunc, ignoreSubfieldsMatcher) ||
+                            __hasFieldChanged(newField, oldField, valueFunc, ignoreSubfieldsMatcher);
         }
-        if( newMarc.existField( new RegExp( fieldname ) ) ) {
-            newField = newMarc.field( fieldname );
+        finally {
+            Log.trace( "Enter - ClassificationData.__hasFieldByNameChanged(): ", result );
         }
-        
-        return __hasFieldChanged( oldField, newField, valueFunc, ignoreSubfieldsMatcher );
     }
     
     function __hasSubfieldChangedMatcher( oldMarc, newMarc, fieldmatcher, subfieldmatcher, oldValueMatcher, newValueMatcher ) {
