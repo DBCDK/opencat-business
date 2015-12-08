@@ -446,6 +446,25 @@
         "966": "DanMarc2.fields.966",
         "968": "DanMarc2.fields.968",
         "980": "DanMarc2.fields.980",
-        "996": "DanMarc2.fields.996"
+        "996":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "a":"Lister.fields.codes.subfields.libraries.996a",
+                "rules": [
+                    {
+                        "type": "SubfieldRules.subfieldCannotContainValue",
+                        "values": [ "DBC" ],
+                        "notcondition": {
+                            "subfield": "001b",
+                            "value": "870970"
+                        }
+                    }
+                ],
+                "m":"Lister.fields.codes.subfields.libraries.996m",
+                "o":"Lister.fields.codes.subfields.libraries.996o"
+            }
+        }
     }
 }
