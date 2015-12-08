@@ -520,7 +520,17 @@
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
             "subfields":{
-                "a":"Lister.fields.codes.subfields.libraries.996a"
+                "a":"Lister.fields.codes.subfields.libraries.996a",
+                "rules": [
+                    {
+                        "type": "SubfieldRules.subfieldCannotContainValue",
+                        "values": [ "DBC" ],
+                        "notcondition": {
+                            "subfield": "001b",
+                            "value": "870970"
+                        }
+                    }
+                ]
             }
         },
         "y08": {
