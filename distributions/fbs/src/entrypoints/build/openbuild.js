@@ -1,9 +1,9 @@
-//-----------------------------------------------------------------------------
 use( "Builder" );
+use( "Log" );
 use( "Print" );
 use( "TemplateContainer" );
+use( "WebserviceUtil" );
 
-//-----------------------------------------------------------------------------
 /**
  * Gets the names of the templates as an Array
  *
@@ -13,7 +13,7 @@ use( "TemplateContainer" );
 function getBuildSchemas() {
     return JSON.stringify( TemplateContainer.getTemplateNames() );
 }
-//-----------------------------------------------------------------------------
+
 function checkTemplate( name, settings ) {
     var result;
     try {
@@ -28,8 +28,7 @@ function checkTemplate( name, settings ) {
     return result;
 }
 
-//-----------------------------------------------------------------------------
-function buildRecord( templateName, record, faustNumber, settings ) {
+function buildRecord( templateName, record, settings ) {
     var result;
     var templateProvider = function() {
         ResourceBundleFactory.init( settings );
@@ -37,7 +36,8 @@ function buildRecord( templateName, record, faustNumber, settings ) {
         return TemplateContainer.getUnoptimized( templateName );
     };
     var faustProvider = function() {
-        return faustNumber;
+        WebserviceUtil.init( settings );
+        return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll;
     };
     if ( record === undefined || record === null ) {
         Log.debug("new record");
@@ -51,4 +51,3 @@ function buildRecord( templateName, record, faustNumber, settings ) {
     }
     return JSON.stringify( result );
 }
-//-----------------------------------------------------------------------------

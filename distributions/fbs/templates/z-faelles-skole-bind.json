@@ -1,5 +1,8 @@
 {
 	"description":"Skabelon til 300000-post - bindpost.",
+    "settings": {
+        "lookupfaust":false
+    },
     "defaults":{
         "field":{
             "indicator":"00",

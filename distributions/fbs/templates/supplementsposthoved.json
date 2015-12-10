@@ -1,5 +1,8 @@
 {
 	"description":"Skabelon til supplementspost - hovedpost.",
+    "settings": {
+        "lookupfaust":false
+    },
     "defaults":{
         "field":{
             "indicator":"00",

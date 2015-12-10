@@ -1,7 +1,8 @@
 use("Builder");
 use("Log");
-use( "TemplateContainer" );
+use("TemplateContainer");
 use("Util");
+use("WebserviceUtil");
 
 var BuildRecordExecutor = function () {
     /**
@@ -12,7 +13,7 @@ var BuildRecordExecutor = function () {
      *
      * @return {String} A json string with an array of validation errors.
      */
-    function buildRecord(tc, record, faustNumber, settings) {
+    function buildRecord(tc, record, settings) {
         Log.trace("Enter - BuildRecordExecutor.buildRecord()");
 
         try {
@@ -26,7 +27,8 @@ var BuildRecordExecutor = function () {
                 return TemplateContainer.getUnoptimized(tc.request.templateName);
             };
             var faustProvider = function () {
-                return faustNumber;
+                WebserviceUtil.init( settings );
+                return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll;
             };
             if (record === undefined || record === null) {
                 result = Builder.buildRecord(templateProvider, faustProvider);

@@ -1,5 +1,8 @@
 {
 	"description":"Skabelon til supplementspost - bindpost.",
+    "settings": {
+        "lookupfaust":false
+    },
     "defaults":{
         "field":{
             "indicator":"00",

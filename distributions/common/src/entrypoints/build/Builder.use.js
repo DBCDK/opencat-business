@@ -1,12 +1,9 @@
-//-----------------------------------------------------------------------------
 use( "Print" );
 use( "TemplateOptimizer" );
 use( "UnitTest" );
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'Builder' ];
 
-//-----------------------------------------------------------------------------
 /**
  * @file Module to build a an empty record from a template.
  *
@@ -28,14 +25,13 @@ var Builder = function() {
      * @method
      */
     function buildRecord( templateProvider, faustProvider ) {
-        Log.trace( "validateRecord" );
+        Log.trace( "buildRecord" );
 
         var result = {
             "fields": []
         };
         // TODO: check om template er ok, ellers kast op, slet senere tjeks
         var template = templateProvider();
-
         var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template ).sort();
         var newField;
         if ( mandatoryFields !== undefined ) {
@@ -133,7 +129,7 @@ var Builder = function() {
             var mandatorySubfieldsObject = newSubfieldsObject["mandatorySubfields"];
 
             // add the remaining mandatory subfields not present in the original field
-            var missingSubfields = buildMissingSubfields( mandatorySubfieldsObject, field, faustProvider );
+            var missingSubfields = buildMissingSubfields( template, mandatorySubfieldsObject, field, faustProvider );
             newField.subfields = newSubfields.concat( missingSubfields );
         }
         return newField;
@@ -196,18 +192,22 @@ var Builder = function() {
         var subfields = field.subfields;
         //TODO: brug for(var i = 0; ...
         for ( var i in subfields ) {
-            subfieldName = subfields[i].name;
-            if ( availableSubfieldsObject.hasOwnProperty( subfieldName ) ) {
-                newSubfield = field.subfields[i];
-                if ( field.name === "001" && subfieldName === "a" ) {
-                    newSubfield.value = faustProvider();
-                }
-                if ( newSubfield.hasOwnProperty( "value" ) === false ) {
-                    newSubfield.value = "";
-                }
-                newSubfields.push( newSubfield );
-                if ( mandatorySubfieldsObject.hasOwnProperty( subfieldName ) ) {
-                    mandatorySubfieldsObject[subfieldName] = true;
+            if ( subfields.hasOwnProperty( i ) ) {
+                subfieldName = subfields[i].name;
+                if ( availableSubfieldsObject.hasOwnProperty( subfieldName ) ) {
+                    newSubfield = field.subfields[i];
+                    if ( field.name === "001" && subfieldName === "a" && isFaustEnabledForTemplate( template ) ) {
+                        var faustProviderFunction = faustProvider();
+                        newSubfield.value = faustProviderFunction();
+                    }
+                    if ( newSubfield.hasOwnProperty( "value" ) === false ) {
+                        Log.debug("4242 newSubfield.hasOwnProperty( \"value\" ) === false")
+                        newSubfield.value = "";
+                    }
+                    newSubfields.push( newSubfield );
+                    if ( mandatorySubfieldsObject.hasOwnProperty( subfieldName ) ) {
+                        mandatorySubfieldsObject[subfieldName] = true;
+                    }
                 }
             }
         }
@@ -218,13 +218,13 @@ var Builder = function() {
 
     // buildMissingSubfields builds a list of the mandatory subfields not used
     // in the original field
-    function buildMissingSubfields( mandatorySubfields, field, faustProvider ) {
+    function buildMissingSubfields( template, mandatorySubfields, field, faustProvider ) {
         Log.trace( "buildMissingSubfields" );
         var newSubfields = [];
         var newSubfield;
         for ( var subfieldKey in mandatorySubfields ) {
             if ( mandatorySubfields[subfieldKey] === false ) {
-                newSubfield = buildSubfield( subfieldKey, field.name, faustProvider );
+                newSubfield = buildSubfield( template, subfieldKey, field.name, faustProvider );
                 newSubfields.push( newSubfield );
             }
         }
@@ -246,7 +246,7 @@ var Builder = function() {
         var newSubfield;
         if ( mandatorySubfields !== undefined ) {
             for ( var i = 0; i < mandatorySubfields.length; i++ ) {
-                newSubfield = buildSubfield( mandatorySubfields[i], fieldName, faustProvider );
+                newSubfield = buildSubfield( template, mandatorySubfields[i], fieldName, faustProvider );
                 field.subfields.push( newSubfield );
             }
         }
@@ -257,15 +257,16 @@ var Builder = function() {
     // as a parameter.
     // If the faustNumber parameter is not undefined, the subfield is part of
     // field 001 and will insert the faust number.
-    function buildSubfield( subfieldName, fieldName, faustProvider ) {
+    function buildSubfield( template, subfieldName, fieldName, faustProvider ) {
         Log.trace( "buildSubfield" );
         var subfield = {
             "name": subfieldName,
             "value": ""
         };
         if ( fieldName === "001" ) {
-            if ( subfieldName === "a" ) {
-                subfield.value = faustProvider();
+            if ( subfieldName === "a" && isFaustEnabledForTemplate( template )) {
+                var faustProviderFunction = faustProvider();
+                subfield.value = faustProviderFunction();
             }
             // TODO: Replace with general method that takes data from template
             // -> will be a story
@@ -359,6 +360,17 @@ var Builder = function() {
         return res;
     }
 
+    function isFaustEnabledForTemplate( template ) {
+        Log.trace( "isFaustEnabledForTemplate" );
+        var res = true;
+        if ( template.hasOwnProperty( "settings" )
+            && template["settings"].hasOwnProperty( "lookupfaust" )
+            && Util.getType( template["settings"]["lookupfaust"] ) === "boolean" ) {
+            res = template["settings"]["lookupfaust"];
+        }
+        return res;
+    }
+
     return {
         'buildRecord': buildRecord,
         'convertRecord': convertRecord,
@@ -376,6 +388,7 @@ var Builder = function() {
         '__getMandatoryDefaultValueFromUnoptimizedTemplate': getMandatoryDefaultValueFromUnoptimizedTemplate,
         '__listeAsObject': listAsObject,
         '__subfieldsInTemplate': subfieldsInTemplate,
-        '__isFunction': isFunction
+        '__isFunction': isFunction,
+        '__isFaustEnabledForTemplate': isFaustEnabledForTemplate
     };
 }();

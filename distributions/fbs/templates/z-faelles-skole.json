@@ -1,5 +1,8 @@
 {
 	"description":"Skabelon til 300000-post - faelles skolepaahaengspost - enkeltstående.",
+    "settings": {
+        "lookupfaust":false
+    },
     "defaults":{
         "field":{
             "indicator":"00",
@@ -30,7 +33,7 @@
         					"params": {
             					"agencyId": "191919"
         					}
-   		 				}						
+   		 				}
                     ]
                 },
                 "b": {

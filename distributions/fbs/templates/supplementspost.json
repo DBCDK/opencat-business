@@ -1,5 +1,8 @@
 {
 	"description":"Skabelon til supplementspost - enkelstående post.",
+    "settings": {
+        "lookupfaust":false
+    },
     "defaults":{
         "field":{
             "indicator":"00",
@@ -56,7 +59,7 @@
         					"params": {
             					"agencyId": "191919"
         					}
-   		 				}						
+   		 				}
                     ]
                 },
                 "b": "Lister.fields.codes.subfields.libraries.001b",
@@ -170,16 +173,16 @@
                 },
                 "g":{
                     "mandatory":true,
-                    "values":[ 
+                    "values":[
                         "ed", "ef", "eg", "ep", "es", "et",
 						"ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt", "gx",
-						"ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy", 
-						"ia", "ic", "if", "ih", "ik", "ip", "is", "it", 
-						"kb", "kt", "mj", "nh", "np", 
-						"tb", "tc", "tk", "tg",	"th", "ti", "to", "tu", 
-						"ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv", 
+						"ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy",
+						"ia", "ic", "if", "ih", "ik", "ip", "is", "it",
+						"kb", "kt", "mj", "nh", "np",
+						"tb", "tc", "tk", "tg",	"th", "ti", "to", "tu",
+						"ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv",
 						"wf", "wt", "wu",
-						"xa", "xb", "xc", "xd", "xe", "xg", "xh", "xi", "xj", "xk", "xl", "xm", "xn", "xo", "xx", "xy" 
+						"xa", "xb", "xc", "xd", "xe", "xg", "xh", "xi", "xj", "xk", "xl", "xm", "xn", "xo", "xx", "xy"
                     ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
