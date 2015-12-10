@@ -32,9 +32,9 @@ var UpperCaseCheck = function () {
 
             for (var i = 0; i < field.subfields.length; i++) {
                 var name = field.subfields[i].name;
-                if (name.toUpperCase() === name) {// its uppercase
-                    if (field.subfields[i + 1] === undefined || name !== field.subfields[i + 1].name.toUpperCase() || field.subfields[i + 1].name.toUpperCase() === field.subfields[i + 1]) {
-                        var errorMessage = ResourceBundle.getStringFormat( bundle, "uppercase.rule.error", name, name.toLowerCase(), field.name );
+                if ( (name >= 'A' && name <= 'Z') || name == 'Æ' || name == 'Ø') {
+                    if (field.subfields[i + 1] === undefined || name !== field.subfields[i + 1].name.toLowerCase()) {
+                        var errorMessage = ResourceBundle.getStringFormat(bundle, "uppercase.rule.error", name, name.toLowerCase(), field.name);
                         result.push(ValidateErrors.fieldError('TODO:fixurl', errorMessage));
                     }
                 }
