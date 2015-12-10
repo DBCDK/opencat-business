@@ -33,7 +33,7 @@ var UpperCaseCheck = function () {
             for (var i = 0; i < field.subfields.length; i++) {
                 var name = field.subfields[i].name;
                 if ( (name >= 'A' && name <= 'Z') || name == 'Æ' || name == 'Ø') {
-                    if (field.subfields[i + 1] === undefined || name !== field.subfields[i + 1].name.toLowerCase()) {
+                    if (field.subfields[i + 1] === undefined || name.toLowerCase() !== field.subfields[i + 1].name) {
                         var errorMessage = ResourceBundle.getStringFormat(bundle, "uppercase.rule.error", name, name.toLowerCase(), field.name);
                         result.push(ValidateErrors.fieldError('TODO:fixurl', errorMessage));
                     }
