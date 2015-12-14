@@ -1,0 +1,40 @@
+[
+    {
+        "name": "dbc-empty-fields",
+        "description": "Tester skabelonen 'dbc' med et tomt felt",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "ERROR",
+                    "params" : {
+                        "fieldno" : 3,
+                        "message" : "Felt '008' må ikke være tomt.",
+                        "url" : ""
+                    }
+                }
+            ],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "fieldno" : 3,
+                            "message" : "Felt '008' må ikke være tomt.",
+                            "url" : ""
+                        }
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    }
+]
