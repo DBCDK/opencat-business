@@ -1,0 +1,129 @@
+[
+    {
+        "name": "fbs-new-common-school-enrichment-record-no-schools",
+        "description": "Tester oprettelse af ny fælles skolepåhængspost uden eksisterende påhængsposter for skoler",
+        "request": {
+            "authentication": {
+                "group": "300101",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "z-faelles-skole",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "request.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-new-common-school-enrichment-record-with-schools",
+        "description": "Tester oprettelse af ny fælles skolepåhængspost med en eksisterende påhængsposter for en skole",
+        "request": {
+            "authentication": {
+                "group": "300101",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "z-faelles-skole",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-school-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-school-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "request.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-school-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "rawrepo-school-enrichment.marc" ]
+                    }
+                ]
+            }
+        }
+    }
+]
