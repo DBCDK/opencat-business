@@ -116,6 +116,11 @@ var Validator = function() {
             };
 
             if (field.subfields !== undefined) {
+                Log.debug( "Field ", field.name, " has ", field.subfields.length, " subfields: ", JSON.stringify( field ) );
+                if( field.subfields.length === 0 ) {
+                    return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat( bundle, "empty.field", field.name ) ) ];
+                }
+
                 for (var i = 0; i < field.subfields.length; i++) {
                     var subResult = validateSubfield(record, field, field.subfields[i], templateProvider, settings);
 
