@@ -13,6 +13,9 @@ var UpdateConstants = {
     RAWREPO_COMMON_AGENCYID: "191919",
     RAWREPO_DBC_ENRICHMENT_AGENCY_ID: "870970",
 
+    SCHOOL_COMMON_AGENCYID: "300000",
+    SCHOOL_AGENCY_PATTERN: /3[0-9]{5}/,
+
     //-----------------------------------------------------------------------------
     //                  Fields
     //-----------------------------------------------------------------------------

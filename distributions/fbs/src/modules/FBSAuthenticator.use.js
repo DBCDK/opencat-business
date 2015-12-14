@@ -85,15 +85,11 @@ var FBSAuthenticator = function() {
         try {
             var agencyId = record.getValue( /001/, /b/ );
 
-            if( agencyId === groupId ) {
-                return [ record ];
-            }
-
             if (agencyId === UpdateConstants.COMMON_AGENCYID) {
                 return __recordDataForRawRepoCommonRecord( record, userId, groupId );
             }
 
-            return [];
+            return [ record ];
         }
         finally {
             Log.trace( "Exit - FBSAuthenticator.__recordDataForRawRepo()" );

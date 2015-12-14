@@ -694,3 +694,92 @@ UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.auth_public_lib_co
 
     OpenAgencyClientCore.clearFeatures();
 } );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DefaultAuthenticator.authenticateRecord.school-common", function() {
+    var LOGIN_AGENCY_ID = "300101";
+    var FBS_RECORD_AGENCY_ID = "714700";
+
+    var bundle = ResourceBundleFactory.getBundle( DefaultAuthenticator.__BUNDLE_NAME );
+
+    var curRecord;
+    var record;
+
+    function callFunction( marcRecord, userId, groupId ) {
+        return DefaultAuthenticator.create().authenticateRecord( marcRecord, userId, groupId );
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Test update common school record
+    //-----------------------------------------------------------------------------
+
+    record = RecordUtil.createFromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.SCHOOL_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a title\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", UpdateConstants.SCHOOL_COMMON_AGENCYID )
+    );
+    Assert.equalValue( "Common school record by school library",
+        callFunction( record, "netpunkt", LOGIN_AGENCY_ID ),
+        [] );
+
+    //-----------------------------------------------------------------------------
+    //                  Test update common FBS record
+    //-----------------------------------------------------------------------------
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a title\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    Assert.equalValue( "Update of common record for a FBS library",
+        callFunction( record, "netpunkt", LOGIN_AGENCY_ID ),
+        [ ValidateErrors.recordError( "", ResourceBundle.getString( bundle, "update.common.record.other.library.error" ) ) ] );
+    RawRepoClientCore.clear();
+
+    //-----------------------------------------------------------------------------
+    //                  Test update FBS record
+    //-----------------------------------------------------------------------------
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", FBS_RECORD_AGENCY_ID ) +
+        StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", FBS_RECORD_AGENCY_ID ) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    RawRepoClientCore.addRecord( curRecord );
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", FBS_RECORD_AGENCY_ID ) +
+        "004 00 *a e *r n\n" +
+        "245 00 *a title\n" +
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+    );
+    Assert.equalValue( "Update of common record for a FBS library",
+        callFunction( record, "netpunkt", LOGIN_AGENCY_ID ),
+        [ ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", "1 234 567 8" ) ) ] );
+    RawRepoClientCore.clear();
+} );

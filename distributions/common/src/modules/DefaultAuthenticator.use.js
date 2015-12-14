@@ -46,6 +46,12 @@ var DefaultAuthenticator = function() {
                     return __authenticateCommonRecord( record, groupId );
                 }
 
+                if( UpdateConstants.SCHOOL_AGENCY_PATTERN.test( groupId ) ) {
+                    if( record.matchValue( /001/, /b/, RegExp( UpdateConstants.SCHOOL_COMMON_AGENCYID ) ) ) {
+                        return [];
+                    }
+                }
+
                 var recId = record.getValue(/001/, /a/);
                 return [ValidateErrors.recordError("", ResourceBundle.getStringFormat( bundle, "edit.record.other.library.error", recId ) ) ];
             }
