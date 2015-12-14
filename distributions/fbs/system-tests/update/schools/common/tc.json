@@ -125,5 +125,81 @@
                 ]
             }
         }
+    },
+    {
+        "name": "fbs-delete-common-school-enrichment-record-with-schools",
+        "description": "Tester sletning af fælles skolepåhængspost med en eksisterende påhængsposter for en skole",
+        "request": {
+            "authentication": {
+                "group": "300101",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "z-faelles-skole",
+            "record": "delete-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-common-school-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common-school-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-school-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-school-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "rawrepo-school-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-school-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "result-common-school-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": true
+                    }
+                ]
+            }
+        }
     }
 ]
