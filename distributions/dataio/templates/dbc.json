@@ -554,7 +554,6 @@
                 "&": {
                     "repeatable": false
 				},
-                "&":{},
                 "a": "DanMarc2.fields.555.subfields.a",
                 "\u00E5": "DanMarc2.fields.555.subfields.\u00E5"
             }
@@ -1834,17 +1833,5 @@
             }
         }
         
-    },
-	"rules":[
-		{
-            "type":"RecordRules.conflictingFields",
-            "params":{
-                "fields":[ "100", "110" ]
-            }
-        },
-		{
-        	"type": "RecordRules.conflictingSubfields",
-        	"params": { "subfields": [ "652m", "652o", "654m", "654o" ] }
-    	}
-    ]
+    }
 }
