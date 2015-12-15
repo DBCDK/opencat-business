@@ -1,0 +1,42 @@
+[
+    {
+        "name": "dbc-empty-subfields",
+        "description": "Tester skabelonen 'dbc' med et tomt felt",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "ERROR",
+                    "params" : {
+                        "fieldno" : 3,
+                        "subfieldno" : 9,
+                        "message" : "Delfelt '008o' må ikke være tomt.",
+                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                    }
+                }
+            ],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "fieldno" : 3,
+                            "subfieldno" : 9,
+                            "message" : "Delfelt '008o' må ikke være tomt.",
+                            "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
+                        }
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    }
+]
