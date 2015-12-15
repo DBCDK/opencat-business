@@ -32,17 +32,7 @@ var DefaultRawRepoRecordHandler = function() {
             Log.trace( "Record:\n", uneval( record ) );
 
             var records = instance.authenticator.recordDataForRawRepo( record, userId, groupId );
-
-            for( var i = 0; i < records.length; i++ ) {
-                var curRecord = records[ i ];
-                curRecord = RecordUtil.addOrReplaceSubfield( curRecord, "001", "c", RecordUtil.currentAjustmentTime() );
-                Log.debug( "curRecord:\n", curRecord );
-
-                Log.debug( "Adding curRecord: ", curRecord.toString() );
-                result.push( curRecord );
-            }
-
-            return result;
+            return records;
         }
         finally {
             Log.trace( "Exit - DefaultRawRepoRecordHandler.recordDataForRawRepo(): " + result );

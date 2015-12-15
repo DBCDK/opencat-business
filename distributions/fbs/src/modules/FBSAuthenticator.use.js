@@ -70,8 +70,19 @@ var FBSAuthenticator = function() {
     function recordDataForRawRepo( record, userId, groupId ) {
         Log.trace( StringUtil.sprintf( "Enter - FBSAuthenticator.recordDataForRawRepo( %s, %s, %s )", record, userId, groupId ) );
 
+        var result = [];
         try {
-            var result = __recordDataForRawRepo( record, userId, groupId );
+            var records = __recordDataForRawRepo( record, userId, groupId );
+
+            for( var i = 0; i < records.length; i++ ) {
+                var curRecord = records[ i ];
+                curRecord = RecordUtil.addOrReplaceSubfield( curRecord, "001", "c", RecordUtil.currentAjustmentTime() );
+                Log.debug( "curRecord:\n", curRecord );
+
+                Log.debug( "Adding curRecord: ", curRecord.toString() );
+                result.push( curRecord );
+            }
+
             return result;
         }
         finally {
