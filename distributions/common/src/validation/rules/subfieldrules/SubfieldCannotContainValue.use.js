@@ -25,7 +25,7 @@ var SubfieldCannotContainValue = function () {
      * @method
      */
     function validateSubfield ( record, field, subfield, params ) {
-        Log.trace( "Enter --- SubfieldCannotContainValue.validateSubfield" );
+        Log.debug( "Enter --- SubfieldCannotContainValue.validateSubfield" );
         ValueCheck.check( "params.values", params.values );
         ValueCheck.check( "params", params.values ).instanceOf( Array );
 
@@ -39,6 +39,7 @@ var SubfieldCannotContainValue = function () {
                 var subfieldname = params.notcondition.subfield.substr( 3, 1 );
 
                 var foundCondition = false;
+                Log.debug( "Validating subfield: ", field.name, subfield.name, ": ", subfield.value );
                 Log.debug( "Record: " + JSON.stringify( record ) );
                 for( var i = 0; i < record.fields.length; i++ ) {
                     if( record.fields[i].name === fieldname ) {

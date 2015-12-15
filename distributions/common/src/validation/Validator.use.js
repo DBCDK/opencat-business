@@ -64,6 +64,7 @@ var Validator = function() {
                 for (var k = 0; k < template.rules.length; k++) {
                     var rule = template.rules[k];
 
+                    Log.debug( "Record rule: ", rule.name );
                     try {
                         //Log.info("Run rule " + uneval(rule.type) + " on record");
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
@@ -136,6 +137,7 @@ var Validator = function() {
                 for (var i = 0; i < templateField.rules.length; i++) {
                     var rule = templateField.rules[i];
 
+                    Log.debug( "Field rule [", field.name, "]: ", rule.name );
                     try {
                         //Log.info("Run rule " + uneval(rule.type) + " on field " + field.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
@@ -206,6 +208,7 @@ var Validator = function() {
             if (templateSubfield instanceof Array) {
                 for (var i = 0; i < templateSubfield.length; i++) {
                     var rule = templateSubfield[i];
+                    Log.debug( "Subfield rule [", field.name, " *", subfield.name, "]: ", rule.name );
 
                     try {
                         //Log.info("Run rule " + uneval(rule.type) + " on subfield " + field.name + subfield.name);

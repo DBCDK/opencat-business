@@ -43,7 +43,7 @@ var TemplateLoader = function() {
                                 }
                                 else if ( subfieldObj.hasOwnProperty( "values" ) ) {
                                     if ( typeof( subfieldObj.values ) === "string" ) {
-                                        fieldObj.subfields[subfieldName] = __getObjectFromTemplate( subfieldObj.values, templateProvider );
+                                        fieldObj.subfields[subfieldName].values = __getObjectFromTemplate( subfieldObj.values, templateProvider );
                                     }
                                 }
                             }
