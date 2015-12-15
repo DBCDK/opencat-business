@@ -197,7 +197,11 @@ var Validator = function() {
             if (templateSubfield === undefined) {
                 return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( bundle, "wrong.subfield", subfield.name, field.name ) ) ];
             }
-            ;
+            if( subfield.value === "" ) {
+                if( UpdateConstants.EMPTY_SUBFIELDS.indexOf( subfield.name ) === -1 ) {
+                    return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat( bundle, "empty.subfield", field.name, subfield.name ) ) ];
+                }
+            }
 
             if (templateSubfield instanceof Array) {
                 for (var i = 0; i < templateSubfield.length; i++) {

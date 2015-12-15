@@ -30,5 +30,11 @@ var UpdateConstants = {
     AUTH_COMMON_NOTES: "auth_common_notes",
     AUTH_PUBLIC_LIB_COMMON_RECORD: "auth_public_lib_common_record",
     AUTH_RET_RECORD: "auth_ret_record",
-    AUTH_ROOT_FEATURE: "auth_root"
+    AUTH_ROOT_FEATURE: "auth_root",
+
+    //-----------------------------------------------------------------------------
+    //                  Subfields
+    //-----------------------------------------------------------------------------
+
+    EMPTY_SUBFIELDS: [ "0", "1" ]
 };
