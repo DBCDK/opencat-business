@@ -1,4 +1,4 @@
-001 00 *a 90004158 *b 714700 *c20150304180759 *d 20141209 *f a
+001 00 *a 90004158 *b 870970 *c20150304180759 *d 20141209 *f a
 004 00 *r n *a e
 008 00 *t m *u f *a 2014 *b dk *l dan *x 06 *v 0
 009 00 *a a *g xx
@@ -25,4 +25,4 @@
 900 00 *a Hegelund *h Karin S. *z 700
 900 00 *a Hegelund Hansen *h Karin *x se også under det senere navn *z 700
 910 00 *s Københavns Kommune *c Kultur- og Fritidsforvaltningen *c Københavns Biblioteker *z 710
-996 00 *a DBC
+996 00 *a 714700

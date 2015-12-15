@@ -235,9 +235,6 @@ var TemplateOptimizer = function() {
 
         var result = undefined;
         try {
-            Log.debug( "  sf: ", JSON.stringify( sf ) );
-            Log.debug( "  defs: ", JSON.stringify( defs ) );
-
             var values = sf.values;
             var rules = sf.rules;
 
@@ -269,7 +266,7 @@ var TemplateOptimizer = function() {
             return result;
         }
         finally {
-            Log.trace( "Exit -- TemplateOptimizer.optimizeSubfield(): ", result );
+            Log.trace( "Exit -- TemplateOptimizer.optimizeSubfield()" );
         }
     }
 
