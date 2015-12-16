@@ -11,6 +11,74 @@
             "repeatable":true
         }
     },
+    "rules":[
+        {
+            "type":"RecordRules.conflictingFields",
+            "params": {
+                "fields":[ "100", "110" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "652m", "652o", "654m", "654o" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "900w", "900z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "910w", "910z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "930w", "930z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "933w", "933z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "934w", "934z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "945w", "945z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "952w", "952z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "966w", "966z" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "968w", "968z" ]
+            }
+        }
+    ],
     "fields": {
         "001": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -229,7 +297,12 @@
                 "Y": "DanMarc2.fields.245.subfields.Y",
                 "y": "DanMarc2.fields.245.subfields.y",
                 "z": "DanMarc2.fields.245.subfields.z"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "250": "DanMarc2.fields.250",
         "255": "DanMarc2.fields.255",
@@ -313,7 +386,17 @@
         "593": "DanMarc2.fields.593",
         "594": "DanMarc2.fields.594",
         "595": "DanMarc2.fields.595",
-        "596": "DanMarc2.fields.596",
+        "596":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6c.htm",
+            "subfields":{
+                "\u00E5": "DanMarc2.fields.596.subfields.\u00E5",
+                "a": "DanMarc2.fields.596.subfields.a",
+                "x": "DanMarc2.fields.596.subfields.x",
+                "z":{
+                    "mandatory": true
+                }
+            }
+        },
         "597": "DanMarc2.fields.597",
         "598": "DanMarc2.fields.598",
         "599": "DanMarc2.fields.599",
@@ -420,7 +503,12 @@
                 },
                 "0": "DanMarc2.fields.900.subfields.0",
                 "1": "DanMarc2.fields.900.subfields.1"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "910":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
@@ -451,7 +539,12 @@
                 },
                 "0": "DanMarc2.fields.910.subfields.0",
                 "1": "DanMarc2.fields.910.subfields.1"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "930":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.9b.htm",
@@ -531,7 +624,12 @@
                 "z":{
                     "repeatable":false
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "952":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.9f.htm",
@@ -585,73 +683,5 @@
         "990": "DanMarc2.fields.990",
         "991": "DanMarc2.fields.991",
         "996": "DanMarc2.fields.996"
-    },
-    "rules":[
-        {
-            "type":"RecordRules.conflictingFields",
-            "params": {
-                "fields":[ "100", "110" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "652m", "652o", "654m", "654o" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "900w", "900z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "910w", "910z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "930w", "930z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "933w", "933z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "934w", "934z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "945w", "945z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "952w", "952z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "966w", "966z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
-                "subfields": [ "968w", "968z" ]
-            }
-        }
-    ]
+    }
 }
