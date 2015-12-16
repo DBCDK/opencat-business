@@ -1854,7 +1854,13 @@
                     "repeatable":false
                 },
                 "j":{}
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
+
         },
         "264":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.103.htm",
