@@ -1068,29 +1068,17 @@
         "096":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.32.htm",
             "subfields":{
-                "f":{
-					"repeatable": false
-				},
+                "f":{},
                 "x":{},
-                "a":{
-					"repeatable": false
-				},
-                "b":{
-					"repeatable": false
-				},
-                "c":{
-					"repeatable": false
-				},
-                "d":{
-                    "repeatable": false
-                },
+                "a":{},
+                "b":{},
+                "c":{},
+                "d":{},
                 "r":{
 					"repeatable": false,
                     "values": [ "a", "b", "c", "d", "e", "f", "g" ]
 				},
-                "l":{
-					"repeatable": false
-				},
+                "l":{},
                 "u":{
 					"repeatable": false
 				},
