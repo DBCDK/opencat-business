@@ -76,37 +76,22 @@
                 "x": "DanMarc2.fields.002.subfields.x"
             }
         },
-        "004": "DanMarc2.fields.004",
-        "005": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8.htm",
-            "repeatable": false,
-            "subfields": {
-                "h": "DanMarc2.fields.005.subfields.h",
-                "i": "DanMarc2.fields.005.subfields.i",
-                "j": "DanMarc2.fields.005.subfields.j",
-                "k": "DanMarc2.fields.005.subfields.k",
-                "l": "DanMarc2.fields.005.subfields.l",
-                "r": "DanMarc2.fields.005.subfields.r",
-                "v": "DanMarc2.fields.005.subfields.v",
-                "z": "DanMarc2.fields.005.subfields.z"
+        "004": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "r": "DanMarc2.fields.004.subfields.r",
+                "a": {
+                    "mandatory": true,
+                    "values":[ "e", "i" ]
+                }
             }
         },
-        "006": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
-            "subfields": {
-                "a": "DanMarc2.fields.006.subfields.a",
-                "b": "DanMarc2.fields.006.subfields.b",
-                "c": "DanMarc2.fields.006.subfields.c",
-                "d": "DanMarc2.fields.006.subfields.d",
-                "e": {
-                    "repeatable": false
-				},
-                "2": "DanMarc2.fields.006.subfields.2"
-            }
-        },
+        "005": "DanMarc2.fields.005",
+        "006": "DanMarc2.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-            "mandatory": true,
             "repeatable": false,
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
@@ -132,7 +117,10 @@
                 "r": "DanMarc2.fields.008.subfields.r",
                 "w": "DanMarc2.fields.008.subfields.w",
                 "x": "DanMarc2.fields.008.subfields.x",
-                "v": "DanMarc2.fields.008.subfields.v"
+                "v": {
+                    "repeatable": false,
+                    "values": [ "0", "1", "4", "5", "7", "8", "9" ]
+                }
             },
             "rules": [
                 {
@@ -381,6 +369,8 @@
         "539": "DanMarc2.fields.539",
         "540": "DanMarc2.fields.540",
         "555": "DanMarc2.fields.555",
+        "557": "DanMarc2.fields.557",
+        "558": "DanMarc2.fields.558",
         "559": "DanMarc2.fields.559",
         "563": "DanMarc2.fields.563",
         "565": "DanMarc2.fields.565",
