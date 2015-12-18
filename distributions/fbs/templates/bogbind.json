@@ -76,15 +76,14 @@
 					"mandatory": true,
                     "values":[ "b" ],
 					"rules": [
-    			{
-        			"type": "SubfieldRules.checkChangedValue",
-        			"params": 
-				{ 
-            		"fromValues": [ "h", "s" ],
-            		"toValues": [ "b" ]
-       			}	
-    			}
-			]
+            			{
+                			"type": "SubfieldRules.checkChangedValue",
+        		        	"params": {
+            		            "fromValues": [ "h", "s" ],
+            		            "toValues": [ "b" ]
+       			            }
+    			        }
+			        ]
                 }
             }
         },
