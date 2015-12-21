@@ -1,27 +1,31 @@
 [
     {
-        "name": "fbs-delete-locale-last-volume",
-        "description": "Sletning af det sidste eksisterende lokalt bind til eksisterende lokal hovedpost",
+        "name": "basis-delete-common-record-holdings-with-002-links",
+        "bugs": [ "#1517" ],
+        "description": "Tester slettet af fællespost med beholdninger med 002 links til den",
         "request": {
             "authentication": {
-                "group": "723000",
+                "group": "010100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "lokalpostbind",
+            "templateName": "dbc",
             "record": "request.marc"
         },
         "setup": {
+            "holdings": [ 723000 ],
             "rawrepo": [
                 {
-                    "record": "rawrepo-main.marc",
+                    "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "children": [ "rawrepo-volume.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
-                    "record": "rawrepo-volume.marc",
-                    "type": "MARCXCHANGE",
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
                     "deleted": false
                 }
             ]
@@ -32,14 +36,15 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "result-main.marc",
+                        "record": "result-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": true,
-                        "enqueued": true
+                        "enqueued": true,
+                        "enrichments": []
                     },
                     {
-                        "record": "result-volume.marc",
-                        "type": "MARCXCHANGE",
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
                         "deleted": true,
                         "enqueued": true
                     }
