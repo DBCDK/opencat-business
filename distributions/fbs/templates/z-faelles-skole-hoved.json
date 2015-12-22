@@ -386,10 +386,12 @@
         "991": "DanMarc2.fields.991",
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "a": {
-                "mandatory": true,
-                "repeatable": false,
-                "values": [ "300000" ]
+            "subfields":{
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": ["300000"]
+                }
             }
         },
         "y08": {
