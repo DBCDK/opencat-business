@@ -419,7 +419,7 @@ var TemplateOptimizer = function() {
             }
         }
         catch( ex ) {
-            Log.warn( "Unable to find validation function for typename '", typename, "': ", ex );
+            Log.warn( "Unable to find validation function for typename '", typeName, "': ", ex );
         }
         finally {
             Log.trace( "Exit -- TemplateOptimizer.convertRuleTypeNameToFunction()" );
