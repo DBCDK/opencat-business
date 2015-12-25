@@ -33,7 +33,7 @@
                     "params" : {
                         "fieldno" : 1,
                         "subfieldno" : 2,
-                        "message" : "Værdien '830160' er ikke end del af de valide værdier: '870970'",
+                        "message" : "Værdien '830160' er ikke en del af de valide værdier: '870970'",
                         "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                     }
                 }
@@ -45,7 +45,7 @@
                         "params" : {
                             "fieldno" : 1,
                             "subfieldno" : 2,
-                            "message" : "Værdien '830160' er ikke end del af de valide værdier: '870970'",
+                            "message" : "Værdien '830160' er ikke en del af de valide værdier: '870970'",
                             "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
                         }
                     }

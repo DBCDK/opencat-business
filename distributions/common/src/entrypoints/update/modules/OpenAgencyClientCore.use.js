@@ -6,6 +6,8 @@ EXPORTED_SYMBOLS = [ 'OpenAgencyClientCore' ];
 
 //-----------------------------------------------------------------------------
 var OpenAgencyClientCore = function() {
+    var JNDI_NAME = "java:global/updateservice-1.0-SNAPSHOT/OpenAgencyService";
+
     var features = {
         auth_common_notes: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_NOTES,
         auth_common_subjects: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_SUBJECTS,
@@ -21,7 +23,7 @@ var OpenAgencyClientCore = function() {
         var result;
         try {
             var context = new Packages.javax.naming.InitialContext();
-            var serviceProvider = context.lookup( "java:global/updateservice-app-1.0-SNAPSHOT/updateservice-ws-1.0-SNAPSHOT/OpenAgencyService" );
+            var serviceProvider = context.lookup( JNDI_NAME );
 
             return result = serviceProvider.hasFeature( agencyId, features[ featureName ] );
         }

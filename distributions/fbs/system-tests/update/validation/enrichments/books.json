@@ -27,7 +27,7 @@
                     "params": {
                         "fieldno": 2,
                         "subfieldno": 2,
-                        "message": "Værdien 'b' er ikke end del af de valide værdier: 'e', 'i'",
+                        "message": "Værdien 'b' er ikke en del af de valide værdier: 'e', 'i'",
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
                     }
                 },
@@ -35,7 +35,7 @@
                     "type": "ERROR",
                     "params": {
                         "fieldno": 5,
-                        "message": "Felt '014' kan ikke anvendes i denne skabelon.",
+                        "message": "Felt '014' kan ikke anvendes i denne skabelon/posttype.",
                         "url": ""
                     }
                 },
@@ -44,7 +44,7 @@
                     "params": {
                         "fieldno": 10,
                         "subfieldno": 1,
-                        "message": "Delfelt 'g' kan ikke anvendes paa felt '245' i denne skabelon.",
+                        "message": "Delfelt 'g' kan ikke anvendes i felt '245' i denne skabelon/posttype.",
                         "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
                 }
