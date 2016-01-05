@@ -945,17 +945,23 @@
             "mandatory":true,
             "repeatable":false,
             "subfields":{
-                "a":"Lister.fields.codes.subfields.libraries.996a",
-                "rules": [
-                    {
-                        "type": "SubfieldRules.subfieldCannotContainValue",
-                        "values": [ "DBC" ],
-                        "notcondition": {
-                            "subfield": "001b",
-                            "value": "870970"
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": "Lister.fields.codes.subfields.libraries.996a.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldCannotContainValue",
+                            "params": {
+                                "values": [ "DBC" ],
+                                "notcondition": {
+                                    "subfield": "001b",
+                                    "value": "870970"
+                                }
+                            }
                         }
-                    }
-                ],
+                    ]
+                },
                 "m":"Lister.fields.codes.subfields.libraries.996m",
                 "o":"Lister.fields.codes.subfields.libraries.996o"
             }
