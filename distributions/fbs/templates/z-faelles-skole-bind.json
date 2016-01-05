@@ -1,5 +1,8 @@
 {
-	"description":"Skabelon til 300000-post - bindpost.",
+    "template": {
+        "description":"Skabelon til 300000-post - bindpost.",
+        "features": [ "all" ]
+    },
     "settings": {
         "lookupfaust":false
     },

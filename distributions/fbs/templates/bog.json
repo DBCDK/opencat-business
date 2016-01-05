@@ -1,5 +1,8 @@
-    {
-	"description": "Skabelon til katalogisering af fysiske bøger - enkeltstående post.",
+{
+    "template": {
+        "description": "Skabelon til katalogisering af fysiske bøger - enkeltstående post.",
+        "features": [ "all" ]
+    },
     "defaults":{
         "field":{
             "indicator":"00",

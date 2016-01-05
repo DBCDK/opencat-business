@@ -1,5 +1,8 @@
 {
-	"description":"Skabelon til periodicaposter fra ffu-biblioteker.",
+    "template": {
+        "description":"Skabelon til periodicaposter fra ffu-biblioteker.",
+        "features": [ "all" ]
+    },
     "defaults":{
         "field":{
             "indicator":"00",

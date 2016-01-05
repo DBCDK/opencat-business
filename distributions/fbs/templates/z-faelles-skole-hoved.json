@@ -1,5 +1,8 @@
 {
-	"description":"Skabelon til 300000-post - hovedpost.",
+    "template": {
+        "description":"Skabelon til 300000-post - hovedpost.",
+        "features": [ "all" ]
+    },
     "defaults":{
         "field":{
             "indicator":"00",

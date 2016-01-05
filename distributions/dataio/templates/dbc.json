@@ -1,4 +1,7 @@
 {
+    "template": {
+        "features": [ "all" ]
+    },
     "defaults":{
         "field":{
             "indicator":"00",

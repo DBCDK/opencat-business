@@ -1,5 +1,8 @@
 {
-    "description":"Skabelon til sletteposter - alle post- og materialetyper.",
+    "template": {
+        "description": "Skabelon til sletteposter - alle post- og materialetyper.",
+        "features": [ "all" ]
+    },
     "defaults":{
         "field":{
             "indicator": [ "00", "01", "02", "03", "04", "05", "06", "07" ],

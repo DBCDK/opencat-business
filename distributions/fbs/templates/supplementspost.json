@@ -1,5 +1,8 @@
 {
-	"description":"Skabelon til supplementspost - enkelstående post.",
+    "template": {
+        "description":"Skabelon til supplementspost - enkelstående post.",
+        "features": [ "create_enrichments", "use_enrichments" ]
+    },
     "settings": {
         "lookupfaust":false
     },

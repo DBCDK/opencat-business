@@ -1,5 +1,8 @@
 {
-	"description": "Skabelon til katalogisering af musikmaterialer (cd'er, plader, noder m.m.) - enkelststående post.",
+    "template": {
+        "description": "Skabelon til katalogisering af musikmaterialer (cd'er, plader, noder m.m.) - enkelststående post.",
+        "features": [ "all" ]
+    },
     "defaults":{
         "field":{
             "indicator":"00",
