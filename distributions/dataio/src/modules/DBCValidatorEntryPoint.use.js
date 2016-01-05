@@ -1,4 +1,5 @@
 //-----------------------------------------------------------------------------
+use( "AuthenticateTemplate" );
 use( "TemplateContainer" );
 use( "Validator" );
 
@@ -20,11 +21,28 @@ var DBCValidatorEntryPoint = function() {
      * @return {JSON} A json with the names of the templates. The names is returned
      *                as an Array.
      */
-    function getValidateSchemas( settings ) {
-        ResourceBundleFactory.init( settings );
-        TemplateContainer.setSettings( settings );
+    function getValidateSchemas( groupId, settings ) {
+        Log.trace( "Enter - DBCValidatorEntryPoint.getValidateSchemas( '", groupId, "', ", settings, " )" );
 
-        return JSON.stringify( TemplateContainer.getTemplateNames( settings ) );
+        var result = undefined;
+        try {
+            ResourceBundleFactory.init(settings);
+            TemplateContainer.setSettings(settings);
+
+            var schemas = TemplateContainer.getTemplateNames();
+            var list = [];
+            for( var i = 0; i < schemas.length; i++ ) {
+                var schema = schemas[ i ];
+                if( AuthenticateTemplate.canAuthenticate( groupId, TemplateContainer.getUnoptimized( schema.schemaName ) ) ) {
+                    list.push( schema );
+                }
+            }
+
+            return result = JSON.stringify( list );
+        }
+        finally {
+            Log.trace( "Exit - DBCValidatorEntryPoint.getValidateSchemas(): ", result );
+        }
     }
 
     /**
@@ -34,7 +52,7 @@ var DBCValidatorEntryPoint = function() {
      *
      * @return {Boolean} true if the template exists, false otherwise.
      */
-    function checkTemplate( name, settings ) {
+    function checkTemplate( name, groupId, settings ) {
         Log.trace( StringUtil.sprintf( "Enter - checkTemplate( '%s' )", name ) );
 
         var result = null;
@@ -42,8 +60,12 @@ var DBCValidatorEntryPoint = function() {
             ResourceBundleFactory.init( settings );
             TemplateContainer.setSettings( settings );
 
-            result = TemplateContainer.getUnoptimized( name ) !== undefined;
-            return result;
+            var templateObj = TemplateContainer.getUnoptimized( name );
+            if( templateObj !== undefined ) {
+                return result = AuthenticateTemplate.canAuthenticate(groupId, templateObj);
+            }
+
+            return result = false;
         }
         catch( ex ) {
             Log.debug( "Caught exception -> returning false. The exception was: ", ex );

@@ -9,6 +9,8 @@ var OpenAgencyClientCore = function() {
     var JNDI_NAME = "java:global/updateservice-1.0-SNAPSHOT/OpenAgencyService";
 
     var features = {
+        create_enrichments: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.CREATE_ENRICHMENTS,
+        use_enrichments: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.USE_ENRICHMENTS,
         auth_common_notes: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_NOTES,
         auth_common_subjects: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_COMMON_SUBJECTS,
         auth_dbc_records: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_DBC_RECORDS,

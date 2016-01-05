@@ -73,8 +73,8 @@ function recordDataForRawRepo( record, userId, groupId ) {
  * @return {JSON} A json with the names of the templates. The names is returned
  *                as an Array.
  */
-function getValidateSchemas( settings ) {
-    return FBSValidatorEntryPoint.getValidateSchemas( settings );
+function getValidateSchemas( groupId, settings ) {
+    return FBSValidatorEntryPoint.getValidateSchemas( groupId, settings );
 }
 
 /**
@@ -84,8 +84,8 @@ function getValidateSchemas( settings ) {
  *
  * @return {Boolean} true if the template exists, false otherwise.
  */
-function checkTemplate( name, settings ) {
-    return FBSValidatorEntryPoint.checkTemplate( name, settings );
+function checkTemplate( name, groupId, settings ) {
+    return FBSValidatorEntryPoint.checkTemplate( name, groupId, settings );
 }
 
 /**

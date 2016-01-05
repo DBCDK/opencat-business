@@ -61,8 +61,10 @@ var TemplateContainer = function() {
 
                 schema.schemaName = filename.substr(0, filename.lastIndexOf("."));
                 var templateObj = JSON.parse(System.readFile(filepath));
-                if (templateObj.hasOwnProperty('description')) {
-                    schema.schemaInfo = templateObj.description;
+                if (templateObj.hasOwnProperty('template')) {
+                    if (templateObj.template.hasOwnProperty('description')) {
+                        schema.schemaInfo = templateObj.template.description;
+                    }
                 }
 
                 Log.debug("Found template '", schema.schemaName, "' -> '", schema.schemaInfo, "'");

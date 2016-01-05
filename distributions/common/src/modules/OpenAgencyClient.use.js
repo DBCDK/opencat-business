@@ -20,6 +20,7 @@ var OpenAgencyClient = function() {
 
         var result;
         try {
+            Log.info( "Checking feature '", featureName, "' for agency: ", agencyId );
             return result = OpenAgencyClientCore.hasFeature( agencyId, featureName );
         }
         finally {
