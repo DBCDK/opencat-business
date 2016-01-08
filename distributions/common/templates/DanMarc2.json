@@ -215,6 +215,7 @@
                 },
                 "a": {
                     "repeatable": false,
+                    "values": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "?" ],
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
@@ -226,6 +227,7 @@
                 },
                 "z": {
                     "repeatable": false,
+                    "values": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "?" ],
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
@@ -4454,11 +4456,30 @@
 				},
                 "a":{},
                 "b":{},
+                "C":{},
+                "c":{},
+                "D":{},
                 "d":{
 					"repeatable": false
 				},
-                "c":{}
-            }
+                "e":{},
+                "f":{},
+                "g":{},
+                "h":{},
+                "i":{},
+                "k":{},
+                "m":{},
+                "v":{},
+                "w":{},
+                "x":{},
+                "y":{},
+                "z":{}
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "700":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",
