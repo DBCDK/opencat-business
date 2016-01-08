@@ -29,39 +29,56 @@ var CheckISBN10 = function () {
         var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
 
         //ValueCheck.checkUndefined( "params", params );
+        // https://www.isbn-international.org/
+        // we must iterate the ISBN10 number string and multiply each number
+        // with numbers 10 to 1.
+        // 1. the product modulo 11 must be zero
+        // 2. subfield value =     0-201-53082-1
+        // 3. subfield trimmed =   0  2 0 1 5 3 0 8 2 1
+        // 4. weight               10 9 8 7 6 5 4 3 2 1
+        // 5. before summing =     0  1 0 7 3 1 0 2 4 1
+        //                            8     0 5   4
+        // 6. productsum =         0 + 18 + 0 + 7 + 30 + 15 + 0 + 24 + 4 + 1 = 99
+        // 7. productsum % 11 =    99 % 11 = 0 = valid ISBN10
+        // 8. last digit can be an x (ie. 10)
         var result = [];
-        var subfieldValue = subfield['value'].replace(/-/g,""); // removes dashes
+        var pos = 0;
+        var weight = 10;
+        var value = 0;
         var subfieldName = subfield['name'];
-        if ( !ValidationUtil.isNumber( subfieldValue.substring( 0, subfieldValue.length - 2 ) ) ||
-            (!ValidationUtil.isNumber(subfieldValue.substring( subfieldValue.length - 1 ) ) && subfieldValue.substring( subfieldValue.length - 1 ).toLowerCase() !== 'x' ) ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", subfieldName ) ) );
-        } else if ( subfieldValue.length !== 10 ) {
-            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.length.error", subfieldName ) ) );
-        } else {
-            // we must iterate the ISBN10 number string and multiply each number
-            // with numbers 10 to 1.
-            // 1. the product modulo 11 must be zero
-            // 2. subfield value =     0-201-53082-1
-            // 3. subfield trimmed =   0  2 0 1 5 3 0 8 2 1
-            // 4. weight               10 9 8 7 6 5 4 3 2 1
-            // 5. before summing =     0  1 0 7 3 1 0 2 4 1
-            //                            8     0 5   4
-            // 6. productsum =         0 + 18 + 0 + 7 + 30 + 15 + 0 + 24 + 4 + 1 = 99
-            // 7. productsum % 11 =    99 % 11 = 0 = valid ISBN10
-            // 8. last digit can be an x (ie. 10)
-            var value = 0;
-            for ( var i = 0; i < subfieldValue.length - 1; ++i ) {
-                value += parseInt( subfieldValue.charAt( i ) ) * ( subfieldValue.length - i ); // 4, 5, 6
-            }
-            if ( subfieldValue.charAt( subfieldValue.length - 1 ).toLowerCase() === 'x' ) {
-                value += 10; // 8
+        var subfieldValue = subfield['value'];
+        var len = subfieldValue.length ;
+        for ( var ix = 0; ix < len; ix++ ) {
+            var ch = subfieldValue.charAt( ix );
+            if ( ch >= '0' && ch <= '9' ) {
+                value += parseInt( ch ) * weight; // 4, 5, 6
+                weight--;
+                pos++;
             } else {
-                value += parseInt( subfieldValue.charAt( subfieldValue.length - 1 ) ); // 4, 5, 6
-            }
-            if ( value % 11 !== 0 ) { // 7
-                result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.invalid.error", subfieldName, subfield['value'] ) ) );
+                if ( ch === '-' ) {
+                    continue;
+                }
+                if ( ch.toLowerCase() === 'x' ) {
+                    if ( ix != len - 1 ) {
+                        result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.length.error", subfieldName ) ) );
+                        return result;
+                    }
+                    value += 10; // 8
+                    pos++;
+                } else {
+                    result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", subfieldName ) ) );
+                    return result;
+                }
             }
         }
+        if ( pos != 10 ) {
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.length.error", subfieldName ) ) );
+            return result;
+        }
+        if ( value % 11 !== 0 ) { // 7
+            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.invalid.error", subfieldName, subfield['value'] ) ) );
+        }
+
         return result;
         } finally {
             Log.trace( "Exit --- CheckISBN10.validateSubfield" );
