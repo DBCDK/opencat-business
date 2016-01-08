@@ -215,7 +215,6 @@
                 },
                 "a": {
                     "repeatable": false,
-                    "values": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "?" ],
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
@@ -227,7 +226,6 @@
                 },
                 "z": {
                     "repeatable": false,
-                    "values": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "?" ],
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
