@@ -7,6 +7,8 @@ use( "UnitTest" );
 use("CheckSubfieldNotUsedInChildrenRecords");
 use("LookupValue");
 use("SubfieldMandatoryIfSubfieldNotPresentRule");
+use("CheckISMN");
+use("CheckISSN");
 use("CheckISBN10");
 use("CheckISBN13");
 use("LookUpRecord");
@@ -395,6 +397,10 @@ var TemplateOptimizer = function() {
                 case "SubfieldRules.checkFaust":
                     return CheckFaust.validateSubfield;
                 //case "SubfieldRules.checkFaust": return CheckFaust.validateSubfield;
+                case "SubfieldRules.checkISMN":
+                    return CheckISMN.validateSubfield;
+                case "SubfieldRules.checkISSN":
+                    return CheckISSN.validateSubfield;
                 case "SubfieldRules.checkISBN10":
                     return CheckISBN10.validateSubfield;
                 case "SubfieldRules.checkISBN13":
@@ -660,6 +666,7 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
     defs = { values: [ "a" ] };
     Assert.equalValue( "Empty subfield and defs with values", TemplateOptimizer.optimizeSubfield( sf, defs ), [
             {
+                name: "CheckValue.validateSubfield",
                 type: CheckValue.validateSubfield,
                 params: { values: defs.values }
             }
@@ -669,6 +676,7 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
     defs = { values: [ "a" ] };
     Assert.equalValue( "subfield with values and defs with values", TemplateOptimizer.optimizeSubfield( sf, defs ), [
             {
+                name: "CheckValue.validateSubfield",
                 type: CheckValue.validateSubfield,
                 params: { values: sf.values }
             }
@@ -684,9 +692,11 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
     Assert.equalValue( "subfield with values and defs with rules", TemplateOptimizer.optimizeSubfield( sf, defs ), [
             {
                 type: CheckLength.validateSubfield,
-                params: { min: 1 }
+                params: { min: 1 },
+                name: "SubfieldRules.checkLength"
             },
             {
+                name: "CheckValue.validateSubfield",
                 type: CheckValue.validateSubfield,
                 params: { values: sf.values }
             }
@@ -702,9 +712,11 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
     Assert.equalValue( "subfield with rules and defs with values", TemplateOptimizer.optimizeSubfield( sf, defs ), [
             {
                 type: CheckLength.validateSubfield,
-                params: { min: 1 }
+                params: { min: 1 },
+                name: "SubfieldRules.checkLength"
             },
             {
+                name: "CheckValue.validateSubfield",
                 type: CheckValue.validateSubfield,
                 params: { values: defs.values }
             }
@@ -723,7 +735,7 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
         ] };
     Assert.equalValue( "subfield with rules and defs with rules", TemplateOptimizer.optimizeSubfield( sf, defs ), [
             {
-                type: CheckISBN10.validateSubfield
+                type: CheckISBN10.validateSubfield, name:"SubfieldRules.checkISBN10"
             }
         ] );
 });
