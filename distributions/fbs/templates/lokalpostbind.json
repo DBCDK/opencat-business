@@ -446,6 +446,11 @@
                 "m":"Lister.fields.codes.subfields.libraries.996m",
                 "o":"Lister.fields.codes.subfields.libraries.996o"
             }
+        },
+        "y08": {
+            "subfields": {
+                "a": {}
+            }
         }
     }
 }
