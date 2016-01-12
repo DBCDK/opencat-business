@@ -66,7 +66,7 @@ var CheckISBN10 = function () {
                     value += 10; // 8
                     pos++;
                 } else {
-                    result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", subfieldName ) ) );
+                    result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.numbers.error", subfieldName ) ) );
                     return result;
                 }
             }

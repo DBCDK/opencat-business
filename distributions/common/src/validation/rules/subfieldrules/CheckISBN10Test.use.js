@@ -34,7 +34,7 @@ UnitTest.addFixture( "CheckISBN10.validateSubfield", function() {
     SafeAssert.equal( "4 CheckISBN10.validateSubfield with invalid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield4, params )[0], error4[0] );
 
     var subfield5 = {'name': "isbn10", 'value': "0-201-53O82-1" };
-    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", "isbn10" ) )];
+    var error5 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.numbers.error", "isbn10" ) )];
     SafeAssert.equal( "5 CheckISBN10.validateSubfield with invalid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield5, params )[0], error5[0] );
 
     var subfield6 = {'name': "isbn10", 'value': "0-8044-2957-X" };
@@ -45,6 +45,6 @@ UnitTest.addFixture( "CheckISBN10.validateSubfield", function() {
     SafeAssert.equal( "7 CheckISBN10.validateSubfield with invalid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield7, params )[0], error7[0] );
 
     var subfield8 = {'name': "isbn10", 'value': "0-8044-2967-a" };
-    var error8 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn.numbers.error", "isbn10" ) )];
+    var error8 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.numbers.error", "isbn10" ) )];
     SafeAssert.equal( "8 CheckISBN10.validateSubfield with invalid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield8, params )[0], error8[0] );
 });
