@@ -88,9 +88,19 @@ var ClassificationData = function() {
             }
 
             if (instance.fields.test("239")) {
-                if (__hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /4|c/)) {
-                    reason = "239c";
-                    return result = true;
+                var checkField = true;
+
+                if( oldMarc.matchValue( /001/, /b/, RegExp( UpdateConstants.RAWREPO_COMMON_AGENCYID ) ) &&
+                    newMarc.matchValue( /001/, /b/, RegExp( UpdateConstants.RAWREPO_COMMON_AGENCYID ) ) ) {
+
+                    checkField = oldMarc.getValue( /245/, /a/ ) !== newMarc.getValue( /239/, /t/ );
+                }
+
+                if( checkField ) {
+                    if( __hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /4|c/) ) {
+                        reason = "239c";
+                        return result = true;
+                    }
                 }
             }
 

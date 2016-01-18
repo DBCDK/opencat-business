@@ -322,6 +322,74 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     Assert.equalValue( "Two 038: Changed order", callFunction( oldRecord, newRecord ), false );
 
     //-------------------------------------------------------------------------
+    //         Changes values in classification data (field: 239)
+    //-------------------------------------------------------------------------
+
+    oldRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "t", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "New 239t: 239t == 245a (in old record)", callFunction( oldRecord, newRecord ), false );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "t", value: "xx" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "t", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "Changed 239t: 239t == 245a (in old record)", callFunction( oldRecord, newRecord ), false );
+
+    //-------------------------------------------------------------------------
     //         Changes values in classification data (field: 245)
     //-------------------------------------------------------------------------
 
