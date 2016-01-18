@@ -95,37 +95,47 @@ var ClassificationData = function() {
             }
 
             if (instance.fields.test("245")) {
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /a/)) {
-                    reason = "245a";
-                    return result = true;
+                var checkField = true;
+
+                if( oldMarc.existField( new MatchField( /239/, undefined, /a|h|k|e|f|t|\u00F8/ ) ) ||
+                    newMarc.existField( new MatchField( /239/, undefined, /a|h|k|e|f|t|\u00F8/ ) ) )
+                {
+                    checkField = __hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /[^ahkeft\u00F8]/ );
                 }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /g/)) {
-                    reason = "245g";
-                    return result = true;
-                }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __value, /245/, /m/)) {
-                    reason = "245m";
-                    return result = true;
-                }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValue, /245/, /n/)) {
-                    reason = "245n";
-                    return result = true;
-                }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /o/)) {
-                    reason = "245o";
-                    return result = true;
-                }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /y/)) {
-                    reason = "245y";
-                    return result = true;
-                }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /\u00E6/)) {
-                    reason = "245\u00E6";
-                    return result = true;
-                }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /\u00F8/)) {
-                    reason = "245\u00F8";
-                    return result = true;
+
+                if( checkField === true ) {
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /a/)) {
+                        reason = "245a";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /g/)) {
+                        reason = "245g";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __value, /245/, /m/)) {
+                        reason = "245m";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValue, /245/, /n/)) {
+                        reason = "245n";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /o/)) {
+                        reason = "245o";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /y/)) {
+                        reason = "245y";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /\u00E6/)) {
+                        reason = "245\u00E6";
+                        return result = true;
+                    }
+                    if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /\u00F8/)) {
+                        reason = "245\u00F8";
+                        return result = true;
+                    }
                 }
             }
 
@@ -367,7 +377,7 @@ var ClassificationData = function() {
                             __hasFieldChanged(newField, oldField, valueFunc, ignoreSubfieldsMatcher);
         }
         finally {
-            Log.trace( "Enter - ClassificationData.__hasFieldByNameChanged(): ", result );
+            Log.trace( "Exit - ClassificationData.__hasFieldByNameChanged(): ", result );
         }
     }
     

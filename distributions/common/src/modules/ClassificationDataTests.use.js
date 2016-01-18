@@ -320,7 +320,89 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
         ]
     };    
     Assert.equalValue( "Two 038: Changed order", callFunction( oldRecord, newRecord ), false );
-    
+
+    //-------------------------------------------------------------------------
+    //         Changes values in classification data (field: 245)
+    //-------------------------------------------------------------------------
+
+    oldRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245 changed, but 239a not changed", callFunction( oldRecord, newRecord ), false );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "a", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "a", value: "tx" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245 and 239a changed", callFunction( oldRecord, newRecord ), true );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "m", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "239", indicator: "00",
+                subfields: [ { name: "m", value: "te" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245 changed, but 239m not changed", callFunction( oldRecord, newRecord ), true );
+
     //-------------------------------------------------------------------------
     //              Changes values in non classification data
     //-------------------------------------------------------------------------
