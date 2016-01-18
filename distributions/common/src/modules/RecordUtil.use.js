@@ -106,7 +106,9 @@ var RecordUtil = function() {
 
         try {
             var record = new Record();
-            record.fromString( s );
+            if( s !== "" ) {
+                record.fromString(s);
+            }
 
             return record;
         }
