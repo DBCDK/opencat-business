@@ -1008,7 +1008,16 @@
                 "u": "DanMarc2.fields.990.subfields.u"
             }
         },
-        "991": "DanMarc2.fields.991",
+        "991":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a4.htm",
+            "subfields":{
+                "\u00E5":{
+                    "repeatable": false
+                },
+                "a":{},
+                "o":{}
+            }
+        },
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
             "repeatable":false,
