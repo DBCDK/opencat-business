@@ -9,7 +9,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "supplementspost",
+            "templateName": "påhængspost",
             "record": "request.marc"
         },
         "setup": {
@@ -73,7 +73,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "supplementspost",
+            "templateName": "påhængspost",
             "record": "request.marc"
         },
         "setup": {

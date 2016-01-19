@@ -8,7 +8,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "supplementspostbind",
+            "templateName": "påhængspostbind",
             "record": "request.marc"
         },
         "setup": {
