@@ -21,7 +21,23 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": [ {
+                "type" : "ERROR",
+                "params" : {
+                    "fieldno" : 4,
+                    "subfieldno" : 1,
+                    "message" : "Delfelt 'a' kan ikke anvendes i felt '009' i denne skabelon/posttype.",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            }, {
+                "type" : "ERROR",
+                "params" : {
+                    "fieldno" : 4,
+                    "subfieldno" : 2,
+                    "message" : "Delfelt 'g' kan ikke anvendes i felt '009' i denne skabelon/posttype.",
+                    "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm"
+                }
+            } ],
             "update": {
                 "errors": [],
                 "rawrepo": [
