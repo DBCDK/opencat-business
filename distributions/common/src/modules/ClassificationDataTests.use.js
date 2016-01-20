@@ -414,7 +414,7 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
             }
         ]
     };
-    Assert.equalValue( "245 changed, but 239a not changed", callFunction( oldRecord, newRecord ), false );
+    Assert.equalValue( "245a changed, but 239a not changed", callFunction( oldRecord, newRecord ), false );
 
     oldRecord = {
         fields: [
@@ -440,7 +440,7 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
             }
         ]
     };
-    Assert.equalValue( "245 and 239a changed", callFunction( oldRecord, newRecord ), true );
+    Assert.equalValue( "245a and 239a changed", callFunction( oldRecord, newRecord ), true );
 
     oldRecord = {
         fields: [
@@ -466,7 +466,111 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
             }
         ]
     };
-    Assert.equalValue( "245 changed, but 239m not changed", callFunction( oldRecord, newRecord ), true );
+    Assert.equalValue( "245a changed, but 239m not changed", callFunction( oldRecord, newRecord ), true );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245a changed, 004a=s, !245n", callFunction( oldRecord, newRecord ), true );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" }, { name: "n", value: "gg" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" }, { name: "n", value: "gg" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245a changed, 004a=s, 245n", callFunction( oldRecord, newRecord ), false );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "b" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "b" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245a changed, 004a=b, !245g", callFunction( oldRecord, newRecord ), true );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "b" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" }, { name: "g", value: "gg" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "b" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" }, { name: "g", value: "gg" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "245a changed, 004a=b, 245g", callFunction( oldRecord, newRecord ), false );
 
     //-------------------------------------------------------------------------
     //              Changes values in non classification data

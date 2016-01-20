@@ -108,8 +108,22 @@ var ClassificationData = function() {
 
                 if( checkField === true ) {
                     if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /a/)) {
-                        reason = "245a";
-                        return result = true;
+                        if( newMarc.matchValue( /004/, /a/, /s/ ) ) {
+                            if( !newMarc.existField( new MatchField( /245/, undefined, /n/ ) ) ) {
+                                reason = "245a: 004a=s and !245n";
+                                return result = true;
+                            }
+                        }
+                        else if( newMarc.matchValue( /004/, /a/, /b/ ) ) {
+                            if( !newMarc.existField( new MatchField( /245/, undefined, /g/ ) ) ) {
+                                reason = "245a: 004a=b and !245g";
+                                return result = true;
+                            }
+                        }
+                        else {
+                            reason = "245a";
+                            return result = true;
+                        }
                     }
                     if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /g/)) {
                         reason = "245g";
