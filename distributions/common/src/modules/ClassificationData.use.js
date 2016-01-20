@@ -464,9 +464,12 @@ var ClassificationData = function() {
         Log.trace( "Enter - ClassificationData.__stripValue()" );
 
         try {
+            var Normalizer = Java.type("java.text.Normalizer");
+
             Log.trace("    v: " + v);
 
             v = v.replace(/\s|\[|\]|\u00A4/g, "");
+            v = Normalizer.normalize( v, Normalizer.Form.NFD ).replaceAll( "[\\p{InCombiningDiacriticalMarks}]", "" );
 
             return v;
         }

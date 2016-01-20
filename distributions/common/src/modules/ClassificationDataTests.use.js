@@ -261,8 +261,9 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     Assert.equalValue( "239c 1970 -> 1970", callSubfieldChanged( "239", "c", "1970", "1970" ), false ); 
     Assert.equalValue( "239c 1970 -> 1967", callSubfieldChanged( "239", "c", "1970", "1967" ), false ); 
     Assert.equalValue( "245a xx -> xx", callSubfieldChanged( "245", "a", "xx", "xx" ), false ); 
-    Assert.equalValue( "245a xx -> xy", callSubfieldChanged( "245", "a", "xx", "xy" ), true ); 
-    Assert.equalValue( "245g xx -> xx", callSubfieldChanged( "245", "g", "xx", "xx" ), false ); 
+    Assert.equalValue( "245a xx -> xy", callSubfieldChanged( "245", "a", "xx", "xy" ), true );
+    Assert.equalValue( "245a ëx -> ex", callSubfieldChanged( "245", "a", "ëx", "ex" ), false );
+    Assert.equalValue( "245g xx -> xx", callSubfieldChanged( "245", "g", "xx", "xx" ), false );
     Assert.equalValue( "245g xx -> xy", callSubfieldChanged( "245", "g", "xx", "xy" ), true ); 
     Assert.equalValue( "245m xx -> xx", callSubfieldChanged( "245", "m", "xx", "xx" ), false ); 
     Assert.equalValue( "245m xx -> xy", callSubfieldChanged( "245", "m", "xx", "xy" ), true ); 
