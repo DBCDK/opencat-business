@@ -39,13 +39,6 @@ var ClassificationData = function() {
             Log.trace("    oldMarc: " + oldMarc);
             Log.trace("    newMarc: " + newMarc);
 
-            if (instance.fields.test("004")) {
-                if (__hasSubfieldChangedMatcher(oldMarc, newMarc, /004/, /a/, /e/, /b/)) {
-                    reason = "004a: e -> b";
-                    return result = true;
-                }
-            }
-
             if (instance.fields.test("008")) {
                 if (__hasSubfieldChangedMatcher(oldMarc, newMarc, /008/, /t/, /m|s/, /p/)) {
                     reason = "008t m|s -> p";
@@ -74,15 +67,15 @@ var ClassificationData = function() {
             }
 
             if (instance.fields.test("100")) {
-                if (__hasFieldByNameChanged(oldMarc, newMarc, "100", __stripValue, /0|4|c/)) {
-                    reason = "100 Delfelterne 0|4|c";
+                if (__hasFieldByNameChanged(oldMarc, newMarc, "100", __stripValue, /[^a|h|k|e|f]/)) {
+                    reason = "100 Delfelterne ahkef";
                     return result = true;
                 }
             }
 
             if (instance.fields.test("110")) {
-                if (__hasFieldByNameChanged(oldMarc, newMarc, "110", __stripValue, /4/ ) ) {
-                    reason = "110";
+                if (__hasFieldByNameChanged(oldMarc, newMarc, "110", __stripValue, /[^s|a|c|e|i|k|j]/ ) ) {
+                    reason = "110 saceikj";
                     return result = true;
                 }
             }
@@ -97,8 +90,8 @@ var ClassificationData = function() {
                 }
 
                 if( checkField ) {
-                    if( __hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /4|c/) ) {
-                        reason = "239c";
+                    if( __hasFieldByNameChanged(oldMarc, newMarc, "239", __stripValueLength10, /[^a|h|k|e|f|t|\u00F8]/ ) ) {
+                        reason = "239 ahkeft\u00F8";
                         return result = true;
                     }
                 }
@@ -150,12 +143,12 @@ var ClassificationData = function() {
             }
 
             if (instance.fields.test("652")) {
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, new MatchField(/652/, undefined, /m|o/), /a/)) {
-                    reason = "652m|o Delfelt a changed";
+                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /652/, /a/)) {
+                    reason = "652 Delfelt a changed";
                     return result = true;
                 }
-                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, new MatchField(/652/, undefined, /m|o/), /b/)) {
-                    reason = "652m|o Delfelt b changed";
+                if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /652/, /b/)) {
+                    reason = "652 Delfelt b changed";
                     return result = true;
                 }
                 if (__hasSubfieldJustChanged(oldMarc, newMarc, __stripValue, new MatchField(/652/, undefined, /m|o/), /e/)) {

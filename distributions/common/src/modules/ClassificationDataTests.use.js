@@ -246,10 +246,7 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     //         Changes values in classification data (single fields)
     //-------------------------------------------------------------------------
     
-    Assert.equalValue( "004a e -> e", callSubfieldChanged( "004", "a", "e", "e" ), false ); 
-    Assert.equalValue( "004a e -> i", callSubfieldChanged( "004", "a", "e", "i" ), false ); 
-    Assert.equalValue( "004a e -> b", callSubfieldChanged( "004", "a", "e", "b" ), true ); 
-    Assert.equalValue( "008t m -> m", callSubfieldChanged( "008", "t", "m", "m" ), false ); 
+    Assert.equalValue( "008t m -> m", callSubfieldChanged( "008", "t", "m", "m" ), false );
     Assert.equalValue( "008t m -> z", callSubfieldChanged( "008", "t", "m", "z" ), false ); 
     Assert.equalValue( "008t m -> p", callSubfieldChanged( "008", "t", "m", "p" ), true ); 
     Assert.equalValue( "008t s -> p", callSubfieldChanged( "008", "t", "s", "p" ), true ); 
@@ -647,9 +644,14 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     //-------------------------------------------------------------------------
     //              Field 652
     //-------------------------------------------------------------------------
-    
-    testField652( "a", "The \u00A4book of life", "The \u00A4book of liberty", "Book of life" );
-    testField652( "b", "The \u00A4book of life", "The \u00A4book of liberty", "Book of life" );
+
+    Assert.equalValue( "652a xx -> xx", callSubfieldChanged( "652", "a", "xx", "xx" ), false );
+    Assert.equalValue( "652a xx -> x[[x", callSubfieldChanged( "652", "a", "xx", "x[[x" ), false );
+    Assert.equalValue( "652a xx -> xy", callSubfieldChanged( "652", "a", "xx", "xy" ), true );
+    Assert.equalValue( "652b xx -> xx", callSubfieldChanged( "652", "b", "xx", "xx" ), false );
+    Assert.equalValue( "652b xx -> x[[x", callSubfieldChanged( "652", "b", "xx", "x[[x" ), false );
+    Assert.equalValue( "652b xx -> xy", callSubfieldChanged( "652", "b", "xx", "xy" ), true );
+
     testField652( "e", "The \u00A4book of life", "The \u00A4book of life", "Book of life" );
     testField652( "f", "The \u00A4book of life", "The \u00A4book of life", "Book of life" );
     testField652( "h", "The \u00A4book of life", "The \u00A4book of life", "Book of life" );
