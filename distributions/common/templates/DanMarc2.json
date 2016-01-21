@@ -237,7 +237,7 @@
                     ]
                 },
                 "b": {
-                    "values": "Lister.fields.codes.subfields.country.general.values"
+                    "values": "Lister.fields.codes.subfields.country.general"
                 },
                 "c": {
                     "repeatable": false,
@@ -279,7 +279,7 @@
                 },
                 "l": {
                     "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
 				"m": {
                     "repeatable": false,
@@ -341,16 +341,16 @@
             "repeatable":false,
             "subfields":{
                 "a": {
-                    "values": "Lister.fields.codes.subfields.general_mattype.value"
+                    "values": "Lister.fields.codes.subfields.general_mattype"
                 },
                 "g": {
-                    "values": "Lister.fields.codes.subfields.specific_mattype.value"
+                    "values": "Lister.fields.codes.subfields.specific_mattype"
                 },
                 "b": {
-                    "values": "Lister.fields.codes.subfields.general_mattype.value"
+                    "values": "Lister.fields.codes.subfields.general_mattype"
                 },
                 "h": {
-                    "values": "Lister.fields.codes.subfields.specific_mattype.value"
+                    "values": "Lister.fields.codes.subfields.specific_mattype"
                 }
 			}
         },
@@ -492,7 +492,7 @@
             "subfields":{
                 "a": {
                     "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.country.general.values"
+                    "values": "Lister.fields.codes.subfields.country.general"
                 },
                 "b":{},
                 "x":{},
@@ -780,7 +780,7 @@
                 },
                 "b": {
                     "repeatable":false,
-                    "values": "Lister.fields.codes.subfields.country.music.value"
+                    "values": "Lister.fields.codes.subfields.country.music"
                 }
             }
         },
@@ -788,28 +788,28 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "subfields":{
                 "a": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "b": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "c": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "s": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "p": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "d": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "e": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 },
                 "u": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old"
                 }
             }
         },
