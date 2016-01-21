@@ -169,14 +169,14 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "repeatable": false,
             "subfields":{
-                "a": "Lister.fields.codes.subfields.language.repeat",
-                "b": "Lister.fields.codes.subfields.language.repeat",
-                "c": "Lister.fields.codes.subfields.language.repeat",
-                "s": "Lister.fields.codes.subfields.language.repeat",
-                "p": "Lister.fields.codes.subfields.language.repeat",
-                "d": "Lister.fields.codes.subfields.language.repeat",
-                "e": "Lister.fields.codes.subfields.language.repeat",
-                "u": "Lister.fields.codes.subfields.language.repeat"
+                "a": "DanMarc2.fields.041.subfields.a",
+                "b": "DanMarc2.fields.041.subfields.b",
+                "c": "DanMarc2.fields.041.subfields.c",
+                "d": "DanMarc2.fields.041.subfields.d",
+                "e": "DanMarc2.fields.041.subfields.e",
+                "p": "DanMarc2.fields.041.subfields.p",
+                "s": "DanMarc2.fields.041.subfields.s",
+                "u": "DanMarc2.fields.041.subfields.u"
             }
         },
         "042":{
