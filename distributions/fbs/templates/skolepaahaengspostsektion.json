@@ -1,6 +1,6 @@
 {
     "template": {
-        "description":"Skabelon til supplementspost - sektionspost.",
+        "description":"Skabelon til 300000-post - fælles skolepåhængspost - sektionspost",
         "features": [ "all" ]
     },
     "settings": {
@@ -44,7 +44,7 @@
                 "b": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "300000", "300101" ]
+                    "values": [ "300000" ]
                 },
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",

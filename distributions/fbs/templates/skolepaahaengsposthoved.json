@@ -1,6 +1,6 @@
 {
     "template": {
-        "description":"Skabelon til 300000-post - hovedpost.",
+        "description":"Skabelon til 300000-post - fælles skolepåhængspost - hovedpost",
         "features": [ "all" ]
     },
     "defaults":{
@@ -41,7 +41,7 @@
                 "b": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "300000", "300101" ]
+                    "values": [ "300000" ]
                 },
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
