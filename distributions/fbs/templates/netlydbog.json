@@ -3,6 +3,9 @@
         "description": "Skabelon til onlinelydbog - enkeltstående post",
         "features": [ "all" ]
     },
+    "settings": {
+        "lookupfaust": true
+    },
     "defaults":{
         "field":{
             "indicator":"00",

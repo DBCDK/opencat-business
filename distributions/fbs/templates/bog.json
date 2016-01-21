@@ -3,6 +3,9 @@
         "description": "Skabelon til katalogisering af fysiske bøger - enkeltstående post.",
         "features": [ "all" ]
     },
+    "settings": {
+        "lookupfaust": true
+    },
     "defaults":{
         "field":{
             "indicator":"00",
@@ -114,6 +117,7 @@
                     "repeatable": false
                 },
 				"t":{
+                    "mandatory":true,
                 	"repeatable": false,
                     "values":[ "m", "s" ]
                 },

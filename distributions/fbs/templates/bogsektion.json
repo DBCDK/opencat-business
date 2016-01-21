@@ -3,6 +3,9 @@
         "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - sektionspost.",
         "features": [ "all" ]
     },
+    "settings": {
+        "lookupfaust": true
+    },
     "defaults":{
         "field":{
             "indicator":"00",

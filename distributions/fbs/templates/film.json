@@ -3,6 +3,9 @@
         "description": "Skabelon til katalogisering af film på fysiske medier (dvd, videobånd m.m.) - enkeltstående post.",
         "features": [ "all" ]
     },
+    "settings": {
+        "lookupfaust": true
+    },
     "defaults":{
         "field":{
             "indicator":"00",
@@ -132,7 +135,7 @@
                 "b": "DanMarc2.fields.008.subfields.b",               
                 "e": "DanMarc2.fields.008.subfields.e",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",                                                              
+                "l": "DanMarc2.fields.008.subfields.l",
                 "t":{
                     "repeatable":false,
                     "values":[ "m", "s" ]

@@ -3,6 +3,9 @@
         "description": "Skabelon til katalogisering af musikmaterialer (cd'er, plader, noder m.m.) - enkelststående post.",
         "features": [ "all" ]
     },
+    "settings": {
+        "lookupfaust": true
+    },
     "defaults":{
         "field":{
             "indicator":"00",
