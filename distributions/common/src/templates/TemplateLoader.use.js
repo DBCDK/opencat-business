@@ -76,7 +76,7 @@ var TemplateLoader = function() {
             var templateName = name.substring( 0, index );
             var objName = name.substring( index + 1 );
 
-            return getObjectByName( objName, templateProvider( templateName ) );
+            return getObjectByName( objName, load( templateName, templateProvider ) );
         } finally {
             Log.trace( "Exit - TemplateLoader.__getObjectFromTemplate" );
         }
