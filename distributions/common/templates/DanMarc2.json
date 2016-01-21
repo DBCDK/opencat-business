@@ -1207,7 +1207,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "5":{
 					"repeatable": false
 				},
@@ -1270,7 +1270,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "5":{
 					"repeatable": false
 				},
@@ -1388,7 +1388,7 @@
                 "1":{
                     "repeatable":false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "7":{}
             },
             "rules": [
@@ -4606,7 +4606,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "5":{
                     "repeatable": false
                 },
@@ -4699,7 +4699,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "5":{
                     "repeatable": false
                 },
@@ -4741,7 +4741,7 @@
                 "o":{
                     "repeatable":false
                 },
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "g":{
                     "repeatable":false,
                     "values":[ "1" ]
@@ -4801,7 +4801,7 @@
                 "1":{
                     "repeatable":false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "7":{},
                 "g":{
                     "repeatable":false,
@@ -4969,7 +4969,7 @@
                 "1":{
                     "repeatable":false
                 },
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "5":{},
                 "6":{
                     "repeatable":false
@@ -5038,7 +5038,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code",
+                "4": "Lister.fields.codes.subfields.relator_code.values",
                 "5":{
 					"repeatable": false
 				},
