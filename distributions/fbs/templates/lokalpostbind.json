@@ -1,6 +1,6 @@
 {
     "template": {
-        "description":"Skabelon til optrettelse af lokalpost - alle materialetyper.",
+        "description":"Skabelon til oprettelse af lokalpost - bindpost, alle materialetyper.",
         "features": [ "all" ]
     },
     "settings": {

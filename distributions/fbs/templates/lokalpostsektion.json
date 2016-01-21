@@ -1,6 +1,6 @@
 {
     "template": {
-        "description":"Skabelon til optrettelse af lokalpost - alle materialetyper.",
+        "description":"Skabelon til oprettelse af lokalpost - sektionspost, alle materialetyper.",
         "features": [ "all" ]
     },
     "settings": {
