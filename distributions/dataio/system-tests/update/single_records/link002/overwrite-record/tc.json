@@ -1,8 +1,8 @@
 [
     {
-        "name": "basis-new-common-record-with-002-link-to-it",
+        "name": "basis-overwrite-common-record-with-002-link-to-it",
         "bugs": [ "bug-19833" ],
-        "description": "Tester oprettelse af fællesskabspost med en eksisterende post som har 002-link til den nye post.",
+        "description": "Tester overskriv af fællesskabspost med en eksisterende post som har 002-link til den opdaterede post.",
         "request": {
             "authentication": {
                 "group": "010100",
@@ -25,6 +25,19 @@
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-dead-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dead-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dead-dbc-enrichment.marc",
                     "type": "ENRICHMENT",
                     "deleted": false
                 }
@@ -52,6 +65,19 @@
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-dead-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-dead-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-dead-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
                     }
