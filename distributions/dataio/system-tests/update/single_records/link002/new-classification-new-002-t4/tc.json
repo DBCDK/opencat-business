@@ -1,7 +1,7 @@
 [
     {
         "name": "basis-link002-new-classifications-new-002-t4",
-        "description": "Tester flytning af påhængsposter mellem fællesskabsposter c1 og c2. Opstillingsdata er forskellig med nye beholdninger. Påhængsposter oprettes, da c1 er publiceret.",
+        "description": "Tester flytning af påhængsposter mellem fællesskabsposter c1 (publiceret) og c2 (ikke publiceret). Opstillingsdata er forskellig med nye beholdninger. Påhængsposter oprettes ikke, da c2 ikke er publiceret.",
         "request": {
             "authentication": {
                 "group": "010100",
@@ -48,16 +48,10 @@
                         "type": "MARCXCHANGE",
                         "enqueued": true,
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment-c1.marc", "result-fbs-enrichment-c1.marc" ]
+                        "enrichments": [ "rawrepo-dbc-enrichment-c1.marc" ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment-c1.marc",
-                        "type": "ENRICHMENT",
-                        "enqueued": true,
-                        "deleted": false
-                    },
-                    {
-                        "record": "result-fbs-enrichment-c1.marc",
                         "type": "ENRICHMENT",
                         "enqueued": true,
                         "deleted": false
