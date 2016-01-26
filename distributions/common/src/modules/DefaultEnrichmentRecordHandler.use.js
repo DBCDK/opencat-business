@@ -82,7 +82,7 @@ var DefaultEnrichmentRecordHandler = function() {
             }
 
             if( result.status === "OK" ) {
-                if( RecordProduction.checkRecord( new Date, updatingCommonRecord ) ) {
+                if( RecordProduction.checkRecord( new Date, currentCommonRecord ) ) {
                     var bundle = ResourceBundleFactory.getBundle( "enrichments" );
                     result = __shouldCreateRecordsNoResult( ResourceBundle.getString( bundle, "do.not.create.enrichments.inproduction.reason" ) );
                 }

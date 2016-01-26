@@ -5,7 +5,7 @@
 010 00 *a D74099520X
 021 00 *e 9788771691078 *c hf.
 021 00 *e 9788771690651 *b bogpakken DigiLesen nybegyndertysk
-032 00 *a DBF201511 *x BKM201511 *a DBF *x BKM *x SKO
+032 00 *a ACC201444 *a DBF203511 *x BKM203511 *a DBF *x BKM *x SKO
 100 00 *0  *a Møller *h Karl Henrik *4 aut
 245 00 *a [Common P2] Lilly macht einen Ausflug *c QR bog
 250 00 *a 1. udgave *b ÷
@@ -17,7 +17,8 @@
 520 00 *a Originaludgave: 2015
 521 00 *b 1. oplag *c 2015 *k Lasertryk
 526 00 *a Heri QR-koder til bogens tekst indlæst
-652 00 *m NY TITEL
+652 00 *n 86.4 *z 096
+652 00 *o 84
 666 00 *0  *s udflugter
 666 00 *0  *u for 11 år
 666 00 *0  *u for 12 år

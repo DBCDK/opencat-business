@@ -16,6 +16,13 @@ EXPORTED_SYMBOLS = [ 'RecordProduction' ];
 var RecordProduction = function () {
     var Calendar = Packages.java.util.Calendar;
 
+    /**
+     * Checks if a record is under production.
+     *
+     * @param date
+     * @param record
+     * @returns {boolean}
+     */
     function checkRecord( date, record ) {
         Log.trace( "Enter - RecordProduction.checkRecord( ", date, ", ", record, " )" );
 
@@ -37,18 +44,25 @@ var RecordProduction = function () {
 
                     var weekYear = __extractWeekAndYear( subfield.value );
                     if( weekYear === null ) {
+                        Log.debug( "Ignore '", subfield.value, "' in calculating production date." );
                         continue;
                     }
 
+                    Log.debug( "Using '", subfield.value, "' is calculating production date." );
+
                     var productionDate = __calculateFirstProductionDate( weekYear.weekno, weekYear.year );
-                    Log.debug( "current date < production date ==> ", date, " < ", productionDate );
-                    if( date.getTime() < productionDate.getTime() ) {
-                        return result = true;
+                    Log.debug( "Compared date:   ", date );
+                    Log.debug( "Production date: ", productionDate );
+
+                    if( date.getTime() >= productionDate.getTime() ) {
+                        Log.debug( "Record is released from production because of subfield: ", subfield.toString() );
+                        return result = false;
                     }
                 }
             }
 
-            return result = false;
+            Log.debug( "Record is under production. This date was used: ", date );
+            return result = true;
         }
         finally {
             Log.trace( "Exit - RecordProduction.checkRecord(): " + result );
