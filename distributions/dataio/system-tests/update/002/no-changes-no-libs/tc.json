@@ -1,0 +1,102 @@
+[
+    {
+        "name": "basis-002-no-changes-with-enrichments",
+        "description": "Opdatering af Basis-post med 002-linkning, paahaengspost på 002-faust",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request-1.marc"
+        },
+        "setup": {
+            "holdings": [ 761500 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common-dead.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment-dead.marc",
+                        "rawrepo-fbs-enrichment-dead.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment-dead.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment-dead.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "result-dbc-enrichment.marc",
+                            "result-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-common-dead.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "result-dbc-enrichment-dead.marc",
+                            "result-fbs-enrichment-dead.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment-dead.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "result-fbs-enrichment-dead.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
