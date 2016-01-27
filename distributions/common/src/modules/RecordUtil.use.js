@@ -108,6 +108,7 @@ var RecordUtil = function() {
             var record = new Record();
             if( s !== "" ) {
                 record.fromString(s);
+                Log.trace("record created from <" + s + ">");
             }
 
             return record;

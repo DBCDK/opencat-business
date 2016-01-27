@@ -22,11 +22,18 @@ var RecordProduction = function () {
      * @param date
      * @param record
      * @returns {boolean}
+     * If conditions result in there should be created enrichments, then return false
+     * otherwise true
+     * if no 032 do it (false)
+     * if any 032*a/*x contains a weekcode older than current and the catalogue code is one of the
+     * specified then do it (false)
+     * otherwise don't do it (true)
      */
     function checkRecord( date, record ) {
         Log.trace( "Enter - RecordProduction.checkRecord( ", date, ", ", record, " )" );
 
         var result;
+        var num032 = 0;
         try {
             for( var fieldIndex = 0; fieldIndex < record.size(); fieldIndex++ ) {
                 var field = record.field( fieldIndex );
@@ -35,6 +42,7 @@ var RecordProduction = function () {
                     continue;
                 }
 
+                num032++;
                 for( var subfieldIndex = 0; subfieldIndex < field.size(); subfieldIndex++ ) {
                     var subfield = field.subfield( subfieldIndex );
 
@@ -48,9 +56,10 @@ var RecordProduction = function () {
                         continue;
                     }
 
-                    Log.debug( "Using '", subfield.value, "' is calculating production date." );
+                    Log.debug( "Using '", subfield.value, "' in calculating production date." );
 
                     var productionDate = __calculateFirstProductionDate( weekYear.weekno, weekYear.year );
+                    // What to do with 999999 ? - they are handled prior to this function
                     Log.debug( "Compared date:   ", date );
                     Log.debug( "Production date: ", productionDate );
 
@@ -59,6 +68,10 @@ var RecordProduction = function () {
                         return result = false;
                     }
                 }
+            }
+            if ( num032 === 0 ) {
+                Log.debug( "Record without 032 detected - always create enrichment" );
+                return false;
             }
 
             Log.debug( "Record is under production. This date was used: ", date );

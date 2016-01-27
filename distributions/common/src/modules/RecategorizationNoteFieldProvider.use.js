@@ -51,7 +51,11 @@ var RecategorizationNoteFieldProvider = function() {
             return result;
         }
         finally {
-            Log.trace( "Exit - RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue(): ", result );
+            if( result !== undefined ) {
+                Log.trace( "Exit - RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue(): ", result );
+        } else {
+                Log.trace( "Exit - RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue(): undefined result!" );
+            }
         }
     }
 

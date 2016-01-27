@@ -38,7 +38,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
 
     var currentRecord;
     var record = new Record;
-    Assert.equalValue( "Empty record", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
+    Assert.equalValue( "Empty record",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
+        DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
 
     record = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -46,7 +48,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "014 00 *a 2 345 678 9",
         "245 00 *a titel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
+    Assert.equalValue( "Complete record",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
+        DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
 
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -62,8 +66,8 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "245 00 *a titel",
     ].join( "\n" ) );
     Assert.equalValue( "Complete record: 652m=Ny titel",
-                       DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
-                       noResult( "652m", currentRecord.getValue( /652/, /m/ ) ) );
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
+        noResult( "652m", currentRecord.getValue( /652/, /m/ ) ) );
 
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -111,7 +115,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "032 00 *a DBI200204",
         "245 00 *a titel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record not in production", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
+    Assert.equalValue( "Complete record not in production",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
+        DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
 
     record = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -120,7 +126,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "032 00 *x DBI210004",
         "245 00 *a titel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record in production", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ), noResultInProduction() );
+    Assert.equalValue( "Complete record in production",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
+        noResultInProduction() );
 
     Log.trace( "Enter - Testcase" );
     currentRecord = RecordUtil.createFromString( [
@@ -139,7 +147,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "032 00 *x DBI210004",
         "245 00 *a titel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record in production: 008u=r and 032a|x is changed", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ), DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
+    Assert.equalValue( "Complete record in production: 008u=r and 032a|x is changed",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
+        DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
     Log.trace( "Exit - Testcase" );
 
     currentRecord = RecordUtil.createFromString( [
@@ -158,7 +168,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "032 00 *x DBI210004",
         "245 00 *a titel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record in production: 008u=r and 032a|x is not changed", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ), noResultInProduction() );
+    Assert.equalValue( "Complete record in production: 008u=r and 032a|x is not changed",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
+        noResultInProduction() );
 
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -176,7 +188,9 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "032 00 *x DBI210004",
         "245 00 *a titel"
     ].join( "\n" ) );
-    Assert.equalValue( "Complete record in production: 008u!=r and 032a|x is changed", DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ), noResultInProduction() );
+    Assert.equalValue( "Complete record in production: 008u!=r and 032a|x is changed",
+        DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
+        DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
 } );
 
 //-----------------------------------------------------------------------------

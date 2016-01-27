@@ -45,46 +45,31 @@ var DefaultEnrichmentRecordHandler = function() {
             var dk5Codes = /ny\stitel|Uden\sklassem\xe6rke/i;
             var catCodes = /(DBF|DLF|DBI|DMF|DMO|DPF|BKM|GBF|GMO|GPF|FPF|DBR|UTI)999999/i;
 
-            result = __shouldCreateRecords( instance, updatingCommonRecord, "032", "a", catCodes );
+            result = __shouldCreateRecords( instance, currentCommonRecord, "652", "m", dk5Codes );
 
             if( result.status === "OK" ) {
                 result = __shouldCreateRecords( instance, updatingCommonRecord, "032", "x", catCodes );
             }
             if( result.status === "OK" ) {
-                result = __shouldCreateRecords( instance, currentCommonRecord, "652", "m", dk5Codes );
+                result = __shouldCreateRecords( instance, updatingCommonRecord, "032", "a", catCodes );
             }
 
             if( result.status === "OK" ) {
-                if( updatingCommonRecord.matchValue( /008/, /u/, /r/) ) {
-                    var oldValues = __collectProductionCodes( currentCommonRecord );
-                    var newValues = __collectProductionCodes( updatingCommonRecord );
-
-                    oldValues.sort();
-                    newValues.sort();
-
-                    Log.debug( "oldValues: ", oldValues );
-                    Log.debug( "newValues: ", newValues );
-
-                    if( oldValues.length !== newValues.length ) {
-                        Log.debug( "oldValues.length !== newValues.length" );
-                        return result;
-                    }
-                    else {
-                        Log.debug( "oldValues.length === newValues.length" );
-                        for( var i = 0; i < oldValues.length; i++ ) {
-                            if( oldValues[i] !== newValues[i] ) {
-                                Log.debug( "oldValues[i] !== newValues[i]: ", oldValues[i], " !== ", newValues[i] );
-                                return result;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if( result.status === "OK" ) {
+                // Check if record has been published before today.
                 if( RecordProduction.checkRecord( new Date, currentCommonRecord ) ) {
-                    var bundle = ResourceBundleFactory.getBundle( "enrichments" );
-                    result = __shouldCreateRecordsNoResult( ResourceBundle.getString( bundle, "do.not.create.enrichments.inproduction.reason" ) );
+                    // It wasn't, so it should fail unless
+                    // if 008*u==r then we have to check if content of 032a|x is about to change (some catCodes only).
+                    if( updatingCommonRecord.matchValue( /008/, /u/, /r/) ) {
+                        if ( __matchKatcodes( currentCommonRecord, updatingCommonRecord ) ) {
+                            // 032 not changed
+                            var bundle = ResourceBundleFactory.getBundle("enrichments");
+                            result = __shouldCreateRecordsNoResult(ResourceBundle.getString(bundle, "do.not.create.enrichments.inproduction.reason"));
+                        }
+                    } else {
+                        var bundle = ResourceBundleFactory.getBundle("enrichments");
+                        result = __shouldCreateRecordsNoResult(ResourceBundle.getString(bundle, "do.not.create.enrichments.inproduction.reason"));
+
+                    }
                 }
             }
 
@@ -141,14 +126,49 @@ var DefaultEnrichmentRecordHandler = function() {
         }
     }
 
+    function __matchKatcodes( actualRec, newRec ) {
+        var result = false;
+        try {
+            var oldValues = __collectProductionCodes( actualRec );
+            var newValues = __collectProductionCodes( newRec );
+
+            oldValues.sort();
+            newValues.sort();
+
+            Log.debug( "oldValues: ", oldValues );
+            Log.debug( "newValues: ", newValues );
+
+            if (oldValues.length !== newValues.length ) {
+                Log.debug( "oldValues.length !== newValues.length" );
+                return result = false;
+            }
+            else {
+                Log.debug( "oldValues.length === newValues.length" );
+                for ( var i = 0; i < oldValues.length; i++ ) {
+                    if ( oldValues[i] !== newValues[i] ) {
+                        Log.debug( "oldValues[i] !== newValues[i]: ", oldValues[i], " !== ", newValues[i] );
+                        return result = false;
+                    }
+                }
+            }
+            return result = true;
+        }
+        finally {
+                Log.trace( "Exit - DefaultEnrichmentRecordHandler.__matchKatcodes(): " + result );
+            }
+    }
+
     function __collectProductionCodes( record ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.__collectProductionCodes()" );
 
+        var compareCats = "^(/DBF|DLF|DBI|DMF|DMO|DPF|BKM|GBF|GMO|GPF|FPF|DBR|UTI/)";
         var result = [];
         try {
             record.eachField( /032/, function( field ) {
                 field.eachSubField( /a|x/, function( field, subfield ) {
-                    result.push( subfield.name + ": " + subfield.value );
+                    if ( /^(DBF|DLF|DBI|DMF|DMO|DPF|BKM|GBF|GMO|GPF|FPF|DBR|UTI)/.test(subfield.value) ) {
+                        result.push(subfield.name + ": " + subfield.value);
+                    }
                 } )
             } );
 
