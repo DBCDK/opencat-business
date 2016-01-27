@@ -571,35 +571,7 @@
                 "y": "DanMarc2.fields.534.subfields.y"
             }
         },
-        "538":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.60.htm",
-            "subfields":{
-                "\u00E5": "DanMarc2.fields.538.subfields.\u00E5",
-                "i": "DanMarc2.fields.538.subfields.i",
-                "a": "DanMarc2.fields.538.subfields.a",
-                "b": "DanMarc2.fields.538.subfields.b",
-                "c": "DanMarc2.fields.538.subfields.c",
-                "d": "DanMarc2.fields.538.subfields.d",
-                "f": "DanMarc2.fields.538.subfields.f",
-                "G": "DanMarc2.fields.538.subfields.G",
-                "g": "DanMarc2.fields.538.subfields.g",
-                "h": "DanMarc2.fields.538.subfields.h",
-                "j": "DanMarc2.fields.538.subfields.j",
-                "k": "DanMarc2.fields.538.subfields.k",
-                "l": "DanMarc2.fields.538.subfields.l",
-                "m": "DanMarc2.fields.538.subfields.m",
-                "o": "DanMarc2.fields.538.subfields.o",
-                "p": "DanMarc2.fields.538.subfields.p",
-                "q": "DanMarc2.fields.538.subfields.q",
-                "s": "DanMarc2.fields.538.subfields.s",
-                "t": "DanMarc2.fields.538.subfields.t"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
-        },
+        "538": "DanMarc2.fields.538",
         "539": "DanMarc2.fields.539",
         "540": "DanMarc2.fields.540",
         "555":{
