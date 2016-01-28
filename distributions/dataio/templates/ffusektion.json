@@ -379,17 +379,7 @@
         "593": "DanMarc2.fields.593",
         "594": "DanMarc2.fields.594",
         "595": "DanMarc2.fields.595",
-        "596":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6c.htm",
-            "subfields":{
-                "\u00E5": "DanMarc2.fields.596.subfields.\u00E5",
-                "a": "DanMarc2.fields.596.subfields.a",
-                "x": "DanMarc2.fields.596.subfields.x",
-                "z":{
-                    "mandatory": true
-                }
-            }
-        },
+        "596": "DanMarc2.fields.596",
         "597": "DanMarc2.fields.597",
         "598": "DanMarc2.fields.598",
         "599": "DanMarc2.fields.599",
