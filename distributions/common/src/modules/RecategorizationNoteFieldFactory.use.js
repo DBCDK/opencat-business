@@ -251,7 +251,7 @@ var RecategorizationNoteFieldFactory = function() {
 
             var message = "";
 
-            field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( updatingRecord, "652", /m|n|z|o|a|b|h|e|f/ );
+            field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( currentRecord, "652", /m|n|z|o|a|b|h|e|f/ );
             if( field !== undefined ) {
                 spec = {
                     sepSpec: [

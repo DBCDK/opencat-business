@@ -79,8 +79,7 @@
                         "deleted": false,
                         "enqueued": false,
                         "enrichments": [
-                            "result-dbc-enrichment-dead.marc",
-                            "result-fbs-enrichment-dead.marc"
+                            "result-dbc-enrichment-dead.marc"
                         ]
                     },
                     {

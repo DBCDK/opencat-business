@@ -229,10 +229,16 @@ var DefaultEnrichmentRecordHandler = function() {
             var record = instance.classifications.module.updateClassificationsInRecord( instance.classifications.instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord );
 
             if( __isRecategorization( currentCommonMarc, updatingCommonMarc ) ) {
+                Log.info( "Record is a recategorization." );
+
+                record = instance.classifications.module.removeClassificationsFromRecord( instance.classifications.instance, record );
                 var field = RecategorizationNoteFieldFactory.newNoteField( currentCommonMarc, updatingCommonMarc );
                 if( field !== undefined ) {
                     record = RecordSorter.insertField( record, field );
                 }
+            }
+            else {
+                Log.info( "Record is not a recategorization." );
             }
 
             record.removeAll( "004" );
