@@ -35,6 +35,8 @@ var RecordProduction = function () {
         var result;
         var num032 = 0;
         try {
+            var hasCheckedForProductionDate = false;
+
             for( var fieldIndex = 0; fieldIndex < record.size(); fieldIndex++ ) {
                 var field = record.field( fieldIndex );
 
@@ -63,6 +65,7 @@ var RecordProduction = function () {
                     Log.debug( "Compared date:   ", date );
                     Log.debug( "Production date: ", productionDate );
 
+                    hasCheckedForProductionDate = true;
                     if( date.getTime() >= productionDate.getTime() ) {
                         Log.debug( "Record is released from production because of subfield: ", subfield.toString() );
                         return result = false;
@@ -74,8 +77,14 @@ var RecordProduction = function () {
                 return false;
             }
 
-            Log.debug( "Record is under production. This date was used: ", date );
-            return result = true;
+            if( hasCheckedForProductionDate ) {
+                Log.info( "Record is under production. This date was used: ", date );
+                return result = true;
+            }
+            else {
+                Log.info( "Record is released from production because no release dates where found." );
+                return result = false;
+            }
         }
         finally {
             Log.trace( "Exit - RecordProduction.checkRecord(): " + result );

@@ -16,13 +16,13 @@ UnitTest.addFixture( "RecordProduction.checkRecord", function() {
     SafeAssert.not( "No 032", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *k xxx" );
-    SafeAssert.that( "032: No a|x", RecordProduction.checkRecord( date, record ) );
+    SafeAssert.not( "032: No a|x", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *a xxx" );
-    SafeAssert.that( "032a: Wrong format", RecordProduction.checkRecord( date, record ) );
+    SafeAssert.not( "032a: Wrong format", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *a XXX201504" );
-    SafeAssert.that( "032a: Wrong production code", RecordProduction.checkRecord( date, record ) );
+    SafeAssert.not( "032a: Wrong production code", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *a DBI201504" );
     SafeAssert.not( "032a: Publicity date is before current date", RecordProduction.checkRecord( date, record ) );
@@ -31,10 +31,10 @@ UnitTest.addFixture( "RecordProduction.checkRecord", function() {
     SafeAssert.that( "032a: Publicity date is after current date", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *x xxx" );
-    SafeAssert.that( "032x: Wrong format", RecordProduction.checkRecord( date, record ) );
+    SafeAssert.not( "032x: Wrong format", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *x XXX201504" );
-    SafeAssert.that( "032x: Wrong production code", RecordProduction.checkRecord( date, record ) );
+    SafeAssert.not( "032x: Wrong production code", RecordProduction.checkRecord( date, record ) );
 
     record = RecordUtil.createFromString( "032 00 *x DBI201504" );
     SafeAssert.not( "032x: Publicity date is before current date", RecordProduction.checkRecord( date, record ) );
