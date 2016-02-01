@@ -1283,7 +1283,6 @@
         },
         "210":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.35.htm",
-            "repeatable":false,
             "subfields":{
                 "\u00E5":{
 					"repeatable": false
