@@ -21,6 +21,38 @@ use( "Log" );
  */
 var SolrCore = function( ) {
     /**
+     * Performs a search in a solr instance and returns the response as an object.
+     *
+     * @syntax SolrCore.search( url, query );
+     * @param {String} url   Url to the solr installation including core selection:
+     * 						 <server>/solr/<core-name> or similary.
+     * @param {String} query Solr query to execute.
+     *
+     * @return {Object} The solr response.
+     *
+     * @name SolrCore#search
+     */
+    function search( url, query ) {
+        Log.trace( "Enter - SolrCore.search" );
+        try {
+            var solr_url = url + "/select";
+            var solr_params = {
+                q: query,   	// Query parameter for solr.
+                indent: true,
+                wt: "json"  	// Result type for solr.
+            };
+
+            var solr = JSON.parse( Http.get( solr_url, solr_params, {}, false ) );
+            ValueCheck.checkThat( "solr", solr ).type( "object" );
+
+            return solr;
+        }
+        finally {
+            Log.trace( "Exit - SolrCore" );
+        }
+    }
+
+    /**
      * Method to return the number of documents found for a given query string.
      *
      * @syntax SolrCore.numFound( url, query );
@@ -35,15 +67,7 @@ var SolrCore = function( ) {
     function numFound( url, query ) {
         Log.trace( "Enter - SolrCore.numFound" );
         try {
-            var solr_url = url + "/select";
-            var solr_params = {
-                q: query,   	// Query parameter for solr.
-                indent: true,
-                wt: "json"  	// Result type for solr.
-            }
-
-            var solr = JSON.parse( Http.get( solr_url, solr_params, {}, false ) );
-            ValueCheck.checkThat( "solr", solr ).type( "object" );
+            var solr = search( url, query );
             ValueCheck.checkThat( "solr.response", solr.response ).type( "object" );
 
             // This one is not explicitly nessasary, but it is nice to known that we always returns

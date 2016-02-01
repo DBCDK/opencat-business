@@ -18,7 +18,25 @@ use( "Log" );
  * @namespace SolrCore
  */
 var SolrCore = function( ) {
-    var queries = {};
+    var responses = [];
+
+    function search( url, query ) {
+        Log.trace( "Enter - SolrCore.search()" );
+
+        try {
+            for( var i = 0; i < responses.length; i++ ) {
+                Log.debug( "Query: ", responses[i].query );
+                if( responses[i].query === query ) {
+                    return responses[i].response;
+                }
+            }
+
+            throw StringUtil.sprintf( "Unable to lookup value for query: %s", query );
+        }
+        finally {
+            Log.trace( "Exit - SolrCore.search()" );
+        }
+    }
 
     /**
      * Method to return the number of documents found for a given query string.
@@ -33,30 +51,32 @@ var SolrCore = function( ) {
      * @name SolrCore#numFound
      */
     function numFound( url, query ) {
-        Log.trace( "Enter - SolrCore.numFound" );
+        Log.trace( "Enter - SolrCore.numFound()" );
 
         try {
-            var numFound = queries[ query ];
-            if( numFound === undefined ) {
-                throw StringUtil.sprintf( "Unable to lookup value for query: %s", query );
-            }
-
-            return numFound;
+            return search().response.numFound;
         }
         finally {
-            Log.trace( "Exit - SolrCore" );
+            Log.trace( "Exit - SolrCore.numFound()" );
         }
     }
 
     function clear() {
-        queries = {};
+        responses = [];
     }
 
-    function addQuery( query, numFound ) {
-        queries[ query ] = numFound;
+    function addQuery( query, response ) {
+        Log.trace( "Enter - SolrCore.addQuery()" );
+
+        responses.push( {query: query, response: response } );
+        Log.debug( "Add query: ", query );
+
+        Log.trace( "Exit - SolrCore.addQuery()" );
+
     }
 
     return {
+        'search': search,
         'numFound': numFound,
         'clear': clear,
         'addQuery': addQuery

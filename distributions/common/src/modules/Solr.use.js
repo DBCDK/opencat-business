@@ -17,6 +17,16 @@ use( "Log" );
  * @namespace Solr
  */
 var Solr = function( ) {
+	function search( url, query ) {
+		Log.trace( "Enter - Solr.numFound" );
+		try {
+			return SolrCore.search( url, query );
+		}
+		finally {
+			Log.trace( "Exit - Solr" );
+		}
+	}
+
 	/**
 	 * Method to return the number of documents found for a given query string.
 	 * 
@@ -40,6 +50,7 @@ var Solr = function( ) {
 	}
 	
 	return {
+        'search': search,
 		'numFound': numFound
 	}
 }();

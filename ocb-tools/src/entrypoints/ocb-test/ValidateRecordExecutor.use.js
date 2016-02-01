@@ -77,6 +77,7 @@ var ValidateRecordExecutor = function() {
         Log.trace( "Enter - ValidateRecordExecutor.__setupSolr()" );
 
         try {
+            return;
             SolrCore.clear();
 
             if( tc.setup !== null ) {
