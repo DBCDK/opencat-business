@@ -747,7 +747,6 @@
             "repeatable":false,
             "subfields":{
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "b":{
