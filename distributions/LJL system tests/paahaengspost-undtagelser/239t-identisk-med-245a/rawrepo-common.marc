@@ -1,0 +1,37 @@
+001 00 *a 51464915 *b 191919 *c 20151103110604 *d 20141202 *f a
+004 00 *r n *a e
+006 00 *d 15 *2 b
+008 00 *t m *u f *a 2014 *b dk *l hun *n b *v 5
+009 00 *a m *g xe
+032 00 *a DBI201451 *x BKM201451 *x FSF201451 *x DAT991508
+041 00 *a hun *u dan
+245 00 *a Det ¤store stilehæfte *b krigsdagbogen
+260 00 *b [Another World] *c [2014]
+300 00 *l 108 min.
+504 00 *& 1 *a Vi er 1944 i slutningen af 2.verdenskrig. I Ungarn sendes et tvillingepar af deres forældre ud på landet til deres bedstemor for at de kan være i sikkerhed. De to drenge beslutter sig for at blive følelseskolde, så de kan overleve i en afstumpet verden
+508 00 *a Ungarsk tale
+508 00 *a Undertekster på dansk
+512 00 *i Alternativ titel *t Krigsdagbogen
+512 00 *a Produktion: Intuit Pictures (Tyskland), Hunnia (Ungarn), Beta Cinema (Tyskland) etc., 2013
+512 00 *a Beskrivelsen baseret på det fysiske forlæg
+517 00 *& 1 *a Mærkning: Tilladt for børn over 15 år
+652 00 *m 77.7
+666 00 *0 *s krig
+666 00 *0 *s den ¤2. verdenskrig
+666 00 *0 *s ondskab
+666 00 *0 *q Ungarn
+666 00 *0 *i 1940-1949
+666 00 *0 *o ungarske film
+700 00 *a Szász *h János *4 aus *4 drt
+700 00 *a Szekér *h András *4 aus
+700 00 *a Kristof *h Agota *4 ant
+700 00 *a Berger *h Christian *c f. 1945
+720 00 *o András Gyémánt *4 act
+720 00 *o László Gyémiánt *4 act
+720 00 *o Píroska Molnár *4 act
+720 00 *o Ulrich Thomsen *4 act
+720 00 *o Ulrich Matthes *4 act
+720 00 *o Gyöngyver Bognár *4 act
+856 00 *z Adgang til streaming for biblioteksbrugere i kommuner med abonnement på Filmstriben *u http://www.filmstriben.dk/fjernleje/film/details.aspx?id=http://www.filmstriben.dk/fjernleje/film/details.aspx?id=9000001611
+990 00 *o 201451 *b v *u nt
+996 00 *a DBC
