@@ -3611,9 +3611,16 @@
                 "\u00E5":{
 					"repeatable": false
 				},
-                "a":{},
-                "x":{},
-                "z":{}
+                "a":{
+                    "repeatable": false
+                },
+                "x":{
+                    "repeatable": false
+                },
+                "z":{
+                    "mandatory": true,
+                    "repeatable": false
+                }
             }
         },
         "597":{
