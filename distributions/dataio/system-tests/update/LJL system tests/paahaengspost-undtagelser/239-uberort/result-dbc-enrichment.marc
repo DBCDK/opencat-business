@@ -1,4 +1,5 @@
 001 00 *a 51464915 *b 870970 *c 20151103110604 *d 20141202 *f a
+004 00 *r n *a e
 d08 00 *a tilf. af dybe links på fsf og fsb ved masserettelse
 d08 00 *o nø *r amh *a NB! 856 rettet til dybt link for at teste visning i Bibliotek.dk *r ljl *a 245a rettet
 d08 00 *o aut
@@ -6,6 +7,5 @@ d08 00 *o Masserettelse: FSO-kode tilføjet, nov15
 d09 00 *z FSO201547
 f06 00 *b v *s u
 n51 00 *a 20141210
-s10 00 *a DBC
 s12 00 *t TeamBMV201449
 z99 00 *a ljl

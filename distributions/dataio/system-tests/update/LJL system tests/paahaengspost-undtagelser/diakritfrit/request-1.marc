@@ -1,4 +1,4 @@
-001 00 *a 51464915 *b 191919 *c 20151103110604 *d 20141202 *f a
+001 00 *a 51464915 *b 870970 *c 20151103110604 *d 20141202 *f a
 004 00 *r n *a e
 006 00 *d 15 *2 b
 008 00 *t m *u f *a 2014 *b dk *l hun *n b *v 5
@@ -6,7 +6,7 @@
 032 00 *a DBI201451 *x BKM201451 *x FSF201451 *x DAT991508
 041 00 *a hun *u dan
 239 00 *t Det ¤store stilehæfte *b krigsdagbogen
-245 00 *a A ¤nagy füzet
+245 00 *a Brilleaben
 260 00 *b [Another World] *c [2014]
 300 00 *l 108 min.
 504 00 *& 1 *a Vi er 1944 i slutningen af 2.verdenskrig. I Ungarn sendes et tvillingepar af deres forældre ud på landet til deres bedstemor for at de kan være i sikkerhed. De to drenge beslutter sig for at blive følelseskolde, så de kan overleve i en afstumpet verden
@@ -35,4 +35,13 @@
 720 00 *o Gyöngyver Bognár *4 act
 856 00 *z Adgang til streaming for biblioteksbrugere i kommuner med abonnement på Filmstriben *u http://www.filmstriben.dk/fjernleje/film/details.aspx?id=http://www.filmstriben.dk/fjernleje/film/details.aspx?id=9000001611
 990 00 *o 201451 *b v *u nt
-996 00 *a DBC
+d08 00 *a tilf. af dybe links på fsf og fsb ved masserettelse
+d08 00 *o nø *r amh *a NB! 856 rettet til dybt link for at teste visning i Bibliotek.dk *r ljl *a 245a rettet
+d08 00 *o aut
+d08 00 *o Masserettelse: FSO-kode tilføjet, nov15
+d09 00 *z FSO201547
+f06 00 *b v *s u
+n51 00 *a 20141210
+s10 00 *a DBC
+s12 00 *t TeamBMV201449
+z99 00 *a ljl
