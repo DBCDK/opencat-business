@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------------------
 use( "DanMarc2Converter" );
+use( "DefaultDoubleRecordHandler" );
 use( "DefaultEnrichmentRecordHandler" );
 use( "DefaultRawRepoRecordHandler" );
 use( "FBSAuthenticator" );
@@ -212,6 +213,17 @@ var FBSUpdaterEntryPoint = function() {
         }
     }
 
+    function checkDoubleRecord( record, settings ) {
+        Log.trace( "Enter - DBCUpdaterEntryPoint.checkDoubleRecord" );
+
+        try {
+            DefaultDoubleRecordHandler.checkAndSendMails( DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) ), settings );
+        }
+        finally {
+            Log.trace( "Exit - DBCUpdaterEntryPoint.checkDoubleRecord" );
+        }
+    }
+
     function __createClassificationInstance( currentRecord, newRecord ) {
         Log.trace( "Enter - FBSUpdaterEntryPoint.__createClassificationInstance" );
 
@@ -250,7 +262,8 @@ var FBSUpdaterEntryPoint = function() {
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
-        'recordDataForRawRepo': recordDataForRawRepo
+        'recordDataForRawRepo': recordDataForRawRepo,
+        'checkDoubleRecord': checkDoubleRecord
     };
 
 }();

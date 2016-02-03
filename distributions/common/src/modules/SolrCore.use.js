@@ -34,9 +34,12 @@ var SolrCore = function( ) {
      */
     function search( url, query ) {
         Log.trace( "Enter - SolrCore.search" );
+
+        var solr_url = undefined;
+        var solr_params = undefined;
         try {
-            var solr_url = url + "/select";
-            var solr_params = {
+            solr_url = url + "/select";
+            solr_params = {
                 q: query,   	// Query parameter for solr.
                 indent: true,
                 wt: "json"  	// Result type for solr.
@@ -46,6 +49,10 @@ var SolrCore = function( ) {
             ValueCheck.checkThat( "solr", solr ).type( "object" );
 
             return solr;
+        }
+        catch( ex ) {
+            Log.warn( "Failed to perform solr search: ", solr_url, "?q=", solr_params.q );
+            throw ex;
         }
         finally {
             Log.trace( "Exit - SolrCore" );
@@ -82,6 +89,7 @@ var SolrCore = function( ) {
     }
 
     return {
+        'search': search,
         'numFound': numFound
     }
 }();
