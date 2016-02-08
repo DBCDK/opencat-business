@@ -804,9 +804,7 @@
         "795":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8a.htm",
             "subfields":{
-                "&": {
-                    "repeatable": false
-				},
+                "&": {},
                 "\u00E5": "DanMarc2.fields.795.subfields.\u00E5",
                 "A": "DanMarc2.fields.795.subfields.A",
                 "a": "DanMarc2.fields.795.subfields.a",
