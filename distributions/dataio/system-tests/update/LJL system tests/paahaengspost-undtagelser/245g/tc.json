@@ -18,6 +18,7 @@
                     "record": "rawrepo-common-head.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
+                    "children": [ "rawrepo-common-section.marc" ],
                     "enrichments": [ "rawrepo-head-enrichment.marc" ]
                 },
                 {
@@ -29,6 +30,7 @@
                     "record": "rawrepo-common-section.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
+                    "children": [ "rawrepo-common-volume.marc" ],
                     "enrichments": [ "rawrepo-section-enrichment.marc" ]
                 },
                 {
@@ -59,6 +61,7 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": false,
+                        "children": [ "result-common-section.marc" ],
                         "enrichments": [ "result-head-enrichment.marc" ]
                     },
                     {
@@ -72,6 +75,7 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": false,
+                        "children": [ "result-common-volume.marc" ],
                         "enrichments": [ "result-section-enrichment.marc" ]
                     },
                     {
