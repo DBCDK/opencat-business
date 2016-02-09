@@ -113,19 +113,28 @@ var ClassificationData = function() {
 
                 if( checkField ) {
                     if( __hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /a/)) {
+                        var subFieldExist = true;
+
                         if( newMarc.matchValue( /004/, /a/, /s/ ) ) {
-                            if( oldMarc.getValue( /245/, /n/ ) !== newMarc.getValue( /245/, /n/ ) ) {
-                                reason = "245a: 004a=s and 245n untouched";
-                                return result = true;
+                            subFieldExist = oldMarc.existField( new MatchField( /245/, undefined, /n/ ) ) ||
+                                            newMarc.existField( new MatchField( /245/, undefined, /n/ ) );
+
+                            if( subFieldExist && !__hasSubfieldJustChanged(oldMarc, newMarc, __stripValue, /245/, /n/) ) {
+                                Log.info( "245n is not touched ==> Ignore 245a" );
+                                check245a = false;
                             }
                         }
                         else if( newMarc.matchValue( /004/, /a/, /b/ ) ) {
-                            if( oldMarc.getValue( /245/, /n/ ) !== newMarc.getValue( /245/, /n/ ) ) {
-                                reason = "245a: 004a=b and 245g untouched";
-                                return result = true;
+                            subFieldExist = oldMarc.existField( new MatchField( /245/, undefined, /g/ ) ) ||
+                                            newMarc.existField( new MatchField( /245/, undefined, /g/ ) );
+
+                            if( subFieldExist && !__hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /g/) ) {
+                                Log.info( "245g is not touched ==> Ignore 245a" );
+                                check245a = false;
                             }
                         }
-                        else if( check245a ) {
+
+                        if( check245a ) {
                             reason = "245a";
                             return result = true;
                         }

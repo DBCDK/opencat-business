@@ -303,7 +303,7 @@ var DefaultEnrichmentRecordHandler = function() {
 
             for( var i = 0; i < record.size(); i++ ) {
                 var field = record.field( i );
-                if( !( field.name === "001" || field.name === "996" ) ) {
+                if( !( field.name === "001" || field.name === "004" || field.name === "996" ) ) {
                     Log.debug( "Return full record." );
                     return result;
                 }
