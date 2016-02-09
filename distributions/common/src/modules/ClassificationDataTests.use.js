@@ -547,6 +547,141 @@ UnitTest.addFixture( "ClassificationData.hasClassificationsChanged", function() 
     //         Changes values in classification data (field: 245)
     //-------------------------------------------------------------------------
 
+    oldRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" }, { name: "n", value: "yy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "New 245n: 245a changed", callFunction( oldRecord, newRecord ), true );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" }, { name: "n", value: "yy" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" }, { name: "n", value: "zy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "Changed 245n: 245a changed", callFunction( oldRecord, newRecord ), true );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" }, { name: "n", value: "yy" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" }, { name: "n", value: "yy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "Same 245n: 245a changed", callFunction( oldRecord, newRecord ), false );
+
+    oldRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xx" }, { name: "n", value: "yy" } ]
+            }
+        ]
+    };
+    newRecord = {
+        fields: [
+            {
+                name: "001", indicator: "00",
+                subfields: [ { name: "b", value: UpdateConstants.RAWREPO_COMMON_AGENCYID } ]
+            },
+            {
+                name: "004", indicator: "00",
+                subfields: [ { name: "a", value: "s" } ]
+            },
+            {
+                name: "245", indicator: "00",
+                subfields: [ { name: "a", value: "xy" } ]
+            }
+        ]
+    };
+    Assert.equalValue( "Deleted 245n: 245a changed", callFunction( oldRecord, newRecord ), true );
 
     //-------------------------------------------------------------------------
     //              Changes values in non classification data

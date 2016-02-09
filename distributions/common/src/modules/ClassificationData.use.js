@@ -114,7 +114,7 @@ var ClassificationData = function() {
                 if( checkField ) {
                     if( __hasSubfieldJustChanged(oldMarc, newMarc, __stripValueLength10, /245/, /a/)) {
                         if( newMarc.matchValue( /004/, /a/, /s/ ) ) {
-                            if( !newMarc.existField( new MatchField( /245/, undefined, /n/ ) ) ) {
+                            if( oldMarc.getValue( /245/, /n/ ) !== newMarc.getValue( /245/, /n/ ) ) {
                                 reason = "245a: 004a=s and !245n";
                                 return result = true;
                             }
