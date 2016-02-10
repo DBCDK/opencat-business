@@ -23,20 +23,28 @@ var RecategorizationNoteFieldProvider = function() {
 
         var result = undefined;
         try {
-            var field = record.field( fieldname );
+            Log.debug( "Provide field: ", fieldname );
 
-            result = new Field( fieldname, "00" );
-            for( var i = 0; i < field.count(); i++ ) {
-                var subfield = field.subfield(i);
+            var field = record.getFirstFieldAsField( RegExp( fieldname ) );
+            Log.debug( "Found field: ", field );
 
-                if( subfieldmatcher.test( subfield.name ) ) {
-                    result.append( subfield.name, __loadBundleValue( bundle, field, subfield ) );
+            if( field !== "" ) {
+                result = new Field(fieldname, "00");
+                for (var i = 0; i < field.count(); i++) {
+                    var subfield = field.subfield(i);
+
+                    if (subfieldmatcher.test(subfield.name)) {
+                        result.append(subfield.name, __loadBundleValue(bundle, field, subfield));
+                    }
                 }
             }
-
-            if( result.count() === 0 ) {
+            else {
                 var parentId = record.getValue( /014/, /a/ );
                 var agencyId = record.getValue( /001/, /b/ );
+
+                Log.debug( "Trying to lookup parentid in record:\n", record.toString() );
+                Log.debug( "Found parent id: ", parentId );
+                Log.debug( "Found agency id: ", agencyId );
 
                 if( parentId !== "" && agencyId !== "" ) {
                     if( RawRepoClient.recordExists( parentId, agencyId ) ) {
@@ -46,6 +54,10 @@ var RecategorizationNoteFieldProvider = function() {
                 }
 
                 return result = undefined;
+            }
+
+            if( result.count() === 0 ) {
+                result = undefined;
             }
 
             return result;

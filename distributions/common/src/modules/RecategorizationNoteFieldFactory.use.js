@@ -103,6 +103,7 @@ var RecategorizationNoteFieldFactory = function() {
             var spec = undefined;
 
             field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "100", /a|h|k|e|f/ );
+            Log.debug( "Found field: ", field );
             if( field !== undefined ) {
                 spec = {
                     sepSpec: [
@@ -192,6 +193,7 @@ var RecategorizationNoteFieldFactory = function() {
                 Log.debug("Formating field: ", field);
                 var message = ISBDFieldFormater.formatField( field, spec );
 
+                Log.debug( "C1: Add *t with: ", message )
                 noteField.append("t", message.trim());
                 return;
             }
@@ -211,6 +213,7 @@ var RecategorizationNoteFieldFactory = function() {
                     Log.debug("Formating field: ", field);
                     var message = ISBDFieldFormater.formatField(field, spec);
 
+                    Log.debug( "C2: Add *t with: ", message )
                     noteField.append("t", message.trim());
                 }
                 return;
@@ -234,6 +237,7 @@ var RecategorizationNoteFieldFactory = function() {
                 Log.debug("Formating field: ", field);
                 var message = ISBDFieldFormater.formatField(field, spec);
 
+                Log.debug( "C3: Add *t with: ", message )
                 noteField.append("t", message.trim());
             }
         }
@@ -288,25 +292,33 @@ var RecategorizationNoteFieldFactory = function() {
             }
 
             if( message !== "" ) {
+                Log.debug( "Generate reason info for case 'note.category.reason.general'" );
                 message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.general" );
 
-                var recTypeChanged = !currentRecord.matchValue( /004/, /e/, RegExp( updatingRecord.getValue( /004/, /e/ ) ) );
+                var recTypeChanged = !currentRecord.matchValue( /004/, /a/, RegExp( updatingRecord.getValue( /004/, /a/ ) ) );
                 var categoryChanged = !currentRecord.matchValue( /008/, /t/, RegExp( updatingRecord.getValue( /008/, /t/ ) ) );
+
+                Log.trace( "Generate reason info. recTypeChanged: ", recTypeChanged );
+                Log.trace( "Generate reason info. categoryChanged: ", categoryChanged );
 
                 if( recTypeChanged || categoryChanged ) {
                     if( currentRecord.matchValue( /004/, /a/, /e/ ) ) {
                         if( updatingRecord.matchValue( /004/, /a/, /b/ ) && updatingRecord.matchValue( /008/, /t/, /p/ ) ) {
+                            Log.debug( "Generate reason info for case 'note.category.reason.to.serials'" );
                             message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials" );
                         }
                         else if( currentRecord.matchValue( /008/, /t/, /m|s/ ) ) {
+                            Log.debug( "Generate reason info for case 'note.category.reason.from.single'" );
                             message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.single" );
                         }
                     }
                     else if( currentRecord.matchValue( /004/, /a/, /b/ ) ) {
                         if( currentRecord.matchValue( /008/, /t/, /m|s/ ) ) {
+                            Log.debug( "Generate reason info for case 'note.category.reason.from.volume'" );
                             message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.volume" );
                         }
                         else if( currentRecord.matchValue( /008/, /t/, /p/ ) && updatingRecord.matchValue( /004/, /a/, /e/ ) ) {
+                            Log.debug( "Generate reason info for case 'note.category.reason.from.serials'" );
                             message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials" );
                         }
 
