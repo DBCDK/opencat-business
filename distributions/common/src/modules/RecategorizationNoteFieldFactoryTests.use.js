@@ -303,6 +303,19 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
     };
     Assert.equalValue( "652mb found", callFunction( record, record ).toString(), createNote( parts ).toString() );
 
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "652 00 *n 86 *z 06\n" +
+        "652 00 *o sk\n"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        category: ResourceBundle.getStringFormat( bundle, "note.category.dk5", "86-06; sk" ) + " " +
+        ResourceBundle.getString( bundle, "note.category.reason.general" )
+    };
+    Assert.equalValue( "Two 652(nzo) found", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
     //-----------------------------------------------------------------------------
     //                  Test complete cases
     //-----------------------------------------------------------------------------

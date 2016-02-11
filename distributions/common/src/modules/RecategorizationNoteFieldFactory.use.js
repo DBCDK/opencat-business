@@ -259,19 +259,20 @@ var RecategorizationNoteFieldFactory = function() {
             if( field !== undefined ) {
                 spec = {
                     sepSpec: [
-                        { pattern: /[ahk][ah]/, midSep: ", " },
-                        { pattern: /.[ef]/, midSep: " " },
-                        { pattern: /[ef]./, midSep: " " },
-                        { pattern: /m./, midSep: " " },
-                        { pattern: /.m/, midSep: " " },
-                        { pattern: /nz/, midSep: "-" },
-                        { pattern: /zo/, midSep: "; " }
+                        { pattern: /[ahk][ah]$/, midSep: ", " },
+                        { pattern: /.[ef]$/, midSep: " " },
+                        { pattern: /[ef].$/, midSep: " " },
+                        { pattern: /m.$/, midSep: " " },
+                        { pattern: /.m$/, midSep: " " },
+                        { pattern: /nz$/, midSep: "-" },
+                        { pattern: /zo$/, midSep: "; " }
                     ],
                     valueSpec: {
                     }
                 };
 
-                Log.debug("Formating field: ", field);
+                Log.debug( "Formating field: ", field);
+                Log.debug( "Formated message: ", ISBDFieldFormater.formatField( field, spec ) );
                 message = ResourceBundle.getStringFormat( __loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField( field, spec ) );
             }
 

@@ -53,6 +53,7 @@ var ISBDFieldFormater = function() {
                 var subfieldValue = undefined;
                 if( previousSubNames !== "" ) {
                     if( specSepItem !== undefined ) {
+                        Log.debug( "Subfield names: ", previousSubNames + subField.name, " - spec: ", specSepItem );
                         if( specSepItem.midSep !== undefined ) {
                             Log.debug( "Add midSep" );
                             result += specSepItem.midSep;
