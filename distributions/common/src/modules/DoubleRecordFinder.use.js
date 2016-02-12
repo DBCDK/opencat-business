@@ -74,9 +74,11 @@ var DoubleRecordFinder = function() {
 
                         if( subfield.name === "a" ) {
                             if( found009a ) {
+                                Log.debug( "__matchTechnicalLiterature(): t1" );
                                 return false;
                             }
                             if( [ "a", "c" ].indexOf( subfield.value ) === -1 ) {
+                                Log.debug( "__matchTechnicalLiterature(): t2" );
                                 return false;
                             }
 
@@ -84,6 +86,7 @@ var DoubleRecordFinder = function() {
                         }
                         if( subfield.name === "g" ) {
                             if( found009g ) {
+                                Log.debug( "__matchTechnicalLiterature(): t3" );
                                 return false;
                             }
                             found009g = true;
@@ -93,15 +96,18 @@ var DoubleRecordFinder = function() {
 
                 if( field.name === "652" ) {
                     if( field.matchValue( /m/, /Uden\sklassem\xe6rke/ ) ) {
+                        Log.debug( "Found 652m = 'Uden\sklassem\xe6rke'" );
                         found652m = true;
                     }
 
-                    if( !__isFictionLiterature( field ) ) {
+                    if( __isTechnicalLiterature( field ) ) {
+                        Log.debug( "Found 652 for technical literature" );
                         found652m = true;
                     }
                 }
             }
 
+            Log.debug( "__matchTechnicalLiterature(): t4" );
             return result = found009a && found009g && found652m;
         }
         finally {
@@ -133,8 +139,8 @@ var DoubleRecordFinder = function() {
     //                  Type checkers
     //-----------------------------------------------------------------------------
 
-    function __isFictionLiterature( field ) {
-        Log.trace( "Enter - DoubleRecordFinder.__isFictionLiterature()" );
+    function __isTechnicalLiterature( field ) {
+        Log.trace( "Enter - DoubleRecordFinder.__isTechnicalLiterature()" );
 
         var result = undefined;
         try {
@@ -144,21 +150,31 @@ var DoubleRecordFinder = function() {
 
                     if( subfield.name === "m" ) {
                         if( subfield.value === "sk" ) {
-                            return result = true;
+                            Log.debug( "__isTechnicalLiterature(): t1" );
+                            return result = false;
                         }
                         else if( /^(8[2-8])/i.test( subfield.value ) ) {
                             if( [ "88.1", "88.2" ].indexOf( subfield.value ) > -1 ) {
-                                return result = false;
+                                Log.debug( "__isTechnicalLiterature(): t2" );
+                                return result = true;
                             }
 
+                            Log.debug( "__isTechnicalLiterature(): t3" );
+                            return result = false;
+                        }
+                        else {
+                            Log.debug( "__isTechnicalLiterature(): t4" );
                             return result = true;
                         }
                     }
                 }
             }
+
+            Log.debug( "__isTechnicalLiterature(): t5" );
+            return result = false;
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__isFictionLiterature(): ", result );
+            Log.trace( "Enter - DoubleRecordFinder.__isTechnicalLiterature(): ", result );
         }
     }
 

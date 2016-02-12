@@ -112,6 +112,13 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchTechnicalLiterature", function()
         "652 00 *m 48.64"
     ].join( "\n") );
     Assert.equalValue( "Found 009a(c)g/652m: 48.64", DoubleRecordFinder.__matchTechnicalLiterature( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a c *g xx",
+        "652 00 *n 86.4 *z 096",
+        "652 00 *o 84"
+    ].join( "\n") );
+    Assert.equalValue( "Fixtion Literature STP", DoubleRecordFinder.__matchTechnicalLiterature( record ), false );
 } );
 
 //-----------------------------------------------------------------------------
