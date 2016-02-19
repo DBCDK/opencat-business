@@ -1197,9 +1197,7 @@
                 "c":{
 					"repeatable": false
 				},
-                "b":{
-					"repeatable": false
-				},
+                "b":{},
                 "0":{
 					"repeatable": false
 				},
