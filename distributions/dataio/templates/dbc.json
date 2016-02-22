@@ -591,7 +591,17 @@
         "570": "DanMarc2.fields.570",
         "580": "DanMarc2.fields.580",
         "583": "DanMarc2.fields.583",
-        "596": "DanMarc2.fields.596",
+        "596":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6c.htm",
+            "subfields":{
+                "\u00E5":{
+                    "repeatable": false
+                },
+                "a":{},
+                "x":{},
+                "z":{}
+            }
+        },
         "600":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6d.htm",
             "subfields":{
