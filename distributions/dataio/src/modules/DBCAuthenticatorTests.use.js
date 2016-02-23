@@ -181,3 +181,57 @@ UnitTest.addFixture( "DBCAuthenticator.authenticateRecord", function() {
 
     OpenAgencyClientCore.clearFeatures();
 } );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DBCAuthenticator.recordDataForRawRepo", function() {
+    var BASIS_AGENCY_ID = "010100";
+    var FFU_AGENCY_ID = "820010";
+    var record;
+
+    var actual;
+    var expected;
+
+    function recordToString( record ) {
+        return record.toString();
+    }
+
+    OpenAgencyClientCore.clearFeatures();
+    OpenAgencyClientCore.addFeatures( BASIS_AGENCY_ID, UpdateConstants.USE_ENRICHMENTS );
+
+    record = RecordUtil.createFromString( [
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", UpdateConstants.COMMON_AGENCYID ),
+        "004 00 *a e *r n",
+        StringUtil.sprintf( "996 00 *a %s", UpdateConstants.COMMON_AGENCYID ),
+        StringUtil.sprintf( "s10 00 *a %s", UpdateConstants.COMMON_AGENCYID )
+    ].join( "\n" ) );
+
+    actual = DBCAuthenticator.recordDataForRawRepo( record, "netpunkt", BASIS_AGENCY_ID );
+    expected = BasisSplitter.splitCompleteBasisRecord( record );
+    Assert.equalValue( "Basis record (USE_ENRICHMENTS)", actual.map( recordToString).toString(), expected.map( recordToString).toString() );
+
+    OpenAgencyClientCore.clearFeatures();
+    OpenAgencyClientCore.addFeatures( BASIS_AGENCY_ID, UpdateConstants.USE_ENRICHMENTS );
+
+    record = RecordUtil.createFromString( [
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", UpdateConstants.COMMON_AGENCYID ),
+        "004 00 *a e *r n",
+        StringUtil.sprintf( "996 00 *a %s", UpdateConstants.COMMON_AGENCYID ),
+        StringUtil.sprintf( "s10 00 *a %s", UpdateConstants.COMMON_AGENCYID )
+    ].join( "\n" ) );
+
+    actual = DBCAuthenticator.recordDataForRawRepo( record, "netpunkt", BASIS_AGENCY_ID );
+    expected = BasisSplitter.splitCompleteBasisRecord( record );
+    Assert.equalValue( "Basis record (AUTH_ROOT_FEATURE)", actual.map( recordToString).toString(), expected.map( recordToString).toString() );
+
+    OpenAgencyClientCore.clearFeatures();
+
+    record = RecordUtil.createFromString( [
+        StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s", FFU_AGENCY_ID ),
+        "004 00 *a e *r n",
+        StringUtil.sprintf( "996 00 *a %s", FFU_AGENCY_ID )
+    ].join( "\n" ) );
+
+    actual = DBCAuthenticator.recordDataForRawRepo( record, "netpunkt", FFU_AGENCY_ID );
+    expected = [ record ];
+    Assert.equalValue( "FFU record", actual.map( recordToString ).toString(), expected.map( recordToString).toString() );
+} );

@@ -5,6 +5,7 @@ use( "DefaultAuthenticator" );
 use( "Log" );
 use( "Marc" );
 use( "MarcClasses" );
+use( "OpenAgencyClient" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
 use( "UpdateConstants" );
@@ -68,7 +69,13 @@ var DBCAuthenticator = function() {
         Log.trace( "Enter - DBCAuthenticator.recordDataForRawRepo()" );
 
         try {
-            return BasisSplitter.splitCompleteBasisRecord( record );
+            if( OpenAgencyClient.hasFeature( groupId, UpdateConstants.USE_ENRICHMENTS ) ||
+                OpenAgencyClient.hasFeature( groupId, UpdateConstants.AUTH_ROOT_FEATURE ) )
+            {
+                return BasisSplitter.splitCompleteBasisRecord(record);
+            }
+
+            return [ record ];
         }
         finally {
             Log.trace( "Exit - DBCAuthenticator.recordDataForRawRepo()" );
