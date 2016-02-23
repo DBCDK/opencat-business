@@ -113,7 +113,12 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
             }, {
                 "name": "003",
                 "indicator": "00",
-                "subfields": []
+                "subfields": [
+                    {
+                        "name": "",
+                        "value": ""
+                    }
+                ]
             }, {
                 "name": "042",
                 "indicator": "00",
@@ -1381,7 +1386,7 @@ UnitTest.addFixture( "Builder.__convertField", function() {
                 "name": "b",
                 "value": ""
             }, {
-                "name": "c",
+                "name": "c"
             }, {
                 "name": "f",
                 "value": "a"
