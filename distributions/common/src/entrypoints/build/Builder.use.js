@@ -244,11 +244,14 @@ var Builder = function() {
         };
 
         var newSubfield;
-        if ( mandatorySubfields !== undefined ) {
+        if ( mandatorySubfields.length > 0 ) {
             for ( var i = 0; i < mandatorySubfields.length; i++ ) {
                 newSubfield = buildSubfield( template, mandatorySubfields[i], fieldName, faustProvider );
                 field.subfields.push( newSubfield );
             }
+        } else {
+            newSubfield = buildSubfield( template, "", fieldName, faustProvider );
+            field.subfields.push( newSubfield );
         }
         return field;
     }
