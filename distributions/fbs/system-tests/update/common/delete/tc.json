@@ -1,0 +1,71 @@
+[
+    {
+        "name": "fbs-delete-common-record",
+        "bugs": [ "#1819" ],
+        "description": "Tester sletning af fællesskabspost fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "714700",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 714700 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "ERROR",
+                    "params" : {
+                        "fieldno" : 2,
+                        "subfieldno" : 1,
+                        "message" : "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'",
+                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    }
+                }
+            ],
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "params" : {
+                            "fieldno" : 2,
+                            "subfieldno" : 1,
+                            "message" : "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'",
+                            "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                        }
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]
