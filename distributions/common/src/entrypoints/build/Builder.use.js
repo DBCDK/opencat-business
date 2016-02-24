@@ -121,16 +121,21 @@ var Builder = function() {
             newField = field;
             // TODO: Fix return undefined
             // make sure it has an indicator
-            newField = verifyIndicator( template, newField );
+            newField = verifyIndicator(template, newField);
 
             // make a list of mandatory subfields
-            var newSubfieldsObject = convertSubfields(template, field, faustProvider );
+            var newSubfieldsObject = convertSubfields(template, field, faustProvider);
             var newSubfields = newSubfieldsObject["subfields"];
             var mandatorySubfieldsObject = newSubfieldsObject["mandatorySubfields"];
 
-            // add the remaining mandatory subfields not present in the original field
-            var missingSubfields = buildMissingSubfields( template, mandatorySubfieldsObject, field, faustProvider );
-            newField.subfields = newSubfields.concat( missingSubfields );
+            var missingSubfields;
+            if (newSubfields.length == 0 && Object.keys(mandatorySubfieldsObject).length == 0) {
+                missingSubfields = {name:"", value:""};
+            } else {
+                // add the remaining mandatory subfields not present in the original field
+                missingSubfields = buildMissingSubfields(template, mandatorySubfieldsObject, field, faustProvider);
+            }
+            newField.subfields = newSubfields.concat(missingSubfields);
         }
         return newField;
     }
@@ -201,7 +206,7 @@ var Builder = function() {
                         newSubfield.value = faustProviderFunction();
                     }
                     if ( newSubfield.hasOwnProperty( "value" ) === false ) {
-                        Log.debug("4242 newSubfield.hasOwnProperty( \"value\" ) === false")
+                        Log.debug("newSubfield.hasOwnProperty( \"value\" ) === false");
                         newSubfield.value = "";
                     }
                     newSubfields.push( newSubfield );
