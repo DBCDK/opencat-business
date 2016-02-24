@@ -325,21 +325,24 @@ var ClassificationData = function() {
     }
     
     function __hasFieldChanged( oldField, newField, valueFunc, ignoreSubfieldsMatcher ) {
-        Log.trace( "Enter - ClassificationData.__hasFieldChanged()" );
+        Log.debug( "Enter - ClassificationData.__hasFieldChanged()" );
 
         var result = undefined;
         try {
-            Log.trace("    oldField: " + oldField);
-            Log.trace("    newField: " + newField);
-            Log.trace("    ignoreSubfieldsMatcher: " + ignoreSubfieldsMatcher);
+            Log.debug("    oldField: " + oldField);
+            Log.debug("    newField: " + newField);
+            Log.debug("    ignoreSubfieldsMatcher: " + ignoreSubfieldsMatcher);
 
             if (oldField === undefined && newField === undefined) {
+                Log.debug( "STP: Result C1" );
                 return result = false;
             }
             else if (oldField !== undefined && newField === undefined) {
+                Log.debug( "STP: Result C2" );
                 return result = true;
             }
             else if (oldField === undefined && newField !== undefined) {
+                Log.debug( "STP: Result C3" );
                 return result = true;
             }
 
@@ -347,6 +350,7 @@ var ClassificationData = function() {
             if (ignoreSubfieldsMatcher === undefined) {
                 msf = {
                     matchSubField: function (f, sf) {
+                        Log.debug( "STP: Result C4" );
                         return false;
                     }
                 };
@@ -355,37 +359,58 @@ var ClassificationData = function() {
             var result = false;
             oldField.eachSubField(/./, function (field, subfield) {
                 if (result) {
+                    Log.debug( "STP: Result C5" );
                     return;
                 }
 
                 if (msf.matchSubField(field, subfield)) {
+                    Log.debug( "STP: Result C6" );
                     return;
                 }
 
                 var sfMatcher = {
                     matchSubField: function (f, sf) {
                         if( subfield.value === "" ) {
+                            Log.debug( "STP: Result C7" );
                             return true;
                         }
 
-                        return sf.name === subfield.name && valueFunc(sf.value) === valueFunc(subfield.value);
+                        var sfValue = valueFunc(sf.value);
+                        var subfieldValue = valueFunc(subfield.value);
+                        Log.debug( "sfValue (", sf.name, "): '", sfValue, "'" );
+                        Log.debug( "subfieldValue (", subfield.name, "): '", subfieldValue, "'" );
+                        Log.debug( "sf.name.type: ", typeof( sf.name ) );
+                        Log.debug( "subfieldf.name.type: ", typeof( subfield.name ) );
+                        Log.debug( "sf.value.type: ", typeof( sfValue ) );
+                        Log.debug( "subfield.value.type: ", typeof( subfieldValue ) );
+
+                        if( sf.name === subfield.name && sfValue === subfieldValue ) {
+                            Log.debug( "STP: Result C8" );
+                            return true;
+                        }
+                        else {
+                            Log.debug( "STP: Result C9" );
+                            return false;
+                        }
                     }
                 };
 
                 if (!newField.exists(sfMatcher)) {
+                    Log.debug( "STP: Result C10" );
                     result = true;
                 }
             });
 
+            Log.debug( "STP: Result C11" );
             return result;
         }
         finally {
-            Log.trace("Exit - ClassificationData.__hasFieldChanged(): " + result);
+            Log.debug("Exit - ClassificationData.__hasFieldChanged(): " + result);
         }
     }
     
     function __hasFieldByNameChanged( oldMarc, newMarc, fieldname, valueFunc, ignoreSubfieldsMatcher ) {
-        Log.trace( "Enter - ClassificationData.__hasFieldByNameChanged()" );
+        Log.debug( "Enter - ClassificationData.__hasFieldByNameChanged()" );
 
         var result = undefined;
         try {
@@ -408,7 +433,7 @@ var ClassificationData = function() {
                             __hasFieldChanged(newField, oldField, valueFunc, ignoreSubfieldsMatcher);
         }
         finally {
-            Log.trace( "Exit - ClassificationData.__hasFieldByNameChanged(): ", result );
+            Log.debug( "Exit - ClassificationData.__hasFieldByNameChanged(): ", result );
         }
     }
 
@@ -507,14 +532,14 @@ var ClassificationData = function() {
         Log.trace( "Enter - ClassificationData.__stripValue()" );
 
         try {
-            var Normalizer = Java.type("java.text.Normalizer");
+            var Normalizer = Packages.java.text.Normalizer;
 
             Log.trace("    v: " + v);
 
             v = v.replace(/\s|\[|\]|\u00A4/g, "");
             v = Normalizer.normalize( v, Normalizer.Form.NFD ).replaceAll( "[\\p{InCombiningDiacriticalMarks}]", "" );
 
-            return v;
+            return v + "";
         }
         finally {
             Log.trace("Exit - ClassificationData.__stripValue():" + v);
