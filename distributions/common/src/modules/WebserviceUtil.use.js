@@ -15,7 +15,7 @@ var WebserviceUtil = function() {
 
     function init( settings ) {
         Log.trace("init");
-        openNumberRoll = settings.get( 'opennumberroll' );
+        openNumberRoll = String(settings.get( 'opennumberroll' ));
     }
 
     /**
