@@ -14,47 +14,171 @@ EXPORTED_SYMBOLS = [ 'DoubleRecordFinder' ];
  * @namespace
  * @name DoubleRecordFinder
  */
-var DoubleRecordFinder = function() {
+var DoubleRecordFinder = function(  ) {
     /**
      * Finds all double record candidates for a given record.
      *
-     * @param record {Record}  The record to find double records for.
-     * @param sorlUrl {String} Url to the solr service to use.
+     * @param record {record}  The record to find double records for.
+     * @param solrUrl {String} Url to the solr service to use.
      *
      * @return {Array} Array of objects with found records. See DefaultDoubleRecordHandler#formatMessage
      *                 for an explanation.
      *
      * @name DoubleRecordFinder#find
      */
-    function find( record, solrUrl ) {
-        Log.trace( "Enter - DoubleRecordFinder.find()" );
+
+    /**
+     * Contains the value of 250a for fictional books and music
+     * @type {undefined}
+     */
+    var field250a = undefined;
+    var solrUrl = undefined;
+
+    function find( record, callSolrUrl ) {
+        Log.trace( "Enter - DoubleRecordFinder.find()", 0 );
 
         var result = [];
+        solrUrl = callSolrUrl;
         try {
             var array = [];
 
             array.push({
                 matcher: __matchTechnicalLiterature,
-                searcher: __findTechnicalLiterature
+                searcher: __findTechnicalLiterature,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchFictionBookMusic,
+                searcher: __findFictionBookMusicRun,
+                continueOnHit: false
             });
 
             for (var i = 0; i < array.length; i++) {
                 var findObj = array[i];
 
                 if (findObj.matcher(record)) {
-                    result = result.concat(findObj.searcher(record, solrUrl));
+                    result = result.concat(findObj.searcher(record));
+                    if ( ! findObj.continueOnHit ) {
+                        return result;
+                    }
                 }
             }
 
             return result;
         }
         finally {
-            Log.trace( "Exit - DoubleRecordFinder.find(): ", result );
+            Log.trace( "Exit - DoubleRecordFinder.find(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
         }
     }
 
     //-----------------------------------------------------------------------------
-    //                  Paper or Musical
+    //                  Paper or Musical - fiction
+    //-----------------------------------------------------------------------------
+
+    function __matchFictionBookMusic( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchFictionBookMusic()" );
+
+        var result = undefined;
+        var subfield = undefined;
+        var found009a = false;
+        var found009g = false;
+        var found652m = false;
+        try {
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field(i);
+                // 009 check - Possible target for moving to a function
+                if (field.name === "009") {
+                    for (var j = 0; j < field.count(); j++) {
+                        subfield = field.subfield(j);
+
+                        if (subfield.name === "a") {
+                            if (found009a) {
+                                return false;
+                            }
+                            if (["a", "c"].indexOf(subfield.value) === -1) {
+                                return false;
+                            }
+
+                            found009a = true;
+                        }
+                        if (subfield.name === "g") {
+                            if (found009g) {
+                                return false;
+                            }
+                            if (["xx", "xe"].indexOf(subfield.value) === -1) {
+                                return false;
+                            }
+                            found009g = true;
+                        }
+                    }
+                }
+
+                if (field.name === "652") {
+                    if (__isFictionLiterature(field)) {
+                        found652m = true;
+                    }
+                }
+                if (field.name === "250") {
+                    for (var k = 0; k < field.count(); k++) {
+                        subfield = field.subfield(k);
+                        if (subfield.name === "a") {
+                            field250a = subfield.value;
+                        }
+                    }
+                }
+            }
+
+            return result = found009a && found009g && found652m;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchFictionBookMusic(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findFictionBookMusic( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findFictionBookMusicRun( record );
+    }
+    function __findFictionBookMusicRun( record ) {
+        var result = undefined;
+        var normalized250a = undefined;
+        try {
+            var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldValueLengthFormatter( 20 ),
+                '260b': __querySubfieldValueLengthFormatter( 2 )
+            };
+
+            result = __executeQueryAndFindRecords( record, formatters );
+            if ( field250a !== undefined ) {
+                normalized250a = Solr.analyse( solrUrl, field250a, "match.field250a" );
+            } else {
+                // When incoming rec doesn't have a 250a all found are possible matches
+                return result;
+            }
+            var finalResult = [];
+            for (var i = 0; i < result.length; i++ ) {
+                var workRes = result[i];
+                if (workRes.edition !== undefined ) {
+                    var normalizedFind250a = Solr.analyse( solrUrl, workRes.edition, "match.field250a" );
+                    if (normalized250a === normalizedFind250a ) {
+                        finalResult.push( workRes );
+                    }
+                } else {
+                    finalResult.push( workRes );
+                }
+            }
+            return finalResult;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__findTechnicalLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Paper or Musical - technical
     //-----------------------------------------------------------------------------
 
     function __matchTechnicalLiterature( record ) {
@@ -68,6 +192,7 @@ var DoubleRecordFinder = function() {
 
             for( var i = 0; i < record.numberOfFields(); i++ ) {
                 var field = record.field( i );
+                // 009 check - Possible target for moving to a function
                 if( field.name === "009" ) {
                     for( var j = 0; j < field.count(); j++ ) {
                         var subfield = field.subfield( j );
@@ -87,6 +212,9 @@ var DoubleRecordFinder = function() {
                         if( subfield.name === "g" ) {
                             if( found009g ) {
                                 Log.debug( "__matchTechnicalLiterature(): t3" );
+                                return false;
+                            }
+                            if( [ "xx", "xe" ].indexOf( subfield.value ) === -1 ) {
                                 return false;
                             }
                             found009g = true;
@@ -111,27 +239,32 @@ var DoubleRecordFinder = function() {
             return result = found009a && found009g && found652m;
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__matchTechnicalLiterature(): ", result );
+            Log.trace( "Exit - DoubleRecordFinder.__matchTechnicalLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
         }
     }
 
-    function __findTechnicalLiterature( record, solrUrl ) {
+    // TESTING only
+    function __findTechnicalLiterature( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findTechnicalLiteratureRun( record );
+    }
+    function __findTechnicalLiteratureRun( record ) {
         Log.trace( "Enter - DoubleRecordFinder.__findTechnicalLiterature()" );
 
         var result = undefined;
         try {
-            var formaters = {
-                '008a': __querySubfieldYearFormater(),
-                '009a': __querySubfieldFormater,
-                '009g': __querySubfieldFormater,
-                '245a': __querySubfieldValueLengthFormater( 20 ),
-                '260b': __querySubfieldValueLengthFormater( 2 )
+            var formatters = {
+                '008a': __querySubfieldYearFormatter(),
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldValueLengthFormatter( 20 ),
+                '260b': __querySubfieldValueLengthFormatter( 2 )
             };
 
-            return result = __executeQueryAndFindRecords( record, formaters, solrUrl );
+            return result = __executeQueryAndFindRecords( record, formatters );
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__findTechnicalLiterature(): ", result );
+            Log.trace( "Exit - DoubleRecordFinder.__findTechnicalLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef" );
         }
     }
 
@@ -139,8 +272,8 @@ var DoubleRecordFinder = function() {
     //                  Type checkers
     //-----------------------------------------------------------------------------
 
-    function __isTechnicalLiterature( field ) {
-        Log.trace( "Enter - DoubleRecordFinder.__isTechnicalLiterature()" );
+    function __isFictionLiterature( field ) {
+        Log.trace( "Enter - DoubleRecordFinder.__isFictionLiterature()", 0 );
 
         var result = undefined;
         try {
@@ -153,17 +286,11 @@ var DoubleRecordFinder = function() {
                             Log.debug( "__isTechnicalLiterature(): t1" );
                             return result = false;
                         }
-                        else if( /^(8[2-8])/i.test( subfield.value ) ) {
-                            if( [ "88.1", "88.2" ].indexOf( subfield.value ) > -1 ) {
-                                Log.debug( "__isTechnicalLiterature(): t2" );
-                                return result = true;
+                        if( /^(8[2-8])/i.test( subfield.value ) ) {
+                            if( subfield.value.indexOf( "88.1") > -1 || subfield.value.indexOf( "88.2") > -1 ) {
+                                return result = false;
                             }
 
-                            Log.debug( "__isTechnicalLiterature(): t3" );
-                            return result = false;
-                        }
-                        else {
-                            Log.debug( "__isTechnicalLiterature(): t4" );
                             return result = true;
                         }
                     }
@@ -174,7 +301,7 @@ var DoubleRecordFinder = function() {
             return result = false;
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__isTechnicalLiterature(): ", result );
+            Log.trace( "Exit - DoubleRecordFinder.__isFictionLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
         }
     }
 
@@ -182,7 +309,7 @@ var DoubleRecordFinder = function() {
     //                  Query executor
     //-----------------------------------------------------------------------------
 
-    function __executeQueryAndFindRecords( record, queryFormaters, solrUrl ) {
+    function __executeQueryAndFindRecords( record, queryFormatter ) {
         Log.trace( "Enter - DoubleRecordFinder.__executeQueryAndFindRecords()" );
 
         var result = [];
@@ -196,11 +323,11 @@ var DoubleRecordFinder = function() {
                 for( var j = 0; j < field.count(); j++ ) {
                     var subfield = field.subfield( j );
 
-                    var formater = queryFormaters[ field.name + subfield.name ];
-                    if( formater !== undefined ) {
+                    var formatter = queryFormatter[ field.name + subfield.name ];
+                    if( formatter !== undefined ) {
                         reason.push( field.name + subfield.name );
 
-                        queryElements.push( formater( field, subfield ) );
+                        queryElements.push( formatter( field, subfield ) );
                     }
                 }
             }
@@ -213,8 +340,8 @@ var DoubleRecordFinder = function() {
             }
 
             var solr = Solr.search( solrUrl, query );
-            for( var i = 0; i < solr.response.docs.length; i++ ) {
-                var document = solr.response.docs[i];
+            for( var k = 0; k < solr.response.docs.length; k++ ) {
+                var document = solr.response.docs[k];
                 var recordId;
                 var index = document.id.indexOf( ":" );
 
@@ -227,14 +354,15 @@ var DoubleRecordFinder = function() {
 
                 result.push(  {
                     id: recordId,
-                    reason: reason.join( ", " )
+                    reason: reason.join( ", " ),
+                    edition: document["match.250a"]
                 } );
             }
 
             return result;
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__executeQueryAndFindRecords(): ", result );
+            Log.trace( "Exit - DoubleRecordFinder.__executeQueryAndFindRecords(): ", result );
         }
 
     }
@@ -243,26 +371,23 @@ var DoubleRecordFinder = function() {
     //                  Query executor
     //-----------------------------------------------------------------------------
 
-    function __querySubfieldFormater( field, subfield ) {
-        Log.trace( "Enter - DoubleRecordFinder.__executeQueryAndFindRecords()" );
+    function __querySubfieldFormatter( field, subfield ) {
+        Log.trace( "Enter - DoubleRecordFinder.__querySubfieldFormatter()", 0 );
+        Log.trace("HIK!", 0);
 
         var result = undefined;
         try {
-            var Normalizer = Java.type("java.text.Normalizer");
-
-            var value = subfield.value;
-            value = value.replace(/\[|\]|\u00A4/g, "");
-            value = Normalizer.normalize( value, Normalizer.Form.NFD ).replaceAll( "[\\p{InCombiningDiacriticalMarks}]", "" );
+            var value = Solr.analyse( solrUrl, subfield.value, "match." + field.name + subfield.name );
 
             return result = "marc." + field.name + subfield.name + ":\"" + value + "\"";
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__executeQueryAndFindRecords(): ", result );
+            Log.trace( "Exit - DoubleRecordFinder.__querySubfieldFormatter ", result !== undefined ? JSON.stringify(result) : "undefined" );
         }
     }
 
-    function __querySubfieldYearFormater() {
-        Log.trace( "Enter - DoubleRecordFinder.__querySubfieldValueLengthFormater()" );
+    function __querySubfieldYearFormatter() {
+        Log.trace( "Enter - DoubleRecordFinder.__querySubfieldYearFormatter()", 0 );
 
         try {
             return function( field, subfield ) {
@@ -271,34 +396,40 @@ var DoubleRecordFinder = function() {
                 var array = [];
 
                 sf = new Subfield( subfield.name, ( year - 1 ).toString() );
-                array.push( __querySubfieldFormater( field, sf ) );
+                array.push( __querySubfieldFormatter( field, sf ) );
 
                 sf = new Subfield( subfield.name, year.toString() );
-                array.push( __querySubfieldFormater( field, sf ) );
+                array.push( __querySubfieldFormatter( field, sf ) );
 
                 sf = new Subfield( subfield.name, ( year + 1 ).toString() );
-                array.push( __querySubfieldFormater( field, sf ) );
+                array.push( __querySubfieldFormatter( field, sf ) );
 
                 return "( " + array.join( " or " ) + " )";
             }
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__querySubfieldValueLengthFormater()" );
+            Log.trace( "Exit - DoubleRecordFinder.__querySubfieldYearFormatter()", 0 );
         }
     }
 
-    function __querySubfieldValueLengthFormater( valueLength ) {
-        Log.trace( "Enter - DoubleRecordFinder.__querySubfieldValueLengthFormater()" );
+    function __querySubfieldValueLengthFormatter( valueLength ) {
+        Log.trace( "Enter - DoubleRecordFinder.__querySubfieldValueLengthFormatter()", 0);
 
+        var result = undefined;
         try {
             return function( field, subfield ) {
-                var sf = new Subfield( subfield.name, subfield.value.substring( 0, valueLength ) );
+                var value = Solr.analyse( solrUrl, subfield.value, "match." + field.name + subfield.name );
+                // hvis den uklippede men trimmede strengs længde er større end ønsket længde skal der trunkes
+                var value1 = value.substr(0, valueLength );
+                if ( value.length > valueLength ) {
+                    value1 = value1 + "?";
+                }
 
-                return __querySubfieldFormater( field, sf );
+                return result = "marc." + field.name + subfield.name + ":\"" + value1 + "\"";
             }
         }
         finally {
-            Log.trace( "Enter - DoubleRecordFinder.__querySubfieldValueLengthFormater()" );
+            Log.trace( "Exit - DoubleRecordFinder.__querySubfieldValueLengthFormatter(): ", result !== undefined ? JSON.stringify(result) : "undef" );
         }
     }
 
@@ -307,7 +438,11 @@ var DoubleRecordFinder = function() {
 
         // Functions is exported so they are accessible from the unittests.
         '__matchTechnicalLiterature': __matchTechnicalLiterature,
-        '__findTechnicalLiterature': __findTechnicalLiterature
+        '__findTechnicalLiterature': __findTechnicalLiterature,
+        '__matchFictionBookMusic': __matchFictionBookMusic,
+        '__findFictionBookMusic': __findFictionBookMusic
     }
 
 }();
+
+

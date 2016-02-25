@@ -17,13 +17,37 @@ use( "Log" );
  * @namespace Solr
  */
 var Solr = function( ) {
+	function analyse( url, text, index ) {
+		Log.trace( "Enter - Solr.analyse", url + " " + text + " " + index );
+		try {
+			var solr = SolrCore.analyse( url, text, index );
+			if ( solr.responseHeader.status == 0 ) {
+				var solrindex = solr.analysis.field_names[index].index;
+				return solrindex[solrindex.length - 1].text;
+			} else {
+				// what is a reasonable action here ?
+				var errStr = ( "Failed to perform solr analysis - url: ", url, " index: ", index, " text :<", text, "> error : ", solr.error.msg );
+				Log.warn( errStr );
+				throw errStr;
+			}
+		}
+		catch( ex ) {
+			Log.warn( "EXCEPTION :Failed to perform solr analysis - url: ", url, " index: ", index, " text :<", text, ">" );
+            Log.trace("EX", JSON.stringify(ex));
+			throw ex;
+		}
+		finally {
+			Log.trace( "Exit - Solr.analyse" );
+		}
+	}
+
 	function search( url, query ) {
-		Log.trace( "Enter - Solr.numFound" );
+		Log.trace( "Enter - Solr.search" );
 		try {
 			return SolrCore.search( url, query );
 		}
 		finally {
-			Log.trace( "Exit - Solr" );
+			Log.trace( "Exit - Solr.search" );
 		}
 	}
 
@@ -45,11 +69,12 @@ var Solr = function( ) {
             return SolrCore.numFound( url, query );
 		}
 		finally {
-			Log.trace( "Exit - Solr" );
+			Log.trace( "Exit - Solr.numfound" );
 		}
 	}
 	
 	return {
+		'analyse': analyse,
         'search': search,
 		'numFound': numFound
 	}
