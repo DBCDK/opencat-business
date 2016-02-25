@@ -923,9 +923,7 @@
         "082":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.2d.htm",
             "subfields":{
-                "a":{
-                    "mandatory":true
-                },
+                "a":{},
                 "b":{},
                 "c":{
                     "repeatable":false
