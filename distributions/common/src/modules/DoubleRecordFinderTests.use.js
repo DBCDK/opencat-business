@@ -5,6 +5,33 @@ use( "SolrCore" );
 use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchMusic", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchMusic( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *h ws",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, but no *a", DoubleRecordFinder.__matchMusic( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *as", DoubleRecordFinder.__matchMusic( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a a *a s",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *a twice and a v", DoubleRecordFinder.__matchMusic( record ), false );
+
+} );
+
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchComposedMaterials", function() {
     var record;
 
@@ -37,6 +64,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchComposedMaterials", function() {
 
 } );
 
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchTechnicalLiterature", function() {
     var record;
 
@@ -153,6 +181,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchTechnicalLiterature", function()
     Assert.equalValue( "Fixtion Literature STP", DoubleRecordFinder.__matchTechnicalLiterature( record ), false );
 } );
 
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchFictionBookMusic", function() {
     var record;
 
@@ -292,6 +321,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findTechnicalLiterature", function() 
     );
 } );
 
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -315,6 +345,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
     );
 } );
 
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -335,6 +366,52 @@ UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
+    );
+} );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    record = new Record;
+    SolrCore.clear();
+    SolrCore.addQuery( "marc.009a:\"s\" and marc.009g:\"xe\" and marc.538g:\"troffelspisernesmareridt\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
+    SolrCore.addAnalyse( "match.538g:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.538g": {index: [ { text: "troffelspisernesmareridt" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a s *g xe",
+        "538 00 *g Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic538( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined } ]
+    );
+} );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    record = new Record;
+    SolrCore.clear();
+    SolrCore.addQuery( "marc.009a:\"s\" and marc.009g:\"xe\" and marc.245a:\"troffelspisernesmareridt\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "troffelspisernesmareridt" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a s *g xe",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic245( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 245a", edition:undefined, composed:undefined } ]
     );
 } );
 

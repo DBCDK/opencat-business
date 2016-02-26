@@ -44,6 +44,16 @@ var DoubleRecordFinder = function(  ) {
             var array = [];
 
             array.push({
+                matcher: __matchMusic,
+                searcher: __findMusic245Run,
+                continueOnHit: true
+            });
+            array.push({
+                matcher: __matchMusic,
+                searcher: __findMusic538Run,
+                continueOnHit: false
+            });
+            array.push({
                 matcher: __matchTechnicalLiterature,
                 searcher: __findTechnicalLiterature,
                 continueOnHit: false
@@ -74,6 +84,90 @@ var DoubleRecordFinder = function(  ) {
         }
         finally {
             Log.trace( "Exit - DoubleRecordFinder.find(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Music
+    //-----------------------------------------------------------------------------
+
+    function __matchMusic( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchMusic()" );
+
+        var result = undefined;
+        var subfield = undefined;
+        var count009a = 0;
+        var found009as = false;
+        try {
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field(i);
+                // 009 check - Possible target for moving to a function
+                if (field.name === "009") {
+                    for (var j = 0; j < field.count(); j++) {
+                        subfield = field.subfield(j);
+
+                        if (subfield.name === "a") {
+                            count009a++;
+                            if (["s"].indexOf(subfield.value) !== -1) {
+                                found009as = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ( found009as  && count009a === 1 ) {
+                return result = true;
+            }
+            return result = false;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchMusic(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findMusic245( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findMusic245Run( record );
+    }
+    function __findMusic245Run( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findMusic245Run()");
+        var result = undefined;
+        try {
+            var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldFormatter
+            };
+
+            result = __executeQueryAndFindRecords(record, formatters);
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findMusic245Run(): ", result !== undefined ? JSON.stringify(result) : "undef");
+        }
+    }
+    // TESTING only
+    function __findMusic538( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findMusic538Run( record );
+    }
+    function __findMusic538Run( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findMusic538Run()");
+        var result = undefined;
+        try {
+            var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '538g': __querySubfieldFormatter
+            };
+
+            result = __executeQueryAndFindRecords(record, formatters);
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findMusic538Run(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
 
@@ -546,6 +640,9 @@ var DoubleRecordFinder = function(  ) {
         'find': find,
 
         // Functions is exported so they are accessible from the unittests.
+        '__matchMusic': __matchMusic,
+        '__findMusic245': __findMusic245,
+        '__findMusic538': __findMusic538,
         '__matchComposedMaterials': __matchComposedMaterials,
         '__findComposedMaterials': __findComposedMaterials,
         '__matchTechnicalLiterature': __matchTechnicalLiterature,
