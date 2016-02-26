@@ -659,7 +659,7 @@ var DoubleRecordFinder = function(  ) {
         try {
             var value = Solr.analyse( solrUrl, subfield.value, "match." + field.name + subfield.name );
 
-            return result = "marc." + field.name + subfield.name + ":\"" + value + "\"";
+            return result = "match." + field.name + subfield.name + ":\"" + value + "\"";
         }
         finally {
             Log.trace( "Exit - DoubleRecordFinder.__querySubfieldFormatter ", result !== undefined ? JSON.stringify(result) : "undefined" );
@@ -699,7 +699,7 @@ var DoubleRecordFinder = function(  ) {
         try {
             return function( field, subfield ) {
                 var value = Solr.analyse( solrUrl, subfield.value, "match." + register );
-                return result = "marc." + register + ":\"" + value + "\"";
+                return result = "match." + register + ":\"" + value + "\"";
             }
         }
         finally {
@@ -720,7 +720,7 @@ var DoubleRecordFinder = function(  ) {
                     value1 = value1 + "?";
                 }
 
-                return result = "marc." + field.name + subfield.name + ":\"" + value1 + "\"";
+                return result = "match." + field.name + subfield.name + ":\"" + value1 + "\"";
             }
         }
         finally {

@@ -363,7 +363,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findTechnicalLiterature", function() 
     Assert.equalValue( "Empty record", DoubleRecordFinder.__findTechnicalLiterature( record, solrUrl ), [] );
 
     SolrCore.clear();
-    SolrCore.addQuery( "( marc.008a:\"2014\" or marc.008a:\"2015\" or marc.008a:\"2016\" ) and marc.009a:\"a\" and marc.009g:\"xx\" and marc.245a:\"antontilsoes\" and marc.260b:\"ca?\"",
+    SolrCore.addQuery( "( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.008a:2014", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ { text: "2014" } ] } } } } );
     SolrCore.addAnalyse( "match.008a:2015", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ { text: "2015" } ] } } } } );
@@ -391,7 +391,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
 
     record = new Record;
     SolrCore.clear();
-    SolrCore.addQuery( "marc.009a:\"a\" and marc.009g:\"xe\" and marc.245a:\"troffelspisernesmare?\" and marc.260b:\"fa?\"",
+    SolrCore.addQuery( "match.009a:\"a\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:a", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "a" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
@@ -415,7 +415,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
 
     record = new Record;
     SolrCore.clear();
-    SolrCore.addQuery( "marc.009a:\"v\" and marc.009g:\"xe\" and marc.245a:\"troffelspisernesmare?\" and marc.260b:\"fa?\"",
+    SolrCore.addQuery( "match.009a:\"v\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:v", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "v" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
@@ -439,7 +439,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
 
     record = new Record;
     SolrCore.clear();
-    SolrCore.addQuery( "marc.009a:\"s\" and marc.009g:\"xe\" and marc.538g:\"troffelspisernesmareridt\"",
+    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.538g:\"troffelspisernesmareridt\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
@@ -462,7 +462,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
 
     record = new Record;
     SolrCore.clear();
-    SolrCore.addQuery( "marc.009a:\"s\" and marc.009g:\"xe\" and marc.245a:\"troffelspisernesmareridt\"",
+    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmareridt\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
@@ -489,7 +489,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
     SolrCore.addAnalyse( "match.021a:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.021a": {index: [ { text: "12345678" } ] } } } } );
     SolrCore.addAnalyse( "match.023ab:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ { text: "12345678" } ] } } } } );
     SolrCore.addAnalyse( "match.023ab:87654321", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ { text: "87654321" } ] } } } } );
-    SolrCore.addQuery( "marc.021a:\"12345678\" or marc.023ab:\"12345678\" or marc.023ab:\"87654321\"",
+    SolrCore.addQuery( "match.021a:\"12345678\" or match.023ab:\"12345678\" or match.023ab:\"87654321\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     record = RecordUtil.createFromString( [
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
