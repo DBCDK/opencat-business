@@ -33,6 +33,7 @@ var DoubleRecordFinder = function(  ) {
      */
     var field250a = undefined;
     var solrUrl = undefined;
+    var materialType = { unknown:0, literature:1, technical:2 };
 
     function find( record, callSolrUrl ) {
         Log.trace( "Enter - DoubleRecordFinder.find()", 0 );
@@ -50,6 +51,11 @@ var DoubleRecordFinder = function(  ) {
             array.push({
                 matcher: __matchFictionBookMusic,
                 searcher: __findFictionBookMusicRun,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchComposedMaterials,
+                searcher: __findComposedMaterials,
                 continueOnHit: false
             });
 
@@ -71,6 +77,108 @@ var DoubleRecordFinder = function(  ) {
         }
     }
 
+    //-----------------------------------------------------------------------------
+    //                  Composed materials
+    //-----------------------------------------------------------------------------
+
+    function __matchComposedMaterials( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchComposedMaterials()" );
+
+        var result = undefined;
+        var subfield = undefined;
+        var count009a = 0;
+        var found009av = false;
+        try {
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field(i);
+                // 009 check - Possible target for moving to a function
+                if (field.name === "009") {
+                    for (var j = 0; j < field.count(); j++) {
+                        subfield = field.subfield(j);
+
+                        if (subfield.name === "a") {
+                            count009a++;
+                            if (["v"].indexOf(subfield.value) !== -1) {
+                                found009av = true;
+                            }
+                        }
+                    }
+                }
+
+                if (field.name === "250") {
+                    for (var k = 0; k < field.count(); k++) {
+                        subfield = field.subfield(k);
+                        if (subfield.name === "a") {
+                            field250a = subfield.value;
+                        }
+                    }
+                }
+            }
+
+            // Conditions - (count009a > 1 and content != v) OR ( count009a == 1 and content == v ) then found
+            if ( found009av ) {
+                return result = count009a == 1;
+            } else {
+                return result = count009a > 1;
+            }
+            return result = false;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchComposedMaterials(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findComposedMaterials( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findComposedMaterialsRun( record );
+    }
+    function __findComposedMaterialsRun( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__findComposeMaterialsRun()" );
+        var result = undefined;
+        var normalized250a = undefined;
+        try {
+            var formatters = {
+                '245a': __querySubfieldValueLengthFormatter( 20 ),
+                '260b': __querySubfieldValueLengthFormatter( 2 )
+            };
+
+            result = __executeQueryAndFindRecords( record, formatters );
+            if ( field250a !== undefined ) {
+                normalized250a = Solr.analyse( solrUrl, field250a, "match.field250a" );
+            } else {
+                // When incoming rec doesn't have a 250a all found are possible matches
+                return result;
+            }
+            /* Walk through all findings and select those that has empty 250a, have 009a=v or multiple 009a
+             */
+            var finalResult = [];
+            for (var i = 0; i < result.length; i++ ) {
+                var workRes = result[i];
+                var pushMe = false;
+                if (workRes.edition !== undefined ) {
+                    var normalizedFind250a = Solr.analyse(solrUrl, workRes.edition, "match.field250a");
+                    if (normalized250a === normalizedFind250a) {
+                        pushMe = true;
+                    }
+                }
+                if ( 1 < workRes.composed.length ) {
+                    pushMe = true;
+                } else {
+                    if ( workRes.composed == "v" ) {
+                        pushMe = true;
+                    }
+                }
+                if ( pushMe ) {
+                    finalResult.push( workRes );
+                }
+            }
+            return finalResult;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__findComposedMaterialsRun(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
     //-----------------------------------------------------------------------------
     //                  Paper or Musical - fiction
     //-----------------------------------------------------------------------------
@@ -114,7 +222,7 @@ var DoubleRecordFinder = function(  ) {
                 }
 
                 if (field.name === "652") {
-                    if (__isFictionLiterature(field)) {
+                    if (__get_652MaterialType(field) === materialType.literature ) {
                         found652m = true;
                     }
                 }
@@ -141,6 +249,7 @@ var DoubleRecordFinder = function(  ) {
         return __findFictionBookMusicRun( record );
     }
     function __findFictionBookMusicRun( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__findFictionBookMusicRun()" );
         var result = undefined;
         var normalized250a = undefined;
         try {
@@ -173,7 +282,7 @@ var DoubleRecordFinder = function(  ) {
             return finalResult;
         }
         finally {
-            Log.trace( "Exit - DoubleRecordFinder.__findTechnicalLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+            Log.trace( "Exit - DoubleRecordFinder.__findFictionBookMusicRun(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
         }
     }
 
@@ -221,14 +330,8 @@ var DoubleRecordFinder = function(  ) {
                         }
                     }
                 }
-
                 if( field.name === "652" ) {
-                    if( field.matchValue( /m/, /Uden\sklassem\xe6rke/ ) ) {
-                        Log.debug( "Found 652m = 'Uden\sklassem\xe6rke'" );
-                        found652m = true;
-                    }
-
-                    if( __isTechnicalLiterature( field ) ) {
+                    if ( __get_652MaterialType(field) === materialType.technical ) {
                         Log.debug( "Found 652 for technical literature" );
                         found652m = true;
                     }
@@ -249,7 +352,7 @@ var DoubleRecordFinder = function(  ) {
         return __findTechnicalLiteratureRun( record );
     }
     function __findTechnicalLiteratureRun( record ) {
-        Log.trace( "Enter - DoubleRecordFinder.__findTechnicalLiterature()" );
+        Log.trace( "Enter - DoubleRecordFinder.__findTechnicalLiteratureRun()" );
 
         var result = undefined;
         try {
@@ -264,7 +367,7 @@ var DoubleRecordFinder = function(  ) {
             return result = __executeQueryAndFindRecords( record, formatters );
         }
         finally {
-            Log.trace( "Exit - DoubleRecordFinder.__findTechnicalLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef" );
+            Log.trace( "Exit - DoubleRecordFinder.__findTechnicalLiteratureRun(): ", result !== undefined ? JSON.stringify(result) : "undef" );
         }
     }
 
@@ -272,8 +375,8 @@ var DoubleRecordFinder = function(  ) {
     //                  Type checkers
     //-----------------------------------------------------------------------------
 
-    function __isFictionLiterature( field ) {
-        Log.trace( "Enter - DoubleRecordFinder.__isFictionLiterature()", 0 );
+    function __get_652MaterialType( field ) {
+        Log.trace( "Enter - DoubleRecordFinder.__get_652MaterialType()", 0 );
 
         var result = undefined;
         try {
@@ -283,25 +386,28 @@ var DoubleRecordFinder = function(  ) {
 
                     if( subfield.name === "m" ) {
                         if( subfield.value === "sk" ) {
-                            Log.debug( "__isTechnicalLiterature(): t1" );
-                            return result = false;
+                            return materialType.literature;
+                            return result = true;
+                        }
+                        if( subfield.value === "Uden klassem\xe6rke" ) {
+                            Log.debug("Found 652m = 'Uden\sklassem\xe6rke'");
+                            return result = materialType.technical;
                         }
                         if( /^(8[2-8])/i.test( subfield.value ) ) {
                             if( subfield.value.indexOf( "88.1") > -1 || subfield.value.indexOf( "88.2") > -1 ) {
-                                return result = false;
+                                return result = materialType.technical;
                             }
-
-                            return result = true;
+                            return materialType.literature;
                         }
+                        return materialType.technical;
                     }
                 }
             }
 
-            Log.debug( "__isTechnicalLiterature(): t5" );
-            return result = false;
+            return result = materialType.unknown;
         }
         finally {
-            Log.trace( "Exit - DoubleRecordFinder.__isFictionLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+            Log.trace( "Exit - DoubleRecordFinder.__get_652MaterialType(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
         }
     }
 
@@ -355,7 +461,8 @@ var DoubleRecordFinder = function(  ) {
                 result.push(  {
                     id: recordId,
                     reason: reason.join( ", " ),
-                    edition: document["match.250a"]
+                    edition: document["match.250a"],
+                    composed: document["match.009a"]
                 } );
             }
 
@@ -437,6 +544,8 @@ var DoubleRecordFinder = function(  ) {
         'find': find,
 
         // Functions is exported so they are accessible from the unittests.
+        '__matchComposedMaterials': __matchComposedMaterials,
+        '__findComposedMaterials': __findComposedMaterials,
         '__matchTechnicalLiterature': __matchTechnicalLiterature,
         '__findTechnicalLiterature': __findTechnicalLiterature,
         '__matchFictionBookMusic': __matchFictionBookMusic,

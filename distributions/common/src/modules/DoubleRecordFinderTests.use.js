@@ -5,6 +5,38 @@ use( "SolrCore" );
 use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchComposedMaterials", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchComposedMaterials( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *h ws",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, but no *a", DoubleRecordFinder.__matchComposedMaterials( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a v",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *av", DoubleRecordFinder.__matchComposedMaterials( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a a *a b",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *a twice", DoubleRecordFinder.__matchComposedMaterials( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a a *a v",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *a twice and a v", DoubleRecordFinder.__matchComposedMaterials( record ), false );
+
+} );
+
 UnitTest.addFixture( "DoubleRecordFinder.__matchTechnicalLiterature", function() {
     var record;
 
@@ -256,7 +288,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findTechnicalLiterature", function() 
         "260 00 *& 1 *a Vinderup *b Cadeau *c 2015",
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findTechnicalLiterature( record, solrUrl ),
-        [ { id: "12345678", reason: "008a, 009a, 009g, 245a, 260b", edition:undefined } ]
+        [ { id: "12345678", reason: "008a, 009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
     );
 } );
 
@@ -279,7 +311,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books",
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined } ]
+        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
     );
 } );
 
