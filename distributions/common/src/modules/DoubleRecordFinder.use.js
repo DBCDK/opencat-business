@@ -139,6 +139,8 @@ var DoubleRecordFinder = function(  ) {
         var normalized250a = undefined;
         try {
             var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
                 '245a': __querySubfieldValueLengthFormatter( 20 ),
                 '260b': __querySubfieldValueLengthFormatter( 2 )
             };

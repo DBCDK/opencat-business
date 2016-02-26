@@ -315,6 +315,29 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
     );
 } );
 
+UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    record = new Record;
+    SolrCore.clear();
+    SolrCore.addQuery( "marc.009a:\"v\" and marc.009g:\"xe\" and marc.245a:\"troffelspisernesmare?\" and marc.260b:\"fa?\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:v", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "v" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "troffelspisernesmareridt" } ] } } } } );
+    SolrCore.addAnalyse( "match.260b:Fantagraphic Books", { responseHeader: { status: 0 }, analysis: { field_names: { "match.260b": {index: [ { text: "fantagraphicBooks" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a v *g xe",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
+    );
+} );
+
 
 
 
