@@ -5,6 +5,69 @@ use( "SolrCore" );
 use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchNumbers", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchNumbers( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *h ws",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "No 021,022,023,024,028 fields", DoubleRecordFinder.__matchNumbers( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "021 00 *a 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "021 a", DoubleRecordFinder.__matchNumbers( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "021 00 *e 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "021 e", DoubleRecordFinder.__matchNumbers( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "021 00 *x 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "021 x", DoubleRecordFinder.__matchNumbers( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "022 00 *a 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "022 a", DoubleRecordFinder.__matchNumbers( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "024 00 *a 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "024 a", DoubleRecordFinder.__matchNumbers( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "028 00 *a 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "028 a", DoubleRecordFinder.__matchNumbers( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "023 00 *a 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "023 a", DoubleRecordFinder.__matchNumbers( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "023 00 *b 12345678",
+    ].join( "\n") );
+    Assert.equalValue( "023 b", DoubleRecordFinder.__matchNumbers( record ), true );
+
+} );
+
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchMusic", function() {
     var record;
 
@@ -412,6 +475,32 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic245( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a", edition:undefined, composed:undefined } ]
+    );
+} );
+
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    record = new Record;
+    SolrCore.clear();
+    SolrCore.addAnalyse( "match.021a:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.021a": {index: [ { text: "12345678" } ] } } } } );
+    SolrCore.addAnalyse( "match.023ab:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ { text: "12345678" } ] } } } } );
+    SolrCore.addAnalyse( "match.023ab:87654321", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ { text: "87654321" } ] } } } } );
+    SolrCore.addQuery( "marc.021a:\"12345678\" or marc.023ab:\"12345678\" or marc.023ab:\"87654321\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a s *g xe",
+        "021 00 *a 12345678",
+        "023 00 *a 12345678 *b 87654321",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findNumbers( record, solrUrl ),
+        [ { id: "12345678", reason: "021a, 023a, 023b", edition:undefined, composed:undefined } ]
     );
 } );
 

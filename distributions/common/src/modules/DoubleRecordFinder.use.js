@@ -34,6 +34,7 @@ var DoubleRecordFinder = function(  ) {
     var field250a = undefined;
     var solrUrl = undefined;
     var materialType = { unknown:0, literature:1, technical:2 };
+    var andingTogether = true;
 
     function find( record, callSolrUrl ) {
         Log.trace( "Enter - DoubleRecordFinder.find()", 0 );
@@ -43,6 +44,13 @@ var DoubleRecordFinder = function(  ) {
         try {
             var array = [];
 
+            // Keep this as the first ISSN,ISBN;ISMN etc has highest priority
+            array.push({
+                matcher: __matchNumbers,
+                searcher: __findNumbersRun,
+                continueOnHit: false
+            });
+            // Keep Music245 and 538 grouped together
             array.push({
                 matcher: __matchMusic,
                 searcher: __findMusic245Run,
@@ -53,6 +61,7 @@ var DoubleRecordFinder = function(  ) {
                 searcher: __findMusic538Run,
                 continueOnHit: false
             });
+            // END Keep Music245 and 538 grouped together
             array.push({
                 matcher: __matchTechnicalLiterature,
                 searcher: __findTechnicalLiterature,
@@ -84,6 +93,69 @@ var DoubleRecordFinder = function(  ) {
         }
         finally {
             Log.trace( "Exit - DoubleRecordFinder.find(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  ISSN,ISBN,ISMN etc
+    //-----------------------------------------------------------------------------
+
+    function __checkSubfieldExistence( field, name, subfields) {
+        if (field.name === name ) {
+            for (var j = 0; j < field.count(); j++) {
+                var subfield = field.subfield(j);
+                return subfield.name.match(subfields);
+            }
+        }
+    }
+
+    function __matchNumbers( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchNumbers()" );
+
+        var result = undefined;
+        var doit = false;
+        try {
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field(i);
+                doit = __checkSubfieldExistence( field, "021", /[ea]/);
+                if (!doit) doit = __checkSubfieldExistence( field, "022", /[a]/);
+                if (!doit) doit = __checkSubfieldExistence( field, "024", /[a]/);
+                if (!doit) doit = __checkSubfieldExistence( field, "028", /[a]/);
+                if (!doit) doit = __checkSubfieldExistence( field, "023", /[ab]/);
+                if (doit) return result = true;
+            }
+            return result = false;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchNumbers(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findNumbers( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findNumbersRun( record );
+    }
+    function __findNumbersRun( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findNumbersRun()");
+        var result = undefined;
+        try {
+            var formatters = {
+                '021e': __querySubfieldFormatter,
+                '021a': __querySubfieldFormatter,
+                '022a': __querySubfieldFormatter,
+                '024a': __querySubfieldFormatter,
+                '028a': __querySubfieldFormatter,
+                '023a': __querySubfieldSpecificRegister("023ab"),
+                '023b': __querySubfieldSpecificRegister("023ab")
+            };
+
+            andingTogether = false;
+            result = __executeQueryAndFindRecords(record, formatters);
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findNumbersRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
 
@@ -534,7 +606,12 @@ var DoubleRecordFinder = function(  ) {
                 }
             }
 
-            var query = queryElements.join( " and " );
+            query = "";
+            if ( andingTogether ) {
+                var query = queryElements.join( " and " );
+            } else {
+                var query = queryElements.join( " or " );
+            }
             Log.debug( "Solr query: ", query );
 
             if( query === "" ) {
@@ -615,6 +692,21 @@ var DoubleRecordFinder = function(  ) {
         }
     }
 
+    function __querySubfieldSpecificRegister( register ) {
+        Log.trace( "Enter - DoubleRecordFinder.__querySubfieldSpecificRegister()", 0);
+
+        var result = undefined;
+        try {
+            return function( field, subfield ) {
+                var value = Solr.analyse( solrUrl, subfield.value, "match." + register );
+                return result = "marc." + register + ":\"" + value + "\"";
+            }
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__querySubfieldSpecificRegister(): ", result !== undefined ? JSON.stringify(result) : "undef" );
+        }
+    }
+
     function __querySubfieldValueLengthFormatter( valueLength ) {
         Log.trace( "Enter - DoubleRecordFinder.__querySubfieldValueLengthFormatter()", 0);
 
@@ -640,6 +732,8 @@ var DoubleRecordFinder = function(  ) {
         'find': find,
 
         // Functions is exported so they are accessible from the unittests.
+        '__matchNumbers': __matchNumbers,
+        '__findNumbers': __findNumbers,
         '__matchMusic': __matchMusic,
         '__findMusic245': __findMusic245,
         '__findMusic538': __findMusic538,
