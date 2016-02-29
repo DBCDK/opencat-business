@@ -19,49 +19,49 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchNumbers", function() {
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "021 00 *a 12345678",
+        "021 00 *a 12345678"
     ].join( "\n") );
     Assert.equalValue( "021 a", DoubleRecordFinder.__matchNumbers( record ), true );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "021 00 *e 12345678",
+        "021 00 *e 12345678"
     ].join( "\n") );
     Assert.equalValue( "021 e", DoubleRecordFinder.__matchNumbers( record ), true );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "021 00 *x 12345678",
+        "021 00 *x 12345678"
     ].join( "\n") );
     Assert.equalValue( "021 x", DoubleRecordFinder.__matchNumbers( record ), false );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "022 00 *a 12345678",
+        "022 00 *a 12345678"
     ].join( "\n") );
     Assert.equalValue( "022 a", DoubleRecordFinder.__matchNumbers( record ), true );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "024 00 *a 12345678",
+        "024 00 *a 12345678"
     ].join( "\n") );
     Assert.equalValue( "024 a", DoubleRecordFinder.__matchNumbers( record ), true );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "028 00 *a 12345678",
+        "028 00 *a 12345678"
     ].join( "\n") );
     Assert.equalValue( "028 a", DoubleRecordFinder.__matchNumbers( record ), true );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "023 00 *a 12345678",
+        "023 00 *a 12345678"
     ].join( "\n") );
     Assert.equalValue( "023 a", DoubleRecordFinder.__matchNumbers( record ), true );
 
     record = RecordUtil.createFromString( [
         "009 00 *a s",
-        "023 00 *b 12345678",
+        "023 00 *b 12345678"
     ].join( "\n") );
     Assert.equalValue( "023 b", DoubleRecordFinder.__matchNumbers( record ), true );
 
@@ -76,7 +76,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchSoundMovieMultimedia", function(
 
     record = RecordUtil.createFromString( [
         "009 00 *h ws",
-        "652 00 *m Uden klassem\xe6rke"
+        "652 00 *m Uden klasem\xe6rke"
     ].join( "\n") );
     Assert.equalValue( "009, but no *a", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), false );
 
@@ -427,7 +427,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findTechnicalLiterature", function() 
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a a *g xx",
         "245 00 *a Anton til soes",
-        "260 00 *& 1 *a Vinderup *b Cadeau *c 2015",
+        "260 00 *& 1 *a Vinderup *b Cadeau *c 2015"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findTechnicalLiterature( record, solrUrl ),
         [ { id: "12345678", reason: "008a, 009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
@@ -439,7 +439,6 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
 
-    record = new Record;
     SolrCore.clear();
     SolrCore.addQuery( "match.009a:\"a\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
@@ -451,7 +450,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a a *g xe",
         "245 00 *a Troffelspisernes mareridt",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
@@ -463,7 +462,6 @@ UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
 
-    record = new Record;
     SolrCore.clear();
     SolrCore.addQuery( "match.009a:\"v\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
@@ -475,7 +473,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a v *g xe",
         "245 00 *a Troffelspisernes mareridt",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
@@ -487,7 +485,6 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
 
-    record = new Record;
     SolrCore.clear();
     SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.538g:\"troffelspisernesmareridt\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
@@ -498,7 +495,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a s *g xe",
         "538 00 *g Troffelspisernes mareridt",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic538( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined } ]
@@ -510,7 +507,6 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
 
-    record = new Record;
     SolrCore.clear();
     SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmareridt\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
@@ -521,7 +517,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a s *g xe",
         "245 00 *a Troffelspisernes mareridt",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic245( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a", edition:undefined, composed:undefined } ]
@@ -534,7 +530,6 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
 
-    record = new Record;
     SolrCore.clear();
     SolrCore.addAnalyse( "match.021a:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.021a": {index: [ { text: "12345678" } ] } } } } );
     SolrCore.addAnalyse( "match.023ab:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ { text: "12345678" } ] } } } } );
@@ -547,7 +542,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
         "021 00 *a 12345678",
         "023 00 *a 12345678 *b 87654321",
         "245 00 *a Troffelspisernes mareridt",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findNumbers( record, solrUrl ),
         [ { id: "12345678", reason: "021a, 023a, 023b", edition:undefined, composed:undefined } ]
@@ -559,7 +554,6 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
 
-    record = new Record;
     SolrCore.clear();
     SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmareridt\" and match.245ø:\"1cd\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
@@ -571,7 +565,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a r *g xe",
         "245 00 *a Troffelspisernes mareridt *ø 1 cd",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimedia( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined } ]
