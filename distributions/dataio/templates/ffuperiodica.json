@@ -232,15 +232,19 @@
         "096":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.32.htm",
             "subfields":{
-                "f": "DanMarc2.fields.096.subfields.f",
-                "x": "DanMarc2.fields.096.subfields.x",
-                "a": "DanMarc2.fields.096.subfields.a",
-                "b": "DanMarc2.fields.096.subfields.b",
-                "c": "DanMarc2.fields.096.subfields.c",
-                "d": "DanMarc2.fields.096.subfields.d",
-                "r": "DanMarc2.fields.096.subfields.r",
-                "l": "DanMarc2.fields.096.subfields.l",
-                "u": "DanMarc2.fields.096.subfields.u",
+                "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{},
+                "i":{}, "j":{}, "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{},
+                "q":{},
+                "r":{
+                    "repeatable": false,
+                    "values": [ "a", "b", "c", "d", "e", "f", "g" ]
+                },
+                "s":{},
+                "t":{},
+                "u":{
+                    "repeatable": false
+                },
+                "v":{}, "w":{}, "x":{}, "y":{},
                 "z":{
                     "mandatory": true,
                     "repeatable": false,
