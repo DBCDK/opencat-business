@@ -1227,6 +1227,22 @@
                 "x": {}
             }
         },
+        "f07": {
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "f08": {
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
         "f21": {
             "subfields": {
                 "a": {},
