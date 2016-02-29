@@ -68,6 +68,11 @@ var DoubleRecordFinder = function(  ) {
                 continueOnHit: false
             });
             array.push({
+                matcher: __matchSoundMovieMultimedia,
+                searcher: __findSoundMovieMultimedia,
+                continueOnHit: false
+            });
+            array.push({
                 matcher: __matchFictionBookMusic,
                 searcher: __findFictionBookMusicRun,
                 continueOnHit: false
@@ -159,6 +164,80 @@ var DoubleRecordFinder = function(  ) {
             Log.trace("Exit - DoubleRecordFinder.__findNumbersRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
+
+    //-----------------------------------------------------------------------------
+    //                  Music
+    //-----------------------------------------------------------------------------
+
+    function __matchSoundMovieMultimedia( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchSoundMovieMultimedia()" );
+
+        var result = undefined;
+        var subfield = undefined;
+        var count009a = 0;
+        var count009g = 0;
+        var value009g = "";
+        try {
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field(i);
+                // 009 check - Possible target for moving to a function
+                if (field.name === "009") {
+                    for (var j = 0; j < field.count(); j++) {
+                        subfield = field.subfield(j);
+
+                        if (subfield.name === "a") {
+                            count009a++;
+                            if (["r", "m", "t"].indexOf(subfield.value) === -1) {
+                                return false;
+                            }
+                        }
+                    }
+                    if (subfield.name === "g") {
+                        count009g++;
+                        value009g = subfield.value;
+                    }
+                }
+            }
+
+            if ( count009a > 1 || count009g > 1 ) {
+                return result = false;
+            }
+            if (["xe"].indexOf(value009g) === -1) {
+                if ( value009g[0] !== "t" ) {
+                    return result = false;
+                }
+            }
+            return result = true;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchSoundMovieMultimedia(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findSoundMovieMultimedia( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findSoundMovieMultimediaRun( record );
+    }
+    function __findSoundMovieMultimediaRun( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimediaRun()");
+        var result = undefined;
+        try {
+            var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldFormatter,
+                '245ø': __querySubfieldFormatter
+            };
+
+            result = __executeQueryAndFindRecords(record, formatters);
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimediaRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
+        }
+    }
+
 
     //-----------------------------------------------------------------------------
     //                  Music
@@ -735,6 +814,8 @@ var DoubleRecordFinder = function(  ) {
         // Functions is exported so they are accessible from the unittests.
         '__matchNumbers': __matchNumbers,
         '__findNumbers': __findNumbers,
+        '__matchSoundMovieMultimedia': __matchSoundMovieMultimedia,
+        '__findSoundMovieMultimedia': __findSoundMovieMultimedia,
         '__matchMusic': __matchMusic,
         '__findMusic245': __findMusic245,
         '__findMusic538': __findMusic538,

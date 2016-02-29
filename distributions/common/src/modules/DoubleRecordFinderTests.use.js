@@ -68,6 +68,56 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchNumbers", function() {
 } );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchSoundMovieMultimedia", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *h ws",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, but no *a", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a s",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *as", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a a *a s",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009, *a twice and a v", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a r *g xe",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009 *a r and g xe", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a m *g xe",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009 *a m and g xe", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a t *g xe",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009 *a t and g xe", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a t *g tk",
+        "652 00 *m Uden klassem\xe6rke"
+    ].join( "\n") );
+    Assert.equalValue( "009 *a t and g tk", DoubleRecordFinder.__matchSoundMovieMultimedia( record ), true );
+
+} );
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchMusic", function() {
     var record;
 
@@ -504,6 +554,29 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
     );
 } );
 
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    record = new Record;
+    SolrCore.clear();
+    SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmareridt\" and match.245ø:\"1cd\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "r" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "troffelspisernesmareridt" } ] } } } } );
+    SolrCore.addAnalyse( "match.245ø:1 cd", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245ø": {index: [ { text: "1cd" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt *ø 1 cd",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimedia( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined } ]
+    );
+} );
 
 
 
