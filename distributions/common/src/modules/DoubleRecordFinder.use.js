@@ -152,6 +152,7 @@ var DoubleRecordFinder = function(  ) {
 
             andingTogether = false;
             result = __executeQueryAndFindRecords(record, formatters);
+            andingTogether = true;
             return result;
         }
         finally {
