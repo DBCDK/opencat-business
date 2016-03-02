@@ -430,7 +430,12 @@
                 "o":"DanMarc2.fields.652.subfields.o",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
 		"654": "DanMarc2.fields.654",
         "655": "DanMarc2.fields.655",
