@@ -546,7 +546,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.538g:\"troffelspisernesmareridt\"",
+    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.538g:\"troffelspisernesmare?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
@@ -568,7 +568,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmareridt\"",
+    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
@@ -615,7 +615,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmareridt\" and match.245ø:\"1cd\"",
+    SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.245ø:\"1cd\"",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "r" } ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
