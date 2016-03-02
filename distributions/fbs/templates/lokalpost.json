@@ -331,7 +331,12 @@
                 "0": "DanMarc2.fields.100.subfields.0",
                 "1": "DanMarc2.fields.100.subfields.1",
                 "4": "DanMarc2.fields.100.subfields.4"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "110":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.34.htm",
@@ -354,7 +359,12 @@
                 "0": "DanMarc2.fields.110.subfields.0",
                 "1": "DanMarc2.fields.110.subfields.1",
                 "4": "DanMarc2.fields.110.subfields.4"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
@@ -398,7 +408,12 @@
                 "w":"DanMarc2.fields.245.subfields.w",
                 "Y":"DanMarc2.fields.245.subfields.Y",
                 "y":"DanMarc2.fields.245.subfields.y"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.upperCaseCheck"
+                }
+            ]
         },
         "247": "DanMarc2.fields.247",
         "248": "DanMarc2.fields.248",
