@@ -5,6 +5,36 @@ use( "SolrCore" );
 use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchSections", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchSections( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "004 00 *r n",
+        "014 00 *a 5 000 259 4",
+        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+    ].join( "\n") );
+    Assert.equalValue( "004, but no *a", DoubleRecordFinder.__matchSections( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a e",
+        "014 00 *a 5 000 259 4",
+        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+    ].join( "\n") );
+    Assert.equalValue( "004, *a but no s", DoubleRecordFinder.__matchSections( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a s",
+        "014 00 *a 5 000 259 4",
+        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+    ].join( "\n") );
+    Assert.equalValue( "004, *a with s", DoubleRecordFinder.__matchSections( record ), true );
+
+} );
+
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchNumbers", function() {
     var record;
 
@@ -430,7 +460,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findTechnicalLiterature", function() 
         "260 00 *& 1 *a Vinderup *b Cadeau *c 2015"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findTechnicalLiterature( record, solrUrl ),
-        [ { id: "12345678", reason: "008a, 009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "008a, 009a, 009g, 245a, 260b", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
@@ -453,7 +483,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
@@ -476,7 +506,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findFictionBookMusic( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "009a, 009g, 245a, 260b", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
@@ -498,7 +528,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic538( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
@@ -520,7 +550,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findMusic245( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
@@ -545,7 +575,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findNumbers( record, solrUrl ),
-        [ { id: "12345678", reason: "021a, 023a, 023b", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "021a, 023a, 023b", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
@@ -568,7 +598,45 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimedia( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined } ]
+        [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+} );
+
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findSections", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery( "match.004a:\"s\" and match.014a:\"50002594\" and match.245n:\"3band\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addQuery( "match.004a:\"s\" and match.014a:\"50002594\" and match.245a:\"griechenland\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.004a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.004a": {index: [ { text: "s" } ] } } } } );
+    SolrCore.addAnalyse( "match.014a:5 000 259 4", { responseHeader: { status: 0 }, analysis: { field_names: { "match.014a": {index: [ { text: "50002594" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Griechenland", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "griechenland" } ] } } } } );
+    SolrCore.addAnalyse( "match.245n:3. Band", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245n": {index: [ { text: "3band" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a s",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *n 3. Band *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findSections( record, solrUrl, true ),
+        [ { id: "12345678", reason: "004a, 014a, 245n", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined },
+            { id: "12345678", reason: "004a, 014a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a s",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findSections( record, solrUrl, false ),
+        [ { id: "12345678", reason: "004a, 014a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
