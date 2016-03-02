@@ -5,6 +5,36 @@ use( "SolrCore" );
 use( "UnitTest" );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchVolumes", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchVolumes( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "004 00 *r n",
+        "014 00 *a 5 000 259 4",
+        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+    ].join( "\n") );
+    Assert.equalValue( "004, but no *a", DoubleRecordFinder.__matchVolumes( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a e",
+        "014 00 *a 5 000 259 4",
+        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+    ].join( "\n") );
+    Assert.equalValue( "004, *a but no b", DoubleRecordFinder.__matchVolumes( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a b",
+        "014 00 *a 5 000 259 4",
+        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+    ].join( "\n") );
+    Assert.equalValue( "004, *a with b", DoubleRecordFinder.__matchVolumes( record ), true );
+
+} );
+
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchSections", function() {
     var record;
 
@@ -636,6 +666,44 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSections", function() {
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findSections( record, solrUrl, false ),
+        [ { id: "12345678", reason: "004a, 014a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+} );
+
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findVolumes", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery( "match.004a:\"b\" and match.014a:\"50002594\" and match.245g:\"3band\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addQuery( "match.004a:\"b\" and match.014a:\"50002594\" and match.245a:\"griechenland\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.004a:b", { responseHeader: { status: 0 }, analysis: { field_names: { "match.004a": {index: [ { text: "b" } ] } } } } );
+    SolrCore.addAnalyse( "match.014a:5 000 259 4", { responseHeader: { status: 0 }, analysis: { field_names: { "match.014a": {index: [ { text: "50002594" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Griechenland", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "griechenland" } ] } } } } );
+    SolrCore.addAnalyse( "match.245g:3. Band", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245g": {index: [ { text: "3band" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a b",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *g 3. Band *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findVolumes( record, solrUrl, true ),
+        [ { id: "12345678", reason: "004a, 014a, 245g", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined },
+            { id: "12345678", reason: "004a, 014a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+    record = RecordUtil.createFromString( [
+        "004 00 *r n *a b",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findVolumes( record, solrUrl, false ),
         [ { id: "12345678", reason: "004a, 014a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );

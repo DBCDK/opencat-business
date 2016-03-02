@@ -33,6 +33,7 @@ var DoubleRecordFinder = function(  ) {
      */
     var field250a = undefined;
     var sectionSubfieldN = false;
+    var volumeSubfieldG = false;
     var solrUrl = undefined;
     var materialType = { unknown:0, literature:1, technical:2 };
     var andingTogether = true;
@@ -63,6 +64,11 @@ var DoubleRecordFinder = function(  ) {
                 continueOnHit: false
             });
             // END Keep Music245 and 538 grouped together
+            array.push({
+                matcher: __matchVolumes,
+                searcher: __findVolumes,
+                continueOnHit: false
+            });
             array.push({
                 matcher: __matchSections,
                 searcher: __findSections,
@@ -107,6 +113,79 @@ var DoubleRecordFinder = function(  ) {
         }
     }
 
+    //-----------------------------------------------------------------------------
+    //                  Volume records
+    //-----------------------------------------------------------------------------
+
+    function __matchVolumes( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchVolumes()" );
+
+        var result = undefined;
+        try {
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field(i);
+                if (field.name === "004") {
+                    for( var j = 0; j < field.count(); j++ ) {
+                        var subfield = field.subfield(j);
+                        if (subfield.name === "a") {
+                            if (subfield.value === "b") {
+                                return result = true;
+                            }
+                        }
+                    }
+                }
+                volumeSubfieldG = __checkSubfieldExistence( field, "245", /[g]/);
+            }
+            return result = false;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchVolumes(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findVolumes( record, newsolrUrl, volumeG ) {
+        solrUrl = newsolrUrl;
+        volumeSubfieldG = volumeG;
+        return __findVolumesRun( record );
+    }
+    function __findVolumesRun( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findVolumesRun()");
+        var result = undefined;
+        /*
+         hvis incoming har *g skal der findes poster med tilsvarende samt poster uden *g men med matchende *a
+         - bøvlet - søgeres på 014a+245g skal suppleres med resultat af en 014a+245a søgning hvor poster med *g skal sorteres fra.
+         hvis *n mangler skal *a matche
+         */
+
+        try {
+            var formatters = {
+                '004a': __querySubfieldFormatter,
+                '014a': __querySubfieldFormatter,
+                '245a': __querySubfieldFormatter
+            };
+            result = __executeQueryAndFindRecords(record, formatters);
+            if ( volumeSubfieldG ) {
+                var formatters = {
+                    '004a': __querySubfieldFormatter,
+                    '014a': __querySubfieldFormatter,
+                    '245g': __querySubfieldFormatter
+                };
+                var result1 = __executeQueryAndFindRecords(record, formatters);
+                for (var i = 0; i < result.length; i++ ) {
+                    var workRes = result[i];
+                    if (workRes.sectioninfo === undefined) {
+                        result1.push(workRes);
+                    }
+                }
+                return result = result1;
+            }
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findVolumesRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
+        }
+    }
     //-----------------------------------------------------------------------------
     //                  Section records
     //-----------------------------------------------------------------------------
@@ -153,32 +232,27 @@ var DoubleRecordFinder = function(  ) {
          */
 
         try {
+            var formatters = {
+                '004a': __querySubfieldFormatter,
+                '014a': __querySubfieldFormatter,
+                '245a': __querySubfieldFormatter
+            };
+            result = __executeQueryAndFindRecords(record, formatters);
             if ( sectionSubfieldN ) {
                 var formatters = {
                     '004a': __querySubfieldFormatter,
                     '014a': __querySubfieldFormatter,
                     '245n': __querySubfieldFormatter
                 };
-                result = __executeQueryAndFindRecords(record, formatters);
-                var formatters = {
-                    '004a': __querySubfieldFormatter,
-                    '014a': __querySubfieldFormatter,
-                    '245a': __querySubfieldFormatter
-                };
                 var result1 = __executeQueryAndFindRecords(record, formatters);
-                for (var i = 0; i < result1.length; i++ ) {
-                    var workRes = result1[i];
+                for (var i = 0; i < result.length; i++ ) {
+                    var workRes = result[i];
                     if (workRes.sectioninfo === undefined) {
-                        result.push(workRes);
+                        result1.push(workRes);
                     }
                 }
+                return result = result1;
             } else {
-                var formatters = {
-                    '004a': __querySubfieldFormatter,
-                    '014a': __querySubfieldFormatter,
-                    '245a': __querySubfieldFormatter
-                };
-                result = __executeQueryAndFindRecords(record, formatters);
 
             }
             return result;
@@ -904,6 +978,8 @@ var DoubleRecordFinder = function(  ) {
         '__findNumbers': __findNumbers,
         '__matchSoundMovieMultimedia': __matchSoundMovieMultimedia,
         '__findSoundMovieMultimedia': __findSoundMovieMultimedia,
+        '__matchVolumes': __matchVolumes,
+        '__findVolumes': __findVolumes,
         '__matchSections': __matchSections,
         '__findSections': __findSections,
         '__matchMusic': __matchMusic,
