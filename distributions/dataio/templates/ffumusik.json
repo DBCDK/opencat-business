@@ -263,7 +263,7 @@
         "098": "DanMarc2.fields.098",
         "099": "DanMarc2.fields.099",
         "100": "DanMarc2.fields.100",
-        "110": "DanMarc2.fields.100",
+        "110": "DanMarc2.fields.110",
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
         "239": "DanMarc2.fields.239",
@@ -318,6 +318,23 @@
         },
         "247": "DanMarc2.fields.247",
         "248": "DanMarc2.fields.248",
+        "249":{
+            "repeatable": false,
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a9.htm#pgfId=1249955",
+            "subfields":{
+                "A":{
+                    "repeatable": false
+                },
+                "a":{
+                    "repeatable": false
+                },
+                "rules": [
+                    {
+                        "type": "FieldRules.upperCaseCheck"
+                    }
+                ]
+            }
+        },
         "250": "DanMarc2.fields.250",
         "255": "DanMarc2.fields.255",
 		"256": "DanMarc2.fields.256",

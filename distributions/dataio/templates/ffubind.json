@@ -311,6 +311,23 @@
                 }
             ]
         },
+        "249":{
+            "repeatable": false,
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a9.htm#pgfId=1249955",
+            "subfields":{
+                "A":{
+                    "repeatable": false
+                },
+                "a":{
+                    "repeatable": false
+                },
+                "rules": [
+                    {
+                        "type": "FieldRules.upperCaseCheck"
+                    }
+                ]
+            }
+        },
         "250": "DanMarc2.fields.250",
         "255": "DanMarc2.fields.255",
 		"256": "DanMarc2.fields.256",
