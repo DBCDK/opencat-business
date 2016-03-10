@@ -694,6 +694,9 @@
                 "\u00E5": "DanMarc2.fields.968.subfields.\u00E5",
                 "a": "DanMarc2.fields.968.subfields.a",
                 "c": "DanMarc2.fields.968.subfields.c",
+                "w":{
+                    "repeatable":false
+                },
                 "x": "DanMarc2.fields.968.subfields.x",
                 "z":{
                     "repeatable":false
