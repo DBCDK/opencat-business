@@ -1,0 +1,81 @@
+[
+    {
+        "name": "basis-ffu-delete-locale-record-no-holdings",
+        "bugs": [ "#1819" ],
+        "description": "Tester slettet af lokal FFU-post uden beholdninger",
+        "request": {
+            "authentication": {
+                "group": "810010",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ffu",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": []
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": true,
+                        "enqueued": true,
+                        "enrichments": []
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "basis-ffu-delete-locale-record-with-holdings",
+        "bugs": [ "#1819" ],
+        "description": "Tester slettet af lokal FFU-post uden beholdninger",
+        "request": {
+            "authentication": {
+                "group": "810010",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ffu",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 810010 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": []
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": true,
+                        "enqueued": true,
+                        "enrichments": []
+                    }
+                ]
+            }
+        }
+    }
+]
