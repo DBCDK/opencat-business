@@ -488,7 +488,16 @@
                 "b": "DanMarc2.fields.526.subfields.b",
                 "u": "DanMarc2.fields.526.subfields.u",
                 "y": "DanMarc2.fields.526.subfields.y",
-                "r": "DanMarc2.fields.526.subfields.r",
+                "r":{
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 13,
+                            "max": 13
+                        }
+                    }
+                    ]
+                },
                 "z": "DanMarc2.fields.526.subfields.z"
             },
             "rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
