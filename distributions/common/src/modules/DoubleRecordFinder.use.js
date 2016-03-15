@@ -38,20 +38,102 @@ var DoubleRecordFinder = function(  ) {
     var materialType = { unknown:0, literature:1, technical:2 };
     var andingTogether = true;
 
-    function find( record, callSolrUrl ) {
-        Log.trace( "Enter - DoubleRecordFinder.find()", 0 );
+    function commonChecks() {
+        Log.trace( "Enter - DoubleRecordFinder.commonChecks()", 0 );
 
-        var result = [];
-        solrUrl = callSolrUrl;
         try {
             var array = [];
 
             // Keep this as the first ISSN,ISBN;ISMN etc has highest priority
             array.push({
+                matcher: __matchMusic,
+                searcher: __findMusicGeneralRun,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchSoundMovieMultimedia,
+                searcher: __findSoundMovieMultimediaGeneralRun,
+                continueOnHit: false
+            });
+            array.push({
                 matcher: __matchNumbers,
                 searcher: __findNumbersRun,
                 continueOnHit: false
             });
+            array.push({
+                matcher: __matchVolumes,
+                searcher: __findVolumes,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchSections,
+                searcher: __findSections,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchFictionBookMusic,
+                searcher: __findFictionBookMusicRun,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchTechnicalLiterature,
+                searcher: __findTechnicalLiterature,
+                continueOnHit: false
+            });
+            array.push({
+                matcher: __matchComposedMaterials,
+                searcher: __findComposedMaterials,
+                continueOnHit: false
+            });
+            return array;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.commonChecks(): ", JSON.stringify(array) );
+        }
+    }
+
+    function doFind( record, array ) {
+        Log.trace("Enter - DoubleRecordFinder.doFind()", 0);
+        var result = [];
+        try {
+            for (var i = 0; i < array.length; i++) {
+                var findObj = array[i];
+
+                if (findObj.matcher(record)) {
+                    result = result.concat(findObj.searcher(record));
+                    if ( ! findObj.continueOnHit ) {
+                        return result;
+                    }
+                }
+            }
+
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.doFind(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    function findGeneral( record, callSolrUrl ) {
+        Log.trace( "Enter - DoubleRecordFinder.findGeneral()", 0 );
+        solrUrl = callSolrUrl;
+        var result = [];
+        try {
+            var array = commonChecks();
+            result = doFind( record, array );
+            return result;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.findGeneral(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    function find( record, callSolrUrl ) {
+        Log.trace("Enter - DoubleRecordFinder.find()", 0);
+        solrUrl = callSolrUrl;
+        var result = [];
+        try {
+            var array = commonChecks();
             // Keep Music245 and 538 grouped together
             array.push({
                 matcher: __matchMusic,
@@ -65,47 +147,11 @@ var DoubleRecordFinder = function(  ) {
             });
             // END Keep Music245 and 538 grouped together
             array.push({
-                matcher: __matchVolumes,
-                searcher: __findVolumes,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchSections,
-                searcher: __findSections,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchTechnicalLiterature,
-                searcher: __findTechnicalLiterature,
-                continueOnHit: false
-            });
-            array.push({
                 matcher: __matchSoundMovieMultimedia,
                 searcher: __findSoundMovieMultimedia,
                 continueOnHit: false
             });
-            array.push({
-                matcher: __matchFictionBookMusic,
-                searcher: __findFictionBookMusicRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchComposedMaterials,
-                searcher: __findComposedMaterials,
-                continueOnHit: false
-            });
-
-            for (var i = 0; i < array.length; i++) {
-                var findObj = array[i];
-
-                if (findObj.matcher(record)) {
-                    result = result.concat(findObj.searcher(record));
-                    if ( ! findObj.continueOnHit ) {
-                        return result;
-                    }
-                }
-            }
-
+            result = doFind( record, array );
             return result;
         }
         finally {
@@ -375,6 +421,36 @@ var DoubleRecordFinder = function(  ) {
         }
     }
 
+    //-----------------------------------------------------------------------------
+    //                  Sound, movies and multimedias - general match
+    //-----------------------------------------------------------------------------
+    // TESTING only
+    function __findSoundMovieMultimediaGeneral( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findSoundMovieMultimediaGeneralRun( record );
+    }
+    function __findSoundMovieMultimediaGeneralRun( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimediaGeneralRun()");
+        var result = undefined;
+        try {
+            var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldValueLengthFormatter( 20 ),
+                '300e': __querySubfieldValueLengthFormatter( 20 )
+            };
+
+            result = __executeQueryAndFindRecords(record, formatters);
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimediaGeneralRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
+        }
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Sound, movies and multimedias - special match, DBC only
+    //-----------------------------------------------------------------------------
     // TESTING only
     function __findSoundMovieMultimedia( record, newsolrUrl ) {
         solrUrl = newsolrUrl;
@@ -439,6 +515,37 @@ var DoubleRecordFinder = function(  ) {
         }
     }
 
+    //-----------------------------------------------------------------------------
+    //                  Music - general check
+    //-----------------------------------------------------------------------------
+    // TESTING only
+    function __findMusicGeneral( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findMusicGeneralRun( record );
+    }
+    function __findMusicGeneralRun( record ) {
+        Log.trace("Enter - DoubleRecordFinder.__findMusicGeneralRun()");
+        var result = undefined;
+        try {
+            var formatters = {
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldValueLengthFormatter( 20 ),
+                '100a': __querySubfieldValueLengthFormatter( 20 ),
+                '110a': __querySubfieldValueLengthFormatter( 20 )
+            };
+
+            result = __executeQueryAndFindRecords(record, formatters);
+            return result;
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findMusicGeneralRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
+        }
+    }
+
+    //-----------------------------------------------------------------------------
+    //                  Music - special check, DBC only
+    //-----------------------------------------------------------------------------
     // TESTING only
     function __findMusic245( record, newsolrUrl ) {
         solrUrl = newsolrUrl;
@@ -461,6 +568,10 @@ var DoubleRecordFinder = function(  ) {
             Log.trace("Exit - DoubleRecordFinder.__findMusic245Run(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
+
+    //-----------------------------------------------------------------------------
+    //                  Music - special check for internal records
+    //-----------------------------------------------------------------------------
     // TESTING only
     function __findMusic538( record, newsolrUrl ) {
         solrUrl = newsolrUrl;
@@ -972,17 +1083,20 @@ var DoubleRecordFinder = function(  ) {
 
     return {
         'find': find,
+        'findGeneral': findGeneral,
 
         // Functions is exported so they are accessible from the unittests.
         '__matchNumbers': __matchNumbers,
         '__findNumbers': __findNumbers,
         '__matchSoundMovieMultimedia': __matchSoundMovieMultimedia,
+        '__findSoundMovieMultimediaGeneral': __findSoundMovieMultimediaGeneral,
         '__findSoundMovieMultimedia': __findSoundMovieMultimedia,
         '__matchVolumes': __matchVolumes,
         '__findVolumes': __findVolumes,
         '__matchSections': __matchSections,
         '__findSections': __findSections,
         '__matchMusic': __matchMusic,
+        '__findMusicGeneral': __findMusicGeneral,
         '__findMusic245': __findMusic245,
         '__findMusic538': __findMusic538,
         '__matchComposedMaterials': __matchComposedMaterials,

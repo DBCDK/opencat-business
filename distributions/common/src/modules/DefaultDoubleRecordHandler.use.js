@@ -37,6 +37,10 @@ var DefaultDoubleRecordHandler = function() {
                 return;
             }
 
+            /*
+             TODO Når extern dobbeltpostkontrol laves skal man her kalde findGeneral ved almindelig
+             opdatering og ved forced skal find kaldes. Yderligere skal der kun sendes mail ved forced.
+             */
             var records = DoubleRecordFinder.find( record, settings.get( 'solr.url' ) );
             var idField = record.getFirstFieldAsField( /001/ );
             if( idField === "" ) {

@@ -563,6 +563,44 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
 } );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findMusicGeneral", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.100a:\"3rdearexperience\" and match.245a:\"troffelspisernesmare?\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.110a:\"3rdearexperience\" and match.245a:\"troffelspisernesmare?\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "s" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "troffelspisernesmareridt" } ] } } } } );
+    SolrCore.addAnalyse( "match.110a:3rd Ear Experience", { responseHeader: { status: 0 }, analysis: { field_names: { "match.110a": {index: [ { text: "3rdearexperience" } ] } } } } );
+    SolrCore.addAnalyse( "match.100a:3rd Ear Experience", { responseHeader: { status: 0 }, analysis: { field_names: { "match.100a": {index: [ { text: "3rdearexperience" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a s *g xe",
+        "110 00 *A3 ear experience*a3rd Ear Experience",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findMusicGeneral( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 110a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a s *g xe",
+        "100 00 *A3 ear experience*a3rd Ear Experience",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findMusicGeneral( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 100a, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+} );
+
+
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -629,6 +667,31 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
     ].join( "\n") );
     Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimedia( record, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+} );
+
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimediaGeneral", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.300e:\"2mapper402mikrokort\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "r" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xe" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "troffelspisernesmareridt" } ] } } } } );
+    SolrCore.addAnalyse( "match.300e:2 mapper (402 mikrokort)", { responseHeader: { status: 0 }, analysis: { field_names: { "match.300e": {index: [ { text: "2mapper402mikrokort" } ] } } } } );
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt *ø 1 cd",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "300 00 *e2 mapper (402 mikrokort)"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimediaGeneral( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 245a, 300e", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 } );
 
