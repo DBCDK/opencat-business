@@ -2518,16 +2518,7 @@
                 "b":{},
                 "u":{},
                 "y":{},
-                "r":{
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 13,
-                                "max": 13
-                            }
-                        }
-                    ]
-				},
+                "r":{},
                 "z":{
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
