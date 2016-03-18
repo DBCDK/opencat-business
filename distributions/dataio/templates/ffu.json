@@ -158,7 +158,7 @@
             "repeatable":false,
             "subfields":{
                 "a": {
-                    "values": [ "a", "b", "e", "f", "g", "u", "v" ]
+                    "values": [ "a", "b", "e", "f", "g", "u", "t", "v" ]
                 },
                 "g": "Lister.fields.codes.subfields.specific_mattype",
                 "b": "Lister.fields.codes.subfields.general_mattype",
