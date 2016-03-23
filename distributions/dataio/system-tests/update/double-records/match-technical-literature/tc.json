@@ -33,7 +33,8 @@
                         "deleted": false,
                         "enqueued": true
                     }
-                ]
+                ],
+                "mails": [ "result-double-records.txt" ]
             }
         }
     }
