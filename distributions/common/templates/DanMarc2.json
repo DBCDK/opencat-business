@@ -2403,26 +2403,8 @@
                 "b":{},
                 "u":{},
                 "y":{},
-                "r":{
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 13,
-                                "max": 13
-                            }
-                        }
-                    ]
-				},
-                "z":{
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 9,
-                                "max": 9
-                            }
-                        }
-                    ]
-				},
+                "r":{},
+                "z":{},
                 "n":{}
             },
 			"rules": [
@@ -2518,16 +2500,7 @@
                 "u":{},
                 "y":{},
                 "r":{},
-                "z":{
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 9,
-                                "max": 9
-                            }
-                        }
-                    ]
-				}
+                "z":{}
             },
             "rules": [
                 {
@@ -2561,16 +2534,8 @@
                     "repeatable":false
 				},
                 "z":{
-                    "repeatable":false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 9,
-                                "max": 9
-                            }
-                        }
-                    ]
-				},
+                    "repeatable":false
+                },
                 "u":{},
                 "y":{}
             }
