@@ -50,7 +50,7 @@
                     {
                         "type" : "ERROR",
                         "params" : {
-                            "message" : "Posten kan ikke oprettes/overskrives, da der eksisterer post(er) med et link i 002 med samme faust-nr."
+                            "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
                         }
                     }
                 ],
