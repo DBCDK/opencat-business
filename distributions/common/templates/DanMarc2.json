@@ -687,8 +687,7 @@
         },
         "032":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1e.htm",
-            "repeatable":false,
-             "subfields":{
+            "subfields":{
                 "a":{},
                 "x":{}
             }
