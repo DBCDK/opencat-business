@@ -34,7 +34,10 @@
                         "enqueued": true
                     }
                 ],
-                "mails": [ "result-double-records.txt" ]
+                "mail": {
+                    "subject": "Dobbeltpost fundet: 5 158 076 1:191919",
+                    "body": "mail-body.txt"
+                }
             }
         }
     }
