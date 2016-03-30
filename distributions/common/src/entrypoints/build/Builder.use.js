@@ -202,8 +202,7 @@ var Builder = function() {
                 if ( availableSubfieldsObject.hasOwnProperty( subfieldName ) ) {
                     newSubfield = field.subfields[i];
                     if ( field.name === "001" && subfieldName === "a" && isFaustEnabledForTemplate( template ) ) {
-                        var faustProviderFunction = faustProvider();
-                        newSubfield.value = faustProviderFunction();
+                        newSubfield.value = faustProvider();
                     }
                     if ( newSubfield.hasOwnProperty( "value" ) === false ) {
                         Log.debug("newSubfield.hasOwnProperty( \"value\" ) === false");

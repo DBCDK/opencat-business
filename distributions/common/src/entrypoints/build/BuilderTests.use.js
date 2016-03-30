@@ -310,7 +310,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
     };
 
     var templateProvider = function() { return template; };
-    var faustProvider = function() { return function() { return "58082937"; } };
+    var faustProvider = function() { return "58082937"; };
     SafeAssert.equal( "1 BuildRecord test", Builder.buildRecord( templateProvider, faustProvider ), record );
     var templateProvider2 = function() { return template2; };
     SafeAssert.equal( "2 BuildRecord test", Builder.buildRecord( templateProvider2, faustProvider ), record2 );
@@ -576,7 +576,7 @@ UnitTest.addFixture( "Builder.convertRecord", function() {
     };
 
     var templateProvider = function() { return template; };
-    var faustProvider = function() { return function() { return "42"; } };
+    var faustProvider = function() { return "42"; };
     SafeAssert.equal( "1 convertRecord test", Builder.convertRecord( templateProvider, record, faustProvider ), recordResult );
     SafeAssert.equal( "2 convertRecord test", Builder.convertRecord( templateProvider, record2, faustProvider ), recordResult );
 });
@@ -704,7 +704,7 @@ UnitTest.addFixture( "Builder.__buildField", function() {
         }
     };
 
-    var faustProvider = function() { return function() { return "58082937"; } };
+    var faustProvider = function() { return "58082937"; };
     SafeAssert.equal( "1 buildField test", Builder.__buildField( template, "001", faustProvider ), field001 );
     SafeAssert.equal( "2 buildField test", Builder.__buildField( template, "004", faustProvider ), field004 );
 });
@@ -727,8 +727,57 @@ UnitTest.addFixture( "Builder.__buildSubfield", function() {
         "value": "a"
     };
 
-    var faustProvider = function() { return function() { return "58082937"; } };
-    var template = {};
+    var faustProvider = function() { return "58082937"; };
+    var template = {
+        "fields": {
+            "001": {
+                "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
+                "mandatory": true,
+                "repeatable": false,
+                "sorting": "abcdf",
+                "subfields": {
+                    "a": {
+                        "mandatory": true,
+                        "repeatable": false,
+                        "rules": [
+                            {
+                                "type": "SubfieldRules.checkFaust"
+                            },
+                            {
+                                "type": "SubfieldRules.checkLength",
+                                "params": {
+                                    "min": 8
+                                }
+                            }
+                        ]
+                    },
+                    "b": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "f": {
+                        "mandatory": true,
+                        "repeatable": false,
+                        "values": [
+                            "a"
+                        ]
+                    }
+                }
+            },
+            "002": {
+                "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
+                "mandatory": true,
+                "repeatable": false,
+                "sorting": "abcdf",
+                "subfields": {
+                    "a": {
+                        "mandatory": true,
+                        "repeatable": false
+                    }
+                }
+            }
+        }
+    };
     SafeAssert.equal( "1 buildSubfield test", Builder.__buildSubfield( template, "a", "001", faustProvider ), subfielda1 );
     SafeAssert.equal( "2 buildSubfield test", Builder.__buildSubfield( template, "a", "002", faustProvider ), subfielda2 );
     SafeAssert.equal( "3 buildSubfield test", Builder.__buildSubfield( template, "b", "001", faustProvider ), subfieldb );
@@ -1457,7 +1506,7 @@ UnitTest.addFixture( "Builder.__convertField", function() {
             }
         ]
     };
-    var faustProvider = function() { return function() { return "58082937"; } };
+    var faustProvider = function() { return "58082937"; };
     SafeAssert.equal( "1 __convertField test", Builder.__convertField( template, fieldInput, faustProvider ), fieldOutput );
     SafeAssert.equal( "2 __convertField test", Builder.__convertField( template, fieldInput2, faustProvider ), fieldOutput2 );
     SafeAssert.equal( "3 __convertField test", Builder.__convertField( template, fieldInput3, faustProvider ), fieldOutput3 );
@@ -2064,7 +2113,7 @@ UnitTest.addFixture( "Builder.__buildMissingFields", function() {
                     "value": ""
                 }, {
                     "name": "f",
-                    "value": ""
+                    "value": "a"
                 }
             ]
         }, {
@@ -2082,13 +2131,13 @@ UnitTest.addFixture( "Builder.__buildMissingFields", function() {
                     "value": ""
                 }, {
                     "name": "f",
-                    "value": ""
+                    "value": "a"
                 }
             ]
         }
     ];
 
-    var faustProvider = function() { return function() { return "58082937"; } };
+    var faustProvider = function() { return "58082937"; };
     var mandatoryFields = {"001": true, "002": false, "003": false, "004": true};
     SafeAssert.equal( "1 __buildMissingFields test", Builder.__buildMissingFields( template, faustProvider, mandatoryFields ), missingFields );
     mandatoryFields = {"001": true, "002": true, "003": true, "004": true};
@@ -2313,7 +2362,7 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
     var result = {};
     result["subfields"] = fieldOutput;
     result["mandatorySubfields"] = mandatorySubfieldsObj;
-    var faustProvider = function() { return function() { return "58082937"; } };
+    var faustProvider = function() { return "58082937"; };
     SafeAssert.equal( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
     faustProvider = function() {return undefined;};
     SafeAssert.equal( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
@@ -2563,13 +2612,13 @@ UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
     var result = {};
     result["subfields"] = fieldOutput;
     result["mandatorySubfields"] = mandatorySubfieldsObj;
-    var faustProvider = function() { return function() { return "58082937"; } };
+    var faustProvider = function() { return "58082937"; };
 
     use("Print");
 
 
     SafeAssert.equal( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
-    faustProvider = function() {return function() { return undefined; } };
+    faustProvider = function() { return undefined; };
     SafeAssert.equal( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
 
     var fieldInput2= {
@@ -2598,7 +2647,7 @@ UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
     var result2 = {};
     result2["subfields"] = [];
     result2["mandatorySubfields"] = {};
-    faustProvider = function() { return function() { return "58082937"; } };
+    faustProvider = function() { return "58082937"; };
     SafeAssert.equal( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput2, faustProvider ), result2 );
 });
 
@@ -2688,10 +2737,61 @@ UnitTest.addFixture( "Builder.__buildMissingSubfields", function() {
     var mandatorySubfields2 = {"a": false, "b": true, "c": true, "d": false, "f": false};
     var mandatorySubfields3 = {"a": false, "b": true, "c": true, "d": false, "f": false};
 
-    var faustProvider = function() { return function() { return "58082937"; } };
-    var faustProviderUndefined = function() { return function() { return undefined; } };
-    var template = {};
-
+    var faustProvider = function() { return "58082937"; };
+    var faustProviderUndefined = function() { return undefined; };
+    var template = {
+        "fields": {
+            "001": {
+                "mandatory": true,
+                "repeatable": false,
+                "subfields": {
+                    "b": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "c": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "d": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "f": {
+                        "mandatory": true,
+                        "repeatable": false,
+                        "values": [ "a" ]
+                    }
+                }
+            },
+            "002": {
+                "mandatory": true,
+                "repeatable": false,
+                "subfields": {
+                    "a": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "b": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "c": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "d": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "f": {
+                        "mandatory": true,
+                        "repeatable": false
+                    }
+                }
+            }
+        }
+    };
     SafeAssert.equal( "1 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields, fieldInput, faustProvider ), fieldOutput );
     SafeAssert.equal( "2 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields2, fieldInput2, faustProvider ), fieldOutput2 );
     SafeAssert.equal( "3 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields3, fieldInput3, faustProvider ), fieldOutput3 );
