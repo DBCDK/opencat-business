@@ -47,4 +47,10 @@ UnitTest.addFixture( "CheckISBN10.validateSubfield", function() {
     var subfield8 = {'name': "isbn10", 'value': "0-8044-2967-a" };
     var error8 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.isbn10.numbers.error", "isbn10" ) )];
     SafeAssert.equal( "8 CheckISBN10.validateSubfield with invalid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield8, params )[0], error8[0] );
+
+    var subfield9 = {'name': "isbn10", 'value': "0 201 53082 1" };
+    SafeAssert.equal( "1 CheckISBN10.validateSubfield with valid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield9, params ), [] );
+
+    var subfield10 = {'name': "isbn10", 'value': "0 201-53082 1" };
+    SafeAssert.equal( "1 CheckISBN10.validateSubfield with valid isbn10 number", CheckISBN10.validateSubfield( record, field, subfield10, params ), [] );
 });

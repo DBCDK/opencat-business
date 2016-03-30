@@ -55,7 +55,7 @@ var CheckISBN10 = function () {
                 weight--;
                 pos++;
             } else {
-                if ( ch === '-' ) {
+                if ( ch === '-' || ch === ' ' ) {
                     continue;
                 }
                 if ( ch.toLowerCase() === 'x' ) {
