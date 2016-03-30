@@ -1,0 +1,85 @@
+[
+    {
+        "name": "basis-ffu-update-common-record-same-id",
+        "bugs": [ "Bug-20091" ],
+        "description": "Tester opdatering af FFU-post hvor der findes en fællesskabspost med samme id",
+        "request": {
+            "authentication": {
+                "group": "873310",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ffu",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ],
+                    "children": [ "rawrepo-volume-common.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enrichments": []
+                },
+                {
+                    "record": "rawrepo-volume-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-volume-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enrichments": []
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ],
+                        "children": [ "rawrepo-volume-common.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enrichments": []
+                    },
+                    {
+                        "record": "rawrepo-volume-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enrichments": []
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": []
+                    }
+                ]
+            }
+        }
+    }
+]
