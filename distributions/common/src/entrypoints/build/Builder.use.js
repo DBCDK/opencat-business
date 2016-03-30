@@ -271,15 +271,14 @@ var Builder = function() {
             "name": subfieldName,
             "value": ""
         };
-        if ( fieldName === "001" ) {
-            if ( subfieldName === "a" && isFaustEnabledForTemplate( template )) {
-                var faustProviderFunction = faustProvider();
-                subfield.value = faustProviderFunction();
-            }
-            // TODO: Replace with general method that takes data from template
-            // -> will be a story
-            if ( subfieldName === "f" ) {
-                subfield.value = "a";
+        if ( subfieldName !== undefined && subfieldName !== "" ) {
+            if (fieldName === "001" && subfieldName === "a" && isFaustEnabledForTemplate(template)) {
+                subfield.value = faustProvider();
+            } else {
+                var mandatoryValuesList = template["fields"][fieldName]["subfields"][subfieldName]["values"];
+                if (mandatoryValuesList !== undefined && mandatoryValuesList.length === 1) {
+                    subfield.value = mandatoryValuesList[0];
+                }
             }
         }
         return subfield;
