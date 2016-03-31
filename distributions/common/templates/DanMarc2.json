@@ -2109,7 +2109,6 @@
                     "repeatable":false
                 },
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "\u00D8":{
@@ -5065,7 +5064,6 @@
                     "repeatable":false
                 },
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "\u00C6":{
