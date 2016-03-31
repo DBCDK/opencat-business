@@ -4827,8 +4827,7 @@
 					"repeatable": false
 				},
                 "i":{
-                    "repeatable":false,
-                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
+                    "repeatable":false
                 },
                 "A":{
                     "repeatable":false
