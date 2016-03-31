@@ -2187,8 +2187,7 @@
 					"repeatable": false
 				},
                 "i":{
-                    "repeatable":false,
-                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
+                    "repeatable":false
 				},
                 "a":{
                     "repeatable":false
@@ -2454,7 +2453,6 @@
 					"repeatable": false
 				},
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "z":{
