@@ -406,9 +406,11 @@ var Builder = function() {
             && template["settings"]["extrafields"].length > 0 ) {
             var tmpFields = template["settings"]["extrafields"];
             var tmpResult = [];
+            var tmpField;
             for ( var i = 0; i < tmpFields.length; i++ ) {
-                if ( tmpFields[i].length === 4 ) {
-                    tmpResult.push( {"field": tmpFields[i].slice(0, 3), "subfield": tmpFields[i].slice(3)} )
+                tmpField = tmpFields[i];
+                if ( tmpField.length === 4 ) {
+                    tmpResult.push( {"field": tmpField.slice(0, 3), "subfield": tmpField.slice(3)} )
                 }
             }
             if (tmpResult.length > 0) {
