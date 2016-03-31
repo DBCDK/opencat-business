@@ -32,12 +32,18 @@ var Builder = function() {
         };
         // TODO: check om template er ok, ellers kast op, slet senere tjeks
         var template = templateProvider();
-        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template ).sort();
+        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template );
+        var extraFields = getExtraFieldsList( template );
+        for ( var j = 0; j < extraFields.length; j++ ) {
+            mandatoryFields.push( extraFields[j]["field"] )
+        }
+        mandatoryFields = mandatoryFields.sort();
+
         var newField;
         if ( mandatoryFields !== undefined ) {
             for ( var i = 0; i < mandatoryFields.length; i++ ) {
-                newField = buildField( template, mandatoryFields[i], faustProvider );
-                result.fields.push( newField );
+                newField = buildField( template, mandatoryFields[i], faustProvider, extraFields );
+                result["fields"].push( newField );
             }
         }
         return result;
@@ -236,8 +242,8 @@ var Builder = function() {
     }
 
     // buildField constructs a single field using the field name given as a parameter.
-    // If it is field 001 being constructed, the faust number (fstNumber) is also used.
-    function buildField( template, fieldName, faustProvider ) {
+    // If it is field 001 being constructed, the faust number (call to faustProvider method) is also used.
+    function buildField( template, fieldName, faustProvider, extraFields ) {
         Log.trace( "buildField" );
         var mandatorySubfields = getMandatorySubfieldsFromUnoptimizedTemplate( template, fieldName );
         var indicator = getIndicatorFromUnoptimizedTemplate( template );
@@ -254,10 +260,23 @@ var Builder = function() {
                 field.subfields.push( newSubfield );
             }
         } else {
-            newSubfield = buildSubfield( template, "", fieldName, faustProvider );
+            var tmpSubfield = getSubfieldFromExtraFields( fieldName, extraFields );
+            newSubfield = buildSubfield( template, tmpSubfield, fieldName, faustProvider );
             field.subfields.push( newSubfield );
         }
         return field;
+    }
+
+    // Looks through the array of extra fields and returns the fields subfield otherwise a blank string.
+    function getSubfieldFromExtraFields( fieldName, extraFields ) {
+        Log.trace("getSubfieldFromExtraFields");
+        var res = "";
+        for ( var i = 0; i < extraFields.length && res === ""; i++ ) {
+            if ( extraFields[i]["field"] === fieldName ) {
+                res = extraFields[i]["subfield"];
+            }
+        }
+        return res;
     }
 
     // buildSubfield constructs a single subfield using the subfield name given
@@ -376,6 +395,29 @@ var Builder = function() {
         }
         return res;
     }
+
+    // returns an array with any extra fields defined in the template
+    function getExtraFieldsList( template ) {
+        Log.trace( "getExtraFieldsList" );
+        var extraFields = [];
+        if ( template.hasOwnProperty( "settings" )
+            && template["settings"].hasOwnProperty( "extrafields" )
+            && Util.getType( template["settings"]["extrafields"] ) === "Array"
+            && template["settings"]["extrafields"].length > 0 ) {
+            var tmpFields = template["settings"]["extrafields"];
+            var tmpResult = [];
+            for ( var i = 0; i < tmpFields.length; i++ ) {
+                if ( tmpFields[i].length === 4 ) {
+                    tmpResult.push( {"field": tmpFields[i].slice(0, 3), "subfield": tmpFields[i].slice(3)} )
+                }
+            }
+            if (tmpResult.length > 0) {
+                extraFields = tmpResult;
+            }
+        }
+        return extraFields;
+    }
+
 
     return {
         'buildRecord': buildRecord,

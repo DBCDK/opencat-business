@@ -309,11 +309,124 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
         }
     };
 
+    var record3 = {
+        "fields": [
+            {
+                "name": "001",
+                "indicator": "00",
+                "subfields": [
+                    {
+                        "name": "a",
+                        "value": "58082937"
+                    }, {
+                        "name": "b",
+                        "value": ""
+                    }, {
+                        "name": "c",
+                        "value": ""
+                    }, {
+                        "name": "d",
+                        "value": ""
+                    }, {
+                        "name": "f",
+                        "value": "a"
+                    }
+                ]
+            },
+            {
+                "name": "300",
+                "indicator": "00",
+                "subfields": [
+                    {
+                        "name": "a",
+                        "value": ""
+                    }
+                ]
+            }
+        ]
+    };
+
+    var template3 =
+    {
+        "defaults": {
+            "field": {
+                "indicator": "00",
+                "mandatory": false,
+                "repeatable": true
+            },
+            "subfield": {
+                "mandatory": false,
+                "repeatable": true
+            }
+        },
+        "settings": {
+            "extrafields": ["300a"]
+        },
+        "fields": {
+            "001": {
+                "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
+                "mandatory": true,
+                "repeatable": false,
+                "sorting": "abcdf",
+                "subfields": {
+                    "a": {
+                        "mandatory": true,
+                        "repeatable": false,
+                        "rules": [
+                            {
+                                "type": "SubfieldRules.checkFaust"
+                            },
+                            {
+                                "type": "SubfieldRules.checkLength",
+                                "params": {
+                                    "min": 8
+                                }
+                            }
+                        ]
+                    },
+                    "b": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "c": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "d": {
+                        "mandatory": true,
+                        "repeatable": false
+                    },
+                    "f": {
+                        "mandatory": true,
+                        "repeatable": false,
+                        "values": [
+                            "a"
+                        ]
+                    }
+                }
+            },
+            "300": {
+                "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
+                "mandatory": false,
+                "repeatable": false,
+                "sorting": "abcdf",
+                "subfields": {
+                    "a": {
+                        "mandatory": false,
+                        "repeatable": false
+                    }
+                }
+            }
+        }
+    };
+
     var templateProvider = function() { return template; };
     var faustProvider = function() { return "58082937"; };
     SafeAssert.equal( "1 BuildRecord test", Builder.buildRecord( templateProvider, faustProvider ), record );
     var templateProvider2 = function() { return template2; };
     SafeAssert.equal( "2 BuildRecord test", Builder.buildRecord( templateProvider2, faustProvider ), record2 );
+    var templateProvider3 = function() { return template3; };
+    SafeAssert.equal( "3 BuildRecord test", Builder.buildRecord( templateProvider3, faustProvider ), record3 );
 });
 
 UnitTest.addFixture( "Builder.convertRecord", function() {
