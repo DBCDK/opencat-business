@@ -157,9 +157,7 @@
             "mandatory": true,
             "repeatable":false,
             "subfields":{
-                "a": {
-                    "values": [ "a", "b", "e", "f", "g", "u", "t", "v" ]
-                },
+                "a": "Lister.fields.codes.subfields.general_mattype",
                 "g": "Lister.fields.codes.subfields.specific_mattype",
                 "b": "Lister.fields.codes.subfields.general_mattype",
                 "h": "Lister.fields.codes.subfields.specific_mattype"
@@ -173,19 +171,7 @@
 		"021": "DanMarc2.fields.021",
         "023": "DanMarc2.fields.023",
         "024": "DanMarc2.fields.024",
-        "025":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.19a.htm",
-            "subfields":{
-                "a": "DanMarc2.fields.025.subfields.a",
-                "b": "DanMarc2.fields.025.subfields.b",
-                "c": "DanMarc2.fields.025.subfields.c",
-                "d": "DanMarc2.fields.025.subfields.d",
-                "x": "DanMarc2.fields.025.subfields.x",
-                "2":{
-                    "repeatable":false
-                }
-            }
-        },
+        "025": "DanMarc2.fields.025",
         "027": "DanMarc2.fields.027",
         "028": "DanMarc2.fields.028",
         "029": "DanMarc2.fields.029",
@@ -267,6 +253,7 @@
         "110": "DanMarc2.fields.110",
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
+        "239": "DanMarc2.fields.239",
         "240": "DanMarc2.fields.240",
         "241": "DanMarc2.fields.241",
         "242": "DanMarc2.fields.242",
@@ -293,8 +280,12 @@
                 "c": "DanMarc2.fields.245.subfields.c",
                 "U": "DanMarc2.fields.245.subfields.U",
                 "u": "DanMarc2.fields.245.subfields.u",
+                "l": "DanMarc2.fields.245.subfields.l",
                 "e": "DanMarc2.fields.245.subfields.e",
                 "f": "DanMarc2.fields.245.subfields.f",
+                "i": "DanMarc2.fields.245.subfields.i",
+                "j": "DanMarc2.fields.245.subfields.j",
+                "k": "DanMarc2.fields.245.subfields.k",
                 "P": "DanMarc2.fields.245.subfields.P",
                 "p": "DanMarc2.fields.245.subfields.p",
                 "q": "DanMarc2.fields.245.subfields.q",

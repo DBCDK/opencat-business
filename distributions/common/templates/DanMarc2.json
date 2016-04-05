@@ -605,8 +605,7 @@
                 "d":{},
                 "x":{},
                 "2":{ 
-                    "repeatable":false,
-					"values": [ "SICI" ]
+                    "repeatable":false
 				}
             }
         },
