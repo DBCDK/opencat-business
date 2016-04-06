@@ -76,6 +76,11 @@ var DoubleRecordFinder = function(  ) {
                 continueOnHit: false
             });
             array.push({
+                matcher: __matchSimpleLiterature,
+                searcher: __findSimpleLiterature,
+                continueOnHit: false
+            });
+            array.push({
                 matcher: __matchTechnicalLiterature,
                 searcher: __findTechnicalLiterature,
                 continueOnHit: false
@@ -807,6 +812,84 @@ var DoubleRecordFinder = function(  ) {
     }
 
     //-----------------------------------------------------------------------------
+    //                  Paper or Musical - simpleMatch
+    //-----------------------------------------------------------------------------
+
+    function __matchSimpleLiterature( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__matchSimpleLiterature()" );
+
+        var result = undefined;
+        try {
+            var found009a = false;
+            var found009g = false;
+
+            for( var i = 0; i < record.numberOfFields(); i++ ) {
+                var field = record.field( i );
+                // 009 check - Possible target for moving to a function
+                if( field.name === "009" ) {
+                    for( var j = 0; j < field.count(); j++ ) {
+                        var subfield = field.subfield( j );
+
+                        if( subfield.name === "a" ) {
+                            if( found009a ) {
+                                Log.debug( "__matchSimpleLiterature(): t1" );
+                                return false;
+                            }
+                            if( [ "a", "c" ].indexOf( subfield.value ) === -1 ) {
+                                Log.debug( "__matchSimpleLiterature(): t2" );
+                                return false;
+                            }
+
+                            found009a = true;
+                        }
+                        if( subfield.name === "g" ) {
+                            if( found009g ) {
+                                Log.debug( "__matchSimpleLiterature(): t3" );
+                                return false;
+                            }
+                            if( [ "xx", "xe" ].indexOf( subfield.value ) === -1 ) {
+                                return false;
+                            }
+                            found009g = true;
+                        }
+                    }
+                }
+            }
+
+            Log.debug( "__matchSimpleLiterature(): t4" );
+            return result = found009a && found009g;
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__matchSimpleLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+        }
+    }
+
+    // TESTING only
+    function __findSimpleLiterature( record, newsolrUrl ) {
+        solrUrl = newsolrUrl;
+        return __findSimpleLiteratureRun( record );
+    }
+    function __findSimpleLiteratureRun( record ) {
+        Log.trace( "Enter - DoubleRecordFinder.__findSimpleLiteratureRun()" );
+
+        var result = undefined;
+        try {
+            var formatters = {
+                '008a': __querySubfieldYearFormatter(),
+                '009a': __querySubfieldFormatter,
+                '009g': __querySubfieldFormatter,
+                '245a': __querySubfieldValueLengthFormatter( 20 ),
+                '260b': __querySubfieldValueLengthFormatter( 2 )
+            };
+
+            return result = __executeQueryAndFindRecords( record, formatters );
+        }
+        finally {
+            Log.trace( "Exit - DoubleRecordFinder.__findSimpleLiteratureRun(): ", result !== undefined ? JSON.stringify(result) : "undef" );
+        }
+    }
+    
+    //-----------------------------------------------------------------------------
     //                  Paper or Musical - technical
     //-----------------------------------------------------------------------------
 
@@ -1101,6 +1184,8 @@ var DoubleRecordFinder = function(  ) {
         '__findMusic538': __findMusic538,
         '__matchComposedMaterials': __matchComposedMaterials,
         '__findComposedMaterials': __findComposedMaterials,
+        '__matchSimpleLiterature': __matchSimpleLiterature,
+        '__findSimpleLiterature': __findSimpleLiterature,
         '__matchTechnicalLiterature': __matchTechnicalLiterature,
         '__findTechnicalLiterature': __findTechnicalLiterature,
         '__matchFictionBookMusic': __matchFictionBookMusic,

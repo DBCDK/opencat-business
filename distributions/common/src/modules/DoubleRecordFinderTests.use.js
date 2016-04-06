@@ -238,6 +238,45 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchComposedMaterials", function() {
 } );
 
 //-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__matchSimpleLiterature", function() {
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__matchSimpleLiterature( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *h ws",
+    ].join( "\n") );
+    Assert.equalValue( "009, but no *a", DoubleRecordFinder.__matchSimpleLiterature( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a a",
+    ].join( "\n") );
+    Assert.equalValue( "009, but no *g", DoubleRecordFinder.__matchSimpleLiterature( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a a *g xx",
+    ].join( "\n") );
+    Assert.equalValue( "Found 009a(a)g", DoubleRecordFinder.__matchSimpleLiterature( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a c *g xx",
+    ].join( "\n") );
+    Assert.equalValue( "Found 009a(c)g", DoubleRecordFinder.__matchSimpleLiterature( record ), true );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a c *a q *g xx",
+    ].join( "\n") );
+    Assert.equalValue( "Found 009a(c)ag", DoubleRecordFinder.__matchSimpleLiterature( record ), false );
+
+    record = RecordUtil.createFromString( [
+        "009 00 *a c *g xx *g xe",
+    ].join( "\n") );
+    Assert.equalValue( "Found 009a(c)gg", DoubleRecordFinder.__matchSimpleLiterature( record ), false );
+
+} );
+
+//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__matchTechnicalLiterature", function() {
     var record;
 
@@ -462,6 +501,36 @@ UnitTest.addFixture( "DoubleRecordFinder.__matchFictionBookMusic", function() {
         "652 00 *m 48.64"
     ].join( "\n") );
     Assert.equalValue( "Fiction Found 009a(c)g/652m: 48.64", DoubleRecordFinder.__matchFictionBookMusic( record ), false );
+} );
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.__findSimpleLiterature", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    record = new Record;
+    Assert.equalValue( "Empty record", DoubleRecordFinder.__findSimpleLiterature( record, solrUrl ), [] );
+
+    SolrCore.clear();
+    SolrCore.addQuery( "( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\"",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.008a:2014", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ { text: "2014" } ] } } } } );
+    SolrCore.addAnalyse( "match.008a:2015", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ { text: "2015" } ] } } } } );
+    SolrCore.addAnalyse( "match.008a:2016", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ { text: "2016" } ] } } } } );
+    SolrCore.addAnalyse( "match.009a:a", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ { text: "a" } ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xx", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ { text: "xx" } ] } } } } );
+    SolrCore.addAnalyse( "match.245a:Anton til soes", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ { text: "antontilsoes" } ] } } } } );
+    SolrCore.addAnalyse( "match.260b:Cadeau", { responseHeader: { status: 0 }, analysis: { field_names: { "match.260b": {index: [ { text: "cadeau" } ] } } } } );
+
+    record = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a a *g xx",
+        "245 00 *a Anton til soes",
+        "260 00 *& 1 *a Vinderup *b Cadeau *c 2015"
+    ].join( "\n") );
+    Assert.equalValue( "Full record", DoubleRecordFinder.__findSimpleLiterature( record, solrUrl ),
+        [ { id: "12345678", reason: "008a, 009a, 009g, 245a, 260b", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
 } );
 
 //-----------------------------------------------------------------------------
