@@ -4,7 +4,8 @@
         "features": [ "all" ]
     },
     "settings": {
-        "lookupfaust": true
+        "lookupfaust": true,
+        "extrafields": [ "260a", "260b", "260c", "440a" ]
     },
     "defaults":{
         "field":{
@@ -391,10 +392,7 @@
                 {
                     "type": "FieldRules.upperCaseCheck"
                 }
-            ],
-            "settings": {
-              "extrafields": [ "260a", "260b", "260c" ]
-            }
+            ]
         },
         "300": "DanMarc2.fields.300",
         "320": "DanMarc2.fields.320",
@@ -433,11 +431,7 @@
                 {
                     "type": "FieldRules.upperCaseCheck"
                 }
-            ],
-            "settings": {
-                "extrafields": [ "440a" ]
-            }
-
+            ]
         },
 		"500": "DanMarc2.fields.500",
         "502": "DanMarc2.fields.502",
