@@ -22,8 +22,25 @@ var Solr = function( ) {
 		try {
 			var solr = SolrCore.analyse( url, text, index );
 			if ( solr.responseHeader.status == 0 ) {
-				var solrindex = solr.analysis.field_names[index].index;
-				return solrindex[solrindex.length - 1].text;
+				var solrIndexArray = solr.analysis.field_names[index].index;
+                var solrIndexObject = solrIndexArray[ solrIndexArray.length - 1 ];
+
+                Log.debug( "Solr analysis object: ", JSON.stringify( solrIndexArray ) );
+                if( typeof( solrIndexObject ) === "string" ) {
+                    Log.debug( "Return solrIndexObject: ", solrIndexObject );
+                    return solrIndexObject;
+                }
+                else if( typeof( solrIndexObject ) === "object" ) {
+                    if( solrIndexObject instanceof Array ) {
+                        var v = solrIndexObject[ solrIndexObject.length - 1 ].text;
+
+                        Log.debug( "Return solrIndexObject Array value: ", v );
+                        return v;
+                    }
+                }
+
+                Log.warn( "Unable to decode analysis value from solr response:\n", JSON.stringify( solr ) );
+				return text;
 			} else {
 				// what is a reasonable action here ?
 				var errStr = ( "Failed to perform solr analysis - url: ", url, " index: ", index, " text :<", text, "> error : ", solr.error.msg );

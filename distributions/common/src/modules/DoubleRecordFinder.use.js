@@ -135,6 +135,8 @@ var DoubleRecordFinder = function(  ) {
 
     function find( record, callSolrUrl ) {
         Log.trace("Enter - DoubleRecordFinder.find()", 0);
+        Log.debug( "Try to find double records for record:\n", record.toString() );
+
         solrUrl = callSolrUrl;
         var result = [];
         try {

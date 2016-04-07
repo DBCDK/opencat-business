@@ -1,6 +1,6 @@
 {
     "request" : {
-        "url" : "/solr/raapost-index/select?q=match.021e%3A%22undefined%22+or+match.021e%3A%22undefined%22&indent=true&wt=json",
+        "url" : "/solr/raapost-index/select?q=match.021e%3A%229788771691078%22+or+match.021e%3A%229788771690651%22&indent=true&wt=json",
         "method" : "GET"
     },
     "response" : {
