@@ -37,7 +37,7 @@ function buildRecord( templateName, record, settings ) {
     };
     var faustProvider = function() {
         WebserviceUtil.init( settings );
-        return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll;
+        return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll();
     };
     if ( record === undefined || record === null ) {
         Log.debug("new record");
