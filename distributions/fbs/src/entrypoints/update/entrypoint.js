@@ -66,7 +66,7 @@ function recordDataForRawRepo( record, userId, groupId ) {
 }
 
 function checkDoubleRecord( record, settings ) {
-    return DBCUpdaterEntryPoint.checkDoubleRecord( record, settings );
+    return FBSUpdaterEntryPoint.checkDoubleRecord( record, settings );
 }
 
 //-----------------------------------------------------------------------------
