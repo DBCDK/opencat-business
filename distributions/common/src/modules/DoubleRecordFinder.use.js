@@ -62,12 +62,12 @@ var DoubleRecordFinder = function(  ) {
             });
             array.push({
                 matcher: __matchVolumes,
-                searcher: __findVolumes,
+                searcher: __findVolumesRun,
                 continueOnHit: false
             });
             array.push({
                 matcher: __matchSections,
-                searcher: __findSections,
+                searcher: __findSectionsRun,
                 continueOnHit: false
             });
             array.push({
@@ -77,17 +77,17 @@ var DoubleRecordFinder = function(  ) {
             });
             array.push({
                 matcher: __matchSimpleLiterature,
-                searcher: __findSimpleLiterature,
+                searcher: __findSimpleLiteratureRun,
                 continueOnHit: false
             });
             array.push({
                 matcher: __matchTechnicalLiterature,
-                searcher: __findTechnicalLiterature,
+                searcher: __findTechnicalLiteratureRun,
                 continueOnHit: false
             });
             array.push({
                 matcher: __matchComposedMaterials,
-                searcher: __findComposedMaterials,
+                searcher: __findComposedMaterialsRun,
                 continueOnHit: false
             });
             return array;
@@ -153,7 +153,7 @@ var DoubleRecordFinder = function(  ) {
             // END Keep Music245 and 538 grouped together
             array.push({
                 matcher: __matchSoundMovieMultimedia,
-                searcher: __findSoundMovieMultimedia,
+                searcher: __findSoundMovieMultimediaRun,
                 continueOnHit: false
             });
             result = doFind( record, array );
@@ -217,12 +217,12 @@ var DoubleRecordFinder = function(  ) {
             };
             result = __executeQueryAndFindRecords(record, formatters);
             if ( volumeSubfieldG ) {
-                var formatters = {
+                var formattersSG = {
                     '004a': __querySubfieldFormatter,
                     '014a': __querySubfieldFormatter,
                     '245g': __querySubfieldValueLengthFormatter( 20 )
                 };
-                var result1 = __executeQueryAndFindRecords(record, formatters);
+                var result1 = __executeQueryAndFindRecords(record, formattersSG);
                 for (var i = 0; i < result.length; i++ ) {
                     var workRes = result[i];
                     if (workRes.sectioninfo === undefined) {
@@ -290,12 +290,12 @@ var DoubleRecordFinder = function(  ) {
             };
             result = __executeQueryAndFindRecords(record, formatters);
             if ( sectionSubfieldN ) {
-                var formatters = {
+                var formattersSN = {
                     '004a': __querySubfieldFormatter,
                     '014a': __querySubfieldFormatter,
                     '245n': __querySubfieldValueLengthFormatter( 20 )
                 };
-                var result1 = __executeQueryAndFindRecords(record, formatters);
+                var result1 = __executeQueryAndFindRecords(record, formattersSN);
                 for (var i = 0; i < result.length; i++ ) {
                     var workRes = result[i];
                     if (workRes.sectioninfo === undefined) {

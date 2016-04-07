@@ -18,8 +18,6 @@ UnitTest.addFixture( "DefaultDoubleRecordHandler.checkAndSendMails", function() 
 
     //-----------------------------------------------------------------------------
     record = RecordUtil.createFromString( [
-        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
-        "009 00 *a a *g xx",
         "245 00 *a Anton til soes",
         "260 00 *& 1 *a Vinderup *b Cadeau *c 2015"
     ].join( "\n") );

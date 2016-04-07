@@ -33,7 +33,7 @@ var SolrCore = function( ) {
                 }
             }
 
-            throw StringUtil.sprintf( "Unable to lookup value for analysis: %s", index + text );
+            throw StringUtil.sprintf( "Unable to lookup value for analysis: %s", index + ":" + text );
         }
         finally {
             Log.trace( "Exit - SolrCoreTEST.analyse()", 0 );
