@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 //use
 //-----------------------------------------------------------------------------
+use( "StopWatch" );
 use( "UnitTest" );
 
 //subfield rules
@@ -71,6 +72,7 @@ var TemplateOptimizer = function() {
      */
     function optimize( template ) {
         Log.trace( "Enter -- TemplateOptimizer.optimize()" );
+        var watchFunc = new StopWatch( "TemplateOptimizer.optimize" );
 
         var result = {
             fields: {},
@@ -138,6 +140,7 @@ var TemplateOptimizer = function() {
             return result;
         }
         finally {
+            watchFunc.stop();
             Log.trace( "Exit -- TemplateOptimizer.optimize(): ", result );
         }
     }
@@ -145,6 +148,7 @@ var TemplateOptimizer = function() {
     // TODO: JSDoc
     function optimizeField( fieldName, field, fieldDefs, subfieldDefs ) {
         Log.trace( "Enter -- TemplateOptimizer.optimizeField()" );
+        var watchFunc = new StopWatch( "TemplateOptimizer.optimizeField" );
 
         var result = undefined;
         try {
@@ -217,6 +221,7 @@ var TemplateOptimizer = function() {
             return result;
         }
         finally {
+            watchFunc.stop();
             Log.trace( "Exit -- TemplateOptimizer.optimizeField(): ", result );
         }
     }
@@ -234,6 +239,7 @@ var TemplateOptimizer = function() {
      */
     function optimizeSubfield( sf, defs ) {
         Log.trace( "Enter -- TemplateOptimizer.optimizeSubfield()" );
+        var watchFunc = new StopWatch( "TemplateOptimizer.optimizeSubfield" );
 
         var result = undefined;
         try {
@@ -268,6 +274,7 @@ var TemplateOptimizer = function() {
             return result;
         }
         finally {
+            watchFunc.stop();
             Log.trace( "Exit -- TemplateOptimizer.optimizeSubfield()" );
         }
     }

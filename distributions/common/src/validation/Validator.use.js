@@ -3,6 +3,7 @@ use( "Print" );
 use( "ReadFile" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
+use( "StopWatch" );
 use( "StringUtil" );
 use( "TemplateOptimizer" );
 use( "ValidateErrors" );
@@ -32,13 +33,17 @@ var Validator = function() {
      */
     function validateRecord( record, templateProvider, settings ) {
         Log.trace( "Enter - Validator.validateRecord()" );
+        var watchFunc = new StopWatch();
 
         try {
             var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            watchFunc.lap( "javascript.Validator.validateRecord.bundle" );
             //Log.info("Record:\n" + JSON.stringify(record, undefined, 4));
 
             var result = [];
             var template = templateProvider();
+            watchFunc.lap( "javascript.Validator.validateRecord.templateProvider" );
+
             /* Log udkommenteret da denne exception bliver kastet fra andet kald og fremover indtil redeploy.
              * Caused by: org.mozilla.javascript.EcmaError: TypeError: Cyclic {0} value not allowed.
              * (jar:file:/home/thl/glassfish-4.0/glassfish/domains/dbc/applications/validateservice-app-1.0-SNAPSHOT/lib/iscrum-javascript-1.0-SNAPSHOT.jar!/javascript/iscrum/Validator.use.js#35)
@@ -68,7 +73,11 @@ var Validator = function() {
                     try {
                         //Log.info("Run rule " + uneval(rule.type) + " on record");
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
+
+                        var watch = new StopWatch( "javascript.Validator." + rule.name );
                         var valErrors = rule.type( record, rule.params, settings );
+                        watch.stop();
+
                         valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
 
                         Log.debug( "Record rules before errors: ", JSON.stringify( result ) );
@@ -88,6 +97,7 @@ var Validator = function() {
             return result;
         }
         finally {
+            watchFunc.stop( "javascript.Validator.validateRecord" );
             Log.trace( "Exit - Validator.validateRecord()" );
         }
     };
@@ -104,6 +114,7 @@ var Validator = function() {
      */
     function validateField( record, field, templateProvider, settings ) {
         Log.trace( "Enter - Validator.validateField()" );
+        var watchFunc = new StopWatch( "javascript.Validator.validateField" );
 
         try {
             var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
@@ -142,7 +153,9 @@ var Validator = function() {
                         //Log.info("Run rule " + uneval(rule.type) + " on field " + field.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
+                        var watch = new StopWatch( "javascript.Validator." + rule.name );
                         var valErrors = rule.type(record, field, rule.params, settings );
+                        watch.stop();
                         valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
                         result = result.concat( valErrors );
                     }
@@ -162,6 +175,7 @@ var Validator = function() {
             return result;
         }
         finally {
+            watchFunc.stop();
             Log.trace( "Exit - Validator.validateField()" );
         }
     };
@@ -179,6 +193,7 @@ var Validator = function() {
      */
     function validateSubfield( record, field, subfield, templateProvider, settings ) {
         Log.trace( "Enter - Validator.validateSubfield()" );
+        var watchFunc = new StopWatch( "javascript.Validator.validateSubfield" );
 
         try {
             var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
@@ -214,7 +229,10 @@ var Validator = function() {
                         //Log.info("Run rule " + uneval(rule.type) + " on subfield " + field.name + subfield.name);
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
+                        var watch = new StopWatch( "javascript.Validator." + rule.name );
                         var valErrors = rule.type(record, field, subfield, rule.params, settings );
+                        watch.stop();
+
                         valErrors = __updateErrorTypeOnValidationResults( rule, valErrors );
                         result = result.concat( valErrors );
                     }
@@ -230,6 +248,7 @@ var Validator = function() {
             return result;
         }
         finally {
+            watchFunc.stop();
             Log.trace( "Exit - Validator.validateSubfield()" );
         }
     }

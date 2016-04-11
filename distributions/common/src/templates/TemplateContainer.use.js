@@ -102,15 +102,22 @@ var TemplateContainer = function() {
      * @param {Object} name The of the template.
      */
     function get( name ) {
-        var result = templates[ name ];
-        if( result === undefined ) {
-            result = loadTemplate( name );
-            if( result !== undefined ) {
-                templates[ name ] = result;
+        var watch = new StopWatch( "javascript.TemplateContainer.get" );
+
+        try {
+            var result = templates[name];
+            if (result === undefined) {
+                result = loadTemplate(name);
+                if (result !== undefined) {
+                    templates[name] = result;
+                }
             }
+
+            return result;
         }
-        
-        return result;
+        finally {
+            watch.stop();
+        }
     }
 
     /**

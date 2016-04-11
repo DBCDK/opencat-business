@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------------------
 use( "Log" );
+use( "StopWatch" );
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'TemplateLoader' ];
 //-----------------------------------------------------------------------------
@@ -23,8 +24,12 @@ var TemplateLoader = function() {
      */
     function load ( name, templateProvider ) {
         Log.trace( "Enter - TemplateLoader.load" );
+        var watchFunc = new StopWatch();
+
         try {
             var result = templateProvider( name );
+            watchFunc.lap( "TemplateLoader.load.templateProvider" );
+
             if ( result === undefined ) {
                 throw "Unable to load template '" + name + "'";
             }
@@ -53,6 +58,7 @@ var TemplateLoader = function() {
             }
             return result;
         } finally {
+            watchFunc.stop( "TemplateLoader.load" );
             Log.trace( "Exit - TemplateLoader.load" );
         }
     }
