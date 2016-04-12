@@ -58,7 +58,7 @@ var TemplateLoader = function() {
             }
             return result;
         } finally {
-            watchFunc.stop( "TemplateLoader.load" );
+            watchFunc.stop( "TemplateLoader.load." + name );
             Log.trace( "Exit - TemplateLoader.load" );
         }
     }
@@ -99,9 +99,12 @@ var TemplateLoader = function() {
      */
     function getObjectByName ( name, object ) {
         Log.trace( "Enter - TemplateLoader.getObjectByName( '", name, "' ", object, " )" );
+        var watchFunc = new StopWatch( "TemplateLoader.getObjectByName" );
+
         try {
             return __getObjectByName( name, name, object );
         } finally {
+            watchFunc.stop();
             Log.trace( "Exit - TemplateLoader.getObjectByName" );
         }
     }
