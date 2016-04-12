@@ -16,6 +16,8 @@ var CheckYear = function () {
 
     /**
      * checkYear is used to validate a year. Content can be 0 to 4 digits followed by 0 to 4 ? marks.
+     * valid examples : ???? 1??? 12?? 123? 2016
+     * invalid examples : 19?2 19o3
      *
      * @syntax CheckYear.validateSubfield( record, field, subfield, params )
      * @param {object} record
