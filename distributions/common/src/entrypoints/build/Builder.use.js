@@ -24,26 +24,26 @@ var Builder = function() {
      * @name Builder.buildRecord
      * @method
      */
-    function buildRecord( templateProvider, faustProvider ) {
-        Log.trace( "buildRecord" );
+    function buildRecord(templateProvider, faustProvider) {
+        Log.trace("-> buildRecord");
 
         var result = {
             "fields": []
         };
         // TODO: check om template er ok, ellers kast op, slet senere tjeks
         var template = templateProvider();
-        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template );
-        var extraFields = getExtraFieldsList( template );
-        for ( var j = 0; j < extraFields.length; j++ ) {
-            mandatoryFields.push( extraFields[j]["field"] )
+        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate(template);
+        var extraFields = getExtraFieldsList(template);
+        for (var j = 0; j < extraFields.length; j++) {
+            mandatoryFields.push(extraFields[j]["field"])
         }
-        mandatoryFields = mandatoryFields.sort();
+        mandatoryFields = removeDuplicatesFromArray(mandatoryFields.sort());
 
         var newField;
-        if ( mandatoryFields !== undefined ) {
-            for ( var i = 0; i < mandatoryFields.length; i++ ) {
-                newField = buildField( template, mandatoryFields[i], faustProvider, extraFields );
-                result["fields"].push( newField );
+        if (mandatoryFields !== undefined) {
+            for (var i = 0; i < mandatoryFields.length; i++) {
+                newField = buildField(template, mandatoryFields[i], faustProvider, extraFields);
+                result["fields"].push(newField);
             }
         }
         return result;
@@ -63,7 +63,7 @@ var Builder = function() {
      * @method
      */
     function convertRecord( templateProvider, record, faustProvider ) {
-        Log.trace( "convertRecord" );
+        Log.trace( "-> convertRecord" );
 
         var result = {
             "fields": []
@@ -97,7 +97,7 @@ var Builder = function() {
 
     // function to sort the record fields
     function sortRecord( record ) {
-        Log.trace( "sortRecord" );
+        Log.trace( "-> sortRecord" );
         var result = {
             "fields": []
         };
@@ -108,7 +108,7 @@ var Builder = function() {
     // sort function used by sortRecord
     // function( a, b ) { return a.name.localeCompare(b.name); }
     function sortRecordFunction( a, b ){
-        Log.trace( "sortRecordFunction" );
+        Log.trace( "-> sortRecordFunction" );
         var result = a.name.localeCompare(b.name);
         return result;
     }
@@ -118,7 +118,7 @@ var Builder = function() {
     // Returns undefined if field is not used.
     // TODO: faustnumber, brug som buildrecord
     function convertField( template, field, faustProvider ) {
-        Log.trace( "convertField" );
+        Log.trace( "-> convertField" );
         var fieldName = field.name;
         // here we check if the field name, eg. 001, is in the template and
         // thus allowed
@@ -148,7 +148,7 @@ var Builder = function() {
 
     // verifyIndicator adds the indicator value of '00' if none is present
     function verifyIndicator( template, field ) {
-        Log.trace( "verifyIndicator" );
+        Log.trace( "-> verifyIndicator" );
         var newField = field;
         var indicator = getIndicatorFromUnoptimizedTemplate( template );
         if ( field.hasOwnProperty( "indicator" ) === false ||
@@ -162,7 +162,7 @@ var Builder = function() {
     // getIndicatorFromUnoptimizedTemplate returns the default indicator value
     // from an unoptimized template
     function getIndicatorFromUnoptimizedTemplate( template ) {
-        Log.trace( "getIndicatorFromUnoptimizedTemplate" );
+        Log.trace( "-> getIndicatorFromUnoptimizedTemplate" );
         var indicator = "00";
         if ( template["defaults"]["field"].hasOwnProperty( "indicator" ) ) {
             indicator = template["defaults"]["field"]["indicator"];
@@ -172,7 +172,7 @@ var Builder = function() {
 
     // buildMissingFields returns a list of mandatory fields not used in the original record
     function buildMissingFields( template, faustProvider, mandatoryFields ) {
-        Log.trace( "buildMissingFields" );
+        Log.trace( "-> buildMissingFields" );
         var newField;
         var result = [];
         for ( var fieldKey in mandatoryFields ) {
@@ -188,7 +188,7 @@ var Builder = function() {
     // given as an argument by removing fields not allowed and indicating the
     // mandatory fields that has been used
     function convertSubfields( template, field, faustProvider ) {
-        Log.trace( "convertSubfields" );
+        Log.trace( "-> convertSubfields" );
         var newSubfields = [];
         // list of allowed subfields
         var availableSubfieldsObject = subfieldsInTemplate( template, field.name );
@@ -229,7 +229,7 @@ var Builder = function() {
     // buildMissingSubfields builds a list of the mandatory subfields not used
     // in the original field
     function buildMissingSubfields( template, mandatorySubfields, field, faustProvider ) {
-        Log.trace( "buildMissingSubfields" );
+        Log.trace( "-> buildMissingSubfields" );
         var newSubfields = [];
         var newSubfield;
         for ( var subfieldKey in mandatorySubfields ) {
@@ -243,37 +243,40 @@ var Builder = function() {
 
     // buildField constructs a single field using the field name given as a parameter.
     // If it is field 001 being constructed, the faust number (call to faustProvider method) is also used.
-    function buildField( template, fieldName, faustProvider, extraFields ) {
-        Log.trace( "buildField" );
-        var mandatorySubfields = getMandatorySubfieldsFromUnoptimizedTemplate( template, fieldName );
-        var indicator = getIndicatorFromUnoptimizedTemplate( template );
+    function buildField(template, fieldName, faustProvider, extraFields) {
+        Log.trace("-> buildField");
+        var mandatorySubfields = getMandatorySubfieldsFromUnoptimizedTemplate(template, fieldName);
+        var indicator = getIndicatorFromUnoptimizedTemplate(template);
         var field = {
             "name": fieldName,
             "indicator": indicator,
             "subfields": []
         };
 
-        var newSubfield;
-        if ( mandatorySubfields.length > 0 ) {
-            for ( var i = 0; i < mandatorySubfields.length; i++ ) {
-                newSubfield = buildSubfield( template, mandatorySubfields[i], fieldName, faustProvider );
-                field.subfields.push( newSubfield );
+        if (mandatorySubfields.length > 0) {
+            for (var i = 0; i < mandatorySubfields.length; i++) {
+                field.subfields.push(buildSubfield(template, mandatorySubfields[i], fieldName, faustProvider));
             }
         } else {
-            var tmpSubfield = getSubfieldFromExtraFields( fieldName, extraFields );
-            newSubfield = buildSubfield( template, tmpSubfield, fieldName, faustProvider );
-            field.subfields.push( newSubfield );
+            var tmpSubfields = getSubfieldsFromExtraFields(fieldName, extraFields);
+            if (tmpSubfields.length > 0) {
+                for (var j = 0; j < tmpSubfields.length; j++) {
+                    field.subfields.push(buildSubfield(template, tmpSubfields[j], fieldName, faustProvider));
+                }
+            } else {
+                field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
+            }
         }
         return field;
     }
 
     // Looks through the array of extra fields and returns the fields subfield otherwise a blank string.
-    function getSubfieldFromExtraFields( fieldName, extraFields ) {
-        Log.trace("getSubfieldFromExtraFields");
-        var res = "";
-        for ( var i = 0; i < extraFields.length && res === ""; i++ ) {
-            if ( extraFields[i]["field"] === fieldName ) {
-                res = extraFields[i]["subfield"];
+    function getSubfieldsFromExtraFields(fieldName, extraFields) {
+        Log.trace("-> getSubfieldsFromExtraFields");
+        var res = [];
+        for (var i = 0; i < extraFields.length; i++) {
+            if (extraFields[i]["field"] === fieldName) {
+                res.push(extraFields[i]["subfield"]);
             }
         }
         return res;
@@ -284,7 +287,7 @@ var Builder = function() {
     // If the faustNumber parameter is not undefined, the subfield is part of
     // field 001 and will insert the faust number.
     function buildSubfield( template, subfieldName, fieldName, faustProvider ) {
-        Log.trace( "buildSubfield" );
+        Log.trace( "-> buildSubfield" );
         var subfield = {
             "name": subfieldName,
             "value": ""
@@ -293,9 +296,13 @@ var Builder = function() {
             if (fieldName === "001" && subfieldName === "a" && isFaustEnabledForTemplate(template)) {
                 subfield.value = faustProvider();
             } else {
-                var mandatoryValuesList = template["fields"][fieldName]["subfields"][subfieldName]["values"];
-                if (mandatoryValuesList !== undefined && mandatoryValuesList.length === 1) {
-                    subfield.value = mandatoryValuesList[0];
+                if (template["fields"] !== undefined
+                    && template["fields"][fieldName] !== undefined
+                    && template["fields"][fieldName]["subfields"] !== undefined
+                    && template["fields"][fieldName]["subfields"][subfieldName] !== undefined
+                    && template["fields"][fieldName]["subfields"][subfieldName]["values"] !== undefined
+                    && template["fields"][fieldName]["subfields"][subfieldName]["values"].length === 1) {
+                    subfield.value = template["fields"][fieldName]["subfields"][subfieldName]["values"][0];
                 }
             }
         }
@@ -305,7 +312,7 @@ var Builder = function() {
     // getMandatoryFieldsFromTemplate returns an array of mandatory fields,
     // if any, from the template given as a parameter.
     function getMandatoryFieldsFromUnoptimizedTemplate( template ) {
-        Log.trace( "getMandatoryFieldsFromUnoptimizedTemplate" );
+        Log.trace( "-> getMandatoryFieldsFromUnoptimizedTemplate" );
         var mandatoryFields = [];
         // first read the mandatory field value
         var mandatoryFieldValue = getMandatoryDefaultValueFromUnoptimizedTemplate( template, "field" );
@@ -324,7 +331,7 @@ var Builder = function() {
     // getMandatorySubfieldsFromTemplate returns an array of mandatory subfields,
     // if any, from the template and field name given as parameters.
     function getMandatorySubfieldsFromUnoptimizedTemplate( template, fieldName ) {
-        Log.trace( "getMandatorySubfieldsFromUnoptimizedTemplate" );
+        Log.trace( "-> getMandatorySubfieldsFromUnoptimizedTemplate" );
         var mandatorySubfields = [];
         if ( template.fields[fieldName] !== undefined) {
             // first read the mandatory field value
@@ -341,7 +348,7 @@ var Builder = function() {
     }
 
     function getMandatoryDefaultValueFromUnoptimizedTemplate( template, type ) {
-        Log.trace( "getMandatoryDefaultValueFromUnoptimizedTemplate" );
+        Log.trace( "-> getMandatoryDefaultValueFromUnoptimizedTemplate" );
         var mandatoryValue = template["defaults"][type]["mandatory"];
         return mandatoryValue;
     }
@@ -350,7 +357,7 @@ var Builder = function() {
     // ex: in  = ["001", "002", "003"], 1
     //     out = {"001": 1, "002": 1, "003": 1}
     function listAsObject( list, defaultValue ) {
-        Log.trace( "listeAsObject" );
+        Log.trace( "-> listeAsObject" );
         var result;
         if ( list instanceof Array ) {
             result = {};
@@ -365,7 +372,7 @@ var Builder = function() {
 
     // returns a list of subfields present in the template under a specifiec field
     function subfieldsInTemplate( template, field ) {
-        Log.trace( "subfieldsInTemplate" );
+        Log.trace( "-> subfieldsInTemplate" );
         var result = {};
         if ( template.fields.hasOwnProperty( field ) ) {
             for ( var key in template.fields[field].subfields ) {
@@ -377,7 +384,7 @@ var Builder = function() {
 
     // returns true if parameter is not undefined and a function
     function isFunction( functionObject ) {
-        Log.trace( "validateFunction" );
+        Log.trace( "-> validateFunction" );
         var res = false;
         if ( functionObject !== undefined && functionObject instanceof Function ) {
             res = true;
@@ -386,7 +393,7 @@ var Builder = function() {
     }
 
     function isFaustEnabledForTemplate( template ) {
-        Log.trace( "isFaustEnabledForTemplate" );
+        Log.trace( "-> isFaustEnabledForTemplate" );
         var res = true;
         if ( template.hasOwnProperty( "settings" )
             && template["settings"].hasOwnProperty( "lookupfaust" )
@@ -398,7 +405,7 @@ var Builder = function() {
 
     // returns an array with any extra fields defined in the template
     function getExtraFieldsList( template ) {
-        Log.trace( "getExtraFieldsList" );
+        Log.trace( "-> getExtraFieldsList" );
         var extraFields = [];
         if ( template.hasOwnProperty( "settings" )
             && template["settings"].hasOwnProperty( "extrafields" )
@@ -420,6 +427,20 @@ var Builder = function() {
         return extraFields;
     }
 
+    function removeDuplicatesFromArray(array) {
+        Log.trace("-> removeDuplicatesFromArray");
+        var uniqueArray = [];
+        if (array !== undefined && array !== null && array.length > 0) {
+            var lastUsedField = "";
+            for (var j = 0; j < array.length; j++) {
+                if (lastUsedField !== array[j]) {
+                    uniqueArray.push(array[j]);
+                    lastUsedField = array[j];
+                }
+            }
+        }
+        return uniqueArray;
+    }
 
     return {
         'buildRecord': buildRecord,
@@ -432,6 +453,7 @@ var Builder = function() {
         '__convertSubfields': convertSubfields,
         '__buildMissingSubfields': buildMissingSubfields,
         '__buildField': buildField,
+        '__getSubfieldsFromExtraFields': getSubfieldsFromExtraFields,
         '__buildSubfield': buildSubfield,
         '__getMandatoryFieldsFromUnoptimizedTemplate': getMandatoryFieldsFromUnoptimizedTemplate,
         '__getMandatorySubfieldsFromUnoptimizedTemplate': getMandatorySubfieldsFromUnoptimizedTemplate,
@@ -439,6 +461,8 @@ var Builder = function() {
         '__listeAsObject': listAsObject,
         '__subfieldsInTemplate': subfieldsInTemplate,
         '__isFunction': isFunction,
-        '__isFaustEnabledForTemplate': isFaustEnabledForTemplate
+        '__isFaustEnabledForTemplate': isFaustEnabledForTemplate,
+        '__getExtraFieldsList': getExtraFieldsList,
+        '__removeDuplicatesFromArray': removeDuplicatesFromArray
     };
 }();
