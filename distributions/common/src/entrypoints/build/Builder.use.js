@@ -116,7 +116,6 @@ var Builder = function() {
     // convertField converts a field to the type indicated by the template, by
     // either removing not allowed subfields and adding mandatory subfields.
     // Returns undefined if field is not used.
-    // TODO: faustnumber, brug som buildrecord
     function convertField( template, field, faustProvider ) {
         Log.trace( "-> convertField" );
         var fieldName = field.name;
@@ -259,10 +258,14 @@ var Builder = function() {
             }
         } else {
             var tmpSubfields = getSubfieldsFromExtraFields(fieldName, extraFields);
+
             if (tmpSubfields.length > 0) {
-                for (var j = 0; j < tmpSubfields.length; j++) {
-                    field.subfields.push(buildSubfield(template, tmpSubfields[j], fieldName, faustProvider));
-                }
+                tmpSubfields.forEach(function (arg) {
+                    field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
+                });
+                // for (var j = 0; j < tmpSubfields.length; j++) {
+                //     field.subfields.push(buildSubfield(template, tmpSubfields[j], fieldName, faustProvider));
+                // }
             } else {
                 field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
             }
