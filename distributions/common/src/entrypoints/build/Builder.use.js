@@ -30,21 +30,18 @@ var Builder = function() {
         var result = {
             "fields": []
         };
-        // TODO: check om template er ok, ellers kast op, slet senere tjeks
         var template = templateProvider();
         var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate(template);
         var extraFields = getExtraFieldsList(template);
-        for (var j = 0; j < extraFields.length; j++) {
-            mandatoryFields.push(extraFields[j]["field"])
-        }
-        mandatoryFields = removeDuplicatesFromArray(mandatoryFields.sort());
-
-        var newField;
+        extraFields.forEach(function (currentValue) {
+            mandatoryFields.push(currentValue["field"])
+        });
+        mandatoryFields = removeDuplicatesFromArray(mandatoryFields);
         if (mandatoryFields !== undefined) {
-            for (var i = 0; i < mandatoryFields.length; i++) {
-                newField = buildField(template, mandatoryFields[i], faustProvider, extraFields);
-                result["fields"].push(newField);
-            }
+            mandatoryFields.forEach(function (currentElement) {
+                result["fields"].push(buildField(template, currentElement, faustProvider, extraFields));
+            })
+
         }
         return result;
     }
@@ -65,29 +62,28 @@ var Builder = function() {
     function convertRecord( templateProvider, record, faustProvider ) {
         Log.trace( "-> convertRecord" );
 
-        var result = {
-            "fields": []
-        };
-        var template = templateProvider();
+        var result = {"fields": []};
+
         // get list of mandatory fields
-        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( template );
+        var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( templateProvider() );
 
         // convert list of mandatory fields to object for easier access
         // brug true/false istedet for 0 og 1
         var mandatoryFieldsObject = listAsObject( mandatoryFields, false );
         var newField;
-        for ( var i = 0; i < record.fields.length; i++ ) {
-            newField = convertField( template, record.fields[i], faustProvider );
+        record.fields.forEach(function (currentValue) {
+            newField = convertField( templateProvider(), currentValue, faustProvider );
             if ( newField !== undefined ) {
                 result.fields.push( newField );
             }
             // if the field is mandatory we note that it's used
-            if ( mandatoryFieldsObject.hasOwnProperty( record.fields[i].name ) ) {
-                mandatoryFieldsObject[record.fields[i].name] = true;
+            if ( mandatoryFieldsObject.hasOwnProperty( currentValue.name ) ) {
+                mandatoryFieldsObject[currentValue.name] = true;
             }
-        }
+        });
+
         // here we add the remaining mandatory fields not present in the original record
-        var missingFields = buildMissingFields( template, faustProvider, mandatoryFieldsObject );
+        var missingFields = buildMissingFields( templateProvider(), faustProvider, mandatoryFieldsObject );
         result.fields = result.fields.concat( missingFields );
 
         // sort the new record before returning it
@@ -98,9 +94,7 @@ var Builder = function() {
     // function to sort the record fields
     function sortRecord( record ) {
         Log.trace( "-> sortRecord" );
-        var result = {
-            "fields": []
-        };
+        var result = {"fields": []};
         result.fields = record.fields.sort(sortRecordFunction);
         return result;
     }
@@ -109,8 +103,7 @@ var Builder = function() {
     // function( a, b ) { return a.name.localeCompare(b.name); }
     function sortRecordFunction( a, b ){
         Log.trace( "-> sortRecordFunction" );
-        var result = a.name.localeCompare(b.name);
-        return result;
+        return a.name.localeCompare(b.name);
     }
 
     // convertField converts a field to the type indicated by the template, by
@@ -175,7 +168,7 @@ var Builder = function() {
         var newField;
         var result = [];
         for ( var fieldKey in mandatoryFields ) {
-            if ( mandatoryFields[fieldKey] === false ) {
+            if ( mandatoryFields.hasOwnProperty(fieldKey) && mandatoryFields[fieldKey] === false ) {
                 newField = buildField( template, fieldKey, faustProvider );
                 result.push( newField );
             }
@@ -188,38 +181,32 @@ var Builder = function() {
     // mandatory fields that has been used
     function convertSubfields( template, field, faustProvider ) {
         Log.trace( "-> convertSubfields" );
-        var newSubfields = [];
         // list of allowed subfields
         var availableSubfieldsObject = subfieldsInTemplate( template, field.name );
-        var subfieldName;
-        var newSubfield;
         var result = {};
         var mandatorySubfieldsList = getMandatorySubfieldsFromUnoptimizedTemplate( template, field.name );
         var mandatorySubfieldsObject = listAsObject( mandatorySubfieldsList, false );
 
+        var newSubfields = [];
         // for each subfield in the records field we check if it is allowed
         // and if not we discard it
-        var subfields = field.subfields;
-        //TODO: brug for(var i = 0; ...
-        for ( var i in subfields ) {
-            if ( subfields.hasOwnProperty( i ) ) {
-                subfieldName = subfields[i].name;
-                if ( availableSubfieldsObject.hasOwnProperty( subfieldName ) ) {
-                    newSubfield = field.subfields[i];
-                    if ( field.name === "001" && subfieldName === "a" && isFaustEnabledForTemplate( template ) ) {
-                        newSubfield.value = faustProvider();
-                    }
-                    if ( newSubfield.hasOwnProperty( "value" ) === false ) {
-                        Log.debug("newSubfield.hasOwnProperty( \"value\" ) === false");
-                        newSubfield.value = "";
-                    }
-                    newSubfields.push( newSubfield );
-                    if ( mandatorySubfieldsObject.hasOwnProperty( subfieldName ) ) {
-                        mandatorySubfieldsObject[subfieldName] = true;
-                    }
+        // var subfields = field.subfields;
+        field.subfields.forEach(function (currentValue) {
+            // subfieldName = currentValue.name;
+            if (availableSubfieldsObject.hasOwnProperty(currentValue.name)) {
+                var newSubfield = currentValue;
+                if (field.name === "001" && currentValue.name === "a" && isFaustEnabledForTemplate(template)) {
+                    newSubfield.value = faustProvider();
+                }
+                if (newSubfield.hasOwnProperty("value") === false) {
+                    newSubfield.value = "";
+                }
+                newSubfields.push(newSubfield);
+                if (mandatorySubfieldsObject.hasOwnProperty(currentValue.name)) {
+                    mandatorySubfieldsObject[currentValue.name] = true;
                 }
             }
-        }
+        });
         result["subfields"] = newSubfields;
         result["mandatorySubfields"] = mandatorySubfieldsObject;
         return result;
@@ -227,14 +214,14 @@ var Builder = function() {
 
     // buildMissingSubfields builds a list of the mandatory subfields not used
     // in the original field
-    function buildMissingSubfields( template, mandatorySubfields, field, faustProvider ) {
-        Log.trace( "-> buildMissingSubfields" );
+    function buildMissingSubfields(template, mandatorySubfields, field, faustProvider) {
+        Log.trace("-> buildMissingSubfields");
         var newSubfields = [];
         var newSubfield;
-        for ( var subfieldKey in mandatorySubfields ) {
-            if ( mandatorySubfields[subfieldKey] === false ) {
-                newSubfield = buildSubfield( template, subfieldKey, field.name, faustProvider );
-                newSubfields.push( newSubfield );
+        for (var subfieldKey in mandatorySubfields) {
+            if (mandatorySubfields.hasOwnProperty(subfieldKey) && mandatorySubfields[subfieldKey] === false) {
+                newSubfield = buildSubfield(template, subfieldKey, field.name, faustProvider);
+                newSubfields.push(newSubfield);
             }
         }
         return newSubfields;
@@ -263,9 +250,6 @@ var Builder = function() {
                 tmpSubfields.forEach(function (arg) {
                     field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
                 });
-                // for (var j = 0; j < tmpSubfields.length; j++) {
-                //     field.subfields.push(buildSubfield(template, tmpSubfields[j], fieldName, faustProvider));
-                // }
             } else {
                 field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
             }
@@ -289,13 +273,13 @@ var Builder = function() {
     // as a parameter.
     // If the faustNumber parameter is not undefined, the subfield is part of
     // field 001 and will insert the faust number.
-    function buildSubfield( template, subfieldName, fieldName, faustProvider ) {
-        Log.trace( "-> buildSubfield" );
+    function buildSubfield(template, subfieldName, fieldName, faustProvider) {
+        Log.trace("-> buildSubfield");
         var subfield = {
             "name": subfieldName,
             "value": ""
         };
-        if ( subfieldName !== undefined && subfieldName !== "" ) {
+        if (subfieldName !== undefined && subfieldName !== "") {
             if (fieldName === "001" && subfieldName === "a" && isFaustEnabledForTemplate(template)) {
                 subfield.value = faustProvider();
             } else {
@@ -314,19 +298,19 @@ var Builder = function() {
 
     // getMandatoryFieldsFromTemplate returns an array of mandatory fields,
     // if any, from the template given as a parameter.
-    function getMandatoryFieldsFromUnoptimizedTemplate( template ) {
-        Log.trace( "-> getMandatoryFieldsFromUnoptimizedTemplate" );
+    function getMandatoryFieldsFromUnoptimizedTemplate(template) {
+        Log.trace("-> getMandatoryFieldsFromUnoptimizedTemplate");
         var mandatoryFields = [];
         // first read the mandatory field value
-        var mandatoryFieldValue = getMandatoryDefaultValueFromUnoptimizedTemplate( template, "field" );
-        for ( var fieldKey in template["fields"] ) {
-            if ( ( template["fields"][fieldKey].hasOwnProperty( "mandatory" ) &&
-                    template["fields"][fieldKey]["mandatory"] === true ) ||
-                    mandatoryFieldValue === true ) {
-                mandatoryFields.push( fieldKey );
+        var mandatoryFieldValue = getMandatoryDefaultValueFromUnoptimizedTemplate(template, "field");
+        for (var fieldKey in template["fields"]) {
+            if ((template["fields"].hasOwnProperty(fieldKey)
+                && template["fields"][fieldKey].hasOwnProperty("mandatory")
+                && template["fields"][fieldKey]["mandatory"] === true ) ||
+                mandatoryFieldValue === true) {
+                mandatoryFields.push(fieldKey);
             }
         }
-
         mandatoryFields.sort();
         return mandatoryFields;
     }
@@ -352,8 +336,7 @@ var Builder = function() {
 
     function getMandatoryDefaultValueFromUnoptimizedTemplate( template, type ) {
         Log.trace( "-> getMandatoryDefaultValueFromUnoptimizedTemplate" );
-        var mandatoryValue = template["defaults"][type]["mandatory"];
-        return mandatoryValue;
+        return template["defaults"][type]["mandatory"];
     }
 
     // converts an array to an object
@@ -407,25 +390,20 @@ var Builder = function() {
     }
 
     // returns an array with any extra fields defined in the template
-    function getExtraFieldsList( template ) {
-        Log.trace( "-> getExtraFieldsList" );
+    function getExtraFieldsList(template) {
+        Log.trace("-> getExtraFieldsList");
         var extraFields = [];
-        if ( template.hasOwnProperty( "settings" )
-            && template["settings"].hasOwnProperty( "extrafields" )
-            && Util.getType( template["settings"]["extrafields"] ) === "Array"
-            && template["settings"]["extrafields"].length > 0 ) {
+        if (template.hasOwnProperty("settings")
+            && template["settings"].hasOwnProperty("extrafields")
+            && Util.getType(template["settings"]["extrafields"]) === "Array"
+            && template["settings"]["extrafields"].length > 0) {
+
             var tmpFields = template["settings"]["extrafields"];
-            var tmpResult = [];
-            var tmpField;
-            for ( var i = 0; i < tmpFields.length; i++ ) {
-                tmpField = tmpFields[i];
-                if ( tmpField.length === 4 ) {
-                    tmpResult.push( {"field": tmpField.slice(0, 3), "subfield": tmpField.slice(3)} )
+            tmpFields.forEach(function (currentValue) {
+                if (currentValue.length === 4) {
+                    extraFields.push({"field": currentValue.slice(0, 3), "subfield": currentValue.slice(3)})
                 }
-            }
-            if (tmpResult.length > 0) {
-                extraFields = tmpResult;
-            }
+            });
         }
         return extraFields;
     }
@@ -434,13 +412,14 @@ var Builder = function() {
         Log.trace("-> removeDuplicatesFromArray");
         var uniqueArray = [];
         if (array !== undefined && array !== null && array.length > 0) {
+            var sortedArray = array.sort();
             var lastUsedField = "";
-            for (var j = 0; j < array.length; j++) {
-                if (lastUsedField !== array[j]) {
-                    uniqueArray.push(array[j]);
-                    lastUsedField = array[j];
+            sortedArray.forEach(function (currentValue) {
+                if (lastUsedField !== currentValue) {
+                    uniqueArray.push(currentValue);
+                    lastUsedField = currentValue;
                 }
-            }
+            });
         }
         return uniqueArray;
     }
