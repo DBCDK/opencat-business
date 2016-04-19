@@ -40,7 +40,7 @@ UnitTest.addFixture( "DefaultDoubleRecordHandler.checkAndSendMails", function() 
     SolrCore.clear();
 
     //-----------------------------------------------------------------------------
-    SolrCore.addQuery( "( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\"",
+    SolrCore.addQuery( "(( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.008a:2014", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2014" } ] ] } } } } );
     SolrCore.addAnalyse( "match.008a:2015", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2015" } ] ] } } } } );

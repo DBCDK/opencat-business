@@ -1049,11 +1049,13 @@ var DoubleRecordFinder = function(  ) {
             } else {
                 var query = queryElements.join( " or " );
             }
-            Log.debug( "Solr query: ", query );
 
             if( query === "" ) {
+                Log.debug( "Empty Solr query" );
                 return result = [];
             }
+            query = "(" + query + ") and marc.001b:870970";
+            Log.debug( "Solr query: ", query );
 
             var solr = Solr.search( solrUrl, query );
             for( var k = 0; k < solr.response.docs.length; k++ ) {

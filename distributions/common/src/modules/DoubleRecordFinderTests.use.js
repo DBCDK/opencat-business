@@ -512,7 +512,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSimpleLiterature", function() {
     Assert.equalValue( "Empty record", DoubleRecordFinder.__findSimpleLiterature( record, solrUrl ), [] );
 
     SolrCore.clear();
-    SolrCore.addQuery( "( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\"",
+    SolrCore.addQuery( "(( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.008a:2014", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2014" } ] ] } } } } );
     SolrCore.addAnalyse( "match.008a:2015", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2015" } ] ] } } } } );
@@ -542,7 +542,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findTechnicalLiterature", function() 
     Assert.equalValue( "Empty record", DoubleRecordFinder.__findTechnicalLiterature( record, solrUrl ), [] );
 
     SolrCore.clear();
-    SolrCore.addQuery( "( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\"",
+    SolrCore.addQuery( "(( match.008a:\"2014\" or match.008a:\"2015\" or match.008a:\"2016\" ) and match.009a:\"a\" and match.009g:\"xx\" and match.245a:\"antontilsoes\" and match.260b:\"ca?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.008a:2014", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2014" } ] ] } } } } );
     SolrCore.addAnalyse( "match.008a:2015", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2015" } ] ] } } } } );
@@ -569,7 +569,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findFictionBookMusic", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"a\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\"",
+    SolrCore.addQuery( "(match.009a:\"a\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:a", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "a" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -592,7 +592,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findComposedMaterials", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"v\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\"",
+    SolrCore.addQuery( "(match.009a:\"v\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.260b:\"fa?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:v", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "v" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -615,7 +615,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic538", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.538g:\"troffelspisernesmare?\"",
+    SolrCore.addQuery( "(match.009a:\"s\" and match.009g:\"xe\" and match.538g:\"troffelspisernesmare?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "s" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -637,9 +637,9 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusicGeneral", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.100a:\"3rdearexperience\" and match.245a:\"troffelspisernesmare?\"",
+    SolrCore.addQuery( "(match.009a:\"s\" and match.009g:\"xe\" and match.100a:\"3rdearexperience\" and match.245a:\"troffelspisernesmare?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
-    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.110a:\"3rdearexperience\" and match.245a:\"troffelspisernesmare?\"",
+    SolrCore.addQuery( "(match.009a:\"s\" and match.009g:\"xe\" and match.110a:\"3rdearexperience\" and match.245a:\"troffelspisernesmare?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "s" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -675,7 +675,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findMusic245", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"s\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\"",
+    SolrCore.addQuery( "(match.009a:\"s\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "s" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -701,7 +701,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
     SolrCore.addAnalyse( "match.021a:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.021a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "12345678" } ] ] } } } } );
     SolrCore.addAnalyse( "match.023ab:12345678", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "12345678" } ] ] } } } } );
     SolrCore.addAnalyse( "match.023ab:87654321", { responseHeader: { status: 0 }, analysis: { field_names: { "match.023ab": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "87654321" } ] ] } } } } );
-    SolrCore.addQuery( "match.021a:\"12345678\" or match.023ab:\"12345678\" or match.023ab:\"87654321\"",
+    SolrCore.addQuery( "(match.021a:\"12345678\" or match.023ab:\"12345678\" or match.023ab:\"87654321\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     record = RecordUtil.createFromString( [
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
@@ -722,7 +722,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.245ø:\"1cd\"",
+    SolrCore.addQuery( "(match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.245ø:\"1cd\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "r" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -746,7 +746,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimediaGeneral", fun
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.300e:\"2mapper402mikrokort\"",
+    SolrCore.addQuery( "(match.009a:\"r\" and match.009g:\"xe\" and match.245a:\"troffelspisernesmare?\" and match.300e:\"2mapper402mikrokort\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "r" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
@@ -771,9 +771,9 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSections", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.004a:\"s\" and match.014a:\"50002594\" and match.245n:\"3band\"",
+    SolrCore.addQuery( "(match.004a:\"s\" and match.014a:\"50002594\" and match.245n:\"3band\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
-    SolrCore.addQuery( "match.004a:\"s\" and match.014a:\"50002594\" and match.245a:\"griechenland\"",
+    SolrCore.addQuery( "(match.004a:\"s\" and match.014a:\"50002594\" and match.245a:\"griechenland\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.004a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.004a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "s" } ] ] } } } } );
     SolrCore.addAnalyse( "match.014a:5 000 259 4", { responseHeader: { status: 0 }, analysis: { field_names: { "match.014a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "50002594" } ] ] } } } } );
@@ -809,9 +809,9 @@ UnitTest.addFixture( "DoubleRecordFinder.__findVolumes", function() {
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery( "match.004a:\"b\" and match.014a:\"50002594\" and match.245g:\"3band\"",
+    SolrCore.addQuery( "(match.004a:\"b\" and match.014a:\"50002594\" and match.245g:\"3band\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
-    SolrCore.addQuery( "match.004a:\"b\" and match.014a:\"50002594\" and match.245a:\"griechenland\"",
+    SolrCore.addQuery( "(match.004a:\"b\" and match.014a:\"50002594\" and match.245a:\"griechenland\") and marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.004a:b", { responseHeader: { status: 0 }, analysis: { field_names: { "match.004a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "b" } ] ] } } } } );
     SolrCore.addAnalyse( "match.014a:5 000 259 4", { responseHeader: { status: 0 }, analysis: { field_names: { "match.014a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "50002594" } ] ] } } } } );
