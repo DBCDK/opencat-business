@@ -1157,6 +1157,15 @@
                 "x": {}
             }
         },
+        "d64": {
+            "subfields": {
+                "a": {},
+                "b": {},
+                "c": {
+                    "repeatable": false
+                }
+            }
+        },
         "d70": {
             "subfields": {
                 "a": {},
