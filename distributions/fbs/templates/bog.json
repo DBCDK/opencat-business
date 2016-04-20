@@ -5,7 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "260a", "440a" ]
+        "extrafields": [ "008a", "008d", "100a", "100h", "1004","260a", "260b", "260c", "300a", "440a", "652m", "700a", "700h", "7004" ]
     },
     "defaults":{
         "field":{
