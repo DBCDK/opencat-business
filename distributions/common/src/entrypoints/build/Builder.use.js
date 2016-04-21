@@ -228,7 +228,6 @@ var Builder = function() {
     }
 
     // buildField constructs a single field using the field name given as a parameter.
-    // If it is field 001 being constructed, the faust number (call to faustProvider method) is also used.
     function buildField(template, fieldName, faustProvider, extraFields) {
         Log.trace("-> buildField");
         var mandatorySubfields = getMandatorySubfieldsFromUnoptimizedTemplate(template, fieldName);
@@ -239,20 +238,16 @@ var Builder = function() {
             "subfields": []
         };
 
-        if (mandatorySubfields.length > 0) {
-            for (var i = 0; i < mandatorySubfields.length; i++) {
-                field.subfields.push(buildSubfield(template, mandatorySubfields[i], fieldName, faustProvider));
-            }
+        var tmpSubfields = getSubfieldsFromExtraFields(fieldName, extraFields);
+        if (mandatorySubfields.length > 0 || tmpSubfields.length > 0) {
+            mandatorySubfields.forEach(function (arg) {
+                field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
+            });
+            tmpSubfields.forEach(function (arg) {
+                field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
+            });
         } else {
-            var tmpSubfields = getSubfieldsFromExtraFields(fieldName, extraFields);
-
-            if (tmpSubfields.length > 0) {
-                tmpSubfields.forEach(function (arg) {
-                    field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
-                });
-            } else {
-                field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
-            }
+            field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
         }
         return field;
     }

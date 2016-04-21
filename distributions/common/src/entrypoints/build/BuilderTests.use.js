@@ -471,7 +471,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
             }
         },
         "settings": {
-            "extrafields": ["300a", "300b"]
+            "extrafields": ["300b"]
         },
         "fields": {
             "001": {
@@ -523,7 +523,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 "sorting": "abcdf",
                 "subfields": {
                     "a": {
-                        "mandatory": false,
+                        "mandatory": true,
                         "repeatable": false
                     }
                 }
