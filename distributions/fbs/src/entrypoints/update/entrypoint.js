@@ -4,6 +4,11 @@ use( "FBSUpdaterEntryPoint" );
 use( "FBSValidatorEntryPoint" );
 
 //-----------------------------------------------------------------------------
+function initTemplates( settings ) {
+    FBSValidatorEntryPoint.initTemplates( settings );
+}
+
+//-----------------------------------------------------------------------------
 function authenticateRecord( record, userId, groupId, settings ) {
     return FBSAuthenticator.authenticateRecord( record, userId, groupId, settings );
 }

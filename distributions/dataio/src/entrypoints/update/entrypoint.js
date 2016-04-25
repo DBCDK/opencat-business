@@ -4,6 +4,11 @@ use( "DBCUpdaterEntryPoint" );
 use( "DBCValidatorEntryPoint" );
 
 //-----------------------------------------------------------------------------
+function initTemplates( settings ) {
+    DBCValidatorEntryPoint.initTemplates( settings );
+}
+
+//-----------------------------------------------------------------------------
 function authenticateRecord( record, userId, groupId, settings ) {
     return DBCAuthenticator.authenticateRecord( record, userId, groupId, settings );
 }

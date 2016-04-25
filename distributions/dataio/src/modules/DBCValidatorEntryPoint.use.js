@@ -15,6 +15,13 @@ EXPORTED_SYMBOLS = [ 'DBCValidatorEntryPoint' ];
  * @name DBCValidatorEntryPoint
  */
 var DBCValidatorEntryPoint = function() {
+    function initTemplates( settings ) {
+        ResourceBundleFactory.init(settings);
+        TemplateContainer.setSettings(settings);
+
+        TemplateContainer.initTemplates();
+    }
+
     /**
      * Gets the names of the templates as an Array
      *
@@ -114,6 +121,7 @@ var DBCValidatorEntryPoint = function() {
     }
 
     return {
+        'initTemplates': initTemplates,
         'getValidateSchemas': getValidateSchemas,
         'checkTemplate': checkTemplate,
         'validateRecord': validateRecord

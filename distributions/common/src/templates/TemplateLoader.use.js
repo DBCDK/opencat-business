@@ -13,6 +13,8 @@ EXPORTED_SYMBOLS = [ 'TemplateLoader' ];
  * 
  */
 var TemplateLoader = function() {
+    var cache = undefined;
+
     /**
      * Loads and returns a template based on its name.
      * 
@@ -77,6 +79,8 @@ var TemplateLoader = function() {
 
     function __getObjectFromTemplate ( name, templateProvider ) {
         Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", templateProvider, " )" );
+        var watch = new StopWatch();
+
         try {
             var index = name.indexOf( "." );
             var templateName = name.substring( 0, index );
@@ -84,6 +88,7 @@ var TemplateLoader = function() {
 
             return getObjectByName( objName, load( templateName, templateProvider ) );
         } finally {
+            watch.stop();
             Log.trace( "Exit - TemplateLoader.__getObjectFromTemplate" );
         }
     }
@@ -121,6 +126,8 @@ var TemplateLoader = function() {
      */
     function __getObjectByName ( fullName, name, object ) {
         Log.trace( "Enter - TemplateLoader.__getObjectByName( '", fullName, "', '", name, "', ", object, " )" );
+        var watch = new StopWatch( "TemplateLoader.__getObjectByName" );
+
         try {
             if ( object === null ) {
             }
@@ -161,6 +168,7 @@ var TemplateLoader = function() {
 
             return __getObjectByName( fullName, name.substring( index + 1 ), obj );
         } finally {
+            watch.stop();
             Log.trace( "Exit - TemplateLoader.__getObjectByName" );
         }
     }

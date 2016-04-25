@@ -29,6 +29,30 @@ var TemplateContainer = function() {
 	}
 
     /**
+     * Loads and init all templates.
+     */
+    function initTemplates() {
+        Log.trace( "Enter - TemplateContainer.initTemplates()" );
+
+        try {
+            var templates = getTemplateNames();
+            for( var i = 0; i < templates.length; i++ ) {
+                var watch = new StopWatch( "javascript.env.create.templates." + templates[i].schemaName );
+
+                try {
+                    get( templates[i].schemaName )
+                }
+                finally {
+                    watch.stop();
+                }
+            }
+        }
+        finally {
+            Log.trace( "Exit - TemplateContainer.initTemplates()" );
+        }
+    }
+
+    /**
      * Gets the names of the templates as an Array
      * 
      * @return {Array} An Array with the names of the templates.
@@ -90,7 +114,15 @@ var TemplateContainer = function() {
      *         the requested template. Or undefined in case of an error. 
      */
     function loadTemplate( name ) {
-        return TemplateOptimizer.optimize( loadTemplateUnoptimized( name, settings ) );
+        var template = loadTemplateUnoptimized(name, settings);
+
+        var watch = new StopWatch( "TemplateOptimizer.optimize." + name );
+        try {
+            return TemplateOptimizer.optimize( template );
+        }
+        finally {
+            watch.stop();
+        }
     }
 
     /**
@@ -133,11 +165,14 @@ var TemplateContainer = function() {
      */
     function __loadUnoptimizedTemplate( name ) {
     	Log.trace( "Enter - __loadUnoptimizedTemplate( name )" );
+        var watch = new StopWatch();
+        var watchTag = "javascript.TemplateContainer.__loadUnoptimizedTemplate." + name;
 
     	try {
 	        var result = templatesUnoptimized[ name ];
 
 	        if( result === undefined ) {
+                watchTag += ".miss";
                 var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
 
 	            if( !settings.containsKey( 'javascript.basedir' ) ) {
@@ -184,10 +219,14 @@ var TemplateContainer = function() {
 	                templatesUnoptimized[ name ] = result;
 	            }
 	        }
+            else {
+                watchTag += ".hit";
+            }
 
 	        return result;
 		}
 		finally {
+            watch.stop( watchTag );
 			Log.trace( "Exit - __loadUnoptimizedTemplate( name, settings )" );
 		}
     }
@@ -242,6 +281,7 @@ var TemplateContainer = function() {
 
     return {
     	'setSettings': setSettings,
+        'initTemplates': initTemplates,
         'getTemplateNames': getTemplateNames,
         'loadTemplate': loadTemplate,
         'get': get,

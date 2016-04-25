@@ -16,6 +16,13 @@ EXPORTED_SYMBOLS = [ 'FBSValidatorEntryPoint' ];
  * @name FBSValidatorEntryPoint
  */
 var FBSValidatorEntryPoint = function() {
+    function initTemplates( settings ) {
+        ResourceBundleFactory.init(settings);
+        TemplateContainer.setSettings(settings);
+
+        TemplateContainer.initTemplates();
+    }
+
     /**
      * Gets the names of the templates as an Array
      *
@@ -115,6 +122,7 @@ var FBSValidatorEntryPoint = function() {
     }
 
     return {
+        'initTemplates': initTemplates,
         'getValidateSchemas': getValidateSchemas,
         'checkTemplate': checkTemplate,
         'validateRecord': validateRecord
