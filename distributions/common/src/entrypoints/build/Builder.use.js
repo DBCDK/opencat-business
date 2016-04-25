@@ -256,9 +256,9 @@ var Builder = function() {
     function getSubfieldsFromExtraFields(fieldName, extraFields) {
         Log.trace("-> getSubfieldsFromExtraFields");
         var res = [];
-        for (var i = 0; i < extraFields.length; i++) {
-            if (extraFields[i]["field"] === fieldName) {
-                res.push(extraFields[i]["subfield"]);
+        for (var field in extraFields) {
+            if (extraFields[field]["field"] === fieldName) {
+                res.push(extraFields[field]["subfield"]);
             }
         }
         return res;
