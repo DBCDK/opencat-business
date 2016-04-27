@@ -158,23 +158,11 @@
             "subfields":{
                 "a":{
                     "mandatory":true,
-                    "repeatable":false,
-                    "values":[ "a", "b", "c", "d", "e", "f", "g", "m", "n", "p", "r", "s", "t", "u", "v" ]
+                    "values": "Lister.fields.codes.subfields.general_mattype.values"
                 },
                 "g":{
                     "mandatory":true,
-                    "repeatable":false,
-                    "values":[
-                        "ed", "ef", "eg", "ep", "es", "et",
-                        "ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt", "gx",
-                        "ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy",
-                        "ia", "ic", "if", "ih", "ik", "ip", "is", "it",
-                        "kb", "kt", "mj", "nh", "np",
-                        "tb", "tc", "tk", "tg",	"th", "ti", "to", "tu",
-                        "ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv",
-                        "wf", "wt", "wu",
-                        "xa", "xb", "xc", "xd", "xe", "xg", "xh", "xi", "xj", "xk", "xl", "xm", "xn", "xo", "xx", "xy"
-                    ]
+                    "values": "Lister.fields.codes.subfields.specific_mattype.values"
                 },
                 "b": "Lister.fields.codes.subfields.general_mattype",
                 "h": "Lister.fields.codes.subfields.specific_mattype"
