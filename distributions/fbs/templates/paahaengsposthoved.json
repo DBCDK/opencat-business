@@ -165,9 +165,12 @@
             "subfields":{
                 "a":{
                     "mandatory":true,
-                    "values":[ "a", "b", "c", "d", "e", "f", "g", "m", "n", "p", "r", "s", "t", "u", "v" ]
-				},
-                "g": "Lister.fields.codes.subfields.specific_mattype",
+                    "values": "Lister.fields.codes.subfields.general_mattype.values"
+                },
+                "g":{
+                    "mandatory":true,
+                    "values": "Lister.fields.codes.subfields.specific_mattype.values"
+                },
                 "b": "Lister.fields.codes.subfields.general_mattype",
                 "h": "Lister.fields.codes.subfields.specific_mattype"
 			}
