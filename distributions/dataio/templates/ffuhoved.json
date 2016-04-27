@@ -150,7 +150,10 @@
             "mandatory": true,
             "repeatable":false,
             "subfields":{
-                "a": "Lister.fields.codes.subfields.general_mattype",
+                "a":{
+                    "mandatory": true,
+                    "values": "Lister.fields.codes.subfields.general_mattype.values"
+                },
                 "g": "Lister.fields.codes.subfields.specific_mattype",
                 "b": "Lister.fields.codes.subfields.general_mattype",
                 "h": "Lister.fields.codes.subfields.specific_mattype"

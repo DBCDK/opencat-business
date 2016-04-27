@@ -157,7 +157,8 @@
             "mandatory": true,
             "repeatable":false,
             "subfields":{
-                "a": {
+                "a":{
+                    "mandatory": true,
                     "values": [ "c", "d", "m", "p", "r", "s", "t" ]
                 },
                 "g": "Lister.fields.codes.subfields.specific_mattype",
