@@ -242,9 +242,20 @@ var TemplateContainer = function() {
      * @return {Object} A json object that contains the configuration of
      *         the requested template. Or undefined in case of an error. 
      */
-    function loadTemplateUnoptimized( name ) {
-        return TemplateLoader.load( name, __loadUnoptimizedTemplate );
-    };
+    function loadTemplateUnoptimized(name) {
+        var unoptimizedTemplate = TemplateLoader.load(name, __loadUnoptimizedTemplate);
+        for (var field in unoptimizedTemplate.fields) {
+            if (unoptimizedTemplate.fields.hasOwnProperty(field) && unoptimizedTemplate.fields[field].hasOwnProperty("subfields")) {
+                if (!unoptimizedTemplate.fields[field].subfields.hasOwnProperty("\u00E5")) {
+                    unoptimizedTemplate.fields[field].subfields["\u00E5"] = {
+                        "mandatory": false,
+                        "repeatable": false
+                    };
+                }
+            }
+        }
+        return unoptimizedTemplate;
+    }
 
     /**
      * Returns the unoptimized template by name.
