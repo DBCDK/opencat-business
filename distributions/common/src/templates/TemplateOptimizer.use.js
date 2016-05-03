@@ -177,12 +177,15 @@ var TemplateOptimizer = function() {
                 Log.debug("Subfield rules (", fieldName, " *", name, "): " + __formatRuleNames( result.subfields[name].rules ) );
 
                 if (sf.mandatory === true) {
+                    Log.debug("Push mandatory");
                     mandatoryNames.push(name);
                 }
 
                 if (sf.repeatable === false) {
+                    Log.debug("Push repeatable");
                     repeatableNames.push(name);
                 }
+                Log.debug("Loop for");
             }
 
             // Setup predefined rules in field.
