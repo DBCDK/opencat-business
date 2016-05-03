@@ -79,7 +79,7 @@ var TemplateLoader = function() {
 
     function __getObjectFromTemplate ( name, templateProvider ) {
         Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", templateProvider, " )" );
-        var watch = new StopWatch();
+        var watch = new StopWatch("__getObjectFromTemplate");
 
         try {
             var index = name.indexOf( "." );
