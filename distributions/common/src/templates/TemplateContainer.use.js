@@ -244,16 +244,8 @@ var TemplateContainer = function() {
      */
     function loadTemplateUnoptimized(name) {
         var unoptimizedTemplate = TemplateLoader.load(name, __loadUnoptimizedTemplate);
-        for (var field in unoptimizedTemplate.fields) {
-            if (unoptimizedTemplate.fields.hasOwnProperty(field) && unoptimizedTemplate.fields[field].hasOwnProperty("subfields")) {
-                if (!unoptimizedTemplate.fields[field].subfields.hasOwnProperty("\u00E5")) {
-                    unoptimizedTemplate.fields[field].subfields["\u00E5"] = {
-                        "mandatory": false,
-                        "repeatable": false
-                    };
-                }
-            }
-        }
+        __addDanishLetterAaToTemplate(unoptimizedTemplate);
+        __addUppercaseLetterToTemplate(unoptimizedTemplate);
         return unoptimizedTemplate;
     }
 
@@ -277,18 +269,74 @@ var TemplateContainer = function() {
     }
 
     // Function used to test templates, DO NOT USE
-    function testLoadOfTemplateDoNotUse( name ) {
-        var template = TemplateLoader.load( name, __testLoadOptimizedTemplateDoNotUse );
-        var res = TemplateOptimizer.optimize( template );
-        return res;
+    function testLoadOfTemplateDoNotUse(name) {
+        var template = TemplateLoader.load(name, __testLoadOptimizedTemplateDoNotUse);
+        return TemplateOptimizer.optimize(template);
     }
 
-    function __testLoadOptimizedTemplateDoNotUse( name ) {
-        var stringContent = System.readFile( name + ".json" );
-        var jsonContent = JSON.parse(stringContent);
-        return jsonContent;
+    function __testLoadOptimizedTemplateDoNotUse(name) {
+        var stringContent = System.readFile(name + ".json");
+        return JSON.parse(stringContent);
     }
 
+    function __addDanishLetterAaToTemplate(unoptimizedTemplate) {
+        for (var field in unoptimizedTemplate.fields) {
+            if (unoptimizedTemplate.fields.hasOwnProperty(field) && unoptimizedTemplate.fields[field].hasOwnProperty("subfields")) {
+                if (!unoptimizedTemplate.fields[field].subfields.hasOwnProperty("\u00E5")) {
+                    unoptimizedTemplate.fields[field].subfields["\u00E5"] = {
+                        "mandatory": false,
+                        "repeatable": false
+                    };
+                }
+            }
+        }
+    }
+
+    function __addUppercaseLetterToTemplate(unoptimizedTemplate) {
+        // var uppercaseSubfields;
+        // var foundRule;
+        // for (var field in unoptimizedTemplate.fields) {
+        //     uppercaseSubfields = [];
+        //     // First create list of all missing uppercase letters
+        //     if (unoptimizedTemplate.fields.hasOwnProperty(field) && unoptimizedTemplate.fields[field].hasOwnProperty("subfields")) {
+        //         for (var subfield in unoptimizedTemplate.fields[field].subfields) {
+        //             if (unoptimizedTemplate.fields[field].subfields.hasOwnProperty(subfield)) {
+        //                 if (subfield >= 'a' && subfield <= 'z' && subfield !== "\u00E5") {
+        //                     if (!unoptimizedTemplate.fields[field].subfields.hasOwnProperty(subfield.toUpperCase())) {
+        //                         uppercaseSubfields.push(subfield.toUpperCase());
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         for (var newUpperCaseSubfield)
+        //          TODO: add newUpperCaseSubfield array content to unoptimizedTemplate.fields[field].subfields object
+        //     }
+        //
+        //     // Check if upperCaseCheck rule is present
+        //     if (uppercaseSubfields.length > 0) {
+        //         foundRule = false;
+        //         if (unoptimizedTemplate.fields.hasOwnProperty(field) && unoptimizedTemplate.fields[field].hasOwnProperty("rules")) {
+        //             for (var rule in unoptimizedTemplate.fields[field].rules) {
+        //                 if (unoptimizedTemplate.fields[field].rules[rule].hasOwnProperty("type") && !foundRule) {
+        //                     if (unoptimizedTemplate.fields[field].rules[rule]["type"] === "FieldRules.upperCaseCheck") {
+        //                         foundRule = true;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //
+        //     // Add upperCaseCheck rule if not present
+        //     if (!foundRule) {
+        //         if (unoptimizedTemplate.fields.hasOwnProperty(field)) {
+        //             if (!unoptimizedTemplate.fields[field].hasOwnProperty("rules")) {
+        //                 unoptimizedTemplate.fields[field].rules = [];
+        //             }
+        //             unoptimizedTemplate.fields[field].rules.push({"type": "FieldRules.upperCaseCheck"});
+        //         }
+        //     }
+        // }
+    }
 
     return {
     	'setSettings': setSettings,
