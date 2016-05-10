@@ -38,9 +38,8 @@ var TemplateContainer = function () {
             var templates = getTemplateNames();
             for ( var i = 0; i < templates.length; i++ ) {
                 var watch = new StopWatch( "javascript.env.create.templates." + templates[i].schemaName );
-
                 try {
-                    get( templates[i].schemaName )
+                    get( templates[i].schemaName );
                 }
                 finally {
                     watch.stop();
@@ -264,7 +263,6 @@ var TemplateContainer = function () {
                 templatesUnoptimized[name] = result;
             }
         }
-
         return result;
     }
 
@@ -281,56 +279,107 @@ var TemplateContainer = function () {
     }
 
     function __addDanishLetterAaToTemplate ( unoptimizedTemplate ) {
-        for ( var field in unoptimizedTemplate.fields ) {
-            if ( unoptimizedTemplate.fields.hasOwnProperty( field ) && unoptimizedTemplate.fields[field].hasOwnProperty( "subfields" ) ) {
-                if ( !unoptimizedTemplate.fields[field].subfields.hasOwnProperty( "\u00E5" ) ) {
-                    unoptimizedTemplate.fields[field].subfields["\u00E5"] = {
-                        "mandatory": false,
-                        "repeatable": false
-                    };
+        Log.trace( "Entering __addDanishLetterAaToTemplate " );
+        try {
+            for ( var field in unoptimizedTemplate.fields ) {
+                if ( unoptimizedTemplate.fields.hasOwnProperty( field ) && unoptimizedTemplate.fields[field].hasOwnProperty( "subfields" ) ) {
+                    if ( !unoptimizedTemplate.fields[field].subfields.hasOwnProperty( "getAaTemplate" ) ) {
+                        unoptimizedTemplate.fields[field].subfields["\u00E5"] = {
+                            "mandatory": false,
+                            "repeatable": false
+                        };
+                    }
                 }
             }
+        } finally {
+            Log.trace( "Exit __addDanishLetterAaToTemplate " );
+        }
+    }
+
+    function __appendRuleToField ( field ) {
+        Log.trace( "Entering __appendRuleToField : " );
+        try {
+            if ( field.hasOwnProperty( "rules" ) ) {
+                field["rules"].push( {"type": "FieldRules.upperCaseCheck"} );
+            } else {
+                field["rules"] = [{"type": "FieldRules.upperCaseCheck"}];
+            }
+        } finally {
+            Log.trace( "Exit __appendRuleToField : " );
+        }
+    }
+
+    function __addUppercaseLetterToTemplate ( unoptimizedTemplate ) {
+        Log.trace( "Entering __addUppercaseLetterToTemplate : " );
+        try {
+            var fieldsWithLowerCaseSubfields = __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields( unoptimizedTemplate );
+            for ( var fieldKey in fieldsWithLowerCaseSubfields ) {
+                __appendRuleToField( unoptimizedTemplate.fields[fieldKey] );
+                for ( var subfieldKey in fieldsWithLowerCaseSubfields[fieldKey] ) {
+                    unoptimizedTemplate.fields[fieldKey]["subfields"][subfieldKey] = fieldsWithLowerCaseSubfields[fieldKey][subfieldKey];
+                }
+            }
+        } finally {
+            Log.trace( "Exit  __addUppercaseLetterToTemplate : " );
+        }
+    }
+
+    function __getDefaultSubfieldRepeatable ( unoptimizedTemplate ) {
+        Log.trace( "Entering __getDefaultSubfieldRepeatable : " );
+        var ret = {};
+        try {
+            if ( unoptimizedTemplate.hasOwnProperty( "defaults" ) ) {
+                if ( unoptimizedTemplate["defaults"].hasOwnProperty( "subfield" ) ) {
+                    if ( unoptimizedTemplate["defaults"]["subfield"].hasOwnProperty( "repeatable" ) ) {
+                        return ret = unoptimizedTemplate["defaults"]["subfield"]["repeatable"];
+                    }
+                }
+            }
+            return {};
+        } finally {
+            Log.trace( "Exit __getDefaultSubfieldRepeatable : " + JSON.stringify( ret ) );
         }
     }
 
 
-    function __addUppercaseLetterToTemplate ( unoptimizedTemplate ) {
-        var fieldsWithLowerCaseSubfields = __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields( unoptimizedTemplate )
-        for ( var fieldKey in fieldsWithLowerCaseSubfields ) {
-            for ( var subfieldKey in fieldsWithLowerCaseSubfields[fieldKey] ) {
-                unoptimizedTemplate.fields[fieldKey]["subfields"][subfieldKey] = fieldsWithLowerCaseSubfields[fieldKey][subfieldKey]
+    function __getRepeatableValue ( field, subfield, unoptimizedTemplate ) {
+        Log.trace( "Entering __getRepeatableValue : " );
+        var ret;
+        try {
+            var repeatableDefaultVal = __getDefaultSubfieldRepeatable( unoptimizedTemplate );
+            if ( field.subfields[subfield].hasOwnProperty( "repeatable" ) ) {
+                return ret = {"repeatable": field.subfields[subfield]["repeatable"]};
+            } else {
+                return ret = {"repeatable": repeatableDefaultVal};
             }
+        } finally {
+            Log.trace( "Exit __getRepeatableValue : " + JSON.stringify( ret ) );
         }
     }
 
     function __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields ( unoptimizedTemplate ) {
-        var repeatableDefaultVal = unoptimizedTemplate["defaults"]["subfield"]["repeatable"];
-        var fieldsWithLowerCaseSubfields = {};
-
-        function __getRepeatableValue ( field, subfield ) {
-            if ( field.subfields[subfield].hasOwnProperty( "repeatable" ) ) {
-                return {"repeatable": field.subfields[subfield]["repeatable"]};
-            } else {
-                return {"repeatable": repeatableDefaultVal};
-            }
-        }
-
-        for ( var field in unoptimizedTemplate.fields ) {
-            if ( unoptimizedTemplate.fields.hasOwnProperty( field ) && unoptimizedTemplate.fields[field].hasOwnProperty( "subfields" ) ) {
-                for ( var subfield in unoptimizedTemplate.fields[field].subfields ) {
-                    if ( unoptimizedTemplate.fields[field].subfields.hasOwnProperty( subfield ) ) {
-                        if ( subfield.match( /[a-z]|\u00E6|\u00f8/ ) ) {
-                            var subfieldUpper = subfield.toUpperCase();
-                            if (!fieldsWithLowerCaseSubfields.hasOwnProperty( field)) {
-                                fieldsWithLowerCaseSubfields[field]={};
+        Log.trace( "Entering __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields : " );
+        var ret;
+        try {
+            var fieldsWithLowerCaseSubfields = {};
+            for ( var field in unoptimizedTemplate.fields ) {
+                if ( unoptimizedTemplate.fields.hasOwnProperty( field ) && unoptimizedTemplate.fields[field].hasOwnProperty( "subfields" ) ) {
+                    for ( var subfield in unoptimizedTemplate.fields[field].subfields ) {
+                        if ( unoptimizedTemplate.fields[field].subfields.hasOwnProperty( subfield ) ) {
+                            if ( subfield.match( /[a-z]|\u00E6|\u00f8/ ) ) {
+                                if ( !fieldsWithLowerCaseSubfields.hasOwnProperty( field ) ) {
+                                    fieldsWithLowerCaseSubfields[field] = {};
+                                }
+                                fieldsWithLowerCaseSubfields[field][subfield.toUpperCase()] = __getRepeatableValue( unoptimizedTemplate.fields[field], subfield, unoptimizedTemplate );
                             }
-                            fieldsWithLowerCaseSubfields[field][subfieldUpper] = __getRepeatableValue( unoptimizedTemplate.fields[field], subfield )
                         }
                     }
                 }
             }
+            return ret = fieldsWithLowerCaseSubfields;
+        } finally {
+            Log.trace( "Exit __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields : " + JSON.stringify( ret ) );
         }
-        return fieldsWithLowerCaseSubfields;
     }
 
 
@@ -342,7 +391,167 @@ var TemplateContainer = function () {
         'get': get,
         'loadTemplateUnoptimized': loadTemplateUnoptimized,
         'getUnoptimized': getUnoptimized,
-        'testLoadOfTemplateDoNotUse': testLoadOfTemplateDoNotUse
+        'testLoadOfTemplateDoNotUse': testLoadOfTemplateDoNotUse,
+        'onlyForTest__addUppercaseLetterToTemplate': __addUppercaseLetterToTemplate,
+        'onlyForTest__addDanishLetterAaToTemplate': __addDanishLetterAaToTemplate
     }
 
 }();
+
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "TemplateContainer.__addUppercaseLetterToTemplate", function () {
+
+    function getUppercaseTemplates () {
+        return {
+            "defaults": {
+                "subfield": {
+                    "mandatory": false,
+                    "repeatable": true
+                }
+            },
+            "fields": {
+                "002": {
+                    "subfields": {
+                        "a": {
+                            "mandatory": true,
+                            "repeatable": false
+                        },
+                        "b": {
+                            "mandatory": true
+                        },
+                        "A": {
+                            "repeatable": false
+                        },
+                        "B": {
+                            "repeatable": true
+                        }
+                    },
+                    "rules": [{"type": "FieldRules.upperCaseCheck"}]
+                }
+            }
+        }
+    }
+
+    function getLowerCaseTemplateNoUppercaseFieldsNoRules () {
+        return {
+            "defaults": {
+                "subfield": {
+                    "mandatory": false,
+                    "repeatable": true
+                }
+            },
+            "fields": {
+                "002": {
+                    "subfields": {
+                        "a": {
+                            "mandatory": true,
+                            "repeatable": false
+                        },
+                        "b": {
+                            "mandatory": true,
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    function getLowerCaseTemplateWithUppercaseFieldsNoRules () {
+        return {
+            "defaults": {
+                "subfield": {
+                    "mandatory": false,
+                    "repeatable": true
+                }
+            },
+            "fields": {
+                "002": {
+                    "subfields": {
+                        "a": {
+                            "mandatory": true,
+                            "repeatable": false
+                        },
+                        "b": {
+                            "mandatory": true
+                        },
+                        "B": {
+                            "repeatable": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    var lowerCaseTemplate = getLowerCaseTemplateNoUppercaseFieldsNoRules();
+    TemplateContainer.onlyForTest__addUppercaseLetterToTemplate( lowerCaseTemplate );
+    Assert.equalValue( "TemplateContainer.onlyForTest__addUppercaseLetterToTemplate()", JSON.stringify( lowerCaseTemplate ), JSON.stringify( getUppercaseTemplates() ) );
+
+    var lowerCaseTemplateWithUppercase = getLowerCaseTemplateWithUppercaseFieldsNoRules();
+    TemplateContainer.onlyForTest__addUppercaseLetterToTemplate( lowerCaseTemplateWithUppercase );
+    Assert.equal( "TemplateContainer.onlyForTest__addUppercaseLetterToTemplate()", Object.keys(lowerCaseTemplateWithUppercase["fields"]["002"]["subfields"] ).sort(), Object.keys(getUppercaseTemplates()["fields"]["002"]["subfields"] ).sort() );
+} );
+
+UnitTest.addFixture( "TemplateContainer.onlyForTest__addDanishLetterAaToTemplate", function () {
+
+    function getAaTemplate () {
+        return {
+            "defaults": {
+                "subfield": {
+                    "mandatory": false,
+                    "repeatable": true
+                }
+            },
+            "fields": {
+                "002": {
+                    "subfields": {
+                        "a": {
+                            "mandatory": true,
+                            "repeatable": false
+                        },
+                        "b": {
+                            "mandatory": true
+                        },
+                        // getAaTemplate
+                        "\u00E5": {
+                            "mandatory": false,
+                            "repeatable": false
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function getLowerCaseTemplate () {
+        return {
+            "defaults": {
+                "subfield": {
+                    "mandatory": false,
+                    "repeatable": true
+                }
+            },
+            "fields": {
+                "002": {
+                    "subfields": {
+                        "a": {
+                            "mandatory": true,
+                            "repeatable": false
+                        },
+                        "b": {
+                            "mandatory": true,
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    var lowerCaseTemplate = getLowerCaseTemplate();
+    TemplateContainer.onlyForTest__addDanishLetterAaToTemplate( lowerCaseTemplate );
+
+    Assert.equalValue( "TemplateContainer.onlyForTest__addUppercaseLetterToTemplate()", JSON.stringify( lowerCaseTemplate, undefined, 4 ), JSON.stringify( getAaTemplate(),undefined, 4 ) );
+} );
