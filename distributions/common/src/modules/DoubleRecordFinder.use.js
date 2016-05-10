@@ -1045,16 +1045,16 @@ var DoubleRecordFinder = function(  ) {
 
             query = "";
             if ( andingTogether ) {
-                var query = queryElements.join( " and " );
+                var query = queryElements.join( " AND " );
             } else {
-                var query = queryElements.join( " or " );
+                var query = queryElements.join( " OR " );
             }
 
             if( query === "" ) {
                 Log.debug( "Empty Solr query" );
                 return result = [];
             }
-            query = "(" + query + ") and marc.001b:870970";
+            query = "(" + query + ") AND marc.001b:870970";
             Log.debug( "Solr query: ", query );
 
             var solr = Solr.search( solrUrl, query );
@@ -1124,7 +1124,7 @@ var DoubleRecordFinder = function(  ) {
                 sf = new Subfield( subfield.name, ( year + 1 ).toString() );
                 array.push( __querySubfieldFormatter( field, sf ) );
 
-                return "( " + array.join( " or " ) + " )";
+                return "( " + array.join( " OR " ) + " )";
             }
         }
         finally {
