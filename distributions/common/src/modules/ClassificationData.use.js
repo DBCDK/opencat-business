@@ -437,35 +437,6 @@ var ClassificationData = function() {
         }
     }
 
-    function __hasFieldByNameChangedToOtherField( oldMarc, newMarc, oldFieldName, newFieldName, valueFunc, ignoreSubfieldsMatcher ) {
-        Log.trace( "Enter - ClassificationData.__hasFieldByNameChanged()" );
-
-        var result = undefined;
-        try {
-            var oldField = undefined;
-            var newField = undefined;
-
-            if (oldMarc.existField(new RegExp(oldFieldName))) {
-                oldField = oldMarc.field(oldFieldName);
-            }
-            if (newMarc.existField(new RegExp(newFieldName))) {
-                newField = newMarc.field(newFieldName);
-            }
-
-            Log.debug( "Old fieldname: ", oldFieldName );
-            Log.debug( "New fieldname: ", newFieldName );
-            Log.debug( "ignoreSubfieldsMatcher: ", uneval( ignoreSubfieldsMatcher ) );
-            Log.debug( "oldField: ", oldField === undefined ? "undefined" : oldField.toString() );
-            Log.debug( "newField: ", newField === undefined ? "undefined" : newField.toString() );
-
-            return result = __hasFieldChanged(oldField, newField, valueFunc, ignoreSubfieldsMatcher) ||
-                __hasFieldChanged(newField, oldField, valueFunc, ignoreSubfieldsMatcher);
-        }
-        finally {
-            Log.trace( "Exit - ClassificationData.__hasFieldByNameChanged(): ", result );
-        }
-    }
-
     function __hasSubfieldChangedMatcher( oldMarc, newMarc, fieldmatcher, subfieldmatcher, oldValueMatcher, newValueMatcher ) {
         Log.trace( "Enter - ClassificationData.__hasSubfieldChangedMatcher()" );
 

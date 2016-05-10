@@ -56,17 +56,14 @@ var RecategorizationNoteFieldFactory = function() {
 
         try {
             var bundle = __loadBundle();
-
             var field;
             var spec = undefined;
 
             field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "038", /a/ );
             if( field !== undefined ) {
                 spec = {sepSpec: [], valueSpec: {}};
-            }
-            else {
+            } else {
                 field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "039", /a|b/ );
-
                 if( field !== undefined ) {
                     spec = {
                         sepSpec: [
@@ -83,8 +80,7 @@ var RecategorizationNoteFieldFactory = function() {
                 var message = ResourceBundle.getStringFormat(bundle, "note.material", ISBDFieldFormater.formatField(field, spec));
 
                 noteField.append("i", message.trim());
-            }
-            else {
+            } else {
                 var message = ResourceBundle.getStringFormat(bundle, "note.material", "" );
 
                 noteField.append("i", message.trim());

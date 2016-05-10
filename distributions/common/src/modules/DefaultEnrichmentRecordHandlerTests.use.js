@@ -247,7 +247,8 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.updateRecord", function() {
     expected  = RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *r n *a e\n" +
-        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()
+        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString() +"\n" +
+        "y08 00 *a UPDATE posttypeskift"
     );
     Assert.equalValue( "New 512-note: 004a=e had 004a=b", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
 
@@ -269,7 +270,8 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.updateRecord", function() {
     expected  = RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *r n *a b\n" +
-        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()
+        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()+"\n" +
+        "y08 00 *a UPDATE posttypeskift"
     );
     Assert.equalValue( "New 512-note: 004a=b had 004a=e", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
 
@@ -292,7 +294,8 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.updateRecord", function() {
     expected  = RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *r n *a e\n" +
-        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()
+        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()+"\n" +
+        "y08 00 *a UPDATE posttypeskift"
     );
     Assert.equalValue( "New 512-note: Current common record has 008t=p", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
 
@@ -315,7 +318,8 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.updateRecord", function() {
     expected  = RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
         "004 00 *r n *a e\n" +
-        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()
+        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()+"\n" +
+        "y08 00 *a UPDATE posttypeskift"
     );
     Assert.equalValue( "New 512-note: Updating common record has 008t=p", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
 } );
