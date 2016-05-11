@@ -57,31 +57,6 @@
                 "t": "DanMarc2.fields.001.subfields.t"
             }
         },
-        "002": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkFaust"
-                        }
-                    ]
-                },
-                "b": "Lister.fields.codes.subfields.libraries.002b",
-                "c": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkFaust"
-                        }
-                    ]
-                },
-                "d": "DanMarc2.fields.002.subfields.d",
-                "t": "DanMarc2.fields.002.subfields.t",
-                "x": "DanMarc2.fields.002.subfields.x"
-            }
-        },
         "004": "DanMarc2.fields.004",
         "005": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8.htm",
