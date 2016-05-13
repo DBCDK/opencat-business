@@ -137,7 +137,7 @@ var FBSAuthenticator = function() {
             var recId = correctedRecord.getValue( /001/, /a/ );
 
             if( !RawRepoClient.recordExists( recId, UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) ) {
-                Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.DBC_ENRICHMENT_AGENCYID, "] does not exist." );
+                Log.debug( "DBC enrichment record [", recId, ":", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, "] does not exist." );
                 dbcEnrichmentRecord = new Record;
 
                 var idField = record.field( "001" ).clone();
