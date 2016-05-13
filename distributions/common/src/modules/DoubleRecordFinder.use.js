@@ -1157,10 +1157,10 @@ var DoubleRecordFinder = function(  ) {
                 // hvis den uklippede men trimmede strengs længde er større end ønsket længde skal der trunkes
                 var value1 = value.substr(0, valueLength );
                 if ( value.length > valueLength ) {
-                    value1 = value1 + "?";
+                    value1 = value1 + "*";
                 }
 
-                return result = "match." + field.name + subfield.name + ":\"" + value1 + "\"";
+                return result = "match." + field.name + subfield.name + ":" + value1;
             }
         }
         finally {
