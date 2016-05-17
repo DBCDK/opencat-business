@@ -1,6 +1,6 @@
 {
   "request" : {
-    "urlPattern" : "/solr/raapost-index/select\\?q=marc\\.002a%3A%22([0-9]|\\+)+%22&wt=json",
+    "urlPattern" : "/solr/raapost-index/select\\?q=marc\\.002a%3A%22([0-9]|\\+)+%22\\+AND\\+marc\\.001b%3A870970&wt=json",
     "method" : "GET"
   },
   "response" : {
