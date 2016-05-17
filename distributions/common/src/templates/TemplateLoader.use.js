@@ -1,9 +1,8 @@
-//-----------------------------------------------------------------------------
 use( "Log" );
 use( "StopWatch" );
-//-----------------------------------------------------------------------------
+
 EXPORTED_SYMBOLS = [ 'TemplateLoader' ];
-//-----------------------------------------------------------------------------
+
 /**
  * Module to load a template and suptitute fields and subfields from other 
  * templates.
@@ -26,11 +25,9 @@ var TemplateLoader = function() {
      */
     function load ( name, templateProvider ) {
         Log.trace( "Enter - TemplateLoader.load" );
-        var watchFunc = new StopWatch();
 
         try {
             var result = templateProvider( name );
-            watchFunc.lap( "TemplateLoader.load.templateProvider" );
 
             if ( result === undefined ) {
                 throw "Unable to load template '" + name + "'";
@@ -40,15 +37,13 @@ var TemplateLoader = function() {
                     var fieldObj = result.fields[fieldName];
                     if ( typeof( fieldObj ) === "string" ) {
                         result.fields[fieldName] = __getObjectFromTemplate( fieldObj, templateProvider );
-                    }
-                    else {
+                    } else {
                         for ( var subfieldName in fieldObj.subfields ) {
                             if ( fieldObj.subfields.hasOwnProperty( subfieldName ) ) {
                                 var subfieldObj = fieldObj.subfields[subfieldName];
                                 if ( typeof( subfieldObj ) === "string" ) {
                                     fieldObj.subfields[subfieldName] = __getObjectFromTemplate( subfieldObj, templateProvider );
-                                }
-                                else if ( subfieldObj.hasOwnProperty( "values" ) ) {
+                                } else if ( subfieldObj.hasOwnProperty( "values" ) ) {
                                     if ( typeof( subfieldObj.values ) === "string" ) {
                                         fieldObj.subfields[subfieldName].values = __getObjectFromTemplate( subfieldObj.values, templateProvider );
                                     }
@@ -60,7 +55,6 @@ var TemplateLoader = function() {
             }
             return result;
         } finally {
-            watchFunc.stop( "TemplateLoader.load." + name );
             Log.trace( "Exit - TemplateLoader.load" );
         }
     }
@@ -79,7 +73,6 @@ var TemplateLoader = function() {
 
     function __getObjectFromTemplate ( name, templateProvider ) {
         Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", templateProvider, " )" );
-        var watch = new StopWatch("__getObjectFromTemplate");
 
         try {
             var index = name.indexOf( "." );
@@ -88,7 +81,6 @@ var TemplateLoader = function() {
 
             return getObjectByName( objName, load( templateName, templateProvider ) );
         } finally {
-            watch.stop();
             Log.trace( "Exit - TemplateLoader.__getObjectFromTemplate" );
         }
     }
@@ -104,12 +96,10 @@ var TemplateLoader = function() {
      */
     function getObjectByName ( name, object ) {
         Log.trace( "Enter - TemplateLoader.getObjectByName( '", name, "' ", object, " )" );
-        var watchFunc = new StopWatch( "TemplateLoader.getObjectByName" );
 
         try {
             return __getObjectByName( name, name, object );
         } finally {
-            watchFunc.stop();
             Log.trace( "Exit - TemplateLoader.getObjectByName" );
         }
     }
@@ -126,7 +116,6 @@ var TemplateLoader = function() {
      */
     function __getObjectByName ( fullName, name, object ) {
         Log.trace( "Enter - TemplateLoader.__getObjectByName( '", fullName, "', '", name, "', ", object, " )" );
-        var watch = new StopWatch( "TemplateLoader.__getObjectByName" );
 
         try {
             if ( object === null ) {
@@ -154,9 +143,7 @@ var TemplateLoader = function() {
                     foundProperty = true;
                     break;
                 }
-                ;
             }
-            ;
             if ( !foundProperty ) {
                 throw "The property " + objName + " in the path " + fullName + " does not exist.";
             }
@@ -164,11 +151,10 @@ var TemplateLoader = function() {
             if ( propName === name ) {
                 return obj;
             }
-            ;
 
             return __getObjectByName( fullName, name.substring( index + 1 ), obj );
         } finally {
-            watch.stop();
+            // watch.stop();
             Log.trace( "Exit - TemplateLoader.__getObjectByName" );
         }
     }
@@ -177,5 +163,4 @@ var TemplateLoader = function() {
         'load': load,
         'getObjectByName': getObjectByName
     };
-
 }();

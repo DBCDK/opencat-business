@@ -1,6 +1,3 @@
-//-----------------------------------------------------------------------------
-//use
-//-----------------------------------------------------------------------------
 use( "StopWatch" );
 use( "UnitTest" );
 
@@ -45,9 +42,7 @@ use("FieldDemandsOtherFields");
 use("AllFieldsMandatoryIfOneExist");
 use("FieldsMandatory");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
-//-----------------------------------------------------------------------------
 
 /**
  * Module to optimize a template.
@@ -100,7 +95,7 @@ var TemplateOptimizer = function() {
                 }
                 if (isMandatory === true) {
                     mandatoryNames.push(name);
-                    Log.debug("Adding mandatory name '", name, "'. New mandatoryNames: ", JSON.stringify(mandatoryNames) );
+                    Log.trace("Adding mandatory name '", name, "'. New mandatoryNames: ", JSON.stringify(mandatoryNames) );
                 }
 
                 var isRepeatable = field.repeatable;
@@ -138,8 +133,7 @@ var TemplateOptimizer = function() {
 
             result.rules = convertTypeNameOfAllRules(result.rules);
             return result;
-        }
-        finally {
+        } finally {
             watchFunc.stop();
             Log.trace( "Exit -- TemplateOptimizer.optimize(): ", result );
         }
@@ -148,7 +142,6 @@ var TemplateOptimizer = function() {
     // TODO: JSDoc
     function optimizeField( fieldName, field, fieldDefs, subfieldDefs ) {
         Log.trace( "Enter -- TemplateOptimizer.optimizeField()" );
-        var watchFunc = new StopWatch( "TemplateOptimizer.optimizeField" );
 
         var result = undefined;
         try {
@@ -172,20 +165,19 @@ var TemplateOptimizer = function() {
                 }
 
                 var sf = field.subfields[name];
-                Log.debug("Optimize subfield(", fieldName, " *", name, "): " );
+                Log.trace("Optimize subfield(", fieldName, " *", name, "): " );
                 result.subfields[name] = optimizeSubfield(sf, subfieldDefs);
-                Log.debug("Subfield rules (", fieldName, " *", name, "): " + __formatRuleNames( result.subfields[name].rules ) );
+                Log.trace("Subfield rules (", fieldName, " *", name, "): " + __formatRuleNames( result.subfields[name].rules ) );
 
                 if (sf.mandatory === true) {
-                    Log.debug("Push mandatory");
+                    Log.trace("Push mandatory");
                     mandatoryNames.push(name);
                 }
 
                 if (sf.repeatable === false) {
-                    Log.debug("Push repeatable");
+                    Log.trace("Push repeatable");
                     repeatableNames.push(name);
                 }
-                Log.debug("Loop for");
             }
 
             // Setup predefined rules in field.
@@ -219,12 +211,10 @@ var TemplateOptimizer = function() {
 
             result.rules = convertTypeNameOfAllRules(result.rules);
 
-            Log.info("Field rules (", fieldName, "): " + __formatRuleNames( result.rules ) );
+            Log.trace("Field rules (", fieldName, "): " + __formatRuleNames( result.rules ) );
 
             return result;
-        }
-        finally {
-            watchFunc.stop();
+        } finally {
             Log.trace( "Exit -- TemplateOptimizer.optimizeField(): ", result );
         }
     }
@@ -242,7 +232,6 @@ var TemplateOptimizer = function() {
      */
     function optimizeSubfield( sf, defs ) {
         Log.trace( "Enter -- TemplateOptimizer.optimizeSubfield()" );
-        var watchFunc = new StopWatch( "TemplateOptimizer.optimizeSubfield" );
 
         var result = undefined;
         try {
@@ -273,11 +262,9 @@ var TemplateOptimizer = function() {
 
             result = convertTypeNameOfAllRules(rules);
 
-            Log.debug( "  rules: ", __formatRuleNames( rules ) );
+            Log.trace( "  rules: ", __formatRuleNames( rules ) );
             return result;
-        }
-        finally {
-            watchFunc.stop();
+        } finally {
             Log.trace( "Exit -- TemplateOptimizer.optimizeSubfield()" );
         }
     }
@@ -297,8 +284,7 @@ var TemplateOptimizer = function() {
             }
 
             rule.params.template = template;
-        }
-        finally {
+        } finally {
             Log.trace( "Exit -- TemplateOptimizer.setTemplatePropertyOnRule(): ", rule );
         }
     }
@@ -338,15 +324,14 @@ var TemplateOptimizer = function() {
                     obj.type = convertRuleTypeNameToFunction(rules[i].type);
 
                     __checkRule(rules[i], rules[i].type);
-                    Log.debug( "Converted rule name: ", obj.name );
+                    Log.trace( "Converted rule name: ", obj.name );
                 }
 
                 res.push(obj);
             }
 
             return res;
-        }
-        finally {
+        } finally {
             Log.trace( "Exit -- TemplateOptimizer.convertTypeNameOfAllRules(): ", res );
         }
     }
@@ -433,11 +418,9 @@ var TemplateOptimizer = function() {
                     throw ResourceBundle.getStringFormat(bundle, "validation.rule.unknown", typeName);
                 }
             }
-        }
-        catch( ex ) {
+        } catch( ex ) {
             Log.warn( "Unable to find validation function for typename '", typeName, "': ", ex );
-        }
-        finally {
+        } finally {
             Log.trace( "Exit -- TemplateOptimizer.convertRuleTypeNameToFunction()" );
         }
     }
@@ -451,8 +434,7 @@ var TemplateOptimizer = function() {
 
                 throw ResourceBundle.getStringFormat( bundle, "invalid.validation.error.type", ruleName, rule.errorType, VALID_ERROR_TYPES.join( ", " ) );
             }
-        }
-        finally {
+        } finally {
             Log.trace( "Exit -- TemplateOptimizer.__checkRule()" );
         }
     }

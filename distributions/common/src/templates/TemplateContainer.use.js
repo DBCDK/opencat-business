@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------
 use( "ReadFile" );
 use( "ResourceBundle" );
 use( "ResourceBundleFactory" );
@@ -6,10 +5,8 @@ use( "TemplateOptimizer" );
 use( "TemplateLoader" );
 use( "UnitTest" );
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['TemplateContainer'];
 
-//-----------------------------------------------------------------------------
 /**
  * Container of all templates for the Validate Web Service.
  *
@@ -164,14 +161,11 @@ var TemplateContainer = function () {
      */
     function __loadUnoptimizedTemplate ( name ) {
         Log.trace( "Enter - __loadUnoptimizedTemplate( name )" );
-        var watch = new StopWatch();
-        var watchTag = "javascript.TemplateContainer.__loadUnoptimizedTemplate." + name;
 
         try {
             var result = templatesUnoptimized[name];
 
             if ( result === undefined ) {
-                watchTag += ".miss";
                 var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
 
                 if ( !settings.containsKey( 'javascript.basedir' ) ) {
@@ -190,8 +184,7 @@ var TemplateContainer = function () {
                     Log.info( "Trying to load template file: ", filename );
 
                     templateContent = System.readFile( filename );
-                }
-                catch ( ex ) {
+                } catch ( ex ) {
                     Log.debug( "Unable to load template file: ", ex );
 
                     // Load template from 'common' directory.
@@ -203,14 +196,12 @@ var TemplateContainer = function () {
                 if ( templateContent !== null ) {
                     try {
                         result = JSON.parse( templateContent );
-                    }
-                    catch ( ex ) {
+                    } catch ( ex ) {
                         var message = StringUtil.sprintf( "Syntax error in file '%s': %s", filename, ex );
                         Log.error( message );
                         throw message;
                     }
-                }
-                else {
+                } else {
                     throw StringUtil.sprintf( "Unable to read content from '%s'", filename );
                 }
 
@@ -218,14 +209,9 @@ var TemplateContainer = function () {
                     templatesUnoptimized[name] = result;
                 }
             }
-            else {
-                watchTag += ".hit";
-            }
 
             return result;
-        }
-        finally {
-            watch.stop( watchTag );
+        } finally {
             Log.trace( "Exit - __loadUnoptimizedTemplate( name, settings )" );
         }
     }
@@ -382,7 +368,6 @@ var TemplateContainer = function () {
         }
     }
 
-
     return {
         'setSettings': setSettings,
         'initTemplates': initTemplates,
@@ -398,7 +383,6 @@ var TemplateContainer = function () {
 
 }();
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture( "TemplateContainer.__addUppercaseLetterToTemplate", function () {
 
     function getUppercaseTemplates () {
@@ -456,7 +440,6 @@ UnitTest.addFixture( "TemplateContainer.__addUppercaseLetterToTemplate", functio
         }
     }
 
-
     function getLowerCaseTemplateWithUppercaseFieldsNoRules () {
         return {
             "defaults": {
@@ -483,8 +466,6 @@ UnitTest.addFixture( "TemplateContainer.__addUppercaseLetterToTemplate", functio
             }
         }
     }
-
-
 
     var lowerCaseTemplate = getLowerCaseTemplateNoUppercaseFieldsNoRules();
     TemplateContainer.onlyForTest__addUppercaseLetterToTemplate( lowerCaseTemplate );
