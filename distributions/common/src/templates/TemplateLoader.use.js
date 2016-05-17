@@ -154,7 +154,6 @@ var TemplateLoader = function() {
 
             return __getObjectByName( fullName, name.substring( index + 1 ), obj );
         } finally {
-            // watch.stop();
             Log.trace( "Exit - TemplateLoader.__getObjectByName" );
         }
     }
