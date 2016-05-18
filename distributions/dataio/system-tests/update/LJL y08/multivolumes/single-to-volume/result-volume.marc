@@ -1,0 +1,13 @@
+001 00 *a 51483464 *b 191919 *c 20150415180030 *d 20141211 *f a
+004 00 *r n *a b
+008 00 *t m *u f *a 2014 *v 0
+014 00 *a 51670361
+021 00 *e 9788799766956 *c hf.
+032 00 *x ACC201450 *a DBF201504 *x BKR201517
+245 00 *g B1 *a Plus med tallene fra 1 til 10
+260 00 *c [2014]
+300 00 *a [28] sider
+521 00 *& REX *b 1. oplag *c [2014]
+990 00 *r 201517 *b s *m Omkatalogiseret fra enkeltbindsværk. Bind B2 og B3 udsendt 201517 *m Rettelse, Dansk bogf. *u nt
+990 00 *o 201504 *b s *u nt
+996 00 *a DBC

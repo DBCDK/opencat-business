@@ -1,0 +1,13 @@
+001 00 *a 27453767 *b 191919 *c 20121020203029 *d 20081010 *f a
+004 00 *r n *a b
+008 00 *t m *v 0
+014 00 *a 12345678
+021 00 *e 9788770554589 *c ib. *d kr. 199,00
+032 00 *x ACC200841 *a DBF200847 *x BKM200847 *x BKR201621
+245 00 *g [Bind 1]
+260 00 *c 2008
+300 00 *a 375 sider
+521 00 *& REX *b 1. oplag *c 2008
+990 00 *r 200919 *b b *b s *c a *m Omkatalogiseret fra flerbindsværk. Serie tilføjet. 2. bind udsendt 200919 *m Rettelse *u nt
+990 00 *o 200847 *b l *b b *b s *c a *u nt
+996 00 *a DBC
