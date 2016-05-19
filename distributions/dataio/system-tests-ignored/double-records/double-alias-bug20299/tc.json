@@ -1,0 +1,26 @@
+[
+    {
+        "name": "dbc-match-double-alias",
+        "description": "Test af bug 20299: post med dublet alias skal fejle",
+        "bugs": [ "" ],
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": []
+            }
+        }
+    }
+]
