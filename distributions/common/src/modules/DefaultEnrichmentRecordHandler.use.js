@@ -215,7 +215,7 @@ var DefaultEnrichmentRecordHandler = function () {
 
     // Fix for story #1911 ,
     // adding a y08 field with subfield value *a UPDATE posttypeskift
-    function __getY08PosttypeSkift () {
+    function __getY08PosttypeSkiftField () {
         Log.trace( "Enter - __getY08PosttypeSkift()" );
         var ret;
         try {
@@ -247,11 +247,10 @@ var DefaultEnrichmentRecordHandler = function () {
             if ( __isRecategorization( currentCommonMarc, updatingCommonMarc ) ) {
                 Log.info( "Record is a recategorization." );
                 record = instance.classifications.module.removeClassificationsFromRecord( instance.classifications.instance, record );
-                // TODO add here
                 var field = RecategorizationNoteFieldFactory.newNoteField( currentCommonMarc, updatingCommonMarc );
                 if ( field !== undefined ) {
                     record = RecordSorter.insertField( record, field );
-                    record = RecordSorter.insertField( record, __getY08PosttypeSkift() )
+                    record = RecordSorter.insertField( record, __getY08PosttypeSkiftField() )
                 }
             } else {
                 Log.info( "Record is not a recategorization." );
@@ -273,11 +272,9 @@ var DefaultEnrichmentRecordHandler = function () {
 
     function correctRecord ( instance, commonRecord, enrichmentRecord ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.correctRecord()" );
-
         try {
             Log.trace( "    commonRecord: " + commonRecord );
             Log.trace( "    enrichmentRecord: " + enrichmentRecord );
-
             var result = null;
 
             if ( instance.classifications.module.hasClassificationData( instance.classifications.instance, commonRecord ) ) {
@@ -286,9 +283,11 @@ var DefaultEnrichmentRecordHandler = function () {
                     result = instance.classifications.module.removeClassificationsFromRecord( instance.classifications.instance, enrichmentRecord );
                 } else {
                     Log.info( "Classifications has changed." );
+                    result=enrichmentRecord;
                 }
             } else {
                 Log.info( "Common record has no classifications." );
+
             }
 
             if ( result === null ) {
@@ -316,7 +315,7 @@ var DefaultEnrichmentRecordHandler = function () {
 
             for ( var i = 0; i < record.size(); i++ ) {
                 var field = record.field( i );
-                if ( !( field.name === "001" || field.name === "004" || field.name === "996" ) ) {
+                if ( !( field.name.match(/00[1|4]|996/))){
                     Log.debug( "Return full record." );
                     return result;
                 }

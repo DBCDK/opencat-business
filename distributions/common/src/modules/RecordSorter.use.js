@@ -3,7 +3,7 @@ use( "Log" );
 use( "Marc" );
 
 //-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'RecordSorter' ];
+EXPORTED_SYMBOLS = ['RecordSorter'];
 
 //-----------------------------------------------------------------------------
 /**
@@ -12,7 +12,7 @@ EXPORTED_SYMBOLS = [ 'RecordSorter' ];
  * @namespace
  * @name RecordSorter
  */
-var RecordSorter = function() {
+var RecordSorter = function () {
     /**
      * Constructs a new record from an sorted record and insert a field so
      * the returned record is sorted.
@@ -24,29 +24,28 @@ var RecordSorter = function() {
      *
      * @name RecordSorter#insertField
      */
-    function insertField( record, field ) {
+    function insertField ( record, field ) {
         Log.trace( "Enter - RecordSorter.insertField" );
-
+        var result = new Record();
         try {
             var isFieldAppended = false;
-            var result = new Record();
-            for( var i = 0; i < record.size(); i++ ) {
+            for ( var i = 0; i < record.size(); i++ ) {
                 var recordField = record.field( i );
-                if( field.name < recordField.name && !isFieldAppended ) {
+                // cant insert y08 here
+                if ( field.name < recordField.name && !isFieldAppended ) {
                     result.append( field );
                     isFieldAppended = true;
                 }
                 result.append( recordField );
             }
 
-            if( !isFieldAppended ) {
+            if ( !isFieldAppended ) {
                 result.append( field );
             }
-
             return result;
         }
         finally {
-            Log.trace( "Exit - RecordSorter.insertField" );
+            Log.trace( "Exit - RecordSorter.insertField : " + result.toString() );
         }
 
     }
@@ -64,12 +63,12 @@ var RecordSorter = function() {
      *
      * @name RecordSorter#__fieldInsertPosition
      */
-    function __fieldInsertPosition( record, name ) {
+    function __fieldInsertPosition ( record, name ) {
         Log.trace( "Enter - RecordSorter.__fieldInsertPosition" );
 
         try {
-            for( var i = 0; i < record.size(); i++ ) {
-                if( name < record.field( i).name ) {
+            for ( var i = 0; i < record.size(); i++ ) {
+                if ( name < record.field( i ).name ) {
                     return i;
                 }
             }

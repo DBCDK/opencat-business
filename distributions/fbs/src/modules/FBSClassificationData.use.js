@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
-use( "ClassificationData" );
-use( "Marc" );
-use( "MarcClasses" );
-use( "Log" );
-use( "RecordLookupField" );
+//use( "ClassificationData" );
+//use( "Marc" );
+//use( "MarcClasses" );
+//use( "Log" );
+//use( "RecordLookupField" );
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'FBSClassificationData' ];
@@ -15,7 +15,7 @@ var FBSClassificationData = function() {
             fields: fieldsRegExp
         }
         var that = ClassificationData.create( fieldsRegExp);
-        that.hasClassificationsChanged = funciton()
+        that.hasClassificationsChanged = fuciton();
     }
 
     function hasClassificationData( instance, marc ) {
@@ -24,6 +24,7 @@ var FBSClassificationData = function() {
 
     function hasClassificationsChanged( instance, oldMarc, newMarc ) {
         Log.trace( "Enter - FBSClassificationData.hasClassificationsChanged( ", oldMarc, ", ", newMarc, " )" );
+        Log.trace( "debug - FBSClassificationData.hasClassificationsChanged( ", oldMarc, ", ", newMarc, " )" );
 
         var result = null;
         try {
@@ -42,7 +43,7 @@ var FBSClassificationData = function() {
                     return result = true;
                 }
             }
-
+            Log.debug ("mvs #1");
             return result = false;
         }
         finally {

@@ -33,8 +33,8 @@ var DBCUpdaterEntryPoint = function() {
 
         var result;
         try {
-            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
             var instance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
+            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
 
             result = ClassificationData.hasClassificationData( instance, marc );
             return result;
