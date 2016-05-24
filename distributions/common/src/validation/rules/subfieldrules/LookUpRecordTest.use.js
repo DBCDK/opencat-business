@@ -64,7 +64,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
             name: '001', indicator: '00', subfields: [{
                 name: "a", value: "a1Val"
             }, {
-                name: "b", value: "870970"
+                name: "b", value: "191919"
             }, {
                 name: "c", value: "c1Val"
             }]
@@ -80,7 +80,7 @@ UnitTest.addFixture( "LookUpRecord", function( ) {
             name: '001', indicator: '00', subfields: [{
                 name: "a", value: "a1Val"
             }, {
-                name: "b", value: "870970"
+                name: "b", value: "191919"
             }, {
                 name: "c", value: "c1Val"
             }]
