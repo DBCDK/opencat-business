@@ -161,7 +161,7 @@ UnitTest.addFixture( "CheckChangedValue.validateSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 1 234 567 8 *b 191919\n" +
         "004 00 *a s"
     );
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );

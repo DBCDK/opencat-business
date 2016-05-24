@@ -283,7 +283,7 @@ var DefaultEnrichmentRecordHandler = function () {
                     result = instance.classifications.module.removeClassificationsFromRecord( instance.classifications.instance, enrichmentRecord );
                 } else {
                     Log.info( "Classifications has changed." );
-                    result=enrichmentRecord;
+                    result = enrichmentRecord;
                 }
             } else {
                 Log.info( "Common record has no classifications." );
@@ -315,7 +315,7 @@ var DefaultEnrichmentRecordHandler = function () {
 
             for ( var i = 0; i < record.size(); i++ ) {
                 var field = record.field( i );
-                if ( !( field.name.match(/00[1|4]|996/))){
+                if ( !( field.name.match( /00[1|4]|996/ )) ) {
                     Log.debug( "Return full record." );
                     return result;
                 }
@@ -333,7 +333,7 @@ var DefaultEnrichmentRecordHandler = function () {
     function __isRecategorization ( currentCommonRecord, updatingCommonRecord ) {
         Log.trace( "Enter - DefaultEnrichmentRecordHandler.__isRecategorization()" );
 
-        var result = undefined;
+        var result;
         try {
             if ( updatingCommonRecord.matchValue( /004/, /a/, /e/ ) ) {
                 if ( currentCommonRecord.matchValue( /004/, /a/, /b/ ) ) {
@@ -360,14 +360,10 @@ var DefaultEnrichmentRecordHandler = function () {
             var currentMaterialField = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( bundle, currentCommonRecord, "009", /a|g/ );
             var updatingMaterialField = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( bundle, updatingCommonRecord, "009", /a|g/ );
 
-            if ( currentMaterialField === undefined && updatingMaterialField === undefined ) {
+            if ( currentMaterialField || updatingMaterialField ) {
+                return result = true;
+            } else {
                 return result = false;
-            }
-            if ( currentMaterialField === undefined && updatingMaterialField !== undefined ) {
-                return result = true;
-            }
-            if ( currentMaterialField !== undefined && updatingMaterialField === undefined ) {
-                return result = true;
             }
 
             var record_lookup = RecordLookupField.createFromField( currentMaterialField );

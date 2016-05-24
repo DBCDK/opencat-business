@@ -84,7 +84,7 @@ UnitTest.addFixture( "CheckSubfieldNotUsedInParentRecord.validateSubfield", func
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 2 234 567 8 *b 191919 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
         "014 00 *a 1 234 567 8\n" +
         "008 00 *t xx"

@@ -5,6 +5,7 @@ use( "ResourceBundleFactory" );
 use( "ValidateErrors" );
 use( "DanMarc2Converter");
 use( "RawRepoClient");
+use( "UpdateConstants");
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['CheckChangedValue'];
