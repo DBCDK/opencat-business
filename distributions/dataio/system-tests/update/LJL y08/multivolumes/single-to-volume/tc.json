@@ -74,7 +74,7 @@
         }
     },
     {
-        "name": "LJL_basis-update-volume-to-single-y08-t02",
+        "name": "LJL_basis-update-single-to-volume-y08-t02",
         "description": "Omkatalogisering af en eksisterende bindpost til en enkeltstående post. Ændret opstilling + beholdninger + eksisterende påhængspost udbygges",
         "request": {
             "authentication": {
