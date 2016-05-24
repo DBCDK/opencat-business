@@ -63,7 +63,7 @@ var LookUpRecord = function () {
 
             if ( !RawRepoClientCore.recordExists ( recordId, agencyId ) ) {
                 Log.trace( "Record does not exist!" );
-                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId ) ) ];
+                return [ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "lookup.record.does.not.exist", recordId, agencyId ) ) ];
             }
 
             if ( params.hasOwnProperty( "requiredFieldAndSubfield" ) || params.hasOwnProperty( "allowedSubfieldValues" ) ) {
