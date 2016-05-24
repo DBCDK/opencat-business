@@ -1,6 +1,6 @@
 [
     {
-        "name": "LJL-basis-update-volume-to-single-y08-t01",
+        "name": "LJL_basis-update-volume-to-single-y08-t01",
         "description": "Omkatalogisering af en eksisterende bindpost til en enkeltstående post. Ændret opstilling + ingen beholdninger",
         "request": {
             "authentication": {

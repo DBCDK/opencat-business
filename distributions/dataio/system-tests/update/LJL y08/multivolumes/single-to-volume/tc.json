@@ -1,6 +1,6 @@
 [
     {
-        "name": "LJL-basis-update-single-to-volume-y08-t01",
+        "name": "LJL_basis-update-single-to-volume-y08-t01",
         "description": "Omkatalogisering af en enkeltstående post til flerbindsværk. Ændret opstilling + ingen beholdninger",
         "request": {
             "authentication": {

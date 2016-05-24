@@ -1,6 +1,6 @@
 [
     {
-        "name": "LJL-basis-update-single-to-volume-t01",
+        "name": "LJL_basis-update-single-to-volume-t01",
         "description": "Omkatalogisering af et eksisterende enkeltstående post (e1) til et bind (b1). Ændret opstilling + ingen beholdninger på e1",
         "request": {
             "authentication": {
