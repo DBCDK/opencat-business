@@ -45,7 +45,7 @@
                     {
                         "type" : "ERROR",
                         "params" : {
-                            "message" : "Posten {58442895|870970} må ikke pege på sig selv i 014a"
+                            "message" : "Posten {58442895|191919} må ikke pege på sig selv i 014a"
                         }
                     }
                 ]
