@@ -308,8 +308,10 @@ var DefaultEnrichmentRecordHandler = function () {
         Log.debug( "Record: ", record.toString() );
         var result = record;
         try {
-            if ( record.getValue( /001/, /b/ ) === UpdateConstants.COMMON_AGENCYID ) {
-                Log.debug( "Return full record for " + UpdateConstants.COMMON_AGENCYID );
+            var libraryId = record.getValue( /001/, /b/ );
+            if ( libraryId === UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ||
+                 libraryId === UpdateConstants.RAWREPO_COMMON_AGENCYID ) {
+                Log.debug( "Return full record for " + linraryId );
                 return record;
             }
 
