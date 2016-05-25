@@ -311,7 +311,7 @@ var DefaultEnrichmentRecordHandler = function () {
             var libraryId = record.getValue( /001/, /b/ );
             if ( libraryId === UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ||
                  libraryId === UpdateConstants.RAWREPO_COMMON_AGENCYID ) {
-                Log.debug( "Return full record for " + linraryId );
+                Log.debug( "Return full record for " + libraryId );
                 return record;
             }
 
