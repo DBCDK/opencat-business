@@ -47,10 +47,6 @@ var CheckSubfieldNotUsedInParentRecord = function () {
                 return [ ValidateErrors.subfieldError( "TODO:fixurl", msg ) ];
             }
 
-            if( libNo === UpdateConstants.COMMON_AGENCYID ) {
-                libNo = UpdateConstants.RAWREPO_COMMON_AGENCYID;
-            }
-
             // If parent record does not exist then we are fine.
             if( !RawRepoClient.recordExists( recId, libNo ) ) {
                 Log.debug( "Parent record does not exist!" );
