@@ -362,17 +362,23 @@ var DefaultEnrichmentRecordHandler = function () {
             var currentMaterialField = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( bundle, currentCommonRecord, "009", /a|g/ );
             var updatingMaterialField = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( bundle, updatingCommonRecord, "009", /a|g/ );
 
-            if ( currentMaterialField || updatingMaterialField ) {
-                return result = true;
-            } else {
+            if ( currentMaterialField === undefined && updatingMaterialField === undefined ) {
                 return result = false;
+            }
+            if ( currentMaterialField === undefined && updatingMaterialField !== undefined ) {
+                return result = true;
+            }
+            if ( currentMaterialField !== undefined && updatingMaterialField === undefined ) {
+                return result = true;
             }
 
             var record_lookup = RecordLookupField.createFromField( currentMaterialField );
             if ( RecordLookupField.containsField( record_lookup, updatingMaterialField ) ) {
+            Log.error ("mvs #8");
                 return result = false;
             }
 
+            Log.error ("mvs #9");
             return result = false;
         }
         finally {

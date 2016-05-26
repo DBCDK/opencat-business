@@ -14,8 +14,6 @@ var FBSClassificationData = function() {
         return {
             fields: fieldsRegExp
         }
-        var that = ClassificationData.create( fieldsRegExp);
-        that.hasClassificationsChanged = fuciton();
     }
 
     function hasClassificationData( instance, marc ) {
@@ -43,7 +41,6 @@ var FBSClassificationData = function() {
                     return result = true;
                 }
             }
-            Log.debug ("mvs #1");
             return result = false;
         }
         finally {
