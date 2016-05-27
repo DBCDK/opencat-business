@@ -3509,9 +3509,6 @@
         "666":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
             "subfields":{
-                "\u00E5": {
-                    "repeatable": false
-                },
                 "f": {},
                 "t": {},
                 "e": {},

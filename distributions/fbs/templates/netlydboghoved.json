@@ -791,9 +791,7 @@
                 "0":"DanMarc2.fields.700.subfields.0",
                 "1":"DanMarc2.fields.700.subfields.1",
                 "4":"DanMarc2.fields.700.subfields.4",
-                "g":"DanMarc2.fields.700.subfields.g",
-                "\u00E5":"DanMarc2.fields.700.subfields.\u00E5"
-
+                "g":"DanMarc2.fields.700.subfields.g"
             },
             "rules": [
                 {
@@ -815,8 +813,7 @@
                 "0":"DanMarc2.fields.710.subfields.0",
                 "1":"DanMarc2.fields.710.subfields.1",
                 "4":"DanMarc2.fields.710.subfields.4",
-                "g":"DanMarc2.fields.710.subfields.g",
-                "\u00E5":"DanMarc2.fields.710.subfields.\u00E5"
+                "g":"DanMarc2.fields.710.subfields.g"
             },
             "rules": [
                 {
@@ -922,8 +919,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":"DanMarc2.fields.945.subfields.\u00E5"
+                }
             },
             "rules": [
                 {
@@ -940,8 +936,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":"DanMarc2.fields.952.subfields.\u00E5"
+                }
             }
         },
         "996":{

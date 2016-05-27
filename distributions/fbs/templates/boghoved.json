@@ -968,8 +968,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "\u00E5":"DanMarc2.fields.945.subfields.\u00E5"
+                }
             },
             "rules": [
                 {
