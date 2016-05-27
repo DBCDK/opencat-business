@@ -637,8 +637,7 @@
                 "&":{
                     "repeatable":false
                 },
-                "a": "DanMarc2.fields.555.subfields.a",
-                "\u00E5": "DanMarc2.fields.555.subfields.\u00E5"
+                "a": "DanMarc2.fields.555.subfields.a"
             }
         },
         "596":"DanMarc2.fields.596",
