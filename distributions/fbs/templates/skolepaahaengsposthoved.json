@@ -1,7 +1,7 @@
 {
     "template": {
         "description":"Skabelon til 300000-post - fælles skolepåhængspost - hovedpost",
-        "features": [ "all" ]
+        "features": [ "create_enrichments", "use_enrichments" ]
     },
     "defaults":{
         "field":{
