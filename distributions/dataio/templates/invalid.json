@@ -1,6 +1,6 @@
 {
     "template": {
-        "features": [ "all" ]
+        "features": [ "auth_root" ]
     },
     "defaults":{
         "field":{
