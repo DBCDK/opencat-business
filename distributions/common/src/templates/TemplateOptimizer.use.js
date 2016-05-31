@@ -349,6 +349,8 @@ var TemplateOptimizer = function() {
                     return FieldsMandatory.validateRecord;
                 case "RecordRules.repeatableFields":
                     return RepeatableFields.validateRecord;
+                case "RecordRules.recordSorted":
+                    return RecordSorted.validateRecord;
                 case "RecordRules.conflictingFields":
                     return ConflictingFields.validateRecord;
                 case "RecordRules.conflictingSubfields":
