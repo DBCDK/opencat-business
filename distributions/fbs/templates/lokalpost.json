@@ -19,9 +19,6 @@
     },
     "rules":[
         {
-            "type": "RecordRules.recordSorted"
-        },
-        {
             "type":"RecordRules.conflictingFields",
             "params": {
                 "fields":[ "100", "110" ]
