@@ -437,8 +437,7 @@
             "subfields":{
                 "a": "DanMarc2.fields.530.subfields.a",
                 "i":{
-                    "repeatable":false,
-                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
+                    "repeatable":false
                 },
                 "t": "DanMarc2.fields.530.subfields.t",
                 "e": "DanMarc2.fields.530.subfields.e",
