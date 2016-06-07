@@ -1,0 +1,63 @@
+[
+    {
+        "name": "fbs-update-local-from-single-to-volume",
+        "description": "Omkatalogisering af lokal singlepost til lokal bindpost",
+        "request": {
+            "authentication": {
+                "group": "726500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokalpostbind",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "children": [ "rawrepo-section.marc" ]
+                },
+                {
+                    "record": "rawrepo-section.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-single.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "children": [ "rawrepo-section.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-section.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "children": [ "result-volume.marc" ]
+                    },
+                    {
+                        "record": "result-volume.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

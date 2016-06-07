@@ -1,0 +1,18 @@
+001 00 *a 26992915 *b 726500 *c 20160606075017 *d 20160606 *f a
+004 00 *r n *a h
+008 00 *b dk *l mul *v 0
+009 00 *a a *g xx
+041 00 *a dan *a eng
+245 00 *a Geometriske produktspecifikationer (GPS)
+260 00 *a Charlottenlund *b Dansk Standard *c 2006- *k eget
+300 00 *a bind *b ill.
+508 00 *a Dansk og engelsk tekst
+526 00 *i Afløser *t Geometriske produktspecifikationer (GPS)
+        (5-binds-udgave) *b . 1997-1999
+652 00 *m 74.909
+666 00 *0 *f teknisk tegning
+666 00 *0 *o standarder
+666 00 *0 *o håndbøger
+710 00 *a Dansk Standard
+910 00 *a DS *z 710
+996 00 *a 726500
