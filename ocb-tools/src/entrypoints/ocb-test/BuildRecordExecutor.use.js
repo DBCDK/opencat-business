@@ -43,7 +43,7 @@ var BuildRecordExecutor = function () {
             if (e.toString().indexOf("java.io.FileNotFoundException") > -1) {
                 res = "FAILED_INVALID_SCHEMA";
             } else {
-                res = StringUtil.sprintf("Systemfejl ved validering af testcase: %s", e);
+                res = StringUtil.sprintf("Buildrecord systemfejl ved validering af testcase: %s", e);
             }
             return res;
         } finally {

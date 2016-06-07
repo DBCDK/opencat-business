@@ -111,7 +111,7 @@ var FBSValidatorEntryPoint = function() {
                 result = Validator.validateRecord( rec, templateProvider, settings );
             }
             catch( ex ) {
-                result = [ ValidateErrors.recordError( "", StringUtil.sprintf( "Systemfejl ved validering: %s", ex ) ) ];
+                result = [ ValidateErrors.recordError( "", StringUtil.sprintf( "FBSvalidator systemfejl ved validering: %s", ex ) ) ];
             }
 
             return JSON.stringify( result );

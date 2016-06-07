@@ -110,7 +110,7 @@ var DBCValidatorEntryPoint = function() {
                 result = Validator.validateRecord( rec, templateProvider, settings );
             }
             catch( ex ) {
-                result = [ ValidateErrors.recordError( "", StringUtil.sprintf( "Systemfejl ved validering: %s", ex ) ) ];
+                result = [ ValidateErrors.recordError( "", StringUtil.sprintf( "DBCvalidator systemfejl ved validering: %s", ex ) ) ];
             }
 
             return JSON.stringify( result );
