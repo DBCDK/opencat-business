@@ -122,6 +122,7 @@
             "repeatable": false,
             "sorting": "uazbcdefghijklmnoqrxwv",
             "subfields": {
+                "t": "DanMarc2.fields.008.subfields.t",
                 "u": "DanMarc2.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
                 "z": "DanMarc2.fields.008.subfields.z",
