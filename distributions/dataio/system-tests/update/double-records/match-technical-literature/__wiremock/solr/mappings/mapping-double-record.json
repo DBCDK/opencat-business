@@ -1,6 +1,6 @@
 {
   "request" : {
-    "url" : "/solr/raapost-index/select?q=%28+marc.008a%3A%222014%22+or+marc.008a%3A%222015%22+or+marc.008a%3A%222016%22+%29+and+marc.009a%3A%22a%22+and+marc.009g%3A%22xx%22+and+marc.245a%3A%22Lilly+macht+einen+Au%22+and+marc.260b%3A%22Di%22&indent=true&wt=json",
+    "url" : "/solr/raapost-index/select?q=%28+marc.008a%3A%222014%22+OR+marc.008a%3A%222015%22+OR+marc.008a%3A%222016%22+%29+AND+marc.009a%3A%22a%22+AND+marc.009g%3A%22xx%22+AND+marc.245a%3A%22Lilly+macht+einen+Au%22+AND+marc.260b%3A%22Di%22&indent=true&wt=json",
     "method" : "GET"
   },
   "response" : {
