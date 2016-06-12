@@ -9,7 +9,7 @@ function die() {
 cd $(realpath $(dirname $0)/..)
 echo PWD: $PWD
 
-SHELL_CMD='/home/ja7/src/dbc/head/dbc-jsshell/tools/dbc-jsshell'
+SHELL_CMD='dbc-jsshell'
 DISTRIBUTIONS_PATH=`realpath ../distributions`
 
 LOG_FILE=transpiler.log
