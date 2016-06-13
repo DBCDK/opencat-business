@@ -5,7 +5,7 @@ use("ExclusiveSubfieldParameterized");
 UnitTest.addFixture("ExclusiveSubfieldParameterized", function () {
     var bundle = ResourceBundleFactory.getBundle(ExclusiveSubfieldParameterized.BUNDLE_NAME);
     var record = {};
-    var params = {fieldName: '900', subfields: ['w', 'z']};
+    var params = {subfields: ['w', 'z']};
 
     var field1 = {
         name: '900', indicator: '00', subfields: [{
@@ -40,7 +40,7 @@ UnitTest.addFixture("ExclusiveSubfieldParameterized", function () {
     SafeAssert.equal("13 ExclusiveSubfieldParameterized test ok", ExclusiveSubfieldParameterized.validateField(record, field13, params), []);
 
     var field14 = {
-        name: '100', indicator: '00', subfields: [{
+        name: '900', indicator: '00', subfields: [{
             name: "a", value: "aVal"
         }]
     };
