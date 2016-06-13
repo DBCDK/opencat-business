@@ -32,7 +32,6 @@ var TemplateContainer = function () {
         Log.trace( "Enter - TemplateContainer.initTemplates()" );
 
         try {
-            /*
             var templates = getTemplateNames();
             for ( var i = 0; i < templates.length; i++ ) {
                 var watch = new StopWatch( "javascript.env.create.templates." + templates[i].schemaName );
@@ -43,7 +42,6 @@ var TemplateContainer = function () {
                     watch.stop();
                 }
             }
-            */
         }
         finally {
             Log.trace( "Exit - TemplateContainer.initTemplates()" );
@@ -137,7 +135,7 @@ var TemplateContainer = function () {
         try {
             var result = templates[name];
             if ( result === undefined ) {
-                result = __load_compiled_template( name );
+                result = loadTemplate( name );
                 if ( result !== undefined ) {
                     templates[name] = result;
                 }
