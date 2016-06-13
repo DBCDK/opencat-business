@@ -1,20 +1,17 @@
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['ExclusiveSubfieldParameterized'];
-//-----------------------------------------------------------------------------
 
 var ExclusiveSubfieldParameterized = function () {
     var BUNDLE_NAME = "validation";
 
     /**
-     * exclusiveSubfieldParameterized is used to validate that only one fields defined by the params are present 
+     * exclusiveSubfieldParameterized is used to validate that only one fields defined by the params are present
      * @syntax ExclusiveSubfieldParameterized.validateField(  record, field, params  )
      * @param {object} record
      * @param {object} field
@@ -23,21 +20,21 @@ var ExclusiveSubfieldParameterized = function () {
      * @name ExclusiveSubfieldParameterized.validateField
      * @method
      */
-    function validateField ( record, field, params ) {
-        Log.trace( "Enter -- ExclusiveSubfieldParameterized.validateField" );
+    function validateField(record, field, params) {
+        Log.trace("Enter -- ExclusiveSubfieldParameterized.validateField");
         try {
             var result = [];
             var fieldName, subFields;
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
-            ValueCheck.checkThat( "params", params ).type( "object" );
+            ValueCheck.checkThat("params", params).type("object");
 
-            ValueCheck.checkValue( "params.fieldName", params.fieldName ).is.defined
-                .and.has.type( "string" )
-                .and.value.that.is.not.equalTo( "" )
-                .and.value.that.is.not.equalTo( null );
+            ValueCheck.checkValue("params.fieldName", params.fieldName).is.defined
+                .and.has.type("string")
+                .and.value.that.is.not.equalTo("")
+                .and.value.that.is.not.equalTo(null);
 
-            ValueCheck.check( "params.subfields", params.subfields ).instanceOf( Array );
+            ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             // Validate params
             if (params.fieldName.length == 3) {
@@ -60,7 +57,7 @@ var ExclusiveSubfieldParameterized = function () {
                 for (var f = 0; f < field.subfields.length; f++) {
                     if (subFields.indexOf(field.subfields[f].name) > -1) {
                         if (foundFirstSubfield) { // second match -> return error
-                            result.push( ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.paramterized.rule.error", field.subfields[f].name, subFields ) ) );
+                            result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.paramterized.rule.error", field.subfields[f].name, subFields)));
                             return result;
                         } else {
                             foundFirstSubfield = true; // First match
@@ -68,12 +65,13 @@ var ExclusiveSubfieldParameterized = function () {
                     }
                 }
             }
-            
+
             return result;
         } finally {
-            Log.trace( "Exit -- ExclusiveSubfieldParameterized.validateField" );
+            Log.trace("Exit -- ExclusiveSubfieldParameterized.validateField");
         }
     }
+
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
         'validateField': validateField

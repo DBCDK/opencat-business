@@ -27,6 +27,7 @@ use("SubfieldConditionalMandatory");
 use("UpperCaseCheck");
 use("RepeatableSubfields");
 use("ExclusiveSubfield");
+use("ExclusiveSubfieldParameterized");
 use("SubfieldHasValueDemandsOtherSubfield");
 use("FieldsIndicator");
 use("SubfieldsMandatory");
@@ -376,6 +377,8 @@ var TemplateOptimizer = function() {
                     return RepeatableSubfields.validateField;
                 case "FieldRules.exclusiveSubfield":
                     return ExclusiveSubfield.validateField;
+                case "FieldRules.exclusiveSubfieldParameterized":
+                    return ExclusiveSubfieldParameterized.validateField;
                 case "FieldRules.mandatorySubfieldInVolumeWork":
                     return MandatorySubfieldInVolumeWorkRule.validateField;
                 case "FieldRules.upperCaseCheck":
