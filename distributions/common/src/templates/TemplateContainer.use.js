@@ -32,6 +32,7 @@ var TemplateContainer = function () {
         Log.trace( "Enter - TemplateContainer.initTemplates()" );
 
         try {
+            /*
             var templates = getTemplateNames();
             for ( var i = 0; i < templates.length; i++ ) {
                 var watch = new StopWatch( "javascript.env.create.templates." + templates[i].schemaName );
@@ -42,6 +43,7 @@ var TemplateContainer = function () {
                     watch.stop();
                 }
             }
+            */
         }
         finally {
             Log.trace( "Exit - TemplateContainer.initTemplates()" );
@@ -135,7 +137,7 @@ var TemplateContainer = function () {
         try {
             var result = templates[name];
             if ( result === undefined ) {
-                result = loadTemplate( name );
+                result = __load_compiled_template( name );
                 if ( result !== undefined ) {
                     templates[name] = result;
                 }
@@ -146,6 +148,30 @@ var TemplateContainer = function () {
         finally {
             watch.stop();
         }
+    }
+
+    function __load_compiled_template( name ) {
+        var templateFileNamePattern = "%s/distributions/%s/compiled_templates/%s.json";
+        var result=null;
+
+        // Load template from 'install.name' directory.
+        var filename = StringUtil.sprintf( templateFileNamePattern, settings.get( 'javascript.basedir' ), settings.get( 'javascript.install.name' ), name );
+        Log.info( "Trying to load template file: ", filename );
+
+        var templateContent = System.readFile( filename );
+
+        if ( templateContent !== null ) {
+            try {
+                result = JSON.parse( templateContent );
+            } catch ( ex ) {
+                var message = StringUtil.sprintf( "Syntax error in file '%s': %s", filename, ex );
+                Log.error( message );
+                throw message;
+            }
+        } else {
+            throw StringUtil.sprintf( "Unable to read content from '%s'", filename );
+        }
+        return result;
     }
 
     /**

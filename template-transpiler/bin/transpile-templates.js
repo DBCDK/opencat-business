@@ -70,7 +70,7 @@ function main() {
             print( "." );
             var templateName = templateNames[i].schemaName;
             stopWatch.lap( "4. Template " + installName + "/" + templateName );
-            var template = TemplateContainer.get( templateName );
+            var template = TemplateContainer.loadTemplate( templateName );
             System.writeFile( outputDirectory + "/" + templateName + ".json", JSON.stringify( template ) );
 
             ++antCompiledTemplates;
