@@ -24,7 +24,6 @@ var ExclusiveSubfieldParameterized = function () {
         Log.trace("Enter -- ExclusiveSubfieldParameterized.validateField");
         try {
             var result = [];
-            var subFields;
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
             ValueCheck.checkThat("params", params).type("object");
@@ -36,14 +35,19 @@ var ExclusiveSubfieldParameterized = function () {
                 throw ResourceBundle.getStringFormat(bundle, "conflictingSubfieldsParameterized.params.subfields.error", params.subfields);
             }
 
-            subFields = params.subfields;
+            // Transform the params.subfields to an array for faster lookup
+            var subfieldsMap = {};
+            for (var s = 0; s < params.subfields.length; s++) {
+                var sf = params.subfields[s];
+                subfieldsMap[sf] = '';
+            }
 
             var foundFirstSubfield = false;
 
             for (var f = 0; f < field.subfields.length; f++) {
-                if (subFields.indexOf(field.subfields[f].name) > -1) {
+                if (subfieldsMap.hasOwnProperty(field.subfields[f].name)) {
                     if (foundFirstSubfield) { // second match -> return error
-                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.paramterized.rule.error", field.subfields[f].name, subFields)));
+                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.paramterized.rule.error", field.subfields[f].name, params.subfields)));
                         return result;
                     } else {
                         foundFirstSubfield = true; // First match which is okay
