@@ -136,10 +136,7 @@ var TemplateContainer = function () {
         try {
             var result = templates[name];
             if ( result === undefined ) {
-                result = loadTemplate( name );
-                try {
-                    System.writeFile( "/data/logs/dump."+ name + ".json", JSON.stringify( result ) );
-                } catch(e) { }
+                result = __load_compiled_template();
                 if ( result !== undefined ) {
                     templates[name] = result;
                 }
@@ -152,6 +149,25 @@ var TemplateContainer = function () {
         }
     }
 
+    /**
+     *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Using_the_reviver_parameter
+     * @param k
+     * @param v
+     * @private
+     */
+    function __compiled_template_reviever(k, v) {
+        if(k !== "name") return v;
+
+        this['type'] = TemplateOptimizer.convertRuleTypeNameToFunction(v);
+        return v;
+    }
+
+    /**
+     *
+     * @param name template Name
+     * @returns {*}
+     * @private
+     */
     function __load_compiled_template( name ) {
         var templateFileNamePattern = "%s/distributions/%s/compiled_templates/%s.json";
         var result=null;
@@ -164,7 +180,9 @@ var TemplateContainer = function () {
 
         if ( templateContent !== null ) {
             try {
-                result = JSON.parse( templateContent );
+                result = JSON.parse( templateContent, __compiled_template_reviever);
+                //   TODO: loop the reslt and call
+                
             } catch ( ex ) {
                 var message = StringUtil.sprintf( "Syntax error in file '%s': %s", filename, ex );
                 Log.error( message );
@@ -204,7 +222,7 @@ var TemplateContainer = function () {
                 }
 
                 var templateFileNamePattern = "%s/distributions/%s/templates/%s.json";
-                var templateContent = null;
+                var templateContent = null;    
                 var filename = "";
                 try {
                     // Load template from 'install.name' directory.
@@ -328,8 +346,14 @@ var TemplateContainer = function () {
         try {
             var fieldsWithLowerCaseSubfields = __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields( unoptimizedTemplate );
             for ( var fieldKey in fieldsWithLowerCaseSubfields ) {
-                __appendRuleToField( unoptimizedTemplate.fields[fieldKey] );
+                if( !fieldsWithLowerCaseSubfields.hasOwnProperty(fieldKey) ) continue;
+
+                if( ! unoptimizedTemplate.fields[fieldKey].hasOwnProperty("rules")) {
+                    __appendRuleToField( unoptimizedTemplate.fields[fieldKey] );
+                }
                 for ( var subfieldKey in fieldsWithLowerCaseSubfields[fieldKey] ) {
+                    if( !fieldsWithLowerCaseSubfields[fieldKey].hasOwnProperty( subfieldKey) ) continue;
+
                     unoptimizedTemplate.fields[fieldKey]["subfields"][subfieldKey] = fieldsWithLowerCaseSubfields[fieldKey][subfieldKey];
                 }
             }

@@ -347,9 +347,11 @@ var TemplateOptimizer = function() {
                     return FieldsPosition.validateRecord;
                 case "RecordRules.idFieldExists":
                     return IdFieldExists.validateRecord;
-                case "RecordRules.fieldsMandatory":
+                case "RecordRules.fieldsMandatory":    // intended fall tru
+                case "FieldsMandatory.validateRecord":
                     return FieldsMandatory.validateRecord;
-                case "RecordRules.repeatableFields":
+                case "RecordRules.repeatableFields":  // intented fall tru
+                case "RepeatableFields.validateRecord":
                     return RepeatableFields.validateRecord;
                 case "RecordRules.recordSorted":
                     return RecordSorted.validateRecord;
@@ -366,7 +368,8 @@ var TemplateOptimizer = function() {
 
                 case "FieldRules.fieldsIndicator":
                     return FieldsIndicator.validateField;
-                case "FieldRules.subfieldsMandatory":
+                case "FieldRules.subfieldsMandatory":  // intended fall tru
+                case "SubfieldsMandatory.validateField":
                     return SubfieldsMandatory.validateField;
                 case "FieldRules.subfieldMandatoryIfSubfieldNotPresent":
                     return SubfieldMandatoryIfSubfieldNotPresentRule.validateField;
@@ -374,7 +377,8 @@ var TemplateOptimizer = function() {
                     return SubfieldConditionalMandatory.validateField;
                 case "FieldRules.subfieldHasValueDemandsOtherSubfield":
                     return SubfieldHasValueDemandsOtherSubfield.validateField;
-                case "FieldRules.repeatableSubfields":
+                case "FieldRules.repeatableSubfields":  // intended fall tru
+                case "RepeatableSubfields.validateField":
                     return RepeatableSubfields.validateField;
                 case "FieldRules.exclusiveSubfield":
                     return ExclusiveSubfield.validateField;
@@ -395,7 +399,8 @@ var TemplateOptimizer = function() {
                     return CheckReference.validateSubfield;
                 case "SubfieldRules.checkLength":
                     return CheckLength.validateSubfield;
-                case "SubfieldRules.checkValue":
+                case "SubfieldRules.checkValue":  // intended fall true
+                case "CheckValue.validateSubfield":
                     return CheckValue.validateSubfield;
                 case "SubfieldRules.checkFaust":
                     return CheckFaust.validateSubfield;
@@ -451,7 +456,8 @@ var TemplateOptimizer = function() {
         'optimize': optimize,
         'optimizeField': optimizeField,
         'optimizeSubfield': optimizeSubfield,
-        'setTemplatePropertyOnRule': setTemplatePropertyOnRule
+        'setTemplatePropertyOnRule': setTemplatePropertyOnRule,
+        'convertRuleTypeNameToFunction': convertRuleTypeNameToFunction
     };
 }();
 
