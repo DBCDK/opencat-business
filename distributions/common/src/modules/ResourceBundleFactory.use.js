@@ -32,7 +32,9 @@ var ResourceBundleFactory = function() {
                 return bundles[ filename ];
             }
 
-            for each( var path in resourcePaths ) {
+            for ( var i in resourcePaths ) {
+                var path=resourcePaths[i];
+
                 var props = __loadResourceBundle( path, filename );
                 if( props !== null ) {
                     result = ResourceBundle.createWithProperties( locale, props );
