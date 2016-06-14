@@ -13,14 +13,14 @@ SHELL_CMD='dbc-jsshell'
 DISTRIBUTIONS_PATH=`realpath ../distributions`
 
 LOG_FILE=transpiler.log
-LOG_LEVEL=trace
+#LOG_LEVEL=trace
+LOG_LEVEL=info
 CONFIG_FILE='bin/config.json'
 
 test -f $CONFIG_FILE || die  "Umnable to Load file $CONFIG_FILE"
 
 modules=( "common/src/entrypoints/build"
           "common/src/entrypoints/update"
-          "common/src/validation"
           "common/src/templates"
           "common/src/modules"
           "common/src/modules/unittests"
@@ -36,7 +36,7 @@ for d in `find ${DISTRIBUTIONS_PATH}/common/src/validation/rules -type d` ; do
    search_args=$search_args"-a file:${d} "
 done
 
-
+rm -r $DISTRIBUTIONS_PATH/*/compiled_templates
 rm $LOG_FILE
 
 if [ "x$1" == "x--shell" ] ; then

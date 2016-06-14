@@ -24,7 +24,7 @@ function main() {
 
     use( "StopWatch" );
     var stopWatch = new StopWatch( "transpile-templates" );
-    stopWatch.lap( "1. Load Packages" );
+    stopWatch.lap( "Load Packages" );
     use( "Print" );
 
 // Todo: moved TemplateLoader and TemplateOptimizer out of TemplateContainer
@@ -44,6 +44,9 @@ function main() {
 
     for ( var k = 0; k < configuration.installNames.length; k++ ) {
         var installName = configuration.installNames[k];
+        stopWatch.startNestet(installName);
+        var nestedStopWatch=new StopWatch(installName, installName);
+
         printn( " compiling templates for name : " + installName );
 
 
@@ -59,8 +62,7 @@ function main() {
         var outputDirectory = getCompiledOutDirFromSettings( GenericSettings );
         createDirectoryIfDontExist( outputDirectory );
 
-
-        stopWatch.lap( "3. lookup templates: " + installName );
+        nestedStopWatch.lap( "getTemplates" );
         var templateNames = TemplateContainer.getTemplateNames();
         printn( "Found " + templateNames.length + " for " + installName );
         printn( "Output Directory is: " + outputDirectory );
@@ -74,6 +76,7 @@ function main() {
             System.writeFile( outputDirectory + "/" + templateName + ".json", JSON.stringify( template ) );
 
             ++antCompiledTemplates;
+            nestedStopWatch.stop();
         }
         printn( "\ndone with: " + installName );
     }
