@@ -137,7 +137,9 @@ var TemplateContainer = function () {
             var result = templates[name];
             if ( result === undefined ) {
                 result = loadTemplate( name );
-                System.writeFile("/data/logs/dump."+installName+"/"+name+".json",JSON.stringify( result ));
+                try {
+                    System.writeFile( "/data/logs/dump." + installName + "/" + name + ".json", JSON.stringify( result ) );
+                } catch(e) { }
                 if ( result !== undefined ) {
                     templates[name] = result;
                 }
