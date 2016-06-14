@@ -183,7 +183,8 @@ var TemplateOptimizer = function() {
 
             // Setup predefined rules in field.
             if (result.rules === undefined) {
-                result.rules = fieldDefs.rules;
+                // deep clone the Default field
+                result.rules = JSON.parse(JSON.stringify(fieldDefs.rules));
             }
 
             // Add rule for mandatory subfields.
