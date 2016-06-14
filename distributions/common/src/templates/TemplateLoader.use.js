@@ -12,7 +12,7 @@ EXPORTED_SYMBOLS = [ 'TemplateLoader' ];
  * 
  */
 var TemplateLoader = function() {
-    var cache = undefined;
+    var cache = {};
 
     /**
      * Loads and returns a template based on its name.
@@ -24,33 +24,39 @@ var TemplateLoader = function() {
      * @name TemplateLoader#load
      */
     function load ( name, templateProvider ) {
-        Log.trace( "Enter - TemplateLoader.load" );
+        Log.trace( "Enter - TemplateLoader.load( " + name +" )" );
 
         try {
-            var result = templateProvider( name );
-
+            var result=cache[name];
             if ( result === undefined ) {
-                throw "Unable to load template '" + name + "'";
-            }
-            for ( var fieldName in result.fields ) {
-                if ( result.fields.hasOwnProperty( fieldName ) ) {
-                    var fieldObj = result.fields[fieldName];
-                    if ( typeof( fieldObj ) === "string" ) {
-                        result.fields[fieldName] = __getObjectFromTemplate( fieldObj, templateProvider );
-                    } else {
-                        for ( var subfieldName in fieldObj.subfields ) {
-                            if ( fieldObj.subfields.hasOwnProperty( subfieldName ) ) {
-                                var subfieldObj = fieldObj.subfields[subfieldName];
-                                if ( typeof( subfieldObj ) === "string" ) {
-                                    fieldObj.subfields[subfieldName] = __getObjectFromTemplate( subfieldObj, templateProvider );
-                                } else if ( subfieldObj.hasOwnProperty( "values" ) ) {
-                                    if ( typeof( subfieldObj.values ) === "string" ) {
-                                        fieldObj.subfields[subfieldName].values = __getObjectFromTemplate( subfieldObj.values, templateProvider );
+                result = templateProvider( name );
+
+                if ( result === undefined ) {
+                    throw "Unable to load template '" + name + "'";
+                }
+                for ( var fieldName in result.fields ) {
+                    if ( result.fields.hasOwnProperty( fieldName ) ) {
+                        var fieldObj = result.fields[fieldName];
+                        if ( typeof( fieldObj ) === "string" ) {
+                            result.fields[fieldName] = __getObjectFromTemplate( fieldObj, templateProvider );
+                        } else {
+                            for ( var subfieldName in fieldObj.subfields ) {
+                                if ( fieldObj.subfields.hasOwnProperty( subfieldName ) ) {
+                                    var subfieldObj = fieldObj.subfields[subfieldName];
+                                    if ( typeof( subfieldObj ) === "string" ) {
+                                        fieldObj.subfields[subfieldName] = __getObjectFromTemplate( subfieldObj, templateProvider );
+                                    } else if ( subfieldObj.hasOwnProperty( "values" ) ) {
+                                        if ( typeof( subfieldObj.values ) === "string" ) {
+                                            fieldObj.subfields[subfieldName].values = __getObjectFromTemplate( subfieldObj.values, templateProvider );
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                }
+                if ( result !== undefined ) {
+                    cache[name] = result;
                 }
             }
             return result;
@@ -72,14 +78,15 @@ var TemplateLoader = function() {
      */
 
     function __getObjectFromTemplate ( name, templateProvider ) {
-        Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", templateProvider, " )" );
+        Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", "templateProvider", " )" );
 
         try {
             var index = name.indexOf( "." );
             var templateName = name.substring( 0, index );
             var objName = name.substring( index + 1 );
 
-            return getObjectByName( objName, load( templateName, templateProvider ) );
+            // Deep copy of Value form Template.. To Avoid Change of object in Cache
+            return JSON.parse(JSON.stringify(getObjectByName( objName, load( templateName, templateProvider ) )));
         } finally {
             Log.trace( "Exit - TemplateLoader.__getObjectFromTemplate" );
         }
