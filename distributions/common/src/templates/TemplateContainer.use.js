@@ -4,6 +4,7 @@ use( "ResourceBundleFactory" );
 use( "TemplateOptimizer" );
 use( "TemplateLoader" );
 use( "UnitTest" );
+use( "WriteFile" );
 
 EXPORTED_SYMBOLS = ['TemplateContainer'];
 
@@ -136,6 +137,7 @@ var TemplateContainer = function () {
             var result = templates[name];
             if ( result === undefined ) {
                 result = loadTemplate( name );
+                System.writeFile("/data/logs/dump."+installName+"/"+name+".json",JSON.stringify( result ));
                 if ( result !== undefined ) {
                     templates[name] = result;
                 }
