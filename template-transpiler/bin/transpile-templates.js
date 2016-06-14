@@ -71,12 +71,11 @@ function main() {
         for ( var i = 0; i < templateNames.length; ++i ) {
             print( "." );
             var templateName = templateNames[i].schemaName;
-            stopWatch.lap( "4. Template " + installName + "/" + templateName );
+            nestedStopWatch.lap( templateName );
             var template = TemplateContainer.loadTemplate( templateName );
             System.writeFile( outputDirectory + "/" + templateName + ".json", JSON.stringify( template ) );
 
             ++antCompiledTemplates;
-            nestedStopWatch.stop();
         }
         printn( "\ndone with: " + installName );
     }
