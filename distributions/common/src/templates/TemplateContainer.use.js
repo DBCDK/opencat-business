@@ -136,7 +136,7 @@ var TemplateContainer = function () {
         try {
             var result = templates[name];
             if ( result === undefined ) {
-                result = __load_compiled_template();
+                result = __load_compiled_template( name );
                 if ( result !== undefined ) {
                     templates[name] = result;
                 }
