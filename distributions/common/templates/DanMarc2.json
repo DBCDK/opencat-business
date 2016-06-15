@@ -4115,9 +4115,7 @@
                 "n":{
                     "repeatable":false
                 },
-                "o":{
-                    "repeatable":false
-                },
+                "o":{},
                 "z":{
                     "repeatable":false,
                     "rules": [{
