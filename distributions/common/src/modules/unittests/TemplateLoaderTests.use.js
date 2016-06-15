@@ -39,7 +39,7 @@ UnitTest.addFixture( "TemplateLoader.load", function() {
                     "subfields":{
                         "a":{
                             "mandatory":true,
-                            "repeatable":false,
+                            "repeatable":false
                         }
                     }
                 }
@@ -48,6 +48,7 @@ UnitTest.addFixture( "TemplateLoader.load", function() {
             "rules": []
         };
     }
+    TemplateLoader.UnitTestReset();
     Assert.equalValue( "No includes", TemplateLoader.load( "bog", singleTemplate ), singleTemplate( "bog" ) );
 
     function includeFieldTemplate( name ) {
@@ -73,6 +74,7 @@ UnitTest.addFixture( "TemplateLoader.load", function() {
             case "danmarc2": return singleTemplate( "danmarc2" );
         }
     }
+    TemplateLoader.UnitTestReset();
     Assert.equalValue( "Include field", TemplateLoader.load( "bog", includeFieldTemplate ).fields[ "001" ], singleTemplate( "danmarc2" ).fields[ "001" ] );
 
     function includeSubfieldTemplate( name ) {
@@ -106,6 +108,7 @@ UnitTest.addFixture( "TemplateLoader.load", function() {
             case "danmarc2": return singleTemplate( "danmarc2" );
         }
     }
+    TemplateLoader.UnitTestReset();
     var includeSubFIeldTemplateResult = TemplateLoader.load( "bog", includeSubfieldTemplate );
     Assert.equalValue( "Include subfield", includeSubFIeldTemplateResult.fields[ "001" ]["subfields"][ "b" ], singleTemplate( "danmarc2" ).fields[ "001" ]["subfields"][ "a" ]);
 
@@ -142,6 +145,7 @@ UnitTest.addFixture( "TemplateLoader.load", function() {
             case "danmarc2": return singleTemplate( "danmarc2" );
         }
 
+        TemplateLoader.UnitTestReset();
         Assert.equalValue( "Include subfield from object", TemplateLoader.load( "bog", includeSubfieldWithStringInValuesTemplate ).fields[ "001" ]["subfields"]["v"]["values"], singleTemplate( "danmarc2" ).fields[ "001" ]["subfields"][ "a" ] );
     }
 });

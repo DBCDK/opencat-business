@@ -182,7 +182,7 @@ var TemplateOptimizer = function() {
             }
 
             // Setup predefined rules in field.
-            if (result.rules === undefined) {
+            if (result.rules === undefined && fieldDefs.rules !== undefined ) {
                 // deep clone the Default field
                 result.rules = JSON.parse(JSON.stringify(fieldDefs.rules));
             }

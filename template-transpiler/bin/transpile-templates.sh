@@ -40,8 +40,9 @@ rm -r $DISTRIBUTIONS_PATH/*/compiled_templates
 rm $LOG_FILE
 
 if [ "x$1" == "x--shell" ] ; then
+  shift # remove $1
   echo $SHELL_CMD $search_args -l $LOG_FILE -L $LOG_LEVEL -c main\(\) bin/transpile-templates.js $CONFIG_FILE
-  $SHELL_CMD $search_args -l $LOG_FILE -L $LOG_LEVEL
+  $SHELL_CMD $search_args -l $LOG_FILE -L $LOG_LEVEL "$*"
 else
   time $SHELL_CMD $search_args -l $LOG_FILE -L $LOG_LEVEL -c main\(\) bin/transpile-templates.js $CONFIG_FILE
 fi

@@ -14,6 +14,7 @@ EXPORTED_SYMBOLS = [ 'TemplateLoader' ];
 var TemplateLoader = function() {
     var cache = {};
 
+
     /**
      * Loads and returns a template based on its name.
      * 
@@ -165,8 +166,13 @@ var TemplateLoader = function() {
         }
     }
 
+    function UnitTestReset () {
+        cache = {};
+    }
+
     return {
         'load': load,
-        'getObjectByName': getObjectByName
+        'getObjectByName': getObjectByName,
+        'UnitTestReset' : UnitTestReset
     };
 }();
