@@ -1,6 +1,6 @@
 [
     {
-        "name": "fbs-update-local-from-single-to-volume",
+        "name": "fbs-update-local-from-mono-to-volume",
         "description": "Omkatalogisering af lokal singlepost til lokal bindpost",
         "request": {
             "authentication": {
@@ -40,14 +40,14 @@
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enqueued": true,
+                        "enqueued": false,
                         "children": [ "rawrepo-section.marc" ]
                     },
                     {
                         "record": "rawrepo-section.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enqueued": true,
+                        "enqueued": false,
                         "children": [ "result-volume.marc" ]
                     },
                     {
