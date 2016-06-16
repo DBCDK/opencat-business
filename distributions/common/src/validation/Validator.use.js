@@ -6,6 +6,7 @@ use("StopWatch");
 use("StringUtil");
 use("TemplateOptimizer");
 use("ValidateErrors");
+use("SubfieldSorting");
 
 EXPORTED_SYMBOLS = ['Validator'];
 
@@ -31,6 +32,7 @@ var Validator = function () {
     function validateRecord(record, templateProvider, settings) {
         Log.trace("Enter - Validator.validateRecord()");
         var watchFunc = new StopWatch();
+        var fieldsToSort = [];
 
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
@@ -44,6 +46,9 @@ var Validator = function () {
             if (record.fields !== undefined) {
                 for (var i = 0; i < record.fields.length; i++) {
                     var subResult = validateField(record, record.fields[i], templateProvider, settings);
+                    if (record.fields[i].sorting) {
+                        fieldsToSort.push(record.fields[i]);
+                    }
 
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].params.fieldno = i + 1;
@@ -79,6 +84,12 @@ var Validator = function () {
                 }
             } else {
                 // TODO: Return error.
+            }
+
+            if (result.length === 0) {
+                for (var s = 0; s < fieldsToSort.length; s++) {
+                    SubfieldSorting.sort(fieldsToSort[s]);
+                }
             }
 
             return result;
