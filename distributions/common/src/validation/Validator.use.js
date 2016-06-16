@@ -6,6 +6,7 @@ use("StopWatch");
 use("StringUtil");
 use("TemplateOptimizer");
 use("ValidateErrors");
+use("RecordSorting");
 use("SubfieldSorting");
 
 EXPORTED_SYMBOLS = ['Validator'];
@@ -87,6 +88,8 @@ var Validator = function () {
             }
 
             if (result.length === 0) {
+                RecordSorting.sort(record);
+
                 for (var s = 0; s < fieldsToSort.length; s++) {
                     SubfieldSorting.sort(fieldsToSort[s]);
                 }
