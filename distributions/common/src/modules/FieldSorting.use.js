@@ -3,9 +3,9 @@ use("MarcClasses");
 use("Log");
 use("StringUtil");
 
-EXPORTED_SYMBOLS = ['SubfieldSorting'];
+EXPORTED_SYMBOLS = ['FieldSorting'];
 
-var SubfieldSorting = function () {
+var FieldSorting = function () {
     var sortingList;
     var BUNDLE_NAME = "validation";
 
@@ -20,18 +20,18 @@ var SubfieldSorting = function () {
      * Returns the field object with the subfields ordered after the sorting list
      */
     function sort(field) {
-        Log.trace("Enter - SubfieldSorting.sort", field);
+        Log.trace("Enter - FieldSorting.sort", field);
         try {
 
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
             if (field.sorting === undefined || field.sorting === null) {
-                Log.debug(ResourceBundle.getString(bundle, "subfieldSorting.sort.sorting.error"));
+                Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.sorting.error"));
                 return field;
             }
 
             if (field.subfields === undefined || field.subfields === null) {
-                Log.debug(ResourceBundle.getString(bundle, "subfieldSorting.sort.subfields.error"));
+                Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.subfields.error"));
                 return field;
             }
 
@@ -56,7 +56,7 @@ var SubfieldSorting = function () {
 
             return field;
         } finally {
-            Log.trace("Exit -- SubfieldSorting.sort");
+            Log.trace("Exit -- FieldSorting.sort");
         }
     }
 
