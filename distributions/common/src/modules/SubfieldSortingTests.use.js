@@ -98,7 +98,7 @@ UnitTest.addFixture("SubfieldSorting", function () {
     SafeAssert.equal("fieldWithWeirdChar", SubfieldSorting.sort(fieldWithWeirdChar), fieldWithWeirdCharExpected);
 
     var alreadySorted = {
-        "sorting": "AaBb",
+        "sorting": "ab",
         "subfields": {
             "A": "A",
             "a": "a",

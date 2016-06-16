@@ -68,7 +68,8 @@ var SubfieldSorting = function () {
      * should appear right before the lower case subfield
      * * A subfield name not defined in the sort order should just be moved to the end of the list
      *
-     * Note: Lower value = earlier in the list
+     * Note 1: Lower value = earlier in the list
+     * Note 2: Only lower case subfield names are listed in the sorting list
      *
      * @param arg subfield name
      * @returns the index of the subfield name
@@ -81,10 +82,6 @@ var SubfieldSorting = function () {
         } else if (sortingList.indexOf(arg.toLowerCase()) > -1) {
             // Upper case should be before lower case so we give it a slight nudge forward
             index = sortingList.indexOf(arg.toLowerCase()) - 0.5;
-        } else if (sortingList.indexOf(arg.toUpperCase()) > -1) {
-            // Reverse situation then above - lower case subfield but only upper case version found in the sort order
-            // and since upper case should be before lower case we push the lower case subfield just a nudge back
-            index = sortingList.indexOf(arg.toUpperCase()) + 0.5;
         } else {
             index = 999; // Not found so move to the end of the list
         }
