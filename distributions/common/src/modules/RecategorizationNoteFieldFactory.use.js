@@ -99,7 +99,7 @@ var RecategorizationNoteFieldFactory = function() {
             var spec = undefined;
 
             field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue( __loadBundle(), record, "100", /a|h|k|e|f/ );
-            Log.debug( "Found field: ", field );
+            Log.debug( "Found field: ", field !== undefined ? field : "UNDEFINED");
             if( field !== undefined ) {
                 spec = {
                     sepSpec: [
