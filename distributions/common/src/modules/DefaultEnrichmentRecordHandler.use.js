@@ -57,7 +57,7 @@ var DefaultEnrichmentRecordHandler = function () {
 
             if ( result.status === "OK" ) {
                 // Check if record has been published before today.
-                if ( RecordProduction.checkRecord( new Date, currentCommonRecord ) ) {
+                if ( RecordProduction.checkRecord( new Date, updatingCommonRecord ) ) {
                     // It wasn't, so it should fail unless
                     // if 008*u==r then we have to check if content of 032a|x is about to change (some catCodes only).
                     if ( updatingCommonRecord.matchValue( /008/, /u/, /r/ ) ) {
