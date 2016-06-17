@@ -27,8 +27,11 @@ var FieldDemandsOtherFieldAndSubfield = function () {
      * @returns an array which contains errors if any is present.
      * @method
      */
-    function validateField ( record, field, params, settings ) {
-        Log.trace( "Enter - FieldDemandsOtherFieldAndSubfield.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField ( record, field, params ) {
+        Log.debug( "Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)" );
+        Log.debug( "record ", record !== undefined ? JSON.stringify(record) : "undef" );
+        Log.debug( "field ", field !== undefined ? JSON.stringify(field) : "undef" );
+        Log.debug( "params ", params !== undefined ? JSON.stringify(params) : "undef" );
 
         var result = null;
         try {
@@ -68,7 +71,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             return result = [ ValidateErrors.fieldError( "", message ) ];
         }
         finally {
-            Log.trace( "Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result );
+            Log.debug( "Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result !== undefined ? JSON.stringify(result) : "undef" );
         }
     }
 

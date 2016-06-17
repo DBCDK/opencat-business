@@ -3,6 +3,7 @@ use( "ClassificationData" );
 use( "DefaultEnrichmentRecordHandler" );
 use( "UnitTest" );
 use( "UpdateConstants" );
+use( "Log" );
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "DefaultEnrichmentRecordHandler.create", function() {
@@ -130,7 +131,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
         noResultInProduction() );
 
-    Log.trace( "Enter - Testcase" );
+    Log.debug( "Enter - Testcase" );
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
@@ -150,7 +151,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     Assert.equalValue( "Complete record in production: 008u=r and 032a|x is changed",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
         DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
-    Log.trace( "Exit - Testcase" );
+    Log.debug( "Exit - Testcase" );
 
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -190,7 +191,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     ].join( "\n" ) );
     Assert.equalValue( "Complete record in production: 008u!=r and 032a|x is changed",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
-        DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
+        noResultInProduction() );
 } );
 
 //-----------------------------------------------------------------------------

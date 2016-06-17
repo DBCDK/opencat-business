@@ -41,7 +41,7 @@ var ISBDFieldFormater = function() {
 
                 Log.debug( "subfield: ", subField );
                 Log.debug( "Subfield names: ", previousSubNames + subField.name );
-                Log.debug( "specSepItem: ", specSepItem );
+                Log.debug( "specSepItem: ", specSepItem !== undefined ? specSepItem : "UNDEFINED" );
 
                 if( i === 0 ) {
                     if( specSepItem !== undefined && specSepItem.firstSep !== undefined ) {

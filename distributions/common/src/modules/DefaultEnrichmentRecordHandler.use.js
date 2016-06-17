@@ -77,7 +77,7 @@ var DefaultEnrichmentRecordHandler = function () {
             return result;
         }
         finally {
-            Log.trace( "Exit - DefaultEnrichmentRecordHandler.shouldCreateRecords(): " + result );
+            Log.debug( "Exit - DefaultEnrichmentRecordHandler.shouldCreateRecords(): " + result.toString() );
         }
     }
 
@@ -155,7 +155,7 @@ var DefaultEnrichmentRecordHandler = function () {
             return result = true;
         }
         finally {
-            Log.trace( "Exit - DefaultEnrichmentRecordHandler.__matchKatcodes(): " + result );
+            Log.debug( "Exit - DefaultEnrichmentRecordHandler.__matchKatcodes(): " + result );
         }
     }
 
