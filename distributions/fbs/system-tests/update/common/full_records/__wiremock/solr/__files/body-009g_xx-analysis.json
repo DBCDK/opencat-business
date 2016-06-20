@@ -1,0 +1,28 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":1},
+  "analysis":{
+    "field_types":{},
+    "field_names":{
+      "match.009g":{
+        "index":[
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","xx",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","xx",
+          "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
+            "text":"xx",
+            "raw_bytes":"[78 78]",
+            "start":0,
+            "end":2,
+            "position":1,
+            "positionHistory":[1],
+            "type":"word"}],
+          "org.apache.lucene.analysis.core.LowerCaseFilter",[{
+            "text":"xx",
+            "raw_bytes":"[78 78]",
+            "position":1,
+            "positionHistory":[1,
+              1],
+            "start":0,
+            "end":2,
+            "type":"word"}]]}}}}
