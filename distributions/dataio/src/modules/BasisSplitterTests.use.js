@@ -22,7 +22,7 @@ UnitTest.addFixture( "BasisSplitter.splitCompleteBasisRecord", function() {
     record = RecordUtil.createFromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID ) +
         "004 00 *r n *a e\n" +
-        "s10 00 *a text\n"
+        "996 00 *a text\n"
     );
     commonRecord = RecordUtil.createFromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID ) +
