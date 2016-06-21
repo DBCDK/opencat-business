@@ -114,7 +114,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        StringUtil.sprintf( "s10 00 *a %s\n", FBS_RECORD_AGENCY_ID )
+        StringUtil.sprintf( "996 00 *a %s\n", FBS_RECORD_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
@@ -140,7 +140,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+        StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
@@ -166,7 +166,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        StringUtil.sprintf( "s10 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
+        StringUtil.sprintf( "996 00 *a %s\n", OTHER_FBS_RECORD_AGENCY_ID )
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
@@ -194,7 +194,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        "s10 00 *a RET"
+        "996 00 *a RET"
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
@@ -224,7 +224,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        "s10 00 *a DBC"
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();
@@ -254,7 +254,7 @@ UnitTest.addFixture( "FBSAuthenticator.authenticateRecord", function() {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf( "001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID ) +
-        "s10 00 *a DBC"
+        "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord( curRecord );
     curRecord = new Record();

@@ -41,9 +41,9 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
     record.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     );
-    Assert.equalValue("New record with s10",
+    Assert.equalValue("New record with 996",
         callFunction(record, "netpunkt", LOGIN_AGENCY_ID),
         []);
 
@@ -87,7 +87,7 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID) +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     );
     RawRepoClientCore.addRecord(curRecord);
 
@@ -96,7 +96,7 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n"
     );
-    Assert.equalValue("Update record with s10/996 in current record",
+    Assert.equalValue("Update record with 996 in current record",
         callFunction(record, "netpunkt", LOGIN_AGENCY_ID),
         []);
     RawRepoClientCore.clear();
@@ -111,32 +111,7 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID) +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
-    );
-    RawRepoClientCore.addRecord(curRecord);
-
-    record = new Record();
-    record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
-        "004 00 *a e *r n" +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
-    );
-    Assert.equalValue("Update record with s10/996 in current record. Only s10 is presented and unchanged in new record.",
-        callFunction(record, "netpunkt", LOGIN_AGENCY_ID),
-        []);
-    RawRepoClientCore.clear();
-
-    curRecord = new Record();
-    curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
-        "004 00 *a e *r n\n" +
         StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
-    );
-    RawRepoClientCore.addRecord(curRecord);
-    curRecord = new Record();
-    curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID) +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     );
     RawRepoClientCore.addRecord(curRecord);
 
@@ -146,7 +121,7 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
         "004 00 *a e *r n" +
         StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     );
-    Assert.equalValue("Update record with s10/996 in current record. Only 996 is presented and unchanged in new record.",
+    Assert.equalValue("Update record with 996 in current record. Only 996 is presented and unchanged in new record.",
         callFunction(record, "netpunkt", LOGIN_AGENCY_ID),
         []);
     RawRepoClientCore.clear();
@@ -161,7 +136,32 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
     curRecord = new Record();
     curRecord.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID) +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+    );
+    RawRepoClientCore.addRecord(curRecord);
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        "004 00 *a e *r n" +
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+    );
+    Assert.equalValue("Update record with 996 in current record. Only 996 is presented and unchanged in new record.",
+        callFunction(record, "netpunkt", LOGIN_AGENCY_ID),
+        []);
+    RawRepoClientCore.clear();
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        "004 00 *a e *r n\n" +
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+    );
+    RawRepoClientCore.addRecord(curRecord);
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID) +
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     );
     RawRepoClientCore.addRecord(curRecord);
 
@@ -170,9 +170,9 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         StringUtil.sprintf("996 00 *a %s\n", UpdateConstants.COMMON_AGENCYID) +
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     );
-    Assert.equalValue("Update record with s10/996 in current record. 996/s10 is presented and unchanged in new record.",
+    Assert.equalValue("Update record with 996 in current record. 996 is presented and unchanged in new record.",
         callFunction(record, "netpunkt", LOGIN_AGENCY_ID),
         []);
     RawRepoClientCore.clear();
@@ -199,7 +199,7 @@ UnitTest.addFixture("DBCAuthenticator.recordDataForRawRepo", function () {
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s", UpdateConstants.COMMON_AGENCYID),
         "004 00 *a e *r n",
         StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID),
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     ].join("\n"));
 
     actual = DBCAuthenticator.recordDataForRawRepo(record, "netpunkt", BASIS_AGENCY_ID);
@@ -213,7 +213,7 @@ UnitTest.addFixture("DBCAuthenticator.recordDataForRawRepo", function () {
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s", UpdateConstants.COMMON_AGENCYID),
         "004 00 *a e *r n",
         StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID),
-        StringUtil.sprintf("s10 00 *a %s", UpdateConstants.COMMON_AGENCYID)
+        StringUtil.sprintf("996 00 *a %s", UpdateConstants.COMMON_AGENCYID)
     ].join("\n"));
 
     actual = DBCAuthenticator.recordDataForRawRepo(record, "netpunkt", BASIS_AGENCY_ID);

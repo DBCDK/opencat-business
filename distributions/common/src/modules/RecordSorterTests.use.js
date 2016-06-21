@@ -65,8 +65,7 @@ UnitTest.addFixture( "RecordSorter.insertField", function() {
         "245 00 *a title a" +
         "245 00 *a title b" +
         "245 00 *a title c" +
-        "245 00 *a new field" +
-        "s10 00 *a 700145"
+        "245 00 *a new field"
     );
 
     record = new Record();
@@ -75,8 +74,7 @@ UnitTest.addFixture( "RecordSorter.insertField", function() {
         "004 00 *a r\n" +
         "245 00 *a title a" +
         "245 00 *a title b" +
-        "245 00 *a title c" +
-        "s10 00 *a 700145"
+        "245 00 *a title c"
     );
     field = expected.field( 5 );
     Assert.equalValue( "Field into record with repeated fields", RecordSorter.insertField( record, field ), expected );
