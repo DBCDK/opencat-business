@@ -1,22 +1,17 @@
-//-----------------------------------------------------------------------------
-use( "DBCAuthenticator" );
-use( "DBCUpdaterEntryPoint" );
-use( "DBCValidatorEntryPoint" );
+use("DBCAuthenticator");
+use("DBCUpdaterEntryPoint");
+use("DBCValidatorEntryPoint");
 
-//-----------------------------------------------------------------------------
-function initTemplates( settings ) {
-    DBCValidatorEntryPoint.initTemplates( settings );
+function initTemplates(settings) {
+    DBCValidatorEntryPoint.initTemplates(settings);
 }
 
-//-----------------------------------------------------------------------------
-function authenticateRecord( record, userId, groupId, settings ) {
-    return DBCAuthenticator.authenticateRecord( record, userId, groupId, settings );
+function authenticateRecord(record, userId, groupId, settings) {
+    return DBCAuthenticator.authenticateRecord(record, userId, groupId, settings);
 }
 
-//-----------------------------------------------------------------------------
-
-function hasClassificationData( marc ) {
-    return DBCUpdaterEntryPoint.hasClassificationData( marc );
+function hasClassificationData(marc) {
+    return DBCUpdaterEntryPoint.hasClassificationData(marc);
 }
 
 /**
@@ -27,12 +22,12 @@ function hasClassificationData( marc ) {
  *
  * @return {Boolean} true if the classifications has changed, false otherwise.
  */
-function hasClassificationsChanged( oldRecord, newRecord ) {
-    return DBCUpdaterEntryPoint.hasClassificationsChanged( oldRecord, newRecord );
+function hasClassificationsChanged(oldRecord, newRecord) {
+    return DBCUpdaterEntryPoint.hasClassificationsChanged(oldRecord, newRecord);
 }
 
-function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord ) {
-    return DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord );
+function shouldCreateEnrichmentRecords(settings, currentRecord, updatingRecord) {
+    return DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords(settings, currentRecord, updatingRecord);
 }
 
 /**
@@ -44,8 +39,8 @@ function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord 
  *
  * @return {String} A json with the new record.
  */
-function createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, agencyId ) {
-    return DBCUpdaterEntryPoint.createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, agencyId );
+function createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId) {
+    return DBCUpdaterEntryPoint.createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId);
 }
 
 /**
@@ -58,23 +53,21 @@ function createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord,
  *
  * @return {String} A json with the updated record.
  */
-function updateLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, enrichmentRecord ) {
-    return DBCUpdaterEntryPoint.updateLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, enrichmentRecord );
+function updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
+    return DBCUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord);
 }
 
-function correctLibraryExtendedRecord( commonRecord, enrichmentRecord ) {
-    return DBCUpdaterEntryPoint.correctLibraryExtendedRecord( commonRecord, enrichmentRecord );
+function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
+    return DBCUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
 }
 
-function recordDataForRawRepo( record, userId, groupId ) {
-    return DBCUpdaterEntryPoint.recordDataForRawRepo( record, userId, groupId );
+function recordDataForRawRepo(record, userId, groupId) {
+    return DBCUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId);
 }
 
-function checkDoubleRecord( record, settings ) {
-    return DBCUpdaterEntryPoint.checkDoubleRecord( record, settings );
+function checkDoubleRecord(record, settings) {
+    return DBCUpdaterEntryPoint.checkDoubleRecord(record, settings);
 }
-
-//-----------------------------------------------------------------------------
 
 /**
  * Gets the names of the templates as an Array
@@ -82,8 +75,8 @@ function checkDoubleRecord( record, settings ) {
  * @return {JSON} A json with the names of the templates. The names is returned
  *                as an Array.
  */
-function getValidateSchemas( groupId, settings ) {
-    return DBCValidatorEntryPoint.getValidateSchemas( groupId, settings );
+function getValidateSchemas(groupId, settings) {
+    return DBCValidatorEntryPoint.getValidateSchemas(groupId, settings);
 }
 
 /**
@@ -93,8 +86,8 @@ function getValidateSchemas( groupId, settings ) {
  *
  * @return {Boolean} true if the template exists, false otherwise.
  */
-function checkTemplate( name, groupId, settings ) {
-    return DBCValidatorEntryPoint.checkTemplate( name, groupId, settings );
+function checkTemplate(name, groupId, settings) {
+    return DBCValidatorEntryPoint.checkTemplate(name, groupId, settings);
 }
 
 /**
@@ -105,6 +98,6 @@ function checkTemplate( name, groupId, settings ) {
  *
  * @return {String} A json string with an array of validation errors.
  */
-function validateRecord( templateName, record, settings ) {
-    return DBCValidatorEntryPoint.validateRecord( templateName, record, settings );
+function validateRecord(templateName, record, settings) {
+    return DBCValidatorEntryPoint.validateRecord(templateName, record, settings);
 }
