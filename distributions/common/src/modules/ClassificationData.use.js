@@ -39,6 +39,7 @@ var ClassificationData = function() {
             Log.debug("    oldMarc: " + oldMarc);
             Log.debug("    newMarc: " + newMarc);
 
+            // TODO move to posttypeskift
             if (instance.fields.test("008")) {
                 if (__hasSubfieldChangedMatcher(oldMarc, newMarc, /008/, /t/, /m|s/, /p/)) {
                     reason = "008t m|s -> p";
@@ -56,6 +57,7 @@ var ClassificationData = function() {
                     return result = true;
                 }
             }
+            // TODO move to posttypeskift END
 
             if (instance.fields.test("038") || instance.fields.test("039")) {
                 var selectFields = /038|039/;
