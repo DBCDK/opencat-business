@@ -15,7 +15,7 @@ d09 00 *z REX201504
 f06 00 *b s *m Omkatalogiseret fra enkeltbindsværk. Bind B2 og B3 udsendt 201517 *m Rettelse, Dansk bogf.
 n50 00 *a 20150415
 n51 00 *a 20150114
-s10 00 *a DBC
+996 00 *a DBC
 s12 00 *t TeamBLY201502
 z99 00 *a ljl
 z98 00 *a Minus korrekturprint
