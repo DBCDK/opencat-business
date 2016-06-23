@@ -36,7 +36,7 @@ f06 00 *b b *b s
 f21 00 *a http://dmat.dbc.dk/eVALU/get.php?isbn=9788762724754
 f21 00 *a http://samples.pubhub.dk/9788762724754.epub *l eReolen *f https://images.pubhub.dk/originals/3898b9b4-1a5c-4e92-a622-e5569e2c792f.jpg *n 9788762724754
 n51 00 *a 20150902
-s10 00 *a DBC
+996 00 *a DBC
 s12 00 *t TeamBMV201535
 z99 00 *a Admin
 z98 00 *a Minus korrekturprint

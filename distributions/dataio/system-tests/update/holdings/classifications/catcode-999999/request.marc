@@ -34,6 +34,6 @@ d31 00 *b 155 *h 212 *t 3
 d32 00 *b 155 *h 212 *t 7
 d35 00 *a P *i 04 *n 10 *p 04 *q 10
 f06 00 *b l *b b *b s
-s10 00 *a DBC
+996 00 *a DBC
 s12 00 *t TeamBLY201535
 z99 00 *a ljl
