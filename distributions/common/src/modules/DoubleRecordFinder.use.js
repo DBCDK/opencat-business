@@ -118,7 +118,7 @@ var DoubleRecordFinder = function () {
             array.push({
                 matcher: __matchSoundMovieMultimedia,
                 searcher: __findSoundMovieMultimediaGeneralRun,
-                continueOnHit: false
+                continueOnHit: true
             });
             array.push({
                 matcher: __matchVolumes,
