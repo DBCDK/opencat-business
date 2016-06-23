@@ -206,6 +206,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchVolumes(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: Volumes");
+            }
         }
     }
 
@@ -281,6 +285,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchSections(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: Sections");
+            }
         }
     }
 
@@ -347,22 +355,27 @@ var DoubleRecordFinder = function () {
 
     function __matchNumbers(record) {
         Log.trace( "Enter - DoubleRecordFinder.__matchNumbers()" );
-
+        var result = undefined;
+        
         try {
             for (var i = 0; i < record.numberOfFields(); i++) {
                 var field = record.field(i);
 
-                var found = __checkSubfieldExistence(field, "021", /[ea]/) ||
+                result = __checkSubfieldExistence(field, "021", /[ea]/) ||
                     __checkSubfieldExistence(field, "022", /[a]/) ||
                     __checkSubfieldExistence(field, "024", /[a]/) ||
                     __checkSubfieldExistence(field, "028", /[a]/) ||
                     __checkSubfieldExistence(field, "023", /[ab]/);
-                if (found) return true;
+                if (result) return true;
             }
             return false;
         }
         finally {
-            Log.trace( "Exit - DoubleRecordFinder.__matchNumbers(): ", found !== undefined ? JSON.stringify(found) : "undef"  );
+            Log.trace( "Exit - DoubleRecordFinder.__matchNumbers(): ", result !== undefined ? JSON.stringify(result) : "undef"  );
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: Numbers");
+            }
         }
     }
 
@@ -442,6 +455,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchSoundMovieMultimedia(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: SoundMovieMultimedia");
+            }
         }
     }
 
@@ -538,6 +555,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchMusic(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: Music");
+            }
         }
     }
 
@@ -672,6 +693,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchComposedMaterials(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: ComposedMaterials");
+            }
         }
     }
 
@@ -791,6 +816,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchFictionBookMusic(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: FictionBookMusic");
+            }
         }
     }
 
@@ -888,6 +917,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchSimpleLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: SimpleLiterature");
+            }
         }
     }
 
@@ -974,6 +1007,10 @@ var DoubleRecordFinder = function () {
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__matchTechnicalLiterature(): ", result !== undefined ? JSON.stringify(result) : "undef");
+
+            if (result !== undefined && result) {
+                Log.debug("Match found: TechnicalLiterature");
+            }
         }
     }
 
