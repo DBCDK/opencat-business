@@ -411,7 +411,6 @@
             "repeatable":false,
             "subfields":{
                 "a": {
-                    "mandatory": true,
                     "repeatable": false,
                     "values": "Lister.fields.codes.subfields.libraries.996a.values",
                     "rules": [
