@@ -4232,11 +4232,8 @@
                     "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
                 },
                 "t":{},
-                "c":{
-                    "repeatable":false
-                },
+                "c":{},
                 "z":{
-                    "repeatable":false,
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
