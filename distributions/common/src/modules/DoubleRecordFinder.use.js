@@ -32,7 +32,7 @@ var DoubleRecordFinder = function () {
      * Used by FBS
      *
      * @param record {record}  The record to find double records for.
-     * @param solrUrl {String} Url to the solr service to use.
+     * @param callSolrUrl {String} Url to the solr service to use.
      *
      * @return {Array} Array of objects with found records. See DefaultDoubleRecordHandler#formatMessage
      *                 for an explanation.
@@ -40,12 +40,14 @@ var DoubleRecordFinder = function () {
      * @name DoubleRecordFinder#find
      */
     function findGeneral(record, callSolrUrl) {
-        Log.debug("Enter - DoubleRecordFinder.findGeneral()", 0);
+        Log.debug("Enter - DoubleRecordFinder.findGeneral()");
         solrUrl = callSolrUrl;
         var result = [];
         try {
-            var array = commonChecks();
+            var array = commonChecks(false);
+            
             result = doFind(record, array);
+            
             return result;
         }
         finally {
@@ -58,7 +60,7 @@ var DoubleRecordFinder = function () {
      * Used by DBC internally
      *
      * @param record {record}  The record to find double records for.
-     * @param solrUrl {String} Url to the solr service to use.
+     * @param callSolrUrl {String} Url to the solr service to use.
      *
      * @return {Array} Array of objects with found records. See DefaultDoubleRecordHandler#formatMessage
      *                 for an explanation.
@@ -66,31 +68,15 @@ var DoubleRecordFinder = function () {
      * @name DoubleRecordFinder#find
      */
     function find(record, callSolrUrl) {
-        Log.debug("Enter - DoubleRecordFinder.find()", 0);
-        Log.debug("Try to find double records for record:\n", record.toString());
+        Log.debug("Enter - DoubleRecordFinder.find()");
 
         solrUrl = callSolrUrl;
         var result = [];
         try {
-            var array = commonChecks();
-            // Keep Music245 and 538 grouped together
-            array.push({
-                matcher: __matchMusic,
-                searcher: __findMusic245Run,
-                continueOnHit: true
-            });
-            array.push({
-                matcher: __matchMusic,
-                searcher: __findMusic538Run,
-                continueOnHit: false
-            });
-            // END Keep Music245 and 538 grouped together
-            array.push({
-                matcher: __matchSoundMovieMultimedia,
-                searcher: __findSoundMovieMultimediaRun,
-                continueOnHit: false
-            });
+            var array = commonChecks(true);
+
             result = doFind(record, array);
+
             return result;
         }
         finally {
@@ -98,7 +84,7 @@ var DoubleRecordFinder = function () {
         }
     }
 
-    function commonChecks() {
+    function commonChecks(includeDBCOnlyFinders) {
         Log.trace("Enter - DoubleRecordFinder.commonChecks()", 0);
 
         try {
@@ -113,13 +99,34 @@ var DoubleRecordFinder = function () {
             array.push({
                 matcher: __matchMusic,
                 searcher: __findMusicGeneralRun,
-                continueOnHit: false
+                continueOnHit: includeDBCOnlyFinders
             });
+            if (includeDBCOnlyFinders) {
+                // Keep Music245 and 538 grouped together
+                array.push({
+                    matcher: __matchMusic,
+                    searcher: __findMusic245Run,
+                    continueOnHit: true
+                });
+                array.push({
+                    matcher: __matchMusic,
+                    searcher: __findMusic538Run,
+                    continueOnHit: false
+                });
+                // END Keep Music245 and 538 grouped together
+            }
             array.push({
                 matcher: __matchSoundMovieMultimedia,
                 searcher: __findSoundMovieMultimediaGeneralRun,
-                continueOnHit: true
+                continueOnHit: includeDBCOnlyFinders
             });
+            if (includeDBCOnlyFinders) {
+                array.push({
+                    matcher: __matchSoundMovieMultimedia,
+                    searcher: __findSoundMovieMultimediaRun,
+                    continueOnHit: false
+                });
+            }
             array.push({
                 matcher: __matchVolumes,
                 searcher: __findVolumesRun,

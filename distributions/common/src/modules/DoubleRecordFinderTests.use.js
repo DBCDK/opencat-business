@@ -840,5 +840,81 @@ UnitTest.addFixture( "DoubleRecordFinder.__findVolumes", function() {
     );
 } );
 
+//-----------------------------------------------------------------------------
+UnitTest.addFixture( "DoubleRecordFinder.find", function() {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
 
+
+    /*
+        This test performs 3 comparisons:
+        - __findMusicGeneral on 009a, 009g, 110a and 245a (no hit)
+        - __findMusic245 on 009a, 009g and 245a (hit)
+        - __findMusic538 on 009a, 009g and 538g (hit)
+     */
+    SolrCore.clear();
+    SolrCore.addQuery( "(match.009a:\"s\" AND match.009g:\"xc\" AND match.110a:kirsebærrød AND match.245a:538g) AND marc.001b:870970",
+        { response: { docs: [ ] } } );
+    SolrCore.addQuery( "(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addQuery( "(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "s" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xc", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xc" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.110a:Kirsebærrød", { responseHeader: { status: 0 }, analysis: { field_names: { "match.110a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "kirsebærrød" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.245a:538g", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "538g" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.538g:208", { responseHeader: { status: 0 }, analysis: { field_names: { "match.538g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "208" } ] ] } } } } );
+
+    record = RecordUtil.createFromString( [
+        "001 00 *a 47798086 *b 870970 *d 20160501 *f a",
+        "002 00 *r n *a e",
+        "008 00 *t s *u s *a 2016 *b gb *l eng *v 0",
+        "009 00 *a s *g xc",
+        "110 00 *a Kirsebærrød",
+        "245 00 *a 538g",
+        "260 00 *b Kirsebærrød",
+        "538 00 *f Cherry Red *g 208",
+        "652 00 *m 78.796 *v 5",
+        "996 00 *a 710100"
+    ].join( "\n") );
+
+    Assert.equalValue( "DoubleRecordFinder.find - music, second match", DoubleRecordFinder.find( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined },
+          { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined }]
+    );
+
+    /*
+     This test performs 3 comparisons:
+     - __findMusicGeneral on 009a, 009g and 245a (no hit)
+     - __findMusic245 on 009a, 009g and 245a (no hit)
+     - __findMusic538 on 009a, 009g and 538g (hit)
+     */
+    SolrCore.clear();
+    SolrCore.addQuery( "(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+        { response: { docs: [] } } );
+    SolrCore.addQuery( "(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+        { response: { docs: [ { id: "12345678:870970" } ] } } );
+    SolrCore.addAnalyse( "match.009a:s", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "s" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.009g:xc", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xc" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.245a:538g", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "538g" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.538g:208", { responseHeader: { status: 0 }, analysis: { field_names: { "match.538g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "208" } ] ] } } } } );
+
+    record = RecordUtil.createFromString( [
+        "001 00 *a 47798086 *b 870970 *d 20160501 *f a",
+        "002 00 *r n *a e",
+        "008 00 *t s *u s *a 2016 *b gb *l eng *v 0",
+        "009 00 *a s *g xc",
+        "245 00 *a 538g",
+        "260 00 *b Kirsebærrød",
+        "538 00 *f Cherry Red *g 208",
+        "652 00 *m 78.796 *v 5",
+        "996 00 *a 710100"
+    ].join( "\n") );
+
+    Assert.equalValue( "DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find( record, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+
+
+} );
 
