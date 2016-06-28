@@ -35,24 +35,16 @@ var FieldSorting = function () {
                 return field;
             }
 
+            Log.debug("Sorting field " + field.name + " by sort order " + field.sorting);
+
             sortingList = field.sorting;
 
-            var keys = Object.keys(field.subfields);
-
-            keys.sort(function (a, b) {
-                var indexA = findIndexInSortingList(a);
-                var indexB = findIndexInSortingList(b);
+            field.subfields.sort(function (a, b) {
+                var indexA = findIndexInSortingList(a.name);
+                var indexB = findIndexInSortingList(b.name);
 
                 return indexA - indexB;
             });
-
-            var sortedSubfields = {};
-
-            for (var i = 0; i < keys.length; i++) {
-                sortedSubfields[keys[i]] = field.subfields[keys[i]];
-            }
-
-            field.subfields = sortedSubfields;
 
             return field;
         } finally {

@@ -6,144 +6,154 @@ UnitTest.addFixture("FieldSorting", function () {
     var bundle = ResourceBundleFactory.getBundle(FieldSorting.BUNDLE_NAME);
 
     var fieldMoreSubfieldsThanSorting = {
+        "name": "fieldMoreSubfieldsThanSorting",
         "sorting": "naelb",
-        "subfields": {
-            "a": "value for a",
-            "A": "value for A",
-            "b": "value for b",
-            "c": "value for c",
-            "e": "value for e",
-            "q": "value for q",
-            "L": "value for L",
-            "x": "value for X"
-        }
+        "subfields": [
+            {name: "a"},
+            {name: "A"},
+            {name: "b"},
+            {name: "c"},
+            {name: "e"},
+            {name: "q"},
+            {name: "L"},
+            {name: "X"}
+        ]
     };
 
     var fieldMoreSubfieldsThanSortingExpected = {
+        "name": "fieldMoreSubfieldsThanSorting",
         "sorting": "naelb",
-        "subfields": {
-            "A": "value for A",
-            "a": "value for a",
-            "e": "value for e",
-            "L": "value for L",
-            "b": "value for b",
-            "c": "value for c",
-            "q": "value for q",
-            "x": "value for X"
-        }
+        "subfields": [
+            {name: "A"},
+            {name: "a"},
+            {name: "e"},
+            {name: "L"},
+            {name: "b"},
+            {name: "c"},
+            {name: "q"},
+            {name: "X"}
+        ]
     };
 
     SafeAssert.equal("fieldMoreSubfieldsThanSorting", FieldSorting.sort(fieldMoreSubfieldsThanSorting), fieldMoreSubfieldsThanSortingExpected);
 
     var fieldWithWeirdChar = {
+        "name": "fieldWithWeirdChar",
         "sorting": "&tuazbcdefghijklmnoqrxwv",
-        "subfields": {
-            "&": {},
-            "t": "t",
-            "u": "u",
-            "a": "a",
-            "z": "z",
-            "b": "b",
-            "c": "c",
-            "d": "d",
-            "e": "e",
-            "f": "f",
-            "g": "g",
-            "h": "h",
-            "i": "i",
-            "j": "j",
-            "k": "k",
-            "l": "l",
-            "m": "m",
-            "n": "n",
-            "o": "o",
-            "q": "q",
-            "r": "r",
-            "w": "w",
-            "x": "x",
-            "v": "v"
-        }
+        "subfields": [
+            {name: "&"},
+            {name: "t"},
+            {name: "u"},
+            {name: "a"},
+            {name: "z"},
+            {name: "b"},
+            {name: "c"},
+            {name: "d"},
+            {name: "e"},
+            {name: "f"},
+            {name: "g"},
+            {name: "h"},
+            {name: "i"},
+            {name: "j"},
+            {name: "k"},
+            {name: "l"},
+            {name: "m"},
+            {name: "n"},
+            {name: "o"},
+            {name: "q"},
+            {name: "r"},
+            {name: "w"},
+            {name: "x"},
+            {name: "v"}
+        ]
     };
 
     var fieldWithWeirdCharExpected = {
+        "name": "fieldWithWeirdChar",
         "sorting": "&tuazbcdefghijklmnoqrxwv",
-        "subfields": {
-            "&": {},
-            "t": "t",
-            "u": "u",
-            "a": "a",
-            "z": "z",
-            "b": "b",
-            "c": "c",
-            "d": "d",
-            "e": "e",
-            "f": "f",
-            "g": "g",
-            "h": "h",
-            "i": "i",
-            "j": "j",
-            "k": "k",
-            "l": "l",
-            "m": "m",
-            "n": "n",
-            "o": "o",
-            "q": "q",
-            "r": "r",
-            "x": "x",
-            "w": "w",
-            "v": "v"
-        }
+        "subfields": [
+            {name: "&"},
+            {name: "t"},
+            {name: "u"},
+            {name: "a"},
+            {name: "z"},
+            {name: "b"},
+            {name: "c"},
+            {name: "d"},
+            {name: "e"},
+            {name: "f"},
+            {name: "g"},
+            {name: "h"},
+            {name: "i"},
+            {name: "j"},
+            {name: "k"},
+            {name: "l"},
+            {name: "m"},
+            {name: "n"},
+            {name: "o"},
+            {name: "q"},
+            {name: "r"},
+            {name: "x"},
+            {name: "w"},
+            {name: "v"}
+        ]
     };
 
     SafeAssert.equal("fieldWithWeirdChar", FieldSorting.sort(fieldWithWeirdChar), fieldWithWeirdCharExpected);
 
     var alreadySorted = {
+        "name": "alreadySorted",
         "sorting": "ab",
-        "subfields": {
-            "A": "A",
-            "a": "a",
-            "B": "B",
-            "b": "b"
-        }
+        "subfields": [
+            {name: "A"},
+            {name: "a"},
+            {name: "B"},
+            {name: "b"}
+        ]
     };
 
 
     SafeAssert.equal("alreadySorted", FieldSorting.sort(alreadySorted), alreadySorted);
 
     var noSortingOverlap = {
+        "name": "noSortingOverlap",
         "sorting": "abcd",
-        "subfields": {
-            "e": "e",
-            "f": "f",
-            "g": "g",
-            "h": "h"
-        }
+        "subfields": [
+            {name: "e"},
+            {name: "f"},
+            {name: "g"},
+            {name: "h"}
+        ]
     };
 
     SafeAssert.equal("noSortingOverlap", FieldSorting.sort(noSortingOverlap), noSortingOverlap);
 
     var emptyField = {
+        "name": "emptyField",
         "sorting": "",
-        "subfields": {}
+        "subfields": []
     };
 
     SafeAssert.equal("noSortingOverlap", FieldSorting.sort(emptyField), emptyField);
 
     var noSorting = {
-        "subfields": {
-            "e": "e",
-            "f": "f",
-            "g": "g",
-            "h": "h"
-        }
+        "name": "noSorting",
+        "subfields": [
+            {name: "e"},
+            {name: "f"},
+            {name: "g"},
+            {name: "h"}
+        ]
     };
 
     SafeAssert.equal("noSorting", FieldSorting.sort(noSorting), noSorting);
 
     var noSubfields = {
+        "name": "noSubfields",
         "sorting": "abcd"
     };
 
     SafeAssert.equal("noSubfields", FieldSorting.sort(noSubfields), noSubfields);
 
-});
+})
+;
