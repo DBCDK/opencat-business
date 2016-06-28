@@ -4737,6 +4737,12 @@
             "rules": [
                 {
                     "type": "FieldRules.upperCaseCheck"
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
                 }
             ]
         },
