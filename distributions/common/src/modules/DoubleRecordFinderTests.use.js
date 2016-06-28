@@ -719,51 +719,65 @@ UnitTest.addFixture( "DoubleRecordFinder.__findNumbers", function() {
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function() {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery( "(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.245ø:1cd) AND marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
-    SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "r" } ] ] } } } } );
-    SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
-    SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "troffelspisernesmareridt" } ] ] } } } } );
-    SolrCore.addAnalyse( "match.245ø:1 cd", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245ø": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "1cd" } ] ] } } } } );
-    record = RecordUtil.createFromString( [
-        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
-        "009 00 *a r *g xe",
-        "245 00 *a Troffelspisernes mareridt *ø 1 cd",
-        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
-    ].join( "\n") );
-    Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimedia( record, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
-    );
-} );
-
-
-//-----------------------------------------------------------------------------
-UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimediaGeneral", function() {
-    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
-
-    SolrCore.clear();
     SolrCore.addQuery( "(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "r" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
     SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "troffelspisernesmareridt" } ] ] } } } } );
+    SolrCore.addAnalyse( "match.245ø:1 cd", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245ø": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "1cd" } ] ] } } } } );
     SolrCore.addAnalyse( "match.300e:2 mapper (402 mikrokort)", { responseHeader: { status: 0 }, analysis: { field_names: { "match.300e": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2mapper402mikrokort" } ] ] } } } } );
-    record = RecordUtil.createFromString( [
+
+    var soundMovieMultimedia245 = RecordUtil.createFromString( [
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a r *g xe",
         "245 00 *a Troffelspisernes mareridt *ø 1 cd",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+
+    var soundMovieMultimedia300 = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books",
         "300 00 *e2 mapper (402 mikrokort)"
     ].join( "\n") );
-    Assert.equalValue( "Full record", DoubleRecordFinder.__findSoundMovieMultimediaGeneral( record, solrUrl ),
+
+    var soundMovieMultimedia = RecordUtil.createFromString( [
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join( "\n") );
+
+    Assert.equalValue( "__findSoundMovieMultimedia245 with record containing field 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245( soundMovieMultimedia245, solrUrl ),
+        [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+
+    Assert.equalValue( "__findSoundMovieMultimedia245 with record containing 300e but not 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245( soundMovieMultimedia300, solrUrl ),
+        [ ]
+    );
+
+    Assert.equalValue( "__findSoundMovieMultimedia245 with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia245( soundMovieMultimedia, solrUrl ),
+        [ ]
+    );
+
+    Assert.equalValue( "__findSoundMovieMultimedia300 with record containing field 300e", DoubleRecordFinder.__findSoundMovieMultimedia300( soundMovieMultimedia300, solrUrl ),
         [ { id: "12345678", reason: "009a, 009g, 245a, 300e", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
-} );
 
+    Assert.equalValue( "__findSoundMovieMultimedia300 with record containing 245ø but not 300e", DoubleRecordFinder.__findSoundMovieMultimedia300( soundMovieMultimedia245, solrUrl ),
+        [ ]
+    );
+
+    Assert.equalValue( "__findSoundMovieMultimedia300 with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia300( soundMovieMultimedia, solrUrl ),
+        [ ]
+    );
+
+} );
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "DoubleRecordFinder.__findSections", function() {
@@ -915,6 +929,6 @@ UnitTest.addFixture( "DoubleRecordFinder.find", function() {
         [ { id: "12345678", reason: "009a, 009g, 538g", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 
-
+    
 } );
 
