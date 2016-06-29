@@ -1,11 +1,11 @@
 {
   "request" : {
-    "urlPattern" : "/solr/raapost-index/analysis/field\\?analysis\\.fieldvalue=K%C3%B8benhavns\\+Biblioteker\\&analysis\\.fieldname=match\\.260b\\&indent=true\\&wt=json",
+    "urlPattern" : "/solr/raapost-index/analysis/field\\?analysis\\.fieldvalue=7319980017353\\&analysis\\.fieldname=match\\.023ab\\&indent=true\\&wt=json",
     "method" : "GET"
   },
   "response" : {
     "status" : 200,
-    "bodyFileName" : "body-260b_cphbib-analysis.json",
+    "bodyFileName" : "body-023ab-analysis.json",
     "headers" : {
       "Server" : "Apache-Coyote/1.1",
       "Content-Type" : "text/plain;charset=UTF-8",

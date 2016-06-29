@@ -1,0 +1,10 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":5,
+    "params":{
+      "q":"(match.023ab:<faust id>) AND marc.001b:870970",
+      "indent":"true",
+      "wt":"json"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }}
