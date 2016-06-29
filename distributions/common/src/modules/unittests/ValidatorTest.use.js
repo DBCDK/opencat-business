@@ -276,3 +276,225 @@ UnitTest.addFixture( "Validator.validateSubfield", function() {
                                                        function() { return template; }, GenericSettings ), 
                                                        [ ValidateErrors.subfieldError( "url", "message" ) ] );    
 } );
+
+UnitTest.addFixture("Validator.validateRecord (bug 20163)", function () {
+    var record20163 = {
+        fields: [
+            {
+                name: "001",
+                subfields: [
+                    {name: "a", value: "29587574"},
+                    {name: "b", value: "761500"}
+                ]
+            },
+            {
+                name: "008",
+                subfields: [
+                    {name: "v"},
+                    {name: "u"},
+                    {name: "a"},
+                    {name: "z"},
+                    {name: "b"},
+                    {name: "d"},
+                    {name: "j"},
+                    {name: "l"},
+                    {name: "t"}
+                ]
+            }
+        ]
+    };
+
+    var record20163Expected = {
+        fields: [
+            {
+                name: "001",
+                subfields: [
+                    {name: "a", value: "29587574"},
+                    {name: "b", value: "761500"}
+                ]
+            },
+            {
+                name: "008",
+                subfields: [
+                    {name: "t"},
+                    {name: "u"},
+                    {name: "a"},
+                    {name: "z"},
+                    {name: "b"},
+                    {name: "d"},
+                    {name: "j"},
+                    {name: "l"},
+                    {name: "v"}
+                ]
+            }
+        ]
+    };
+
+    var template20163 = {
+        fields: {
+            "001": {
+                subfields: {
+                    a: {},
+                    b: {}
+                }
+            },
+            "008": {
+                sorting: "tuazbdjlv",
+                subfields: {
+                    t: {},
+                    u: {},
+                    a: {},
+                    z: {},
+                    b: {},
+                    d: {},
+                    j: {},
+                    l: {},
+                    v: {}
+                }
+            }
+        },
+        rules: []
+    };
+
+    Assert.equalValue("bug 20163 - check validate works", Validator.validateRecord(record20163, function () {
+        return template20163;
+    }, GenericSettings), []);
+
+    Assert.equalValue("bug 20163 - check field sorting works", record20163, record20163Expected);
+
+});
+
+UnitTest.addFixture("Validator.validateRecord (Record sorting)", function () {
+    var recordToSort = {
+        fields: [
+            {
+                name: "008",
+                subfields: [
+                    {name: "a"}
+                ]
+            },
+            {
+                name: "001",
+                subfields: [
+                    {name: "a", value: "29587574"},
+                    {name: "b", value: "761500"}
+                ]
+            },
+            {
+                name: "996",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "DBC"
+                    }
+                ]
+            },
+            {
+                name: "700",
+                subfields: [
+                    {name: "A"}
+                ]
+            },
+            {
+                name: "700",
+                subfields: [
+                    {name: "B"}
+                ]
+            },
+            {
+                name: "245",
+                subfields: [
+                    {name: "a"}
+                ]
+            }
+        ]
+    };
+
+    var recordToSortExpected = {
+        fields: [
+            {
+                name: "001",
+                subfields: [
+                    {name: "a", value: "29587574"},
+                    {name: "b", value: "761500"}
+                ]
+            },
+            {
+                name: "008",
+                subfields: [
+                    {name: "a"}
+                ]
+            },
+            {
+                name: "245",
+                subfields: [
+                    {name: "a"}
+                ]
+            },
+            {
+                name: "700",
+                subfields: [
+                    {name: "A"}
+                ]
+            },
+            {
+                name: "700",
+                subfields: [
+                    {name: "B"}
+                ]
+            },
+            {
+                name: "996",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "DBC"
+                    }
+                ]
+            }
+
+        ]
+    };
+
+    var templateToSort = {
+        fields: {
+            "001": {
+                subfields: {
+                    a: {},
+                    b: {}
+                }
+            },
+            "008": {
+                subfields: {
+                    a: {}
+                }
+            },
+            "245": {
+                subfields: {
+                    a: {}
+                }
+            },
+            "700": {
+                subfields: {
+                    subfields: {
+                        A: {},
+                        B: {}
+                    }
+                }
+            },
+            "996": {
+                subfields: {
+                    a: {}
+                }
+            },
+            rules: []
+        }
+    };
+
+    Assert.equalValue("ValidatorTest - check validate works", Validator.validateRecord(recordToSort, function () {
+        return templateToSort;
+    }, GenericSettings), []);
+
+    Assert.equalValue("ValidatorTest - check record sorting works", recordToSort, recordToSortExpected);
+
+});

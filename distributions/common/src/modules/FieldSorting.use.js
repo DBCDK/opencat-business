@@ -16,16 +16,17 @@ var FieldSorting = function () {
      * Any subfields not listed in the sorting list will be moved to after the subfields listed in the sorting list
      *
      * @param field - the field must include both sorting list and subfields
+     * @param sortOrder - the order in which the subfields should be sorted by, e.g. "abcd"
      *
      * Returns the field object with the subfields ordered after the sorting list
      */
-    function sort(field) {
+    function sort(field, sortOrder) {
         Log.trace("Enter - FieldSorting.sort", field);
         try {
 
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
-            if (field.sorting === undefined || field.sorting === null) {
+            if (sortOrder === undefined || sortOrder === null) {
                 Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.sorting.error"));
                 return field;
             }
@@ -35,9 +36,9 @@ var FieldSorting = function () {
                 return field;
             }
 
-            Log.debug("Sorting field " + field.name + " by sort order " + field.sorting);
+            Log.debug("Sorting field " + field.name + " by sort order " + sortOrder);
 
-            sortingList = field.sorting;
+            sortingList = sortOrder;
 
             field.subfields.sort(function (a, b) {
                 var indexA = findIndexInSortingList(a.name);

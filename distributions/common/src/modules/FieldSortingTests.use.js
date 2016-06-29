@@ -7,7 +7,6 @@ UnitTest.addFixture("FieldSorting", function () {
 
     var fieldMoreSubfieldsThanSorting = {
         "name": "fieldMoreSubfieldsThanSorting",
-        "sorting": "naelb",
         "subfields": [
             {name: "a"},
             {name: "A"},
@@ -22,7 +21,6 @@ UnitTest.addFixture("FieldSorting", function () {
 
     var fieldMoreSubfieldsThanSortingExpected = {
         "name": "fieldMoreSubfieldsThanSorting",
-        "sorting": "naelb",
         "subfields": [
             {name: "A"},
             {name: "a"},
@@ -35,11 +33,10 @@ UnitTest.addFixture("FieldSorting", function () {
         ]
     };
 
-    SafeAssert.equal("fieldMoreSubfieldsThanSorting", FieldSorting.sort(fieldMoreSubfieldsThanSorting), fieldMoreSubfieldsThanSortingExpected);
+    SafeAssert.equal("fieldMoreSubfieldsThanSorting", FieldSorting.sort(fieldMoreSubfieldsThanSorting, "naelb"), fieldMoreSubfieldsThanSortingExpected);
 
     var fieldWithWeirdChar = {
         "name": "fieldWithWeirdChar",
-        "sorting": "&tuazbcdefghijklmnoqrxwv",
         "subfields": [
             {name: "&"},
             {name: "t"},
@@ -70,7 +67,6 @@ UnitTest.addFixture("FieldSorting", function () {
 
     var fieldWithWeirdCharExpected = {
         "name": "fieldWithWeirdChar",
-        "sorting": "&tuazbcdefghijklmnoqrxwv",
         "subfields": [
             {name: "&"},
             {name: "t"},
@@ -99,11 +95,10 @@ UnitTest.addFixture("FieldSorting", function () {
         ]
     };
 
-    SafeAssert.equal("fieldWithWeirdChar", FieldSorting.sort(fieldWithWeirdChar), fieldWithWeirdCharExpected);
+    SafeAssert.equal("fieldWithWeirdChar", FieldSorting.sort(fieldWithWeirdChar, "&tuazbcdefghijklmnoqrxwv"), fieldWithWeirdCharExpected);
 
     var alreadySorted = {
         "name": "alreadySorted",
-        "sorting": "ab",
         "subfields": [
             {name: "A"},
             {name: "a"},
@@ -113,11 +108,10 @@ UnitTest.addFixture("FieldSorting", function () {
     };
 
 
-    SafeAssert.equal("alreadySorted", FieldSorting.sort(alreadySorted), alreadySorted);
+    SafeAssert.equal("alreadySorted", FieldSorting.sort(alreadySorted, "ab"), alreadySorted);
 
     var noSortingOverlap = {
         "name": "noSortingOverlap",
-        "sorting": "abcd",
         "subfields": [
             {name: "e"},
             {name: "f"},
@@ -126,15 +120,14 @@ UnitTest.addFixture("FieldSorting", function () {
         ]
     };
 
-    SafeAssert.equal("noSortingOverlap", FieldSorting.sort(noSortingOverlap), noSortingOverlap);
+    SafeAssert.equal("noSortingOverlap", FieldSorting.sort(noSortingOverlap, "abcd"), noSortingOverlap);
 
     var emptyField = {
         "name": "emptyField",
-        "sorting": "",
         "subfields": []
     };
 
-    SafeAssert.equal("noSortingOverlap", FieldSorting.sort(emptyField), emptyField);
+    SafeAssert.equal("noSortingOverlap", FieldSorting.sort(emptyField, ""), emptyField);
 
     var noSorting = {
         "name": "noSorting",
@@ -146,14 +139,13 @@ UnitTest.addFixture("FieldSorting", function () {
         ]
     };
 
-    SafeAssert.equal("noSorting", FieldSorting.sort(noSorting), noSorting);
+    SafeAssert.equal("noSorting", FieldSorting.sort(noSorting, null), noSorting);
 
     var noSubfields = {
-        "name": "noSubfields",
-        "sorting": "abcd"
+        "name": "noSubfields"
     };
 
-    SafeAssert.equal("noSubfields", FieldSorting.sort(noSubfields), noSubfields);
+    SafeAssert.equal("noSubfields", FieldSorting.sort(noSubfields, "abcd"), noSubfields);
 
 })
 ;
