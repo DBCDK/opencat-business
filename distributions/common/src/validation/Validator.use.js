@@ -51,7 +51,7 @@ var Validator = function () {
                     
                     var field = record.fields[i];
 
-                    if (template.fields[field.name].sorting) {
+                    if (template.fields[field.name] && template.fields[field.name].sorting) {
                         FieldSorting.sort(field, template.fields[field.name].sorting);
                     }
 

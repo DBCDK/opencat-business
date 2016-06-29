@@ -495,6 +495,6 @@ UnitTest.addFixture("Validator.validateRecord (Record sorting)", function () {
         return templateToSort;
     }, GenericSettings), []);
 
-    Assert.equalValue("ValidatorTest - check record sorting works", recordToSort, recordToSortExpected);
+    Assert.equalValue("ValidatorTest - check record storting works", recordToSort, recordToSortExpected);
 
 });
