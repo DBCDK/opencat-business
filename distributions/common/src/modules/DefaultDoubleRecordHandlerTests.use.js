@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------
 use( "DefaultDoubleRecordHandler" );
 use( "DoubleRecordMailServiceClientCore" );
 use( "GenericSettings" );
@@ -6,7 +5,6 @@ use( "RecordUtil" );
 use( "SolrCore" );
 use( "UnitTest" );
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DefaultDoubleRecordHandler.checkAndSendMails", function() {
     var __bundle = ResourceBundleFactory.getBundle( DefaultDoubleRecordHandler.__BUNDLE_NAME );
 
@@ -16,7 +14,6 @@ UnitTest.addFixture( "DefaultDoubleRecordHandler.checkAndSendMails", function() 
 
     var record;
 
-    //-----------------------------------------------------------------------------
     record = RecordUtil.createFromString( [
         "245 00 *a Anton til soes",
         "260 00 *& 1 *a Vinderup *b Cadeau *c 2015"
@@ -27,7 +24,6 @@ UnitTest.addFixture( "DefaultDoubleRecordHandler.checkAndSendMails", function() 
     DoubleRecordMailServiceClientCore.clearMessages();
     SolrCore.clear();
 
-    //-----------------------------------------------------------------------------
     record = RecordUtil.createFromString( [
         "001 00 *a 12345678 *b 191919",
         "009 00 *h ws",
@@ -39,7 +35,6 @@ UnitTest.addFixture( "DefaultDoubleRecordHandler.checkAndSendMails", function() 
     DoubleRecordMailServiceClientCore.clearMessages();
     SolrCore.clear();
 
-    //-----------------------------------------------------------------------------
     SolrCore.addQuery( "(( match.008a:\"2014\" OR match.008a:\"2015\" OR match.008a:\"2016\" ) AND match.009a:\"a\" AND match.009g:\"xx\" AND match.245a:antontilsoes AND match.260b:ca*) AND marc.001b:870970",
         { response: { docs: [ { id: "12345678:870970" } ] } } );
     SolrCore.addAnalyse( "match.008a:2014", { responseHeader: { status: 0 }, analysis: { field_names: { "match.008a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "2014" } ] ] } } } } );
