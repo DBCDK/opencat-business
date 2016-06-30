@@ -298,27 +298,36 @@ var RecategorizationNoteFieldFactory = function() {
                 Log.trace( "Generate reason info. recTypeChanged: ", recTypeChanged );
                 Log.trace( "Generate reason info. categoryChanged: ", categoryChanged );
 
-                if( recTypeChanged || categoryChanged ) {
-                    if( currentRecord.matchValue( /004/, /a/, /e/ ) ) {
-                        if( updatingRecord.matchValue( /004/, /a/, /b/ ) && updatingRecord.matchValue( /008/, /t/, /p/ ) ) {
-                            Log.debug( "Generate reason info for case 'note.category.reason.to.serials'" );
-                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials" );
-                        }
-                        else if( currentRecord.matchValue( /008/, /t/, /m|s/ ) ) {
-                            Log.debug( "Generate reason info for case 'note.category.reason.from.single'" );
-                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.single" );
-                        }
+                //bug 20422
+                if (recTypeChanged) {
+                    if (currentRecord.matchValue(/008/, /t/, /ms/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials" );
+                    } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials" );
                     }
-                    else if( currentRecord.matchValue( /004/, /a/, /b/ ) ) {
-                        if( currentRecord.matchValue( /008/, /t/, /m|s/ ) ) {
-                            Log.debug( "Generate reason info for case 'note.category.reason.from.volume'" );
-                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.volume" );
-                        }
-                        else if( currentRecord.matchValue( /008/, /t/, /p/ ) && updatingRecord.matchValue( /004/, /a/, /e/ ) ) {
-                            Log.debug( "Generate reason info for case 'note.category.reason.from.serials'" );
-                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials" );
-                        }
+                }
 
+                if (currentRecord.getValue(/008/, /t/) === updatingRecord.getValue(/008/, /t/)) {
+                    if (currentRecord.matchValue(/004/, /a/, /b/) && updatingRecord.matchValue(/004/, /a/, /e/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.volume" );
+                    } else if(currentRecord.matchValue(/004/, /a/, /e/) && updatingRecord.matchValue(/004/, /a/, /b/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.single" );
+                    }
+                }
+
+                if (currentRecord.matchValue(/004/, /a/, /b/) === updatingRecord.matchValue(/004/, /a/, /e/)) {
+                    if (currentRecord.matchValue(/008/, /t/, /m|s/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials.from.volume" );
+                    } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials.to.single" );
+                    }
+                }
+
+                if (currentRecord.matchValue(/004/, /a/, /e/) === updatingRecord.matchValue(/004/, /a/, /b/)) {
+                    if (currentRecord.matchValue(/008/, /t/, /m|s/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials.from.single" );
+                    } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
+                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials.to.volume" );
                     }
                 }
 
