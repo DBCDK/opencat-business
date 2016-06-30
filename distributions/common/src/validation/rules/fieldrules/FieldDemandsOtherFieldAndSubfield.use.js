@@ -31,7 +31,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
         Log.debug( "Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)" );
         Log.debug( "record ", record !== undefined ? JSON.stringify(record) : "undef" );
         Log.debug( "field ", field !== undefined ? JSON.stringify(field) : "undef" );
-        Log.debug( "params ", params !== undefined ? JSON.stringify(params) : "undef" );
+        //Log.debug( "params ", params !== undefined ? JSON.stringify(params) : "undef" ); - Doesn't work :(
 
         var result = null;
         try {
@@ -54,7 +54,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
                 for (var i = 0; i < collectedFields.length; ++i) {
                     var collectedSubFields = {};
                     for (var j = 0; j < collectedFields[i].subfields.length; ++j) {
-                        collectedSubFields[collectedFields[i].subfields[j]] = true;
+                        collectedSubFields[collectedFields[i].subfields[j].name] = true;
                     }
                     var ct = 0;
                     for (var k = 0; k < params.subfields.length; ++k) {
