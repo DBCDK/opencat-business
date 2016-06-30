@@ -117,13 +117,13 @@ var DoubleRecordFinder = function () {
             }
             array.push({
                 matcher: __matchSoundMovieMultimedia,
-                searcher: __findSoundMovieMultimedia300,
+                searcher: __findSoundMovieMultimedia300Run,
                 continueOnHit: includeDBCOnlyFinders
             });
             if (includeDBCOnlyFinders) {
                 array.push({
                     matcher: __matchSoundMovieMultimedia,
-                    searcher: __findSoundMovieMultimedia245,
+                    searcher: __findSoundMovieMultimedia245Run,
                     continueOnHit: false
                 });
             }
@@ -359,8 +359,9 @@ var DoubleRecordFinder = function () {
             if (field.name === fieldName) {
                 result = __checkSubfieldExistence(field, fieldName, subfields);
 
-                if (result)
+                if (result) {
                     return true;
+                }
             }
 
         }
@@ -373,8 +374,9 @@ var DoubleRecordFinder = function () {
             for (var j = 0; j < field.count(); j++) {
                 var subfield = field.subfield(j);
 
-                if(subfield.name.match(subfields) !== null)
-                    return true
+                if(subfield.name.match(subfields) !== null) {
+                    return true;
+                }
             }
         }
 
@@ -496,11 +498,11 @@ var DoubleRecordFinder = function () {
     // TESTING only
     function __findSoundMovieMultimedia300(record, newsolrUrl) {
         solrUrl = newsolrUrl;
-        return __findSoundMovieMultimediaRun300(record);
+        return __findSoundMovieMultimedia300Run(record);
     }
 
-    function __findSoundMovieMultimediaRun300(record) {
-        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimediaRun300()");
+    function __findSoundMovieMultimedia300Run(record) {
+        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimedia300Run()");
         var result = undefined;
 
 
@@ -522,7 +524,7 @@ var DoubleRecordFinder = function () {
             }
         }
         finally {
-            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimediaRun300(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimedia300Run(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
 
@@ -532,11 +534,11 @@ var DoubleRecordFinder = function () {
     // TESTING only
     function __findSoundMovieMultimedia245(record, newsolrUrl) {
         solrUrl = newsolrUrl;
-        return __findSoundMovieMultimediaRun245(record);
+        return __findSoundMovieMultimedia245Run(record);
     }
 
-    function __findSoundMovieMultimediaRun245(record) {
-        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimediaRun245()");
+    function __findSoundMovieMultimedia245Run(record) {
+        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimedia245Run()");
         var result = undefined;
         try {
             if (__checkSubfieldExistenceOnRecord(record, "245", /[ø]/)) {
@@ -554,7 +556,7 @@ var DoubleRecordFinder = function () {
             }
         }
         finally {
-            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimediaRun245(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimedia245Run(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
 
