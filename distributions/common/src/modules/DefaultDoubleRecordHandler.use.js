@@ -1,13 +1,10 @@
-//-----------------------------------------------------------------------------
 use( "DoubleRecordFinder" );
 use( "DoubleRecordMailServiceClient" );
 use( "Log" );
 use( "Marc" );
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = [ 'DefaultDoubleRecordHandler' ];
 
-//-----------------------------------------------------------------------------
 /**
  * Module execute the checks of double records and sending a mail with any hits.
  *
@@ -28,12 +25,12 @@ var DefaultDoubleRecordHandler = function() {
      *
      * @name DefaultDoubleRecordHandler#checkAndSendMails
      */
-    function checkAndSendMails( record, settings ) {
-        Log.trace( "Enter - DefaultDoubleRecordHandler.checkAndSendMails()" );
+    function checkAndSendMails(record, settings) {
+        Log.trace("Enter - DefaultDoubleRecordHandler.checkAndSendMails()");
 
         try {
-            if( !settings.containsKey( 'solr.url' ) ) {
-                Log.error( "SOLR has not been configured. Missing key 'solr.url' in settings." );
+            if (!settings.containsKey('solr.url')) {
+                Log.error("SOLR has not been configured. Missing key 'solr.url' in settings.");
                 return;
             }
 
@@ -41,26 +38,26 @@ var DefaultDoubleRecordHandler = function() {
              TODO Når extern dobbeltpostkontrol laves skal man her kalde findGeneral ved almindelig
              opdatering og ved forced skal find kaldes. Yderligere skal der kun sendes mail ved forced.
              */
-            var records = DoubleRecordFinder.find( record, settings.get( 'solr.url' ) );
-            var idField = record.getFirstFieldAsField( /001/ );
-            if( idField === "" ) {
+            var records = DoubleRecordFinder.find(record, settings.get('solr.url'));
+            var idField = record.getFirstFieldAsField(/001/);
+            if (idField === "") {
                 // record.getFirstFieldAsField() returns "" if no field were found!!!
                 return;
             }
 
-            var logMessage = StringUtil.sprintf( "Double records for record {%s:%s}: %s",
-                             idField.getFirstValue( /a/ ), idField.getFirstValue( /b/ ), JSON.stringify( records ) );
-            Log.info( logMessage );
+            var logMessage = StringUtil.sprintf("Double records for record {%s:%s}: %s",
+                idField.getFirstValue(/a/), idField.getFirstValue(/b/), JSON.stringify(records));
+            Log.info(logMessage);
 
-            if( records.length === 0 ) {
+            if (records.length === 0) {
                 return;
             }
 
-            var mailObject = formatMessage( idField, records );
-            DoubleRecordMailServiceClient.sendMessage( mailObject.subject, mailObject.body );
+            var mailObject = formatMessage(idField, records);
+            DoubleRecordMailServiceClient.sendMessage(mailObject.subject, mailObject.body);
         }
         finally {
-            Log.trace( "Exit - DefaultDoubleRecordHandler.checkAndSendMails()" );
+            Log.trace("Exit - DefaultDoubleRecordHandler.checkAndSendMails()");
         }
     }
 
@@ -77,32 +74,32 @@ var DefaultDoubleRecordHandler = function() {
      *
      * @name DefaultDoubleRecordHandler#formatMessage
      */
-    function formatMessage( idField, records ) {
-        Log.trace( "Enter - DefaultDoubleRecordHandler.formatMessage()" );
+    function formatMessage(idField, records) {
+        Log.trace("Enter - DefaultDoubleRecordHandler.formatMessage()");
 
         var result = undefined;
         try {
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var s = "";
 
-            var recordId = idField.getFirstValue( /a/ );
-            var agencyId = idField.getFirstValue( /b/ );
+            var recordId = idField.getFirstValue(/a/);
+            var agencyId = idField.getFirstValue(/b/);
 
-            s += ResourceBundle.getStringFormat( bundle, "mail.body.header", recordId, agencyId );
-            for( var i = 0; i < records.length; i++ ) {
+            s += ResourceBundle.getStringFormat(bundle, "mail.body.header", recordId, agencyId);
+            for (var i = 0; i < records.length; i++) {
                 var doubleRecord = records[i];
 
-                s += ResourceBundle.getStringFormat( bundle, "mail.body.double.record.line", doubleRecord.id, doubleRecord.reason );
+                s += ResourceBundle.getStringFormat(bundle, "mail.body.double.record.line", doubleRecord.id, doubleRecord.reason);
             }
-            s += ResourceBundle.getString( bundle, "mail.body.footer" );
+            s += ResourceBundle.getString(bundle, "mail.body.footer");
 
             return result = {
-                subject: ResourceBundle.getStringFormat( bundle, "mail.subject", recordId, agencyId ),
+                subject: ResourceBundle.getStringFormat(bundle, "mail.subject", recordId, agencyId),
                 body: s
             }
         }
         finally {
-            Log.trace( "Exit - DefaultDoubleRecordHandler.formatMessage(): ", result );
+            Log.trace("Exit - DefaultDoubleRecordHandler.formatMessage(): ", result);
         }
     }
 
