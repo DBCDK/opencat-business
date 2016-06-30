@@ -1,9 +1,9 @@
-use( "DoubleRecordFinder" );
-use( "DoubleRecordMailServiceClient" );
-use( "Log" );
-use( "Marc" );
+use("DoubleRecordFinder");
+use("DoubleRecordMailServiceClient");
+use("Log");
+use("Marc");
 
-EXPORTED_SYMBOLS = [ 'DefaultDoubleRecordHandler' ];
+EXPORTED_SYMBOLS = ['DefaultDoubleRecordHandler'];
 
 /**
  * Module execute the checks of double records and sending a mail with any hits.
