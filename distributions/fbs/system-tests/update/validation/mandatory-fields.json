@@ -508,12 +508,6 @@
                         "message" : "Felt '245' mangler i posten",
                         "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
                     }
-                }, {
-                    "type": "ERROR",
-                    "params": {
-                        "message": "Felt '996' mangler i posten",
-                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm"
-                    }
                 }
             ]
         }
