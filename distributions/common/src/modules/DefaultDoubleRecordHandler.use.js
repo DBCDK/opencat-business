@@ -103,8 +103,38 @@ var DefaultDoubleRecordHandler = function() {
         }
     }
 
+    /**
+     * Checks a records for double records and sends a response back to the frontend if one or more are found.
+     *
+     * @param record   The record to check for double records.
+     * @param settings JNDI settings.
+     *
+     * @name DefaultDoubleRecordHandler#checkGeneral
+     */
+    function checkGeneral(record, settings) {
+        Log.trace("Enter - FrontendDoubleRecordHandler.checkGeneral()");
+
+        try {
+            if (!settings.containsKey('solr.url')) {
+                Log.error("SOLR has not been configured. Missing key 'solr.url' in settings.");
+                return;
+            }
+            var records = DoubleRecordFinder.findGeneral(record, settings.getAbsolutePath('solr.url'));
+            var idField = record.getFirstFieldAsField(/001/);
+            if (idField === "") {
+                return;
+            }
+            var logMessage = StringUtil.sprintf("Double records for record {%s:%s}: %s", idField.getFirstValue(/a/), idField.getFirstValue(/b/), JSON.stringify(records));
+            Log.info(logMessage);
+
+        } finally {
+            Log.trace("Exit - FrontendDoubleRecordHandler.checkGeneral()");
+        }
+    }
+
     return {
         '__BUNDLE_NAME': __BUNDLE_NAME,
-        'checkAndSendMails': checkAndSendMails
+        'checkAndSendMails': checkAndSendMails,
+        'checkGeneral': checkGeneral
     }
 }();

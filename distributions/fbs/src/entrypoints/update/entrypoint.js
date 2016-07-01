@@ -1,19 +1,14 @@
-//-----------------------------------------------------------------------------
 use( "FBSAuthenticator" );
 use( "FBSUpdaterEntryPoint" );
 use( "FBSValidatorEntryPoint" );
 
-//-----------------------------------------------------------------------------
 function initTemplates( settings ) {
     FBSValidatorEntryPoint.initTemplates( settings );
 }
 
-//-----------------------------------------------------------------------------
 function authenticateRecord( record, userId, groupId, settings ) {
     return FBSAuthenticator.authenticateRecord( record, userId, groupId, settings );
 }
-
-//-----------------------------------------------------------------------------
 
 function hasClassificationData( marc ) {
     return FBSUpdaterEntryPoint.hasClassificationData( marc );
@@ -73,8 +68,6 @@ function recordDataForRawRepo( record, userId, groupId ) {
 function checkDoubleRecord( record, settings ) {
     return FBSUpdaterEntryPoint.checkDoubleRecord( record, settings );
 }
-
-//-----------------------------------------------------------------------------
 
 /**
  * Gets the names of the templates as an Array
