@@ -305,6 +305,22 @@ var RecategorizationNoteFieldFactory = function() {
                     } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
                         message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials" );
                     }
+                } else {
+                    if (currentRecord.matchValue(/004/, /a/, /b/) === updatingRecord.matchValue(/004/, /a/, /e/)) {
+                        if (currentRecord.matchValue(/008/, /t/, /m|s/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
+                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials.from.volume" );
+                        } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
+                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials.to.single" );
+                        }
+                    }
+
+                    if (currentRecord.matchValue(/004/, /a/, /e/) === updatingRecord.matchValue(/004/, /a/, /b/)) {
+                        if (currentRecord.matchValue(/008/, /t/, /m|s/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
+                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials.from.single" );
+                        } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
+                            message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials.to.volume" );
+                        }
+                    }
                 }
 
                 if (currentRecord.getValue(/008/, /t/) === updatingRecord.getValue(/008/, /t/)) {
@@ -312,22 +328,6 @@ var RecategorizationNoteFieldFactory = function() {
                         message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.volume" );
                     } else if(currentRecord.matchValue(/004/, /a/, /e/) && updatingRecord.matchValue(/004/, /a/, /b/)) {
                         message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.single" );
-                    }
-                }
-
-                if (currentRecord.matchValue(/004/, /a/, /b/) === updatingRecord.matchValue(/004/, /a/, /e/)) {
-                    if (currentRecord.matchValue(/008/, /t/, /m|s/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
-                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials.from.volume" );
-                    } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
-                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials.to.single" );
-                    }
-                }
-
-                if (currentRecord.matchValue(/004/, /a/, /e/) === updatingRecord.matchValue(/004/, /a/, /b/)) {
-                    if (currentRecord.matchValue(/008/, /t/, /m|s/) && updatingRecord.matchValue(/008/, /t/, /p/)) {
-                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.to.serials.from.single" );
-                    } else if (currentRecord.matchValue(/008/, /t/, /p/) && updatingRecord.matchValue(/008/, /t/, /m|s/)) {
-                        message += " " + ResourceBundle.getString( __loadBundle(), "note.category.reason.from.serials.to.volume" );
                     }
                 }
 
