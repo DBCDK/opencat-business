@@ -36,12 +36,6 @@
         {
             "type": "RecordRules.conflictingSubfields",
             "params": {
-                "subfields": [ "910w", "910z" ]
-            }
-        },
-        {
-            "type": "RecordRules.conflictingSubfields",
-            "params": {
                 "subfields": [ "930w", "930z" ]
             }
         },
