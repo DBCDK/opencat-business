@@ -2751,6 +2751,13 @@
             "rules": [
                 {
                     "type": "FieldRules.upperCaseCheck"
+                },
+                {
+                    "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+                    "params": {
+                        "field": "096",
+                        "subfields": [ "z" ]
+                    }
                 }
             ]
         },
@@ -4686,6 +4693,12 @@
             "rules": [
                 {
                     "type": "FieldRules.upperCaseCheck"
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
                 }
             ]
         },
@@ -4760,7 +4773,15 @@
                 "2":{
                     "repeatable":false
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
         },
         "933":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.9c.htm",
@@ -4780,7 +4801,15 @@
                 "2":{
                     "repeatable":false
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
         },
         "934":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.9d.htm",
@@ -4803,7 +4832,15 @@
                 "2":{
                     "repeatable":false
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
         },
         "945":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.9e.htm",
@@ -4871,6 +4908,12 @@
             "rules": [
                 {
                     "type": "FieldRules.upperCaseCheck"
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
                 }
             ]
         },
@@ -4890,7 +4933,15 @@
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
         },
         "966":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a0.htm",
@@ -4918,7 +4969,15 @@
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
         },
         "968":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a1.htm",
@@ -4935,7 +4994,15 @@
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
         },
         "980":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a2.htm",
