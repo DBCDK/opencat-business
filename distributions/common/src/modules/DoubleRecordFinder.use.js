@@ -674,14 +674,21 @@ var DoubleRecordFinder = function () {
         Log.trace("Enter - DoubleRecordFinder.__findMusic538Run()");
         var result = undefined;
         try {
-            var formatters = {
-                '009a': __querySubfieldFormatter,
-                '009g': __querySubfieldFormatter,
-                '538g': __querySubfieldValueLengthFormatter(20)
-            };
+            if (__checkSubfieldExistenceOnRecord(record, "538", /[g]/)) {
+                var formatters = {
+                    '009a': __querySubfieldFormatter,
+                    '009g': __querySubfieldFormatter,
+                    '538g': __querySubfieldValueLengthFormatter(20)
+                };
 
-            result = __executeQueryAndFindRecords(record, formatters);
-            return result;
+                result = __executeQueryAndFindRecords(record, formatters);
+
+                return result;
+            } else {
+                return result = [];
+            }
+
+
         }
         finally {
             Log.trace("Exit - DoubleRecordFinder.__findMusic538Run(): ", result !== undefined ? JSON.stringify(result) : "undef");
