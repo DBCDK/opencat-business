@@ -129,7 +129,7 @@ var DoubleRecordFinder = function () {
                 array.push({
                     matcher: __matchSoundMovieMultimedia,
                     searcher: __findSoundMovieMultimediaRun,
-                    continueOnHit: true
+                    continueOnHit: false
                 });
             }
             array.push({
