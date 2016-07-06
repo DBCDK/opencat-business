@@ -124,7 +124,12 @@ var DoubleRecordFinder = function () {
                 array.push({
                     matcher: __matchSoundMovieMultimedia,
                     searcher: __findSoundMovieMultimedia245Run,
-                    continueOnHit: false
+                    continueOnHit: true
+                });
+                array.push({
+                    matcher: __matchSoundMovieMultimedia,
+                    searcher: __findSoundMovieMultimediaRun,
+                    continueOnHit: true
                 });
             }
             array.push({
@@ -560,6 +565,46 @@ var DoubleRecordFinder = function () {
         }
     }
 
+    //-----------------------------------------------------------------------------
+    //                  Sound, movies and multimedias - match exactly
+    //-----------------------------------------------------------------------------
+
+    function __findSoundMovieMultimedia(record, newsolrUrl) {
+        solrUrl = newsolrUrl;
+        return __findSoundMovieMultimediaRun(record);
+    }
+
+    function __findSoundMovieMultimediaRun(record) {
+        Log.trace("Enter - DoubleRecordFinder.__findSoundMovieMultimediaRun()");
+        var result = undefined;
+        try {
+            if (!__checkSubfieldExistenceOnRecord(record, "245", /[ø]/) &&
+                !__checkSubfieldExistenceOnRecord(record, "300", /[e]/)) {
+                var formatters = {
+                    '009a': __querySubfieldFormatter,
+                    '009g': __querySubfieldFormatter,
+                    '245a': __querySubfieldValueLengthFormatter(20)
+                };
+
+                var excludedFields = ["245ø", "300e"];
+
+                result = __executeQueryAndFindRecords(record, formatters, excludedFields);
+
+                if (result != undefined && result.length > 0) {
+                    for(var i = 0; i < result.length; i++) {
+
+                    }
+                }
+
+                return result;
+            } else {
+                return result = [];
+            }
+        }
+        finally {
+            Log.trace("Exit - DoubleRecordFinder.__findSoundMovieMultimediaRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
+        }
+    }
 
     //-----------------------------------------------------------------------------
     //                  Music
@@ -1134,9 +1179,13 @@ var DoubleRecordFinder = function () {
     //                  Query executor
     //-----------------------------------------------------------------------------
 
-    function __executeQueryAndFindRecords(record, queryFormatter) {
+    function __executeQueryAndFindRecords(record, queryFormatter, excludedFields) {
         Log.trace("Enter - DoubleRecordFinder.__executeQueryAndFindRecords()");
 
+        if (!excludedFields){
+            excludedFields = [];
+        }
+        
         var result = [];
         try {
             var reason = [];
@@ -1168,6 +1217,11 @@ var DoubleRecordFinder = function () {
                 Log.debug("Empty Solr query");
                 return result = [];
             }
+
+            for (var e = 0; e < excludedFields.length; e++) {
+                query += " AND NOT match." + excludedFields[e] + ":\"*\"";
+            }
+
             query = "(" + query + ") AND marc.001b:870970";
             Log.debug("Solr query: ", query);
 
@@ -1292,6 +1346,7 @@ var DoubleRecordFinder = function () {
         '__matchSoundMovieMultimedia': __matchSoundMovieMultimedia,
         '__findSoundMovieMultimedia300': __findSoundMovieMultimedia300,
         '__findSoundMovieMultimedia245': __findSoundMovieMultimedia245,
+        '__findSoundMovieMultimedia': __findSoundMovieMultimedia,
         '__matchVolumes': __matchVolumes,
         '__findVolumes': __findVolumes,
         '__matchSections': __matchSections,

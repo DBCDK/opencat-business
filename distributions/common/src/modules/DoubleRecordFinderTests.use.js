@@ -722,9 +722,11 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
 
     SolrCore.clear();
     SolrCore.addQuery( "(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.245ø:1cd) AND marc.001b:870970",
-        { response: { docs: [ { id: "12345678:870970" } ] } } );
+        { response: { docs: [ { id: "11111111:870970" } ] } } );
     SolrCore.addQuery( "(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
-        { response: { docs: [ { id: "12345678:870970" } ] } } );
+        { response: { docs: [ { id: "22222222:870970" } ] } } );
+    SolrCore.addQuery( "(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND NOT match.245ø:\"*\" AND NOT match.300e:\"*\") AND marc.001b:870970",
+        { response: { docs: [ { id: "33333333:870970" } ] } } );
     SolrCore.addAnalyse( "match.009a:r", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "r" } ] ] } } } } );
     SolrCore.addAnalyse( "match.009g:xe", { responseHeader: { status: 0 }, analysis: { field_names: { "match.009g": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "xe" } ] ] } } } } );
     SolrCore.addAnalyse( "match.245a:Troffelspisernes mareridt", { responseHeader: { status: 0 }, analysis: { field_names: { "match.245a": {index: [ "org.apache.lucene.analysis.core.LowerCaseFilter",[ { text: "troffelspisernesmareridt" } ] ] } } } } );
@@ -754,7 +756,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
     ].join( "\n") );
 
     Assert.equalValue( "__findSoundMovieMultimedia245 with record containing field 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245( soundMovieMultimedia245, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+        [ { id: "11111111", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 
     Assert.equalValue( "__findSoundMovieMultimedia245 with record containing 300e but not 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245( soundMovieMultimedia300, solrUrl ),
@@ -766,7 +768,7 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
     );
 
     Assert.equalValue( "__findSoundMovieMultimedia300 with record containing field 300e", DoubleRecordFinder.__findSoundMovieMultimedia300( soundMovieMultimedia300, solrUrl ),
-        [ { id: "12345678", reason: "009a, 009g, 245a, 300e", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+        [ { id: "22222222", reason: "009a, 009g, 245a, 300e", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
     );
 
     Assert.equalValue( "__findSoundMovieMultimedia300 with record containing 245ø but not 300e", DoubleRecordFinder.__findSoundMovieMultimedia300( soundMovieMultimedia245, solrUrl ),
@@ -777,6 +779,30 @@ UnitTest.addFixture( "DoubleRecordFinder.__findSoundMovieMultimedia", function()
         [ ]
     );
 
+
+    Assert.equalValue( "__findSoundMovieMultimedia with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia( soundMovieMultimedia, solrUrl ),
+        [ { id: "33333333", reason: "009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+
+    Assert.equalValue( "__findSoundMovieMultimedia with record with 245ø", DoubleRecordFinder.__findSoundMovieMultimedia( soundMovieMultimedia245, solrUrl ),
+        [ ]
+    );
+
+    Assert.equalValue( "__findSoundMovieMultimedia with record with 300e", DoubleRecordFinder.__findSoundMovieMultimedia( soundMovieMultimedia300, solrUrl ),
+        [ ]
+    );
+
+    Assert.equalValue( "DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find( soundMovieMultimedia245, solrUrl ),
+        [ { id: "11111111", reason: "009a, 009g, 245a, 245ø", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+
+    Assert.equalValue( "DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find( soundMovieMultimedia300, solrUrl ),
+        [ { id: "22222222", reason: "009a, 009g, 245a, 300e", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
+
+    Assert.equalValue( "DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find( soundMovieMultimedia, solrUrl ),
+        [ { id: "33333333", reason: "009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined } ]
+    );
 } );
 
 //-----------------------------------------------------------------------------
