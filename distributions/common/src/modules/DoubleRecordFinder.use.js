@@ -590,12 +590,6 @@ var DoubleRecordFinder = function () {
 
                 result = __executeQueryAndFindRecords(record, formatters, excludedFields);
 
-                if (result != undefined && result.length > 0) {
-                    for(var i = 0; i < result.length; i++) {
-
-                    }
-                }
-
                 return result;
             } else {
                 return result = [];
@@ -1218,9 +1212,9 @@ var DoubleRecordFinder = function () {
                 return result = [];
             }
 
-            for (var e = 0; e < excludedFields.length; e++) {
-                query += " AND NOT match." + excludedFields[e] + ":\"*\"";
-            }
+            excludedFields.forEach(function(element) {
+                query += " AND NOT match." + element + ":\"*\"";
+            });
 
             query = "(" + query + ") AND marc.001b:870970";
             Log.debug("Solr query: ", query);
