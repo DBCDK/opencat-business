@@ -44,9 +44,9 @@ var DoubleRecordFinder = function () {
         solrUrl = callSolrUrl;
         var result = [];
         try {
-            var array = commonChecks(false);
+            var finders = matchFinders(record, false);
             
-            result = doFind(record, array);
+            result = doFind(record, finders);
             
             return result;
         }
@@ -73,9 +73,9 @@ var DoubleRecordFinder = function () {
         solrUrl = callSolrUrl;
         var result = [];
         try {
-            var array = commonChecks(true);
+            var finders = matchFinders(record, true);
 
-            result = doFind(record, array);
+            result = doFind(record, finders);
 
             return result;
         }
@@ -84,105 +84,55 @@ var DoubleRecordFinder = function () {
         }
     }
 
-    function commonChecks(includeDBCOnlyFinders) {
-        Log.trace("Enter - DoubleRecordFinder.commonChecks()", 0);
+
+    function matchFinders(record, includeDBCOnlyFinders) {
+        Log.trace("Enter - DoubleRecordFinder.matchFinders()");
 
         try {
-            var array = [];
+            var result = [];
 
-            // Keep this as the first ISSN,ISBN;ISMN etc has highest priority
-            array.push({
-                matcher: __matchNumbers,
-                searcher: __findNumbersRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchMusic,
-                searcher: __findMusicGeneralRun,
-                continueOnHit: includeDBCOnlyFinders
-            });
-            if (includeDBCOnlyFinders) {
-                // Keep Music245 and 538 grouped together
-                array.push({
-                    matcher: __matchMusic,
-                    searcher: __findMusic245Run,
-                    continueOnHit: true
-                });
-                array.push({
-                    matcher: __matchMusic,
-                    searcher: __findMusic538Run,
-                    continueOnHit: false
-                });
-                // END Keep Music245 and 538 grouped together
+            if (__matchNumbers(record)) {
+                result.push(__findNumbersRun);
+            } else if (__matchMusic(record)) {
+                result.push(__findMusicGeneralRun);
+                if (includeDBCOnlyFinders) {
+                    result.push(__findMusic245Run);
+                    result.push(__findMusic538Run);
+                }
+            } else if (__matchSoundMovieMultimedia(record)) {
+                result.push(__findSoundMovieMultimedia300Run);
+                if (includeDBCOnlyFinders) {
+                    result.push(__findSoundMovieMultimedia245Run);
+                    result.push(__findSoundMovieMultimediaRun);
+                }
+            } else if (__matchVolumes(record)) {
+                result.push(__findVolumesRun);
+            } else if (__matchSections(record)) {
+                result.push(__findSectionsRun);
+            } else if (__matchFictionBookMusic(record)) {
+                result.push(__findFictionBookMusicRun);
+            } else if (__matchSimpleLiterature(record)) {
+                result.push(__findSimpleLiteratureRun);
+            } else if (__matchTechnicalLiterature(record)) {
+                result.push(__findTechnicalLiteratureRun);
+            } else if (__matchComposedMaterials(record)) {
+                result.push(__findComposedMaterialsRun);
             }
-            array.push({
-                matcher: __matchSoundMovieMultimedia,
-                searcher: __findSoundMovieMultimedia300Run,
-                continueOnHit: includeDBCOnlyFinders
-            });
-            if (includeDBCOnlyFinders) {
-                array.push({
-                    matcher: __matchSoundMovieMultimedia,
-                    searcher: __findSoundMovieMultimedia245Run,
-                    continueOnHit: true
-                });
-                array.push({
-                    matcher: __matchSoundMovieMultimedia,
-                    searcher: __findSoundMovieMultimediaRun,
-                    continueOnHit: false
-                });
-            }
-            array.push({
-                matcher: __matchVolumes,
-                searcher: __findVolumesRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchSections,
-                searcher: __findSectionsRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchFictionBookMusic,
-                searcher: __findFictionBookMusicRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchSimpleLiterature,
-                searcher: __findSimpleLiteratureRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchTechnicalLiterature,
-                searcher: __findTechnicalLiteratureRun,
-                continueOnHit: false
-            });
-            array.push({
-                matcher: __matchComposedMaterials,
-                searcher: __findComposedMaterialsRun,
-                continueOnHit: false
-            });
-            return array;
-        }
-        finally {
-            Log.trace("Exit - DoubleRecordFinder.commonChecks(): ", JSON.stringify(array));
+
+            return result;
+        } finally {
+            Log.trace("Exit - DoubleRecordFinder.matchFinders(): ", JSON.stringify(result));
         }
     }
 
-    function doFind(record, array) {
+    function doFind(record, finders) {
         Log.trace("Enter - DoubleRecordFinder.doFind()", 0);
         var result = [];
         try {
-            for (var i = 0; i < array.length; i++) {
-                var findObj = array[i];
 
-                if (findObj.matcher(record)) {
-                    result = result.concat(findObj.searcher(record));
-                    if (!findObj.continueOnHit) {
-                        return result;
-                    }
-                }
-            }
+            finders.forEach(function(element) {
+                result = result.concat(element(record));
+            });
 
             return result;
         }
