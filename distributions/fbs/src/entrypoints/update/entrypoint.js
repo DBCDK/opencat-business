@@ -31,6 +31,18 @@ function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord 
 }
 
 /**
+ * Function that takes a record and creates a 512 notefield from the given data.
+ *
+ * @param {String} currentCommonRecord  The current record as a json.
+ *
+ * @return {String} A json with the new record.
+ */
+
+function recategorizationNoteFieldFactory( currentRecord) {
+    return FBSUpdaterEntryPoint.recategorizationNoteFieldFactory( currentRecord, currentRecord );
+}
+
+/**
  * Creates a new library extended record based on a DBC record.
  *
  * @param {String} currentCommonRecord  The current common record as a json.
