@@ -56,28 +56,5 @@
         ]
       }
     }
-  },
-  {
-    "name": "fbs-new-volume-record",
-    "description": "Tester oprettelse af ny volume post",
-    "request": {
-      "authentication": {
-        "group": "737600",
-        "user": "netpunkt",
-        "password": "20Koster"
-      },
-      "templateName": "bog",
-      "record": "request-volume.marc"
-    },
-    "setup": {
-      "rawrepo": [ ]
-    },
-    "expected": {
-      "validation": [],
-      "update": {
-        "errors": [],
-        "rawrepo": [ ]
-      }
-    }
   }
 ]
