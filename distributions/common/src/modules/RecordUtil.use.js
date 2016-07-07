@@ -33,9 +33,8 @@ var RecordUtil = function() {
      */
     function addOrReplaceSubfield( record, fieldName, subfieldName, value ) {
         Log.trace( "Enter - RecordUtil.addOrReplaceSubfield" );
-
         try {
-            if( record.existField( RegExp( fieldName ) ) ) {
+            if( record.existField( new RegExp( fieldName ) ) ) {
                 record.field( fieldName ).append( subfieldName, value, true );
                 return record;
             }

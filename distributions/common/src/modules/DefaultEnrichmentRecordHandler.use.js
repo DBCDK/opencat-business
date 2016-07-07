@@ -374,11 +374,9 @@ var DefaultEnrichmentRecordHandler = function () {
 
             var record_lookup = RecordLookupField.createFromField( currentMaterialField );
             if ( RecordLookupField.containsField( record_lookup, updatingMaterialField ) ) {
-            Log.error ("mvs #8");
                 return result = false;
             }
 
-            Log.error ("mvs #9");
             return result = false;
         }
         finally {

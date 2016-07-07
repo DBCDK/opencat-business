@@ -198,7 +198,7 @@ var RecategorizationNoteFieldFactory = function() {
                 field = RecategorizationNoteFieldProvider.loadMergeFieldRecursive( record, "245", /[anogm\u00F8\u00E6y]/ );
                 spec = {
                     sepSpec: [
-                        { pattern: /a[ang]$/, midSep: ". " },
+                        { pattern: /a[anog]$/, midSep: ". " },
                         { pattern: /na$|ga$/, midSep: " : " }
                     ],
                     valueSpec: {

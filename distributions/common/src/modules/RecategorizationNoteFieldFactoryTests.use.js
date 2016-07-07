@@ -78,6 +78,18 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
     parts = { recategorization: formatMaterialMessage( bundle, "code.038a.dr" ) };
     Assert.equalValue( "038a found", callFunction( record, record ).toString(), createNote( parts ).toString() );
 
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "038 00 *a dr"
+    );
+
+    var field = new Field( "512", "00");
+    var subfield = new Subfield ("i", "Materialet er opstillet under dramatik");
+    field.append(subfield);
+    Assert.equalValue( "test of calling function with identic records", callFunction( record, record ).toString(), field.toString() );
+
+
     //-----------------------------------------------------------------------------
     //                  Test 039 field
     //-----------------------------------------------------------------------------
