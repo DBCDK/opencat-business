@@ -1,6 +1,6 @@
 {
   "request" : {
-    "urlPattern" : "/solr/raapost-index/select\\?q=%28match\\.009a%3A%22r%22\\+AND\\+match\\.009g%3A%22xe%22\\+AND\\+match\\.245a%3Adefire%C3%A5rstideriprove%2A\\+AND\\+NOT\\+match\\.245%C3%B8%3A%22%2A%22\\+AND\\+NOT\\+match\\.300e%3A%22%2A%22%29\\+AND\\+marc\\.001b%3A870970&indent=true&wt=json",
+    "urlPattern" : "/solr/raapost-index/select\\?q=marc\\.002a%3A%22([0-9]|\\+)+%22\\+AND\\+marc\\.001b%3A870970&wt=json",
     "method" : "GET"
   },
   "response" : {
