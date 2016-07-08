@@ -44,6 +44,9 @@ var ClassificationData = function() {
                 if (__hasSubfieldChangedMatcher(oldMarc, newMarc, /008/, /t/, /m|s/, /p/)) {
                     reason = "008t m|s -> p";
                     return result = true;
+                } else if (__hasSubfieldChangedMatcher(oldMarc, newMarc, /008/, /t/, /p/, /m|s/)) {
+                    reason = "008t p -> m|s";
+                    return result = true;
                 }
             }
 
