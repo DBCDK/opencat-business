@@ -51,7 +51,7 @@ var DoubleRecordFinder = function () {
             return result;
         }
         finally {
-            Log.debug("Exit - DoubleRecordFinder.findGeneral(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.debug("Exit - DoubleRecordFinder.findGeneral(): ", JSON.stringify(result));
         }
     }
 
@@ -80,7 +80,7 @@ var DoubleRecordFinder = function () {
             return result;
         }
         finally {
-            Log.debug("Exit - DoubleRecordFinder.find(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.debug("Exit - DoubleRecordFinder.find(): ", JSON.stringify(result));
         }
     }
 
@@ -137,7 +137,7 @@ var DoubleRecordFinder = function () {
             return result;
         }
         finally {
-            Log.trace("Exit - DoubleRecordFinder.doFind(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.trace("Exit - DoubleRecordFinder.doFind(): ", JSON.stringify(result));
         }
     }
 
