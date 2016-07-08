@@ -106,6 +106,7 @@ var TemplateOptimizer = function() {
                 if (isRepeatable === true) {
                     repeatableNames.push(name);
                 }
+
             }
 
             if (mandatoryNames.length > 0) {
@@ -209,6 +210,10 @@ var TemplateOptimizer = function() {
                         subfields: repeatableNames
                     }
                 });
+            }
+
+            if (field.sorting !== undefined) {
+                result.sorting = field.sorting;
             }
 
             result.rules = convertTypeNameOfAllRules(result.rules);
