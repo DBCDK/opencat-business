@@ -189,7 +189,7 @@ var RecategorizationNoteFieldFactory = function() {
                 Log.debug("Formating field: ", field);
                 var message = ISBDFieldFormater.formatField( field, spec );
 
-                Log.debug( "C1: Add *t with: ", message )
+                Log.debug( "C1: Add *t with: ", message );
                 noteField.append("t", message.trim());
                 return;
             }
@@ -202,6 +202,7 @@ var RecategorizationNoteFieldFactory = function() {
                         { pattern: /na$|ga$/, midSep: " : " }
                     ],
                     valueSpec: {
+                        \u00E6: __BracketsWithSpaces
                     }
                 };
 
@@ -209,7 +210,7 @@ var RecategorizationNoteFieldFactory = function() {
                     Log.debug("Formating field: ", field);
                     var message = ISBDFieldFormater.formatField(field, spec);
 
-                    Log.debug( "C2: Add *t with: ", message )
+                    Log.debug( "C2: Add *t with: ", message );
                     noteField.append("t", message.trim());
                 }
                 return;
@@ -336,6 +337,10 @@ var RecategorizationNoteFieldFactory = function() {
 
     function __Brackets( value ) {
         return "(" + value + ")";
+    }
+
+    function __BracketsWithSpaces( value ) {
+        return " (" + value + ") ";
     }
 
     return {

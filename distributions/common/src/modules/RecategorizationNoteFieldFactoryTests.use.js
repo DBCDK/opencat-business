@@ -299,6 +299,27 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
     };
     Assert.equalValue( "652mb found", callFunction( record, record ).toString(), createNote( parts ).toString() );
 
+    RawRepoClientCore.addRecord(
+        RecordUtil.createFromString(
+            "001 00 *a 3 234 567 8 *b 191919\n" +
+            "004 00 *r n *a h\n" +
+            "245 00 *a Technical report *æ Datalogisk Institut, DIKU"
+        )
+    );
+
+    record = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a b\n" +
+        "014 00 *a 2 234 567 8\n" +
+        "245 00 *G nr. 2012 3 *g No. 2012/03 *a Design of reversible logic circuits using standard cells *c standard cells and functional programming"
+    );
+
+    parts = {
+        recategorization: formatMaterialMessage( bundle, "" ),
+        title: "Technical report (Datalogisk Institut, DIKU) [Bind] 18 : Ringkøbing Amt. No. 2012/03 : Design of reversible logic circuits using standard cells "
+    };
+    Assert.equalValue( "Bug 20440 - Update: Mindre korrektion af tegnsæt i 512-note", callFunction( record, record ).toString(), createNote( parts ).toString() );
+
     //-----------------------------------------------------------------------------
     //                  Test 009/652 field
     //-----------------------------------------------------------------------------
