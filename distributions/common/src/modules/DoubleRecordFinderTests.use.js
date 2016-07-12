@@ -894,7 +894,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
         {response: {docs: [{id: "11111111:870970"}]}});
     SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
         {response: {docs: [{id: "22222222:870970"}]}});
-    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND NOT match.245ø:\"*\" AND NOT match.300e:\"*\") AND marc.001b:870970",
+    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND (NOT match.245ø:\"*\" OR NOT match.300e:\"*\")) AND marc.001b:870970",
         {response: {docs: [{id: "33333333:870970"}]}});
     SolrCore.addAnalyse("match.009a:r", {
         responseHeader: {status: 0},
@@ -1298,3 +1298,55 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
 
 });
 
+UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster med 300e skal kun matche op imod poster med 300e", function () {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND (NOT match.245ø:\"*\" OR NOT match.300e:\"*\")) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.009a:m", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "m"}]]}}}
+    });
+    SolrCore.addAnalyse("match.009g:th", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "th"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:Hamlet", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "hamlet"}]]}}}
+    });
+    record = RecordUtil.createFromString([
+        "001 00 *a 61690859 *b 870970 *c 20131114211327 *d 20131114 *f a",
+        "004 00 *a e *r c",
+        "008 00 *t m *v 0 *a 2003 *b gb *l eng *u f",
+        "009 00 *a m *g th",
+        "245 00 *a Hamlet",
+        "260 00 *a [London] *b Carlton International Media *c 2003 *g Front Row",
+        "300 00 *n 1 dvd-video *l 2 t., 35 min.",
+        "440 00 *0  *a Classic collection",
+        "508 00 *a Engelsk tale",
+        "508 00 *a Uden undertekster",
+        "512 00 *a Originalfilm: Two Cities, 1948",
+        "652 00 *m 77.7",
+        "666 00 *s drama",
+        "666 00 *s hævn",
+        "666 00 *q Danmark",
+        "700 00 *a Shakespeare *h William *4 ant",
+        "700 00 *a Olivier *h Laurence *4 drt *4 pro *4 act",
+        "700 00 *a Herlie *h Eileen *4 act",
+        "700 00 *a Sydney *h Basil *4 act",
+        "700 00 *a Simmons *h Jean *4 act",
+        "700 00 *a Aylmer *h Felix *4 act",
+        "996 00 *a 746100",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+
+    Log.debug("GRYDESTEG - GRYDESTEG");
+
+    Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
+        [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
+    );
+
+});

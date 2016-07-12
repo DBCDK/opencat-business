@@ -1162,9 +1162,14 @@ var DoubleRecordFinder = function () {
                 return result = [];
             }
 
-            excludedFields.forEach(function(element) {
-                query += " AND NOT match." + element + ":\"*\"";
-            });
+            if (excludedFields.length > 0) {
+                query += " AND (";
+                excludedFields.forEach(function(element, index) {
+                    query += "NOT match." + element + ":\"*\"";
+                    query += index < excludedFields.length -1 ? " OR " : "";
+                });
+                query += ")";
+            }
 
             query = "(" + query + ") AND marc.001b:870970";
             Log.debug("Solr query: ", query);
