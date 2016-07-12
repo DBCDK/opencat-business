@@ -1,0 +1,153 @@
+[
+    {
+        "name": "LJL-basis-update-from-single-t01",
+        "description": "Omkatalogisering af en enkeltstående post til en bindpost. Ændret opstilling + ingen beholdninger",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-single.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-single-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-single-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [ "rawrepo-volume.marc" ],
+                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "LJL_basis-update-from-single-t02",
+        "description": "Omkatalogisering af en enkeltstående post til en bindpost. Ændret opstilling + beholdning",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 715100 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-single.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-single-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-single-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [ "rawrepo-volume.marc" ],
+                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc", "result-fbs-715100.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-715100.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
