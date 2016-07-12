@@ -894,7 +894,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
         {response: {docs: [{id: "11111111:870970"}]}});
     SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
         {response: {docs: [{id: "22222222:870970"}]}});
-    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND (NOT match.245ø:\"*\" OR NOT match.300e:\"*\")) AND marc.001b:870970",
+    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
         {response: {docs: [{id: "33333333:870970"}]}});
     SolrCore.addAnalyse("match.009a:r", {
         responseHeader: {status: 0},
@@ -1303,7 +1303,7 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     var record;
 
     SolrCore.clear();
-    SolrCore.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND (NOT match.245ø:\"*\" OR NOT match.300e:\"*\")) AND marc.001b:870970",
+    SolrCore.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
     SolrCore.addAnalyse("match.009a:m", {
         responseHeader: {status: 0},
