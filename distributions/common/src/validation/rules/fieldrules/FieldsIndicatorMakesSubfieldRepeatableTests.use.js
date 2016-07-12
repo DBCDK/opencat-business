@@ -21,7 +21,7 @@ UnitTest.addFixture( "FieldsIndicatorMakesSubfieldRepeatable", function () {
 
     var params = {
         "indicators": ["01"],
-        "subfieldNames": []
+        "subfieldNames": ["a"]
     };
 
     SafeAssert.equal( "testing with valid indicator", [], FieldsIndicatorMakesSubfieldRepeatable.validateField( record, field, params ) );

@@ -42,10 +42,7 @@ var FieldsIndicatorMakesSubfieldRepeatable = function () {
             ValueCheck.check( "params.subfieldNames", params.subfieldNames ).instanceOf( Array );
             ValueCheck.checkThat( "params.subfieldNames", params.subfieldNames.length ).is.greaterThan(0);
 
-
-
             if ( !__fieldIndicatorInParams( params, field ) ) {
-
                 var subfieldMap = __getSubfieldMap( field.subfields );
                 params.subfieldNames.forEach( function ( subfield ) {
                     if ( subfieldMap.hasOwnProperty( subfield ) && subfieldMap[subfield].isRepeated === true ) {
