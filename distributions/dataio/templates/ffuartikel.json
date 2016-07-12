@@ -545,7 +545,33 @@
         "945": "DanMarc2.fields.945",
         "952": "DanMarc2.fields.952",
         "966": "DanMarc2.fields.966",
-        "968": "DanMarc2.fields.968",
+        "968":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a1.htm",
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false
+                },
+                "c":{},
+                "x":{
+                    "repeatable":false
+                },
+                "w":{
+                    "repeatable":false
+                },
+                "z":{
+                    "repeatable":false
+                }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                }
+            ]
+        },
         "980": "DanMarc2.fields.980",
         "990": "DanMarc2.fields.990",
         "991": "DanMarc2.fields.991",
