@@ -306,13 +306,13 @@ var RecategorizationNoteFieldFactory = function() {
                         } else if (currentRecord.matchValue(/004/, /a/, /b/) && updatingRecord.matchValue(/004/, /a/, /e/)) {
                             message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.from.serials.to.single");
                         } else {
-                            message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.from.serials.to.volumes");
+                            message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.from.serials.to.volume");
                         }
                     } else if (currentRecord.matchValue(/008/, /t/, /m|s/)) {
                         if (currentRecord.getValue(/004/, /a/) == updatingRecord.getValue(/004/, /a/)) {
                             message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.to.serials");
                         } else if (currentRecord.matchValue(/004/, /a/, /b/) && updatingRecord.matchValue(/004/, /a/, /e/)) {
-                            message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.to.serials.from.volumes");
+                            message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.to.serials.from.volume");
                         } else {
                             message += " " + ResourceBundle.getString(__loadBundle(), "note.category.reason.to.serials.from.single");
                         }
