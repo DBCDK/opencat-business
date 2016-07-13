@@ -1840,9 +1840,7 @@
                 "\u00E6":{
                     "repeatable":false
                 },
-                "n":{
-                    "repeatable":false
-                },
+                "n":{},
                 "o":{},
                 "c":{},
                 "e":{},
@@ -4113,9 +4111,7 @@
                 "\u00f8":{
                     "repeatable":false
                 },
-                "n":{
-                    "repeatable":false
-                },
+                "n":{},
                 "o":{},
                 "z":{
                     "repeatable":false,
