@@ -336,15 +336,12 @@ var ClassificationData = function () {
             Log.debug("    ignoreSubfieldsMatcher: " + ignoreSubfieldsMatcher);
 
             if (oldField === undefined && newField === undefined) {
-                Log.debug("STP: Result C1");
                 return result = false;
             }
             else if (oldField !== undefined && newField === undefined) {
-                Log.debug("STP: Result C2");
                 return result = true;
             }
             else if (oldField === undefined && newField !== undefined) {
-                Log.debug("STP: Result C3");
                 return result = true;
             }
 
@@ -352,7 +349,6 @@ var ClassificationData = function () {
             if (ignoreSubfieldsMatcher === undefined) {
                 msf = {
                     matchSubField: function (f, sf) {
-                        Log.debug("STP: Result C4");
                         return false;
                     }
                 };
@@ -361,19 +357,16 @@ var ClassificationData = function () {
             result = false;
             oldField.eachSubField(/./, function (field, subfield) {
                 if (result) {
-                    Log.debug("STP: Result C5");
                     return;
                 }
 
                 if (msf.matchSubField(field, subfield)) {
-                    Log.debug("STP: Result C6");
                     return;
                 }
 
                 var sfMatcher = {
                     matchSubField: function (f, sf) {
                         if (subfield.value === "") {
-                            Log.debug("STP: Result C7");
                             return true;
                         }
 
@@ -386,24 +379,15 @@ var ClassificationData = function () {
                         Log.debug("sf.value.type: ", typeof( sfValue ));
                         Log.debug("subfield.value.type: ", typeof( subfieldValue ));
 
-                        if (sf.name === subfield.name && sfValue === subfieldValue) {
-                            Log.debug("STP: Result C8");
-                            return true;
-                        }
-                        else {
-                            Log.debug("STP: Result C9");
-                            return false;
-                        }
+                        return sf.name === subfield.name && sfValue === subfieldValue;
                     }
                 };
 
                 if (!newField.exists(sfMatcher)) {
-                    Log.debug("STP: Result C10");
                     result = true;
                 }
             });
 
-            Log.debug("STP: Result C11");
             return result;
         }
         finally {
