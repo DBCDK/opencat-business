@@ -67,22 +67,22 @@ function createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, 
  * @return {String} A json with the updated record.
  */
 function updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
-    Log.info("FBSUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord)");
+    Log.info("THL - entrypoint, FBSUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord)");
     return FBSUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord);
 }
 
 function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
-    Log.info("FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord)");
+    Log.info("THL - entrypoint, FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord)");
     return FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
 }
 
 function recordDataForRawRepo(record, userId, groupId) {
-    Log.info("FBSUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId)");
+    Log.info("THL - entrypoint, FBSUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId)");
     return FBSUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId);
 }
 
 function checkDoubleRecord(record, settings) {
-    Log.info("FBSUpdaterEntryPoint.checkDoubleRecord(record, settings)");
+    Log.info("THL - entrypoint, FBSUpdaterEntryPoint.checkDoubleRecord(record, settings)");
     return FBSUpdaterEntryPoint.checkDoubleRecord(record, settings);
 }
 
