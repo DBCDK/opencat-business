@@ -1,17 +1,18 @@
-use( "FBSAuthenticator" );
-use( "FBSUpdaterEntryPoint" );
-use( "FBSValidatorEntryPoint" );
+use("FBSAuthenticator");
+use("FBSUpdaterEntryPoint");
+use("FBSValidatorEntryPoint");
+use("Log");
 
-function initTemplates( settings ) {
-    FBSValidatorEntryPoint.initTemplates( settings );
+function initTemplates(settings) {
+    FBSValidatorEntryPoint.initTemplates(settings);
 }
 
-function authenticateRecord( record, userId, groupId, settings ) {
-    return FBSAuthenticator.authenticateRecord( record, userId, groupId, settings );
+function authenticateRecord(record, userId, groupId, settings) {
+    return FBSAuthenticator.authenticateRecord(record, userId, groupId, settings);
 }
 
-function hasClassificationData( marc ) {
-    return FBSUpdaterEntryPoint.hasClassificationData( marc );
+function hasClassificationData(marc) {
+    return FBSUpdaterEntryPoint.hasClassificationData(marc);
 }
 
 /**
@@ -22,12 +23,12 @@ function hasClassificationData( marc ) {
  *
  * @return {Boolean} true if the classifications has changed, false otherwise.
  */
-function hasClassificationsChanged( oldRecord, newRecord ) {
-    return FBSUpdaterEntryPoint.hasClassificationsChanged( oldRecord, newRecord );
+function hasClassificationsChanged(oldRecord, newRecord) {
+    return FBSUpdaterEntryPoint.hasClassificationsChanged(oldRecord, newRecord);
 }
 
-function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord ) {
-    return FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord );
+function shouldCreateEnrichmentRecords(settings, currentRecord, updatingRecord) {
+    return FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords(settings, currentRecord, updatingRecord);
 }
 
 /**
@@ -38,8 +39,8 @@ function shouldCreateEnrichmentRecords( settings, currentRecord, updatingRecord 
  * @return {String} A json with the new record.
  */
 
-function recategorizationNoteFieldFactory( currentRecord) {
-    return FBSUpdaterEntryPoint.recategorizationNoteFieldFactory( currentRecord, currentRecord );
+function recategorizationNoteFieldFactory(currentRecord) {
+    return FBSUpdaterEntryPoint.recategorizationNoteFieldFactory(currentRecord, currentRecord);
 }
 
 /**
@@ -51,8 +52,8 @@ function recategorizationNoteFieldFactory( currentRecord) {
  *
  * @return {String} A json with the new record.
  */
-function createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, agencyId ) {
-    return FBSUpdaterEntryPoint.createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, agencyId );
+function createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId) {
+    return FBSUpdaterEntryPoint.createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId);
 }
 
 /**
@@ -65,20 +66,24 @@ function createLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord,
  *
  * @return {String} A json with the updated record.
  */
-function updateLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, enrichmentRecord ) {
-    return FBSUpdaterEntryPoint.updateLibraryExtendedRecord( currentCommonRecord, updatingCommonRecord, enrichmentRecord );
+function updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
+    Log.info("FBSUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord)");
+    return FBSUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord);
 }
 
-function correctLibraryExtendedRecord( commonRecord, enrichmentRecord ) {
-    return FBSUpdaterEntryPoint.correctLibraryExtendedRecord( commonRecord, enrichmentRecord );
+function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
+    Log.info("FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord)");
+    return FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
 }
 
-function recordDataForRawRepo( record, userId, groupId ) {
-    return FBSUpdaterEntryPoint.recordDataForRawRepo( record, userId, groupId );
+function recordDataForRawRepo(record, userId, groupId) {
+    Log.info("FBSUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId)");
+    return FBSUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId);
 }
 
-function checkDoubleRecord( record, settings ) {
-    return FBSUpdaterEntryPoint.checkDoubleRecord( record, settings );
+function checkDoubleRecord(record, settings) {
+    Log.info("FBSUpdaterEntryPoint.checkDoubleRecord(record, settings)");
+    return FBSUpdaterEntryPoint.checkDoubleRecord(record, settings);
 }
 
 /**
@@ -87,8 +92,8 @@ function checkDoubleRecord( record, settings ) {
  * @return {JSON} A json with the names of the templates. The names is returned
  *                as an Array.
  */
-function getValidateSchemas( groupId, settings ) {
-    return FBSValidatorEntryPoint.getValidateSchemas( groupId, settings );
+function getValidateSchemas(groupId, settings) {
+    return FBSValidatorEntryPoint.getValidateSchemas(groupId, settings);
 }
 
 /**
@@ -98,8 +103,8 @@ function getValidateSchemas( groupId, settings ) {
  *
  * @return {Boolean} true if the template exists, false otherwise.
  */
-function checkTemplate( name, groupId, settings ) {
-    return FBSValidatorEntryPoint.checkTemplate( name, groupId, settings );
+function checkTemplate(name, groupId, settings) {
+    return FBSValidatorEntryPoint.checkTemplate(name, groupId, settings);
 }
 
 /**
@@ -110,6 +115,6 @@ function checkTemplate( name, groupId, settings ) {
  *
  * @return {String} A json string with an array of validation errors.
  */
-function validateRecord( templateName, record, settings ) {
-    return FBSValidatorEntryPoint.validateRecord( templateName, record, settings );
+function validateRecord(templateName, record, settings) {
+    return FBSValidatorEntryPoint.validateRecord(templateName, record, settings);
 }
