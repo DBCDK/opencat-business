@@ -237,68 +237,73 @@ var DefaultEnrichmentRecordHandler = function () {
      *
      * @return {Record} The new enrichment record.
      */
-    function updateRecord ( instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord ) {
-        Log.trace( "Enter - DefaultEnrichmentRecordHandler.updateRecord()" );
-
+    function updateRecord(instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord) {
+        Log.trace("Enter - DefaultEnrichmentRecordHandler.updateRecord()");
+        Log.info("Enter - DefaultEnrichmentRecordHandler.updateRecord()");
         var result;
         try {
-            var record = instance.classifications.module.updateClassificationsInRecord( instance.classifications.instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord );
+            var record = instance.classifications.module.updateClassificationsInRecord(instance.classifications.instance, currentCommonMarc, updatingCommonMarc, enrichmentRecord);
 
-            if ( __isRecategorization( currentCommonMarc, updatingCommonMarc ) ) {
-                Log.info( "Record is a recategorization." );
-                record = instance.classifications.module.removeClassificationsFromRecord( instance.classifications.instance, record );
-                var field = RecategorizationNoteFieldFactory.newNoteField( currentCommonMarc, updatingCommonMarc );
-                if ( field !== undefined ) {
-                    record = RecordSorter.insertField( record, field );
-                    record = RecordSorter.insertField( record, __getY08PosttypeSkiftField() )
+            if (__isRecategorization(currentCommonMarc, updatingCommonMarc)) {
+                Log.info("Record is a recategorization.");
+                record = instance.classifications.module.removeClassificationsFromRecord(instance.classifications.instance, record);
+                var field = RecategorizationNoteFieldFactory.newNoteField(currentCommonMarc, updatingCommonMarc);
+                if (field !== undefined) {
+                    record = RecordSorter.insertField(record, field);
+                    record = RecordSorter.insertField(record, __getY08PosttypeSkiftField())
                 }
             } else {
-                Log.info( "Record is not a recategorization." );
+                Log.info("Record is not a recategorization.");
             }
-            record.removeAll( "004" );
-            updatingCommonMarc.eachField( /004/, function ( field ) {
-                field.eachSubField( /./, function ( field, subfield ) {
-                    record = RecordUtil.addOrReplaceSubfield( record, field.name, subfield.name, subfield.value );
-                } )
-            } );
+            record.removeAll("004");
+            updatingCommonMarc.eachField(/004/, function (field) {
+                field.eachSubField(/./, function (field, subfield) {
+                    record = RecordUtil.addOrReplaceSubfield(record, field.name, subfield.name, subfield.value);
+                })
+            });
 
-            result = __correctRecordIfEmpty( record );
+            Log.info("THL record\n:" + record);
+            result = __correctRecordIfEmpty(record);
+            Log.info("THL result\n:" + result);
             return result;
-        }
-        finally {
-            Log.trace( "Exit - DefaultEnrichmentRecordHandler.updateRecord(): " + result );
+        } finally {
+            Log.trace("Exit - DefaultEnrichmentRecordHandler.updateRecord(): " + result);
         }
     }
 
-    function correctRecord ( instance, commonRecord, enrichmentRecord ) {
-        Log.trace( "Enter - DefaultEnrichmentRecordHandler.correctRecord()" );
+    function correctRecord(instance, commonRecord, enrichmentRecord) {
+        Log.trace("Enter - DefaultEnrichmentRecordHandler.correctRecord()");
+        Log.info("THL Enter - DefaultEnrichmentRecordHandler.correctRecord()");
         try {
-            Log.trace( "    commonRecord: " + commonRecord );
-            Log.trace( "    enrichmentRecord: " + enrichmentRecord );
+            Log.trace("    commonRecord: " + commonRecord);
+            Log.trace("    enrichmentRecord: " + enrichmentRecord);
+            Log.info("THL     commonRecord: " + commonRecord);
+            Log.info("THL     enrichmentRecord: " + enrichmentRecord);
             var result = null;
 
-            if ( instance.classifications.module.hasClassificationData( instance.classifications.instance, commonRecord ) ) {
-                if ( !instance.classifications.module.hasClassificationsChanged( instance.classifications.instance, commonRecord, enrichmentRecord ) ) {
-                    Log.info( "Classifications is the same. Removing it from library record." );
-                    result = instance.classifications.module.removeClassificationsFromRecord( instance.classifications.instance, enrichmentRecord );
+            if (instance.classifications.module.hasClassificationData(instance.classifications.instance, commonRecord)) {
+                if (!instance.classifications.module.hasClassificationsChanged(instance.classifications.instance, commonRecord, enrichmentRecord)) {
+                    Log.info("Classifications is the same. Removing it from library record.");
+                    result = instance.classifications.module.removeClassificationsFromRecord(instance.classifications.instance, enrichmentRecord);
                 } else {
-                    Log.info( "Classifications has changed." );
+                    Log.info("Classifications has changed.");
                     result = enrichmentRecord;
                 }
             } else {
-                Log.info( "Common record has no classifications." );
+                Log.info("Common record has no classifications.");
 
             }
 
-            if ( result === null ) {
+            if (result === null) {
                 result = enrichmentRecord.clone();
             }
 
-            var record = __correctRecordIfEmpty( result );
+            Log.info("THL record\n:" + record);
+            var record = __correctRecordIfEmpty(result);
+            Log.info("THL result\n:" + result);
             return record;
-        }
-        finally {
-            Log.trace( "Exit - DefaultEnrichmentRecordHandler.correctRecord()" );
+        } finally {
+            Log.trace("Exit - DefaultEnrichmentRecordHandler.correctRecord()");
         }
     }
 

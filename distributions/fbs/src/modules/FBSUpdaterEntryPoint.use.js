@@ -137,44 +137,55 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @return {String} A json with the updated record.
      */
-    function updateLibraryExtendedRecord ( currentCommonRecord, updatingCommonRecord, enrichmentRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.updateLibraryExtendedRecord()" );
+    function updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.updateLibraryExtendedRecord()");
+        Log.info("THL Enter - FBSUpdaterEntryPoint.updateLibraryExtendedRecord()");
 
         var result;
         try {
-            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( currentCommonRecord ) );
-            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( updatingCommonRecord ) );
-            var enrichmentMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( enrichmentRecord ) );
+            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
+            Log.info("THL currentCommonMarc:\n" + currentCommonMarc);
+            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
+            Log.info("THL updatingCommonMarc:\n" + updatingCommonMarc);
+            var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
+            Log.info("THL enrichmentMarc:\n" + enrichmentMarc);
 
-            var instance = __createEnrichmentRecordHandlerInstance( currentCommonMarc, updatingCommonMarc );
+            var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
 
-            result = DefaultEnrichmentRecordHandler.updateRecord( instance, currentCommonMarc, updatingCommonMarc, enrichmentMarc );
-            result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
+            result = DefaultEnrichmentRecordHandler.updateRecord(instance, currentCommonMarc, updatingCommonMarc, enrichmentMarc);
+            Log.info("THL result 1:\n" + result);
+            result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
+            Log.info("THL result 2:\n" + result);
             return result;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.updateLibraryExtendedRecord(): " + result );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.updateLibraryExtendedRecord(): " + result);
         }
     }
 
-    function correctLibraryExtendedRecord ( commonRecord, enrichmentRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()" );
+    function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()");
+        Log.info("THL Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()");
 
         var result;
         try {
-            var commonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( commonRecord ) );
-            var enrichmentMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( enrichmentRecord ) );
+            var commonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(commonRecord));
+            Log.info("THL commonMarc:\n" + commonMarc);
+            var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
+            Log.info("THL enrichmentMarc:\n" + enrichmentMarc);
 
-            Log.trace( "Create instance with FBSClassificationData" );
-            var classificationsInstance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-            var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
+            Log.trace("Create instance with FBSClassificationData");
+            Log.info("THL Create instance with FBSClassificationData");
+            var classificationsInstance = FBSClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
+            var instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, FBSClassificationData);
 
-            result = DefaultEnrichmentRecordHandler.correctRecord( instance, commonMarc, enrichmentMarc );
-            result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
+            result = DefaultEnrichmentRecordHandler.correctRecord(instance, commonMarc, enrichmentMarc);
+            Log.info("THL result 1:\n" + result);
+            result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
+            Log.info("THL result 2:\n" + result);
             return result;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result);
+            Log.info("THL Exit - FBSUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result);
         }
     }
 
