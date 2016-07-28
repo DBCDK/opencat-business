@@ -22,12 +22,10 @@ var FBSClassificationData = function() {
 
     function hasClassificationsChanged(instance, oldMarc, newMarc) {
         Log.trace("Enter - FBSClassificationData.hasClassificationsChanged( ", oldMarc, ", ", newMarc, " )");
-        Log.info("THL Enter - FBSClassificationData.hasClassificationsChanged( ", oldMarc, ", ", newMarc, " )");
 
         var result = null;
         try {
             var lookup = RecordLookupField.createFromRecord(oldMarc, instance.fields);
-            Log.info("THL lookup:\n" + JSON.stringify(lookup, undefined, 3));
 
             for (var i = 0; i < newMarc.numberOfFields(); i++) {
                 var newField = newMarc.field(i);

@@ -262,9 +262,7 @@ var DefaultEnrichmentRecordHandler = function () {
                 })
             });
 
-            Log.info("THL record\n:" + record);
             result = __correctRecordIfEmpty(record);
-            Log.info("THL result\n:" + result);
             return result;
         } finally {
             Log.trace("Exit - DefaultEnrichmentRecordHandler.updateRecord(): " + result);
@@ -273,12 +271,9 @@ var DefaultEnrichmentRecordHandler = function () {
 
     function correctRecord(instance, commonRecord, enrichmentRecord) {
         Log.trace("Enter - DefaultEnrichmentRecordHandler.correctRecord()");
-        Log.info("THL Enter - DefaultEnrichmentRecordHandler.correctRecord()");
         try {
             Log.trace("    commonRecord: " + commonRecord);
             Log.trace("    enrichmentRecord: " + enrichmentRecord);
-            Log.info("THL     commonRecord: " + commonRecord);
-            Log.info("THL     enrichmentRecord: " + enrichmentRecord);
             var result = null;
 
             if (instance.classifications.module.hasClassificationData(instance.classifications.instance, commonRecord)) {
@@ -298,9 +293,7 @@ var DefaultEnrichmentRecordHandler = function () {
                 result = enrichmentRecord.clone();
             }
 
-            Log.info("THL record\n:" + record);
             var record = __correctRecordIfEmpty(result);
-            Log.info("THL result\n:" + result);
             return record;
         } finally {
             Log.trace("Exit - DefaultEnrichmentRecordHandler.correctRecord()");
