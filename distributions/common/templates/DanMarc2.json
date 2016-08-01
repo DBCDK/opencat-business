@@ -2376,7 +2376,7 @@
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
-                                "min": 9,
+                                "min": 8,
                                 "max": 9
                             }
                         }
@@ -2420,25 +2420,11 @@
                 "v":{},
                 "z":{
                 	"repeatable":false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 13,
-                                "max": 13
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISBN10" } ]
 				},
                 "r":{
                 	"repeatable":false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 13,
-                                "max": 13
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISBN13" } ]
 				}
             },
             "rules": [
