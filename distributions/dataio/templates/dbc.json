@@ -1134,6 +1134,12 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "n": {
+                    "repeatable": false
                 }
             }
         },
