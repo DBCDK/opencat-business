@@ -759,7 +759,7 @@ var DoubleRecordFinder = function () {
 
             result = __executeQueryAndFindRecords(record, formatters);
             if (field250a !== undefined) {
-                normalized250a = Solr.analyse(solrUrl, field250a, "match.field250a");
+                normalized250a = Solr.analyse(solrUrl, field250a, "match.250a");
             } else {
                 // When incoming rec doesn't have a 250a all found are possible matches
                 return result;
@@ -771,7 +771,7 @@ var DoubleRecordFinder = function () {
                 var workRes = result[i];
                 var pushMe = false;
                 if (workRes.edition !== undefined) {
-                    var normalizedFind250a = Solr.analyse(solrUrl, workRes.edition, "match.field250a");
+                    var normalizedFind250a = Solr.analyse(solrUrl, workRes.edition, "match.250a");
                     if (normalized250a === normalizedFind250a) {
                         pushMe = true;
                     }
@@ -882,7 +882,7 @@ var DoubleRecordFinder = function () {
 
             result = __executeQueryAndFindRecords(record, formatters);
             if (field250a !== undefined) {
-                normalized250a = Solr.analyse(solrUrl, field250a, "match.field250a");
+                normalized250a = Solr.analyse(solrUrl, field250a, "match.250a");
             } else {
                 // When incoming rec doesn't have a 250a all found are possible matches
                 return result;
@@ -891,7 +891,7 @@ var DoubleRecordFinder = function () {
             for (var i = 0; i < result.length; i++) {
                 var workRes = result[i];
                 if (workRes.edition !== undefined) {
-                    var normalizedFind250a = Solr.analyse(solrUrl, workRes.edition, "match.field250a");
+                    var normalizedFind250a = Solr.analyse(solrUrl, workRes.edition, "match.250a");
                     if (normalized250a === normalizedFind250a) {
                         finalResult.push(workRes);
                     }
