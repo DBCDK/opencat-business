@@ -512,7 +512,6 @@ UnitTest.addFixture( "RecategorizationNoteFieldFactory.newNoteField", function()
         category: "# (DK5 65.821), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering fra periodica til flerbindsværk "
     };
 
-    Log.debug("GRYDESTEG - testing");
     Assert.equalValue( "volume-to-single", callFunction( currentRecord, record ).toString(), createNote( parts ).toString() );
 
 } );

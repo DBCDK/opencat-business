@@ -276,15 +276,6 @@ UnitTest.addFixture("ClassificationData.hasClassificationsChanged", function () 
     Assert.equalValue("245\u00F8 xx -> xx", callSubfieldChanged("245\u00E6", "\u00F8", "xx", "xx"), false);
     Assert.equalValue("245\u00F8 xx -> xy", callSubfieldChanged("245\u00E6", "\u00F8", "xx", "xy"), true);
 
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}]}]}), false);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}]}]}), false);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "x"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}]}]}), true);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "x"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}]}]}), true);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}, {name: "g", value: "xs"}]}]}), true);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}, {name: "g", value: "xs"}]}]}), true);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}, {name: "g", value: "xs"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "g", value: "xx"}, {name: "g", value: "xs"}]}]}), false);
-    Assert.equalValue("", callFunction({fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}, {name: "g", value: "xs"}]}]}, {fields: [{name: "009", indicator: "00", subfields: [{name: "a", value: "xx"}, {name: "g", value: "xs"}]}]}), false);
-
     //-------------------------------------------------------------------------
     //         Changes values in classification data (field: 038)
     //-------------------------------------------------------------------------

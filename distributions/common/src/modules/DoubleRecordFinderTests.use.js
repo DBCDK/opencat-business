@@ -1343,8 +1343,6 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
 
-    Log.debug("GRYDESTEG - GRYDESTEG");
-
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
         [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
     );

@@ -48,9 +48,13 @@ var ClassificationData = function () {
             }
 
             if (instance.fields.test("009")) {
-                if (__different009AG(oldMarc, newMarc)) {
-                    reason = "009a or g";
-                    return result = true
+                if (__hasSubfieldJustChanged(oldMarc, newMarc, __value, /009/, /a/)) {
+                    reason = "009a";
+                    return result = true;
+                }
+                if (__hasSubfieldJustChanged(oldMarc, newMarc, __value, /009/, /g/)) {
+                    reason = "009g";
+                    return result = true;
                 }
             }
             // TODO move to posttypeskift END
@@ -502,50 +506,6 @@ var ClassificationData = function () {
     function __stripValueLength10(v) {
         v = __stripValue(v.substr(0, 10));
         return v;
-    }
-
-
-    function __different009AG(oldRecord, newRecord) {
-        Log.debug("Enter - ClassificationData.__different009AG()");
-
-        var result = false;
-
-        try {
-            var oldA = [], oldG = [];
-            var newA = [], newG = [];
-
-            if (oldRecord.existField(new RegExp("009"))) {
-                var oldField = oldRecord.field("009");
-
-                oldField.eachSubField( /a/, function( field, subField ) {
-                        oldA.push(subField.value);
-                });
-
-                oldField.eachSubField( /g/, function( field, subField ) {
-                    oldG.push(subField.value);
-                });
-
-            }
-
-            if (newRecord.existField(new RegExp("009"))) {
-                var newField = newRecord.field("009");
-
-                newField.eachSubField( /a/, function( field, subField ) {
-                    newA.push(subField.value);
-                });
-
-                newField.eachSubField( /g/, function( field, subField ) {
-                    newG.push(subField.value);
-                });
-            }
-
-            var aDiffers = oldA.sort().concat().join("") !== newA.sort().concat().join("");
-            var gDiffers = oldG.sort().concat().join("") !== newG.sort().concat().join("");
-
-            return result = aDiffers || gDiffers;
-        } finally {
-            Log.debug("Exit - ClassificationData.__different009AG(): " + result);
-        }
     }
 
     return {
