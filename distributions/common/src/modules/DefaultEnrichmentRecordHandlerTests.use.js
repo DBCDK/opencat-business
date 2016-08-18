@@ -323,4 +323,81 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.updateRecord", function() {
         "y08 00 *a UPDATE posttypeskift"
     );
     Assert.equalValue( "New 512-note: Updating common record has 008t=p", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
+
+    currentCommonRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a c *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    updatingCommonRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a c *a a *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    enrichmentRecord  = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 700400"
+    );
+    expected  = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "004 00 *r n *a e\n" +
+        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()+"\n" +
+        "y08 00 *a UPDATE posttypeskift"
+    );
+    Assert.equalValue( "New 512-note: Updating common record has more 009 *a fields", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
+
+    currentCommonRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a a *a c *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    updatingCommonRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a c *a a *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    enrichmentRecord  = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 700400"
+    );
+    expected  = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a a *a c *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    Assert.equalValue( "New 512-note: Different order of fields", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
+
+    currentCommonRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a aa *a yy *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    updatingCommonRecord = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "004 00 *r n *a e\n" +
+        "009 00 *a aa *a xx *g xx *b s *h xc\n" +
+        "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel\n" +
+        "652 00 *m 47.44 *b Barcelona"
+    );
+    enrichmentRecord  = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 700400"
+    );
+    expected  = RecordUtil.createFromString(
+        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "004 00 *r n *a e\n" +
+        RecategorizationNoteFieldFactory.newNoteField( currentCommonRecord, updatingCommonRecord ).toString()+"\n" +
+        "y08 00 *a UPDATE posttypeskift"
+    );
+    Assert.equalValue( "New 512-note: Same amount of fields, different values", callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString() );
+
 } );

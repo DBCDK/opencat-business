@@ -370,6 +370,33 @@ var DefaultEnrichmentRecordHandler = function () {
                 return result = true;
             }
 
+            // At this point 009 a|g is defined in both records
+            var currentA = [], currentG = [];
+            var updatingA = [], updatingG = [];
+
+            currentMaterialField.eachSubField( /a/, function( field, subField ) {
+                currentA.push(subField.value);
+            });
+
+            currentMaterialField.eachSubField( /g/, function( field, subField ) {
+                currentG.push(subField.value);
+            });
+
+            updatingMaterialField.eachSubField( /a/, function( field, subField ) {
+                updatingA.push(subField.value);
+            });
+
+            updatingMaterialField.eachSubField( /g/, function( field, subField ) {
+                updatingG.push(subField.value);
+            });
+
+            var aDiffers = currentA.sort().concat().join("") !== updatingA.sort().concat().join("");
+            var gDiffers = currentG.sort().concat().join("") !== updatingG.sort().concat().join("");
+
+            if (currentA.length !== updatingA.length || currentG.length !== updatingG.length || aDiffers || gDiffers) {
+                return result = true;
+            }
+
             var record_lookup = RecordLookupField.createFromField( currentMaterialField );
             if ( RecordLookupField.containsField( record_lookup, updatingMaterialField ) ) {
                 return result = false;
