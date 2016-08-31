@@ -1916,7 +1916,6 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.4c.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "u":{
