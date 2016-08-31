@@ -414,7 +414,10 @@
                 "&":{
                     "repeatable":false
                 },
-                "a":"DanMarc2.fields.504.subfields.a"
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false
+                }
             }
         },
         "507": "DanMarc2.fields.507",
