@@ -4,7 +4,6 @@
 009 00 *a a *g xx
 021 00 *e 9788771691078 *c hf.
 021 00 *e 9788771690651 *b bogpakken DigiLesen nybegyndertysk
-032 00 *a DBF201511 *x BKM201511 *a DBF *x BKM *x SKO
 100 00 *0 *a Møller *h Karl Henrik *4 aut
 245 00 *a Lilly macht einen Ausflug *c QR bog
 250 00 *a 1. udgave *b ÷
@@ -24,5 +23,4 @@
 720 00 *o Mette Bødker *4 ill
 945 00 *a Digi lesen *x se *z 440(a)
 945 00 *a Lillys Leben - Niveau B *x se *z 440(a,o)
-990 00 *o 201511 *b b *b s *u nt
 996 00 *a 723000
