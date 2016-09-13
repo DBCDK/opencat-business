@@ -137,7 +137,7 @@
                         "enqueued": false
                     },
                     {
-                        "record": "result-volume1.marc",
+                        "record": "result-volume.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,

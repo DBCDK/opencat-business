@@ -1,15 +1,14 @@
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "TemplateUrl" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("TemplateUrl");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['ConflictingSubfields'];
-//-----------------------------------------------------------------------------
-var ConflictingSubfields = function( ) {
+
+var ConflictingSubfields = function () {
     var BUNDLE_NAME = "validation";
 
     /**
@@ -27,52 +26,49 @@ var ConflictingSubfields = function( ) {
      * @name RecordRules.conflictingSubfields
      * @method
      */
-    function validateRecord( record, params ) {
-        Log.trace ( "Enter - RecordRules.conflictingSubfields( ", record, ", ", params, " )" );
+    function validateRecord(record, params) {
+        Log.trace("Enter - RecordRules.conflictingSubfields( ", record, ", ", params, " )");
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
-            ValueCheck.checkThat( "params", params ).type( "object" );
-            ValueCheck.check( "params.subfields", params.subfields ).instanceOf( Array );
+            ValueCheck.checkThat("params", params).type("object");
+            ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             // Convert to Record so we can use its utility functions.
-            var marc = DanMarc2Converter.convertToDanMarc2( record );
+            var marc = DanMarc2Converter.convertToDanMarc2(record);
 
             // Array of found subfields. If this array contains 2 or more items, when we
             // have a validation error.
             var foundSubfields = [];
 
-            for( var i = 0; i < params.subfields.length; i++ ) {
-                var arg = params.subfields[ i ];
-                if( arg.length !== 4 ) {
-                    Log.debug( ResourceBundle.getString( bundle, "conflictingSubfields.params.subfields.error" ), arg, params.subfields );
-                    throw ResourceBundle.getStringFormat( bundle, "conflictingSubfields.params.subfields.error", arg, params.subfields );
+            for (var i = 0; i < params.subfields.length; i++) {
+                var arg = params.subfields[i];
+                if (arg.length !== 4) {
+                    Log.debug(ResourceBundle.getString(bundle, "conflictingSubfields.params.subfields.error"), arg, params.subfields);
+                    throw ResourceBundle.getStringFormat(bundle, "conflictingSubfields.params.subfields.error", arg, params.subfields);
                 }
-                var fieldName = arg.substr( 0, 3 );
-                var subfieldName = arg[ 3 ];
+                var fieldName = arg.substr(0, 3);
+                var subfieldName = arg[3];
 
-                marc.eachField( new RegExp( fieldName ), function( field ) {
-
-                    field.eachSubField( new RegExp( subfieldName ), function( field, subfield ) {
-
-                        if( foundSubfields.indexOf( arg ) == -1 ) {
-                            foundSubfields.push( arg )
+                marc.eachField(new RegExp(fieldName), function (field) {
+                    field.eachSubField(new RegExp(subfieldName), function (field, subfield) {
+                        if (foundSubfields.indexOf(arg) == -1) {
+                            foundSubfields.push(arg)
                         }
                     })
                 });
 
-                if( foundSubfields.length > 1 ) {
-                    var message = ResourceBundle.getStringFormat( bundle, "conflictingSubfields.validation.error", foundSubfields[0], foundSubfields[1] );
-                    return result = [ ValidateErrors.recordError( "TODO:fixurl", message ) ];
+                if (foundSubfields.length > 1) {
+                    var message = ResourceBundle.getStringFormat(bundle, "conflictingSubfields.validation.error", foundSubfields[0], foundSubfields[1]);
+                    return result = [ValidateErrors.recordError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
                 }
             }
 
             return result;
-        }
-        finally {
-            Log.trace( "Exit - RecordRules.conflictingSubfields(): ", result );
+        } finally {
+            Log.trace("Exit - RecordRules.conflictingSubfields(): ", result);
         }
     }
 
@@ -80,5 +76,4 @@ var ConflictingSubfields = function( ) {
         "validateRecord": validateRecord,
         "__BUNDLE_NAME": BUNDLE_NAME
     };
-
 }();

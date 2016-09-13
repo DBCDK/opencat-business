@@ -1,12 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['LookupValue'];
-//-----------------------------------------------------------------------------
+
 var LookupValue = function () {
     var __BUNDLE_NAME = "validation";
 
@@ -32,46 +31,39 @@ var LookupValue = function () {
      * @name LookupValue.validateSubfield
      * @method
      */
-    function validateSubfield ( record, field, subfield, params, settings ) {
-        Log.trace( "Enter - LookupValue.validateSubfield" );
-
-        ValueCheck.checkThat( "params", params ).type( "object" );
-        ValueCheck.checkThat( "params['register']", params['register'] ).type( "string" );
-        ValueCheck.checkThat( "params['exist']", params['exist'] ).type( "boolean" );
-        ValueCheck.checkThat( "settings", params ).type( "object" );
-
+    function validateSubfield(record, field, subfield, params, settings) {
+        Log.trace("Enter - LookupValue.validateSubfield");
+        ValueCheck.checkThat("params", params).type("object");
+        ValueCheck.checkThat("params['register']", params['register']).type("string");
+        ValueCheck.checkThat("params['exist']", params['exist']).type("boolean");
+        ValueCheck.checkThat("settings", params).type("object");
         try {
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-
-            if( !settings.containsKey( 'solr.url' ) ) {
-                throw ResourceBundle.getString( bundle, "lookup.value.missing.solr.url" );
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            if (!settings.containsKey('solr.url')) {
+                throw ResourceBundle.getString(bundle, "lookup.value.missing.solr.url");
             }
 
-            var url = settings.get( 'solr.url' );
-            if( url === undefined ) {
-                throw ResourceBundle.getString( bundle, "lookup.value.undefined.solr.url" );
+            var url = settings.get('solr.url');
+            if (url === undefined) {
+                throw ResourceBundle.getString(bundle, "lookup.value.undefined.solr.url");
             }
 
             var hits = 0;
-            if( subfield.value !== "" ) {
-                hits = Solr.numFound( url, StringUtil.sprintf( "%s:\"%s\"", params.register, subfield.value ) );
+            if (subfield.value !== "") {
+                hits = Solr.numFound(url, StringUtil.sprintf("%s:\"%s\"", params.register, subfield.value));
             }
 
-            if( params.exist === true && hits === 0 ) {
-                var message = ResourceBundle.getStringFormat( bundle, "lookup.value.expected.value",
-                    subfield.value, field.name, subfield.name );
-                return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];
+            var message;
+            if (params.exist === true && hits === 0) {
+                message = ResourceBundle.getStringFormat(bundle, "lookup.value.expected.value", subfield.value, field.name, subfield.name);
+                return [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
+            } else if (params.exist === false && hits !== 0) {
+                message = ResourceBundle.getStringFormat(bundle, "lookup.value.unexpected.value", subfield.value, field.name, subfield.name);
+                return [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
             }
-            else if( params.exist === false && hits !== 0 ) {
-                var message = ResourceBundle.getStringFormat( bundle, "lookup.value.unexpected.value",
-                    subfield.value, field.name, subfield.name );
-                return [ ValidateErrors.subfieldError( "TODO:fixurl", message ) ];
-            }
-
             return [];
-        }
-        finally {
-            Log.trace( "Exit - LookupValue.validateSubfield" );
+        } finally {
+            Log.trace("Exit - LookupValue.validateSubfield");
         }
     }
 

@@ -18,7 +18,9 @@
                     "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
@@ -32,10 +34,22 @@
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "message" : "Du har ikke ret til at opdatere en fællesskabspost som er ejet af DBC",
-                            "url" : ""
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "message",
+                                    "value": "Du har ikke ret til at opdatere en fællesskabspost som er ejet af DBC"
+                                },
+                                {
+                                    "key": "url",
+                                    "value": ""
+                                },
+                                {
+                                    "value": "90004158:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -44,7 +58,9 @@
                         "record": "rawrepo-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",

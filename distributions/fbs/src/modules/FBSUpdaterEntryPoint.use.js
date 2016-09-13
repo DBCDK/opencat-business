@@ -1,19 +1,16 @@
-//-----------------------------------------------------------------------------
-use( "DanMarc2Converter" );
-use( "DefaultDoubleRecordHandler" );
-use( "DefaultEnrichmentRecordHandler" );
-use( "DefaultRawRepoRecordHandler" );
-use( "FBSAuthenticator" );
-use( "FBSClassificationData" );
-use( "Log" );
-use( "Marc" );
-use( "RecordUtil" );
-use( "RecategorizationNoteFieldFactory" );
+use("DanMarc2Converter");
+use("DefaultDoubleRecordHandler");
+use("DefaultEnrichmentRecordHandler");
+use("DefaultRawRepoRecordHandler");
+use("FBSAuthenticator");
+use("FBSClassificationData");
+use("Log");
+use("Marc");
+use("RecordUtil");
+use("RecategorizationNoteFieldFactory");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FBSUpdaterEntryPoint'];
 
-//-----------------------------------------------------------------------------
 /**
  * Module to contain entry points for the update API between Java and
  * JavaScript.
@@ -29,19 +26,16 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @return {Boolean} true if classification data exists in the record, false otherwise.
      */
-    function hasClassificationData ( jsonRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.hasClassificationData()" );
-
+    function hasClassificationData(jsonRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.hasClassificationData()");
         var result;
         try {
-            var instance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-            var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( jsonRecord ) );
-
-            result = FBSClassificationData.hasClassificationData( instance, marc );
+            var instance = FBSClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
+            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
+            result = FBSClassificationData.hasClassificationData(instance, marc);
             return result;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.hasClassificationData():" + result );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.hasClassificationData():" + result);
         }
     }
 
@@ -53,20 +47,17 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @return {Boolean} true if the classifications has changed, false otherwise.
      */
-    function hasClassificationsChanged ( oldRecord, newRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.hasClassificationsChanged()" );
-
+    function hasClassificationsChanged(oldRecord, newRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.hasClassificationsChanged()");
         var result;
         try {
-            var oldMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( oldRecord ) );
-            var newMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( newRecord ) );
-            var instance = __createClassificationInstance( oldMarc, newMarc );
-
-            result = FBSClassificationData.hasClassificationsChanged( instance, oldMarc, newMarc );
+            var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
+            var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
+            var instance = __createClassificationInstance(oldMarc, newMarc);
+            result = FBSClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
             return result;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.hasClassificationsChanged(): " + result );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.hasClassificationsChanged(): " + result);
         }
     }
 
@@ -79,23 +70,19 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @return {String} A json with the value of a ServiceResult instance.
      */
-    function shouldCreateEnrichmentRecords ( settings, currentCommonRecord, updatingCommonRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords()" );
-
+    function shouldCreateEnrichmentRecords(settings, currentCommonRecord, updatingCommonRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords()");
         var result;
         try {
-            ResourceBundleFactory.init( settings );
-            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( currentCommonRecord ) );
-            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( updatingCommonRecord ) );
-
-            var instance = __createEnrichmentRecordHandlerInstance( currentCommonMarc, updatingCommonMarc );
-
-            result = DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentCommonMarc, updatingCommonMarc );
-            result = JSON.stringify( result );
+            ResourceBundleFactory.init(settings);
+            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
+            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
+            var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
+            result = DefaultEnrichmentRecordHandler.shouldCreateRecords(instance, currentCommonMarc, updatingCommonMarc);
+            result = JSON.stringify(result);
             return result;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords(): " + result );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords(): " + result);
         }
     }
 
@@ -108,22 +95,18 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @return {String} A json with the new record.
      */
-    function createLibraryExtendedRecord ( currentCommonRecord, updatingCommonRecord, agencyId ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.createLibraryExtendedRecord()" );
-
+    function createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.createLibraryExtendedRecord()");
         var result;
         try {
-            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( currentCommonRecord ) );
-            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2( JSON.parse( updatingCommonRecord ) );
-
-            var instance = __createEnrichmentRecordHandlerInstance( currentCommonMarc, updatingCommonMarc );
-
-            result = DefaultEnrichmentRecordHandler.createRecord( instance, currentCommonMarc, updatingCommonMarc, agencyId );
-            result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2( result ) );
+            var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
+            var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
+            var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
+            result = DefaultEnrichmentRecordHandler.createRecord(instance, currentCommonMarc, updatingCommonMarc, agencyId);
+            result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.createLibraryExtendedRecord(): " + result );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.createLibraryExtendedRecord(): " + result);
         }
     }
 
@@ -139,15 +122,12 @@ var FBSUpdaterEntryPoint = function () {
      */
     function updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
         Log.trace("Enter - FBSUpdaterEntryPoint.updateLibraryExtendedRecord()");
-
         var result;
         try {
             var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
             var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
             var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
-
             var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
-
             result = DefaultEnrichmentRecordHandler.updateRecord(instance, currentCommonMarc, updatingCommonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
@@ -158,16 +138,13 @@ var FBSUpdaterEntryPoint = function () {
 
     function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
         Log.trace("Enter - FBSUpdaterEntryPoint.correctLibraryExtendedRecord()");
-
         var result;
         try {
             var commonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(commonRecord));
             var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
-
             Log.trace("Create instance with FBSClassificationData");
             var classificationsInstance = FBSClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
             var instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, FBSClassificationData);
-
             result = DefaultEnrichmentRecordHandler.correctRecord(instance, commonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
@@ -183,36 +160,28 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @returns {Array} A list of records as json strings.
      */
-    function recordDataForRawRepo ( record, userId, groupId ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.recordDataForRawRepo" );
-
+    function recordDataForRawRepo(record, userId, groupId) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.recordDataForRawRepo");
         try {
-            var marc = DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) );
-            Log.trace( "Record:\n", uneval( marc ) );
-
-            var instance = DefaultRawRepoRecordHandler.create( FBSAuthenticator );
-
-            var records = DefaultRawRepoRecordHandler.recordDataForRawRepo( instance, marc, userId, groupId );
+            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(record));
+            Log.trace("Record:\n", uneval(marc));
+            var instance = DefaultRawRepoRecordHandler.create(FBSAuthenticator);
+            var records = DefaultRawRepoRecordHandler.recordDataForRawRepo(instance, marc, userId, groupId);
             var result = [];
-
-            for ( var i = 0; i < records.length; i++ ) {
+            for (var i = 0; i < records.length; i++) {
                 var curRecord = records[i];
-                var resultRecord = DanMarc2Converter.convertFromDanMarc2( curRecord );
-                var resultRecordAsJson = JSON.stringify( resultRecord );
-                Log.debug( "Adding resultRecord: ", resultRecordAsJson );
-                result.push( resultRecordAsJson );
+                var resultRecord = DanMarc2Converter.convertFromDanMarc2(curRecord);
+                var resultRecordAsJson = JSON.stringify(resultRecord);
+                Log.debug("Adding resultRecord: ", resultRecordAsJson);
+                result.push(resultRecordAsJson);
             }
-
-            var resultAsJson = "[" + result.join( "," ) + "]";
-            Log.debug( "Returning: ", resultAsJson );
+            var resultAsJson = "[" + result.join(",") + "]";
+            Log.debug("Returning: ", resultAsJson);
             return resultAsJson;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.recordDataForRawRepo" );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.recordDataForRawRepo");
         }
     }
-
-
 
     /**
      * Returns a 512 note field
@@ -222,59 +191,54 @@ var FBSUpdaterEntryPoint = function () {
      *
      * @returns {String} JSON representation of a field.
      */
-
-    function recategorizationNoteFieldFactory ( currentRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.RecategorizationNoteFieldFactory" );
+    function recategorizationNoteFieldFactory(currentRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.RecategorizationNoteFieldFactory");
         var result;
         try {
-            var rec =DanMarc2Converter.convertToDanMarc2( JSON.parse( currentRecord ) );
-            return result = JSON.stringify( DanMarc2Converter.convertFromDanMarc2Field( RecategorizationNoteFieldFactory.newNoteField( rec, rec ) ) );
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.recordDataForRawRepo: " , result );
+            var rec = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentRecord));
+            return result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2Field(RecategorizationNoteFieldFactory.newNoteField(rec, rec)));
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.recordDataForRawRepo: ", result);
         }
     }
 
-
-    function checkDoubleRecord ( record, settings ) {
-        Log.trace( "Enter - DBCUpdaterEntryPoint.checkDoubleRecord" );
-
+    function checkDoubleRecord(record, settings) {
+        Log.trace("Enter - DBCUpdaterEntryPoint.checkDoubleRecord");
         try {
-            DefaultDoubleRecordHandler.checkAndSendMails( DanMarc2Converter.convertToDanMarc2( JSON.parse( record ) ), settings );
-        }
-        finally {
-            Log.trace( "Exit - DBCUpdaterEntryPoint.checkDoubleRecord" );
+            DefaultDoubleRecordHandler.checkAndSendMails(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
+        } finally {
+            Log.trace("Exit - DBCUpdaterEntryPoint.checkDoubleRecord");
         }
     }
 
-    function __createClassificationInstance ( currentRecord, newRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.__createClassificationInstance" );
-
+    function checkDoubleRecordFrontend(record, settings) {
+        Log.trace("Enter - DBCUpdaterEntryPoint.checkDoubleRecordFrontend");
         try {
-            var instance;
-
-            instance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-
-            return instance;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.__createClassificationInstance" );
+            return DefaultDoubleRecordHandler.checkDoubleRecordFrontend(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
+        } finally {
+            Log.trace("Exit - DBCUpdaterEntryPoint.checkDoubleRecordFrontend");
         }
     }
 
-    function __createEnrichmentRecordHandlerInstance ( currentCommonRecord, updatingCommonRecord ) {
-        Log.trace( "Enter - FBSUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance" );
+    function __createClassificationInstance(currentRecord, newRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.__createClassificationInstance");
+        try {
+            return FBSClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.__createClassificationInstance");
+        }
+    }
 
+    function __createEnrichmentRecordHandlerInstance(currentCommonRecord, updatingCommonRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance");
         var instance;
         try {
-            Log.trace( "Create instance with FBSClassificationData" );
-            var classificationsInstance = FBSClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
-            instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, FBSClassificationData );
-
+            Log.trace("Create instance with FBSClassificationData");
+            var classificationsInstance = FBSClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
+            instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, FBSClassificationData);
             return instance;
-        }
-        finally {
-            Log.trace( "Exit - FBSUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance() " + instance );
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance() " + instance);
         }
     }
 
@@ -287,7 +251,7 @@ var FBSUpdaterEntryPoint = function () {
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
         'recordDataForRawRepo': recordDataForRawRepo,
-        'checkDoubleRecord': checkDoubleRecord
+        'checkDoubleRecord': checkDoubleRecord,
+        'checkDoubleRecordFrontend': checkDoubleRecordFrontend
     };
-
 }();

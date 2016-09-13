@@ -1,20 +1,17 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "Marc" );
-use( "RawRepoClient" );
-use( "RecordSorter" );
+use("Log");
+use("Marc");
+use("RawRepoClient");
+use("RecordSorter");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'RecordUtil' ];
+EXPORTED_SYMBOLS = ['RecordUtil'];
 
-//-----------------------------------------------------------------------------
 /**
  * Utility functions that operates on a Field
  *
  * @namespace
  * @name BasisSplitter
  */
-var RecordUtil = function() {
+var RecordUtil = function () {
     /**
      * Adds or replaces a subfield with a given value.
      * <p/>
@@ -31,22 +28,20 @@ var RecordUtil = function() {
      *
      * @name RecordUtil#addOrReplaceSubfield
      */
-    function addOrReplaceSubfield( record, fieldName, subfieldName, value ) {
-        Log.trace( "Enter - RecordUtil.addOrReplaceSubfield" );
+    function addOrReplaceSubfield(record, fieldName, subfieldName, value) {
+        Log.trace("Enter - RecordUtil.addOrReplaceSubfield");
         try {
-            if( record.existField( new RegExp( fieldName ) ) ) {
-                record.field( fieldName ).append( subfieldName, value, true );
+            if (record.existField(new RegExp(fieldName))) {
+                record.field(fieldName).append(subfieldName, value, true);
                 return record;
-            }
-            else {
-                var field = new Field( fieldName, "00" );
-                field.append( subfieldName, value );
+            } else {
+                var field = new Field(fieldName, "00");
+                field.append(subfieldName, value);
 
-                return RecordSorter.insertField( record, field );
+                return RecordSorter.insertField(record, field);
             }
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.addOrReplaceSubfield" );
+        } finally {
+            Log.trace("Exit - RecordUtil.addOrReplaceSubfield");
         }
     }
 
@@ -57,16 +52,13 @@ var RecordUtil = function() {
      * @returns {String} The current ajustment time.
      */
     function currentAjustmentDate() {
-        Log.trace( "Enter - RecordUtil.currentAjustmentDate" );
-
+        Log.trace("Enter - RecordUtil.currentAjustmentDate");
         try {
             var curDate = new Date();
-            var ajustmentDateStr = StringUtil.sprintf( "%4s%2s%2s",
-                curDate.getFullYear(), curDate.getMonth() + 1, curDate.getDate() );
-            return __replaceAll( ajustmentDateStr, " ", "0" );
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.currentAjustmentDate" );
+            var ajustmentDateStr = StringUtil.sprintf("%4s%2s%2s", curDate.getFullYear(), curDate.getMonth() + 1, curDate.getDate());
+            return __replaceAll(ajustmentDateStr, " ", "0");
+        } finally {
+            Log.trace("Exit - RecordUtil.currentAjustmentDate");
         }
     }
 
@@ -77,17 +69,13 @@ var RecordUtil = function() {
      * @returns {String} The current ajustment time.
      */
     function currentAjustmentTime() {
-        Log.trace( "Enter - RecordUtil.currentAjustmentTime" );
-
+        Log.trace("Enter - RecordUtil.currentAjustmentTime");
         try {
             var curDate = new Date();
-            var ajustmentTimeStr = StringUtil.sprintf( "%4s%2s%2s%2s%2s%2s",
-                            curDate.getFullYear(), curDate.getMonth() + 1, curDate.getDate(),
-                            curDate.getHours(), curDate.getMinutes(), curDate.getSeconds() );
-            return __replaceAll( ajustmentTimeStr, " ", "0" );
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.currentAjustmentTime" );
+            var ajustmentTimeStr = StringUtil.sprintf("%4s%2s%2s%2s%2s%2s", curDate.getFullYear(), curDate.getMonth() + 1, curDate.getDate(), curDate.getHours(), curDate.getMinutes(), curDate.getSeconds());
+            return __replaceAll(ajustmentTimeStr, " ", "0");
+        } finally {
+            Log.trace("Exit - RecordUtil.currentAjustmentTime");
         }
     }
 
@@ -100,20 +88,17 @@ var RecordUtil = function() {
      *
      * @name RecordUtil#createFromString
      */
-    function createFromString( s ) {
-        Log.trace( "Enter - RecordUtil.createFromString" );
-
+    function createFromString(s) {
+        Log.trace("Enter - RecordUtil.createFromString");
         try {
             var record = new Record();
-            if( s !== "" ) {
+            if (s !== "") {
                 record.fromString(s);
                 Log.trace("record created from <" + s + ">");
             }
-
             return record;
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.createFromString" );
+        } finally {
+            Log.trace("Exit - RecordUtil.createFromString");
         }
     }
 
@@ -126,93 +111,136 @@ var RecordUtil = function() {
      *
      * @name RecordUtil#createFieldFromString
      */
-    function createFieldFromString( s ) {
-        Log.trace( "Enter - RecordUtil.createFieldFromString" );
-
+    function createFieldFromString(s) {
+        Log.trace("Enter - RecordUtil.createFieldFromString");
         try {
-            return createFromString( s ).field( 0 );
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.createFieldFromString" );
+            return createFromString(s).field(0);
+        } finally {
+            Log.trace("Exit - RecordUtil.createFieldFromString");
         }
     }
 
-    function equalIds( rec1, rec2 ) {
-        Log.trace( "Enter - RecordUtil.equalIds" );
-
+    function equalIds(rec1, rec2) {
+        Log.trace("Enter - RecordUtil.equalIds");
         try {
-            return rec1.getValue( /001/, /a/ ) === rec2.getValue( /001/, /a/ ) &&
-                   rec1.getValue( /001/, /b/ ) === rec2.getValue( /001/, /b/ );
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.equalIds" );
+            return rec1.getValue(/001/, /a/) === rec2.getValue(/001/, /a/) && rec1.getValue(/001/, /b/) === rec2.getValue(/001/, /b/);
+        } finally {
+            Log.trace("Exit - RecordUtil.equalIds");
         }
     }
 
-    function isChangedFromVolumeToSingle( oldRecord, newRecord ) {
-        Log.trace( "Enter - RecordUtil.isChangedFromVolumeToSingle()" );
-
+    function isChangedFromVolumeToSingle(oldRecord, newRecord) {
+        Log.trace("Enter - RecordUtil.isChangedFromVolumeToSingle()");
         try {
             var result;
-
-            Log.debug( "New Record: " + newRecord.toString() );
-            if( newRecord.matchValue( /004/, /a/, /e/ ) ) {
-                if( oldRecord !== undefined ) {
-                    Log.debug( "oldRecord: " + oldRecord.toString() );
+            Log.debug("New Record: " + newRecord.toString());
+            if (newRecord.matchValue(/004/, /a/, /e/)) {
+                if (oldRecord !== undefined) {
+                    Log.debug("oldRecord: " + oldRecord.toString());
                     return result = oldRecord.matchValue(/004/, /a/, /b/);
                 }
             }
-
             return result = false;
-        }
-        finally {
-            Log.trace( "Exit - RecordUtil.isChangedFromVolumeToSingle(): " + result );
-        }
-    }
-
-    function fetchCurrentRecord( record ) {
-        Log.info( "Enter - RecordUtil.__fetchParentRecord()" );
-
-        var result = undefined;
-        try {
-            Log.debug( "Record: " + record );
-
-            var recId = record.getValue( /001/, /a/ );
-            var libNo = record.getValue( /001/, /b/ );
-
-            return result = fetchRecord( recId, libNo );
-        }
-        finally {
-            Log.trace( "Enter - RecordUtil.__fetchParentRecord(): " + result );
+        } finally {
+            Log.trace("Exit - RecordUtil.isChangedFromVolumeToSingle(): " + result);
         }
     }
 
-    function fetchRecord( recId, libNo ) {
-        Log.info( "Enter - RecordUtil.__fetchRecord()" );
-
+    function fetchCurrentRecord(record) {
+        Log.info("Enter - RecordUtil.__fetchParentRecord()");
         var result = undefined;
         try {
-            if( RawRepoClient.recordExists( recId, libNo ) ) {
-                result = RawRepoClient.fetchRecord( recId, libNo );
+            Log.debug("Record: " + record);
+            var recId = record.getValue(/001/, /a/);
+            var libNo = record.getValue(/001/, /b/);
+            return result = fetchRecord(recId, libNo);
+        } finally {
+            Log.trace("Enter - RecordUtil.__fetchParentRecord(): " + result);
+        }
+    }
+
+    function fetchRecord(recId, libNo) {
+        Log.info("Enter - RecordUtil.__fetchRecord()");
+        var result = undefined;
+        try {
+            if (RawRepoClient.recordExists(recId, libNo)) {
+                result = RawRepoClient.fetchRecord(recId, libNo);
             }
-
             return result;
-        }
-        finally {
-            Log.trace( "Enter - RecordUtil.__fetchRecord(): " + result );
+        } finally {
+            Log.trace("Enter - RecordUtil.__fetchRecord(): " + result);
         }
     }
 
-    //-----------------------------------------------------------------------------
-    //                  Helper functions
-    //-----------------------------------------------------------------------------
-
-    function __escapeRegExp( string ) {
+    function __escapeRegExp(string) {
         return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
     }
 
-    function __replaceAll( string, find, replace ) {
+    function __replaceAll(string, find, replace) {
         return string.replace(new RegExp(__escapeRegExp(find), 'g'), replace);
+    }
+
+    function getRecordPid(record) {
+        if (record === undefined) {
+            return undefined;
+        }
+        if (record instanceof Record) {
+            return __getRecordPid(record)
+        } else {
+            return __getObjectPid(record)
+        }
+    }
+
+    function __getRecordPid(record) {
+        var recordId = record.getValue(/001/, /a/);
+        var agencyId = record.getValue(/001/, /b/);
+        return __combinePid(recordId, agencyId);
+    }
+
+    function __getObjectPid(record) {
+        var recordId = __getObjectSubfieldValue(record, "001", "a");
+        var agencyId = __getObjectSubfieldValue(record, "001", "b");
+        return __combinePid(recordId, agencyId);
+    }
+
+    function __getObjectSubfieldValue(record, field, subfield) {
+        var res = undefined;
+        var foundField = false;
+        var foundSubfield = false;
+        if (record === undefined || record.fields === undefined) {
+            return undefined;
+        }
+        for (var i = 0; i < record.fields.length && !foundField; i++) {
+            if (record.fields[i].name === field) {
+                if (record.fields[i].subfields !== undefined) {
+                    for (var j = 0; j < record.fields[i].subfields.length && !foundSubfield; j++) {
+                        if (record.fields[i].subfields[j].name === subfield) {
+                            res = record.fields[i].subfields[j].value;
+                            foundSubfield = true;
+                        }
+                    }
+                }
+                foundField = true;
+            }
+        }
+        return res;
+    }
+
+    function __combinePid(recordId, agencyId) {
+        var res = undefined;
+        var rId = "na";
+        if (recordId !== undefined && recordId !== "") {
+            rId = recordId;
+        }
+        var aId = "na";
+        if (agencyId !== undefined && agencyId !== "") {
+            aId = agencyId;
+        }
+        var tmpRes = rId + ":" + aId;
+        if (tmpRes !== "na:na") {
+            res = tmpRes;
+        }
+        return res;
     }
 
     return {
@@ -224,7 +252,7 @@ var RecordUtil = function() {
         'equalIds': equalIds,
         'isChangedFromVolumeToSingle': isChangedFromVolumeToSingle,
         'fetchCurrentRecord': fetchCurrentRecord,
-        'fetchRecord': fetchRecord
+        'fetchRecord': fetchRecord,
+        'getRecordPid': getRecordPid
     }
-
 }();

@@ -17,7 +17,9 @@
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-main-dbc-enrichment.marc",
@@ -31,9 +33,18 @@
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "message",
+                                    "value": "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
+                                },
+                                {
+                                    "value": "93628551:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -43,7 +54,9 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": false,
-                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "rawrepo-main-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-main-dbc-enrichment.marc",

@@ -1,7 +1,10 @@
 [
     {
         "name": "fbs-new-notes-to-common-record",
-        "bugs": [ "18331", "18345" ],
+        "bugs": [
+            "18331",
+            "18345"
+        ],
         "description": "Tester tilføjelse af noter/emneord til fællesskabspost",
         "request": {
             "authentication": {
@@ -18,7 +21,9 @@
                     "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
@@ -37,7 +42,9 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "result-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "result-dbc-enrichment.marc",

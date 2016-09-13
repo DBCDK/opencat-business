@@ -1,0 +1,41 @@
+[
+    {
+        "name": "fbs-match-double-record-frontend",
+        "description": "Match af dobbeltpost frontend, uden force",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [
+                    {
+                        "type": "DOUBLE_RECORD",
+                        "params": {
+                            "param": [
+                                {
+                                    "value": "Double records for record {5 158 076 1:870970}: 3 158 076 1",
+                                    "key": "message"
+                                },
+                                {
+                                    "value": "5 158 076 1:870970",
+                                    "key": "pid"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    }
+]

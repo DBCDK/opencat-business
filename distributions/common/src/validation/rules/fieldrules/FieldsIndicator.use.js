@@ -1,17 +1,15 @@
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FieldsIndicator'];
-//-----------------------------------------------------------------------------
 
 var FieldsIndicator = function () {
     var BUNDLE_NAME = "validation";
+
     /**
      * fieldsIndicator checks whether an indicate has the value corresponding to the value given in params
      *
@@ -23,39 +21,35 @@ var FieldsIndicator = function () {
      * @name FieldsIndicator.validateField
      * @method
      */
-    function validateField( record, field, params, settings ) {
-        Log.trace( "Enter - FieldsIndicator.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
-
+    function validateField(record, field, params, settings) {
+        Log.trace("Enter - FieldsIndicator.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )");
         var result = [];
         try {
             ValueCheck.check("params.indicator", params.indicator);
-            if( typeof( params.indicator ) === "string" ) {
+            if (typeof( params.indicator ) === "string") {
                 if (field.indicator === params.indicator) {
                     return result;
                 }
-
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-                var errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.string.error", field.indicator, params.indicator );
-                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.string.error", field.indicator, params.indicator);
+                var error = ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record));
                 return result = [error];
-            }
-            else {
-                if( params.indicator.indexOf( field.indicator ) > -1 ) {
+            } else {
+                if (params.indicator.indexOf(field.indicator) > -1) {
                     return result = [];
                 }
-
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-                var errorMessage = ResourceBundle.getStringFormat( bundle, "field.indicator.array.error", field.indicator, params.indicator.join( ", " ) );
-                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.array.error", field.indicator, params.indicator.join(", "));
+                var error = ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record));
                 return result = [error];
             }
-        }
-        finally {
-            Log.trace( "Exit - FieldsIndicator.validateField(): ", result );
+        } finally {
+            Log.trace("Exit - FieldsIndicator.validateField(): ", result);
         }
     }
+
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateField' : validateField
+        'validateField': validateField
     };
 }();

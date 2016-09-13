@@ -1,12 +1,9 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
+use("Log");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'OpenAgencyClientCore' ];
+EXPORTED_SYMBOLS = ['OpenAgencyClientCore'];
 
-//-----------------------------------------------------------------------------
-var OpenAgencyClientCore = function() {
-    var JNDI_NAME = "java:global/updateservice-1.0-SNAPSHOT/OpenAgencyService";
+var OpenAgencyClientCore = function () {
+    var JNDI_NAME = "java:global/updateservice-2.0-SNAPSHOT/OpenAgencyService";
 
     var features = {
         create_enrichments: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.CREATE_ENRICHMENTS,
@@ -19,20 +16,16 @@ var OpenAgencyClientCore = function() {
         auth_root: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.AUTH_ROOT
     };
 
-    function hasFeature( agencyId, featureName ) {
-        Log.trace( "Enter - OpenAgencyClientCore.hasFeature()" );
-
+    function hasFeature(agencyId, featureName) {
+        Log.trace("Enter - OpenAgencyClientCore.hasFeature()");
         var result;
         try {
             var context = new Packages.javax.naming.InitialContext();
-            var serviceProvider = context.lookup( JNDI_NAME );
-
-            return result = serviceProvider.hasFeature( agencyId, features[ featureName ] );
+            var serviceProvider = context.lookup(JNDI_NAME);
+            return result = serviceProvider.hasFeature(agencyId, features[featureName]);
+        } finally {
+            Log.trace("Exit - OpenAgencyClientCore.hasFeature(): " + result);
         }
-        finally {
-            Log.trace( "Exit - OpenAgencyClientCore.hasFeature(): " + result );
-        }
-
     }
 
     return {

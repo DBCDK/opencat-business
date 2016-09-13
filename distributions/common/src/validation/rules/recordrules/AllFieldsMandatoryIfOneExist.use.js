@@ -1,15 +1,15 @@
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "TemplateUrl" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
-use( "ValidationUtil" );
+use("Exception");
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("TemplateUrl");
+use("ValidateErrors");
+use("ValueCheck");
+use("ValidationUtil");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['AllFieldsMandatoryIfOneExist'];
-//-----------------------------------------------------------------------------
+
 var AllFieldsMandatoryIfOneExist = function () {
     var BUNDLE_NAME = "validation";
 
@@ -24,38 +24,38 @@ var AllFieldsMandatoryIfOneExist = function () {
      * @name RecordRules.allFieldsMandatoryIfOneExist
      * @method
      */
-    function validateRecord ( record, params ) {
-        Log.trace( "Enter - RecordRules.allFieldsMandatoryIfOneExist( ", record, ", ", params, " )" );
+    function validateRecord(record, params) {
+        Log.trace("Enter - RecordRules.allFieldsMandatoryIfOneExist( ", record, ", ", params, " )");
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
-            ValueCheck.checkThat( "params", params ).type( "object" );
-            ValueCheck.check( "params.fields", params.fields ).instanceOf( Array );
+            ValueCheck.checkThat("params", params).type("object");
+            ValueCheck.check("params.fields", params.fields).instanceOf(Array);
 
             var totalFieldsFound = 0;
             var foundFields = [];
             var totalFieldsToCheckFor = params.fields.length;
-            var fieldAsKeys = ValidationUtil.getFieldNamesAsKeys( record );
+            var fieldAsKeys = ValidationUtil.getFieldNamesAsKeys(record);
 
-            for ( var i = 0; i < totalFieldsToCheckFor; ++i ) {
+            for (var i = 0; i < totalFieldsToCheckFor; ++i) {
                 var fieldName = params.fields[i];
-                if ( fieldAsKeys.hasOwnProperty( fieldName ) ) {
+                if (fieldAsKeys.hasOwnProperty(fieldName)) {
                     totalFieldsFound += 1;
                 } else {
-                    foundFields.push( fieldName );
+                    foundFields.push(fieldName);
                 }
             }
-            if ( totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor ) {
-                foundFields.forEach( function ( f ) {
-                    var message = ResourceBundle.getStringFormat( bundle, "field.mandatory.error", f );
-                    result.push( ValidateErrors.recordError( "TODO:fixurl", message ) );
-                } );
+            if (totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor) {
+                foundFields.forEach(function (f) {
+                    var message = ResourceBundle.getStringFormat(bundle, "field.mandatory.error", f);
+                    result.push(ValidateErrors.recordError("TODO:fixurl", message, RecordUtil.getRecordPid(record)));
+                });
             }
             return result;
         } finally {
-            Log.trace( "Exit - RecordRules.allFieldsMandatoryIfOneExist(): ", result );
+            Log.trace("Exit - RecordRules.allFieldsMandatoryIfOneExist(): ", result);
         }
     }
 

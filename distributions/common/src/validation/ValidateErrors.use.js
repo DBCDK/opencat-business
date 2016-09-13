@@ -20,15 +20,9 @@ var ValidateErrors = function () {
      *
      * @return A json with the error type for a record error.
      */
-    that.recordError = function (url, message) {
-        return {
-            type: "ERROR",
-            params: {
-                url: url,
-                message: message
-            }
-        };
-    };
+    function recordError(url, message, pid) {
+        return __error(url, message, pid);
+    }
 
     /**
      * Creates a validate error for an generel field error.
@@ -38,15 +32,9 @@ var ValidateErrors = function () {
      *
      * @return A json with the error type for a field error.
      */
-    that.fieldError = function (url, message) {
-        return {
-            type: "ERROR",
-            params: {
-                url: url,
-                message: message
-            }
-        };
-    };
+    function fieldError(url, message, pid) {
+        return __error(url, message, pid);
+    }
 
     /**
      * Creates a validate error for an generel subfield error.
@@ -56,44 +44,211 @@ var ValidateErrors = function () {
      *
      * @return A json with the error type for a field error.
      */
-    that.subfieldError = function (url, message) {
+    function subfieldError(url, message, pid) {
+        return __error(url, message, pid);
+    }
+
+    function __error(url, message, pid) {
+        if (url === undefined) {
+            if (pid === undefined) {
+                return __errorWoUrl(message);
+            } else {
+                return __errorWoUrlWPid(message, pid);
+            }
+        } else {
+            if (pid === undefined) {
+                return __errorWUrl(url, message);
+            } else {
+                return __errorWUrlWPid(url, message, pid);
+            }
+        }
+    }
+
+    function __errorWUrl(url, message) {
         return {
             type: "ERROR",
             params: {
-                url: url,
-                message: message
+                param: [
+                    {
+                        key: "message",
+                        value: message
+                    },
+                    {
+                        key: "url",
+                        value: url
+                    }
+                ]
             }
         };
+    }
+
+    function __errorWUrlWPid(url, message, pid) {
+        return {
+            type: "ERROR",
+            params: {
+                param: [
+                    {
+                        key: "message",
+                        value: message
+                    },
+                    {
+                        key: "url",
+                        value: url
+                    },
+                    {
+                        key: "pid",
+                        value: pid
+                    }
+                ]
+            }
+        };
+    }
+
+    function __errorWoUrl(message) {
+        return {
+            type: "ERROR",
+            params: {
+                param: [
+                    {
+                        key: "message",
+                        value: message
+                    }
+                ]
+            }
+        };
+    }
+
+    function __errorWoUrlWPid(message,pid) {
+        return {
+            type: "ERROR",
+            params: {
+                param: [
+                    {
+                        key: "message",
+                        value: message
+                    },
+                    {
+                        key: "pid",
+                        value: pid
+                    }
+                ]
+            }
+        };
+    }
+
+    return {
+        'recordError': recordError,
+        'fieldError': fieldError,
+        'subfieldError': subfieldError
     };
-    return that;
 }();
 
 UnitTest.addFixture("Test ValidateErrors.recordError", function () {
     Assert.equalValue("ValidateErrors.recordError", {
         type: "ERROR",
         params: {
-            url: "url",
-            message: "message"
+            param: [
+                {
+                    key: "message",
+                    value: "message"
+                },
+                {
+                    key: "url",
+                    value: "url"
+                }
+            ]
         }
     }, ValidateErrors.recordError("url", "message"));
+
+    Assert.equalValue("ValidateErrors.recordError wPid", {
+        type: "ERROR",
+        params: {
+            param: [
+                {
+                    key: "message",
+                    value: "message"
+                },
+                {
+                    key: "url",
+                    value: "url"
+                },
+                {
+                    key: "pid",
+                    value: "pid"
+                }
+            ]
+        }
+    }, ValidateErrors.recordError("url", "message", "pid"));
 
     Assert.equalValue("ValidateErrors.fieldError", {
         type: "ERROR",
         params: {
-            url: "url",
-            message: "message"
+            param: [
+                {
+                    key: "message",
+                    value: "message"
+                },
+                {
+                    key: "url",
+                    value: "url"
+                }
+            ]
         }
     }, ValidateErrors.fieldError("url", "message"));
+
+    Assert.equalValue("ValidateErrors.fieldError wPid", {
+        type: "ERROR",
+        params: {
+            param: [
+                {
+                    key: "message",
+                    value: "message"
+                },
+                {
+                    key: "url",
+                    value: "url"
+                },
+                {
+                    key: "pid",
+                    value: "pid"
+                }
+            ]
+        }
+    }, ValidateErrors.fieldError("url", "message", "pid"));
 
     Assert.equalValue("ValidateErrors.subfieldError", {
         type: "ERROR",
         params: {
-            url: "url",
-            message: "message"
+            param: [
+                {
+                    key: "message",
+                    value: "message"
+                },
+                {
+                    key: "url",
+                    value: "url"
+                }
+            ]
         }
     }, ValidateErrors.subfieldError("url", "message"));
+
+    Assert.equalValue("ValidateErrors.subfieldError wPid", {
+        type: "ERROR",
+        params: {
+            param: [
+                {
+                    key: "message",
+                    value: "message"
+                },
+                {
+                    key: "url",
+                    value: "url"
+                },
+                {
+                    key: "pid",
+                    value: "pid"
+                }
+            ]
+        }
+    }, ValidateErrors.subfieldError("url", "message", "pid"));
 });
-
-// TODO: test fieldError
-
-// TODO: test subfieldError

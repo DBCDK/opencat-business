@@ -4,17 +4,17 @@
  */
 
 //-----------------------------------------------------------------------------
-use( "DanMarc2Converter" );
-use( "GenericSettings" );
-use( "RecordUtil" );
-use( "ResourceBundle" );
-use( "SafeAssert" );
-use( "SubfieldCannotContainValue" );
-use( "UnitTest" );
+use("DanMarc2Converter");
+use("GenericSettings");
+use("RecordUtil");
+use("ResourceBundle");
+use("SafeAssert");
+use("SubfieldCannotContainValue");
+use("UnitTest");
 //-----------------------------------------------------------------------------
 
-UnitTest.addFixture( "SubfieldCannotContainValue.validateSubfield", function() {
-    Log.trace( "Enter - TestFixture: SubfieldCannotContainValue.validateSubfield");
+UnitTest.addFixture("SubfieldCannotContainValue.validateSubfield", function () {
+    Log.trace("Enter - TestFixture: SubfieldCannotContainValue.validateSubfield");
 
     try {
         var bundle = ResourceBundleFactory.getBundle(SubfieldCannotContainValue.__BUNDLE_NAME);
@@ -31,8 +31,16 @@ UnitTest.addFixture( "SubfieldCannotContainValue.validateSubfield", function() {
         var errorMsg = [{
             type: "ERROR",
             params: {
-                url: "TODO:fixurl",
-                message: ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", "c", "42")
+                param: [{
+                    key: "message",
+                    value: ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", "c", "42")
+                }, {
+                    key: "url",
+                    value: "TODO:fixurl"
+                }, {
+                    key: "pid",
+                    value: "50984508:710100"
+                }]
             }
         }];
 
@@ -61,9 +69,9 @@ UnitTest.addFixture( "SubfieldCannotContainValue.validateSubfield", function() {
         SafeAssert.equal("8. subfieldCannotContainValue meet condition", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);
 
         params = {values: ["42", "x"], notcondition: {subfield: "001b", value: "870970"}};
-        SafeAssert.equal("9. subfieldCannotContainValue does not meet condition", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg );
+        SafeAssert.equal("9. subfieldCannotContainValue does not meet condition", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), errorMsg);
     }
     finally {
-        Log.trace( "Exit - TestFixture: SubfieldCannotContainValue.validateSubfield");
+        Log.trace("Exit - TestFixture: SubfieldCannotContainValue.validateSubfield");
     }
 });

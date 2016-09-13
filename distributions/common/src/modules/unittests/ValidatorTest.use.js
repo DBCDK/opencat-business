@@ -1,16 +1,15 @@
-//-----------------------------------------------------------------------------
 /**
- * This file contains unittests for the Validator module.  
+ * This file contains unittests for the Validator module.
  */
 
-//-----------------------------------------------------------------------------
-use( "GenericSettings" );
-use( "Log" );
-use( "UnitTest" );
-use( "Validator" );
+use("GenericSettings");
+use("Log");
+use("RecordUtil");
+use("UnitTest");
+use("Validator");
 
-//-----------------------------------------------------------------------------
-UnitTest.addFixture( "Validator.validateRecord (Full test)", function() {
+UnitTest.addFixture("Validator.validateRecord (Full test)", function () {
+    // TODO: Ehh what???
     return;
     var record = {
         fields: [
@@ -39,7 +38,7 @@ UnitTest.addFixture( "Validator.validateRecord (Full test)", function() {
                         value: "d"
                     }
                 ]
-            }, 
+            },
             {
                 name: "004",
                 indicator: "00",
@@ -53,36 +52,38 @@ UnitTest.addFixture( "Validator.validateRecord (Full test)", function() {
                         value: "n"
                     }
                 ]
-            } 
+            }
         ]
     };
-    
-    var tempAsString = readFile( "templates/bog.json" );
-    var template = TemplateOptimizer.optimize( JSON.parse( tempAsString ) );
 
-    Assert.equalValue( "", template.fields[ "001" ].rules.length, 1 ); 
-    Assert.equalValue( "", Validator.validateRecord( record, function() { return template; }, GenericSettings ), [] ); 
-} );
+    var tempAsString = readFile("templates/bog.json");
+    var template = TemplateOptimizer.optimize(JSON.parse(tempAsString));
 
-UnitTest.addFixture( "Validator.validateRecord", function() {
+    Assert.equalValue("", template.fields["001"].rules.length, 1);
+    Assert.equalValue("", Validator.validateRecord(record, function () {
+        return template;
+    }, GenericSettings), []);
+});
+
+UnitTest.addFixture("Validator.validateRecord", function () {
     var record = {
-        fields: [ 
+        fields: [
             {
                 name: "001",
                 indicator: "00",
-                subfields: [ 
+                subfields: [
                     {
                         name: "a",
                         value: "1 234 567 8"
-                    } 
+                    }
                 ]
-            } 
+            }
         ]
     };
 
     var template = {
         fields: {
-            "001": { 
+            "001": {
                 subfields: {
                     "a": {}
                 }
@@ -90,26 +91,9 @@ UnitTest.addFixture( "Validator.validateRecord", function() {
         },
         rules: []
     };
-    Assert.equalValue( "Full record with no errors", Validator.validateRecord( record, function() { return template; }, GenericSettings ), [] );    
-
-    template = {
-        fields: {
-            "001": { 
-                subfields: {
-                    "a": {}
-                }                
-            }
-        },
-        rules: [
-            {
-                type: function( record, params ) {
-                    return [ ValidateErrors.subfieldError( "url", "message" ) ];
-                }
-            }
-        ]
-    };
-    Assert.equalValue( "Validate record with error", Validator.validateRecord( record, function() { return template; }, GenericSettings ),
-                                                    [ ValidateErrors.subfieldError( "url", "message" ) ] );
+    Assert.equalValue("Full record with no errors", Validator.validateRecord(record, function () {
+        return template;
+    }, GenericSettings), []);
 
     template = {
         fields: {
@@ -121,47 +105,72 @@ UnitTest.addFixture( "Validator.validateRecord", function() {
         },
         rules: [
             {
-                type: function( record, params ) {
-                    return [ ValidateErrors.subfieldError( "url", "message" ) ];
+                type: function (record, params) {
+                    return [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))];
+                }
+            }
+        ]
+    };
+    Assert.equalValue("Validate record with error", Validator.validateRecord(record, function () {
+            return template;
+        }, GenericSettings),
+        [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))]);
+
+    template = {
+        fields: {
+            "001": {
+                subfields: {
+                    "a": {}
+                }
+            }
+        },
+        rules: [
+            {
+                type: function (record, params) {
+                    return [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))];
                 },
                 errorType: "WARNING"
             }
         ]
     };
 
-    var valWarning = ValidateErrors.subfieldError( "url", "message" );
+    var valWarning = ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record));
     valWarning.type = "WARNING";
-    Assert.equalValue( "Validate record with warnings",
-                       Validator.validateRecord( record, function() { return template; }, GenericSettings ),
-                       [ valWarning ] );
-} );
+    Assert.equalValue("Validate record with warnings",
+        Validator.validateRecord(record, function () {
+            return template;
+        }, GenericSettings),
+        [valWarning]);
+});
 
 //-----------------------------------------------------------------------------
-UnitTest.addFixture( "Validator.validateField", function() {
-    var bundle = ResourceBundleFactory.getBundle( Validator.BUNDLE_NAME );
+UnitTest.addFixture("Validator.validateField", function () {
+    var bundle = ResourceBundleFactory.getBundle(Validator.BUNDLE_NAME);
 
     var record = {
-        fields: [ 
+        fields: [
             {
                 name: "001",
                 indicator: "00",
-                subfields: [ 
+                subfields: [
                     {
                         name: "a",
                         value: "1 234 567 8"
-                    } 
+                    }
                 ]
-            } 
+            }
         ]
     };
-    var template = { fields: {}, rules: [] };
+    var template = {fields: {}, rules: []};
 
-    Assert.equalValue( "Test 1", Validator.validateField( record, record.fields[ 0 ], function() { return template; }, GenericSettings ),
-                                                       [ ValidateErrors.fieldError( "", ResourceBundle.getStringFormat( bundle, "wrong.field", "001" ) ) ] );
+    Assert.equalValue("Test 1", Validator.validateField(record, record.fields[0], function () {
+            return template;
+        }, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", "001"), RecordUtil.getRecordPid(record))]);
 
     template = {
         fields: {
-            "001": { 
+            "001": {
                 subfields: {
                     "a": {}
                 }
@@ -169,7 +178,9 @@ UnitTest.addFixture( "Validator.validateField", function() {
         },
         rules: []
     };
-    Assert.equalValue( "Test 2", Validator.validateField( record, record.fields[ 0 ], function() { return template; }, GenericSettings ), [] );    
+    Assert.equalValue("Test 2", Validator.validateField(record, record.fields[0], function () {
+        return template;
+    }, GenericSettings), []);
 
     template = {
         fields: {
@@ -180,51 +191,55 @@ UnitTest.addFixture( "Validator.validateField", function() {
                 },
                 rules: [
                     {
-                        type: function( record, field, params ) {
-                            return [ ValidateErrors.subfieldError( "url", "message" ) ];
+                        type: function (record, field, params) {
+                            return [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))];
                         }
                     }
                 ]
-                
+
             }
         },
         rules: []
     };
-    Assert.equalValue( "Test 3", Validator.validateField( record, record.fields[ 0 ], function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.subfieldError( "url", "message" ) ] );    
-} );
+    Assert.equalValue("Test 3", Validator.validateField(record, record.fields[0], function () {
+            return template;
+        }, GenericSettings),
+        [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))]);
+});
 
 //-----------------------------------------------------------------------------
-UnitTest.addFixture( "Validator.validateSubfield", function() {
-    var bundle = ResourceBundleFactory.getBundle( Validator.BUNDLE_NAME );
+UnitTest.addFixture("Validator.validateSubfield", function () {
+    var bundle = ResourceBundleFactory.getBundle(Validator.BUNDLE_NAME);
 
     var record = {
-        fields: [ 
+        fields: [
             {
                 name: "001",
                 indicator: "00",
-                subfields: [ 
+                subfields: [
                     {
                         name: "A",
                         value: "1 234 567 8"
-                    }, 
+                    },
                     {
                         name: "a",
                         value: "1 234 567 8"
-                    } 
+                    }
                 ]
-            } 
+            }
         ]
     };
-    var template = { fields: {}, rules: [] };
-    
-    Assert.equalValue( "Test 1", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 0 ], 
-                                                       function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.fieldError( "", ResourceBundle.getStringFormat( bundle, "wrong.field", "001" ) ) ] );
+    var template = {fields: {}, rules: []};
+
+    Assert.equalValue("Test 1", Validator.validateSubfield(record, record.fields[0], record.fields[0].subfields[0],
+        function () {
+            return template;
+        }, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", "001"), RecordUtil.getRecordPid(record))]);
 
     template = {
         fields: {
-            "001": { 
+            "001": {
                 subfields: {
                     "g": []
                 }
@@ -232,13 +247,15 @@ UnitTest.addFixture( "Validator.validateSubfield", function() {
         },
         rules: []
     };
-    Assert.equalValue( "Test 2", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 1 ], 
-                                                       function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.subfieldError( "", ResourceBundle.getStringFormat( bundle, "wrong.subfield", "a", "001" ) ) ] );
+    Assert.equalValue("Test 2", Validator.validateSubfield(record, record.fields[0], record.fields[0].subfields[1],
+        function () {
+            return template;
+        }, GenericSettings),
+        [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "wrong.subfield", "a", "001"), RecordUtil.getRecordPid(record))]);
 
     template = {
         fields: {
-            "001": { 
+            "001": {
                 subfields: {
                     "a": []
                 }
@@ -246,12 +263,16 @@ UnitTest.addFixture( "Validator.validateSubfield", function() {
         },
         rules: []
     };
-    Assert.equalValue( "Test 3", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 0 ], 
-                                                       function() { return template; }, GenericSettings ), 
-                                                       [] );    
-    Assert.equalValue( "Test 3", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 1 ], 
-                                                       function() { return template; }, GenericSettings ), 
-                                                       [] );    
+    Assert.equalValue("Test 3", Validator.validateSubfield(record, record.fields[0], record.fields[0].subfields[0],
+        function () {
+            return template;
+        }, GenericSettings),
+        []);
+    Assert.equalValue("Test 3", Validator.validateSubfield(record, record.fields[0], record.fields[0].subfields[1],
+        function () {
+            return template;
+        }, GenericSettings),
+        []);
 
     template = {
         fields: {
@@ -259,23 +280,27 @@ UnitTest.addFixture( "Validator.validateSubfield", function() {
                 url: "url",
                 subfields: {
                     "a": [
-                            {
-                                type: function( record, field, subfield, params ) {
-                                    return [ ValidateErrors.subfieldError( "url", "message" ) ];
-                                }
+                        {
+                            type: function (record, field, subfield, params) {
+                                return [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))];
                             }
-                        ]
+                        }
+                    ]
                 }
             }
         },
         rules: []
     };
-    Assert.equalValue( "Test 4", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 0 ], 
-                                                       function() { return template; }, GenericSettings ), [] );    
-    Assert.equalValue( "Test 4", Validator.validateSubfield( record, record.fields[ 0 ], record.fields[ 0 ].subfields[ 1 ], 
-                                                       function() { return template; }, GenericSettings ), 
-                                                       [ ValidateErrors.subfieldError( "url", "message" ) ] );    
-} );
+    Assert.equalValue("Test 4", Validator.validateSubfield(record, record.fields[0], record.fields[0].subfields[0],
+        function () {
+            return template;
+        }, GenericSettings), []);
+    Assert.equalValue("Test 4", Validator.validateSubfield(record, record.fields[0], record.fields[0].subfields[1],
+        function () {
+            return template;
+        }, GenericSettings),
+        [ValidateErrors.subfieldError("url", "message", RecordUtil.getRecordPid(record))]);
+});
 
 UnitTest.addFixture("Validator.validateRecord (bug 20163)", function () {
     var record20163 = {
@@ -494,7 +519,5 @@ UnitTest.addFixture("Validator.validateRecord (Record sorting)", function () {
     Assert.equalValue("ValidatorTest - check validate works", Validator.validateRecord(recordToSort, function () {
         return templateToSort;
     }, GenericSettings), []);
-
     Assert.equalValue("ValidatorTest - check record storting works", recordToSort, recordToSortExpected);
-
 });

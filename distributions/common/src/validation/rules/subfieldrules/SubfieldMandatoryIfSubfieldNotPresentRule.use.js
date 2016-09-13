@@ -1,14 +1,12 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ValueCheck" );
-use( "ValidateErrors" );
-use( "ValidationUtil" );
+use("Log");
+use("RecordUtil");
+use("ValueCheck");
+use("ValidateErrors");
+use("ValidationUtil");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'SubfieldMandatoryIfSubfieldNotPresentRule' ];
+EXPORTED_SYMBOLS = ['SubfieldMandatoryIfSubfieldNotPresentRule'];
 
-//-----------------------------------------------------------------------------
-var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
+var SubfieldMandatoryIfSubfieldNotPresentRule = function () {
     var BUNDLE_NAME = "validation";
 
     /**
@@ -28,47 +26,44 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
      * @name SubfieldMandatoryIfSubfieldNotPresentRule.validateField
      * @method
      */
-    function validateField( record, field, params ) {
-        Log.trace( "Enter - SubfieldMandatoryIfSubfieldNotPresentRule.validateField( record, field, params )" );
-
+    function validateField(record, field, params) {
+        Log.trace("Enter - SubfieldMandatoryIfSubfieldNotPresentRule.validateField( record, field, params )");
         try {
-            Log.trace( "Params = " + uneval( params ) );
-            ValueCheck.checkThat( "params", params ).type( "object" );
-            ValueCheck.check( "params.subfield", params['subfield'] ).type( "string" );
-            ValueCheck.check( "params.not_presented_subfield", params['not_presented_subfield'] ).instanceOf( Array );
+            Log.trace("Params = " + uneval(params));
+            ValueCheck.checkThat("params", params).type("object");
+            ValueCheck.check("params.subfield", params['subfield']).type("string");
+            ValueCheck.check("params.not_presented_subfield", params['not_presented_subfield']).instanceOf(Array);
 
-            var fieldsFromRecord = ValidationUtil.getFields ( record, field.name );
-            if ( __isSubfieldPresentInFields( fieldsFromRecord, params.subfield ) ) {
+            var fieldsFromRecord = ValidationUtil.getFields(record, field.name);
+            if (__isSubfieldPresentInFields(fieldsFromRecord, params.subfield)) {
                 return [];
             }
 
-            params.not_presented_subfield.forEach( function ( fieldSubfield ) {
-                if ( fieldSubfield.length < 4 ) {
-                    Log.debug( "params.not_presented_subfield is not a field/subfield: %s in param %s", fieldSubfield, params.subfields );
-                    throw StringUtil.sprintf( "params.not_presented_subfield is not a field/subfield: %s in param %s", params.not_presented_subfield, params.subfields );
+            params.not_presented_subfield.forEach(function (fieldSubfield) {
+                if (fieldSubfield.length < 4) {
+                    Log.debug("params.not_presented_subfield is not a field/subfield: %s in param %s", fieldSubfield, params.subfields);
+                    throw StringUtil.sprintf("params.not_presented_subfield is not a field/subfield: %s in param %s", params.not_presented_subfield, params.subfields);
                 }
-            } );
+            });
 
-            var foundFieldAndSubfields = __isAnyOfListOfSubfieldsFoundInFieldList( record, params.not_presented_subfield );
-
+            var foundFieldAndSubfields = __isAnyOfListOfSubfieldsFoundInFieldList(record, params.not_presented_subfield);
             var result = [];
-            if ( !foundFieldAndSubfields ) {
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-                var errorMessage = ResourceBundle.getStringFormat( bundle, "mandatory.subfields.rule.error", params.subfield, field.name );
-                result.push( ValidateErrors.fieldError( "TODO:url", errorMessage ) );
+            if (!foundFieldAndSubfields) {
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                var errorMessage = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", params.subfield, field.name);
+                result.push(ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record)));
             }
             return result;
-        }
-        finally {
-            Log.trace( "Exit - SubfieldMandatoryIfSubfieldNotPresentRule.validateField( record, field, params )" );
+        } finally {
+            Log.trace("Exit - SubfieldMandatoryIfSubfieldNotPresentRule.validateField( record, field, params )");
         }
     }
 
     //Helper function, returns true if the subfield is found in list of fields
-    function __isSubfieldPresentInFields( fieldsFromRecord, subfieldName ) {
-        Log.trace ( "SubfieldMandatoryIfSubfieldNotPresentRule.__isSubfieldPresentInFields" );
-        for ( var i = 0; i < fieldsFromRecord.length ; ++i ) {
-            if ( ValidationUtil.doesFieldContainSubfield ( fieldsFromRecord[i], subfieldName ) ) {
+    function __isSubfieldPresentInFields(fieldsFromRecord, subfieldName) {
+        Log.trace("SubfieldMandatoryIfSubfieldNotPresentRule.__isSubfieldPresentInFields");
+        for (var i = 0; i < fieldsFromRecord.length; ++i) {
+            if (ValidationUtil.doesFieldContainSubfield(fieldsFromRecord[i], subfieldName)) {
                 return true;
             }
         }
@@ -76,18 +71,18 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
     }
 
     // Helper function, returns true if any of the subfields of the format ["001a", "002b"] is present in the record
-    function __isAnyOfListOfSubfieldsFoundInFieldList ( record, listOfFieldsAndSubfieldsString ) {
-        Log.trace( "SubfieldMandatoryIfSubfieldNotPresentRule.__getFieldsFromRecord" );
+    function __isAnyOfListOfSubfieldsFoundInFieldList(record, listOfFieldsAndSubfieldsString) {
+        Log.trace("SubfieldMandatoryIfSubfieldNotPresentRule.__getFieldsFromRecord");
         var listOfFieldsAndSubfieldsStringLength = listOfFieldsAndSubfieldsString.length;
-        for ( var i = 0; i < listOfFieldsAndSubfieldsStringLength; ++i ) {
-            var fieldName = listOfFieldsAndSubfieldsString[i].substring( 0, 3 );
-            var subfieldNames = listOfFieldsAndSubfieldsString[i].substring( 3 );
-            var recordFields = ValidationUtil.getFields( record, fieldName );
+        for (var i = 0; i < listOfFieldsAndSubfieldsStringLength; ++i) {
+            var fieldName = listOfFieldsAndSubfieldsString[i].substring(0, 3);
+            var subfieldNames = listOfFieldsAndSubfieldsString[i].substring(3);
+            var recordFields = ValidationUtil.getFields(record, fieldName);
             var recordFieldsLength = recordFields.length;
-            for ( var j = 0; j < recordFieldsLength; ++j ) {
+            for (var j = 0; j < recordFieldsLength; ++j) {
                 var subfieldNamesLength = subfieldNames.length;
-                for ( var i = 0; i < subfieldNamesLength; ++i ) {
-                    if ( ValidationUtil.doesFieldContainSubfield( recordFields[j], subfieldNames.substring( i, 1 ) ) ) {
+                for (var k = 0; k < subfieldNamesLength; ++k) {
+                    if (ValidationUtil.doesFieldContainSubfield(recordFields[j], subfieldNames.substring(k, 1))) {
                         return true
                     }
                 }
@@ -95,10 +90,6 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function() {
         }
         return false;
     }
-
-
-
-
 
     return {
         '__BUNDLE_NAME': BUNDLE_NAME,

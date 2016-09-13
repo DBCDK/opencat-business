@@ -27,7 +27,6 @@ var DBCUpdaterEntryPoint = function () {
      */
     function hasClassificationData(jsonRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.hasClassificationData()");
-
         var result;
         try {
             var instance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
@@ -35,8 +34,7 @@ var DBCUpdaterEntryPoint = function () {
 
             result = ClassificationData.hasClassificationData(instance, marc);
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.hasClassificationData():" + result);
         }
     }
@@ -51,17 +49,14 @@ var DBCUpdaterEntryPoint = function () {
      */
     function hasClassificationsChanged(oldRecord, newRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.hasClassificationsChanged()");
-
         var result;
         try {
             var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
             var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
             var instance = __createClassificationInstance(oldMarc, newMarc);
-
             result = ClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.hasClassificationsChanged(): " + result);
         }
     }
@@ -77,20 +72,16 @@ var DBCUpdaterEntryPoint = function () {
      */
     function shouldCreateEnrichmentRecords(settings, currentCommonRecord, updatingCommonRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords()");
-
         var result;
         try {
             ResourceBundleFactory.init(settings);
             var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
             var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
-
             var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
-
             result = DefaultEnrichmentRecordHandler.shouldCreateRecords(instance, currentCommonMarc, updatingCommonMarc);
             result = JSON.stringify(result);
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.shouldCreateEnrichmentRecords(): " + result);
         }
     }
@@ -106,19 +97,15 @@ var DBCUpdaterEntryPoint = function () {
      */
     function createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId) {
         Log.trace("Enter - DBCUpdaterEntryPoint.createLibraryExtendedRecord()");
-
         var result;
         try {
             var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
             var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
-
             var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
-
             result = DefaultEnrichmentRecordHandler.createRecord(instance, currentCommonMarc, updatingCommonMarc, agencyId);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.createLibraryExtendedRecord(): " + result);
         }
     }
@@ -135,36 +122,29 @@ var DBCUpdaterEntryPoint = function () {
      */
     function updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.updateLibraryExtendedRecord()");
-
         var result;
         try {
             var currentCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentCommonRecord));
             var updatingCommonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(updatingCommonRecord));
             var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
-
             var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
-
             result = DefaultEnrichmentRecordHandler.updateRecord(instance, currentCommonMarc, updatingCommonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.updateLibraryExtendedRecord(): " + result);
         }
     }
 
     function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.correctLibraryExtendedRecord()");
-
         var result;
         try {
             var commonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(commonRecord));
             var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
-
             Log.trace("Create instance with ClassificationData");
             var classificationsInstance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
             var instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, ClassificationData);
-
             result = DefaultEnrichmentRecordHandler.correctRecord(instance, commonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
@@ -183,16 +163,12 @@ var DBCUpdaterEntryPoint = function () {
      */
     function recordDataForRawRepo(record, userId, groupId) {
         Log.trace("Enter - DBCUpdaterEntryPoint.recordDataForRawRepo");
-
         try {
             var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(record));
             Log.trace("Record:\n", uneval(marc));
-
             var instance = DefaultRawRepoRecordHandler.create(DBCAuthenticator);
-
             var records = DefaultRawRepoRecordHandler.recordDataForRawRepo(instance, marc, userId, groupId);
             var result = [];
-
             for (var i = 0; i < records.length; i++) {
                 var curRecord = records[i];
                 var resultRecord = DanMarc2Converter.convertFromDanMarc2(curRecord);
@@ -200,53 +176,41 @@ var DBCUpdaterEntryPoint = function () {
                 Log.debug("Adding resultRecord: ", resultRecordAsJson);
                 result.push(resultRecordAsJson);
             }
-
             var resultAsJson = "[" + result.join(",") + "]";
             Log.debug("Returning: ", resultAsJson);
             return resultAsJson;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.recordDataForRawRepo");
         }
     }
 
     function checkDoubleRecord(record, settings) {
         Log.trace("Enter - DBCUpdaterEntryPoint.checkDoubleRecord");
-
         try {
             DefaultDoubleRecordHandler.checkAndSendMails(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.checkDoubleRecord");
         }
     }
 
     function __createClassificationInstance(currentRecord, newRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.__createClassificationInstance");
-
         try {
-            var instance;
-
-            instance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
-            return instance;
-        }
-        finally {
+            return ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.__createClassificationInstance");
         }
     }
 
     function __createEnrichmentRecordHandlerInstance(currentCommonRecord, updatingCommonRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance");
-
         var instance;
         try {
             Log.trace("Create instance with ClassificationData");
             var classificationsInstance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
             instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, ClassificationData);
-
             return instance;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.__createEnrichmentRecordHandlerInstance(): " + instance);
         }
     }
@@ -261,5 +225,4 @@ var DBCUpdaterEntryPoint = function () {
         'recordDataForRawRepo': recordDataForRawRepo,
         'checkDoubleRecord': checkDoubleRecord
     };
-
 }();

@@ -17,7 +17,7 @@ LOG_FILE=transpiler.log
 LOG_LEVEL=info
 CONFIG_FILE='bin/config.json'
 
-test -f $CONFIG_FILE || die  "Umnable to Load file $CONFIG_FILE"
+test -f $CONFIG_FILE || die  "Unable to Load file $CONFIG_FILE"
 
 modules=( "common/src/entrypoints/build"
           "common/src/entrypoints/update"
@@ -30,6 +30,10 @@ search_args="-a file:. -a file:${PWD}/modules "
 for i in "${modules[@]}"
 do
     search_args=$search_args"-a file:$DISTRIBUTIONS_PATH/$i "
+done
+
+for d in `find ${DISTRIBUTIONS_PATH}/common/src/validation -type d` ; do
+   search_args=$search_args"-a file:${d} "
 done
 
 for d in `find ${DISTRIBUTIONS_PATH}/common/src/validation/rules -type d` ; do

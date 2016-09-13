@@ -14,22 +14,52 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "fieldno" : 3,
-                        "message" : "Felt '008' må ikke være tomt.",
-                        "url" : ""
+                    "type": "ERROR",
+                    "params": {
+                        "param": [
+                            {
+                                "key": "fieldno",
+                                "value": 3
+                            },
+                            {
+                                "key": "message",
+                                "value": "Felt '008' må ikke være tomt."
+                            },
+                            {
+                                "key": "url",
+                                "value": ""
+                            },
+                            {
+                                "value": "5 158 076 1:870970",
+                                "key": "pid"
+                            }
+                        ]
                     }
                 }
             ],
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "fieldno" : 3,
-                            "message" : "Felt '008' må ikke være tomt.",
-                            "url" : ""
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "fieldno",
+                                    "value": 3
+                                },
+                                {
+                                    "key": "message",
+                                    "value": "Felt '008' må ikke være tomt."
+                                },
+                                {
+                                    "key": "url",
+                                    "value": ""
+                                },
+                                {
+                                    "value": "5 158 076 1:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ],

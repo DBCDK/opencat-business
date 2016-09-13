@@ -1,14 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['ExclusiveSubfield'];
-//-----------------------------------------------------------------------------
 
 var ExclusiveSubfield = function () {
     var BUNDLE_NAME = "validation";
@@ -24,14 +21,14 @@ var ExclusiveSubfield = function () {
      * @name ExclusiveSubfield.validateField
      * @method
      */
-    function validateField ( record, field, params ) {
-        Log.trace( "Enter -- ExclusiveSubfield.validateField" );
+    function validateField(record, field, params) {
+        Log.trace("Enter -- ExclusiveSubfield.validateField");
         try {
             // first count all subfields
             var counts = {};
-            for ( var i = 0; i < field.subfields.length; ++i ) {
+            for (var i = 0; i < field.subfields.length; ++i) {
                 var name = field.subfields[i].name;
-                if ( !counts.hasOwnProperty( name ) ) {
+                if (!counts.hasOwnProperty(name)) {
                     counts[name] = 1;
                 } else {
                     counts[name]++;
@@ -41,22 +38,22 @@ var ExclusiveSubfield = function () {
             var a = 'a';
             var aExclusiveFields = ['i', 't', 'e', 'x', 'b'];
             // if there are any 'a's
-            if ( counts.hasOwnProperty( a ) ) {
-                var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-
+            if (counts.hasOwnProperty(a)) {
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 // then check for aExclusiveFields
-                for ( var j = 0; j < aExclusiveFields.length; ++j ) {
+                for (var j = 0; j < aExclusiveFields.length; ++j) {
                     var name_ = aExclusiveFields[j];
-                    if ( counts.hasOwnProperty( name_ ) ) {
-                        result.push( ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", name_ ) ) );
+                    if (counts.hasOwnProperty(name_)) {
+                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.rule.error", "a", name_), RecordUtil.getRecordPid(record)));
                     }
                 }
             }
             return result;
         } finally {
-            Log.trace( "Exit -- ExclusiveSubfield.validateField" );
+            Log.trace("Exit -- ExclusiveSubfield.validateField");
         }
     }
+
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
         'validateField': validateField

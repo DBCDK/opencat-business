@@ -16,36 +16,105 @@
                 {
                     "type": "ERROR",
                     "params": {
-                        "fieldno": 1,
-                        "subfieldno": 1,
-                        "message": "Posten med faustnr/bibliotek '51586417/191919' findes ikke i forvejen",
-                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                        "param": [
+                            {
+                                "key": "fieldno",
+                                "value": 1
+                            },
+                            {
+                                "key": "subfieldno",
+                                "value": 1
+                            },
+                            {
+                                "key": "message",
+                                "value": "Posten med faustnr/bibliotek '51586417/191919' findes ikke i forvejen"
+                            },
+                            {
+                                "key": "url",
+                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm"
+                            },
+                            {
+                                "value": "51586417:723000",
+                                "key": "pid"
+                            }
+                        ]
                     }
                 },
                 {
                     "type": "ERROR",
                     "params": {
-                        "fieldno": 2,
-                        "subfieldno": 2,
-                        "message": "Værdien 'b' er ikke en del af de valide værdier: 'e', 'i'",
-                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                        "param": [
+                            {
+                                "key": "fieldno",
+                                "value": 2
+                            },
+                            {
+                                "key": "subfieldno",
+                                "value": 2
+                            },
+                            {
+                                "key": "message",
+                                "value": "Værdien 'b' er ikke en del af de valide værdier: 'e', 'i'"
+                            },
+                            {
+                                "key": "url",
+                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                            },
+                            {
+                                "value": "51586417:723000",
+                                "key": "pid"
+                            }
+                        ]
                     }
                 },
                 {
                     "type": "ERROR",
                     "params": {
-                        "fieldno": 5,
-                        "message": "Felt '014' kan ikke anvendes i denne skabelon/posttype.",
-                        "url": ""
+                        "param": [
+                            {
+                                "key": "fieldno",
+                                "value": 5
+                            },
+                            {
+                                "key": "message",
+                                "value": "Felt '014' kan ikke anvendes i denne skabelon/posttype."
+                            },
+                            {
+                                "key": "url",
+                                "value": ""
+                            },
+                            {
+                                "value": "51586417:723000",
+                                "key": "pid"
+                            }
+                        ]
                     }
                 },
                 {
                     "type": "ERROR",
                     "params": {
-                        "fieldno": 10,
-                        "subfieldno": 1,
-                        "message": "Delfelt 'g' kan ikke anvendes i felt '245' i denne skabelon/posttype.",
-                        "url": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                        "param": [
+                            {
+                                "key": "fieldno",
+                                "value": 10
+                            },
+                            {
+                                "key": "subfieldno",
+                                "value": 1
+                            },
+                            {
+                                "key": "message",
+                                "value": "Delfelt 'g' kan ikke anvendes i felt '245' i denne skabelon/posttype."
+                            },
+                            {
+                                "key": "url",
+                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm"
+                            },
+                            {
+                                "value": "51586417:723000",
+                                "key": "pid"
+                            }
+                        ]
                     }
                 }
             ]

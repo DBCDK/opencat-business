@@ -1,16 +1,16 @@
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "TemplateUrl" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
-use( "ValidationUtil" );
+use("Exception");
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("TemplateUrl");
+use("ValidateErrors");
+use("ValueCheck");
+use("ValidationUtil");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FieldsMandatory'];
-//-----------------------------------------------------------------------------
-var FieldsMandatory= function( ) {
+
+var FieldsMandatory = function () {
     var BUNDLE_NAME = "validation";
 
     /**
@@ -22,28 +22,26 @@ var FieldsMandatory= function( ) {
      * @return an array which is empty with no errors present, or contains the appropiate errors
      * @method
      */
-    function validateRecord( record, params ) {
-        Log.trace ( "Enter - FieldsMandatory.validateRecord( ", record, ", ", params, " )" );
+    function validateRecord(record, params) {
+        Log.trace("Enter - FieldsMandatory.validateRecord( ", record, ", ", params, " )");
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
-            Log.debug( "Checking fields: ", params.fields );
+            Log.debug("Checking fields: ", params.fields);
             for (var i = 0; i < params.fields.length; ++i) {
-                if (ValidationUtil.recordContainsField (record, params.fields[i]) !== true) {
-                    Log.debug( "Fields: ", params.fields[i], " was not found in record:\n", uneval( record ) );
-                    result.push(ValidateErrors.recordError(TemplateUrl.getUrlForField(params.fields[i], params.template),
-                        ResourceBundle.getStringFormat( bundle, "field.mandatory.error", params.fields[i] ) ) );
+                if (ValidationUtil.recordContainsField(record, params.fields[i]) !== true) {
+                    Log.debug("Fields: ", params.fields[i], " was not found in record:\n", uneval(record));
+                    var url = TemplateUrl.getUrlForField(params.fields[i], params.template);
+                    var msg = ResourceBundle.getStringFormat(bundle, "field.mandatory.error", params.fields[i]);
+                    result.push(ValidateErrors.recordError(url, msg, RecordUtil.getRecordPid(record)));
                 }
             }
             return result;
-        }
-        finally {
-            Log.trace ( "Exit - FieldsMandatory.validateRecord: ", result );
+        } finally {
+            Log.trace("Exit - FieldsMandatory.validateRecord: ", result);
         }
     }
-
-
 
     return {
         "validateRecord": validateRecord,

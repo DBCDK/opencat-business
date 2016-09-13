@@ -1,14 +1,12 @@
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
-use( "ValidationUtil" );
-//-----------------------------------------------------------------------------
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
+use("ValidationUtil");
+
 EXPORTED_SYMBOLS = ['SubfieldsMandatory'];
-//-----------------------------------------------------------------------------
 
 var SubfieldsMandatory = function () {
     var BUNDLE_NAME = "validation";
@@ -24,24 +22,25 @@ var SubfieldsMandatory = function () {
      * @name SubfieldsMandatory.validateField
      * @method
      */
-    function validateField ( record, field, params, settings ) {
-        Log.trace( "Enter - SubfieldsMandatory.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField(record, field, params, settings) {
+        Log.trace("Enter - SubfieldsMandatory.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )");
 
         var result = [];
         try {
-            ValueCheck.check( "params.subfields", params.subfields ).instanceOf( Array );
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
-            for ( var i = 0; i < params.subfields.length; ++i ) {
-                if ( ValidationUtil.doesFieldContainSubfield( field, params.subfields[i] ) === false ) {
-                    result.push( ValidateErrors.fieldError( "TODO:url", ResourceBundle.getStringFormat( bundle, "mandatory.subfields.rule.error", params.subfields[i], field.name ) ) );
+            ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+            for (var i = 0; i < params.subfields.length; ++i) {
+                if (ValidationUtil.doesFieldContainSubfield(field, params.subfields[i]) === false) {
+                    var msg = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", params.subfields[i], field.name);
+                    result.push(ValidateErrors.fieldError("TODO:url", msg, RecordUtil.getRecordPid(record)));
                 }
             }
             return result;
-        }
-        finally {
-            Log.trace( "Exit - SubfieldsMandatory.validateField(): ", result );
+        } finally {
+            Log.trace("Exit - SubfieldsMandatory.validateField(): ", result);
         }
     }
+
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
         'validateField': validateField

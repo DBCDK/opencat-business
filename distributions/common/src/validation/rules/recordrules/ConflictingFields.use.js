@@ -1,15 +1,15 @@
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "TemplateUrl" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("TemplateUrl");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['ConflictingFields'];
-//-----------------------------------------------------------------------------
-var ConflictingFields = function( ) {
+
+var ConflictingFields = function () {
     var BUNDLE_NAME = "validation";
 
     /**
@@ -23,15 +23,15 @@ var ConflictingFields = function( ) {
      * @name ConflictingFields.validateRecord
      * @method
      */
-    function validateRecord( record, params ) {
-        Log.trace ( "Enter - ConflictingFields.validateRecord( ", record, ", ", params, " )" );
+    function validateRecord(record, params) {
+        Log.trace("Enter - ConflictingFields.validateRecord( ", record, ", ", params, " )");
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
             var foundFields = {};
-            var result = [];
+            result = [];
             for (var i = 0; i < record.fields.length; i++) {
                 if (!foundFields.hasOwnProperty(foundFields[record.fields[i].name])) {
                     foundFields[record.fields[i].name] = 1;
@@ -44,20 +44,21 @@ var ConflictingFields = function( ) {
                 if (foundFields.hasOwnProperty(params.fields[j])) {
                     found.counter++;
                     if (found.counter > 1) {
-                        result.push(ValidateErrors.recordError("", ResourceBundle.getStringFormat( bundle, "fields.conflicting.error", params.fields[j], found.name ) ) );
+                        var msg = ResourceBundle.getStringFormat(bundle, "fields.conflicting.error", params.fields[j], found.name);
+                        result.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
                     } else {
                         found.name = params.fields[j];
                     }
                 }
             }
             return result;
-        }
-        finally {
-            Log.trace ( "Exit - ConflictingFields.validateRecord: ", result );
+        } finally {
+            Log.trace("Exit - ConflictingFields.validateRecord: ", result);
         }
     }
 
-    return {"validateRecord" : validateRecord,
-            "__BUNDLE_NAME"  : BUNDLE_NAME
+    return {
+        "validateRecord": validateRecord,
+        "__BUNDLE_NAME": BUNDLE_NAME
     };
 }();

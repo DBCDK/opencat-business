@@ -47,7 +47,7 @@ var ExclusiveSubfieldParameterized = function () {
             for (var f = 0; f < field.subfields.length; f++) {
                 if (subfieldsMap.hasOwnProperty(field.subfields[f].name)) {
                     if (foundFirstSubfield) { // second match -> return error
-                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.parameterized.rule.error", field.subfields[f].name, params.subfields)));
+                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.parameterized.rule.error", field.subfields[f].name, params.subfields), RecordUtil.getRecordPid(record)));
                         return result;
                     } else {
                         foundFirstSubfield = true; // First match which is okay

@@ -1,18 +1,15 @@
-//-----------------------------------------------------------------------------
-use( "DefaultAuthenticator" );
-use( "Log" );
-use( "Marc" );
-use( "OpenAgencyClient" );
-use( "RawRepoClient" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "UpdateConstants" );
-use( "ValidateErrors" );
+use("DefaultAuthenticator");
+use("Log");
+use("Marc");
+use("OpenAgencyClient");
+use("RawRepoClient");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("UpdateConstants");
+use("ValidateErrors");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'NoteAndSubjectExtentionsHandler' ];
+EXPORTED_SYMBOLS = ['NoteAndSubjectExtentionsHandler'];
 
-//-----------------------------------------------------------------------------
 /**
  * Module to handle the authentication of changing notes or subjects by a FBS
  * library.
@@ -20,7 +17,7 @@ EXPORTED_SYMBOLS = [ 'NoteAndSubjectExtentionsHandler' ];
  * @namespace
  * @name NoteAndSubjectExtentionsHandler
  */
-var NoteAndSubjectExtentionsHandler = function() {
+var NoteAndSubjectExtentionsHandler = function () {
     /**
      * Authenticates extentions in a record.
      *
@@ -32,51 +29,43 @@ var NoteAndSubjectExtentionsHandler = function() {
      *
      * @name NoteAndSubjectExtentionsHandler#authenticateExtentions
      */
-    function authenticateExtentions( record, groupId ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.authenticateExtentions( %s, %s )", uneval( record ), uneval( groupId ) ) );
-
+    function authenticateExtentions(record, groupId) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.authenticateExtentions( %s, %s )", uneval(record), uneval(groupId)));
         var result = null;
         try {
             var recId = record.getValue(/001/, /a/);
             if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
                 return result = [];
             }
-
             var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
-            curRecord.field( "001" ).subfield( "b" ).value = record.getValue( /001/, /b/ );
+            curRecord.field("001").subfield("b").value = record.getValue(/001/, /b/);
             if (!isNationalCommonRecord(curRecord)) {
                 return result = [];
             }
-
-            var bundle = ResourceBundleFactory.getBundle( DefaultAuthenticator.__BUNDLE_NAME );
-
+            var bundle = ResourceBundleFactory.getBundle(DefaultAuthenticator.__BUNDLE_NAME);
             var authResult = [];
-
-            var extentableFieldsRx = __createExtentableFieldsRx( groupId );
+            var extentableFieldsRx = __createExtentableFieldsRx(groupId);
             record.eachField(/./, function (field) {
-                if( !( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) ) ) {
+                if (!( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) )) {
                     if (__isFieldChangedInOtherRecord(field, curRecord)) {
-                        var message = ResourceBundle.getStringFormat( bundle, "notes.subjects.edit.field.error", groupId, field.name, recId );
-                        authResult.push(ValidateErrors.recordError("", message ) );
+                        var message = ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", groupId, field.name, recId);
+                        authResult.push(ValidateErrors.recordError("", message, RecordUtil.getRecordPid(record)));
                     }
                 }
             });
-
             curRecord.eachField(/./, function (field) {
-                if( !( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) ) ) {
+                if (!( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) )) {
                     if (__isFieldChangedInOtherRecord(field, record)) {
-                        if( curRecord.count( field.name ) !== record.count( field.name ) ) {
-                            var message = ResourceBundle.getStringFormat( bundle, "notes.subjects.delete.field.error", groupId, field.name, recId );
-                            authResult.push(ValidateErrors.recordError( "", message ) );
+                        if (curRecord.count(field.name) !== record.count(field.name)) {
+                            var message = ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", groupId, field.name, recId);
+                            authResult.push(ValidateErrors.recordError("", message, RecordUtil.getRecordPid(record)));
                         }
                     }
                 }
             });
-
             return result = authResult;
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.authenticateExtentions(): ", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.authenticateExtentions(): ", result);
         }
     }
 
@@ -91,38 +80,31 @@ var NoteAndSubjectExtentionsHandler = function() {
      *
      * @name NoteAndSubjectExtentionsHandler#changeUpdateRecordForUpdate
      */
-    function recordDataForRawRepo( record, userId, groupId ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo( %s, %s, %s )", record, userId, groupId ) );
-
+    function recordDataForRawRepo(record, userId, groupId) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo( %s, %s, %s )", record, userId, groupId));
         var result = null;
         try {
             var recId = record.getValue(/001/, /a/);
-
             if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
                 return result = record;
             }
-
             var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
             if (!isNationalCommonRecord(curRecord)) {
                 return result = record;
             }
-
-            var extentableFieldsRx = __createExtentableFieldsRx( groupId );
+            var extentableFieldsRx = __createExtentableFieldsRx(groupId);
             record.eachField(/./, function (field) {
-                if( extentableFieldsRx !== undefined && extentableFieldsRx.test( field.name ) ) {
-                    if( field.exists( /&/ ) ) {
-                        field.append( "&", groupId, true );
-                    }
-                    else if( __isFieldChangedInOtherRecord( field, curRecord ) ) {
+                if (extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name)) {
+                    if (field.exists(/&/)) {
+                        field.append("&", groupId, true);
+                    } else if (__isFieldChangedInOtherRecord(field, curRecord)) {
                         field.insert(0, "&", groupId);
                     }
                 }
             });
-
             return result = record;
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.recordDataForRawRepo():", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.recordDataForRawRepo():", result);
         }
     }
 
@@ -135,53 +117,44 @@ var NoteAndSubjectExtentionsHandler = function() {
      *
      * @name NoteAndSubjectExtentionsHandler#isNationalCommonRecord
      */
-    function isNationalCommonRecord( record ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.isNationalCommonRecord( %s )", record ) );
-
+    function isNationalCommonRecord(record) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.isNationalCommonRecord( %s )", record));
         var result = null;
         try {
-            if( !record.matchValue( /996/, /a/, /DBC/ ) ) {
+            if (!record.matchValue(/996/, /a/, /DBC/)) {
                 return result = false;
             }
-
             for (var i = 0; i < record.size(); i++) {
                 if (__isFieldNationalCommonRecord(record.field(i))) {
                     return result = true;
                 }
             }
-
             return result = false;
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.isNationalCommonRecord(): ", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.isNationalCommonRecord(): ", result);
         }
     }
 
-    function __createExtentableFieldsRx( agencyId ) {
-        Log.trace( "Enter - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx()" );
-
+    function __createExtentableFieldsRx(agencyId) {
+        Log.trace("Enter - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx()");
         var result = undefined;
         try {
             var extentableFields = "";
 
-            if( OpenAgencyClient.hasFeature( agencyId, UpdateConstants.AUTH_COMMON_NOTES ) ) {
+            if (OpenAgencyClient.hasFeature(agencyId, UpdateConstants.AUTH_COMMON_NOTES)) {
                 extentableFields += UpdateConstants.EXTENTABLE_NOTE_FIELDS;
             }
-
-            if( OpenAgencyClient.hasFeature( agencyId, UpdateConstants.AUTH_COMMON_SUBJECTS ) ) {
-                if( extentableFields !== "" ) {
+            if (OpenAgencyClient.hasFeature(agencyId, UpdateConstants.AUTH_COMMON_SUBJECTS)) {
+                if (extentableFields !== "") {
                     extentableFields += "|";
                 }
-
                 extentableFields += UpdateConstants.EXTENTABLE_SUBJECT_FIELDS;
             }
-
-            if( extentableFields !== "" ) {
-                return result = RegExp( extentableFields );
+            if (extentableFields !== "") {
+                return result = RegExp(extentableFields);
             }
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx(): " + result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx(): " + result);
         }
     }
 
@@ -195,27 +168,23 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @private
      * @name NoteAndSubjectExtentionsHandler#__isFieldNationalCommonRecord
      */
-    function __isFieldNationalCommonRecord( field ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord( %s )", field ) );
-
+    function __isFieldNationalCommonRecord(field) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord( %s )", field));
         var result = null;
         try {
             var fieldName = field.name.toString() + '';
-            if ( fieldName !== "032") {
-                result = StringUtil.sprintf( "x1: '%s': false", fieldName );
+            if (fieldName !== "032") {
+                result = StringUtil.sprintf("x1: '%s': false", fieldName);
                 return false;
             }
-
             if (!field.exists(/a/)) {
                 result = "x2: false";
                 return false;
             }
-
             result = "x3: " + !field.matchValue(/x/, /BKM*|NET*|SF*/);
             return !field.matchValue(/x/, /BKM*|NET*|SF*/);
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord(): ", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord(): ", result);
         }
     }
 
@@ -230,32 +199,28 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @private
      * @name NoteAndSubjectExtentionsHandler#__isFieldChangedInOtherRecord
      */
-    function __isFieldChangedInOtherRecord( field, record ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord( %s, %s )", field, record ) );
-
+    function __isFieldChangedInOtherRecord(field, record) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord( %s, %s )", field, record));
         var result = null;
         try {
             var compareRecord = record;
-            if( field.name === "001" ) {
+            if (field.name === "001") {
                 compareRecord = record.clone();
-                if( field.exists( /c/ ) ) {
-                    RecordUtil.addOrReplaceSubfield( compareRecord, "001", "c", field.getValue( /c/ ) );
+                if (field.exists(/c/)) {
+                    RecordUtil.addOrReplaceSubfield(compareRecord, "001", "c", field.getValue(/c/));
                 }
-                if( field.exists( /d/ ) ) {
-                    RecordUtil.addOrReplaceSubfield( compareRecord, "001", "d", field.getValue( /d/ ) );
+                if (field.exists(/d/)) {
+                    RecordUtil.addOrReplaceSubfield(compareRecord, "001", "d", field.getValue(/d/));
                 }
             }
-
-            for( var i = 0; i < compareRecord.size(); i++ ) {
-                if( __isFieldsEqual( field, compareRecord.field( i ) ) ) {
+            for (var i = 0; i < compareRecord.size(); i++) {
+                if (__isFieldsEqual(field, compareRecord.field(i))) {
                     return result = false;
                 }
             }
-
             return result = true;
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord(): ", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__isFieldChangedInOtherRecord(): ", result);
         }
     }
 
@@ -270,38 +235,27 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @private
      * @name NoteAndSubjectExtentionsHandler#__isFieldsEqual
      */
-    function __isFieldsEqual( srcField, destField ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__isFieldsEqual( %s, %s )", srcField, destField ) );
-
+    function __isFieldsEqual(srcField, destField) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.__isFieldsEqual( %s, %s )", srcField, destField));
         var result = null;
         try {
-            Log.debug( "srcField.name: '", srcField.name, "'" );
-            Log.debug( "typeof( srcField.name ): ", typeof( srcField.name ) );
-            Log.debug( "srcField.name === \"001\": ", srcField.name === "001" );
-            Log.debug( "srcField.name === '001': ", srcField.name === '001' );
-
             if (srcField.name !== destField.name) {
                 return result = false;
             }
-
             if (srcField.indicator !== destField.indicator) {
                 return result = false;
             }
-
             if (srcField.size() !== destField.size()) {
                 return result = false;
             }
-
             var srcSubfields = [];
             var destSubfields = [];
             for (var i = 0; i < srcField.size(); i++) {
                 srcSubfields.push(srcField.subfield(i));
                 destSubfields.push(destField.subfield(i));
             }
-
             srcSubfields.sort(__sortSubfield);
             destSubfields.sort(__sortSubfield);
-
             for (i = 0; i < srcSubfields.length; i++) {
                 if (srcSubfields[i].name !== destSubfields[i].name) {
                     return result = false;
@@ -310,11 +264,9 @@ var NoteAndSubjectExtentionsHandler = function() {
                     return result = false;
                 }
             }
-
             return true;
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__isFieldsEqual(): ", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__isFieldsEqual(): ", result);
         }
     }
 
@@ -329,30 +281,24 @@ var NoteAndSubjectExtentionsHandler = function() {
      * @private
      * @name NoteAndSubjectExtentionsHandler#__sortSubfield
      */
-    function __sortSubfield( a, b ) {
-        Log.trace( StringUtil.sprintf( "Enter - NoteAndSubjectExtentionsHandler.__sortSubfield( %s, %s )", a, b ) );
-
+    function __sortSubfield(a, b) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.__sortSubfield( %s, %s )", a, b));
         var result = null;
         try {
             if (a.name < b.name) {
                 return result = -1;
-            }
-            else if (a.name > b.name) {
+            } else if (a.name > b.name) {
                 return result = 1;
-            }
-            else {
+            } else {
                 if (a.value < b.value) {
                     return result = -1;
-                }
-                else if (a.value > b.value) {
+                } else if (a.value > b.value) {
                     return result = 1;
                 }
             }
-
             return result = 0;
-        }
-        finally {
-            Log.trace( "Exit - NoteAndSubjectExtentionsHandler.__sortSubfield(): ", result );
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__sortSubfield(): ", result);
         }
     }
 
@@ -361,5 +307,4 @@ var NoteAndSubjectExtentionsHandler = function() {
         'recordDataForRawRepo': recordDataForRawRepo,
         'isNationalCommonRecord': isNationalCommonRecord
     }
-
 }();

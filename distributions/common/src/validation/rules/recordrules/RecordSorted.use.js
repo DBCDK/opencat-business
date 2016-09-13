@@ -1,15 +1,15 @@
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "TemplateUrl" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("TemplateUrl");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['RecordSorted'];
-//-----------------------------------------------------------------------------
-var RecordSorted = function( ) {
+
+var RecordSorted = function () {
     var BUNDLE_NAME = "validation";
 
     /**
@@ -21,28 +21,31 @@ var RecordSorted = function( ) {
      * @return an array which is empty with no errors present, or contains the appropiate errors
      * @method
      */
-    function validateRecord ( record, params ) {
-        Log.trace( "Enter - recordSorted.validateRecord( ", record, ", ", params, " )" );
+    function validateRecord(record, params) {
+        Log.trace("Enter - recordSorted.validateRecord( ", record, ", ", params, " )");
         try {
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
-            ValueCheck.check( "record.fields", record.fields ).instanceOf( Array );
+            ValueCheck.check("record.fields", record.fields).instanceOf(Array);
 
             var result = [];
             var previous = "000";
-            for ( var i = 0; i < record.fields.length; ++i ) {
-                if ( record.fields[i].name < previous ) {
-                    var message = ResourceBundle.getStringFormat( bundle, "record.sorted.error", record.fields[i].name );
-                    return result = [ValidateErrors.recordError( TemplateUrl.getUrlForField( record.fields[i].name, params.template ), message )];
+            for (var i = 0; i < record.fields.length; ++i) {
+                if (record.fields[i].name < previous) {
+                    var url = TemplateUrl.getUrlForField(record.fields[i].name, params.template);
+                    var msg = ResourceBundle.getStringFormat(bundle, "record.sorted.error", record.fields[i].name);
+                    return result = [ValidateErrors.recordError(url, msg, RecordUtil.getRecordPid(record))];
                 }
                 previous = record.fields[i].name;
             }
             return result;
-        }
-        finally {
-            Log.trace( "Exit - recordSorted.validateRecord: ", result );
+        } finally {
+            Log.trace("Exit - recordSorted.validateRecord: ", result);
         }
     }
-    return {"validateRecord" : validateRecord,
-        "__BUNDLE_NAME"  : BUNDLE_NAME };
+
+    return {
+        "validateRecord": validateRecord,
+        "__BUNDLE_NAME": BUNDLE_NAME
+    };
 }();

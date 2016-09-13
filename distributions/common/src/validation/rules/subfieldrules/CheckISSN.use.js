@@ -1,13 +1,12 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use ("ValidationUtil");
-//-----------------------------------------------------------------------------
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValidationUtil");
+
 EXPORTED_SYMBOLS = ['CheckISSN'];
 
-//-----------------------------------------------------------------------------
 var CheckISSN = function () {
     var __BUNDLE_NAME = "validation";
 
@@ -23,11 +22,10 @@ var CheckISSN = function () {
      * @name CheckISSN.validateSubfield
      * @method
      */
-    function validateSubfield( record, field, subfield, params ) {
-        Log.trace( "Enter --- CheckISSN.validateSubfield" );
+    function validateSubfield(record, field, subfield, params) {
+        Log.trace("Enter --- CheckISSN.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             //ValueCheck.checkUndefined( "params", params );
             // http://www.issn.org/understanding-the-issn/assignment-rules/issn-manual/
             // we must iterate the ISSN number string and multiply each number
@@ -47,41 +45,45 @@ var CheckISSN = function () {
             var value = 0;
             var subfieldName = subfield['name'];
             var subfieldValue = subfield['value'];
-            var len = subfieldValue.length ;
-            for ( var ix = 0; ix < len; ix++ ) {
-                var ch = subfieldValue.charAt( ix );
-                if ( ch >= '0' && ch <= '9' ) {
-                    value += parseInt( ch ) * weight; // 4, 5, 6
+            var len = subfieldValue.length;
+            var msg;
+            for (var ix = 0; ix < len; ix++) {
+                var ch = subfieldValue.charAt(ix);
+                if (ch >= '0' && ch <= '9') {
+                    value += parseInt(ch) * weight; // 4, 5, 6
                     weight--;
                     pos++;
                 } else {
-                    if ( ch === '-' ) {
+                    if (ch === '-') {
                         continue;
                     }
-                    if ( ch.toLowerCase() === 'x' ) {
-                        if ( ix != len - 1 ) {
-                            result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.issn.length.error", subfieldName ) ) );
+                    if (ch.toLowerCase() === 'x') {
+                        if (ix != len - 1) {
+                            msg = ResourceBundle.getStringFormat(bundle, "check.issn.length.error", subfieldName);
+                            result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
                             return result;
                         }
                         value += 10; // 8
                         pos++;
                     } else {
-                        result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.issn.numbers.error", subfieldName ) ) );
+                        msg = ResourceBundle.getStringFormat(bundle, "check.issn.numbers.error", subfieldName);
+                        result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
                         return result;
                     }
                 }
             }
-            if ( pos != 8 ) {
-                result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.issn.length.error", subfieldName ) ) );
+            if (pos != 8) {
+                msg = ResourceBundle.getStringFormat(bundle, "check.issn.length.error", subfieldName);
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
                 return result;
             }
-            if ( value % 11 !== 0 ) { // 7
-                result.push( ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.issn.invalid.error", subfieldName, subfield['value'] ) ) );
+            if (value % 11 !== 0) { // 7
+                msg = ResourceBundle.getStringFormat(bundle, "check.issn.invalid.error", subfieldName, subfield['value']);
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
             }
-
             return result;
         } finally {
-            Log.trace( "Exit --- CheckISSN.validateSubfield" );
+            Log.trace("Exit --- CheckISSN.validateSubfield");
         }
     }
 

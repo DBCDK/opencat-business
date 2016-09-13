@@ -1,7 +1,9 @@
 [
     {
         "name": "basis-new-common-record-with-002-link-to-it",
-        "bugs": [ "bug-19833" ],
+        "bugs": [
+            "bug-19833"
+        ],
         "description": "Tester oprettelse af fællesskabspost med en eksisterende post som har 002-link til den nye post.",
         "request": {
             "authentication": {
@@ -35,9 +37,18 @@
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "message",
+                                    "value": "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
+                                },
+                                {
+                                    "value": "51886712:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ],

@@ -1,11 +1,10 @@
-//-----------------------------------------------------------------------------
-use( "UnitTest" );
-use( "SafeAssert" );
-use( "SubfieldHasValueDemandsOtherSubfield" );
-//-----------------------------------------------------------------------------
+use("RecordUtil");
+use("SafeAssert");
+use("SubfieldHasValueDemandsOtherSubfield");
+use("UnitTest");
 
-UnitTest.addFixture( "SubfieldHasValueDemandsOtherSubfield" , function() {
-    var bundle = ResourceBundleFactory.getBundle( SubfieldHasValueDemandsOtherSubfield.__BUNDLE_NAME );
+UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
+    var bundle = ResourceBundleFactory.getBundle(SubfieldHasValueDemandsOtherSubfield.__BUNDLE_NAME);
 
     var record = {};
     var field1 = {
@@ -24,8 +23,13 @@ UnitTest.addFixture( "SubfieldHasValueDemandsOtherSubfield" , function() {
         }]
     };
     record.fields = [field2];
-    var params = { "subfieldConditional": "a", "subfieldConditionalValue": "b", "fieldMandatory": "002", "subfieldMandatory": "d" };
-    SafeAssert.equal( "1 subfieldHasValueDemandsOtherSubfield - ok", SubfieldHasValueDemandsOtherSubfield.validateField( record, field1, params ), [] );
+    var params = {
+        "subfieldConditional": "a",
+        "subfieldConditionalValue": "b",
+        "fieldMandatory": "002",
+        "subfieldMandatory": "d"
+    };
+    SafeAssert.equal("1 subfieldHasValueDemandsOtherSubfield - ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), []);
 
     record = {};
     record.fields = [field1];
@@ -37,8 +41,9 @@ UnitTest.addFixture( "SubfieldHasValueDemandsOtherSubfield" , function() {
         }]
     };
     record.fields = [field3];
-    var errorMsg = [ ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d" ) ) ];
-    SafeAssert.equal( "2 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField( record, field1, params ), errorMsg );
+    var msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
+    var errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+    SafeAssert.equal("2 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
     record.fields = [field1];
@@ -50,11 +55,12 @@ UnitTest.addFixture( "SubfieldHasValueDemandsOtherSubfield" , function() {
         }]
     };
     record.fields = [field4];
-    var errorMsg = [ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d" ) ) ];
-    SafeAssert.equal( "3 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField( record, field1, params ), errorMsg );
+    msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
+    errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+    SafeAssert.equal("3 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
     record.fields = [field1];
-    var errorMsg = [ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d" ) ) ];
-    SafeAssert.equal( "4 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField( record, field1, params ), errorMsg );
-} );
+    errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+    SafeAssert.equal("4 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
+});

@@ -1,13 +1,10 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['SubfieldConditionalMandatoryField'];
 
-//-----------------------------------------------------------------------------
 var SubfieldConditionalMandatoryField = function () {
     var __BUNDLE_NAME = "validation";
 
@@ -24,30 +21,28 @@ var SubfieldConditionalMandatoryField = function () {
      * @method
      */
 
-    function validateSubfield ( record, field, subfield, params ) {
-        Log.trace( "Enter --- SubfieldConditionalMandatoryField.validateSubfield" );
+    function validateSubfield(record, field, subfield, params) {
+        Log.trace("Enter --- SubfieldConditionalMandatoryField.validateSubfield");
         try {
-            ValueCheck.check( "params.values", params.subfieldValue );
-            ValueCheck.check( "params.subfieldMandatory", params.fieldMandatory );
-
-            if ( subfield.value === params.subfieldValue ) {
+            ValueCheck.check("params.values", params.subfieldValue);
+            ValueCheck.check("params.subfieldMandatory", params.fieldMandatory);
+            if (subfield.value === params.subfieldValue) {
                 // condition fulfilled, params.fieldMandatory is mandatory
-                for ( var i = 0; i < record.fields.length; ++i ) {
-                    if ( record.fields[i].name === params.fieldMandatory ) {
+                for (var i = 0; i < record.fields.length; ++i) {
+                    if (record.fields[i].name === params.fieldMandatory) {
                         return [];
                     }
                 }
-                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-                var errorMessage = ResourceBundle.getStringFormat( bundle, "mandatory.field.conditional.rule.error", subfield.name, params.subfieldValue, params.fieldMandatory );
-                return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
+                var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                var errorMessage = ResourceBundle.getStringFormat(bundle, "mandatory.field.conditional.rule.error", subfield.name, params.subfieldValue, params.fieldMandatory);
+                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
             }
             return [];
-        }
-
-        finally {
-            Log.trace( "Exit --- SubfieldConditionalMandatoryField.validateSubfield" );
+        } finally {
+            Log.trace("Exit --- SubfieldConditionalMandatoryField.validateSubfield");
         }
     }
+
     return {
         'validateSubfield': validateSubfield,
         '__BUNDLE_NAME': __BUNDLE_NAME

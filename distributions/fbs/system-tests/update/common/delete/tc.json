@@ -1,7 +1,9 @@
 [
     {
         "name": "fbs-delete-common-record",
-        "bugs": [ "#1819" ],
+        "bugs": [
+            "#1819"
+        ],
         "description": "Tester sletning af fællesskabspost fra et FBS-bibliotek",
         "request": {
             "authentication": {
@@ -13,13 +15,17 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 714700 ],
+            "holdings": [
+                714700
+            ],
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
@@ -31,24 +37,60 @@
         "expected": {
             "validation": [
                 {
-                    "type" : "ERROR",
-                    "params" : {
-                        "fieldno" : 2,
-                        "subfieldno" : 1,
-                        "message" : "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'",
-                        "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                    "type": "ERROR",
+                    "params": {
+                        "param": [
+                            {
+                                "key": "fieldno",
+                                "value": 2
+                            },
+                            {
+                                "key": "subfieldno",
+                                "value": 1
+                            },
+                            {
+                                "key": "message",
+                                "value": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
+                            },
+                            {
+                                "key": "url",
+                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                            },
+                            {
+                                "value": "90004158:870970",
+                                "key": "pid"
+                            }
+                        ]
                     }
                 }
             ],
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "fieldno" : 2,
-                            "subfieldno" : 1,
-                            "message" : "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'",
-                            "url" : "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "fieldno",
+                                    "value": 2
+                                },
+                                {
+                                    "key": "subfieldno",
+                                    "value": 1
+                                },
+                                {
+                                    "key": "message",
+                                    "value": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
+                                },
+                                {
+                                    "key": "url",
+                                    "value": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
+                                },
+                                {
+                                    "value": "90004158:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -57,7 +99,9 @@
                         "record": "rawrepo-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",

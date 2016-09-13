@@ -1,12 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
-//-----------------------------------------------------------------------------
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
+
 EXPORTED_SYMBOLS = ['FieldDemandsOtherFields'];
-//-----------------------------------------------------------------------------
 
 var FieldDemandsOtherFields = function () {
     var __BUNDLE_NAME = "validation";
@@ -27,103 +26,98 @@ var FieldDemandsOtherFields = function () {
      * @name FieldDemandsOtherFields.validateFields
      * @method validateFields
      */
-    function validateRecord ( record, params) {
-        Log.trace( "Enter - FieldDemandsOtherFields.validateRecord" );
+    function validateRecord(record, params) {
+        Log.trace("Enter - FieldDemandsOtherFields.validateRecord");
         try {
-            ValueCheck.check( "record", record ).type( "object" );
-            ValueCheck.check( "params", params ).type( "object" );
+            ValueCheck.check("record", record).type("object");
+            ValueCheck.check("params", params).type("object");
 
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-            var checkedParams = __checkParams( params , bundle);
-            if ( checkedParams.length > 0 ) {
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var checkedParams = __checkParams(params, bundle);
+            if (checkedParams.length > 0) {
                 return checkedParams;
             }
-            return __checkFields( ValidationUtil.getFieldNamesAsKeys( record ), params, bundle );
+            return __checkFields(ValidationUtil.getFieldNamesAsKeys(record), params, bundle, record);
         } finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.validateRecord" );
+            Log.trace("Exit - FieldDemandsOtherFields.validateRecord");
         }
     }
 
-//-----------------------------------------------------------------------------
-// Helper functions
-//-----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------
-// __checkFields
-//-----------------------------------------------------------------------------
-    function __checkFields ( fieldNames, params, bundle ) {
-        Log.trace( "Enter - FieldDemandsOtherFields.__checkFields" );
+    function __checkFields(fieldNames, params, bundle, record) {
+        Log.trace("Enter - FieldDemandsOtherFields.__checkFields");
         try {
             var existingSourceFields = [];
             var missingDemandFields = [];
 
-            params.sources.forEach( function ( fieldName ) {
-                if ( fieldNames.hasOwnProperty( fieldName ) ) {
-                    existingSourceFields.push( fieldName );
+            params.sources.forEach(function (fieldName) {
+                if (fieldNames.hasOwnProperty(fieldName)) {
+                    existingSourceFields.push(fieldName);
                 }
-            } )
-            if ( existingSourceFields.length > 0 ) {
-                params.demands.forEach( function ( fieldName ) {
-                    if ( !fieldNames.hasOwnProperty( fieldName ) ) {
-                        missingDemandFields.push( fieldName );
+            });
+            if (existingSourceFields.length > 0) {
+                params.demands.forEach(function (fieldName) {
+                    if (!fieldNames.hasOwnProperty(fieldName)) {
+                        missingDemandFields.push(fieldName);
                     }
-                } )
+                })
             }
-            if ( missingDemandFields.length > 0 ) {
-                return [ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.missing.values", existingSourceFields, missingDemandFields ) )];
+            if (missingDemandFields.length > 0) {
+                var msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.missing.values", existingSourceFields, missingDemandFields);
+                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
             }
             return [];
-        }
-        finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.__checkFields" );
+        } finally {
+            Log.trace("Exit - FieldDemandsOtherFields.__checkFields");
         }
     }
-// -----------------------------------------------------------------------------
-// __checkParams
-//-----------------------------------------------------------------------------
-    function __checkParams ( params, bundle ) {
-        Log.trace( "Enter - FieldDemandsOtherFields.__checkParams" );
+
+    function __checkParams(params, bundle, record) {
+        Log.trace("Enter - FieldDemandsOtherFields.__checkParams");
         try {
             var ret = [];
-            if ( !params.hasOwnProperty( "sources" ) && !params.hasOwnProperty( "demands" ) ) {
-                Log.warn( "sources and demands params are missing" );
-                return [ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.missing.sources.and.demands" ))];
+            var msg;
+            if (!params.hasOwnProperty("sources") && !params.hasOwnProperty("demands")) {
+                Log.warn("sources and demands params are missing");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.missing.sources.and.demands");
+                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
             }
-            if ( !params.hasOwnProperty( "demands" ) ) {
-                Log.warn( "params.demands is missing" );
-                return [ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.having.sources.missing.demands" ))];
+            if (!params.hasOwnProperty("demands")) {
+                Log.warn("params.demands is missing");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.sources.missing.demands");
+                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
             }
-            if ( !params.hasOwnProperty( "sources" ) ) {
-                Log.warn( "params.sources is missing" );
-                return [ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.having.demands.missing.sources" ))];
+            if (!params.hasOwnProperty("sources")) {
+                Log.warn("params.sources is missing");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.demands.missing.sources");
+                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
             }
             // check for wrong type and array.length
-            if ( !Array.isArray( params.sources ) ) {
-                ret.push( ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.having.sources.but.not.array" )));
-                Log.warn( "params.sources is not of type array" );
-            } else if ( Array.isArray( params.sources ) && params.sources.length < 1 ) {
-                ret.push( ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.having.sources.length.0" )));
-                Log.warn( "params.sources is empty" );
+            if (!Array.isArray(params.sources)) {
+                Log.warn("params.sources is not of type array");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.sources.but.not.array");
+                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+            } else if (Array.isArray(params.sources) && params.sources.length < 1) {
+                Log.warn("params.sources is empty");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.sources.length.0");
+                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
             }
-            if ( !Array.isArray( params.demands ) ) {
-                ret.push( ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.having.demands.but.not.array" )));
-                Log.warn( "params.demands is not of type array" );
-            } else if ( Array.isArray( params.demands ) &&  params.demands.length < 1 ) {
-                ret.push( ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "field.demands.other.fields.having.demands.length.0" )));
-                Log.warn( "params.demands is empty" );
+            if (!Array.isArray(params.demands)) {
+                Log.warn("params.demands is not of type array");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.demands.but.not.array");
+                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+            } else if (Array.isArray(params.demands) && params.demands.length < 1) {
+                Log.warn("params.demands is empty");
+                msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.demands.length.0");
+                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
             }
             return ret;
-        }
-        finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.__checkParams" );
+        } finally {
+            Log.trace("Exit - FieldDemandsOtherFields.__checkParams");
         }
     }
-//-----------------------------------------------------------------------------
-// End helper functions
-//-----------------------------------------------------------------------------
+
     return {
         'validateRecord': validateRecord,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
-}
-();
+}();

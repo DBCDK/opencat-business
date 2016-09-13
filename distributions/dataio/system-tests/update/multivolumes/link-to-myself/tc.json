@@ -17,8 +17,12 @@
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "children": [ "rawrepo-volume.marc" ],
-                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    "children": [
+                        "rawrepo-volume.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-main-dbc-enrichment.marc",
@@ -29,7 +33,9 @@
                     "record": "rawrepo-volume.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-volume-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-volume-dbc-enrichment.marc",
@@ -43,9 +49,18 @@
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "message" : "Posten {58442895|191919} må ikke pege på sig selv i 014a"
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "message",
+                                    "value": "Posten {58442895|191919} må ikke pege på sig selv i 014a"
+                                },
+                                {
+                                    "value": "58442895:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ]

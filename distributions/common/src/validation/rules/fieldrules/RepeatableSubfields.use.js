@@ -1,14 +1,12 @@
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['RepeatableSubfields'];
-//-----------------------------------------------------------------------------
 
 var RepeatableSubfields = function () {
     var BUNDLE_NAME = "validation";
@@ -25,8 +23,8 @@ var RepeatableSubfields = function () {
      * @method
      */
 
-    function validateField( record, field, params, settings ) {
-        Log.trace( "Enter - RepeatableSubfields.validateField ( ", record, ", ", field, ", ", params, ", ", settings, " )" );
+    function validateField(record, field, params, settings) {
+        Log.trace("Enter - RepeatableSubfields.validateField ( ", record, ", ", field, ", ", params, ", ", settings, " )");
 
         var result = [];
         try {
@@ -41,21 +39,21 @@ var RepeatableSubfields = function () {
                     }
                 }
             }
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             for (var i = 0; i < params.subfields.length; ++i) {
                 if (counter[params.subfields[i]] > 1) {
-                    var errorMessage = ResourceBundle.getStringFormat( bundle, "repeatable.subfields.rule.error", params.subfields[i], counter[params.subfields[i]] );
-                    result.push(ValidateErrors.fieldError( "TODO:url", errorMessage ) );
+                    var errorMessage = ResourceBundle.getStringFormat(bundle, "repeatable.subfields.rule.error", params.subfields[i], counter[params.subfields[i]]);
+                    result.push(ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record)));
                 }
             }
             return result;
-        }
-        finally {
-            Log.trace( "Exit - RepeatableSubfields.validateField (): ", result );
+        } finally {
+            Log.trace("Exit - RepeatableSubfields.validateField (): ", result);
         }
     }
+
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateField' : validateField
+        'validateField': validateField
     };
 }();

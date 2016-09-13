@@ -14,7 +14,7 @@ EXPORTED_SYMBOLS = ['DefaultDoubleRecordHandler'];
  * @namespace
  * @name DefaultEnrichmentRecordHandler
  */
-var DefaultDoubleRecordHandler = function() {
+var DefaultDoubleRecordHandler = function () {
     var __BUNDLE_NAME = "double-record";
 
     /**
@@ -27,13 +27,11 @@ var DefaultDoubleRecordHandler = function() {
      */
     function checkAndSendMails(record, settings) {
         Log.trace("Enter - DefaultDoubleRecordHandler.checkAndSendMails()");
-
         try {
             if (!settings.containsKey('solr.url')) {
                 Log.error("SOLR has not been configured. Missing key 'solr.url' in settings.");
                 return;
             }
-
             /*
              TODO Når extern dobbeltpostkontrol laves skal man her kalde findGeneral ved almindelig
              TODO opdatering og ved forced skal find kaldes. Yderligere skal der kun sendes mail ved forced.
@@ -45,20 +43,51 @@ var DefaultDoubleRecordHandler = function() {
                 // record.getFirstFieldAsField() returns "" if no field were found!!!
                 return;
             }
-
-            var logMessage = StringUtil.sprintf("Double records for record {%s:%s}: %s",
-                idField.getFirstValue(/a/), idField.getFirstValue(/b/), JSON.stringify(records));
+            var logMessage = StringUtil.sprintf("Double records for record {%s:%s}: %s", idField.getFirstValue(/a/), idField.getFirstValue(/b/), JSON.stringify(records));
             Log.info(logMessage);
-
             if (records.length === 0) {
                 return;
             }
-
             var mailObject = formatMessage(idField, records);
             DoubleRecordMailServiceClient.sendMessage(mailObject.subject, mailObject.body);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DefaultDoubleRecordHandler.checkAndSendMails()");
+        }
+    }
+
+    /**
+     * Checks a records for double records and returns a warning if one or more are found.
+     *
+     * @param record   The record to check for double records.
+     * @param settings JNDI settings.
+     *
+     * @name DefaultDoubleRecordHandler#checkDoubleRecordFrontend
+     */
+    function checkDoubleRecordFrontend(record, settings) {
+        Log.trace("Enter - DefaultDoubleRecordHandler.checkDoubleRecordFrontend()");
+        var res = {status: "ok", message: ""};
+        try {
+            if (!settings.containsKey('solr.url')) {
+                var msg = "SOLR has not been configured. Missing key 'solr.url' in settings.";
+                Log.error(msg);
+                res.status = "error";
+                res.message = msg;
+            } else {
+                var records = DoubleRecordFinder.findGeneral(record, settings.get('solr.url'));
+                var idField = record.getFirstFieldAsField(/001/);
+                if (idField !== "" && records.length > 0) {
+                    var logMessage = StringUtil.sprintf("Double records for record {%s:%s}:", idField.getFirstValue(/a/), idField.getFirstValue(/b/));
+                    for (var i = 0; i < records.length; i++) {
+                        logMessage += " " + records[i].id + ","
+                    }
+                    logMessage = logMessage.slice(0, -1);
+                    res.status = "doublerecord";
+                    res.message = logMessage;
+                }
+            }
+            return JSON.stringify(res);
+        } finally {
+            Log.trace("Exit - DefaultDoubleRecordHandler.checkDoubleRecordFrontend()");
         }
     }
 
@@ -82,24 +111,20 @@ var DefaultDoubleRecordHandler = function() {
         try {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var s = "";
-
             var recordId = idField.getFirstValue(/a/);
             var agencyId = idField.getFirstValue(/b/);
 
             s += ResourceBundle.getStringFormat(bundle, "mail.body.header", recordId, agencyId);
             for (var i = 0; i < records.length; i++) {
                 var doubleRecord = records[i];
-
                 s += ResourceBundle.getStringFormat(bundle, "mail.body.double.record.line", doubleRecord.id, doubleRecord.reason);
             }
             s += ResourceBundle.getString(bundle, "mail.body.footer");
-
             return result = {
                 subject: ResourceBundle.getStringFormat(bundle, "mail.subject", recordId, agencyId),
                 body: s
             }
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DefaultDoubleRecordHandler.formatMessage(): ", result);
         }
     }
@@ -114,20 +139,26 @@ var DefaultDoubleRecordHandler = function() {
      */
     function checkGeneral(record, settings) {
         Log.trace("Enter - FrontendDoubleRecordHandler.checkGeneral()");
-
+        var res = {status: ok, message: ""};
         try {
             if (!settings.containsKey('solr.url')) {
-                Log.error("SOLR has not been configured. Missing key 'solr.url' in settings.");
-                return;
+                var msg = "SOLR has not been configured. Missing key 'solr.url' in settings.";
+                Log.error(msg);
+                res.status = "failed";
+                res.message = msg;
+                return res;
             }
-            var records = DoubleRecordFinder.findGeneral(record, settings.getAbsolutePath('solr.url'));
+            // var records = DoubleRecordFinder.findGeneral(record, settings.getAbsolutePath('solr.url'));
+            var records = [];
             var idField = record.getFirstFieldAsField(/001/);
             if (idField === "") {
-                return;
+                return res;
             }
             var logMessage = StringUtil.sprintf("Double records for record {%s:%s}: %s", idField.getFirstValue(/a/), idField.getFirstValue(/b/), JSON.stringify(records));
             Log.info(logMessage);
-
+            res.status = "doublerecord";
+            res.message = logMessage;
+            return res;
         } finally {
             Log.trace("Exit - FrontendDoubleRecordHandler.checkGeneral()");
         }
@@ -136,6 +167,7 @@ var DefaultDoubleRecordHandler = function() {
     return {
         '__BUNDLE_NAME': __BUNDLE_NAME,
         'checkAndSendMails': checkAndSendMails,
-        'checkGeneral': checkGeneral
+        'checkGeneral': checkGeneral,
+        'checkDoubleRecordFrontend': checkDoubleRecordFrontend
     }
 }();

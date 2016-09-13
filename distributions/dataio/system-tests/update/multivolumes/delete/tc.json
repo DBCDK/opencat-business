@@ -17,8 +17,12 @@
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "children": [ "rawrepo-volume.marc" ],
-                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    "children": [
+                        "rawrepo-volume.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-main-dbc-enrichment.marc",
@@ -29,7 +33,9 @@
                     "record": "rawrepo-volume.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-volume-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-volume-dbc-enrichment.marc",
@@ -47,7 +53,9 @@
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ],
+                        "enrichments": [
+                            "rawrepo-main-dbc-enrichment.marc"
+                        ],
                         "children": []
                     },
                     {
@@ -85,14 +93,20 @@
             "record": "delete-volume-request.marc"
         },
         "setup": {
-            "holdings": [ 723000 ],
+            "holdings": [
+                723000
+            ],
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "children": [ "rawrepo-volume.marc" ],
-                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    "children": [
+                        "rawrepo-volume.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-main-dbc-enrichment.marc",
@@ -103,7 +117,9 @@
                     "record": "rawrepo-volume.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-volume-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-volume-dbc-enrichment.marc",
@@ -121,7 +137,9 @@
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ],
+                        "enrichments": [
+                            "rawrepo-main-dbc-enrichment.marc"
+                        ],
                         "children": []
                     },
                     {
@@ -164,8 +182,12 @@
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "children": [ "rawrepo-volume.marc" ],
-                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                    "children": [
+                        "rawrepo-volume.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-main-dbc-enrichment.marc",
@@ -176,7 +198,9 @@
                     "record": "rawrepo-volume.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-volume-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-volume-dbc-enrichment.marc",
@@ -190,9 +214,18 @@
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "message" : "Posten '58442615' kan ikke slettes, da der er poster på et lavere niveau som refererer til den"
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "message",
+                                    "value": "Posten '58442615' kan ikke slettes, da der er poster på et lavere niveau som refererer til den"
+                                },
+                                {
+                                    "value": "58442615:870970",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -201,8 +234,12 @@
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "children": [ "rawrepo-volume.marc" ],
-                        "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
+                        "children": [
+                            "rawrepo-volume.marc"
+                        ],
+                        "enrichments": [
+                            "rawrepo-main-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-main-dbc-enrichment.marc",
@@ -213,7 +250,9 @@
                         "record": "rawrepo-volume.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                        "enrichments": [
+                            "rawrepo-volume-dbc-enrichment.marc"
+                        ]
                     },
                     {
                         "record": "rawrepo-volume-dbc-enrichment.marc",

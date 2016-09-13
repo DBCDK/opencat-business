@@ -1,13 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "AuthenticateTemplate" );
-use( "StopWatch" );
-use( "TemplateContainer" );
-use( "Validator" );
+use("AuthenticateTemplate");
+use("RecordUtil");
+use("StopWatch");
+use("TemplateContainer");
+use("Validator");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'FBSValidatorEntryPoint' ];
+EXPORTED_SYMBOLS = ['FBSValidatorEntryPoint'];
 
-//-----------------------------------------------------------------------------
 /**
  * Module to contain entry points for the validator API between Java and
  * JavaScript.
@@ -15,11 +13,10 @@ EXPORTED_SYMBOLS = [ 'FBSValidatorEntryPoint' ];
  * @namespace
  * @name FBSValidatorEntryPoint
  */
-var FBSValidatorEntryPoint = function() {
-    function initTemplates( settings ) {
+var FBSValidatorEntryPoint = function () {
+    function initTemplates(settings) {
         ResourceBundleFactory.init(settings);
         TemplateContainer.setSettings(settings);
-
         TemplateContainer.initTemplates();
     }
 
@@ -29,27 +26,23 @@ var FBSValidatorEntryPoint = function() {
      * @return {JSON} A json with the names of the templates. The names is returned
      *                as an Array.
      */
-    function getValidateSchemas( groupId, settings ) {
-        Log.trace( "Enter - FBSValidatorEntryPoint.getValidateSchemas( '", groupId, "', ", settings, " )" );
-
+    function getValidateSchemas(groupId, settings) {
+        Log.trace("Enter - FBSValidatorEntryPoint.getValidateSchemas( '", groupId, "', ", settings, " )");
         var result = undefined;
         try {
             ResourceBundleFactory.init(settings);
             TemplateContainer.setSettings(settings);
-
             var schemas = TemplateContainer.getTemplateNames();
             var list = [];
-            for( var i = 0; i < schemas.length; i++ ) {
-                var schema = schemas[ i ];
-                if( AuthenticateTemplate.canAuthenticate( groupId, TemplateContainer.getUnoptimized( schema.schemaName ) ) ) {
-                    list.push( schema );
+            for (var i = 0; i < schemas.length; i++) {
+                var schema = schemas[i];
+                if (AuthenticateTemplate.canAuthenticate(groupId, TemplateContainer.getUnoptimized(schema.schemaName))) {
+                    list.push(schema);
                 }
             }
-
-            return result = JSON.stringify( list );
-        }
-        finally {
-            Log.trace( "Exit - FBSValidatorEntryPoint.getValidateSchemas(): ", result );
+            return result = JSON.stringify(list);
+        } finally {
+            Log.trace("Exit - FBSValidatorEntryPoint.getValidateSchemas(): ", result);
         }
     }
 
@@ -60,29 +53,23 @@ var FBSValidatorEntryPoint = function() {
      *
      * @return {Boolean} true if the template exists, false otherwise.
      */
-    function checkTemplate( name, groupId, settings ) {
-        Log.trace( StringUtil.sprintf( "Enter - checkTemplate( '%s' )", name ) );
-
+    function checkTemplate(name, groupId, settings) {
+        Log.trace(StringUtil.sprintf("Enter - checkTemplate( '%s' )", name));
         var result = null;
         try {
-            ResourceBundleFactory.init( settings );
-            TemplateContainer.setSettings( settings );
-
-            var templateObj = TemplateContainer.getUnoptimized( name );
-            if( templateObj !== undefined ) {
+            ResourceBundleFactory.init(settings);
+            TemplateContainer.setSettings(settings);
+            var templateObj = TemplateContainer.getUnoptimized(name);
+            if (templateObj !== undefined) {
                 return result = AuthenticateTemplate.canAuthenticate(groupId, templateObj);
             }
-
             return result = false;
-        }
-        catch( ex ) {
-            Log.debug( "Caught exception -> returning false. The exception was: ", ex );
-
+        } catch (ex) {
+            Log.debug("Caught exception -> returning false. The exception was: ", ex);
             result = false;
             return result;
-        }
-        finally {
-            Log.trace( "Exit - checkTemplate(): " + result );
+        } finally {
+            Log.trace("Exit - checkTemplate(): " + result);
         }
     }
 
@@ -94,30 +81,25 @@ var FBSValidatorEntryPoint = function() {
      *
      * @return {String} A json string with an array of validation errors.
      */
-    function validateRecord( templateName, record, settings ) {
-        Log.trace( "Enter - validateRecord()" );
-
+    function validateRecord(templateName, record, settings) {
+        Log.trace("Enter - validateRecord()");
         try {
-            var rec = JSON.parse( record );
+            var rec = JSON.parse(record);
             var templateProvider = function () {
-                TemplateContainer.setSettings( settings );
-                return TemplateContainer.get( templateName );
+                TemplateContainer.setSettings(settings);
+                return TemplateContainer.get(templateName);
             };
-
             var result = null;
-
             try {
-                ResourceBundleFactory.init( settings );
-                result = Validator.validateRecord( rec, templateProvider, settings );
+                ResourceBundleFactory.init(settings);
+                result = Validator.validateRecord(rec, templateProvider, settings);
+            } catch (ex) {
+                var msg = StringUtil.sprintf("FBSvalidator systemfejl ved validering: %s", ex);
+                result = [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
             }
-            catch( ex ) {
-                result = [ ValidateErrors.recordError( "", StringUtil.sprintf( "FBSvalidator systemfejl ved validering: %s", ex ) ) ];
-            }
-
-            return JSON.stringify( result );
-        }
-        finally {
-            Log.trace( "Exit - validateRecord()" );
+            return JSON.stringify(result);
+        } finally {
+            Log.trace("Exit - validateRecord()");
         }
     }
 

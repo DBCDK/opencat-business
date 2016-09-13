@@ -1,14 +1,12 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use ("ValidationUtil");
-use ("CheckEAN13");
-//-----------------------------------------------------------------------------
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValidationUtil");
+use("CheckEAN13");
+
 EXPORTED_SYMBOLS = ['CheckISBN13'];
 
-//-----------------------------------------------------------------------------
 var CheckISBN13 = function () {
     var __BUNDLE_NAME = "validation";
 
@@ -24,20 +22,19 @@ var CheckISBN13 = function () {
      * @name CheckISBN13.validateSubfield
      * @method
      */
-    function validateSubfield( record, field, subfield, params ) {
-        Log.trace( "Enter --- CheckISBN13.validateSubfield" );
+    function validateSubfield(record, field, subfield, params) {
+        Log.trace("Enter --- CheckISBN13.validateSubfield");
         try {
-
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             //ValueCheck.checkUndefined( "params", params );
             var result = [];
-            result = CheckEAN13.makeCheck( subfield, bundle, 'B' );
+            result = CheckEAN13.makeCheck(subfield, bundle, 'B', record);
             return result;
         } finally {
-            Log.trace( "Exit --- CheckISBN13.validateSubfield" );
+            Log.trace("Exit --- CheckISBN13.validateSubfield");
         }
     }
+
     return {
         'validateSubfield': validateSubfield,
         '__BUNDLE_NAME': __BUNDLE_NAME

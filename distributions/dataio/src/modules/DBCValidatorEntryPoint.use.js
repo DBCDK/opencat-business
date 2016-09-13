@@ -1,4 +1,5 @@
 use("AuthenticateTemplate");
+use("RecordUtil");
 use("TemplateContainer");
 use("Validator");
 
@@ -15,7 +16,6 @@ var DBCValidatorEntryPoint = function () {
     function initTemplates(settings) {
         ResourceBundleFactory.init(settings);
         TemplateContainer.setSettings(settings);
-
         TemplateContainer.initTemplates();
     }
 
@@ -27,7 +27,6 @@ var DBCValidatorEntryPoint = function () {
      */
     function getValidateSchemas(groupId, settings) {
         Log.trace("Enter - DBCValidatorEntryPoint.getValidateSchemas( '", groupId, "', ", settings, " )");
-
         var result = undefined;
         try {
             ResourceBundleFactory.init(settings);
@@ -41,10 +40,8 @@ var DBCValidatorEntryPoint = function () {
                     list.push(schema);
                 }
             }
-
             return result = JSON.stringify(list);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCValidatorEntryPoint.getValidateSchemas(): ", result);
         }
     }
@@ -58,26 +55,20 @@ var DBCValidatorEntryPoint = function () {
      */
     function checkTemplate(name, groupId, settings) {
         Log.trace(StringUtil.sprintf("Enter - checkTemplate( '%s' )", name));
-
         var result = null;
         try {
             ResourceBundleFactory.init(settings);
             TemplateContainer.setSettings(settings);
-
             var templateObj = TemplateContainer.getUnoptimized(name);
             if (templateObj !== undefined) {
                 return result = AuthenticateTemplate.canAuthenticate(groupId, templateObj);
             }
-
             return result = false;
-        }
-        catch (ex) {
+        } catch (ex) {
             Log.debug("Caught exception -> returning false. The exception was: ", ex);
-
             result = false;
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - checkTemplate(): " + result);
         }
     }
@@ -92,7 +83,6 @@ var DBCValidatorEntryPoint = function () {
      */
     function validateRecord(templateName, record, settings) {
         Log.trace("Enter - validateRecord()");
-
         try {
             var rec = JSON.parse(record);
             var templateProvider = function () {
@@ -101,18 +91,15 @@ var DBCValidatorEntryPoint = function () {
             };
 
             var result = null;
-
             try {
                 ResourceBundleFactory.init(settings);
                 result = Validator.validateRecord(rec, templateProvider, settings);
+            } catch (ex) {
+                var msg = StringUtil.sprintf("DBCvalidator systemfejl ved validering: %s", ex);
+                result = [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
             }
-            catch (ex) {
-                result = [ValidateErrors.recordError("", StringUtil.sprintf("DBCvalidator systemfejl ved validering: %s", ex))];
-            }
-
             return JSON.stringify(result);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - validateRecord()");
         }
     }

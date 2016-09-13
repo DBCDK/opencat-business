@@ -1,13 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['SubfieldsDemandsOtherSubfields'];
 
-//-----------------------------------------------------------------------------
 var SubfieldsDemandsOtherSubfields = function () {
     var __BUNDLE_NAME = "validation";
 
@@ -23,21 +21,22 @@ var SubfieldsDemandsOtherSubfields = function () {
      * @name SubfieldsDemandsOtherSubfields.validateSubfield
      * @method
      */
-    function validateSubfield ( record, field, subfield, params ) {
-        Log.trace( "Enter --- SubfieldsDemandsOtherSubfields.validateSubfield" );
+    function validateSubfield(record, field, subfield, params) {
+        Log.trace("Enter --- SubfieldsDemandsOtherSubfields.validateSubfield");
         try {
-            for ( var i = 0; i < field.subfields.length; ++i ) {
-                if ( field.subfields[i].name !== subfield.name ) {
+            for (var i = 0; i < field.subfields.length; ++i) {
+                if (field.subfields[i].name !== subfield.name) {
                     return [];
                 }
             }
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-            var errorMessage = ResourceBundle.getStringFormat( bundle, "subfield.demands.other.subfields.rule.error", field.name, subfield.name );
-            return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var errorMessage = ResourceBundle.getStringFormat(bundle, "subfield.demands.other.subfields.rule.error", field.name, subfield.name);
+            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
         } finally {
-            Log.trace( "Exit --- SubfieldsDemandsOtherSubfields.validateSubfield" );
+            Log.trace("Exit --- SubfieldsDemandsOtherSubfields.validateSubfield");
         }
     }
+
     return {
         'validateSubfield': validateSubfield,
         '__BUNDLE_NAME': __BUNDLE_NAME

@@ -17,8 +17,13 @@
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "children": [ "rawrepo-volume.marc" ],
-                    "enrichments": [ "rawrepo-main-dbc-enrichment.marc", "rawrepo-main-fbs-enrichment.marc" ]
+                    "children": [
+                        "rawrepo-volume.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc",
+                        "rawrepo-main-fbs-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-main-dbc-enrichment.marc",
@@ -50,9 +55,18 @@
             "update": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "params" : {
-                            "message" : "Påhængsposten {58442895|723000} må ikke pege på en post via 014a"
+                        "type": "ERROR",
+                        "params": {
+                            "param": [
+                                {
+                                    "key": "message",
+                                    "value": "Påhængsposten {58442895|723000} må ikke pege på en post via 014a"
+                                },
+                                {
+                                    "value": "58442895:723000",
+                                    "key": "pid"
+                                }
+                            ]
                         }
                     }
                 ]

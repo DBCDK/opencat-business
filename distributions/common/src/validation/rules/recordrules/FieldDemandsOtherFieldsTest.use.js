@@ -6,9 +6,7 @@ use ( "FieldDemandsOtherFields");
 //-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "FieldDemandsOtherFields first", function( ) {
-
     var bundle = ResourceBundleFactory.getBundle( FieldDemandsOtherFields.__BUNDLE_NAME );
-
     var record = {
         fields: [
             {
@@ -39,55 +37,54 @@ UnitTest.addFixture( "FieldDemandsOtherFields first", function( ) {
     };
 
     //params error testing
-    var error= [{type:"ERROR", params:{url:"", message:"Params mangler sources og demands attribbuterne."}}];
+    var error= [{type:"ERROR", params:{param:[{key:"message", value:"Params mangler sources og demands attribbuterne."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields with empty params obj" ,  FieldDemandsOtherFields.validateRecord( record, {}), error);
     var params = { "demands" : ["001"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Params attributten demands er angivet men attributten sources mangler."}}];
+    error= [{type:"ERROR", params:{param:[{key:"message", value:"Params attributten demands er angivet men attributten sources mangler."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields with params but no sources obj" ,  FieldDemandsOtherFields.validateRecord( record, params), error);
-    var params = {"sources" : ["001"], "demands" : []};
-    var error= [{type:"ERROR", params:{url:"", message:"Params attributten demands skal minimum indeholde een v\xe6rdi."}}];
+    params = {"sources" : ["001"], "demands" : []};
+    error= [{type:"ERROR", params:{param:[{key:"message", value:"Params attributten demands skal minimum indeholde een v\xe6rdi."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields with params but no values in demands array" ,  FieldDemandsOtherFields.validateRecord( record, params), error);
-    var params = {"sources" : [], "demands" : ["001"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Params attributten sources skal minimum indeholde een v\xe6rdi."}}];
+    params = {"sources" : [], "demands" : ["001"]};
+    error= [{type:"ERROR", params:{param:[{key:"message", value:"Params attributten sources skal minimum indeholde een v\xe6rdi."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields with params obj but no values in sources array" ,  FieldDemandsOtherFields.validateRecord( record, params), error);
 
     // ok testing
-    var params = {"sources" : ["001"], "demands" : ["001"]};
+    params = {"sources" : ["001"], "demands" : ["001"]};
     SafeAssert.equal( "FieldDemandsOtherFields demand 001 and source 001" ,  FieldDemandsOtherFields.validateRecord( record, params),[]);
-    var params = {"sources" : ["004"], "demands" : ["001"]};
+    params = {"sources" : ["004"], "demands" : ["001"]};
     SafeAssert.equal( "FieldDemandsOtherFields demand 004 and source 001" ,  FieldDemandsOtherFields.validateRecord( record, params),[]);
-    var params = {"sources" : ["005"], "demands" : ["001"]};
+    params = {"sources" : ["005"], "demands" : ["001"]};
     SafeAssert.equal( "FieldDemandsOtherFields demand 005 and source 001" ,  FieldDemandsOtherFields.validateRecord( record, params),[]);
-    var params = {"sources" : ["005"], "demands" : ["005"]};
+    params = {"sources" : ["005"], "demands" : ["005"]};
     SafeAssert.equal( "FieldDemandsOtherFields demand 005 and source 005" ,  FieldDemandsOtherFields.validateRecord( record, params),[]);
-    var params = {"sources" : ["001","002","003","004","101","102","103","104"], "demands" : ["001","002","003","004","101","102","103","104"]};
+    params = {"sources" : ["001","002","003","004","101","102","103","104"], "demands" : ["001","002","003","004","101","102","103","104"]};
     SafeAssert.equal( "FieldDemandsOtherFields demand all and source all" ,  FieldDemandsOtherFields.validateRecord( record, params),[]);
-    var params = {"sources" : ["001","002","003","004","101","102","103","104","105"], "demands" : ["004"]};
+    params = {"sources" : ["001","002","003","004","101","102","103","104","105"], "demands" : ["004"]};
     SafeAssert.equal( "FieldDemandsOtherFields demand 004 and source all +1" ,  FieldDemandsOtherFields.validateRecord( record, params),[]);
 
     //logic errors testing
-    var params = {"sources" : ["001"], "demands" : ["005"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Da f\xf8lgende felter er tilstede i posten : '001'  er f\xf8lgende felter obligatoriske og mangler : '005'."}}];
+    params = {"sources" : ["001"], "demands" : ["005"]};
+    error = [{type:"ERROR", params:{param:[{key:"message", value:"Da f\xf8lgende felter er tilstede i posten : '001'  er f\xf8lgende felter obligatoriske og mangler : '005'."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields source 001 and demands 001" ,  FieldDemandsOtherFields.validateRecord( record, params),error);
 
-    var params = {"sources" : ["001","002"], "demands" : ["005"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Da f\xf8lgende felter er tilstede i posten : '001,002'  er f\xf8lgende felter obligatoriske og mangler : '005'."}}];
+    params = {"sources" : ["001","002"], "demands" : ["005"]};
+    error = [{type:"ERROR", params:{param:[{key:"message", value:"Da f\xf8lgende felter er tilstede i posten : '001,002'  er f\xf8lgende felter obligatoriske og mangler : '005'."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields demands 005 source 001,002" ,  FieldDemandsOtherFields.validateRecord( record, params),error);
 
-    var params = {"sources" : ["001", "005"], "demands" : ["005"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Da f\xf8lgende felter er tilstede i posten : '001'  er f\xf8lgende felter obligatoriske og mangler : '005'."}}];
+    params = {"sources" : ["001", "005"], "demands" : ["005"]};
+    error = [{type:"ERROR", params:{param:[{key:"message", value:"Da f\xf8lgende felter er tilstede i posten : '001'  er f\xf8lgende felter obligatoriske og mangler : '005'."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields demands 005 source 001,005" ,  FieldDemandsOtherFields.validateRecord( record , params),error);
 
-    var params = {"sources" : ["001", "005","006","002"], "demands" : ["005"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Da f\xf8lgende felter er tilstede i posten : '001,002'  er f\xf8lgende felter obligatoriske og mangler : '005'."}}];
+    params = {"sources" : ["001", "005","006","002"], "demands" : ["005"]};
+    error = [{type:"ERROR", params:{param:[{key:"message", value:"Da f\xf8lgende felter er tilstede i posten : '001,002'  er f\xf8lgende felter obligatoriske og mangler : '005'."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields demand 005 and source 001,005,006,002" ,  FieldDemandsOtherFields.validateRecord( record, params),error);
 
-    var params = {"sources" : ["001", "004"], "demands" : ["001","005"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Da f\xf8lgende felter er tilstede i posten : '001,004'  er f\xf8lgende felter obligatoriske og mangler : '005'."}}];
+    params = {"sources" : ["001", "004"], "demands" : ["001","005"]};
+    error = [{type:"ERROR", params:{param:[{key:"message", value:"Da f\xf8lgende felter er tilstede i posten : '001,004'  er f\xf8lgende felter obligatoriske og mangler : '005'."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields demand 001 and source 001" ,  FieldDemandsOtherFields.validateRecord( record, params),error);
 
-    var params = {"sources" : ["001", "004"], "demands" : ["001","005","006"]};
-    var error= [{type:"ERROR", params:{url:"", message:"Da f\xf8lgende felter er tilstede i posten : '001,004'  er f\xf8lgende felter obligatoriske og mangler : '005,006'."}}];
+    params = {"sources" : ["001", "004"], "demands" : ["001","005","006"]};
+    error = [{type:"ERROR", params:{param:[{key:"message", value:"Da f\xf8lgende felter er tilstede i posten : '001,004'  er f\xf8lgende felter obligatoriske og mangler : '005,006'."}, {key:"url", value:""}]}}];
     SafeAssert.equal( "FieldDemandsOtherFields demand 001 and source 001" ,  FieldDemandsOtherFields.validateRecord( record , params),error);
-
 } );

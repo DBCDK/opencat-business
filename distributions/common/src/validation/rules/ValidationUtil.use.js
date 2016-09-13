@@ -1,9 +1,7 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-//-----------------------------------------------------------------------------
+use("Log");
+
 EXPORTED_SYMBOLS = ['ValidationUtil'];
 
-//-----------------------------------------------------------------------------
 var ValidationUtil = function () {
 
     /**
@@ -15,8 +13,8 @@ var ValidationUtil = function () {
      * @name isNumber
      * @method
      */
-    function isNumber ( n ) {
-        return !isNaN( parseFloat( n ) ) && isFinite( n );
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
     /**
@@ -28,10 +26,10 @@ var ValidationUtil = function () {
      * @name doesFieldContainSubfield
      * @method
      */
-    function doesFieldContainSubfield( field, subfieldName ) {
-        Log.trace ( "RecordRules.__doesFieldContainSubfield" );
-        for ( var i = 0 ; i < field.subfields.length ; ++i ) {
-            if ( field.subfields[i].name === subfieldName ) {
+    function doesFieldContainSubfield(field, subfieldName) {
+        Log.trace("RecordRules.__doesFieldContainSubfield");
+        for (var i = 0; i < field.subfields.length; ++i) {
+            if (field.subfields[i].name === subfieldName) {
                 return true;
             }
         }
@@ -47,14 +45,15 @@ var ValidationUtil = function () {
      * @name getFields
      * @method
      */
-    function getFields( record, fieldName ) {
+    function getFields(record, fieldName) {
         var ret = [];
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName )
-                ret.push( record.fields[i] );
+        for (var i = 0; i < record.fields.length; ++i) {
+            if (record.fields[i].name === fieldName)
+                ret.push(record.fields[i]);
         }
         return ret;
     }
+
     /**
      * getFirstField
      * @syntax
@@ -64,12 +63,13 @@ var ValidationUtil = function () {
      * @name getFirstField
      * @method
      */
-    function getFirstField( record, fieldName ) {
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName )
-                return  record.fields[i];
+    function getFirstField(record, fieldName) {
+        for (var i = 0; i < record.fields.length; ++i) {
+            if (record.fields[i].name === fieldName)
+                return record.fields[i];
         }
     }
+
     /**
      * getFirstSubfieldValue
      * @syntax
@@ -79,12 +79,14 @@ var ValidationUtil = function () {
      * @name getFirstSubfieldValue
      * @method
      */
-    function getFirstSubfieldValue(subfields , subfieldName ) {
-        for ( var i = 0; i < subfields.length; ++i ) {
-            if ( subfields[i].name === subfieldName)
-                return subfields[i].value ;
+    function getFirstSubfieldValue(subfields, subfieldName) {
+        for (var i = 0; i < subfields.length; ++i) {
+            if (subfields[i].name === subfieldName) {
+                return subfields[i].value;
+            }
         }
     }
+
     /**
      * recordContainsField
      * @syntax
@@ -94,10 +96,10 @@ var ValidationUtil = function () {
      * @name recordContainsField
      * @method
      */
-    function recordContainsField( record, fieldName ) {
-        Log.trace ( "RecordRules.__recordContainsField" );
-        for ( var i = 0; i < record.fields.length; ++i ) {
-            if ( record.fields[i].name === fieldName ) {
+    function recordContainsField(record, fieldName) {
+        Log.trace("RecordRules.__recordContainsField");
+        for (var i = 0; i < record.fields.length; ++i) {
+            if (record.fields[i].name === fieldName) {
                 return true;
             }
         }
@@ -112,27 +114,28 @@ var ValidationUtil = function () {
      * @name getFieldNamesAsKeys
      * @method
      */
-    function getFieldNamesAsKeys ( record ) {
-        Log.trace( "Enter - ValidationUtil.getFieldNamesAsKeys" );
+    function getFieldNamesAsKeys(record) {
+        Log.trace("Enter - ValidationUtil.getFieldNamesAsKeys");
         try {
             var ret = {};
-            record.fields.forEach( function ( field ) {
-                if ( !ret.hasOwnProperty( (field.name ) ) ) {
-                    Object.defineProperty( ret, field.name, {enumerable: true, value: field} );
+            record.fields.forEach(function (field) {
+                if (!ret.hasOwnProperty((field.name ))) {
+                    Object.defineProperty(ret, field.name, {enumerable: true, value: field});
                 }
-            } );
+            });
             return ret;
         } finally {
-            Log.trace( "Exit - FieldDemandsOtherFields.__getFieldNamesAskeys" );
+            Log.trace("Exit - FieldDemandsOtherFields.__getFieldNamesAskeys");
         }
     }
 
-    return {"getFieldNamesAsKeys" : getFieldNamesAsKeys ,
-            "getFirstSubfieldValue": getFirstSubfieldValue,
-            "getFirstField" : getFirstField,
-            "isNumber": isNumber,
-            "doesFieldContainSubfield" : doesFieldContainSubfield,
-            "getFields" : getFields,
-            "recordContainsField" : recordContainsField };
-
+    return {
+        "getFieldNamesAsKeys": getFieldNamesAsKeys,
+        "getFirstSubfieldValue": getFirstSubfieldValue,
+        "getFirstField": getFirstField,
+        "isNumber": isNumber,
+        "doesFieldContainSubfield": doesFieldContainSubfield,
+        "getFields": getFields,
+        "recordContainsField": recordContainsField
+    };
 }();

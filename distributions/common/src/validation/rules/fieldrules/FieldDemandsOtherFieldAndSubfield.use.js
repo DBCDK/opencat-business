@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
-use( "ValidationUtil" );
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
+use("ValidationUtil");
 
 //-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
@@ -13,6 +13,7 @@ EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
 
 var FieldDemandsOtherFieldAndSubfield = function () {
     var BUNDLE_NAME = "validation";
+
     /**
      * Function that checks if a field exists then another field must exists and contain the subfields from params.
      * @syntax FieldDemandsOtherFieldAndSubfield.validateField(  record , params  )
@@ -27,15 +28,15 @@ var FieldDemandsOtherFieldAndSubfield = function () {
      * @returns an array which contains errors if any is present.
      * @method
      */
-    function validateField ( record, field, params ) {
-        Log.debug( "Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)" );
-        Log.debug( "record ", record !== undefined ? JSON.stringify(record) : "undef" );
-        Log.debug( "field ", field !== undefined ? JSON.stringify(field) : "undef" );
+    function validateField(record, field, params) {
+        Log.debug("Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)");
+        Log.debug("record ", record !== undefined ? JSON.stringify(record) : "undef");
+        Log.debug("field ", field !== undefined ? JSON.stringify(field) : "undef");
         //Log.debug( "params ", params !== undefined ? JSON.stringify(params) : "undef" ); - Doesn't work :(
 
         var result = null;
         try {
-            var bundle = ResourceBundleFactory.getBundle( BUNDLE_NAME );
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
             ValueCheck.check("record.fields", record.fields).instanceOf(Array);
             ValueCheck.check("params.field", params.field);
@@ -47,8 +48,8 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             var collectedFields = ValidationUtil.getFields(record, params.field);
 
             if (collectedFields.length === 0) {
-                message = ResourceBundle.getStringFormat( bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields );
-                return result = [ValidateErrors.fieldError( "", message ) ];
+                message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
+                return result = [ValidateErrors.fieldError("", message, RecordUtil.getRecordPid(record))];
             } else {
 
                 for (var i = 0; i < collectedFields.length; ++i) {
@@ -67,17 +68,17 @@ var FieldDemandsOtherFieldAndSubfield = function () {
                     }
                 }
             }
-            message = ResourceBundle.getStringFormat( bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields );
-            return result = [ ValidateErrors.fieldError( "", message ) ];
+            message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
+            return result = [ValidateErrors.fieldError("", message, RecordUtil.getRecordPid(record))];
         }
         finally {
-            Log.debug( "Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result !== undefined ? JSON.stringify(result) : "undef" );
+            Log.debug("Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result !== undefined ? JSON.stringify(result) : "undef");
         }
     }
 
 
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateField' : validateField
+        'validateField': validateField
     };
 }();

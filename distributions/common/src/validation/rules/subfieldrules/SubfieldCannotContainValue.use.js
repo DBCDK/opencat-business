@@ -1,15 +1,14 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['SubfieldCannotContainValue'];
 
-//-----------------------------------------------------------------------------
 var SubfieldCannotContainValue = function () {
     var __BUNDLE_NAME = "validation";
+
     /**
      * subfieldCannotContainValue checks that if a given subfield does not contain the value from params
      * @syntax SubfieldRules.subfieldCannotContainValue( record, field, subfield, params )
@@ -24,38 +23,33 @@ var SubfieldCannotContainValue = function () {
      * @name SubfieldRules.subfieldCannotContainValue
      * @method
      */
-    function validateSubfield ( record, field, subfield, params ) {
-        Log.debug( "Enter --- SubfieldCannotContainValue.validateSubfield" );
-        ValueCheck.check( "params.values", params.values );
-        ValueCheck.check( "params", params.values ).instanceOf( Array );
-
+    function validateSubfield(record, field, subfield, params) {
+        Log.debug("Enter --- SubfieldCannotContainValue.validateSubfield");
+        ValueCheck.check("params.values", params.values);
+        ValueCheck.check("params", params.values).instanceOf(Array);
         try {
-            if( params.notcondition !== undefined ) {
-                ValueCheck.check( "params.notcondition", params.notcondition ).type( "object" );
-                ValueCheck.check( "params.notcondition.subfield", params.notcondition.subfield ).type( 'string' );
-                ValueCheck.check( "params.notcondition.value", params.notcondition.value ).type( 'string' );
+            if (params.notcondition !== undefined) {
+                ValueCheck.check("params.notcondition", params.notcondition).type("object");
+                ValueCheck.check("params.notcondition.subfield", params.notcondition.subfield).type('string');
+                ValueCheck.check("params.notcondition.value", params.notcondition.value).type('string');
 
-                var fieldname = params.notcondition.subfield.substr( 0, 3 );
-                var subfieldname = params.notcondition.subfield.substr( 3, 1 );
-
+                var fieldname = params.notcondition.subfield.substr(0, 3);
+                var subfieldname = params.notcondition.subfield.substr(3, 1);
                 var foundCondition = false;
-                Log.debug( "Validating subfield: ", field.name, subfield.name, ": ", subfield.value );
-                Log.debug( "Record: " + JSON.stringify( record ) );
-                for( var i = 0; i < record.fields.length; i++ ) {
-                    if( record.fields[i].name === fieldname ) {
+                Log.debug("Validating subfield: ", field.name, subfield.name, ": ", subfield.value);
+                Log.debug("Record: " + JSON.stringify(record));
+                for (var i = 0; i < record.fields.length; i++) {
+                    if (record.fields[i].name === fieldname) {
                         for (var j = 0; j < record.fields[i].subfields.length; j++) {
-
-                            if( record.fields[i].subfields[j].name === subfieldname &&
-                                record.fields[i].subfields[j].value === params.notcondition.value )
-                            {
+                            if (record.fields[i].subfields[j].name === subfieldname &&
+                                record.fields[i].subfields[j].value === params.notcondition.value) {
                                 foundCondition = true;
                                 break;
                             }
                         }
                     }
                 }
-
-                if( foundCondition ) {
+                if (foundCondition) {
                     return [];
                 }
             }
@@ -63,16 +57,16 @@ var SubfieldCannotContainValue = function () {
             var ret = [];
             // implicit cast here as we want to check for both strings and ints
             // eg 1 equals '1'
-            params.values.forEach( function ( value ) {
-                if ( subfield.value == value ) {
-                    var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-                    var errorMessage = ResourceBundle.getStringFormat( bundle, "subfield.cannot.contain.value.rule.error", subfield.name, subfield.value );
-                    ret.push( ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage ) );
+            params.values.forEach(function (value) {
+                if (subfield.value == value) {
+                    var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                    var errorMessage = ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", subfield.name, subfield.value);
+                    ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record)));
                 }
             });
             return ret;
         } finally {
-            Log.trace( "Exit --- SubfieldCannotContainValue.validateSubfield" );
+            Log.trace("Exit --- SubfieldCannotContainValue.validateSubfield");
         }
     }
 

@@ -1,13 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
+use("Log");
+use("RecordUtil");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['CheckValue'];
 
-//-----------------------------------------------------------------------------
 var CheckValue = function () {
     var __BUNDLE_NAME = "validation";
 
@@ -26,25 +24,24 @@ var CheckValue = function () {
      * @name CheckValue.validateSubfield
      * @method
      */
-    function validateSubfield ( record, field, subfield, params ) {
-        Log.trace( "Enter --- CheckValue.validateSubfield" );
+    function validateSubfield(record, field, subfield, params) {
+        Log.trace("Enter --- CheckValue.validateSubfield");
         try {
-            ValueCheck.checkThat( "params", params ).type( "object" );
-            ValueCheck.checkThat( "params['values']", params['values'] ).instanceOf( Array );
-            for ( var i = 0; i < params.values.length; i++ ) {
-                if ( subfield.value === params.values[i] ) {
+            ValueCheck.checkThat("params", params).type("object");
+            ValueCheck.checkThat("params['values']", params['values']).instanceOf(Array);
+            for (var i = 0; i < params.values.length; i++) {
+                if (subfield.value === params.values[i]) {
                     return [];
                 }
             }
-
-            var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
-
-            var errorMessage = ResourceBundle.getStringFormat( bundle, "check.value.rule.error", subfield.value, params.values.join( "', '" ) );
-            return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
+            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", subfield.value, params.values.join("', '"));
+            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
         } finally {
-            Log.trace( "Exit --- CheckValue.validateSubfield" );
+            Log.trace("Exit --- CheckValue.validateSubfield");
         }
     }
+
     return {
         'validateSubfield': validateSubfield,
         '__BUNDLE_NAME': __BUNDLE_NAME
