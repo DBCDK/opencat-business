@@ -575,8 +575,8 @@
                     "rules":[{
                             "type":"SubfieldRules.checkLength",
                             "params":{
-                                "min":12,
-                                "max":12
+                                "min":15,
+                                "max":15
                             }
                         }
                     ]
@@ -626,7 +626,7 @@
                             "type":"SubfieldRules.checkLength",
                             "params":{
                                 "min":10,
-                                "max":13
+                                "max":16
                             }
                         }
                     ]
