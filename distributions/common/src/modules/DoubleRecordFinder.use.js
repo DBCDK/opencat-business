@@ -331,6 +331,7 @@ var DoubleRecordFinder = function () {
                 '023a': __querySubfieldSpecificRegister("023ab"),
                 '023b': __querySubfieldSpecificRegister("023ab")
             };
+            andingTogether = false;
             result = __executeQueryAndFindRecords(record, formatters);
             andingTogether = true;
             return result;

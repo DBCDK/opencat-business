@@ -32,7 +32,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
 
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchSections", function () {
     var record;
 
@@ -62,7 +61,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSections", function () {
 
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchNumbers", function () {
     var record;
 
@@ -125,7 +123,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchNumbers", function () {
 
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchSoundMovieMultimedia", function () {
     var record;
 
@@ -175,7 +172,7 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSoundMovieMultimedia", function (
     Assert.equalValue("009 *a t and g tk", DoubleRecordFinder.__matchSoundMovieMultimedia(record), true);
 
 });
-//-----------------------------------------------------------------------------
+
 UnitTest.addFixture("DoubleRecordFinder.__matchMusic", function () {
     var record;
 
@@ -202,7 +199,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchMusic", function () {
 
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchComposedMaterials", function () {
     var record;
 
@@ -235,7 +231,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchComposedMaterials", function () {
 
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchSimpleLiterature", function () {
     var record;
 
@@ -274,7 +269,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSimpleLiterature", function () {
 
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchTechnicalLiterature", function () {
     var record;
 
@@ -391,7 +385,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchTechnicalLiterature", function ()
     Assert.equalValue("Fixtion Literature STP", DoubleRecordFinder.__matchTechnicalLiterature(record), false);
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__matchFictionBookMusic", function () {
     var record;
 
@@ -501,7 +494,6 @@ UnitTest.addFixture("DoubleRecordFinder.__matchFictionBookMusic", function () {
     Assert.equalValue("Fiction Found 009a(c)g/652m: 48.64", DoubleRecordFinder.__matchFictionBookMusic(record), false);
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findSimpleLiterature", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -559,7 +551,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSimpleLiterature", function () {
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findTechnicalLiterature", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -617,7 +608,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findTechnicalLiterature", function () 
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findFictionBookMusic", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -659,7 +649,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findFictionBookMusic", function () {
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findComposedMaterials", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -701,7 +690,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findComposedMaterials", function () {
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findMusic538", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -739,7 +727,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic538", function () {
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -806,7 +793,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
 });
 
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findMusic245", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -844,8 +830,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic245", function () {
     );
 });
 
-
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findNumbers", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -885,7 +869,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findNumbers", function () {
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
@@ -1031,7 +1014,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     );
 });
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -1102,7 +1084,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
 });
 
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
@@ -1172,7 +1153,466 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     );
 });
 
-//-----------------------------------------------------------------------------
+UnitTest.addFixture("DoubleRecordFinder.find", function () {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+
+    /*
+     This test performs 3 comparisons:
+     - __findMusicGeneral on 009a, 009g, 110a and 245a (no hit)
+     - __findMusic245 on 009a, 009g and 245a (hit)
+     - __findMusic538 on 009a, 009g and 538g (hit)
+     */
+    SolrCore.clear();
+    SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.110a:kirsebærrød AND match.245a:538g) AND marc.001b:870970",
+        {response: {docs: []}});
+    SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.009a:s", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
+    });
+    SolrCore.addAnalyse("match.009g:xc", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xc"}]]}}}
+    });
+    SolrCore.addAnalyse("match.110a:Kirsebærrød", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.110a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "kirsebærrød"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:538g", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "538g"}]]}}}
+    });
+    SolrCore.addAnalyse("match.538g:208", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
+    });
+
+    record = RecordUtil.createFromString([
+        "001 00 *a 47798086 *b 870970 *d 20160501 *f a",
+        "002 00 *r n *a e",
+        "008 00 *t s *u s *a 2016 *b gb *l eng *v 0",
+        "009 00 *a s *g xc",
+        "110 00 *a Kirsebærrød",
+        "245 00 *a 538g",
+        "260 00 *b Kirsebærrød",
+        "538 00 *f Cherry Red *g 208",
+        "652 00 *m 78.796 *v 5",
+        "996 00 *a 710100"
+    ].join("\n"));
+
+    Assert.equalValue("DoubleRecordFinder.find - music, second match", DoubleRecordFinder.find(record, solrUrl),
+        [{
+            id: "12345678",
+            reason: "009a, 009g, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        },
+            {
+                id: "12345678",
+                reason: "009a, 009g, 538g",
+                edition: undefined,
+                composed: undefined,
+                sectioninfo: undefined,
+                volumeinfo: undefined
+            }]
+    );
+
+    /*
+     This test performs 3 comparisons:
+     - __findMusicGeneral on 009a, 009g and 245a (no hit)
+     - __findMusic245 on 009a, 009g and 245a (no hit)
+     - __findMusic538 on 009a, 009g and 538g (hit)
+     */
+    SolrCore.clear();
+    SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+        {response: {docs: []}});
+    SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.009a:s", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
+    });
+    SolrCore.addAnalyse("match.009g:xc", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xc"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:538g", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "538g"}]]}}}
+    });
+    SolrCore.addAnalyse("match.538g:208", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
+    });
+
+    record = RecordUtil.createFromString([
+        "001 00 *a 47798086 *b 870970 *d 20160501 *f a",
+        "002 00 *r n *a e",
+        "008 00 *t s *u s *a 2016 *b gb *l eng *v 0",
+        "009 00 *a s *g xc",
+        "245 00 *a 538g",
+        "260 00 *b Kirsebærrød",
+        "538 00 *f Cherry Red *g 208",
+        "652 00 *m 78.796 *v 5",
+        "996 00 *a 710100"
+    ].join("\n"));
+
+    Assert.equalValue("DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find(record, solrUrl),
+        [{
+            id: "12345678",
+            reason: "009a, 009g, 538g",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+
+
+});
+
+UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster med 300e skal kun matche op imod poster med 300e", function () {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.009a:m", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "m"}]]}}}
+    });
+    SolrCore.addAnalyse("match.009g:th", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "th"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:Hamlet", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "hamlet"}]]}}}
+    });
+    record = RecordUtil.createFromString([
+        "001 00 *a 61690859 *b 870970 *c 20131114211327 *d 20131114 *f a",
+        "004 00 *a e *r c",
+        "008 00 *t m *v 0 *a 2003 *b gb *l eng *u f",
+        "009 00 *a m *g th",
+        "245 00 *a Hamlet",
+        "260 00 *a [London] *b Carlton International Media *c 2003 *g Front Row",
+        "300 00 *n 1 dvd-video *l 2 t., 35 min.",
+        "440 00 *0  *a Classic collection",
+        "508 00 *a Engelsk tale",
+        "508 00 *a Uden undertekster",
+        "512 00 *a Originalfilm: Two Cities, 1948",
+        "652 00 *m 77.7",
+        "666 00 *s drama",
+        "666 00 *s hævn",
+        "666 00 *q Danmark",
+        "700 00 *a Shakespeare *h William *4 ant",
+        "700 00 *a Olivier *h Laurence *4 drt *4 pro *4 act",
+        "700 00 *a Herlie *h Eileen *4 act",
+        "700 00 *a Sydney *h Basil *4 act",
+        "700 00 *a Simmons *h Jean *4 act",
+        "700 00 *a Aylmer *h Felix *4 act",
+        "996 00 *a 746100",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+
+    Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
+        [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
+    );
+
+});
+
+UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function () {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+
+    SolrCore.clear();
+    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.245ø:1cd) AND marc.001b:870970",
+        {response: {docs: [{id: "11111111:870970"}]}});
+    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
+        {response: {docs: [{id: "22222222:870970"}]}});
+    SolrCore.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
+        {response: {docs: [{id: "33333333:870970"}]}});
+    SolrCore.addAnalyse("match.009a:r", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "r"}]]}}}
+    });
+    SolrCore.addAnalyse("match.009g:xe", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xe"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:Troffelspisernes mareridt", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "troffelspisernesmareridt"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245ø:1 cd", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245ø": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "1cd"}]]}}}
+    });
+    SolrCore.addAnalyse("match.300e:2 mapper (402 mikrokort)", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.300e": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "2mapper402mikrokort"}]]}}}
+    });
+
+    var soundMovieMultimedia245 = RecordUtil.createFromString([
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt *ø 1 cd",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+
+    var soundMovieMultimedia300 = RecordUtil.createFromString([
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books",
+        "300 00 *e2 mapper (402 mikrokort)"
+    ].join("\n"));
+
+    var soundMovieMultimedia = RecordUtil.createFromString([
+        "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
+        "009 00 *a r *g xe",
+        "245 00 *a Troffelspisernes mareridt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+
+    Assert.equalValue("__findSoundMovieMultimedia245 with record containing field 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245(soundMovieMultimedia245, solrUrl),
+        [{
+            id: "11111111",
+            reason: "009a, 009g, 245a, 245ø",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia245 with record containing 300e but not 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245(soundMovieMultimedia300, solrUrl),
+        []
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia245 with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia245(soundMovieMultimedia, solrUrl),
+        []
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia300 with record containing field 300e", DoubleRecordFinder.__findSoundMovieMultimedia300(soundMovieMultimedia300, solrUrl),
+        [{
+            id: "22222222",
+            reason: "009a, 009g, 245a, 300e",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia300 with record containing 245ø but not 300e", DoubleRecordFinder.__findSoundMovieMultimedia300(soundMovieMultimedia245, solrUrl),
+        []
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia300 with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia300(soundMovieMultimedia, solrUrl),
+        []
+    );
+
+
+    Assert.equalValue("__findSoundMovieMultimedia with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia(soundMovieMultimedia, solrUrl),
+        [{
+            id: "33333333",
+            reason: "009a, 009g, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia with record with 245ø", DoubleRecordFinder.__findSoundMovieMultimedia(soundMovieMultimedia245, solrUrl),
+        []
+    );
+
+    Assert.equalValue("__findSoundMovieMultimedia with record with 300e", DoubleRecordFinder.__findSoundMovieMultimedia(soundMovieMultimedia300, solrUrl),
+        []
+    );
+
+    Assert.equalValue("DoubleRecordFinder.find - 245ø", DoubleRecordFinder.find(soundMovieMultimedia245, solrUrl),
+        [{
+            id: "11111111",
+            reason: "009a, 009g, 245a, 245ø",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+
+    Assert.equalValue("DoubleRecordFinder.find - 300e", DoubleRecordFinder.find(soundMovieMultimedia300, solrUrl),
+        [{
+            id: "22222222",
+            reason: "009a, 009g, 245a, 300e",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+
+    Assert.equalValue("DoubleRecordFinder.find - general", DoubleRecordFinder.find(soundMovieMultimedia, solrUrl),
+        [{
+            id: "33333333",
+            reason: "009a, 009g, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+});
+
+UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245n:3band) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245a:griechenland) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.004a:s", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
+    });
+    SolrCore.addAnalyse("match.014a:5 000 259 4", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:Griechenland", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "griechenland"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245n:3. Band", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245n": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
+    });
+    record = RecordUtil.createFromString([
+        "004 00 *r n *a s",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *n 3. Band *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+    Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
+        [{
+            id: "12345678",
+            reason: "004a, 014a, 245n",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        },
+            {
+                id: "12345678",
+                reason: "004a, 014a, 245a",
+                edition: undefined,
+                composed: undefined,
+                sectioninfo: undefined,
+                volumeinfo: undefined
+            }]
+    );
+    record = RecordUtil.createFromString([
+        "004 00 *r n *a s",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+    Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, false),
+        [{
+            id: "12345678",
+            reason: "004a, 014a, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+});
+
+
+UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
+    var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
+    var record;
+
+    SolrCore.clear();
+    SolrCore.addQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245g:3band) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245a:griechenland) AND marc.001b:870970",
+        {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.004a:b", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "b"}]]}}}
+    });
+    SolrCore.addAnalyse("match.014a:5 000 259 4", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245a:Griechenland", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "griechenland"}]]}}}
+    });
+    SolrCore.addAnalyse("match.245g:3. Band", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.245g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
+    });
+    record = RecordUtil.createFromString([
+        "004 00 *r n *a b",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *g 3. Band *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
+        [{
+            id: "12345678",
+            reason: "004a, 014a, 245g",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        },
+            {
+                id: "12345678",
+                reason: "004a, 014a, 245a",
+                edition: undefined,
+                composed: undefined,
+                sectioninfo: undefined,
+                volumeinfo: undefined
+            }]
+    );
+    record = RecordUtil.createFromString([
+        "004 00 *r n *a b",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *a Griechenland *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
+        [{
+            id: "12345678",
+            reason: "004a, 014a, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+});
+
 UnitTest.addFixture("DoubleRecordFinder.find", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
     var record;
