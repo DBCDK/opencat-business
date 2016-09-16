@@ -112,7 +112,7 @@ var DoubleRecordFinder = function () {
     }
 
     function doFind(record, finders) {
-        Log.trace("Enter - DoubleRecordFinder.doFind()", 0);
+        Log.trace("Enter - DoubleRecordFinder.doFind()");
         var result = [];
         try {
             finders.forEach(function (element) {
@@ -172,6 +172,7 @@ var DoubleRecordFinder = function () {
                 '245a': __querySubfieldValueLengthFormatter(20)
             };
             result = __executeQueryAndFindRecords(record, formatters);
+            Log.trace("DoubleRecordFinder.__findVolumesRun, volumeSubfieldG: " + volumeSubfieldG);
             if (volumeSubfieldG) {
                 var formattersSG = {
                     '004a': __querySubfieldFormatter,
@@ -185,7 +186,7 @@ var DoubleRecordFinder = function () {
                         result1.push(workRes);
                     }
                 }
-                return result = result1;
+                result = result1;
             }
             return result;
         } finally {
@@ -330,8 +331,6 @@ var DoubleRecordFinder = function () {
                 '023a': __querySubfieldSpecificRegister("023ab"),
                 '023b': __querySubfieldSpecificRegister("023ab")
             };
-
-            andingTogether = false;
             result = __executeQueryAndFindRecords(record, formatters);
             andingTogether = true;
             return result;
@@ -912,7 +911,7 @@ var DoubleRecordFinder = function () {
     }
 
     function __get_652MaterialType(field) {
-        Log.trace("Enter - DoubleRecordFinder.__get_652MaterialType()", 0);
+        Log.trace("Enter - DoubleRecordFinder.__get_652MaterialType()");
 
         var result = undefined;
         try {
@@ -946,6 +945,8 @@ var DoubleRecordFinder = function () {
 
     function __executeQueryAndFindRecords(record, queryFormatter, excludedFields) {
         Log.trace("Enter - DoubleRecordFinder.__executeQueryAndFindRecords()");
+        Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), record:\n" + JSON.stringify(record, undefined, 4));
+        Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), queryFormatter:\n" + JSON.stringify(queryFormatter, undefined, 4));
         if (!excludedFields) {
             excludedFields = [];
         }
@@ -957,19 +958,20 @@ var DoubleRecordFinder = function () {
                 var field = record.field(i);
                 for (var j = 0; j < field.count(); j++) {
                     var subfield = field.subfield(j);
+                    Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), field.name: " + field.name + ", subfield.name: " + subfield.name);
                     var formatter = queryFormatter[field.name + subfield.name];
+                    Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), formatter !== undefined: " + formatter !== undefined);
                     if (formatter !== undefined) {
                         reason.push(field.name + subfield.name);
-
                         queryElements.push(formatter(field, subfield));
                     }
                 }
             }
-            query = "";
+            var query = "";
             if (andingTogether) {
-                var query = queryElements.join(" AND ");
+                query = queryElements.join(" AND ");
             } else {
-                var query = queryElements.join(" OR ");
+                query = queryElements.join(" OR ");
             }
 
             if (query === "") {
@@ -1011,7 +1013,7 @@ var DoubleRecordFinder = function () {
     }
 
     function __querySubfieldFormatter(field, subfield) {
-        Log.trace("Enter - DoubleRecordFinder.__querySubfieldFormatter()", 0);
+        Log.trace("Enter - DoubleRecordFinder.__querySubfieldFormatter()");
         var result = undefined;
         try {
             var value = Solr.analyse(solrUrl, subfield.value, "match." + field.name + subfield.name);
@@ -1022,7 +1024,7 @@ var DoubleRecordFinder = function () {
     }
 
     function __querySubfieldYearFormatter() {
-        Log.trace("Enter - DoubleRecordFinder.__querySubfieldYearFormatter()", 0);
+        Log.trace("Enter - DoubleRecordFinder.__querySubfieldYearFormatter()");
         try {
             return function (field, subfield) {
                 var sf;
@@ -1040,12 +1042,12 @@ var DoubleRecordFinder = function () {
                 return "( " + array.join(" OR ") + " )";
             }
         } finally {
-            Log.trace("Exit - DoubleRecordFinder.__querySubfieldYearFormatter()", 0);
+            Log.trace("Exit - DoubleRecordFinder.__querySubfieldYearFormatter()");
         }
     }
 
     function __querySubfieldSpecificRegister(register) {
-        Log.trace("Enter - DoubleRecordFinder.__querySubfieldSpecificRegister()", 0);
+        Log.trace("Enter - DoubleRecordFinder.__querySubfieldSpecificRegister()");
         var result = undefined;
         try {
             return function (field, subfield) {
@@ -1058,7 +1060,7 @@ var DoubleRecordFinder = function () {
     }
 
     function __querySubfieldValueLengthFormatter(valueLength) {
-        Log.trace("Enter - DoubleRecordFinder.__querySubfieldValueLengthFormatter()", 0);
+        Log.trace("Enter - DoubleRecordFinder.__querySubfieldValueLengthFormatter()");
         var result = undefined;
         try {
             return function (field, subfield) {
