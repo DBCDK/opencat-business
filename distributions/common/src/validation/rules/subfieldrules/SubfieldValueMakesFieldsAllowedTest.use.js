@@ -28,7 +28,7 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
 
     var params = ["032", "996"]
 
-    var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.value.makes.field.allowed.rule.error", "032", "a" );
+    var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.value.makes.field.allowed.rule.error", "996", "a" );
     SafeAssert.equal( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )] );
 
 

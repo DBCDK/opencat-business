@@ -30,23 +30,49 @@ var SubfieldValueMakesFieldsAllowed = function () {
         try {
             ValueCheck.check( "params", params );
             ValueCheck.check( "params", params ).instanceOf( Array );
-
             if ( subfield.value === 'DBC' ) {
                 return [];
             }
-            return __checkForMatchingFields( record, subfield, params )
+            var parMap = __mapifyMe( params, false );
+            var recordMap = __mapifyMe( record, true );
+            return __checkForExcluded( recordMap, subfield, parMap )
         } finally {
             Log.trace( "Exit SubfieldValueMakesFieldsAllowed.validateField" );
         }
     }
 
-    function __checkForMatchingFields ( record, subfield, params ) {
+    function __mapifyMe ( arr, isRecord ) {
+        Log.trace( "Enter SubfieldValueMakesFieldsAllowed.__mapifyMe" );
+        try {
+            var ret = {};
+            if ( isRecord ) {
+                arr.fields.forEach( function ( ele ) {
+                    if ( !ret.hasOwnProperty( ele.name ) ) {
+                        ret[ele.name] = undefined;
+                    }
+                } );
+            } else {
+                arr.forEach( function ( ele ) {
+                    if ( !ret.hasOwnProperty( ele ) ) {
+                        ret[ele] = undefined;
+                    }
+                } );
+            }
+            return ret;
+        } finally {
+            Log.trace( "exit SubfieldValueMakesFieldsAllowed.__mapifyMe" );
+        }
+    }
+
+
+    function __checkForExcluded ( recordMap, subfield, parMap ) {
         Log.trace( "Enter SubfieldValueMakesFieldsAllowed.__checkForMatchingFields" );
         try {
-            for ( var i = 0; i < record.fields.length; i++ ) {
-                for ( var j = 0; j < params.length; j++ ) {
-                    if ( record.fields[i].name === params[j] ) {
-                        var errorMessage = ResourceBundle.getStringFormat( ResourceBundleFactory.getBundle( BUNDLE_NAME ), "subfield.value.makes.field.allowed.rule.error", params[j], subfield.name );
+
+            for ( var key in parMap ) {
+                if ( parMap.hasOwnProperty( key ) ) {
+                    if ( recordMap.hasOwnProperty( key ) ) {
+                        var errorMessage = ResourceBundle.getStringFormat( ResourceBundleFactory.getBundle( BUNDLE_NAME ), "subfield.value.makes.field.allowed.rule.error", key, subfield.name );
                         return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
                     }
                 }
@@ -61,4 +87,5 @@ var SubfieldValueMakesFieldsAllowed = function () {
         '__BUNDLE_NAME': BUNDLE_NAME,
         'validateSubfield': validateSubfield
     };
-}();
+}
+();
