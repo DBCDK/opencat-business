@@ -126,7 +126,7 @@ var DoubleRecordFinder = function () {
 
     function __matchVolumes(record) {
         Log.trace("Enter - DoubleRecordFinder.__matchVolumes()");
-        var result = undefined;
+        var result = false;
         try {
             for (var i = 0; i < record.numberOfFields(); i++) {
                 var field = record.field(i);
@@ -135,14 +135,16 @@ var DoubleRecordFinder = function () {
                         var subfield = field.subfield(j);
                         if (subfield.name === "a") {
                             if (subfield.value === "b") {
-                                return result = true;
+                                result = true;
                             }
                         }
                     }
                 }
-                volumeSubfieldG = __checkSubfieldExistence(field, "245", /[g]/);
+                if (field.name === "245") {
+                    volumeSubfieldG = __checkSubfieldExistence(field, "245", /[g]/);
+                }
             }
-            return result = false;
+            return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__matchVolumes(): ", result !== undefined ? JSON.stringify(result) : "undef");
             if (result !== undefined && result) {
@@ -172,7 +174,6 @@ var DoubleRecordFinder = function () {
                 '245a': __querySubfieldValueLengthFormatter(20)
             };
             result = __executeQueryAndFindRecords(record, formatters);
-            Log.trace("DoubleRecordFinder.__findVolumesRun, volumeSubfieldG: " + volumeSubfieldG);
             if (volumeSubfieldG) {
                 var formattersSG = {
                     '004a': __querySubfieldFormatter,
@@ -196,7 +197,7 @@ var DoubleRecordFinder = function () {
 
     function __matchSections(record) {
         Log.trace("Enter - DoubleRecordFinder.__matchSections()");
-        var result = undefined;
+        var result = false;
         try {
             for (var i = 0; i < record.numberOfFields(); i++) {
                 var field = record.field(i);
@@ -205,17 +206,18 @@ var DoubleRecordFinder = function () {
                         var subfield = field.subfield(j);
                         if (subfield.name === "a") {
                             if (subfield.value === "s") {
-                                return result = true;
+                                result = true;
                             }
                         }
                     }
                 }
-                sectionSubfieldN = __checkSubfieldExistence(field, "245", /[n]/);
+                if (field.name === "245") {
+                    sectionSubfieldN = __checkSubfieldExistence(field, "245", /[n]/);
+                }
             }
-            return result = false;
+            return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__matchSections(): ", result !== undefined ? JSON.stringify(result) : "undef");
-
             if (result !== undefined && result) {
                 Log.debug("Match found: Sections");
             }
@@ -913,7 +915,6 @@ var DoubleRecordFinder = function () {
 
     function __get_652MaterialType(field) {
         Log.trace("Enter - DoubleRecordFinder.__get_652MaterialType()");
-
         var result = undefined;
         try {
             if (field.name === "652") {
@@ -921,8 +922,7 @@ var DoubleRecordFinder = function () {
                     var subfield = field.subfield(j);
                     if (subfield.name === "m") {
                         if (subfield.value === "sk") {
-                            return materialType.literature;
-                            return result = true;
+                            return result = materialType.literature;
                         }
                         if (subfield.value === "Uden klassem\xe6rke") {
                             Log.debug("Found 652m = 'Uden\sklassem\xe6rke'");
@@ -932,9 +932,9 @@ var DoubleRecordFinder = function () {
                             if (subfield.value.indexOf("88.1") > -1 || subfield.value.indexOf("88.2") > -1) {
                                 return result = materialType.technical;
                             }
-                            return materialType.literature;
+                            return result = materialType.literature;
                         }
-                        return materialType.technical;
+                        return result = materialType.technical;
                     }
                 }
             }
@@ -959,9 +959,7 @@ var DoubleRecordFinder = function () {
                 var field = record.field(i);
                 for (var j = 0; j < field.count(); j++) {
                     var subfield = field.subfield(j);
-                    Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), field.name: " + field.name + ", subfield.name: " + subfield.name);
                     var formatter = queryFormatter[field.name + subfield.name];
-                    Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), formatter !== undefined: " + formatter !== undefined);
                     if (formatter !== undefined) {
                         reason.push(field.name + subfield.name);
                         queryElements.push(formatter(field, subfield));
