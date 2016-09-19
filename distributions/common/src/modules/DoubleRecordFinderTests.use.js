@@ -4,9 +4,7 @@ use("SolrCore");
 use("UnitTest");
 
 UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
@@ -29,13 +27,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
         "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with b", DoubleRecordFinder.__matchVolumes(record), true);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchSections", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchSections(record), false);
 
     record = RecordUtil.createFromString([
@@ -58,13 +53,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSections", function () {
         "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with s", DoubleRecordFinder.__matchSections(record), true);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchNumbers", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchNumbers(record), false);
 
     record = RecordUtil.createFromString([
@@ -120,13 +112,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchNumbers", function () {
         "023 00 *b 12345678"
     ].join("\n"));
     Assert.equalValue("023 b", DoubleRecordFinder.__matchNumbers(record), true);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchSoundMovieMultimedia", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchSoundMovieMultimedia(record), false);
 
     record = RecordUtil.createFromString([
@@ -170,13 +159,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSoundMovieMultimedia", function (
         "652 00 *m Uden klassem\xe6rke"
     ].join("\n"));
     Assert.equalValue("009 *a t and g tk", DoubleRecordFinder.__matchSoundMovieMultimedia(record), true);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchMusic", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchMusic(record), false);
 
     record = RecordUtil.createFromString([
@@ -196,13 +182,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchMusic", function () {
         "652 00 *m Uden klassem\xe6rke"
     ].join("\n"));
     Assert.equalValue("009, *a twice and a v", DoubleRecordFinder.__matchMusic(record), false);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchComposedMaterials", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchComposedMaterials(record), false);
 
     record = RecordUtil.createFromString([
@@ -228,13 +211,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchComposedMaterials", function () {
         "652 00 *m Uden klassem\xe6rke"
     ].join("\n"));
     Assert.equalValue("009, *a twice and a v", DoubleRecordFinder.__matchComposedMaterials(record), false);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchSimpleLiterature", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchSimpleLiterature(record), false);
 
     record = RecordUtil.createFromString([
@@ -266,13 +246,10 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSimpleLiterature", function () {
         "009 00 *a c *g xx *g xe"
     ].join("\n"));
     Assert.equalValue("Found 009a(c)gg", DoubleRecordFinder.__matchSimpleLiterature(record), false);
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchTechnicalLiterature", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__matchTechnicalLiterature(record), false);
 
     record = RecordUtil.createFromString([
@@ -386,9 +363,7 @@ UnitTest.addFixture("DoubleRecordFinder.__matchTechnicalLiterature", function ()
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__matchFictionBookMusic", function () {
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Fiction Empty record", DoubleRecordFinder.__matchFictionBookMusic(record), false);
 
     record = RecordUtil.createFromString([
@@ -496,9 +471,7 @@ UnitTest.addFixture("DoubleRecordFinder.__matchFictionBookMusic", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findSimpleLiterature", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__findSimpleLiterature(record, solrUrl), []);
 
     SolrCore.clear();
@@ -553,9 +526,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSimpleLiterature", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findTechnicalLiterature", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
-
-    record = new Record;
+    var record = new Record;
     Assert.equalValue("Empty record", DoubleRecordFinder.__findTechnicalLiterature(record, solrUrl), []);
 
     SolrCore.clear();
@@ -610,7 +581,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findTechnicalLiterature", function () 
 
 UnitTest.addFixture("DoubleRecordFinder.__findFictionBookMusic", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"a\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.260b:fa*) AND marc.001b:870970",
@@ -631,7 +601,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findFictionBookMusic", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.260b": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "fantagraphicBooks"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a a *g xe",
         "245 00 *a Troffelspisernes mareridt",
@@ -651,7 +621,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findFictionBookMusic", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findComposedMaterials", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"v\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.260b:fa*) AND marc.001b:870970",
@@ -672,7 +641,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findComposedMaterials", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.260b": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "fantagraphicBooks"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a v *g xe",
         "245 00 *a Troffelspisernes mareridt",
@@ -692,7 +661,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findComposedMaterials", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findMusic538", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xe\" AND match.538g:troffelspisernesmare*) AND marc.001b:870970",
@@ -709,7 +677,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic538", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "troffelspisernesmareridt"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a s *g xe",
         "538 00 *g Troffelspisernes mareridt",
@@ -729,7 +697,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic538", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xe\" AND match.100a:3rdearexperience AND match.245a:troffelspisernesmare*) AND marc.001b:870970",
@@ -756,7 +723,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.100a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3rdearexperience"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a s *g xe",
         "110 00 *A3 ear experience*a3rd Ear Experience",
@@ -795,7 +762,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findMusic245", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"s\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare*) AND marc.001b:870970",
@@ -812,7 +778,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic245", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "troffelspisernesmareridt"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a s *g xe",
         "245 00 *a Troffelspisernes mareridt",
@@ -832,8 +798,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic245", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findNumbers", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
-
     SolrCore.clear();
     SolrCore.addAnalyse("match.021a:12345678", {
         responseHeader: {status: 0},
@@ -849,7 +813,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findNumbers", function () {
     });
     SolrCore.addQuery("(match.021a:\"12345678\" OR match.023ab:\"12345678\" OR match.023ab:\"87654321\") AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a s *g xe",
         "021 00 *a 12345678",
@@ -1016,7 +980,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
 
 UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245n:3band) AND marc.001b:870970",
@@ -1039,7 +1002,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245n": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "004 00 *r n *a s",
         "014 00 *a 5 000 259 4",
         "009 00 *a r *g xe",
@@ -1086,7 +1049,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245g:3band) AND marc.001b:870970",
@@ -1109,7 +1071,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "004 00 *r n *a b",
         "014 00 *a 5 000 259 4",
         "009 00 *a r *g xe",
@@ -1155,8 +1117,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.find", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
-
 
     /*
      This test performs 3 comparisons:
@@ -1192,7 +1152,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
     });
 
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "001 00 *a 47798086 *b 870970 *d 20160501 *f a",
         "002 00 *r n *a e",
         "008 00 *t s *u s *a 2016 *b gb *l eng *v 0",
@@ -1274,13 +1234,10 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
             volumeinfo: undefined
         }]
     );
-
-
 });
 
 UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster med 300e skal kun matche op imod poster med 300e", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
@@ -1297,7 +1254,7 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "hamlet"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "001 00 *a 61690859 *b 870970 *c 20131114211327 *d 20131114 *f a",
         "004 00 *a e *r c",
         "008 00 *t m *v 0 *a 2003 *b gb *l eng *u f",
@@ -1326,7 +1283,6 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
         [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
     );
-
 });
 
 UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function () {
@@ -1476,7 +1432,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
 
 UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245n:3band) AND marc.001b:870970",
@@ -1499,7 +1454,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245n": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "004 00 *r n *a s",
         "014 00 *a 5 000 259 4",
         "009 00 *a r *g xe",
@@ -1546,7 +1501,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245g:3band) AND marc.001b:870970",
@@ -1569,7 +1523,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "004 00 *r n *a b",
         "014 00 *a 5 000 259 4",
         "009 00 *a r *g xe",
@@ -1615,8 +1569,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
 
 UnitTest.addFixture("DoubleRecordFinder.find", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
-
 
     /*
      This test performs 3 comparisons:
@@ -1652,7 +1604,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
     });
 
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "001 00 *a 47798086 *b 870970 *d 20160501 *f a",
         "002 00 *r n *a e",
         "008 00 *t s *u s *a 2016 *b gb *l eng *v 0",
@@ -1740,7 +1692,6 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
 
 UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster med 300e skal kun matche op imod poster med 300e", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
-    var record;
 
     SolrCore.clear();
     SolrCore.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
@@ -1757,7 +1708,7 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "hamlet"}]]}}}
     });
-    record = RecordUtil.createFromString([
+    var record = RecordUtil.createFromString([
         "001 00 *a 61690859 *b 870970 *c 20131114211327 *d 20131114 *f a",
         "004 00 *a e *r c",
         "008 00 *t m *v 0 *a 2003 *b gb *l eng *u f",
@@ -1786,5 +1737,4 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
         [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
     );
-
 });
