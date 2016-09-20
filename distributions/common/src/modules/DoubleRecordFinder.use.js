@@ -162,33 +162,23 @@ var DoubleRecordFinder = function () {
     function __findVolumesRun(record) {
         Log.trace("Enter - DoubleRecordFinder.__findVolumesRun()");
         var result = undefined;
+        var formatters = {
+            '004a': __querySubfieldFormatter,
+            '014a': __querySubfieldFormatter
+        };
         /*
-         hvis incoming har *g skal der findes poster med tilsvarende samt poster uden *g men med matchende *a
-         - bøvlet - søgeres på 014a+245g skal suppleres med resultat af en 014a+245a søgning hvor poster med *g skal sorteres fra.
-         hvis *n mangler skal *a matche
+         Hvis posten tjekket udføres på har 245g eller 245g+245a skal der kun udføres tjek med 245g.
+         Hvis posten tjekket udføres på kun 245a skal der kun udføres tjek mod det.
          */
         try {
-            var formatters = {
-                '004a': __querySubfieldFormatter,
-                '014a': __querySubfieldFormatter,
-                '245a': __querySubfieldValueLengthFormatter(20)
-            };
-            result = __executeQueryAndFindRecords(record, formatters);
             if (volumeSubfieldG) {
-                var formattersSG = {
-                    '004a': __querySubfieldFormatter,
-                    '014a': __querySubfieldFormatter,
-                    '245g': __querySubfieldValueLengthFormatter(20)
-                };
-                var result1 = __executeQueryAndFindRecords(record, formattersSG);
-                for (var i = 0; i < result.length; i++) {
-                    var workRes = result[i];
-                    if (workRes.sectioninfo === undefined) {
-                        result1.push(workRes);
-                    }
-                }
-                result = result1;
+                formatters["245g"] = __querySubfieldValueLengthFormatter(20);
+                Log.trace("DoubleRecordFinder.__findVolumesRun(), 245g");
+            } else {
+                formatters["245a"] = __querySubfieldValueLengthFormatter(20);
+                Log.trace("DoubleRecordFinder.__findVolumesRun(), 245a");
             }
+            result = __executeQueryAndFindRecords(record, formatters);
             return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__findVolumesRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
@@ -233,33 +223,23 @@ var DoubleRecordFinder = function () {
     function __findSectionsRun(record) {
         Log.trace("Enter - DoubleRecordFinder.__findSectionsRun()");
         var result = undefined;
+        var formatters = {
+            '004a': __querySubfieldFormatter,
+            '014a': __querySubfieldFormatter
+        };
         /*
-         hvis incoming har *n skal der findes poster med tilsvarende samt poster uden *n men med matchende *a
-         - bøvlet - søgeres på 014a+245n skal suppleres med resultat af en 014a+245a søgning hvor poster med *n skal sorteres fra.
-         hvis *n mangler skal *a matche
+         Hvis posten tjekket udføres på har 245n eller 245n+245a skal der kun udføres tjek med 245n.
+         Hvis posten tjekket udføres på kun 245a skal der kun udføres tjek mod det.
          */
         try {
-            var formatters = {
-                '004a': __querySubfieldFormatter,
-                '014a': __querySubfieldFormatter,
-                '245a': __querySubfieldValueLengthFormatter(20)
-            };
-            result = __executeQueryAndFindRecords(record, formatters);
             if (sectionSubfieldN) {
-                var formattersSN = {
-                    '004a': __querySubfieldFormatter,
-                    '014a': __querySubfieldFormatter,
-                    '245n': __querySubfieldValueLengthFormatter(20)
-                };
-                var result1 = __executeQueryAndFindRecords(record, formattersSN);
-                for (var i = 0; i < result.length; i++) {
-                    var workRes = result[i];
-                    if (workRes.sectioninfo === undefined) {
-                        result1.push(workRes);
-                    }
-                }
-                return result = result1;
+                formatters["245n"] = __querySubfieldValueLengthFormatter(20);
+                Log.trace("DoubleRecordFinder.__findSectionsRun(), 245n");
+            } else {
+                formatters["245a"] = __querySubfieldValueLengthFormatter(20);
+                Log.trace("DoubleRecordFinder.__findSectionsRun(), 245a");
             }
+            result = __executeQueryAndFindRecords(record, formatters);
             return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__findSectionsRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
@@ -946,8 +926,6 @@ var DoubleRecordFinder = function () {
 
     function __executeQueryAndFindRecords(record, queryFormatter, excludedFields) {
         Log.trace("Enter - DoubleRecordFinder.__executeQueryAndFindRecords()");
-        Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), record:\n" + JSON.stringify(record, undefined, 4));
-        Log.trace("DoubleRecordFinder.__executeQueryAndFindRecords(), queryFormatter:\n" + JSON.stringify(queryFormatter, undefined, 4));
         if (!excludedFields) {
             excludedFields = [];
         }
@@ -1008,7 +986,6 @@ var DoubleRecordFinder = function () {
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__executeQueryAndFindRecords(): ", result);
         }
-
     }
 
     function __querySubfieldFormatter(field, subfield) {

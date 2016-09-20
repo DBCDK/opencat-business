@@ -1017,15 +1017,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
             composed: undefined,
             sectioninfo: undefined,
             volumeinfo: undefined
-        },
-            {
-                id: "12345678",
-                reason: "004a, 014a, 245a",
-                edition: undefined,
-                composed: undefined,
-                sectioninfo: undefined,
-                volumeinfo: undefined
-            }]
+        }]
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
@@ -1044,8 +1036,24 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
             volumeinfo: undefined
         }]
     );
+    record = RecordUtil.createFromString([
+        "004 00 *r n *a s",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *n 3. Band *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+    Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
+        [{
+            id: "12345678",
+            reason: "004a, 014a, 245n",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
 });
-
 
 UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
@@ -1086,15 +1094,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
             composed: undefined,
             sectioninfo: undefined,
             volumeinfo: undefined
-        },
-            {
-                id: "12345678",
-                reason: "004a, 014a, 245a",
-                edition: undefined,
-                composed: undefined,
-                sectioninfo: undefined,
-                volumeinfo: undefined
-            }]
+        }]
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
@@ -1107,6 +1107,23 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         [{
             id: "12345678",
             reason: "004a, 014a, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
+    );
+    record = RecordUtil.createFromString([
+        "004 00 *r n *a b",
+        "014 00 *a 5 000 259 4",
+        "009 00 *a r *g xe",
+        "245 00 *g 3. Band *c die hellenistische Welt",
+        "260 00 *a Seattle, Wash. *b Fantagraphic Books"
+    ].join("\n"));
+    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
+        [{
+            id: "12345678",
+            reason: "004a, 014a, 245g",
             edition: undefined,
             composed: undefined,
             sectioninfo: undefined,
@@ -1281,7 +1298,14 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     ].join("\n"));
 
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
-        [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
+        [{
+            id: "12345678",
+            reason: "009a, 009g, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
     );
 });
 
@@ -1469,15 +1493,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
             composed: undefined,
             sectioninfo: undefined,
             volumeinfo: undefined
-        },
-            {
-                id: "12345678",
-                reason: "004a, 014a, 245a",
-                edition: undefined,
-                composed: undefined,
-                sectioninfo: undefined,
-                volumeinfo: undefined
-            }]
+        }]
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
@@ -1538,15 +1554,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
             composed: undefined,
             sectioninfo: undefined,
             volumeinfo: undefined
-        },
-            {
-                id: "12345678",
-                reason: "004a, 014a, 245a",
-                edition: undefined,
-                composed: undefined,
-                sectioninfo: undefined,
-                volumeinfo: undefined
-            }]
+        }]
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
@@ -1735,6 +1743,13 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     ].join("\n"));
 
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
-        [{id:"12345678", reason:"009a, 009g, 245a", edition:undefined, composed:undefined, sectioninfo:undefined, volumeinfo:undefined}]
+        [{
+            id: "12345678",
+            reason: "009a, 009g, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }]
     );
 });
