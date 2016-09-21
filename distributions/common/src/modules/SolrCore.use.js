@@ -1,16 +1,11 @@
-/**
- * @file Module which provides operations to query a Solr installation.
- */
+use("Config");
+use("Exception");
+use("Http");
+use("Log");
+use("ValueCheck");
+
 EXPORTED_SYMBOLS = ['SolrCore'];
 
-//-----------------------------------------------------------------------------
-use( "Http" );
-use( "Config");
-use( "Exception" );
-use( "ValueCheck" );
-use( "Log" );
-
-//-----------------------------------------------------------------------------
 /**
  * Provide operations to lookup entires in a Solr installation.
  *
@@ -19,13 +14,13 @@ use( "Log" );
  *
  * @namespace SolrCore
  */
-var SolrCore = function( ) {
+var SolrCore = function () {
     /**
      * Performs an analysis of a search string in a solr instance and returns the response as an object.
      *
      * @syntax SolrCore.analyse( url, text, index );
      * @param {String} url   Url to the solr installation including core selection:
-     * 						 <server>/solr/<core-name> or similary.
+     *                         <server>/solr/<core-name> or similary.
      * @param {String} text The text that you want to analyse
      * @param {String} index The index that the text should be analysed against.
      *
@@ -81,8 +76,8 @@ var SolrCore = function( ) {
     "msg":"undefined field match.260d",
     "code":400}}
      */
-    function analyse( url, text, index ) {
-        Log.trace( "Enter - SolrCore.analyse" );
+    function analyse(url, text, index) {
+        Log.trace("Enter - SolrCore.analyse");
 
         var solr_url = undefined;
         var solr_params = undefined;
@@ -94,23 +89,19 @@ var SolrCore = function( ) {
                 indent: true,
                 wt: "json"  	// Result type for solr.
             };
-
-            var solr = JSON.parse( Http.get( solr_url, solr_params, {}, false ) );
-            ValueCheck.checkThat( "solr", solr ).type( "object" );
+            var solr = JSON.parse(Http.get(solr_url, solr_params, {}, false));
+            ValueCheck.checkThat("solr", solr).type("object");
             return solr;
-
-        }
-        catch( ex ) {
-            Log.warn( "Failed to perform solr analysis - url: ", solr_url, " index: ", index, " text :<", text, ">" );
+        } catch (ex) {
+            Log.warn("Failed to perform solr analysis - url: ", solr_url, " index: ", index, " text :<", text, ">");
             throw ex;
-        }
-        finally {
-            Log.trace( "Exit - SolrCore" );
+        } finally {
+            Log.trace("Exit - SolrCore");
         }
     }
 
-    function search( url, query ) {
-        Log.trace( "Enter - SolrCore.search" );
+    function search(url, query) {
+        Log.trace("Enter - SolrCore.search");
 
         var solr_url = undefined;
         var solr_params = undefined;
@@ -121,18 +112,14 @@ var SolrCore = function( ) {
                 indent: true,
                 wt: "json"  	// Result type for solr.
             };
-
-            var solr = JSON.parse( Http.get( solr_url, solr_params, {}, false ) );
-            ValueCheck.checkThat( "solr", solr ).type( "object" );
-
+            var solr = JSON.parse(Http.get(solr_url, solr_params, {}, false));
+            ValueCheck.checkThat("solr", solr).type("object");
             return solr;
-        }
-        catch( ex ) {
-            Log.warn( "Failed to perform solr search: ", solr_url, "?q=", solr_params.q );
+        } catch (ex) {
+            Log.warn("Failed to perform solr search: ", solr_url, "?q=", solr_params.q);
             throw ex;
-        }
-        finally {
-            Log.trace( "Exit - SolrCore" );
+        } finally {
+            Log.trace("Exit - SolrCore");
         }
     }
 
@@ -141,27 +128,24 @@ var SolrCore = function( ) {
      *
      * @syntax SolrCore.numFound( url, query );
      * @param {String} url   Url to the solr installation including core selection:
-     * 						 <server>/solr/<core-name> or similary.
+     *                         <server>/solr/<core-name> or similary.
      * @param {String} query Solr query to execute.
      *
      * @return {Number} Number of solr documents found.
      *
      * @name SolrCore#numFound
      */
-    function numFound( url, query ) {
-        Log.trace( "Enter - SolrCore.numFound" );
+    function numFound(url, query) {
+        Log.trace("Enter - SolrCore.numFound");
         try {
-            var solr = search( url, query );
-            ValueCheck.checkThat( "solr.response", solr.response ).type( "object" );
-
+            var solr = search(url, query);
+            ValueCheck.checkThat("solr.response", solr.response).type("object");
             // This one is not explicitly nessasary, but it is nice to known that we always returns
             // a number and not undefined for instance.
-            ValueCheck.checkThat( "solr.response.numFound", solr.response.numFound ).type( "number" );
-
+            ValueCheck.checkThat("solr.response.numFound", solr.response.numFound).type("number");
             return solr.response.numFound;
-        }
-        finally {
-            Log.trace( "Exit - SolrCore" );
+        } finally {
+            Log.trace("Exit - SolrCore");
         }
     }
 
