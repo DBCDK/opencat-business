@@ -41,10 +41,7 @@ var DoubleRecordFinder = function () {
         solrUrl = callSolrUrl;
         var result = [];
         try {
-            var finders = [];
-            if (__matchNumbers(record)) {
-                finders.push(__findNumbersRun);
-            }
+            var finders = matchFinders(record, false);
             result = doFind(record, finders);
             return result;
         } finally {
@@ -69,7 +66,7 @@ var DoubleRecordFinder = function () {
         solrUrl = callSolrUrl;
         var result = [];
         try {
-            var finders = matchFinders(record);
+            var finders = matchFinders(record, true);
             result = doFind(record, finders);
             return result;
         } finally {
@@ -78,7 +75,7 @@ var DoubleRecordFinder = function () {
     }
 
 
-    function matchFinders(record) {
+    function matchFinders(record, includeDBCOnlyFinders) {
         Log.trace("Enter - DoubleRecordFinder.matchFinders()");
         try {
             var result = [];
@@ -86,12 +83,16 @@ var DoubleRecordFinder = function () {
                 result.push(__findNumbersRun);
             } else if (__matchMusic(record)) {
                 result.push(__findMusicGeneralRun);
-                result.push(__findMusic245Run);
-                result.push(__findMusic538Run);
+                if (includeDBCOnlyFinders) {
+                    result.push(__findMusic245Run);
+                    result.push(__findMusic538Run);
+                }
             } else if (__matchSoundMovieMultimedia(record)) {
                 result.push(__findSoundMovieMultimedia300Run);
-                result.push(__findSoundMovieMultimedia245Run);
-                result.push(__findSoundMovieMultimediaRun);
+                if (includeDBCOnlyFinders) {
+                    result.push(__findSoundMovieMultimedia245Run);
+                    result.push(__findSoundMovieMultimediaRun);
+                }
             } else if (__matchVolumes(record)) {
                 result.push(__findVolumesRun);
             } else if (__matchSections(record)) {
@@ -104,8 +105,7 @@ var DoubleRecordFinder = function () {
                 result.push(__findTechnicalLiteratureRun);
             } else if (__matchComposedMaterials(record)) {
                 result.push(__findComposedMaterialsRun);
-            }
-            return result;
+            }            return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.matchFinders(): ", JSON.stringify(result));
         }
