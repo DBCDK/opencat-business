@@ -4,6 +4,28 @@ use('RecordSorting');
 
 UnitTest.addFixture("RecordSorting", function () {
 
+    var template = {
+        "fields": {
+            "001": {},
+            "002": {},
+            "003": {},
+            "004": {},
+            "101": {},
+            "102": {},
+            "103": {},
+            "104": {},
+            "999": {},
+            "a01": {},
+            "a02": {},
+            "b99": {},
+            "c01": {}
+        }
+    };
+
+    var templateProvider = function () {
+        return template;
+    };
+
     var record = {
         fields: [
             {name: '104'},
@@ -40,7 +62,30 @@ UnitTest.addFixture("RecordSorting", function () {
         ]
     };
 
-    SafeAssert.equal("fieldWithWeirdChar", RecordSorting.sort(record), expectedResult);
+    SafeAssert.equal("fieldWithWeirdChar", RecordSorting.sort(templateProvider, record), expectedResult);
 
-})
-;
+    record = {
+        fields: [
+            {name: 'a02'},
+            {name: 'z01'},
+            {name: 'z10'},
+            {name: 'z99'},
+            {name: 'a01'},
+            {name: 'z98'}
+        ]
+    };
+
+    expectedResult = {
+        fields: [
+            {name: 'a01'},
+            {name: 'a02'},
+            {name: 'z01'},
+            {name: 'z10'},
+            {name: 'z98'},
+            {name: 'z99'}
+        ]
+    };
+
+    SafeAssert.equal("Sort letter fields only", RecordSorting.sort(templateProvider, record), expectedResult);
+
+});

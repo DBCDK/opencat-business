@@ -86,6 +86,10 @@ function checkDoubleRecordFrontend(record, settings) {
     return FBSUpdaterEntryPoint.checkDoubleRecordFrontend(record, settings);
 }
 
+function sortRecord(templateName, record, settings) {
+    return FBSUpdaterEntryPoint.sortRecord(templateName, record, settings);
+}
+
 /**
  * Gets the names of the templates as an Array
  *

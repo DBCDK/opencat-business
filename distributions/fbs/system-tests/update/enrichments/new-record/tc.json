@@ -34,21 +34,21 @@
         "errors": [],
         "rawrepo": [
           {
-            "record": "rawrepo-common.marc",
+            "record": "result-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enrichments": [
-              "rawrepo-dbc-enrichment.marc",
+              "result-dbc-enrichment.marc",
               "result-fbs-enrichment.marc"
             ]
           },
           {
-            "record": "rawrepo-dbc-enrichment.marc",
+            "record": "result-dbc-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false
           },
           {
-            "record": "request.marc",
+            "record": "result-request.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true

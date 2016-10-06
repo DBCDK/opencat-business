@@ -6,7 +6,6 @@
 032 00 *x ACC201533 *a DBF999999 *x BKM999999
 042 00 *c 17
 100 00 *0 *a Søndergꜳrd *h Per Strꜳrup *4 aut
-900 00 *a Strꜳrup Søndergꜳrd *h Per *z 100
 245 00 *a København tur retur
 250 00 *a 1. udgave *b ÷
 260 00 *& 1 *a Ꜳrhus *b Turbine *c 2015
@@ -26,6 +25,7 @@
 720 00 *o Peter Bejder *4 edt
 720 00 *o Lars C. Hansen *4 dkbea
 720 00 *o Ole Steen *4 ill
+900 00 *a Strꜳrup Søndergꜳrd *h Per *z 100
 945 00 *a Min første bog *ø Turbine *z 440
 945 00 *a Min 1. bog *z 440
 945 00 *a Min første bog-serien *z 440

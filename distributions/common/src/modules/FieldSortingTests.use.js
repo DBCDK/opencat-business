@@ -147,5 +147,40 @@ UnitTest.addFixture("FieldSorting", function () {
 
     SafeAssert.equal("noSubfields", FieldSorting.sort(noSubfields, "abcd"), noSubfields);
 
-})
-;
+    var moveToLast = {
+        "name": "moveToLast",
+        "subfields": [
+            {name: "t"},
+            {name: "u"},
+            {name: "a"},
+            {name: "b"},
+            {name: "j"},
+            {name: "l"},
+            {name: "&"},
+            {name: "n"},
+            {name: "o"},
+            {name: "v"},
+            {name: "w"}
+        ]
+    };
+
+    var moveToLastExpected = {
+        "name": "moveToLast",
+        "subfields": [
+            {name: "&"},
+            {name: "t"},
+            {name: "u"},
+            {name: "a"},
+            {name: "b"},
+            {name: "j"},
+            {name: "l"},
+            {name: "n"},
+            {name: "o"},
+            {name: "w"},
+            {name: "v"}
+        ]
+    };
+
+    SafeAssert.equal("moveToLast", FieldSorting.sort(moveToLast, "&tuazbcdefghijklmnoqrxwv"), moveToLastExpected);
+
+});

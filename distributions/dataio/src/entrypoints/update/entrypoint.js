@@ -69,6 +69,10 @@ function checkDoubleRecord(record, settings) {
     return DBCUpdaterEntryPoint.checkDoubleRecord(record, settings);
 }
 
+function sortRecord(templateName, record, settings) {
+    return DBCUpdaterEntryPoint.sortRecord(templateName, record, settings);
+}
+
 /**
  * Gets the names of the templates as an Array
  *

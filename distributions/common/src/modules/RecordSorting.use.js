@@ -2,6 +2,7 @@ use("Marc");
 use("MarcClasses");
 use("Log");
 use("StringUtil");
+use("FieldSorting");
 
 EXPORTED_SYMBOLS = ['RecordSorting'];
 
@@ -18,16 +19,29 @@ var RecordSorting = function () {
      * aXX
      * xXX
      *
+     * @param templateProvider
      * @param record
      * @returns {*}
      */
-    function sort(record) {
+    function sort(templateProvider, record) {
         Log.trace("Enter - RecordSorting.sort");
 
         try {
-            record.fields.sort(function (a, b) {
-                return a.name.localeCompare(b.name, 'dk');
-            });
+            if (record !== null && record !== undefined && record.fields !== undefined) {
+                record.fields.sort(function (a, b) {
+                    return a.name.localeCompare(b.name, 'dk');
+                });
+
+                var template = templateProvider();
+
+                for (var i = 0; i < record.fields.length; i++) {
+                    var field = record.fields[i];
+
+                    if (template.fields[field.name] && template.fields[field.name].sorting) {
+                        FieldSorting.sort(field, template.fields[field.name].sorting);
+                    }
+                }
+            }
 
             return record;
         } finally {

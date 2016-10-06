@@ -7,6 +7,8 @@ use("DefaultRawRepoRecordHandler");
 use("Log");
 use("Marc");
 use("RecordUtil");
+use("RecordSorting");
+use("TemplateContainer");
 
 EXPORTED_SYMBOLS = ['DBCUpdaterEntryPoint'];
 
@@ -193,6 +195,26 @@ var DBCUpdaterEntryPoint = function () {
         }
     }
 
+    function sortRecord(templateName, record, settings) {
+        Log.info("Enter - DBCUpdaterEntryPoint.sortRecord");
+
+        var templateProvider = function () {
+            TemplateContainer.setSettings(settings);
+            return TemplateContainer.get(templateName);
+        };
+
+        try {
+            ResourceBundleFactory.init(settings);
+
+            var recordSorted = RecordSorting.sort(templateProvider, JSON.parse(record));
+            var marc = DanMarc2Converter.convertToDanMarc2(recordSorted);
+
+            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
+        } finally {
+            Log.info("Exit - DBCUpdaterEntryPoint.sortRecord");
+        }
+    }
+
     function __createClassificationInstance(currentRecord, newRecord) {
         Log.trace("Enter - DBCUpdaterEntryPoint.__createClassificationInstance");
         try {
@@ -223,6 +245,7 @@ var DBCUpdaterEntryPoint = function () {
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
         'recordDataForRawRepo': recordDataForRawRepo,
-        'checkDoubleRecord': checkDoubleRecord
+        'checkDoubleRecord': checkDoubleRecord,
+        'sortRecord': sortRecord
     };
 }();

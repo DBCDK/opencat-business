@@ -32,21 +32,21 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "rawrepo-common.marc",
+                        "record": "result-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
-                            "rawrepo-dbc-enrichment.marc",
-                            "request.marc"
+                            "result-dbc-enrichment.marc",
+                            "result-request.marc"
                         ]
                     },
                     {
-                        "record": "rawrepo-dbc-enrichment.marc",
+                        "record": "result-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
                     },
                     {
-                        "record": "request.marc",
+                        "record": "result-request.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
@@ -96,31 +96,31 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "rawrepo-common.marc",
+                        "record": "result-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
-                            "rawrepo-dbc-enrichment.marc",
+                            "result-dbc-enrichment.marc",
                             "request.marc"
                         ]
                     },
                     {
-                        "record": "rawrepo-dbc-enrichment.marc",
+                        "record": "result-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
                     },
                     {
-                        "record": "rawrepo-school-enrichment.marc",
+                        "record": "result-school-enrichment.marc",
                         "type": "ENRICHMENT",
                         "enqueued": true,
                         "deleted": false
                     },
                     {
-                        "record": "request.marc",
+                        "record": "result-request.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "rawrepo-school-enrichment.marc" ]
+                        "enrichments": [ "result-school-enrichment.marc" ]
                     }
                 ]
             }
@@ -173,21 +173,21 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "rawrepo-common.marc",
+                        "record": "result-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
-                            "rawrepo-dbc-enrichment.marc",
-                            "rawrepo-school-enrichment.marc"
+                            "result-dbc-enrichment.marc",
+                            "result-school-enrichment.marc"
                         ]
                     },
                     {
-                        "record": "rawrepo-dbc-enrichment.marc",
+                        "record": "result-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
                     },
                     {
-                        "record": "rawrepo-school-enrichment.marc",
+                        "record": "result-school-enrichment.marc",
                         "type": "ENRICHMENT",
                         "enqueued": true,
                         "deleted": false

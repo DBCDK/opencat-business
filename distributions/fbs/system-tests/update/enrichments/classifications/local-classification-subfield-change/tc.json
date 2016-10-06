@@ -37,7 +37,7 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "rawrepo-common.marc",
+                        "record": "result-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
@@ -46,12 +46,12 @@
                         ]
                     },
                     {
-                        "record": "rawrepo-dbc-enrichment.marc",
+                        "record": "result-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
                     },
                     {
-                        "record": "request.marc",
+                        "record": "result-request-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

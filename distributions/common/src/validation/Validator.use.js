@@ -1,7 +1,6 @@
 use("FieldSorting");
 use("Print");
 use("ReadFile");
-use("RecordSorting");
 use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
@@ -41,7 +40,6 @@ var Validator = function () {
             var template = templateProvider();
             watchFunc.lap("javascript.Validator.validateRecord.templateProvider");
             if (record.fields !== undefined) {
-                RecordSorting.sort(record);
                 for (var i = 0; i < record.fields.length; i++) {
                     var subResult = validateField(record, record.fields[i], templateProvider, settings);
                     var field = record.fields[i];
