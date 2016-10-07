@@ -1,7 +1,7 @@
 [
   {
     "name": "002_linkning_bug_20535",
-    "description": "LJL mangler beskrivelse her.",
+    "description": "Enrichment for 710100 fn=29147353 is deleted and replaced with enrichment fn=29147450",
     "request": {
       "authentication": {
         "group": "010100",
@@ -14,7 +14,7 @@
     "setup": {
       "rawrepo": [
         {
-          "record": "dying_common.marc",
+          "record": "before_dying_common.marc",
           "type": "MARCXCHANGE",
           "holdings": [
             710100
@@ -22,23 +22,23 @@
           "deleted": false
         },
         {
-          "record": "dying_enrichment_DBC.marc",
+          "record": "before_dying_DBC.marc",
           "type": "ENRICHMENT",
           "deleted": false
         },
         {
-          "record": "dying_enrichment.marc",
+          "record": "before_dying_710100.marc",
           "type": "ENRICHMENT",
           "deleted": false
         },
         {
-          "record": "living_common.marc",
+          "record": "before_living_common.marc",
           "type": "MARCXCHANGE",
           "deleted": false
         },
         {
-          "record": "living_DBC.marc",
-          "type": "MARCXCHANGE",
+          "record": "before_living_DBC.marc",
+          "type": "ENRICHMENT",
           "deleted": false
         }
       ]
@@ -61,21 +61,15 @@
             "enqueued": true
           },
           {
-            "record": "result_die_common.marc",
-            "type": "MARCXCHANGE",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "result_die_dbc.marc",
+            "record": "result_710100.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
           },
           {
-            "record": "result_die_710100.marc",
+            "record": "result_dying_710100.marc",
             "type": "ENRICHMENT",
-            "deleted": false,
+            "deleted": true,
             "enqueued": true
           }
         ]
