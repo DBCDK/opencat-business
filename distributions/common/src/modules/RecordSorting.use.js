@@ -36,8 +36,9 @@ var RecordSorting = function () {
 
                 for (var i = 0; i < record.fields.length; i++) {
                     var field = record.fields[i];
+                    var fieldName = field.name;
 
-                    if (template.fields[field.name] && template.fields[field.name].sorting) {
+                    if (template.fields.hasOwnProperty(fieldName) && template.fields[fieldName].hasOwnProperty('sorting')) {
                         FieldSorting.sort(field, template.fields[field.name].sorting);
                     }
                 }
