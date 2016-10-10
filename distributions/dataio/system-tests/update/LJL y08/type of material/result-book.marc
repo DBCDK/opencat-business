@@ -5,9 +5,6 @@
 021 00 *e 9788779243453 *c spiralryg *d kr. 262,50
 032 00 *x ACC201111 *a DBF201120 *x BKM201120 *x BKX201119 *x BKR201122
 100 00 *a Riemer Henningsen *h Lone *4 aut
-900 00 *a Henningsen *h Lone Riemer *z 100
-900 00 *a Riemer *h Lone *z 100
-900 00 *a Riemer *h Lone *x se også under det senere navn *z 100
 245 00 *a Bliv en haj til regneark, grundlæggende - Microsoft Excel 2010 *ø Udgave med cd-rom
 250 00 *a 1. udgave *b ÷
 260 00 *& 2 *a Ꜳlborg *b Edutasia *c 2010
@@ -24,6 +21,9 @@
 720 00 *o Trine Hangꜳrd Rasmussen *4 edt
 720 00 *o Tine Nøhr Stenild *4 edt
 745 00 *a Regneark, grundlæggende - Microsoft Excel 2010. Med cd-rom
+900 00 *a Henningsen *h Lone Riemer *z 100
+900 00 *a Riemer *h Lone *z 100
+900 00 *a Riemer *h Lone *x se også under det senere navn *z 100
 990 00 *r 201122 *b v *m Omkatalogiseret fra cd-rom til bog med cd-rom som bilag *m Rettelse *u op
 990 00 *o 201120 *b v *u nt
 991 00 *o Ekspres 201119
