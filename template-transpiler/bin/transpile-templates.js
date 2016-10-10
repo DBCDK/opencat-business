@@ -20,6 +20,17 @@ function createDirectoryIfDontExist( dir ) {
 }
 
 
+function initResourceBundleAndSetTemplateContainerSettings( templateBaseDir, installName ) {
+    GenericSettings.setSettings( {
+        'javascript.basedir'     : templateBaseDir,
+        'javascript.install.name': installName
+    } );
+    ResourceBundleFactory.init( GenericSettings );
+    TemplateContainer.setSettings( GenericSettings );
+}
+
+
+
 function main() {
 
     use( "StopWatch" );
@@ -51,13 +62,7 @@ function main() {
 
 
         printn( templateBaseDir );
-
-        GenericSettings.setSettings( {
-            'javascript.basedir'     : templateBaseDir,
-            'javascript.install.name': installName
-        } );
-        ResourceBundleFactory.init( GenericSettings );
-        TemplateContainer.setSettings( GenericSettings );
+        initResourceBundleAndSetTemplateContainerSettings( templateBaseDir, installName );
 
         var outputDirectory = getCompiledOutDirFromSettings( GenericSettings );
         createDirectoryIfDontExist( outputDirectory );
