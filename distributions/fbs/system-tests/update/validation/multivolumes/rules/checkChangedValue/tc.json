@@ -19,7 +19,7 @@
                 {
                     "record": "rawrepo-main.marc",
                     "type": "MARCXCHANGE",
-                    "deleted": false
+                     "deleted": false
                 },
                 {
                     "record": "rawrepo-update-main.marc",
@@ -32,30 +32,10 @@
             "validation": [
                 {
                     "type": "ERROR",
-                    "params": {
-                        "param": [
-                            {
-                                "key": "fieldno",
-                                "value": 3
-                            },
-                            {
-                                "key": "subfieldno",
-                                "value": 2
-                            },
-                            {
-                                "key": "message",
-                                "value": "Delfelt 004a må ikke ændre sig fra s til b"
-                            },
-                            {
-                                "key": "url",
-                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
-                            },
-                            {
-                                "value": "42087904:870970",
-                                "key": "pid"
-                            }
-                        ]
-                    }
+                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                    "ordinalPositionOfField": 2,
+                    "ordinalPositionOfSubfield": 1,
+                    "message": "Delfelt 004a må ikke ændre sig fra s til b"
                 }
             ]
         }

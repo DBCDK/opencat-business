@@ -1,11 +1,8 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "Marc" );
+use("Log");
+use("Marc");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['RecordSorter'];
 
-//-----------------------------------------------------------------------------
 /**
  * Module to sort a Record and to insert fields in the sorted record.
  *
@@ -24,35 +21,30 @@ var RecordSorter = function () {
      *
      * @name RecordSorter#insertField
      */
-    function insertField ( record, field ) {
-        Log.trace( "Enter - RecordSorter.insertField" );
+    function insertField(record, field) {
+        Log.trace("Enter - RecordSorter.insertField");
         var result = new Record();
         try {
             var isFieldAppended = false;
-            for ( var i = 0; i < record.size(); i++ ) {
-                var recordField = record.field( i );
+            for (var i = 0; i < record.size(); i++) {
+                var recordField = record.field(i);
                 // cant insert y08 here
-                if ( field.name < recordField.name && !isFieldAppended ) {
-                    result.append( field );
+                if (field.name < recordField.name && !isFieldAppended) {
+                    result.append(field);
                     isFieldAppended = true;
                 }
-                result.append( recordField );
+                result.append(recordField);
             }
 
-            if ( !isFieldAppended ) {
-                result.append( field );
+            if (!isFieldAppended) {
+                result.append(field);
             }
             return result;
-        }
-        finally {
-            Log.trace( "Exit - RecordSorter.insertField : " + result.toString() );
+        } finally {
+            Log.trace("Exit - RecordSorter.insertField : " + result.toString());
         }
 
     }
-
-    //-----------------------------------------------------------------------------
-    //                  Helper functions
-    //-----------------------------------------------------------------------------
 
     /**
      * Returns the position in record that a field should be inserted into for the
@@ -63,20 +55,17 @@ var RecordSorter = function () {
      *
      * @name RecordSorter#__fieldInsertPosition
      */
-    function __fieldInsertPosition ( record, name ) {
-        Log.trace( "Enter - RecordSorter.__fieldInsertPosition" );
-
+    function __fieldInsertPosition(record, name) {
+        Log.trace("Enter - RecordSorter.__fieldInsertPosition");
         try {
-            for ( var i = 0; i < record.size(); i++ ) {
-                if ( name < record.field( i ).name ) {
+            for (var i = 0; i < record.size(); i++) {
+                if (name < record.field(i).name) {
                     return i;
                 }
             }
-
             return record.size();
-        }
-        finally {
-            Log.trace( "Exit - RecordSorter.__fieldInsertPosition" );
+        } finally {
+            Log.trace("Exit - RecordSorter.__fieldInsertPosition");
         }
     }
 

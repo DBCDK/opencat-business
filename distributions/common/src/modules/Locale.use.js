@@ -1,7 +1,5 @@
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'Locale' ];
+EXPORTED_SYMBOLS = ['Locale'];
 
-//-----------------------------------------------------------------------------
 /**
  * Module represent a Locale (country and language). Is it used with
  * ResourceBundle to load language specific resources.
@@ -9,14 +7,14 @@ EXPORTED_SYMBOLS = [ 'Locale' ];
  * @namespace
  * @name Locale
  */
-var Locale = function() {
+var Locale = function () {
     /**
      * Locale for danish.
      *
      * @type {{country, language}|{country: 'DK', language: 'da'}}
      * @name Locale#DANISH
      */
-    var DANISH = create( "da", "DK" );
+    var DANISH = create("da", "DK");
 
     /**
      * Creates an instance for a Locale with a country and language.
@@ -27,7 +25,7 @@ var Locale = function() {
      * @returns {{country: *, language: *}}
      * @name Locale#create
      */
-    function create( language, country ) {
+    function create(language, country) {
         return {
             country: country,
             language: language
@@ -43,8 +41,8 @@ var Locale = function() {
      *
      * @name Locale#create
      */
-    function toString( instance ) {
-        return StringUtil.sprintf( "%s_%s", instance.language, instance.country );
+    function toString(instance) {
+        return StringUtil.sprintf("%s_%s", instance.language, instance.country);
     }
 
     return {

@@ -51,7 +51,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
     var msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Head record with no children: Missing subfield",
         callRule(record, record.fields[2], {subfield: "t"}),
-        [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.subfieldError("", msg)]);
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
         "001 00 *a 2 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
@@ -120,7 +120,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
     ));
     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Update Head record: Remove subfield. Subfield missing in one volume",
-        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))]);
+        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg)]);
     RawRepoClientCore.clear();
 });
 
@@ -144,7 +144,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
     ));
     var msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Volume record: Missing subfield",
-        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))]);
+        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg)]);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -210,6 +210,6 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
     ));
     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Mandatory subfield removed from volume record",
-        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))]);
+        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg)]);
     RawRepoClientCore.clear();
 });

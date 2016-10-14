@@ -1,4 +1,3 @@
-use("RecordUtil");
 use("SafeAssert");
 use("SubfieldHasValueDemandsOtherSubfield");
 use("UnitTest");
@@ -42,7 +41,7 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
     };
     record.fields = [field3];
     var msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
-    var errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+    var errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
     SafeAssert.equal("2 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
@@ -56,11 +55,11 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
     };
     record.fields = [field4];
     msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
-    errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+    errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
     SafeAssert.equal("3 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
     record.fields = [field1];
-    errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+    errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
     SafeAssert.equal("4 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 });

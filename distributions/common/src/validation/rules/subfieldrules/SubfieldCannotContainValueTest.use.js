@@ -17,21 +17,7 @@ UnitTest.addFixture("SubfieldCannotContainValue.validateSubfield", function () {
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 50984508 *b 710100 *c 42"));
     field = record.fields[0];
     subfield = field.subfields[2];
-    var errorMsg = [{
-        type: "ERROR",
-        params: {
-            param: [{
-                key: "message",
-                value: ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", "c", "42")
-            }, {
-                key: "url",
-                value: "TODO:fixurl"
-            }, {
-                key: "pid",
-                value: "50984508:710100"
-            }]
-        }
-    }];
+    var errorMsg = [{type: "ERROR", urlForDocumentation: "TODO:fixurl", message: ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", "c", "42")}];
 
     params = {values: []};
     SafeAssert.equal("1. subfieldCannotContainValue with empty params array", SubfieldCannotContainValue.validateSubfield(record, field, subfield, params), []);

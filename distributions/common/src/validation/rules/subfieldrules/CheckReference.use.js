@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -42,7 +41,7 @@ var CheckReference = function () {
 
             if (matchingFields.length < 1) {
                 errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.field", fieldNameToCheck);
-                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
             // if the lenght og the subfield val is only 3 , we have a subfield val matching case 1, meaning its a pure field name eg : 710
             if (subfield.value.length === 3) {
@@ -68,7 +67,7 @@ var CheckReference = function () {
                 }
             } else {
                 errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.value", forwardslashValue.value, matchingFields[0].name);
-                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
             return [];
         } finally {
@@ -81,7 +80,7 @@ var CheckReference = function () {
         try {
             for (var i = 0; i < fields.length; ++i) {
                 if (__fieldHasSubFieldDanishaa(fields[i])) {
-                    return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck), RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck))];
                 }
             }
             return [];
@@ -125,12 +124,12 @@ var CheckReference = function () {
                         var count = __countSubfieldOccurrences(fieldsWithSubfieldDanishaa[i], subfield);
                         if (count < nbr) {
                             var errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr);
-                            ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record)));
+                            ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     } else {
                         if (!found.hasOwnProperty(val)) {
                             var errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, val);
-                            ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record)));
+                            ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     }
                 });

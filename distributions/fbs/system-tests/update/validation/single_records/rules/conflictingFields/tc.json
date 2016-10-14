@@ -18,22 +18,8 @@
             "validation": [
                 {
                     "type": "ERROR",
-                    "params": {
-                        "param": [
-                            {
-                                "key": "message",
-                                "value": "Følgende felt er til stede: '110' sammen med '100'"
-                            },
-                            {
-                                "key": "url",
-                                "value": ""
-                            },
-                            {
-                                "value": "4 568 318 4:870970",
-                                "key": "pid"
-                            }
-                        ]
-                    }
+                    "urlForDocumentation": "",
+                    "message": "Følgende felt er til stede: '110' sammen med '100'"
                 }
             ]
         }

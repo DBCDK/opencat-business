@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UpdateConstants");

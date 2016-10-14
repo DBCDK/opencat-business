@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -41,7 +40,7 @@ var CheckSubfieldNotUsedInParentRecord = function () {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             if (!ValidationUtil.isNumber(libNo)) {
                 msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
-                return [ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
 
             // If parent record does not exist then we are fine.
@@ -54,7 +53,7 @@ var CheckSubfieldNotUsedInParentRecord = function () {
             var parentRecord = RawRepoClient.fetchRecord(recId, libNo);
             if (parentRecord.existField(new MatchField(RegExp(field.name), undefined, RegExp(subfield.name)))) {
                 msg = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", field.name, subfield.name, recId);
-                return [ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
 
             // Recursively check the parent record for the subfield.

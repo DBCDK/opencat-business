@@ -1,6 +1,5 @@
 use("Log");
 use("Marc");
-use("RecordUtil");
 use("UpdateConstants");
 
 EXPORTED_SYMBOLS = ['BasisSplitter'];

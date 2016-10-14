@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -36,7 +35,7 @@ var CheckValue = function () {
             }
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", subfield.value, params.values.join("', '"));
-            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
+            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
         } finally {
             Log.trace("Exit --- CheckValue.validateSubfield");
         }

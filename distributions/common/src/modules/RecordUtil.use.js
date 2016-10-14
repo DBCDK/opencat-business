@@ -180,69 +180,6 @@ var RecordUtil = function () {
         return string.replace(new RegExp(__escapeRegExp(find), 'g'), replace);
     }
 
-    function getRecordPid(record) {
-        if (record === undefined) {
-            return undefined;
-        }
-        if (record instanceof Record) {
-            return __getRecordPid(record)
-        } else {
-            return __getObjectPid(record)
-        }
-    }
-
-    function __getRecordPid(record) {
-        var recordId = record.getValue(/001/, /a/);
-        var agencyId = record.getValue(/001/, /b/);
-        return __combinePid(recordId, agencyId);
-    }
-
-    function __getObjectPid(record) {
-        var recordId = __getObjectSubfieldValue(record, "001", "a");
-        var agencyId = __getObjectSubfieldValue(record, "001", "b");
-        return __combinePid(recordId, agencyId);
-    }
-
-    function __getObjectSubfieldValue(record, field, subfield) {
-        var res = undefined;
-        var foundField = false;
-        var foundSubfield = false;
-        if (record === undefined || record.fields === undefined) {
-            return undefined;
-        }
-        for (var i = 0; i < record.fields.length && !foundField; i++) {
-            if (record.fields[i].name === field) {
-                if (record.fields[i].subfields !== undefined) {
-                    for (var j = 0; j < record.fields[i].subfields.length && !foundSubfield; j++) {
-                        if (record.fields[i].subfields[j].name === subfield) {
-                            res = record.fields[i].subfields[j].value;
-                            foundSubfield = true;
-                        }
-                    }
-                }
-                foundField = true;
-            }
-        }
-        return res;
-    }
-
-    function __combinePid(recordId, agencyId) {
-        var res = undefined;
-        var rId = "na";
-        if (recordId !== undefined && recordId !== "") {
-            rId = recordId;
-        }
-        var aId = "na";
-        if (agencyId !== undefined && agencyId !== "") {
-            aId = agencyId;
-        }
-        var tmpRes = rId + ":" + aId;
-        if (tmpRes !== "na:na") {
-            res = tmpRes;
-        }
-        return res;
-    }
-
     return {
         'addOrReplaceSubfield': addOrReplaceSubfield,
         'currentAjustmentDate': currentAjustmentDate,
@@ -252,7 +189,6 @@ var RecordUtil = function () {
         'equalIds': equalIds,
         'isChangedFromVolumeToSingle': isChangedFromVolumeToSingle,
         'fetchCurrentRecord': fetchCurrentRecord,
-        'fetchRecord': fetchRecord,
-        'getRecordPid': getRecordPid
+        'fetchRecord': fetchRecord
     }
 }();

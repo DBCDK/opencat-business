@@ -74,8 +74,7 @@ var DefaultEnrichmentRecordHandler = function () {
 
     function __shouldCreateRecordsYesResult() {
         return {
-            status: "OK",
-            entries: []
+            status: "OK"
         };
     }
 
@@ -84,15 +83,8 @@ var DefaultEnrichmentRecordHandler = function () {
             status: "FAILED",
             entries: [
                 {
-                    "type": "ERROR",
-                    "params": {
-                        "param": [
-                            {
-                                "key": "message",
-                                "value": reason
-                            }
-                        ]
-                    }
+                    type: "ERROR",
+                    message: reason
                 }
             ]
         }
@@ -107,7 +99,6 @@ var DefaultEnrichmentRecordHandler = function () {
             if (record.matchValue(fieldRx, subfieldRx, checkValue)) {
                 var value = record.getValue(fieldRx, subfieldRx, ",");
                 var bundle = ResourceBundleFactory.getBundle("enrichments");
-
                 result = __shouldCreateRecordsNoResult(ResourceBundle.getStringFormat(bundle, "do.not.create.enrichments.reason", field + subfield, value));
             }
             return result;

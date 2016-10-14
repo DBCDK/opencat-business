@@ -1,20 +1,16 @@
-//-----------------------------------------------------------------------------
-use( "OpenAgencyClient" );
+use("OpenAgencyClient");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'AuthenticateTemplate' ];
+EXPORTED_SYMBOLS = ['AuthenticateTemplate'];
 
-//-----------------------------------------------------------------------------
 /**
  * Module to authenticate a template for an agency.
  *
  * @namespace
  * @name AuthenticateTemplate
  */
-var AuthenticateTemplate = function() {
-    function canAuthenticate( groupId, template ) {
-        Log.trace( "Enter - AuthenticateTemplate.canAuthenticate( '", groupId, "', ", template, " )" );
-
+var AuthenticateTemplate = function () {
+    function canAuthenticate(groupId, template) {
+        Log.trace("Enter - AuthenticateTemplate.canAuthenticate( '", groupId, "', ", template, " )");
         var result = undefined;
         try {
             if (!template.hasOwnProperty('template')) {
@@ -37,11 +33,9 @@ var AuthenticateTemplate = function() {
                     return result = true;
                 }
             }
-
             return result = false;
-        }
-        finally {
-            Log.trace( "Exit - AuthenticateTemplate.canAuthenticate(): ", result );
+        } finally {
+            Log.trace("Exit - AuthenticateTemplate.canAuthenticate(): ", result);
         }
     }
 

@@ -65,24 +65,25 @@ var DefaultDoubleRecordHandler = function () {
      */
     function checkDoubleRecordFrontend(record, settings) {
         Log.trace("Enter - DefaultDoubleRecordHandler.checkDoubleRecordFrontend()");
-        var res = {status: "ok", message: ""};
+        var res = {status: "ok"};
         try {
             if (!settings.containsKey('solr.url')) {
                 var msg = "SOLR has not been configured. Missing key 'solr.url' in settings.";
                 Log.error(msg);
                 res.status = "error";
-                res.message = msg;
+                res.doubleRecordFrontendContents = [{message: msg}];
             } else {
                 var records = DoubleRecordFinder.findGeneral(record, settings.get('solr.url'));
                 var idField = record.getFirstFieldAsField(/001/);
                 if (idField !== "" && records.length > 0) {
-                    var logMessage = StringUtil.sprintf("Double records for record {%s:%s}:", idField.getFirstValue(/a/), idField.getFirstValue(/b/));
-                    for (var i = 0; i < records.length; i++) {
-                        logMessage += " " + records[i].id + ","
-                    }
-                    logMessage = logMessage.slice(0, -1);
                     res.status = "doublerecord";
-                    res.message = logMessage;
+                    res.doubleRecordFrontendContents = [];
+                    for (var i = 0; i < records.length; i++) {
+                        var newDoubleRecord = {};
+                        newDoubleRecord.pid = records[i].pid;
+                        newDoubleRecord.message = "Double record for record " + idField.getFirstValue(/a/) + ", reason: " + records[i].reason;
+                        res.doubleRecordFrontendContents.push(newDoubleRecord);
+                    }
                 }
             }
             return JSON.stringify(res);

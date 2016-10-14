@@ -35,22 +35,8 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "message",
-                                    "value": "Du har ikke ret til at opdatere en fællesskabspost som er ejet af DBC"
-                                },
-                                {
-                                    "key": "url",
-                                    "value": ""
-                                },
-                                {
-                                    "value": "90004158:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "urlForDocumentation": "",
+                        "message": "Du har ikke ret til at opdatere en fællesskabspost som er ejet af DBC"
                     }
                 ],
                 "rawrepo": [

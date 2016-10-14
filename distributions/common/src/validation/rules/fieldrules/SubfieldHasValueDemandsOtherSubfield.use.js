@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -49,10 +48,10 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
                             }
                         }
                         if (foundSubfield === false) {
-                            result.push(ValidateErrors.fieldError("TODO:fixurl", errorMsg, RecordUtil.getRecordPid(record)));
+                            result.push(ValidateErrors.fieldError("TODO:fixurl", errorMsg));
                         }
                     } else {
-                        result.push(ValidateErrors.fieldError("TODO:fixurl", errorMsg, RecordUtil.getRecordPid(record)));
+                        result.push(ValidateErrors.fieldError("TODO:fixurl", errorMsg));
                     }
                     break;
                 }

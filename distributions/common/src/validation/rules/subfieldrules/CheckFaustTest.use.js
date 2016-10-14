@@ -27,19 +27,19 @@ UnitTest.addFixture("CheckFaust.validateSubfield", function () {
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 50984507 *b 710100"));
     field = record.fields[0];
     subfield = field.subfields[0];
-    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.error", subfield.name, subfield.value), RecordUtil.getRecordPid(record))];
+    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.error", subfield.name, subfield.value))];
     SafeAssert.equal("3 CheckFaust.validateSubfield with valid faust number", CheckFaust.validateSubfield(record, field, subfield, params), error);
 
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 50984508A *b 710100"));
     field = record.fields[0];
     subfield = field.subfields[0];
-    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.digit.error", subfield.name), RecordUtil.getRecordPid(record))];
+    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.digit.error", subfield.name))];
     SafeAssert.equal("4 CheckFaust.validateSubfield with valid faust number", CheckFaust.validateSubfield(record, field, subfield, params), error);
 
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 42 *b 710100"));
     field = record.fields[0];
     subfield = field.subfields[0];
-    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.length.error", subfield.name, 8), RecordUtil.getRecordPid(record))];
+    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.length.error", subfield.name, 8))];
     SafeAssert.equal("5 CheckFaust.validateSubfield with valid faust number", CheckFaust.validateSubfield(record, field, subfield, params), error);
 
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 5098 4508 *b 710100"));
@@ -65,6 +65,6 @@ UnitTest.addFixture("CheckFaust.validateSubfield", function () {
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 497290236 *b 870970"));
     field = record.fields[0];
     subfield = field.subfields[0];
-    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.common.records.length.error", subfield.name), RecordUtil.getRecordPid(record))];
+    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.common.records.length.error", subfield.name))];
     SafeAssert.equal("10 CheckFaust.validateSubfield with failed faust number with 9 digits for common records", CheckFaust.validateSubfield(record, field, subfield, params), error);
 });

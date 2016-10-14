@@ -56,18 +56,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "message",
-                                    "value": "Påhængsposten {58442895|723000} må ikke pege på en post via 014a"
-                                },
-                                {
-                                    "value": "58442895:723000",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "message": "Påhængsposten {58442895|723000} må ikke pege på en post via 014a"
                     }
                 ]
             }

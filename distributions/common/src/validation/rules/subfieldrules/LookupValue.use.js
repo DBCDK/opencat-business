@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -56,10 +55,10 @@ var LookupValue = function () {
             var message;
             if (params.exist === true && hits === 0) {
                 message = ResourceBundle.getStringFormat(bundle, "lookup.value.expected.value", subfield.value, field.name, subfield.name);
-                return [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("TODO:fixurl", message)];
             } else if (params.exist === false && hits !== 0) {
                 message = ResourceBundle.getStringFormat(bundle, "lookup.value.unexpected.value", subfield.value, field.name, subfield.name);
-                return [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("TODO:fixurl", message)];
             }
             return [];
         } finally {

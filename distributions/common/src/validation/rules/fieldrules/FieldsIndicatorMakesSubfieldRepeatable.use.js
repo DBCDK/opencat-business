@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -58,7 +57,7 @@ var FieldsIndicatorMakesSubfieldRepeatable = function () {
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.subfield.repeated.error", subfieldName, indicators);
-            return res = ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record));
+            return res = ValidateErrors.fieldError("TODO:url", errorMessage);
         } finally {
             Log.trace("exit - FieldsIndicatorMakesSubfieldRepeatable.____getSubfieldMap(): ", res);
         }

@@ -35,7 +35,7 @@ var SubfieldConditionalMandatoryField = function () {
                 }
                 var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 var errorMessage = ResourceBundle.getStringFormat(bundle, "mandatory.field.conditional.rule.error", subfield.name, params.subfieldValue, params.fieldMandatory);
-                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
             return [];
         } finally {

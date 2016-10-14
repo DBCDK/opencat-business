@@ -50,18 +50,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "message",
-                                    "value": "Posten {58442895|191919} må ikke pege på sig selv i 014a"
-                                },
-                                {
-                                    "value": "58442895:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "message": "Posten {58442895|191919} må ikke pege på sig selv i 014a"
                     }
                 ]
             }

@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -45,7 +44,7 @@ var ConflictingFields = function () {
                     found.counter++;
                     if (found.counter > 1) {
                         var msg = ResourceBundle.getStringFormat(bundle, "fields.conflicting.error", params.fields[j], found.name);
-                        result.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+                        result.push(ValidateErrors.recordError("", msg));
                     } else {
                         found.name = params.fields[j];
                     }

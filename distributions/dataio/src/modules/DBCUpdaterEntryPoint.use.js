@@ -6,7 +6,6 @@ use("DefaultEnrichmentRecordHandler");
 use("DefaultRawRepoRecordHandler");
 use("Log");
 use("Marc");
-use("RecordUtil");
 use("RecordSorting");
 use("TemplateContainer");
 

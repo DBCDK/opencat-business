@@ -32,7 +32,7 @@ var ValidateRecordExecutor = function () {
             }
         } catch (ex) {
             var msg = StringUtil.sprintf("validateRecord systemfejl ved validering af testcase: %s", ex);
-            return JSON.stringify([ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))]);
+            return JSON.stringify([ValidateErrors.recordError("", msg)]);
         } finally {
             Log.trace("Exit - ValidateRecordExecutor.validateRecord()");
         }

@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -61,7 +60,7 @@ var SubfieldCannotContainValue = function () {
                 if (subfield.value == value) {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     var errorMessage = ResourceBundle.getStringFormat(bundle, "subfield.cannot.contain.value.rule.error", subfield.name, subfield.value);
-                    ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record)));
+                    ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                 }
             });
             return ret;

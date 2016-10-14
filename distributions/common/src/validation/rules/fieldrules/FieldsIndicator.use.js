@@ -32,7 +32,7 @@ var FieldsIndicator = function () {
                 }
                 var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.string.error", field.indicator, params.indicator);
-                var error = ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record));
+                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
                 return result = [error];
             } else {
                 if (params.indicator.indexOf(field.indicator) > -1) {
@@ -40,7 +40,7 @@ var FieldsIndicator = function () {
                 }
                 var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.array.error", field.indicator, params.indicator.join(", "));
-                var error = ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record));
+                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
                 return result = [error];
             }
         } finally {

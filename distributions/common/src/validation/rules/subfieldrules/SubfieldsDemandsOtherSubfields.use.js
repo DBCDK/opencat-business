@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -31,7 +30,7 @@ var SubfieldsDemandsOtherSubfields = function () {
             }
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var errorMessage = ResourceBundle.getStringFormat(bundle, "subfield.demands.other.subfields.rule.error", field.name, subfield.name);
-            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage, RecordUtil.getRecordPid(record))];
+            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
         } finally {
             Log.trace("Exit --- SubfieldsDemandsOtherSubfields.validateSubfield");
         }

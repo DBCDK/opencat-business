@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -43,7 +42,7 @@ var RepeatableSubfields = function () {
             for (var i = 0; i < params.subfields.length; ++i) {
                 if (counter[params.subfields[i]] > 1) {
                     var errorMessage = ResourceBundle.getStringFormat(bundle, "repeatable.subfields.rule.error", params.subfields[i], counter[params.subfields[i]]);
-                    result.push(ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.fieldError("TODO:url", errorMessage));
                 }
             }
             return result;

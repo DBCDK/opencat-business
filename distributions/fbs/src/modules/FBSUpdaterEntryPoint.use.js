@@ -6,7 +6,6 @@ use("FBSAuthenticator");
 use("FBSClassificationData");
 use("Log");
 use("Marc");
-use("RecordUtil");
 use("RecategorizationNoteFieldFactory");
 use("RecordSorting");
 
@@ -81,6 +80,7 @@ var FBSUpdaterEntryPoint = function () {
             var instance = __createEnrichmentRecordHandlerInstance(currentCommonMarc, updatingCommonMarc);
             result = DefaultEnrichmentRecordHandler.shouldCreateRecords(instance, currentCommonMarc, updatingCommonMarc);
             result = JSON.stringify(result);
+            Log.info("424242 result: " + result);
             return result;
         } finally {
             Log.trace("Exit - FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords(): " + result);

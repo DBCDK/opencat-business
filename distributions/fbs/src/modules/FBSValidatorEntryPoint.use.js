@@ -1,5 +1,4 @@
 use("AuthenticateTemplate");
-use("RecordUtil");
 use("StopWatch");
 use("TemplateContainer");
 use("Validator");
@@ -95,7 +94,7 @@ var FBSValidatorEntryPoint = function () {
                 result = Validator.validateRecord(rec, templateProvider, settings);
             } catch (ex) {
                 var msg = StringUtil.sprintf("FBSvalidator systemfejl ved validering: %s", ex);
-                result = [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                result = [ValidateErrors.recordError("", msg)];
             }
             return JSON.stringify(result);
         } finally {

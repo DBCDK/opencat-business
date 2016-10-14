@@ -1,6 +1,5 @@
 use("CheckChangedValue");
 use("GenericSettings");
-use("RecordUtil");
 use("ResourceBundle");
 use("SafeAssert");
 use("UnitTest");
@@ -165,5 +164,5 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     SafeAssert.equal("Update record with wrong record type",
         CheckChangedValue.validateSubfield(record, field, subfield, params),
-        [ValidateErrors.subfieldError("TODO:fixurl", StringUtil.sprintf(msg_format, "e", "s"), RecordUtil.getRecordPid(marcRecord))]);
+        [ValidateErrors.subfieldError("TODO:fixurl", StringUtil.sprintf(msg_format, "e", "s"))]);
 });

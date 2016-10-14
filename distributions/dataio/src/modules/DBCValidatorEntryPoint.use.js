@@ -1,5 +1,4 @@
 use("AuthenticateTemplate");
-use("RecordUtil");
 use("TemplateContainer");
 use("Validator");
 
@@ -96,7 +95,7 @@ var DBCValidatorEntryPoint = function () {
                 result = Validator.validateRecord(rec, templateProvider, settings);
             } catch (ex) {
                 var msg = StringUtil.sprintf("DBCvalidator systemfejl ved validering: %s", ex);
-                result = [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                result = [ValidateErrors.recordError("", msg)];
             }
             return JSON.stringify(result);
         } finally {

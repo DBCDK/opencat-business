@@ -38,60 +38,20 @@
             "validation": [
                 {
                     "type": "ERROR",
-                    "params": {
-                        "param": [
-                            {
-                                "key": "fieldno",
-                                "value": 2
-                            },
-                            {
-                                "key": "subfieldno",
-                                "value": 1
-                            },
-                            {
-                                "key": "message",
-                                "value": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
-                            },
-                            {
-                                "key": "url",
-                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
-                            },
-                            {
-                                "value": "90004158:870970",
-                                "key": "pid"
-                            }
-                        ]
-                    }
+                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                    "ordinalPositionOfField": 1,
+                    "ordinalPositionOfSubfield": 0,
+                    "message": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
                 }
             ],
             "update": {
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "fieldno",
-                                    "value": 2
-                                },
-                                {
-                                    "key": "subfieldno",
-                                    "value": 1
-                                },
-                                {
-                                    "key": "message",
-                                    "value": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
-                                },
-                                {
-                                    "key": "url",
-                                    "value": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm"
-                                },
-                                {
-                                    "value": "90004158:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                        "ordinalPositionOfField": 1,
+                        "ordinalPositionOfSubfield": 0,
+                        "message": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
                     }
                 ],
                 "rawrepo": [

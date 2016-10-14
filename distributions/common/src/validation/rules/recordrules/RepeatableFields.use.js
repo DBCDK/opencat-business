@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -53,7 +52,7 @@ var RepeatableFields = function () {
                 if (foundFields.hasOwnProperty(key)) {
                     if (paramsValues[key] === undefined && foundFields[key] > 1) {
                         var msg = ResourceBundle.getStringFormat(bundle, "fields.repeatable.error", key, foundFields[key]);
-                        result.push(ValidateErrors.recordError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                        result.push(ValidateErrors.recordError("TODO:fixurl", msg));
                     }
                 }
             }

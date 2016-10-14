@@ -1,6 +1,5 @@
 use("CheckSubfieldNotUsedInChildrenRecords");
 use("GenericSettings");
-use("RecordUtil");
 use("ResourceBundle");
 use("SafeAssert");
 use("UnitTest");
@@ -89,5 +88,5 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     field = record.fields[2];
     subfield = field.subfields[0];
     SafeAssert.equal("Subfield used in one child record", callRule(record, field, subfield),
-        [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "subfield.in.children.record.error", "008", "t"), RecordUtil.getRecordPid(marcRecord))]);
+        [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "subfield.in.children.record.error", "008", "t"))]);
 });

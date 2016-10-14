@@ -71,18 +71,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "message",
-                                    "value": "Posten må ikke slettes da der er beholding på"
-                                },
-                                {
-                                    "value": "5 134 021 3:723000",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "message": "Posten må ikke slettes da der er beholding på"
                     }
                 ],
                 "rawrepo": [

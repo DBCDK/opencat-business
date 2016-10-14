@@ -1,7 +1,6 @@
 use("DanMarc2Converter");
 use("Log");
 use("RawRepoClient");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -52,7 +51,7 @@ var CheckChangedValue = function () {
             if (params.fromValues.indexOf(oldValue) > -1 && params.toValues.indexOf(subfield.value) > -1) {
                 var msg = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", field.name, subfield.name, oldValue, subfield.value);
                 Log.debug("Found validation error: " + msg);
-                return [ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
 
             }
             return [];

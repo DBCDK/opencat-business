@@ -15,60 +15,20 @@
             "validation": [
                 {
                     "type": "ERROR",
-                    "params": {
-                        "param": [
-                            {
-                                "key": "fieldno",
-                                "value": 3
-                            },
-                            {
-                                "key": "subfieldno",
-                                "value": 9
-                            },
-                            {
-                                "key": "message",
-                                "value": "Delfelt '008o' må ikke være tomt."
-                            },
-                            {
-                                "key": "url",
-                                "value": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
-                            },
-                            {
-                                "value": "5 158 076 1:870970",
-                                "key": "pid"
-                            }
-                        ]
-                    }
+                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                    "ordinalPositionOfField": 2,
+                    "ordinalPositionOfSubfield": 8,
+                    "message": "Delfelt '008o' må ikke være tomt."
                 }
             ],
             "update": {
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "fieldno",
-                                    "value": 3
-                                },
-                                {
-                                    "key": "subfieldno",
-                                    "value": 9
-                                },
-                                {
-                                    "key": "message",
-                                    "value": "Delfelt '008o' må ikke være tomt."
-                                },
-                                {
-                                    "key": "url",
-                                    "value": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm"
-                                },
-                                {
-                                    "value": "5 158 076 1:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 8,
+                        "message": "Delfelt '008o' må ikke være tomt."
                     }
                 ],
                 "rawrepo": []

@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------
 use("Exception");
 use("Log");
 use("ResourceBundle");
@@ -7,9 +6,7 @@ use("ValidateErrors");
 use("ValueCheck");
 use("ValidationUtil");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
-//-----------------------------------------------------------------------------
 
 var FieldDemandsOtherFieldAndSubfield = function () {
     var BUNDLE_NAME = "validation";
@@ -32,7 +29,6 @@ var FieldDemandsOtherFieldAndSubfield = function () {
         Log.debug("Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)");
         Log.debug("record ", record !== undefined ? JSON.stringify(record) : "undef");
         Log.debug("field ", field !== undefined ? JSON.stringify(field) : "undef");
-        //Log.debug( "params ", params !== undefined ? JSON.stringify(params) : "undef" ); - Doesn't work :(
 
         var result = null;
         try {
@@ -49,7 +45,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
 
             if (collectedFields.length === 0) {
                 message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
-                return result = [ValidateErrors.fieldError("", message, RecordUtil.getRecordPid(record))];
+                return result = [ValidateErrors.fieldError("", message)];
             } else {
 
                 for (var i = 0; i < collectedFields.length; ++i) {
@@ -69,7 +65,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
                 }
             }
             message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
-            return result = [ValidateErrors.fieldError("", message, RecordUtil.getRecordPid(record))];
+            return result = [ValidateErrors.fieldError("", message)];
         }
         finally {
             Log.debug("Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result !== undefined ? JSON.stringify(result) : "undef");

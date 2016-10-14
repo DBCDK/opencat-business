@@ -105,7 +105,8 @@ var DoubleRecordFinder = function () {
                 result.push(__findTechnicalLiteratureRun);
             } else if (__matchComposedMaterials(record)) {
                 result.push(__findComposedMaterialsRun);
-            }            return result;
+            }
+            return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.matchFinders(): ", JSON.stringify(result));
         }
@@ -133,10 +134,8 @@ var DoubleRecordFinder = function () {
                 if (field.name === "004") {
                     for (var j = 0; j < field.count(); j++) {
                         var subfield = field.subfield(j);
-                        if (subfield.name === "a") {
-                            if (subfield.value === "b") {
-                                result = true;
-                            }
+                        if (subfield.name === "a" && subfield.value === "b") {
+                            result = true;
                         }
                     }
                 }
@@ -194,10 +193,8 @@ var DoubleRecordFinder = function () {
                 if (field.name === "004") {
                     for (var j = 0; j < field.count(); j++) {
                         var subfield = field.subfield(j);
-                        if (subfield.name === "a") {
-                            if (subfield.value === "s") {
-                                result = true;
-                            }
+                        if (subfield.name === "a" && subfield.value === "s") {
+                            result = true;
                         }
                     }
                 }
@@ -967,7 +964,6 @@ var DoubleRecordFinder = function () {
                 var document = solr.response.docs[k];
                 var recordId;
                 var index = document.id.indexOf(":");
-
                 if (index > -1) {
                     recordId = document.id.substring(0, index);
                 } else {
@@ -975,6 +971,7 @@ var DoubleRecordFinder = function () {
                 }
                 result.push({
                     id: recordId,
+                    pid: document.id,
                     reason: reason.join(", "),
                     edition: document["match.250a"],
                     composed: document["match.009a"],

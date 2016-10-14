@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -34,7 +33,7 @@ var RecordSorted = function () {
                 if (record.fields[i].name < previous) {
                     var url = TemplateUrl.getUrlForField(record.fields[i].name, params.template);
                     var msg = ResourceBundle.getStringFormat(bundle, "record.sorted.error", record.fields[i].name);
-                    return result = [ValidateErrors.recordError(url, msg, RecordUtil.getRecordPid(record))];
+                    return result = [ValidateErrors.recordError(url, msg)];
                 }
                 previous = record.fields[i].name;
             }

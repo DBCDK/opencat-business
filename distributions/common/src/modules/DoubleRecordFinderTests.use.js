@@ -515,6 +515,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSimpleLiterature", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findSimpleLiterature(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "008a, 009a, 009g, 245a, 260b",
             edition: undefined,
             composed: undefined,
@@ -570,6 +571,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findTechnicalLiterature", function () 
     Assert.equalValue("Full record", DoubleRecordFinder.__findTechnicalLiterature(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "008a, 009a, 009g, 245a, 260b",
             edition: undefined,
             composed: undefined,
@@ -610,6 +612,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findFictionBookMusic", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findFictionBookMusic(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a, 260b",
             edition: undefined,
             composed: undefined,
@@ -650,6 +653,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findComposedMaterials", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findFictionBookMusic(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a, 260b",
             edition: undefined,
             composed: undefined,
@@ -686,6 +690,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic538", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findMusic538(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 538g",
             edition: undefined,
             composed: undefined,
@@ -733,6 +738,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findMusicGeneral(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 110a, 245a",
             edition: undefined,
             composed: undefined,
@@ -750,6 +756,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusicGeneral", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findMusicGeneral(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 100a, 245a",
             edition: undefined,
             composed: undefined,
@@ -787,6 +794,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findMusic245", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findMusic245(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -824,6 +832,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findNumbers", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findNumbers(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "021a, 023a, 023b",
             edition: undefined,
             composed: undefined,
@@ -889,6 +898,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("__findSoundMovieMultimedia245 with record containing field 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245(soundMovieMultimedia245, solrUrl),
         [{
             id: "11111111",
+            pid: "11111111:870970",
             reason: "009a, 009g, 245a, 245ø",
             edition: undefined,
             composed: undefined,
@@ -908,6 +918,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("__findSoundMovieMultimedia300 with record containing field 300e", DoubleRecordFinder.__findSoundMovieMultimedia300(soundMovieMultimedia300, solrUrl),
         [{
             id: "22222222",
+            pid: "22222222:870970",
             reason: "009a, 009g, 245a, 300e",
             edition: undefined,
             composed: undefined,
@@ -928,6 +939,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("__findSoundMovieMultimedia with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia(soundMovieMultimedia, solrUrl),
         [{
             id: "33333333",
+            pid: "33333333:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -947,6 +959,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("DoubleRecordFinder.find - 245ø", DoubleRecordFinder.find(soundMovieMultimedia245, solrUrl),
         [{
             id: "11111111",
+            pid: "11111111:870970",
             reason: "009a, 009g, 245a, 245ø",
             edition: undefined,
             composed: undefined,
@@ -958,6 +971,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("DoubleRecordFinder.find - 300e", DoubleRecordFinder.find(soundMovieMultimedia300, solrUrl),
         [{
             id: "22222222",
+            pid: "22222222:870970",
             reason: "009a, 009g, 245a, 300e",
             edition: undefined,
             composed: undefined,
@@ -969,6 +983,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("DoubleRecordFinder.find - general", DoubleRecordFinder.find(soundMovieMultimedia, solrUrl),
         [{
             id: "33333333",
+            pid: "33333333:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -1012,6 +1027,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245n",
             edition: undefined,
             composed: undefined,
@@ -1029,6 +1045,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, false),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
@@ -1046,6 +1063,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245n",
             edition: undefined,
             composed: undefined,
@@ -1089,6 +1107,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245g",
             edition: undefined,
             composed: undefined,
@@ -1106,6 +1125,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
@@ -1123,6 +1143,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245g",
             edition: undefined,
             composed: undefined,
@@ -1185,6 +1206,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
     Assert.equalValue("DoubleRecordFinder.find - music, second match", DoubleRecordFinder.find(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -1193,6 +1215,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
         },
             {
                 id: "12345678",
+                pid: "12345678:870970",
                 reason: "009a, 009g, 538g",
                 edition: undefined,
                 composed: undefined,
@@ -1244,6 +1267,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
     Assert.equalValue("DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 538g",
             edition: undefined,
             composed: undefined,
@@ -1300,6 +1324,7 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -1365,6 +1390,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("__findSoundMovieMultimedia245 with record containing field 245ø", DoubleRecordFinder.__findSoundMovieMultimedia245(soundMovieMultimedia245, solrUrl),
         [{
             id: "11111111",
+            pid: "11111111:870970",
             reason: "009a, 009g, 245a, 245ø",
             edition: undefined,
             composed: undefined,
@@ -1384,6 +1410,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("__findSoundMovieMultimedia300 with record containing field 300e", DoubleRecordFinder.__findSoundMovieMultimedia300(soundMovieMultimedia300, solrUrl),
         [{
             id: "22222222",
+            pid: "22222222:870970",
             reason: "009a, 009g, 245a, 300e",
             edition: undefined,
             composed: undefined,
@@ -1404,6 +1431,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("__findSoundMovieMultimedia with record without both 245ø and 300e", DoubleRecordFinder.__findSoundMovieMultimedia(soundMovieMultimedia, solrUrl),
         [{
             id: "33333333",
+            pid: "33333333:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -1423,6 +1451,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("DoubleRecordFinder.find - 245ø", DoubleRecordFinder.find(soundMovieMultimedia245, solrUrl),
         [{
             id: "11111111",
+            pid: "11111111:870970",
             reason: "009a, 009g, 245a, 245ø",
             edition: undefined,
             composed: undefined,
@@ -1434,6 +1463,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("DoubleRecordFinder.find - 300e", DoubleRecordFinder.find(soundMovieMultimedia300, solrUrl),
         [{
             id: "22222222",
+            pid: "22222222:870970",
             reason: "009a, 009g, 245a, 300e",
             edition: undefined,
             composed: undefined,
@@ -1445,6 +1475,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     Assert.equalValue("DoubleRecordFinder.find - general", DoubleRecordFinder.find(soundMovieMultimedia, solrUrl),
         [{
             id: "33333333",
+            pid: "33333333:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -1488,6 +1519,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245n",
             edition: undefined,
             composed: undefined,
@@ -1505,6 +1537,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, false),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
@@ -1549,6 +1582,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245g",
             edition: undefined,
             composed: undefined,
@@ -1566,6 +1600,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
@@ -1628,6 +1663,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
     Assert.equalValue("DoubleRecordFinder.find - music, second match", DoubleRecordFinder.find(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,
@@ -1636,6 +1672,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
         },
             {
                 id: "12345678",
+                pid: "12345678:870970",
                 reason: "009a, 009g, 538g",
                 edition: undefined,
                 composed: undefined,
@@ -1687,6 +1724,7 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
     Assert.equalValue("DoubleRecordFinder.find - music, third match", DoubleRecordFinder.find(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 538g",
             edition: undefined,
             composed: undefined,
@@ -1745,6 +1783,7 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
     Assert.equalValue("Full record", DoubleRecordFinder.find(record, solrUrl),
         [{
             id: "12345678",
+            pid: "12345678:870970",
             reason: "009a, 009g, 245a",
             edition: undefined,
             composed: undefined,

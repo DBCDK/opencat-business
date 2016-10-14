@@ -215,18 +215,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "message",
-                                    "value": "Posten '58442615' kan ikke slettes, da der er poster på et lavere niveau som refererer til den"
-                                },
-                                {
-                                    "value": "58442615:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "message": "Posten '58442615' kan ikke slettes, da der er poster på et lavere niveau som refererer til den"
                     }
                 ],
                 "rawrepo": [

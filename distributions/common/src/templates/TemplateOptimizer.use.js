@@ -1,5 +1,5 @@
-use( "StopWatch" );
-use( "UnitTest" );
+use("StopWatch");
+use("UnitTest");
 
 //subfield rules
 use("CheckSubfieldNotUsedInChildrenRecords");
@@ -43,7 +43,7 @@ use("FieldDemandsOtherFields");
 use("AllFieldsMandatoryIfOneExist");
 use("FieldsMandatory");
 
-EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
+EXPORTED_SYMBOLS = ['TemplateOptimizer'];
 
 /**
  * Module to optimize a template.
@@ -53,7 +53,7 @@ EXPORTED_SYMBOLS = [ 'TemplateOptimizer' ];
  *
  */
 
-var TemplateOptimizer = function() {
+var TemplateOptimizer = function () {
     var __BUNDLE_NAME = "templates";
 
     var VALID_ERROR_TYPES = [
@@ -66,9 +66,9 @@ var TemplateOptimizer = function() {
      *
      * @param {Object} template The template.
      */
-    function optimize( template ) {
-        Log.trace( "Enter -- TemplateOptimizer.optimize()" );
-        var watchFunc = new StopWatch( "TemplateOptimizer.optimize" );
+    function optimize(template) {
+        Log.trace("Enter -- TemplateOptimizer.optimize()");
+        var watchFunc = new StopWatch("TemplateOptimizer.optimize");
 
         var result = {
             fields: {},
@@ -88,7 +88,7 @@ var TemplateOptimizer = function() {
                 }
 
                 var field = template.fields[name];
-                result.fields[name] = optimizeField( name, field, template.defaults.field, template.defaults.subfield);
+                result.fields[name] = optimizeField(name, field, template.defaults.field, template.defaults.subfield);
 
                 var isMandatory = field.mandatory;
                 if (isMandatory === undefined) {
@@ -96,7 +96,7 @@ var TemplateOptimizer = function() {
                 }
                 if (isMandatory === true) {
                     mandatoryNames.push(name);
-                    Log.trace("Adding mandatory name '", name, "'. New mandatoryNames: ", JSON.stringify(mandatoryNames) );
+                    Log.trace("Adding mandatory name '", name, "'. New mandatoryNames: ", JSON.stringify(mandatoryNames));
                 }
 
                 var isRepeatable = field.repeatable;
@@ -106,12 +106,10 @@ var TemplateOptimizer = function() {
                 if (isRepeatable === true) {
                     repeatableNames.push(name);
                 }
-
             }
 
             if (mandatoryNames.length > 0) {
                 mandatoryNames.sort();
-
                 Log.debug("mandatoryNames: ", JSON.stringify(mandatoryNames));
                 result.rules.push({
                     name: "FieldsMandatory.validateRecord",
@@ -132,19 +130,17 @@ var TemplateOptimizer = function() {
                     }
                 });
             }
-
             result.rules = convertTypeNameOfAllRules(result.rules);
             return result;
         } finally {
             watchFunc.stop();
-            Log.trace( "Exit -- TemplateOptimizer.optimize(): ", result );
+            Log.trace("Exit -- TemplateOptimizer.optimize(): ", result);
         }
     }
 
     // TODO: JSDoc
-    function optimizeField( fieldName, field, fieldDefs, subfieldDefs ) {
-        Log.trace( "Enter -- TemplateOptimizer.optimizeField()" );
-
+    function optimizeField(fieldName, field, fieldDefs, subfieldDefs) {
+        Log.trace("Enter -- TemplateOptimizer.optimizeField()");
         var result = undefined;
         try {
             result = {
@@ -167,9 +163,9 @@ var TemplateOptimizer = function() {
                 }
 
                 var sf = field.subfields[name];
-                Log.trace("Optimize subfield(", fieldName, " *", name, "): " );
+                Log.trace("Optimize subfield(", fieldName, " *", name, "): ");
                 result.subfields[name] = optimizeSubfield(sf, subfieldDefs);
-                Log.trace("Subfield rules (", fieldName, " *", name, "): " + __formatRuleNames( result.subfields[name].rules ) );
+                Log.trace("Subfield rules (", fieldName, " *", name, "): " + __formatRuleNames(result.subfields[name].rules));
 
                 if (sf.mandatory === true) {
                     Log.trace("Push mandatory");
@@ -183,7 +179,7 @@ var TemplateOptimizer = function() {
             }
 
             // Setup predefined rules in field.
-            if (result.rules === undefined && fieldDefs.rules !== undefined ) {
+            if (result.rules === undefined && fieldDefs.rules !== undefined) {
                 // deep clone the Default field
                 result.rules = JSON.parse(JSON.stringify(fieldDefs.rules));
             }
@@ -215,14 +211,11 @@ var TemplateOptimizer = function() {
             if (field.sorting !== undefined) {
                 result.sorting = field.sorting;
             }
-
             result.rules = convertTypeNameOfAllRules(result.rules);
-
-            Log.trace("Field rules (", fieldName, "): " + __formatRuleNames( result.rules ) );
-
+            Log.trace("Field rules (", fieldName, "): " + __formatRuleNames(result.rules));
             return result;
         } finally {
-            Log.trace( "Exit -- TemplateOptimizer.optimizeField(): ", result );
+            Log.trace("Exit -- TemplateOptimizer.optimizeField(): ", result);
         }
     }
 
@@ -237,81 +230,64 @@ var TemplateOptimizer = function() {
      *
      * TODO: Example of json in and out.
      */
-    function optimizeSubfield( sf, defs ) {
-        Log.trace( "Enter -- TemplateOptimizer.optimizeSubfield()" );
-
+    function optimizeSubfield(sf, defs) {
+        Log.trace("Enter -- TemplateOptimizer.optimizeSubfield()");
         var result = undefined;
         try {
             var values = sf.values;
             var rules = sf.rules;
-
             if (values === undefined) {
                 values = defs.values;
             }
-
             if (rules === undefined) {
                 rules = defs.rules;
             }
-
             if (rules === undefined) {
                 rules = [];
             }
-
             if (values !== undefined) {
                 var obj = {
                     name: "CheckValue.validateSubfield",
                     type: CheckValue.validateSubfield,
                     params: {values: values}
                 };
-
                 rules.push(obj);
             }
-
             result = convertTypeNameOfAllRules(rules);
-
-            Log.trace( "  rules: ", __formatRuleNames( rules ) );
+            Log.trace("  rules: ", __formatRuleNames(rules));
             return result;
         } finally {
-            Log.trace( "Exit -- TemplateOptimizer.optimizeSubfield()" );
+            Log.trace("Exit -- TemplateOptimizer.optimizeSubfield()");
         }
     }
 
     // TODO: JSDoc
-    function setTemplatePropertyOnRule( rule, template ) {
-        Log.trace( "Enter -- TemplateOptimizer.setTemplatePropertyOnRule()" );
-
+    function setTemplatePropertyOnRule(rule, template) {
+        Log.trace("Enter -- TemplateOptimizer.setTemplatePropertyOnRule()");
         try {
             if (rule === undefined) {
                 return;
             }
-
             if (rule.params === undefined) {
                 rule.params = {template: template};
                 return;
             }
-
             rule.params.template = template;
         } finally {
-            Log.trace( "Exit -- TemplateOptimizer.setTemplatePropertyOnRule(): ", rule );
+            Log.trace("Exit -- TemplateOptimizer.setTemplatePropertyOnRule(): ", rule);
         }
     }
 
-
-    //-----------------------------------------------------------------------------
-    //              Helpers
-    //-----------------------------------------------------------------------------
-
-    function __formatRuleNames( rules ) {
+    function __formatRuleNames(rules) {
         var names = [];
-
-        if( rules !== undefined ) {
+        if (rules !== undefined) {
             for (var i = 0; i < rules.length; i++) {
                 names.push(rules[i].name);
             }
         }
-
         return names.join(",");
     }
+
     /**
      *
      *
@@ -319,9 +295,8 @@ var TemplateOptimizer = function() {
      *
      * @returns {Array}
      */
-    function convertTypeNameOfAllRules( rules ) {
-        Log.trace( "Enter -- TemplateOptimizer.convertTypeNameOfAllRules()" );
-
+    function convertTypeNameOfAllRules(rules) {
+        Log.trace("Enter -- TemplateOptimizer.convertTypeNameOfAllRules()");
         var res = [];
         try {
             for (var i = 0; i < rules.length; i++) {
@@ -331,21 +306,18 @@ var TemplateOptimizer = function() {
                     obj.type = convertRuleTypeNameToFunction(rules[i].type);
 
                     __checkRule(rules[i], rules[i].type);
-                    Log.trace( "Converted rule name: ", obj.name );
+                    Log.trace("Converted rule name: ", obj.name);
                 }
-
                 res.push(obj);
             }
-
             return res;
         } finally {
-            Log.trace( "Exit -- TemplateOptimizer.convertTypeNameOfAllRules(): ", res );
+            Log.trace("Exit -- TemplateOptimizer.convertTypeNameOfAllRules(): ", res);
         }
     }
 
-    function convertRuleTypeNameToFunction( typeName ) {
-        Log.trace( "Enter -- TemplateOptimizer.convertRuleTypeNameToFunction( " + typeName + " )" );
-
+    function convertRuleTypeNameToFunction(typeName) {
+        Log.trace("Enter -- TemplateOptimizer.convertRuleTypeNameToFunction( " + typeName + " )");
         try {
             switch (typeName) {
                 case "RecordRules.fieldsPosition":
@@ -429,31 +401,28 @@ var TemplateOptimizer = function() {
                 case "SubfieldRules.lookupValue":
                     return LookUpValue.validateSubfield;
 
-                default:
-                {
+                default: {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-
                     throw ResourceBundle.getStringFormat(bundle, "validation.rule.unknown", typeName);
                 }
             }
-        } catch( ex ) {
-            Log.warn( "Unable to find validation function for typename '", typeName, "': ", ex );
+        } catch (ex) {
+            Log.warn("Unable to find validation function for typename '", typeName, "': ", ex);
         } finally {
-            Log.trace( "Exit -- TemplateOptimizer.convertRuleTypeNameToFunction()" );
+            Log.trace("Exit -- TemplateOptimizer.convertRuleTypeNameToFunction()");
         }
     }
 
-    function __checkRule( rule, ruleName ) {
-        Log.trace( "Enter -- TemplateOptimizer.__checkRule()" );
-
+    function __checkRule(rule, ruleName) {
+        Log.trace("Enter -- TemplateOptimizer.__checkRule()");
         try {
-            if( rule.hasOwnProperty( "errorType" ) && VALID_ERROR_TYPES.indexOf( rule.errorType ) == -1 ) {
-                var bundle = ResourceBundleFactory.getBundle( __BUNDLE_NAME );
+            if (rule.hasOwnProperty("errorType") && VALID_ERROR_TYPES.indexOf(rule.errorType) == -1) {
+                var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
 
-                throw ResourceBundle.getStringFormat( bundle, "invalid.validation.error.type", ruleName, rule.errorType, VALID_ERROR_TYPES.join( ", " ) );
+                throw ResourceBundle.getStringFormat(bundle, "invalid.validation.error.type", ruleName, rule.errorType, VALID_ERROR_TYPES.join(", "));
             }
         } finally {
-            Log.trace( "Exit -- TemplateOptimizer.__checkRule()" );
+            Log.trace("Exit -- TemplateOptimizer.__checkRule()");
         }
     }
 
@@ -467,9 +436,9 @@ var TemplateOptimizer = function() {
 }();
 
 //-----------------------------------------------------------------------------
-UnitTest.addFixture( "TemplateOptimizer.optimize", function() {
+UnitTest.addFixture("TemplateOptimizer.optimize", function () {
     var template = {};
-    Assert.equalValue( "Empty template", TemplateOptimizer.optimize( template ), { fields: {}, rules: [] } );
+    Assert.equalValue("Empty template", TemplateOptimizer.optimize(template), {fields: {}, rules: []});
 
     template = {
         defaults: {
@@ -501,75 +470,79 @@ UnitTest.addFixture( "TemplateOptimizer.optimize", function() {
         rules: []
     };
 
-    var actual = TemplateOptimizer.optimize( template );
-    Assert.equalValue( "Template with mandatory/repeatable fields", actual, {
-            fields: {
-                "001": TemplateOptimizer.optimizeField( "001", template.fields[ "001" ], template.defaults.field, template.defaults.subfield  ),
-                "002": TemplateOptimizer.optimizeField( "002", template.fields[ "002" ], template.defaults.field, template.defaults.subfield  )
-            },
-            rules: [ {
-                name: "FieldsMandatory.validateRecord",
-                type: FieldsMandatory.validateRecord,
-                params: {
-                    fields: [ "001" ]
-                }
-            },
+    var actual = TemplateOptimizer.optimize(template);
+    Assert.equalValue("Template with mandatory/repeatable fields", actual, {
+        fields: {
+            "001": TemplateOptimizer.optimizeField("001", template.fields["001"], template.defaults.field, template.defaults.subfield),
+            "002": TemplateOptimizer.optimizeField("002", template.fields["002"], template.defaults.field, template.defaults.subfield)
+        },
+        rules: [{
+            name: "FieldsMandatory.validateRecord",
+            type: FieldsMandatory.validateRecord,
+            params: {
+                fields: ["001"]
+            }
+        },
             {
                 name: "RepeatableFields.validateRecord",
                 type: RepeatableFields.validateRecord,
                 params: {
-                    fields: [ "002" ]
+                    fields: ["002"]
                 }
             }
-            ]
-        } );
+        ]
+    });
     //Assert.equalValue( "Template with mandatory/repeatable fields", actual.rules.length, 2 );
 
-    template.rules = [ {
+    template.rules = [{
         type: FieldsMandatory.validateRecord,
         params: {
-            fields: [ "001" ]
+            fields: ["001"]
         }
-    } ];
+    }];
     /*
-    Assert.equalValue( "Template with extra record rule", TemplateOptimizer.optimize( template ), {
-            fields: {
-                "001": TemplateOptimizer.optimizeField( "001", template.fields[ "001" ], template.defaults.field, template.defaults.subfield  ),
-                "002": TemplateOptimizer.optimizeField( "002", template.fields[ "002" ], template.defaults.field, template.defaults.subfield  )
-            },
-            rules: [ {
-                name: "FieldsMandatory.validateRecord",
-                type: FieldsMandatory.validateRecord,
-                params: {
-                    fields: [ "001" ]
-                }
-            },
-            {
-                name: "FieldsMandatory.validateRecord",
-                type: FieldsMandatory.validateRecord,
-                params: {
-                    fields: [ "001" ]
-                }
-            },
-            {
-                name: "FieldsMandatory.validateRecord",
-                type: RepeatableFields.validateRecord,
-                params: {
-                    fields: [ "002" ]
-                }
-            }
-            ]
-        } );
+     Assert.equalValue( "Template with extra record rule", TemplateOptimizer.optimize( template ), {
+     fields: {
+     "001": TemplateOptimizer.optimizeField( "001", template.fields[ "001" ], template.defaults.field, template.defaults.subfield  ),
+     "002": TemplateOptimizer.optimizeField( "002", template.fields[ "002" ], template.defaults.field, template.defaults.subfield  )
+     },
+     rules: [ {
+     name: "FieldsMandatory.validateRecord",
+     type: FieldsMandatory.validateRecord,
+     params: {
+     fields: [ "001" ]
+     }
+     },
+     {
+     name: "FieldsMandatory.validateRecord",
+     type: FieldsMandatory.validateRecord,
+     params: {
+     fields: [ "001" ]
+     }
+     },
+     {
+     name: "FieldsMandatory.validateRecord",
+     type: RepeatableFields.validateRecord,
+     params: {
+     fields: [ "002" ]
+     }
+     }
+     ]
+     } );
 
      */
 });
 
-UnitTest.addFixture( "TemplateOptimizer.optimizeField", function() {
+UnitTest.addFixture("TemplateOptimizer.optimizeField", function () {
     var field = {};
     var fdDefs = {};
     var sfDefs = {};
 
-    Assert.equalValue( "TemplateOptimizer.optimizeField 1", TemplateOptimizer.optimizeField( field, fdDefs, sfDefs ), { url: undefined, rules: [], subfields: {} } );
+    Assert.equalValue("TemplateOptimizer.optimizeField 1", TemplateOptimizer.optimizeField(field, fdDefs, sfDefs), {
+        url: undefined,
+        rules: [],
+        subfields: {}
+    });
 
     field = {
         subfields: {
@@ -578,48 +551,48 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeField", function() {
         }
     };
 
-    Assert.equalValue( "TemplateOptimizer.optimizeField 2", TemplateOptimizer.optimizeField( "xxx", field, fdDefs, sfDefs ),
+    Assert.equalValue("TemplateOptimizer.optimizeField 2", TemplateOptimizer.optimizeField("xxx", field, fdDefs, sfDefs),
         {
             url: undefined,
             rules: [],
             subfields: {
-                "a": TemplateOptimizer.optimizeSubfield( field.subfields[ "a" ], sfDefs ),
-                "b": TemplateOptimizer.optimizeSubfield( field.subfields[ "b" ], sfDefs )
+                "a": TemplateOptimizer.optimizeSubfield(field.subfields["a"], sfDefs),
+                "b": TemplateOptimizer.optimizeSubfield(field.subfields["b"], sfDefs)
             }
-        } );
+        });
 
     field = {
         subfields: {
-            "a": { repeatable: true },
-            "b": { repeatable: true },
-            "c": { repeatable: true },
-            "d": { repeatable: false }
+            "a": {repeatable: true},
+            "b": {repeatable: true},
+            "c": {repeatable: true},
+            "d": {repeatable: false}
         }
     };
-    Assert.equalValue( "TemplateOptimizer.optimizeField 3", TemplateOptimizer.optimizeField( "xxx", field, fdDefs, sfDefs ),
+    Assert.equalValue("TemplateOptimizer.optimizeField 3", TemplateOptimizer.optimizeField("xxx", field, fdDefs, sfDefs),
         {
             url: undefined,
-            rules: [ {
+            rules: [{
                 name: "RepeatableSubfields.validateField",
                 type: RepeatableSubfields.validateField,
                 params: {
-                    subfields: [ "d" ]
+                    subfields: ["d"]
                 }
-            } ],
+            }],
             subfields: {
-                "a": TemplateOptimizer.optimizeSubfield( field.subfields[ "a" ], sfDefs ),
-                "b": TemplateOptimizer.optimizeSubfield( field.subfields[ "b" ], sfDefs ),
-                "c": TemplateOptimizer.optimizeSubfield( field.subfields[ "c" ], sfDefs ),
-                "d": TemplateOptimizer.optimizeSubfield( field.subfields[ "d" ], sfDefs )
+                "a": TemplateOptimizer.optimizeSubfield(field.subfields["a"], sfDefs),
+                "b": TemplateOptimizer.optimizeSubfield(field.subfields["b"], sfDefs),
+                "c": TemplateOptimizer.optimizeSubfield(field.subfields["c"], sfDefs),
+                "d": TemplateOptimizer.optimizeSubfield(field.subfields["d"], sfDefs)
             }
-        } );
+        });
 
     field = {
         subfields: {
-            "a": { mandatory: true, repeatable: true },
-            "b": { mandatory: true, repeatable: true },
-            "c": { mandatory: false, repeatable: false },
-            "d": { mandatory: false, repeatable: false }
+            "a": {mandatory: true, repeatable: true},
+            "b": {mandatory: true, repeatable: true},
+            "c": {mandatory: false, repeatable: false},
+            "d": {mandatory: false, repeatable: false}
         }
     };
 
@@ -630,123 +603,131 @@ UnitTest.addFixture( "TemplateOptimizer.optimizeField", function() {
                 name: "SubfieldsMandatory.validateField",
                 type: SubfieldsMandatory.validateField,
                 params: {
-                    subfields: [ "a", "b" ]
+                    subfields: ["a", "b"]
                 }
             },
             {
                 name: "RepeatableSubfields.validateField",
                 type: RepeatableSubfields.validateField,
                 params: {
-                    subfields: [ "c", "d" ]
+                    subfields: ["c", "d"]
                 }
-            } ],
+            }],
         subfields: {
-            "a": TemplateOptimizer.optimizeSubfield( field.subfields[ "a" ], sfDefs ),
-            "b": TemplateOptimizer.optimizeSubfield( field.subfields[ "b" ], sfDefs ),
-            "c": TemplateOptimizer.optimizeSubfield( field.subfields[ "c" ], sfDefs ),
-            "d": TemplateOptimizer.optimizeSubfield( field.subfields[ "d" ], sfDefs )
+            "a": TemplateOptimizer.optimizeSubfield(field.subfields["a"], sfDefs),
+            "b": TemplateOptimizer.optimizeSubfield(field.subfields["b"], sfDefs),
+            "c": TemplateOptimizer.optimizeSubfield(field.subfields["c"], sfDefs),
+            "d": TemplateOptimizer.optimizeSubfield(field.subfields["d"], sfDefs)
         }
     };
-    var actualResult4 = TemplateOptimizer.optimizeField( field, fdDefs, sfDefs );
+    var actualResult4 = TemplateOptimizer.optimizeField(field, fdDefs, sfDefs);
     //Assert.equalValue( "TemplateOptimizer.optimizeField 4 ", actualResult4, expectedResult4 );
-} );
+});
 
-UnitTest.addFixture( "TemplateOptimizer.optimizeSubfield", function() {
+UnitTest.addFixture("TemplateOptimizer.optimizeSubfield", function () {
     var sf = {};
     var defs = {};
 
-    Assert.equalValue( "Empty subfield and empty defs", TemplateOptimizer.optimizeSubfield( sf, defs ), [] );
+    Assert.equalValue("Empty subfield and empty defs", TemplateOptimizer.optimizeSubfield(sf, defs), []);
 
     sf = {};
-    defs = { mandatory: true };
-    Assert.equalValue( "Empty subfield and defs with mandatory", TemplateOptimizer.optimizeSubfield( sf, defs ), [] );
+    defs = {mandatory: true};
+    Assert.equalValue("Empty subfield and defs with mandatory", TemplateOptimizer.optimizeSubfield(sf, defs), []);
 
     sf = {};
-    defs = { repeatable: true };
-    Assert.equalValue( "Empty subfield and defs with repeatable", TemplateOptimizer.optimizeSubfield( sf, defs ), [] );
+    defs = {repeatable: true};
+    Assert.equalValue("Empty subfield and defs with repeatable", TemplateOptimizer.optimizeSubfield(sf, defs), []);
 
-    sf = { mandatory: false };
-    defs = { mandatory: true };
-    Assert.equalValue( "subfield with mandatory and defs with mandatory", TemplateOptimizer.optimizeSubfield( sf, defs ), [] );
+    sf = {mandatory: false};
+    defs = {mandatory: true};
+    Assert.equalValue("subfield with mandatory and defs with mandatory", TemplateOptimizer.optimizeSubfield(sf, defs), []);
 
-    sf = { repeatable: false };
-    defs = { repeatable: true };
-    Assert.equalValue( "subfield with repeatable and defs with repeatable", TemplateOptimizer.optimizeSubfield( sf, defs ), [] );
+    sf = {repeatable: false};
+    defs = {repeatable: true};
+    Assert.equalValue("subfield with repeatable and defs with repeatable", TemplateOptimizer.optimizeSubfield(sf, defs), []);
 
     sf = {};
-    defs = { values: [ "a" ] };
-    Assert.equalValue( "Empty subfield and defs with values", TemplateOptimizer.optimizeSubfield( sf, defs ), [
-            {
-                name: "CheckValue.validateSubfield",
-                type: CheckValue.validateSubfield,
-                params: { values: defs.values }
-            }
-        ] );
+    defs = {values: ["a"]};
+    Assert.equalValue("Empty subfield and defs with values", TemplateOptimizer.optimizeSubfield(sf, defs), [
+        {
+            name: "CheckValue.validateSubfield",
+            type: CheckValue.validateSubfield,
+            params: {values: defs.values}
+        }
+    ]);
 
-    sf = { values: [ "1", "2" ] };
-    defs = { values: [ "a" ] };
-    Assert.equalValue( "subfield with values and defs with values", TemplateOptimizer.optimizeSubfield( sf, defs ), [
-            {
-                name: "CheckValue.validateSubfield",
-                type: CheckValue.validateSubfield,
-                params: { values: sf.values }
-            }
-        ] );
+    sf = {values: ["1", "2"]};
+    defs = {values: ["a"]};
+    Assert.equalValue("subfield with values and defs with values", TemplateOptimizer.optimizeSubfield(sf, defs), [
+        {
+            name: "CheckValue.validateSubfield",
+            type: CheckValue.validateSubfield,
+            params: {values: sf.values}
+        }
+    ]);
 
-    sf = { values: [ "1", "2" ] };
-    defs = { rules: [
+    sf = {values: ["1", "2"]};
+    defs = {
+        rules: [
             {
                 type: "SubfieldRules.checkLength",
-                params: { min: 1 }
+                params: {min: 1}
             }
-        ] };
-    Assert.equalValue( "subfield with values and defs with rules", TemplateOptimizer.optimizeSubfield( sf, defs ), [
-            {
-                type: CheckLength.validateSubfield,
-                params: { min: 1 },
-                name: "SubfieldRules.checkLength"
-            },
-            {
-                name: "CheckValue.validateSubfield",
-                type: CheckValue.validateSubfield,
-                params: { values: sf.values }
-            }
-        ] );
+        ]
+    };
+    Assert.equalValue("subfield with values and defs with rules", TemplateOptimizer.optimizeSubfield(sf, defs), [
+        {
+            type: CheckLength.validateSubfield,
+            params: {min: 1},
+            name: "SubfieldRules.checkLength"
+        },
+        {
+            name: "CheckValue.validateSubfield",
+            type: CheckValue.validateSubfield,
+            params: {values: sf.values}
+        }
+    ]);
 
-    sf = { rules: [
+    sf = {
+        rules: [
             {
                 type: "SubfieldRules.checkLength",
-                params: { min: 1 }
+                params: {min: 1}
             }
-        ] };
-    defs = { values: [ "1", "2" ] };
-    Assert.equalValue( "subfield with rules and defs with values", TemplateOptimizer.optimizeSubfield( sf, defs ), [
-            {
-                type: CheckLength.validateSubfield,
-                params: { min: 1 },
-                name: "SubfieldRules.checkLength"
-            },
-            {
-                name: "CheckValue.validateSubfield",
-                type: CheckValue.validateSubfield,
-                params: { values: defs.values }
-            }
-        ] );
+        ]
+    };
+    defs = {values: ["1", "2"]};
+    Assert.equalValue("subfield with rules and defs with values", TemplateOptimizer.optimizeSubfield(sf, defs), [
+        {
+            type: CheckLength.validateSubfield,
+            params: {min: 1},
+            name: "SubfieldRules.checkLength"
+        },
+        {
+            name: "CheckValue.validateSubfield",
+            type: CheckValue.validateSubfield,
+            params: {values: defs.values}
+        }
+    ]);
 
-    sf = { rules: [
+    sf = {
+        rules: [
             {
                 type: "SubfieldRules.checkISBN10"
             }
-        ] };
-    defs = { rules: [
+        ]
+    };
+    defs = {
+        rules: [
             {
                 type: "SubfieldRules.checkLength",
-                params: { min: 1 }
+                params: {min: 1}
             }
-        ] };
-    Assert.equalValue( "subfield with rules and defs with rules", TemplateOptimizer.optimizeSubfield( sf, defs ), [
-            {
-                type: CheckISBN10.validateSubfield, name:"SubfieldRules.checkISBN10"
-            }
-        ] );
+        ]
+    };
+    Assert.equalValue("subfield with rules and defs with rules", TemplateOptimizer.optimizeSubfield(sf, defs), [
+        {
+            type: CheckISBN10.validateSubfield, name: "SubfieldRules.checkISBN10"
+        }
+    ]);
 });

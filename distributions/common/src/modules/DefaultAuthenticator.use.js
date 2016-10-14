@@ -3,7 +3,6 @@ use("Marc");
 use("MarcClasses");
 use("NoteAndSubjectExtentionsHandler");
 use("OpenAgencyClient");
-use("RecordUtil");
 use("RawRepoClient");
 use("ResourceBundle");
 use("ResourceBundleFactory");
@@ -45,7 +44,7 @@ var DefaultAuthenticator = function () {
                     }
                 }
                 var recId = record.getValue(/001/, /a/);
-                return [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "edit.record.other.library.error", recId), RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "edit.record.other.library.error", recId))];
             } finally {
                 Log.trace("Exit - DefaultAuthenticator.authenticateRecord()");
             }
@@ -80,10 +79,10 @@ var DefaultAuthenticator = function () {
                 if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
                     Log.debug("Checking authentication for new common record.");
                     if (owner === "") {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "create.common.record.error"), RecordUtil.getRecordPid(record))];
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "create.common.record.error"))];
                     }
                     if (owner !== groupId) {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "create.common.record.other.library.error"), RecordUtil.getRecordPid(record))];
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "create.common.record.other.library.error"))];
                     }
                     return [];
                 }
@@ -95,33 +94,33 @@ var DefaultAuthenticator = function () {
                 Log.info("Current owner: ", curOwner);
                 if (curOwner === "DBC") {
                     if (!OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_DBC_RECORDS)) {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.dbc.error"), RecordUtil.getRecordPid(record))];
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.dbc.error"))];
                     }
 
                     return [];
                 }
                 if (curOwner === "RET") {
                     if (!OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_RET_RECORD)) {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"), RecordUtil.getRecordPid(record))];
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
                     }
 
                     return [];
                 }
                 if (owner === "") {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"), RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
                 }
                 if (OpenAgencyClient.hasFeature(curOwner, UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD)) {
                     if (owner !== groupId) {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.give.public.library.error"), RecordUtil.getRecordPid(record))];
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.give.public.library.error"))];
                     }
 
                     if (!OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD)) {
-                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.take.public.library.error"), RecordUtil.getRecordPid(record))];
+                        return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.take.public.library.error"))];
                     }
                     return [];
                 }
                 if (!( owner === groupId && groupId === curOwner )) {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.other.library.error"), RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.other.library.error"))];
                 }
                 return [];
             } finally {

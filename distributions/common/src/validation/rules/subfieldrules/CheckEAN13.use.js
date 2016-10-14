@@ -1,8 +1,4 @@
-/**
- * Created by mib on 1/11/16.
- */
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -21,18 +17,18 @@ var CheckEAN13 = function () {
         if (!ValidationUtil.isNumber(subfieldValue)) {
             if (ISBNorISMN === 'B') {
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.numbers.error", subfieldName);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             } else {
                 msg = ResourceBundle.getStringFormat(bundle, "check.ismn.numbers.error", subfieldName);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
         } else if (subfieldValue.length !== 13) {
             if (ISBNorISMN === 'B') {
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.length.error", subfieldName);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             } else {
                 msg = ResourceBundle.getStringFormat(bundle, "check.ismn.length.error", subfieldName);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
         } else {
             var productSum = 0;
@@ -63,10 +59,10 @@ var CheckEAN13 = function () {
             if (checksum !== x13) { // 7
                 if (ISBNorISMN === 'B') {
                     msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.invalid.error", subfieldName, subfieldValue);
-                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 } else {
                     msg = ResourceBundle.getStringFormat(bundle, "check.ismn.invalid.error", subfieldName, subfieldValue);
-                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 }
             }
         }

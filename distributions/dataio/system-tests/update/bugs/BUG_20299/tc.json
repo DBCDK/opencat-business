@@ -34,18 +34,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "message",
-                                    "value": "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
-                                },
-                                {
-                                    "value": "93628551:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "message": "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
                     }
                 ],
                 "rawrepo": [

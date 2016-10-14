@@ -44,7 +44,7 @@ var ExclusiveSubfield = function () {
                 for (var j = 0; j < aExclusiveFields.length; ++j) {
                     var name_ = aExclusiveFields[j];
                     if (counts.hasOwnProperty(name_)) {
-                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.rule.error", "a", name_), RecordUtil.getRecordPid(record)));
+                        result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.rule.error", "a", name_)));
                     }
                 }
             }

@@ -1,73 +1,64 @@
-//-----------------------------------------------------------------------------
-use( "RawRepoClientCore" );
+use("RawRepoClientCore");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'RawRepoClient' ];
+EXPORTED_SYMBOLS = ['RawRepoClient'];
 
-//-----------------------------------------------------------------------------
 /**
  * This module gives access to a raw-repo of records.
- * 
+ *
  * Each JS environment must provide a RawRepoCore module that implements the
  * actual access to the rawrepo.
- * 
+ *
  * @namespace
  * @name RawRepoClient
  */
-var RawRepoClient = function() {
+var RawRepoClient = function () {
     /**
      * Checks if a record exists in the rawrepo.
-     * 
+     *
      * @param {String} recordId  Record id.
      * @param {String} libraryNo Library no.
-     * 
+     *
      * @return {Boolean} true if the record exists, false otherwise.
-     * 
+     *
      * @name RawRepoClient#recordExists
      */
-	function recordExists( recordId, libraryNo ) {
-        Log.trace( "Enter - RawRepoClient.recordExists()" );
-
+    function recordExists(recordId, libraryNo) {
+        Log.trace("Enter - RawRepoClient.recordExists()");
         var result = null;
         try {
-            Log.debug( "Check if record [", recordId, ":", libraryNo, "] exists." );
+            Log.debug("Check if record [", recordId, ":", libraryNo, "] exists.");
             result = RawRepoClientCore.recordExists(recordId, libraryNo);
             return result;
-        }
-        catch( ex ) {
-            Log.error( "Catched exception: ", ex );
+        } catch (ex) {
+            Log.error("Catched exception: ", ex);
             throw ex;
-        }
-        finally {
-            Log.trace( "Exit - RawRepoClient.recordExists(): ", result );
+        } finally {
+            Log.trace("Exit - RawRepoClient.recordExists(): ", result);
         }
     }
 
     /**
      * Fetches a record from the rawrepo.
-     * 
+     *
      * @param {String} recordId  Record id.
      * @param {String} libraryNo Library no.
-     * 
+     *
      * @return {Record} The record from the rawrepo if it can be fecthed, undefined otherwise.
-     * 
+     *
      * @name RawRepoClient#fetchRecord
      */
-    function fetchRecord( recordId, libraryNo ) {
-        Log.trace( "Enter - RawRepoClient.fetchRecord()" );
-
+    function fetchRecord(recordId, libraryNo) {
+        Log.trace("Enter - RawRepoClient.fetchRecord()");
         var result = null;
         try {
-            Log.debug( "Fetchrecord [", recordId, ":", libraryNo, "] from rawrepo" );
-            result = RawRepoClientCore.fetchRecord( recordId, libraryNo );
+            Log.debug("Fetchrecord [", recordId, ":", libraryNo, "] from rawrepo");
+            result = RawRepoClientCore.fetchRecord(recordId, libraryNo);
             return result;
-        }
-        catch( ex ) {
-            Log.error( "Catched exception: ", ex );
+        } catch (ex) {
+            Log.error("Catched exception: ", ex);
             throw ex;
-        }
-        finally {
-            Log.trace( "Exit - RawRepoClient.fetchRecord(): ", result );
+        } finally {
+            Log.trace("Exit - RawRepoClient.fetchRecord(): ", result);
         }
     }
 
@@ -84,27 +75,24 @@ var RawRepoClient = function() {
      *
      * @name RawRepoCore#getRelationsChildren
      */
-    function getRelationsChildren( recordId, libraryNo ) {
-        Log.trace( "Enter - RawRepoClient.getRelationsChildren()" );
-
+    function getRelationsChildren(recordId, libraryNo) {
+        Log.trace("Enter - RawRepoClient.getRelationsChildren()");
         var result = null;
         try {
-            Log.debug( "Fetch childrens of [", recordId, ":", libraryNo, "]" );
-            result = RawRepoClientCore.getRelationsChildren( recordId, libraryNo );
+            Log.debug("Fetch childrens of [", recordId, ":", libraryNo, "]");
+            result = RawRepoClientCore.getRelationsChildren(recordId, libraryNo);
             return result;
-        }
-        catch( ex ) {
-            Log.error( "Catched exception: ", ex );
+        } catch (ex) {
+            Log.error("Catched exception: ", ex);
             throw ex;
-        }
-        finally {
-            Log.trace( "Exit - RawRepoClient.getRelationsChildren(): ", result );
+        } finally {
+            Log.trace("Exit - RawRepoClient.getRelationsChildren(): ", result);
         }
     }
 
     return {
-    	'recordExists': recordExists,
-    	'fetchRecord': fetchRecord,
+        'recordExists': recordExists,
+        'fetchRecord': fetchRecord,
         'getRelationsChildren': getRelationsChildren
     };
 }();

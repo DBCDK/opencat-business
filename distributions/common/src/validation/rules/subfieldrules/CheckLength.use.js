@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -59,7 +58,7 @@ var CheckLength = function () {
         if (subfieldValueLength < paramsMin) {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var errorMessage = ResourceBundle.getStringFormat(bundle, "check.length.min.error", subfieldName, paramsMin);
-            var error = ValidateErrors.subfieldError("TODO:fixurl", errorMessage, RecordUtil.getRecordPid(record));
+            var error = ValidateErrors.subfieldError("TODO:fixurl", errorMessage);
             return [error];
         }
         return [];
@@ -73,7 +72,7 @@ var CheckLength = function () {
         if (subfieldValueLength > paramsMax) {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var errorMessage = ResourceBundle.getStringFormat(bundle, "check.length.max.error", subfieldName, paramsMax);
-            var error = ValidateErrors.subfieldError("TODO:fixurl", errorMessage, RecordUtil.getRecordPid(record));
+            var error = ValidateErrors.subfieldError("TODO:fixurl", errorMessage);
             return [error];
         }
         return [];

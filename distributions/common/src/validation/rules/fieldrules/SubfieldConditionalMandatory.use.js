@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -44,7 +43,7 @@ var SubfieldConditionalMandatory = function () {
             if (mandatoryAndNotFound) {
                 var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var errorMessage = ResourceBundle.getStringFormat(bundle, "mandatory.subfield.conditional.rule.error", params.subfieldMandatory, params.subfieldConditional, params.values);
-                return [ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.fieldError("TODO:url", errorMessage)];
             }
             return [];
         } finally {

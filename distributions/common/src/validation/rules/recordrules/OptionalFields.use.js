@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -38,7 +37,7 @@ var OptionalFields = function () {
             }
             if (negativeFields.length > 0) {
                 var msg = ResourceBundle.getStringFormat(bundle, "fields.optional.error", negativeFields);
-                result = [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                result = [ValidateErrors.recordError("", msg)];
             }
             return result;
         } finally {

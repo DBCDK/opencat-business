@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -60,26 +59,26 @@ var CheckISBN10 = function () {
                     if (ch.toLowerCase() === 'x') {
                         if (ix != len - 1) {
                             msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.length.error", subfieldName);
-                            result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                            result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                             return result;
                         }
                         value += 10; // 8
                         pos++;
                     } else {
                         msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.numbers.error", subfieldName);
-                        result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                        result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                         return result;
                     }
                 }
             }
             if (pos != 10) {
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.length.error", subfieldName);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
             if (value % 11 !== 0) { // 7
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.invalid.error", subfieldName, subfield['value']);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
             return result;
         } finally {

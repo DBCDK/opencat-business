@@ -1,11 +1,8 @@
-// -----------------------------------------------------------------------------
-use( "Log" );
-use( "OpenAgencyClientCore" );
+use("Log");
+use("OpenAgencyClientCore");
 
-// -----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'OpenAgencyClient' ];
+EXPORTED_SYMBOLS = ['OpenAgencyClient'];
 
-// -----------------------------------------------------------------------------
 /**
  * This module implements access to retrieve features by the OpenAgency service.
  *
@@ -14,19 +11,16 @@ EXPORTED_SYMBOLS = [ 'OpenAgencyClient' ];
  * @namespace
  * @name OpenAgencyClient
  */
-var OpenAgencyClient = function() {
-    function hasFeature( agencyId, featureName ) {
-        Log.trace( "Enter - OpenAgencyClient.hasFeature()" );
-
+var OpenAgencyClient = function () {
+    function hasFeature(agencyId, featureName) {
+        Log.trace("Enter - OpenAgencyClient.hasFeature()");
         var result;
         try {
-            Log.info( "Checking feature '", featureName, "' for agency: ", agencyId );
-            return result = OpenAgencyClientCore.hasFeature( agencyId, featureName );
+            Log.info("Checking feature '", featureName, "' for agency: ", agencyId);
+            return result = OpenAgencyClientCore.hasFeature(agencyId, featureName);
+        } finally {
+            Log.trace("Exit - OpenAgencyClient.hasFeature(): " + result);
         }
-        finally {
-            Log.trace( "Exit - OpenAgencyClient.hasFeature(): " + result );
-        }
-
     }
 
     return {

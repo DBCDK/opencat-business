@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ValueCheck");
 use("ValidateErrors");
 use("ValidationUtil");
@@ -51,7 +50,7 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function () {
             if (!foundFieldAndSubfields) {
                 var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var errorMessage = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", params.subfield, field.name);
-                result.push(ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.fieldError("TODO:url", errorMessage));
             }
             return result;
         } finally {

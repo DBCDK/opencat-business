@@ -1,7 +1,6 @@
 use("FieldSorting");
 use("Print");
 use("ReadFile");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("StopWatch");
@@ -27,7 +26,7 @@ var Validator = function () {
      * @param {Object} record The record that contains the subfield.
      * @param {Object} templateProvider A function that returns the
      *                 optimized template to use for the validation.
-     *
+     * @param settings properties object
      * @return {Array} An array of validation errors.
      */
     function validateRecord(record, templateProvider, settings) {
@@ -46,9 +45,8 @@ var Validator = function () {
                     if (template.fields[field.name] && template.fields[field.name].sorting) {
                         FieldSorting.sort(field, template.fields[field.name].sorting);
                     }
-                    var val = i + 1;
                     for (var j = 0; j < subResult.length; j++) {
-                        subResult[j].params.param.push({key: "fieldno", value: val});
+                        subResult[j].ordinalPositionOfField = i;
                     }
                     result = result.concat(subResult);
                 }
@@ -87,7 +85,7 @@ var Validator = function () {
      * @param {Object} field  The field that contains the subfield.
      * @param {Object} templateProvider A function that returns the
      *                 optimized template to use for the validation.
-     *
+     * @param settings properties object
      * @return {Array} An array of validation errors.
      */
     function validateField(record, field, templateProvider, settings) {
@@ -99,19 +97,18 @@ var Validator = function () {
             var template = templateProvider();
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
-                return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name), RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name))];
             }
             var i;
             if (field.subfields !== undefined) {
                 Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields: ", JSON.stringify(field));
                 if (field.subfields.length === 0) {
-                    return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name), RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
                     var subResult = validateSubfield(record, field, field.subfields[i], templateProvider, settings);
-                    var val = i + 1;
                     for (var j = 0; j < subResult.length; j++) {
-                        subResult[j].params.param.push({key: "subfieldno", value: val});
+                        subResult[j].ordinalPositionOfSubfield = i;
                     }
                     result = result.concat(subResult);
                 }
@@ -136,15 +133,26 @@ var Validator = function () {
                 // TODO: Return error.
             }
             for (var k = 0; k < result.length; k++) {
-                var found = false;
-                for (var m = 0; m < result[k].params.param.length && !found; m++) {
-                    if (result[k].params.param[m].key === "url" && templateField.url !== undefined && templateField.url !== "") {
-                        found = true;
-                        result[k].params.param[m].value = templateField.url;
+                // Log.info("123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123");
+                // Log.info("templateField.url...................................................................: (" + templateField.url + ")");
+                // Log.info("result[k].urlForDocumentation.......................................................: (" + result[k].urlForDocumentation + ")");
+                // var bla = templateField.url !== undefined;
+                // Log.info("templateField.url !== undefined.....................................................: " + bla);
+                // bla = templateField.url !== "";
+                // Log.info("templateField.url !== \"\"............................................................: " + bla);
+                // bla = result[k].urlForDocumentation === undefined;
+                // Log.info("result[k].urlForDocumentation === undefined.........................................: " + bla);
+                // bla = result[k].urlForDocumentation === "";
+                // Log.info("result[k].urlForDocumentation === \"\"................................................: " + bla);
+                // bla = templateField.url !== undefined && templateField.url !== "";
+                // Log.info("templateField.url !== undefined && templateField.url !== \"\".........................: " + bla);
+                // bla = result[k].urlForDocumentation === undefined || result[k].urlForDocumentation === "";
+                // Log.info("result[k].urlForDocumentation === undefined && result[k].urlForDocumentation === \"\".: " + bla);
+                // Log.info("123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123");
+                if (templateField.url !== undefined && templateField.url !== "") {
+                    if (result[k].urlForDocumentation === undefined || result[k].urlForDocumentation === "" || result[k].urlForDocumentation === "TODO:fixurl") {
+                        result[k].urlForDocumentation = templateField.url;
                     }
-                }
-                if (!found) {
-                    result[k].params.param.push({key: "url", value: templateField.url});
                 }
             }
             return result;
@@ -162,7 +170,7 @@ var Validator = function () {
      * @param {Object} subfield The subfield itself.
      * @param {Object} templateProvider A function that returns the
      *                 optimized template to use for the validation.
-     *
+     * @param settings properties object
      * @return {Array} An array of validation errors.
      */
     function validateSubfield(record, field, subfield, templateProvider, settings) {
@@ -174,7 +182,7 @@ var Validator = function () {
             var template = templateProvider();
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
-                return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name), RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name))];
             }
             // Skip validation if subfield.name is upper case.
             if (subfield.name !== subfield.name.toLowerCase()) {
@@ -182,11 +190,11 @@ var Validator = function () {
             }
             var templateSubfield = templateField.subfields[subfield.name];
             if (templateSubfield === undefined) {
-                return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "wrong.subfield", subfield.name, field.name), RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "wrong.subfield", subfield.name, field.name))];
             }
             if (subfield.value === "") {
                 if (UpdateConstants.EMPTY_SUBFIELDS.indexOf(subfield.name) === -1) {
-                    return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "empty.subfield", field.name, subfield.name), RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "empty.subfield", field.name, subfield.name))];
                 }
             }
             if (templateSubfield instanceof Array) {

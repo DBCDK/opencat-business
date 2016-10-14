@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UpdateConstants");
@@ -34,19 +33,19 @@ var CheckFaust = function () {
             var msg;
             if (!ValidationUtil.isNumber(subfieldValue)) {
                 msg = ResourceBundle.getStringFormat(bundle, "check.faust.digit.error", subfieldName);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
             if (subfieldValue.length < FAUST_MIN_LENGTH) {
                 msg = ResourceBundle.getStringFormat(bundle, "check.faust.length.error", subfieldName, FAUST_MIN_LENGTH);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
             if (subfieldValue.length !== 8) {
                 var marc = DanMarc2Converter.convertToDanMarc2(record);
                 if (marc.matchValue(/001/, /b/, RegExp(UpdateConstants.COMMON_AGENCYID))) {
                     msg = ResourceBundle.getStringFormat(bundle, "check.faust.common.records.length.error", subfieldName);
-                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                     return result;
                 }
             }
@@ -83,7 +82,7 @@ var CheckFaust = function () {
             var checksumValue = parseInt(subfieldValue.charAt(subfieldValue.length - 1));
             if (value + checksumValue !== 11 && value !== 0) { // 14
                 msg = ResourceBundle.getStringFormat(bundle, "check.faust.error", subfieldName, subfieldValue);
-                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record)));
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
             return result;
         } finally {

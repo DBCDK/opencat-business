@@ -1,5 +1,4 @@
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
@@ -63,7 +62,7 @@ var FieldDemandsOtherFields = function () {
             }
             if (missingDemandFields.length > 0) {
                 var msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.missing.values", existingSourceFields, missingDemandFields);
-                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.recordError("", msg)];
             }
             return [];
         } finally {
@@ -79,36 +78,36 @@ var FieldDemandsOtherFields = function () {
             if (!params.hasOwnProperty("sources") && !params.hasOwnProperty("demands")) {
                 Log.warn("sources and demands params are missing");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.missing.sources.and.demands");
-                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.recordError("", msg)];
             }
             if (!params.hasOwnProperty("demands")) {
                 Log.warn("params.demands is missing");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.sources.missing.demands");
-                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.recordError("", msg)];
             }
             if (!params.hasOwnProperty("sources")) {
                 Log.warn("params.sources is missing");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.demands.missing.sources");
-                return [ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.recordError("", msg)];
             }
             // check for wrong type and array.length
             if (!Array.isArray(params.sources)) {
                 Log.warn("params.sources is not of type array");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.sources.but.not.array");
-                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.recordError("", msg));
             } else if (Array.isArray(params.sources) && params.sources.length < 1) {
                 Log.warn("params.sources is empty");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.sources.length.0");
-                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.recordError("", msg));
             }
             if (!Array.isArray(params.demands)) {
                 Log.warn("params.demands is not of type array");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.demands.but.not.array");
-                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.recordError("", msg));
             } else if (Array.isArray(params.demands) && params.demands.length < 1) {
                 Log.warn("params.demands is empty");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.having.demands.length.0");
-                ret.push(ValidateErrors.recordError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.recordError("", msg));
             }
             return ret;
         } finally {

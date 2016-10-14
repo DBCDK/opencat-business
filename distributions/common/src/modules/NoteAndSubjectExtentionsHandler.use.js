@@ -3,6 +3,7 @@ use("Log");
 use("Marc");
 use("OpenAgencyClient");
 use("RawRepoClient");
+use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UpdateConstants");
@@ -49,7 +50,7 @@ var NoteAndSubjectExtentionsHandler = function () {
                 if (!( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) )) {
                     if (__isFieldChangedInOtherRecord(field, curRecord)) {
                         var message = ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", groupId, field.name, recId);
-                        authResult.push(ValidateErrors.recordError("", message, RecordUtil.getRecordPid(record)));
+                        authResult.push(ValidateErrors.recordError("", message));
                     }
                 }
             });
@@ -58,7 +59,7 @@ var NoteAndSubjectExtentionsHandler = function () {
                     if (__isFieldChangedInOtherRecord(field, record)) {
                         if (curRecord.count(field.name) !== record.count(field.name)) {
                             var message = ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", groupId, field.name, recId);
-                            authResult.push(ValidateErrors.recordError("", message, RecordUtil.getRecordPid(record)));
+                            authResult.push(ValidateErrors.recordError("", message));
                         }
                     }
                 }

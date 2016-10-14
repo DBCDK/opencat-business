@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -34,7 +33,7 @@ var FieldsMandatory = function () {
                     Log.debug("Fields: ", params.fields[i], " was not found in record:\n", uneval(record));
                     var url = TemplateUrl.getUrlForField(params.fields[i], params.template);
                     var msg = ResourceBundle.getStringFormat(bundle, "field.mandatory.error", params.fields[i]);
-                    result.push(ValidateErrors.recordError(url, msg, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.recordError(url, msg));
                 }
             }
             return result;

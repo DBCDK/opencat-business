@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -50,7 +49,7 @@ var AllFieldsMandatoryIfOneExist = function () {
             if (totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor) {
                 foundFields.forEach(function (f) {
                     var message = ResourceBundle.getStringFormat(bundle, "field.mandatory.error", f);
-                    result.push(ValidateErrors.recordError("TODO:fixurl", message, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.recordError("TODO:fixurl", message));
                 });
             }
             return result;

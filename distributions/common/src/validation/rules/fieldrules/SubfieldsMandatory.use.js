@@ -32,7 +32,7 @@ var SubfieldsMandatory = function () {
             for (var i = 0; i < params.subfields.length; ++i) {
                 if (ValidationUtil.doesFieldContainSubfield(field, params.subfields[i]) === false) {
                     var msg = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", params.subfields[i], field.name);
-                    result.push(ValidateErrors.fieldError("TODO:url", msg, RecordUtil.getRecordPid(record)));
+                    result.push(ValidateErrors.fieldError("TODO:url", msg));
                 }
             }
             return result;

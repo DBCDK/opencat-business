@@ -17,23 +17,13 @@
         "expected": {
             "validation": [],
             "update": {
-                "errors": [
+                "doubleRecords": [
                     {
-                        "type": "DOUBLE_RECORD",
-                        "params": {
-                            "param": [
-                                {
-                                    "value": "Double records for record {5 158 076 1:870970}: 3 158 076 1",
-                                    "key": "message"
-                                },
-                                {
-                                    "value": "5 158 076 1:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "pid": "3 158 076 1:870970",
+                        "message": "Double record for record 5 158 076 1, reason: 021e, 021e"
                     }
                 ],
+                "errors": [],
                 "rawrepo": []
             }
         }

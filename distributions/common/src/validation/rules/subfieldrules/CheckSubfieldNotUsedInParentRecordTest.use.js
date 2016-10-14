@@ -3,7 +3,6 @@ use("DanMarc2Converter");
 use("GenericSettings");
 use("Marc");
 use("RawRepoClient");
-use("RecordUtil");
 use("ResourceBundle");
 use("SafeAssert");
 use("UnitTest");
@@ -41,7 +40,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     subfield = field.subfields[0];
 
     var message = ResourceBundle.getString(bundle, "agencyid.not.a.number");
-    SafeAssert.equal("Parent record: 001b Not-A-Number", callRule(record, field, subfield), [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))]);
+    SafeAssert.equal("Parent record: 001b Not-A-Number", callRule(record, field, subfield), [ValidateErrors.subfieldError("TODO:fixurl", message)]);
 
     // Case: Parent record -> Subfield not used.
     marcRecord = new Record();
@@ -88,5 +87,5 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     subfield = field.subfields[0];
 
     message = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", "008", "t", "1 234 567 8");
-    SafeAssert.equal("Parent record: Subfield is used in parent record", callRule(record, field, subfield), [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))]);
+    SafeAssert.equal("Parent record: Subfield is used in parent record", callRule(record, field, subfield), [ValidateErrors.subfieldError("TODO:fixurl", message)]);
 });

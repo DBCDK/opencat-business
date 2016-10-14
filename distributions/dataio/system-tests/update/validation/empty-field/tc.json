@@ -15,52 +15,18 @@
             "validation": [
                 {
                     "type": "ERROR",
-                    "params": {
-                        "param": [
-                            {
-                                "key": "fieldno",
-                                "value": 3
-                            },
-                            {
-                                "key": "message",
-                                "value": "Felt '008' må ikke være tomt."
-                            },
-                            {
-                                "key": "url",
-                                "value": ""
-                            },
-                            {
-                                "value": "5 158 076 1:870970",
-                                "key": "pid"
-                            }
-                        ]
-                    }
+                    "urlForDocumentation": "",
+                    "ordinalPositionOfField": 2,
+                    "message": "Felt '008' må ikke være tomt."
                 }
             ],
             "update": {
                 "errors": [
                     {
                         "type": "ERROR",
-                        "params": {
-                            "param": [
-                                {
-                                    "key": "fieldno",
-                                    "value": 3
-                                },
-                                {
-                                    "key": "message",
-                                    "value": "Felt '008' må ikke være tomt."
-                                },
-                                {
-                                    "key": "url",
-                                    "value": ""
-                                },
-                                {
-                                    "value": "5 158 076 1:870970",
-                                    "key": "pid"
-                                }
-                            ]
-                        }
+                        "urlForDocumentation": "",
+                        "ordinalPositionOfField": 2,
+                        "message": "Felt '008' må ikke være tomt."
                     }
                 ],
                 "rawrepo": []

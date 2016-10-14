@@ -62,7 +62,7 @@ var ConflictingSubfields = function () {
 
                 if (foundSubfields.length > 1) {
                     var message = ResourceBundle.getStringFormat(bundle, "conflictingSubfields.validation.error", foundSubfields[0], foundSubfields[1]);
-                    return result = [ValidateErrors.recordError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
+                    return result = [ValidateErrors.recordError("TODO:fixurl", message)];
                 }
             }
 

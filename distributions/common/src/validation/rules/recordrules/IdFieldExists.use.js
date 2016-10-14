@@ -1,6 +1,5 @@
 use("Exception");
 use("Log");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("TemplateUrl");
@@ -33,7 +32,7 @@ var IdFieldExists = function () {
         }
         var url = "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869";
         var msg = "Felt 001 er obligatorisk.";
-        return [ValidateErrors.recordError(url, msg, RecordUtil.getRecordPid(record))];
+        return [ValidateErrors.recordError(url, msg)];
     }
 
     return {

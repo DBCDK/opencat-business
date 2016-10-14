@@ -32,7 +32,7 @@ var CheckSubfieldNotUsedInChildrenRecords = function () {
                     var message = ResourceBundle.getStringFormat(bundle, "subfield.in.children.record.error", field.name, subfield.name);
 
                     Log.trace("Found error in record [", recId, ":", libNo, "]: ", message);
-                    return [ValidateErrors.subfieldError("TODO:fixurl", message, RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.subfieldError("TODO:fixurl", message)];
                 }
                 var result = CheckSubfieldNotUsedInChildrenRecords.validateSubfield(DanMarc2Converter.convertFromDanMarc2(rec), field, subfield, params, settings);
                 if (result.length !== 0) {

@@ -1,6 +1,5 @@
 use("DanMarc2Converter");
 use("Log");
-use("RecordUtil");
 use("RawRepoClient");
 use("ResourceBundle");
 use("ResourceBundleFactory");
@@ -40,14 +39,14 @@ var MandatorySubfieldInVolumeWorkRule = function () {
             if (volumes.length === 0) {
                 if (!__checkSubfieldIsUsed([record], field, params.subfield)) {
                     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield);
-                    return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.subfieldError("", msg)];
                 }
             }
 
             for (var i = 0; i < volumes.length; i++) {
                 if (!__checkSubfieldIsUsed([volumes[i], record], field, params.subfield)) {
                     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield);
-                    return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.subfieldError("", msg)];
                 }
             }
             return [];
@@ -69,7 +68,7 @@ var MandatorySubfieldInVolumeWorkRule = function () {
             if (!__checkSubfieldIsUsed([headRecord, record], field, params.subfield)) {
                 var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 var msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield);
-                return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("", msg)];
             }
             return [];
         } finally {

@@ -67,7 +67,7 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
     paramsArg = {subfield: "m", not_presented_subfield: ["001b"]};
     var msg = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", "m", "001");
     SafeAssert.equal("001m: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg),
-        [ValidateErrors.fieldError("TODO:url", msg, RecordUtil.getRecordPid(recordArg))]);
+        [ValidateErrors.fieldError("TODO:url", msg)]);
 
     recordArg = {
         fields: [

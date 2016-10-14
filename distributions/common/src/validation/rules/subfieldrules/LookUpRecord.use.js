@@ -1,7 +1,6 @@
 use("DanMarc2Converter");
 use("Log");
 use("RawRepoClient");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UpdateConstants");
@@ -53,13 +52,13 @@ var LookUpRecord = function () {
             var msg;
             if (!ValidationUtil.isNumber(agencyId)) {
                 msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
-                return [ValidateErrors.subfieldError("TODO:fixurl", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
 
             if (!RawRepoClientCore.recordExists(recordId, agencyId)) {
                 Log.trace("Record does not exist!");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", recordId, agencyId);
-                return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("", msg)];
             }
 
             if (params.hasOwnProperty("requiredFieldAndSubfield") || params.hasOwnProperty("allowedSubfieldValues")) {
@@ -69,7 +68,7 @@ var LookUpRecord = function () {
                 }
                 if (!__fieldAndSubfieldMandatoryAndHaveValues(RawRepoClient.fetchRecord(recordId, agencyId), params)) {
                     msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.values", recordId, params.allowedSubfieldValues, params.requiredFieldAndSubfield);
-                    return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                    return [ValidateErrors.subfieldError("", msg)];
                 }
             }
             return [];
@@ -86,31 +85,31 @@ var LookUpRecord = function () {
             if (!params.hasOwnProperty("requiredFieldAndSubfield") && !params.hasOwnProperty("allowedSubfieldValues")) {
                 Log.warn("requiredFieldAndSubfield and allowedSubfieldValues is missing");
                 msg = ResourceBundle.getStringFormat(bundle, "field.demands.other.fields.missing.sources.and.demands");
-                return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("", msg)];
             }
             if (!params.hasOwnProperty("allowedSubfieldValues")) {
                 Log.warn("allowedSubfieldValues is missing");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.value.allowedSubfieldValues");
-                return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("", msg)];
             }
             if (!params.hasOwnProperty("requiredFieldAndSubfield")) {
                 Log.warn("allowedSubfieldValues is missing");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.value.requiredFieldAndSubfield");
-                return [ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record))];
+                return [ValidateErrors.subfieldError("", msg)];
             }
             if (typeof params.requiredFieldAndSubfield !== "string") {
                 Log.warn("requiredFieldAndSubfield has errornous value");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.value.requiredFieldAndSubfield.not.string");
-                ret.push(ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.subfieldError("", msg));
             }
             if (!Array.isArray(params.allowedSubfieldValues)) {
                 Log.warn("allowedSubfieldValues is not of type array");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.value.allowedSubfieldValues.not.array");
-                ret.push(ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.subfieldError("", msg));
             } else if (Array.isArray(params.allowedSubfieldValues) && params.allowedSubfieldValues.length < 1) {
                 Log.warn("allowedSubfieldValues is empty");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.value.allowedSubfieldValues.no.items");
-                ret.push(ValidateErrors.subfieldError("", msg, RecordUtil.getRecordPid(record)));
+                ret.push(ValidateErrors.subfieldError("", msg));
             }
             return ret;
         } finally {

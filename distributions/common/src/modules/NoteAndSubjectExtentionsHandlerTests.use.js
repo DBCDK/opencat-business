@@ -1,15 +1,11 @@
 use("FBSAuthenticator");
 use("NoteAndSubjectExtentionsHandler");
 use("RawRepoClientCore");
-use("RecordUtil");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UnitTest");
 
-//-----------------------------------------------------------------------------
-//                      isNationalCommonRecord
-//-----------------------------------------------------------------------------
-
+// isNationalCommonRecord
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.isNationalCommonRecord", function () {
     var record;
 
@@ -52,10 +48,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.isNationalCommonRecord", fu
     Assert.equalValue("032: *a and *x SF", NoteAndSubjectExtentionsHandler.isNationalCommonRecord(record), false);
 });
 
-//-----------------------------------------------------------------------------
-//                      authenticateExtentions
-//-----------------------------------------------------------------------------
-
+// authenticateExtentions
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_features", function () {
     var bundle = ResourceBundleFactory.getBundle(FBSAuthenticator.__BUNDLE_NAME);
     var curRecord;
@@ -142,8 +135,8 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
     Assert.equalValue("New extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
         [
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "1 234 567 8"), RecordUtil.getRecordPid(record)),
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "1 234 567 8"), RecordUtil.getRecordPid(record))
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "1 234 567 8")),
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "1 234 567 8"))
         ]);
     RawRepoClientCore.clear();
 
@@ -170,8 +163,8 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
     Assert.equalValue("Edit extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
         [
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "1 234 567 8"), RecordUtil.getRecordPid(record)),
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "1 234 567 8"), RecordUtil.getRecordPid(record))
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "1 234 567 8")),
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "1 234 567 8"))
         ]);
     RawRepoClientCore.clear();
 
@@ -196,8 +189,8 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
     Assert.equalValue("Delete extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
         [
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "504", "1 234 567 8"), RecordUtil.getRecordPid(record)),
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "600", "1 234 567 8"), RecordUtil.getRecordPid(record))
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "504", "1 234 567 8")),
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "600", "1 234 567 8"))
         ]);
     RawRepoClientCore.clear();
 
@@ -222,7 +215,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
     );
     Assert.equalValue("New non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -247,7 +240,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
     );
     Assert.equalValue("Edit non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -271,7 +264,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
     );
     Assert.equalValue("Delete non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 });
 
@@ -420,7 +413,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
     );
     Assert.equalValue("New non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -445,7 +438,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
     );
     Assert.equalValue("Edit non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -469,7 +462,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
     );
     Assert.equalValue("Delete non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     OpenAgencyClientCore.clearFeatures();
@@ -620,7 +613,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
     );
     Assert.equalValue("New non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -645,7 +638,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
     );
     Assert.equalValue("Edit non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
@@ -669,16 +662,13 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
     );
     Assert.equalValue("Delete non extension field",
         NoteAndSubjectExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"), RecordUtil.getRecordPid(record))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"))]);
     RawRepoClientCore.clear();
 
     OpenAgencyClientCore.clearFeatures();
 });
 
-//-----------------------------------------------------------------------------
-//                      recordDataForRawRepo
-//-----------------------------------------------------------------------------
-
+// recordDataForRawRepo
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.recordDataForRawRepo.no_features", function () {
     var curRecord;
     var record;

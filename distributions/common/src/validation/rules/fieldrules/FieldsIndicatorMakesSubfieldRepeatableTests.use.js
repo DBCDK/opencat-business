@@ -1,5 +1,4 @@
 use("FieldsIndicatorMakesSubfieldRepeatable");
-use("RecordUtil");
 use("SafeAssert");
 use("UnitTest");
 
@@ -55,7 +54,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
     };
 
     var errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, params.subfieldNames, params.indicators);
-    var error = [ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record))];
+    var error = [ValidateErrors.fieldError("TODO:url", errorMessage)];
     SafeAssert.equal("testing with invalid indicator and a repeated", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
@@ -72,7 +71,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         "subfieldNames": ["a"]
     };
     errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, params.subfieldNames, params.indicators);
-    error = [ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record))];
+    error = [ValidateErrors.fieldError("TODO:url", errorMessage)];
     SafeAssert.equal("testing with invalid indicator and a repeated", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
@@ -110,7 +109,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
     error = [];
     for (var i = 0; i < params.subfieldNames.length; i++) {
         errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, params.subfieldNames[i], params.indicators);
-        error.push(ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record)));
+        error.push(ValidateErrors.fieldError("TODO:url", errorMessage));
     }
     SafeAssert.equal("Huins test 1 from userstory 1951", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
@@ -152,7 +151,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
     error = [];
     params.subfieldNames.forEach(function (sf) {
         errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, sf, params.indicators);
-        error.push(ValidateErrors.fieldError("TODO:url", errorMessage, RecordUtil.getRecordPid(record)));
+        error.push(ValidateErrors.fieldError("TODO:url", errorMessage));
     });
     SafeAssert.equal("Huins test 2 with invalid indicators from userstory 1951", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
