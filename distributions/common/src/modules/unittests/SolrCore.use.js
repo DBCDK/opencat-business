@@ -1,14 +1,12 @@
 /**
  * @file Module which provides operations to query a Solr installation.
  */
+use("Exception");
+use("Log");
+use("ValueCheck");
+
 EXPORTED_SYMBOLS = ['SolrCore'];
 
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "ValueCheck" );
-use( "Log" );
-
-//-----------------------------------------------------------------------------
 /**
  * Provide operations to lookup entires in a Solr installation.
  *
@@ -17,44 +15,39 @@ use( "Log" );
  *
  * @namespace SolrCore
  */
-var SolrCore = function( ) {
+var SolrCore = function () {
     var responses = [];
     var analysis = [];
 
-    function analyse( url, text, index ) {
-        Log.trace( "Enter - SolrCoreTEST.analyse" );
+    function analyse(url, text, index) {
+        Log.trace("Enter - SolrCoreTEST.analyse");
         try {
-            Log.debug( "Analyse: ", index + ":" + text );
-            for( var i = 0; i < analysis.length; i++ ) {
-                Log.debug( "Analyse results: ", analysis[i].query );
-                if( analysis[i].query === index + ":" + text ) {
-                    Log.trace("analyse found ", JSON.stringify( analysis[i].response) );
+            Log.debug("Analyse: ", index + ":" + text);
+            for (var i = 0; i < analysis.length; i++) {
+                Log.debug("Analyse results: ", analysis[i].query);
+                if (analysis[i].query === index + ":" + text) {
+                    Log.trace("analyse found ", JSON.stringify(analysis[i].response));
                     return analysis[i].response;
                 }
             }
-
-            throw StringUtil.sprintf( "Unable to lookup value for analysis: %s", index + ":" + text );
-        }
-        finally {
-            Log.trace( "Exit - SolrCoreTEST.analyse()", 0 );
+            throw StringUtil.sprintf("Unable to lookup value for analysis: %s", index + ":" + text);
+        } finally {
+            Log.trace("Exit - SolrCoreTEST.analyse()", 0);
         }
     }
 
-    function search( url, query ) {
-        Log.trace( "Enter - SolrCoreTEST.search()" );
-
+    function search(url, query) {
+        Log.trace("Enter - SolrCoreTEST.search()");
         try {
-            for( var i = 0; i < responses.length; i++ ) {
-                Log.debug( "Query: ", responses[i].query );
-                if( responses[i].query === query ) {
+            for (var i = 0; i < responses.length; i++) {
+                Log.debug("Query: ", responses[i].query);
+                if (responses[i].query === query) {
                     return responses[i].response;
                 }
             }
-
-            throw StringUtil.sprintf( "Unable to lookup value for query: %s", query );
-        }
-        finally {
-            Log.trace( "Exit - SolrCoreTEST.search()" );
+            throw StringUtil.sprintf("Unable to lookup value for query: %s", query);
+        } finally {
+            Log.trace("Exit - SolrCoreTEST.search()");
         }
     }
 
@@ -63,21 +56,19 @@ var SolrCore = function( ) {
      *
      * @syntax SolrCore.numFound( url, query );
      * @param {String} url   Url to the solr installation including core selection:
-     * 						 <server>/solr/<core-name> or similary.
+     *                         <server>/solr/<core-name> or similary.
      * @param {String} query Solr query to execute.
      *
      * @return {Number} Number of solr documents found.
      *
      * @name SolrCore#numFound
      */
-    function numFound( url, query ) {
-        Log.trace( "Enter - SolrCoreTEST.numFound()" );
-
+    function numFound(url, query) {
+        Log.trace("Enter - SolrCoreTEST.numFound()");
         try {
             return search().response.numFound;
-        }
-        finally {
-            Log.trace( "Exit - SolrCoreTEST.numFound()" );
+        } finally {
+            Log.trace("Exit - SolrCoreTEST.numFound()");
         }
     }
 
@@ -86,24 +77,18 @@ var SolrCore = function( ) {
         analysis = [];
     }
 
-    function addAnalyse( query, response ) {
-        Log.trace( "Enter - SolrCoreTEST.addAnalyse()" );
-
-        analysis.push( {query: query, response: response } );
-        Log.debug( "Add analyse: ", query );
-
-        Log.trace( "Exit - SolrCoreTEST.addAnalyse()" );
-
+    function addAnalyse(query, response) {
+        Log.trace("Enter - SolrCoreTEST.addAnalyse()");
+        analysis.push({query: query, response: response});
+        Log.debug("Add analyse: ", query);
+        Log.trace("Exit - SolrCoreTEST.addAnalyse()");
     }
 
-    function addQuery( query, response ) {
-        Log.trace( "Enter - SolrCoreTEST.addQuery()" );
-
-        responses.push( {query: query, response: response } );
-        Log.debug( "Add query: ", query );
-
-        Log.trace( "Exit - SolrCoreTEST.addQuery()" );
-
+    function addQuery(query, response) {
+        Log.trace("Enter - SolrCoreTEST.addQuery()");
+        responses.push({query: query, response: response});
+        Log.debug("Add query: ", query);
+        Log.trace("Exit - SolrCoreTEST.addQuery()");
     }
 
     return {
