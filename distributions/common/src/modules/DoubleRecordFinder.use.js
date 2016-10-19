@@ -131,6 +131,7 @@ var DoubleRecordFinder = function () {
         try {
             for (var i = 0; i < record.numberOfFields(); i++) {
                 var field = record.field(i);
+                Log.info("### field.name: " + field.name);
                 if (field.name === "004") {
                     for (var j = 0; j < field.count(); j++) {
                         var subfield = field.subfield(j);
@@ -140,7 +141,9 @@ var DoubleRecordFinder = function () {
                     }
                 }
                 if (field.name === "245") {
+                    Log.info("### field.name === \"245\"");
                     volumeSubfieldG = __checkSubfieldExistence(field, "245", /[g]/);
+                    Log.info("### volumeSubfieldG: [" + volumeSubfieldG + "]");
                 }
             }
             return result;
@@ -160,24 +163,36 @@ var DoubleRecordFinder = function () {
 
     function __findVolumesRun(record) {
         Log.trace("Enter - DoubleRecordFinder.__findVolumesRun()");
-        var result = undefined;
-        var formatters = {
-            '004a': __querySubfieldFormatter,
-            '014a': __querySubfieldFormatter
-        };
+        var result = [];
         /*
-         Hvis posten tjekket udføres på har 245g eller 245g+245a skal der kun udføres tjek med 245g.
-         Hvis posten tjekket udføres på kun 245a skal der kun udføres tjek mod det.
+         hvis incoming har *g skal der findes poster med tilsvarende samt poster uden *g men med matchende *a
+         - bøvlet - søgeres på 014a+245g skal suppleres med resultat af en 014a+245a søgning hvor poster med *g skal sorteres fra.
+         hvis *n mangler skal *a matche
          */
         try {
-            if (volumeSubfieldG) {
-                formatters["245g"] = __querySubfieldValueLengthFormatter(20);
-                Log.trace("DoubleRecordFinder.__findVolumesRun(), 245g");
-            } else {
-                formatters["245a"] = __querySubfieldValueLengthFormatter(20);
-                Log.trace("DoubleRecordFinder.__findVolumesRun(), 245a");
+            if (record !== undefined && record.existField(/245/) && record.field("245").exists(/a/)) {
+                var formatters = {
+                    '004a': __querySubfieldFormatter,
+                    '014a': __querySubfieldFormatter,
+                    '245a': __querySubfieldValueLengthFormatter(20)
+                };
+                result = __executeQueryAndFindRecords(record, formatters);
             }
-            result = __executeQueryAndFindRecords(record, formatters);
+            if (volumeSubfieldG) {
+                var formattersSG = {
+                    '004a': __querySubfieldFormatter,
+                    '014a': __querySubfieldFormatter,
+                    '245g': __querySubfieldValueLengthFormatter(20)
+                };
+                var result1 = __executeQueryAndFindRecords(record, formattersSG);
+                for (var i = 0; i < result.length; i++) {
+                    var workRes = result[i];
+                    if (workRes.sectioninfo === undefined) {
+                        result1.push(workRes);
+                    }
+                }
+                result = result1;
+            }
             return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__findVolumesRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
@@ -219,24 +234,36 @@ var DoubleRecordFinder = function () {
 
     function __findSectionsRun(record) {
         Log.trace("Enter - DoubleRecordFinder.__findSectionsRun()");
-        var result = undefined;
-        var formatters = {
-            '004a': __querySubfieldFormatter,
-            '014a': __querySubfieldFormatter
-        };
+        var result = [];
         /*
-         Hvis posten tjekket udføres på har 245n eller 245n+245a skal der kun udføres tjek med 245n.
-         Hvis posten tjekket udføres på kun 245a skal der kun udføres tjek mod det.
+         hvis incoming har *n skal der findes poster med tilsvarende samt poster uden *n men med matchende *a
+         - bøvlet - søgeres på 014a+245n skal suppleres med resultat af en 014a+245a søgning hvor poster med *n skal sorteres fra.
+         hvis *n mangler skal *a matche
          */
         try {
-            if (sectionSubfieldN) {
-                formatters["245n"] = __querySubfieldValueLengthFormatter(20);
-                Log.trace("DoubleRecordFinder.__findSectionsRun(), 245n");
-            } else {
-                formatters["245a"] = __querySubfieldValueLengthFormatter(20);
-                Log.trace("DoubleRecordFinder.__findSectionsRun(), 245a");
+            if (record !== undefined && record.existField(/245/) && record.field("245").exists(/a/)) {
+                var formatters = {
+                    '004a': __querySubfieldFormatter,
+                    '014a': __querySubfieldFormatter,
+                    '245a': __querySubfieldValueLengthFormatter(20)
+                };
+                result = __executeQueryAndFindRecords(record, formatters);
             }
-            result = __executeQueryAndFindRecords(record, formatters);
+            if (sectionSubfieldN) {
+                var formattersSN = {
+                    '004a': __querySubfieldFormatter,
+                    '014a': __querySubfieldFormatter,
+                    '245n': __querySubfieldValueLengthFormatter(20)
+                };
+                var result1 = __executeQueryAndFindRecords(record, formattersSN);
+                for (var i = 0; i < result.length; i++) {
+                    var workRes = result[i];
+                    if (workRes.sectioninfo === undefined) {
+                        result1.push(workRes);
+                    }
+                }
+                result = result1;
+            }
             return result;
         } finally {
             Log.trace("Exit - DoubleRecordFinder.__findSectionsRun(): ", result !== undefined ? JSON.stringify(result) : "undef");
@@ -275,13 +302,14 @@ var DoubleRecordFinder = function () {
         try {
             for (var i = 0; i < record.numberOfFields(); i++) {
                 var field = record.field(i);
-
                 result = __checkSubfieldExistence(field, "021", /[ea]/) ||
                     __checkSubfieldExistence(field, "022", /[a]/) ||
+                    __checkSubfieldExistence(field, "023", /[ab]/) ||
                     __checkSubfieldExistence(field, "024", /[a]/) ||
-                    __checkSubfieldExistence(field, "028", /[a]/) ||
-                    __checkSubfieldExistence(field, "023", /[ab]/);
-                if (result) return true;
+                    __checkSubfieldExistence(field, "028", /[a]/);
+                if (result) {
+                    return true;
+                }
             }
             return false;
         } finally {
@@ -934,8 +962,10 @@ var DoubleRecordFinder = function () {
                 var field = record.field(i);
                 for (var j = 0; j < field.count(); j++) {
                     var subfield = field.subfield(j);
+                    Log.info("### field.name + subfield.name [" + field.name + subfield.name + "]");
                     var formatter = queryFormatter[field.name + subfield.name];
                     if (formatter !== undefined) {
+                        Log.info("### formatter !== undefined");
                         reason.push(field.name + subfield.name);
                         queryElements.push(formatter(field, subfield));
                     }

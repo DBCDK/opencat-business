@@ -1024,11 +1024,19 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
         "245 00 *n 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
+    Assert.equalValue("Full record 1", DoubleRecordFinder.__findSections(record, solrUrl, true),
         [{
             id: "12345678",
             pid: "12345678:870970",
             reason: "004a, 014a, 245n",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }, {
+            id: "12345678",
+            pid: "12345678:870970",
+            reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
             sectioninfo: undefined,
@@ -1042,7 +1050,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, false),
+    Assert.equalValue("Full record 2", DoubleRecordFinder.__findSections(record, solrUrl, false),
         [{
             id: "12345678",
             pid: "12345678:870970",
@@ -1060,7 +1068,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
         "245 00 *n 3. Band *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findSections(record, solrUrl, true),
+    Assert.equalValue("Full record 3", DoubleRecordFinder.__findSections(record, solrUrl, true),
         [{
             id: "12345678",
             pid: "12345678:870970",
@@ -1104,11 +1112,19 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         "245 00 *g 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
+    Assert.equalValue("Full record 1", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
         [{
             id: "12345678",
             pid: "12345678:870970",
             reason: "004a, 014a, 245g",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }, {
+            id: "12345678",
+            pid: "12345678:870970",
+            reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
             sectioninfo: undefined,
@@ -1122,7 +1138,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
+    Assert.equalValue("Full record 2", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
         [{
             id: "12345678",
             pid: "12345678:870970",
@@ -1140,7 +1156,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         "245 00 *g 3. Band *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
+    Assert.equalValue("Full record 3", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
         [{
             id: "12345678",
             pid: "12345678:870970",
@@ -1485,7 +1501,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
     );
 });
 
-UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
+UnitTest.addFixture("DoubleRecordFinder.__findSections 2", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
     SolrCore.clear();
@@ -1525,6 +1541,14 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
             composed: undefined,
             sectioninfo: undefined,
             volumeinfo: undefined
+        }, {
+            id: "12345678",
+            pid: "12345678:870970",
+            reason: "004a, 014a, 245a",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
         }]
     );
     record = RecordUtil.createFromString([
@@ -1548,7 +1572,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
 });
 
 
-UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
+UnitTest.addFixture("DoubleRecordFinder.__findVolumes 2", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
     SolrCore.clear();
@@ -1579,11 +1603,19 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         "245 00 *g 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
+    Assert.equalValue("Full record 1", DoubleRecordFinder.__findVolumes(record, solrUrl, true),
         [{
             id: "12345678",
             pid: "12345678:870970",
             reason: "004a, 014a, 245g",
+            edition: undefined,
+            composed: undefined,
+            sectioninfo: undefined,
+            volumeinfo: undefined
+        }, {
+            id: "12345678",
+            pid: "12345678:870970",
+            reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
             sectioninfo: undefined,
@@ -1597,7 +1629,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
     ].join("\n"));
-    Assert.equalValue("Full record", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
+    Assert.equalValue("Full record 2", DoubleRecordFinder.__findVolumes(record, solrUrl, false),
         [{
             id: "12345678",
             pid: "12345678:870970",
