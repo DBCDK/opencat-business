@@ -19,10 +19,8 @@ var BasisSplitter = function () {
         try {
             var dbcRecord = new Record();
             var commonRecord = new Record();
-
             for (var i = 0; i < record.size(); i++) {
                 var field = record.field(i);
-
                 if (field.name === "001") {
                     var dbcField = field.clone();
                     dbcField.append("b", UpdateConstants.RAWREPO_DBC_ENRICHMENT_AGENCY_ID, true);
@@ -31,24 +29,19 @@ var BasisSplitter = function () {
                     var commonField = field.clone();
                     commonField.append("b", UpdateConstants.RAWREPO_COMMON_AGENCYID, true);
                     commonRecord.append(commonField);
-                }
-                else {
+                } else {
                     if (field.name === "004") {
                         dbcRecord.append(field);
                         commonRecord.append(field);
-                    }
-                    else if (DBC_FIELDS.test(field.name)) {
+                    } else if (DBC_FIELDS.test(field.name)) {
                         dbcRecord.append(field);
-                    }
-                    else {
+                    } else {
                         commonRecord.append(field);
                     }
                 }
             }
-
             return [commonRecord, dbcRecord];
-        }
-        finally {
+        } finally {
             Log.trace("Exit - BasisSplitter.splitCompleteBasisRecord");
         }
     }
