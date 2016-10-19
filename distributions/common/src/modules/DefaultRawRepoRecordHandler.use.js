@@ -1,14 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "Marc" );
-use( "RecordUtil" );
+use("Log");
+use("Marc");
+use("RecordUtil");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'DefaultRawRepoRecordHandler' ];
+EXPORTED_SYMBOLS = ['DefaultRawRepoRecordHandler'];
 
-//-----------------------------------------------------------------------------
-var DefaultRawRepoRecordHandler = function() {
-    function create( authModule ) {
+var DefaultRawRepoRecordHandler = function () {
+    function create(authModule) {
         return {
             authenticator: authModule
         }
@@ -24,18 +21,15 @@ var DefaultRawRepoRecordHandler = function() {
      *
      * @returns {Array} A list of Record objects.
      */
-    function recordDataForRawRepo( instance, record, userId, groupId ) {
-        Log.trace( "Enter - DefaultRawRepoRecordHandler.recordDataForRawRepo" );
-
+    function recordDataForRawRepo(instance, record, userId, groupId) {
+        Log.trace("Enter - DefaultRawRepoRecordHandler.recordDataForRawRepo");
         var result = [];
         try {
-            Log.trace( "Record:\n", uneval( record ) );
-
-            var records = instance.authenticator.recordDataForRawRepo( record, userId, groupId );
-            return records;
-        }
-        finally {
-            Log.trace( "Exit - DefaultRawRepoRecordHandler.recordDataForRawRepo(): " + result );
+            Log.trace("Record:\n", uneval(record));
+            result = instance.authenticator.recordDataForRawRepo(record, userId, groupId);
+            return result;
+        } finally {
+            Log.trace("Exit - DefaultRawRepoRecordHandler.recordDataForRawRepo(): " + result);
         }
     }
 
