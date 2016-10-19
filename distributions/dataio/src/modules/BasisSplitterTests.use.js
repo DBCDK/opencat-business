@@ -1,6 +1,7 @@
 use("BasisSplitter");
 use("UnitTest");
 use("Print");
+use("RecordUtil");
 
 UnitTest.addFixture("BasisSplitter.splitCompleteBasisRecord", function () {
     var record;
