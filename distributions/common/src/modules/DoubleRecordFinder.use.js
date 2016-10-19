@@ -131,7 +131,6 @@ var DoubleRecordFinder = function () {
         try {
             for (var i = 0; i < record.numberOfFields(); i++) {
                 var field = record.field(i);
-                Log.info("### field.name: " + field.name);
                 if (field.name === "004") {
                     for (var j = 0; j < field.count(); j++) {
                         var subfield = field.subfield(j);
@@ -141,9 +140,7 @@ var DoubleRecordFinder = function () {
                     }
                 }
                 if (field.name === "245") {
-                    Log.info("### field.name === \"245\"");
                     volumeSubfieldG = __checkSubfieldExistence(field, "245", /[g]/);
-                    Log.info("### volumeSubfieldG: [" + volumeSubfieldG + "]");
                 }
             }
             return result;
@@ -962,10 +959,8 @@ var DoubleRecordFinder = function () {
                 var field = record.field(i);
                 for (var j = 0; j < field.count(); j++) {
                     var subfield = field.subfield(j);
-                    Log.info("### field.name + subfield.name [" + field.name + subfield.name + "]");
                     var formatter = queryFormatter[field.name + subfield.name];
                     if (formatter !== undefined) {
-                        Log.info("### formatter !== undefined");
                         reason.push(field.name + subfield.name);
                         queryElements.push(formatter(field, subfield));
                     }
