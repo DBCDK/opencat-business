@@ -36,21 +36,16 @@ var DBCAuthenticator = function () {
      */
     function authenticateRecord(record, userId, groupId, settings) {
         Log.trace("Enter - DBCAuthenticator.authenticateRecord()");
-
         var result = undefined;
         try {
             if (settings !== undefined) {
                 ResourceBundleFactory.init(settings);
             }
-
             var authenticator = DefaultAuthenticator.create();
-
             var marcRecord = DanMarc2Converter.convertToDanMarc2(JSON.parse(record));
             result = authenticator.authenticateRecord(marcRecord, userId, groupId);
-
             return JSON.stringify(result);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCAuthenticator.authenticateRecord(): " + result);
         }
     }
@@ -64,16 +59,13 @@ var DBCAuthenticator = function () {
      */
     function recordDataForRawRepo(record, userId, groupId) {
         Log.trace("Enter - DBCAuthenticator.recordDataForRawRepo()");
-
         try {
             if (OpenAgencyClient.hasFeature(groupId, UpdateConstants.USE_ENRICHMENTS) ||
                 OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_ROOT_FEATURE)) {
                 return BasisSplitter.splitCompleteBasisRecord(record);
             }
-
             return [record];
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCAuthenticator.recordDataForRawRepo()");
         }
     }
