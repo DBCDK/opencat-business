@@ -26,7 +26,7 @@ var LookUpRecord = function () {
      * @method
      */
     function validateSubfield(record, field, subfield, params, settings) {
-        Log.trace("Enter - LoopUpRecord.validateSubfield()");
+        Log.trace("Enter - LookUpRecord.validateSubfield()");
         try {
             ValueCheck.check("record", record).type("object");
             ValueCheck.check("field", field).type("object");
@@ -73,7 +73,7 @@ var LookUpRecord = function () {
             }
             return [];
         } finally {
-            Log.trace("Exit - LoopUpRecord.validateSubfield()");
+            Log.trace("Exit - LookUpRecord.validateSubfield()");
         }
     }
 
