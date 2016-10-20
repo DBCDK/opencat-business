@@ -133,22 +133,6 @@ var Validator = function () {
                 // TODO: Return error.
             }
             for (var k = 0; k < result.length; k++) {
-                // Log.info("123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123");
-                // Log.info("templateField.url...................................................................: (" + templateField.url + ")");
-                // Log.info("result[k].urlForDocumentation.......................................................: (" + result[k].urlForDocumentation + ")");
-                // var bla = templateField.url !== undefined;
-                // Log.info("templateField.url !== undefined.....................................................: " + bla);
-                // bla = templateField.url !== "";
-                // Log.info("templateField.url !== \"\"............................................................: " + bla);
-                // bla = result[k].urlForDocumentation === undefined;
-                // Log.info("result[k].urlForDocumentation === undefined.........................................: " + bla);
-                // bla = result[k].urlForDocumentation === "";
-                // Log.info("result[k].urlForDocumentation === \"\"................................................: " + bla);
-                // bla = templateField.url !== undefined && templateField.url !== "";
-                // Log.info("templateField.url !== undefined && templateField.url !== \"\".........................: " + bla);
-                // bla = result[k].urlForDocumentation === undefined || result[k].urlForDocumentation === "";
-                // Log.info("result[k].urlForDocumentation === undefined && result[k].urlForDocumentation === \"\".: " + bla);
-                // Log.info("123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123");
                 if (templateField.url !== undefined && templateField.url !== "") {
                     if (result[k].urlForDocumentation === undefined || result[k].urlForDocumentation === "" || result[k].urlForDocumentation === "TODO:fixurl") {
                         result[k].urlForDocumentation = templateField.url;
