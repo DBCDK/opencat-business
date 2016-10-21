@@ -1,4 +1,4 @@
-EXPORTED_SYMBOLS = [ 'UpdateConstants' ];
+EXPORTED_SYMBOLS = ['UpdateConstants'];
 
 var UpdateConstants = {
 
@@ -24,5 +24,5 @@ var UpdateConstants = {
     AUTH_ROOT_FEATURE: "auth_root",
 
     // Subfields
-    EMPTY_SUBFIELDS: [ "0", "1" ]
+    EMPTY_SUBFIELDS: ["0", "1"]
 };
