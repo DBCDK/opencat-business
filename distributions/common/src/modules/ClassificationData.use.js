@@ -13,19 +13,19 @@ var ClassificationData = function () {
     }
 
     function hasClassificationData(instance, marc) {
-        Log.debug("Enter - ClassificationData.hasClassificationData()");
+        Log.trace("Enter - ClassificationData.hasClassificationData()");
         var result = null;
         try {
             Log.debug("Fields: " + instance.fields);
             Log.debug("Record: " + marc);
             return result = marc.existField(instance.fields);
         } finally {
-            Log.debug("Exit - ClassificationData.hasClassificationData(): " + result);
+            Log.trace("Exit - ClassificationData.hasClassificationData(): " + result);
         }
     }
 
     function hasClassificationsChanged(instance, oldMarc, newMarc) {
-        Log.debug("Enter - ClassificationData.hasClassificationsChanged()");
+        Log.trace("Enter - ClassificationData.hasClassificationsChanged()");
         var result = false;
         var reason = undefined;
         try {
@@ -197,12 +197,12 @@ var ClassificationData = function () {
             if (result === true) {
                 Log.info("Classifications has changed because of: " + reason);
             }
-            Log.debug("Exit - ClassificationData.hasClassificationsChanged(): " + result);
+            Log.trace("Exit - ClassificationData.hasClassificationsChanged(): " + result);
         }
     }
 
     function updateClassificationsInRecord(instance, currentCommonMarc, updatingCommonMarc, libraryRecord) {
-        Log.debug("Enter - ClassificationData.updateClassificationsInRecord()");
+        Log.trace("Enter - ClassificationData.updateClassificationsInRecord()");
         var result;
         try {
             Log.debug("    currentCommonMarc: " + currentCommonMarc);
@@ -216,12 +216,12 @@ var ClassificationData = function () {
             }
             return result;
         } finally {
-            Log.debug("Exit - ClassificationData.updateClassificationsInRecord(): " + result);
+            Log.trace("Exit - ClassificationData.updateClassificationsInRecord(): " + result);
         }
     }
 
     function removeClassificationsFromRecord(instance, record) {
-        Log.debug("Enter - ClassificationData.updateClassificationsInRecord()");
+        Log.trace("Enter - ClassificationData.removeClassificationsFromRecord()");
         var result = undefined;
         try {
             Log.debug("    record: " + record);
@@ -233,7 +233,7 @@ var ClassificationData = function () {
             });
             return result;
         } finally {
-            Log.debug("Exit - ClassificationData.updateClassificationsInRecord(): " + result);
+            Log.trace("Exit - ClassificationData.removeClassificationsFromRecord(): " + result);
         }
     }
 
@@ -247,7 +247,7 @@ var ClassificationData = function () {
      * @returns {Record} The new subset record.
      */
     function __createSubRecord(record, fieldmatcher) {
-        Log.debug("Enter - ClassificationData.__createSubRecord()");
+        Log.trace("Enter - ClassificationData.__createSubRecord()");
         var result = undefined;
         try {
             Log.debug("    record: " + record);
@@ -258,12 +258,12 @@ var ClassificationData = function () {
             });
             return result;
         } finally {
-            Log.debug("Exit - ClassificationData.__createSubRecord(): " + result);
+            Log.trace("Exit - ClassificationData.__createSubRecord(): " + result);
         }
     }
 
     function __hasRecordChanged(oldRecord, newRecord, valueFunc) {
-        Log.debug("Enter - ClassificationData.__hasRecordChanged()");
+        Log.trace("Enter - ClassificationData.__hasRecordChanged()");
         var result = undefined;
         try {
             Log.debug("    oldRecord: " + oldRecord);
@@ -289,12 +289,12 @@ var ClassificationData = function () {
             });
             return result;
         } finally {
-            Log.debug("Exit - ClassificationData.__hasRecordChanged(): " + result);
+            Log.trace("Exit - ClassificationData.__hasRecordChanged(): " + result);
         }
     }
 
     function __hasFieldChanged(oldField, newField, valueFunc, ignoreSubfieldsMatcher) {
-        Log.debug("Enter - ClassificationData.__hasFieldChanged()");
+        Log.trace("Enter - ClassificationData.__hasFieldChanged()");
         var result = undefined;
         try {
             Log.debug("    oldField: " + oldField);
@@ -345,12 +345,12 @@ var ClassificationData = function () {
             });
             return result;
         } finally {
-            Log.debug("Exit - ClassificationData.__hasFieldChanged(): " + result);
+            Log.trace("Exit - ClassificationData.__hasFieldChanged(): " + result);
         }
     }
 
     function __hasFieldByNameChanged(oldMarc, newMarc, fieldname, valueFunc, ignoreSubfieldsMatcher) {
-        Log.debug("Enter - ClassificationData.__hasFieldByNameChanged()");
+        Log.trace("Enter - ClassificationData.__hasFieldByNameChanged()");
         var result = undefined;
         try {
             var oldField = undefined;
@@ -368,12 +368,12 @@ var ClassificationData = function () {
             return result = __hasFieldChanged(oldField, newField, valueFunc, ignoreSubfieldsMatcher) ||
                 __hasFieldChanged(newField, oldField, valueFunc, ignoreSubfieldsMatcher);
         } finally {
-            Log.debug("Exit - ClassificationData.__hasFieldByNameChanged(): ", result);
+            Log.trace("Exit - ClassificationData.__hasFieldByNameChanged(): ", result);
         }
     }
 
     function __hasSubfieldChangedMatcher(oldMarc, newMarc, fieldmatcher, subfieldmatcher, oldValueMatcher, newValueMatcher) {
-        Log.debug("Enter - ClassificationData.__hasSubfieldChangedMatcher()");
+        Log.trace("Enter - ClassificationData.__hasSubfieldChangedMatcher()");
         var result = undefined;
         try {
             Log.debug("    oldMarc: " + oldMarc);
@@ -386,12 +386,12 @@ var ClassificationData = function () {
                 newMarc.matchValue(fieldmatcher, subfieldmatcher, newValueMatcher);
             return result;
         } finally {
-            Log.debug("Exit - ClassificationData.__hasSubfieldChangedMatcher(): " + result);
+            Log.trace("Exit - ClassificationData.__hasSubfieldChangedMatcher(): " + result);
         }
     }
 
     function __hasSubfieldJustChanged(oldMarc, newMarc, valueFunc, fieldmatcher, subfieldmatcher) {
-        Log.debug("Enter - ClassificationData.__hasSubfieldJustChanged()");
+        Log.trace("Enter - ClassificationData.__hasSubfieldJustChanged()");
         var result = undefined;
         try {
             Log.debug("    oldMarc: " + oldMarc);
@@ -400,12 +400,12 @@ var ClassificationData = function () {
             Log.debug("    subfieldmatcher: " + subfieldmatcher);
             return result = valueFunc(oldMarc.getValue(fieldmatcher, subfieldmatcher)) !== valueFunc(newMarc.getValue(fieldmatcher, subfieldmatcher));
         } finally {
-            Log.debug("Exit - ClassificationData.__hasSubfieldJustChanged():" + result);
+            Log.trace("Exit - ClassificationData.__hasSubfieldJustChanged():" + result);
         }
     }
 
     function __hasStripedValueChanged(a, b, len) {
-        Log.debug("Enter - ClassificationData.__hasStripedValueChanged()");
+        Log.trace("Enter - ClassificationData.__hasStripedValueChanged()");
         var result = undefined;
         try {
             Log.debug("    a: " + a);
@@ -415,7 +415,7 @@ var ClassificationData = function () {
             b = __stripValue(b.substr(0, len));
             return result = a !== b
         } finally {
-            Log.debug("Exit - ClassificationData.__hasStripedValueChanged():" + result);
+            Log.trace("Exit - ClassificationData.__hasStripedValueChanged():" + result);
         }
     }
 
@@ -425,7 +425,7 @@ var ClassificationData = function () {
     }
 
     function __stripValue(v) {
-        Log.debug("Enter - ClassificationData.__stripValue()");
+        Log.trace("Enter - ClassificationData.__stripValue()");
         try {
             var Normalizer = Packages.java.text.Normalizer;
             Log.debug("    v: " + v);
@@ -433,7 +433,7 @@ var ClassificationData = function () {
             v = Normalizer.normalize(v, Normalizer.Form.NFD).replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
             return v + "";
         } finally {
-            Log.debug("Exit - ClassificationData.__stripValue():" + v);
+            Log.trace("Exit - ClassificationData.__stripValue():" + v);
         }
     }
 
