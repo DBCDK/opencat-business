@@ -1,5 +1,4 @@
 use("AuthenticateTemplate");
-use("StopWatch");
 use("TemplateContainer");
 use("Validator");
 

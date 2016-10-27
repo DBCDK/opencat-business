@@ -1,4 +1,3 @@
-use("StopWatch");
 use("UnitTest");
 
 //subfield rules
@@ -68,7 +67,6 @@ var TemplateOptimizer = function () {
      */
     function optimize(template) {
         Log.trace("Enter -- TemplateOptimizer.optimize()");
-        var watchFunc = new StopWatch("TemplateOptimizer.optimize");
 
         var result = {
             fields: {},
@@ -133,7 +131,6 @@ var TemplateOptimizer = function () {
             result.rules = convertTypeNameOfAllRules(result.rules);
             return result;
         } finally {
-            watchFunc.stop();
             Log.trace("Exit -- TemplateOptimizer.optimize(): ", result);
         }
     }

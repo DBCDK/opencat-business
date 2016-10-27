@@ -1,54 +1,53 @@
-use( "Log" );
-use( "StopWatch" );
+use("Log");
 
-EXPORTED_SYMBOLS = [ 'TemplateLoader' ];
+EXPORTED_SYMBOLS = ['TemplateLoader'];
 
 /**
- * Module to load a template and suptitute fields and subfields from other 
+ * Module to load a template and suptitute fields and subfields from other
  * templates.
- * 
+ *
  * @namespace
  * @name TemplateLoader
- * 
+ *
  */
-var TemplateLoader = function() {
+var TemplateLoader = function () {
     var cache = {};
 
 
     /**
      * Loads and returns a template based on its name.
-     * 
+     *
      * @param {String}   name The name of the template.
-     * @param {Function} templateProvider A function that takes a 
-     *                   String and returns an Object with the structure 
+     * @param {Function} templateProvider A function that takes a
+     *                   String and returns an Object with the structure
      *                   of the template given by name.
      * @name TemplateLoader#load
      */
-    function load ( name, templateProvider ) {
-        Log.trace( "Enter - TemplateLoader.load( " + name +" )" );
+    function load(name, templateProvider) {
+        Log.trace("Enter - TemplateLoader.load( " + name + " )");
 
         try {
-            var result=cache[name];
-            if ( result === undefined ) {
-                result = templateProvider( name );
+            var result = cache[name];
+            if (result === undefined) {
+                result = templateProvider(name);
 
-                if ( result === undefined ) {
+                if (result === undefined) {
                     throw "Unable to load template '" + name + "'";
                 }
-                for ( var fieldName in result.fields ) {
-                    if ( result.fields.hasOwnProperty( fieldName ) ) {
+                for (var fieldName in result.fields) {
+                    if (result.fields.hasOwnProperty(fieldName)) {
                         var fieldObj = result.fields[fieldName];
-                        if ( typeof( fieldObj ) === "string" ) {
-                            result.fields[fieldName] = __getObjectFromTemplate( fieldObj, templateProvider );
+                        if (typeof( fieldObj ) === "string") {
+                            result.fields[fieldName] = __getObjectFromTemplate(fieldObj, templateProvider);
                         } else {
-                            for ( var subfieldName in fieldObj.subfields ) {
-                                if ( fieldObj.subfields.hasOwnProperty( subfieldName ) ) {
+                            for (var subfieldName in fieldObj.subfields) {
+                                if (fieldObj.subfields.hasOwnProperty(subfieldName)) {
                                     var subfieldObj = fieldObj.subfields[subfieldName];
-                                    if ( typeof( subfieldObj ) === "string" ) {
-                                        fieldObj.subfields[subfieldName] = __getObjectFromTemplate( subfieldObj, templateProvider );
-                                    } else if ( subfieldObj.hasOwnProperty( "values" ) ) {
-                                        if ( typeof( subfieldObj.values ) === "string" ) {
-                                            fieldObj.subfields[subfieldName].values = __getObjectFromTemplate( subfieldObj.values, templateProvider );
+                                    if (typeof( subfieldObj ) === "string") {
+                                        fieldObj.subfields[subfieldName] = __getObjectFromTemplate(subfieldObj, templateProvider);
+                                    } else if (subfieldObj.hasOwnProperty("values")) {
+                                        if (typeof( subfieldObj.values ) === "string") {
+                                            fieldObj.subfields[subfieldName].values = __getObjectFromTemplate(subfieldObj.values, templateProvider);
                                         }
                                     }
                                 }
@@ -56,123 +55,123 @@ var TemplateLoader = function() {
                         }
                     }
                 }
-                if ( result !== undefined ) {
+                if (result !== undefined) {
                     cache[name] = result;
                 }
             }
             return result;
         } finally {
-            Log.trace( "Exit - TemplateLoader.load" );
+            Log.trace("Exit - TemplateLoader.load");
         }
     }
 
     /**
-     * Returns the object for a .-based path where the first part of the path 
-     * is the template name. The rest of the path reference to the object of the 
+     * Returns the object for a .-based path where the first part of the path
+     * is the template name. The rest of the path reference to the object of the
      * template that will be returned.
-     * 
+     *
      * @param {String}   name The name of the template.
-     * @param {Function} templateProvider A function that takes a 
-     *                   String and returns an Object with the structure 
+     * @param {Function} templateProvider A function that takes a
+     *                   String and returns an Object with the structure
      *                   of the template given by name.
      * @name TemplateLoader#__getObjectFromTemplate
      */
 
-    function __getObjectFromTemplate ( name, templateProvider ) {
-        Log.trace( "Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", "templateProvider", " )" );
+    function __getObjectFromTemplate(name, templateProvider) {
+        Log.trace("Enter - TemplateLoader.__getObjectFromTemplate( '", name, "', ", "templateProvider", " )");
 
         try {
-            var index = name.indexOf( "." );
-            var templateName = name.substring( 0, index );
-            var objName = name.substring( index + 1 );
+            var index = name.indexOf(".");
+            var templateName = name.substring(0, index);
+            var objName = name.substring(index + 1);
 
             // Deep copy of Value form Template.. To Avoid Change of object in Cache
-            return JSON.parse(JSON.stringify(getObjectByName( objName, load( templateName, templateProvider ) )));
+            return JSON.parse(JSON.stringify(getObjectByName(objName, load(templateName, templateProvider))));
         } finally {
-            Log.trace( "Exit - TemplateLoader.__getObjectFromTemplate" );
+            Log.trace("Exit - TemplateLoader.__getObjectFromTemplate");
         }
     }
-    
+
     /**
-     * Returns the object for a .-based path that reference to the property of an 
+     * Returns the object for a .-based path that reference to the property of an
      * object that will be returned.
-     * 
+     *
      * @param {String} name The name of the property to return.
      * @param {Object} object The object that contains the property. Directly or indirectly.
-     *  
+     *
      * @name TemplateLoader#getObjectByName
      */
-    function getObjectByName ( name, object ) {
-        Log.trace( "Enter - TemplateLoader.getObjectByName( '", name, "' ", object, " )" );
+    function getObjectByName(name, object) {
+        Log.trace("Enter - TemplateLoader.getObjectByName( '", name, "' ", object, " )");
 
         try {
-            return __getObjectByName( name, name, object );
+            return __getObjectByName(name, name, object);
         } finally {
-            Log.trace( "Exit - TemplateLoader.getObjectByName" );
+            Log.trace("Exit - TemplateLoader.getObjectByName");
         }
     }
 
     /**
-     * Returns the object for a .-based path that reference to the property of an 
+     * Returns the object for a .-based path that reference to the property of an
      * object that will be returned.
-     * 
+     *
      * @param {String} fullName The initial full name of the property to return.
      * @param {String} name The name of the property to return.
      * @param {Object} object The object that contains the property. Directly or indirectly.
-     *  
+     *
      * @name TemplateLoader#__getObjectByName
      */
-    function __getObjectByName ( fullName, name, object ) {
-        Log.trace( "Enter - TemplateLoader.__getObjectByName( '", fullName, "', '", name, "', ", object, " )" );
+    function __getObjectByName(fullName, name, object) {
+        Log.trace("Enter - TemplateLoader.__getObjectByName( '", fullName, "', '", name, "', ", object, " )");
 
         try {
-            if ( object === null ) {
+            if (object === null) {
             }
 
-            if ( object === undefined ) {
+            if (object === undefined) {
                 throw "TemplateLoader.__getObjectByName: object can not be undefined";
             }
 
-            if ( name === "" ) {
+            if (name === "") {
                 throw "TemplateLoader.__getObjectByName: name can not be empty";
             }
 
-            var index = name.indexOf( "." );
+            var index = name.indexOf(".");
             var propName = name;
-            if ( index > -1 ) {
-                propName = name.substring( 0, index );
+            if (index > -1) {
+                propName = name.substring(0, index);
             }
 
             var obj = undefined;
             var foundProperty = false;
-            for ( var objName in object ) {
-                if ( objName === propName && object.hasOwnProperty( objName ) ) {
+            for (var objName in object) {
+                if (objName === propName && object.hasOwnProperty(objName)) {
                     obj = object[propName];
                     foundProperty = true;
                     break;
                 }
             }
-            if ( !foundProperty ) {
+            if (!foundProperty) {
                 throw "The property " + objName + " in the path " + fullName + " does not exist.";
             }
 
-            if ( propName === name ) {
+            if (propName === name) {
                 return obj;
             }
 
-            return __getObjectByName( fullName, name.substring( index + 1 ), obj );
+            return __getObjectByName(fullName, name.substring(index + 1), obj);
         } finally {
-            Log.trace( "Exit - TemplateLoader.__getObjectByName" );
+            Log.trace("Exit - TemplateLoader.__getObjectByName");
         }
     }
 
-    function UnitTestReset () {
+    function UnitTestReset() {
         cache = {};
     }
 
     return {
         'load': load,
         'getObjectByName': getObjectByName,
-        'UnitTestReset' : UnitTestReset
+        'UnitTestReset': UnitTestReset
     };
 }();

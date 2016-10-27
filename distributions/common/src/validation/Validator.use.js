@@ -3,7 +3,6 @@ use("Print");
 use("ReadFile");
 use("ResourceBundle");
 use("ResourceBundleFactory");
-use("StopWatch");
 use("StringUtil");
 use("TemplateOptimizer");
 use("ValidateErrors");
@@ -31,13 +30,10 @@ var Validator = function () {
      */
     function validateRecord(record, templateProvider, settings) {
         Log.trace("Enter - Validator.validateRecord()");
-        var watchFunc = new StopWatch();
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-            watchFunc.lap("javascript.Validator.validateRecord.bundle");
             var result = [];
             var template = templateProvider();
-            watchFunc.lap("javascript.Validator.validateRecord.templateProvider");
             if (record.fields !== undefined) {
                 for (var i = 0; i < record.fields.length; i++) {
                     var subResult = validateField(record, record.fields[i], templateProvider, settings);
@@ -59,9 +55,7 @@ var Validator = function () {
                     Log.debug("Record rule: ", rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
-                        var watch = new StopWatch("javascript.Validator." + rule.name);
                         var valErrors = rule.type(record, rule.params, settings);
-                        watch.stop();
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (e) {
@@ -73,7 +67,6 @@ var Validator = function () {
             }
             return result;
         } finally {
-            watchFunc.stop("javascript.Validator.validateRecord");
             Log.trace("Exit - Validator.validateRecord()");
         }
     }
@@ -90,7 +83,6 @@ var Validator = function () {
      */
     function validateField(record, field, templateProvider, settings) {
         Log.trace("Enter - Validator.validateField()");
-        var watchFunc = new StopWatch("javascript.Validator.validateField");
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
@@ -120,9 +112,7 @@ var Validator = function () {
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
-                        var watch = new StopWatch("javascript.Validator." + rule.name);
                         var valErrors = rule.type(record, field, rule.params, settings);
-                        watch.stop();
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (ex) {
@@ -141,7 +131,6 @@ var Validator = function () {
             }
             return result;
         } finally {
-            watchFunc.stop();
             Log.trace("Exit - Validator.validateField()");
         }
     }
@@ -159,7 +148,7 @@ var Validator = function () {
      */
     function validateSubfield(record, field, subfield, templateProvider, settings) {
         Log.trace("Enter - Validator.validateSubfield()");
-        var watchFunc = new StopWatch("javascript.Validator.validateSubfield");
+
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
@@ -188,9 +177,7 @@ var Validator = function () {
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
-                        var watch = new StopWatch("javascript.Validator." + rule.name);
                         var valErrors = rule.type(record, field, subfield, rule.params, settings);
-                        watch.stop();
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (e) {
@@ -202,7 +189,6 @@ var Validator = function () {
             }
             return result;
         } finally {
-            watchFunc.stop();
             Log.trace("Exit - Validator.validateSubfield()");
         }
     }
