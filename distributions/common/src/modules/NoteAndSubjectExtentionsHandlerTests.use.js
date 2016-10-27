@@ -5,7 +5,6 @@ use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UnitTest");
 
-// isNationalCommonRecord
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.isNationalCommonRecord", function () {
     var record;
 

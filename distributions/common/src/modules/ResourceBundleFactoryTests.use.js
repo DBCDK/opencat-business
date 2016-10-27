@@ -1,11 +1,9 @@
-//-----------------------------------------------------------------------------
-use( "Log" );
-use( "ResourceBundleFactory" );
-use( "SafeAssert" );
+use("Log");
+use("ResourceBundleFactory");
+use("SafeAssert");
 
-//-----------------------------------------------------------------------------
-UnitTest.addFixture( "ResourceBundleFactory.getBundleByLocale", function() {
-    Log.trace( "Enter - Fixture: ResourceBundleFactory.getBundleByLocale" );
+UnitTest.addFixture("ResourceBundleFactory.getBundleByLocale", function () {
+    Log.trace("Enter - Fixture: ResourceBundleFactory.getBundleByLocale");
 
     try {
         var bundle = ResourceBundleFactory.getBundle("validation");
@@ -18,6 +16,6 @@ UnitTest.addFixture( "ResourceBundleFactory.getBundleByLocale", function() {
         SafeAssert.not("Load known value", ResourceBundle.getString(bundle, "record.execute.error") === "");
     }
     finally {
-        Log.trace( "Exit - Fixture: ResourceBundleFactory.getBundleByLocale" );
+        Log.trace("Exit - Fixture: ResourceBundleFactory.getBundleByLocale");
     }
-} );
+});

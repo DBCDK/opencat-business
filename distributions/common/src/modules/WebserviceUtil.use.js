@@ -1,7 +1,7 @@
-use( "Http" );
-use( "Log" );
+use("Http");
+use("Log");
 
-EXPORTED_SYMBOLS = [ 'WebserviceUtil' ];
+EXPORTED_SYMBOLS = ['WebserviceUtil'];
 
 /**
  * @file Module to call webservices.
@@ -10,12 +10,12 @@ EXPORTED_SYMBOLS = [ 'WebserviceUtil' ];
  * @name WebserviceUtil
  *
  */
-var WebserviceUtil = function() {
+var WebserviceUtil = function () {
     var openNumberRoll;
 
-    function init( settings ) {
+    function init(settings) {
         Log.trace("init");
-        openNumberRoll = String(settings.get( 'opennumberroll' ));
+        openNumberRoll = String(settings.get('opennumberroll'));
     }
 
     /**
@@ -27,17 +27,17 @@ var WebserviceUtil = function() {
      * @method
      */
     function getNewFaustNumberFromOpenNumberRoll() {
-        Log.trace( "getNewFaustNumberFromOpenNumberRoll" );
+        Log.trace("getNewFaustNumberFromOpenNumberRoll");
         var headers = {
             'Content-type': 'application/xml;charset=utf-8'
         };
         var params = {};
-        var responseString = Http.getNoProxy( openNumberRoll, params, headers, false );
-        var response = JSON.parse( responseString );
+        var responseString = Http.getNoProxy(openNumberRoll, params, headers, false);
+        var response = JSON.parse(responseString);
         var res = "";
-        if ( response.hasOwnProperty( "numberRollResponse" )
-            && response["numberRollResponse"].hasOwnProperty( "rollNumber" )
-            && response["numberRollResponse"]["rollNumber"].hasOwnProperty( "$" ) ) {
+        if (response.hasOwnProperty("numberRollResponse")
+            && response["numberRollResponse"].hasOwnProperty("rollNumber")
+            && response["numberRollResponse"]["rollNumber"].hasOwnProperty("$")) {
             res = response["numberRollResponse"]["rollNumber"]["$"];
         } else {
             throw "Could not find faustNumber in this response: " + responseString;
