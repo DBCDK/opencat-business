@@ -1,7 +1,6 @@
 use("SafeAssert");
 use("RawRepoClient");
 use("UnitTest");
-use("Log");
 use("Marc");
 use("LookUpRecord");
 

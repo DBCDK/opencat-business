@@ -1,9 +1,6 @@
-//-----------------------------------------------------------------------------
 use( "SafeAssert" );
 use( "UnitTest" );
-use( "Log" );
 use ( "AllFieldsMandatoryIfOneExist");
-//-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( AllFieldsMandatoryIfOneExist.__BUNDLE_NAME );

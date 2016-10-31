@@ -1,9 +1,7 @@
-//-----------------------------------------------------------------------------
 use( "SafeAssert" );
 use( "UnitTest" );
-use( "Log" );
 use( "FieldsMandatory" );
-//-----------------------------------------------------------------------------
+
 UnitTest.addFixture( "Test FieldsMandatory.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( FieldsMandatory.__BUNDLE_NAME );
 

@@ -1,6 +1,5 @@
 use("SafeAssert");
 use("UnitTest");
-use("Log");
 use("FieldDemandsOtherFields");
 
 UnitTest.addFixture( "FieldDemandsOtherFields first", function( ) {

@@ -1,7 +1,6 @@
 use("Marc");
 use("RawRepoClient");
 use("UnitTest");
-use("Log");
 
 UnitTest.addFixture("RawRepoClient", function () {
     RawRepoClientCore.clear();

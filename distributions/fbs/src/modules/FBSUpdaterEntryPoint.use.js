@@ -213,7 +213,7 @@ var FBSUpdaterEntryPoint = function () {
     }
 
     function checkDoubleRecordFrontend(record, settings) {
-        Log.info("Enter - FBSUpdaterEntryPoint.checkDoubleRecordFrontend");
+        Log.trace("Enter - FBSUpdaterEntryPoint.checkDoubleRecordFrontend");
         try {
             return DefaultDoubleRecordHandler.checkDoubleRecordFrontend(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
         } finally {
@@ -222,7 +222,7 @@ var FBSUpdaterEntryPoint = function () {
     }
 
     function sortRecord(templateName, record, settings) {
-        Log.info("Enter - FBSUpdaterEntryPoint.sortRecord");
+        Log.trace("Enter - FBSUpdaterEntryPoint.sortRecord");
 
         var templateProvider = function () {
             TemplateContainer.setSettings(settings);
@@ -237,7 +237,7 @@ var FBSUpdaterEntryPoint = function () {
 
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
         } finally {
-            Log.info("Exit - FBSUpdaterEntryPoint.sortRecord");
+            Log.trace("Exit - FBSUpdaterEntryPoint.sortRecord");
         }
     }
 

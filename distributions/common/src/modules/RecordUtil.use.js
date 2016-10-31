@@ -147,7 +147,7 @@ var RecordUtil = function () {
     }
 
     function fetchCurrentRecord(record) {
-        Log.info("Enter - RecordUtil.__fetchParentRecord()");
+        Log.trace("Enter - RecordUtil.__fetchParentRecord()");
         var result = undefined;
         try {
             Log.debug("Record: " + record);
@@ -160,7 +160,7 @@ var RecordUtil = function () {
     }
 
     function fetchRecord(recId, libNo) {
-        Log.info("Enter - RecordUtil.__fetchRecord()");
+        Log.trace("Enter - RecordUtil.__fetchRecord()");
         var result = undefined;
         try {
             if (RawRepoClient.recordExists(recId, libNo)) {

@@ -25,7 +25,7 @@ var RepeatableFields = function () {
      * @method
      */
     function validateRecord(record, params) {
-        Log.debug("Enter - RepeatableFields.validateRecord( ", record, ", ", params, " )");
+        Log.trace("Enter - RepeatableFields.validateRecord( ", record, ", ", params, " )");
 
         var result = [];
         try {
@@ -58,7 +58,7 @@ var RepeatableFields = function () {
             }
             return result;
         } finally {
-            Log.debug("Exit - RepeatableFields.validateRecord: ", result);
+            Log.trace("Exit - RepeatableFields.validateRecord: ", result);
         }
     }
 

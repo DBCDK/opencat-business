@@ -1,9 +1,6 @@
-//-----------------------------------------------------------------------------
 use( "SafeAssert" );
 use( "UnitTest" );
-use( "Log" );
 use ( "ConflictingFields");
-//-----------------------------------------------------------------------------
 UnitTest.addFixture( "Test ConflictingFields.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( ConflictingFields.__BUNDLE_NAME );
 

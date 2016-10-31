@@ -4,7 +4,6 @@ use("RawRepoClientCore");
 use("RecategorizationNoteFieldProvider");
 use("RecordUtil");
 use("UnitTest");
-use("Log");
 
 UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue", function () {
     function callFunction(bundle, record, fieldname, subfieldmatcher) {

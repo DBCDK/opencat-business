@@ -23,7 +23,7 @@ var SubfieldCannotContainValue = function () {
      * @method
      */
     function validateSubfield(record, field, subfield, params) {
-        Log.debug("Enter --- SubfieldCannotContainValue.validateSubfield");
+        Log.trace("Enter --- SubfieldCannotContainValue.validateSubfield");
         ValueCheck.check("params.values", params.values);
         ValueCheck.check("params", params.values).instanceOf(Array);
         try {

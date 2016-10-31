@@ -1,11 +1,8 @@
-//-----------------------------------------------------------------------------
 use( "ClassificationData" );
 use( "DefaultEnrichmentRecordHandler" );
 use( "UnitTest" );
 use( "UpdateConstants" );
-use( "Log" );
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DefaultEnrichmentRecordHandler.create", function() {
     var classificationsInstance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );
     var instance = DefaultEnrichmentRecordHandler.create( classificationsInstance, ClassificationData );
@@ -20,7 +17,6 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.create", function() {
     );
 } );
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", function() {
     function noResult( fieldname, value ) {
         var bundle = ResourceBundleFactory.getBundle( "enrichments" );
@@ -131,7 +127,6 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),
         noResultInProduction() );
 
-    Log.debug( "Enter - Testcase" );
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
@@ -151,7 +146,6 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
     Assert.equalValue( "Complete record in production: 008u=r and 032a|x is changed",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
         DefaultEnrichmentRecordHandler.__shouldCreateRecordsYesResult() );
-    Log.debug( "Exit - Testcase" );
 
     currentRecord = RecordUtil.createFromString( [
         "001 00 *a 1 234 567 8 *b 191919",
@@ -194,7 +188,6 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         noResultInProduction() );
 } );
 
-//-----------------------------------------------------------------------------
 UnitTest.addFixture( "DefaultEnrichmentRecordHandler.updateRecord", function() {
     function callFunction( currentCommonRecord, updatingCommonRecord, enrichmentRecord ) {
         var classificationsInstance = ClassificationData.create( UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS );

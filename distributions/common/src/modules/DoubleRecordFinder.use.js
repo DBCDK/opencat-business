@@ -37,7 +37,7 @@ var DoubleRecordFinder = function () {
      * @name DoubleRecordFinder#find
      */
     function findGeneral(record, callSolrUrl) {
-        Log.debug("Enter - DoubleRecordFinder.findGeneral()");
+        Log.trace("Enter - DoubleRecordFinder.findGeneral()");
         solrUrl = callSolrUrl;
         var result = [];
         try {
@@ -45,7 +45,7 @@ var DoubleRecordFinder = function () {
             result = doFind(record, finders);
             return result;
         } finally {
-            Log.debug("Exit - DoubleRecordFinder.findGeneral(): ", JSON.stringify(result));
+            Log.trace("Exit - DoubleRecordFinder.findGeneral(): ", JSON.stringify(result));
         }
     }
 
@@ -62,7 +62,7 @@ var DoubleRecordFinder = function () {
      * @name DoubleRecordFinder#find
      */
     function find(record, callSolrUrl) {
-        Log.debug("Enter - DoubleRecordFinder.find()");
+        Log.trace("Enter - DoubleRecordFinder.find()");
         solrUrl = callSolrUrl;
         var result = [];
         try {
@@ -70,7 +70,7 @@ var DoubleRecordFinder = function () {
             result = doFind(record, finders);
             return result;
         } finally {
-            Log.debug("Exit - DoubleRecordFinder.find(): ", JSON.stringify(result));
+            Log.trace("Exit - DoubleRecordFinder.find(): ", JSON.stringify(result));
         }
     }
 

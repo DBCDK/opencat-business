@@ -1,9 +1,6 @@
-//-----------------------------------------------------------------------------
 use( "SafeAssert" );
 use( "UnitTest" );
-use( "Log" );
 use ( "RepeatableFields");
-//-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "Test RepeatableFields.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( RepeatableFields.__BUNDLE_NAME );

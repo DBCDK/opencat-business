@@ -38,9 +38,7 @@ var Validator = function () {
                 for (var i = 0; i < record.fields.length; i++) {
                     var subResult = validateField(record, record.fields[i], templateProvider, settings);
                     var field = record.fields[i];
-                    if (template.fields[field.name] && template.fields[field.name].sorting) {
-                        FieldSorting.sort(field, template.fields[field.name].sorting);
-                    }
+
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].ordinalPositionOfField = i;
                     }

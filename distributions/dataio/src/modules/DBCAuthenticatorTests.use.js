@@ -9,18 +9,13 @@ UnitTest.addFixture("DBCAuthenticator.authenticateRecord", function () {
     var record;
 
     function callFunction(record, userId, groupId, settings) {
-        Log.trace("Enter - DBCAuthenticatorTests.authenticateRecord.callFunction()");
 
-        try {
-            var recordObject = DanMarc2Converter.convertFromDanMarc2(record);
-            var recordJson = JSON.stringify(recordObject);
-            var result = DBCAuthenticator.authenticateRecord(recordJson, userId, groupId, settings);
+        var recordObject = DanMarc2Converter.convertFromDanMarc2(record);
+        var recordJson = JSON.stringify(recordObject);
+        var result = DBCAuthenticator.authenticateRecord(recordJson, userId, groupId, settings);
 
-            return JSON.parse(result);
-        }
-        finally {
-            Log.trace("Exit - DBCAuthenticatorTests.authenticateRecord.callFunction()");
-        }
+        return JSON.parse(result);
+
     }
 
     //-----------------------------------------------------------------------------

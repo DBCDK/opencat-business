@@ -1,9 +1,6 @@
-//-----------------------------------------------------------------------------
 use( "SafeAssert" );
 use( "UnitTest" );
-use( "Log" );
 use ( "OptionalFields");
-//-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "Test OptionalFields.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( OptionalFields.__BUNDLE_NAME );

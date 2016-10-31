@@ -195,7 +195,7 @@ var DBCUpdaterEntryPoint = function () {
     }
 
     function sortRecord(templateName, record, settings) {
-        Log.info("Enter - DBCUpdaterEntryPoint.sortRecord");
+        Log.trace("Enter - DBCUpdaterEntryPoint.sortRecord");
 
         var templateProvider = function () {
             TemplateContainer.setSettings(settings);
@@ -210,7 +210,7 @@ var DBCUpdaterEntryPoint = function () {
 
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
         } finally {
-            Log.info("Exit - DBCUpdaterEntryPoint.sortRecord");
+            Log.trace("Exit - DBCUpdaterEntryPoint.sortRecord");
         }
     }
 

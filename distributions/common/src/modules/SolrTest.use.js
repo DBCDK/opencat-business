@@ -1,5 +1,4 @@
 use("Solr");
-use("Log");
 use("ConfigSettings");
 
 UnitTest.addFixture("Solr.numFound", function () {

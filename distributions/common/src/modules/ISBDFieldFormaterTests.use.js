@@ -3,7 +3,6 @@ use("MarcClasses");
 use("ISBDFieldFormater");
 use("RecordUtil");
 use("UnitTest");
-use("Log");
 
 UnitTest.addFixture("ISBDFieldFormater.formatField", function () {
     var field;

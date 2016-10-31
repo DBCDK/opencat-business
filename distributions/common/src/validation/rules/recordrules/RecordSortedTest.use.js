@@ -1,9 +1,6 @@
-//-----------------------------------------------------------------------------
 use( "SafeAssert" );
 use( "UnitTest" );
-use( "Log" );
 use ( "RecordSorted");
-//-----------------------------------------------------------------------------
 
 UnitTest.addFixture( "Test RecordSorted.validateRecord", function( ) {
     var bundle = ResourceBundleFactory.getBundle( RecordSorted.__BUNDLE_NAME );

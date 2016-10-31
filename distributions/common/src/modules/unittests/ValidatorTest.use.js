@@ -1,5 +1,4 @@
 use("GenericSettings");
-use("Log");
 use("UnitTest");
 use("Validator");
 
@@ -293,91 +292,4 @@ UnitTest.addFixture("Validator.validateSubfield", function () {
             return template;
         }, GenericSettings),
         [ValidateErrors.subfieldError("url", "message")]);
-});
-
-UnitTest.addFixture("Validator.validateRecord (bug 20163)", function () {
-    var record20163 = {
-        fields: [
-            {
-                name: "001",
-                subfields: [
-                    {name: "a", value: "29587574"},
-                    {name: "b", value: "761500"}
-                ]
-            },
-            {
-                name: "008",
-                subfields: [
-                    {name: "v"},
-                    {name: "u"},
-                    {name: "a"},
-                    {name: "z"},
-                    {name: "b"},
-                    {name: "d"},
-                    {name: "j"},
-                    {name: "l"},
-                    {name: "t"}
-                ]
-            }
-        ]
-    };
-
-    var record20163Expected = {
-        fields: [
-            {
-                name: "001",
-                subfields: [
-                    {name: "a", value: "29587574"},
-                    {name: "b", value: "761500"}
-                ]
-            },
-            {
-                name: "008",
-                subfields: [
-                    {name: "t"},
-                    {name: "u"},
-                    {name: "a"},
-                    {name: "z"},
-                    {name: "b"},
-                    {name: "d"},
-                    {name: "j"},
-                    {name: "l"},
-                    {name: "v"}
-                ]
-            }
-        ]
-    };
-
-    var template20163 = {
-        fields: {
-            "001": {
-                subfields: {
-                    a: {},
-                    b: {}
-                }
-            },
-            "008": {
-                sorting: "tuazbdjlv",
-                subfields: {
-                    t: {},
-                    u: {},
-                    a: {},
-                    z: {},
-                    b: {},
-                    d: {},
-                    j: {},
-                    l: {},
-                    v: {}
-                }
-            }
-        },
-        rules: []
-    };
-
-    Assert.equalValue("bug 20163 - check validate works", Validator.validateRecord(record20163, function () {
-        return template20163;
-    }, GenericSettings), []);
-
-    Assert.equalValue("bug 20163 - check field sorting works", record20163, record20163Expected);
-
 });

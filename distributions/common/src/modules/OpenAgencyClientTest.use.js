@@ -1,6 +1,5 @@
 use("OpenAgencyClient");
 use("UnitTest");
-use("Log");
 
 UnitTest.addFixture("OpenAgencyClient.Features", function () {
     Assert.not("Feature not found in empty set", OpenAgencyClient.hasFeature("010100", "auth_root"));

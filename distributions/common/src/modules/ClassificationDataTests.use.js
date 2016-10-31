@@ -2,7 +2,6 @@ use("ClassificationData");
 use("DanMarc2Converter");
 use("UnitTest");
 use("UpdateConstants");
-use("Log");
 
 UnitTest.addFixture("ClassificationData.hasClassificationData", function () {
     function callFunction(jsonObj) {

@@ -6,7 +6,6 @@ use("ResourceBundle");
 use("ResourceBundleFactory");
 use("UnitTest");
 use("UpdateConstants");
-use("Log");
 
 UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function () {
 
@@ -16,30 +15,25 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     }
 
     function createNote(parts) {
-        Log.trace("Enter - createNote( '" + parts + "' )");
-
         var result = undefined;
-        try {
-            result = new Field(RecategorizationNoteFieldFactory.__FIELD_NAME, "00");
 
-            if (parts.recategorization !== undefined) {
-                result.append("i", parts.recategorization.trim());
-            }
-            if (parts.creator !== undefined) {
-                result.append("d", parts.creator.trim());
-            }
-            if (parts.title !== undefined) {
-                result.append("t", parts.title.trim());
-            }
-            if (parts.category !== undefined) {
-                result.append("b", parts.category.trim());
-            }
+        result = new Field(RecategorizationNoteFieldFactory.__FIELD_NAME, "00");
 
-            return result;
+        if (parts.recategorization !== undefined) {
+            result.append("i", parts.recategorization.trim());
         }
-        finally {
-            Log.trace("Exit - createNote(): " + result);
+        if (parts.creator !== undefined) {
+            result.append("d", parts.creator.trim());
         }
+        if (parts.title !== undefined) {
+            result.append("t", parts.title.trim());
+        }
+        if (parts.category !== undefined) {
+            result.append("b", parts.category.trim());
+        }
+
+        return result;
+
     }
 
     function formatMaterialMessage(bundle, code) {
