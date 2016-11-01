@@ -26,17 +26,32 @@
                     "repeatable": false
                 },
                 "c": {
-                    "repeatable": false
+                    "repeatable": false,
+                    "rules": [
+                      {
+                        "type": "SubfieldRules.checkDateFormat",
+                        "params": {
+                          "allowLong": true
+                        }
+                      }
+                    ]
                 },
                 "d": {
                     "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 8
-                            }
+                    "rules": [
+                      {
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                          "min": 8,
+                          "max": 8
                         }
+                      },
+                      {
+                        "type": "SubfieldRules.checkDateFormat",
+                        "params": {
+                          "allowLong": false
+                        }
+                      }
                     ]
                 },
                 "e": {
@@ -192,7 +207,7 @@
 				},
                 "e": {
                     "repeatable": false,
-                    "values": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", 
+                    "values": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
                         "13", "14", "15", "16", "17", "18" ]
 				},
                 "2": {
@@ -208,7 +223,7 @@
             "subfields": {
                 "t": {
                     "repeatable": false,
-                    "values": [ "m", "s", "p", "a", "h" ]                    
+                    "values": [ "m", "s", "p", "a", "h" ]
                 },
                 "u": {
                     "repeatable": false,
@@ -246,7 +261,7 @@
 				},
                 "d": {
                     "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-                                "l", "m", "n", "o", "p", "q", "r", "s", "t","u", "w", 
+                                "l", "m", "n", "o", "p", "q", "r", "s", "t","u", "w",
                                 "z", "\u00E5", "x", "y", "1", "2" ]
                 },
                 "e": {
@@ -300,7 +315,7 @@
                 },
                 "r": {
                     "repeatable": false,
-                    "values": [ "a", "b", "c", "d", "e", "f", "g", "m", "p", "r", "s", "t", "u", "v", 
+                    "values": [ "a", "b", "c", "d", "e", "f", "g", "m", "p", "r", "s", "t", "u", "v",
 					            "am", "an", "ap", "az", "ad", "a?" ]
                 },
                 "w": {
@@ -598,7 +613,7 @@
 				},
                 "d":{},
                 "x":{},
-                "2":{ 
+                "2":{
                     "repeatable":false
 				}
             }
@@ -763,10 +778,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values": [ "sam", "mir", "mia", "avg", "ava", "ork", 
-					"ora", "kam", "kaa", "eti", "eta", "vok", "voa", "opr", 
-					"opa", "otm", "ota", "new", "fol", "blu", "bla", "jaz", 
-					"jaa", "bef", "bea", "und", "dau", "jul", "fil", "tes", 
+                    "values": [ "sam", "mir", "mia", "avg", "ava", "ork",
+					"ora", "kam", "kaa", "eti", "eta", "vok", "voa", "opr",
+					"opa", "otm", "ota", "new", "fol", "blu", "bla", "jaz",
+					"jaa", "bef", "bea", "und", "dau", "jul", "fil", "tes",
 					"mmo", "hib", "mub" ]
                 },
                 "b": {
@@ -1373,7 +1388,7 @@
                 },
                 "r":{}
             }
-        },    
+        },
         "242":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39a.htm",
             "subfields":{
@@ -2445,8 +2460,8 @@
         "560":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
             "subfields":{
-                "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{}, "i":{}, "j":{}, 
-                "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{}, 
+                "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{}, "i":{}, "j":{},
+                "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
             },
@@ -3982,7 +3997,7 @@
 				"rules": [
 				    {
 				        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
-				        "params": { 
+				        "params": {
 				            "field": "795",
 			    	        "subfields": [ "a" ]
 				        }
@@ -4029,7 +4044,7 @@
 				"rules": [
 				    {
 				        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
-				        "params": { 
+				        "params": {
 				            "field": "795",
 			    	        "subfields": [ "a" ]
 				        }

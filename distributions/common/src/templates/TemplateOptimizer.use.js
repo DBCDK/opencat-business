@@ -13,6 +13,7 @@ use("CheckValue");
 use("MandatorySubfieldInVolumeWorkRule");
 use("CheckLength");
 use("CheckFaust");
+use("CheckDateFormat");
 use("SubfieldConditionalMandatoryField");
 use("CheckChangedValue");
 use("SubfieldCannotContainValue");
@@ -376,6 +377,8 @@ var TemplateOptimizer = function () {
                 case "SubfieldRules.checkValue":  // intended fall true
                 case "CheckValue.validateSubfield":
                     return CheckValue.validateSubfield;
+                case "SubfieldRules.checkDateFormat":
+                    return CheckDateFormat.validateSubfield;
                 case "SubfieldRules.checkFaust":
                     return CheckFaust.validateSubfield;
                 //case "SubfieldRules.checkFaust": return CheckFaust.validateSubfield;
