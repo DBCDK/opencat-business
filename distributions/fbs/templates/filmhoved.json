@@ -220,8 +220,7 @@
         },
         "021":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.15.htm",            
-            "repeatable":false,
-            "sorting":"abdenwx",
+            "sorting":"aebdnwx",
             "subfields":{
                 "a": "DanMarc2.fields.021.subfields.a",
                 "b": "DanMarc2.fields.021.subfields.b",
