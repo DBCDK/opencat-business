@@ -1,0 +1,105 @@
+[
+  {
+    "name": "002_linkning_same_classification",
+    "description": "Enrichment for 710100 fn=29147353 is deleted and replaced with enrichment fn=29147450",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "before_dying_common.marc",
+          "type": "MARCXCHANGE",
+          "holdings": [
+            710100
+          ],
+          "deleted": false,
+          "enrichments": [
+            "before_dying_DBC.marc",
+            "before_dying_710100.marc"
+          ]
+        },
+        {
+          "record": "before_dying_DBC.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_dying_710100.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_living_common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "before_living_DBC.marc"
+          ]
+        },
+        {
+          "record": "before_living_DBC.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": [],
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result_dying_DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result_dying_710100.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": true
+          },
+          {
+            "record": "result_dying_common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "result_dying_DBC.marc"
+            ]
+          },
+          {
+            "record": "result_living_common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result_living_DBC.marc",
+              "result_710100.marc"
+            ]
+          },
+          {
+            "record": "result_710100.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result_living_DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

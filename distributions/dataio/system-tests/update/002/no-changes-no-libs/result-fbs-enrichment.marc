@@ -1,3 +1,9 @@
 001 00 *a 27367402 *b 761500 *c 20150910133757 *d 20150910 *f a
+004 00 *r n *a e
+008 00 *t m *v 7
+009 00 *a a *g xx
+245 00 *a Vidensdeling i forsvaret
 512 00 *a faust ændres til 27367402
+652 00 *m NY TITEL
 996 00 *a 761500
+y08 00 *a UPDATE opstillingsændring

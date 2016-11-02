@@ -1,0 +1,23 @@
+001 00 *a 29147450 *b 870970 *c 20161007111944 *d 20111230 *f a
+002 00 *a 29147353
+004 00 *r n *a e
+008 00 *t m *u f *a 2011 *b dk *d å *d y *l eng *x 06 *v 0
+009 00 *a a *g xx
+021 00 *c Hf.
+032 00 *x ACC201152 *a BKM999999
+245 00 *a Women and diabetes *c today can change tomorrow
+260 00 *a [Kbh.] *b Novo Nordisk *c [2011]
+300 00 *a 43 sider *b ill. i farver *c 21×30 cm
+512 00 *a På omslaget: Changing diabetes
+521 00 *& REX *b 1. oplag *c [2011]
+532 00 *& 1 *a Med litteraturhenvisninger og links
+652 00 *m 99.4
+700 00 *a Nicolaisen *h Ida *4 edt
+700 00 *a Kapur *h Anil *4 edt
+710 00 *a Novo Nordisk
+996 00 *a DBC
+d08 00 *o wnn *o nø *k ahf
+d08 00 *o 002/okt16, ljl
+d09 00 *z REX201205
+s12 00 *t TeamBMV201202
+z99 00 *a ljl

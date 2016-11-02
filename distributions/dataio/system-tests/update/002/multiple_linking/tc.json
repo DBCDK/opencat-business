@@ -1,0 +1,207 @@
+[
+  {
+    "name": "002_linkning_multiple_002",
+    "description": "Enrichment for 710100 fn=29147353 is deleted and replaced with enrichment fn=29147450",
+    "description": "652 differs in the two records and 032*a is BKM188051 in 29147353 and BKM188051 in 29147450",
+    "description": "Enrichment for 710100 fn=29147450 should end up with classification from fn=29147353",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "before_dying_1_common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "holdings": [
+            710100
+          ],
+          "enrichments": [
+            "before_dying_1_DBC.marc",
+            "before_dying_1_710100.marc"
+          ]
+        },
+        {
+          "record": "before_dying_1_DBC.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_dying_1_710100.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_dying_2_common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "holdings": [
+            720100
+          ],
+          "enrichments": [
+            "before_dying_2_DBC.marc",
+            "before_dying_2_720100.marc"
+          ]
+        },
+        {
+          "record": "before_dying_2_DBC.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_dying_2_720100.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_dying_3_common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "holdings": [
+            734100
+          ],
+          "enrichments": [
+            "before_dying_3_DBC.marc",
+            "before_dying_3_734100.marc"
+          ]
+        },
+        {
+          "record": "before_dying_3_DBC.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_dying_3_734100.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "before_living_common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "before_living_DBC.marc"
+          ]
+        },
+        {
+          "record": "before_living_DBC.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": [],
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result_dying_1_common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "result_dying_1_DBC.marc"
+            ]
+          },
+          {
+            "record": "result_dying_1_DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result_dying_1_710100.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": true
+          },
+          {
+            "record": "result_dying_2_common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "result_dying_2_DBC.marc"
+            ]
+          },
+          {
+            "record": "result_dying_2_DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result_dying_3_common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "result_dying_3_DBC.marc"
+            ]
+          },
+          {
+            "record": "result_dying_3_DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result_living_common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result_living_DBC.marc",
+              "result_living_1_710100.marc",
+              "result_living_2_720100.marc",
+              "result_living_3_734100.marc"
+            ]
+          },
+          {
+            "record": "result_living_1_710100.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result_dying_2_720100.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": true
+          },
+          {
+            "record": "result_living_2_720100.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result_dying_3_734100.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": true
+          },
+          {
+            "record": "result_living_3_734100.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result_living_DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

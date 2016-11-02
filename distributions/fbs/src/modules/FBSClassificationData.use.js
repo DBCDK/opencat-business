@@ -16,6 +16,10 @@ var FBSClassificationData = function() {
         }
     }
 
+    function isRecordInProduction( marc ) {
+        return ClassificationData.isRecordInProduction( marc );
+    }
+
     function hasClassificationData( instance, marc ) {
         return ClassificationData.hasClassificationData( instance, marc );
     }
@@ -55,6 +59,7 @@ var FBSClassificationData = function() {
 
     return {
         'create': create,
+        'isRecordInProduction': isRecordInProduction,
         'hasClassificationData': hasClassificationData,
         'hasClassificationsChanged': hasClassificationsChanged,
         'updateClassificationsInRecord': updateClassificationsInRecord,

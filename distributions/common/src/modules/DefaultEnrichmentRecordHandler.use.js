@@ -1,7 +1,7 @@
 use("RecategorizationNoteFieldFactory");
 use("Log");
 use("Marc");
-use("RecordProduction");
+use("RecordInProduction");
 use("RecordUtil");
 use("ResourceBundleFactory");
 use("ResourceBundle");
@@ -40,18 +40,18 @@ var DefaultEnrichmentRecordHandler = function () {
         try {
             var dk5Codes = /ny\stitel|Uden\sklassem\xe6rke/i;
             var catCodes = /(DBF|DLF|DBI|DMF|DMO|DPF|BKM|GBF|GMO|GPF|FPF|DBR|UTI)999999/i;
-            result = __shouldCreateRecords(instance, currentCommonRecord, "652", "m", dk5Codes);
+            result = __shouldCreateRecords(currentCommonRecord, "652", "m", dk5Codes);
 
             if (result.status === "OK") {
-                result = __shouldCreateRecords(instance, updatingCommonRecord, "032", "x", catCodes);
+                result = __shouldCreateRecords(updatingCommonRecord, "032", "x", catCodes);
             }
             if (result.status === "OK") {
-                result = __shouldCreateRecords(instance, updatingCommonRecord, "032", "a", catCodes);
+                result = __shouldCreateRecords(updatingCommonRecord, "032", "a", catCodes);
             }
             if (result.status === "OK") {
-                // Check if record has been published before today.
-                if (RecordProduction.checkRecord(new Date, updatingCommonRecord)) {
-                    // It wasn't, so it should fail unless
+                // Check if record has been published before today - ie. is it still in production.
+                if (RecordInProduction.checkRecord(new Date, updatingCommonRecord)) {
+                    // It wasn't, that is, it's still in production, so it should fail unless
                     // if 008*u==r then we have to check if content of 032a|x is about to change (some catCodes only).
                     if (updatingCommonRecord.matchValue(/008/, /u/, /r/)) {
                         if (__matchKatcodes(currentCommonRecord, updatingCommonRecord)) {
@@ -90,7 +90,7 @@ var DefaultEnrichmentRecordHandler = function () {
         }
     }
 
-    function __shouldCreateRecords(instance, record, field, subfield, checkValue) {
+    function __shouldCreateRecords(record, field, subfield, checkValue) {
         Log.trace("Enter - DefaultEnrichmentRecordHandler.__shouldCreateRecords()");
         var result = __shouldCreateRecordsYesResult();
         try {

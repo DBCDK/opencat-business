@@ -20,6 +20,26 @@ EXPORTED_SYMBOLS = ['FBSUpdaterEntryPoint'];
  */
 var FBSUpdaterEntryPoint = function () {
     /**
+     * Checks if a record is published
+     *
+     * @param {String} jsonRecord The record as a json.
+     *
+     * @return {Boolean} true if the record is published, false otherwise.
+     */
+    function isRecordInProduction(jsonRecord) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.isRecordInProduction()");
+        var result;
+        try {
+            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
+
+            result = ClassificationData.isRecordInProduction(marc);
+            return result;
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.isRecordInProduction():" + result);
+        }
+    }
+
+    /**
      * Checks if a record contains any classification data
      *
      * @param {String} jsonRecord The record as a json.
@@ -266,6 +286,7 @@ var FBSUpdaterEntryPoint = function () {
     return {
         'recategorizationNoteFieldFactory': recategorizationNoteFieldFactory,
         'hasClassificationData': hasClassificationData,
+        'isRecordInProduction': isRecordInProduction,
         'hasClassificationsChanged': hasClassificationsChanged,
         'shouldCreateEnrichmentRecords': shouldCreateEnrichmentRecords,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,

@@ -11,6 +11,10 @@ function authenticateRecord(record, userId, groupId, settings) {
     return FBSAuthenticator.authenticateRecord(record, userId, groupId, settings);
 }
 
+function isRecordInProduction(marc) {
+    return FBSUpdaterEntryPoint.isRecordInProduction(marc);
+}
+
 function hasClassificationData(marc) {
     return FBSUpdaterEntryPoint.hasClassificationData(marc);
 }

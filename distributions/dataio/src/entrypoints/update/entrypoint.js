@@ -10,6 +10,10 @@ function authenticateRecord(record, userId, groupId, settings) {
     return DBCAuthenticator.authenticateRecord(record, userId, groupId, settings);
 }
 
+function isRecordInProduction(marc) {
+    return DBCUpdaterEntryPoint.isRecordInProduction(marc);
+}
+
 function hasClassificationData(marc) {
     return DBCUpdaterEntryPoint.hasClassificationData(marc);
 }
