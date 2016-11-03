@@ -65,19 +65,6 @@ UnitTest.addFixture("RecordSorter.insertField", function () {
         "245 00 *a title c\n" +
         "245 00 *a new field"
     );
-/*
- Test number : 4
- URL         : file:///home/mvs/development/opencat-business/distributions/common/src/modules/RecordSorterTests.use.js
- Description : Field into record with repeated fields
- Evaluated   : (new String("  \n001 00 *a text \n004 00 *a r \n245 00 *a title a245 00 *a title b245 00 *a title c \n"))
- Time        : 0.011
- Expected    : (new String("001 00 *a text \n004 00 *a r \n245 00 *a title a245 00 *a title b245 00 *a title c245 00 *a new field \n")) (string)
- Actual      : (new String("  \n001 00 *a text \n004 00 *a r \n245 00 *a title a245 00 *a title b245 00 *a title c \n")) (string)
- String diff : Expected and actual differs at position 13:
- Expected: (new String("001 00 *a text \n004 00 *a r \n245 00 *a title a245 00 *a title b24...
- Actual  : (new String("  \n001 00 *a text \n004 00 *a r \n245 00 *a title a245 00 *a title...
- */
-
 
     record = new Record();
     record.fromString(
