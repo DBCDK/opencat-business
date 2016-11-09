@@ -75,13 +75,7 @@
                     "repeatable": false,
                     "values": [ "a" ]
                 },
-                "g": {
-                    "repeatable": false
-                },
                 "o": {
-                    "repeatable": false
-                },
-                "t": {
                     "repeatable": false
                 }
             }
@@ -107,7 +101,6 @@
                     ]
                 },
                 "d": "DanMarc2.fields.002.subfields.d",
-                "t": "DanMarc2.fields.002.subfields.t",
                 "x": "DanMarc2.fields.002.subfields.x"
             }
         },
@@ -403,12 +396,7 @@
                 "o":"DanMarc2.fields.652.subfields.o",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
 		"654": "DanMarc2.fields.654",
         "655": "DanMarc2.fields.655",

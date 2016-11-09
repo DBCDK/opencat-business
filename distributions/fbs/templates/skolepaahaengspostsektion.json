@@ -6,6 +6,15 @@
     "settings": {
         "lookupfaust":false
     },
+    "rules": [
+        {
+            "type": "RecordRules.fieldDemandsOtherFields",
+            "params": {
+                "sources": [ "008", "239", "245" ] ,
+                "demands": [ "008", "245" ]
+            }
+        }
+    ],
     "defaults":{
         "field":{
             "indicator":"00",

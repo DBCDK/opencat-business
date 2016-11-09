@@ -50,11 +50,8 @@
                 "b": "Lister.fields.codes.subfields.libraries.001b_lokal",
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
-                "e": "DanMarc2.fields.001.subfields.e",
                 "f": "DanMarc2.fields.001.subfields.f",
-                "g": "DanMarc2.fields.001.subfields.g",
-                "o": "DanMarc2.fields.001.subfields.o",
-                "t": "DanMarc2.fields.001.subfields.t"
+                "o": "DanMarc2.fields.001.subfields.o"
             }
         },
         "004": "DanMarc2.fields.004",
@@ -291,12 +288,7 @@
                 "0": "DanMarc2.fields.100.subfields.0",
                 "1": "DanMarc2.fields.100.subfields.1",
                 "4": "DanMarc2.fields.100.subfields.4"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "110":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.34.htm",
@@ -312,12 +304,7 @@
                 "0": "DanMarc2.fields.110.subfields.0",
                 "1": "DanMarc2.fields.110.subfields.1",
                 "4": "DanMarc2.fields.110.subfields.4"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
@@ -352,12 +339,7 @@
                 "x":"DanMarc2.fields.245.subfields.x",
                 "w":"DanMarc2.fields.245.subfields.w",
                 "y":"DanMarc2.fields.245.subfields.y"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "250": "DanMarc2.fields.250",
         "255": "DanMarc2.fields.255",

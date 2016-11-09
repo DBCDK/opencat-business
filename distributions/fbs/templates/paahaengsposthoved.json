@@ -72,13 +72,7 @@
                     "repeatable": false,
                     "values": [ "a" ]
                 },
-                "g": {
-                    "repeatable": false
-                },
                 "o": {
-                    "repeatable": false
-                },
-                "t": {
                     "repeatable": false
                 }
             }
@@ -104,7 +98,6 @@
                     ]
                 },
                 "d": "DanMarc2.fields.002.subfields.d",
-                "t": "DanMarc2.fields.002.subfields.t",
                 "x": "DanMarc2.fields.002.subfields.x"
             }
         },

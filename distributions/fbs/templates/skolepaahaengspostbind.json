@@ -17,6 +17,15 @@
             "repeatable":true
         }
     },
+    "rules": [
+        {
+            "type": "RecordRules.fieldDemandsOtherFields",
+            "params": {
+                "sources": [ "008", "239", "245" ] ,
+                "demands": [ "008", "245" ]
+            }
+        }
+    ],
     "fields": {
         "001": {
             "indicator": [ "00", "01", "02" ],
