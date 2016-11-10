@@ -880,6 +880,10 @@
                                     "value": "870970"
                                 }
                             }
+                        },
+                        {
+                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
+                            "params": ["032"]
                         }
                     ]
                 },
