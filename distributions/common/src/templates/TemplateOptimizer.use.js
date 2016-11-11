@@ -20,6 +20,7 @@ use("SubfieldCannotContainValue");
 use("SubfieldsDemandsOtherSubfields");
 use("CheckSubfieldNotUsedInParentRecord");
 use("CheckReference");
+use("SubfieldValueMakesFieldsAllowed");
 
 //field rules
 use("FieldDemandsOtherFieldAndSubfield");
@@ -400,6 +401,8 @@ var TemplateOptimizer = function () {
                     return LookUpRecord.validateSubfield;
                 case "SubfieldRules.lookupValue":
                     return LookUpValue.validateSubfield;
+                case "SubfieldRules.subfieldValueMakesFieldsAllowed":
+                    return SubfieldValueMakesFieldsAllowed.validateSubfield;
 
                 default: {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
