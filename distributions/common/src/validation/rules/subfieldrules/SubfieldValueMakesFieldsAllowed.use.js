@@ -1,14 +1,11 @@
-//-----------------------------------------------------------------------------
-use( "Exception" );
-use( "Log" );
-use( "ResourceBundle" );
-use( "ResourceBundleFactory" );
-use( "ValidateErrors" );
-use( "ValueCheck" );
+use("Exception");
+use("Log");
+use("ResourceBundle");
+use("ResourceBundleFactory");
+use("ValidateErrors");
+use("ValueCheck");
 
-//-----------------------------------------------------------------------------
 EXPORTED_SYMBOLS = ['SubfieldValueMakesFieldsAllowed'];
-//-----------------------------------------------------------------------------
 
 var SubfieldValueMakesFieldsAllowed = function () {
     var BUNDLE_NAME = "validation";
@@ -25,61 +22,61 @@ var SubfieldValueMakesFieldsAllowed = function () {
      * @name SubfieldValueMakesFieldsAllowed.validateField
      * @method
      */
-    function validateSubfield ( record, field, subfield, params ) {
-        Log.trace( "Enter SubfieldValueMakesFieldsAllowed.validateField" );
+    function validateSubfield(record, field, subfield, params) {
+        Log.trace("Enter SubfieldValueMakesFieldsAllowed.validateField");
         try {
-            ValueCheck.check( "params", params );
-            ValueCheck.check( "params", params ).instanceOf( Array );
-            if ( subfield.value === 'DBC' ) {
+            ValueCheck.check("params", params);
+            ValueCheck.check("params", params).instanceOf(Array);
+            if (subfield.value === 'DBC') {
                 return [];
             }
-            var parMap = __mapifyMe( params, false );
-            var recordMap = __mapifyMe( record, true );
-            return __checkForExcluded( recordMap, subfield, parMap )
+            var parMap = __mapifyMe(params, false);
+            var recordMap = __mapifyMe(record, true);
+            return __checkForExcluded(recordMap, subfield, parMap)
         } finally {
-            Log.trace( "Exit SubfieldValueMakesFieldsAllowed.validateField" );
+            Log.trace("Exit SubfieldValueMakesFieldsAllowed.validateField");
         }
     }
 
-    function __mapifyMe ( arr, isRecord ) {
-        Log.trace( "Enter SubfieldValueMakesFieldsAllowed.__mapifyMe" );
+    function __mapifyMe(arr, isRecord) {
+        Log.trace("Enter SubfieldValueMakesFieldsAllowed.__mapifyMe");
         try {
             var ret = {};
-            if ( isRecord ) {
-                arr.fields.forEach( function ( ele ) {
-                    if ( !ret.hasOwnProperty( ele.name ) ) {
+            if (isRecord) {
+                arr.fields.forEach(function (ele) {
+                    if (!ret.hasOwnProperty(ele.name)) {
                         ret[ele.name] = undefined;
                     }
-                } );
+                });
             } else {
-                arr.forEach( function ( ele ) {
-                    if ( !ret.hasOwnProperty( ele ) ) {
+                arr.forEach(function (ele) {
+                    if (!ret.hasOwnProperty(ele)) {
                         ret[ele] = undefined;
                     }
-                } );
+                });
             }
             return ret;
         } finally {
-            Log.trace( "exit SubfieldValueMakesFieldsAllowed.__mapifyMe" );
+            Log.trace("exit SubfieldValueMakesFieldsAllowed.__mapifyMe");
         }
     }
 
 
-    function __checkForExcluded ( recordMap, subfield, parMap ) {
-        Log.trace( "Enter SubfieldValueMakesFieldsAllowed.__checkForMatchingFields" );
+    function __checkForExcluded(recordMap, subfield, parMap) {
+        Log.trace("Enter SubfieldValueMakesFieldsAllowed.__checkForMatchingFields");
         try {
 
-            for ( var key in parMap ) {
-                if ( parMap.hasOwnProperty( key ) ) {
-                    if ( recordMap.hasOwnProperty( key ) ) {
-                        var errorMessage = ResourceBundle.getStringFormat( ResourceBundleFactory.getBundle( BUNDLE_NAME ), "subfield.value.makes.field.allowed.rule.error", key, subfield.name );
-                        return [ValidateErrors.subfieldError( 'TODO:fixurl', errorMessage )];
+            for (var key in parMap) {
+                if (parMap.hasOwnProperty(key)) {
+                    if (recordMap.hasOwnProperty(key)) {
+                        var errorMessage = ResourceBundle.getStringFormat(ResourceBundleFactory.getBundle(BUNDLE_NAME), "subfield.value.makes.field.allowed.rule.error", key, subfield.name);
+                        return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
                     }
                 }
             }
             return [];
         } finally {
-            Log.trace( "Exit SubfieldValueMakesFieldsAllowed.__checkForMatchingFields" );
+            Log.trace("Exit SubfieldValueMakesFieldsAllowed.__checkForMatchingFields");
         }
     }
 
@@ -87,5 +84,4 @@ var SubfieldValueMakesFieldsAllowed = function () {
         '__BUNDLE_NAME': BUNDLE_NAME,
         'validateSubfield': validateSubfield
     };
-}
-();
+}();
