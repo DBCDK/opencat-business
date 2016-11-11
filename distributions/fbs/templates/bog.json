@@ -225,6 +225,7 @@
                 }
             }
         },
+        "020": "DanMarc2.fields.020",
         "021": "DanMarc2.fields.021",
 		"022": "DanMarc2.fields.022",
 		"023": "DanMarc2.fields.023",
@@ -303,23 +304,23 @@
                     "mandatory":true
                 },
                 "b":"DanMarc2.fields.245.subfields.b",
-                "m":"DanMarc2.fields.245.subfields.m",
-                "\u00f8":"DanMarc2.fields.245.subfields.\u00f8",
-                "\u00E6":"DanMarc2.fields.245.subfields.\u00E6",
-                "n":"DanMarc2.fields.245.subfields.n",
-                "o":"DanMarc2.fields.245.subfields.o",
                 "c":"DanMarc2.fields.245.subfields.c",
-                "u":"DanMarc2.fields.245.subfields.u",
                 "e":"DanMarc2.fields.245.subfields.e",
                 "f":"DanMarc2.fields.245.subfields.f",
+                "m":"DanMarc2.fields.245.subfields.m",
+                "n":"DanMarc2.fields.245.subfields.n",
+                "o":"DanMarc2.fields.245.subfields.o",
                 "p":"DanMarc2.fields.245.subfields.p",
                 "q":"DanMarc2.fields.245.subfields.q",
                 "r":"DanMarc2.fields.245.subfields.r",
                 "s":"DanMarc2.fields.245.subfields.s",
                 "t":"DanMarc2.fields.245.subfields.t",
-                "x":"DanMarc2.fields.245.subfields.x",
+                "u":"DanMarc2.fields.245.subfields.u",
                 "w":"DanMarc2.fields.245.subfields.w",
-                "y":"DanMarc2.fields.245.subfields.y"
+                "x":"DanMarc2.fields.245.subfields.x",
+                "y":"DanMarc2.fields.245.subfields.y",
+                "\u00f8":"DanMarc2.fields.245.subfields.\u00f8",
+                "\u00E6":"DanMarc2.fields.245.subfields.\u00E6"
             }
         },
         "250":{
@@ -367,19 +368,19 @@
                     "repeatable":false
                 },
                 "a": "DanMarc2.fields.440.subfields.a",
-                "\u00f8": "DanMarc2.fields.440.subfields.\u00f8",
-                "\u00E6": "DanMarc2.fields.440.subfields.\u00E6",
-                "n": "DanMarc2.fields.440.subfields.n",
-                "o": "DanMarc2.fields.440.subfields.o",
                 "c": "DanMarc2.fields.440.subfields.c",
                 "e": "DanMarc2.fields.440.subfields.e",
+                "n": "DanMarc2.fields.440.subfields.n",
+                "o": "DanMarc2.fields.440.subfields.o",
                 "p": "DanMarc2.fields.440.subfields.p",
                 "q": "DanMarc2.fields.440.subfields.q",
                 "r": "DanMarc2.fields.440.subfields.r",
                 "s": "DanMarc2.fields.440.subfields.s",
                 "t": "DanMarc2.fields.440.subfields.t",
-                "z": "DanMarc2.fields.440.subfields.z",
                 "v": "DanMarc2.fields.440.subfields.v",
+                "z": "DanMarc2.fields.440.subfields.z",
+                "\u00f8": "DanMarc2.fields.440.subfields.\u00f8",
+                "\u00E6": "DanMarc2.fields.440.subfields.\u00E6",
                 "0": "DanMarc2.fields.440.subfields.0",
                 "1": "DanMarc2.fields.440.subfields.1"
             }
@@ -584,11 +585,10 @@
                     "repeatable":false
                 },
                 "a":"DanMarc2.fields.600.subfields.a",
-                "h":"DanMarc2.fields.600.subfields.h",
-                "k":"DanMarc2.fields.600.subfields.k",
+                "c":"DanMarc2.fields.600.subfields.c",
                 "e":"DanMarc2.fields.600.subfields.e",
                 "f":"DanMarc2.fields.600.subfields.f",
-                "c":"DanMarc2.fields.600.subfields.c",
+                "h":"DanMarc2.fields.600.subfields.h",
                 "0":"DanMarc2.fields.600.subfields.0",
 				"1":"DanMarc2.fields.600.subfields.1",
                 "2":"DanMarc2.fields.600.subfields.2"
@@ -601,8 +601,8 @@
                     "repeatable":false
                 },
                 "a":"DanMarc2.fields.610.subfields.a",
-                "e":"DanMarc2.fields.610.subfields.e",
                 "c":"DanMarc2.fields.610.subfields.c",
+                "e":"DanMarc2.fields.610.subfields.e",
                 "s":"DanMarc2.fields.610.subfields.s",
                 "i":"DanMarc2.fields.610.subfields.i",
                 "k":"DanMarc2.fields.610.subfields.k",
@@ -642,7 +642,6 @@
                 "v":"DanMarc2.fields.652.subfields.v",
                 "a":"DanMarc2.fields.652.subfields.a",
                 "h":"DanMarc2.fields.652.subfields.h",
-                "k":"DanMarc2.fields.652.subfields.k",
                 "e":"DanMarc2.fields.652.subfields.e",
                 "f":"DanMarc2.fields.652.subfields.f",
                 "c":"DanMarc2.fields.652.subfields.c",
@@ -708,7 +707,6 @@
                 "f": "DanMarc2.fields.700.subfields.f",
                 "g": "DanMarc2.fields.700.subfields.g",
                 "h": "DanMarc2.fields.700.subfields.h",
-                "\u00f8": "DanMarc2.fields.700.subfields.\u00f8",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "1": "DanMarc2.fields.700.subfields.1",
                 "4": "DanMarc2.fields.700.subfields.4"
@@ -795,7 +793,6 @@
             "subfields":{
                 "a":"DanMarc2.fields.900.subfields.a",
                 "h":"DanMarc2.fields.900.subfields.h",
-                "k":"DanMarc2.fields.900.subfields.k",
                 "e":"DanMarc2.fields.900.subfields.e",
                 "f":"DanMarc2.fields.900.subfields.f",
                 "c":"DanMarc2.fields.900.subfields.c",
