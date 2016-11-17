@@ -4,7 +4,7 @@
         "bugs": [
             "bug-19833"
         ],
-        "description": "Tester oprettelse af fællesskabspost med en eksisterende post som har 002-link til den nye post.",
+        "description": "Tester oprettelse af fællesskabspost med en eksisterende post som har 002-link til den nye post",
         "request": {
             "authentication": {
                 "group": "010100",
