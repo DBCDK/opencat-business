@@ -51,9 +51,7 @@
                     ]
                 },
                 "b": "Lister.fields.codes.subfields.libraries.001b_lokal",
-                "c": {
-                    "repeatable": false
-                },
+                "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
                 "f": {
                     "mandatory": true,
