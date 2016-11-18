@@ -38,7 +38,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "message": "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias."
+                        "message": "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias"
                     }
                 ],
                 "rawrepo": [
