@@ -1,0 +1,45 @@
+[
+    {
+        "name": "subfieldValueMakesFieldsAllowed",
+        "description": "032 er tilladt da der er DBC i 996",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "goodbook.marc"
+        },
+        "expected": {
+            "validation": [
+            ]
+        }
+    },
+    {
+        "name": "subfieldValueMakesFieldsAllowedBad",
+        "description": "032 er ikke tilladt da der er 733000 i 996",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "badbook.marc"
+        },
+        "expected": {
+            "validation": [
+                {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+                    "ordinalPositionOfField" : 13,
+                    "ordinalPositionOfSubfield" : 0,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Feltet '032' er ikke tilladt da delfelt 'a' ikke indeholder værdien 'DBC'"
+                }
+            ]
+        }
+    }
+]
