@@ -311,20 +311,29 @@ var DefaultEnrichmentRecordHandler = function () {
     function __isEnrichmentReferenceFieldPresentInAlreadyProcessedFields(enrichmentField, alreadyProcessedEnrichmentFields) {
         var result = false;
         var subfieldZ = enrichmentField.getValue("z");
+        var subfieldZObj = __getReferencePartOfSubfieldZ(subfieldZ);
+        alreadyProcessedEnrichmentFields.eachField(subfieldZObj.lhs, function (field) {
+            if (subfieldZObj.rhs === undefined || field.getValue("å") === subfieldZObj.rhs) {
+                result = true;
+            }
+        });
+        return result;
+    }
+
+    function __getReferencePartOfSubfieldZ(subfieldZ) {
         var referencedField = subfieldZ;
         var subfieldNbrReference = undefined;
         if (subfieldZ.length > 4) {
             referencedField = subfieldZ.slice(0, 3);
             if (subfieldZ[3] === "/") {
                 subfieldNbrReference = subfieldZ.slice(4);
+                var p = subfieldNbrReference.indexOf("(");
+                if (subfieldNbrReference.indexOf("(") >= 0) {
+                    subfieldNbrReference = subfieldNbrReference.slice(0, p);
+                }
             }
         }
-        alreadyProcessedEnrichmentFields.eachField(referencedField, function (field) {
-            if (subfieldNbrReference === undefined || field.getValue("å") === subfieldNbrReference) {
-                result = true;
-            }
-        });
-        return result;
+        return {"lhs": referencedField, "rhs": subfieldNbrReference};
     }
 
     // Returns true if the current enrichmentField is already present in the common record and therefore should NOT
@@ -476,6 +485,7 @@ var DefaultEnrichmentRecordHandler = function () {
         '__shouldCreateRecordsNoResult': __shouldCreateRecordsNoResult,
         'createRecord': createRecord,
         'updateRecord': updateRecord,
-        'correctRecord': correctRecord
+        'correctRecord': correctRecord,
+        '__getReferencePartOfSubfieldZ': __getReferencePartOfSubfieldZ
     }
 }();

@@ -393,3 +393,25 @@ UnitTest.addFixture("DefaultEnrichmentRecordHandler.updateRecord", function () {
     );
     Assert.equalValue("New 512-note: Same amount of fields, different values", callFunction(currentCommonRecord, updatingCommonRecord, enrichmentRecord).toString(), expected.toString());
 });
+
+UnitTest.addFixture("DefaultEnrichmentRecordHandler.__getReferencePartOfSubfieldZ", function () {
+    var subfieldZ = "100";
+    var res = {"lhs": "100", "rhs": undefined};
+    Assert.equalValue("Tests value 100", DefaultEnrichmentRecordHandler.__getReferencePartOfSubfieldZ(subfieldZ), res);
+
+    subfieldZ = "100/1";
+    res = {"lhs": "100", "rhs": "1"};
+    Assert.equalValue("Tests value 100/1", DefaultEnrichmentRecordHandler.__getReferencePartOfSubfieldZ(subfieldZ), res);
+
+    subfieldZ = "100/11";
+    res = {"lhs": "100", "rhs": "11"};
+    Assert.equalValue("Tests value 100/11", DefaultEnrichmentRecordHandler.__getReferencePartOfSubfieldZ(subfieldZ), res);
+
+    subfieldZ = "100/1(a)";
+    res = {"lhs": "100", "rhs": "1"};
+    Assert.equalValue("Tests value 100/1(a)", DefaultEnrichmentRecordHandler.__getReferencePartOfSubfieldZ(subfieldZ), res);
+
+    subfieldZ = "100/11(a)";
+    res = {"lhs": "100", "rhs": "11"};
+    Assert.equalValue("Tests value 100/11(a)", DefaultEnrichmentRecordHandler.__getReferencePartOfSubfieldZ(subfieldZ), res);
+});
