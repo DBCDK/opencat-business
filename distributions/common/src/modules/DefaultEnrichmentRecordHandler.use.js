@@ -237,31 +237,133 @@ var DefaultEnrichmentRecordHandler = function () {
     }
 
     function correctRecord(instance, commonRecord, enrichmentRecord) {
-        Log.trace("Enter - DefaultEnrichmentRecordHandler.correctRecord()");
-        try {
-            Log.trace("    commonRecord: " + commonRecord);
-            Log.trace("    enrichmentRecord: " + enrichmentRecord);
-            var result = null;
+        Log.trace("    commonRecord: " + commonRecord);
+        Log.trace("    enrichmentRecord: " + enrichmentRecord);
+        var result = null;
 
-            if (instance.classifications.module.hasClassificationData(instance.classifications.instance, commonRecord)) {
-                if (!instance.classifications.module.hasClassificationsChanged(instance.classifications.instance, commonRecord, enrichmentRecord)) {
-                    Log.info("Classifications is the same. Removing it from library record.");
-                    result = instance.classifications.module.removeClassificationsFromRecord(instance.classifications.instance, enrichmentRecord);
+        if (instance.classifications.module.hasClassificationData(instance.classifications.instance, commonRecord)) {
+            if (!instance.classifications.module.hasClassificationsChanged(instance.classifications.instance, commonRecord, enrichmentRecord)) {
+                Log.info("Classifications are the same. Removing them from library record.");
+                result = instance.classifications.module.removeClassificationsFromRecord(instance.classifications.instance, enrichmentRecord);
+            } else {
+                Log.info("Classifications has changed.");
+                result = enrichmentRecord;
+            }
+        } else {
+            Log.info("Common record has no classifications.");
+        }
+
+        if (result === null) {
+            result = enrichmentRecord.clone();
+        }
+        result = __cleanupEnrichmentRecord(result, commonRecord, instance.classifications.instance.fields);
+        return __correctRecordIfEmpty(result);
+    }
+
+    // Method for cleaning up unneeded fields from an enrichment record by comparing it the the common record.
+    function __cleanupEnrichmentRecord(enrichmentRecord, commonRecord, classificationRegexList) {
+        var classificationList = __convertClassificationRegexListToRegularList(classificationRegexList);
+        var alwaysKeepFieldsList = ["001", "004", "996"];
+        var combinedKeepFieldsList = classificationList.concat(alwaysKeepFieldsList);
+        combinedKeepFieldsList = combinedKeepFieldsList.sort();
+        var newCleanedEnrichmentRecord = new Record();
+
+        enrichmentRecord.eachField(/./, function (field) {
+            if (__shouldEnrichmentRecordFieldBeKept(field, commonRecord, combinedKeepFieldsList, enrichmentRecord) == true) {
+                newCleanedEnrichmentRecord.append(field);
+            }
+        });
+        return newCleanedEnrichmentRecord;
+    }
+
+    function __convertClassificationRegexListToRegularList(classificationRegexList) {
+        var classificationRegexListString = classificationRegexList.toString();
+        classificationRegexListString = classificationRegexListString.slice(1, -1); // Remove leading and trailing slashes
+        return classificationRegexListString.split("|");
+    }
+
+    // This function checks if a specific enrichment field should be kept, by examine the following:
+    // (1) if the field nbr. is in the list of always keep fields (001, 004, 996 + classification fields)
+    // (2) if field is not found in the common record from RawRepo
+    // (3) if the field is a reference field that points to either a field from (1) or (2)
+    // Returns true if fields should be kept otherwise false
+    function __shouldEnrichmentRecordFieldBeKept(enrichmentField, commonRecord, listOfAlwaysKeepFields, alreadyProcessedEnrichmentFields) {
+        var result = false;
+        if (listOfAlwaysKeepFields.indexOf(enrichmentField.name) >= 0) {
+            result = true;
+        } else {
+            if (commonRecord.existField(enrichmentField.name)) {
+                if (UpdateConstants.REFERENCE_FIELDS.indexOf(enrichmentField.name) >= 0) {
+                    result = __isEnrichmentReferenceFieldPresentInAlreadyProcessedFields(enrichmentField, alreadyProcessedEnrichmentFields);
                 } else {
-                    Log.info("Classifications has changed.");
-                    result = enrichmentRecord;
+                    var commonRecordFieldList = commonRecord.selectFields(enrichmentField.name);
+                    result = !__isEnrichmentFieldPresentInCommonFieldList(enrichmentField, commonRecordFieldList);
                 }
             } else {
-                Log.info("Common record has no classifications.");
+                result = true;
             }
-
-            if (result === null) {
-                result = enrichmentRecord.clone();
-            }
-            return __correctRecordIfEmpty(result);
-        } finally {
-            Log.trace("Exit - DefaultEnrichmentRecordHandler.correctRecord()");
         }
+        return result;
+    }
+
+    // Returns true if the current reference enrichment field points to a enrichment fields that has been kept,
+    // otherwise false.
+    function __isEnrichmentReferenceFieldPresentInAlreadyProcessedFields(enrichmentField, alreadyProcessedEnrichmentFields) {
+        var result = false;
+        var subfieldZ = enrichmentField.getValue("z");
+        var referencedField = subfieldZ;
+        var subfieldNbrReference = undefined;
+        if (subfieldZ.length > 4) {
+            referencedField = subfieldZ.slice(0, 3);
+            if (subfieldZ[3] === "/") {
+                subfieldNbrReference = subfieldZ.slice(4);
+            }
+        }
+        alreadyProcessedEnrichmentFields.eachField(referencedField, function (field) {
+            if (subfieldNbrReference === undefined || field.getValue("å") === subfieldNbrReference) {
+                result = true;
+            }
+        });
+        return result;
+    }
+
+    // Returns true if the current enrichmentField is already present in the common record and therefore should NOT
+    // be kept, otherwise false (the enrichfield should be kept).
+    function __isEnrichmentFieldPresentInCommonFieldList(enrichmentField, commonFieldList) {
+        var cleanedEnrichmentField = __createRecordFieldWithoutIgnorableSubfields(enrichmentField);
+        var cleanedCommonFieldList = __createRecordFieldListWithoutIgnorableSubfields(commonFieldList);
+        return __isFieldPresentInList(cleanedEnrichmentField, cleanedCommonFieldList);
+    }
+
+    function __createRecordFieldWithoutIgnorableSubfields(inputField) {
+        var listOfIgnorableSubfields = ["&", "0", "1", "4"];
+        var cleanedField = new Field(inputField.name, inputField.indicator);
+        inputField.eachSubField(/./, function (field, subfield) {
+            if (listOfIgnorableSubfields.indexOf(subfield.name) < 0) {
+                cleanedField.append(subfield.name, subfield.value);
+            }
+        });
+        return cleanedField;
+    }
+
+    function __createRecordFieldListWithoutIgnorableSubfields(notYetCleandedInputFieldList) {
+        var cleanedFieldList = [];
+        for (var i = 0; i < notYetCleandedInputFieldList.length; i++) {
+            cleanedFieldList.push(__createRecordFieldWithoutIgnorableSubfields(notYetCleandedInputFieldList[i]));
+        }
+        return cleanedFieldList;
+    }
+
+    function __isFieldPresentInList(enrichmentField, commonRecordFieldList) {
+        var result = false;
+        var cleanedEnrichmentField = enrichmentField.toString().trim();
+        for (var i = 0; i < commonRecordFieldList.length; i++) {
+            if (commonRecordFieldList[i] !== undefined && cleanedEnrichmentField === commonRecordFieldList[i].toString().trim()) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
     function __correctRecordIfEmpty(record) {
@@ -278,7 +380,7 @@ var DefaultEnrichmentRecordHandler = function () {
 
             for (var i = 0; i < record.size(); i++) {
                 var field = record.field(i);
-                if (!( field.name.match(/00[1|4]|996/))) {
+                if (!(field.name.match(/00[1|4]|996/))) {
                     Log.debug("Return full record.");
                     return result;
                 }

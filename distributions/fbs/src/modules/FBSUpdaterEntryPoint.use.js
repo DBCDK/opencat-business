@@ -163,8 +163,8 @@ var FBSUpdaterEntryPoint = function () {
         try {
             var commonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(commonRecord));
             var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
-            Log.trace("Create instance with FBSClassificationData");
-            var classificationsInstance = FBSClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
+            Log.trace("Create instance with ClassificationData");
+            var classificationsInstance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
             var instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, FBSClassificationData);
             result = DefaultEnrichmentRecordHandler.correctRecord(instance, commonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));

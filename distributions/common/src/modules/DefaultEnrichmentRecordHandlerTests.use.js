@@ -60,7 +60,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "001 00 *a 1 234 567 8 *b 191919",
         "004 00 *a e *r n",
         "014 00 *a 2 345 678 9",
-        "245 00 *a titel",
+        "245 00 *a titel"
     ].join( "\n" ) );
     Assert.equalValue( "Complete record: 652m=Ny titel",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, currentRecord, record ),
@@ -99,7 +99,7 @@ UnitTest.addFixture( "DefaultEnrichmentRecordHandler.shouldCreateRecords", funct
         "004 00 *a e *r n",
         "014 00 *a 2 345 678 9",
         "032 00 *x DBF999999",
-        "245 00 *a titel",
+        "245 00 *a titel"
     ].join( "\n" ) );
     Assert.equalValue( "Complete record: 032x=DBF999999",
         DefaultEnrichmentRecordHandler.shouldCreateRecords( instance, record, record ),

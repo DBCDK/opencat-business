@@ -1,16 +1,11 @@
-//-----------------------------------------------------------------------------
-//use( "ClassificationData" );
-//use( "Marc" );
-//use( "MarcClasses" );
-//use( "Log" );
-//use( "RecordLookupField" );
+use("ClassificationData");
+use("Log");
+use("RecordLookupField");
 
-//-----------------------------------------------------------------------------
-EXPORTED_SYMBOLS = [ 'FBSClassificationData' ];
+EXPORTED_SYMBOLS = ['FBSClassificationData'];
 
-//-----------------------------------------------------------------------------
-var FBSClassificationData = function() {
-    function create( fieldsRegExp )  {
+var FBSClassificationData = function () {
+    function create(fieldsRegExp) {
         return {
             fields: fieldsRegExp
         }
@@ -25,36 +20,15 @@ var FBSClassificationData = function() {
     }
 
     function hasClassificationsChanged(instance, oldMarc, newMarc) {
-        Log.trace("Enter - FBSClassificationData.hasClassificationsChanged( ", oldMarc, ", ", newMarc, " )");
-
-        var result = null;
-        try {
-            var lookup = RecordLookupField.createFromRecord(oldMarc, instance.fields);
-
-            for (var i = 0; i < newMarc.numberOfFields(); i++) {
-                var newField = newMarc.field(i);
-
-                if (!instance.fields.test(newField.name)) {
-                    continue;
-                }
-                if (!RecordLookupField.containsField(lookup, newField)) {
-                    Log.debug("Unable to find field: ", newField);
-                    Log.debug("Lookup record:\n", oldMarc);
-                    return result = true;
-                }
-            }
-            return result = false;
-        } finally {
-            Log.trace("Exit - FBSClassificationData.hasClassificationsChanged(): ", result);
-        }
+        return ClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
     }
 
-    function updateClassificationsInRecord( instance, currentCommonMarc, updatingCommonMarc, libraryRecord ) {
-        return ClassificationData.updateClassificationsInRecord( instance, currentCommonMarc, updatingCommonMarc, libraryRecord );
+    function updateClassificationsInRecord(instance, currentCommonMarc, updatingCommonMarc, libraryRecord) {
+        return ClassificationData.updateClassificationsInRecord(instance, currentCommonMarc, updatingCommonMarc, libraryRecord);
     }
 
-    function removeClassificationsFromRecord( instance, record ) {
-        return ClassificationData.removeClassificationsFromRecord( instance, record );
+    function removeClassificationsFromRecord(instance, record) {
+        return ClassificationData.removeClassificationsFromRecord(instance, record);
     }
 
     return {

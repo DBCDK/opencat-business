@@ -1,10 +1,8 @@
 [
     {
-        "name": "local-classification-subfield-change",
-        "bugs": [
-            "#1484"
-        ],
-        "description": "Tilføjelse af lokalt delfelt til felt med opstilling",
+        "name": "enrichment-remove-non-relevant-fields-with-changed-enrichment-subfield",
+        "bugs": [],
+        "description": "Tester indsending af en påhængspost med ændret delfeltindhold i opstillingsfelt. Story 1994 case 4.",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -12,7 +10,7 @@
                 "password": "20Koster"
             },
             "templateName": "paahaengspost",
-            "record": "request.marc"
+            "record": "request-enrichment.marc"
         },
         "setup": {
             "rawrepo": [
@@ -37,21 +35,21 @@
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "result-common.marc",
+                        "record": "rawrepo-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": [
                             "rawrepo-dbc-enrichment.marc",
-                            "result-request-enrichment.marc"
+                            "result-enrichment.marc"
                         ]
                     },
                     {
-                        "record": "result-dbc-enrichment.marc",
+                        "record": "rawrepo-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
                     },
                     {
-                        "record": "result-request-enrichment.marc",
+                        "record": "result-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
