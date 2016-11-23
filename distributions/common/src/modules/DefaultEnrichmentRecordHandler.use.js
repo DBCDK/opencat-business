@@ -269,7 +269,7 @@ var DefaultEnrichmentRecordHandler = function () {
         var newCleanedEnrichmentRecord = new Record();
 
         enrichmentRecord.eachField(/./, function (field) {
-            if (__shouldEnrichmentRecordFieldBeKept(field, commonRecord, combinedKeepFieldsList, enrichmentRecord) == true) {
+            if (__shouldEnrichmentRecordFieldBeKept(field, commonRecord, combinedKeepFieldsList, enrichmentRecord) === true) {
                 newCleanedEnrichmentRecord.append(field);
             }
         });
@@ -288,22 +288,20 @@ var DefaultEnrichmentRecordHandler = function () {
     // (3) if the field is a reference field that points to either a field from (1) or (2)
     // Returns true if fields should be kept otherwise false
     function __shouldEnrichmentRecordFieldBeKept(enrichmentField, commonRecord, listOfAlwaysKeepFields, alreadyProcessedEnrichmentFields) {
-        var result = false;
-        if (listOfAlwaysKeepFields.indexOf(enrichmentField.name) >= 0) {
-            result = true;
+        if (listOfAlwaysKeepFields.indexOf(enrichmentField.name) !== -1) {
+            return true;
         } else {
             if (commonRecord.existField(enrichmentField.name)) {
-                if (UpdateConstants.REFERENCE_FIELDS.indexOf(enrichmentField.name) >= 0) {
-                    result = __isEnrichmentReferenceFieldPresentInAlreadyProcessedFields(enrichmentField, alreadyProcessedEnrichmentFields);
+                if (UpdateConstants.REFERENCE_FIELDS.indexOf(enrichmentField.name) !== -1) {
+                    return __isEnrichmentReferenceFieldPresentInAlreadyProcessedFields(enrichmentField, alreadyProcessedEnrichmentFields);
                 } else {
                     var commonRecordFieldList = commonRecord.selectFields(enrichmentField.name);
-                    result = !__isEnrichmentFieldPresentInCommonFieldList(enrichmentField, commonRecordFieldList);
+                    return !__isEnrichmentFieldPresentInCommonFieldList(enrichmentField, commonRecordFieldList);
                 }
             } else {
-                result = true;
+                return true;
             }
         }
-        return result;
     }
 
     // Returns true if the current reference enrichment field points to a enrichment fields that has been kept,
@@ -313,7 +311,7 @@ var DefaultEnrichmentRecordHandler = function () {
         var subfieldZ = enrichmentField.getValue("z");
         var subfieldZObj = __getReferencePartOfSubfieldZ(subfieldZ);
         alreadyProcessedEnrichmentFields.eachField(subfieldZObj.lhs, function (field) {
-            if (subfieldZObj.rhs === undefined || field.getValue("å") === subfieldZObj.rhs) {
+            if (result === false || subfieldZObj.rhs === undefined || field.getValue("å") === subfieldZObj.rhs) {
                 result = true;
             }
         });
