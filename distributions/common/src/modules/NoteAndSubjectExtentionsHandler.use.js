@@ -110,6 +110,36 @@ var NoteAndSubjectExtentionsHandler = function () {
     }
 
     /**
+     * Checks if a field specifies that a record is a national common record.
+     *
+     * @param {Field} Field.
+     *
+     * @returns {Boolean} True / False. Return false if a field is indicating it is a NCR field, and true if the field demonstrates it's not a NCR.
+     *
+     * @private
+     * @name NoteAndSubjectExtentionsHandler#__isFieldNationalCommonRecord
+     */
+    function __isFieldNationalCommonRecord(field) {
+        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord( %s )", field));
+        var result = null;
+        try {
+            var fieldName = field.name.toString() + '';
+            if (fieldName !== "032") {
+                result = StringUtil.sprintf("x1: '%s': false", fieldName);
+                return false;
+            }
+            if (!field.exists(/a/)) {
+                result = "x2: false";
+                return false;
+            }
+            result = "x3: " + !field.matchValue(/x/, /BKM*|NET*|SF*/);
+            return !field.matchValue(/x/, /BKM*|NET*|SF*/);
+        } finally {
+            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord(): ", result);
+        }
+    }
+
+    /**
      * Checks if this record is a national common record.
      *
      * @param record Record.
@@ -156,36 +186,6 @@ var NoteAndSubjectExtentionsHandler = function () {
             }
         } finally {
             Log.trace("Exit - NoteAndSubjectExtentionsHandler.__createExtentableFieldsRx(): " + result);
-        }
-    }
-
-    /**
-     * Checks if a field specifies that a record is a national common record.
-     *
-     * @param {Field} Field.
-     *
-     * @returns {Boolean} True / False.
-     *
-     * @private
-     * @name NoteAndSubjectExtentionsHandler#__isFieldNationalCommonRecord
-     */
-    function __isFieldNationalCommonRecord(field) {
-        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord( %s )", field));
-        var result = null;
-        try {
-            var fieldName = field.name.toString() + '';
-            if (fieldName !== "032") {
-                result = StringUtil.sprintf("x1: '%s': false", fieldName);
-                return false;
-            }
-            if (!field.exists(/a/)) {
-                result = "x2: false";
-                return false;
-            }
-            result = "x3: " + !field.matchValue(/x/, /BKM*|NET*|SF*/);
-            return !field.matchValue(/x/, /BKM*|NET*|SF*/);
-        } finally {
-            Log.trace("Exit - NoteAndSubjectExtentionsHandler.__isFieldNationalCommonRecord(): ", result);
         }
     }
 
