@@ -1,0 +1,67 @@
+[
+    {
+        "name": "fbs-update-enrichment-classification-references",
+        afventer afklaring af hvad der egentlig skal ske
+        "description": "Tester opdatering af se-etellerandet linkede opstillingsdata",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "paahaengsposthoved",
+            "record": "request-100.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "result-dbc-enrichment.marc",
+                            "result-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
