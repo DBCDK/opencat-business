@@ -1,0 +1,176 @@
+[
+    {
+        "name": "basis-vip-auth-public-lib-common-record-700300",
+        "description": "Tester featuren 'auth_public_lib_common_record' is on",
+        "description": "Først, er det et kendt agency",
+        "request": {
+            "authentication": {
+                "group": "726500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-700300.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment-700300.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment-700300.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [{
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : null,
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Postens rettigheder kunne ikke checkes pga følgende fejl: Webservice RESPONDS with content: Agency not found"
+                } ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common-700300.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment-700300.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment-700300.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "basis-vip-auth-public-lib-common-record-810010",
+        "description": "Tester featuren 'auth_public_lib_common_record' is on",
+        "description": "Først, er det et kendt agency",
+        "request": {
+            "authentication": {
+                "group": "726500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-810010.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment-810010.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment-810010.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [{
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Du har ikke ret til at opdatere en fællesskabspost for et andet bibliotek"
+                } ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common-810010.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment-810010.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment-810010.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "basis-vip-auth-public-lib-common-record-unknown",
+        "description": "Tester featuren 'auth_public_lib_common_record' is on",
+        "description": "Først, er det et kendt agency",
+        "request": {
+            "authentication": {
+                "group": "726500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-unknown.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment-unknown.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment-unknown.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": [],
+            "update": {
+                "errors": [{
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : null,
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Postens rettigheder kunne ikke checkes pga følgende fejl: Webservice RESPONDS with content: Agency not found"
+                } ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common-unknown.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment-unknown.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment-unknown.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]
