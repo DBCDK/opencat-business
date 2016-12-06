@@ -71,45 +71,6 @@ var NoteAndSubjectExtentionsHandler = function () {
     }
 
     /**
-     * Changes the content of a record for update.
-     *
-     * @param record Record
-     * @param userId User id - not used.
-     * @param groupId Group id.
-     *
-     * @returns {Record} A new record with the new content.
-     *
-     * @name NoteAndSubjectExtentionsHandler#changeUpdateRecordForUpdate
-     */
-    function recordDataForRawRepo(record, userId, groupId) {
-        Log.trace(StringUtil.sprintf("Enter - NoteAndSubjectExtentionsHandler.recordDataForRawRepo( %s, %s, %s )", record, userId, groupId));
-        var result = null;
-        try {
-            var recId = record.getValue(/001/, /a/);
-            if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
-                return result = record;
-            }
-            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
-            if (!isNationalCommonRecord(curRecord)) {
-                return result = record;
-            }
-            var extentableFieldsRx = __createExtentableFieldsRx(groupId);
-            record.eachField(/./, function (field) {
-                if (extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name)) {
-                    if (field.exists(/&/)) {
-                        field.append("&", groupId, true);
-                    } else if (__isFieldChangedInOtherRecord(field, curRecord)) {
-                        field.insert(0, "&", groupId);
-                    }
-                }
-            });
-            return result = record;
-        } finally {
-            Log.trace("Exit - NoteAndSubjectExtentionsHandler.recordDataForRawRepo():", result);
-        }
-    }
-
-    /**
      * Checks if a field specifies that a record is a national common record.
      *
      * @param {Field} Field.
@@ -305,7 +266,6 @@ var NoteAndSubjectExtentionsHandler = function () {
 
     return {
         'authenticateExtentions': authenticateExtentions,
-        'recordDataForRawRepo': recordDataForRawRepo,
         'isNationalCommonRecord': isNationalCommonRecord
     }
 }();

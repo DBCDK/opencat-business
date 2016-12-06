@@ -78,10 +78,6 @@ function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
     return FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
 }
 
-function recordDataForRawRepo(record, userId, groupId) {
-    return FBSUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId);
-}
-
 function checkDoubleRecord(record, settings) {
     return FBSUpdaterEntryPoint.checkDoubleRecord(record, settings);
 }

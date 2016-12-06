@@ -50,28 +50,7 @@ var DBCAuthenticator = function () {
         }
     }
 
-    /**
-     * Converts a record to the actual records that should be stored in the RawRepo.
-     *
-     * @param {Record} record The record.
-     *
-     * @returns {Array} A list of records of type Record.
-     */
-    function recordDataForRawRepo(record, userId, groupId) {
-        Log.trace("Enter - DBCAuthenticator.recordDataForRawRepo()");
-        try {
-            if (OpenAgencyClient.hasFeature(groupId, UpdateConstants.USE_ENRICHMENTS) ||
-                OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_ROOT_FEATURE)) {
-                return BasisSplitter.splitCompleteBasisRecord(record);
-            }
-            return [record];
-        } finally {
-            Log.trace("Exit - DBCAuthenticator.recordDataForRawRepo()");
-        }
-    }
-
     return {
         'authenticateRecord': authenticateRecord,
-        'recordDataForRawRepo': recordDataForRawRepo
     }
 }();

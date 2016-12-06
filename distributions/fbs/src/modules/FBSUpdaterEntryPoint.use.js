@@ -175,36 +175,6 @@ var FBSUpdaterEntryPoint = function () {
     }
 
     /**
-     * Converts a record to the actual records that should be stored in the RawRepo.
-     *
-     * @param {String} record The record as a json.
-     *
-     * @returns {Array} A list of records as json strings.
-     */
-    function recordDataForRawRepo(record, userId, groupId) {
-        Log.trace("Enter - FBSUpdaterEntryPoint.recordDataForRawRepo");
-        try {
-            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(record));
-            Log.trace("Record:\n", uneval(marc));
-            var instance = DefaultRawRepoRecordHandler.create(FBSAuthenticator);
-            var records = DefaultRawRepoRecordHandler.recordDataForRawRepo(instance, marc, userId, groupId);
-            var result = [];
-            for (var i = 0; i < records.length; i++) {
-                var curRecord = records[i];
-                var resultRecord = DanMarc2Converter.convertFromDanMarc2(curRecord);
-                var resultRecordAsJson = JSON.stringify(resultRecord);
-                Log.debug("Adding resultRecord: ", resultRecordAsJson);
-                result.push(resultRecordAsJson);
-            }
-            var resultAsJson = "[" + result.join(",") + "]";
-            Log.debug("Returning: ", resultAsJson);
-            return resultAsJson;
-        } finally {
-            Log.trace("Exit - FBSUpdaterEntryPoint.recordDataForRawRepo");
-        }
-    }
-
-    /**
      * Returns a 512 note field
      *
      * @param {record} the record as a string
@@ -219,7 +189,7 @@ var FBSUpdaterEntryPoint = function () {
             var rec = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentRecord));
             return result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2Field(RecategorizationNoteFieldFactory.newNoteField(rec, rec)));
         } finally {
-            Log.trace("Exit - FBSUpdaterEntryPoint.recordDataForRawRepo: ", result);
+            Log.trace("Exit - FBSUpdaterEntryPoint.RecategorizationNoteFieldFactory: ", result);
         }
     }
 
@@ -292,7 +262,6 @@ var FBSUpdaterEntryPoint = function () {
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
-        'recordDataForRawRepo': recordDataForRawRepo,
         'checkDoubleRecord': checkDoubleRecord,
         'checkDoubleRecordFrontend': checkDoubleRecordFrontend,
         'sortRecord': sortRecord

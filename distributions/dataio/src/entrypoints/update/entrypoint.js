@@ -65,10 +65,6 @@ function correctLibraryExtendedRecord(commonRecord, enrichmentRecord) {
     return DBCUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
 }
 
-function recordDataForRawRepo(record, userId, groupId) {
-    return DBCUpdaterEntryPoint.recordDataForRawRepo(record, userId, groupId);
-}
-
 function checkDoubleRecord(record, settings) {
     return DBCUpdaterEntryPoint.checkDoubleRecord(record, settings);
 }
