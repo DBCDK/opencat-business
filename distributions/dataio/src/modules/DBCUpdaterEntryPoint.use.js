@@ -40,27 +40,6 @@ var DBCUpdaterEntryPoint = function () {
     }
 
     /**
-     * Checks if a record contains any classification data
-     *
-     * @param {String} jsonRecord The record as a json.
-     *
-     * @return {Boolean} true if classification data exists in the record, false otherwise.
-     */
-    function hasClassificationData(jsonRecord) {
-        Log.trace("Enter - DBCUpdaterEntryPoint.hasClassificationData()");
-        var result;
-        try {
-            var instance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
-            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
-
-            result = ClassificationData.hasClassificationData(instance, marc);
-            return result;
-        } finally {
-            Log.trace("Exit - DBCUpdaterEntryPoint.hasClassificationData():" + result);
-        }
-    }
-
-    /**
      * Checks if the classifications has changed between two records.
      *
      * @param {String} oldRecord The old record as a json.
@@ -227,7 +206,6 @@ var DBCUpdaterEntryPoint = function () {
     }
 
     return {
-        'hasClassificationData': hasClassificationData,
         'isRecordInProduction': isRecordInProduction,
         'hasClassificationsChanged': hasClassificationsChanged,
         'shouldCreateEnrichmentRecords': shouldCreateEnrichmentRecords,

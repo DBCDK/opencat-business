@@ -241,7 +241,9 @@ var DefaultEnrichmentRecordHandler = function () {
         Log.trace("    enrichmentRecord: " + enrichmentRecord);
         var result = null;
 
-        if (instance.classifications.module.hasClassificationData(instance.classifications.instance, commonRecord)) {
+        // TODO erstatte hasClassificationData med et kald til java (og så alligevel ikke - det er noget knald at skulle konvertere
+        // poster tilbage for at kunne kalde java - må afvente at correctRecord er flyttet til java.
+        if (ClassificationData.hasClassificationData(instance.classifications.instance, commonRecord)) {
             if (!instance.classifications.module.hasClassificationsChanged(instance.classifications.instance, commonRecord, enrichmentRecord)) {
                 Log.info("Classifications are the same. Removing them from library record.");
                 result = instance.classifications.module.removeClassificationsFromRecord(instance.classifications.instance, enrichmentRecord);

@@ -228,6 +228,7 @@ var ClassificationData = function () {
 
             result = libraryRecord.clone();
 
+            // TODO skulle kaldes i java men bøvlet at konvertere tilbage.
             if (!hasClassificationData(instance, libraryRecord)) {
                 currentCommonMarc.eachField(instance.fields, function (field) {
                     result.append(field);

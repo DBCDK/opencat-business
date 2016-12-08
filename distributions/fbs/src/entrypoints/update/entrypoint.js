@@ -15,10 +15,6 @@ function isRecordInProduction(marc) {
     return FBSUpdaterEntryPoint.isRecordInProduction(marc);
 }
 
-function hasClassificationData(marc) {
-    return FBSUpdaterEntryPoint.hasClassificationData(marc);
-}
-
 /**
  * Checks if the classifications has changed between two records.
  *

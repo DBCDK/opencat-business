@@ -14,10 +14,6 @@ function isRecordInProduction(marc) {
     return DBCUpdaterEntryPoint.isRecordInProduction(marc);
 }
 
-function hasClassificationData(marc) {
-    return DBCUpdaterEntryPoint.hasClassificationData(marc);
-}
-
 /**
  * Checks if the classifications has changed between two records.
  *
