@@ -3,39 +3,6 @@ use("DanMarc2Converter");
 use("UnitTest");
 use("UpdateConstants");
 
-UnitTest.addFixture("ClassificationData.hasClassificationData", function () {
-    function callFunction(jsonObj) {
-        return ClassificationData.hasClassificationData(ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS), DanMarc2Converter.convertToDanMarc2(jsonObj));
-    }
-
-    function callWithFields(fields) {
-        var record = {fields: []};
-
-        for (var i = 0; i < fields.length; i++) {
-            record.fields.push({
-                name: fields[i][0],
-                indicator: "00",
-                subfields: [
-                    {
-                        name: fields[i][1],
-                        value: fields[i][2]
-                    }
-                ]
-            });
-        }
-
-        return callFunction(record);
-    }
-
-    Assert.equalValue("Empty", callWithFields([]), false);
-    Assert.equalValue("001a", callWithFields([["001", "a", "12345678"]]), false);
-    Assert.equalValue("245a", callWithFields([["245", "a", "Titel"]]), true);
-    Assert.equalValue("001a,245a", callWithFields([["001", "a", "12345678"],
-        ["245", "a", "Titel"]]), true);
-    Assert.equalValue("008t,245a", callWithFields([["008", "t", "m"],
-        ["245", "a", "Titel"]]), true);
-});
-
 UnitTest.addFixture("ClassificationData.hasClassificationsChanged", function () {
     function callFunction(oldMarc, newMarc) {
         return ClassificationData.hasClassificationsChanged(ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS),
