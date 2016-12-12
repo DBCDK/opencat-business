@@ -13,6 +13,7 @@ var ClassificationData = function () {
         }
     }
 
+    // TODO This whole function should be moved to Java at some point
     function isRecordInProduction(marc) {
         Log.debug("Enter - ClassificationData.isRecordInProduction()");
 

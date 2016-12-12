@@ -19,25 +19,6 @@ EXPORTED_SYMBOLS = ['DBCUpdaterEntryPoint'];
  * @name DBCUpdaterEntryPoint
  */
 var DBCUpdaterEntryPoint = function () {
-    /**
-     * Checks if a record is published
-     *
-     * @param {String} jsonRecord The record as a json.
-     *
-     * @return {Boolean} true if the record is published, false otherwise.
-     */
-    function isRecordInProduction(jsonRecord) {
-        Log.trace("Enter - DBCUpdaterEntryPoint.isRecordInProduction()");
-        var result;
-        try {
-            var marc = DanMarc2Converter.convertToDanMarc2(JSON.parse(jsonRecord));
-
-            result = ClassificationData.isRecordInProduction(marc);
-            return result;
-        } finally {
-            Log.trace("Exit - DBCUpdaterEntryPoint.isRecordInProduction():" + result);
-        }
-    }
 
     /**
      * Checks if the classifications has changed between two records.
@@ -206,7 +187,6 @@ var DBCUpdaterEntryPoint = function () {
     }
 
     return {
-        'isRecordInProduction': isRecordInProduction,
         'hasClassificationsChanged': hasClassificationsChanged,
         'shouldCreateEnrichmentRecords': shouldCreateEnrichmentRecords,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,

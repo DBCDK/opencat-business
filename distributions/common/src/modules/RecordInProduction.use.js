@@ -10,6 +10,7 @@ EXPORTED_SYMBOLS = ['RecordInProduction'];
  * @namespace
  * @name RecordInProduction
  */
+// TODO Remove function when no Javascript is using this module anymore. Has been reimplemented in Java
 var RecordInProduction = function () {
     var Calendar = Packages.java.util.Calendar;
 
