@@ -1,7 +1,6 @@
 use("DanMarc2Converter");
 use("Marc");
 use("MarcClasses");
-use("RecordInProduction");
 use("Log");
 
 EXPORTED_SYMBOLS = ['ClassificationData'];
@@ -10,19 +9,6 @@ var ClassificationData = function () {
     function create(fieldsRegExp) {
         return {
             fields: fieldsRegExp
-        }
-    }
-
-    // TODO This whole function should be moved to Java at some point
-    function isRecordInProduction(marc) {
-        Log.debug("Enter - ClassificationData.isRecordInProduction()");
-
-        var result = null;
-        try {
-            return result = RecordInProduction.checkRecord(new Date, marc);
-        }
-        finally {
-            Log.debug("Exit - ClassificationData.isRecordInProduction(): " + result);
         }
     }
 
@@ -491,7 +477,6 @@ var ClassificationData = function () {
     return {
         'create': create,
         'hasClassificationData': hasClassificationData,
-        "isRecordInProduction": isRecordInProduction,
         'hasClassificationsChanged': hasClassificationsChanged,
         'updateClassificationsInRecord': updateClassificationsInRecord,
         'removeClassificationsFromRecord': removeClassificationsFromRecord,
