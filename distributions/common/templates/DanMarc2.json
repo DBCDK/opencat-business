@@ -1869,7 +1869,7 @@
                     "rules": [{
                             "type": "SubfieldRules.checkLength",
                             "params": {
-                                "min": 8,
+                                "min": 9,
                                 "max": 9
                             }
                         }
