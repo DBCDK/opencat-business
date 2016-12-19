@@ -163,7 +163,6 @@ var DBCUpdaterEntryPoint = function () {
 
     return {
         'hasClassificationsChanged': hasClassificationsChanged,
-        'shouldCreateEnrichmentRecords': shouldCreateEnrichmentRecords,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,

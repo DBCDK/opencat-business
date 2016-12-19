@@ -23,9 +23,6 @@ function hasClassificationsChanged(oldRecord, newRecord) {
     return FBSUpdaterEntryPoint.hasClassificationsChanged(oldRecord, newRecord);
 }
 
-function shouldCreateEnrichmentRecords(settings, currentRecord, updatingRecord) {
-    return FBSUpdaterEntryPoint.shouldCreateEnrichmentRecords(settings, currentRecord, updatingRecord);
-}
 
 /**
  * Function that takes a record and creates a 512 notefield from the given data.

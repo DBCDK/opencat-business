@@ -191,7 +191,6 @@ var FBSUpdaterEntryPoint = function () {
     return {
         'recategorizationNoteFieldFactory': recategorizationNoteFieldFactory,
         'hasClassificationsChanged': hasClassificationsChanged,
-        'shouldCreateEnrichmentRecords': shouldCreateEnrichmentRecords,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
