@@ -127,8 +127,7 @@ var DefaultEnrichmentRecordHandler = function () {
         if (result === null) {
             result = enrichmentRecord.clone();
         }
-        // Commented out until further notice, do not remove
-        // result = __cleanupEnrichmentRecord(result, commonRecord, instance.classifications.instance.fields);
+        result = __cleanupEnrichmentRecord(result, commonRecord, instance.classifications.instance.fields);
         return __correctRecordIfEmpty(result);
     }
 
@@ -181,14 +180,16 @@ var DefaultEnrichmentRecordHandler = function () {
     function __isEnrichmentReferenceFieldPresentInAlreadyProcessedFields(enrichmentField, alreadyProcessedEnrichmentFields) {
         var result = false;
         var subfieldZ = enrichmentField.getValue("z");
-        if (subfieldZ.length > 4) {
+        if (subfieldZ !== undefined && subfieldZ.length > 4) {
             subfieldZ = subfieldZ.slice(0, 3);
         }
-        alreadyProcessedEnrichmentFields.eachField(subfieldZ, function (field) {
-            if (subfieldZ === undefined) {
-                result = true;
-            }
-        });
+        if (subfieldZ !== undefined) {
+            alreadyProcessedEnrichmentFields.eachField(subfieldZ, function (field) {
+                if (field.name === subfieldZ) {
+                    result = true;
+                }
+            });
+        }
         return result;
     }
 
