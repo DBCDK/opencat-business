@@ -66,12 +66,6 @@
                         "record": "rawrepo-dbc-enrichment-c2.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
-                    },
-                    {
-                        "record": "rawrepo-local-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "enqueued": true,
-                        "deleted": false
                     }
                 ]
             }
