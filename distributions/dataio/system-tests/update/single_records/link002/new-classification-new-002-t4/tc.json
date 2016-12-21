@@ -48,7 +48,7 @@
                         "type": "MARCXCHANGE",
                         "enqueued": true,
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment-c1.marc", "rawrepo-local-enrichment.marc" ]
+                        "enrichments": [ "rawrepo-dbc-enrichment-c1.marc" ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment-c1.marc",
