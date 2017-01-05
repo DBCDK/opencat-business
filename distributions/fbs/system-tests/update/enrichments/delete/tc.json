@@ -66,7 +66,7 @@
     {
         "name": "fbs-delete-enrichment-record-holdings",
         "bugs": [ "#1521" ],
-        "description": "Tester sletning af påhængspost uden beholdninger",
+        "description": "Tester sletning af påhængspost med beholdninger",
         "request": {
             "authentication": {
                 "group": "723000",
