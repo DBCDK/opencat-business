@@ -19,9 +19,9 @@ function die() {
 #
 #rm -rf deploy || die "Failed to remove deploy"
 #
-#mkdir -p deploy/opencat-business || die "mkdir -p deploy/opencat-business"
-#cp -r bin deploy/opencat-business/ || die "cp -r bin deploy/opencat-business/"
-#cp -r distributions deploy/opencat-business/ || die "cp -r distributions deploy/opencat-business/"
+mkdir -p deploy/opencat-business || die "mkdir -p deploy/opencat-business"
+cp -r bin deploy/opencat-business/ || die "cp -r bin deploy/opencat-business/"
+cp -r distributions deploy/opencat-business/ || die "cp -r distributions deploy/opencat-business/"
 echo "input arg " $1
 echo $1 > deploy/opencat-business/svn_revision.txt
 
