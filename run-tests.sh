@@ -23,7 +23,7 @@ mkdir -p deploy/opencat-business || die "mkdir -p deploy/opencat-business"
 cp -r bin deploy/opencat-business/ || die "cp -r bin deploy/opencat-business/"
 cp -r distributions deploy/opencat-business/ || die "cp -r distributions deploy/opencat-business/"
 echo "input arg " $1
-$1 > deploy/opencat-business/svn_revision.txt
+echo $1 > deploy/opencat-business/svn_revision.txt
 
 cd deploy || die "cd deploy"
 tar --exclude-vcs --exclude=.idea -czf opencat-business.tar.gz opencat-business || die "tar --exclude-vcs --exclude=.idea -czf opencat-business.tar.gz opencat-business"
