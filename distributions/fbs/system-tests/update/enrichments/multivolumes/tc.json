@@ -51,7 +51,15 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": [ {
+                "type" : "ERROR",
+                "code" : null,
+                "urlForDocumentation" : "",
+                "ordinalPositionOfField" : 6,
+                "ordinalPositionOfSubfield" : null,
+                "ordinalPositionInSubfield" : null,
+                "message" : "Felt '038' kan ikke anvendes i denne skabelon/posttype."
+            } ],
             "update": {
                 "errors": [
                     {
