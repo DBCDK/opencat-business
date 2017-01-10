@@ -11,10 +11,7 @@
             "templateName": "bog",
             "record": "goodbook.marc"
         },
-        "expected": {
-            "validation": [
-            ]
-        }
+        "expected": {}
     },
     {
         "name": "subfieldValueMakesFieldsAllowedBad",
@@ -29,17 +26,19 @@
             "record": "badbook.marc"
         },
         "expected": {
-            "validation": [
-                {
-                    "type" : "ERROR",
-                    "code" : null,
-                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                    "ordinalPositionOfField" : 13,
-                    "ordinalPositionOfSubfield" : 0,
-                    "ordinalPositionInSubfield" : null,
-                    "message" : "Feltet '032' er ikke tilladt da delfelt 'a' ikke indeholder værdien 'DBC'"
-                }
-            ]
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+                        "ordinalPositionOfField": 13,
+                        "ordinalPositionOfSubfield": 0,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Feltet '032' er ikke tilladt da delfelt 'a' ikke indeholder værdien 'DBC'"
+                    }
+                ]
+            }
         }
     }
 ]

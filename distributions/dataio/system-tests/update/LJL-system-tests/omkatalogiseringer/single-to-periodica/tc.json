@@ -38,7 +38,7 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [
@@ -111,7 +111,7 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [

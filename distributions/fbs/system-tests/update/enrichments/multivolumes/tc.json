@@ -51,19 +51,15 @@
             ]
         },
         "expected": {
-            "validation": [ {
-                "type" : "ERROR",
-                "code" : null,
-                "urlForDocumentation" : "",
-                "ordinalPositionOfField" : 6,
-                "ordinalPositionOfSubfield" : null,
-                "ordinalPositionInSubfield" : null,
-                "message" : "Felt '038' kan ikke anvendes i denne skabelon/posttype."
-            } ],
+            "validation": {},
             "update": {
                 "errors": [
                     {
                         "type": "ERROR",
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
                         "message": "Påhængsposten {58442895|723000} må ikke pege på en post via 014a"
                     }
                 ]

@@ -35,15 +35,17 @@
             ]
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-                    "ordinalPositionOfField": 1,
-                    "ordinalPositionOfSubfield": 0,
-                    "message": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
-                }
-            ],
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                        "ordinalPositionOfField": 1,
+                        "ordinalPositionOfSubfield": 0,
+                        "message": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
+                    }
+                ]
+            },
             "update": {
                 "errors": [
                     {

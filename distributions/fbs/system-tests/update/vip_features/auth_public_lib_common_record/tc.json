@@ -28,7 +28,7 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [{
                     "type" : "ERROR",
@@ -86,7 +86,7 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [{
                     "type" : "ERROR",
@@ -144,7 +144,7 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [{
                     "type" : "ERROR",

@@ -12,7 +12,7 @@
             "record": "book.marc"
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [

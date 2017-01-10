@@ -11,9 +11,7 @@
             "templateName": "boghoved",
             "record": "main.marc"
         },
-        "expected": {
-            "validation": []
-        }
+        "expected": {}
     },
     {
         "name": "volume-book-no-main",
@@ -28,15 +26,17 @@
             "record": "volume.marc"
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
-                    "ordinalPositionOfField": 3,
-                    "ordinalPositionOfSubfield": 0,
-                    "message": "Posten med faustnr/bibliotek '51617649/870970' findes ikke i forvejen"
-                }
-            ]
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
+                        "ordinalPositionOfField": 3,
+                        "ordinalPositionOfSubfield": 0,
+                        "message": "Posten med faustnr/bibliotek '51617649/870970' findes ikke i forvejen"
+                    }
+                ]
+            }
         }
     },
     {
@@ -61,15 +61,17 @@
             "record": "volume.marc"
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                    "ordinalPositionOfField": 2,
-                    "ordinalPositionOfSubfield": 4,
-                    "message": "Delfelt 008o må ikke anvendes i posten '51617649', da delfeltet allerede er anvendt i flerbindsværket"
-                }
-            ]
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 4,
+                        "message": "Delfelt 008o må ikke anvendes i posten '51617649', da delfeltet allerede er anvendt i flerbindsværket"
+                    }
+                ]
+            }
         }
     }
 ]

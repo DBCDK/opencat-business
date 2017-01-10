@@ -13,7 +13,7 @@
             "record": "request.marc"
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [

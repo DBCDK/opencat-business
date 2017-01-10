@@ -15,13 +15,16 @@
             "record": "bog.marc"
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "",
-                    "message": "Følgende felt er til stede: '110' sammen med '100'"
-                }
-            ]
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "",
+                        "message": "Følgende felt er til stede: '110' sammen med '100'"
+                    }
+                ]
+            }
+
         }
     }
 ]

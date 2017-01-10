@@ -12,15 +12,17 @@
             "record": "request.marc"
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                    "ordinalPositionOfField": 2,
-                    "ordinalPositionOfSubfield": 8,
-                    "message": "Delfelt '008o' må ikke være tomt."
-                }
-            ],
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 8,
+                        "message": "Delfelt '008o' må ikke være tomt."
+                    }
+                ]
+            },
             "update": {
                 "errors": [
                     {

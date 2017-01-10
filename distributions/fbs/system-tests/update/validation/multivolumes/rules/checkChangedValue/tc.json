@@ -29,15 +29,17 @@
             ]
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-                    "ordinalPositionOfField": 2,
-                    "ordinalPositionOfSubfield": 1,
-                    "message": "Delfelt 004a må ikke ændre sig fra s til b"
-                }
-            ]
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 1,
+                        "message": "Delfelt 004a må ikke ændre sig fra s til b"
+                    }
+                ]
+            }
         }
     }
 ]

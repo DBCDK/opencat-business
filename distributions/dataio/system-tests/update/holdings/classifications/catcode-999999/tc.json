@@ -12,13 +12,19 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 700400, 700500, 700600 ],
+            "holdings": [
+                700400,
+                700500,
+                700600
+            ],
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
                 },
                 {
                     "record": "rawrepo-dbc-enrichment.marc",
@@ -28,7 +34,7 @@
             ]
         },
         "expected": {
-            "validation": [],
+            "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [

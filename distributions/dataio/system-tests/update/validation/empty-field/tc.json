@@ -12,14 +12,16 @@
             "record": "request.marc"
         },
         "expected": {
-            "validation": [
-                {
-                    "type": "ERROR",
-                    "urlForDocumentation": "",
-                    "ordinalPositionOfField": 2,
-                    "message": "Felt '008' må ikke være tomt."
-                }
-            ],
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "",
+                        "ordinalPositionOfField": 2,
+                        "message": "Felt '008' må ikke være tomt."
+                    }
+                ]
+            },
             "update": {
                 "errors": [
                     {
