@@ -13,11 +13,9 @@ tar -xf ocb-tools-1.0.0.tar.gz || die "tar -xf ocb-tools-1.0.0.tar.gz"
 
 template-transpiler/bin/transpile-templates.sh || die "template-transpiler/bin/transpile-templates.sh"
 
-/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests  || die "ocb-test.sh js-tests"
-/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh run -a u -s || die "ocb-test.sh run -a u -s"
-/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh run -a b -s || die "ocb-test.sh run -a b -s"
+/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests  || die "/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests"
 
-rm -rf deploy || die "Failed to remove deploy"
+rm -rf deploy || die "rm -rf deploy"
 
 mkdir -p deploy/opencat-business || die "mkdir -p deploy/opencat-business"
 cp -r bin deploy/opencat-business/ || die "cp -r bin deploy/opencat-business/"
