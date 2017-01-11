@@ -21,28 +21,6 @@ EXPORTED_SYMBOLS = ['DBCUpdaterEntryPoint'];
 var DBCUpdaterEntryPoint = function () {
 
     /**
-     * Checks if the classifications has changed between two records.
-     *
-     * @param {String} oldRecord The old record as a json.
-     * @param {String} newRecord The new record as a json.
-     *
-     * @return {Boolean} true if the classifications has changed, false otherwise.
-     */
-    function hasClassificationsChanged(oldRecord, newRecord) {
-        Log.trace("Enter - DBCUpdaterEntryPoint.hasClassificationsChanged()");
-        var result;
-        try {
-            var oldMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(oldRecord));
-            var newMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(newRecord));
-            var instance = __createClassificationInstance(oldMarc, newMarc);
-            result = ClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
-            return result;
-        } finally {
-            Log.trace("Exit - DBCUpdaterEntryPoint.hasClassificationsChanged(): " + result);
-        }
-    }
-
-    /**
      * Creates a new library extended record based on a DBC record.
      *
      * @param {String} currentCommonRecord  The current common record as a json.
@@ -162,7 +140,6 @@ var DBCUpdaterEntryPoint = function () {
     }
 
     return {
-        'hasClassificationsChanged': hasClassificationsChanged,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
         'correctLibraryExtendedRecord': correctLibraryExtendedRecord,

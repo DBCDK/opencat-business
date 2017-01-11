@@ -11,18 +11,6 @@ function authenticateRecord(record, userId, groupId, settings) {
 }
 
 /**
- * Checks if the classifications has changed between two records.
- *
- * @param {String} oldRecord The old record as a json.
- * @param {String} newRecord The new record as a json.
- *
- * @return {Boolean} true if the classifications has changed, false otherwise.
- */
-function hasClassificationsChanged(oldRecord, newRecord) {
-    return DBCUpdaterEntryPoint.hasClassificationsChanged(oldRecord, newRecord);
-}
-
-/**
  * Creates a new library extended record based on a DBC record.
  *
  * @param {String} currentCommonRecord  The current common record as a json.

@@ -11,10 +11,6 @@ var FBSClassificationData = function () {
         }
     }
 
-    function hasClassificationsChanged(instance, oldMarc, newMarc) {
-        return ClassificationData.hasClassificationsChanged(instance, oldMarc, newMarc);
-    }
-
     function updateClassificationsInRecord(instance, currentCommonMarc, updatingCommonMarc, libraryRecord) {
         return ClassificationData.updateClassificationsInRecord(instance, currentCommonMarc, updatingCommonMarc, libraryRecord);
     }
@@ -25,7 +21,6 @@ var FBSClassificationData = function () {
 
     return {
         'create': create,
-        'hasClassificationsChanged': hasClassificationsChanged,
         'updateClassificationsInRecord': updateClassificationsInRecord,
         'removeClassificationsFromRecord': removeClassificationsFromRecord
     };
