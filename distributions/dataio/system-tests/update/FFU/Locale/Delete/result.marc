@@ -1,4 +1,4 @@
-001 00 *a 5 158 076 1 *b 810010 *c 20150304180759 *d 20150209 *f a *t FAUST
+001 00 *a 5 158 076 1 *b 810010 *c 20150324171702 *d 20150209 *f a *t FAUST
 004 00 *r d *a e
 008 00 *t m *u f *a 2015 *b dk *d å *d x *j f *l ger *o s *v 0
 009 00 *a a *g xx
@@ -22,6 +22,7 @@
 666 00 *0  *u for 12 år
 666 00 *0  *u let at læse
 720 00 *o Mette Bødker *4 ill
-945 00 *a Digi lesen *x se *z 440(a)
-945 00 *a Lillys Leben - Niveau B *x se *z 440(a,o)
+945 00 *a Digi lesen *x se *w Digilesen *z 440(a)
+945 00 *a Lillys Leben - Niveau B *x se *w Digilesen. Lillys Leben - Niveau B *z 440(a,o)
 990 00 *o 201511 *b b *b s *u nt
+996 00 *a 810010

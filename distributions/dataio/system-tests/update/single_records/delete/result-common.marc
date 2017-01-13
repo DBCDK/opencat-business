@@ -24,7 +24,7 @@
 666 00 *0  *u for 12 år
 666 00 *0  *u let at læse
 720 00 *o Mette Bødker *4 ill
-945 00 *a Digi lesen *x se *z 440(a)
-945 00 *a Lillys Leben - Niveau B *x se *z 440(a,o)
+945 00 *a Digi lesen *x se *w Digilesen *z 440(a)
+945 00 *a Lillys Leben - Niveau B *x se *w Digilesen. Lillys Leben - Niveau B *z 440(a,o)
 990 00 *o 201511 *b b *b s *u nt
 996 00 *a DBC
