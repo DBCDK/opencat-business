@@ -133,6 +133,7 @@
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "DanMarc2.fields.008.subfields.l",
                 "t":{
+                    "mandatory":true,
                     "repeatable":false,
                     "values":[ "m", "s" ]
                 },
