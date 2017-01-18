@@ -5,7 +5,8 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008d", "100h", "1004","260a", "260b", "260c", "300a", "440a", "652m", "700h", "7004" ]
+        "extrafields": [ "008a", "008b", "008d", "008l", "021n", "023b", "100h", "1004","260a", "260b", "260c", "300n", "300a", "300b", "300d", "300c",
+            "504", "508", "517", "652m", "700h", "7004" ]
     },
     "defaults":{
         "field":{
@@ -53,7 +54,18 @@
                 "d": "DanMarc2.fields.001.subfields.d",
                 "f": "DanMarc2.fields.001.subfields.f",
                 "o": "DanMarc2.fields.001.subfields.o"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldHasValueDemandsOtherSubfield",
+                    "params": {
+                        "subfieldConditional": "b",
+                        "subfieldConditionalValue": "870970",
+                        "fieldMandatory": "996",
+                        "subfieldMandatory": "a"
+                    }
+                }
+            ]
         },
         "002": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6.htm",
@@ -496,12 +508,12 @@
                     "repeatable":false
                 },
                 "a": "DanMarc2.fields.526.subfields.a",
+                "b": "DanMarc2.fields.526.subfields.b",
+                "d": "DanMarc2.fields.526.subfields.d",
+                "e": "DanMarc2.fields.526.subfields.e",
                 "i": "DanMarc2.fields.526.subfields.i",
                 "t": "DanMarc2.fields.526.subfields.t",
-                "e": "DanMarc2.fields.526.subfields.e",
-                "d": "DanMarc2.fields.526.subfields.d",
                 "x": "DanMarc2.fields.526.subfields.x",
-                "b": "DanMarc2.fields.526.subfields.b",
                 "u": "DanMarc2.fields.526.subfields.u",
                 "y": "DanMarc2.fields.526.subfields.y",
                 "r":{
@@ -861,7 +873,6 @@
 		"991": "DanMarc2.fields.991",
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "mandatory":true,
             "repeatable":false,
             "subfields":{
                 "a": {
