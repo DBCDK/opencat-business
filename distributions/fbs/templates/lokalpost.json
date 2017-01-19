@@ -255,6 +255,7 @@
         "028": "DanMarc2.fields.028",
         "029": "DanMarc2.fields.029",
         "030": "DanMarc2.fields.030",
+        "032": "DanMarc2.fields.030",
         "033": "DanMarc2.fields.033",
         "034": "DanMarc2.fields.034",
         "035": "DanMarc2.fields.035",
@@ -459,31 +460,6 @@
         "966": "DanMarc2.fields.966",
         "968": "DanMarc2.fields.968",
         "980": "DanMarc2.fields.980",
-        "996":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "repeatable":false,
-            "subfields":{
-                "a": {
-                    "repeatable": false,
-                    "mandatory":true,
-                    "values": "Lister.fields.codes.subfields.libraries.996a.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldCannotContainValue",
-                            "params": {
-                                "values": [ "DBC" ],
-                                "notcondition": {
-                                    "subfield": "001b",
-                                    "value": "870970"
-                                }
-                            }
-                        }
-                    ]
-                },
-                "m":"Lister.fields.codes.subfields.libraries.996m",
-                "o":"Lister.fields.codes.subfields.libraries.996o"
-            }
-        },
         "y08": {
             "subfields": {
                 "a": {}
