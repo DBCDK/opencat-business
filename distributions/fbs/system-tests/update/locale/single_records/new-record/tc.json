@@ -1,7 +1,7 @@
 [
     {
         "name": "fbs-new-locale-record",
-        "description": "Tester oprettelse af ny lokal post",
+        "description": "Tester oprettelse af ny lokal post samt sortering af felter og delfelter i 008",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -11,39 +11,13 @@
             "templateName": "film",
             "record": "request.marc"
         },
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "rawrepo-common.marc",
-                    "type": "MARCXCHANGE",
-                    "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
-                },
-                {
-                    "record": "rawrepo-dbc-enrichment.marc",
-                    "type": "ENRICHMENT",
-                    "deleted": false
-                }
-            ]
-        },
         "expected": {
             "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "rawrepo-common.marc",
-                        "type": "MARCXCHANGE",
-                        "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
-                    },
-                    {
-                        "record": "rawrepo-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false
-                    },
-                    {
-                        "record": "request.marc",
+                        "record": "result-new-local.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true
