@@ -52,7 +52,18 @@
                 "d": "DanMarc2.fields.001.subfields.d",
                 "f": "DanMarc2.fields.001.subfields.f",
                 "o": "DanMarc2.fields.001.subfields.o"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldHasValueDemandsOtherSubfield",
+                    "params": {
+                        "subfieldConditional": "b",
+                        "subfieldConditionalValue": "870970",
+                        "fieldMandatory": "996",
+                        "subfieldMandatory": "a"
+                    }
+                }
+            ]
         },
         "002": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6.htm",
@@ -829,7 +840,6 @@
         },
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "mandatory":true,
             "repeatable":false,
             "subfields":{
                 "a": {
