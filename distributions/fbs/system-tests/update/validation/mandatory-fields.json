@@ -87,11 +87,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
                         "message": "Felt '245' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -141,11 +136,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -190,11 +180,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
                         "message": "Felt '245' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -254,11 +239,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -308,11 +288,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -372,50 +347,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
-                    }
-                ]
-            }
-        }
-    },
-    {
-        "name": "lokalpost-mandatory-fields",
-        "description": "Tester obligatoriske felter i skabelonen 'lokalpost'",
-        "request": {
-            "authentication": {
-                "group": "761500",
-                "user": "netpunkt",
-                "password": "20Koster"
-            },
-            "templateName": "lokalpost",
-            "record": "empty.marc"
-        },
-        "expected": {
-            "validation": {
-                "errors": [
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
-                        "message": "Felt '001' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-                        "message": "Felt '004' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
-                        "message": "Felt '009' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
-                        "message": "Felt '245' mangler i posten"
                     }
                 ]
             }
@@ -475,11 +406,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -529,11 +455,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -578,11 +499,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
                         "message": "Felt '245' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
@@ -632,11 +548,45 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "lokalpost-mandatory-fields",
+        "description": "Tester obligatoriske felter i skabelonen 'lokalpost'",
+        "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokalpost",
+            "record": "empty.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
+                        "message": "Felt '001' mangler i posten"
                     },
                     {
                         "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-                        "message": "Felt '996' mangler i posten"
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                        "message": "Felt '004' mangler i posten"
+                    },
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+                        "message": "Felt '009' mangler i posten"
+                    },
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
+                        "message": "Felt '245' mangler i posten"
                     }
                 ]
             }
