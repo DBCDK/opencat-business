@@ -2,10 +2,14 @@
 004 00 *r n *a e
 008 00 *t m *u f *a 2014 *b dk *d y *l dan *x 06 *k b *v 0
 009 00 *a a *g xx
+021 00 *c Hf.
+032 00 *x ACC201420 *a DBF201427
 038 00 *a dt
 100 00 *a Skov *h Søren Santini *4 aut
 245 00 *a Syd Barret - multikunstner, romantiker, outsider - og ufrivilligt ikon for en verdensgeneration!
+260 00 *a Kbh. *b [Søren Santini Skov] *c 2014
 300 00 *a 786 sider *b ill. (nogle i farver)
+521 00 *& REX *b 1. oplag *c 2014
 652 00 *m 99.4 *a Barrett *h Sigurd *c f. 1946
 652 00 *p 78.9064 *v 5
 900 00 *a Santini Skov *h Søren *z 100
