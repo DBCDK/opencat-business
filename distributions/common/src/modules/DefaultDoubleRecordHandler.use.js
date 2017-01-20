@@ -71,18 +71,18 @@ var DefaultDoubleRecordHandler = function () {
                 var msg = "SOLR has not been configured. Missing key 'solr.url' in settings.";
                 Log.error(msg);
                 res.status = "error";
-                res.doubleRecordFrontendDtos = [{message: msg}];
+                res.doubleRecordFrontendDTOs = [{message: msg}];
             } else {
                 var records = DoubleRecordFinder.findGeneral(record, settings.get('solr.url'));
                 var idField = record.getFirstFieldAsField(/001/);
                 if (idField !== "" && records.length > 0) {
                     res.status = "doublerecord";
-                    res.doubleRecordFrontendDtos = [];
+                    res.doubleRecordFrontendDTOs = [];
                     for (var i = 0; i < records.length; i++) {
                         var newDoubleRecord = {};
                         newDoubleRecord.pid = records[i].pid;
                         newDoubleRecord.message = "Double record for record " + idField.getFirstValue(/a/) + ", reason: " + records[i].reason;
-                        res.doubleRecordFrontendDtos.push(newDoubleRecord);
+                        res.doubleRecordFrontendDTOs.push(newDoubleRecord);
                     }
                 }
             }
