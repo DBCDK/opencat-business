@@ -126,8 +126,8 @@
 							"vu", "wf", "ws", "xx", "ye", "yt", "yu", "za", "zm",
 							"zr", "zw",
 							"\u00E5b", "\u00E5c", "\u00E5e", "\u00E5f", "\u00E5h",
-							"\u00E5i", "\u00E5m", "\u00E5n", "\u00E5o", "\u00E5r", 
-							"\u00E5s", "\u00E5t", "\u00E5y" 
+							"\u00E5i", "\u00E5m", "\u00E5n", "\u00E5o", "\u00E5r",
+							"\u00E5s", "\u00E5t", "\u00E5y"
 	                    ]
 					}
                 },
@@ -210,23 +210,55 @@
 					}
                 },
                 "general_mattype": {
-                    "values": [ 
+                    "values": [
                         "a", "b", "c", "d", "e", "f", "g", "m", "n", "p", "r", "s", "t", "u", "v"
                     ]
                 },
                 "specific_mattype": {
-                    "values": [ 
+                    "values": [
                         "ed", "ef", "eg", "ep", "es", "et",
 						"ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt", "gx",
-						"ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy", 
-						"ia", "ic", "if", "ih", "ik", "ip", "is", "it", 
-						"kb", "kt", "mj", "nh", "np", 
-						"tb", "tc", "tk", "tg",	"th", "ti", "to", "tu", 
-						"ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv", 
+						"ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy",
+						"ia", "ic", "if", "ih", "ik", "ip", "is", "it",
+						"kb", "kt", "mj", "nh", "np",
+						"tb", "tc", "tk", "tg",	"th", "ti", "to", "tu",
+						"ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv",
 						"wf", "wt", "wu",
 						"xa", "xb", "xc", "xd", "xe", "xf", "xg", "xh", "xi", "xj", "xk", "xl", "xm", "xn", "xo", "xx", "xy"
                     ]
                 },
+				"local_bibliography": {
+					"community_number": {
+						"repeatable": false,
+						"values": [ "015", "020", "025", "030", "035", "040", "042", "050", "055",
+							"060", "065", "070", "076", "080", "081", "082", "083", "084", "085", "099",
+							"101", "147", "150", "151", "153", "155", "157", "159", "161", "163", "165", "167", "169", "171", "173", "175",
+							"240", "250", "251", "253", "255", "257", "259", "260", "261", "263", "265", "267", "269", "270", "271",
+							"300", "301",
+							"705", "706", "707", "709", "710", "711", "713", "715", "717", "719", "721",
+							"840", "841", "843", "845", "846", "847", "849", "849", "851", "860", "861",
+							"1081", "1082", "1083", "1084", "1085"
+						]
+					},
+					"community_name": {
+						"repeatable": false,
+						"values": [ "K\u00F8benhavns amtskommune", "Frederiksborg amtskommune", "Roskilde amtskommune", "Vestsjællands amtskommune",
+							"Storstr\u00F8ms amtskommune", "Bornholms amtskommune", "Fyns amtskommune", "S\u00F8nderjyllands amtskommune", "Ribe amtskommune",
+							"Vejle amtskommune", "Ringk\u00F8bing amtskommune", "\u00C5rhus amtskommune", "Viborg amtskommune", "Nordjyllands amtskommune",
+							"Region Nordjylland", "Region Midtjylland", "Region Syddanmark", "Region Hovedstaden", "Region Sjælland", "Slesvig",
+							"K\u00F8benhavn Kommune", "Frederiksberg Kommune", "K\u00F8benhavns amtskommune", "Ballerup Kommune", "Br\u00F8ndby Kommune", "Drag\u00F8r Kommune",
+							"Gentofte Kommune", "Gladsaxe Kommune", "Glostrup Kommune", "Herlev Kommune", "Albertslund Kommune", "Hvidovre Kommune",
+							"H\u00F8je-T\uA733strup Kommune", "Led\u00F8je-Sm\u00F8rum Kommune", "Lyngby-T\uA733rb\u00E6k Kommune", "R\u00F8dovre Kommune", "Egedal Kommune",
+							"Frederikssund Kommune", "Bramsn\u00E6s Kommune", "Greve Kommune", "Gunds\u00F8 Kommune", "Hvals\u00F8 Kommune", "K\u00F8ge Kommune",
+							"Halsn\u00E6s Kommune", "Lejre Kommune", "Rams\u00F8 Kommune", "Roskilde Kommune", "Skovbo Kommune", "Solr\u00F8d Kommune",
+							"Gribskov Kommune", "Vall\u00F8 Kommune", "Vestsj\u00E6llands amtskommune", "Bjergsted Kommune", "Gjern Kommune", "Syddjurs Kommune",
+							"Norddjurs Kommune", "Hadsten Kommune", "Favrskov Kommune", "Hammel Kommune", "Hinnerup Kommune", "H\u00F8rning Kommune",
+							"Lang\u00E5 Kommune", "Mariager Kommune", "Midtdjurs Kommune", "Rebild Kommune", "Skagen Kommune", "Sk\u00F8rping Kommune", "St\u00F8vring Kommune",
+							"Mariagerfjord Kommune", "S\u00E6by Kommune", "\uA732bybro Kommune", "Jammerbugt Kommune", "\uA732lborg Kommune", "Hj\u00F8rring Kommune", "\uA732rs Kommune",
+							"Region Nordjylland", "Region Midtjylland", "Region Syddanmark", "Region Hovedstaden", "Region Sj\u00E6lland"
+						]
+					}
+				},
                 "relator_code": {
                     "values": [ 
 					    "act", "aft", "anm", "ant", "arc", "arr", "art", "aud", "aui", "aus", "aut",
