@@ -43,6 +43,11 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
                         "message": "Felt '652' mangler i posten"
+                    },
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+                        "message": "Felt '996' mangler i posten"
                     }
                 ]
             }
