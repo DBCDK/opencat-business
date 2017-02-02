@@ -14,8 +14,7 @@ use( "Builder" );
 use( "AuthenticatorEntryPointTests" );
 use( "BasisSplitterTests" );
 use( "ClassificationData_UnitTests" );
-use( "DBCAuthenticatorTests" );
-use( "FBSAuthenticatorTests" );
+use( "AuthenticatorTests" );
 use( "NoteAndSubjectExtentionsHandlerTests" );
 use( "RecordSorterTests" );
 

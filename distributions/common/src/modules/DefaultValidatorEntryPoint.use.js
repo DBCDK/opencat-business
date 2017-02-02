@@ -2,16 +2,16 @@ use("AuthenticateTemplate");
 use("TemplateContainer");
 use("Validator");
 
-EXPORTED_SYMBOLS = ['DBCValidatorEntryPoint'];
+EXPORTED_SYMBOLS = ['DefaultValidatorEntryPoint'];
 
 /**
  * Module to contain entry points for the validator API between Java and
  * JavaScript.
  *
  * @namespace
- * @name DBCValidatorEntryPoint
+ * @name DefaultValidatorEntryPoint
  */
-var DBCValidatorEntryPoint = function () {
+var DefaultValidatorEntryPoint = function () {
     function initTemplates(settings) {
         ResourceBundleFactory.init(settings);
         TemplateContainer.setSettings(settings);
@@ -24,24 +24,24 @@ var DBCValidatorEntryPoint = function () {
      * @return {JSON} A json with the names of the templates. The names is returned
      *                as an Array.
      */
-    function getValidateSchemas(groupId, settings) {
-        Log.trace("Enter - DBCValidatorEntryPoint.getValidateSchemas( '", groupId, "', ", settings, " )");
+    function getValidateSchemas(groupId, libraryType, settings) {
+        Log.trace("Enter - DefaultValidatorEntryPoint.getValidateSchemas( '", groupId, "', '", libraryType, "', ", settings, " )");
         var result = undefined;
         try {
             ResourceBundleFactory.init(settings);
             TemplateContainer.setSettings(settings);
 
-            var schemas = TemplateContainer.getTemplateNames();
+            var schemas = TemplateContainer.getTemplatesNamesByLibraryType(libraryType, settings);
             var list = [];
             for (var i = 0; i < schemas.length; i++) {
                 var schema = schemas[i];
-                if (AuthenticateTemplate.canAuthenticate(groupId, TemplateContainer.getUnoptimized(schema.schemaName))) {
+                if (AuthenticateTemplate.canAuthenticate(schema.schemaName, groupId, TemplateContainer.getUnoptimized(schema.schemaName), libraryType, settings)) {
                     list.push(schema);
                 }
             }
             return result = JSON.stringify(list);
         } finally {
-            Log.trace("Exit - DBCValidatorEntryPoint.getValidateSchemas(): ", result);
+            Log.trace("Exit - DefaultValidatorEntryPoint.getValidateSchemas(): ", result);
         }
     }
 
@@ -49,18 +49,21 @@ var DBCValidatorEntryPoint = function () {
      * Checks if a template exists by its name.
      *
      * @param {String} name The name of the template.
+     * @param {String} groupId The groupdId from the request
+     * @param {String} libraryType The LibraryType based on the groupId
+     * @param {Object} settings The settings object
      *
      * @return {Boolean} true if the template exists, false otherwise.
      */
-    function checkTemplate(name, groupId, settings) {
+    function checkTemplate(name, groupId, libraryType, settings) {
         Log.trace(StringUtil.sprintf("Enter - checkTemplate( '%s' )", name));
         var result = null;
         try {
             ResourceBundleFactory.init(settings);
             TemplateContainer.setSettings(settings);
-            var templateObj = TemplateContainer.getUnoptimized(name);
+            var templateObj = TemplateContainer.getUnoptimized(name, libraryType, settings);
             if (templateObj !== undefined) {
-                return result = AuthenticateTemplate.canAuthenticate(groupId, templateObj);
+                return result = AuthenticateTemplate.canAuthenticate(name, groupId, templateObj, libraryType, settings);
             }
             return result = false;
         } catch (ex) {
@@ -77,6 +80,7 @@ var DBCValidatorEntryPoint = function () {
      *
      * @param {String} templateName The name of the template to use.
      * @param {String} record       The record to validator as a json.
+     * @param {Object} settings The settings object
      *
      * @return {String} A json string with an array of validation errors.
      */
@@ -94,7 +98,7 @@ var DBCValidatorEntryPoint = function () {
                 ResourceBundleFactory.init(settings);
                 result = Validator.validateRecord(rec, templateProvider, settings);
             } catch (ex) {
-                var msg = StringUtil.sprintf("DBCvalidator systemfejl ved validering: %s", ex);
+                var msg = StringUtil.sprintf("DefaultValidatorEntryPoint systemfejl ved validering: %s", ex);
                 result = [ValidateErrors.recordError("", msg)];
             }
             return JSON.stringify(result);

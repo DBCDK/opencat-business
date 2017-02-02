@@ -33,13 +33,40 @@ var TemplateContainer = function () {
         Log.trace("Enter - TemplateContainer.initTemplates()");
 
         try {
-            var templates = getTemplateNames();
+            var templates = getTemplateNames("dataio");
             for (var i = 0; i < templates.length; i++) {
-                get(templates[i].schemaName);
+                getCompiledTemplateByFolder(templates[i].schemaName, "dataio");
+            }
+
+            templates = getTemplateNames("fbs");
+            for (var j = 0; j < templates.length; j++) {
+                getCompiledTemplateByFolder(templates[j].schemaName, "fbs");
             }
         }
         finally {
             Log.trace("Exit - TemplateContainer.initTemplates()");
+        }
+    }
+
+    function getTemplateNamesAll() {
+        Log.trace("Enter - getTemplateNamesAll()");
+
+        try {
+            var result = [];
+
+            var templates = getTemplateNames("dataio");
+            for (var i = 0; i < templates.length; i++) {
+                result.push(templates[i]);
+            }
+
+            templates = getTemplateNames("fbs");
+            for (var j = 0; j < templates.length; j++) {
+                result.push(templates[j]);
+            }
+
+            return result;
+        } finally {
+            Log.trace("Exit - getTemplateNamesAll()");
         }
     }
 
@@ -48,15 +75,14 @@ var TemplateContainer = function () {
      *
      * @return {Array} An Array with the names of the templates.
      */
-    function getTemplateNames() {
+    function getTemplateNames(templateFolder) {
         Log.trace("Enter - getTemplateNames()");
 
         try {
-            var rootDir = new Packages.java.io.File(StringUtil.sprintf("%s/distributions/%s/templates", settings.get('javascript.basedir'), settings.get('javascript.install.name')));
-            var files = rootDir.listFiles();
             var result = [];
 
-            Log.debug("Using install dir: ", rootDir.getAbsolutePath());
+            var rootDir = new Packages.java.io.File(StringUtil.sprintf("%s/distributions/%s/templates", settings.get('javascript.basedir'), templateFolder));
+            var files = rootDir.listFiles();
 
             for (var i = 0; i < files.length; i++) {
                 if (!files[i].isFile()) {
@@ -144,6 +170,25 @@ var TemplateContainer = function () {
         }
     }
 
+    function getCompiledTemplateByFolder(name, templateFolder) {
+        Log.trace("Enter - TemplateOptimizer.get()");
+
+        try {
+            var result = templates[name];
+            if (result === undefined) {
+                result = __load_compiled_template(name, templateFolder);
+                if (result !== undefined) {
+                    templates[name] = result;
+                }
+            }
+
+            return result;
+        }
+        finally {
+            Log.trace("Exit - TemplateOptimizer.get()");
+        }
+    }
+
     /**
      *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Using_the_reviver_parameter
      * @param k
@@ -163,12 +208,12 @@ var TemplateContainer = function () {
      * @returns {*}
      * @private
      */
-    function __load_compiled_template(name) {
+    function __load_compiled_template(name, templateFolder) {
         var templateFileNamePattern = "%s/distributions/%s/compiled_templates/%s.json";
         var result = null;
 
         // Load template from 'install.name' directory.
-        var filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), settings.get('javascript.install.name'), name);
+        var filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), templateFolder, name);
         Log.debug("Trying to load template file: ", filename);
 
         var templateContent = System.readFile(filename);
@@ -176,7 +221,7 @@ var TemplateContainer = function () {
         if (templateContent !== null) {
             try {
                 result = JSON.parse(templateContent, __compiled_template_reviever);
-                //   TODO: loop the reslt and call
+                //   TODO: loop the result and call
 
             } catch (ex) {
                 var message = StringUtil.sprintf("Syntax error in file '%s': %s", filename, ex);
@@ -212,19 +257,25 @@ var TemplateContainer = function () {
                 if (!settings.containsKey('javascript.basedir')) {
                     throw ResourceBundle.getStringFormat(bundle, "templates.settings.missing.key", "javascript.basedir");
                 }
-                if (!settings.containsKey('javascript.install.name')) {
-                    throw ResourceBundle.getStringFormat(bundle, "templates.settings.missing.key", "javascript.install.name");
-                }
 
                 var templateFileNamePattern = "%s/distributions/%s/templates/%s.json";
                 var templateContent = null;
                 var filename = "";
                 try {
-                    // Load template from 'install.name' directory.
-                    filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), settings.get('javascript.install.name'), name);
-                    Log.info("Trying to load template file: ", filename);
+                    try {
+                        // Load template from 'install.name' directory.
+                        filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), "dataio", name);
+                        Log.info("Trying to load template file: ", filename);
 
-                    templateContent = System.readFile(filename);
+                        templateContent = System.readFile(filename);
+                    } catch (ex) {
+                        Log.info("Loading from dataio failed - trying under fbs instead");
+                        filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), "fbs", name);
+                        Log.info("Trying to load template file: ", filename);
+
+                        templateContent = System.readFile(filename);
+                    }
+
                 } catch (ex) {
                     Log.debug("Unable to load template file: ", ex);
 
@@ -419,6 +470,7 @@ var TemplateContainer = function () {
         'setSettings': setSettings,
         'initTemplates': initTemplates,
         'getTemplateNames': getTemplateNames,
+        'getTemplateNamesAll': getTemplateNamesAll,
         'loadTemplate': loadTemplate,
         'get': get,
         'loadTemplateUnoptimized': loadTemplateUnoptimized,

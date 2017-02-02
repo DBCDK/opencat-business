@@ -3,11 +3,34 @@ use("MarcClasses");
 use("Log");
 use("StringUtil");
 use("FieldSorting");
+use("TemplateContainer");
+use("ResourceBundleFactory");
+use("DanMarc2Converter");
 
 EXPORTED_SYMBOLS = ['RecordSorting'];
 
 var RecordSorting = function () {
     var BUNDLE_NAME = "validation";
+
+    function sortRecord(templateName, record, settings) {
+        Log.trace("Enter - RecordSorting.sortRecord");
+
+        var templateProvider = function () {
+            TemplateContainer.setSettings(settings);
+            return TemplateContainer.get(templateName);
+        };
+
+        try {
+            ResourceBundleFactory.init(settings);
+
+            var recordSorted = sort(templateProvider, JSON.parse(record));
+            var marc = DanMarc2Converter.convertToDanMarc2(recordSorted);
+
+            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
+        } finally {
+            Log.trace("Exit - RecordSorting.sortRecord");
+        }
+    }
 
     /**
      * This function sorts the fields after the name of the field
@@ -52,6 +75,7 @@ var RecordSorting = function () {
 
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
+        'sortRecord': sortRecord,
         'sort': sort
     }
 

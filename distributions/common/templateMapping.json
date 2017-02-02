@@ -1,0 +1,53 @@
+{
+  "libraryToTemplateGroups": {
+    "dbc":                  {"templateGroups": ["DBC", "FFU"]},
+    "fbs":                  {"templateGroups": ["FBS"]},
+    "ffu":                  {"templateGroups": ["FFU"]},
+    "ph":                   {"templateGroups": ["PH", "FFU"]}
+  },
+  "templateGroups": {
+    "DBC": {"templates": [
+      "allowall",
+      "dbc",
+      "delete",
+      "invalid"
+    ], "folder": "dataio"},
+    "FFU": {"templates": [
+      "ffu",
+      "ffuartikel",
+      "ffubind",
+      "ffuhoved",
+      "ffumusik",
+      "ffuperiodica",
+      "ffusektion"
+    ], "folder": "dataio"},
+    "FBS": {"templates": [
+      "bog",
+      "bogbind",
+      "boghoved",
+      "bogsektion",
+      "film",
+      "filmbind",
+      "filmhoved",
+      "lokalpost",
+      "lokalpostbind",
+      "lokalposthoved",
+      "lokalpostsektion",
+      "musik",
+      "netlydbog",
+      "netlydbogbind",
+      "netlydboghoved",
+      "paahaengspost",
+      "paahaengspostbind",
+      "paahaengsposthoved",
+      "paahaengspostsektion",
+      "skolepaahaengspost",
+      "skolepaahaengspostbind",
+      "skolepaahaengsposthoved",
+      "skolepaahaengspostsektion"
+    ], "folder": "fbs"},
+    "PH": {"templates": [], "folder": ""}
+  }
+
+
+}

@@ -1,6 +1,5 @@
 use("ClassificationData");
 use("DanMarc2Converter");
-use("DBCAuthenticator");
 use("DefaultDoubleRecordHandler");
 use("DefaultEnrichmentRecordHandler");
 use("DefaultRawRepoRecordHandler");
@@ -82,38 +81,8 @@ var DBCUpdaterEntryPoint = function () {
             result = DefaultEnrichmentRecordHandler.correctRecord(instance, commonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - DBCUpdaterEntryPoint.correctLibraryExtendedRecord(): " + result);
-        }
-    }
-
-    function checkDoubleRecord(record, settings) {
-        Log.trace("Enter - DBCUpdaterEntryPoint.checkDoubleRecord");
-        try {
-            DefaultDoubleRecordHandler.checkAndSendMails(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
-        } finally {
-            Log.trace("Exit - DBCUpdaterEntryPoint.checkDoubleRecord");
-        }
-    }
-
-    function sortRecord(templateName, record, settings) {
-        Log.trace("Enter - DBCUpdaterEntryPoint.sortRecord");
-
-        var templateProvider = function () {
-            TemplateContainer.setSettings(settings);
-            return TemplateContainer.get(templateName);
-        };
-
-        try {
-            ResourceBundleFactory.init(settings);
-
-            var recordSorted = RecordSorting.sort(templateProvider, JSON.parse(record));
-            var marc = DanMarc2Converter.convertToDanMarc2(recordSorted);
-
-            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
-        } finally {
-            Log.trace("Exit - DBCUpdaterEntryPoint.sortRecord");
         }
     }
 
@@ -142,8 +111,6 @@ var DBCUpdaterEntryPoint = function () {
     return {
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
-        'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
-        'checkDoubleRecord': checkDoubleRecord,
-        'sortRecord': sortRecord
+        'correctLibraryExtendedRecord': correctLibraryExtendedRecord
     };
 }();

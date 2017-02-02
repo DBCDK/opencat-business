@@ -68,7 +68,7 @@ function main() {
         createDirectoryIfDontExist( outputDirectory );
 
         nestedStopWatch.lap( "getTemplates" );
-        var templateNames = TemplateContainer.getTemplateNames();
+        var templateNames = TemplateContainer.getTemplateNames(installName);
         printn( "Found " + templateNames.length + " for " + installName );
         printn( "Output Directory is: " + outputDirectory );
 

@@ -13,7 +13,6 @@ EXPORTED_SYMBOLS = ['TemplateLoader'];
 var TemplateLoader = function () {
     var cache = {};
 
-
     /**
      * Loads and returns a template based on its name.
      *

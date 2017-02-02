@@ -1,4 +1,4 @@
-use("FBSAuthenticator");
+use("DefaultAuthenticator");
 use("NoteAndSubjectExtentionsHandler");
 use("RawRepoClientCore");
 use("ResourceBundle");
@@ -49,7 +49,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.isNationalCommonRecord", fu
 
 // authenticateExtentions
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_features", function () {
-    var bundle = ResourceBundleFactory.getBundle(FBSAuthenticator.__BUNDLE_NAME);
+    var bundle = ResourceBundleFactory.getBundle(DefaultAuthenticator.__BUNDLE_NAME);
     var curRecord;
     var record;
 
@@ -268,7 +268,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 });
 
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth_common_subjects", function () {
-    var bundle = ResourceBundleFactory.getBundle(FBSAuthenticator.__BUNDLE_NAME);
+    var bundle = ResourceBundleFactory.getBundle(DefaultAuthenticator.__BUNDLE_NAME);
     var curRecord;
     var record;
 
@@ -468,7 +468,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 });
 
 UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth_common_notes", function () {
-    var bundle = ResourceBundleFactory.getBundle(FBSAuthenticator.__BUNDLE_NAME);
+    var bundle = ResourceBundleFactory.getBundle(DefaultAuthenticator.__BUNDLE_NAME);
     var curRecord;
     var record;
 
