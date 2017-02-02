@@ -447,7 +447,11 @@
                 "u": "DanMarc2.fields.512.subfields.u",
                 "y": "DanMarc2.fields.512.subfields.y"
             },
-			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
+			"rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfield"
+                }
+            ]
         },
         "517": {
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.54.htm",
@@ -682,9 +686,6 @@
                         "subfield": "o",
                         "not_presented_subfield": [ "652m" ]
                     }
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -875,6 +876,7 @@
 		"991": "DanMarc2.fields.991",
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+            "mandatory": true,
             "repeatable":false,
             "subfields":{
                 "a": {
