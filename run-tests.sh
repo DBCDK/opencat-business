@@ -23,7 +23,7 @@ cp -r distributions deploy/opencat-business/ || die "cp -r distributions deploy/
 
 if [ -n "$1" ];
     then
-        echo $1 > deploy/opencat-business/svn_revision.txt;
+        echo "opencat-business revision : $1" > deploy/opencat-business/svn_revision.txt;
     else
         echo "svn revision could not be resolved" > deploy/opencat-business/svn_revision.txt;
 fi
