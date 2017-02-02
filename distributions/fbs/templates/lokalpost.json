@@ -265,7 +265,13 @@
                 }
             }
         },
-        "033": "DanMarc2.fields.033",
+        "033":{
+          "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1f.htm",
+          "subfields": {
+              "a": "Lister.fields.codes.subfields.local_bibliography.community_number",
+              "b": "Lister.fields.codes.subfields.local_bibliography.community_name"
+          }
+        },
         "034": "DanMarc2.fields.034",
         "035": "DanMarc2.fields.035",
         "036": "DanMarc2.fields.036",
