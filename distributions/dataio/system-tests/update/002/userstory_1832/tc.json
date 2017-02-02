@@ -4,11 +4,11 @@
     "description": "Hvis mere end én post linkes til anden post via 002-alias, og hvis opstillingsdata er forskellig for mere end én post der linkes, og et FBS-bibliotek samtidig har beholdning på mere end én af disse poster med anden opstilling, skal der dannes en påhængspost med oplysninger om tidligere opstilling for alle poster. Disse oplysninger lægges i hver sit felt y08.",
     "request": {
       "authentication": {
-        "group": "870970",
+        "group": "010100",
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "bog",
+      "templateName": "dbc",
       "record": "request.marc"
     },
     "setup": {

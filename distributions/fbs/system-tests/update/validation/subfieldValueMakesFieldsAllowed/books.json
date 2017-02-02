@@ -18,7 +18,7 @@
         "description": "032 er ikke tilladt da der er 733000 i 996",
         "request": {
             "authentication": {
-                "group": "010100",
+                "group": "733000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
