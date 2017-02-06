@@ -1,3 +1,4 @@
+use("DanMarc2Converter");
 use("ISBDFieldFormater");
 use("Marc");
 use("MarcClasses");
@@ -16,6 +17,25 @@ EXPORTED_SYMBOLS = ['RecategorizationNoteFieldFactory'];
 var RecategorizationNoteFieldFactory = function () {
     var __BUNDLE_NAME = "categorization-codes";
     var __FIELD_NAME = "512";
+
+    /**
+     * Returns a 512 note field
+     *
+     * @param {record} the record as a string
+     * @param {updatingRecord} record the updating record as a string
+     *
+     * @returns {String} JSON representation of a field.
+     */
+    function createNewNoteField(currentRecord) {
+        Log.trace("Enter - RecategorizationNoteFieldFactory.RecategorizationNoteFieldFactory");
+        var result;
+        try {
+            var rec = DanMarc2Converter.convertToDanMarc2(JSON.parse(currentRecord));
+            return result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2Field(newNoteField(rec, rec)));
+        } finally {
+            Log.trace("Exit - RecategorizationNoteFieldFactory.RecategorizationNoteFieldFactory: ", result);
+        }
+    }
 
     /**
      * Constructs a new {__FIELD_NAME} note field from a record based on its
@@ -69,7 +89,7 @@ var RecategorizationNoteFieldFactory = function () {
             }
 
             if (field !== undefined && spec !== undefined) {
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 var message = ResourceBundle.getStringFormat(bundle, "note.material", ISBDFieldFormater.formatField(field, spec));
 
                 noteField.append("i", message.trim());
@@ -105,7 +125,7 @@ var RecategorizationNoteFieldFactory = function () {
                     }
                 };
 
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 message = ISBDFieldFormater.formatField(field, spec);
 
                 noteField.append("d", message.trim());
@@ -128,7 +148,7 @@ var RecategorizationNoteFieldFactory = function () {
                     }
                 };
 
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 message = ISBDFieldFormater.formatField(field, spec);
 
                 noteField.append("d", message.trim());
@@ -148,7 +168,7 @@ var RecategorizationNoteFieldFactory = function () {
                     }
                 };
 
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 message = ISBDFieldFormater.formatField(field, spec);
 
                 noteField.append("d", message.trim());
@@ -178,7 +198,7 @@ var RecategorizationNoteFieldFactory = function () {
                     }
                 };
 
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 message = ISBDFieldFormater.formatField(field, spec);
 
                 Log.debug("C1: Add *t with: ", message);
@@ -199,7 +219,7 @@ var RecategorizationNoteFieldFactory = function () {
                 };
 
                 if (field !== undefined) {
-                    Log.debug("Formating field: ", field);
+                    Log.debug("Formatting field: ", field);
                     message = ISBDFieldFormater.formatField(field, spec);
 
                     Log.debug("C2: Add *t with: ", message);
@@ -223,7 +243,7 @@ var RecategorizationNoteFieldFactory = function () {
             };
 
             if (field !== undefined) {
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 message = ISBDFieldFormater.formatField(field, spec);
 
                 Log.debug("C3: Add *t with: ", message);
@@ -257,7 +277,7 @@ var RecategorizationNoteFieldFactory = function () {
                 };
 
                 Log.debug("Formatting field: ", field !== undefined ? field : "UNDEFINED");
-                Log.debug("Formated message: ", ISBDFieldFormater.formatField(field, spec));
+                Log.debug("Formatted message: ", ISBDFieldFormater.formatField(field, spec));
                 message = ResourceBundle.getStringFormat(__loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField(field, spec));
             }
 
@@ -273,7 +293,7 @@ var RecategorizationNoteFieldFactory = function () {
                     }
                 };
 
-                Log.debug("Formating field: ", field);
+                Log.debug("Formatting field: ", field);
                 message += ResourceBundle.getStringFormat(__loadBundle(), "note.category.type", ISBDFieldFormater.formatField(field, spec));
             }
 
@@ -332,6 +352,7 @@ var RecategorizationNoteFieldFactory = function () {
     return {
         '__FIELD_NAME': __FIELD_NAME,
         '__BUNDLE_NAME': __BUNDLE_NAME,
+        'createNewNoteField': createNewNoteField,
         'newNoteField': newNoteField,
         '__PrettyCase': __PrettyCase
     }

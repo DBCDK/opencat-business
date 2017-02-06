@@ -12,7 +12,7 @@ EXPORTED_SYMBOLS = ['DefaultDoubleRecordHandler'];
  * sent by the module XXX.
  *
  * @namespace
- * @name DefaultEnrichmentRecordHandler
+ * @name DefaultDoubleRecordHandler
  */
 var DefaultDoubleRecordHandler = function () {
     var __BUNDLE_NAME = "double-record";

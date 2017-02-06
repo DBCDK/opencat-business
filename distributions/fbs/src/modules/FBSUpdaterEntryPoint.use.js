@@ -2,7 +2,7 @@ use("DanMarc2Converter");
 use("DefaultDoubleRecordHandler");
 use("DefaultEnrichmentRecordHandler");
 use("DefaultRawRepoRecordHandler");
-use("Authenticator");
+use("FBSAuthenticator");
 use("FBSClassificationData");
 use("Log");
 use("Marc");
@@ -16,7 +16,7 @@ EXPORTED_SYMBOLS = ['FBSUpdaterEntryPoint'];
  * JavaScript.
  *
  * @namespace
- * @name FBSUpdaterEntryPoint
+ * @name FBSAuthenticator
  */
 var FBSUpdaterEntryPoint = function () {
 
@@ -78,7 +78,7 @@ var FBSUpdaterEntryPoint = function () {
             var enrichmentMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(enrichmentRecord));
             Log.trace("Create instance with ClassificationData");
             var classificationsInstance = ClassificationData.create(UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS);
-            var instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, ClassificationData);
+            var instance = DefaultEnrichmentRecordHandler.create(classificationsInstance, FBSClassificationData);
             result = DefaultEnrichmentRecordHandler.correctRecord(instance, commonMarc, enrichmentMarc);
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
@@ -103,6 +103,44 @@ var FBSUpdaterEntryPoint = function () {
             return result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2Field(RecategorizationNoteFieldFactory.newNoteField(rec, rec)));
         } finally {
             Log.trace("Exit - FBSUpdaterEntryPoint.RecategorizationNoteFieldFactory: ", result);
+        }
+    }
+
+    function checkDoubleRecord(record, settings) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.checkDoubleRecord");
+        try {
+            DefaultDoubleRecordHandler.checkAndSendMails(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.checkDoubleRecord");
+        }
+    }
+
+    function checkDoubleRecordFrontend(record, settings) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.checkDoubleRecordFrontend");
+        try {
+            return DefaultDoubleRecordHandler.checkDoubleRecordFrontend(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.checkDoubleRecordFrontend");
+        }
+    }
+
+    function sortRecord(templateName, record, settings) {
+        Log.trace("Enter - FBSUpdaterEntryPoint.sortRecord");
+
+        var templateProvider = function () {
+            TemplateContainer.setSettings(settings);
+            return TemplateContainer.get(templateName);
+        };
+
+        try {
+            ResourceBundleFactory.init(settings);
+
+            var recordSorted = RecordSorting.sort(templateProvider, JSON.parse(record));
+            var marc = DanMarc2Converter.convertToDanMarc2(recordSorted);
+
+            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
+        } finally {
+            Log.trace("Exit - FBSUpdaterEntryPoint.sortRecord");
         }
     }
 
@@ -132,6 +170,9 @@ var FBSUpdaterEntryPoint = function () {
         'recategorizationNoteFieldFactory': recategorizationNoteFieldFactory,
         'createLibraryExtendedRecord': createLibraryExtendedRecord,
         'updateLibraryExtendedRecord': updateLibraryExtendedRecord,
-        'correctLibraryExtendedRecord': correctLibraryExtendedRecord
+        'correctLibraryExtendedRecord': correctLibraryExtendedRecord,
+        'checkDoubleRecord': checkDoubleRecord,
+        'checkDoubleRecordFrontend': checkDoubleRecordFrontend,
+        'sortRecord': sortRecord
     };
 }();

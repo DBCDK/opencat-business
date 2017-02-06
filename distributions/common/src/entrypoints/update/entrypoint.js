@@ -1,7 +1,7 @@
 use("Authenticator");
-use("FBSUpdaterEntryPoint");
-use("DBCUpdaterEntryPoint");
 use("DefaultValidatorEntryPoint");
+use("DefaultEnrichmentRecordHandler");
+use("RecategorizationNoteFieldFactory");
 use("RecordSorting");
 use("Log");
 
@@ -11,6 +11,10 @@ function initTemplates(settings) {
 
 function authenticateRecord(record, userId, groupId, settings) {
     return Authenticator.authenticateRecord(record, userId, groupId, settings);
+}
+
+function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
+    return DefaultEnrichmentRecordHandler.doRecategorizationThings(currentRecord, updateRecord, newRecord);
 }
 
 /**
@@ -59,55 +63,6 @@ function sortRecord(templateName, record, settings) {
 }
 
 /**
- * Creates a new library extended record based on a DBC record.
- *
- * @param {String} currentCommonRecord  The current common record as a json.
- * @param {String} updatingCommonRecord The common record begin updated as a json.
- * @param {int}    agencyId Library id for the local library.
- *
- * @return {String} A json with the new record.
- */
-function createLibraryExtendedRecordDBC(currentCommonRecord, updatingCommonRecord, agencyId) {
-    return DBCUpdaterEntryPoint.createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId);
-}
-
-function createLibraryExtendedRecordFBS(currentCommonRecord, updatingCommonRecord, agencyId) {
-    return FBSUpdaterEntryPoint.createLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, agencyId);
-}
-
-/**
- * Updates a library extended record with the classifications from
- * a DBC record.
- *
- * @param {String} currentCommonRecord  The current common record as a json.
- * @param {String} updatingCommonRecord The common record begin updated as a json.
- * @param {String} enrichmentRecord The library record to update as a json.
- *
- * @return {String} A json with the updated record.
- */
-function updateLibraryExtendedRecordDBC(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
-    return DBCUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord);
-}
-
-function updateLibraryExtendedRecordFBS(currentCommonRecord, updatingCommonRecord, enrichmentRecord) {
-    return FBSUpdaterEntryPoint.updateLibraryExtendedRecord(currentCommonRecord, updatingCommonRecord, enrichmentRecord);
-}
-
-/**
- *
- * @param commonRecord
- * @param enrichmentRecord
- * @returns {*}
- */
-function correctLibraryExtendedRecordDBC(commonRecord, enrichmentRecord) {
-    return DBCUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
-}
-
-function correctLibraryExtendedRecordFBS(commonRecord, enrichmentRecord) {
-    return FBSUpdaterEntryPoint.correctLibraryExtendedRecord(commonRecord, enrichmentRecord);
-}
-
-/**
  * Function that takes a record and creates a 512 notefield from the given data.
  *
  * @param {String} currentCommonRecord  The current record as a json.
@@ -115,5 +70,5 @@ function correctLibraryExtendedRecordFBS(commonRecord, enrichmentRecord) {
  * @return {String} A json with the new record.
  */
 function recategorizationNoteFieldFactory(currentCommonRecord) {
-    return FBSUpdaterEntryPoint.recategorizationNoteFieldFactory(currentCommonRecord);
+    return RecategorizationNoteFieldFactory.createNewNoteField(currentCommonRecord);
 }

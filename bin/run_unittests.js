@@ -13,7 +13,6 @@ use( "Builder" );
 // Include update modules
 use( "AuthenticatorEntryPointTests" );
 use( "BasisSplitterTests" );
-use( "ClassificationData_UnitTests" );
 use( "AuthenticatorTests" );
 use( "NoteAndSubjectExtentionsHandlerTests" );
 use( "RecordSorterTests" );
