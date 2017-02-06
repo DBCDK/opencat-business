@@ -2,6 +2,7 @@ use("Authenticator");
 use("DefaultValidatorEntryPoint");
 use("DefaultEnrichmentRecordHandler");
 use("RecategorizationNoteFieldFactory");
+use("DefaultDoubleRecordHandler");
 use("RecordSorting");
 use("Log");
 
