@@ -1,0 +1,38 @@
+[
+    {
+        "name": "ny-node",
+        "bugs": [ "" ],
+        "description": "Tester oprettelse af ny node (fællesskabspost) fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "746100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "musik",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-new-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+
+]
