@@ -40,7 +40,7 @@ var SubfieldMandatoryIfSubfieldNotPresentRule = function () {
 
             params.not_presented_subfield.forEach(function (fieldSubfield) {
                 if (fieldSubfield.length < 4) {
-                    Log.debug("params.not_presented_subfield is not a field/subfield: %s in param %s", fieldSubfield, params.subfields);
+                    Log.debug("params.not_presented_subfield is not a field/subfield: ", fieldSubfield, " in param ", params.subfields === undefined ? "params.subfields undefined" : params.subfields);
                     throw StringUtil.sprintf("params.not_presented_subfield is not a field/subfield: %s in param %s", params.not_presented_subfield, params.subfields);
                 }
             });

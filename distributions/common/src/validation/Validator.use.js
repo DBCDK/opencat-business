@@ -50,7 +50,7 @@ var Validator = function () {
             if (template.rules instanceof Array) {
                 for (var k = 0; k < template.rules.length; k++) {
                     var rule = template.rules[k];
-                    Log.debug("Record rule: ", rule.name);
+                    Log.debug("Record rule: ", rule.name === undefined ? "name undefined" : rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
                         var valErrors = rule.type(record, rule.params, settings);
@@ -106,7 +106,7 @@ var Validator = function () {
             if (templateField.rules instanceof Array) {
                 for (i = 0; i < templateField.rules.length; i++) {
                     var rule = templateField.rules[i];
-                    Log.debug("Field rule [", field.name, "]: ", rule.name);
+                    Log.debug("Field rule [", field.name === undefined ? "field name undefined" : field.name, "]: ", rule.name === undefined ? "rule name undefined" : rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
@@ -171,7 +171,9 @@ var Validator = function () {
             if (templateSubfield instanceof Array) {
                 for (var i = 0; i < templateSubfield.length; i++) {
                     var rule = templateSubfield[i];
-                    Log.debug("Subfield rule [", field.name, " *", subfield.name, "]: ", rule.name);
+                    Log.debug("field ", field.name === undefined ? "field undefined" : field.name);
+                    Log.debug("subfield ", subfield.name === undefined ? "subfield undefined" : subfield.name);
+                    Log.debug("rule ", rule.name === undefined ? "rule undefined" : rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
