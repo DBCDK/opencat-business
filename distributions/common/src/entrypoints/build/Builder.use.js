@@ -1,6 +1,4 @@
-use( "Print" );
-use( "TemplateOptimizer" );
-use( "UnitTest" );
+use("Log");
 
 EXPORTED_SYMBOLS = [ 'Builder' ];
 
@@ -237,14 +235,18 @@ var Builder = function() {
             "indicator": indicator,
             "subfields": []
         };
-
+        var alreadyAddedSubfields = [];
         var tmpSubfields = getSubfieldsFromExtraFields(fieldName, extraFields);
         if (mandatorySubfields.length > 0 || tmpSubfields.length > 0) {
             mandatorySubfields.forEach(function (arg) {
                 field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
+                alreadyAddedSubfields.push(arg);
             });
             tmpSubfields.forEach(function (arg) {
-                field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
+                if (alreadyAddedSubfields.indexOf(arg) == -1) {
+                    field.subfields.push(buildSubfield(template, arg, fieldName, faustProvider));
+                }
+
             });
         } else {
             field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
@@ -338,7 +340,7 @@ var Builder = function() {
     // ex: in  = ["001", "002", "003"], 1
     //     out = {"001": 1, "002": 1, "003": 1}
     function listAsObject( list, defaultValue ) {
-        Log.trace( "-> listeAsObject" );
+        Log.trace( "-> listAsObject" );
         var result;
         if ( list instanceof Array ) {
             result = {};
@@ -351,7 +353,7 @@ var Builder = function() {
         return result;
     }
 
-    // returns a list of subfields present in the template under a specifiec field
+    // returns a list of subfields present in the template under a specific field
     function subfieldsInTemplate( template, field ) {
         Log.trace( "-> subfieldsInTemplate" );
         var result = {};
