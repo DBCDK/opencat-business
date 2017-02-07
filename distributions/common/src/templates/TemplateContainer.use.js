@@ -221,8 +221,6 @@ var TemplateContainer = function () {
         if (templateContent !== null) {
             try {
                 result = JSON.parse(templateContent, __compiled_template_reviever);
-                //   TODO: loop the result and call
-
             } catch (ex) {
                 var message = StringUtil.sprintf("Syntax error in file '%s': %s", filename, ex);
                 Log.error(message);
