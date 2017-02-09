@@ -145,6 +145,7 @@
         },
         "014":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
+            "mandatory":true,
             "repeatable":false,
             "subfields":{
                 "a":{
