@@ -12,6 +12,7 @@ EXPORTED_SYMBOLS = ['RawRepoClient'];
  * @name RawRepoClient
  */
 var RawRepoClient = function () {
+
     /**
      * Checks if a record exists in the rawrepo.
      *

@@ -5,16 +5,16 @@ use("RecordUtil");
 use("ResourceBundleFactory");
 use("ResourceBundle");
 
-EXPORTED_SYMBOLS = ['DefaultEnrichmentRecordHandler'];
+EXPORTED_SYMBOLS = ['EnrichmentRecordHandler'];
 
 /**
  * Module to implement entrypoints for the update logic in DBC and FBS
  * installations.
  *
  * @namespace
- * @name DefaultEnrichmentRecordHandler
+ * @name EnrichmentRecordHandler
  */
-var DefaultEnrichmentRecordHandler = function () {
+var EnrichmentRecordHandler = function () {
 
     // Fix for story #1911 ,
     // adding a y08 field with subfield value *a UPDATE posttypeskift
@@ -31,7 +31,7 @@ var DefaultEnrichmentRecordHandler = function () {
     }
 
     function doRecategorizationThings(commonRecord, enrichmentRecord, newRecord) {
-        Log.trace("Enter - DefaultValidatorEntryPoint.doRecategorizationThings()");
+        Log.trace("Enter - EnrichmentRecordHandler.doRecategorizationThings()");
         var result;
         try {
             var commonMarc = DanMarc2Converter.convertToDanMarc2(JSON.parse(commonRecord));
@@ -41,7 +41,7 @@ var DefaultEnrichmentRecordHandler = function () {
             result = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(result));
             return result;
         } finally {
-            Log.trace("Exit - DefaultValidatorEntryPoint.doRecategorizationThings(): " + result);
+            Log.trace("Exit - EnrichmentRecordHandler.doRecategorizationThings(): " + result);
         }
     }
 
@@ -74,7 +74,7 @@ var DefaultEnrichmentRecordHandler = function () {
     }
 
     function __isRecategorization(currentCommonRecord, updatingCommonRecord) {
-        Log.trace("Enter - DefaultEnrichmentRecordHandler.__isRecategorization()");
+        Log.trace("Enter - EnrichmentRecordHandler.__isRecategorization()");
         var result;
         try {
             if (updatingCommonRecord.matchValue(/004/, /a/, /e/)) {
@@ -145,7 +145,7 @@ var DefaultEnrichmentRecordHandler = function () {
             }
             return result = false;
         } finally {
-            Log.trace("Exit - DefaultEnrichmentRecordHandler.__isRecategorization(): ", result);
+            Log.trace("Exit - EnrichmentRecordHandler.__isRecategorization(): ", result);
         }
     }
 

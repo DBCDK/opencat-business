@@ -12,6 +12,7 @@ var ResourceBundleFactory = function () {
     var bundles = {};
 
     function init(settings) {
+        Log.info('javascript.basedir = ' + settings.get('javascript.basedir'));
         setDistributionPaths(settings.get('javascript.basedir'), "common");
     }
 

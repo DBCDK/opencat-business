@@ -9,7 +9,7 @@ EXPORTED_SYMBOLS = ['RecordUtil'];
  * Utility functions that operates on a Field
  *
  * @namespace
- * @name BasisSplitter
+ * @name RecordUtil
  */
 var RecordUtil = function () {
     /**

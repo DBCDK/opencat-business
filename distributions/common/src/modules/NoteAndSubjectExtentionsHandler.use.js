@@ -1,4 +1,4 @@
-use("DefaultAuthenticator");
+use("Authenticator");
 use("Log");
 use("Marc");
 use("OpenAgencyClient");
@@ -43,7 +43,7 @@ var NoteAndSubjectExtentionsHandler = function () {
             if (!isNationalCommonRecord(curRecord)) {
                 return result = [];
             }
-            var bundle = ResourceBundleFactory.getBundle(DefaultAuthenticator.__BUNDLE_NAME);
+            var bundle = ResourceBundleFactory.getBundle(Authenticator.__BUNDLE_NAME);
             var authResult = [];
             var extentableFieldsRx = __createExtentableFieldsRx(groupId);
             record.eachField(/./, function (field) {

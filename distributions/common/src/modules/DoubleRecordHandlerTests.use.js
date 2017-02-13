@@ -1,12 +1,12 @@
-use("DefaultDoubleRecordHandler");
+use("DoubleRecordHandler");
 use("DoubleRecordMailServiceClientCore");
 use("GenericSettings");
 use("RecordUtil");
 use("SolrCore");
 use("UnitTest");
 
-UnitTest.addFixture("DefaultDoubleRecordHandler.checkAndSendMails", function () {
-    var __bundle = ResourceBundleFactory.getBundle(DefaultDoubleRecordHandler.__BUNDLE_NAME);
+UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
+    var __bundle = ResourceBundleFactory.getBundle(DoubleRecordHandler.__BUNDLE_NAME);
 
     GenericSettings.setSettings({
         'solr.url': "http://unknown.dbc.dk:8080/solr/raapost-index"
@@ -18,7 +18,7 @@ UnitTest.addFixture("DefaultDoubleRecordHandler.checkAndSendMails", function () 
         "245 00 *a Anton til soes",
         "260 00 *& 1 *a Vinderup *b Cadeau *c 2015"
     ].join("\n"));
-    DefaultDoubleRecordHandler.checkAndSendMails(record, GenericSettings);
+    DoubleRecordHandler.checkAndSendMails(record, GenericSettings);
     Assert.equalValue("No 001", DoubleRecordMailServiceClientCore.receivedMessages(), []);
 
     DoubleRecordMailServiceClientCore.clearMessages();
@@ -29,7 +29,7 @@ UnitTest.addFixture("DefaultDoubleRecordHandler.checkAndSendMails", function () 
         "009 00 *h ws",
         "652 00 *m Uden klassem\xe6rke"
     ].join("\n"));
-    DefaultDoubleRecordHandler.checkAndSendMails(record, GenericSettings);
+    DoubleRecordHandler.checkAndSendMails(record, GenericSettings);
     Assert.equalValue("009, but no *a", DoubleRecordMailServiceClientCore.receivedMessages(), []);
 
     DoubleRecordMailServiceClientCore.clearMessages();
@@ -73,7 +73,7 @@ UnitTest.addFixture("DefaultDoubleRecordHandler.checkAndSendMails", function () 
         "260 00 *& 1 *a Vinderup *b Cadeau *c 2015",
         "652 00 *m Uden klassem\xe6rke"
     ].join("\n"));
-    DefaultDoubleRecordHandler.checkAndSendMails(record, GenericSettings);
+    DoubleRecordHandler.checkAndSendMails(record, GenericSettings);
     Assert.equalValue("Full record", JSON.stringify(DoubleRecordMailServiceClientCore.receivedMessages()),
         JSON.stringify([{
             subject: ResourceBundle.getStringFormat(__bundle, "mail.subject", "3 458 795 6", "191919"),

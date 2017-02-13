@@ -2,16 +2,16 @@ use("AuthenticateTemplate");
 use("TemplateContainer");
 use("Validator");
 
-EXPORTED_SYMBOLS = ['DefaultValidatorEntryPoint'];
+EXPORTED_SYMBOLS = ['ValidatorEntryPoint'];
 
 /**
  * Module to contain entry points for the validator API between Java and
  * JavaScript.
  *
  * @namespace
- * @name DefaultValidatorEntryPoint
+ * @name ValidatorEntryPoint
  */
-var DefaultValidatorEntryPoint = function () {
+var ValidatorEntryPoint = function () {
     function initTemplates(settings) {
         ResourceBundleFactory.init(settings);
         TemplateContainer.setSettings(settings);
@@ -25,13 +25,13 @@ var DefaultValidatorEntryPoint = function () {
      *                as an Array.
      */
     function getValidateSchemas(groupId, libraryType, settings) {
-        Log.trace("Enter - DefaultValidatorEntryPoint.getValidateSchemas( '", groupId, "', '", libraryType, "', ", settings, " )");
+        Log.trace("Enter - ValidatorEntryPoint.getValidateSchemas( '", groupId, "', '", libraryType, "', ", settings, " )");
         var result = undefined;
         try {
             ResourceBundleFactory.init(settings);
             TemplateContainer.setSettings(settings);
 
-            var schemas = TemplateContainer.getTemplatesNamesByLibraryType(libraryType, settings);
+            var schemas = TemplateContainer.getTemplateNamesAll();
             var list = [];
             for (var i = 0; i < schemas.length; i++) {
                 var schema = schemas[i];
@@ -41,7 +41,7 @@ var DefaultValidatorEntryPoint = function () {
             }
             return result = JSON.stringify(list);
         } finally {
-            Log.trace("Exit - DefaultValidatorEntryPoint.getValidateSchemas(): ", result);
+            Log.trace("Exit - ValidatorEntryPoint.getValidateSchemas(): ", result);
         }
     }
 
@@ -98,7 +98,7 @@ var DefaultValidatorEntryPoint = function () {
                 ResourceBundleFactory.init(settings);
                 result = Validator.validateRecord(rec, templateProvider, settings);
             } catch (ex) {
-                var msg = StringUtil.sprintf("DefaultValidatorEntryPoint systemfejl ved validering: %s", ex);
+                var msg = StringUtil.sprintf("ValidatorEntryPoint systemfejl ved validering: %s", ex);
                 result = [ValidateErrors.recordError("", msg)];
             }
             return JSON.stringify(result);

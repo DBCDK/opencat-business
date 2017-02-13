@@ -3,7 +3,7 @@ use("DoubleRecordMailServiceClient");
 use("Log");
 use("Marc");
 
-EXPORTED_SYMBOLS = ['DefaultDoubleRecordHandler'];
+EXPORTED_SYMBOLS = ['DoubleRecordHandler'];
 
 /**
  * Module execute the checks of double records and sending a mail with any hits.
@@ -12,9 +12,9 @@ EXPORTED_SYMBOLS = ['DefaultDoubleRecordHandler'];
  * sent by the module XXX.
  *
  * @namespace
- * @name DefaultDoubleRecordHandler
+ * @name DoubleRecordHandler
  */
-var DefaultDoubleRecordHandler = function () {
+var DoubleRecordHandler = function () {
     var __BUNDLE_NAME = "double-record";
 
     /**
@@ -23,10 +23,10 @@ var DefaultDoubleRecordHandler = function () {
      * @param record   The record to check for double records.
      * @param settings JNDI settings.
      *
-     * @name DefaultDoubleRecordHandler#checkAndSendMails
+     * @name DoubleRecordHandler#checkAndSendMails
      */
     function checkAndSendMails(record, settings) {
-        Log.trace("Enter - DefaultDoubleRecordHandler.checkAndSendMails()");
+        Log.trace("Enter - DoubleRecordHandler.checkAndSendMails()");
         try {
             if (!settings.containsKey('solr.url')) {
                 Log.error("SOLR has not been configured. Missing key 'solr.url' in settings.");
@@ -40,7 +40,6 @@ var DefaultDoubleRecordHandler = function () {
             var records = DoubleRecordFinder.find(record, settings.get('solr.url'));
             var idField = record.getFirstFieldAsField(/001/);
             if (idField === "") {
-                // record.getFirstFieldAsField() returns "" if no field were found!!!
                 return;
             }
             var logMessage = StringUtil.sprintf("Double records for record {%s:%s}: %s", idField.getFirstValue(/a/), idField.getFirstValue(/b/), JSON.stringify(records));
@@ -51,7 +50,7 @@ var DefaultDoubleRecordHandler = function () {
             var mailObject = formatMessage(idField, records);
             DoubleRecordMailServiceClient.sendMessage(mailObject.subject, mailObject.body);
         } finally {
-            Log.trace("Exit - DefaultDoubleRecordHandler.checkAndSendMails()");
+            Log.trace("Exit - DoubleRecordHandler.checkAndSendMails()");
         }
     }
 
@@ -61,10 +60,10 @@ var DefaultDoubleRecordHandler = function () {
      * @param record   The record to check for double records.
      * @param settings JNDI settings.
      *
-     * @name DefaultDoubleRecordHandler#checkDoubleRecordFrontend
+     * @name DoubleRecordHandler#checkDoubleRecordFrontend
      */
     function checkDoubleRecordFrontend(record, settings) {
-        Log.trace("Enter - DefaultDoubleRecordHandler.checkDoubleRecordFrontend()");
+        Log.trace("Enter - DoubleRecordHandler.checkDoubleRecordFrontend()");
         var res = {status: "ok"};
         try {
             if (!settings.containsKey('solr.url')) {
@@ -88,7 +87,7 @@ var DefaultDoubleRecordHandler = function () {
             }
             return JSON.stringify(res);
         } finally {
-            Log.trace("Exit - DefaultDoubleRecordHandler.checkDoubleRecordFrontend()");
+            Log.trace("Exit - DoubleRecordHandler.checkDoubleRecordFrontend()");
         }
     }
 
@@ -103,10 +102,10 @@ var DefaultDoubleRecordHandler = function () {
      *
      * @returns {{subject: String, body: String}} An object the subject and body for the mail message.
      *
-     * @name DefaultDoubleRecordHandler#formatMessage
+     * @name DoubleRecordHandler#formatMessage
      */
     function formatMessage(idField, records) {
-        Log.trace("Enter - DefaultDoubleRecordHandler.formatMessage()");
+        Log.trace("Enter - DoubleRecordHandler.formatMessage()");
 
         var result = undefined;
         try {
@@ -126,7 +125,7 @@ var DefaultDoubleRecordHandler = function () {
                 body: s
             }
         } finally {
-            Log.trace("Exit - DefaultDoubleRecordHandler.formatMessage(): ", result);
+            Log.trace("Exit - DoubleRecordHandler.formatMessage(): ", result);
         }
     }
 
@@ -136,7 +135,7 @@ var DefaultDoubleRecordHandler = function () {
      * @param record   The record to check for double records.
      * @param settings JNDI settings.
      *
-     * @name DefaultDoubleRecordHandler#checkGeneral
+     * @name DoubleRecordHandler#checkGeneral
      */
     function checkGeneral(record, settings) {
         Log.trace("Enter - FrontendDoubleRecordHandler.checkGeneral()");

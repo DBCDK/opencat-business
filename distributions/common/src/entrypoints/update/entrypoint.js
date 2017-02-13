@@ -1,21 +1,21 @@
 use("Authenticator");
-use("DefaultValidatorEntryPoint");
-use("DefaultEnrichmentRecordHandler");
+use("ValidatorEntryPoint");
+use("EnrichmentRecordHandler");
 use("RecategorizationNoteFieldFactory");
-use("DefaultDoubleRecordHandler");
+use("DoubleRecordHandler");
 use("RecordSorting");
 use("Log");
 
 function initTemplates(settings) {
-    DefaultValidatorEntryPoint.initTemplates(settings);
+    ValidatorEntryPoint.initTemplates(settings);
 }
 
 function authenticateRecord(record, userId, groupId, settings) {
-    return Authenticator.authenticateRecord(record, userId, groupId, settings);
+    return Authenticator.authenticateRecordEntryPoint(record, userId, groupId, settings);
 }
 
 function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
-    return DefaultEnrichmentRecordHandler.doRecategorizationThings(currentRecord, updateRecord, newRecord);
+    return EnrichmentRecordHandler.doRecategorizationThings(currentRecord, updateRecord, newRecord);
 }
 
 /**
@@ -25,7 +25,7 @@ function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
  *                as an Array.
  */
 function getValidateSchemas(groupId, libraryGroup, settings) {
-    return DefaultValidatorEntryPoint.getValidateSchemas(groupId, libraryGroup, settings);
+    return ValidatorEntryPoint.getValidateSchemas(groupId, libraryGroup, settings);
 }
 
 /**
@@ -36,7 +36,7 @@ function getValidateSchemas(groupId, libraryGroup, settings) {
  * @return {Boolean} true if the template exists, false otherwise.
  */
 function checkTemplate(name, groupId, libraryGroup, settings) {
-    return DefaultValidatorEntryPoint.checkTemplate(name, groupId, libraryGroup, settings);
+    return ValidatorEntryPoint.checkTemplate(name, groupId, libraryGroup, settings);
 }
 
 /**
@@ -48,15 +48,15 @@ function checkTemplate(name, groupId, libraryGroup, settings) {
  * @return {String} A json string with an array of validation errors.
  */
 function validateRecord(templateName, record, settings) {
-    return DefaultValidatorEntryPoint.validateRecord(templateName, record, settings);
+    return ValidatorEntryPoint.validateRecord(templateName, record, settings);
 }
 
 function checkDoubleRecord(record, settings) {
-    return DefaultDoubleRecordHandler.checkAndSendMails(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
+    return DoubleRecordHandler.checkAndSendMails(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
 }
 
 function checkDoubleRecordFrontend(record, settings) {
-    return DefaultDoubleRecordHandler.checkDoubleRecordFrontend(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
+    return DoubleRecordHandler.checkDoubleRecordFrontend(DanMarc2Converter.convertToDanMarc2(JSON.parse(record)), settings);
 }
 
 function sortRecord(templateName, record, settings) {

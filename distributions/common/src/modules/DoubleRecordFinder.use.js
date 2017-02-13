@@ -30,7 +30,7 @@ var DoubleRecordFinder = function () {
      * @param record {record}  The record to find double records for.
      * @param callSolrUrl {String} Url to the solr service to use.
      *
-     * @return {Array} Array of objects with found records. See DefaultDoubleRecordHandler#formatMessage
+     * @return {Array} Array of objects with found records. See DoubleRecordHandler#formatMessage
      *                 for an explanation.
      *
      * @name DoubleRecordFinder#find
@@ -55,7 +55,7 @@ var DoubleRecordFinder = function () {
      * @param record {record}  The record to find double records for.
      * @param callSolrUrl {String} Url to the solr service to use.
      *
-     * @return {Array} Array of objects with found records. See DefaultDoubleRecordHandler#formatMessage
+     * @return {Array} Array of objects with found records. See DoubleRecordHandler#formatMessage
      *                 for an explanation.
      *
      * @name DoubleRecordFinder#find
