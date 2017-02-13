@@ -356,6 +356,7 @@
             "repeatable":false,
             "subfields":{
                 "a": {
+                    "mandatory": true,
                     "values": "Lister.fields.codes.subfields.general_mattype.values"
                 },
                 "g": {
@@ -793,6 +794,7 @@
         },
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
+            "sorting":"apbcde",
             "subfields":{
                 "a": {
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
@@ -1883,12 +1885,7 @@
                 "1":{
                     "repeatable":false
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "500":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.48.htm",
@@ -1997,7 +1994,11 @@
                 },
                 "i":{
                     "repeatable":false,
-                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "t":{},
                 "e":{},
@@ -2010,9 +2011,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -2067,7 +2065,11 @@
                 },
                 "i":{
                     "repeatable":false,
-                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "t":{},
                 "e":{},
@@ -2083,9 +2085,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -2163,9 +2162,6 @@
             "rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -2218,9 +2214,6 @@
             "rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -2265,9 +2258,6 @@
             "rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -2302,12 +2292,7 @@
                     "repeatable":false
 				},
                 "t":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "539":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.61.htm",
@@ -2324,12 +2309,7 @@
                 "a":{
                     "mandatory":true
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "545":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.63a.htm",
@@ -2397,12 +2377,7 @@
                         }
                     ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "558":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.65.htm",
@@ -2441,12 +2416,7 @@
                 	"repeatable":false,
                     "rules":[ { "type":"SubfieldRules.checkISBN13" } ]
 				}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "559":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.66.htm",
@@ -2465,12 +2435,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "561":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2479,12 +2444,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "562":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2493,12 +2453,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "563":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.67.htm",
@@ -2507,12 +2462,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "564":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2521,12 +2471,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "565":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.68.htm",
@@ -2535,12 +2480,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "566":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2549,12 +2489,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "567":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2563,12 +2498,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "568":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2577,12 +2507,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "569":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2591,12 +2516,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "570":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.69.htm",
@@ -2605,12 +2525,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "571":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2619,12 +2534,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "572":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2633,12 +2543,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "573":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2647,12 +2552,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "574":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2661,12 +2561,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "575":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2675,12 +2570,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "576":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2689,12 +2579,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "577":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2703,12 +2588,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "578":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2717,12 +2597,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "579":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2731,12 +2606,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "580":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6a.htm",
@@ -2747,9 +2617,6 @@
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
             },
             "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                },
                 {
                     "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
                     "params": {
@@ -2766,12 +2633,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "582":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2780,12 +2642,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "583":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6b.htm",
@@ -2794,12 +2651,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "584":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2808,12 +2660,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "585":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2822,12 +2669,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "586":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2836,12 +2678,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "587":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2850,12 +2687,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "588":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2864,12 +2696,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "589":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2878,12 +2705,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "590":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2892,12 +2714,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "591":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2906,12 +2723,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "592":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2920,12 +2732,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "593":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2934,12 +2741,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "594":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2948,12 +2750,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "595":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -2989,12 +2786,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "598":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -3003,12 +2795,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "599":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
@@ -3017,12 +2804,7 @@
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{}, "x":{}, "y":{}, "z":{}, "\u00E6":{}, "\u00F8":{} ,
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "600":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6d.htm",
@@ -3072,12 +2854,7 @@
 					"repeatable": false
 				},
                 "6":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "610":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6e.htm",
@@ -3125,12 +2902,7 @@
 					"repeatable": false
 				},
                 "6":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "620":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6f.htm",
@@ -3188,12 +2960,7 @@
                 "t":{},
                 "u":{},
                 "2":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "631":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73.htm",
@@ -3208,12 +2975,7 @@
                     "repeatable":false,
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "632":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73a.htm",
@@ -3240,12 +3002,7 @@
                 "2":{
 					"repeatable": false
 				}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "634":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.75.htm",
@@ -3286,12 +3043,7 @@
                 "2":{
 					"repeatable": false
 				}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "650":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.77.htm",
@@ -3390,12 +3142,7 @@
                 "r":{
 					"repeatable": false
 				}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "654":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
@@ -3449,12 +3196,7 @@
                 "r":{
 					"repeatable": false
 				}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "655":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7b.htm",
@@ -3498,12 +3240,7 @@
 				},
                 "0":{},
                 "1":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "660":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7c.htm",
@@ -3565,12 +3302,7 @@
                     "repeatable": false
                 },
                 "6": {}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "667":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7g.htm",
@@ -3650,12 +3382,7 @@
                 "x":{},
                 "y":{},
                 "z":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "700":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",
@@ -3726,12 +3453,7 @@
                     "repeatable": false
                 },
                 "6":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "710":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.84.htm",
@@ -3793,12 +3515,7 @@
                     "repeatable": false
                 },
                 "6":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "720":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85a.htm",
@@ -3820,12 +3537,7 @@
                     "repeatable":false,
                     "values":[ "1" ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "739":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85.htm",
@@ -3866,18 +3578,12 @@
                     "repeatable":false,
                     "values":[ "1" ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "740":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.86.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "\u00f8":{
@@ -3932,12 +3638,7 @@
                 "1":{
                     "repeatable":false
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "745":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
@@ -3959,12 +3660,7 @@
                 },
                 "n":{},
                 "o":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "770":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.88.htm",
@@ -4006,10 +3702,7 @@
 				            "field": "795",
 			    	        "subfields": [ "a" ]
 				        }
-				    },
-                    {
-                        "type": "FieldRules.upperCaseCheck"
-                    }
+				    }
 				]
             }
         },
@@ -4053,10 +3746,7 @@
 				            "field": "795",
 			    	        "subfields": [ "a" ]
 				        }
-				    },
-                    {
-                        "type": "FieldRules.upperCaseCheck"
-                    }
+				    }
 				]
             }
         },
@@ -4096,12 +3786,7 @@
 					"repeatable": false
 				},
                 "7":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "840":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b.htm",
@@ -4135,12 +3820,7 @@
                 "1":{
                     "repeatable":false
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
@@ -4217,12 +3897,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "861":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8e.htm",
@@ -4247,12 +3922,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "863":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8f.htm",
@@ -4282,12 +3952,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "865":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.90.htm",
@@ -4314,12 +3979,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "866":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.91.htm",
@@ -4348,12 +4008,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "867":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.92.htm",
@@ -4382,12 +4037,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "868":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.93.htm",
@@ -4416,12 +4066,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "870":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.94.htm",
@@ -4450,12 +4095,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "871":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.95.htm",
@@ -4484,12 +4124,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "873":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.96.htm",
@@ -4518,12 +4153,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "874":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.97.htm",
@@ -4552,12 +4182,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "879":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.98.htm",
@@ -4586,12 +4211,7 @@
                 "g":{},
                 "u":{},
                 "y":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "880":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.101.htm",
@@ -4636,12 +4256,7 @@
                 "7":{},
                 "8":{},
                 "9":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "887":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.98a.htm",
@@ -4691,9 +4306,6 @@
             },
             "rules": [
                 {
-                    "type": "FieldRules.upperCaseCheck"
-                },
-                {
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
                         "subfields": [ "w", "z" ]
@@ -4740,9 +4352,7 @@
                 "1":{}
             },
             "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                },
+
                 {
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
@@ -4900,9 +4510,6 @@
                 }
             },
             "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                },
                 {
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
