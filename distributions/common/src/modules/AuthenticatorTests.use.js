@@ -598,7 +598,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.auth_ret_record", function
     var record;
 
     function callFunction(marcRecord, userId, groupId) {
-        return Authenticator.authenticateRecordEntryPoint(marcRecord, userId, groupId);
+        return Authenticator.authenticateRecord(marcRecord, userId, groupId);
     }
 
     OpenAgencyClientCore.addFeatures(FBS_RECORD_AGENCY_ID, [UpdateConstants.AUTH_RET_RECORD]);
@@ -642,7 +642,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.auth_root", function () {
     var record;
 
     function callFunction(marcRecord, userId, groupId) {
-        return Authenticator.authenticateRecordEntryPoint(marcRecord, userId, groupId);
+        return Authenticator.authenticateRecord(marcRecord, userId, groupId);
     }
 
     // Test update FBS record
@@ -679,7 +679,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.auth_public_lib_common_rec
     var record;
 
     function callFunction(marcRecord, userId, groupId) {
-        return Authenticator.authenticateRecordEntryPoint(marcRecord, userId, groupId);
+        return Authenticator.authenticateRecord(marcRecord, userId, groupId);
     }
 
     OpenAgencyClientCore.addFeatures(FBS_RECORD_AGENCY_ID, [UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD]);
@@ -801,7 +801,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.school-common", function (
     var record;
 
     function callFunction(marcRecord, userId, groupId) {
-        return Authenticator.authenticateRecordEntryPoint(marcRecord, userId, groupId);
+        return Authenticator.authenticateRecord(marcRecord, userId, groupId);
     }
 
     // Test update common school record
