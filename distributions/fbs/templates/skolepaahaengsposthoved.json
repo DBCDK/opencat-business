@@ -55,9 +55,9 @@
 					    {
         					"type": "SubfieldRules.lookupRecord",
         					"params": {
-            					"agencyId": "191919",
-					            "requiredFieldAndSubfield": "004a",
-								"allowedSubfieldValues": [ "h" ]
+                                "agencyId": "870970",
+                                "requiredFieldAndSubfield": "004a",
+                                "allowedSubfieldValues": [ "h" ]
         					}
    		 				}
                     ]
