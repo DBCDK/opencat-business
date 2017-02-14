@@ -4,7 +4,11 @@
         "features": [ "create_enrichments", "use_enrichments" ]
     },
     "settings": {
-        "lookupfaust":false
+        "lookupfaust":false,
+        "extrafields": [ "008t", "008u", "008a", "008b", "008d", "008j", "008l", "008x", "008v",
+            "009a", "009g", "038", "039", "100a", "100h", "1004",
+            "239", "245a", "245c", "504", "530a", "530i", "530t",
+            "652m", "631a", "666f", "666s" ]
     },
     "defaults":{
         "field":{
@@ -106,6 +110,7 @@
         },
         "004": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+            "mandatory": true,
             "repeatable": false,
             "subfields": {
                 "r": {
@@ -116,7 +121,7 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "e", "i" ]
+                    "values": [ "e" ]
                 },
                 "n": {
                     "repeatable": false,

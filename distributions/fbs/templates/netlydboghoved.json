@@ -134,19 +134,8 @@
                     "repeatable": false
                 },
 				"u": "DanMarc2.fields.008.subfields.u",
-                "a": {
-                    "repeatable": false,
-                    "rules": [
-						{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
-                        }
-                    ]
-                },
-				 "z": {
+                "a": "DanMarc2.fields.008.subfields.a",
+				"z": {
                     "repeatable": false,
                     "rules": [
 						{
@@ -799,7 +788,6 @@
                 "0":"DanMarc2.fields.840.subfields.0"
             }
         },
-		"856": "DanMarc2.fields.856",
         "880": "DanMarc2.fields.880",
         "900":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",

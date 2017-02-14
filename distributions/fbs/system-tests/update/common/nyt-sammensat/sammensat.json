@@ -1,0 +1,36 @@
+[
+    {
+        "name": "fbs-test-opret-common-sammensat",
+        "description": "Tester oprettelse af nyt sammensat materiale fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "726500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "sammensat",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-new-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

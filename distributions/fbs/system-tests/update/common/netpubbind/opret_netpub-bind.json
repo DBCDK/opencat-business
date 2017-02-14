@@ -1,0 +1,52 @@
+[
+    {
+        "name": "fbs-test-opret-common-netpub-bind",
+        "bugs": [ "18522" ],
+        "description": "Tester oprettelse af ny netpublikation, bindpost  fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "netpubbind",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "existinghead.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "existinghead.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [ "result-new-common.marc" ]
+                    },
+                    {
+                        "record": "result-new-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
