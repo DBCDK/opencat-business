@@ -1,0 +1,51 @@
+[
+    {
+        "name": "basis-create-common-record-same-id-as-ffu",
+        "description": "Tester oprettelse af en fbs post hvor der allerede eksisterer en ffu post",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "ffu-record.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": []
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-main-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [ "result-main-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enrichments": []
+                    },
+                    {
+                        "record": "ffu-record.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enrichments": []
+                    }
+                ]
+            }
+        }
+    }
+]

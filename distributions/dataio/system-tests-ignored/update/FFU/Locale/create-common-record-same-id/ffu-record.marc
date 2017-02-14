@@ -1,0 +1,17 @@
+001 00 *a 01300008 *b 125420 *c 20151211193000 *d 20151211 *f a
+002 00 *d vtls000130000
+004 00 *r n *a e
+008 00 *t p *u c *a 1974 *b ru *h ? *i c *l rus *v 4
+009 00 *a a *g xx
+010 00 *a D725484399
+022 00 *a 0130-0008 *l 0130-0008
+080 00 *a 616 *2 [curr. ed.]
+210 00 *a Vopr. klin. med. *b Čeboksary
+222 00 *a Voprosy kliničeskoj mediciny *b Čeboksary
+245 00 *a Voprosy kliničeskoj mediciny
+260 00 *a Čeboksary: *b Čuvašskij universitet imeni I.N.Ulʹânova
+720 00 *o Čuvašskij universitet imeni I.N.Ulʹânova
+880 00 *6 222;c *a Вопросы клинической медицины (Чебоксары)
+880 00 *6 245;c *a Вопросы клинической медицины
+880 00 *6 260;c *a Чебоксары: *b Чувашский университет имени И.Н.Ульянова
+880 00 *6 720;c *a Чувашский университет имени И.Н.Ульянова
