@@ -32,5 +32,39 @@
                 ]
             }
         }
+    },
+    {
+        "name": "fbs-test-opret-common-klassesaet",
+        "description": "Tester oprettelse af nyt sammensat materiale fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "726500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "sammensat",
+            "record": "klassesaet-request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "klassesaet-new-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "klassesaet-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "klassesaet-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
     }
 ]
