@@ -10,21 +10,21 @@ UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
     record = RecordUtil.createFromString([
         "004 00 *r n",
         "014 00 *a 5 000 259 4",
-        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, but no *a", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a e",
         "014 00 *a 5 000 259 4",
-        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a but no b", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
         "014 00 *a 5 000 259 4",
-        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with b", DoubleRecordFinder.__matchVolumes(record), true);
 });
