@@ -1,0 +1,28 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":1},
+  "analysis":{
+    "field_types":{},
+    "field_names":{
+      "match.245a":{
+        "index":[
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","Ottobre design",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","Ottobredesign",
+          "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
+            "text":"Ottobredesign",
+            "raw_bytes":"[4e 65 74 6c 79 64 62 6f 67 66 c3 a6 6c 6c 65 73 73 6b 61 62 73 70 6f 73 74]",
+            "start":0,
+            "end":27,
+            "position":1,
+            "positionHistory":[1],
+            "type":"word"}],
+          "org.apache.lucene.analysis.core.LowerCaseFilter",[{
+            "text":"ottobredesign",
+            "raw_bytes":"[6e 65 74 6c 79 64 62 6f 67 66 c3 a6 6c 6c 65 73 73 6b 61 62 73 70 6f 73 74]",
+            "position":1,
+            "positionHistory":[1,
+              1],
+            "start":0,
+            "end":27,
+            "type":"word"}]]}}}}

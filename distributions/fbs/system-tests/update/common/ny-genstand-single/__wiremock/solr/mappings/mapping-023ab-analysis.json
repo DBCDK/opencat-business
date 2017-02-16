@@ -1,6 +1,6 @@
 {
   "request" : {
-    "urlPattern" : "/solr/raapost-index/analysis/field\\?analysis\\.fieldvalue=7319980017353\\&analysis\\.fieldname=match\\.023ab\\&indent=true\\&wt=json",
+    "urlPattern" : "/solr/raapost-index/analysis/field\\?analysis\\.fieldvalue=9781887801478\\&analysis\\.fieldname=match\\.023ab\\&indent=true\\&wt=json",
     "method" : "GET"
   },
   "response" : {

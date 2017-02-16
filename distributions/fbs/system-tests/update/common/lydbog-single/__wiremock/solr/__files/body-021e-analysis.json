@@ -7,10 +7,10 @@
     "field_names":{
       "match.021e":{
         "index":[
-          "org.apache.lucene.analysis.charfilter.MappingCharFilter","9788771746174",
-          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","9788771746174",
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","9781484721049",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","9781484721049",
           "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
-            "text":"9788771746174",
+            "text":"9781484721049",
             "raw_bytes":"[39 37 38 38 37 37 31 37 34 36 31 37 34]",
             "start":0,
             "end":13,
@@ -18,7 +18,7 @@
             "positionHistory":[1],
             "type":"word"}],
           "org.apache.lucene.analysis.core.LowerCaseFilter",[{
-            "text":"9788771746174",
+            "text":"9781484721049",
             "raw_bytes":"[39 37 38 38 37 37 31 37 34 36 31 37 34]",
             "position":1,
             "positionHistory":[1,

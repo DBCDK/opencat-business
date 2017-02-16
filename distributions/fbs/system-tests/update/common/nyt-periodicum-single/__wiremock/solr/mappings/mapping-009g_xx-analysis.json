@@ -1,11 +1,11 @@
 {
   "request" : {
-    "urlPattern" : "/solr/raapost-index/select\\?q=%28match\\.023ab%3A%22([0-9]|\\+)+%22%29\\+AND\\+marc\\.001b%3A870970\\&indent=true\\&wt=json",
+    "urlPattern" : "/solr/raapost-index/analysis/field\\?analysis\\.fieldvalue=xx\\&analysis\\.fieldname=match\\.009g\\&indent=true\\&wt=json",
     "method" : "GET"
   },
   "response" : {
     "status" : 200,
-    "bodyFileName" : "body-023ab-nohits.json",
+    "bodyFileName" : "body-009g_xx-analysis.json",
     "headers" : {
       "Server" : "Apache-Coyote/1.1",
       "Content-Type" : "text/plain;charset=UTF-8",

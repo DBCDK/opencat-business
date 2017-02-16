@@ -1,0 +1,10 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":10,
+    "params":{
+      "q":"(( match.008a:\"1999\" OR match.008a:\"2000\" OR match.008a:\"2001\" ) AND match.009a:\"a\" AND match.009g:\"xx\" AND match.245a:ottobredesign AND match.260b:st*) AND marc.001b:870970",
+      "indent":"true",
+      "wt":"json"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }}

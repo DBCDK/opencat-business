@@ -3,6 +3,7 @@
     "name": "002_linkning_classification_differ_none_published",
     "description": "Enrichment for 710100 fn=29147353 is deleted and replaced with enrichment fn=29147450",
     "description": "652 differs in the two records and 032*a is BKM9999 in both",
+    "description": "Bug 20535 related",
     "request": {
       "authentication": {
         "group": "010100",

@@ -5,24 +5,24 @@
   "analysis":{
     "field_types":{},
     "field_names":{
-      "match.023ab":{
+      "match.260b":{
         "index":[
-          "org.apache.lucene.analysis.charfilter.MappingCharFilter","9781887801478",
-          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","9781887801478",
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","Studio Tuumat Oy",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","StudioTuumatOy",
           "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
-            "text":"9781887801478",
-            "raw_bytes":"[35 30 35 33 30 38 33 30 31 30 32 34 39]",
+            "text":"StudioTuumatOy",
+            "raw_bytes":"[4b c3 b8 62 65 6e 68 61 76 6e 73 42 69 62 6c 69 6f 74 65 6b 65 72]",
             "start":0,
-            "end":13,
+            "end":22,
             "position":1,
             "positionHistory":[1],
             "type":"word"}],
           "org.apache.lucene.analysis.core.LowerCaseFilter",[{
-            "text":"9781887801478",
-            "raw_bytes":"[35 30 35 33 30 38 33 30 31 30 32 34 39]",
+            "text":"studiotuumatoy",
+            "raw_bytes":"[6b c3 b8 62 65 6e 68 61 76 6e 73 62 69 62 6c 69 6f 74 65 6b 65 72]",
             "position":1,
             "positionHistory":[1,
               1],
             "start":0,
-            "end":13,
+            "end":22,
             "type":"word"}]]}}}}

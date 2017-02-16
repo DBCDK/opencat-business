@@ -1,28 +1,28 @@
 {
   "responseHeader":{
     "status":0,
-    "QTime":1},
+    "QTime":0},
   "analysis":{
     "field_types":{},
     "field_names":{
-      "match.023ab":{
+      "match.245g":{
         "index":[
-          "org.apache.lucene.analysis.charfilter.MappingCharFilter","9781887801478",
-          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","9781887801478",
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","Disc5",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","Disc5",
           "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
-            "text":"9781887801478",
-            "raw_bytes":"[35 30 35 33 30 38 33 30 31 30 32 34 39]",
+            "text":"Disc5",
+            "raw_bytes":"[54 65 73 74 74 69 74 65 6c]",
             "start":0,
-            "end":13,
+            "end":9,
             "position":1,
             "positionHistory":[1],
             "type":"word"}],
           "org.apache.lucene.analysis.core.LowerCaseFilter",[{
-            "text":"9781887801478",
-            "raw_bytes":"[35 30 35 33 30 38 33 30 31 30 32 34 39]",
+            "text":"disc5",
+            "raw_bytes":"[74 65 73 74 74 69 74 65 6c]",
             "position":1,
             "positionHistory":[1,
               1],
             "start":0,
-            "end":13,
+            "end":9,
             "type":"word"}]]}}}}
