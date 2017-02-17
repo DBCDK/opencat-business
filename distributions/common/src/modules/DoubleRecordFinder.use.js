@@ -20,14 +20,13 @@ var DoubleRecordFinder = function () {
     var sectionSubfieldN;
     var volumeSubfieldG;
     var solrUrl;
-    var materialType;
+    var materialType = {unknown: 0, literature: 1, technical: 2};
 
     function init(callSolrUrl) {
         field250a = undefined;
         sectionSubfieldN = false;
         volumeSubfieldG = false;
         solrUrl = callSolrUrl;
-        materialType = {unknown: 0, literature: 1, technical: 2};
     }
 
     /**
