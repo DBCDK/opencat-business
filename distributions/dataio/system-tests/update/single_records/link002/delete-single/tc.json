@@ -2,7 +2,7 @@
     {
         "name": "basis-delete-common-record-holdings-with-002-links",
         "bugs": [ "#1517" ],
-        "description": "Tester slettet af fællespost med beholdninger med 002 links til den",
+        "description": "Tester sletning af fællespost med beholdninger med 002 links til den",
         "request": {
             "authentication": {
                 "group": "010100",

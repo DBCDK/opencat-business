@@ -1,7 +1,7 @@
 [
     {
         "name": "basis-link-to-myself-volume",
-        "description": "Tester innk til sig selv (014a = 001a)",
+        "description": "Tester link til sig selv (014a = 001a)",
         "request": {
             "authentication": {
                 "group": "010100",

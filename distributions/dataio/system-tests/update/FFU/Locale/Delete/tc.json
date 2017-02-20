@@ -41,7 +41,7 @@
     {
         "name": "basis-ffu-delete-locale-record-with-holdings",
         "bugs": [ "#1819" ],
-        "description": "Tester slettet af lokal FFU-post uden beholdninger",
+        "description": "Tester slettet af lokal FFU-post med beholdninger",
         "request": {
             "authentication": {
                 "group": "810010",
