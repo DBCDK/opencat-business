@@ -6,54 +6,68 @@
     "ph":                   {"templateGroups": ["PH", "FFU"]}
   },
   "templateGroups": {
-    "DBC": {"templates": [
-      "allowall",
-      "dbc",
-      "delete",
-      "invalid"
-    ], "folder": "dataio"},
-    "FFU": {"templates": [
-      "ffu",
-      "ffuartikel",
-      "ffubind",
-      "ffuhoved",
-      "ffumusik",
-      "ffuperiodica",
-      "ffusektion"
-    ], "folder": "dataio"},
-    "FBS": {"templates": [
-      "bog",
-      "bogbind",
-      "boghoved",
-      "bogsektion",
-      "film",
-      "filmbind",
-      "filmhoved",
-      "genstand",
-      "lokalpost",
-      "lokalpostbind",
-      "lokalposthoved",
-      "lokalpostsektion",
-      "lydbog",
-      "musik",
-      "netlydbog",
-      "netlydbogbind",
-      "netlydboghoved",
-      "netpub",
-      "netpubbind",
-      "netpubhoved",
-      "periodicum",
-      "paahaengspost",
-      "paahaengspostbind",
-      "paahaengsposthoved",
-      "paahaengspostsektion",
-      "sammensat",
-      "skolepaahaengspost",
-      "skolepaahaengspostbind",
-      "skolepaahaengsposthoved",
-      "skolepaahaengspostsektion"
-    ], "folder": "fbs"},
-    "PH": {"templates": [], "folder": ""}
+    "DBC": {
+      "templates": [
+        "allowall",
+        "dbc",
+        "delete",
+        "invalid"
+      ],
+      "folder": "dataio"
+    },
+    "FFU": {
+      "templates": [
+        "ffu",
+        "ffuartikel",
+        "ffubind",
+        "ffuhoved",
+        "ffumusik",
+        "ffuperiodica",
+        "ffusektion"
+      ],
+      "folder": "dataio"
+    },
+    "FBS": {
+      "templates": [
+        "bog",
+        "bogbind",
+        "boghoved",
+        "bogsektion",
+        "film",
+        "filmbind",
+        "filmhoved",
+        "genstand",
+        "lokalpost",
+        "lokalpostbind",
+        "lokalposthoved",
+        "lokalpostsektion",
+        "lydbog",
+        "lydbogbind",
+        "lydboghoved",
+        "musik",
+        "netlydbog",
+        "netlydbogbind",
+        "netlydboghoved",
+        "netpub",
+        "netpubbind",
+        "netpubhoved",
+        "periodicum",
+        "paahaengspost",
+        "paahaengspostbind",
+        "paahaengsposthoved",
+        "paahaengspostsektion",
+        "sammensat",
+        "skolepaahaengspost",
+        "skolepaahaengspostbind",
+        "skolepaahaengsposthoved",
+        "skolepaahaengspostsektion"
+      ],
+      "folder": "fbs"
+    },
+    "PH": {
+      "templates": [],
+      "folder": ""
+    }
   }
 
 
