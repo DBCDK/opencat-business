@@ -3,12 +3,6 @@ use("RawRepoClientCore");
 use("RecordUtil");
 use("UnitTest");
 
-UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.Params", function () {
-    Assert.exception("No params", 'MandatorySubfieldInVolumeWorkRule.validateField( undefined, undefined, undefined, {} )');
-    Assert.exception("No params.subfield", 'MandatorySubfieldInVolumeWorkRule.validateField( undefined, undefined, {}, {} )');
-    Assert.exception("Wrong type: params.subfield ", 'MandatorySubfieldInVolumeWorkRule.validateField( undefined, undefined, { subfield: [] }, {} )');
-});
-
 UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.NotHeadOrVolumeRecord", function () {
     function callRule(record, field, params) {
         return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params, undefined);
