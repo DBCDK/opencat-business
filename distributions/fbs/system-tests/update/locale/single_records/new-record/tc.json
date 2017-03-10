@@ -1,6 +1,6 @@
 [
     {
-        "name": "fbs-new-locale-record",
+        "name": "fbs-new-local-record",
         "description": "Tester oprettelse af ny lokal post samt sortering af felter og delfelter i 008",
         "request": {
             "authentication": {
