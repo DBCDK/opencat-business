@@ -1107,5 +1107,30 @@
                 ]
             }
         }
+    },
+    {
+        "name": "bog-without-mandatory-996",
+        "description": "Tester obligatorisk felt 996 i skabelonen 'bog'",
+        "request": {
+            "authentication": {
+                "group": "761500",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-common-without-996.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
+                        "ordinalPositionOfField": 0,
+                        "message": "Delfelt 'b' på felt '001' har værdien '870970', derfor er felt '996' og delfelt 'a' obligatorisk"
+                    }
+                ]
+            }
+        }
     }
 ]
