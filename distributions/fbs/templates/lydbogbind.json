@@ -5,7 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "021e", "023b", "245g", "245a", "300n", "300e", "300l", "996a" ]
+        "extrafields": [ "021e", "023b", "245g", "245a", "300n", "300e", "300l", "996" ]
     },
     "defaults":{
         "field":{
@@ -354,6 +354,7 @@
 		"255": "DanMarc2.fields.255",
         "260":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
+            "repeatable":false,
             "subfields":{
                 "a": "DanMarc2.fields.260.subfields.a",
                 "d": "DanMarc2.fields.260.subfields.d",
@@ -363,7 +364,6 @@
                 "e": "DanMarc2.fields.260.subfields.e",
                 "b": "DanMarc2.fields.260.subfields.b",
                 "c": "DanMarc2.fields.260.subfields.c",
-                "k": "DanMarc2.fields.260.subfields.k",
                 "r": "DanMarc2.fields.260.subfields.r",
                 "s": "DanMarc2.fields.260.subfields.s",
                 "t": "DanMarc2.fields.260.subfields.t",
@@ -371,7 +371,19 @@
                 "j": "DanMarc2.fields.260.subfields.j"
             }
         },
-        "300": "DanMarc2.fields.300",
+        "300":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
+            "repeatable":false,
+            "sorting":"naelb",
+            "subfields":{
+                "n":"DanMarc2.fields.300.subfields.n",
+                "a":"DanMarc2.fields.300.subfields.a",
+                "l":"DanMarc2.fields.300.subfields.l",
+                "b":"DanMarc2.fields.300.subfields.b",
+                "d":"DanMarc2.fields.300.subfields.d",
+                "e":"DanMarc2.fields.300.subfields.e"
+            }
+        },
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
         "440":{

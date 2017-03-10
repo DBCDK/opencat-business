@@ -4,7 +4,8 @@
         "features": [ "all" ]
     },
     "settings": {
-        "lookupfaust": true
+        "lookupfaust": true,
+        "extrafields": [ "023b", "245g", "245a", "300n", "996" ]
     },
     "defaults":{
         "field":{
@@ -325,7 +326,7 @@
         },
         "300":{            
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-            "mandatory":true,            
+            "mandatory":true,
             "repeatable":false,
             "sorting":"naelb",
             "subfields":{

@@ -6,7 +6,7 @@
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "005p", "008a", "008b", "008d", "008j", "008l",  "008n", "021e", "023b", "100h", "1004",
-            "245c", "260a", "260b", "260c", "300n", "300e", "300l", "504", "512", "530", "652m", "700h", "7004", "996a" ]
+            "245c", "260a", "260b", "260c", "300n", "300e", "300l", "504", "512", "530", "652m", "700h", "7004", "996" ]
     },
     "defaults":{
         "field":{
@@ -348,6 +348,8 @@
         "256": "DanMarc2.fields.256",
         "260":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
+            "mandatory":true,
+            "repeatable":false,
             "subfields":{
                 "a": "DanMarc2.fields.260.subfields.a",
                 "d": "DanMarc2.fields.260.subfields.d",

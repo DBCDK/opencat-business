@@ -4,7 +4,9 @@
         "features": [ "all" ]
     },
     "settings": {
-        "lookupfaust": true
+        "lookupfaust": true,
+        "extrafields": [ "008a", "008b", "008d", "008j", "008l", "008x", "100h", "1004", "245c", "260a", "260b", "260c", "300a",
+            "504", "530a", "530i", "530t", "652m", "666f", "666s", "700h", "7004", "996" ]
     },
     "defaults":{
         "field":{
@@ -124,7 +126,21 @@
                     "repeatable": false
 				},
 				"u": "DanMarc2.fields.008.subfields.u",
-                "a": "DanMarc2.fields.008.subfields.a",
+                "a": {
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 4,
+                                "max": 4
+                            }
+                        },
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
                 "z": "DanMarc2.fields.008.subfields.z",
                 "c": "DanMarc2.fields.008.subfields.c",
                 "b": "DanMarc2.fields.008.subfields.b",
@@ -355,6 +371,8 @@
 		"256": "DanMarc2.fields.256",
         "260":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
+            "mandatory":true,
+            "repeatable":false,
             "subfields":{
                 "&":{
                     "repeatable":false
@@ -375,7 +393,20 @@
                 "j": "DanMarc2.fields.260.subfields.j"
 			}
         },
-        "300": "DanMarc2.fields.300",
+        "300":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "n": "DanMarc2.fields.300.subfields.n",
+                "a": "DanMarc2.fields.300.subfields.a",
+                "b": "DanMarc2.fields.300.subfields.b",
+                "c": "DanMarc2.fields.300.subfields.c",
+                "d": "DanMarc2.fields.300.subfields.d",
+                "e": "DanMarc2.fields.300.subfields.e",
+                "l": "DanMarc2.fields.300.subfields.l"
+            }
+        },
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
         "440":{

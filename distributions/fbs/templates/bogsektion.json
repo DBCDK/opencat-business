@@ -4,7 +4,8 @@
         "features": [ "all" ]
     },
     "settings": {
-        "lookupfaust": true
+        "lookupfaust": true,
+        "extrafields": [ "245n", "245o", "245a", "260c", "300a", "300b", "996" ]
     },
     "defaults":{
         "field":{

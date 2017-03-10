@@ -6,9 +6,9 @@
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008d", "008j", "008x", "021e", "100h", "1004",
-            "245c", "250a", "260a", "260b", "260c", "300a", "300b", "300d", "440a", "440z", "440V", "440v",
-            "504a", "508a", "512a", "512i", "512t", "517a", "530a", "530i", "530t",
-            "652m", "652b", "631a", "666f", "666s", "700h", "7004", "996a" ]
+            "245c", "250a", "260a", "260b", "260c", "300a", "300b", "440a", "440z", "440V", "440v",
+            "504", "508", "512a", "512i", "512t", "517a", "530a", "530i", "530t",
+            "652m", "666f", "666s", "700h", "7004", "996" ]
     },
     "defaults":{
         "field":{
@@ -195,7 +195,7 @@
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "xx" ]
+                    "values":[ "xx", "xy" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
@@ -351,6 +351,8 @@
         },
 		"256": "DanMarc2.fields.256",
         "260":{
+            "mandatory":true,
+            "repeatable":false,
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
             "subfields":{
                 "&":{
@@ -372,7 +374,20 @@
                 "j": "DanMarc2.fields.260.subfields.j"
 			}
         },
-        "300": "DanMarc2.fields.300",
+        "300":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "n": "DanMarc2.fields.300.subfields.n",
+                "a": "DanMarc2.fields.300.subfields.a",
+                "b": "DanMarc2.fields.300.subfields.b",
+                "c": "DanMarc2.fields.300.subfields.c",
+                "d": "DanMarc2.fields.300.subfields.d",
+                "e": "DanMarc2.fields.300.subfields.e",
+                "l": "DanMarc2.fields.300.subfields.l"
+            }
+        },
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
         "440":{

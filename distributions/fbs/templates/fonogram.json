@@ -1,12 +1,13 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af musikbærende materialer (cd'er, plader, bånd) - enkeltstående post.",
+        "description": "Skabelon til katalogisering af fonogrammer (musikcd'er, lp'er m.m.) - enkeltstående post",
         "features": [ "all" ]
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "005h", "005i", "005j","005k", "008a", "008b", "028a", "100h", "1004", "110a",
-            "239a", "260a", "260b", "260c", "300n", "440a", "652m", "700h", "7004" ]
+        "extrafields": [ "005h", "005i", "005j","005k", "008a", "008b", "008l", "023b", "028a", "039",
+            "100h", "1004", "110a", "239t", "260a", "260b", "260c", "300n", "531", "538f", "538g",
+            "652m", "652v", "666m", "666n","666p","666l", "700h", "7004", "770h", "780a", "795a", "996"  ]
     },
     "defaults":{
         "field":{
@@ -185,12 +186,12 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":["a", "c", "d", "m", "r", "s" ]
+                    "values":[ "m", "s" ]
                 },
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "nh", "tb", "th", "to", "xc", "xd", "xg", "xh", "xi", "xj", "xk", "xx" ]
+                    "values":[ "nh", "tb", "th", "to", "xc", "xd", "xg", "xh", "xi", "xj", "xk" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
@@ -238,7 +239,6 @@
         "021": "DanMarc2.fields.021",
 		"023": "DanMarc2.fields.023",
         "024": "DanMarc2.fields.024",
-        "028": "DanMarc2.fields.028",
         "039":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.22.htm",
             "repeatable":false,
@@ -300,9 +300,6 @@
         "241":{
                 "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",
                 "subfields":{                
-                "A":{
-                    "repeatable": false
-                    },
                 "a":{
                     "mandatory":true,
                     "repeatable":false
@@ -522,7 +519,30 @@
             },
 			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },
-        "538":"DanMarc2.fields.538",
+        "538":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.60.htm",
+            "subfields":{
+                "i": "DanMarc2.fields.538.subfields.i",
+                "a": "DanMarc2.fields.538.subfields.a",
+                "f": "DanMarc2.fields.538.subfields.f",
+                "g": "DanMarc2.fields.538.subfields.g",
+                "h": "DanMarc2.fields.538.subfields.h",
+                "j": "DanMarc2.fields.538.subfields.j",
+                "k": "DanMarc2.fields.538.subfields.k",
+                "l": "DanMarc2.fields.538.subfields.l",
+                "m": "DanMarc2.fields.538.subfields.m",
+                "o": "DanMarc2.fields.538.subfields.o",
+                "p": "DanMarc2.fields.538.subfields.p",
+                "q": "DanMarc2.fields.538.subfields.q",
+                "s": "DanMarc2.fields.538.subfields.s",
+                "t": "DanMarc2.fields.538.subfields.t"
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfield"
+                }
+            ]
+        },
 		"555":"DanMarc2.fields.555",
         "596":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6c.htm",
