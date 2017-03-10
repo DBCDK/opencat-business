@@ -9,7 +9,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "musik",
+            "templateName": "node",
             "record": "request.marc"
         },
         "expected": {
