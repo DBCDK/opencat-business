@@ -212,6 +212,16 @@
         "028": "DanMarc2.fields.028",
         "029": "DanMarc2.fields.029",
         "030": "DanMarc2.fields.030",
+        "032":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1e.htm",
+            "repeatable":false,
+            "subfields":{
+                "x":{
+                    "repeatable":false,
+                    "values": [ "DLB" ]
+                }
+            }
+        },
         "033": "DanMarc2.fields.033",
         "034": "DanMarc2.fields.034",
         "035": "DanMarc2.fields.035",
@@ -392,36 +402,6 @@
         "952": "DanMarc2.fields.952",
         "966": "DanMarc2.fields.966",
         "968": "DanMarc2.fields.968",
-        "980": "DanMarc2.fields.980",
-        "996":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "mandatory":true,
-            "repeatable":false,
-            "subfields":{
-                "a": {
-                    "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.libraries.996a.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldCannotContainValue",
-                            "params": {
-                                "values": [ "DBC" ],
-                                "notcondition": {
-                                    "subfield": "001b",
-                                    "value": "870970"
-                                }
-                            }
-                        }
-                    ]
-                },
-                "m":"Lister.fields.codes.subfields.libraries.996m",
-                "o":"Lister.fields.codes.subfields.libraries.996o"
-            }
-        },
-        "y08": {
-            "subfields": {
-                "a": {}
-            }
-        }
+        "980": "DanMarc2.fields.980"
     }
 }

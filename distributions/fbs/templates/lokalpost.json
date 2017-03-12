@@ -474,11 +474,6 @@
         "952": "DanMarc2.fields.952",
         "966": "DanMarc2.fields.966",
         "968": "DanMarc2.fields.968",
-        "980": "DanMarc2.fields.980",
-        "y08": {
-            "subfields": {
-                "a": {}
-            }
-        }
+        "980": "DanMarc2.fields.980"
     }
 }
