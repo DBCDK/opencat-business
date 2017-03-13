@@ -5,8 +5,8 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008b", "008d", "008l", "021n", "023b", "100h", "1004","260a", "260b", "260c", "300n", "300a", "300b", "300d", "300c",
-            "504", "508", "517", "652m", "700h", "7004" ]
+        "extrafields": [ "008a", "008b", "008d", "008l", "021n", "023b", "260a", "260b", "260c",
+            "300n", "300a", "300b", "300d", "300c", "504a", "508a", "517a", "652m", "700h", "7004", "996a" ]
     },
     "defaults":{
         "field":{
@@ -134,7 +134,17 @@
                     "repeatable": false,
                     "values": [ "?", "r", "o", "f", "u" ]
                 },
-                "a": "DanMarc2.fields.008.subfields.a",
+                "a": {
+                    "repeatable": false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 4,
+                            "max": 4
+                        }
+                    }
+                    ]
+                },
                 "z": "DanMarc2.fields.008.subfields.z",
                 "b": {
                     "mandatory":true,

@@ -5,7 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "021e", "023b", "245g", "245a", "300n", "300e", "300l", "996" ]
+        "extrafields": [ "021e", "023b", "245g", "245a", "300n", "300e", "300l", "996a" ]
     },
     "defaults":{
         "field":{
