@@ -3,6 +3,7 @@
     "dbc":                  {"templateGroups": ["DBC", "FFU"]},
     "fbs":                  {"templateGroups": ["FBS"]},
     "ffu":                  {"templateGroups": ["FFU"]},
+    "lokbib":                  {"templateGroups": ["Lokalbibliografi"]},
     "ph":                   {"templateGroups": ["PH", "FFU"]}
   },
   "templateGroups": {
@@ -64,6 +65,15 @@
         "skolepaahaengspostbind",
         "skolepaahaengsposthoved",
         "skolepaahaengspostsektion"
+      ],
+      "folder": "fbs"
+    },
+    "Lokalbibliografi": {
+      "templates": [
+        "lokalpost",
+        "lokalpostbind",
+        "lokalposthoved",
+        "lokalpostsektion"
       ],
       "folder": "fbs"
     },
