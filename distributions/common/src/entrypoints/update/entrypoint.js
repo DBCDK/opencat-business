@@ -24,8 +24,8 @@ function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
  * @return {JSON} A json with the names of the templates. The names is returned
  *                as an Array.
  */
-function getValidateSchemas(groupId, libraryGroup, settings) {
-    return ValidatorEntryPoint.getValidateSchemas(groupId, libraryGroup, settings);
+function getValidateSchemas(groupId, templateGroup, settings) {
+    return ValidatorEntryPoint.getValidateSchemas(groupId, templateGroup, settings);
 }
 
 /**

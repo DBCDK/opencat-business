@@ -11,7 +11,7 @@ EXPORTED_SYMBOLS = ['AuthenticateTemplate'];
 var AuthenticateTemplate = function () {
     var templateMapping = null;
 
-    function canAuthenticate(templateName, groupId, template, libraryType, settings) {
+    function canAuthenticate(templateName, groupId, template, templateGroup, settings) {
         Log.trace("Enter - AuthenticateTemplate.canAuthenticate( '", groupId, "', ", template, " )");
         var result = undefined;
         try {
@@ -40,7 +40,7 @@ var AuthenticateTemplate = function () {
             }
 
             if (featureIsOk) {
-                return result = _groupUseTemplate(templateName, libraryType, settings);
+                return result = _groupUseTemplate(templateName, templateGroup, settings);
             } else {
                 return result = false;
             }
@@ -49,25 +49,25 @@ var AuthenticateTemplate = function () {
         }
     }
 
-    function _groupUseTemplate(templateName, libraryType, settings) {
-        Log.info('Checking if libraryGroup ' + libraryType + ' can use template ' + templateName);
+    function _groupUseTemplate(templateName, templateGroup, settings) {
+        Log.info('Checking if templateGroup ' + templateGroup + ' can use template ' + templateName);
         if (templateMapping === null) {
             Log.info('Template mappings are not loaded, so do that now');
             templateMapping = _loadTemplateMapping(settings);
         }
 
-        var allowedTemplateGroups = templateMapping['libraryToTemplateGroups'][libraryType]['templateGroups'];
-        Log.info('Allowed templateGroup for ' + libraryType + ': ' + allowedTemplateGroups);
+        var allowedTemplateGroups = templateMapping['libraryToTemplateGroups'][templateGroup]['templateGroups'];
+        Log.info('Allowed templateGroup for ' + templateGroup + ': ' + allowedTemplateGroups);
         var templateGroups = templateMapping['templateGroups'];
 
         for (var i = 0; i < allowedTemplateGroups.length; i++) {
             if (templateGroups[allowedTemplateGroups[i]]['templates'].indexOf(templateName) > -1) {
-                Log.info('Template group found! LibraryGroup ' + libraryType + ' can use template ' + templateName);
+                Log.info('Template group found! LibraryGroup ' + templateGroup + ' can use template ' + templateName);
                 return true;
             }
         }
 
-        Log.info('Template group NOT found! ' + libraryType + ' cannot use template ' + templateName);
+        Log.info('Template group NOT found! ' + templateGroup + ' cannot use template ' + templateName);
         return false;
     }
 

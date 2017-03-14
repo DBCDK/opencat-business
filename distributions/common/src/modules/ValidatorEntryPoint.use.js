@@ -24,8 +24,8 @@ var ValidatorEntryPoint = function () {
      * @return {JSON} A json with the names of the templates. The names is returned
      *                as an Array.
      */
-    function getValidateSchemas(groupId, libraryType, settings) {
-        Log.trace("Enter - ValidatorEntryPoint.getValidateSchemas( '", groupId, "', '", libraryType, "', ", settings, " )");
+    function getValidateSchemas(groupId, templateGroup, settings) {
+        Log.trace("Enter - ValidatorEntryPoint.getValidateSchemas( '", groupId, "', '", templateGroup, "', ", settings, " )");
         var result = undefined;
         try {
             ResourceBundleFactory.init(settings);
@@ -35,7 +35,7 @@ var ValidatorEntryPoint = function () {
             var list = [];
             for (var i = 0; i < schemas.length; i++) {
                 var schema = schemas[i];
-                if (AuthenticateTemplate.canAuthenticate(schema.schemaName, groupId, TemplateContainer.getUnoptimized(schema.schemaName), libraryType, settings)) {
+                if (AuthenticateTemplate.canAuthenticate(schema.schemaName, groupId, TemplateContainer.getUnoptimized(schema.schemaName), templateGroup, settings)) {
                     list.push(schema);
                 }
             }
