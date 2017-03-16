@@ -4,10 +4,7 @@
         "features": [ "all" ]
     },
     "settings": {
-        "lookupfaust": true,
-        "extrafields": [ "008a", "008b", "008l", "021e", "100h", "1004",
-            "245c", "260a", "260b", "260c", "300a", "300b", "504a", "530a",
-            "530i", "530t", "652m", "666f", "666s", "700h", "7004"]
+        "lookupfaust": true
     },
     "defaults":{
         "field":{
@@ -65,7 +62,7 @@
                 "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
                     "mandatory": true,
-                    "values":[ "e", "i" ]
+                    "values":[ "e" ]
                 }
             }
         },
@@ -86,6 +83,7 @@
         },
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+            "mandatory":true,
             "repeatable": false,
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
@@ -116,6 +114,7 @@
                 "w": "DanMarc2.fields.008.subfields.w",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v": {
+                    "mandatory":true,
                     "repeatable": false,
                     "values": [ "0", "1", "4", "5", "7", "8", "9" ]
                 }
