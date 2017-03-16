@@ -6,7 +6,7 @@
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "005h", "005i", "005k", "008a", "008b", "008l", "021e", "028a",
-            "100h", "1004", "110a", "239t", "239ø", "245e", "260a", "260b", "260c", "300n", "300a", "300c", "509", "538b", "538d",
+            "100h", "1004", "110a", "239t", "239ø", "245e", "260a", "260b", "260c", "300n", "300a", "300c", "509a", "538b", "538d",
             "652m", "652v", "666m", "666n","666p","666l", "700h", "7004", "770\u00E5", "770h", "780\u00E5", "780a", "795\u00E5", "795a", "996a"  ]
     },
     "defaults":{
@@ -644,17 +644,7 @@
         },
         "739":"DanMarc2.fields.739",
         "740": "DanMarc2.fields.740",
-        "745":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
-            "subfields":{
-                "A":{
-                    "repeatable":false
-                },
-                "a":{
-                    "repeatable":false
-                }
-            }
-        },
+        "745": "DanMarc2.fields.745",
         "770":"DanMarc2.fields.770",
         "780":"DanMarc2.fields.780",
         "795":{
