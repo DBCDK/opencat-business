@@ -1,0 +1,60 @@
+[
+  {
+    "name": "ph-enrichment-with-980",
+    "description": "Tester om et PH bibliotek kan oprette ophængsport indeholdende felt 980 (story 2140)",
+    "request": {
+      "authentication": {
+        "group": "830380",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "paahaengspost",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "result-dbc-enrichment.marc",
+              "result-fbs-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "result-request.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
