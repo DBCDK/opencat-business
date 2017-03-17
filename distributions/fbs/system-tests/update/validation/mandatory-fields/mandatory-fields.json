@@ -983,6 +983,11 @@
                     },
                     {
                         "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "message": "Felt '008' mangler i posten"
+                    },
+                    {
+                        "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
                         "message": "Felt '009' mangler i posten"
                     },
