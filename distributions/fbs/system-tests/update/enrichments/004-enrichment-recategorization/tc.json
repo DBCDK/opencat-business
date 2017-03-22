@@ -1,0 +1,81 @@
+[
+    {
+        "name": "fbs-004-enrichment-recategorization",
+        "description": "Når en 870970 post ændre type, så skal alle dens påhængsposter opdateres med samme type",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "full-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-hovedpost.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-hovedpost.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [
+                            "result-common.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "result-dbc-enrichment.marc",
+                            "result-fbs-enrichment.marc"
+                        ],
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
