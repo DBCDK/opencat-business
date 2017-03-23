@@ -1,7 +1,7 @@
 [
   {
     "name": "ph-enrichment-with-980",
-    "description": "Tester om et PH bibliotek kan oprette ophængsport indeholdende felt 980 (story 2140)",
+    "description": "Tester om et PH bibliotek kan oprette påhængspost indeholdende felt 980 (story 2140)",
     "request": {
       "authentication": {
         "group": "830380",
