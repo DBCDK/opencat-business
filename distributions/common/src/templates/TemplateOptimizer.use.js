@@ -321,6 +321,8 @@ var TemplateOptimizer = function () {
             switch (typeName) {
                 case "RecordRules.fieldsPosition":
                     return FieldsPosition.validateRecord;
+                case "RecordRules.MustContainOneOfFields":
+                    return MustContainOneOfFields.validateRecord;
                 case "RecordRules.idFieldExists":
                     return IdFieldExists.validateRecord;
                 case "RecordRules.fieldsMandatory":    // intended fall tru

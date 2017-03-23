@@ -13,6 +13,7 @@ var DoubleRecordMailServiceClientCore = function () {
     function sendMessage(subject, body) {
         Log.trace("Enter - DoubleRecordMailServiceClientCore.sendMessage()");
         try {
+
             var context = new Packages.javax.naming.InitialContext();
             var serviceProvider = context.lookup(JNDI_NAME);
             serviceProvider.sendMessage(subject, body);
