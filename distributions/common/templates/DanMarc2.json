@@ -705,12 +705,8 @@
         "033":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1f.htm",
             "subfields":{
-                "a":{
-                    "repeatable":false
-				},
-                "b":{
-                    "repeatable":false
-				}
+              "a": "Lister.fields.codes.subfields.local_bibliography.community_number",
+              "b": "Lister.fields.codes.subfields.local_bibliography.community_name"
             }
         },
         "034":{
@@ -4336,6 +4332,20 @@
                     "params": {
                         "subfields": [ "w", "z" ]
                     }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "900z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "900w" ]
+                    }
                 }
             ]
         },
@@ -4385,6 +4395,20 @@
                     "params": {
                         "subfields": [ "w", "z" ]
                     }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "910z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "910w" ]
+                    }
                 }
             ]
         },
@@ -4415,6 +4439,20 @@
                     "params": {
                         "subfields": [ "w", "z" ]
                     }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "930z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "930w" ]
+                    }
                 }
             ]
         },
@@ -4442,6 +4480,20 @@
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
                         "subfields": [ "w", "z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "933z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "933w" ]
                     }
                 }
             ]
@@ -4473,6 +4525,20 @@
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
                         "subfields": [ "w", "z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "934z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "934w" ]
                     }
                 }
             ]
@@ -4546,6 +4612,20 @@
                     "params": {
                         "subfields": [ "w", "z" ]
                     }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "945z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "945w" ]
+                    }
                 }
             ]
         },
@@ -4571,6 +4651,20 @@
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
                         "subfields": [ "w", "z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                      "subfield": "w",
+                      "not_presented_subfield": [ "952z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                      "subfield": "z",
+                      "not_presented_subfield": [ "952w" ]
                     }
                 }
             ]
@@ -4608,6 +4702,20 @@
                     "params": {
                         "subfields": [ "w", "z" ]
                     }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "966z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "966w" ]
+                    }
                 }
             ]
         },
@@ -4635,6 +4743,20 @@
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {
                         "subfields": [ "w", "z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "968z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "968w" ]
                     }
                 }
             ]
