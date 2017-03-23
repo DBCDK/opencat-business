@@ -123,7 +123,7 @@
                 },
                 "n": {
                     "repeatable": false,
-                    "values": [ "w" ]
+                    "values": [ "f", "w" ]
                 },
                 "x": {
                     "values": [ "m", "n", "u", "t", "w", "x", "y", "z" ]
@@ -3147,7 +3147,23 @@
                 "r":{
 					"repeatable": false
 				}
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "m",
+                        "not_presented_subfield": [ "652o" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "o",
+                        "not_presented_subfield": [ "652m" ]
+                    }
+                }
+            ]
         },
         "654":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
@@ -4596,6 +4612,9 @@
                 },
                 "c":{},
                 "x":{
+                    "repeatable":false
+                },
+                "w":{
                     "repeatable":false
                 },
                 "z":{
