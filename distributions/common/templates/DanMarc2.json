@@ -4324,7 +4324,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
                 "0":{},
                 "1":{}
@@ -4371,7 +4372,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
                 "0":{},
                 "1":{}
@@ -4400,7 +4402,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
                 "2":{
                     "repeatable":false
@@ -4427,7 +4430,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
                 "2":{
                     "repeatable":false
@@ -4457,7 +4461,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
                 "2":{
                     "repeatable":false
@@ -4531,7 +4536,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
             },
             "rules": [
@@ -4556,7 +4562,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
             },
             "rules": [
@@ -4591,7 +4598,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
             },
             "rules": [
@@ -4618,7 +4626,8 @@
                     "repeatable":false
                 },
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 }
             },
             "rules": [
