@@ -23,9 +23,15 @@
     },
     "rules":[
         {
-            "type":"RecordRules.conflictingFields",
+            "type": "RecordRules.conflictingFields",
             "params": {
                 "fields":[ "100", "110" ]
+            }
+        },
+        {
+            "type": "RecordRules.mustContainOneOfFields",
+            "params": {
+                "fields": [ "255", "539" ]
             }
         },
         {
