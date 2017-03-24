@@ -43,6 +43,7 @@ use("ConflictingSubfields");
 use("FieldDemandsOtherFields");
 use("AllFieldsMandatoryIfOneExist");
 use("FieldsMandatory");
+use("MustContainOneOfFields");
 
 EXPORTED_SYMBOLS = ['TemplateOptimizer'];
 
