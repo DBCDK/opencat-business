@@ -1,0 +1,29 @@
+[
+    {
+        "name": "fbs-new-local-ph-record-book",
+        "description": "Tester oprettelse af ny lokalpost fra ph'er",
+        "request": {
+            "authentication": {
+                "group": "831020",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ph-bog",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-local.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
