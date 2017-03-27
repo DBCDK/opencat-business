@@ -79,8 +79,32 @@
       "folder": "fbs"
     },
     "PH": {
-      "templates": [],
-      "folder": ""
+      "templates": [
+        "ph-bog",
+        "ph-bogbind",
+        "ph-boghoved",
+        "ph-bogsektion"
+//        "ph-film",
+//        "ph-filmbind",
+//        "ph-filmhoved",
+//        "ph-fonogram",
+//        "ph-genstand",
+//        "ph-lydbog",
+//        "ph-lydbogbind",
+//        "ph-lydboghoved",
+//        "ph-netlydbog",
+//        "ph-netlydbogbind",
+//        "ph-etlydboghoved",
+//        "ph-netpub",
+//        "ph-netpubbind",
+//        "ph-netpubhoved",
+//        "ph-node",
+//        "ph-nodebind",
+//        "ph-nodehoved",
+//        "ph-periodicum",
+//        "ph-sammensat"
+      ],
+      "folder": "fbs"
     }
   }
 
