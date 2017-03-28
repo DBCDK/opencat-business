@@ -1016,13 +1016,9 @@
             "validation": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "code" : null,
-                        "urlForDocumentation" : "",
-                        "ordinalPositionOfField" : null,
-                        "ordinalPositionOfSubfield" : null,
-                        "ordinalPositionInSubfield" : null,
-                        "message" : "En af felterne '255,539' skal forefindes i posten  "
+                        "type": "ERROR",
+                        "urlForDocumentation": "",
+                        "message": "Et af felterne '255,539' skal forefindes i posten."
                     },
                     {
                         "type": "ERROR",
