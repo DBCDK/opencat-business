@@ -40,6 +40,7 @@
         "filmhoved",
         "fonogram",
         "genstand",
+        "lokalartikel",
         "lokalpost",
         "lokalpostbind",
         "lokalposthoved",
@@ -71,6 +72,7 @@
     },
     "Lokalbibliografi": {
       "templates": [
+        "lokalartikel",
         "lokalpost",
         "lokalpostbind",
         "lokalposthoved",
