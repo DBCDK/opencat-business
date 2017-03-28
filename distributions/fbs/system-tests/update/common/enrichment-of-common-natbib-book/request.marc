@@ -13,8 +13,10 @@
 521 00*&REX*b[1. oplag]*c2007
 530 00*aNOTEFELT 530
 532 00*&1*aMed litteraturhenvisninger
+534 00 *a Ledsaget af atlas: A demographic atlas of North-west Ireland (39s. : kort i farver ; 36 cm), tidligere udgivet separat
 600 00*aEFTERNAVN*hFORNAVN
 610 00*aKORPORATION
+631 00 *f kultursammenstød *f indianermyter
 652 00*m69.47
 666 00*fEMNEORD 666
 710 00*aYIT
