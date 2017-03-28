@@ -41,6 +41,6 @@ UnitTest.addFixture( "Test MustContainOneOfFields.validateRecord", function( ) {
         'fields' : ['004', '005']
     };
 
-    var valErr =  [({type:"ERROR", urlForDocumentation:"", message:"En af felterne '004,005' skal forefindes i posten  "})];
+    var valErr =  [({type:"ERROR", urlForDocumentation:"", message:"Et af felterne '%s' skal forefindes i posten."})];
     Assert.equal( "1 testing with valid " + params + " param", MustContainOneOfFields.validateRecord( record, params ), valErr );
 } );

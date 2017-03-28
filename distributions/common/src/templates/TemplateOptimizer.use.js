@@ -304,7 +304,6 @@ var TemplateOptimizer = function () {
                 if (typeof( rules[i].type ) === "string") {
                     obj.name = rules[i].type;
                     obj.type = convertRuleTypeNameToFunction(rules[i].type);
-
                     __checkRule(rules[i], rules[i].type);
                     Log.trace("Converted rule name: ", obj.name);
                 }
