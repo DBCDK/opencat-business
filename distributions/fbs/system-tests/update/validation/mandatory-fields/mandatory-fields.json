@@ -1016,6 +1016,15 @@
             "validation": {
                 "errors": [
                     {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "En af felterne '255,539' skal forefindes i posten  "
+                    },
+                    {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
                         "message": "Felt '001' mangler i posten"
