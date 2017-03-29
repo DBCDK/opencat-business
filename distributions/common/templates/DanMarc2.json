@@ -1846,6 +1846,7 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.47.htm",
             "subfields":{
                 "a":{
+                    "mandatory":true,
                     "repeatable":false
                 },
                 "\u00f8":{
@@ -2152,8 +2153,25 @@
                 "b":{},
                 "u":{},
                 "y":{},
-                "r":{},
-                "z":{}
+                "r":{
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 10,
+                            "max": 13
+                        }
+                    }
+                    ]
+                },
+                "z":{
+                    "rules":[{
+                        "type":"SubfieldRules.checkLength",
+                        "params":{
+                            "min":9,
+                            "max":9
+                        }
+                    }]
+                }
             },
             "rules": [
                 {
@@ -3807,6 +3825,7 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b.htm",
             "subfields":{
                 "a":{
+                    "mandatory":true,
                     "repeatable":false
                 },
                 "\u00E6":{
