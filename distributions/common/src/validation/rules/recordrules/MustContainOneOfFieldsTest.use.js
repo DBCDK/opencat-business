@@ -30,17 +30,17 @@ UnitTest.addFixture( "Test MustContainOneOfFields.validateRecord", function( ) {
     };
     var err = new Error("ValueCheckError: The following check failed: Value of 'params.fields' : '0' is not > '0'");
 
-    Assert.exception ("1 testing with valid " + params + " param", function(){MustContainOneOfFields.validateRecord( record, params )} , err);
+    Assert.exception ("2 testing with valid " + params + " param", function(){MustContainOneOfFields.validateRecord( record, params )} , err);
 
     params = {
         'fields' : ['001', '004']
     };
-    Assert.equal( "1 testing with valid " + params + " param", MustContainOneOfFields.validateRecord( record, params ), [] );
+    Assert.equal( "3 testing with valid " + params + " param", MustContainOneOfFields.validateRecord( record, params ), [] );
 
     params = {
         'fields' : ['004', '005']
     };
 
-    var valErr =  [({type:"ERROR", urlForDocumentation:"", message:"Et af felterne '%s' skal forefindes i posten."})];
-    Assert.equal( "1 testing with valid " + params + " param", MustContainOneOfFields.validateRecord( record, params ), valErr );
+    var valErr =  [({type:"ERROR", urlForDocumentation:"", message:"Et af felterne '004,005' skal forefindes i posten."})];
+    Assert.equal( "4 testing with valid " + params + " param", MustContainOneOfFields.validateRecord( record, params ), valErr );
 } );
