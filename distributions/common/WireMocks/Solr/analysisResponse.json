@@ -1,0 +1,198 @@
+{
+  "responseHeader": {
+    "status": 0
+  },
+  "analysis": {
+    "field_names": {
+      "match.004a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.008a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.009a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.009g": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.014a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.021a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.021e": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.022a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.023ab": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.024a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.028a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.100a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.110a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.245a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.245g": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.245n": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.245ø": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.250a": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.260b": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.300e": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      },
+      "match.538g": {
+        "index": [
+          [
+            {
+              "text": "something"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}
