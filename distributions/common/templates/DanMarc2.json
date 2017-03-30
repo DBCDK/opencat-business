@@ -483,6 +483,7 @@
                     "mandatory":true,
                     "repeatable":false
                 }
+
             }
         },
         "017":{
@@ -798,7 +799,8 @@
                 "b": {
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 },
-                "c": {
+                "c": {                "u": "DanMarc2.fields.008.subfields.u",
+
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 },
                 "s": {
