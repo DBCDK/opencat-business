@@ -20,6 +20,7 @@ use("SubfieldCannotContainValue");
 use("SubfieldsDemandsOtherSubfields");
 use("CheckSubfieldNotUsedInParentRecord");
 use("CheckReference");
+use("SubfieldValueExcludesField");
 use("SubfieldValueMakesFieldsAllowed");
 
 //field rules
@@ -337,8 +338,6 @@ var TemplateOptimizer = function () {
                     return ConflictingFields.validateRecord;
                 case "RecordRules.conflictingSubfields":
                     return ConflictingSubfields.validateRecord;
-                case "RecordRules.optionalFields":
-                    return OptionalFieldsvalidateRecord.validateRecord;
                 case "RecordRules.allFieldsMandatoryIfOneExist":
                     return AllFieldsMandatoryIfOneExist.validateRecord;
                 case "RecordRules.fieldDemandsOtherFields":
@@ -384,7 +383,6 @@ var TemplateOptimizer = function () {
                     return CheckDateFormat.validateSubfield;
                 case "SubfieldRules.checkFaust":
                     return CheckFaust.validateSubfield;
-                //case "SubfieldRules.checkFaust": return CheckFaust.validateSubfield;
                 case "SubfieldRules.checkISMN":
                     return CheckISMN.validateSubfield;
                 case "SubfieldRules.checkISSN":
@@ -401,8 +399,8 @@ var TemplateOptimizer = function () {
                     return CheckSubfieldNotUsedInChildrenRecords.validateSubfield;
                 case "SubfieldRules.lookupRecord":
                     return LookUpRecord.validateSubfield;
-                case "SubfieldRules.lookupValue":
-                    return LookUpValue.validateSubfield;
+                case "SubfieldRules.subfieldValueExcludesField":
+                    return SubfieldValueExcludesField.validateSubfield;
                 case "SubfieldRules.subfieldValueMakesFieldsAllowed":
                     return SubfieldValueMakesFieldsAllowed.validateSubfield;
 
