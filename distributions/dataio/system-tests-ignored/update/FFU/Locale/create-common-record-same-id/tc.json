@@ -30,17 +30,19 @@
                         "record": "result-main-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "result-main-dbc-enrichment.marc" ]
+                        "enrichments": [ "result-main-dbc-enrichment.marc" ],
+                        "enqueued": true
                     },
                     {
                         "record": "result-main-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
-                        "enrichments": []
+                        "enrichments": [],
+                        "enqueued": true
                     },
                     {
                         "record": "ffu-record.marc",
-                        "type": "ENRICHMENT",
+                        "type": "MARCXCHANGE",
                         "deleted": false,
                         "enrichments": []
                     }

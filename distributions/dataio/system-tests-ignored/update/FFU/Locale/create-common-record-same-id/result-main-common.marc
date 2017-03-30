@@ -1,12 +1,13 @@
-001 00 *a 21038849 *b 870970 *c 19951016 *d 19950911 *f a *o c
+001 00 *a 01300008 *b 870970 *c 20010128224732 *d 19761022 *f a *o c *t FAUST
 004 00 *r n *a e
-008 00 *b dk *v 0
-009 00 *a c *g xx
-100 00 *a Langgꜳrd *h Rued
-245 00 *a Selected piano works *c for klaver *e Rued Langgꜳrd *e edited by \Bengt Johnsson\ *Ø johnsson *ø Ved Bengt Johnsson
-260 00 *a Copenhagen *b Engstrøm & Sødring *c 1995—
-300 00 *a bind *c 32 cm
-534 00 *a Med revisionsberetning (dansk, engelsk)
-652 00 *m 78.53
-700 00 *a Johnsson *h Bengt
+008 00 *t m *u f *a 1975 *b no *l nor *v 1
+009 00 *a a *g xx
+010 00 *a D833976507
+021 00 *a 82-03-06496-5
+032 00 *x DIS197400
+100 00 *0 *a Jensen *h Bjørn *c f. 1924
+245 00 *a New York - kontrasternes metropol *c med en snartur til Washington
+260 00 *a Oslo *b Aschehoug *c 1975
+300 00 *a 181 sider
+652 00 *0 *m 48.64 *b New York
 996 00 *a DBC
