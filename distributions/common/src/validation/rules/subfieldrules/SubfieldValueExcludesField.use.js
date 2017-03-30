@@ -20,7 +20,7 @@ var SubfieldValueExcludesField = function () {
      * if the value of the subfield with this rule has a value matching the values of the rule
      *
      * Params should contain two elements:
-     * - matchValues [Array] contains the values the subfield should match with
+     * - values [Array] contains the values the subfield should match with
      * - excludedFields [Array] contains the list of fields that are excluded on the record if a match is made with
      * the matchValues list
      *
@@ -38,17 +38,17 @@ var SubfieldValueExcludesField = function () {
         try {
             ValueCheck.check("params", params);
             ValueCheck.check("params", params).instanceOf(Object);
-            ValueCheck.check("params", params.matchValues);
-            ValueCheck.check("params", params.matchValues).instanceOf(Array);
-            ValueCheck.check("params", params.excludedField);
-            ValueCheck.check("params", params.excludedField).instanceOf(Array);
+            ValueCheck.check("params", params.values);
+            ValueCheck.check("params", params.values).instanceOf(Array);
+            ValueCheck.check("params", params.excludedFields);
+            ValueCheck.check("params", params.excludedFields).instanceOf(Array);
 
-            var matchValues = params.matchValues;
-            var excludedField = params.excludedField;
+            var matchValues = params.values;
+            var excludedFields = params.excludedFields;
 
             if (matchValues.indexOf(subfield.value) > -1) {
                 record.fields.forEach(function (recordField) {
-                    if (excludedField.indexOf(recordField.name) > -1) {
+                    if (excludedFields.indexOf(recordField.name) > -1) {
                         var message = ResourceBundle.getStringFormat(bundle, "excluded.field", recordField.name, field.name, subfield.name);
                         result.push(ValidateErrors.recordError("TODO:fixurl", message));
                    }

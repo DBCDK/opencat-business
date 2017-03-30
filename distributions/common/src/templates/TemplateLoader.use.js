@@ -50,6 +50,21 @@ var TemplateLoader = function () {
                                         }
                                     }
                                 }
+
+                                // This section looks for all occurances of rule.params.values
+                                // If the value of values is a String then replace the value.
+                                if (fieldObj.subfields[subfieldName].hasOwnProperty('rules')) {
+                                    var rulesObj = fieldObj.subfields[subfieldName].rules;
+                                    for (var r = 0; r < rulesObj.length; r++) {
+                                        var ruleObj = rulesObj[r];
+                                        if (ruleObj.hasOwnProperty('params') && ruleObj.params.hasOwnProperty('values')) {
+                                            var valuesObj = ruleObj.params.values;
+                                            if (typeof( valuesObj ) === "string") {
+                                                ruleObj.params.values = __getObjectFromTemplate(valuesObj, templateProvider);
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
