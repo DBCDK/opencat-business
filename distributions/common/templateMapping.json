@@ -85,7 +85,8 @@
         "ph-bog",
         "ph-bogbind",
         "ph-boghoved",
-        "ph-bogsektion"
+        "ph-bogsektion",
+        "ph-film"
       ],
       "folder": "fbs"
     }
