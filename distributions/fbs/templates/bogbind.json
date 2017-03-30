@@ -107,15 +107,15 @@
             "repeatable":false,
             "sorting":"tuazbcdefghijklmorxv&",
             "subfields":{
-                "&": {
-                    "repeatable": false
-				},
                 "t":{
 					"mandatory": true,
                 	"repeatable": false,
                     "values":[ "m", "s", "p" ]
                 },
-                "u": "DanMarc2.fields.008.subfields.u",
+                "u": {
+                    "repeatable": false,
+                    "values": [ "?", "r", "o", "f", "u" ]
+                },
                 "a": {
                     "repeatable": false,
                     "rules": [
@@ -147,11 +147,7 @@
                     ]
                 },
                 "b": "DanMarc2.fields.008.subfields.b",
-                "d": {
-                    "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-                        "l", "m", "n", "o", "p", "q", "r", "s", "t","u", "w",
-                        "z", "x", "y", "1", "2", "\u00E5" ]
-                },
+                "d": "DanMarc2.fields.008.subfields.d",
                 "e": {
                     "repeatable": false,
                     "values": [ "1", "2" ],
@@ -189,8 +185,24 @@
                     ]
                 },
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
-                "x": "DanMarc2.fields.008.subfields.x",
+                "l": {
+                    "repeatable": false,
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+                },
+                "x": {
+                    "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
+                        "a", "b", "c", "d", "e", "f", "g", "j" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+                },
                 "m": {
                     "repeatable": false,
                     "values": [ "1" ],
