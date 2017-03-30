@@ -61,16 +61,6 @@ var SubfieldValueExcludesField = function () {
         }
     }
 
-    /**
-     * {
-                            "type": "SubfieldRules.subfieldValueExcludesField",
-                            "param": {
-                                "values": "Lister.fields.codes.subfields.country.general.values",
-                                "excludedField": ["100"]
-                            }
-                        }
-     */
-
     return {
         '__BUNDLE_NAME': BUNDLE_NAME,
         'validateSubfield': validateSubfield
