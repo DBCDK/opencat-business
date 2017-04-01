@@ -1,0 +1,29 @@
+[
+    {
+        "name": "fbs-new-local-book-local-bibliography",
+        "description": "Tester oprettelse af ny lokalbibliografisk bogpost",
+        "request": {
+            "authentication": {
+                "group": "159003",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokalpost",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-new-local.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
