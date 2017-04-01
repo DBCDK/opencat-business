@@ -382,12 +382,7 @@
                 "u": "DanMarc2.fields.530.subfields.u",
                 "y": "DanMarc2.fields.530.subfields.y",
                 "z": "DanMarc2.fields.530.subfields.z"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "531": "DanMarc2.fields.531",
         "532": "DanMarc2.fields.532",
@@ -405,12 +400,7 @@
                 "b": "DanMarc2.fields.534.subfields.b",
                 "u": "DanMarc2.fields.534.subfields.u",
                 "y": "DanMarc2.fields.534.subfields.y"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "538": "DanMarc2.fields.538",
         "539": "DanMarc2.fields.539",
