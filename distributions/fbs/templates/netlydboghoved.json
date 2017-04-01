@@ -804,7 +804,7 @@
                 "c":"DanMarc2.fields.900.subfields.c",
                 "x":"DanMarc2.fields.900.subfields.x",
                 "z":{
-                	"mandatory":true,
+                    "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
@@ -814,18 +814,18 @@
         "910":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
             "subfields":{
-                "a":"DanMarc2.fields.910.subfields.a",
-                "e":"DanMarc2.fields.910.subfields.e",
-                "c":"DanMarc2.fields.910.subfields.c",
-                "s":"DanMarc2.fields.910.subfields.s",
-                "h":"DanMarc2.fields.910.subfields.h",
-                "g":"DanMarc2.fields.910.subfields.g",
-                "i":"DanMarc2.fields.910.subfields.i",
-                "k":"DanMarc2.fields.910.subfields.k",
-                "j":"DanMarc2.fields.910.subfields.j",
-                "x":"DanMarc2.fields.910.subfields.x",
+                "a": "DanMarc2.fields.910.subfields.a",
+                "e": "DanMarc2.fields.910.subfields.e",
+                "c": "DanMarc2.fields.910.subfields.c",
+                "s": "DanMarc2.fields.910.subfields.s",
+                "h": "DanMarc2.fields.910.subfields.h",
+                "g": "DanMarc2.fields.910.subfields.g",
+                "i": "DanMarc2.fields.910.subfields.i",
+                "k": "DanMarc2.fields.910.subfields.k",
+                "j": "DanMarc2.fields.910.subfields.j",
+                "x": "DanMarc2.fields.910.subfields.x",
                 "z":{
-                	"mandatory":true,
+                    "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
@@ -844,6 +844,13 @@
                 "r":"DanMarc2.fields.945.subfields.r",
                 "q":"DanMarc2.fields.945.subfields.q",
                 "u":"DanMarc2.fields.945.subfields.u",
+                "d":"DanMarc2.fields.945.subfields.d",
+                "e":"DanMarc2.fields.945.subfields.e",
+                "f":"DanMarc2.fields.945.subfields.f",
+                "g":"DanMarc2.fields.945.subfields.g",
+                "h":"DanMarc2.fields.945.subfields.h",
+                "j":"DanMarc2.fields.945.subfields.j",
+                "k":"DanMarc2.fields.945.subfields.k",
                 "x":"DanMarc2.fields.945.subfields.x",
                 "z":{
                     "mandatory":true,
