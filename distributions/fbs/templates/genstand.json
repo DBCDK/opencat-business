@@ -198,14 +198,14 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "g", "u" ]
+                    "values":[ "e", "f", "g", "u" ]
                 },
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt", "gx",
-                        "ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy", "kt",
-                        "ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv" ]
+                    "values":[ "ed", "ef", "eg", "ep", "es", "et", "ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt",
+                        "gx", "ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy", "kt",
+                        "ua", "ub", "ud", "ue", "ui", "uk", "ul", "um", "ur", "us", "ut", "uu", "uv", "xy" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
