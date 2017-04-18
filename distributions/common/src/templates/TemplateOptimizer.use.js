@@ -368,6 +368,8 @@ var TemplateOptimizer = function () {
                 case "FieldRules.fieldDemandsOtherFieldAndSubfields":
                     return FieldDemandsOtherFieldAndSubfield.validateField;
 
+                case "SubfieldRules.subfieldConditionalMandatoryField":
+                    return SubfieldConditionalMandatoryField.validateSubfield;
                 case "SubfieldRules.subfieldCannotContainValue":
                     return SubfieldCannotContainValue.validateSubfield;
                 case "SubfieldRules.subfieldsDemandsOtherSubfields":
