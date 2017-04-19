@@ -48,7 +48,7 @@ var CheckChangedValue = function () {
             Log.debug("Old record:\n" + oldRecord);
             var oldValue = oldRecord.getValue(new RegExp(field.name), new RegExp(subfield.name));
             Log.debug(field.name + subfield.name + ": " + oldValue + " -> " + subfield.value);
-            if (params.fromValues.indexOf(oldValue) > -1 && params.toValues.indexOf(subfield.value) === -1) {
+            if (params.fromValues.indexOf(oldValue) === -1 || params.toValues.indexOf(subfield.value) === -1) {
                 var msg = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", field.name, subfield.name, oldValue, subfield.value);
                 Log.debug("Found validation error: " + msg);
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];

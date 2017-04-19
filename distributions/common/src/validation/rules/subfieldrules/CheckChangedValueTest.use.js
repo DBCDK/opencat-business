@@ -182,7 +182,67 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["b", "e"]};
 
-     Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+    Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a h"
+    );
+    RawRepoClientCore.clear();
+    RawRepoClientCore.addRecord(marcRecord);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a b"
+    );
+    Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", "Delfelt 004a må ikke ændre sig fra h til b")]);
+
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a b"
+    );
+    RawRepoClientCore.clear();
+    RawRepoClientCore.addRecord(marcRecord);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e"
+    );
+    Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a e"
+    );
+    RawRepoClientCore.clear();
+    RawRepoClientCore.addRecord(marcRecord);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a b"
+    );
+    Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a b"
+    );
+    RawRepoClientCore.clear();
+    RawRepoClientCore.addRecord(marcRecord);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "004 00 *a b"
+    );
+    Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
 });
