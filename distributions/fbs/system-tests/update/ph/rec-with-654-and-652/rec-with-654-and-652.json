@@ -1,0 +1,29 @@
+[
+    {
+        "name": "rec-with-654-and-652",
+        "description": "Tester en post der har opstilling i 654 og kun biplaceringer i 652. Skal gå godt.",
+        "request": {
+            "authentication": {
+                "group": "831020",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ph-bog",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
