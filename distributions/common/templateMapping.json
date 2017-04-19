@@ -86,7 +86,18 @@
         "ph-bogbind",
         "ph-boghoved",
         "ph-bogsektion",
-        "ph-film"
+        "ph-film",
+        "ph-filmbind",
+        "ph-filmhoved",
+        "ph-musik",
+        "ph-netpub",
+        "ph-netpubbind",
+        "ph-netpubhoved",
+        "ph-periodicum",
+        "paahaengspost",
+        "paahaengspostbind",
+        "paahaengsposthoved",
+        "paahaengspostsektion"
       ],
       "folder": "fbs"
     }
