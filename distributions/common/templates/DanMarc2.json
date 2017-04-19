@@ -780,7 +780,7 @@
                     "values": [ "sam", "mir", "mia", "avg", "ava", "ork",
 					"ora", "kam", "kaa", "eti", "eta", "vok", "voa", "opr",
 					"opa", "otm", "ota", "new", "fol", "blu", "bla", "jaz",
-					"jaa", "bef", "bea", "und", "dau", "jul", "fil", "tes",
+					"jaa", "bef", "bea", "und", "dau", "#fau", "jul", "fil", "tes",
 					"mmo", "hib", "mub" ]
                 },
                 "b": {
@@ -1848,7 +1848,6 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.47.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "\u00f8":{
@@ -2671,7 +2670,8 @@
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
             }
         },
-        "585":{
+        "585":{                "0": "DanMarc2.fields.610.subfields.m",
+
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
             "subfields":{
                 "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{}, "i":{}, "j":{},
@@ -3157,14 +3157,14 @@
                     "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
                     "params": {
                         "subfield": "m",
-                        "not_presented_subfield": [ "652o" ]
+                        "not_presented_subfield": [ "652o", "654m", "654o" ]
                     }
                 },
                 {
                     "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
                     "params": {
                         "subfield": "o",
-                        "not_presented_subfield": [ "652m" ]
+                        "not_presented_subfield": [ "652m", "654m", "654o" ]
                     }
                 }
             ]
