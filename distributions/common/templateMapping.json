@@ -4,7 +4,8 @@
     "fbs":                  {"templateGroups": ["FBS"]},
     "ffu":                  {"templateGroups": ["FFU"]},
     "lokbib":               {"templateGroups": ["Lokalbibliografi"]},
-    "ph":                   {"templateGroups": ["PH"]}
+    "ph":                   {"templateGroups": ["PH"]},
+    "skole":                {"templateGroups": ["Skolepaahaengsposter (p.t. ikke synlige i drift)"]}
   },
   "templateGroups": {
     "DBC": {
@@ -62,11 +63,7 @@
         "paahaengspostbind",
         "paahaengsposthoved",
         "paahaengspostsektion",
-        "sammensat",
-        "skolepaahaengspost",
-        "skolepaahaengspostbind",
-        "skolepaahaengsposthoved",
-        "skolepaahaengspostsektion"
+        "sammensat"
       ],
       "folder": "fbs"
     },
@@ -101,6 +98,15 @@
         "paahaengspostbind",
         "paahaengsposthoved",
         "paahaengspostsektion"
+      ],
+      "folder": "fbs"
+    },
+    "Skolepaahaengsposter (p.t. ikke synlige i drift)": {
+      "templates": [
+        "skolepaahaengspost",
+        "skolepaahaengspostbind",
+        "skolepaahaengsposthoved",
+        "skolepaahaengspostsektion"
       ],
       "folder": "fbs"
     }
