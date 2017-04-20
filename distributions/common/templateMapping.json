@@ -4,7 +4,7 @@
     "fbs":                  {"templateGroups": ["FBS"]},
     "ffu":                  {"templateGroups": ["FFU"]},
     "lokbib":               {"templateGroups": ["Lokalbibliografi"]},
-    "ph":                   {"templateGroups": ["PH", "FFU"]}
+    "ph":                   {"templateGroups": ["PH"]}
   },
   "templateGroups": {
     "DBC": {
@@ -89,6 +89,9 @@
         "ph-film",
         "ph-filmbind",
         "ph-filmhoved",
+        "ph-generel",
+        "ph-generelbind",
+        "ph-generelhoved",
         "ph-musik",
         "ph-netpub",
         "ph-netpubbind",
