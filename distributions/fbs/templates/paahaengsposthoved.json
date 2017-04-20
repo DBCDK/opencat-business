@@ -104,15 +104,20 @@
             "mandatory": true,
             "repeatable": false,
             "subfields": {
-                "r": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "values": [ "n", "c", "d" ]
-                },
+                "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "h" ]
+                    "values": [ "h" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkChangedValue",
+                            "params": {
+                                "fromValues": [ "e", "b" ],
+                                "toValues": [ "e", "b" ]
+                            }
+                        }
+                    ]
                 },
                 "n": {
                     "repeatable": false,

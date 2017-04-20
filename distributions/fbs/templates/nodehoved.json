@@ -28,6 +28,10 @@
             }
         },
         {
+            "type": "RecordRules.mustContainOneOfFields",
+            "params": { "fields": [ "652", "654" ] }
+        },
+        {
             "type": "RecordRules.conflictingSubfields",
             "params": {
                 "subfields": [ "652m", "652o", "654m", "654o" ]
@@ -104,7 +108,17 @@
                 },
                 "a": {
 					"mandatory": true,
-                    "values":[ "e" ]					
+                    "repeatable": false,
+                    "values":[ "h" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkChangedValue",
+                            "params": {
+                                "fromValues": [ "e", "b" ],
+                                "toValues": [ "e", "b" ]
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -565,9 +579,8 @@
         "631":"DanMarc2.fields.631",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "mandatory":true,
+            "sorting":"0\u00E5mnopqrivzAaHhkEeFfCcTtBb",
             "subfields":{
-                "&":{},
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
@@ -580,7 +593,23 @@
                 "t":"DanMarc2.fields.652.subfields.t",
                 "0":"DanMarc2.fields.652.subfields.0",
                 "1":"DanMarc2.fields.652.subfields.1"
-			 }
+			 },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "m",
+                        "not_presented_subfield": [ "652o", "654m", "654o" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "o",
+                        "not_presented_subfield": [ "652m", "654m", "654o" ]
+                    }
+                }
+            ]
         },
         "654":"DanMarc2.fields.654",
         "666":{

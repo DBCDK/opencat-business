@@ -93,7 +93,7 @@
                     "values": [ "?", "f", "o", "r", "u" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecords"
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
                         }
                     ]
                 },
@@ -196,7 +196,7 @@
                     "values": [ "a", "b", "c" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecord"
                         }
                     ]
                 },
@@ -214,7 +214,7 @@
                     "values": [ "1" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecord"
                         }
                     ]
                 },

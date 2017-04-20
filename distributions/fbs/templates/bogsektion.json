@@ -87,16 +87,9 @@
                     "values": [ "n", "c" ]
                 },
                 "a": {
-                    "values":[ "s" ],
-					"rules": [
-		    			{
-		        			"type": "SubfieldRules.checkChangedValue",
-		        			"params": { 
-			            		"fromValues": [ "h", "b", "e" ],
-			            		"toValues": [ "s" ]
-			       			}	
-		    			}
-					]
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values":[ "s" ]
                 }
             }
         },

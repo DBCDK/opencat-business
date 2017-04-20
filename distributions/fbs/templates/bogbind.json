@@ -88,16 +88,17 @@
                 },
                 "a": {
 					"mandatory": true,
+                    "repeatable": false,
                     "values":[ "b" ],
-					"rules": [
-            			{
-                			"type": "SubfieldRules.checkChangedValue",
-        		        	"params": {
-            		            "fromValues": [ "h", "s" ],
-            		            "toValues": [ "b" ]
-       			            }
-    			        }
-			        ]
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkChangedValue",
+                            "params": {
+                                "fromValues": [ "e", "b" ],
+                                "toValues": [ "e", "b" ]
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -378,12 +379,16 @@
                 {
                     "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
                     "params": {
-                        "subfield": "g",
-                        "not_presented_subfield": [ "245a" ]
+                        "subfield": "a",
+                        "not_presented_subfield": [ "245g" ]
                     }
                 },
                 {
-                    "type": "FieldRules.upperCaseCheck"
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "g",
+                        "not_presented_subfield": [ "245a" ]
+                    }
                 }
             ]
         },

@@ -28,6 +28,10 @@
             }
         },
         {
+            "type": "RecordRules.mustContainOneOfFields",
+            "params": { "fields": [ "652", "654" ] }
+        },
+        {
             "type": "RecordRules.conflictingSubfields",
             "params": {
                 "subfields": [ "652m", "652o", "654m", "654o" ]
@@ -250,7 +254,7 @@
 					"ora", "kam", "kaa", "eti", "eta", "vok", "voa", "opr", 
 					"opa", "otm", "ota", "new", "fol", "blu", "bla", "jaz", 
 					"jaa", "bef", "bea", "und", "dau", "jul", "fil", "tes", 
-					"hib", "mub" ]
+					"hib", "mmo", "mub" ]
                 },                
                 "b": "Lister.fields.codes.subfields.country.music"                
             }
@@ -297,15 +301,7 @@
         },
         "239": "DanMarc2.fields.239",
         "240": "DanMarc2.fields.240",
-        "241":{
-                "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",
-                "subfields":{                
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false
-            	}
-			}
-        },
+        "241": "DanMarc2.fields.241",
         "245":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
             "mandatory":true,
@@ -583,9 +579,8 @@
         "631":"DanMarc2.fields.631",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "mandatory":true,
+            "sorting":"0\u00E5mnopqrivzAaHhkEeFfCcTtBb",
             "subfields":{
-                "&":{},
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
@@ -596,9 +591,24 @@
                 "f":"DanMarc2.fields.652.subfields.f",
                 "c":"DanMarc2.fields.652.subfields.c",
                 "t":"DanMarc2.fields.652.subfields.t",
-                "0":"DanMarc2.fields.652.subfields.0",
-                "1":"DanMarc2.fields.652.subfields.1"
-			 }
+                "0":"DanMarc2.fields.652.subfields.0"
+			 },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "m",
+                        "not_presented_subfield": [ "652o", "654m", "654o" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "o",
+                        "not_presented_subfield": [ "652m", "654m", "654o" ]
+                    }
+                }
+            ]
         },
         "654":"DanMarc2.fields.654",
         "666":{

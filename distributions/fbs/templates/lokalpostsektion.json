@@ -40,7 +40,19 @@
                 "o": "DanMarc2.fields.001.subfields.o"
             }
         },
-        "004": "DanMarc2.fields.004",
+        "004": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "r": "DanMarc2.fields.004.subfields.r",
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values":[ "s" ]
+                }
+            }
+        },
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory": true,
