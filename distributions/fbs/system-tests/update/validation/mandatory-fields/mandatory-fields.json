@@ -16,6 +16,11 @@
                 "errors": [
                     {
                         "type": "ERROR",
+                        "urlForDocumentation": "",
+                        "message": "Et af felterne '652,654' skal forefindes i posten."
+                    },
+                    {
+                        "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
                         "message": "Felt '001' mangler i posten"
                     },
@@ -48,11 +53,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -117,6 +117,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                    "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -151,11 +156,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -220,6 +220,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                    "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -254,11 +259,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -328,6 +328,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -362,11 +367,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -387,6 +387,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -421,11 +426,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -446,6 +446,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -470,11 +475,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
                         "message": "Felt '245' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -495,6 +495,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -529,11 +534,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -598,6 +598,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -632,11 +637,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -657,6 +657,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -686,11 +691,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -755,6 +755,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -784,11 +789,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -809,6 +809,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -843,11 +848,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -912,6 +912,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -946,11 +951,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -1015,6 +1015,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "",
@@ -1049,11 +1054,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
@@ -1074,6 +1074,11 @@
         "expected": {
             "validation": {
                 "errors": [
+                  {
+                    "type": "ERROR",
+                      "urlForDocumentation": "",
+                    "message": "Et af felterne '652,654' skal forefindes i posten."
+                  },
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
@@ -1108,11 +1113,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
                         "message": "Felt '300' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-                        "message": "Felt '652' mangler i posten"
                     }
                 ]
             }
