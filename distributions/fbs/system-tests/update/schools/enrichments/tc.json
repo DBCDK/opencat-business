@@ -1,7 +1,7 @@
 [
     {
         "name": "fbs-new-school-enrichment",
-        "description": "Tester oprettelse af ny skolepåhængspost",
+        "description": "Tester oprettelse af lokal påhængspost for en skole",
         "request": {
             "authentication": {
                 "group": "300101",

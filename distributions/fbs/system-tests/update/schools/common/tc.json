@@ -4,7 +4,7 @@
         "description": "Tester oprettelse af ny fælles skolepåhængspost uden eksisterende påhængsposter for skoler",
         "request": {
             "authentication": {
-                "group": "300101",
+                "group": "300000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -60,7 +60,7 @@
         "description": "Tester oprettelse af ny fælles skolepåhængspost med en eksisterende påhængsposter for en skole",
         "request": {
             "authentication": {
-                "group": "300101",
+                "group": "300000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -131,7 +131,7 @@
         "description": "Tester sletning af fælles skolepåhængspost med en eksisterende påhængsposter for en skole",
         "request": {
             "authentication": {
-                "group": "300101",
+                "group": "300000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
