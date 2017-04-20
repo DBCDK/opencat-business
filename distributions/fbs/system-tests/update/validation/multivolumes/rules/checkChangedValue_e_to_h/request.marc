@@ -1,0 +1,17 @@
+001 00 *a 40565906 *b 870970 *c 20080529102532 *d 20080529 *f a
+004 00 *r c *a h
+008 00 *b de *l ger *v 0
+009 00 *a a *g xx
+021 00 *a 3-7618-1100-4 *b Bärenreiter
+021 00 *a 3-476-41022-6 *b Metzler
+245 00 *a Die ¤Musik in Geschichte und Gegenwart *c allgemeine Enzyklopädie der Musik *ø Ved Ludwig Finscher
+250 00 *a 2. neubearbeitete Ausgabe *b 2. Ausgabe *c begründet von Friedrich Blume *c herausgegeben von \Ludwig Finscher\
+260 00 *a Kassel *b Bärenreiter *a Stuttgart *b Metzler *c 1994
+300 00 *a 17 bind *b ill.
+512 00 *a Omslagstitel: MGG
+532 00 *a Litteraturhenvisninger
+652 00 *m 78
+700 00 *a Blume *h Friedrich
+700 00 *a Finscher *h Ludwig
+745 00 *a MGG
+996 00 *a 710100

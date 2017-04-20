@@ -1,0 +1,40 @@
+[
+    {
+        "name": "checkChangedValue_e_to_h",
+        "bugs": [
+            ""
+        ],
+        "description": "Tester omkatalogisering fra singlepost til hoverdpost. Skal fejle.",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "boghoved",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                     "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                        "ordinalPositionOfField": 1,
+                        "ordinalPositionOfSubfield": 1,
+                        "message": "Delfelt 004a må ikke ændre sig fra e til h"
+                    }
+                ]
+            }
+        }
+    }
+]
