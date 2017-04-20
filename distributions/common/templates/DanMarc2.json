@@ -3220,7 +3220,23 @@
 				},
                 "r":{
 					"repeatable": false
-				}
+				},
+                "rules": [
+                    {
+                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                        "params": {
+                            "subfield": "m",
+                            "not_presented_subfield": [ "654o", "652m", "652o" ]
+                        }
+                    },
+                    {
+                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                        "params": {
+                            "subfield": "o",
+                            "not_presented_subfield": [ "654m", "652m", "652o" ]
+                        }
+                    }
+                ]
             }
         },
         "655":{
