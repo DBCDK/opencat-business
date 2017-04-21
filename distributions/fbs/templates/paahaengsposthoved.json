@@ -121,7 +121,7 @@
                 },
                 "n": {
                     "repeatable": false,
-                    "values": [ "w" ]
+                    "values": [ "f", "w" ]
                 },
                 "x": {}
             }
