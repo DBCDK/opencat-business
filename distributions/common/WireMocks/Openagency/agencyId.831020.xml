@@ -7,11 +7,11 @@
                 <oa:agencyType>Forskningsbibliotek</oa:agencyType>
                 <oa:libraryRule>
                     <oa:name>create_enrichments</oa:name>
-                    <oa:bool>0</oa:bool>
+                    <oa:bool>1</oa:bool>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>use_enrichments</oa:name>
-                    <oa:bool>0</oa:bool>
+                    <oa:bool>1</oa:bool>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_root</oa:name>
