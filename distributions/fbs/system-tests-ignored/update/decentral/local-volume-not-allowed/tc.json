@@ -1,9 +1,6 @@
 [
     {
         "name": "local-volume-to-common-main-not-allowed",
-        "bugs": [
-            ""
-        ],
         "description": "Tester oprettelse af lokal bindpost til fællesskabs-hovedpost.",
         "request": {
             "authentication": {
@@ -19,19 +16,21 @@
                 {
                     "record": "rawrepo-common-main.marc",
                     "type": "MARCXCHANGE",
-                     "deleted": false
+                    "deleted": false
                 }
             ]
         },
         "expected": {
-            "validation": {
+            "validation": {},
+            "update": {
                 "errors": [
                     {
                         "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-                        "ordinalPositionOfField": 1,
-                        "ordinalPositionOfSubfield": 1,
-                        "message": "Delfelt 004a må ikke ændre sig fra e til h"
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Posten {51586417|710100} peger på {51617649|710100}, men den refererede post findes ikke"
                     }
                 ]
             }
