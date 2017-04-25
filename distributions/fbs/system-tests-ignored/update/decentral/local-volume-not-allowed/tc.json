@@ -1,0 +1,40 @@
+[
+    {
+        "name": "local-volume-to-common-main-not-allowed",
+        "bugs": [
+            ""
+        ],
+        "description": "Tester oprettelse af lokal bindpost til fællesskabs-hovedpost.",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokalpostbind",
+            "record": "request-local-volume.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-main.marc",
+                    "type": "MARCXCHANGE",
+                     "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+                        "ordinalPositionOfField": 1,
+                        "ordinalPositionOfSubfield": 1,
+                        "message": "Delfelt 004a må ikke ændre sig fra e til h"
+                    }
+                ]
+            }
+        }
+    }
+]
