@@ -397,7 +397,7 @@ var TemplateOptimizer = function () {
                     return CheckChangedValue.validateSubfield;
                 case "SubfieldRules.checkSubfieldNotUsedInParentRecord":
                     return CheckSubfieldNotUsedInParentRecord.validateSubfield;
-                case "SubfieldRules.checkSubfieldNotUsedInChildrenRecords":
+                case "SubfieldRules.checkSubfieldNotUsedInChildrenRecord":
                     return CheckSubfieldNotUsedInChildrenRecords.validateSubfield;
                 case "SubfieldRules.lookupRecord":
                     return LookUpRecord.validateSubfield;
