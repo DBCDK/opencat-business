@@ -98,7 +98,6 @@ var Builder = function() {
     }
 
     // sort function used by sortRecord
-    // function( a, b ) { return a.name.localeCompare(b.name); }
     function sortRecordFunction( a, b ){
         Log.trace( "-> sortRecordFunction" );
         return a.name.localeCompare(b.name);
