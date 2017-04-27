@@ -84,8 +84,12 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"tuazbcdefghijklmnoqrxv",
+            "sorting":"uazbcdefghijklmnoqrxv",
             "subfields":{
+                "u": {
+                    "repeatable":false,
+                    "values":[ "f", "u", "r" ]
+                },
                 "a": {
                     "repeatable": false,
                     "rules": [
@@ -100,10 +104,6 @@
        						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
 						}
                     ]
-                },
-                "u": {
-                    "repeatable":false,
-                    "values":[ "f", "u", "r" ]
                 },
                 "z": {
                     "repeatable": false,
@@ -120,10 +120,42 @@
                         }
                     ]
                 },
-                "b": "DanMarc2.fields.008.subfields.b",
+                "b": {
+                    "values": "Lister.fields.codes.subfields.country.general.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
-                "x": "DanMarc2.fields.008.subfields.x",
+                "l": {
+                    "repeatable": false,
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
+                "o": {
+                    "repeatable": false,
+                    "values": [ "b", "s" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
+                "x": {
+                    "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
+                        "a", "b", "c", "d", "e", "f", "g", "j" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
                 "v": "DanMarc2.fields.008.subfields.v"
             }
         },

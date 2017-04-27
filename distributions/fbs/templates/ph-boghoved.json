@@ -83,7 +83,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"uazbcdefghijklmorxv&",
+            "sorting":"uazbcdefghijklmorxv",
             "subfields":{
 				"u": "DanMarc2.fields.008.subfields.u",
                 "a": {
@@ -101,16 +101,30 @@
                         }
                     ]
                 },
-                "z": "DanMarc2.fields.008.subfields.z",
-                "b": {
+                "z": {
                     "repeatable": false,
-                    "values": [ "1" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 4,
+                                "max": 4
+                            }
+                        },
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
+                "b": {
+                    "values": "Lister.fields.codes.subfields.country.general.values",
                     "rules": [
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
                         }
                     ]
                 },
+                "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
                 "e": {
                     "repeatable": false,

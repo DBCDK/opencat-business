@@ -102,10 +102,23 @@
                         }
                     ]
                 },
-                "z": "DanMarc2.fields.008.subfields.z",
-                "b": {
+                "z": {
                     "repeatable": false,
-                    "values": [ "1" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 4,
+                                "max": 4
+                            }
+                        },
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
+                "b": {
+                    "values": "Lister.fields.codes.subfields.country.general.values",
                     "rules": [
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"

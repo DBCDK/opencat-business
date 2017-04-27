@@ -109,7 +109,14 @@
 						}
                     ]
                 },
-                "b": "DanMarc2.fields.008.subfields.b",
+                "b": {
+                    "values": "Lister.fields.codes.subfields.country.general.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                        }
+                    ]
+                },
                 "d": "DanMarc2.fields.008.subfields.d",
                 "e": {
                     "repeatable": false,
