@@ -73,3 +73,37 @@ function sortRecord(templateName, record, settings) {
 function recategorizationNoteFieldFactory(currentCommonRecord) {
     return RecategorizationNoteFieldFactory.createNewNoteField(currentCommonRecord);
 }
+
+function buildRecord(templateName, record, settings) {
+    var result;
+    var templateProvider = function () {
+        ResourceBundleFactory.init(settings);
+        TemplateContainer.setSettings(settings);
+        return TemplateContainer.getUnoptimized(templateName);
+    };
+    var faustProvider = function () {
+        WebserviceUtil.init(settings);
+        return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll();
+    };
+    if (record === undefined || record === null) {
+        Log.debug("new record");
+        // new record
+        result = Builder.buildRecord(templateProvider, faustProvider);
+    } else {
+        Log.debug("convert record");
+        // convert record
+        var rec = JSON.parse(record);
+        result = Builder.convertRecord(templateProvider, rec, faustProvider);
+    }
+    return JSON.stringify(result);
+}
+
+/**
+ * Gets the names of the templates as an Array
+ *
+ * @return {JSON} A json with the names of the templates. The names is returned
+ *                as an Array.
+ */
+function getBuildSchemas() {
+    return JSON.stringify(TemplateContainer.getTemplateNames());
+}
