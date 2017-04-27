@@ -97,25 +97,7 @@
                 "w": "DanMarc2.fields.008.subfields.w",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v": "DanMarc2.fields.008.subfields.v"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.subfieldConditionalMandatory",
-                    "params": {
-                        "subfieldConditional": "v",
-                        "values": [ "0" ],
-                        "subfieldMandatory": "a"
-                    }
-                },
-                {
-                    "type": "FieldRules.subfieldConditionalMandatory",
-                    "params": {
-                        "subfieldConditional": "v",
-                        "values": [ "1" ],
-                        "subfieldMandatory": "a"
-                    }
-                }
-            ]
+            }
 		},
         "009":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",

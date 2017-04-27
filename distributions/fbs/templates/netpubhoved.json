@@ -170,11 +170,7 @@
                         }
                     ]
                 },
-                "d": {
-                    "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-                        "l", "m", "n", "o", "p", "q", "r", "s", "t","u", "w",
-                        "z", "x", "y", "1", "2" ]
-                },
+                "d": "DanMarc2.fields.008.subfields.d",
                 "e": {
                     "repeatable": false,
                     "values": [ "1", "2" ],
@@ -220,10 +216,7 @@
                         }
                     ]
                 },
-                "k": {
-                    "repeatable": false,
-                    "values": [ "a", "b", "c" ]
-                },
+                "k": "DanMarc2.fields.008.subfields.k",
                 "l": {
                     "repeatable": false,
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values",
@@ -283,7 +276,25 @@
                     "repeatable": false,
                     "values":[ "0", "1", "4", "5", "7" ]
                 }
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldConditionalMandatory",
+                    "params": {
+                        "subfieldConditional": "v",
+                        "values": [ "0" ],
+                        "subfieldMandatory": "a"
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldConditionalMandatory",
+                    "params": {
+                        "subfieldConditional": "v",
+                        "values": [ "1" ],
+                        "subfieldMandatory": "a"
+                    }
+                }
+            ]
 		},
         "009":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
