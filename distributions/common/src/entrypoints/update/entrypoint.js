@@ -5,6 +5,11 @@ use("RecategorizationNoteFieldFactory");
 use("DoubleRecordHandler");
 use("RecordSorting");
 use("Log");
+use("Builder");
+use("Print");
+use("TemplateContainer");
+use("WebserviceUtil");
+
 
 function initTemplates(settings) {
     ValidatorEntryPoint.initTemplates(settings);
@@ -74,6 +79,20 @@ function recategorizationNoteFieldFactory(currentCommonRecord) {
     return RecategorizationNoteFieldFactory.createNewNoteField(currentCommonRecord);
 }
 
+function checkTemplateBuild(name, settings) {
+    var result;
+    try {
+        ResourceBundleFactory.init(settings);
+        TemplateContainer.setSettings(settings);
+        result = TemplateContainer.getUnoptimized(name) !== undefined;
+    } catch (exception) {
+        // It is ok for the TemplateContainer.get to trow, it means that the
+        // template does not exist and we can then return false.
+        result = false;
+    }
+    return result;
+}
+
 function buildRecord(templateName, record, settings) {
     var result;
     var templateProvider = function () {
@@ -96,14 +115,4 @@ function buildRecord(templateName, record, settings) {
         result = Builder.convertRecord(templateProvider, rec, faustProvider);
     }
     return JSON.stringify(result);
-}
-
-/**
- * Gets the names of the templates as an Array
- *
- * @return {JSON} A json with the names of the templates. The names is returned
- *                as an Array.
- */
-function getBuildSchemas() {
-    return JSON.stringify(TemplateContainer.getTemplateNames());
 }
