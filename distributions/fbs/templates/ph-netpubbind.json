@@ -196,7 +196,7 @@
                     "values": [ "a", "b", "c" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecord"
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
                         }
                     ]
                 },
@@ -214,7 +214,7 @@
                     "values": [ "1" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecord"
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
                         }
                     ]
                 },
