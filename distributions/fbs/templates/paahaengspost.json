@@ -117,16 +117,7 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values":[ "e" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkChangedValue",
-                            "params": {
-                                "fromValues": [ "e", "b" ],
-                                "toValues": [ "e", "b" ]
-                            }
-                        }
-                    ]
+                    "values":[ "e" ]
                 },
                 "n": {
                     "repeatable": false,
