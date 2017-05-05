@@ -20,6 +20,39 @@ var Validator = function () {
     var BUNDLE_NAME = "validation";
 
     /**
+     * Checks whether the template provided allow *rd if the record
+     * contains such. If it allows it, there are no reason to make a full
+     * validation.
+     * @param record
+     * @param templateProvider
+     * @param settings
+     * @returns {boolean} True : Either don't have *rd or *rd isn't allowed.
+     *                    False : it's a legal delete record
+     */
+    function isNotLegalDeleteRecord(record, templateProvider, settings) {
+        for (var fieldLoopIndex = 0; fieldLoopIndex < record.fields.length; fieldLoopIndex++) {
+            var field = record.fields[fieldLoopIndex];
+            if (field.name === "004") {
+                if (field.subfields !== undefined) {
+                    for (var subfieldLoopIndex = 0; subfieldLoopIndex < field.subfields.length; subfieldLoopIndex++) {
+                        var subfield = field.subfields[subfieldLoopIndex];
+                        if (subfield.name === "r") {
+                            if (subfield.value === "d") {
+                                var subResult = validateSubfield(record, field, subfield, templateProvider, settings);
+                                if (subResult === []) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Validates an entire record.
      *
      * @param {Object} record The record that contains the subfield.
@@ -35,17 +68,16 @@ var Validator = function () {
             var result = [];
             var template = templateProvider();
             if (record.fields !== undefined) {
-                for (var i = 0; i < record.fields.length; i++) {
-                    var subResult = validateField(record, record.fields[i], templateProvider, settings);
-                    var field = record.fields[i];
-
-                    for (var j = 0; j < subResult.length; j++) {
-                        subResult[j].ordinalPositionOfField = i;
+                // Validation should only be performed if it isn't a legal delete record
+                if (isNotLegalDeleteRecord(record, templateProvider, settings)) {
+                    for (var i = 0; i < record.fields.length; i++) {
+                        var subResult = validateField(record, record.fields[i], templateProvider, settings);
+                        for (var j = 0; j < subResult.length; j++) {
+                            subResult[j].ordinalPositionOfField = i;
+                        }
+                        result = result.concat(subResult);
                     }
-                    result = result.concat(subResult);
                 }
-            } else {
-                // TODO: Return error.
             }
             if (template.rules instanceof Array) {
                 for (var k = 0; k < template.rules.length; k++) {
@@ -60,8 +92,6 @@ var Validator = function () {
                         throw ResourceBundle.getStringFormat(bundle, "record.execute.error", e);
                     }
                 }
-            } else {
-                // TODO: Return error.
             }
             return result;
         } finally {
@@ -117,8 +147,6 @@ var Validator = function () {
                         throw ResourceBundle.getStringFormat(bundle, "field.execute.error", field.name, ex);
                     }
                 }
-            } else {
-                // TODO: Return error.
             }
             for (var k = 0; k < result.length; k++) {
                 if (templateField.url !== undefined && templateField.url !== "") {
@@ -184,8 +212,6 @@ var Validator = function () {
                         throw ResourceBundle.getStringFormat(bundle, "subfield.execute.error", field.name, subfield.name, e);
                     }
                 }
-            } else {
-                // TODO: Return error.
             }
             return result;
         } finally {
