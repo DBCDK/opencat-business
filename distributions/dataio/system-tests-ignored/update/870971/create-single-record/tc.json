@@ -1,0 +1,43 @@
+[
+    {
+        "name": "870971-create-single-record",
+        "description": "Testcase to verify creation of a 870971 record is possible",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "allowall",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
