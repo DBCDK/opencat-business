@@ -19,7 +19,7 @@ UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) 
 
     var expectedResult = [];
     var actualResult = AllFieldsMandatoryIfOneExist.validateRecord( record, params );
-    SafeAssert.equal( "AllFieldsMandatoryIfOneExist.validateRecord 1", actualResult, expectedResult );
+    Assert.equalValue( "AllFieldsMandatoryIfOneExist.validateRecord 1", actualResult, expectedResult );
 
     record = {
         fields : [{
@@ -32,7 +32,7 @@ UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) 
     };
     expectedResult = [ValidateErrors.recordError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "field.mandatory.error", "003" ) ) ];
     actualResult = AllFieldsMandatoryIfOneExist.validateRecord( record, params );
-    SafeAssert.equal( "AllFieldsMandatoryIfOneExist.validateRecord 2", actualResult, expectedResult );
+    Assert.equalValue( "AllFieldsMandatoryIfOneExist.validateRecord 2", actualResult, expectedResult );
 
     record = {
         fields : [{
@@ -41,7 +41,7 @@ UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) 
     };
     expectedResult = [];
     actualResult = AllFieldsMandatoryIfOneExist.validateRecord( record, params );
-    SafeAssert.equal( "AllFieldsMandatoryIfOneExist.validateRecord 3", actualResult, expectedResult );
+    Assert.equalValue( "AllFieldsMandatoryIfOneExist.validateRecord 3", actualResult, expectedResult );
 
     var record = {
         fields : [{
@@ -55,5 +55,5 @@ UnitTest.addFixture( "AllFieldsMandatoryIfOneExist.validateRecord", function( ) 
         ValidateErrors.recordError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "field.mandatory.error", "003" ) ),
     ];
     actualResult = AllFieldsMandatoryIfOneExist.validateRecord( record, params );
-    SafeAssert.equal( "AllFieldsMandatoryIfOneExist.validateRecord 4", actualResult, expectedResult );
+    Assert.equalValue( "AllFieldsMandatoryIfOneExist.validateRecord 4", actualResult, expectedResult );
 } );

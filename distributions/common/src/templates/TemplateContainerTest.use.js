@@ -1,6 +1,5 @@
 use ("TemplateContainer");
 use("UnitTest");
-use("SafeAssert");
 
 UnitTest.addFixture("TemplateContainer.__addUppercaseLetterToTemplate", function () {
 

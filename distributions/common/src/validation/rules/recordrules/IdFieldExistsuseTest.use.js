@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------
 use( "IdFieldExists" );
 use( "UnitTest" );
-use( "SafeAssert" );
 
 //-----------------------------------------------------------------------------
 UnitTest.addFixture( "Test IdFieldExists.validateRecord", function( ) {

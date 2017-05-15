@@ -12,7 +12,7 @@ UnitTest.addFixture( "ExclusiveSubfield", function( ) {
             name : "a", value : "aVal"
         }]
     };
-    SafeAssert.equal( "1 exclusiveSubfield test ok", ExclusiveSubfield.validateField( record, field1, undefined ), [] );
+    Assert.equalValue( "1 exclusiveSubfield test ok", ExclusiveSubfield.validateField( record, field1, undefined ), [] );
 
     var field2 = {
         name : '001', indicator : '00', subfields : [{
@@ -22,7 +22,7 @@ UnitTest.addFixture( "ExclusiveSubfield", function( ) {
         }]
     };
     var error2 = [ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "b" ) ) ];
-    SafeAssert.equal( "2 exclusiveSubfield test not-ok", ExclusiveSubfield.validateField( record, field2, undefined ), error2 );
+    Assert.equalValue( "2 exclusiveSubfield test not-ok", ExclusiveSubfield.validateField( record, field2, undefined ), error2 );
 
     var field3 = {
         name : '001', indicator : '00', subfields : [{
@@ -47,13 +47,13 @@ UnitTest.addFixture( "ExclusiveSubfield", function( ) {
         ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "b" ) )
     ];
 
-    SafeAssert.equal( "3 exclusiveSubfield test not-ok", ExclusiveSubfield.validateField( record, field3, undefined ), error3 );
+    Assert.equalValue( "3 exclusiveSubfield test not-ok", ExclusiveSubfield.validateField( record, field3, undefined ), error3 );
 
     var field4 = {
         name : '001', indicator : '00', subfields : [{
             name : "b", value : "bVal"
         }]
     };
-    SafeAssert.equal( "4 exclusiveSubfield test ok", ExclusiveSubfield.validateField( record, field4, undefined ), [] );
+    Assert.equalValue( "4 exclusiveSubfield test ok", ExclusiveSubfield.validateField( record, field4, undefined ), [] );
 
 } );

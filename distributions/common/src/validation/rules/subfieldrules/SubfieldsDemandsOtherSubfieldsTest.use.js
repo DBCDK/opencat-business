@@ -28,7 +28,7 @@ UnitTest.addFixture( "SubfieldsDemandsOtherSubfields.validateSubfield", function
     };
 
 
-    SafeAssert.equal( "1 SubfieldsDemandsOtherSubfields.validateSubfield valid value", SubfieldsDemandsOtherSubfields.validateSubfield( record, fieldab, subfield ), [] );
+    Assert.equalValue( "1 SubfieldsDemandsOtherSubfields.validateSubfield valid value", SubfieldsDemandsOtherSubfields.validateSubfield( record, fieldab, subfield ), [] );
     //var error003a = [ValidateErrors.subfieldError( "TODO:fixurl", 'I felt :"004" mangler delfeltet "d"' )];
 
     subfield = {
@@ -46,5 +46,5 @@ UnitTest.addFixture( "SubfieldsDemandsOtherSubfields.validateSubfield", function
     };
     var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.demands.other.subfields.rule.error", "003", "a" );
     var errContainsBandA = [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )];
-    SafeAssert.equal( "3 SubfieldsDemandsOtherSubfields.validateSubfield valid value", SubfieldsDemandsOtherSubfields.validateSubfield( record, fielda, subfield ), errContainsBandA );
+    Assert.equalValue( "3 SubfieldsDemandsOtherSubfields.validateSubfield valid value", SubfieldsDemandsOtherSubfields.validateSubfield( record, fielda, subfield ), errContainsBandA );
 });

@@ -1,5 +1,5 @@
 use("ResourceBundleFactory");
-use("SafeAssert");
+
 
 UnitTest.addFixture("ResourceBundleFactory.getBundleByLocale", function () {
     var bundle = ResourceBundleFactory.getBundle("validation");

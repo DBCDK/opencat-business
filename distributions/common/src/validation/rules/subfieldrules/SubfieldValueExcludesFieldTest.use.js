@@ -5,7 +5,6 @@
 
 use("ResourceBundle");
 use("ResourceBundleFactory");
-use("SafeAssert");
 use("UnitTest");
 use('GenericSettings');
 use("SubfieldValueExcludesField");
@@ -31,17 +30,17 @@ UnitTest.addFixture( "SubfieldValueExcludesField.validateSubfield", function( ) 
 
     var params = {'values': ['blah', 'hit', 'something else'], 'excludedFields': ['100']};
     var errMsg = ResourceBundle.getStringFormat(bundle, "excluded.field", "100", "032", "a");
-    SafeAssert.equal("1 SubfieldValueExcludesField.validateSubfield found single excluded field", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", errMsg)]);
+    Assert.equalValue("1 SubfieldValueExcludesField.validateSubfield found single excluded field", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", errMsg)]);
 
     params = {'values': ['blah', 'hit', 'something else'], 'excludedFields': ['100', '200']};
     var errMsg2 = ResourceBundle.getStringFormat(bundle, "excluded.field", "100", "032", "a");
     var errMsg3 = ResourceBundle.getStringFormat(bundle, "excluded.field", "200", "032", "a");
-    SafeAssert.equal("2 SubfieldValueExcludesField.validateSubfield found multiple excluded fields", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", errMsg2), ValidateErrors.subfieldError("TODO:fixurl", errMsg3)]);
+    Assert.equalValue("2 SubfieldValueExcludesField.validateSubfield found multiple excluded fields", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", errMsg2), ValidateErrors.subfieldError("TODO:fixurl", errMsg3)]);
 
     params = {'values': ['blah', 'hit', 'something else'], 'excludedFields': ['500']};
-    SafeAssert.equal("3 SubfieldValueExcludesField.validateSubfield subfield value match but no excluded subfield", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("3 SubfieldValueExcludesField.validateSubfield subfield value match but no excluded subfield", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), []);
 
     params = {'values': ['blah', 'something else'], 'excludedFields': ['100']};
-    SafeAssert.equal("4 SubfieldValueExcludesField.validateSubfield no subfield value match but excluded subfield", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("4 SubfieldValueExcludesField.validateSubfield no subfield value match but excluded subfield", SubfieldValueExcludesField.validateSubfield(record, field, subfield, params), []);
 
 });

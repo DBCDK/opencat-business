@@ -18,7 +18,7 @@ UnitTest.addFixture( "UpperCaseCheck", function( ) {
         }]
     };
 
-    SafeAssert.equal( "1 FieldRules.upperCaseCheck value", UpperCaseCheck.validateField( record, fieldAa ), [] );
+    Assert.equalValue( "1 FieldRules.upperCaseCheck value", UpperCaseCheck.validateField( record, fieldAa ), [] );
 
     var fieldAb = {
         "name" : '003', "indicator" : '00', subfields : [{
@@ -30,7 +30,7 @@ UnitTest.addFixture( "UpperCaseCheck", function( ) {
 
     message = ResourceBundle.getStringFormat( bundle, "uppercase.rule.error", "A", "a", "003" );
     var errNoLowerCaseA = [ValidateErrors.fieldError( 'TODO:fixurl', message )];
-    SafeAssert.equal( "2 UpperCaseCheck.validateField value", UpperCaseCheck.validateField( record, fieldAb ), errNoLowerCaseA );
+    Assert.equalValue( "2 UpperCaseCheck.validateField value", UpperCaseCheck.validateField( record, fieldAb ), errNoLowerCaseA );
 
     var fieldaA = {
         "name" : '003', "indicator" : '00', subfields : [{
@@ -42,5 +42,5 @@ UnitTest.addFixture( "UpperCaseCheck", function( ) {
 
     message = ResourceBundle.getStringFormat( bundle, "uppercase.rule.error", "A", "a", "003" );
     var errNoTrailingA = [ValidateErrors.fieldError( 'TODO:fixurl', message )];
-    SafeAssert.equal( "3 UpperCaseCheck.validateField value", UpperCaseCheck.validateField( record, fieldaA ), errNoTrailingA );
+    Assert.equalValue( "3 UpperCaseCheck.validateField value", UpperCaseCheck.validateField( record, fieldaA ), errNoTrailingA );
 } );

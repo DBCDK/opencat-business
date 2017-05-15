@@ -1,7 +1,6 @@
 use("CheckChangedValue");
 use("GenericSettings");
 use("ResourceBundle");
-use("SafeAssert");
 use("UnitTest");
 
 UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
@@ -11,11 +10,11 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     var msg_format = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", "004", "a", "%s", "%s");
 
     params = {toValues: [], fromValues: []};
-    SafeAssert.equal("Empty param values", CheckChangedValue.validateSubfield({fields: []}, {}, {}, params),
+    Assert.equalValue("Empty param values", CheckChangedValue.validateSubfield({fields: []}, {}, {}, params),
         [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getString(bundle, "agencyid.not.a.number"))]);
 
     params = {toValues: ["e", "b"], fromValues: ["s", "h"]};
-    SafeAssert.equal("Params with new empty record", CheckChangedValue.validateSubfield({fields: []}, {}, {}, params),
+    Assert.equalValue("Params with new empty record", CheckChangedValue.validateSubfield({fields: []}, {}, {}, params),
         [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getString(bundle, "agencyid.not.a.number"))]);
 
     var record = {};
@@ -32,7 +31,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     field = record.fields[1];
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
-    SafeAssert.equal("001b is NaN", CheckChangedValue.validateSubfield(record, field, subfield, params),
+    Assert.equalValue("001b is NaN", CheckChangedValue.validateSubfield(record, field, subfield, params),
         [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getString(bundle, "agencyid.not.a.number"))]);
 
     marcRecord = new Record();
@@ -44,7 +43,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     field = record.fields[1];
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
-    SafeAssert.equal("New record with type not in fromValues", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("New record with type not in fromValues", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -55,7 +54,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     field = record.fields[1];
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
-    SafeAssert.equal("New record with type in fromValues", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("New record with type in fromValues", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -75,7 +74,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     field = record.fields[1];
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
-    SafeAssert.equal("Update record with same record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("Update record with same record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -95,7 +94,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
 
-    SafeAssert.equal("Update record with unknown old value and unknown new value",
+    Assert.equalValue("Update record with unknown old value and unknown new value",
         CheckChangedValue.validateSubfield(record, field, subfield, params),
         []);
 
@@ -118,7 +117,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
 
-    SafeAssert.equal("Update record with known old value and unknown new value",
+    Assert.equalValue("Update record with known old value and unknown new value",
         CheckChangedValue.validateSubfield(record, field, subfield, params),
         []);
 
@@ -140,7 +139,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     subfield = field.subfields[0];
     params = {fromValues: ["e", "b"], toValues: ["s", "h"]};
 
-    SafeAssert.equal("Update record with unknown old value and known new value",
+    Assert.equalValue("Update record with unknown old value and known new value",
         CheckChangedValue.validateSubfield(record, field, subfield, params),
         []);
 

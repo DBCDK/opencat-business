@@ -1,4 +1,4 @@
-use("SafeAssert");
+
 use("RawRepoClient");
 use("UnitTest");
 use("Marc");
@@ -49,7 +49,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     var subfield = field.subfields[0];
     var errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "awrong", "870970");
     var errors1a = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("001a og 001b mismatch, findes ikke i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
+    Assert.equalValue("001a og 001b mismatch, findes ikke i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
 
     record = {
         fields: [{
@@ -64,7 +64,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     };
     field = record.fields[0];
     subfield = field.subfields[0];
-    SafeAssert.equal("Common record findes i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), []);
+    Assert.equalValue("Common record findes i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), []);
 
     record = {
         fields: [{
@@ -79,7 +79,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     };
     field = record.fields[0];
     subfield = field.subfields[0];
-    SafeAssert.equal("Local record findes i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), []);
+    Assert.equalValue("Local record findes i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), []);
 
     record = {
         fields: [{
@@ -96,7 +96,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     subfield = field.subfields[0];
     errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "awrong", "870970");
     errors1a = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("001 a mismatch", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
+    Assert.equalValue("001 a mismatch", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
 
     record = {
         fields: [{
@@ -113,7 +113,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     subfield = field.subfields[0];
     errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "a1Val", "700600");
     errors1a = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("001 b mismatch", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
+    Assert.equalValue("001 b mismatch", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
 
     record = {
         fields: [{
@@ -131,7 +131,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     var params = {"agencyId": "600200"};
     errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "a1Val", "600200");
     errors1a = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med ikke matchende params", LookUpRecord.validateSubfield(record, field, subfield, params), errors1a);
+    Assert.equalValue("med ikke matchende params", LookUpRecord.validateSubfield(record, field, subfield, params), errors1a);
 
     record = {
         fields: [{
@@ -143,7 +143,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     field = record.fields[0];
     subfield = field.subfields[0];
     params = {"agencyId": "870970"};
-    SafeAssert.equal("med matchende params", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("med matchende params", LookUpRecord.validateSubfield(record, field, subfield, params), []);
 
     record = {
         fields: [{
@@ -159,7 +159,7 @@ UnitTest.addFixture("LookUpRecord", function () {
         "allowedSubfieldValues": ["a1", "a2", "a3"],
         "requiredFieldAndSubfield": "004a"
     };
-    SafeAssert.equal("med valide allowedSubfieldValues og requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("med valide allowedSubfieldValues og requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), []);
 
     record = {
         fields: [{
@@ -177,7 +177,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     };
     errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.values", "a1Val", "nonValidValue1,nonValidValue2,nonValidValue3", "004a");
     var err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med ikke valide allowedSubfieldValues men valid requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med ikke valide allowedSubfieldValues men valid requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 
     record = {
         fields: [{
@@ -193,7 +193,7 @@ UnitTest.addFixture("LookUpRecord", function () {
         "allowedSubfieldValues": ["nonValidValue1", "nonValidValue2", "a2"],
         "requiredFieldAndSubfield": "004a"
     };
-    SafeAssert.equal("med valid allowedSubfieldValues og valid requiredFieldAndSubfield med check af andet subfield", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+    Assert.equalValue("med valid allowedSubfieldValues og valid requiredFieldAndSubfield med check af andet subfield", LookUpRecord.validateSubfield(record, field, subfield, params), []);
 
     record = {
         fields: [{
@@ -211,7 +211,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     };
     errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.values", "a1Val", "a1,a2,a3", "005a");
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 
     record = {
         fields: [{
@@ -225,7 +225,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     params = {"agencyId": "870970", "allowedSubfieldValues": ["a1", "a2", "a3"]};
     errorMessage = 'Params attributten allowedSubfieldValues er angivet men requiredFieldAndSubfield mangler';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med valid allowedSubfieldValues mangler requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med valid allowedSubfieldValues mangler requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 
     record = {
         fields: [{
@@ -239,7 +239,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     params = {"agencyId": "870970", "requiredFieldAndSubfield": "005a"};
     errorMessage = 'Params attributten requiredFieldAndSubfield er angivet men allowedSubfieldValues mangler';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med valid requiredFieldAndSubfield mangler allowedSubfieldValues ", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med valid requiredFieldAndSubfield mangler allowedSubfieldValues ", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 
     record = {
         fields: [{
@@ -253,7 +253,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     params = {"agencyId": "870970", "allowedSubfieldValues": {}, "requiredFieldAndSubfield": "005a"};
     errorMessage = 'Params attributten allowedSubfieldValues er ikke af typen array';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 
     record = {
         fields: [{
@@ -267,7 +267,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     params = {"agencyId": "870970", "allowedSubfieldValues": [], "requiredFieldAndSubfield": "005a"};
     errorMessage = 'Params attributten allowedSubfieldValues skal minimum indeholde een v\u00E6rdi';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med valid allowedSubfieldValues men ikke valide requiredFieldAndSubfield", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 
     record = {
         fields: [{
@@ -281,5 +281,5 @@ UnitTest.addFixture("LookUpRecord", function () {
     params = {"agencyId": "870970", "allowedSubfieldValues": ["a1", "a2", "a3"], "requiredFieldAndSubfield": {}};
     errorMessage = 'Params attributten requiredFieldAndSubfield er ikke af typen string';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
-    SafeAssert.equal("med valid allowedSubfieldValues men ikke valid requiredFieldAndSubfield type", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+    Assert.equalValue("med valid allowedSubfieldValues men ikke valid requiredFieldAndSubfield type", LookUpRecord.validateSubfield(record, field, subfield, params), err);
 });

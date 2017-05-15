@@ -1,4 +1,4 @@
-use("SafeAssert");
+
 use("SubfieldHasValueDemandsOtherSubfield");
 use("UnitTest");
 
@@ -28,7 +28,7 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
         "fieldMandatory": "002",
         "subfieldMandatory": "d"
     };
-    SafeAssert.equal("1 subfieldHasValueDemandsOtherSubfield - ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), []);
+    Assert.equalValue("1 subfieldHasValueDemandsOtherSubfield - ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), []);
 
     record = {};
     record.fields = [field1];
@@ -42,7 +42,7 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
     record.fields = [field3];
     var msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
     var errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
-    SafeAssert.equal("2 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
+    Assert.equalValue("2 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
     record.fields = [field1];
@@ -56,10 +56,10 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
     record.fields = [field4];
     msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
     errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
-    SafeAssert.equal("3 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
+    Assert.equalValue("3 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
     record.fields = [field1];
     errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
-    SafeAssert.equal("4 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
+    Assert.equalValue("4 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 });

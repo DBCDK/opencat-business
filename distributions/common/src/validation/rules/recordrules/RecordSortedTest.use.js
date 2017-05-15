@@ -15,7 +15,7 @@ UnitTest.addFixture( "Test RecordSorted.validateRecord", function( ) {
         }]
     };
 
-    SafeAssert.equal( "1 testing with valid record", RecordSorted.validateRecord( recordCorrect, {}), [] );
+    Assert.equalValue( "1 testing with valid record", RecordSorted.validateRecord( recordCorrect, {}), [] );
 
     var recordBad = {
         fields : [{
@@ -27,7 +27,7 @@ UnitTest.addFixture( "Test RecordSorted.validateRecord", function( ) {
         }]
     };
     var errMsg = [ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "record.sorted.error", "002" ) )];
-    SafeAssert.equal( "2 testing with invalid record", RecordSorted.validateRecord( recordBad, {} ), errMsg );
+    Assert.equalValue( "2 testing with invalid record", RecordSorted.validateRecord( recordBad, {} ), errMsg );
 
     var recordBad = {
         fields : [{
@@ -41,7 +41,7 @@ UnitTest.addFixture( "Test RecordSorted.validateRecord", function( ) {
         }]
     };
     var errMsg = [ValidateErrors.recordError( "", ResourceBundle.getStringFormat( bundle, "record.sorted.error", "002" ) ) ];
-    SafeAssert.equal( "3 testing with invalid record", RecordSorted.validateRecord( recordBad, {} ), errMsg );
+    Assert.equalValue( "3 testing with invalid record", RecordSorted.validateRecord( recordBad, {} ), errMsg );
 
     var recordGood = {
         fields : [{
@@ -54,6 +54,6 @@ UnitTest.addFixture( "Test RecordSorted.validateRecord", function( ) {
             'name' : '001'
         }]
     };
-    SafeAssert.equal( "4 testing with valid record", RecordSorted.validateRecord( recordGood, {} ), [] );
+    Assert.equalValue( "4 testing with valid record", RecordSorted.validateRecord( recordGood, {} ), [] );
 
 } );

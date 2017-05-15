@@ -1,4 +1,4 @@
-use("SafeAssert");
+
 use("StringUtil");
 use("SubfieldMandatoryIfSubfieldNotPresentRule");
 use("UnitTest");
@@ -48,12 +48,12 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
     };
     fieldArg = recordArg.fields[0];
     paramsArg = {subfield: "a", not_presented_subfield: ["001b"]};
-    SafeAssert.equal("001a: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
+    Assert.equalValue("001a: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
     paramsArg = {subfield: "m", not_presented_subfield: ["001a"]};
-    SafeAssert.equal("001m: Not mandatory with 001a", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
+    Assert.equalValue("001m: Not mandatory with 001a", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
     paramsArg = {subfield: "m", not_presented_subfield: ["001b"]};
     var msg = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", "m", "001");
-    SafeAssert.equal("001m: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg),
+    Assert.equalValue("001m: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg),
         [ValidateErrors.fieldError("TODO:url", msg)]);
 
     recordArg = {
@@ -74,10 +74,10 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
     };
     fieldArg = recordArg.fields[0];
     paramsArg = {subfield: "a", not_presented_subfield: ["042abc", "002z", "001b"]};
-    SafeAssert.equal("Test 1", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
+    Assert.equalValue("Test 1", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 
     paramsArg = {subfield: "m", not_presented_subfield: ["042abc", "002z", "001a"]};
-    SafeAssert.equal("Test 2", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
+    Assert.equalValue("Test 2", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 
     recordArg = {
         fields: [
@@ -101,9 +101,9 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
     };
     paramsArg = {subfield: "m", not_presented_subfield: ["002o"]};
     fieldArg = recordArg.fields[1];
-    SafeAssert.equal("Test 3", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
+    Assert.equalValue("Test 3", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 
     paramsArg = {subfield: "o", not_presented_subfield: ["002m"]};
     fieldArg = recordArg.fields[1];
-    SafeAssert.equal("Test 4", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
+    Assert.equalValue("Test 4", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 });

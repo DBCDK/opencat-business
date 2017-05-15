@@ -1,4 +1,3 @@
-use( "SafeAssert" );
 use( "UnitTest" );
 use ( "ConflictingFields");
 UnitTest.addFixture( "Test ConflictingFields.validateRecord", function( ) {

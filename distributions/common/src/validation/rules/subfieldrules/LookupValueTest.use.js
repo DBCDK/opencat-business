@@ -54,7 +54,7 @@ UnitTest.addFixture( "LookupValue.validateSubfield", function() {
     field = record.fields[ 0 ];
     subfield = field.subfields[ 0 ];
     var params = { register: "marc.002a", exist: true };
-    SafeAssert.equal( "001a must exist: OK", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ), [] );
+    Assert.equalValue( "001a must exist: OK", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ), [] );
 
     marcRecord = new Record();
     marcRecord.fromString( "001 00 *a 76605141" );
@@ -62,7 +62,7 @@ UnitTest.addFixture( "LookupValue.validateSubfield", function() {
     field = record.fields[ 0 ];
     subfield = field.subfields[ 0 ];
     params = { register: "marc.002a", exist: true };
-    SafeAssert.equal( "001a must exist: Failure", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ),
+    Assert.equalValue( "001a must exist: Failure", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ),
         [ ValidateErrors.subfieldError( "TODO:fixurl", StringUtil.sprintf( exist_message, "76605141", "001", "a" ) ) ] );
 
     marcRecord = new Record();
@@ -71,7 +71,7 @@ UnitTest.addFixture( "LookupValue.validateSubfield", function() {
     field = record.fields[ 0 ];
     subfield = field.subfields[ 0 ];
     params = { register: "marc.002a", exist: false };
-    SafeAssert.equal( "001a must not exist: OK", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ), [] );
+    Assert.equalValue( "001a must not exist: OK", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ), [] );
 
     marcRecord = new Record();
     marcRecord.fromString( "001 00 *a 06605141" );
@@ -79,6 +79,6 @@ UnitTest.addFixture( "LookupValue.validateSubfield", function() {
     field = record.fields[ 0 ];
     subfield = field.subfields[ 0 ];
     params = { register: "marc.002a", exist: false };
-    SafeAssert.equal( "001a must not exist: Failure", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ),
+    Assert.equalValue( "001a must not exist: Failure", LookupValue.validateSubfield( record, field, subfield, params, GenericSettings ),
         [ ValidateErrors.subfieldError( "TODO:fixurl", StringUtil.sprintf( notexist_message, "06605141", "001", "a" ) ) ] );
 });

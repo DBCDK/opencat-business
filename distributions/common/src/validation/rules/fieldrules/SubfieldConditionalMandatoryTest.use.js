@@ -22,13 +22,13 @@ UnitTest.addFixture( "SubfieldConditionalMandatory", function( ) {
         'subfieldConditional' : 'v', 'values' : ['0'], 'subfieldMandatory' : 'a'
     };
 
-    SafeAssert.equal( "1 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
+    Assert.equalValue( "1 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
 
     params = {
         'subfieldConditional' : 'a', 'values' : ['xxx'], 'subfieldMandatory' : 'xxx'
     };
 
-    SafeAssert.equal( "2 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
+    Assert.equalValue( "2 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
 
     params = {
         'subfieldConditional' : 'a', 'values' : ['a1Val'], 'subfieldMandatory' : 'xxx'
@@ -36,22 +36,22 @@ UnitTest.addFixture( "SubfieldConditionalMandatory", function( ) {
 
     var errorMessage = ResourceBundle.getStringFormat( bundle, "mandatory.subfield.conditional.rule.error", "xxx", "a", "a1Val" );
     var error = ValidateErrors.fieldError( "TODO:url", errorMessage );
-    SafeAssert.equal( "3 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [error] );
+    Assert.equalValue( "3 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [error] );
 
     params = {
         'subfieldConditional' : 'a', 'values' : ['a1Val'], 'subfieldMandatory' : 'c'
     };
-    SafeAssert.equal( "4 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
+    Assert.equalValue( "4 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
 
     params = {
         'subfieldConditional' : 'a', 'values' : ['a1Val', 'b1Val', 'c1Val'], 'subfieldMandatory' : 'c'
     };
-    SafeAssert.equal( "5 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
+    Assert.equalValue( "5 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
 
     params = {
         'subfieldConditional' : 'a', 'values' : ['test1', 'test2', 'test3'], 'subfieldMandatory' : 'c'
     };
-    SafeAssert.equal( "6 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
+    Assert.equalValue( "6 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [] );
 
 
     params = {
@@ -59,5 +59,5 @@ UnitTest.addFixture( "SubfieldConditionalMandatory", function( ) {
     };
     var errorMessage = ResourceBundle.getStringFormat( bundle, "mandatory.subfield.conditional.rule.error", "d", "a", "a1Val,b1Val,c1Val" );
     var error = ValidateErrors.fieldError( "TODO:url", errorMessage );
-    SafeAssert.equal( "7 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [error] );
+    Assert.equalValue( "7 Test of subfieldConditionalMandatory", SubfieldConditionalMandatory.validateField( record, field, params ), [error] );
 } );

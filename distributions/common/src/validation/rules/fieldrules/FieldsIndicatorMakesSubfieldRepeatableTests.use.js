@@ -1,5 +1,4 @@
 use("FieldsIndicatorMakesSubfieldRepeatable");
-use("SafeAssert");
 use("UnitTest");
 
 UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
@@ -13,7 +12,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         "indicators": ["01"],
         "subfieldNames": ["a"]
     };
-    SafeAssert.equal("testing with valid indicator", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("testing with valid indicator", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '001', indicator: '00', subfields: []
@@ -22,7 +21,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         "indicators": ["00"],
         "subfieldNames": ["a"]
     };
-    SafeAssert.equal("testing with valid subfieldName", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("testing with valid subfieldName", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '001', indicator: '01', subfields: [{
@@ -37,7 +36,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         "indicators": ["01"],
         "subfieldNames": ["a"]
     };
-    SafeAssert.equal("testing with valid indicator 01 and repeated a", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("testing with valid indicator 01 and repeated a", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '001', indicator: '00', subfields: [{
@@ -55,7 +54,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
 
     var errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, params.subfieldNames, params.indicators);
     var error = [ValidateErrors.fieldError("TODO:url", errorMessage)];
-    SafeAssert.equal("testing with invalid indicator and a repeated", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("testing with invalid indicator and a repeated", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '001', indicator: '00', subfields: [{
@@ -72,7 +71,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
     };
     errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, params.subfieldNames, params.indicators);
     error = [ValidateErrors.fieldError("TODO:url", errorMessage)];
-    SafeAssert.equal("testing with invalid indicator and a repeated", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("testing with invalid indicator and a repeated", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '860', indicator: '04', subfields: [{
@@ -89,7 +88,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         "indicators": ["04"],
         "subfieldNames": ["c", "z"]
     };
-    SafeAssert.equal("Huins test from userstory 1951", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("Huins test from userstory 1951", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '860', indicator: '00', subfields: [{
@@ -111,7 +110,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, params.subfieldNames[i], params.indicators);
         error.push(ValidateErrors.fieldError("TODO:url", errorMessage));
     }
-    SafeAssert.equal("Huins test 1 from userstory 1951", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("Huins test 1 from userstory 1951", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     field = {
         name: '860', indicator: '00', subfields: [{
@@ -130,7 +129,7 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
     };
     params.indicators.forEach(function (indicator) {
         field.indicator = indicator;
-        SafeAssert.equal("Huins test 2  with valid indicators from userstory 1951", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+        Assert.equalValue("Huins test 2  with valid indicators from userstory 1951", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
     });
 
     field = {
@@ -153,10 +152,10 @@ UnitTest.addFixture("FieldsIndicatorMakesSubfieldRepeatable", function () {
         errorMessage = ResourceBundle.getStringFormat(bundle, bundleKey, sf, params.indicators);
         error.push(ValidateErrors.fieldError("TODO:url", errorMessage));
     });
-    SafeAssert.equal("Huins test 2 with invalid indicators from userstory 1951", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+    Assert.equalValue("Huins test 2 with invalid indicators from userstory 1951", error, FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
 
     params.indicators.forEach(function (indicator) {
         field.indicator = indicator;
-        SafeAssert.equal("Huins test 2  with valid indicators from userstory 1951", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
+        Assert.equalValue("Huins test 2  with valid indicators from userstory 1951", [], FieldsIndicatorMakesSubfieldRepeatable.validateField(record, field, params));
     });
 });

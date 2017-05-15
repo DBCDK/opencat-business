@@ -1,14 +1,14 @@
 use("RecordLookupField");
 use("RecordUtil");
-use("SafeAssert");
+
 
 UnitTest.addFixture("RecordLookupField.createFromRecord", function () {
     var record;
 
-    SafeAssert.equal("Empty record", RecordLookupField.createFromRecord(new Record), {});
+    Assert.equalValue("Empty record", RecordLookupField.createFromRecord(new Record), {});
 
     record = RecordUtil.createFromString("001 00 *a 20611529 *b 723000 *c 19971020 *d 19940516 *f a");
-    SafeAssert.equal("Single field", RecordLookupField.createFromRecord(record, /./), {
+    Assert.equalValue("Single field", RecordLookupField.createFromRecord(record, /./), {
         '001': [
             {
                 indicator: "00",
@@ -28,7 +28,7 @@ UnitTest.addFixture("RecordLookupField.createFromRecord", function () {
         "001 00 *a 20611529 *b 191919 *c 19971020 *d 19940516 *f a\n" +
         "004 00 *r n *a e\n"
     );
-    SafeAssert.equal("Multiple fields", RecordLookupField.createFromRecord(record, /./), {
+    Assert.equalValue("Multiple fields", RecordLookupField.createFromRecord(record, /./), {
         '001': [
             {
                 indicator: record.field(0).indicator,
@@ -66,7 +66,7 @@ UnitTest.addFixture("RecordLookupField.createFromRecord", function () {
         "001 00 *a 20611529 *b 723000 *c 19971020 *d 19940516 *f a\n" +
         "004 00 *r n *a e *a k\n"
     );
-    SafeAssert.equal("Multiple subfields fields", RecordLookupField.createFromRecord(record, /./), {
+    Assert.equalValue("Multiple subfields fields", RecordLookupField.createFromRecord(record, /./), {
         '001': [
             {
                 indicator: record.field(0).indicator,

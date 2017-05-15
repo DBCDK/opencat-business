@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 use( "UnitTest" );
-use( "SafeAssert" );
 use( "FieldsIndicator" );
 
 //-----------------------------------------------------------------------------
@@ -17,14 +16,14 @@ UnitTest.addFixture( "FieldsIndicator.string", function( ) {
         indicator : "00"
     };
 
-    SafeAssert.equal( "00: is 00", [], FieldsIndicator.validateField( record, field, params ) );
+    Assert.equalValue( "00: is 00", [], FieldsIndicator.validateField( record, field, params ) );
 
     var errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, "00", "XX" );
     var error = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
     var params = {
         indicator : "XX"
     };
-    SafeAssert.equal( "00: is not XX", error, FieldsIndicator.validateField( record, field, params ) );
+    Assert.equalValue( "00: is not XX", error, FieldsIndicator.validateField( record, field, params ) );
 
     var params = {
         indicator : ""
@@ -32,7 +31,7 @@ UnitTest.addFixture( "FieldsIndicator.string", function( ) {
 
     errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, "00", "" );
     var errorEmpty = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
-    SafeAssert.equal( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, params ) );
+    Assert.equalValue( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, params ) );
 
 } );
 
@@ -50,7 +49,7 @@ UnitTest.addFixture( "FieldsIndicator.array", function( ) {
         indicator : [ "00" ]
     };
 
-    SafeAssert.equal( "00: is 00", [], FieldsIndicator.validateField( record, field, params ) );
+    Assert.equalValue( "00: is 00", [], FieldsIndicator.validateField( record, field, params ) );
 
     params = {
         indicator :[ "XX", "XY" ]
@@ -58,7 +57,7 @@ UnitTest.addFixture( "FieldsIndicator.array", function( ) {
 
     var errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, field.indicator, params.indicator.join( ", " ) );
     var error = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
-    SafeAssert.equal( "00: is not XX", error, FieldsIndicator.validateField( record, field, params ) );
+    Assert.equalValue( "00: is not XX", error, FieldsIndicator.validateField( record, field, params ) );
 
     params = {
         indicator : [ "" ]
@@ -66,6 +65,6 @@ UnitTest.addFixture( "FieldsIndicator.array", function( ) {
 
     errorMessage = ResourceBundle.getStringFormat( bundle, bundleKey, "00", params.indicator.join( ", " ) );
     var errorEmpty = [ValidateErrors.fieldError( "TODO:url", errorMessage )];
-    SafeAssert.equal( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, params ) );
+    Assert.equalValue( "00: is not empty", errorEmpty, FieldsIndicator.validateField( record, field, params ) );
 
 } );

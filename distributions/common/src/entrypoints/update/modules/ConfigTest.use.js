@@ -1,5 +1,4 @@
 use("UnitTest");
-use("SafeAssert");
 use("Config");
 
 // Test some of the helper functions

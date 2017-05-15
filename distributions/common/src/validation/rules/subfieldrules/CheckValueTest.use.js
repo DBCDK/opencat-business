@@ -22,13 +22,13 @@ UnitTest.addFixture( "checkValue.validateSubfield", function() {
     };
 
     var paramsHasValue = {'values': [1, 2, 3, 4, "870970"]};
-    SafeAssert.equal("value is correct", CheckValue.validateSubfield(record, field, subfield, paramsHasValue), []);
+    Assert.equalValue("value is correct", CheckValue.validateSubfield(record, field, subfield, paramsHasValue), []);
 
     var paramsNoValues = {'values': []};
     var errorVal1 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.value.rule.error", "870970", "" ) ) ];
-    SafeAssert.equal("value is not correct", CheckValue.validateSubfield(record, field, subfield, paramsNoValues), errorVal1);
+    Assert.equalValue("value is not correct", CheckValue.validateSubfield(record, field, subfield, paramsNoValues), errorVal1);
 
     var paramsNoMatchingValues = {'values': [1, 2, 3, 4, 5]};
     var errorVal2 = [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check.value.rule.error", "870970", paramsNoMatchingValues.values.join( "', '" ) ) ) ];
-    SafeAssert.equal("value is not correct", CheckValue.validateSubfield(record, field, subfield, paramsNoMatchingValues), errorVal2);
+    Assert.equalValue("value is not correct", CheckValue.validateSubfield(record, field, subfield, paramsNoMatchingValues), errorVal2);
 });

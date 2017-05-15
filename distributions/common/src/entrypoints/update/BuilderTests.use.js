@@ -533,13 +533,13 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
 
     var faustProvider = function() { return "58082937"; };
     var templateProvider = function() { return template; };
-    SafeAssert.equal( "1 BuildRecord test", Builder.buildRecord( templateProvider, faustProvider ), record );
+    Assert.equalValue( "1 BuildRecord test", Builder.buildRecord( templateProvider, faustProvider ), record );
     var templateProvider2 = function() { return template2; };
-    SafeAssert.equal( "2 BuildRecord test", Builder.buildRecord( templateProvider2, faustProvider ), record2 );
+    Assert.equalValue( "2 BuildRecord test", Builder.buildRecord( templateProvider2, faustProvider ), record2 );
     var templateProvider3 = function() { return template3; };
-    SafeAssert.equal( "3 BuildRecord test", Builder.buildRecord( templateProvider3, faustProvider ), record3 );
+    Assert.equalValue( "3 BuildRecord test", Builder.buildRecord( templateProvider3, faustProvider ), record3 );
     var templateProvider4 = function() { return template4; };
-    SafeAssert.equal( "4 BuildRecord test", Builder.buildRecord( templateProvider4, faustProvider ), record4 );
+    Assert.equalValue( "4 BuildRecord test", Builder.buildRecord( templateProvider4, faustProvider ), record4 );
 });
 
 UnitTest.addFixture( "Builder.__convertSubfields", function() {
@@ -759,9 +759,9 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
     result["subfields"] = fieldOutput;
     result["mandatorySubfields"] = mandatorySubfieldsObj;
     var faustProvider = function() { return "58082937"; };
-    SafeAssert.equal( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
+    Assert.equalValue( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
     faustProvider = function() {return undefined;};
-    SafeAssert.equal( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
+    Assert.equalValue( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
 
     var fieldInput2= {
         "name": "005",
@@ -789,7 +789,7 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
     var result2 = {};
     result2["subfields"] = [];
     result2["mandatorySubfields"] = {};
-    SafeAssert.equal( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput2, faustProvider ), result2 );
+    Assert.equalValue( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput2, faustProvider ), result2 );
 });
 
 UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
@@ -1013,9 +1013,9 @@ UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
     use("Print");
 
 
-    SafeAssert.equal( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
+    Assert.equalValue( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
     faustProvider = function() { return undefined; };
-    SafeAssert.equal( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
+    Assert.equalValue( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
 
     var fieldInput2= {
         "name": "005",
@@ -1044,7 +1044,7 @@ UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
     result2["subfields"] = [];
     result2["mandatorySubfields"] = {};
     faustProvider = function() { return "58082937"; };
-    SafeAssert.equal( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput2, faustProvider ), result2 );
+    Assert.equalValue( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput2, faustProvider ), result2 );
 });
 
 UnitTest.addFixture( "Builder.__buildMissingSubfields", function() {
@@ -1188,10 +1188,10 @@ UnitTest.addFixture( "Builder.__buildMissingSubfields", function() {
             }
         }
     };
-    SafeAssert.equal( "1 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields, fieldInput, faustProvider ), fieldOutput );
-    SafeAssert.equal( "2 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields2, fieldInput2, faustProvider ), fieldOutput2 );
-    SafeAssert.equal( "3 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields3, fieldInput3, faustProvider ), fieldOutput3 );
-    SafeAssert.equal( "4 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields3, fieldInput3, faustProviderUndefined ), fieldOutput3 );
+    Assert.equalValue( "1 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields, fieldInput, faustProvider ), fieldOutput );
+    Assert.equalValue( "2 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields2, fieldInput2, faustProvider ), fieldOutput2 );
+    Assert.equalValue( "3 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields3, fieldInput3, faustProvider ), fieldOutput3 );
+    Assert.equalValue( "4 __buildMissingSubfields test", Builder.__buildMissingSubfields( template, mandatorySubfields3, fieldInput3, faustProviderUndefined ), fieldOutput3 );
 });
 
 UnitTest.addFixture( "Builder.__listeAsObject", function() {
@@ -1204,11 +1204,11 @@ UnitTest.addFixture( "Builder.__listeAsObject", function() {
     var listIn3 = ["001"];
     var objectOut3 = {"001": true};
 
-    SafeAssert.equal( "1 __listeAsObject test", Builder.__listeAsObject( listIn, true ), objectOut );
-    SafeAssert.equal( "2 __listeAsObject test", Builder.__listeAsObject( listIn2, true ), objectOut2 );
-    SafeAssert.equal( "3 __listeAsObject test", Builder.__listeAsObject( listIn3, true ), objectOut3 );
+    Assert.equalValue( "1 __listeAsObject test", Builder.__listeAsObject( listIn, true ), objectOut );
+    Assert.equalValue( "2 __listeAsObject test", Builder.__listeAsObject( listIn2, true ), objectOut2 );
+    Assert.equalValue( "3 __listeAsObject test", Builder.__listeAsObject( listIn3, true ), objectOut3 );
     objectOut = {"001": false, "002": false, "003": false};
-    SafeAssert.equal( "4 __listeAsObject test", Builder.__listeAsObject( listIn, false ), objectOut );
+    Assert.equalValue( "4 __listeAsObject test", Builder.__listeAsObject( listIn, false ), objectOut );
 });
 
 UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
@@ -1428,34 +1428,34 @@ UnitTest.addFixture( "Builder.__subfieldsInTemplate", function() {
 
     var subfieldsObj = {"a": false, "b": false, "c": false, "d": false, "f": false, "g": false, "h": false, "j": false};
 
-    SafeAssert.equal( "1 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "001" ), subfieldsObj );
-    SafeAssert.equal( "2 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "042" ), {} );
+    Assert.equalValue( "1 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "001" ), subfieldsObj );
+    Assert.equalValue( "2 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "042" ), {} );
     subfieldsObj = {"r": false, "a": false};
-    SafeAssert.equal( "3 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "005" ), subfieldsObj );
+    Assert.equalValue( "3 __subfieldsInTemplate test", Builder.__subfieldsInTemplate( template, "005" ), subfieldsObj );
 });
 
 UnitTest.addFixture( "Builder.__isFunction", function() {
     var template = {};
     var templateProvider = function() {return template; };
 
-    SafeAssert.equal( "1 __isFunction test", Builder.__isFunction( templateProvider ), true );
-    SafeAssert.equal( "2 __isFunction test", Builder.__isFunction( template ), false );
-    SafeAssert.equal( "3 __isFunction test", Builder.__isFunction( undefined ), false );
+    Assert.equalValue( "1 __isFunction test", Builder.__isFunction( templateProvider ), true );
+    Assert.equalValue( "2 __isFunction test", Builder.__isFunction( template ), false );
+    Assert.equalValue( "3 __isFunction test", Builder.__isFunction( undefined ), false );
 });
 
 UnitTest.addFixture( "Builder.__isFaustEnabledForTemplate", function() {
     var template = {};
-    SafeAssert.equal( "1 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
+    Assert.equalValue( "1 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
 
     template = { "settings": ""};
-    SafeAssert.equal( "2 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
+    Assert.equalValue( "2 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
 
     template = { "settings": { "lookupfaust": "false" } };
-    SafeAssert.equal( "3 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
+    Assert.equalValue( "3 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
 
     template = { "settings": { "lookupfaust": false } };
-    SafeAssert.equal( "4 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), false );
+    Assert.equalValue( "4 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), false );
 
     template = { "settings": { "lookupfaust": true } };
-    SafeAssert.equal( "5 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
+    Assert.equalValue( "5 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
 });

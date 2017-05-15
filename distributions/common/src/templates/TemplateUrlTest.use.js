@@ -3,14 +3,14 @@
  */
 use("TemplateUrl");
 use("UnitTest");
-use("SafeAssert");
+
 
 UnitTest.addFixture("Test TemplateUrl", function () {
     var fieldName = "001";
     var template = {"fields": {"001": {"url": "www.hest.dk"}}};
-    SafeAssert.equal("testing getUrlForFieldWithValidParams", TemplateUrl.getUrlForField(fieldName, template), "www.hest.dk");
+    Assert.equalValue("testing getUrlForFieldWithValidParams", TemplateUrl.getUrlForField(fieldName, template), "www.hest.dk");
 
-    var fieldName = "001";
-    var template = {"fields": {"001": ""}};
-    SafeAssert.equal("testing getUrlForFieldWithValidParams", TemplateUrl.getUrlForField(fieldName, template), "");
+    fieldName = "001";
+    template = {"fields": {"001": ""}};
+    Assert.equalValue("testing getUrlForFieldWithValidParams", TemplateUrl.getUrlForField(fieldName, template), "");
 });

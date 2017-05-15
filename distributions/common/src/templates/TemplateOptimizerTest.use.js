@@ -1,6 +1,6 @@
 use("TemplateOptimizer");
 use("UnitTest");
-use("SafeAssert");
+
 
 UnitTest.addFixture("TemplateOptimizer.optimize", function () {
     var template = {};

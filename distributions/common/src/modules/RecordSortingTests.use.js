@@ -1,5 +1,4 @@
 use("UnitTest");
-use("SafeAssert");
 use('RecordSorting');
 
 UnitTest.addFixture("RecordSorting", function () {
@@ -62,7 +61,7 @@ UnitTest.addFixture("RecordSorting", function () {
         ]
     };
 
-    SafeAssert.equal("fieldWithWeirdChar", RecordSorting.sort(templateProvider, record), expectedResult);
+    Assert.equalValue("fieldWithWeirdChar", RecordSorting.sort(templateProvider, record), expectedResult);
 
     record = {
         fields: [
@@ -86,6 +85,6 @@ UnitTest.addFixture("RecordSorting", function () {
         ]
     };
 
-    SafeAssert.equal("Sort letter fields only", RecordSorting.sort(templateProvider, record), expectedResult);
+    Assert.equalValue("Sort letter fields only", RecordSorting.sort(templateProvider, record), expectedResult);
 
 });

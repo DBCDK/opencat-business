@@ -1,5 +1,4 @@
 use("DanMarc2Converter");
-use("SafeAssert");
 use("UnitTest");
 
 UnitTest.addFixture("DanMarc2Converter.convertToDanMarc2.invalidArguments", function () {
@@ -59,7 +58,7 @@ UnitTest.addFixture("DanMarc2Converter.convertToDanMarc2.validArguments", functi
      */
     var arg = {fields: []};
     var expect = "";
-    SafeAssert.equal("Empty record", DanMarc2Converter.convertToDanMarc2(arg).toString(), expect);
+    Assert.equalValue("Empty record", DanMarc2Converter.convertToDanMarc2(arg).toString(), expect);
 
     arg = {
         fields: [
@@ -75,7 +74,7 @@ UnitTest.addFixture("DanMarc2Converter.convertToDanMarc2.validArguments", functi
     };
     expect = "001 00 *a 1 234 567 9 \n" +
         "004 00 *a e *r c \n";
-    SafeAssert.equal("Record with 2 fields", DanMarc2Converter.convertToDanMarc2(arg).toString(), expect);
+    Assert.equalValue("Record with 2 fields", DanMarc2Converter.convertToDanMarc2(arg).toString(), expect);
 });
 
 UnitTest.addFixture("DanMarc2Converter.convertFromDanMarc2", function () {
@@ -85,7 +84,7 @@ UnitTest.addFixture("DanMarc2Converter.convertFromDanMarc2", function () {
     // TODO US2139 exception problem Assert.exception("Argument is not Record", "DanMarc2Converter.convertFromDanMarc2(35)");
     var arg = {fields: []};
     var record = DanMarc2Converter.convertToDanMarc2(arg);
-    SafeAssert.equal("Empty record", DanMarc2Converter.convertFromDanMarc2(record), arg);
+    Assert.equalValue("Empty record", DanMarc2Converter.convertFromDanMarc2(record), arg);
     arg = {
         fields: [
             {
@@ -99,5 +98,5 @@ UnitTest.addFixture("DanMarc2Converter.convertFromDanMarc2", function () {
             }]
     };
     record = DanMarc2Converter.convertToDanMarc2(arg);
-    SafeAssert.equal("Record with 2 fields", DanMarc2Converter.convertFromDanMarc2(record), arg);
+    Assert.equalValue("Record with 2 fields", DanMarc2Converter.convertFromDanMarc2(record), arg);
 });

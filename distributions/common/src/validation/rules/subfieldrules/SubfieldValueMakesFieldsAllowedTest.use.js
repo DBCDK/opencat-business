@@ -29,7 +29,7 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
     var params = ["032", "996"]
 
     var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.value.makes.field.allowed.rule.error", "996", "a" );
-    SafeAssert.equal( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )] );
+    Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )] );
 
 
     var record = {
@@ -46,7 +46,7 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
 
     var params = ["032", "996"]
 
-    SafeAssert.equal( "2 SubfieldValueMakesFieldsAllowed.validateSubfield valid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
+    Assert.equalValue( "2 SubfieldValueMakesFieldsAllowed.validateSubfield valid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
 
 
     var record = {
@@ -63,7 +63,7 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
 
     var params = ["032", "996"]
 
-    SafeAssert.equal( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
+    Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
 
     var record = {
         fields : [{
@@ -79,5 +79,5 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
 
     var params = ["032", "996"]
 
-    SafeAssert.equal( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
+    Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
 });
