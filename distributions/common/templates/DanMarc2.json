@@ -799,8 +799,7 @@
                 "b": {
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 },
-                "c": {                "u": "DanMarc2.fields.008.subfields.u",
-
+                "c": {
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 },
                 "s": {
@@ -1191,7 +1190,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
 					"repeatable": false
 				},
@@ -1230,7 +1229,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
 					"repeatable": false
 				},
@@ -1299,7 +1298,7 @@
                 "1":{
                     "repeatable":false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "7":{}
             }
         },
@@ -3489,7 +3488,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
                     "repeatable": false
                 },
@@ -3555,7 +3554,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
                     "repeatable": false
                 },
@@ -3577,7 +3576,7 @@
                 "o":{
                     "repeatable":false
                 },
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "g":{
                     "repeatable":false,
                     "values":[ "1" ]
@@ -3617,7 +3616,7 @@
                 "1":{
                     "repeatable":false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "7":{},
                 "g":{
                     "repeatable":false,
@@ -3735,7 +3734,7 @@
                 "1":{
                     "repeatable":false
                 },
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{},
                 "6":{
                     "repeatable":false
@@ -3779,7 +3778,7 @@
                 "1":{
 					"repeatable": false
 				},
-                "4": "Lister.fields.codes.subfields.relator_code.values",
+                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
 					"repeatable": false
 				},
