@@ -113,7 +113,7 @@
                         {
                             "type": "SubfieldRules.checkChangedValue",
                             "params": {
-                                "fromValues": [ "b" ],
+                                "fromValues": [ "e" ],
                                 "toValues": [ "e" ]
                             }
                         }

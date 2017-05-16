@@ -66,16 +66,7 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "e" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkChangedValue",
-                            "params": {
-                                "fromValues": [ "b" ],
-                                "toValues": [ "e" ]
-                            }
-                        }
-                    ]
+                    "values": [ "e" ]
                 },
                 "n": "DanMarc2.fields.004.subfields.n"
             }
