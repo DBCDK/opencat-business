@@ -356,7 +356,6 @@
             "repeatable":false,
             "subfields":{
                 "a": {
-                    "mandatory": true,
                     "values": "Lister.fields.codes.subfields.general_mattype.values"
                 },
                 "g": {
