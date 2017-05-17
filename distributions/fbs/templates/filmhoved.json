@@ -124,6 +124,7 @@
                 "d": "DanMarc2.fields.006.subfields.d",
                 "e": "DanMarc2.fields.006.subfields.e",
                 "2": {
+                    "mandatory": true,
                     "repeatable": false,
                     "values": [ "b", "d", "e" ]
                 }
