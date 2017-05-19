@@ -1,0 +1,57 @@
+[
+  {
+    "name": "ph-enrichment-with-only-004nf",
+    "description": "Tester at et bibliotek kan lave en påhængspost med kun blokering af danbib",
+    "request": {
+      "authentication": {
+        "group": "830380",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "paahaengspost",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [ "result-dbc-enrichment.marc", "result-830380-enrichment.marc" ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result-830380-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

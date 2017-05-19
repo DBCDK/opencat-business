@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Body>
-<oa:libraryRulesResponse xmlns:oa="http://oss.dbc.dk/ns/openagency" xmlns="http://oss.dbc.dk/ns/openagency">
+    <oa:libraryRulesResponse xmlns:oa="http://oss.dbc.dk/ns/openagency">
     <oa:libraryRules>
         <oa:agencyId>830380</oa:agencyId>
         <oa:agencyType>Folkebibliotek</oa:agencyType>
@@ -66,7 +66,7 @@
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>cataloging_template_set</oa:name>
-            <oa:string>ffu</oa:string>
+            <oa:string>ph</oa:string>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>worldcat_synchronize</oa:name>
