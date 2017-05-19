@@ -35,14 +35,14 @@
             "record": "result-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
-            "enqueued": true,
+            "enqueued": false,
             "enrichments": [ "result-dbc-enrichment.marc", "result-830380-enrichment.marc" ]
           },
           {
             "record": "result-dbc-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true
+            "enqueued": false
           },
           {
             "record": "result-830380-enrichment.marc",
