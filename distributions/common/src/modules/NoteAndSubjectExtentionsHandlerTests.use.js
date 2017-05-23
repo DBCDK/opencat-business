@@ -75,7 +75,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -89,7 +89,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -113,7 +113,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -141,7 +141,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a note\n" +
@@ -169,7 +169,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a note\n" +
@@ -195,7 +195,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -219,7 +219,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -244,7 +244,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.no_f
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -295,7 +295,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -308,7 +308,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -330,7 +330,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00 *0 *e emneord\n" +
@@ -352,7 +352,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -373,7 +373,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -393,7 +393,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -417,7 +417,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -442,7 +442,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -495,7 +495,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -508,7 +508,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -530,7 +530,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -552,7 +552,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -573,7 +573,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -593,7 +593,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -617,7 +617,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -642,7 +642,7 @@ UnitTest.addFixture("NoteAndSubjectExtentionsHandler.authenticateExtentions.auth
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.RAWREPO_COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
