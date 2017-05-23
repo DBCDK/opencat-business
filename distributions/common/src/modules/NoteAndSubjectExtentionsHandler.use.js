@@ -35,10 +35,10 @@ var NoteAndSubjectExtentionsHandler = function () {
         var result = null;
         try {
             var recId = record.getValue(/001/, /a/);
-            if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
+            if (!RawRepoClient.recordExists(recId, UpdateConstants.COMMON_AGENCYID)) {
                 return result = [];
             }
-            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
+            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.COMMON_AGENCYID);
             curRecord.field("001").subfield("b").value = record.getValue(/001/, /b/);
             if (!isNationalCommonRecord(curRecord)) {
                 return result = [];

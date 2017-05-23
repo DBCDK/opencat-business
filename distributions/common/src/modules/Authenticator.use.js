@@ -110,7 +110,7 @@ var Authenticator = function () {
             Log.info("Record agency: ", agencyId);
             Log.info("New owner: ", owner);
 
-            if (!RawRepoClient.recordExists(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID)) {
+            if (!RawRepoClient.recordExists(recId, UpdateConstants.COMMON_AGENCYID)) {
                 Log.debug("Checking authentication for new common record.");
 
                 if (owner === "") {
@@ -125,7 +125,7 @@ var Authenticator = function () {
             }
 
             Log.debug("Checking authentication for updating existing common record.");
-            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.RAWREPO_COMMON_AGENCYID);
+            var curRecord = RawRepoClient.fetchRecord(recId, UpdateConstants.COMMON_AGENCYID);
             var curOwner = curRecord.getValue(/996/, /a/);
 
             Log.info("Current owner: ", curOwner);

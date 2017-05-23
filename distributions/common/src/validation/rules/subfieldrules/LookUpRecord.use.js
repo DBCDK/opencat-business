@@ -42,9 +42,6 @@ var LookUpRecord = function () {
                 var marc = DanMarc2Converter.convertToDanMarc2(record);
                 agencyId = marc.getValue(/001/, /b/);
 
-                if (agencyId === UpdateConstants.COMMON_AGENCYID) {
-                    agencyId = UpdateConstants.RAWREPO_COMMON_AGENCYID;
-                }
             }
 
             Log.trace("recordId: ", recordId);
