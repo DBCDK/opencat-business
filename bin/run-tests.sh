@@ -15,6 +15,9 @@ template-transpiler/bin/transpile-templates.sh || die "template-transpiler/bin/t
 
 /bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests  || die "/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests"
 
+exit 0
+
+#Following code is very annoying because it duplicates source files.
 rm -rf deploy || die "rm -rf deploy"
 
 mkdir -p deploy/opencat-business || die "mkdir -p deploy/opencat-business"
