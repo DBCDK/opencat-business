@@ -9,7 +9,7 @@
         "password": "20Koster"
       },
       "templateName": "paahaengspost",
-      "record": "request.marc"
+      "record": "request-with-n.marc"
     },
     "setup": {
       "rawrepo": [
@@ -48,6 +48,115 @@
             "record": "result-830380-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ph-enrichment-without-004nf",
+    "description": "Tester at ved en enrichment med 004 felt men uden *n, og rr post uden 004 *n som bliver enrichmenten ignoreret",
+    "request": {
+      "authentication": {
+        "group": "830380",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "paahaengspost",
+      "record": "request-without-n.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [ "result-dbc-enrichment.marc" ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ph-enrichment-removing-004nf",
+    "description": "Tester man at man kan fjerne 004 *n f",
+    "request": {
+      "authentication": {
+        "group": "830380",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "paahaengspost",
+      "record": "request-without-n.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-dbc-enrichment.marc", "rawrepo-830380-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-830380-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [ "result-dbc-enrichment.marc" ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result-830380-enrichment-delete.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
             "enqueued": true
           }
         ]
