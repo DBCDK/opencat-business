@@ -4,6 +4,7 @@ var UpdateConstants = {
 
     // Agency ids
     COMMON_AGENCYID: "870970",
+    DBC_ENRICHMENT_AGENCY_ID: "191919",
     SCHOOL_COMMON_AGENCYID: "300000",
     SCHOOL_AGENCY_PATTERN: /3[0-9]{5}/,
 
