@@ -88,14 +88,14 @@
                         "record": "result-common-volume.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enqueued": false,
+                        "enqueued": true,
                         "enrichments": [ "result-volume-enrichment.marc" ]
                     },
                     {
                         "record": "result-volume-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
-                        "enqueued": false
+                        "enqueued": true
                     }
                 ]
             }
