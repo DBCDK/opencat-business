@@ -3,6 +3,7 @@ use("RawRepoClientCore");
 use("UnitTest");
 use("RecordUtil");
 use("UpdateConstants");
+use("Log");
 
 UnitTest.addFixture("Authenticator.authenticateRecordEntryPoint", function () {
     var LOGIN_AGENCY_ID = "010100";
@@ -329,6 +330,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord", function () {
     curRecord.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
+        "008 00 *v 4\n" +
         "996 00 *a RET"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -337,6 +339,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord", function () {
     record.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
+        "008 00 *v 0\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf("996 00 *a %s\n", FBS_RECORD_AGENCY_ID)
     );
@@ -612,6 +615,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.auth_ret_record", function
     curRecord.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
+        "008 00 *v 4\n" +
         "996 00 *a RET"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -620,6 +624,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.auth_ret_record", function
     record.fromString(
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
+        "008 00 *v 0\n" +
         "245 00 *a title\n" +
         StringUtil.sprintf("996 00 *a %s\n", FBS_RECORD_AGENCY_ID)
     );
@@ -667,6 +672,109 @@ UnitTest.addFixture("Authenticator.authenticateRecord.auth_root", function () {
 
     RawRepoClientCore.clear();
     OpenAgencyClientCore.clearFeatures();
+});
+
+UnitTest.addFixture("Authenticator.authenticateRecord.kat_level_auth", function () {
+    var bundle = ResourceBundleFactory.getBundle(Authenticator.__BUNDLE_NAME);
+    var curRecord;
+    var record;
+
+    function callFunction(marcRecord, userId, groupId) {
+        return Authenticator.authenticateRecord(marcRecord, userId, groupId);
+    }
+
+    OpenAgencyClientCore.addFeatures("725300", [UpdateConstants.AUTH_RET_RECORD]);
+    RawRepoClientCore.clear();
+
+    RawRepoClientCore.clear();
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n \n" +
+        "008 00 *v 4  \n" +
+        "996 00 *a RET\n"
+    );
+    RawRepoClientCore.addRecord(curRecord);
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "008 00 *v 0  \n" +
+        "245 00 *a new title"
+    );
+    Assert.equalValue("FBS library accepeted new  owership of common record due to kat level",
+        callFunction(record, "netpunkt", "725300"),
+        []);
+
+
+    // Test update FBS record
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "996 00 *a RET\n"
+    );
+    RawRepoClientCore.addRecord(curRecord);
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "245 00 *a new title"
+    );
+    Assert.equalValue("FBS library denied owership of common record , no 008 field",
+        callFunction(record, "netpunkt", "725300"),
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.error"))]);
+
+    RawRepoClientCore.clear();
+
+    // Test update FBS record
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "008 00 *v 0  \n" +
+        "996 00 *a RET\n"
+    );
+    RawRepoClientCore.addRecord(curRecord);
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "008 00 *v 0  \n" +
+        "245 00 *a new title"
+    );
+
+    Assert.equalValue("FBS library denied owership of common record , Record in rawrepo has != 4 in kat lvl",
+        callFunction(record, "netpunkt", "725300"),
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.error"))]);
+
+    RawRepoClientCore.clear();
+
+
+    curRecord = new Record();
+    curRecord.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "008 00 *v 0  \n" +
+        "996 00 *a RET\n"
+    );
+    RawRepoClientCore.addRecord(curRecord);
+
+    record = new Record();
+    record.fromString(
+        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", "870970") +
+        "004 00 *a e *r n\n" +
+        "008 00 *v 1  \n" +
+        "245 00 *a new title"
+    );
+
+    Assert.equalValue("FBS library denied owership of common record , new Record in rawrepo has != 0 in kat lvl",
+        callFunction(record, "netpunkt", "725300"),
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.error"))]);
+
+
 });
 
 UnitTest.addFixture("Authenticator.authenticateRecord.auth_public_lib_common_record", function () {

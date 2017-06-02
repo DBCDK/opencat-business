@@ -112,15 +112,12 @@ var Authenticator = function () {
 
             if (!RawRepoClient.recordExists(recId, UpdateConstants.COMMON_AGENCYID)) {
                 Log.debug("Checking authentication for new common record.");
-
                 if (owner === "") {
                     return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "create.common.record.error"))];
                 }
-
                 if (owner !== groupId) {
                     return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "create.common.record.other.library.error"))];
                 }
-
                 return [];
             }
 
@@ -133,7 +130,6 @@ var Authenticator = function () {
                 if (!OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_DBC_RECORDS)) {
                     return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.owner.dbc.error"))];
                 }
-
                 return [];
             }
 
@@ -142,6 +138,10 @@ var Authenticator = function () {
                     return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
                 }
 
+                // IS-2214 Update: Katalogiseringsniveaucheck
+                if (curRecord.getValue(/008/, /v/) !== "4" || record.getValue(/008/, /v/) !== "0") {
+                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
+                }
                 return [];
             }
 
