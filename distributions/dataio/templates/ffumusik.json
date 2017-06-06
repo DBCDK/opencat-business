@@ -1191,6 +1191,21 @@
         "980": "DanMarc2.fields.980",
         "990": "DanMarc2.fields.990",
         "991": "DanMarc2.fields.991",
-        "996": "DanMarc2.fields.996"
+        "996": "DanMarc2.fields.996",
+        "n55":{
+            "url":"",
+            "subfields":{
+                "a":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                }
+            }
+        }
     }
 }
