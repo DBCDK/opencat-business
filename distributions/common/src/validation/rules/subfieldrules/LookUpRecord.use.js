@@ -17,15 +17,18 @@ var LookUpRecord = function () {
      * @param {object} record
      * @param {object} field
      * @param {object} subfield
-     * @param {object} Object with the following properties.
+     * @param {object} params Object with the following properties.
      * agencyId : if omitted the value from field 001 subfield b will be used instead.
      * requiredFieldAndSubfield : String containing the field and subfield the record from rawrepo must contain , formatted in the following fashion 004a
      * allowedSubfieldValues : Array containing the allowed values of the subfield
+     * an array of groups of agency, requiredFieldAndSubfield, allowedSubfieldValues can be specified with "choice"[] - each is checked for match in field/subfield/content
+     * and in such case the specified agencyId is used. When used this way it will not be considered an error if no match in field/subfield/content.
+     * Do not mix the two types op specification - won't make any sense.
      * @return Array which is either empty or contains an error
      * @name LookUpRecord
      * @method
      */
-    function validateSubfield(record, field, subfield, params, settings) {
+    function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter - LookUpRecord.validateSubfield()");
         try {
             ValueCheck.check("record", record).type("object");
@@ -36,12 +39,24 @@ var LookUpRecord = function () {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var recordId = subfield.value;
             var agencyId = "";
-            if (params !== undefined && typeof params.agencyId === "string") {
-                agencyId = params.agencyId;
-            } else {
+            if (params !== undefined) {
+                if (Array.isArray(params.agencyId)) {
+                    for (var i = 0; i < params.agencyId.length; ++i) {
+                        if (__fieldAndSubfieldMandatoryAndHaveValues(RawRepoClient.fetchRecord(recordId, agencyId), params.agencyId[i].fieldAndSubfield, params.agencyId[i].matchValues)) {
+                            agencyId = params.agencyId[i].agencyId;
+                        }
+                    }
+                } else {
+                    if (typeof params.agencyId === "string") {
+                        agencyId = params.agencyId;
+                    }
+                }
+            }
+
+
+            if (agencyId === "") {
                 var marc = DanMarc2Converter.convertToDanMarc2(record);
                 agencyId = marc.getValue(/001/, /b/);
-
             }
 
             Log.trace("recordId: ", recordId);
@@ -63,7 +78,7 @@ var LookUpRecord = function () {
                 if (checkParamsResult.length > 0) {
                     return checkParamsResult;
                 }
-                if (!__fieldAndSubfieldMandatoryAndHaveValues(RawRepoClient.fetchRecord(recordId, agencyId), params)) {
+                if (!__fieldAndSubfieldMandatoryAndHaveValues(RawRepoClient.fetchRecord(recordId, agencyId), params.requiredFieldAndSubfield, params.allowedSubfieldValues)) {
                     msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.values", recordId, params.allowedSubfieldValues, params.requiredFieldAndSubfield);
                     return [ValidateErrors.subfieldError("", msg)];
                 }
@@ -71,6 +86,18 @@ var LookUpRecord = function () {
             return [];
         } finally {
             Log.trace("Exit - LookUpRecord.validateSubfield()");
+        }
+    }
+
+    function __fieldAndSubfieldMandatoryAndHaveValues(marcRecord, FieldSubfield, subfieldContent) {
+        Log.trace("Enter - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues()");
+        try {
+            var fieldNrFromParams = FieldSubfield.substring(0, 3);
+            var subFieldFromParams = FieldSubfield.substring(3, 4);
+            var expAllowedValuesFromParams = new RegExp(subfieldContent.join("|"));
+            return marcRecord.matchValue(fieldNrFromParams, subFieldFromParams, expAllowedValuesFromParams);
+        } finally {
+            Log.trace("Exit - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues");
         }
     }
 
@@ -95,7 +122,7 @@ var LookUpRecord = function () {
                 return [ValidateErrors.subfieldError("", msg)];
             }
             if (typeof params.requiredFieldAndSubfield !== "string") {
-                Log.warn("requiredFieldAndSubfield has errornous value");
+                Log.warn("requiredFieldAndSubfield has erroneous value");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.value.requiredFieldAndSubfield.not.string");
                 ret.push(ValidateErrors.subfieldError("", msg));
             }
@@ -111,18 +138,6 @@ var LookUpRecord = function () {
             return ret;
         } finally {
             Log.trace("Exit - LookupRecord.__checkParams()");
-        }
-    }
-
-    function __fieldAndSubfieldMandatoryAndHaveValues(marcRecord, params) {
-        Log.trace("Enter - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues()");
-        try {
-            var fieldNrFromParams = params.requiredFieldAndSubfield.substring(0, 3);
-            var subFieldFromParams = params.requiredFieldAndSubfield.substring(3, 4);
-            var expAllowedValsFromParams = new RegExp(params.allowedSubfieldValues.join("|"));
-            return marcRecord.matchValue(fieldNrFromParams, subFieldFromParams, expAllowedValsFromParams);
-        } finally {
-            Log.trace("Exit - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues");
         }
     }
 
