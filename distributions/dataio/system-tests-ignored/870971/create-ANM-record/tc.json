@@ -13,6 +13,19 @@
     },
     "setup": {
       "rawrepo": [
+        {
+          "record": "anmeldt-doc-970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [ "anmeldt-doc-970-enrichment.marc" ]
+        },
+        {
+          "record": "anmeldt-doc-970-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": true
+        }
       ]
     },
     "expected": {
@@ -21,14 +34,25 @@
         "errors": [],
         "rawrepo": [
           {
+            "record": "anmeldt-doc-970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [ "anmeldt-doc-970-enrichment.marc" ]
+          },
+          {
+            "record": "anmeldt-doc-970-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
             "record": "rawrepo-common.marc",
             "type": "ARTICLE",
             "deleted": false,
             "enqueued": true,
             "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"],
-            "enrichments": [
-              "rawrepo-enrichment.marc"
-            ]
+            "enrichments": [ "rawrepo-enrichment.marc" ]
           },
           {
             "record": "rawrepo-enrichment.marc",
