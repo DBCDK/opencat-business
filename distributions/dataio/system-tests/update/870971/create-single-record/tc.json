@@ -23,7 +23,7 @@
                 "rawrepo": [
                     {
                         "record": "rawrepo-common.marc",
-                        "type": "MARCXCHANGE",
+                        "type": "ARTICLE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [
