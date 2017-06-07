@@ -724,7 +724,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.kat_level_auth", function 
     );
     Assert.equalValue("FBS library denied owership of common record , no 008 field",
         callFunction(record, "netpunkt", "725300"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.error"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.katalogiseringsniveau.error"))]);
 
     RawRepoClientCore.clear();
 
@@ -748,7 +748,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.kat_level_auth", function 
 
     Assert.equalValue("FBS library denied owership of common record , Record in rawrepo has != 4 in kat lvl",
         callFunction(record, "netpunkt", "725300"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.error"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.katalogiseringsniveau.error"))]);
 
     RawRepoClientCore.clear();
 
@@ -772,7 +772,7 @@ UnitTest.addFixture("Authenticator.authenticateRecord.kat_level_auth", function 
 
     Assert.equalValue("FBS library denied owership of common record , new Record in rawrepo has != 0 in kat lvl",
         callFunction(record, "netpunkt", "725300"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.error"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "update.common.record.katalogiseringsniveau.error"))]);
 
 
 });

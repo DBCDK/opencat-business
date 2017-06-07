@@ -140,7 +140,7 @@ var Authenticator = function () {
 
                 // IS-2214 Update: Katalogiseringsniveaucheck
                 if (curRecord.getValue(/008/, /v/) !== "4" || record.getValue(/008/, /v/) !== "0") {
-                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
+                    return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.katalogiseringsniveau.error"))];
                 }
                 return [];
             }
