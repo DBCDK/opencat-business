@@ -31,7 +31,7 @@ var RawRepoClient = function () {
             result = RawRepoClientCore.recordExists(recordId, libraryNo);
             return result;
         } catch (ex) {
-            Log.error("Catched exception: ", ex);
+            Log.error("Caught exception: ", ex);
             throw ex;
         } finally {
             Log.trace("Exit - RawRepoClient.recordExists(): ", result);
@@ -56,7 +56,7 @@ var RawRepoClient = function () {
             result = RawRepoClientCore.fetchRecord(recordId, libraryNo);
             return result;
         } catch (ex) {
-            Log.error("Catched exception: ", ex);
+            Log.error("Caught exception: ", ex);
             throw ex;
         } finally {
             Log.trace("Exit - RawRepoClient.fetchRecord(): ", result);
@@ -84,7 +84,7 @@ var RawRepoClient = function () {
             result = RawRepoClientCore.getRelationsChildren(recordId, libraryNo);
             return result;
         } catch (ex) {
-            Log.error("Catched exception: ", ex);
+            Log.error("Caught exception: ", ex);
             throw ex;
         } finally {
             Log.trace("Exit - RawRepoClient.getRelationsChildren(): ", result);
