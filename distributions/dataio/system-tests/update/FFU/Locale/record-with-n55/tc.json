@@ -1,0 +1,40 @@
+[
+    {
+        "name": "add-n55-to-existing-record",
+        "description": "",
+        "request": {
+            "authentication": {
+                "group": "810010",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ffu",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": []
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": []
+                    }
+                ]
+            }
+        }
+    }
+]
