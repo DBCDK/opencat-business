@@ -1,6 +1,6 @@
 [
     {
-        "name": "fbs-new-common-record",
+        "name": "rawrepo-common.marc",
         "bugs": [ "18522" ],
         "description": "Tester oprettelse af ny fællesskabspost fra et FBS-bibliotek",
         "request": {

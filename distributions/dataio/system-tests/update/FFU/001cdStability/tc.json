@@ -1,0 +1,30 @@
+[
+    {
+        "name": "001c_and_001d_must_not_be_changed",
+        "description": "Tester at et FFU lib ikke får ændret 001c og 001d ",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ffu",
+            "record": "request.marc",
+            "check001cd": "true"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
