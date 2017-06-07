@@ -31,10 +31,10 @@ var Authenticator = function () {
      * @returns {Array} Array of authentication errors. We use the same structure
      *                  as for validation errors.
      *
-     * @name Authenticator#authenticateRecord
+     * @name Authenticator#authenticateRecordEnrtyPoint
      */
     function authenticateRecordEntryPoint(record, userId, groupId, settings) {
-        Log.trace("Enter - Authenticator.authenticateRecord()");
+        Log.trace("Enter - Authenticator.authenticateRecordEntryPoint()");
         var result = undefined;
         try {
             if (settings !== undefined) {
@@ -44,7 +44,7 @@ var Authenticator = function () {
             result = authenticateRecord(marcRecord, userId, groupId);
             return JSON.stringify(result);
         } finally {
-            Log.trace("Exit - Authenticator.authenticateRecord(): " + result);
+            Log.trace("Exit - Authenticator.authenticateRecordEntryPoint(): " + result);
         }
     }
 
@@ -68,7 +68,7 @@ var Authenticator = function () {
             }
 
             if (UpdateConstants.SCHOOL_AGENCY_PATTERN.test(groupId)) {
-                if (record.matchValue(/001/, /b/, RegExp(UpdateConstants.SCHOOL_COMMON_AGENCYID))) {
+                if (record.matchValue(/001/, /b/, new RegExp(UpdateConstants.SCHOOL_COMMON_AGENCYID))) {
                     return [];
                 }
             }
