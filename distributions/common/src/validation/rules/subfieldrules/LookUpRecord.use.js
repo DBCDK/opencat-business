@@ -36,20 +36,15 @@ var LookUpRecord = function () {
             ValueCheck.check("subfield", subfield).type("object");
             ValueCheck.check("params", params).type("object");
 
-            Log.info("Params:", params);
-
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var recordId = subfield.value;
             var agencyId = "";
             if (params !== undefined) {
                 if (Array.isArray(params.agencyId)) {
+                    var marc = DanMarc2Converter.convertToDanMarc2(record);
                     for (var i = 0; i < params.agencyId.length; ++i) {
-                        Log.info("Checking " + recordId + ":" + params.agencyId[i].agencyId);
-                        if (RawRepoClient.recordExists(recordId, params.agencyId[i].agencyId)) {
-                            if (__fieldAndSubfieldMandatoryAndHaveValues(RawRepoClient.fetchRecord(recordId, params.agencyId[i].agencyId), params.agencyId[i].fieldAndSubfield, params.agencyId[i].matchValues)) {
-                                agencyId = params.agencyId[i].agencyId;
-                                Log.info("0");
-                            }
+                        if (__fieldAndSubfieldMandatoryAndHaveValues(marc, params.agencyId[i].fieldAndSubfield, params.agencyId[i].matchValues)) {
+                            agencyId = params.agencyId[i].agencyId;
                         }
                     }
                 } else {
@@ -59,42 +54,35 @@ var LookUpRecord = function () {
                 }
             }
 
-            Log.info("1");
 
             if (agencyId === "") {
                 var marc = DanMarc2Converter.convertToDanMarc2(record);
                 agencyId = marc.getValue(/001/, /b/);
             }
-            Log.info("2");
             Log.info("recordId: ", recordId);
             Log.info("agencyId: ", agencyId);
-            Log.info("3");
             var msg;
             if (!ValidationUtil.isNumber(agencyId)) {
                 msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
-            Log.info("4");
+
             if (!RawRepoClientCore.recordExists(recordId, agencyId)) {
                 Log.trace("Record does not exist!");
                 msg = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", recordId, agencyId);
                 return [ValidateErrors.subfieldError("", msg)];
             }
-            Log.info("5");
+
             if (params.hasOwnProperty("requiredFieldAndSubfield") || params.hasOwnProperty("allowedSubfieldValues")) {
                 var checkParamsResult = __checkParams(params, bundle, record);
                 if (checkParamsResult.length > 0) {
                     return checkParamsResult;
                 }
-                Log.info("6");
                 if (!__fieldAndSubfieldMandatoryAndHaveValues(RawRepoClient.fetchRecord(recordId, agencyId), params.requiredFieldAndSubfield, params.allowedSubfieldValues)) {
                     msg = ResourceBundle.getStringFormat(bundle, "lookup.record.missing.values", recordId, params.allowedSubfieldValues, params.requiredFieldAndSubfield);
                     return [ValidateErrors.subfieldError("", msg)];
                 }
-                Log.info("7");
             }
-
-            Log.info("8");
             return [];
         } finally {
             Log.trace("Exit - LookUpRecord.validateSubfield()");
@@ -104,16 +92,9 @@ var LookUpRecord = function () {
     function __fieldAndSubfieldMandatoryAndHaveValues(marcRecord, FieldSubfield, subfieldContent) {
         Log.trace("Enter - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues()");
         try {
-            if (marcRecord == null) {
-                return false;
-            }
-            Log.info("0.1");
             var fieldNrFromParams = FieldSubfield.substring(0, 3);
-            Log.info(fieldNrFromParams);
             var subFieldFromParams = FieldSubfield.substring(3, 4);
-            Log.info(subFieldFromParams);
             var expAllowedValuesFromParams = new RegExp(subfieldContent.join("|"));
-            Log.info(expAllowedValuesFromParams);
             return marcRecord.matchValue(fieldNrFromParams, subFieldFromParams, expAllowedValuesFromParams);
         } finally {
             Log.trace("Exit - LoopUpRecord.__fieldAndSubfieldMandatoryAndHaveValues");

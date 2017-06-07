@@ -38,7 +38,7 @@ UnitTest.addFixture("LookUpRecord", function () {
             {
                 name: '001', indicator: '00',
                 subfields: [
-                    {name: "a", value: "awrong"},
+                    {name: "a", value: "aWrong"},
                     {name: "b", value: "870970"},
                     {name: "c", value: "c1Val"}
                 ]
@@ -47,7 +47,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     };
     var field = record.fields[0];
     var subfield = field.subfields[0];
-    var errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "awrong", "870970");
+    var errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "aWrong", "870970");
     var errors1a = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
     Assert.equalValue("001a og 001b mismatch, findes ikke i repo", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
 
@@ -84,7 +84,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     record = {
         fields: [{
             name: '001', indicator: '00', subfields: [{
-                name: "a", value: "awrong"
+                name: "a", value: "aWrong"
             }, {
                 name: "b", value: "870970"
             }, {
@@ -94,7 +94,7 @@ UnitTest.addFixture("LookUpRecord", function () {
     };
     field = record.fields[0];
     subfield = field.subfields[0];
-    errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "awrong", "870970");
+    errorMessage = ResourceBundle.getStringFormat(bundle, "lookup.record.does.not.exist", "aWrong", "870970");
     errors1a = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
     Assert.equalValue("001 a mismatch", LookUpRecord.validateSubfield(record, field, subfield, {}), errors1a);
 
