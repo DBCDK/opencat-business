@@ -39,9 +39,9 @@ var LookUpRecord = function () {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             var recordId = subfield.value;
             var agencyId = "";
+            var marc = DanMarc2Converter.convertToDanMarc2(record);
             if (params !== undefined) {
                 if (Array.isArray(params.agencyId)) {
-                    var marc = DanMarc2Converter.convertToDanMarc2(record);
                     for (var i = 0; i < params.agencyId.length; ++i) {
                         if (__fieldAndSubfieldMandatoryAndHaveValues(marc, params.agencyId[i].fieldAndSubfield, params.agencyId[i].matchValues)) {
                             agencyId = params.agencyId[i].agencyId;
@@ -56,7 +56,6 @@ var LookUpRecord = function () {
 
 
             if (agencyId === "") {
-                var marc = DanMarc2Converter.convertToDanMarc2(record);
                 agencyId = marc.getValue(/001/, /b/);
             }
             Log.info("recordId: ", recordId);
