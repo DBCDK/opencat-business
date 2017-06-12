@@ -1,7 +1,7 @@
 [
     {
-        "name": "add-n55-to-existing-record",
-        "description": "",
+        "name": "update-existing-record-with-n55",
+        "description": "Tester at når man sender n55 *a ind til en eksisternde post, så fjernes n55",
         "request": {
             "authentication": {
                 "group": "810010",
