@@ -1,40 +1,110 @@
 [
-    {
-        "name": "update-existing-record-with-n55",
-        "description": "Tester at når man sender n55 *a ind til en eksisternde post, så fjernes n55",
-        "request": {
-            "authentication": {
-                "group": "810010",
-                "user": "netpunkt",
-                "password": "20Koster"
-            },
-            "templateName": "ffu",
-            "record": "request.marc"
-        },
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "rawrepo.marc",
-                    "type": "MARCXCHANGE",
-                    "deleted": false,
-                    "enrichments": []
-                }
-            ]
-        },
-        "expected": {
-            "validation": {},
-            "update": {
-                "errors": [],
-                "rawrepo": [
-                    {
-                        "record": "result.marc",
-                        "type": "MARCXCHANGE",
-                        "deleted": false,
-                        "enqueued": true,
-                        "enrichments": []
-                    }
-                ]
-            }
+  {
+    "name": "n55-update-existing-record",
+    "description": "Tester at når man sender n55 *a ind til en eksisterende post, så fjernes n55",
+    "request": {
+      "authentication": {
+        "group": "810010",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "ffu",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": []
         }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": []
+          }
+        ]
+      }
     }
+  },
+  {
+    "name": "n55-update-deleted-record",
+    "description": "Tester at når man sender n55 *a ind til en slettet post, så fjernes n55",
+    "request": {
+      "authentication": {
+        "group": "810010",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "ffu",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-deleted.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true,
+          "enrichments": []
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "n55-new-record",
+    "description": "Tester at når man sender n55 *a ind og posten ikke findes i forvejen så går det godt. Dog testes det ikke om n55 feltet faktisk bruges til noget",
+    "request": {
+      "authentication": {
+        "group": "810010",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "ffu",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": []
+          }
+        ]
+      }
+    }
+  }
 ]
