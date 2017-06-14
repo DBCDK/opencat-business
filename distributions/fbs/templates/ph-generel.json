@@ -1,12 +1,11 @@
 {
     "template": {
-        "description": "Generel skabelon til enekeltsående post - alle materialetyper.",
+        "description": "Generel skabelon til enkeltstående post - alle materialetyper.",
         "features": [ "all" ]
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008b", "008l", "021e", "260a", "260b", "260c",
-            "300a", "300b", "504a", "631a", "652m", "700h", "7004" ]
+        "extrafields": [ "008a", "021e", "260b", "260c" ]
     },
     "defaults":{
         "field":{
