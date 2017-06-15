@@ -1,0 +1,76 @@
+[
+  {
+    "name": "870971-delete-ANM-record",
+    "description": "Tester at man kan slette en anmeldelse",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "anmeldt-doc-970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "anmeldt-doc-970-enrichment.marc" ],
+          "children": [ "rawrepo-common.marc" ]
+        },
+        {
+          "record": "anmeldt-doc-970-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-common.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "anmeldt-doc-970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [ "anmeldt-doc-970-enrichment.marc" ]
+          },
+          {
+            "record": "anmeldt-doc-970-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result-common.marc",
+            "type": "ARTICLE",
+            "deleted": true,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"]
+          },
+          {
+            "record": "result-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
