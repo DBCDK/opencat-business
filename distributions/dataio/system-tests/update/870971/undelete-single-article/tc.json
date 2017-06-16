@@ -1,53 +1,113 @@
 [
-    {
-        "name": "870971-undelete-article",
-        "bugs": [ "#1520" ],
-        "description": "Tester genoplivning af slettet fællespost",
-        "request": {
-            "authentication": {
-                "group": "010100",
-                "user": "netpunkt",
-                "password": "20Koster"
-            },
-            "templateName": "allowall",
-            "record": "request.marc"
+  {
+    "name": "870971-undelete-article",
+    "bugs": [
+      "#1520"
+    ],
+    "description": "Tester genoplivning af slettet fællespost",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request-870971.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
         },
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "rawrepo-common.marc",
-                    "type": "MARCXCHANGE",
-                    "deleted": true
-                },
-                {
-                    "record": "rawrepo-dbc-enrichment.marc",
-                    "type": "ENRICHMENT",
-                    "deleted": true
-                }
-            ]
-        },
-        "expected": {
-            "validation": {},
-            "update": {
-                "errors": [],
-                "rawrepo": [
-                    {
-                        "record": "result-common.marc",
-                        "type": "ARTICLE",
-                        "deleted": false,
-                        "enqueued": true,
-                        "enrichments": [
-                            "rawrepo-dbc-enrichment.marc"
-                        ]
-                    },
-                    {
-                        "record": "result-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    }
-                ]
-            }
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
         }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
     }
+  },
+  {
+    "name": "870971-undelete-article-different-base",
+    "bugs": [
+      "#1520"
+    ],
+    "description": "Tester genoplivning af slettet fællespost for post med andet agency ikke virker",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request-870970.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+           {
+            "type" : "ERROR",
+            "code" : null,
+            "urlForDocumentation" : null,
+            "ordinalPositionOfField" : null,
+            "ordinalPositionOfSubfield" : null,
+            "ordinalPositionInSubfield" : null,
+            "message" : "Posten kan ikke oprettes, da der eksisterer lokale post(er) med samme faust-nr"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true
+          },
+          {
+            "record": "rawrepo-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true
+          }
+        ]
+      }
+    }
+  }
 ]
