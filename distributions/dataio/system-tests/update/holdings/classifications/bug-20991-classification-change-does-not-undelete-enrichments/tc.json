@@ -1,0 +1,66 @@
+[
+  {
+    "name": "bug-20991-classification-change-does-not-undelete-enrichments",
+    "description": "Når man klassificering af en fællesskabspost, så bliver tidligere påhængsposter ikke genoplivet",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "full-request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-fbs-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-fbs-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]
