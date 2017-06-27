@@ -12,6 +12,7 @@
       "templates": [
         "allowall",
         "dbc",
+        "dbcautoritet",
         "delete",
         "invalid"
       ],
