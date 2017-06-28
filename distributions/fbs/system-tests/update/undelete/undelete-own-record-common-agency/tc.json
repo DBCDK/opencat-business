@@ -1,0 +1,71 @@
+[
+  {
+    "name": "undelete-own-record-common-agency",
+    "bugs": [
+      "#1521"
+    ],
+    "description": "Tester at et FBS bibliotek ikke genoprette en påhængspost når der findes en slettet 870970 post",
+    "request": {
+      "authentication": {
+        "group": "723000",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-fbs-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [{
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : null,
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Posten kan ikke genoprettes, da fællesposten for det faust-nr er slettet"
+        }],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "enqueued": false
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-fbs-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]

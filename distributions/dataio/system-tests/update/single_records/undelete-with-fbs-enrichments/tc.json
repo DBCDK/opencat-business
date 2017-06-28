@@ -1,0 +1,66 @@
+[
+  {
+    "name": "undelete-with-fbs-enrichments",
+    "bugs": [
+      "#1521"
+    ],
+    "description": "Tester om man kan genoprette en slettet post hvor der er FBS påhængsposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-fbs-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-fbs-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]
