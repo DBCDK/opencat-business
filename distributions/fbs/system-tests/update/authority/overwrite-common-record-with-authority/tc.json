@@ -1,0 +1,90 @@
+[
+  {
+    "name": "overwrite-common-record-with-authority",
+    "bugs": [
+      ""
+    ],
+    "description": "Tester at hvis et FBS bibliotek tilføjer felter til en 870970 post med autoritets data, så overskrives authoritetsfelterne ikke",
+    "request": {
+      "authentication": {
+        "group": "710100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-68712742.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "rawrepo-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-69294685.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "rawrepo-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-68712742.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "children": [
+              "result-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-69294685.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "children": [
+              "result-common.marc"
+            ]
+          },
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
