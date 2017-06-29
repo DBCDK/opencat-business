@@ -43,11 +43,11 @@ var CheckReference = function () {
                 errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.field", fieldNameToCheck);
                 return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
-            // if the lenght og the subfield val is only 3 , we have a subfield val matching case 1, meaning its a pure field name eg : 710
+            // if the length of the subfield val is only 3, we have a subfield val matching case 1, meaning its a pure field name eg : 710
             if (subfield.value.length === 3) {
-                var hasDanishaaErrors = __checkFieldsNotContainingDanishaa(matchingFields, fieldNameToCheck, bundle, record);
-                if (hasDanishaaErrors.length > 0) {
-                    return hasDanishaaErrors;
+                var hasDanishaaErrors = getFieldCountWithoutDanishaa(matchingFields, fieldNameToCheck, bundle, record);
+                if (hasDanishaaErrors === matchingFields.length) {
+                    return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck))];
                 } else {
                     return [];
                 }
@@ -75,15 +75,17 @@ var CheckReference = function () {
         }
     }
 
-    function __checkFieldsNotContainingDanishaa(fields, fieldNameToCheck, bundle, record) {
+
+    function getFieldCountWithoutDanishaa(fields, fieldNameToCheck, bundle, record) {
         Log.trace("Enter --- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa");
         try {
+            var count = 0;
             for (var i = 0; i < fields.length; ++i) {
                 if (__fieldHasSubFieldDanishaa(fields[i])) {
-                    return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck))];
+                    count++;
                 }
             }
-            return [];
+            return count;
         } finally {
             Log.trace("Exit--- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa");
         }

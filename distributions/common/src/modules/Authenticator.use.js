@@ -1,6 +1,5 @@
 use("DanMarc2Converter");
 use("Log");
-use("NoteAndSubjectExtentionsHandler");
 use("OpenAgencyClient");
 use("RawRepoClient");
 use("ResourceBundle");
@@ -41,48 +40,14 @@ var Authenticator = function () {
                 ResourceBundleFactory.init(settings);
             }
             var marcRecord = DanMarc2Converter.convertToDanMarc2(JSON.parse(record));
-            result = authenticateRecord(marcRecord, userId, groupId);
+            result = __authenticateCommonRecord(marcRecord, groupId);
             return JSON.stringify(result);
         } finally {
             Log.trace("Exit - Authenticator.authenticateRecordEntryPoint(): " + result);
         }
     }
 
-
-    function authenticateRecord(record, userId, groupId) {
-        Log.trace("Enter - Authenticator.authenticateRecord()");
-        try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-            var agencyId = record.getValue(/001/, /b/);
-
-            if (OpenAgencyClient.hasFeature(groupId, UpdateConstants.AUTH_ROOT_FEATURE)) {
-                return [];
-            }
-
-            if (agencyId === groupId) {
-                return [];
-            }
-
-            if (agencyId === UpdateConstants.COMMON_AGENCYID) {
-                return __authenticateCommonRecord(record, groupId);
-            }
-
-            if (UpdateConstants.SCHOOL_AGENCY_PATTERN.test(groupId)) {
-                if (record.matchValue(/001/, /b/, new RegExp(UpdateConstants.SCHOOL_COMMON_AGENCYID))) {
-                    return [];
-                }
-            }
-
-            var recId = record.getValue(/001/, /a/);
-
-            return [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "edit.record.other.library.error", recId))];
-        } finally {
-            Log.trace("Exit - Authenticator.authenticateRecord()");
-        }
-    }
-
     /**
-     * Helper function.
      *
      * Handles the special case then a FBS library updates a common DBC record.
      *
@@ -98,10 +63,6 @@ var Authenticator = function () {
     function __authenticateCommonRecord(record, groupId) {
         Log.trace("Enter - Authenticator.__authenticateCommonRecord()");
         try {
-            if (NoteAndSubjectExtentionsHandler.isNationalCommonRecord(record) === true) {
-                return NoteAndSubjectExtentionsHandler.authenticateExtentions(record, groupId);
-            }
-
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var recId = record.getValue(/001/, /a/);
             var agencyId = record.getValue(/001/, /b/);
@@ -172,7 +133,6 @@ var Authenticator = function () {
 
     return {
         'authenticateRecordEntryPoint': authenticateRecordEntryPoint,
-        'authenticateRecord': authenticateRecord,
         '__BUNDLE_NAME': BUNDLE_NAME
     }
 }();

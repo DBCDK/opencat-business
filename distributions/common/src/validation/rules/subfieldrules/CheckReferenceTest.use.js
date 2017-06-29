@@ -31,7 +31,7 @@ UnitTest.addFixture("CheckReference.validateSubfield", function () {
             name: '001', indicator: '00', subfields: []
         }, {
             name: '710', indicator: '00', subfields: [{
-                'name': "a", 'value': "42"
+                'name': "\u00E5", 'value': "42"
             }]
         }, {
             name: '710', indicator: '00', subfields: [{
@@ -54,6 +54,30 @@ UnitTest.addFixture("CheckReference.validateSubfield", function () {
         message: "Felt '710' findes ikke i posten uden et delfelt å"
     }];
     Assert.equalValue("1 CheckReference.validateSubfield field exists and with a 710 field with danish aa", CheckReference.validateSubfield(record, undefined, subfield), err);
+
+    record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: []
+        }, {
+            name: '710', indicator: '00', subfields: [{
+                'name': "a", 'value': "42"
+            }]
+        }, {
+            name: '710', indicator: '00', subfields: [{
+                'name': "\u00E5", 'value': "42"
+            }]
+        }, {
+            name: '910', indicator: '00', subfields: [{
+                'name': "a", 'value': "42"
+            }, {
+                'name': "z", 'value': "710"
+            }]
+        }]
+    };
+    subfield = {
+        'name': "z", 'value': "710"
+    };
+    Assert.equalValue("1 CheckReference.validateSubfield field exists and with a 710 field with danish aa", CheckReference.validateSubfield(record, undefined, subfield), []);
 
     record = {
         fields: [{
