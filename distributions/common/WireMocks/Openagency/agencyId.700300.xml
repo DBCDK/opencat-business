@@ -30,15 +30,15 @@
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>auth_public_lib_common_record</oa:name>
-            <oa:bool>0</oa:bool>
+            <oa:bool>1</oa:bool>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>auth_ret_record</oa:name>
-            <oa:bool>0</oa:bool>
+            <oa:bool>1</oa:bool>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>auth_agency_common_record</oa:name>
-            <oa:bool>0</oa:bool>
+            <oa:bool>1</oa:bool>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>auth_export_holdings</oa:name>
@@ -58,7 +58,7 @@
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>auth_create_common_record</oa:name>
-            <oa:bool>0</oa:bool>
+            <oa:bool>1</oa:bool>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>ims_library</oa:name>
@@ -66,7 +66,7 @@
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>cataloging_template_set</oa:name>
-            <oa:string>ffu</oa:string>
+            <oa:string>fbs</oa:string>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>worldcat_synchronize</oa:name>
