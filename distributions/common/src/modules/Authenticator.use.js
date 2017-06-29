@@ -110,6 +110,13 @@ var Authenticator = function () {
                 return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.error"))];
             }
 
+            /*
+             AUTH_PUBLIC_LIB_COMMON_RECORD er i vip : Ret fællespost - Har ret til at rette og overtage en folkebiblioteksejet fællesskabspost
+             Hvis ejer af eksisterende post har sat AUTH_PUBLIC_LIB_COMMON_RECORD så :
+                hvis ejer(996) af indsendt post er forskellig fra groupId så fejl : Du har ikke ret til at give ejerskabet for en folkebiblioteksejet fællesskabspost til et andet bibliotek
+                hvis bibliotek groupId ikke har sat AUTH_PUBLIC_LIB_COMMON_RECORD så fejl : Du har ikke ret til at overtage ejerskabet for en folkebiblioteksejet fællesskabspost
+                ellers retur ok
+             */
             if (OpenAgencyClient.hasFeature(curOwner, UpdateConstants.AUTH_PUBLIC_LIB_COMMON_RECORD)) {
                 if (owner !== groupId) {
                     return [ValidateErrors.recordError("", ResourceBundle.getString(bundle, "update.common.record.give.public.library.error"))];
