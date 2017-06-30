@@ -89,7 +89,7 @@
                     "values": [ "DBC" ]
                 },
                 "b": {
-                    "values": "Lister.fields.codes.subfields.country.general.values"
+                    "values": "Lister.fields.codes.subfields.country.language.current.values"
                 }
             }
         },
@@ -99,9 +99,7 @@
                 "c": {
                     "values": "Lister.fields.codes.subfields.country.general.values"
                 },
-                "&": {
-                    "values": "Lister.fields.codes.subfields.country.general.values"
-                }
+                "&": {}
             }
         },
         "046":{
