@@ -38,7 +38,7 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
     Assert.exception("params.not_presented_subfield is not field/subfield", StringUtil.sprintf(exceptCallFormat, JSON.stringify(recordArg), JSON.stringify(fieldArg), JSON.stringify(paramsArg)));
  **************/
 
-    recordArg = {
+    var recordArg = {
         fields: [
             {
                 name: "001", indicator: "00",
@@ -46,8 +46,8 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
             }
         ]
     };
-    fieldArg = recordArg.fields[0];
-    paramsArg = {subfield: "a", not_presented_subfield: ["001b"]};
+    var fieldArg = recordArg.fields[0];
+    var paramsArg = {subfield: "a", not_presented_subfield: ["001b"]};
     Assert.equalValue("001a: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
     paramsArg = {subfield: "m", not_presented_subfield: ["001a"]};
     Assert.equalValue("001m: Not mandatory with 001a", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);

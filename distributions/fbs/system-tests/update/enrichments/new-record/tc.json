@@ -14,7 +14,7 @@
     "setup": {
       "rawrepo": [
         {
-          "record": "rawrepo-common.marc",
+          "record": "result-common.marc",
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
