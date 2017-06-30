@@ -1,0 +1,82 @@
+[
+  {
+    "name": "870979-new-record-VIAF",
+    "description": "Tester at man kan oprette nye authoritetsposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request-VIAF.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-870979-VIAF.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-VIAF.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-VIAF.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "870979-new-record-DBC",
+    "description": "Tester at man kan oprette nye authoritetsposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request-DBC.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-870979-DBC.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-DBC.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-DBC.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
