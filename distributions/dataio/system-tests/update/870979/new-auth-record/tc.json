@@ -1,6 +1,6 @@
 [
   {
-    "name": "870979-new-record-VIAF",
+    "name": "870979-new-auth-record-VIAF",
     "description": "Tester at man kan oprette nye authoritetsposter",
     "request": {
       "authentication": {
@@ -40,7 +40,7 @@
     }
   },
   {
-    "name": "870979-new-record-DBC",
+    "name": "870979-new-auth-record-DBC",
     "description": "Tester at man kan oprette nye authoritetsposter",
     "request": {
       "authentication": {
