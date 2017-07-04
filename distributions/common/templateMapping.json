@@ -5,7 +5,7 @@
     "ffu":                  {"templateGroups": ["FFU"]},
     "lokbib":               {"templateGroups": ["Lokalbibliografi"]},
     "ph":                   {"templateGroups": ["PH"]},
-    "skole":                {"templateGroups": ["Skolepaahaengsposter (p.t. ikke synlige i drift)"]}
+    "skole":                {"templateGroups": ["FBS", "Skolepaahaengsposter (p.t. ikke synlige i drift)"]}
   },
   "templateGroups": {
     "DBC": {
