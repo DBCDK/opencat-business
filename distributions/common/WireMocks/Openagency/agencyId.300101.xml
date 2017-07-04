@@ -66,7 +66,7 @@
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>cataloging_template_set</oa:name>
-            <oa:string>fbs</oa:string>
+            <oa:string>skole</oa:string>
         </oa:libraryRule>
         <oa:libraryRule>
             <oa:name>worldcat_synchronize</oa:name>
