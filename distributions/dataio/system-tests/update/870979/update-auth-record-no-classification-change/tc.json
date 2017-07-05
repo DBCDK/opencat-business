@@ -1,7 +1,7 @@
 [
   {
     "name": "870979-update-auth-record-no-classification-change",
-    "description": "Tester at afhængige poster bliver behandlet korrekt ved opdatering af authoritetsposten",
+    "description": "Tester at afhængige poster bliver behandlet korrekt ved opdatering af authoritetsposten når der ikke er opstillingsændring",
     "request": {
       "authentication": {
         "group": "010100",

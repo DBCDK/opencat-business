@@ -1,14 +1,14 @@
 [
   {
-    "name": "870979-update-auth-record-classification-change",
-    "description": "Tester at afhængige poster bliver behandlet korrekt ved opdatering af authoritetsposten ved opstillingsændring",
+    "name": "870979-disconnect-auth-record",
+    "description": "Tester om man kan fjerne sammenkoblingen fra en 870970 post til en 870979 post",
     "request": {
       "authentication": {
         "group": "010100",
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbcautoritet",
+      "templateName": "dbc",
       "record": "request.marc"
     },
     "setup": {
@@ -18,23 +18,11 @@
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
-            "setup-870970-191919.marc",
-            "setup-870970-763000.marc"
-          ],
-          "holdings": [
-            700400,
-            700500,
-            700600,
-            763000
+            "setup-870970-191919.marc"
           ]
         },
         {
           "record": "setup-870970-191919.marc",
-          "type": "ENRICHMENT",
-          "deleted": false
-        },
-        {
-          "record": "setup-870970-763000.marc",
           "type": "ENRICHMENT",
           "deleted": false
         },
@@ -67,10 +55,7 @@
             "deleted": false,
             "enqueued": true,
             "enrichments": [
-              "expected-870970-191919.marc",
-              "expected-870970-763000.marc",
-              "expected-870970-700500.marc",
-              "expected-870970-700600.marc"
+              "setup-870970-191919.marc"
             ]
           },
           {
@@ -80,40 +65,19 @@
             "enqueued": true
           },
           {
-            "record": "expected-870970-763000.marc",
-            "type": "ENRICHMENT",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "expected-870970-700500.marc",
-            "type": "ENRICHMENT",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "expected-870970-700600.marc",
-            "type": "ENRICHMENT",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "expected-870979.marc",
+            "record": "setup-870979.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
-            "enqueued": true,
+            "enqueued": false,
             "enrichments": [
-              "expected-870979-191919.marc"
-            ],
-            "children": [
-              "expected-870970.marc"
+              "setup-870979-191919.marc"
             ]
           },
           {
-            "record": "expected-870979-191919.marc",
+            "record": "setup-870979-191919.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true
+            "enqueued": false
           }
         ]
       }

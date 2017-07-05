@@ -11,6 +11,23 @@
       "templateName": "dbc",
       "record": "request_add_ind02_equals_1.marc"
     },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-68206928-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-68206928-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-68206928-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
     "expected": {
       "validation": {},
       "update": {
@@ -30,6 +47,24 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
+          },
+          {
+            "record": "rawrepo-68206928-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-68206928-191919.marc"
+            ],
+            "children": [
+              "result_add_ind02_equals_1.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-68206928-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
           }
         ]
       }
@@ -46,6 +81,36 @@
       },
       "templateName": "dbc",
       "record": "request_add_ind02_equals_2.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-68206928-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-68206928-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-68206928-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-69826571-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-69826571-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-69826571-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
     },
     "expected": {
       "validation": {},
@@ -66,6 +131,42 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
+          },
+          {
+            "record": "rawrepo-68206928-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-68206928-191919.marc"
+            ],
+            "children": [
+              "result_add_ind02_equals_2.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-68206928-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-69826571-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-69826571-191919.marc"
+            ],
+            "children": [
+              "result_add_ind02_equals_2.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-69826571-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
           }
         ]
       }
@@ -82,6 +183,23 @@
       },
       "templateName": "dbc",
       "record": "request_add_ind02_on_first_700_equals_1.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-68206928-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-68206928-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-68206928-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
     },
     "expected": {
       "validation": {},
@@ -102,6 +220,24 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
+          },
+          {
+            "record": "rawrepo-68206928-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-68206928-191919.marc"
+            ],
+            "children": [
+              "result_add_ind02_on_first_700_equals_1.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-68206928-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
           }
         ]
       }

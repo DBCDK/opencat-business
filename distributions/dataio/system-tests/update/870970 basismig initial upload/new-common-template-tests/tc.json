@@ -13,6 +13,19 @@
     },
     "setup": {
       "rawrepo": [
+        {
+          "record": "rawrepo-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-870979-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
       ]
     },
     "expected": {
@@ -34,6 +47,22 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
+          },
+          {
+            "record": "rawrepo-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-870979-191919.marc"
+            ],
+            "children": [
+              "rawrepo-870970.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
           }
         ]
       }
