@@ -1,4 +1,3 @@
-use("Authenticator");
 use("Log");
 use("Marc");
 use("OpenAgencyClient");
@@ -19,6 +18,7 @@ EXPORTED_SYMBOLS = ['NoteAndSubjectAndDisputasExtentionsHandler'];
  * @name NoteAndSubjectAndDisputasExtentionsHandler
  */
 var NoteAndSubjectAndDisputasExtentionsHandler = function () {
+    var BUNDLE_NAME = "default-auth";
     /**
      * Authenticates extentions in a record.
      *
@@ -43,7 +43,7 @@ var NoteAndSubjectAndDisputasExtentionsHandler = function () {
                 return result = [];
             }
             curRecord.field("001").subfield("b").value = record.getValue(/001/, /b/);
-            var bundle = ResourceBundleFactory.getBundle(Authenticator.__BUNDLE_NAME);
+            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var authResult = [];
             var extentableFieldsRx = __createExtentableFieldsRx(groupId);
             record.eachField(/./, function (field) {
@@ -267,6 +267,7 @@ var NoteAndSubjectAndDisputasExtentionsHandler = function () {
 
     return {
         'authenticateExtentions': authenticateExtentions,
-        'isNationalCommonRecord': isNationalCommonRecord
+        'isNationalCommonRecord': isNationalCommonRecord,
+        '__BUNDLE_NAME': BUNDLE_NAME
     }
 }();

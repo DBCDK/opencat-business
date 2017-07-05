@@ -1,4 +1,3 @@
-use("Authenticator");
 use("NoteAndSubjectAndDisputasExtentionsHandler");
 use("RawRepoClientCore");
 use("ResourceBundle");
@@ -49,7 +48,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.isNationalCommon
 
 // authenticateExtentions
 UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions.no_features", function () {
-    var bundle = ResourceBundleFactory.getBundle(Authenticator.__BUNDLE_NAME);
+    var bundle = ResourceBundleFactory.getBundle(NoteAndSubjectAndDisputasExtentionsHandler.__BUNDLE_NAME);
     var curRecord;
     var record;
 
@@ -268,7 +267,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 });
 
 UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions.auth_common_subjects", function () {
-    var bundle = ResourceBundleFactory.getBundle(Authenticator.__BUNDLE_NAME);
+    var bundle = ResourceBundleFactory.getBundle(NoteAndSubjectAndDisputasExtentionsHandler.__BUNDLE_NAME);
     var curRecord;
     var record;
 
@@ -468,7 +467,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 });
 
 UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions.auth_common_notes", function () {
-    var bundle = ResourceBundleFactory.getBundle(Authenticator.__BUNDLE_NAME);
+    var bundle = ResourceBundleFactory.getBundle(NoteAndSubjectAndDisputasExtentionsHandler.__BUNDLE_NAME);
     var curRecord;
     var record;
 

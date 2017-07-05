@@ -1,4 +1,3 @@
-use("Authenticator");
 use("ValidatorEntryPoint");
 use("EnrichmentRecordHandler");
 use("RecategorizationNoteFieldFactory");
@@ -13,10 +12,6 @@ use("WebserviceUtil");
 
 function initTemplates(settings) {
     ValidatorEntryPoint.initTemplates(settings);
-}
-
-function authenticateRecord(record, userId, groupId, settings) {
-    return Authenticator.authenticateRecordEntryPoint(record, userId, groupId, settings);
 }
 
 function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
