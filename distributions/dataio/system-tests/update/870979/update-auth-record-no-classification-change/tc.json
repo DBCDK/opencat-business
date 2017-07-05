@@ -1,0 +1,141 @@
+[
+  {
+    "name": "870979-update-auth-record-no-classification-change",
+    "description": "Tester at afhængige poster bliver behandlet korrekt ved opdatering af authoritetsposten",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870970-191919.marc",
+            "setup-870970-763000.marc",
+            "setup-870970-700500.marc",
+            "setup-870970-700600.marc"
+          ],
+          "holdings": [
+            700400,
+            700500,
+            700600,
+            763000
+          ]
+        },
+        {
+          "record": "setup-870970-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870970-763000.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870970-700500.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870970-700600.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870979.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870979-191919.marc"
+          ],
+          "children": [
+            "setup-870970.marc"
+          ]
+        },
+        {
+          "record": "setup-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync"],
+            "enrichments": [
+              "expected-870970-191919.marc",
+              "expected-870970-763000.marc",
+              "expected-870970-700500.marc",
+              "expected-870970-700600.marc"
+            ]
+          },
+          {
+            "record": "expected-870970-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync"]
+          },
+          {
+            "record": "expected-870970-763000.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync"]
+          },
+          {
+            "record": "expected-870970-700500.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync"]
+          },
+          {
+            "record": "expected-870970-700600.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync"]
+          },
+          {
+            "record": "expected-870979.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"],
+            "enrichments": [
+              "expected-870979-191919.marc"
+            ],
+            "children": [
+              "expected-870970.marc"
+            ]
+          },
+          {
+            "record": "expected-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"]
+          }
+        ]
+      }
+    }
+  }
+]
