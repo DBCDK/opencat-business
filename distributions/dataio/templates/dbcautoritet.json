@@ -250,6 +250,15 @@
                 }
             }
         },
+        "996": {
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [ "DBCAUT" ]
+                }
+            }
+        },
         "d08": {
             "subfields": {
                 "a": {},
@@ -319,15 +328,6 @@
                 },
                 "w": {
                     "repeatable": false
-                }
-            }
-        },
-         "s10": {
-            "repeatable": false,
-            "subfields": {
-                "a": {
-                    "repeatable": false,
-                    "values": [ "DBCAUT" ]
                 }
             }
         },
