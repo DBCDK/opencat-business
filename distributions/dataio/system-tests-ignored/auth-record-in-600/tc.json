@@ -1,0 +1,87 @@
+[
+  {
+    "name": "auth-record-in-600-and-700",
+    "description": "Tester om man kan koble eksisterende 870970 post sammen med en eksisterende 870979 post i både 600 og 700",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870970-191919.marc"
+          ]
+        },
+        {
+          "record": "setup-870970-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "setup-870979-191919.marc"
+          ]
+        },
+        {
+          "record": "setup-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "setup-870970-191919.marc"
+            ]
+          },
+          {
+            "record": "expected-870970-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "setup-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "setup-870979-191919.marc"
+            ]
+          ,
+            "children": [
+              "expected-870970.marc"
+            ]
+          },
+          {
+            "record": "setup-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]
