@@ -53,7 +53,7 @@
         },
         {
           "record": "setup-870979.marc",
-          "type": "MARCXCHANGE",
+          "type": "AUTHORITY",
           "deleted": false,
           "enrichments": [
             "setup-870979-191919.marc"
@@ -117,7 +117,7 @@
           },
           {
             "record": "expected-870979.marc",
-            "type": "MARCXCHANGE",
+            "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
             "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"],

@@ -22,7 +22,7 @@
         "rawrepo": [
           {
             "record": "rawrepo-870979-VIAF.marc",
-            "type": "MARCXCHANGE",
+            "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
@@ -62,7 +62,7 @@
         "rawrepo": [
           {
             "record": "rawrepo-870979-DBC.marc",
-            "type": "MARCXCHANGE",
+            "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
