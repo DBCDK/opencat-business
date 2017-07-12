@@ -25,11 +25,6 @@
 666 00 *0 *i 1890-1899
 666 00 *0 *i 1900-1909
 666 00 *0 *i 1910-1919
+700 00 *5 870979 *6 19165914 *4 art
 900 00 *a Clark *h Christopher *z 100
 996 00 *a DBC
-d08 00 *o lhf *a 100 fra BL, 900 i bog. Fulde navn Christopher Munro (f. 1960)
-d08 00 *o 002/okt14, ljl
-d09 00 *z UTC201443
-s12 00 *t TeamBLY201441
-z98 00 *a Minus korrekturprint
-z99 00 *a Admin
