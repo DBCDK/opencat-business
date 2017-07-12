@@ -31,7 +31,17 @@
     "expected": {
       "validation": {},
       "update": {
-        "errors": [],
+        "errors": [
+          {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : null,
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Den refererede authoritetspost (68458560:870979) findes ikke"
+          }
+        ],
         "rawrepo": [
           {
             "record": "setup-870979.marc",
