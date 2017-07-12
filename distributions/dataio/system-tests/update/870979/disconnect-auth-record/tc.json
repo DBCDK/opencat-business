@@ -55,7 +55,7 @@
             "deleted": false,
             "enqueued": true,
             "enrichments": [
-              "setup-870970-191919.marc"
+              "expected-870970-191919.marc"
             ]
           },
           {
