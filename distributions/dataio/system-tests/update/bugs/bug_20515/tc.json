@@ -1,0 +1,143 @@
+[
+  {
+    "name": "bug_20515_invalid_001b",
+    "description": "Tester om man får en fornuftig fejlbesked hvis posten ikke indeholder korrekt værdier i 001 *a og *b",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request_1.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  },
+  {
+    "name": "bug_20515_invalid_001a",
+    "description": "Tester om man får en fornuftig fejlbesked hvis posten ikke indeholder korrekt værdier i 001 *a og *b",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request_2.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  },
+  {
+    "name": "bug_20515_invalid_001",
+    "description": "Tester om man får en fornuftig fejlbesked hvis posten ikke indeholder korrekt værdier i 001 *a og *b",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request_3.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,36 @@
+001 00 *a *b 123456 *c 20141029161445 *d 20140829 *f a
+002 00 *a 50881768
+004 00 *r n *a e
+008 00 *t m *u u *a 2013 *b gb *d y *l eng *x 06 *v 4
+009 00 *a a *g xx
+021 00 *e 9780141027821 *c hf.
+100 00 *a Clark *h Christopher M. *4 aut
+245 00 *a The ¤sleepwalkers *c how Europe went to war in 1914
+260 00 *a London *b Penguin *c 2013
+300 00 *a xxix, 696 sider
+504 00 *a In 'The Sleepwalkers' acclaimed historian and author of 'Iron Kingdom', Christopher Clark, examines the causes of the First World War. The moments that it took Gavrilo Princip to step forward to the stalled car and shoot dead Franz Ferdinand and his wife were perhaps the most fateful of the modern era
+600 00 *5 870979 *6 19165914
+650 00 *a World War, 1914-1918 *x Causes
+650 00 *a World War, 1914-1918 *x Diplomatic history
+650 00 *a Warfare and Defence *2 5
+651 00 *a Europe *x History *y 1871-1918
+651 00 *a Europe *x Politics and government *y 1871-1918
+652 00 *m 91.91
+666 00 *0 *f den ¤1. verdenskrig
+666 00 *0 *f historie
+666 00 *0 *f international politik
+666 00 *0 *e Europa
+666 00 *0 *i 1870-1879
+666 00 *0 *i 1880-1889
+666 00 *0 *i 1890-1899
+666 00 *0 *i 1900-1909
+666 00 *0 *i 1910-1919
+700 00 *5 870979 *6 19165914 *4 art
+900 00 *a Clark *h Christopher *z 100
+996 00 *a DBC
+d08 00 *o lhf *a 100 fra BL, 900 i bog. Fulde navn Christopher Munro (f. 1960)
+d08 00 *o 002/okt14, ljl
+d09 00 *z UTC201443
+s12 00 *t TeamBLY201441
+z98 00 *a Minus korrekturprint
+z99 00 *a Admin
