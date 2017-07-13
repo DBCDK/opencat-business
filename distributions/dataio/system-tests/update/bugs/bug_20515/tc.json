@@ -1,6 +1,6 @@
 [
   {
-    "name": "bug_20515_invalid_001b",
+    "name": "bug_20515_invalid_001",
     "description": "Tester om man får en fornuftig fejlbesked hvis posten ikke indeholder korrekt værdier i 001 *a og *b",
     "request": {
       "authentication": {
@@ -9,7 +9,7 @@
         "password": "20Koster"
       },
       "templateName": "dbc",
-      "record": "request_1.marc"
+      "record": "request_3.marc"
     },
     "setup": {
       "rawrepo": [
@@ -25,7 +25,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post (check 001 *a og *b)"
           }
         ]
       },
@@ -38,7 +38,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post (check 001 *a og *b)"
           }
         ],
         "rawrepo": [
@@ -72,7 +72,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post (check 001 *a og *b)"
           }
         ]
       },
@@ -85,7 +85,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post (check 001 *a og *b)"
           }
         ],
         "rawrepo": [
@@ -94,7 +94,7 @@
     }
   },
   {
-    "name": "bug_20515_invalid_001",
+    "name": "bug_20515_invalid_001b",
     "description": "Tester om man får en fornuftig fejlbesked hvis posten ikke indeholder korrekt værdier i 001 *a og *b",
     "request": {
       "authentication": {
@@ -103,7 +103,7 @@
         "password": "20Koster"
       },
       "templateName": "dbc",
-      "record": "request_3.marc"
+      "record": "request_1.marc"
     },
     "setup": {
       "rawrepo": [
@@ -119,7 +119,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post (check 001 *a og *b)"
           }
         ]
       },
@@ -132,7 +132,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post"
+            "message": "Indholdet i forespørgslen overholder ikke minimumskrav for en gyldig marc post (check 001 *a og *b)"
           }
         ],
         "rawrepo": [
