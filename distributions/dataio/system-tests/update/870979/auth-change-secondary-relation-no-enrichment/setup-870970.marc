@@ -1,0 +1,36 @@
+001 00 *a 52915678 *b 870970 *c 20170329180322 *d 20170202 *f a
+004 00 *r n *a e
+008 00 *t s *u f *a 2017 *b dk *d x *j f *l dan *n b *v 0 *w 1
+009 00 *a a *g xe
+021 00 *e 9788763849371
+032 00 *x ACC201705 *a DBF201714 *x BKM201714
+041 00 *a dan *c fre
+241 00 *a Le ¤grand cahier
+241 00 *a La ¤preuve
+241 00 *a Le ¤troisième mensonge
+245 00 *a Det ¤store stilehæfte *a Beviset *a Den ¤tredje løgn
+250 00 *a 1. ebogsudgave *b ÷
+260 00 *b Rosinante *g [sælges på internettet] *c 2017
+440 00 *0 *a Rosinantes klassikerserie
+502 00 *a Originaltitler: Le grand cahier. La preuve. Le troisième mensonge
+504 00 *& 1 *a Trilogi om to tvillingebrødres opvækst under en unavngiven krig hos en ondskabsfuld bedstemor der ødelægger dem psykisk og om deres savn efter hinanden, da de som voksne må leve i hvert sit land
+512 00 *a Downloades i EPUB-format
+520 00 *a Titlerne tidligere udgivet separat
+520 00 *& 1 *a Originaludgaver: 1986, 1988 og 1991
+600 00 *5 870979 *6 68586275
+652 00 *n 82 *z 26
+652 00 *o sk
+666 00 *0 *s brødre
+666 00 *0 *s barndom
+666 00 *0 *s vold
+666 00 *0 *s familien
+666 00 *0 *s savn
+666 00 *0 *s krig
+666 00 *0 *s diktatur
+666 00 *0 *s eksil
+700 00 *5 870979 *6 68586275 *4 aut
+720 00 *o Nina Lautrup-Larsen *4 trl
+720 00 *o Jonas T. Bengtsson *4 aui
+745 00 *a Den ¤3. løgn
+990 00 *o 201714 *b l *b v *u nt
+996 00 *a DBC
