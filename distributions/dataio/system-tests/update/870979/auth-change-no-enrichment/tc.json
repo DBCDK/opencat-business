@@ -1,0 +1,90 @@
+[
+  {
+    "name": "auth-change-no-enrichment",
+    "description": "Tester at mindre ændringer i autoritetspost ikke medfører dannelse af påhængspost for bibliotek med beholdning",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870970-191919.marc"
+          ],
+          "holdings": [710100]
+        },
+        {
+          "record": "setup-870970-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "setup-870979-191919.marc"
+          ],
+          "children": [
+            "setup-870970.marc"
+          ]
+        },
+        {
+          "record": "setup-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-870970-191919.marc"
+            ]
+          },
+          {
+            "record": "expected-870970-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-870979-191919.marc"
+            ],
+            "children": [
+              "expected-870970.marc"
+            ]
+          },
+          {
+            "record": "expected-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

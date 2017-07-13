@@ -1,0 +1,18 @@
+001 00 *a 68586275 *b 870979 *c 20160717172820 *d 20131129 *f a *t faust
+004 00 *r n *a e *x n *x m
+008 00 *t h *v 9
+025 00 *a 111400548 *2 viaf *& VIAF
+025 00 *a Q123216 *2 wikidata *& VIAF
+040 00 *a DBC *b dan
+043 00 *c hu *c ch
+046 00 *f 1935
+046 00 *g 2012 *& VIAF
+100 00 *a Kristof *h Agota
+400 00 *a Agota *h Kristof
+500 00 *a Skrivemesteren
+663 00 *a Agota Kristof bruger også navnet *b Skrivemesteren
+678 00 *a Bibliografisk note
+996 00 *a DBCAUT
+d08 00 *o autogenereret *r ljl
+xyz 00 *u KRISTOFAGOTA
+z99 00 *a ljl
