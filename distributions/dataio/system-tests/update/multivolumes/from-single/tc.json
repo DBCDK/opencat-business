@@ -46,7 +46,7 @@
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "children": [ "rawrepo-volume.marc" ],
+                        "children": [ "result-volume.marc" ],
                         "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
                     },
                     {
@@ -55,14 +55,14 @@
                         "deleted": false
                     },
                     {
-                        "record": "rawrepo-volume.marc",
+                        "record": "result-volume.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc" ]
+                        "enrichments": [ "result-volume-dbc-enrichment.marc" ]
                     },
                     {
-                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "record": "result-volume-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
@@ -119,7 +119,7 @@
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "children": [ "rawrepo-volume.marc" ],
+                        "children": [ "result-volume.marc" ],
                         "enrichments": [ "rawrepo-main-dbc-enrichment.marc" ]
                     },
                     {
@@ -128,14 +128,14 @@
                         "deleted": false
                     },
                     {
-                        "record": "rawrepo-volume.marc",
+                        "record": "result-volume.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "rawrepo-volume-dbc-enrichment.marc", "result-fbs-715100.marc" ]
+                        "enrichments": [ "result-volume-dbc-enrichment.marc", "result-fbs-715100.marc" ]
                     },
                     {
-                        "record": "rawrepo-volume-dbc-enrichment.marc",
+                        "record": "result-volume-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
