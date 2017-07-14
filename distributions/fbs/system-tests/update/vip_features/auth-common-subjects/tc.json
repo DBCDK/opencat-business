@@ -1,0 +1,64 @@
+[
+  {
+    "name": "fbs-vip-auth-common-subjects-off",
+    "bugs": [],
+    "description": "Tester tilføjelse af emneord til fællesskabspost for bibliotek uden 'auth_common_subjects'",
+    "request": {
+      "authentication": {
+        "group": "746100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Brugeren '746100' har ikke ret til at rette/tilføje feltet '666' i posten '90004158'"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
