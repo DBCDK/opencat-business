@@ -1,14 +1,11 @@
 001 00 *a 5 110 747 0 *b 723000 *c 20150316130513 *d 20150316 *f a
 004 00 *r n *a e
-008 00 *t m *u f *a 2014 *b dk *d y *l dan *x 06 *k b *v 0
+008 00 *t m *u f *a 2014 *b dk *d y *k b *l dan *x 06 *v 0
 009 00 *a a *g xx
 038 00 *a dt
 100 00 *a Skov *h Søren Santini *4 aut
 245 00 *a Syd Barret - multikunstner, romantiker, outsider - og ufrivilligt ikon for en verdensgeneration!
-300 00 *a 786 sider *b ill. (nogle i farver)
 652 00 *m 99.4 *a Barrett *h Sigurd *c f. 1946
 652 00 *p 78.9064 *v 5
 700 00 *å 1 *a Efternavn Efternavn3 *h Fornavn
 900 00 *a Santini Skov *h Søren *z 100
-900 00 *a Efternavn2 *h Fornavn Efternavn *z 700/1(a,h)
-996 00 *a 723000
