@@ -1,22 +1,21 @@
-001 00 *a 20611529 *b 191919 *c 19971020 *d 19940516 *f a
+001 00 *a 20611529 *b 870970 *c 19971020 *d 19940516 *f a
 004 00 *r n *a e
 008 00 *t m *u r *a 1994 *v 0 *z 1997 *b dk *j f *l dan
 009 00 *a a *g xx
 021 00 *a 87-7714-156-3 *c hf. *d kr. 78,00
-032 00 *a DBF200046 *x SFD199746
 041 00 *a dan *c eng
 100 00 *a Koontz *h Dean R.
 241 00 *a The ¤door to December
-245 00 *a Dette er en helt ny titel *e Dean Koontz *f oversat fra amerikansk af Inger Vedersø
+245 00 *a Døren til december *e Dean Koontz *f oversat fra amerikansk af Inger Vedersø
 250 00 *a 2. danske udgave *x nyt oplag *b 2. udgave
 260 00 *& 1 *a [Kbh.] *b Cicero *c 1997 *k Nørhaven Rotation, Viborg
 300 00 *a 331 sider
 504 00 *& 1 *a I videnskabens hellige navn udsætter en sindssyg læge sin lille datter for så hårrejsende eksperimenter, at onde og ukendte kræfter gradvist tager magten over hende
 520 00 *a Tidligere: 2. udgave 1994. - 1. udgave. 1993
 521 00 *a 2. danske udgave *c 1994
-521 00 *b nyt oplag *c 2000
+521 00 *b nyt oplag *c 1997
 652 00 *n 83.8 *z 26
 652 00 *o sk
 666 00 *0  *s gys
 666 00 *0  *s psykisk syge
-996 00 *a 700400
+996 00 *a 715700

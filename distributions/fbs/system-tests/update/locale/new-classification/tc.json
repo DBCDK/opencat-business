@@ -5,7 +5,7 @@
         "bugs": [ "18680" ],
         "request": {
             "authentication": {
-                "group": "700400",
+                "group": "715700",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
