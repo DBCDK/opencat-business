@@ -331,6 +331,12 @@
                 }
             }
         },
+        "n55": {
+            "subfields": {
+                "a": {}
+
+            }
+        },
          "s13": {
              "repeatable": false,
              "subfields": {
