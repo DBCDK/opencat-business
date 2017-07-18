@@ -271,63 +271,60 @@
             "repeatable": false,
             "subfields": {
                 "a": {
-                    "repeatable": false
+                },
+                "h": {
+                },
+                "k": {
+                },
+                "e": {
+                },
+                "f": {
+                },
+                "c": {
+                },
+                "x": {
+                },
+                "w": {
                 }
             }
         },
         "g40": {
             "subfields": {
                 "a": {
-                    "repeatable": false
                 },
                 "h": {
-                    "repeatable": false
                 },
                 "k": {
-                    "repeatable": false
                 },
                 "e": {
-                    "repeatable": false
                 },
                 "f": {
-                    "repeatable": false
                 },
                 "c": {
-                    "repeatable": false
                 },
                 "x": {
-                    "repeatable": false
                 },
                 "w": {
-                    "repeatable": false
                 }
             }
         },
         "g50": {
             "subfields": {
                 "a": {
-                    "repeatable": false
                 },
                 "h": {
-                    "repeatable": false
                 },
                 "k": {
-                    "repeatable": false
                 },
                 "e": {
-                    "repeatable": false
                 },
                 "f": {
-                    "repeatable": false
                 },
                 "c": {
-                    "repeatable": false
                 },
                 "x": {
-                    "repeatable": false
                 },
                 "w": {
-                    "repeatable": false
                 }
             }
         },
@@ -341,8 +338,7 @@
              "repeatable": false,
              "subfields": {
                  "a": {
-                     "repeatable": false,
-                     "values": [ "DBC" ]
+                     "repeatable": false
                  }
              }
         },
