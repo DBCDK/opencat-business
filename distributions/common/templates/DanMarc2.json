@@ -1344,12 +1344,8 @@
                 "m":{
 					"repeatable": false
 				},
-                "n":{
-					"repeatable": false
-				},
-                "o":{
-					"repeatable": false
-				},
+                "n":{},
+                "o":{},
                 "w":{
 					"repeatable": false
 				},
