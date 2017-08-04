@@ -784,14 +784,14 @@
                     "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
                     "params": {
                         "subfield": "w",
-                        "not_presented_subfield": [ "900z" ]
+                        "not_presented_subfield": [ "910z" ]
                     }
                 },
                 {
                     "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
                     "params": {
                         "subfield": "z",
-                        "not_presented_subfield": [ "900w" ]
+                        "not_presented_subfield": [ "910w" ]
                     }
                 }
             ]
