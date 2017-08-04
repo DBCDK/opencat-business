@@ -142,6 +142,7 @@
                     "repeatable": false
                 },
                 "t":{
+                    "mandatory": true,
                     "repeatable": false,
                     "values":[ "m", "s", "p" ]
                 },
