@@ -1591,38 +1591,20 @@
         "z00":{
             "subfields":{
                 "&":{},
-                "A":{
-                    "repeatable": false
-                },
                 "a":{
                     "mandatory":true,
-                    "repeatable": false
-                },
-                "H":{
                     "repeatable": false
                 },
                 "h":{
                     "repeatable": false
                 },
-                "K":{
-                    "repeatable": false
-                },
                 "k":{
-                    "repeatable": false
-                },
-                "E":{
                     "repeatable": false
                 },
                 "e":{
                     "repeatable": false
                 },
-                "F":{
-                    "repeatable": false
-                },
                 "f":{
-                    "repeatable": false
-                },
-                "C":{
                     "repeatable": false
                 },
                 "c":{
@@ -1659,7 +1641,6 @@
         "z02": {
             "subfields": {
                 "a": {
-                    "mandatory": true,
                     "rules": [
                         {
                             "type": "SubfieldRules.checkFaust"
@@ -1691,39 +1672,20 @@
         "z10":{
             "subfields":{
                 "&":{},
-                "A":{
-                    "repeatable": false
-                },
                 "a":{
-                    "repeatable": false
-                },
-               "E":{
                     "repeatable": false
                 },
                 "e":{
                     "repeatable": false
                 },
-                "C":{},
                 "c":{},
-                "S":{
-                    "repeatable": false
-                },
                 "s":{
-                    "repeatable": false
-                },
-                "I":{
                     "repeatable": false
                 },
                 "i":{
                     "repeatable": false
                 },
-                "K":{
-                    "repeatable": false
-                },
                 "k":{
-                    "repeatable": false
-                },
-                "J":{
                     "repeatable": false
                 },
                 "j":{
