@@ -1,0 +1,58 @@
+[
+  {
+    "name": "bug-21264",
+    "bugs": [
+      "21264"
+    ],
+    "description": "Tester om et bibliotek kan ændre i 008 feltet i deres egen fællesskabspost",
+    "request": {
+      "authentication": {
+        "group": "715700",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lydbog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-main.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-main-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-main-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-main.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-main-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-main-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
