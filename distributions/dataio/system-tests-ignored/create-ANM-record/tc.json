@@ -1,0 +1,68 @@
+[
+  {
+    "name": "870971-create-ANM-record",
+    "description": "Testcase to verify creation of a 870971 record with reference to a 870970 record is possible",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcanal",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "anmeldt-doc-970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [ "anmeldt-doc-970-enrichment.marc" ]
+        },
+        {
+          "record": "anmeldt-doc-970-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "anmeldt-doc-970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [ "anmeldt-doc-970-enrichment.marc" ],
+            "children": [ "rawrepo-common.marc" ]
+          },
+          {
+            "record": "anmeldt-doc-970-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-common.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"],
+            "enrichments": [ "rawrepo-enrichment.marc" ]
+          },
+          {
+            "record": "rawrepo-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
