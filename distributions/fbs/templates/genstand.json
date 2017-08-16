@@ -163,7 +163,6 @@
                 "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": {
-                    "mandatory":true,
                     "repeatable": false,
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 },
