@@ -1,7 +1,7 @@
 [
     {
         "name": "other-library-update-SBCI-common-record",
-        "description": "Tester opdatering SBCI-fællesskabspost (ejerkode 700300) foretaget af andet biblioteks ",
+        "description": "Tester opdatering SBCI-fællesskabspost (ejerkode 700300) foretaget af andet biblioteks",
         "request": {
             "authentication": {
                 "group": "710100",
@@ -9,7 +9,7 @@
                 "password": "20Koster"
             },
             "templateName": "bog",
-            "record": "request.marc"
+            "record": "request-700300.marc"
         },
         "setup": {
             "rawrepo": [
@@ -39,6 +39,65 @@
                     "ordinalPositionInSubfield" : null,
                     "message" : "Du har ikke ret til at rette fællesskabspost for bibliotek 700300"
                 }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "other-library-take-ownership-SBCI-common-record",
+        "description": "Tester opdatering SBCI-fællesskabspost (ejerkode 700300) hvor FBS bibliotek forsøger at overtage posten",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-710100.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Du har ikke ret til at rette fællesskabspost for bibliotek 700300"
+                    }
                 ],
                 "rawrepo": [
                     {
