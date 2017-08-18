@@ -1,0 +1,328 @@
+[
+  {
+    "name": "delete-002a-ref-existing-reference-with-holdings",
+    "description": "Tester at man kan slette 002a selvom der er beholdning på den refererede post",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53134440-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53134440-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53134440-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53082289-870970.marc",
+          "holdings": [
+            715100,
+            715300,
+            715500
+          ],
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53082289-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53082289-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-53134440-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-53134440-191919.marc"
+            ]
+          },
+          {
+            "record": "result-53134440-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-53082289-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-53082289-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-53082289-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "delete-002a-ref-deleted-reference-with-holdings",
+    "description": "Tester at man kan slette 002a selvom der er beholdning på den refererede post",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53134440-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53134440-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53134440-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53082289-870970.marc",
+          "holdings": [
+            715100,
+            715300,
+            715500
+          ],
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-53082289-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Posten kan ikke opdateres da der i findes beholdning på tidligere, men nu slettet centralt faustnummer"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-53134440-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "result-53134440-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-53134440-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-53082289-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-53082289-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "delete-002a-ref-deleted-reference-without-holdings",
+    "description": "Tester at man kan slette 002a selvom der er beholdning på den refererede post",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53134440-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53134440-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53134440-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53082289-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-53082289-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-53134440-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-53134440-191919.marc"
+            ]
+          },
+          {
+            "record": "result-53134440-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-53082289-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-53082289-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "delete-002a-ref-deleted-reference-without-holdings",
+    "description": "Tester at man kan slette 002a selvom der er beholdning på den refererede post",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53134440-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53134440-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53134440-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53082289-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-53082289-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-53134440-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-53134440-191919.marc"
+            ]
+          },
+          {
+            "record": "result-53134440-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-53082289-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-53082289-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": true
+          }
+        ]
+      }
+    }
+  }
+]
