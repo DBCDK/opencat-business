@@ -140,7 +140,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Posten kan ikke opdateres da der i findes beholdning på tidligere, men nu slettet centralt faustnummer"
+            "message": "Posten kan ikke opdateres da der findes beholdning på tidligere, men nu slettet centralt faustnummer"
           }
         ],
         "rawrepo": [
