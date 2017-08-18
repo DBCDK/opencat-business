@@ -12,7 +12,7 @@ var FieldsIndicatorMakesSubfieldRepeatable = function () {
 
     /**
      * FieldsIndicatorMakesSubfieldRepeatable checks that if a given indicator is not present , then the subfield cannot be repeatable
-     * Meaning if the indicator macthes the value from the list , they are allowed to be repeated.
+     * Meaning if the indicator matches the value from the list , they are allowed to be repeated.
      * Note this rule does not negate the normal rule of repeatable on a given subfield
      * So to use this rule you have to make the subfields repeatable and then add this rule
      *
@@ -26,8 +26,8 @@ var FieldsIndicatorMakesSubfieldRepeatable = function () {
      * @method
      */
 
-    function validateField(record, field, params, settings) {
-        Log.trace("Enter - FieldsIndicatorMakesSubfieldRepeatable.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )");
+    function validateField(record, field, params) {
+        Log.trace("Enter - FieldsIndicatorMakesSubfieldRepeatable.validateField( ", record, ", ", field, ", ", params, " )");
         var result = [];
         try {
             ValueCheck.check("params.indicators", params.indicators);
@@ -51,7 +51,7 @@ var FieldsIndicatorMakesSubfieldRepeatable = function () {
         }
     }
 
-    function __getError(indicators, subfieldName, record) {
+    function __getError(indicators, subfieldName) {
         Log.trace("Enter - FieldsIndicatorMakesSubfieldRepeatable.____getSubfieldMap(): ", indicators, subfieldName);
         var res = "";
         try {

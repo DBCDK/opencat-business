@@ -22,8 +22,8 @@ var SubfieldsMandatory = function () {
      * @name SubfieldsMandatory.validateField
      * @method
      */
-    function validateField(record, field, params, settings) {
-        Log.trace("Enter - SubfieldsMandatory.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )");
+    function validateField(record, field, params) {
+        Log.trace("Enter - SubfieldsMandatory.validateField( ", record, ", ", field, ", ", params, ", ", " )");
 
         var result = [];
         try {

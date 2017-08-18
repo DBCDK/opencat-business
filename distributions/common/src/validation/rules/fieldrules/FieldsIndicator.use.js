@@ -21,26 +21,29 @@ var FieldsIndicator = function () {
      * @name FieldsIndicator.validateField
      * @method
      */
-    function validateField(record, field, params, settings) {
-        Log.trace("Enter - FieldsIndicator.validateField( ", record, ", ", field, ", ", params, ", ", settings, " )");
+    function validateField(record, field, params) {
+        Log.trace("Enter - FieldsIndicator.validateField( ", record, ", ", field, ", ", params, ")");
         var result = [];
+        var bundle;
+        var errorMessage;
+        var error;
         try {
             ValueCheck.check("params.indicator", params.indicator);
             if (typeof( params.indicator ) === "string") {
                 if (field.indicator === params.indicator) {
                     return result;
                 }
-                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.string.error", field.indicator, params.indicator);
-                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.string.error", field.indicator, params.indicator);
+                error = ValidateErrors.fieldError("TODO:url", errorMessage);
                 return result = [error];
             } else {
                 if (params.indicator.indexOf(field.indicator) > -1) {
-                    return result = [];
+                    return result;
                 }
-                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                var errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.array.error", field.indicator, params.indicator.join(", "));
-                var error = ValidateErrors.fieldError("TODO:url", errorMessage);
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.array.error", field.indicator, params.indicator.join(", "));
+                error = ValidateErrors.fieldError("TODO:url", errorMessage);
                 return result = [error];
             }
         } finally {

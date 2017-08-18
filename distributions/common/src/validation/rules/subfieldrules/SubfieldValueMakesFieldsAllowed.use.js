@@ -13,17 +13,17 @@ var SubfieldValueMakesFieldsAllowed = function () {
     /**
      * Checks that if the subfield has the value 'DBC'
      * then the fields in listOfAllowedSubfields are allowed in the record
-     * @syntax SubfieldValueMakesFieldsAllowed.validateField( record, field, subfield, params )
+     * @syntax SubfieldValueMakesFieldsAllowed.validateSubField( record, field, subfield, params )
      * @param {object} record
      * @param {object} field
      * @param {object} params Array of allowed fields ['032', '990']
      * @return {object}
-     * @example SubfieldValueMakesFieldsAllowed.validateField( record, field, subfield, params )
-     * @name SubfieldValueMakesFieldsAllowed.validateField
+     * @example SubfieldValueMakesFieldsAllowed.validateSubField( record, field, subfield, params )
+     * @name SubfieldValueMakesFieldsAllowed.validateSubField
      * @method
      */
     function validateSubfield(record, field, subfield, params) {
-        Log.trace("Enter SubfieldValueMakesFieldsAllowed.validateField");
+        Log.trace("Enter SubfieldValueMakesFieldsAllowed.validateSubField");
         try {
             ValueCheck.check("params", params);
             ValueCheck.check("params", params).instanceOf(Array);
@@ -34,7 +34,7 @@ var SubfieldValueMakesFieldsAllowed = function () {
             var recordMap = __mapifyMe(record, true);
             return __checkForExcluded(recordMap, subfield, parMap)
         } finally {
-            Log.trace("Exit SubfieldValueMakesFieldsAllowed.validateField");
+            Log.trace("Exit SubfieldValueMakesFieldsAllowed.validateSubField");
         }
     }
 

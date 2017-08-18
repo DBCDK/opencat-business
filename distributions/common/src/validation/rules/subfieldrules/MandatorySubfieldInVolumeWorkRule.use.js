@@ -10,7 +10,7 @@ EXPORTED_SYMBOLS = ['MandatorySubfieldInVolumeWorkRule'];
 var MandatorySubfieldInVolumeWorkRule = function () {
     var __BUNDLE_NAME = "validation";
 
-    function validateField(record, field, params, settings) {
+    function validateField(record, field, params) {
         Log.trace("Enter - MandatorySubfieldInVolumeWorkRule.validateField()");
         try {
             ValueCheck.check("params", params).type("object");

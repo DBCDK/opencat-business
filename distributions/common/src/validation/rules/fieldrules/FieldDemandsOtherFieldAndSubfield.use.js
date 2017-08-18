@@ -15,14 +15,15 @@ var FieldDemandsOtherFieldAndSubfield = function () {
      * Function that checks if a field exists then another field must exists and contain the subfields from params.
      * @syntax FieldDemandsOtherFieldAndSubfield.validateField(  record , params  )
      * @param {Object} record The record as a json.
-     * @param {Object} object
+     * @param {Object} field object
+     * @param {Object} params object
      * Param example :
      * params = {
      *     field : '096',
      *     subfields : ['z']
      * }
      * @name FieldDemandsOtherFieldAndSubfield.validateField
-     * @returns an array which contains errors if any is present.
+     * @return {Array} an array which contains errors if any is present.
      * @method
      */
     function validateField(record, field, params) {
@@ -30,7 +31,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
         Log.debug("record ", record !== undefined ? JSON.stringify(record) : "undef");
         Log.debug("field ", field !== undefined ? JSON.stringify(field) : "undef");
 
-        var result = null;
+        var result = [];
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
@@ -45,7 +46,8 @@ var FieldDemandsOtherFieldAndSubfield = function () {
 
             if (collectedFields.length === 0) {
                 message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
-                return result = [ValidateErrors.fieldError("", message)];
+                result = [ValidateErrors.fieldError("", message)];
+                return result;
             } else {
 
                 for (var i = 0; i < collectedFields.length; ++i) {
@@ -59,7 +61,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
                             ct++;
                         }
                         if (ct === params.subfields.length) {
-                            return result = [];
+                            return result;
                         }
                     }
                 }

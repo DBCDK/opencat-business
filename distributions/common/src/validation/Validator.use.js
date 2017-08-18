@@ -38,7 +38,7 @@ var Validator = function () {
                         var subfield = field.subfields[subfieldLoopIndex];
                         if (subfield.name === "r") {
                             if (subfield.value === "d") {
-                                var subResult = validateSubfield(record, field, subfield, templateProvider, settings);
+                                var subResult = __validateSubfield(record, field, subfield, templateProvider, settings);
                                 if (subResult === []) {
                                     return false;
                                 }
@@ -61,8 +61,8 @@ var Validator = function () {
      * @param settings properties object
      * @return {Array} An array of validation errors.
      */
-    function validateRecord(record, templateProvider, settings) {
-        Log.trace("Enter - Validator.validateRecord()");
+    function doValidateRecord(record, templateProvider, settings) {
+        Log.trace("Enter - Validator.doValidateRecord()");
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
@@ -71,7 +71,7 @@ var Validator = function () {
                 // Validation should only be performed if it isn't a legal delete record
                 if (isNotLegalDeleteRecord(record, templateProvider, settings)) {
                     for (var i = 0; i < record.fields.length; i++) {
-                        var subResult = validateField(record, record.fields[i], templateProvider, settings);
+                        var subResult = __validateField(record, record.fields[i], templateProvider, settings);
                         for (var j = 0; j < subResult.length; j++) {
                             subResult[j].ordinalPositionOfField = i;
                         }
@@ -95,7 +95,7 @@ var Validator = function () {
             }
             return result;
         } finally {
-            Log.trace("Exit - Validator.validateRecord()");
+            Log.trace("Exit - Validator.doValidateRecord()");
         }
     }
 
@@ -109,8 +109,8 @@ var Validator = function () {
      * @param settings properties object
      * @return {Array} An array of validation errors.
      */
-    function validateField(record, field, templateProvider, settings) {
-        Log.trace("Enter - Validator.validateField()");
+    function __validateField(record, field, templateProvider, settings) {
+        Log.trace("Enter - Validator.__validateField()");
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
@@ -126,7 +126,7 @@ var Validator = function () {
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
-                    var subResult = validateSubfield(record, field, field.subfields[i], templateProvider, settings);
+                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings);
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].ordinalPositionOfSubfield = i;
                     }
@@ -136,7 +136,8 @@ var Validator = function () {
             if (templateField.rules instanceof Array) {
                 for (i = 0; i < templateField.rules.length; i++) {
                     var rule = templateField.rules[i];
-                    Log.debug("Field rule [", field.name === undefined ? "field name undefined" : field.name, "]: ", rule.name === undefined ? "rule name undefined" : rule.name);
+                    // DO NOT make a Log.<whatever>("Field rule ....); For unknown reasons "Field rule" results in no logging.
+                    Log.debug("Exec rule [", field.name === undefined ? "field name undefined" : field.name, "]: ", rule.name === undefined ? "rule name undefined" : rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
@@ -157,7 +158,7 @@ var Validator = function () {
             }
             return result;
         } finally {
-            Log.trace("Exit - Validator.validateField()");
+            Log.trace("Exit - Validator.__validateField()");
         }
     }
 
@@ -172,8 +173,8 @@ var Validator = function () {
      * @param settings properties object
      * @return {Array} An array of validation errors.
      */
-    function validateSubfield(record, field, subfield, templateProvider, settings) {
-        Log.trace("Enter - Validator.validateSubfield()");
+    function __validateSubfield(record, field, subfield, templateProvider, settings) {
+        Log.trace("Enter - Validator.__validateSubfield()");
 
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
@@ -215,7 +216,7 @@ var Validator = function () {
             }
             return result;
         } finally {
-            Log.trace("Exit - Validator.validateSubfield()");
+            Log.trace("Exit - Validator.__validateSubfield()");
         }
     }
 
@@ -236,8 +237,8 @@ var Validator = function () {
 
     return {
         'BUNDLE_NAME': BUNDLE_NAME,
-        'validateRecord': validateRecord,
-        'validateField': validateField,
-        'validateSubfield': validateSubfield
+        'doValidateRecord': doValidateRecord,
+        '__validateField': __validateField,
+        '__validateSubfield': __validateSubfield
     };
 }();

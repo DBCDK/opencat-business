@@ -12,7 +12,7 @@ EXPORTED_SYMBOLS = ['CheckSubfieldNotUsedInChildrenRecords'];
 var CheckSubfieldNotUsedInChildrenRecords = function () {
     var __BUNDLE_NAME = "validation";
 
-    function validateSubfield(record, field, subfield, params, settings) {
+    function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter - CheckSubfieldNotUsedInChildrenRecords.validateSubfield");
 
         try {
@@ -27,14 +27,14 @@ var CheckSubfieldNotUsedInChildrenRecords = function () {
             }
             for (var i = 0; i < children.length; i++) {
                 var rec = children[i];
-                if (rec.existField(new MatchField(RegExp(field.name), undefined, RegExp(subfield.name)))) {
+                if (rec.existField(new MatchField(new RegExp(field.name), undefined, new RegExp(subfield.name)))) {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     var message = ResourceBundle.getStringFormat(bundle, "subfield.in.children.record.error", field.name, subfield.name);
 
                     Log.trace("Found error in record [", recId, ":", libNo, "]: ", message);
                     return [ValidateErrors.subfieldError("TODO:fixurl", message)];
                 }
-                var result = CheckSubfieldNotUsedInChildrenRecords.validateSubfield(DanMarc2Converter.convertFromDanMarc2(rec), field, subfield, params, settings);
+                var result = CheckSubfieldNotUsedInChildrenRecords.validateSubfield(DanMarc2Converter.convertFromDanMarc2(rec), field, subfield, params);
                 if (result.length !== 0) {
                     Log.trace("Validation errors found in children records: ", uneval(result));
                     return result;

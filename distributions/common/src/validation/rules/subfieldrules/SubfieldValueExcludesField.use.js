@@ -31,7 +31,7 @@ var SubfieldValueExcludesField = function () {
      * @returns {Array}
      */
     function validateSubfield(record, field, subfield, params) {
-        Log.trace("Enter SubfieldValueExcludesField.validateField");
+        Log.trace("Enter SubfieldValueExcludesField.validateSubField");
         var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
         var result = [];
 

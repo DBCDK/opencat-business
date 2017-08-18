@@ -84,8 +84,8 @@ var ValidatorEntryPoint = function () {
      *
      * @return {String} A json string with an array of validation errors.
      */
-    function validateRecord(templateName, record, settings) {
-        Log.trace("Enter - validateRecord()");
+    function doValidateRecord(templateName, record, settings) {
+        Log.trace("Enter - doValidateRecord()");
         try {
             var rec = JSON.parse(record);
             var templateProvider = function () {
@@ -96,14 +96,14 @@ var ValidatorEntryPoint = function () {
             var result = null;
             try {
                 ResourceBundleFactory.init(settings);
-                result = Validator.validateRecord(rec, templateProvider, settings);
+                result = Validator.doValidateRecord(rec, templateProvider, settings);
             } catch (ex) {
                 var msg = StringUtil.sprintf("ValidatorEntryPoint systemfejl ved validering: %s", ex);
                 result = [ValidateErrors.recordError("", msg)];
             }
             return JSON.stringify(result);
         } finally {
-            Log.trace("Exit - validateRecord()");
+            Log.trace("Exit - doValidateRecord()");
         }
     }
 
@@ -111,7 +111,7 @@ var ValidatorEntryPoint = function () {
         'initTemplates': initTemplates,
         'getValidateSchemas': getValidateSchemas,
         'checkTemplate': checkTemplate,
-        'validateRecord': validateRecord
+        'doValidateRecord': doValidateRecord
     }
 }();
 

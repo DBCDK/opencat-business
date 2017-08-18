@@ -20,7 +20,7 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
      * @param {object} params Object with properties subfieldConditional, subfieldConditionalValue, fieldMandatory, subfieldMandatory
      *                        e.g. { 'subfieldConditional': 'y', 'subfieldConditionalValue': 'z', 'fieldMandatory': 'a', 'subfieldMandatory': 'b' }
      * @return {object}
-     * @name FieldRules.exclusiveSubfield
+     * @name SubfieldHasValueDemandsOtherSubfield.validateField
      * @method
      */
     function validateField(record, field, params) {

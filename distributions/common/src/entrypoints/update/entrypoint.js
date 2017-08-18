@@ -48,7 +48,7 @@ function checkTemplate(name, groupId, libraryGroup, settings) {
  * @return {String} A json string with an array of validation errors.
  */
 function validateRecord(templateName, record, settings) {
-    return ValidatorEntryPoint.validateRecord(templateName, record, settings);
+    return ValidatorEntryPoint.doValidateRecord(templateName, record, settings);
 }
 
 function checkDoubleRecord(record, settings) {
