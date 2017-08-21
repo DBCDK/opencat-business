@@ -109,32 +109,32 @@
             "subfields":{
                 "a":{
                     "mandatory":true,
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.lookupRecord",
+                            "params": {
+                                "agencyId":[
+                                    {
+                                        "agencyId": "870970",
+                                        "fieldAndSubfield": "014x",
+                                        "matchValues": ["ANM"]
+                                    },
+                                    {
+                                        "agencyId": "870971",
+                                        "fieldAndSubfield": "014x",
+                                        "matchValues": ["DEB", "FOR", "SMS"]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
                 },
                 "x":{
                     "repeatable":false,
                     "values": [ "ANM", "DEB", "FOR", "SMS" ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "SubfieldRules.lookupRecord",
-                    "params": {
-                        "agencyId":[
-                            {
-                                "agencyId": "870970",
-                                "fieldAndSubfield": "014x",
-                                "matchValues": ["ANM"]
-                            },
-                            {
-                                "agencyId": "870971",
-                                "fieldAndSubfield": "014x",
-                                "matchValues": ["DEB", "FOR", "SMS"]
-                            }
-                        ]
-                    }
-                }
-            ]
+            }
         },
         "016":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.11.htm",
@@ -142,17 +142,17 @@
             "subfields":{
                 "a":{
                     "mandatory":true,
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.lookupRecord",
+                            "params": {
+                                "agencyId": "870970"
+                            }
+                        }
+                    ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "SubfieldRules.lookupRecord",
-                    "params": {
-                        "agencyId":[ "870970" ]
-                    }
-                }
-            ]
+            }
         },
         "032": "DanMarc2.fields.032",
         "041":{

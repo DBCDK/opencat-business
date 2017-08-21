@@ -13,7 +13,7 @@ var UpperCaseCheck = function () {
     /**
      * upperCaseCheck is used to check whether a subfield order is correct
      * meaning, a subfield uppercase name must be preceded by a subfield with the same lowercase name
-     * @syntax UpperCaseCheck.validateField( record, field, params, settings )
+     * @syntax UpperCaseCheck.validateField( record, field, params )
      * @param {object} record
      * @param {object} field
      * @param {object} params is not used

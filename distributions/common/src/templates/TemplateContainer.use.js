@@ -131,7 +131,7 @@ var TemplateContainer = function () {
      *         the requested template. Or undefined in case of an error.
      */
     function loadTemplate(name) {
-        Log.trace("Enter - TemplateOptimizer.loadTemplate()");
+        Log.trace("Enter - TemplateContainer.loadTemplate()");
 
         try {
             var template = loadTemplateUnoptimized(name, settings);
@@ -139,7 +139,7 @@ var TemplateContainer = function () {
             return TemplateOptimizer.optimize(template);
         }
         finally {
-            Log.trace("Exit - TemplateOptimizer.loadTemplate()");
+            Log.trace("Exit - TemplateContainer.loadTemplate()");
         }
     }
 
@@ -152,7 +152,7 @@ var TemplateContainer = function () {
      * @param {Object} name The of the template.
      */
     function get(name) {
-        Log.trace("Enter - TemplateOptimizer.get()");
+        Log.trace("Enter - TemplateContainer.get()");
 
         try {
             var result = templates[name];
@@ -166,12 +166,12 @@ var TemplateContainer = function () {
             return result;
         }
         finally {
-            Log.trace("Exit - TemplateOptimizer.get()");
+            Log.trace("Exit - TemplateContainer.get()");
         }
     }
 
     function getCompiledTemplateByFolder(name, templateFolder) {
-        Log.trace("Enter - TemplateOptimizer.get()");
+        Log.trace("Enter - TemplateContainer.get()");
 
         try {
             var result = templates[name];
@@ -185,7 +185,7 @@ var TemplateContainer = function () {
             return result;
         }
         finally {
-            Log.trace("Exit - TemplateOptimizer.get()");
+            Log.trace("Exit - TemplateContainer.get()");
         }
     }
 

@@ -36,24 +36,8 @@ var LookUpRecord = function () {
             ValueCheck.check("subfield", subfield).type("object");
             ValueCheck.check("params", params).type("object");
 
-            Log.debug("RECORD", JSON.stringify(record));
-            Log.debug("FIELD" ,JSON.stringify(field));
-            for (var property in params) {
-                Log.debug("PACO: ", property + ': ' + params[property] + '; ');
-                if ( property === "template") {
-                    for (var praperty in params[property]) {
-                        Log.debug("PACO II: ", praperty + ': ' + params[praperty] + '; ');
-                    }
-                }
-            }
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-            var recordId;
-            for (var i = 0; i < field.subfields.length; ++i) {
-                if (field.subfields[i].name === 'a') {
-                    recordId = field.subfields[i].value;
-                }
-            }
-            recordId = subfield.value;
+            var recordId = subfield.value;
             var agencyId = "";
             var marc = DanMarc2Converter.convertToDanMarc2(record);
             if (params !== undefined) {
@@ -89,7 +73,7 @@ var LookUpRecord = function () {
             }
 
             if (params.hasOwnProperty("requiredFieldAndSubfield") || params.hasOwnProperty("allowedSubfieldValues")) {
-                var checkParamsResult = __checkParams(params, bundle, record);
+                var checkParamsResult = __checkParams(params, bundle);
                 if (checkParamsResult.length > 0) {
                     return checkParamsResult;
                 }
@@ -116,7 +100,7 @@ var LookUpRecord = function () {
         }
     }
 
-    function __checkParams(params, bundle, record) {
+    function __checkParams(params, bundle) {
         Log.trace("Enter - LookUpRecord.__checkParams");
         try {
             var msg;
