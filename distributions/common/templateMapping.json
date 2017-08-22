@@ -12,7 +12,7 @@
       "templates": [
         "allowall",
         "dbc",
-        "dbcanal",
+        "dbcartanm",
         "dbcautoritet",
         "delete",
         "invalid"
