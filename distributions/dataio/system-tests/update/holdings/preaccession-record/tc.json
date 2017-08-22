@@ -12,7 +12,7 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 725000 ],
+            "holdings": [ 723000 ],
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
