@@ -8,12 +8,24 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "allowall",
+            "templateName": "dbcartanm",
             "record": "request.marc"
         },
         "setup": {
             "rawrepo": [
-
+                {
+                    "record": "hostpub-doc-970.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enqueued": false,
+                    "enrichments": [ "hostpub-doc-970-enrichment.marc" ]
+                },
+                {
+                    "record": "hostpub-doc-970-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enqueued": false
+                }
             ]
         },
         "expected": {
@@ -21,6 +33,19 @@
             "update": {
                 "errors": [                ],
                 "rawrepo": [
+                    {
+                        "record": "hostpub-doc-970.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "hostpub-doc-970-enrichment.marc" ]
+                    },
+                    {
+                        "record": "hostpub-doc-970-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
                     {
                         "record": "rawrepo-common.marc",
                         "type": "ARTICLE",
