@@ -18,7 +18,7 @@ var CheckChangedValue = function () {
      * @param {object} record
      * @param {object} field
      * @param {object} subfield Subfield containing the subfield to validate
-     * @param {object} Object with two lists of values {fromValues:[e,b] , toValues[e,b]}
+     * @param {object} params Object with two lists of values {fromValues:[e,b] , toValues[e,b]}
      * @return {object}
      * @name CheckChangedValue.validateSubfield
      * @method
@@ -33,13 +33,14 @@ var CheckChangedValue = function () {
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var msg;
 
             if (!ValidationUtil.isNumber(libNo)) {
-                var msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
+                msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
             if (!RawRepoClient.recordExists(recId, libNo)) {
-                Log.debug("Record is new!")
+                Log.debug("Record is new!");
                 return [];
             }
             var oldRecord = RawRepoClient.fetchRecord(recId, libNo);
@@ -49,7 +50,7 @@ var CheckChangedValue = function () {
             var oldValue = oldRecord.getValue(new RegExp(field.name), new RegExp(subfield.name));
             Log.debug(field.name + subfield.name + ": " + oldValue + " -> " + subfield.value);
             if (params.fromValues.indexOf(oldValue) === -1 || params.toValues.indexOf(subfield.value) === -1) {
-                var msg = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", field.name, subfield.name, oldValue, subfield.value);
+                msg = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", field.name, subfield.name, oldValue, subfield.value);
                 Log.debug("Found validation error: " + msg);
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
 

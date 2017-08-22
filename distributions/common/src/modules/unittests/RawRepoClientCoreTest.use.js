@@ -17,6 +17,7 @@ UnitTest.addFixture( "RawRepoClientCore.records", function() {
 
 	Assert.equalValue( "fetchRecord: Record exist", RawRepoClientCore.fetchRecord( "1 234 567 8", "870970" ).toString(), rec.toString() );
 	Assert.equalValue( "fetchRecord: Record does not exist", RawRepoClientCore.fetchRecord( "1 234 567 8", "870973" ), undefined );	
+    RawRepoClientCore.clear();
 } );
 
 UnitTest.addFixture( "RawRepoClientCore.getRelationsChildren", function() {
@@ -34,4 +35,5 @@ UnitTest.addFixture( "RawRepoClientCore.getRelationsChildren", function() {
 	RawRepoClientCore.addRecord( recChild );
 
 	Assert.equalValue( "Has children", RawRepoClientCore.getRelationsChildren( "1 234 567 8", "870970" ), [ recChild ] );
+    RawRepoClientCore.clear();
 } );

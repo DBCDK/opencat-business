@@ -13,6 +13,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
     var bundle = ResourceBundleFactory.getBundle("categorization-codes");
     var record;
     var expected;
+    RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
     //                  Single records
@@ -169,6 +170,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
 
     var record;
     var expected;
+    RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
     //                  Single records
@@ -200,7 +202,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
     );
 
     expected = RecordUtil.createFieldFromString("652 00 *n 85 *z 26 *o sk");
-    Assert.equalValue("Field and subfield found in single record", callFunction(record, "652", /n|z|o/).toString(), expected.toString());
+    Assert.equalValue("Field and subfield found in single record", callFunction(record, "652", /[nzo]/).toString(), expected.toString());
 
     //-----------------------------------------------------------------------------
     //                  Field found in main/volume records
@@ -223,6 +225,6 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
     );
 
     expected = RecordUtil.createFieldFromString("652 00 *n 15 *z 46 *n 85 *z 26 *o sk");
-    Assert.equalValue("Field and subfield found in main/volume record", callFunction(record, "652", /n|z|o/).toString(), expected.toString());
+    Assert.equalValue("Field and subfield found in main/volume record", callFunction(record, "652", /[nzo]/).toString(), expected.toString());
     RawRepoClientCore.clear();
 });

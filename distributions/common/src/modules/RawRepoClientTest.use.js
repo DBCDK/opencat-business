@@ -15,4 +15,5 @@ UnitTest.addFixture("RawRepoClient", function () {
 
     Assert.equalValue("fetchRecord: Record exist", RawRepoClient.fetchRecord("1 234 567 8", "870970").toString(), rec.toString());
     Assert.equalValue("fetchRecord: Record does not exist", RawRepoClient.fetchRecord("1 234 567 8", "870973"), undefined);
+    RawRepoClientCore.clear();
 });

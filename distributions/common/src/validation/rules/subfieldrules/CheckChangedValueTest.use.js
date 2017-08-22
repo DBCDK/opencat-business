@@ -6,8 +6,7 @@ use("UnitTest");
 UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     var params;
     var bundle = ResourceBundleFactory.getBundle(CheckChangedValue.__BUNDLE_NAME);
-
-    var msg_format = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", "004", "a", "%s", "%s");
+    RawRepoClientCore.clear();
 
     params = {toValues: [], fromValues: []};
     Assert.equalValue("Empty param values", CheckChangedValue.validateSubfield({fields: []}, {}, {}, params),
@@ -17,10 +16,10 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
     Assert.equalValue("Params with new empty record", CheckChangedValue.validateSubfield({fields: []}, {}, {}, params),
         [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getString(bundle, "agencyid.not.a.number"))]);
 
-    var record = {};
-    var field = {};
-    var subfield = {};
-    var marcRecord = undefined;
+    var record;
+    var field;
+    var subfield;
+    var marcRecord;
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -243,5 +242,6 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
         "004 00 *a b"
     );
     Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
+    RawRepoClientCore.clear();
 
 });

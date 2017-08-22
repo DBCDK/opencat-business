@@ -8,10 +8,11 @@ use("UnitTest");
 
 UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", function () {
     function callRule(record, field, subfield) {
-        return CheckSubfieldNotUsedInParentRecord.validateSubfield(record, field, subfield, undefined, undefined);
+        return CheckSubfieldNotUsedInParentRecord.validateSubfield(record, field, subfield, undefined);
     }
 
     var bundle = ResourceBundleFactory.getBundle(CheckSubfieldNotUsedInParentRecord.__BUNDLE_NAME);
+    RawRepoClientCore.clear();
 
     // Case: No parent record.
     var marcRecord = new Record();
@@ -87,4 +88,6 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
 
     message = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", "008", "t", "1 234 567 8");
     Assert.equalValue("Parent record: Subfield is used in parent record", callRule(record, field, subfield), [ValidateErrors.subfieldError("TODO:fixurl", message)]);
+
+    RawRepoClientCore.clear();
 });

@@ -10,12 +10,11 @@ use("UpdateConstants");
 UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function () {
 
     function callFunction(currentRecord, updatingRecord) {
-        var result = RecategorizationNoteFieldFactory.newNoteField(currentRecord, updatingRecord);
-        return result;
+        return RecategorizationNoteFieldFactory.newNoteField(currentRecord, updatingRecord);
     }
 
     function createNote(parts) {
-        var result = undefined;
+        var result;
 
         result = new Field(RecategorizationNoteFieldFactory.__FIELD_NAME, "00");
 
@@ -48,6 +47,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
 
     var record;
     var parts;
+    RawRepoClientCore.clear();
 
     //-----------------------------------------------------------------------------
     //                  Test basic cases
@@ -74,8 +74,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     );
 
     var field = new Field("512", "00");
-    var subfield = new Subfield("i", "Materialet er opstillet under dramatik");
-    field.append(subfield);
+    field.append("i", "Materialet er opstillet under dramatik");
     Assert.equalValue("test of calling function with identic records", callFunction(record, record).toString(), field.toString());
 
 
@@ -446,7 +445,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
         ].join("\n"))
     );
 
-    var currentRecord = RecordUtil.createFromString([
+    currentRecord = RecordUtil.createFromString([
             "001 00 *a 22413090 *b 191919 *c 19990510220316 *d 19990407 *f a",
             "004 00 *r n *a e",
             "008 00 *t p *u u *a 1999 *b dk *j f *l dan *v 0",
@@ -501,4 +500,5 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
 
     Assert.equalValue("volume-to-single", callFunction(currentRecord, record).toString(), createNote(parts).toString());
 
+    RawRepoClientCore.clear();
 });

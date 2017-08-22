@@ -2,7 +2,6 @@ use("Log");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
-use("RawRepoClientCore");
 use("Marc");
 use("DanMarc2Converter");
 use("RawRepoClient");

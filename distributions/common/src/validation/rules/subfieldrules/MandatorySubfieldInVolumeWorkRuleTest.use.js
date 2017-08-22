@@ -29,6 +29,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
 
     var record;
     var bundle = ResourceBundleFactory.getBundle(MandatorySubfieldInVolumeWorkRule.__BUNDLE_NAME);
+    RawRepoClientCore.clear();
 
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
@@ -125,6 +126,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
 
     var record;
     var bundle = ResourceBundleFactory.getBundle(MandatorySubfieldInVolumeWorkRule.__BUNDLE_NAME);
+    RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
         "001 00 *a 2 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +

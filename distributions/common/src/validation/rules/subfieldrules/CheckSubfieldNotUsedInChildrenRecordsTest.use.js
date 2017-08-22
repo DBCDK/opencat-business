@@ -88,4 +88,6 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     subfield = field.subfields[0];
     Assert.equalValue("Subfield used in one child record", callRule(record, field, subfield),
         [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "subfield.in.children.record.error", "008", "t"))]);
+
+    RawRepoClientCore.clear();
 });

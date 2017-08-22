@@ -6,6 +6,7 @@ use("LookUpRecord");
 
 UnitTest.addFixture("LookUpRecord", function () {
     var bundle = ResourceBundleFactory.getBundle(LookUpRecord.__BUNDLE_NAME);
+    RawRepoClientCore.clear();
 
     // creating common record in rawrepo
     var trueMarcRec = new Record();
@@ -282,4 +283,6 @@ UnitTest.addFixture("LookUpRecord", function () {
     errorMessage = 'Params attributten requiredFieldAndSubfield er ikke af typen string';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
     Assert.equalValue("med valid allowedSubfieldValues men ikke valid requiredFieldAndSubfield type", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+
+    RawRepoClientCore.clear();
 });

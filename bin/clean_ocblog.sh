@@ -1,8 +1,9 @@
 #!/bin/bash
 
 #Script that makes the ocb-test.log file readable - needs adjustment from time to time 
+fil=${1:-ocb-test.log}
 
-cat ocb-test.log |\
+cat $fil |\
 egrep -v 'ModuleHandler|cannot read file|ield rule|Log4JStopWatch|FileSchemeHandler|Environment.java|ClasspathSchemeHandler.java|microseconds|milliseconds.|^$' |\
 egrep -v 'OCBFileSystem.java:81' |\
 sed -e 's&ServiceScripter.java&&' |\
@@ -14,5 +15,5 @@ sed -e "s&jar:file:/home/${USER}/iscrum/opencat-business/ocb-tools-1.0.0/bin/ocb
 sed -e "s&jar:file:/home/${USER}/iscrum/opencat-business/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar!/javascript/javacore/LogCore.use.js:49&&" |\
 sed -e "s&jar:file:/home/${USER}/iscrum/ocb-tools/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar!/javascript/javacore/LogCore.use.js:48&&" |\
 sed -e "s&jar:file:/home/${USER}/iscrum/ocb-tools/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar!/javascript/javacore/LogCore.use.js:51&&" |\
-sed -e "s&jar:file:/home/${USER}/iscrum/ocb-tools/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar!/javascript/javacore/LogCore.use.js:49&&" > ocb-test.log.vi
-vi ocb-test.log.vi
+sed -e "s&jar:file:/home/${USER}/iscrum/ocb-tools/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar!/javascript/javacore/LogCore.use.js:49&&" > $fil.vi
+vi $fil.vi

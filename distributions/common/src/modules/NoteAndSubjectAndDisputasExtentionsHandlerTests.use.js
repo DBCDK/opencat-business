@@ -52,6 +52,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     var curRecord;
     var record;
 
+    RawRepoClientCore.clear();
     record = new Record();
     record.fromString(
         "001 00 *a 1 234 567 8 *b 700400\n" +
@@ -270,6 +271,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     var bundle = ResourceBundleFactory.getBundle(NoteAndSubjectAndDisputasExtentionsHandler.__BUNDLE_NAME);
     var curRecord;
     var record;
+    RawRepoClientCore.clear();
 
     OpenAgencyClientCore.addFeatures("700400", [UpdateConstants.AUTH_COMMON_SUBJECTS]);
 
@@ -470,6 +472,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     var bundle = ResourceBundleFactory.getBundle(NoteAndSubjectAndDisputasExtentionsHandler.__BUNDLE_NAME);
     var curRecord;
     var record;
+    RawRepoClientCore.clear();
 
     OpenAgencyClientCore.addFeatures("700400", [UpdateConstants.AUTH_COMMON_NOTES]);
 
