@@ -572,14 +572,7 @@
                 },
                 "b":{
                     "repeatable":false,
-                    "rules":[{
-                            "type":"SubfieldRules.checkLength",
-                            "params":{
-                                "min":13,
-                                "max":13
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISBN13" } ]
                 },
                 "c":{},
                 "x":{}
