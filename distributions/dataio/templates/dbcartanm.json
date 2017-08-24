@@ -584,7 +584,8 @@
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
                 "0": "DanMarc2.fields.900.subfields.0",
-                "1": "DanMarc2.fields.900.subfields.1"
+                "1": "DanMarc2.fields.900.subfields.1",
+                "2": {}
             }
         },
         "910":{
@@ -605,7 +606,8 @@
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
                 },
-                "0":"DanMarc2.fields.910.subfields.0"
+                "0":"DanMarc2.fields.910.subfields.0",
+                "2":{}
             }
         },
         "930": "DanMarc2.fields.930",
