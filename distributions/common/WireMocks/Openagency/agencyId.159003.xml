@@ -77,6 +77,10 @@
                     <oa:name>cataloging_template_set</oa:name>
                     <oa:string>lokbib</oa:string>
                 </oa:libraryRule>
+                <oa:libraryRule>
+                    <oa:name>auth_add_dk5_to_phd</oa:name>
+                    <oa:bool>1</oa:bool>
+                </oa:libraryRule>
             </oa:libraryRules>
         </oa:libraryRulesResponse>
     </S:Body>

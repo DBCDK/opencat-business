@@ -77,7 +77,11 @@
                     <oa:name>worldcat_resource_sharing</oa:name>
                     <oa:bool>1</oa:bool>
                 </oa:libraryRule>
-            </oa:libraryRules>
+<oa:libraryRule>
+<oa:name>auth_add_dk5_to_phd</oa:name>
+<oa:bool>1</oa:bool>
+</oa:libraryRule>
+</oa:libraryRules>
         </oa:libraryRulesResponse>
     </S:Body>
 </S:Envelope>
