@@ -313,9 +313,7 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
             "repeatable": false,
             "subfields":{
-                "a": {
-                    "mandatory": true
-                },
+                "a": "DanMarc2.fields.245.subfields.a",
                 "b": "DanMarc2.fields.245.subfields.b",
                 "m": "DanMarc2.fields.245.subfields.m",
                 "\u00f8": "DanMarc2.fields.245.subfields.\u00f8",
