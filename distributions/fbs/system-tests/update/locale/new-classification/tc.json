@@ -5,7 +5,7 @@
         "bugs": [ "18680" ],
         "request": {
             "authentication": {
-                "group": "715700",
+                "group": "763000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -13,7 +13,7 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 715100, 715300, 715500 ],
+            "holdings": [ 710100, 723000 ],
             "rawrepo": [
                 {
                     "record": "rawrepo-common.marc",
@@ -42,9 +42,8 @@
                         "enqueued": true,
                         "enrichments": [
                             "result-dbc-enrichment.marc",
-                            "result-fbs-715100.marc",
-                            "result-fbs-715300.marc",
-                            "result-fbs-715500.marc"
+                            "result-fbs-710100.marc",
+                            "result-fbs-723000.marc"
                         ]
                     },
                     {
@@ -54,19 +53,13 @@
                         "enqueued": true
                     },
                     {
-                        "record": "result-fbs-715100.marc",
+                        "record": "result-fbs-710100.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
                     },
                     {
-                        "record": "result-fbs-715300.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
-                    },
-                    {
-                        "record": "result-fbs-715500.marc",
+                        "record": "result-fbs-723000.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

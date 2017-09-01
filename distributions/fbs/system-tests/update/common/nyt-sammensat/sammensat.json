@@ -4,7 +4,7 @@
         "description": "Tester oprettelse af nyt sammensat materiale fra et FBS-bibliotek",
         "request": {
             "authentication": {
-                "group": "726500",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -38,7 +38,7 @@
         "description": "Tester oprettelse af nyt sammensat materiale fra et FBS-bibliotek",
         "request": {
             "authentication": {
-                "group": "726500",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

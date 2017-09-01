@@ -4,7 +4,7 @@
     "description": "Tester berigelse fra et FBS-bibliotek af nationalbibliografisk post med DK5",
     "request": {
       "authentication": {
-        "group": "763000",
+        "group": "710100",
         "user": "netpunkt",
         "password": "20Koster"
       },
@@ -57,7 +57,7 @@
     "description": "Tester berigelse fra et FBS-bibliotek af nationalbibliografisk post med DK5",
     "request": {
       "authentication": {
-        "group": "726500",
+        "group": "710100",
         "user": "netpunkt",
         "password": "20Koster"
       },
@@ -110,7 +110,7 @@
     "description": "Tester berigelse fra et FBS-bibliotek af nationalbibliografisk post med DK5",
     "request": {
       "authentication": {
-        "group": "726500",
+        "group": "710100",
         "user": "netpunkt",
         "password": "20Koster"
       },

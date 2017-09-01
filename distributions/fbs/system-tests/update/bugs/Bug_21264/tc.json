@@ -7,7 +7,7 @@
     "description": "Tester om et bibliotek kan ændre i 008 feltet i deres egen fællesskabspost",
     "request": {
       "authentication": {
-        "group": "715700",
+        "group": "723000",
         "user": "netpunkt",
         "password": "20Koster"
       },

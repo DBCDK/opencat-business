@@ -4,7 +4,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'bog'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -63,7 +63,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'bogbind'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -107,7 +107,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'boghoved'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -166,7 +166,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'bogsektion'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -210,7 +210,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'film'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -269,7 +269,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'filmbind'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -318,7 +318,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'filmhoved'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -377,7 +377,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'fonogram'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -436,7 +436,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'genstand'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -485,7 +485,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'lydbog'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -544,7 +544,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'lydbogbind'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -588,7 +588,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'lydboghoved'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -647,7 +647,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'netlydbog'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -701,7 +701,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'netlydbogbind'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -745,7 +745,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'netlydboghoved'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -799,7 +799,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'node'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -858,7 +858,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'nodebind'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -902,7 +902,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'nodehoved'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -961,7 +961,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'lokalpost'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -1005,7 +1005,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'periodicum'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -1064,7 +1064,7 @@
         "description": "Tester obligatoriske felter i skabelonen 'sammensat'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -1123,7 +1123,7 @@
         "description": "Tester obligatorisk felt 996 i skabelonen 'bog'",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

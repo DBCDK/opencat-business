@@ -16,5 +16,6 @@ agencyId.299999.xml : Special case - used when "Agency not found" is wanted.
 agencyId.010100.xml : Dataio/dbc user
 agencyId.870970.xml : DBC agency code
 agencyId.191919.xml : DBC enrichment agency code
+agencyId.746100.xml : Special library that doesn't have the rigth to create notes and subject fields
 
 

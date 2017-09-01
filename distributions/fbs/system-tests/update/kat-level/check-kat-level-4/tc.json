@@ -4,7 +4,7 @@
     "description": "Tester om man kan opdatere en RET post med katniveau 4",
     "request": {
       "authentication": {
-        "group": "715700",
+        "group": "723000",
         "user": "netpunkt",
         "password": "20Koster"
       },
@@ -55,7 +55,7 @@
     "description": "Tester om man kan opdatere en RET post med katniveau 4",
     "request": {
       "authentication": {
-        "group": "715700",
+        "group": "723000",
         "user": "netpunkt",
         "password": "20Koster"
       },

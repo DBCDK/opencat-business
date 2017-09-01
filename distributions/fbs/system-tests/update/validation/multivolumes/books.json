@@ -4,7 +4,7 @@
         "description": "Tester en komplet hovedpost",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -18,7 +18,7 @@
         "description": "Tester en komplet bindpost uden hovedpost i rawrepo",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -53,7 +53,7 @@
         },
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

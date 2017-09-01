@@ -8,7 +8,7 @@
         "description": "Tester tilføjelse af noter/emneord til fællesskabspost",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

@@ -7,7 +7,7 @@
         "description": "Tester sletning af fællesskabspost fra et FBS-bibliotek",
         "request": {
             "authentication": {
-                "group": "714700",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -16,7 +16,7 @@
         },
         "setup": {
             "holdings": [
-                714700
+                723000
             ],
             "rawrepo": [
                 {

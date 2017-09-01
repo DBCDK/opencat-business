@@ -4,7 +4,7 @@
         "description": "Omkatalogisering af lokal singlepost til lokal bindpost",
         "request": {
             "authentication": {
-                "group": "726500",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

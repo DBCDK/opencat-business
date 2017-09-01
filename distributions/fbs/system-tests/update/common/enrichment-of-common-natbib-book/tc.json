@@ -4,7 +4,7 @@
         "description": "Tester berigelse fra et FBS-bibliotek af nationalbibliografisk post med emneord og noter",
         "request": {
             "authentication": {
-                "group": "763000",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

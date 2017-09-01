@@ -5,7 +5,7 @@
         "description": "Tester indsending af en påhængspost med ændret opstillingsfelt. Story 1994 case 2.",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

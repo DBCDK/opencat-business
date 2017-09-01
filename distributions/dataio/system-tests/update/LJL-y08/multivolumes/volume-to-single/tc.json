@@ -84,7 +84,7 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 715100 ],
+            "holdings": [ 763000 ],
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
@@ -132,7 +132,7 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "result-single-dbc-enrichment.marc", "result-fbs-715100.marc" ]
+                        "enrichments": [ "result-single-dbc-enrichment.marc", "result-fbs-763000.marc" ]
                     },
                     {
                         "record": "result-single-dbc-enrichment.marc",
@@ -141,7 +141,7 @@
                         "enqueued": true
                     },
                     {
-                        "record": "result-fbs-715100.marc",
+                        "record": "result-fbs-763000.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
@@ -163,7 +163,7 @@
             "record": "request.marc"
         },
         "setup": {
-            "holdings": [ 715100, 710100 ],
+            "holdings": [ 763000, 710100 ],
             "rawrepo": [
                 {
                     "record": "rawrepo-main.marc",
@@ -217,7 +217,7 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "result-single-dbc-enrichment.marc", "result-fbs-715100.marc", "result-fbs-710100.marc" ]
+                        "enrichments": [ "result-single-dbc-enrichment.marc", "result-fbs-763000.marc", "result-fbs-710100.marc" ]
                     },
                     {
                         "record": "result-single-dbc-enrichment.marc",
@@ -226,7 +226,7 @@
                         "enqueued": true
                     },
                     {
-                        "record": "result-fbs-715100.marc",
+                        "record": "result-fbs-763000.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true

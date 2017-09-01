@@ -29,9 +29,8 @@
         {
           "record": "rawrepo-53082289-870970.marc",
           "holdings": [
-            715100,
-            715300,
-            715500
+            723000,
+            710100
           ],
           "type": "MARCXCHANGE",
           "deleted": false,
@@ -115,9 +114,8 @@
         {
           "record": "rawrepo-53082289-870970.marc",
           "holdings": [
-            715100,
-            715300,
-            715500
+            723000,
+            710100
           ],
           "type": "MARCXCHANGE",
           "deleted": true

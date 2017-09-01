@@ -5,7 +5,7 @@
         "description": "Tester oprettelse af ny node (fællesskabspost) fra et FBS-bibliotek",
         "request": {
             "authentication": {
-                "group": "746100",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

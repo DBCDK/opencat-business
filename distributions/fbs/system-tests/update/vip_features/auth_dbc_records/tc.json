@@ -5,7 +5,7 @@
         "description": "Tester featuren 'auth_dbc_records' is on",
         "request": {
             "authentication": {
-                "group": "761500",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

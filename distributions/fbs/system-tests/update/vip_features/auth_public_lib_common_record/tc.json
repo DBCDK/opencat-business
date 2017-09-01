@@ -4,7 +4,7 @@
         "description": "Tester featuren 'auth_public_lib_common_record' is off",
         "request": {
             "authentication": {
-                "group": "726500",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
@@ -61,7 +61,7 @@
         "description": "Tester opførsel når en posts agency ikke kan findes i vip",
         "request": {
             "authentication": {
-                "group": "726500",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

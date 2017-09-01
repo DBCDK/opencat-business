@@ -4,7 +4,7 @@
         "description": "Match af dobbeltpost frontend, uden force",
         "request": {
             "authentication": {
-                "group": "733000",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },

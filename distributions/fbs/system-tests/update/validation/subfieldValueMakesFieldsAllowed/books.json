@@ -15,10 +15,10 @@
     },
     {
         "name": "subfieldValueMakesFieldsAllowedBad",
-        "description": "032 er ikke tilladt da der er 733000 i 996",
+        "description": "032 er ikke tilladt da der er 723000 i 996",
         "request": {
             "authentication": {
-                "group": "733000",
+                "group": "723000",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
