@@ -30,7 +30,7 @@ var FieldsMandatory = function () {
             Log.debug("Checking fields: ", params.fields);
             for (var i = 0; i < params.fields.length; ++i) {
                 if (ValidationUtil.recordContainsField(record, params.fields[i]) !== true) {
-                    Log.debug("Fields: ", params.fields[i], " was not found in record:\n", uneval(record));
+                    Log.debug("Fields: ", params.fields[i], " was not found in record: ", uneval(record));
                     var url = TemplateUrl.getUrlForField(params.fields[i], params.template);
                     var msg = ResourceBundle.getStringFormat(bundle, "field.mandatory.error", params.fields[i]);
                     result.push(ValidateErrors.recordError(url, msg));
