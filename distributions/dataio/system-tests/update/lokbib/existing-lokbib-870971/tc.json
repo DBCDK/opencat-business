@@ -1,0 +1,53 @@
+[
+  {
+    "name": "existing-lokbib-870971",
+    "description": "Tester at man kan oprette en DBC 870971 post selvom der findes en lokbib post for andet bibliotekt med samme faust",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-159003.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-159003.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-dbc.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
