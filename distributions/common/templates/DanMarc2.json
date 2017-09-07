@@ -4706,7 +4706,8 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                }
+                },
+                "0":{}
             },
             "rules": [
                 {
