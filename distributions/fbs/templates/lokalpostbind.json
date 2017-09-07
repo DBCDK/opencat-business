@@ -96,7 +96,11 @@
                 "r": "DanMarc2.fields.008.subfields.r",
                 "w": "DanMarc2.fields.008.subfields.w",
                 "x": "DanMarc2.fields.008.subfields.x",
-                "v": "DanMarc2.fields.008.subfields.v"
+                "v": {
+                    "mandatory":true,
+                    "repeatable": false,
+                    "values": [ "0", "1", "4", "5", "7", "8", "9" ]
+                }
             }
 		},
         "009":{
@@ -142,8 +146,16 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }]
+                            "type":"SubfieldRules.checkFaust"
+                        },
+                        {
+                            "type": "SubfieldRules.lookupRecord",
+                            "params": {
+                                "requiredFieldAndSubfield": "004a",
+                                "allowedSubfieldValues": [ "h", "s" ]
+                            }
+                        }
+                    ]
                 }
             }
         },
