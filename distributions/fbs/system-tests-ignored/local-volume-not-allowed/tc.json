@@ -21,16 +21,17 @@
             ]
         },
         "expected": {
-            "validation": {},
+            "validation": {
+            },
             "update": {
                 "errors": [
                     {
                         "type": "ERROR",
-                        "urlForDocumentation": null,
-                        "ordinalPositionOfField": null,
-                        "ordinalPositionOfSubfield": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
+                        "ordinalPositionOfField": 3,
+                        "ordinalPositionOfSubfield": 0,
                         "ordinalPositionInSubfield": null,
-                        "message": "Posten {51586417|710100} peger på {51617649|710100}, men den refererede post findes ikke"
+                        "message": "Posten med faustnr/bibliotek '51617649/710100' findes ikke i forvejen"
                     }
                 ]
             }
