@@ -76,33 +76,8 @@
                 }
             }
         },
-        "005": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8.htm",
-            "repeatable": false,
-            "subfields": {
-                "h": "DanMarc2.fields.005.subfields.h",
-                "i": "DanMarc2.fields.005.subfields.i",
-                "j": "DanMarc2.fields.005.subfields.j",
-                "k": "DanMarc2.fields.005.subfields.k",
-                "l": "DanMarc2.fields.005.subfields.l",
-                "r": "DanMarc2.fields.005.subfields.r",
-                "v": "DanMarc2.fields.005.subfields.v",
-                "z": "DanMarc2.fields.005.subfields.z"
-            }
-        },
-        "006": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
-            "subfields": {
-                "a": "DanMarc2.fields.006.subfields.a",
-                "b": "DanMarc2.fields.006.subfields.b",
-                "c": "DanMarc2.fields.006.subfields.c",
-                "d": "DanMarc2.fields.006.subfields.d",
-                "e": {
-                    "repeatable": false
-				},
-                "2": "DanMarc2.fields.006.subfields.2"
-            }
-        },
+        "005": "DanMarc2.fields.005",
+        "006": "DanMarc2.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory": true,
@@ -110,132 +85,31 @@
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "u": "DanMarc2.fields.008.subfields.u",
-                "a": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
-                        },
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "z": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
-                        },
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "b": {
-                    "values": "Lister.fields.codes.subfields.country.general.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "a": "DanMarc2.fields.008.subfields.a",
+                "z": "DanMarc2.fields.008.subfields.z",
+                "b": "DanMarc2.fields.008.subfields.b",
                 "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
-                "e": {
-                    "repeatable": false,
-                    "values": [ "1", "2" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "f": {
-                    "repeatable": false,
-                    "values": [ "1" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "g": {
-                    "repeatable": false,
-                    "values": [ "1" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "e": "DanMarc2.fields.008.subfields.e",
+                "f": "DanMarc2.fields.008.subfields.f",
+                "g": "DanMarc2.fields.008.subfields.g",
                 "h": "DanMarc2.fields.008.subfields.h",
                 "i": "DanMarc2.fields.008.subfields.i",
-                "j": {
-                    "repeatable": false,
-                    "values": [ "d", "e", "f", "i", "j", "m", "p" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": {
-                    "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "m": {
-                    "repeatable": false,
-                    "values": [ "1" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "o": {
-                    "repeatable": false,
-                    "values": [ "b", "s" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "l": "DanMarc2.fields.008.subfields.l",
+                "m": "DanMarc2.fields.008.subfields.m",
+                "n": "DanMarc2.fields.008.subfields.n",
+                "o": "DanMarc2.fields.008.subfields.o",
                 "q": "DanMarc2.fields.008.subfields.q",
-                "w": {
+                "r": "DanMarc2.fields.008.subfields.r",
+                "w": "DanMarc2.fields.008.subfields.w",
+                "x": "DanMarc2.fields.008.subfields.x",
+                "v": {
+                    "mandatory":true,
                     "repeatable": false,
-                    "values": [ "1" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "x": {
-                    "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
-                        "a", "b", "c", "d", "e", "f", "g", "j" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "v": "DanMarc2.fields.008.subfields.v"
+                    "values": [ "0", "1", "4", "5", "7", "8", "9" ]
+                }
             }
 		},
         "009":{
