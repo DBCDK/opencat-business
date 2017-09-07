@@ -539,6 +539,7 @@
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{
+                "&": {},
                 "a": "DanMarc2.fields.856.subfields.a",
                 "b": "DanMarc2.fields.856.subfields.b",
                 "c": "DanMarc2.fields.856.subfields.c",
