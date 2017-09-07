@@ -77,20 +77,7 @@
             }
         },
         "005": "DanMarc2.fields.005",
-        "006": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
-            "subfields": {
-                "a": "DanMarc2.fields.006.subfields.a",
-                "b": "DanMarc2.fields.006.subfields.b",
-                "c": "DanMarc2.fields.006.subfields.c",
-                "d": {
-                    "repeatable": false,
-                    "values": [ "0", "6", "7", "11", "12", "15", "16", "18" ]
-                },
-                "e": "DanMarc2.fields.006.subfields.e",
-                "2": "DanMarc2.fields.006.subfields.2"
-            }
-        },
+        "006": "DanMarc2.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
@@ -128,25 +115,7 @@
                     "repeatable": false,
                     "values": [ "0", "1", "4", "5", "7", "8", "9" ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.subfieldConditionalMandatory",
-                    "params": {
-                        "subfieldConditional": "v",
-                        "values": [ "0" ],
-                        "subfieldMandatory": "a"
-                    }
-                },
-                {
-                    "type": "FieldRules.subfieldConditionalMandatory",
-                    "params": {
-                        "subfieldConditional": "v",
-                        "values": [ "1" ],
-                        "subfieldMandatory": "a"
-                    }
-                }
-            ]
+            }
 		},
         "009":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
