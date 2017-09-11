@@ -1,0 +1,119 @@
+[
+  {
+    "name": "870971-change-014-link",
+    "description": "Tester at hvis man udskifter 014 til at pege på en anden post, så opdateres rr relationerne korrekt",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcartanm",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-parent-old.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-parent-old-enrichment.marc" ],
+          "children": [ "rawrepo-article.marc" ]
+        },
+        {
+          "record": "rawrepo-parent-old-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-parent-new.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-parent-new-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-parent-new-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-article.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-article-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-article-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-host.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [ "rawrepo-host-enrichment.marc" ]
+        },
+        {
+          "record": "rawrepo-host-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-parent-old.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [ "rawrepo-parent-old-enrichment.marc" ]
+          },
+          {
+            "record": "rawrepo-parent-old-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-parent-new.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [ "rawrepo-parent-new-enrichment.marc" ],
+            "children": [ "rawrepo-article.marc" ]
+          },
+          {
+            "record": "rawrepo-parent-new-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "expected-article.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [ "expected-article-enrichment.marc" ]
+          },
+          {
+            "record": "expected-article-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-host.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [ "rawrepo-host-enrichment.marc" ]
+          },
+          {
+            "record": "rawrepo-host-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]

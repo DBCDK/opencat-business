@@ -1,0 +1,13 @@
+001 00 *a 85622978 *b 870971 *c 20170825111751 *d 20000718 *f a
+004 00 *r n *a i
+008 00 *t a *u f *a 2000 *b dk *d s *l dan *r ap *v 0
+009 00 *a a *g xx
+014 00 *a 22226967 *x ANM
+016 00 *a 03176916
+032 00 *a ANU201735 *a DAN200007
+245 00 *a [Anmeldelse af 2. tekstrække]
+300 00 *a S. 531-532
+557 00 *a Præsteforeningens blad *j 2000 *z 0106-6218 *V Årg. 0090, nr. 0023 (2000) *v Årg. 90, nr. 23 (2000)
+700 00 *& ANM *a Nymark Heilesen *h Lars
+900 00 *& ANM *a Heilesen *h Lars Nymark *z 700
+996 00 *a DBC
