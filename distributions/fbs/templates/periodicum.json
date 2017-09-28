@@ -249,13 +249,23 @@
             "mandatory":true,
             "repeatable":false,
             "subfields":{
-                "a":"DanMarc2.fields.260.subfields.a",
-                "d":"DanMarc2.fields.260.subfields.d",
-                "f":"DanMarc2.fields.260.subfields.f",
-                "g":"DanMarc2.fields.260.subfields.g",
-                "e":"DanMarc2.fields.260.subfields.e",
-                "b":"DanMarc2.fields.260.subfields.b",
-                "c":"DanMarc2.fields.260.subfields.c"
+                "&":{
+                    "repeatable":false
+                },
+                "a": "DanMarc2.fields.260.subfields.a",
+                "d": "DanMarc2.fields.260.subfields.d",
+                "f": "DanMarc2.fields.260.subfields.f",
+                "g": "DanMarc2.fields.260.subfields.g",
+                "p": "DanMarc2.fields.260.subfields.p",
+                "e": "DanMarc2.fields.260.subfields.e",
+                "b": "DanMarc2.fields.260.subfields.b",
+                "c": "DanMarc2.fields.260.subfields.c",
+                "k": "DanMarc2.fields.260.subfields.k",
+                "r": "DanMarc2.fields.260.subfields.r",
+                "s": "DanMarc2.fields.260.subfields.s",
+                "t": "DanMarc2.fields.260.subfields.t",
+                "x": "DanMarc2.fields.260.subfields.x",
+                "j": "DanMarc2.fields.260.subfields.j"
             }
         },
         "300": "DanMarc2.fields.300",
@@ -304,7 +314,13 @@
                 "f":"DanMarc2.fields.652.subfields.f",
                 "c":"DanMarc2.fields.652.subfields.c",
                 "t":"DanMarc2.fields.652.subfields.t",
-                "0":"DanMarc2.fields.652.subfields.0"
+                "b":"DanMarc2.fields.652.subfields.b",
+                "0":"DanMarc2.fields.652.subfields.0",
+                "z":"DanMarc2.fields.652.subfields.z",
+                "n":"DanMarc2.fields.652.subfields.n",
+                "o":"DanMarc2.fields.652.subfields.o",
+                "q":"DanMarc2.fields.652.subfields.q",
+                "r":"DanMarc2.fields.652.subfields.r"
             },
             "rules": [
                 {
