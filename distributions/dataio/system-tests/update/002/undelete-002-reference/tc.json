@@ -1,0 +1,173 @@
+[
+  {
+    "name": "002-undelete-reference",
+    "description": "Tester om det er muligt at genoplive en post der peges op med 002, og som har beholdning",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request-undelete.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53499309-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53499309-dbc.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53499309-dbc.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53499937-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true,
+          "holdings": [
+            757500
+          ]
+        },
+        {
+          "record": "rawrepo-53499937-dbc.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-53499309-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "expected-53499309-dbc.marc"
+            ],
+            "enqueued": false
+          },
+          {
+            "record": "expected-53499309-dbc.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-53499937-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "expected-53499937-dbc.marc"
+            ],
+            "enqueued": true,
+            "holdings": [
+              757500
+            ]
+          },
+          {
+            "record": "expected-53499937-dbc.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "002-remove-reference-to-deleted-with-holdings",
+    "description": "Tester om det er muligt at fjerne et 002 der peger på en slettet post med beholdning",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request-remove-002-link.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53499309-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53499309-dbc.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53499309-dbc.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53499937-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true,
+          "holdings": [
+            757500
+          ]
+        },
+        {
+          "record": "rawrepo-53499937-dbc.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Posten kan ikke opdateres da der findes beholdning på tidligere, men nu slettet centralt faustnummer"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-53499309-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-53499309-dbc.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-53499309-dbc.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-53499937-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "holdings": [
+              757500
+            ]
+          },
+          {
+            "record": "rawrepo-53499937-dbc.marc",
+            "type": "ENRICHMENT",
+            "deleted": true
+          }
+        ]
+      }
+    }
+  }
+]
