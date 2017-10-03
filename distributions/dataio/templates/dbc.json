@@ -174,7 +174,7 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values": [ "bi", "dr", "te", "pe", "sm", "st"  ]
+                    "values": [ "bi", "dr", "te", "pe", "sm", "st" ]
                 }
             }
         },
