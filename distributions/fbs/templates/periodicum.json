@@ -190,15 +190,16 @@
         "035": "DanMarc2.fields.035",
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
+            "repeatable":false,
             "subfields":{
-                "a":{},
-                "b":{},
-                "c":{},
-                "s":{},
-                "p":{},
-                "d":{},
-                "e":{},
-                "u":{}
+                "a": "DanMarc2.fields.041.subfields.a",
+                "b": "DanMarc2.fields.041.subfields.b",
+                "c": "DanMarc2.fields.041.subfields.c",
+                "s": "DanMarc2.fields.041.subfields.s",
+                "p": "DanMarc2.fields.041.subfields.p",
+                "d": "DanMarc2.fields.041.subfields.d",
+                "e": "DanMarc2.fields.041.subfields.e",
+                "u": "DanMarc2.fields.041.subfields.u"
             }
         },
         "042": "DanMarc2.fields.042",

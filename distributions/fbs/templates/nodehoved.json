@@ -284,7 +284,7 @@
         "041":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "repeatable":false,
-            "sorting":"asbcpeu",
+            "sorting":"apbcdesu",
             "subfields":{
                 "a": "DanMarc2.fields.041.subfields.a",
                 "b": "DanMarc2.fields.041.subfields.b",
