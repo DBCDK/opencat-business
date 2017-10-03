@@ -586,7 +586,17 @@
         "980":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a2.htm",
             "subfields":{
-                "y":"DanMarc2.fields.980.subfields.y",
+                "y":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 6,
+                            "max": 6
+                        }
+                    }]
+                },
                 "u":"DanMarc2.fields.980.subfields.u",
                 "x":"DanMarc2.fields.980.subfields.x",
                 "a":"DanMarc2.fields.980.subfields.a",
