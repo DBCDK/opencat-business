@@ -1,0 +1,18 @@
+001 00 *a 27367402 *b 870970 *c 20150930134005 *d 20080812 *f a
+002 00 *a 51936728
+004 00 *r n *a e
+008 00 *t m *u r *a 2008 *z 2015 *b dk *& f *d y *l dan *x 04 *v 0
+009 00 *a a *g xx
+021 00 *e 9788799756872 *c hf.
+021 00 *e 9788776919238 *b 1. oplag
+032 00 *a DBF201542 *x ACC200833
+100 00 *a Dirksen *h Christian J. D.
+900 00 *a Dirksen *h Christian *z 100
+245 00 *a Vidensdeling i Forsvaret *c introduktion til analyse og stabsmetodik *e Christian J.D. Dirksen
+260 00 *& 1 *a Kbh. *b Books on Demand *c 2008 *k tr. i udl.
+300 00 *a Ca. 200 sider *b ill.
+521 00 *& REX *a [1. oplag] *c 2008
+521 00 *b [Genoptryk] *g Genspejling *c 2015
+532 00 *& 1 *a Med litteraturhenvisninger
+652 00 *m 35.5
+996 00 *a DBC

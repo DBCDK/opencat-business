@@ -1,0 +1,109 @@
+[
+    {
+        "name": "delete-002-record-move-enrichments",
+        "description": "Post flyttet til 002 slettes og påhæng flyttes",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request-delete-002-linked-record.marc"
+        },
+        "setup": {
+            "holdings": [ 723000 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-002-owner-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-002-owner-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-002-owner-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "holdings": [ 746100 ],
+                    "record": "rawrepo-delete-002-linked-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-delete-002-linked-dbc-enrichment.marc",
+                        "rawrepo-delete-002-linked-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-delete-002-linked-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-delete-002-linked-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-002-owner-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "rawrepo-002-owner-dbc-enrichment.marc",
+                            "result-746100-fbs-enrichment.marc",
+                            "result-723000-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-002-owner-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "result-746100-fbs-enrichment.marc",
+                        "comment": "Fejler pt - bliver ikke oprettet/flyttet",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-723000-fbs-enrichment.marc",
+                        "comment": "Fejler pt - bliver ikke oprettet/flyttet",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-delete-002-linked-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": true,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-delete-002-linked-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-delete-002-linked-fbs-enrichment.marc",
+                        "comment": "Fejler pt - bliver ikke slettet",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
