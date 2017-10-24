@@ -1,0 +1,52 @@
+[
+  {
+    "name": "delete-without-validation",
+    "description": "Tester at man kan slette en post selvom posten ikke kan validere mod templaten",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-dbc.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-dbc.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "enqueued": true
+          },
+          {
+            "record": "expected-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": true
+          }
+        ]
+      }
+    }
+  }
+]
