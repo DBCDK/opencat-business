@@ -39,7 +39,7 @@ var Validator = function () {
                         if (subfield.name === "r") {
                             if (subfield.value === "d") {
                                 var subResult = __validateSubfield(record, field, subfield, templateProvider, settings);
-                                if (subResult === []) {
+                                if (subResult !== undefined && subResult instanceof Array && subResult.length === 0) {
                                     return false;
                                 }
                             }
