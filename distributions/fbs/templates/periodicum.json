@@ -297,7 +297,6 @@
         "596": "DanMarc2.fields.596",
         "600": "DanMarc2.fields.600",
         "610": "DanMarc2.fields.610",
-        "630": "DanMarc2.fields.630",
         "631": "DanMarc2.fields.631",
         "650": "DanMarc2.fields.650",
         "651": "DanMarc2.fields.651",
@@ -450,7 +449,7 @@
                         },
                         {
                             "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
-                            "params": ["032"]
+                            "params": ["032", "630"]
                         }
                     ]
                 },

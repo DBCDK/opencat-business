@@ -569,9 +569,7 @@
             }
         },
         "630":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.72.htm",
-            "mandatory":false,            
-            "repeatable":true,
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.72.htm",
             "subfields":{
                 "a":"DanMarc2.fields.630.subfields.a",
                 "2":"DanMarc2.fields.630.subfields.2"
@@ -849,6 +847,10 @@
                                     "value": "870970"
                                 }
                             }
+                        },
+                        {
+                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
+                            "params": [ "032", "630" ]
                         }
                     ]
                 },
