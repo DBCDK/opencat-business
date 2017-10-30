@@ -29,7 +29,7 @@ var Validator = function () {
      * @returns {boolean} True : Either don't have *rd or *rd isn't allowed.
      *                    False : it's a legal delete record
      */
-    function isNotLegalDeleteRecord(record, templateProvider, settings) {
+    function isLegalDeleteRecord(record, templateProvider, settings) {
         for (var fieldLoopIndex = 0; fieldLoopIndex < record.fields.length; fieldLoopIndex++) {
             var field = record.fields[fieldLoopIndex];
             if (field.name === "004") {
@@ -38,18 +38,20 @@ var Validator = function () {
                         var subfield = field.subfields[subfieldLoopIndex];
                         if (subfield.name === "r") {
                             if (subfield.value === "d") {
+                                Log.info("GRYDESTEG has 004 *r d");
                                 var subResult = __validateSubfield(record, field, subfield, templateProvider, settings);
                                 if (subResult !== undefined && subResult instanceof Array && subResult.length === 0) {
-                                    return false;
+                                    Log.info("GRYDESTEG legal delete");
+                                    return true;
                                 }
                             }
                         }
                     }
                 }
-                return true;
+                return false;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -67,9 +69,11 @@ var Validator = function () {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
             var template = templateProvider();
+            var isDelete = false;
             if (record.fields !== undefined) {
+                isDelete = isLegalDeleteRecord(record, templateProvider, settings);
                 // Validation should only be performed if it isn't a legal delete record
-                if (isNotLegalDeleteRecord(record, templateProvider, settings)) {
+                if (!isDelete) {
                     for (var i = 0; i < record.fields.length; i++) {
                         var subResult = __validateField(record, record.fields[i], templateProvider, settings);
                         for (var j = 0; j < subResult.length; j++) {
@@ -79,7 +83,7 @@ var Validator = function () {
                     }
                 }
             }
-            if (template.rules instanceof Array) {
+            if (!isDelete && template.rules instanceof Array) {
                 for (var k = 0; k < template.rules.length; k++) {
                     var rule = template.rules[k];
                     Log.debug("Record rule: ", rule.name === undefined ? "name undefined" : rule.name);
