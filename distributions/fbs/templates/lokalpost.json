@@ -87,7 +87,7 @@
                 "t":{
                     "mandatory":true,
                     "repeatable": false,
-                    "values": [ "m", "s", "p", "a" ]
+                    "values": [ "m", "s", "p" ]
                 },
                 "u": "DanMarc2.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
