@@ -64,7 +64,7 @@
                 "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
 					"mandatory": true,
-                    "values":[ "e" ],
+                    "values":[ "h" ],
                     "rules": [
                         {
                             "type": "SubfieldRules.checkChangedValue",
