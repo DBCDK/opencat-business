@@ -43,7 +43,7 @@
           "ordinalPositionOfField" : null,
           "ordinalPositionOfSubfield" : null,
           "ordinalPositionInSubfield" : null,
-          "message" : "Posten kan ikke genoprettes, da fællesposten for det faust-nr er slettet"
+          "message" : "Posten kan ikke genoprettes, da fællesposten for det faustnummer er slettet"
         }],
         "rawrepo": [
           {
