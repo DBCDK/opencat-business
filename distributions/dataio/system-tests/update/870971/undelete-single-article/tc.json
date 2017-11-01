@@ -86,7 +86,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Posten kan ikke oprettes, da der eksisterer lokale post(er) med samme faust-nr"
+            "message": "Posten kan ikke oprettes, da der eksisterer lokale post(er) med samme faustnummer"
           }
         ],
         "rawrepo": [

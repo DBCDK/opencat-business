@@ -48,7 +48,7 @@
                     "ordinalPositionOfField" : null,
                     "ordinalPositionOfSubfield" : null,
                     "ordinalPositionInSubfield" : null,
-                    "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias"
+                    "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnummer som alias i felt 002. Hvis posten, du er ved at redigere, er en kopi af en eksisterende post, skal du slette felt 002"
                 }],
                 "rawrepo": [
                     {
@@ -118,7 +118,7 @@
                     "ordinalPositionOfField" : null,
                     "ordinalPositionOfSubfield" : null,
                     "ordinalPositionInSubfield" : null,
-                    "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnr som alias"
+                    "message" : "Posten kan ikke oprettes eller opdateres, da der findes anden post med samme faustnummer som alias i felt 002. Hvis posten, du er ved at redigere, er en kopi af en eksisterende post, skal du slette felt 002"
                 }],
                 "rawrepo": [
                     {
