@@ -88,7 +88,7 @@
                 "u": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "c", "d" ]
+                    "values": [ "c", "d", "r" ]
                 },
                 "a": {
                     "mandatory": true,
@@ -115,7 +115,7 @@
                         }
                     ]
                 },
-                "b": {},
+                "b": "DanMarc2.fields.008.subfields.b",
                 "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
                 "e": "DanMarc2.fields.008.subfields.e",
@@ -125,7 +125,7 @@
                 "i": "DanMarc2.fields.008.subfields.i",
                 "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": {},
+                "l": "DanMarc2.fields.008.subfields.l",
                 "m": "DanMarc2.fields.008.subfields.m",
                 "n": "DanMarc2.fields.008.subfields.n",
                 "o": "DanMarc2.fields.008.subfields.o",
