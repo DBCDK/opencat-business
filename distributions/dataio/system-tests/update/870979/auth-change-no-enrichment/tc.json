@@ -75,13 +75,15 @@
             ],
             "children": [
               "expected-870970.marc"
-            ]
+            ],
+            "queueWorkers": ["socl-sync"]
           },
           {
             "record": "expected-870979-191919.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true
+            "enqueued": true,
+            "queueWorkers": ["socl-sync"]
           }
         ]
       }

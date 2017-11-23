@@ -61,13 +61,14 @@
             "type": "ARTICLE",
             "deleted": true,
             "enqueued": true,
-            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"]
+            "queueWorkers": ["broend-sync", "oai-set-matcher", "socl-sync"]
           },
           {
             "record": "result-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": true,
-            "enqueued": true
+            "enqueued": true,
+            "queueWorkers": ["broend-sync", "oai-set-matcher", "socl-sync"]
           }
         ]
       }

@@ -79,7 +79,7 @@
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync"],
+            "queueWorkers": ["broend-sync", "socl-sync", "oai-set-matcher"],
             "enrichments": [
               "expected-870970-191919.marc",
               "expected-870970-763000.marc",
@@ -92,35 +92,35 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync"]
+            "queueWorkers": ["broend-sync", "oai-set-matcher"]
           },
           {
             "record": "expected-870970-763000.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync"]
+            "queueWorkers": ["broend-sync", "oai-set-matcher"]
           },
           {
             "record": "expected-870970-700500.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync"]
+            "queueWorkers": ["broend-sync", "oai-set-matcher"]
           },
           {
             "record": "expected-870970-700600.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync"]
+            "queueWorkers": ["broend-sync", "oai-set-matcher"]
           },
           {
             "record": "expected-870979.marc",
             "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"],
+            "queueWorkers": ["socl-sync"],
             "enrichments": [
               "expected-870979-191919.marc"
             ],
@@ -133,7 +133,7 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"]
+            "queueWorkers": ["socl-sync"]
           }
         ]
       }

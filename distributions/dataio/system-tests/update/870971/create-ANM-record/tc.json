@@ -52,7 +52,7 @@
             "type": "ARTICLE",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync", "solr-sync", "ocb-test"],
+            "queueWorkers": ["broend-sync", "oai-set-matcher", "socl-sync"],
             "enrichments": [ "rawrepo-enrichment.marc" ]
           },
           {
