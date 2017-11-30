@@ -1,0 +1,63 @@
+[
+    {
+        "name": "basis-new-volume",
+        "description": "Oprettelse af et nyt bind til eksisterende hovedpost.",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "new-volume.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ],
+                        "children": [ "new-result-volume.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "new-result-volume.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "new-result-volume-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "new-result-volume-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
