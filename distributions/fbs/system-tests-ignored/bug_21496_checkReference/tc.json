@@ -1,0 +1,202 @@
+[
+    {
+        "name": "child-reference-missing",
+        "description": "Skal fejle på, at henvisningsmålet i 900z ikke findes i posten.",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-child-reference-missing.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Felt '600' findes ikke i posten"
+                    }
+                ]
+            },
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Felt '600' findes ikke i posten"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },
+    {
+        "name": "child-reference-missing-numerator",
+        "description": "Skal fejle på at henvisningsmålet ikke er entydigt. Der findes flere 600-felter, alle uden numerator (*å)",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-child-reference-missing-numerator.marc"
+        },
+        "expected": {
+            "validation": {
+            },
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT HENVISNINGSMÅLET IKKE ER ENTYDIGT"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },
+    {
+        "name": "parent-references-with-illegal-syntax",
+        "description": "Skal fejle på at værdier i 900 *z og 910 *z er ugyldige",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-parent-references-with-illegal-syntax.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField": 22,
+                        "ordinalPositionOfSubfield": 4,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Mangler værdien '3a,c' i delfelt å, for et felt '910'"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 900*z ER UGYLDIG"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 910*z ER UGYLDIG"
+                    }
+                ]
+            },
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 900*z ER UGYLDIG"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 910*z ER UGYLDIG"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },
+    {
+        "name": "parent-reference-to-non-existing-subfield",
+        "description": "Skal fejle på at henvisningsmål i 710 og 910 ikke findes",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-parent-reference-to-non-existing-subfield.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [ {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                    "ordinalPositionOfField" : 20,
+                    "ordinalPositionOfSubfield" : 1,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "I nummer '1', felt '710' mangler delfeltet 'a'"
+                },
+                {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                    "ordinalPositionOfField" : 23,
+                    "ordinalPositionOfSubfield" : 4,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Delfelt 'c' er ikke gentaget på felt '910' 2 gange"
+                } ]
+            },
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField" : 20,
+                        "ordinalPositionOfSubfield" : 1,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "I nummer '1', felt '710' mangler delfeltet 'a'"
+                    },
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField" : 23,
+                        "ordinalPositionOfSubfield" : 4,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 'c' er ikke gentaget på felt '910' 2 gange"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    }
+]

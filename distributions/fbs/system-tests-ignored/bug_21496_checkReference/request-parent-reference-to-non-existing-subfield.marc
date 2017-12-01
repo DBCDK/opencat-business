@@ -1,0 +1,25 @@
+001 00 *a 52477247 *b 870970 *c 20171109152207 *d 20160705 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2014 *b gb *d y *l eng *x 04 *v 0
+009 00 *a a *g xx
+021 00 *e 9781783083695 *c pbk.
+021 00 *e 9781783083688 *c hbk.
+100 00 *a Halewood *h Michael *4 aut
+245 00 *a Rethinking the social through Durkheim, Marx, Weber and Whitehead
+260 00 *a London *b Anthem Press *c 2014
+300 00 *a 174 sider
+440 00 *a Key issues in modern sociology
+504 00 *a A systematically analyse of the different concepts of the social developed by Durkheim, Marx and Weber. It examines how the concept of the social became unproblematic for twentieth-century writers and suggests that debates surrounding this concept remain very much alive. Building on A. N. Whiteheads work, Halewood develops a novel philosophy of the social
+530 00 *a Indhold:  Rethinking the social ; Durkheim approaches the social ; Durkheim's philosophy of the social ; Marx on the social and the societal ; Weber's "sozial" action ; The early death of the problem of the social ; Toward a philosophy of the social - part one : Durkheim, Marx, Weber (and Simmel) revisited : Toward a philosophy of the social -  part two : Whitehead on sociology, societies and the social
+532 00 *a Med litteraturhenvisninger
+652 00 *m 30.1
+666 00 *f sociologi
+666 00 *f sociologisk teori
+666 00 *f samfundsteori
+710 00 *å 1 *s Københavns Amt *c Alkohol- og Stofmisbrugssamrådet
+710 00 *å 2 *s Københavns Amt *c Forebyggelsesrådet
+910 00 *a Alkohol- og Stofmisbrugssamrådet, Københavns Amtskommune *z 710/1(a)
+910 00 *a Forebyggelsesrådet, Københavns Amtskommune *z 710/2
+910 00 *å 3 *a København *e amtskommune *c Alkohol- og Narkotikasamrådet *x se også under det senere navn *z 710/1
+910 00 *a København *e amtskommune *c Alkohol- og Stofmisbrugssamrådet *x se også under det tidligere navn *z 910/3(a,c2)
+996 00 *a 723000 *o RET *m RET
