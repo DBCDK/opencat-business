@@ -4,11 +4,11 @@
         "description": "Oprettelse af et nyt bind til eksisterende hovedpost.",
         "request": {
             "authentication": {
-                "group": "010100",
+                "group": "710100",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dbc",
+            "templateName": "bogbind",
             "record": "new-volume.marc"
         },
         "setup": {
@@ -42,19 +42,6 @@
                         "record": "rawrepo-dbc-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false
-                    },
-                    {
-                        "record": "new-result-volume.marc",
-                        "type": "MARCXCHANGE",
-                        "deleted": false,
-                        "enqueued": true,
-                        "enrichments": [ "new-result-volume-dbc-enrichment.marc" ]
-                    },
-                    {
-                        "record": "new-result-volume-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false,
-                        "enqueued": true
                     }
                 ]
             }
