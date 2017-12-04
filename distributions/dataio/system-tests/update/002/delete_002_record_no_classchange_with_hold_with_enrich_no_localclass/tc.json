@@ -1,0 +1,98 @@
+[
+    {
+        "name": "delete-002-linked-record-with-hold-with-enrich-no-class",
+        "description": "Tester om det er muligt at slette en 002 linket post med beholdning med påhæng og ingen opstillingsændringer ingen lokalopstil",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "allowall",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-common-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-common-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common-002target.marc",
+                    "holdings": [ 723000 ],
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-common-002target-enrichment.marc" ,
+                        "rawrepo-common-002target-723000-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-common-002target-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common-002target-723000-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "rawrepo-common-enrichment.marc" ,
+                            "result-common-723000-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-common-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "result-common-723000-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-common-002target.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": true,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-common-002target-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-common-002target-723000-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

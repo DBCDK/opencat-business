@@ -1,0 +1,15 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "indent":"true",
+      "q":"marc.002a:faust nr",
+      "wt":"json"}},
+  "response":{"numFound":1,"start":0,"docs":[
+    {
+      "marc.001a":["07672624"]
+    }
+    ]
+  }
+}
