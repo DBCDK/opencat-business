@@ -1,0 +1,52 @@
+[
+    {
+        "name": "sort-245-in-volume",
+        "bugs": [ "" ],
+        "description": "Tester sortering af delfelter i 245 i en bindpost",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bogbind",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "existinghead.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "existinghead.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [ "result-new-common.marc" ]
+                    },
+                    {
+                        "record": "result-new-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
