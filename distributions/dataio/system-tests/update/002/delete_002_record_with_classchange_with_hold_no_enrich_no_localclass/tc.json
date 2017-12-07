@@ -147,6 +147,7 @@
                     {
                         "record": "result-common-002target.marc",
                         "type": "MARCXCHANGE",
+                        "holdings": [ 710100 ],
                         "deleted": true,
                         "enqueued": true
                     },
