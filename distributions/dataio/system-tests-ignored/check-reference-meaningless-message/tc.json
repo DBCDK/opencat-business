@@ -1,0 +1,45 @@
+[
+    {
+        "name": "check-references",
+        "description": "Tester skabelonen 'dbc' med et ukendt delfelt i 900*z - meddelelsen giver ikke mening",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField" : 32,
+                        "ordinalPositionOfSubfield" : 1,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "I nummer '1', felt '700' mangler delfeltet 't' <- hvad menes med : I nummer '1' ?"
+                    }
+                ]
+            },
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField" : 32,
+                        "ordinalPositionOfSubfield" : 1,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "I nummer '1', felt '700' mangler delfeltet 't' <- hvad menes med : I nummer '1' ?"
+                    }
+                ],
+                "rawrepo": [
+                ]
+            }
+        }
+    }
+]
