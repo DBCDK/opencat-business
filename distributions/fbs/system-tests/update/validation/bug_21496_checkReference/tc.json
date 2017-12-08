@@ -55,6 +55,17 @@
         },
         "expected": {
             "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 22,
+                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Henvisningen i felt '900' delfelt 'z' er ikke entydig, mangler anvisning om hvilket felt '600' den peger på"
+                    }
+                ]
             },
             "update": {
                 "errors": [
@@ -62,10 +73,10 @@
                         "type": "ERROR",
                         "code": null,
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
-                        "ordinalPositionOfField": 18,
+                        "ordinalPositionOfField": 22,
                         "ordinalPositionOfSubfield": 2,
                         "ordinalPositionInSubfield": null,
-                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT HENVISNINGSMÅLET IKKE ER ENTYDIGT"
+                        "message": "Henvisningen i felt '900' delfelt 'z' er ikke entydig, mangler anvisning om hvilket felt '600' den peger på"
                     }
                 ],
                 "rawrepo": []
@@ -90,29 +101,45 @@
                     {
                         "type": "ERROR",
                         "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+                        "ordinalPositionOfField": 20,
+                        "ordinalPositionOfSubfield": 1,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Værdien '652ah' i felt '900' delfelt 'z' mangler skråstreg mellem feltnummer og numeratorværdi"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField": 21,
+                        "ordinalPositionOfSubfield": 1,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Værdien '7101' i felt '910' delfelt 'z' mangler skråstreg mellem feltnummer og numeratorværdi"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
                         "ordinalPositionOfField": 22,
-                        "ordinalPositionOfSubfield": 4,
+                        "ordinalPositionOfSubfield": 5,
                         "ordinalPositionInSubfield": null,
-                        "message": "Mangler værdien '3a,c' i delfelt å, for et felt '910'"
-                    },
-                    {
-                        "type": "ERROR",
-                        "code": null,
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
-                        "ordinalPositionOfField": 18,
-                        "ordinalPositionOfSubfield": 2,
-                        "ordinalPositionInSubfield": null,
-                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 900*z ER UGYLDIG"
-                    },
-                    {
-                        "type": "ERROR",
-                        "code": null,
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
-                        "ordinalPositionOfField": 18,
-                        "ordinalPositionOfSubfield": 2,
-                        "ordinalPositionInSubfield": null,
-                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 910*z ER UGYLDIG"
+                        "message": "Skråstreg i felt '910' delfelt 'z' skal altid efterfølges af numeratorværdien (delfelt å) i det felt, der henvises til"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField" : 23,
+                        "ordinalPositionOfSubfield" : 4,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Numeratorværdien i felt '910' delfelt 'z' skal være et tal fra 1 og opefter"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField" : 24,
+                        "ordinalPositionOfSubfield" : 4,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelter i delfeltlisten i felt '910' delfelt 'z' skal adskilles med komma"
                     }
                 ]
             },
@@ -122,19 +149,44 @@
                         "type": "ERROR",
                         "code": null,
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
-                        "ordinalPositionOfField": 18,
-                        "ordinalPositionOfSubfield": 2,
+                        "ordinalPositionOfField": 20,
+                        "ordinalPositionOfSubfield": 1,
                         "ordinalPositionInSubfield": null,
-                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 900*z ER UGYLDIG"
+                        "message": "Værdien '652ah' i felt '900' delfelt 'z' mangler skråstreg mellem feltnummer og numeratorværdi"
                     },
                     {
                         "type": "ERROR",
                         "code": null,
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
-                        "ordinalPositionOfField": 18,
-                        "ordinalPositionOfSubfield": 2,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField": 21,
+                        "ordinalPositionOfSubfield": 1,
                         "ordinalPositionInSubfield": null,
-                        "message": "DENNE SKAL FEJLE MED EN MEDDELELSE OM, AT VÆRDIEN/SYNTAKSEN I DELFELT 910*z ER UGYLDIG"
+                        "message": "Værdien '7101' i felt '910' delfelt 'z' mangler skråstreg mellem feltnummer og numeratorværdi"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField": 22,
+                        "ordinalPositionOfSubfield": 5,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Skråstreg i felt '910' delfelt 'z' skal altid efterfølges af numeratorværdien (delfelt å) i det felt, der henvises til"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField" : 23,
+                        "ordinalPositionOfSubfield" : 4,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Numeratorværdien i felt '910' delfelt 'z' skal være et tal fra 1 og opefter"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
+                        "ordinalPositionOfField" : 24,
+                        "ordinalPositionOfSubfield" : 4,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelter i delfeltlisten i felt '910' delfelt 'z' skal adskilles med komma"
                     }
                 ],
                 "rawrepo": []
