@@ -8,6 +8,24 @@ EXPORTED_SYMBOLS = ['CheckReference'];
 
 var CheckReference = function () {
     var __BUNDLE_NAME = "validation";
+    var __TOKEN_TYPE = {
+        "LITERAL": 1,
+        "DELIMITER": 2,
+        "COMMA": 3,
+        "LEFT_PARENTHESIS": 4,
+        "RIGHT_PARENTHESIS": 5,
+        "WHITESPACE": 6
+    };
+
+    // Class representing tokens produced when parsing subfield
+    function Token(type, value) {
+        this.type = type;
+        this.value = value
+    }
+
+    function SubfieldSyntaxError(message) {
+        this.message = message;
+    }
 
     /**
      * CheckReference is used to check if the fields contains correct references
@@ -33,6 +51,16 @@ var CheckReference = function () {
         Log.trace("Enter --- CheckReference.validateSubfield");
         try {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+
+            try {
+                __checkSyntax(field, subfield, bundle);
+            } catch (e) {
+                if (e instanceof SubfieldSyntaxError) {
+                    return [ValidateErrors.subfieldError('TODO:fixurl', e.message)];
+                }
+                throw e;
+            }
+
             var fieldNameToCheck = subfield.value.slice(0, 3);// String
             // array of fields which matches the fieldNameToCheck
             // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
@@ -88,6 +116,214 @@ var CheckReference = function () {
             return count;
         } finally {
             Log.trace("Exit--- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa");
+        }
+    }
+
+    // Helper function which checks the syntax of a subfield referencing another,
+    // throwing SubfieldSyntaxError on invalid syntax
+    function __checkSyntax(field, subfield, bundle) {
+        Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax");
+        try {
+            var tokens = __tokenize(subfield.value);
+            __checkFieldNameSyntax(__getNextToken(), field, subfield, bundle);
+            if (tokens.length > 0 && tokens[0].type === __TOKEN_TYPE.DELIMITER) {
+                __checkNumeratorSyntax(tokens, field, subfield, bundle);
+            }
+            if (tokens.length > 0 && tokens[0].type === __TOKEN_TYPE.LEFT_PARENTHESIS) {
+                __checkSubfieldListSyntax(tokens, field, subfield, bundle);
+            }
+            if (tokens.length > 0) {
+                var token = __getNextToken();
+                throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                    "check.ref.invalid.syntax.illegal.character", token.value, field.name, subfield.name));
+            }
+        } finally {
+            Log.trace("Exit --- CheckReference.validateSubfield.__checkSyntax");
+        }
+
+        // Helper function used for tokenizing a subfield value
+        function __tokenize(str) {
+            // convert to array of characters
+            str = str.split("");
+
+            var tokens = [];    // array of tokens
+            var literalBuffer = [];
+
+            str.forEach(function (char) {
+                if (__isDelimiter(char)) {
+                    __emptyLiteralBuffer();
+                    tokens.push(new Token(__TOKEN_TYPE.DELIMITER, char));
+                } else if (__isComma(char)) {
+                    __emptyLiteralBuffer();
+                    tokens.push(new Token(__TOKEN_TYPE.COMMA, char));
+                } else if (__isLeftParenthesis(char)) {
+                    __emptyLiteralBuffer();
+                    tokens.push(new Token(__TOKEN_TYPE.LEFT_PARENTHESIS, char));
+                } else if (__isRightParenthesis(char)) {
+                    __emptyLiteralBuffer();
+                    tokens.push(new Token(__TOKEN_TYPE.RIGHT_PARENTHESIS, char));
+                } else if (__isWhitespace(char)) {
+                    __emptyLiteralBuffer();
+                    tokens.push(new Token(__TOKEN_TYPE.WHITESPACE, char));
+                } else {
+                    literalBuffer.push(char);
+                }
+            });
+            __emptyLiteralBuffer();
+            return tokens;
+
+            function __emptyLiteralBuffer() {
+                if (literalBuffer.length) {
+                    tokens.push(new Token(__TOKEN_TYPE.LITERAL, literalBuffer.join("")));
+                    literalBuffer = [];
+                }
+            }
+        }
+
+        function __isComma(ch) {
+            return (ch === ",");
+        }
+
+        function __isDelimiter(ch) {
+            return (ch === "/");
+        }
+
+        function __isLeftParenthesis(ch) {
+            return (ch === "(");
+        }
+
+        function __isRightParenthesis(ch) {
+            return (ch === ")");
+        }
+
+        function __isWhitespace(ch) {
+            return /\s/.test(ch);
+        }
+
+        function __isNumeric(str) {
+            return !isNaN(str);
+        }
+
+        function __getNextToken() {
+            var token = tokens.shift();
+            if (token.type === __TOKEN_TYPE.WHITESPACE) {
+                throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                    "check.ref.invalid.syntax.whitespace", field.name, subfield.name));
+            }
+            return token;
+        }
+
+        function __getLastToken() {
+            var token = tokens.pop();
+            if (token.type === __TOKEN_TYPE.WHITESPACE) {
+                throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                    "check.ref.invalid.syntax.whitespace", field.name, subfield.name));
+            }
+            return token;
+        }
+
+        // Helper function which checks the syntax the field name part of a referencing subfield,
+        // throwing SubfieldSyntaxError on invalid syntax
+        function __checkFieldNameSyntax(referencedFieldNameToken) {
+            Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkFieldNameSyntax");
+            try {
+                var tokenValue = referencedFieldNameToken.value;
+                if (referencedFieldNameToken.type !== __TOKEN_TYPE.LITERAL) {
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.field.name", tokenValue, field.name, subfield.name));
+                }
+                if (tokenValue.length < 3) {    // e.g. 60
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.field.name", tokenValue, field.name, subfield.name));
+                }
+                if (tokenValue.slice(3)) {  // e.g. 6001 gives remainder 1
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.numerator.delimiter.missing", tokenValue, field.name, subfield.name));
+                }
+            } finally {
+                Log.trace("Exit --- CheckReference.validateSubfield.__checkSyntax.__checkFieldNameSyntax");
+            }
+        }
+
+        // Helper function which checks the syntax of the numerator part of a referencing subfield,
+        // throwing SubfieldSyntaxError on invalid syntax
+        function __checkNumeratorSyntax() {
+            Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkNumeratorSyntax");
+            try {
+                __getNextToken(); // discard delimiter token
+                if (tokens.length === 0) {   // e.g. 600/
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.numerator.missing", field.name, subfield.name));
+                }
+                var numeratorToken = __getNextToken();
+                if (numeratorToken.type !== __TOKEN_TYPE.LITERAL) { // e.g. 600/(a,b)
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.numerator.missing", field.name, subfield.name));
+                }
+                if (!__isNumeric(numeratorToken.value)) {  // e.g. 600/a
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.numerator.non.numeric", field.name, subfield.name));
+                }
+            } finally {
+                Log.trace("Exit --- CheckReference.validateSubfield.__checkSyntax.__checkNumeratorSyntax");
+            }
+        }
+
+        // Helper function which checks the syntax of the subfield list part of a referencing subfield,
+        // throwing on invalid syntax
+        function __checkSubfieldListSyntax() {
+            Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkSubfieldListSyntax");
+            try {
+                __getNextToken(); // discard left parenthesis
+                var rightParenthesisToken = __getLastToken();
+                if (rightParenthesisToken === undefined
+                    || rightParenthesisToken.type !== __TOKEN_TYPE.RIGHT_PARENTHESIS) {
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.list.parenthesis.missing", field.name, subfield.name));
+                }
+                if (tokens.length > 0) {
+                    var token;
+                    while (tokens.length !== 0) {
+                        token = __getNextToken();
+                        if (token.type !== __TOKEN_TYPE.LITERAL) {
+                            throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                                "check.ref.invalid.syntax.list.subfield.missing", field.name, subfield.name));
+                        }
+
+                        __checkSubfieldSyntax(token, field, subfield, bundle);
+
+                        if (tokens.length > 0) {
+                            token = __getNextToken();
+                            if (token.type !== __TOKEN_TYPE.COMMA) {
+                                throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                                    "check.ref.invalid.syntax.list.comma.missing", field.name, subfield.name));
+                            }
+                        }
+                    }
+                    // last token must be a literal
+                    if (token.type !== __TOKEN_TYPE.LITERAL) {
+                        throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                            "check.ref.invalid.syntax.list.subfield.missing", field.name, subfield.name));
+                    }
+                }
+            } finally {
+                Log.trace("Exit --- CheckReference.validateSubfield.__checkSyntax.__checkSubfieldListSyntax");
+            }
+        }
+
+        // Helper function which checks the syntax of a subfield element from the list part of a referencing subfield,
+        // throwing SubfieldSyntaxError on invalid syntax
+        function __checkSubfieldSyntax(token) {
+            Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkSubfieldListSyntax.__checkSubfieldSyntax");
+            try {
+                if (token.value.length > 2                                                      // e.g. 600(abc)
+                    || (token.value.length === 2 && !__isNumeric(token.value.charAt(1)))) {     // e.g. 600(ab)
+                    throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
+                        "check.ref.invalid.syntax.list.comma.missing", field.name, subfield.name));
+                }
+            } finally {
+                Log.trace("Exit --- CheckReference.validateSubfield.__checkSyntax.__checkSubfieldListSyntax.__checkSubfieldSyntax");
+            }
         }
     }
 

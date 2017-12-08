@@ -209,7 +209,7 @@ UnitTest.addFixture("CheckReference.validateSubfield", function () {
             }]
         }]
     };
-    subfield = {'name': 'a', 'value': '004/1(c1, c2)'};
+    subfield = {'name': 'a', 'value': '004/1(c1,c2)'};
     var errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", "c", "004", 2))];
     Assert.equalValue("9 CheckReference.validateSubfield error, subfield not repeated correctly", CheckReference.validateSubfield(record, undefined, subfield), errorMessage);
 
@@ -254,4 +254,64 @@ UnitTest.addFixture("CheckReference.validateSubfield", function () {
     };
     subfield = {'name': 'a', 'value': '004/1(c1,c2,b)'};
     Assert.equalValue("10 CheckReference.validateSubfield ok, subfield repeated correctly", CheckReference.validateSubfield(record, undefined, subfield), []);
+
+    // syntax checks
+
+    var field = {name : '900'};
+
+    subfield = {'name': 'z', 'value': '600(a, b)'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.whitespace", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - whitespace", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '((('};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.field.name", "(", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - field number is non literal", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '60'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.field.name", "60", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - field number is less than three digits", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '6001'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.numerator.delimiter.missing", "6001", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - numerator delimiter missing", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600/'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.numerator.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - numerator missing", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600/a'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.numerator.non.numeric", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - numerator non-numeric", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600/(a,b)'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.numerator.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - numerator missing numeric", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600/3a,b'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.numerator.non.numeric", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - numerator invalid literal", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600(a'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.list.parenthesis.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - list missing right parenthesis", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600(a,b,c,)'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.list.subfield.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - list missing last literal", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600(a,,c)'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.list.subfield.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - list missing literal", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600(abc)'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.list.comma.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - list missing comma 3", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600(ab)'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.list.comma.missing", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - list missing comma 2", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    subfield = {'name': 'z', 'value': '600,'};
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.illegal.character", ",", "900", "z"))];
+    Assert.equalValue("CheckReference.validateSubfield error, syntax - illegal character", CheckReference.validateSubfield(record, field, subfield), errorMessage);
 });
