@@ -255,9 +255,28 @@ UnitTest.addFixture("CheckReference.validateSubfield", function () {
     subfield = {'name': 'a', 'value': '004/1(c1,c2,b)'};
     Assert.equalValue("10 CheckReference.validateSubfield ok, subfield repeated correctly", CheckReference.validateSubfield(record, undefined, subfield), []);
 
-    // syntax checks
-
     var field = {name : '900'};
+
+    record = {
+        fields: [{
+            name: '001', indicator: '00', subfields: []
+        }, {
+            name: '600', indicator: '00', subfields: [{
+                'name': "a", 'value': "42"
+            }]
+        }, {
+            name: '600', indicator: '00', subfields: [{
+                'name': "a", 'value': "42"
+            }]
+        }]
+    };
+    subfield = {
+        'name': "z", 'value': "600"
+    };
+    errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.ambiguous", "900", "z", "600"))];
+    Assert.equalValue("10 CheckReference.validateSubfield error, ambiguous reference", CheckReference.validateSubfield(record, field, subfield), errorMessage);
+
+    // syntax checks
 
     subfield = {'name': 'z', 'value': '600(a, b)'};
     errorMessage = [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.invalid.syntax.whitespace", "900", "z"))];

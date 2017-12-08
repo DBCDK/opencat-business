@@ -73,12 +73,14 @@ var CheckReference = function () {
             }
             // if the length of the subfield val is only 3, we have a subfield val matching case 1, meaning its a pure field name eg : 710
             if (subfield.value.length === 3) {
-                var hasDanishaaErrors = getFieldCountWithoutDanishaa(matchingFields, fieldNameToCheck, bundle, record);
-                if (hasDanishaaErrors === matchingFields.length) {
+                var hasDanishaa = __getFieldCountWithDanishaa(matchingFields, fieldNameToCheck, bundle, record);
+                if (hasDanishaa === matchingFields.length) {
                     return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck))];
-                } else {
-                    return [];
+                } else if (matchingFields.length > 1 && hasDanishaa === 0) {
+                    return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.ambiguous",
+                        field.name, subfield.name, fieldNameToCheck))];
                 }
+                return [];
             }
 
             var forwardslashValue = __getValueFromForwardSlash(subfield.value); // { containsValidValue: Boolean, Value: String }
@@ -104,8 +106,8 @@ var CheckReference = function () {
     }
 
 
-    function getFieldCountWithoutDanishaa(fields, fieldNameToCheck, bundle, record) {
-        Log.trace("Enter --- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa");
+    function __getFieldCountWithDanishaa(fields, fieldNameToCheck, bundle, record) {
+        Log.trace("Enter --- CheckReference.validateSubfield.__getFieldCountWithDanishaa");
         try {
             var count = 0;
             for (var i = 0; i < fields.length; ++i) {
@@ -115,7 +117,7 @@ var CheckReference = function () {
             }
             return count;
         } finally {
-            Log.trace("Exit--- CheckReference.validateSubfield.____checkFieldsNotContainingDanishaa");
+            Log.trace("Exit--- CheckReference.validateSubfield.__getFieldCountWithDanishaa");
         }
     }
 
