@@ -6,6 +6,7 @@ use("ResourceBundleFactory");
 use("StringUtil");
 use("TemplateOptimizer");
 use("ValidateErrors");
+use("UpperCaseCheck");
 
 EXPORTED_SYMBOLS = ['Validator'];
 
@@ -38,10 +39,8 @@ var Validator = function () {
                         var subfield = field.subfields[subfieldLoopIndex];
                         if (subfield.name === "r") {
                             if (subfield.value === "d") {
-                                Log.info("GRYDESTEG has 004 *r d");
                                 var subResult = __validateSubfield(record, field, subfield, templateProvider, settings);
                                 if (subResult !== undefined && subResult instanceof Array && subResult.length === 0) {
-                                    Log.info("GRYDESTEG legal delete");
                                     return true;
                                 }
                             }
@@ -58,7 +57,7 @@ var Validator = function () {
      * Validates an entire record.
      *
      * @param {Object} record The record that contains the subfield.
-     * @param {Object} templateProvider A function that returns the
+     * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
      * @return {Array} An array of validation errors.
@@ -108,7 +107,7 @@ var Validator = function () {
      *
      * @param {Object} record The record that contains the subfield.
      * @param {Object} field  The field that contains the subfield.
-     * @param {Object} templateProvider A function that returns the
+     * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
      * @return {Array} An array of validation errors.
@@ -117,12 +116,13 @@ var Validator = function () {
         Log.trace("Enter - Validator.__validateField()");
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-            var result = [];
+            var result;
             var template = templateProvider();
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
                 return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name))];
             }
+            result = UpperCaseCheck.validateField(record, field, null);
             var i;
             if (field.subfields !== undefined) {
                 Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields: ", JSON.stringify(field));
@@ -142,14 +142,16 @@ var Validator = function () {
                     var rule = templateField.rules[i];
                     // DO NOT make a Log.<whatever>("Field rule ....); For unknown reasons "Field rule" results in no logging.
                     Log.debug("Exec rule [", field.name === undefined ? "field name undefined" : field.name, "]: ", rule.name === undefined ? "rule name undefined" : rule.name);
-                    try {
-                        TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
+                    if (rule.name !== undefined) {
+                        try {
+                            TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
-                        var valErrors = rule.type(record, field, rule.params, settings);
-                        valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
-                        result = result.concat(valErrors);
-                    } catch (ex) {
-                        throw ResourceBundle.getStringFormat(bundle, "field.execute.error", field.name, ex);
+                            var valErrors = rule.type(record, field, rule.params, settings);
+                            valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
+                            result = result.concat(valErrors);
+                        } catch (ex) {
+                            throw ResourceBundle.getStringFormat(bundle, "field.execute.error", field.name, ex);
+                        }
                     }
                 }
             }
@@ -172,7 +174,7 @@ var Validator = function () {
      * @param {Object} record The record that contains the subfield.
      * @param {Object} field  The field that contains the subfield.
      * @param {Object} subfield The subfield itself.
-     * @param {Object} templateProvider A function that returns the
+     * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
      * @return {Array} An array of validation errors.

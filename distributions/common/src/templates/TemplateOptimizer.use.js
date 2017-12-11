@@ -26,7 +26,6 @@ use("SubfieldValueMakesFieldsAllowed");
 //field rules
 use("FieldDemandsOtherFieldAndSubfield");
 use("SubfieldConditionalMandatory");
-use("UpperCaseCheck");
 use("RepeatableSubfields");
 use("ExclusiveSubfield");
 use("ExclusiveSubfieldParameterized");
@@ -233,7 +232,7 @@ var TemplateOptimizer = function () {
      */
     function optimizeSubfield(sf, defs) {
         Log.trace("Enter -- TemplateOptimizer.optimizeSubfield()");
-        var result = undefined;
+        var result = [];
         try {
             var values = sf.values;
             var rules = sf.rules;
@@ -305,10 +304,14 @@ var TemplateOptimizer = function () {
                 if (typeof( rules[i].type ) === "string") {
                     obj.name = rules[i].type;
                     obj.type = convertRuleTypeNameToFunction(rules[i].type);
-                    __checkRule(rules[i], rules[i].type);
-                    Log.trace("Converted rule name: ", obj.name);
+                    if (obj.type !== null) {
+                        __checkRule(rules[i], rules[i].type);
+                        Log.trace("Converted rule name: ", obj.name);
+                    }
                 }
-                res.push(obj);
+                if (obj.type !== null) {
+                    res.push(obj);
+                }
             }
             return res;
         } finally {
@@ -320,8 +323,6 @@ var TemplateOptimizer = function () {
         Log.trace("Enter -- TemplateOptimizer.convertRuleTypeNameToFunction( " + typeName + " )");
         try {
             switch (typeName) {
-                case "RecordRules.fieldsPosition":
-                    return FieldsPosition.validateRecord;
                 case "RecordRules.mustContainOneOfFields":
                     return MustContainOneOfFields.validateRecord;
                 case "RecordRules.idFieldExists":
@@ -329,7 +330,7 @@ var TemplateOptimizer = function () {
                 case "RecordRules.fieldsMandatory":    // intended fall tru
                 case "FieldsMandatory.validateRecord":
                     return FieldsMandatory.validateRecord;
-                case "RecordRules.repeatableFields":  // intented fall tru
+                case "RecordRules.repeatableFields":  // intended fall tru
                 case "RepeatableFields.validateRecord":
                     return RepeatableFields.validateRecord;
                 case "RecordRules.recordSorted":
@@ -363,8 +364,6 @@ var TemplateOptimizer = function () {
                     return ExclusiveSubfieldParameterized.validateField;
                 case "FieldRules.mandatorySubfieldInVolumeWork":
                     return MandatorySubfieldInVolumeWorkRule.validateField;
-                case "FieldRules.upperCaseCheck":
-                    return UpperCaseCheck.validateField;
                 case "FieldRules.fieldDemandsOtherFieldAndSubfields":
                     return FieldDemandsOtherFieldAndSubfield.validateField;
 
@@ -408,11 +407,14 @@ var TemplateOptimizer = function () {
 
                 default: {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                    throw ResourceBundle.getStringFormat(bundle, "validation.rule.unknown", typeName);
+                    var logMessage = ResourceBundle.getStringFormat(bundle, "validation.rule.unknown", typeName);
+                    logMessage += " function : " + JSON.stringify(typeName);
+                    Log.warn(logMessage);
+                    return undefined;
                 }
             }
         } catch (ex) {
-            Log.warn("Unable to find validation function for typename '", typeName, "': ", ex);
+            Log.warn("Unable to find validation function for typename '", JSON.stringify(typeName), "': ", ex);
         } finally {
             Log.trace("Exit -- TemplateOptimizer.convertRuleTypeNameToFunction()");
         }
@@ -421,7 +423,7 @@ var TemplateOptimizer = function () {
     function __checkRule(rule, ruleName) {
         Log.trace("Enter -- TemplateOptimizer.__checkRule()");
         try {
-            if (rule.hasOwnProperty("errorType") && VALID_ERROR_TYPES.indexOf(rule.errorType) == -1) {
+            if (rule.hasOwnProperty("errorType") && VALID_ERROR_TYPES.indexOf(rule.errorType) === -1) {
                 var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
 
                 throw ResourceBundle.getStringFormat(bundle, "invalid.validation.error.type", ruleName, rule.errorType, VALID_ERROR_TYPES.join(", "));

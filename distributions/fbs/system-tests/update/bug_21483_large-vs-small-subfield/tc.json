@@ -1,6 +1,6 @@
 [
     {
-        "name": "basis-new-volume",
+        "name": "basis-new-volume-with-wrong-upper-lower-subfield-order",
         "description": "Oprettelse af et nyt bind til eksisterende hovedpost.",
         "request": {
             "authentication": {
@@ -27,16 +27,33 @@
             ]
         },
         "expected": {
-            "validation": {},
+            "validation": {
+                "errors": [{
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
+                    "ordinalPositionOfField" : 4,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Delfeltet: 'G'\" skal efterfølges af et 'g'\" i felt '245'"
+                } ]
+            },
             "update": {
-                "errors": [],
+                "errors": [{
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
+                    "ordinalPositionOfField" : 4,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Delfeltet: 'G'\" skal efterfølges af et 'g'\" i felt '245'"
+                } ],
                 "rawrepo": [
                     {
                         "record": "rawrepo-main.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ],
-                        "children": [ "new-result-volume.marc" ]
+                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
                     },
                     {
                         "record": "rawrepo-dbc-enrichment.marc",

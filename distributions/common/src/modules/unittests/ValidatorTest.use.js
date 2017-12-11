@@ -194,10 +194,10 @@ UnitTest.addFixture("Validator.__validateField", function () {
         },
         rules: []
     };
-    Assert.equalValue("Test 3", Validator.__validateField(record, record.fields[0], function () {
+    Assert.equalValue("Test 3 - unknown rule", Validator.__validateField(record, record.fields[0], function () {
             return template;
         }, GenericSettings),
-        [ValidateErrors.subfieldError("url", "message")]);
+        []);
 });
 
 UnitTest.addFixture("Validator.__validateSubfield", function () {

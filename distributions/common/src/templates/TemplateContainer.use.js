@@ -125,7 +125,7 @@ var TemplateContainer = function () {
      * The template file is assumed to be placed in the same directory as this
      * file with the extension "json".
      *
-     * @param {Object} name The name of the template.
+     * @param {string} name The name of the template.
      *
      * @return {Object} A json object that contains the configuration of
      *         the requested template. Or undefined in case of an error.
@@ -134,7 +134,7 @@ var TemplateContainer = function () {
         Log.trace("Enter - TemplateContainer.loadTemplate()");
 
         try {
-            var template = loadTemplateUnoptimized(name, settings);
+            var template = loadTemplateUnoptimized(name);
 
             return TemplateOptimizer.optimize(template);
         }
@@ -195,16 +195,21 @@ var TemplateContainer = function () {
      * @param v
      * @private
      */
-    function __compiled_template_reviever(k, v) {
+    function __compiled_template_reviver(k, v) {
         if (k !== "name") return v;
 
         this['type'] = TemplateOptimizer.convertRuleTypeNameToFunction(v);
-        return v;
+        if (this['type'] === undefined) {
+            return undefined;
+        } else {
+            return v;
+        }
     }
 
     /**
      *
      * @param name template Name
+     * @param templateFolder where to look for templates
      * @returns {*}
      * @private
      */
@@ -220,7 +225,7 @@ var TemplateContainer = function () {
 
         if (templateContent !== null) {
             try {
-                result = JSON.parse(templateContent, __compiled_template_reviever);
+                result = JSON.parse(templateContent, __compiled_template_reviver);
             } catch (ex) {
                 var message = StringUtil.sprintf("Syntax error in file '%s': %s", filename, ex);
                 Log.error(message);
@@ -233,7 +238,7 @@ var TemplateContainer = function () {
     }
 
     /**
-     * Helper function to koads a template from a json file and returns it.
+     * Helper function to load a template from a json file and returns it.
      *
      * The template file is assumed to be placed in the same directory as this
      * file with the extension "json".
@@ -312,7 +317,7 @@ var TemplateContainer = function () {
      * The template file is assumed to be placed in the same directory as this
      * file with the extension "json".
      *
-     * @param {Object} name The name of the template.
+     * @param {string} name The name of the template.
      *
      * @return {Object} A json object that contains the configuration of
      *         the requested template. Or undefined in case of an error.
@@ -320,7 +325,6 @@ var TemplateContainer = function () {
     function loadTemplateUnoptimized(name) {
         var unoptimizedTemplate = TemplateLoader.load(name, __loadUnoptimizedTemplate);
         __addDanishLetterAaToTemplate(unoptimizedTemplate);
-        __addUppercaseLetterToTemplate(unoptimizedTemplate);
         return unoptimizedTemplate;
     }
 
@@ -329,12 +333,12 @@ var TemplateContainer = function () {
      *
      * If the template has not been loaded it will be loaded first and cached.
      *
-     * @param {Object} name The of the template.
+     * @param {string} name The of the template.
      */
     function getUnoptimized(name) {
         var result = templatesUnoptimized[name];
         if (result === undefined) {
-            result = loadTemplateUnoptimized(name, settings);
+            result = loadTemplateUnoptimized(name);
             if (result !== undefined) {
                 templatesUnoptimized[name] = result;
             }
@@ -372,98 +376,6 @@ var TemplateContainer = function () {
         }
     }
 
-    function __appendRuleToField(field) {
-        Log.trace("Entering __appendRuleToField : ");
-        try {
-            if (field.hasOwnProperty("rules")) {
-                field["rules"].push({"type": "FieldRules.upperCaseCheck"});
-            } else {
-                field["rules"] = [{"type": "FieldRules.upperCaseCheck"}];
-            }
-        } finally {
-            Log.trace("Exit __appendRuleToField : ");
-        }
-    }
-
-    function __addUppercaseLetterToTemplate(unoptimizedTemplate) {
-        Log.trace("Entering __addUppercaseLetterToTemplate : ");
-        try {
-            var fieldsWithLowerCaseSubfields = __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields(unoptimizedTemplate);
-            for (var fieldKey in fieldsWithLowerCaseSubfields) {
-                if (!fieldsWithLowerCaseSubfields.hasOwnProperty(fieldKey)) continue;
-
-                if (!unoptimizedTemplate.fields[fieldKey].hasOwnProperty("rules")) {
-                    __appendRuleToField(unoptimizedTemplate.fields[fieldKey]);
-                }
-                for (var subfieldKey in fieldsWithLowerCaseSubfields[fieldKey]) {
-                    if (!fieldsWithLowerCaseSubfields[fieldKey].hasOwnProperty(subfieldKey)) continue;
-
-                    unoptimizedTemplate.fields[fieldKey]["subfields"][subfieldKey] = fieldsWithLowerCaseSubfields[fieldKey][subfieldKey];
-                }
-            }
-        } finally {
-            Log.trace("Exit  __addUppercaseLetterToTemplate : ");
-        }
-    }
-
-    function __getDefaultSubfieldRepeatable(unoptimizedTemplate) {
-        Log.trace("Entering __getDefaultSubfieldRepeatable : ");
-        var ret = {};
-        try {
-            if (unoptimizedTemplate.hasOwnProperty("defaults")) {
-                if (unoptimizedTemplate["defaults"].hasOwnProperty("subfield")) {
-                    if (unoptimizedTemplate["defaults"]["subfield"].hasOwnProperty("repeatable")) {
-                        return ret = unoptimizedTemplate["defaults"]["subfield"]["repeatable"];
-                    }
-                }
-            }
-            return {};
-        } finally {
-            Log.trace("Exit __getDefaultSubfieldRepeatable : " + JSON.stringify(ret));
-        }
-    }
-
-
-    function __getRepeatableValue(field, subfield, unoptimizedTemplate) {
-        Log.trace("Entering __getRepeatableValue : ");
-        var ret;
-        try {
-            var repeatableDefaultVal = __getDefaultSubfieldRepeatable(unoptimizedTemplate);
-            if (field.subfields[subfield].hasOwnProperty("repeatable")) {
-                return ret = {"repeatable": field.subfields[subfield]["repeatable"]};
-            } else {
-                return ret = {"repeatable": repeatableDefaultVal};
-            }
-        } finally {
-            Log.trace("Exit __getRepeatableValue : " + JSON.stringify(ret));
-        }
-    }
-
-    function __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields(unoptimizedTemplate) {
-        Log.trace("Entering __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields : ");
-        var ret;
-        try {
-            var fieldsWithLowerCaseSubfields = {};
-            for (var field in unoptimizedTemplate.fields) {
-                if (unoptimizedTemplate.fields.hasOwnProperty(field) && unoptimizedTemplate.fields[field].hasOwnProperty("subfields")) {
-                    for (var subfield in unoptimizedTemplate.fields[field].subfields) {
-                        if (unoptimizedTemplate.fields[field].subfields.hasOwnProperty(subfield)) {
-                            if (subfield.match(/[a-z]|\u00E6|\u00f8/)) {
-                                if (!fieldsWithLowerCaseSubfields.hasOwnProperty(field)) {
-                                    fieldsWithLowerCaseSubfields[field] = {};
-                                }
-                                fieldsWithLowerCaseSubfields[field][subfield.toUpperCase()] = __getRepeatableValue(unoptimizedTemplate.fields[field], subfield, unoptimizedTemplate);
-                            }
-                        }
-                    }
-                }
-            }
-            return ret = fieldsWithLowerCaseSubfields;
-        } finally {
-            Log.trace("Exit __getLowerCasedSubfieldsWithNonMatchingUpperCaseSubfields : " + JSON.stringify(ret));
-        }
-    }
-
     return {
         'setSettings': setSettings,
         'initTemplates': initTemplates,
@@ -474,7 +386,6 @@ var TemplateContainer = function () {
         'loadTemplateUnoptimized': loadTemplateUnoptimized,
         'getUnoptimized': getUnoptimized,
         'testLoadOfTemplateDoNotUse': testLoadOfTemplateDoNotUse,
-        'onlyForTest__addUppercaseLetterToTemplate': __addUppercaseLetterToTemplate,
         'onlyForTest__addDanishLetterAaToTemplate': __addDanishLetterAaToTemplate
     }
 
