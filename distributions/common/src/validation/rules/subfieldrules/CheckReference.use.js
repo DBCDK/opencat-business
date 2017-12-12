@@ -20,7 +20,7 @@ var CheckReference = function () {
     // Class representing tokens produced when parsing subfield
     function Token(type, value) {
         this.type = type;
-        this.value = value
+        this.value = value;
     }
 
     function SubfieldSyntaxError(message) {
@@ -203,6 +203,9 @@ var CheckReference = function () {
         }
 
         function __isNumeric(str) {
+            if (str === null) {
+                return false;
+            }
             return !isNaN(str);
         }
 
