@@ -293,3 +293,68 @@ UnitTest.addFixture("Validator.__validateSubfield", function () {
         }, GenericSettings),
         [ValidateErrors.subfieldError("url", "message")]);
 });
+
+UnitTest.addFixture("Subfield values must not contain chars with a unicode less then 32", function () {
+    var bundle = ResourceBundleFactory.getBundle(Validator.BUNDLE_NAME);
+
+    var template = {
+        fields: {
+            "042": {
+                subfields: {
+                    "a": []
+                }
+            }
+        },
+        rules: []
+    };
+
+    var templateProvider = function () {
+        return template;
+    };
+
+    var generateRecord = function (value) {
+        var subfield = {'name': 'a', 'value': value};
+        var field = {'name': '042', 'indicator': '00', 'subfields': [subfield]};
+        return [field];
+    };
+
+    var record = generateRecord('\n');
+    Assert.equal("Subfield value with line break - only line break",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('\nabcdef');
+    Assert.equal("Subfield value with line break - start with line break",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('abc\ndef');
+    Assert.equal("Subfield value with line break - line break in the middel of the string",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('abcdef\n');
+    Assert.equal("Subfield value with line break - end with line break",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('abc\tdef');
+    Assert.equal("Subfield value with tab",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('abc' + String.fromCharCode(0) + 'def');
+    Assert.equal("Subfield value with lowest numbered not-accepted char",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('abc' + String.fromCharCode(31) + 'def');
+    Assert.equal("Subfield value with highest numbered not-accepted char",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", "a", "042"))]);
+
+    record = generateRecord('aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZæÆøØåÅ 1234567890_-:;><≥≤Éé¢$”‰{}[]¿?§!¡¯#€%&/()=` °∑é®†¥ü|œπ‘~öä¬∆‹«©ƒ∂ßªΩ…ç√∫ñµ‚‚·—÷„˛');
+    Assert.equal("Subfield value with acceptable chars",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        []);
+});

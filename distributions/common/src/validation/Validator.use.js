@@ -194,6 +194,13 @@ var Validator = function () {
             if (subfield.name !== subfield.name.toLowerCase()) {
                 return [];
             }
+
+            for (var charIndex = 0; charIndex < subfield.value.length; charIndex++) {
+                if (subfield.value.charCodeAt(charIndex) < 32) {
+                    return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", subfield.name, field.name))];
+                }
+            }
+
             var templateSubfield = templateField.subfields[subfield.name];
             if (templateSubfield === undefined) {
                 return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "wrong.subfield", subfield.name, field.name))];
