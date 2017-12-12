@@ -16,7 +16,6 @@ var OpenAgencyClient = function () {
         Log.trace("Enter - OpenAgencyClient.hasFeature()");
         var result;
         try {
-            Log.info("Checking feature '", featureName, "' for agency: ", agencyId);
             return result = OpenAgencyClientCore.hasFeature(agencyId, featureName);
         } finally {
             Log.trace("Exit - OpenAgencyClient.hasFeature(): " + result);

@@ -58,8 +58,6 @@ var LookUpRecord = function () {
             if (agencyId === "") {
                 agencyId = marc.getValue(/001/, /b/);
             }
-            Log.info("recordId: ", recordId);
-            Log.info("agencyId: ", agencyId);
             var msg;
             if (!ValidationUtil.isNumber(agencyId)) {
                 msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
