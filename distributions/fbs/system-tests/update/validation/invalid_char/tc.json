@@ -22,7 +22,7 @@
             "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.5f.htm",
             "ordinalPositionOfField": 12,
             "ordinalPositionOfSubfield": 0,
-            "message": "Delfeltet 'a' i felt '534' indeholder ulovlige, 'usynlige' tegn såsom linjeskift, tabulatorer og lignende. Indholdet skal være én sammenhængende tesktstreng."
+            "message": "Delfeltet 'a' i felt '534' indeholder ulovlige, 'usynlige' tegn såsom linjeskift, tabulatorer og lignende. Indholdet skal være én sammenhængende tekststreng."
           }
         ]
       }
