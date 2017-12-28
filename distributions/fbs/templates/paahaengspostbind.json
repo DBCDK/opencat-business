@@ -325,7 +325,9 @@
         "245":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
             "repeatable": false,
+            "sorting": "ga",
             "subfields":{
+                "g": "DanMarc2.fields.245.subfields.g",
                 "a": "DanMarc2.fields.245.subfields.a",
                 "b": "DanMarc2.fields.245.subfields.b",
                 "m": "DanMarc2.fields.245.subfields.m",
@@ -349,14 +351,8 @@
                 "x": "DanMarc2.fields.245.subfields.x",
                 "w": "DanMarc2.fields.245.subfields.w",
                 "y": "DanMarc2.fields.245.subfields.y",
-                "g": "DanMarc2.fields.245.subfields.g",
                 "z": "DanMarc2.fields.245.subfields.z"
-            },
-			"rules": [
-			    {
-			        "type": "FieldRules.upperCaseCheck"
-			    }
-			]
+            }
         },
         "250": "DanMarc2.fields.250",
         "255": "DanMarc2.fields.255",

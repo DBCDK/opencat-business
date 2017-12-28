@@ -320,12 +320,7 @@
                 "w": "DanMarc2.fields.245.subfields.w",
                 "y": "DanMarc2.fields.245.subfields.y",
                 "z": "DanMarc2.fields.245.subfields.z"
-            },
-			"rules": [
-			    {
-			        "type": "FieldRules.upperCaseCheck"
-			    }
-			]
+            }
         },
         "247": "DanMarc2.fields.247",
         "248": "DanMarc2.fields.248",
