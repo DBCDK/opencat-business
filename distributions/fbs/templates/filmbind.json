@@ -5,7 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "023b", "245g", "245a", "300n", "996a" ]
+        "extrafields": [ "245g", "245a", "300n", "300l", "996a" ]
     },
     "defaults":{
         "field":{
@@ -127,6 +127,15 @@
                     "repeatable":false,
                     "values":[ "n" ]
                 },
+                "t":{
+                    "mandatory": true,
+                    "repeatable":false,
+                    "values":[ "m", "s" ]
+                },
+                "u": {
+                    "repeatable":false,
+                    "values":[ "f", "u", "r" ]
+                },
                 "a": {
                     "repeatable": false,
                     "rules": [
@@ -169,15 +178,7 @@
                 },
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "DanMarc2.fields.008.subfields.l",
-                "t":{
-                    "mandatory": true,
-                    "repeatable":false,
-                    "values":[ "m", "s" ]
-                },
-                "u": {                   
-                    "repeatable":false,
-                    "values":[ "f", "u", "r" ]
-                },                                
+                "o": "DanMarc2.fields.008.subfields.o",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v":{
                     "mandatory": true,
@@ -405,9 +406,6 @@
             "rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },

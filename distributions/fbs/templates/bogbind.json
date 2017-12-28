@@ -5,7 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "021e", "245g", "245a", "260c", "300a", "300b", "300d", "996a" ]
+        "extrafields": [ "008a", "021e", "245g", "245a", "260c", "300a", "996a" ]
     },
     "defaults":{
         "field":{
@@ -147,7 +147,14 @@
 						}
                     ]
                 },
-                "b": "DanMarc2.fields.008.subfields.b",
+                "b": {
+                    "values": "Lister.fields.codes.subfields.country.general.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+                },
                 "d": "DanMarc2.fields.008.subfields.d",
                 "e": {
                     "repeatable": false,
@@ -506,9 +513,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -550,9 +554,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -603,9 +604,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -631,9 +629,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -667,9 +662,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -799,12 +791,7 @@
                 "o":"DanMarc2.fields.666.subfields.o",
                 "u":"DanMarc2.fields.666.subfields.u",
                 "0":"DanMarc2.fields.666.subfields.0"
-            },
-             "rules": [
-                 {
-                     "type": "FieldRules.upperCaseCheck"
-                 }
-             ]
+            }
         },
         "668":"DanMarc2.fields.668",
         "700":{

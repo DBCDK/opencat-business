@@ -5,10 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008d", "008j", "008x", "021e", "100h", "1004",
-            "245c", "250a", "260a", "260b", "260c", "300a", "300b",
-            "504a", "512a", "512i", "512t", "530a", "530i", "530t",
-            "652m", "666f", "666s", "700h", "7004", "996a" ]
+        "extrafields": [ "008a", "008d", "021e", "100h", "1004", "245c", "260a", "260b", "260c", "300a", "652m", "996a" ]
     },
     "defaults":{
         "field":{
@@ -111,20 +108,15 @@
                     "mandatory": true,
                     "repeatable": false,
                     "values":[ "e" ],
-                    "a": {
-                        "mandatory": true,
-                        "repeatable": false,
-                        "values":[ "e" ],
-                        "rules": [
-                            {
-                                "type": "SubfieldRules.checkChangedValue",
-                                "params": {
-                                    "fromValues": [ "e", "b" ],
-                                    "toValues": [ "e", "b" ]
-                                }
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkChangedValue",
+                            "params": {
+                                "fromValues": [ "e", "b" ],
+                                "toValues": [ "e","b" ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             }
         },
