@@ -5,9 +5,8 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "005h", "008a", "008b", "008l", "023b", "028a", "039a",
-            "100h", "1004", "110a", "239t", "260a", "260b", "260c", "300n", "531a", "538f", "538g",
-            "652m", "652v", "666m", "666n","666p","666l", "700h", "7004", "770\u00E5", "770h", "780\u00E5", "780a", "795\u00E5", "795a", "996a"  ]
+        "extrafields": [ "008a", "008b", "008l", "039a", "100h", "1004", "260b", "260c", "300n", "300d",
+            "512a", "538f", "538g", "652m", "700h", "7004", "996a"  ]
     },
     "defaults":{
         "field":{
@@ -158,6 +157,7 @@
                 "b": "DanMarc2.fields.008.subfields.b",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "DanMarc2.fields.008.subfields.l",
+                "o": "DanMarc2.fields.008.subfields.o",
                 "v":{
                     "mandatory": true,
                     "repeatable": false,

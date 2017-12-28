@@ -431,9 +431,6 @@
                         "subfield": "g",
                         "not_presented_subfield": [ "245a" ]
                     }
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -549,9 +546,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -593,9 +587,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -646,9 +637,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -674,9 +662,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -710,9 +695,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -842,12 +824,7 @@
                 "o":"DanMarc2.fields.666.subfields.o",
                 "u":"DanMarc2.fields.666.subfields.u",
                 "0":"DanMarc2.fields.666.subfields.0"
-            },
-             "rules": [
-                 {
-                     "type": "FieldRules.upperCaseCheck"
-                 }
-             ]
+            }
         },
         "668":"DanMarc2.fields.668",
         "700":{

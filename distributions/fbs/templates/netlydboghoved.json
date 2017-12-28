@@ -518,9 +518,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -611,9 +608,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -647,9 +641,6 @@
 			"rules": [
                 {
                     "type": "FieldRules.exclusiveSubfield"
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },
@@ -758,9 +749,6 @@
                         "subfield": "o",
                         "not_presented_subfield": [ "652m", "654m", "654o" ]
                     }
-                },
-                {
-                    "type": "FieldRules.upperCaseCheck"
                 }
             ]
         },

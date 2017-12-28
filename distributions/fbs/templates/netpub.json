@@ -360,6 +360,8 @@
         },
 		"256": "DanMarc2.fields.256",
         "260":{
+            "mandatory":true,
+            "repeatable":false,
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
             "subfields":{
                 "&":{
