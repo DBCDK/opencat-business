@@ -1,0 +1,91 @@
+[
+  {
+    "name": "do-not-generate-enrichments-because-of-autlinks",
+    "description": "Tester at der IKKE oprettes påhængsposter, når en 870970-post opdateres fra udskrevne navne til autoritetslinks.",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request-record-with-autlink.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-52257670.870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-52257670.191919.marc"
+          ],
+          "holdings": [
+            723000,
+            710100
+          ]
+        },
+        {
+          "record": "rawrepo-52257670.191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-68058309.870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-68058309.191919.marc"
+          ],
+          "children": [
+            "rawrepo-52257670.870970.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-68058309.191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-52257670.870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "result-52257670.191919.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "result-52257670.191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-68058309.870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-68058309.191919.marc"
+            ],
+            "children": [
+              "result-52257670.870970.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-68058309.191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
