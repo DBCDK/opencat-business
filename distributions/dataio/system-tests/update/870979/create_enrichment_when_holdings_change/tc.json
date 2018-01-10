@@ -1,0 +1,100 @@
+[
+  {
+    "name": "create_enrichment_when_holdings_change",
+    "bugs": [
+      ""
+    ],
+    "description": "Opdatering af post danner påhængspost for biblioteker med beholdning, og påhængsposten er ekspanderet",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-69975445.870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-69975445.191919.marc"
+          ],
+          "children": [
+            "rawrepo-52568765.870970.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-69975445.191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-52568765.870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-52568765.191919.marc"
+          ],
+          "holdings": [
+            763000
+          ]
+        },
+        {
+          "record": "rawrepo-52568765.191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-69975445.870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-69975445.191919.marc"
+            ],
+            "children": [
+              "rawrepo-52568765.870970.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-69975445.191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "expected-52568765.870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-52568765.191919.marc",
+              "expected-52568765.763000.marc"
+            ]
+          },
+          {
+            "record": "expected-52568765.191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-52568765.763000.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
