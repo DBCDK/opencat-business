@@ -1,0 +1,69 @@
+[
+  {
+    "name": "include-classification-data-if-changed",
+    "bugs": [
+      "18515"
+    ],
+    "description": "Tester at hvis et bibliotek ændre i et opstillingsfelt, men uden at der er opstillingsændring, så kommer alle opstillingsfelterne med i påphængsposten",
+    "request": {
+      "authentication": {
+        "group": "710100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "paahaengspost",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-29991855.870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-29991855.191919.marc",
+            "rawrepo-29991855.710100.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-29991855.191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-29991855.710100.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-29991855.870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-29991855.191919.marc",
+              "result-29991855.710100.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-29991855.191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "result-29991855.710100.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
