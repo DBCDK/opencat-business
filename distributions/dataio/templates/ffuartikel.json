@@ -324,12 +324,7 @@
                 "x": "DanMarc2.fields.245.subfields.x",
                 "w": "DanMarc2.fields.245.subfields.w",
                 "z":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "250": "DanMarc2.fields.250",
         "255": "DanMarc2.fields.255",
@@ -372,12 +367,7 @@
                 "b": "DanMarc2.fields.512.subfields.b",
                 "u": "DanMarc2.fields.512.subfields.u",
                 "y": "DanMarc2.fields.512.subfields.y"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "513": "DanMarc2.fields.513",
         "517": "DanMarc2.fields.517",
@@ -399,12 +389,7 @@
                 "r": "DanMarc2.fields.520.subfields.r",
                 "z": "DanMarc2.fields.520.subfields.z",
                 "n": "DanMarc2.fields.520.subfields.n"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "521": "DanMarc2.fields.521",
         "523": "DanMarc2.fields.523",
@@ -425,12 +410,7 @@
                 "y": "DanMarc2.fields.526.subfields.y",
                 "r": "DanMarc2.fields.526.subfields.r",
                 "z": "DanMarc2.fields.526.subfields.z"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.upperCaseCheck"
-                }
-            ]
+            }
         },
         "529":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.5b.htm",
