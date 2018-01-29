@@ -5,6 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
+        "usefaust8": true,
         "extrafields": [ "021e", "023b", "245g", "245a", "300n", "300e", "300l", "856z", "856u", "996a" ]
     },
     "defaults":{

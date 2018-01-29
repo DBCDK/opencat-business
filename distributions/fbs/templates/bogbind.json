@@ -5,6 +5,7 @@
     },
     "settings": {
         "lookupfaust": true,
+        "usefaust8": true,
         "extrafields": [ "008a", "021e", "245g", "245a", "260c", "300a", "996a" ]
     },
     "defaults":{
