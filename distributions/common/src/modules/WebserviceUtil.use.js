@@ -11,11 +11,16 @@ EXPORTED_SYMBOLS = ['WebserviceUtil'];
  *
  */
 var WebserviceUtil = function () {
-    var openNumberRoll;
+    var openNumberRollUrl;
+    var numberRollNameFaust8;
+    var numberRollNameFaust;
 
     function init(settings) {
         Log.trace("init");
-        openNumberRoll = String(settings.get('opennumberroll'));
+        openNumberRollUrl = String(settings.get('opennumberroll.url'));
+
+        numberRollNameFaust8 = String(settings.get('opennumberroll.name.faust8'));
+        numberRollNameFaust = String(settings.get('opennumberroll.name.faust'));
     }
 
     /**
@@ -26,13 +31,22 @@ var WebserviceUtil = function () {
      * @name WebserviceUtil.getNewFaustNumberFromOpenNumberRoll
      * @method
      */
-    function getNewFaustNumberFromOpenNumberRoll() {
+    function getNewFaustNumberFromOpenNumberRoll(type) {
         Log.trace("getNewFaustNumberFromOpenNumberRoll");
         var headers = {
             'Content-type': 'application/xml;charset=utf-8'
         };
         var params = {};
-        var responseString = Http.getNoProxy(openNumberRoll, params, headers, false);
+
+        var numberRollName;
+        if (type === "faust8") {
+            numberRollName = numberRollNameFaust8;
+        } else {
+            numberRollName = numberRollNameFaust;
+        }
+
+        var url = openNumberRollUrl + '?action=numberRoll&numberRollName=' + numberRollName + '&outputType=json';
+        var responseString = Http.getNoProxy(url, params, headers, false);
         var response = JSON.parse(responseString);
         var res = "";
         if (response.hasOwnProperty("numberRollResponse")

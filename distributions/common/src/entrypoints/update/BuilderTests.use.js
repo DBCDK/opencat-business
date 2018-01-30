@@ -12,7 +12,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 "subfields": [
                     {
                         "name": "a",
-                        "value": "58082937"
+                        "value": "580829379"
                     }, {
                         "name": "b",
                         "value": ""
@@ -97,7 +97,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 "subfields": [
                     {
                         "name": "a",
-                        "value": "58082937"
+                        "value": "580829379"
                     }
                 ]
             }, {
@@ -357,7 +357,8 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
             }
         },
         "settings": {
-            "extrafields": ["300a"]
+            "extrafields": ["300a"],
+            'usefaust8': true
         },
         "fields": {
             "001": {
@@ -471,7 +472,8 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
             }
         },
         "settings": {
-            "extrafields": ["300b"]
+            "extrafields": ["300b"],
+            'usefaust8': true
         },
         "fields": {
             "001": {
@@ -531,7 +533,9 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
         }
     };
 
-    var faustProvider = function() { return "58082937"; };
+    var faustProvider = function (type) {
+        return type === 'faust8' ? '58082937' : '580829379'
+    };
     var templateProvider = function() { return template; };
     Assert.equalValue( "1 BuildRecord test", Builder.buildRecord( templateProvider, faustProvider ), record );
     var templateProvider2 = function() { return template2; };
@@ -758,7 +762,9 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
     var result = {};
     result["subfields"] = fieldOutput;
     result["mandatorySubfields"] = mandatorySubfieldsObj;
-    var faustProvider = function() { return "58082937"; };
+    var faustProvider = function (type) {
+        return type === 'faust8' ? '58082937' : '580829379'
+    };
     Assert.equalValue( "1 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
     faustProvider = function() {return undefined;};
     Assert.equalValue( "2 __convertSubfields test", Builder.__convertSubfields( template, fieldInput, faustProvider ), result );
@@ -1008,7 +1014,9 @@ UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
     var result = {};
     result["subfields"] = fieldOutput;
     result["mandatorySubfields"] = mandatorySubfieldsObj;
-    var faustProvider = function() { return "58082937"; };
+    var faustProvider = function (type) {
+        return type === 'faust8' ? '58082937' : '580829379'
+    };
 
     use("Print");
 
@@ -1133,7 +1141,9 @@ UnitTest.addFixture( "Builder.__buildMissingSubfields", function() {
     var mandatorySubfields2 = {"a": false, "b": true, "c": true, "d": false, "f": false};
     var mandatorySubfields3 = {"a": false, "b": true, "c": true, "d": false, "f": false};
 
-    var faustProvider = function() { return "58082937"; };
+    var faustProvider = function (type) {
+        return type === 'faust' ? '58082937' : '580829379'
+    };
     var faustProviderUndefined = function() { return undefined; };
     var template = {
         "fields": {
@@ -1458,4 +1468,21 @@ UnitTest.addFixture( "Builder.__isFaustEnabledForTemplate", function() {
 
     template = { "settings": { "lookupfaust": true } };
     Assert.equalValue( "5 __isFaustEnabledForTemplate" , Builder.__isFaustEnabledForTemplate( template ), true );
+});
+
+UnitTest.addFixture("Builder.__getNumberRollName", function () {
+    var template = {};
+    Assert.equalValue("1 __getNumberRollName", Builder.__getNumberRollName(template), 'faust');
+
+    template = {"settings": ""};
+    Assert.equalValue("2 __getNumberRollName", Builder.__getNumberRollName(template), 'faust');
+
+    template = {"settings": {"usefaust8": "false"}};
+    Assert.equalValue("3 __getNumberRollName", Builder.__getNumberRollName(template), 'faust');
+
+    template = {"settings": {"usefaust8": false}};
+    Assert.equalValue("4 __getNumberRollName", Builder.__getNumberRollName(template), 'faust');
+
+    template = {"settings": {"usefaust8": true}};
+    Assert.equalValue("5 __getNumberRollName", Builder.__getNumberRollName(template), 'faust8');
 });
