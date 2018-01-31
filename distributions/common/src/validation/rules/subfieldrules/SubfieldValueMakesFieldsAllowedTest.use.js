@@ -26,9 +26,12 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         'name' : "a", 'value' : ""
     };
 
-    var params = ["032", "996"]
+    var params = {
+        "fields": ["032", "996"],
+        "values": ["DBC"]
+    };
 
-    var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.value.makes.field.allowed.rule.error", "996", "a" );
+    var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.value.makes.field.allowed.rule.error", "996", "a", "'DBC'" );
     Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )] );
 
 
@@ -44,7 +47,10 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         'name' : "a", 'value' : "DBC"
     };
 
-    var params = ["032", "996"]
+    var params = {
+        "fields": ["032", "996"],
+        "values": ["DBC"]
+    };
 
     Assert.equalValue( "2 SubfieldValueMakesFieldsAllowed.validateSubfield valid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
 
@@ -61,7 +67,10 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         'name' : "a", 'value' : ""
     };
 
-    var params = ["032", "996"]
+    var params = {
+        "fields": ["032", "996"],
+        "values": ["DBC"]
+    };
 
     Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
 
@@ -77,7 +86,10 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         'name' : "a", 'value' : "DBC"
     };
 
-    var params = ["032", "996"]
+    var params = {
+        "fields": ["032", "996"],
+        "values": ["DBC"]
+    };
 
     Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
 });

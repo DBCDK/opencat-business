@@ -978,7 +978,10 @@
                         },
                         {
                             "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
-                            "params": [ "032", "630" ]
+                            "params": {
+                                "fields": [ "032", "630" ],
+                                "values": [ "DBC" ]
+                            }
                         }
                     ]
                 },
