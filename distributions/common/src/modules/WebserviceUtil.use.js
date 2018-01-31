@@ -39,11 +39,17 @@ var WebserviceUtil = function () {
         var params = {};
 
         var numberRollName;
+        /*
+        Temporarily commented out until we are ready to use 9 digit faust numbers for local records
         if (type === "faust8") {
             numberRollName = numberRollNameFaust8;
         } else {
             numberRollName = numberRollNameFaust;
         }
+       */
+
+        // Remove line below once we are ready to use 9 digit faust for local records
+        numberRollName = numberRollNameFaust8;
 
         var url = openNumberRollUrl + '?action=numberRoll&numberRollName=' + numberRollName + '&outputType=json';
         var responseString = Http.getNoProxy(url, params, headers, false);
