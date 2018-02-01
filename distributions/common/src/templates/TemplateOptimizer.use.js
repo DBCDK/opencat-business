@@ -8,6 +8,7 @@ use("CheckISMN");
 use("CheckISSN");
 use("CheckISBN10");
 use("CheckISBN13");
+use("CheckYear");
 use("LookUpRecord");
 use("CheckValue");
 use("MandatorySubfieldInVolumeWorkRule");
@@ -392,6 +393,8 @@ var TemplateOptimizer = function () {
                     return CheckISBN10.validateSubfield;
                 case "SubfieldRules.checkISBN13":
                     return CheckISBN13.validateSubfield;
+                case "SubfieldRules.checkYear":
+                    return CheckYear.validateSubfield;
                 case "SubfieldRules.checkChangedValue":
                     return CheckChangedValue.validateSubfield;
                 case "SubfieldRules.checkSubfieldNotUsedInParentRecord":
