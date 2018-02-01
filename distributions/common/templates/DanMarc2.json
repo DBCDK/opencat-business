@@ -2030,12 +2030,8 @@
                 "a":{
                     "repeatable":false
 				},
-                "u":{
-                    "repeatable":false
-				},
-                "y":{
-                    "repeatable":false
-				}
+                "u":{},
+                "y":{}
             }
         },
         "520":{
@@ -2758,12 +2754,14 @@
             "subfields":{
                 "a":{
                     "repeatable": false
-                }, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{}, "i":{}, "j":{},
+                },
+                "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{}, "i":{}, "j":{},
                 "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{}, "q":{}, "r":{}, "s":{}, "t":{},
                 "u":{}, "v":{}, "w":{},
                 "x":{
                     "repeatable": false
-                }, "y":{},
+                },
+                "y":{},
                 "z":{
                     "repeatable": false
                 },
@@ -2802,7 +2800,6 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6d.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true,
 					"repeatable": false
 				},
                 "h":{
@@ -2845,7 +2842,29 @@
                 "5":{
 					"repeatable": false
 				},
-                "6":{}
+                "6":{},
+                "rules": [
+                    {
+                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                        "params": {
+                            "subfield": "a",
+                            "not_presented_subfield": [ "6006" ]
+                        }
+                    },
+                    {
+                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                        "params": {
+                            "subfield": "6",
+                            "not_presented_subfield": [ "600a" ]
+                        }
+                    },
+                    {
+                        "type": "FieldRules.exclusiveSubfieldParameterized",
+                        "params": {
+                            "subfields": [ "a", "6" ]
+                        }
+                    }
+                ]
             }
         },
         "610":{
@@ -3117,8 +3136,6 @@
                 "b":{
 					"repeatable": false
 				},
-                "0":{},
-                "1":{},
                 "z":{
 					"repeatable": false
 				},
@@ -3133,7 +3150,9 @@
 				},
                 "r":{
 					"repeatable": false
-				}
+				},
+                "0":{},
+                "1":{}
             },
             "rules": [
                 {
@@ -3187,8 +3206,6 @@
                 "b":{
 					"repeatable": false
 				},
-                "0":{},
-                "1":{},
                 "z":{
 					"repeatable": false
 				},
@@ -3204,6 +3221,8 @@
                 "r":{
 					"repeatable": false
 				},
+                "0":{},
+                "1":{},
                 "rules": [
                     {
                         "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
@@ -3786,7 +3805,9 @@
                 "\u00E6":{
 					"repeatable": false
 				},
-                "\u00f8":{},
+                "\u00f8":{
+                    "repeatable": false
+                },
                 "c":{},
                 "u":{},
                 "v":{},
