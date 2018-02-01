@@ -26,16 +26,21 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         'name' : "a", 'value' : ""
     };
 
+    var field = {
+        "subfields": [subfield]
+    };
+
     var params = {
         "fields": ["032", "996"],
         "values": ["DBC"]
     };
 
     var errMsg = ResourceBundle.getStringFormat( bundle, "subfield.value.makes.field.allowed.rule.error", "996", "a", "'DBC'" );
-    Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )] );
+    Assert.equalValue( "SubfieldValueMakesFieldsAllowed.validateSubfield non-matching value",
+        SubfieldValueMakesFieldsAllowed.validateSubfield( record, field, subfield , params),  [ValidateErrors.subfieldError( "TODO:fixurl", errMsg )] );
 
 
-    var record = {
+    record = {
         fields : [{
             'name' : '032'
         }, {
@@ -43,19 +48,77 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         }]
     };
 
-    var subfield = {
+    subfield = {
         'name' : "a", 'value' : "DBC"
     };
 
-    var params = {
+    field = {
+        "subfields": [subfield]
+    };
+
+    params = {
         "fields": ["032", "996"],
         "values": ["DBC"]
     };
 
-    Assert.equalValue( "2 SubfieldValueMakesFieldsAllowed.validateSubfield valid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
+    Assert.equalValue( "SubfieldValueMakesFieldsAllowed.validateSubfield single subfield, matching value",
+        SubfieldValueMakesFieldsAllowed.validateSubfield( record, field, subfield , params),  [] );
 
+    record = {
+        fields : [{
+            'name' : '032'
+        }, {
+            'name' : '996'
+        }]
+    };
 
-    var record = {
+    var subfield1 = {
+        'name' : "a", 'value' : "A"
+    };
+    var subfield2 = {
+        'name' : "a", 'value' : "DBC"
+    };
+
+    field = {
+        "subfields": [subfield1, subfield2]
+    };
+
+    params = {
+        "fields": ["032", "996"],
+        "values": ["DBC"]
+    };
+
+    Assert.equalValue( "SubfieldValueMakesFieldsAllowed.validateSubfield repeated subfields, matching value",
+        SubfieldValueMakesFieldsAllowed.validateSubfield( record, field, subfield1 , params),  [] );
+
+    record = {
+        fields : [{
+            'name' : '032'
+        }, {
+            'name' : '996'
+        }]
+    };
+
+    subfield1 = {
+        'name' : "a", 'value' : "A"
+    };
+    subfield2 = {
+        'name' : "a", 'value' : "Another A"
+    };
+
+    field = {
+        "subfields": [subfield1, subfield2]
+    };
+
+    params = {
+        "fields": ["032", "996"],
+        "values": ["DBC"]
+    };
+
+    Assert.equalValue( "SubfieldValueMakesFieldsAllowed.validateSubfield repeated subfield already handled",
+        SubfieldValueMakesFieldsAllowed.validateSubfield( record, field, subfield2 , params),  [] );
+
+    record = {
         fields : [{
             'name' : '010'
         }, {
@@ -63,18 +126,23 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         }]
     };
 
-    var subfield = {
+    subfield = {
         'name' : "a", 'value' : ""
     };
 
-    var params = {
+    field = {
+        "subfields": [subfield]
+    };
+
+    params = {
         "fields": ["032", "996"],
         "values": ["DBC"]
     };
 
-    Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
+    Assert.equalValue( "SubfieldValueMakesFieldsAllowed.validateSubfield no affected fields in record, non-matching value",
+        SubfieldValueMakesFieldsAllowed.validateSubfield( record, field, subfield , params),  [] );
 
-    var record = {
+    record = {
         fields : [{
             'name' : '010'
         }, {
@@ -82,14 +150,19 @@ UnitTest.addFixture( "SubfieldValueMakesFieldsAllowed.validateSubfield", functio
         }]
     };
 
-    var subfield = {
+    subfield = {
         'name' : "a", 'value' : "DBC"
     };
 
-    var params = {
+    field = {
+        "subfields": [subfield]
+    };
+
+    params = {
         "fields": ["032", "996"],
         "values": ["DBC"]
     };
 
-    Assert.equalValue( "1 SubfieldValueMakesFieldsAllowed.validateSubfield invalid value", SubfieldValueMakesFieldsAllowed.validateSubfield( record, {}, subfield , params),  [] );
+    Assert.equalValue( "SubfieldValueMakesFieldsAllowed.validateSubfield no affected fields in record, matching value",
+        SubfieldValueMakesFieldsAllowed.validateSubfield( record, field, subfield , params),  [] );
 });

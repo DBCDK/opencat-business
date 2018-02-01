@@ -11,7 +11,7 @@ var SubfieldValueMakesFieldsAllowed = function () {
     var BUNDLE_NAME = "validation";
 
     /**
-     * Checks that if the subfield has a value from params.values
+     * Checks that if the subfield or any of its repetitions has a value from params.values
      * then the fields in params.fields are allowed in the record
      * @syntax SubfieldValueMakesFieldsAllowed.validateSubField( record, field, subfield, params )
      * @param {object} record
@@ -31,8 +31,19 @@ var SubfieldValueMakesFieldsAllowed = function () {
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
             ValueCheck.check("params.values", params.values);
             ValueCheck.check("params.values", params.values).instanceOf(Array);
-            if (subfield.value in __mapifyMe(params.values, false)) {
+
+            var subfieldValues = __getSubfieldValues(field, subfield);
+            if (subfield.value !== subfieldValues[0]) {
+                // Given subfield is a repetition, so it has
+                // already been handled
                 return [];
+            }
+
+            var controllingValues = __mapifyMe(params.values, false);
+            for (var i = 0; i < subfieldValues.length; i++) {
+                if (subfieldValues[i] in controllingValues) {
+                    return [];
+                }
             }
             return __checkForMatchingFields(record, subfield, params)
         } finally {
@@ -82,6 +93,24 @@ var SubfieldValueMakesFieldsAllowed = function () {
             return [];
         } finally {
             Log.trace("Exit SubfieldValueMakesFieldsAllowed.__checkForMatchingFields");
+        }
+    }
+
+    // Helper function fetching values from a subfield and any repetitions
+    // returning them as an array
+    function __getSubfieldValues(field, subfield) {
+        Log.trace("Enter SubfieldValueMakesFieldsAllowed.__getSubfieldValues");
+        try {
+            var subfieldValues = [];
+            for (var i = 0; i < field.subfields.length; ++i) {
+                var candidate = field.subfields[i];
+                if (subfield.name === candidate.name) {
+                    subfieldValues.push(candidate.value);
+                }
+            }
+            return subfieldValues;
+        } finally {
+            Log.trace("Exit SubfieldValueMakesFieldsAllowed.__getSubfieldValues");
         }
     }
 
