@@ -1132,7 +1132,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "bog",
+            "templateName": "netlydbog",
             "record": "request-common-without-996.marc"
         },
         "expected": {
