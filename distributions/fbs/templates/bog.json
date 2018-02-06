@@ -6,7 +6,9 @@
     "settings": {
         "lookupfaust": true,
         "usefaust8": true,
-        "extrafields": [ "008a", "008d", "021e", "100h", "1004", "245c", "260a", "260b", "260c", "300a", "652m", "996a" ]
+        "extrafields": [ "008a", "008d", "008b", "008l", "021e", "100h", "1004", "245c", "260a", "260b", "260c",
+            "300a",
+            "652m", "996a" ]
     },
     "defaults":{
         "field":{
@@ -388,8 +390,7 @@
                 "b": "DanMarc2.fields.300.subfields.b",
                 "c": "DanMarc2.fields.300.subfields.c",
                 "d": "DanMarc2.fields.300.subfields.d",
-                "e": "DanMarc2.fields.300.subfields.e",
-                "l": "DanMarc2.fields.300.subfields.l"
+                "e": "DanMarc2.fields.300.subfields.e"
             }
         },
         "320": "DanMarc2.fields.320",

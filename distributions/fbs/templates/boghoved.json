@@ -136,11 +136,7 @@
                     "repeatable": false,
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                            "type": "SubfieldRules.checkYear"
                         },
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
@@ -151,11 +147,7 @@
                     "repeatable": false,
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                            "type": "SubfieldRules.checkYear"
                         },
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
@@ -303,6 +295,7 @@
 		"022": "DanMarc2.fields.022",
 		"023": "DanMarc2.fields.023",
         "028": "DanMarc2.fields.028",
+        "032": "DanMarc2.fields.032",
         "035": "DanMarc2.fields.035",
         "038": "DanMarc2.fields.038",
         "041":{
@@ -397,30 +390,7 @@
         "250": "DanMarc2.fields.250",
 		"255": "DanMarc2.fields.255",
 		"256": "DanMarc2.fields.256",
-        "260":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
-            "mandatory":true,
-            "repeatable":false,
-            "subfields":{
-                "&":{
-                    "repeatable":false
-                },
-                "a": "DanMarc2.fields.260.subfields.a",
-                "d": "DanMarc2.fields.260.subfields.d",
-                "f": "DanMarc2.fields.260.subfields.f",
-                "g": "DanMarc2.fields.260.subfields.g",
-                "p": "DanMarc2.fields.260.subfields.p",
-                "e": "DanMarc2.fields.260.subfields.e",
-                "b": "DanMarc2.fields.260.subfields.b",
-                "c": "DanMarc2.fields.260.subfields.c",
-                "k": "DanMarc2.fields.260.subfields.k",
-                "r": "DanMarc2.fields.260.subfields.r",
-                "s": "DanMarc2.fields.260.subfields.s",
-                "t": "DanMarc2.fields.260.subfields.t",
-                "x": "DanMarc2.fields.260.subfields.x",
-                "j": "DanMarc2.fields.260.subfields.j"
-			}
-        },
+        "260": "bog.fields.260",
         "300":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
             "mandatory":true,
