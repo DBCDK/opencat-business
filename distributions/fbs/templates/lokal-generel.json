@@ -184,6 +184,8 @@
         "021": "DanMarc2.fields.021",
         "023": "DanMarc2.fields.023",
         "024": "DanMarc2.fields.024",
+        "027": "DanMarc2.fields.027",
+        "028": "DanMarc2.fields.028",
         "032":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1e.htm",
             "repeatable":false,
@@ -196,6 +198,7 @@
         },
         "033": "DanMarc2.fields.033",
         "035": "DanMarc2.fields.035",
+        "038": "DanMarc2.fields.038",
         "039": "DanMarc2.fields.039",
         "041": "DanMarc2.fields.039",
         "043": "DanMarc2.fields.043",
@@ -250,6 +253,25 @@
                 "j": "DanMarc2.fields.110.subfields.j",
                 "1": "DanMarc2.fields.110.subfields.1",
                 "4": "DanMarc2.fields.110.subfields.4"
+            }
+        },
+        "239":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.37.htm",
+            "repeatable": false,
+            "subfields":{
+                "a": "DanMarc2.fields.239.subfields.a",
+                "h": "DanMarc2.fields.239.subfields.h",
+                "e": "DanMarc2.fields.239.subfields.e",
+                "f": "DanMarc2.fields.239.subfields.f",
+                "c": "DanMarc2.fields.239.subfields.c",
+                "t": "DanMarc2.fields.239.subfields.t",
+                "b": "DanMarc2.fields.239.subfields.b",
+                "\u00f8": "DanMarc2.fields.239.subfields.\u00f8",
+                "u": "DanMarc2.fields.239.subfields.u",
+                "v": "DanMarc2.fields.239.subfields.v",
+                "1": "DanMarc2.fields.239.subfields.1",
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "7": "DanMarc2.fields.239.subfields.7"
             }
         },
         "240":{
@@ -500,6 +522,25 @@
             }
         },
         "720": "DanMarc2.fields.720",
+        "739":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85.htm",
+            "subfields":{
+                "a": "DanMarc2.fields.739.subfields.a",
+                "h": "DanMarc2.fields.739.subfields.h",
+                "e": "DanMarc2.fields.739.subfields.e",
+                "f": "DanMarc2.fields.739.subfields.f",
+                "c": "DanMarc2.fields.739.subfields.c",
+                "t": "DanMarc2.fields.739.subfields.t",
+                "b": "DanMarc2.fields.739.subfields.b",
+                "\u00f8": "DanMarc2.fields.739.subfields.\u00f8",
+                "u": "DanMarc2.fields.739.subfields.u",
+                "v": "DanMarc2.fields.739.subfields.v",
+                "1": "DanMarc2.fields.739.subfields.1",
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "7": "DanMarc2.fields.739.subfields.7",
+                "g": "DanMarc2.fields.739.subfields.g"
+            }
+        },
         "740":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.86.htm",
             "subfields":{
