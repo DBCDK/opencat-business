@@ -650,9 +650,18 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
             "repeatable":false,
             "subfields":{
-                "a":"Lister.fields.codes.subfields.libraries.996a",
-                "m":"Lister.fields.codes.subfields.libraries.996m",
-                "o":"Lister.fields.codes.subfields.libraries.996o"
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "IDX", "MUS" ]
+                },
+                "m": {
+                    "values": [ "IDX", "MUS" ]
+                },
+                "o": {
+                    "repeatable": false,
+                    "values": [ "IDX", "MUS" ]
+                }
             }
         },
         "d08": {
