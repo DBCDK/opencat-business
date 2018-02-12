@@ -231,23 +231,17 @@
                 },
                 "a": {
                     "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkYear"
                         }
                     ]
                 },
                 "z": {
                     "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkYear"
                         }
                     ]
                 },
