@@ -72,111 +72,20 @@
                         }
                     ]
                 },
-                "a": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkYear"
-                        },
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "z": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkYear"
-                        },
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "b": {
-                    "values": "Lister.fields.codes.subfields.country.general.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "a": "lokal-generelhoved.fields.008.subfields.a",
+                "z": "lokal-generelhoved.fields.008.subfields.z",
+                "b": "lokal-generelhoved.fields.008.subfields.b",
                 "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
-                "e": {
-                    "repeatable": false,
-                    "values": [ "1", "2" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-						}
-                    ]
-                },
-                "f": {
-                    "repeatable": false,
-                    "values": [ "1" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-						}
-                    ]
-                },
-                "g": {
-                    "repeatable": false,
-                    "values": [ "1" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-						}
-                    ]
-                },
-                "j": {
-                    "repeatable": false,
-                    "values": [ "d", "e", "f", "i", "j", "m", "p" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-						}
-                    ]
-                },
+                "e": "lokal-generelhoved.fields.008.subfields.e",
+                "f": "lokal-generelhoved.fields.008.subfields.f",
+                "g": "lokal-generelhoved.fields.008.subfields.g",
+                "j": "lokal-generelhoved.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": {
-                    "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "m": {
-                    "repeatable": false,
-                    "values": [ "1" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-						}
-                    ]
-                },
-                "o": {
-                    "repeatable": false,
-                    "values": [ "b", "s" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-						}
-                    ]
-                },
-                "x": {
-                    "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
-                        "a", "b", "c", "d", "e", "f", "g", "j" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "l": "lokal-generelhoved.fields.008.subfields.l",
+                "m": "lokal-generelhoved.fields.008.subfields.m",
+                "o": "lokal-generelhoved.fields.008.subfields.o",
+                "x": "lokal-generelhoved.fields.008.subfields.x",
                 "v": "DanMarc2.fields.008.subfields.v"
             }
 		},

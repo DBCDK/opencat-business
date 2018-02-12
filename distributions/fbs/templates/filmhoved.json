@@ -143,12 +143,8 @@
                 "a": {
                     "repeatable": false,
                     "rules": [
-						{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                        {
+                            "type": "SubfieldRules.checkYear"
                         },
 					    {
        						"type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
@@ -159,11 +155,7 @@
                     "repeatable": false,
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                            "type": "SubfieldRules.checkYear"
                         },
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"

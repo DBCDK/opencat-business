@@ -137,50 +137,14 @@
                     "repeatable":false,
                     "values":[ "f", "u", "r" ]
                 },
-                "a": {
-                    "repeatable": false,
-                    "rules": [
-						{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
-                        },
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
-						}
-                    ]
-                },
-				 "z": {
-                    "repeatable": false,
-                    "rules": [
-						{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
-                        },
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
-						}
-                    ]
-                },            
-                "b": "DanMarc2.fields.008.subfields.b",               
-                "e": {
-                    "repeatable": false,
-                    "values": [ "1", "2" ],
-					"rules": [
-					    {
-       						"type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
-						}
-                    ]
-                },
+                "a": "bogbind.fields.008.subfields.a",
+				"z": "bogbind.fields.008.subfields.z",
+                "b": "bogbind.fields.008.subfields.b",
+                "e": "bogbind.fields.008.subfields.e",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
-                "o": "DanMarc2.fields.008.subfields.o",
-                "x": "DanMarc2.fields.008.subfields.x",
+                "l": "bogbind.fields.008.subfields.l",
+                "o": "bogbind.fields.008.subfields.o",
+                "x": "bogbind.fields.008.subfields.x",
                 "v":{
                     "mandatory": true,
                     "repeatable": false,
@@ -188,50 +152,9 @@
                 }
              }
 		},
-        "009":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
-            "repeatable":false,            
-            "subfields":{               
-                "b":"DanMarc2.fields.009.subfields.b",                  
-                "h": "DanMarc2.fields.009.subfields.h"
-            }
-        },
-        "014":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
-            "mandatory":true,
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                            "type":"SubfieldRules.checkFaust"
-                        },
-					    {
-    					    "type": "SubfieldRules.lookupRecord",
-					        "params": {
-            					"requiredFieldAndSubfield": "004a",
-            					"allowedSubfieldValues": [ "h", "s" ]
-        					}
-    					}
-                    ]
-                }
-            }
-        },
-        "017":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.12.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
+        "009": "bogbind.fields.009",
+        "014": "bogbind.fields.014",
+        "017": "bogbind.fields.017",
         "021":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.15.htm",            
             "sorting":"aebdnwx",
@@ -446,7 +369,7 @@
             },
             "rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },
-        "523":"DanMarc2.fields.523",
+        "523": "DanMarc2.fields.523",
         "526":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.5a.htm",
             "subfields":{
