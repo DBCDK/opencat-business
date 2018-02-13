@@ -653,14 +653,14 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "IDX", "MUS" ]
+                    "values": [ "DBC", "IDX", "MUS" ]
                 },
                 "m": {
-                    "values": [ "IDX", "MUS" ]
+                    "values": [ "DBC", "IDX", "MUS" ]
                 },
                 "o": {
                     "repeatable": false,
-                    "values": [ "IDX", "MUS" ]
+                    "values": [ "DBC", "IDX", "MUS" ]
                 }
             }
         },
