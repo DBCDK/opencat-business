@@ -8,7 +8,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcbind",
       "record": "delete-volume-request.marc"
     },
     "setup": {
@@ -89,7 +89,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcbind",
       "record": "delete-volume-request.marc"
     },
     "setup": {
@@ -173,7 +173,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbchoved",
       "record": "delete-main-request.marc"
     },
     "setup": {

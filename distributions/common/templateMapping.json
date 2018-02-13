@@ -13,7 +13,9 @@
       "templates": [
         "allowall",
         "dbc",
+        "dbcbind",
         "dbchoved",
+        "dbcsingle",
         "dbcartanm",
         "dbcautoritet",
         "delete",
