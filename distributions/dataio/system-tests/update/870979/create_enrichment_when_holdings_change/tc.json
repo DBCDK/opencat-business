@@ -11,7 +11,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcsingle",
       "record": "request.marc"
     },
     "setup": {

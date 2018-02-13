@@ -12,7 +12,7 @@
 300 00 *n 2 dvd-videoer *l ca. 5 t., 8 min.
 508 00 *a Undertekster på dansk
 512 00 *i Medvirkende *e Ulla Henningsen, Søren Pilmark, Karen-Lise Mynster, Britta Lillesøe, Preben Harris, Tommy Kenter, Elin Reimer ... et al.
-512 00 *i Produceret af DR TV-Fiktion i 1992*amoi
+512 00 *a Produceret af DR TV-Fiktion i 1992
 517 00 *& 1 *a Mærkning: Tilladt for børn over 15 år
 538 00 *a DVD 1901031
 652 00 *m 77.7
@@ -20,7 +20,6 @@
 700 00 *a Kolerus *h Brigitte
 700 00 *a Elert *h Torben
 700 00 *a Kjær *h Erik Brøndum
-900 00 *a Brøndum Kjær *h Erik
 d08 00 *o mbf *o nø *k osh
 d08 00 *o aut
 d09 00 *z SOL201033

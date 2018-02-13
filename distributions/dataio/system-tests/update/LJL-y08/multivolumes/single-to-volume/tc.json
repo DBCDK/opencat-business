@@ -8,7 +8,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dbc",
+            "templateName": "dbcbind",
             "record": "request.marc"
         },
         "setup": {
@@ -82,7 +82,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dbc",
+            "templateName": "dbcbind",
             "record": "request.marc"
         },
         "setup": {

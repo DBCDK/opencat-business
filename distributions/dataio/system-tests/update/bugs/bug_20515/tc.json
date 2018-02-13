@@ -8,7 +8,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcsingle",
       "record": "request_3.marc"
     },
     "setup": {
@@ -55,7 +55,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcsingle",
       "record": "request_2.marc"
     },
     "setup": {
@@ -102,7 +102,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcsingle",
       "record": "request_1.marc"
     },
     "setup": {
