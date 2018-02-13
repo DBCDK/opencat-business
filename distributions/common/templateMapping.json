@@ -13,9 +13,11 @@
       "templates": [
         "allowall",
         "dbc",
+        "dbcsingle",
         "dbcbind",
         "dbchoved",
-        "dbcsingle",
+        "dbcsektion",
+        "dbcperiodica",
         "dbcartanm",
         "dbcautoritet",
         "delete",
