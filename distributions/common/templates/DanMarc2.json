@@ -537,14 +537,7 @@
             "subfields":{
                 "a":{
                     "repeatable":false,
-                    "rules":[{
-                            "type":"SubfieldRules.checkLength",
-                            "params":{
-                                "min":9,
-                                "max":9
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 },
                 "b":{},
                 "c":{
