@@ -51,18 +51,27 @@
             ]
         },
         "expected": {
-            "validation": {},
+            "validation": {
+                "errors": [ {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : 4,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Felt '014' kan ikke anvendes i denne skabelon/posttype."
+                } ]
+            },
             "update": {
-                "errors": [
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": null,
-                        "ordinalPositionOfField": null,
-                        "ordinalPositionOfSubfield": null,
-                        "ordinalPositionInSubfield": null,
-                        "message": "Påhængsposten {58442895|723000} må ikke pege på en post via 014a"
-                    }
-                ]
+                "errors": [ {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : 4,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Felt '014' kan ikke anvendes i denne skabelon/posttype."
+                } ]
             }
         }
     }
