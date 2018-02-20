@@ -23,6 +23,7 @@ use("CheckSubfieldNotUsedInParentRecord");
 use("CheckReference");
 use("SubfieldValueExcludesField");
 use("SubfieldValueMakesFieldsAllowed");
+use("SubfieldAllowedIfSubfieldValueInOtherFieldExists");
 
 //field rules
 use("FieldDemandsOtherFieldAndSubfield");
@@ -407,6 +408,8 @@ var TemplateOptimizer = function () {
                     return SubfieldValueExcludesField.validateSubfield;
                 case "SubfieldRules.subfieldValueMakesFieldsAllowed":
                     return SubfieldValueMakesFieldsAllowed.validateSubfield;
+                case "SubfieldRules.subfieldAllowedIfSubfieldValueInOtherFieldExists":
+                    return SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubfield;
 
                 default: {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
