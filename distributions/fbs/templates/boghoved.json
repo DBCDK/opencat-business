@@ -6,7 +6,7 @@
     "settings": {
         "lookupfaust": true,
         "usefaust8": true,
-        "extrafields": [ "008a", "008b", "008d", "008l", "021e", "100h", "1004",
+        "extrafields": [ "008u", "008a", "008b", "008d", "008l", "021e", "100h", "1004",
                         "245c", "260a", "260b", "260c", "300a", "652m", "996a" ]
     },
     "defaults":{

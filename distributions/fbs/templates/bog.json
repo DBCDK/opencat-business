@@ -6,7 +6,7 @@
     "settings": {
         "lookupfaust": true,
         "usefaust8": true,
-        "extrafields": [ "008a", "008d", "008b", "008l", "021e", "100h", "1004", "245c", "260a", "260b", "260c",
+        "extrafields": [ "008u", "008a", "008d", "021e", "100h", "1004", "245c", "260a", "260b", "260c",
             "300a",
             "652m", "996a" ]
     },
@@ -127,7 +127,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"&tuazbcdefghijklmoqrxv",
+            "sorting":"&tuazbcdefghijklmoqrnxv",
             "subfields":{
                 "&":{
                     "repeatable": false
