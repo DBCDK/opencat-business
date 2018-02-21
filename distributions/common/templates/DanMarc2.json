@@ -2042,7 +2042,17 @@
                 "b":{},
                 "u":{},
                 "y":{},
-                "r":{},
+                "r":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": "10",
+                                "max": "13"
+                            }
+                        }
+                    ]
+                },
                 "z":{},
                 "n":{}
             },
@@ -2132,11 +2142,7 @@
                 },
                 "z":{
                     "rules":[{
-                        "type":"SubfieldRules.checkLength",
-                        "params":{
-                            "min":9,
-                            "max":9
-                        }
+                        "type":"SubfieldRules.checkISSN"
                     }]
                 }
             },
@@ -2246,7 +2252,8 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.60.htm",
             "subfields":{
                 "i":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
 				},
                 "a":{},
                 "b":{},
@@ -2272,7 +2279,12 @@
                     "repeatable":false
 				},
                 "t":{}
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfield"
+                }
+            ]
         },
         "539":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.61.htm",
