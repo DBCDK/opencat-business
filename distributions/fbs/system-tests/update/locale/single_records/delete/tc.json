@@ -71,7 +71,7 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "message": "Posten må ikke slettes da der er beholding på"
+                        "message": "Posten må ikke slettes da der er beholdning på"
                     }
                 ],
                 "rawrepo": [
