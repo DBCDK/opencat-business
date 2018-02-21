@@ -130,14 +130,15 @@
                         }
                     ]
                 },
-                "x": {
-                    "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
-                        "a", "b", "c", "d", "e", "f", "g", "j" ],
+                "n": {
+                    "repeatable": false,
+                    "values": [ "a", "b", "c" ],
                     "rules": [
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
                         }
                     ]
+
                 },
                 "m": {
                     "repeatable": false,
@@ -156,6 +157,25 @@
                             "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
                         }
                     ]
+                },
+                "x": {
+                    "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
+                        "a", "b", "c", "d", "e", "f", "g", "j" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+                },
+                "w": {
+                    "repeatable": false,
+                    "values": [ "1" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+
                 },
                 "v": "DanMarc2.fields.008.subfields.v"
             }

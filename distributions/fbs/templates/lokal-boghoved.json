@@ -83,9 +83,11 @@
                 "j": "lokal-generelhoved.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "lokal-generelhoved.fields.008.subfields.l",
-                "m": "lokal-generelhoved.fields.008.subfields.m",
-                "o": "lokal-generelhoved.fields.008.subfields.o",
-                "x": "lokal-generelhoved.fields.008.subfields.x",
+                "m": "DanMarc2.fields.008.subfields.m",
+                "n": "DanMarc2.fields.008.subfields.n",
+                "o": "DanMarc2.fields.008.subfields.o",
+                "w": "DanMarc2.fields.008.subfields.w",
+                "x": "DanMarc2.fields.008.subfields.x",
                 "v": "DanMarc2.fields.008.subfields.v"
             }
 		},
