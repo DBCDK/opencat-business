@@ -46,6 +46,7 @@ use("FieldDemandsOtherFields");
 use("AllFieldsMandatoryIfOneExist");
 use("FieldsMandatory");
 use("MustContainOneOfFields");
+use("SubfieldsHaveValuesDemandsOtherSubfield");
 
 EXPORTED_SYMBOLS = ['TemplateOptimizer'];
 
@@ -345,6 +346,8 @@ var TemplateOptimizer = function () {
                     return AllFieldsMandatoryIfOneExist.validateRecord;
                 case "RecordRules.fieldDemandsOtherFields":
                     return FieldDemandsOtherFields.validateRecord;
+                case "RecordRules.subfieldsHaveValuesDemandsOtherSubfield":
+                    return SubfieldsHaveValuesDemandsOtherSubfield.validateRecord;
 
                 case "FieldRules.fieldsIndicator":
                     return FieldsIndicator.validateField;

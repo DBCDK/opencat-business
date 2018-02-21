@@ -107,6 +107,30 @@ var ValidationUtil = function () {
     }
 
     /**
+     * This function is used to see if a given field/subfield exists in the record.
+     *
+     * @param {object} record
+     * @param {String} fieldName
+     * @param {String} subfieldName
+     * @returns {boolean} true if the subfield exists otherwise false
+     */
+    function recordContainsSubfield(record, fieldName, subfieldName) {
+        for (var i = 0; i < record.fields.length; ++i) {
+            var field = record.fields[i];
+            if (field.name === fieldName) {
+                for (var j = 0; j < field.subfields.length; j++) {
+                    var subfield = field.subfields[j];
+                    if (subfield.name === subfieldName) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * getFieldNamesAsKeys
      * @syntax
      * @param {Object} record Obj
@@ -119,7 +143,7 @@ var ValidationUtil = function () {
         try {
             var ret = {};
             record.fields.forEach(function (field) {
-                if (!ret.hasOwnProperty((field.name ))) {
+                if (!ret.hasOwnProperty((field.name))) {
                     Object.defineProperty(ret, field.name, {enumerable: true, value: field});
                 }
             });
@@ -136,6 +160,7 @@ var ValidationUtil = function () {
         "isNumber": isNumber,
         "doesFieldContainSubfield": doesFieldContainSubfield,
         "getFields": getFields,
-        "recordContainsField": recordContainsField
+        "recordContainsField": recordContainsField,
+        "recordContainsSubfield": recordContainsSubfield
     };
 }();
