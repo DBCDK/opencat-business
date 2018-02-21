@@ -1,0 +1,64 @@
+[
+  {
+    "name": "subfieldAllowedIfSubfieldValueInOtherFieldExists_error",
+    "description": "Tester at 245*k ikke må findes når 009*a ikke er 's'",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request-with-error.marc"
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
+            "ordinalPositionOfField": 5,
+            "ordinalPositionOfSubfield": 1,
+            "ordinalPositionInSubfield": null,
+            "message": "Delfelt 245 *k er kun tilladt hvis delfelt 009 *a findes og har en af følgende værdier: c,d,m,s,p,t"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "subfieldAllowedIfSubfieldValueInOtherFieldExists_OK",
+    "description": "Tester at 245*k godt må findes fordi 009*a er 's'",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request-OK.marc"
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-OK-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [ "result-OK-common-enrichment.marc" ]
+          },
+          {
+            "record": "result-OK-common-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
