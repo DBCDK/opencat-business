@@ -1,0 +1,11 @@
+001 00 *a 25943449 *b 870970 *c 20180221091809 *d 20051020 *f a
+004 00 *r n *a b
+008 00 *t m *v 0
+021 00 *a 87-11-22419-3 *c ib. *d kr. 249,00
+032 00 *a DBF200545 *x SFD200545 *x ACC200541 *x BKR201007 *x DAT991243 *x DAT201809
+245 00 *g [Bind] 1
+300 00 *a 264 sider
+521 00 *& REX *b [1. oplag]
+990 00 *r 201007 *b b *b s *m Samhørende-note tilføjet *m Rettelse *u nt
+990 00 *a SFD *o 200545 *b L *b S *b B *c A
+996 00 *a DBC

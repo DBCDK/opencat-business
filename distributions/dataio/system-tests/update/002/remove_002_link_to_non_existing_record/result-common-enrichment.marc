@@ -1,0 +1,16 @@
+001 00 *a 25943449 *b 191919 *c 20180221091809 *d 20051020 *f a
+004 00 *r n *a b
+d08 00 *a BØK/SKO kode fjernet ved masserettelse og 990b tilføjet
+d08 00 *a bg
+d08 00 *a masserettet i forb. med konvertering af aldersnoter
+d08 00 *a 002/feb2018, kpn *a taget af igen
+d09 00 *z MVB200545 *z MVC200545 *z MSA200545
+d09 00 *z REX200551
+d30 00 *n 1
+d31 00 *b 137 *h 215 *t 23
+d32 00 *b 132 *h 210 *t 17
+d35 00 *a P *i 02 *n 03 *p 01 *q 03
+f06 00 *b b *b s *m Samhørende-note tilføjet *m Rettelse
+s12 00 *t TeamAr200542
+z98 00 *a Minus korrekturprint
+z99 00 *a Admin
