@@ -41,8 +41,8 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
             __prepareDemands(params);
 
             record.fields.forEach(function (recordField) {
-                if (__fieldIsInDemand(params, recordField.name)) {
-                    var demandingSubfield = __getDemandingSubfield(params, recordField.name);
+                var demandingSubfield = __getDemandingSubfield(params, recordField.name);
+                if (demandingSubfield !== null) {
                     recordField.subfields.forEach(function (recordSubfield) {
                         if (recordSubfield.name === demandingSubfield.subfieldName) {
                             if (demandingSubfield.subfieldValues.indexOf(recordSubfield.value) > -1) {
@@ -66,25 +66,6 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
     }
 
     /**
-     * Given a field name the function returns true that field name is amongst the demanding fields
-     *
-     * @param params
-     * @param fieldName
-     * @returns {boolean}
-     * @private
-     */
-    function __fieldIsInDemand(params, fieldName) {
-        for (var i = 0; i < params.demandingFields.length; i++) {
-            var demandingField = params.demandingFields[i];
-            if (demandingField.fieldName === fieldName) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Returns the demanding field from params given a field name
      *
      * @param params
@@ -99,6 +80,8 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
                 return demandingField;
             }
         }
+
+        return null;
     }
 
     /**
