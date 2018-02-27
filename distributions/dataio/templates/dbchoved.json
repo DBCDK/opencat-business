@@ -39,7 +39,9 @@
                 "a": {
                     "repeatable": false,
                     "values": [ "h" ]
-                }
+                },
+                "n": "DanMarc2.fields.004.subfields.n",
+                "x": "DanMarc2.fields.004.subfields.x"
             }
         },
 		"005": "DanMarc2.fields.005",
