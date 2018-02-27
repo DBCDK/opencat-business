@@ -99,7 +99,12 @@
         "paahaengspost",
         "paahaengspostbind",
         "paahaengsposthoved",
-        "paahaengspostsektion"
+        "paahaengspostsektion",
+        "lokalartikel",
+        "lokalpost",
+        "lokalpostbind",
+        "lokalposthoved",
+        "lokalpostsektion"
       ],
       "folder": "fbs"
     },
