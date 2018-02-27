@@ -25,6 +25,50 @@
             "params": {
                 "subfields": [ "652m", "652o", "654m", "654o" ]
             }
+        },
+        {
+            "type": "RecordRules.subfieldsHaveValuesDemandsOtherSubfield",
+            "params": {
+                "demandingFields": [
+                    {"fieldName": "008", "subfieldName": "v", "subfieldValues": [ "0", "1", "4" ]}
+                ],
+                "mandatoryFieldName": "008",
+                "mandatorySubfieldName": "t"
+            }
+        },
+        {
+            "type": "RecordRules.subfieldsHaveValuesDemandsOtherSubfield",
+            "params": {
+                "demandingFields": [
+                    {"fieldName": "008", "subfieldName": "v", "subfieldValues": [ "0", "1" ]},
+                    {"fieldName": "009", "subfieldName": "a", "subfieldValues": [ "a", "b", "e", "f", "g", "m", "r",
+                        "t", "u", "v" ]}
+                ],
+                "mandatoryFieldName": "008",
+                "mandatorySubfieldName": "a"
+            }
+        },
+        {
+            "type": "RecordRules.subfieldsHaveValuesDemandsOtherSubfield",
+            "params": {
+                "demandingFields": [
+                    {"fieldName": "008", "subfieldName": "v", "subfieldValues": [ "0", "1", "4" ]},
+                    {"fieldName": "009", "subfieldName": "a", "subfieldValues": [ "a" ]}
+                ],
+                "mandatoryFieldName": "008",
+                "mandatorySubfieldName": "b"
+            }
+        },
+        {
+            "type": "RecordRules.subfieldsHaveValuesDemandsOtherSubfield",
+            "params": {
+                "demandingFields": [
+                    {"fieldName": "008", "subfieldName": "v", "subfieldValues": [ "0", "1", "4" ]},
+                    {"fieldName": "009", "subfieldName": "a", "subfieldValues": [ "a", "b" ]}
+                ],
+                "mandatoryFieldName": "008",
+                "mandatorySubfieldName": "l"
+            }
         }
     ],
     "fields": {
