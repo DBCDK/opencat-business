@@ -1,0 +1,139 @@
+[
+    {
+        "name": "subfieldsHaveValuesDemandsOtherSubfield_OK",
+        "description": "alle obligatoriske delfelter i 008 findes",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbcsingle",
+            "record": "good-book-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "RR-auth-record.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "RR-auth-record-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "RR-auth-record-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "good-book-result.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "good-book-result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "good-book-result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "RR-auth-record.marc",
+                        "type": "AUTHORITY",
+                        "deleted": false,
+                        "enrichments": [
+                            "RR-auth-record-enrichment.marc"
+                        ],
+                        "children": [
+                            "good-book-result.marc"
+                        ]
+                    },
+                    {
+                        "record": "RR-auth-record-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+
+        }
+    },
+    {
+        "name": "subfieldsHaveValuesDemandsOtherSubfield_bad",
+        "description": "alle obligatoriske delfelter i 008 mangler",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbcsingle",
+            "record": "bad-book-request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "RR-auth-record.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "RR-auth-record-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "RR-auth-record-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                     {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "TODO:url",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 008 *t er obligatorisk pga følgende delfelter: delfelt 008 *v med en af værdierne: 0,1,4"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "TODO:url",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 008 *a er obligatorisk pga følgende delfelter: delfelt 008 *v med en af værdierne: 0,1 og delfelt 009 *a med en af værdierne: a,b,e,f,g,m,r,t,u,v"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "TODO:url",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 008 *b er obligatorisk pga følgende delfelter: delfelt 008 *v med en af værdierne: 0,1,4 og delfelt 009 *a med en af værdierne: a"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "TODO:url",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 008 *l er obligatorisk pga følgende delfelter: delfelt 008 *v med en af værdierne: 0,1,4 og delfelt 009 *a med en af værdierne: a,b"
+                    }
+                ]
+            }
+        }
+    }
+]
