@@ -489,12 +489,7 @@
                 "p": "DanMarc2.fields.538.subfields.p",
                 "q": "DanMarc2.fields.538.subfields.q",
                 "s": "DanMarc2.fields.538.subfields.s"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.exclusiveSubfield"
-                }
-            ]
+            }
         },
 		"555":"DanMarc2.fields.555",
         "596":{
