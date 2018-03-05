@@ -1,0 +1,88 @@
+[
+  {
+    "name": "local-on-deleted-common",
+    "bugs": [
+      "21587"
+    ],
+    "description": "Tester at en FBS bibliotek ikke må oprette poster når der er en slettet fællesskabspost med samme id",
+    "request": {
+      "authentication": {
+        "group": "763000",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-53784178-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-53784178-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-53784178-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-53836674-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        },
+        {
+          "record": "rawrepo-53836674-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Da blibiotek 763000 anvender påhængsposter og der findes en slettet fællesskabspost med id 53836674 er det ikke muligt at oprette denne post"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-53784178-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-53784178-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-53784178-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-53836674-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true
+          },
+          {
+            "record": "rawrepo-53836674-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": true
+          }
+        ]
+      }
+    }
+  }
+]

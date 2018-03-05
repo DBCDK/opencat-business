@@ -1,0 +1,21 @@
+001 00 *a 53784178 *b 870970 *c 20180112130758 *d 20171212 *f a
+002 00 *a 53836674
+004 00 *r n *a e
+008 00 *t m *u f *a 2017 *b dk *d y *l dan *x 04 *x 06 *v 0
+009 00 *a a *g xx
+021 00 *c Hf.
+032 00 *x ACC201750 *a DBF201804
+041 00 *a dan *d eng
+245 00 *a At være i centrum *c magt og minde - højstatusbegravelser i udvalgte centre 950-1450 *c rapport fra tværfagligt seminar afholdt i Odense, 10. februar 2016
+260 00 *& 1 *a Odense *b Odense Bys Museer *b Syddansk Universitetsforlag *c 2017
+300 00 *a 113 sider *b ill. (nogle i farver) *c 30 cm
+440 00 *0  *a Kulturhistoriske studier i centralitet *p Archaeological & Historical Studies in Cetrality *z 2596-3686 *V 2017 1 *v vol. 1, 2017
+508 00 *a Med resumé på engelsk
+521 00 *b 1. oplag *c 2017
+532 00 *& 1 *a Med litteraturhenvisninger
+652 00 *m 71.864 *b Odense
+700 00 *5 870979 *6 19271900 *4 edt
+700 00 *5 870979 *6 68891965 *4 edt
+700 01 *5 870979 *6 19300757 *4 ctb *g 1
+710 00 *a Odense Bys Museer
+996 00 *a DBC

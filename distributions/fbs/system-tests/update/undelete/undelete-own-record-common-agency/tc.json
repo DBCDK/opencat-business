@@ -43,7 +43,7 @@
           "ordinalPositionOfField" : null,
           "ordinalPositionOfSubfield" : null,
           "ordinalPositionInSubfield" : null,
-          "message" : "Posten kan ikke genoprettes, da fællesposten for det faustnummer er slettet"
+          "message": "Da blibiotek 723000 anvender påhængsposter og der findes en slettet fællesskabspost med id 20611529 er det ikke muligt at oprette denne post"
         }],
         "rawrepo": [
           {
