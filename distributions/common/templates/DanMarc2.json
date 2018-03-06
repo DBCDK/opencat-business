@@ -2278,12 +2278,7 @@
                     "repeatable":false
 				},
                 "t":{}
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.exclusiveSubfield"
-                }
-            ]
+            }
         },
         "539":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.61.htm",
