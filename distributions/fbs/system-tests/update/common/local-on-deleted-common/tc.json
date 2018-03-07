@@ -52,7 +52,7 @@
             "ordinalPositionOfField": null,
             "ordinalPositionOfSubfield": null,
             "ordinalPositionInSubfield": null,
-            "message": "Da blibiotek 763000 anvender påhængsposter og der findes en slettet fællesskabspost med id 53836674 er det ikke muligt at oprette denne post"
+            "message": "Da blibiotek 763000 anvender påhængsposter og der findes en tidligere eller slettet fællesskabspost med id 53836674 er det ikke muligt at oprette denne post"
           }
         ],
         "rawrepo": [
