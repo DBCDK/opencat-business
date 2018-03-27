@@ -13,6 +13,6 @@ tar -xf ocb-tools-1.0.0.tar.gz || die "tar -xf ocb-tools-1.0.0.tar.gz"
 
 template-transpiler/bin/transpile-templates.sh || die "template-transpiler/bin/transpile-templates.sh"
 
-/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests  || die "/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests"
+/bin/bash target/dist/ocb-tools-1.0.0/bin/ocb-test.sh js-tests  || die "/bin/bash ocb-tools-1.0.0/bin/ocb-test.sh js-tests"
 
 
