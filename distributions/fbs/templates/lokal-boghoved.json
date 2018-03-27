@@ -68,7 +68,7 @@
                     "values": [ "?", "r", "o", "f", "u" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecord"
+                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
                         }
                     ]
                 },
