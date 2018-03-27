@@ -1,0 +1,89 @@
+[
+  {
+    "name": "check-reference-loop",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-19333108-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-19333108-191919.marc"
+          ],
+          "children": [
+            "rawrepo-37739324-870971.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-19333108-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-37739324-870971.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-37739324-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-37739324-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-19333108-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-19333108-191919.marc"
+            ],
+            "children": [
+              "rawrepo-37739324-870971.marc"
+            ]
+          },
+          {
+            "record": "expected-19333108-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-37739324-870971.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-37739324-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-37739324-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
