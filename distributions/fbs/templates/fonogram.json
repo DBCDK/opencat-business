@@ -121,12 +121,10 @@
             "subfields":{
                 "a":{
                     "mandatory":true,
-                    "repeatable":false,
                     "values":[ "m", "s" ]
                 },
                 "g":{
                     "mandatory":true,
-                    "repeatable":false,
                     "values":[ "nh", "tb", "th", "to", "xc", "xd", "xg", "xh", "xi", "xj", "xk" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
