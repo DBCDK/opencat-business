@@ -41,7 +41,7 @@
                 "v": "dbcsingle.fields.008.subfields.v"
             }
         },
-        "011": "DanMarc2.fields.011",
+        "011": "dbcsingle.fields.011",
         "013": "DanMarc2.fields.013",
         "014":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
@@ -65,8 +65,8 @@
                 }
             }
         },
-        "017": "DanMarc2.fields.017",
-        "018": "DanMarc2.fields.018",
+        "017": "dbcsingle.fields.017",
+        "018": "dbcsingle.fields.018",
 		"020": "DanMarc2.fields.020",
 		"021": "DanMarc2.fields.021",
 		"022": "DanMarc2.fields.022",
@@ -231,6 +231,7 @@
                 "0":"DanMarc2.fields.654.subfields.0"
             }
         },
+        "665": "DanMarc2.fields.665",
         "666": "dbcsingle.fields.666",
         "668": "DanMarc2.fields.668",
         "670": "DanMarc2.fields.670",

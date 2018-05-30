@@ -8,7 +8,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcsingle",
       "record": "request-undelete.marc"
     },
     "setup": {
@@ -92,7 +92,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbc",
+      "templateName": "dbcsingle",
       "record": "request-remove-002-link.marc"
     },
     "setup": {

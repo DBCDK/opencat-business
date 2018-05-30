@@ -42,16 +42,7 @@
         "001": "bog.fields.001",
         "002": "bog.fields.002",
         "004": "bog.fields.004",
-        "005": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8.htm",
-            "repeatable": false,
-            "subfields": {
-                "h": "DanMarc2.fields.005.subfields.h",
-                "i": "DanMarc2.fields.005.subfields.i",
-                "j": "DanMarc2.fields.005.subfields.j",
-                "k": "DanMarc2.fields.005.subfields.k"
-            }
-        },
+        "005": "DanMarc2.fields.005",
         "006":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
             "subfields": {

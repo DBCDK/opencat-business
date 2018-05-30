@@ -105,15 +105,12 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "m", "n", "g"]
+                    "values":[ "m", "g"]
                 },
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "xa", "xb", "xd", "xj", "xy", "mj", "th", "nh", "np",
-                               "ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt", "gx",
-                               "ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy",
-                               "kb", "kt" ]
+                    "values":[ "mj", "nh", "np", "th" ]
                 },
                 "b":"DanMarc2.fields.009.subfields.b",                  
                 "h": "DanMarc2.fields.009.subfields.h"
@@ -147,15 +144,7 @@
                 "\u00f8": "DanMarc2.fields.239.subfields.\u00f8"
             }
         },
-        "241":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",            
-            "repeatable":false,
-            "sorting":"ar",
-            "subfields":{
-                "a": "DanMarc2.fields.241.subfields.a",
-                "r": "DanMarc2.fields.241.subfields.r"
-            }
-        },    
+        "241": "bog.fields.241",
         "245":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
             "mandatory":true,

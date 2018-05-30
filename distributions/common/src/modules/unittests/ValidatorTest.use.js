@@ -358,3 +358,45 @@ UnitTest.addFixture("Subfield values must not contain chars with a unicode less 
         Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
         []);
 });
+UnitTest.addFixture("Subfield å must contain a number", function () {
+    var bundle = ResourceBundleFactory.getBundle(Validator.BUNDLE_NAME);
+
+    var template = {
+        fields: {
+            "042": {
+                subfields: {
+                    "å": []
+                }
+            }
+        },
+        rules: []
+    };
+
+    var templateProvider = function () {
+        return template;
+    };
+
+    var record = [
+        {'name': '042', 'indicator': '00', 'subfields': [{'name': 'å', 'value': 'julemand'}]}
+    ];
+
+    Assert.equal("Subfield value with acceptable chars",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "subfield.value.must.be.number", "042", "julemand"))]);
+
+    record = [
+        {'name': '042', 'indicator': '00', 'subfields': [{'name': 'å', 'value': '1'}]}
+    ];
+
+    Assert.equal("Subfield value with acceptable chars",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        []);
+
+    record = [
+        {'name': '042', 'indicator': '00', 'subfields': [{'name': 'å', 'value': '42'}]}
+    ];
+
+    Assert.equal("Subfield value with acceptable chars",
+        Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
+        []);
+});

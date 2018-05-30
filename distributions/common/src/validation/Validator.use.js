@@ -19,6 +19,7 @@ EXPORTED_SYMBOLS = ['Validator'];
  */
 var Validator = function () {
     var BUNDLE_NAME = "validation";
+    var matchNumber = new RegExp(/^\d+$/);
 
     /**
      * Checks whether the template provided allow *rd if the record
@@ -199,6 +200,10 @@ var Validator = function () {
                 if (subfield.value.charCodeAt(charIndex) < 32) {
                     return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", subfield.name, field.name))];
                 }
+            }
+
+            if(subfield.name === 'å' && !matchNumber.test(subfield.value)) {
+                return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "subfield.value.must.be.number", field.name, subfield.value))];
             }
 
             var templateSubfield = templateField.subfields[subfield.name];

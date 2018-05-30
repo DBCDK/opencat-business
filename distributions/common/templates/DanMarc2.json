@@ -40,13 +40,6 @@
                     "repeatable": false,
                     "rules": [
                       {
-                        "type": "SubfieldRules.checkLength",
-                        "params": {
-                          "min": 8,
-                          "max": 8
-                        }
-                      },
-                      {
                         "type": "SubfieldRules.checkDateFormat",
                         "params": {
                           "allowLong": false
@@ -1837,14 +1830,7 @@
                 "t":{},
                 "z":{
                     "repeatable":false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 9,
-                                "max": 9
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 },
                 "v":{},
                 "0":{
@@ -2053,14 +2039,26 @@
                         }
                     ]
                 },
-                "z":{},
-                "n":{}
+                "n": {
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+                "z":{
+                    "rules":[
+			{
+                            "type":"SubfieldRules.checkISSN"
+                        }
+		    ]
+                }
             },
-			"rules": [
-                {
+	    "rules": [
+		{
                     "type": "FieldRules.exclusiveSubfield"
                 }
-            ]
+	    ]
         },
         "521":{
             "url":"www.kat-format.dk/danMARC2/Danmarc2.57.htm",
@@ -2172,7 +2170,8 @@
                     "repeatable":false
 				},
                 "z":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 },
                 "u":{},
                 "y":{}
@@ -2348,14 +2347,7 @@
                 },
                 "z":{
                     "repeatable":false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8,
-                                "max": 9
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 }
             }
         },
@@ -2642,8 +2634,7 @@
                 "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{}, "8":{}, "9":{}
             }
         },
-        "585":{                "0": "DanMarc2.fields.610.subfields.m",
-
+        "585":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.560-599.htm",
             "subfields":{
                 "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{}, "i":{}, "j":{},
@@ -3315,6 +3306,33 @@
                 "c":{}
             }
         },
+        "665":{
+            "subfields":{
+                "a": {},
+                "i": {},
+                "q": {},
+                "p": {},
+                "m": {},
+                "g": {},
+                "u": {},
+                "e": {},
+                "h": {
+                    "repeatable": false
+                },
+                "j": {
+                    "repeatable": false
+                },
+                "k": {},
+                "l": {},
+                "f": {
+                    "repeatable": false
+                },
+                "s": {},
+                "r": {},
+                "t": {},
+                "n": {}
+            }
+        },
         "666":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
             "subfields":{
@@ -3864,14 +3882,7 @@
                 "o":{},
                 "z":{
                     "repeatable":false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 9,
-                                "max": 9
-                            }
-                        }
-                    ]
+                    "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 },
                 "v":{},
                 "0":{
