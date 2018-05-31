@@ -1,0 +1,86 @@
+version: '2'
+networks:
+  default:
+    external:
+        name: update-compose-network
+
+services:
+  rawrepoDb:
+    image: docker-os.dbc.dk/rawrepo-postgres-1.10-snapshot:latest
+    environment:
+      - POSTGRES_DB=rawrepo
+      - POSTGRES_USER=rawrepo
+      - POSTGRES_PASSWORD=thePassword
+    expose:
+      - "5432"
+    ports:
+      - "5432"
+
+  holdingsitemsDb:
+    image: docker-os.dbc.dk/holdings-items-postgres-1.1.1-snapshot:latest
+    environment:
+      - POSTGRES_DB=holdingsitems
+      - POSTGRES_USER=holdingsitems
+      - POSTGRES_PASSWORD=thePassword
+    expose:
+      - "5432"
+    ports:
+      - "5432"
+
+  updateserviceDb:
+    image: docker-i.dbc.dk/update-postgres:staging
+    environment:
+      - POSTGRES_DB=updateservice
+      - POSTGRES_USER=updateservice
+      - POSTGRES_PASSWORD=thePassword
+    expose:
+      - "5432"
+    ports:
+      - "5432"
+
+  fakeSmtp:
+    image: docker-i.dbc.dk/fakesmtp
+    volumes:
+      - "../logs/fakesmtp:/output"
+
+  updateservice:
+    image: docker-i.dbc.dk/update-payara-deployer:staging
+    env_file:
+      - ./settings.env
+      - ./db.env
+    environment:
+      - LOGBACK_FILE=file:///data/update-logback-include.xml
+      - SETTINGS_RAWREPO_ALLOW_EXTRA_RECORD_DATA=True
+      - THREAD_POOL_SIZE=1
+      - RAWREPO_PORT_5432_TCP_ADDR=${HOST_IP}
+      - RAWREPO_PORT_5432_TCP_PORT=${RAWREPO_PORT}
+      - SETTINGS_RAWREPO_PROVIDER_ID_DBC=dataio-update
+      - SETTINGS_RAWREPO_PROVIDER_ID_DBC_SOLR=update-rawrepo-solr-sync
+      - SETTINGS_RAWREPO_PROVIDER_ID_FBS=opencataloging-update
+      - SETTINGS_RAWREPO_PROVIDER_ID_PH=fbs-ph-update
+      - SETTINGS_RAWREPO_PROVIDER_ID_PH_HOLDINGS=dataio-ph-holding-update
+      - HOLDINGSITEMS_PORT_5432_TCP_ADDR=${HOST_IP}
+      - HOLDINGSITEMS_PORT_5432_TCP_PORT=${HOLDINGSITEMSDB_PORT}
+      - UPDATE_DB_PORT_5432_TCP_ADDR=${HOST_IP}
+      - UPDATE_DB_PORT_5432_TCP_PORT=${UPDATESERVICEDB_PORT}
+      - SOLR_PORT_8080_TCP_ADDR=${DEV_SOLR_ADDR}
+      - SOLR_PORT_8080_TCP_PORT=${DEV_SOLR_PORT}
+      - SOLR_PATH=${DEV_SOLR_PATH}
+      - MAX_HEAP_IN_GB=4
+      - SETTINGS_OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
+      - SETTINGS_OPENAGENCY_CACHE_AGE=0
+      - INSTANCE_NAME=${USER}_dev
+    extra_hosts:
+      - "solrserver:${HOST_IP}"
+    volumes:
+      - "../logs/update/app:/data/logs"
+      - "../logs/update/server:/usr/local/payara41/glassfish/domains/domain1/logs"
+      - "../../distributions:/data/opencat-business/distributions"
+    expose:
+      - "8080"
+      - "8686"
+      - "4848"
+    ports:
+      - "8080"
+      - "8686"
+      - "4848"
