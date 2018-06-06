@@ -2,29 +2,29 @@
 #set -x
 
 SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
-export IDEA_ROOT=$(dirname $(dirname $(realpath ${0})))
+export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
-cd ${IDEA_ROOT}/docker
+cd ${PROJECT_ROOT}/docker
 mkdir -p logs/update/app logs/update/server logs/fakesmtp
 res=$?
 if [ ${res} -ne 0 ]
 then
-    echo "Could not create ${IDEA_ROOT}/docker/logs/update/app ${IDEA_ROOT}/docker/logs/update/server"
+    echo "Could not create ${PROJECT_ROOT}/docker/logs/update/app ${PROJECT_ROOT}/docker/logs/update/server"
     exit 1
 fi
 chmod ugo+rw logs logs/update/app logs/update/server logs/fakesmtp
 res=$?
 if [ ${res} -ne 0 ]
 then
-    echo "Could not set o+rw for ${IDEA_ROOT}/logs and subdirectories"
+    echo "Could not set o+rw for ${PROJECT_ROOT}/logs and subdirectories"
     exit 1
 fi
 
 
 
-cd ${IDEA_ROOT}/docker/compose
+cd ${PROJECT_ROOT}/docker/compose
 
-. ${IDEA_ROOT}/bin/get_solr_port_nr.sh
+. ${PROJECT_ROOT}/bin/get_solr_port_nr.sh
 
 if [ ! -d $HOME/.ocb-tools ]
 then
@@ -135,3 +135,6 @@ echo "rawrepo.provider.name.ph = fbs-ph-update" >> ${HOME}/.ocb-tools/testrun.pr
 echo "rawrepo.provider.name.ph.holdings = dataio-ph-holding-update" >> ${HOME}/.ocb-tools/testrun.properties
 
 echo "export SOLR_PORT_NR=${SOLR_PORT_NR}"
+
+echo "Sleeping 20 seconds while updateservice is deploying"
+sleep 20
