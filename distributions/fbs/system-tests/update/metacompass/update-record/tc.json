@@ -1,0 +1,169 @@
+[
+  {
+    "name": "metacompass-fbs-changed-665-error",
+    "description": "Tester at et bibliotek uden metakompass rettigheder ikke får lov til at rette felt 665",
+    "request": {
+      "authentication": {
+        "group": "723000",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "netlydbog",
+      "record": "request-changed-665-723000.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": "",
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Du har ikke ret til at ændre i felt 665"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "metacompass-fbs-changed-665-ok",
+    "description": "Tester at et bibliotek med metakompass rettigheder får lov til at rette felt 665",
+    "request": {
+      "authentication": {
+        "group": "710100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "netlydbog",
+      "record": "request-changed-665-710100.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-changed-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "metacompass-fbs-same-665",
+    "description": "Tester at et bibliotek uden metakompass rettighed kan indsende en fællesskabspost med 665 felt, hvor feltet ikke er ændret",
+    "request": {
+      "authentication": {
+        "group": "723000",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "netlydbog",
+      "record": "request-same-665.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

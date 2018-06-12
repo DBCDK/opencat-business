@@ -22,7 +22,7 @@
     },
     "fields":{
         "001": "lokal-generel.fields.001",
-        "004": "lokal-generel.fields.004",
+        "004": "lokal-generelbind.fields.004",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,

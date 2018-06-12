@@ -30,7 +30,7 @@
             "sorting":"&tuazbcdefghijklmnorwxv",
             "subfields":{
                 "&": "bog.fields.008.subfields.&",
-                "t": "bog.fields.008.subfields.t",
+                "t": "bogbind.fields.008.subfields.t",
                 "u": "film.fields.008.subfields.u",
                 "a": "bogbind.fields.008.subfields.a",
                 "z": "bogbind.fields.008.subfields.z",

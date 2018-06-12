@@ -1,0 +1,30 @@
+001 00 *a 5 158 076 1 *b 870970 *c 20150324171702 *d 20150209 *f a *t FAUST
+004 00 *r n *a e
+008 00 *t m *u f *a 2015 *b dk *d å *d x *j f *l ger *o s *v 0
+009 00 *a a *g xx
+021 00 *e 9788771691078 *c hf.
+021 00 *e 9788771690651 *b bogpakken DigiLesen nybegyndertysk
+032 00 *a DBF201511 *x BKM201511 *a DBF *x BKM *x SKO
+100 00 *0  *a Møller *h Karl Henrik *4 aut
+245 00 *a Lilly macht einen Ausflug *c QR bog
+250 00 *a 1. udgave *b ÷
+260 00 *a [Værløse] *b DigTea *c 2015
+300 00 *a 23 sider *b alle ill. i farver
+440 00 *0  *a Digilesen *o Lillys Leben - Niveau B
+504 00 *a Lilly og hendes far tager på udflugt, og hendes far bestemmer at de skal ud i naturen, men Lilly ville hellere have været på shoppetur i byen. Desværre forløber turen ikke helt som planlagt
+512 00 *a På titelsiden: Hören und lesen
+520 00 *a Originaludgave: 2015
+521 00 *b 1. oplag *c 2015 *k Lasertryk
+526 00 *a Heri QR-koder til bogens tekst indlæst
+652 00 *n 86.4 *z 096
+652 00 *o 84
+665 00 *q København *i istiden
+666 00 *0  *s udflugter
+666 00 *0  *u for 11 år
+666 00 *0  *u for 12 år
+666 00 *0  *u let at læse
+720 00 *o Mette Bødker *4 ill
+945 00 *a Digi lesen *x se *z 440(a)
+945 00 *a Lillys Leben - Niveau B *x se *z 440(a,o)
+990 00 *o 201511 *b b *b s *u nt
+996 00 *a DBC

@@ -20,7 +20,7 @@
     },
     "fields":{
         "001": "lokal-generel.fields.001",
-        "004": "lokal-generel.fields.004",
+        "004": "lokal-generelbind.fields.004",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
@@ -85,7 +85,7 @@
         "256": "DanMarc2.fields.256",
         "260": "DanMarc2.fields.260",
         "264": "DanMarc2.fields.264",
-        "300": "lokal-bog.fields.300",
+        "300": "DanMarc2.fields.300",
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
         "440": "DanMarc2.fields.440",

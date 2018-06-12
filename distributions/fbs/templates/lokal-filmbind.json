@@ -41,28 +41,7 @@
                 "o": "DanMarc2.fields.001.subfields.o"
             }
         },
-        "004": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-            "mandatory":true,
-            "repeatable":false,
-            "subfields":{
-                "r": "DanMarc2.fields.004.subfields.r",
-                "a": {
-                    "mandatory": true,
-                    "values":[ "b" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkChangedValue",
-                            "params": {
-                                "fromValues": [ "e", "b" ],
-                                "toValues": [ "e", "b" ]
-                            }
-                        }
-                    ]
-                },
-                "n": "DanMarc2.fields.004.subfields.n"
-            }
-        },
+        "004": "lokal-generelbind.fields.004",
         "006": "DanMarc2.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",

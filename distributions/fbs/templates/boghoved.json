@@ -73,9 +73,7 @@
             "repeatable":false,
             "sorting":"uazbcdefghijklmorxv&",
             "subfields":{
-                "&": {
-                    "repeatable": false
-				},
+                "&": "bog.fields.008.subfields.&",
 				"u": "DanMarc2.fields.008.subfields.u",
                 "a": {
                     "repeatable": false,
