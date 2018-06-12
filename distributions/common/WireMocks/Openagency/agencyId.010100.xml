@@ -81,6 +81,10 @@
                     <oa:name>auth_add_dk5_to_phd</oa:name>
                     <oa:bool>1</oa:bool>
                 </oa:libraryRule>
+                <oa:libraryRule>
+                    <oa:name>auth_metacompass</oa:name>
+                    <oa:bool>1</oa:bool>
+                </oa:libraryRule>
             </oa:libraryRules>
         </oa:libraryRulesResponse>
     </S:Body>

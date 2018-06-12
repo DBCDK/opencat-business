@@ -270,6 +270,7 @@
         },
         "239": "DanMarc2.fields.239",
         "240": "DanMarc2.fields.240",
+        "242": "DanMarc2.fields.242",
         "241":{
                 "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",
                 "subfields":{                

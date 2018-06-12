@@ -54,6 +54,7 @@
             "repeatable":false,
             "sorting":"tuazbcdefghijklmorxv&",
             "subfields":{
+                "&": "bog.fields.008.subfields.&",
                 "t":{
 					"mandatory": true,
                 	"repeatable": false,

@@ -81,6 +81,7 @@
         },
         "239": "film.fields.239",
         "241": "bog.fields.241",
+        "242": "DanMarc2.fields.242",
         "245": "film.fields.245",
         "250": "DanMarc2.fields.250",
         "260": "bog.fields.260",
