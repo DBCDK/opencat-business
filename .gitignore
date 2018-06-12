@@ -1,6 +1,7 @@
 *.log
 target/
-.idea/
+!.idea/
+.idea/*
 !.idea/runConfigurations
 *.iml
 *.war
