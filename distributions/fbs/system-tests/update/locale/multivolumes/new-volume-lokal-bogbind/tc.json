@@ -1,0 +1,44 @@
+[
+    {
+        "name": "fbs-new-locale-volume-lokalbogbind",
+        "description": "Oprettelse af et nyt lokalt bind - med skeblonen lokal-bogbind - til eksisterende lokal hovedpost",
+        "request": {
+            "authentication": {
+                "group": "861110",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokal-bogbind",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [ "request.marc" ]
+                    },
+                    {
+                        "record": "request.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

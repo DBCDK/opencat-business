@@ -1,0 +1,86 @@
+[
+  {
+    "name": "870979-set-auth-on-article",
+    "description": "Tester om man kan ændre udskrevet felt 700 til authoritetslinks",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-37877093-870971.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-37877093-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-37877093-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-68556759-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-68556759-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-68556759-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-37877093-870971.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-37877093-191919.marc"
+            ]
+          },
+          {
+            "record": "expected-37877093-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-68556759-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-68556759-191919.marc"
+            ],
+            "children": [
+              "expected-37877093-870971.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-68556759-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]
