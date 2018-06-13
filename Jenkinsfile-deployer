@@ -28,23 +28,25 @@ pipeline {
         timestamps()
     }
 
-    stage("Deploy production") {
-        when {
-            branch "master"
-        }
-        steps {
-            script {
-                def docker_tag = sh(
-                        script: "curl -f --globoff \"https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()=\'DOCKER_TAG\']/following-sibling::value\" | sed -rn 's|<value>(.+)</value>|\\1|p'",
-                        returnStdout: true
-                ).trim()
-                def image = docker.build("docker-i.dbc.dk/update-payara-deployer-prod:${env.BRANCH_NAME}-${env.BUILD_NUMBER}", ". -f docker/deploy/Dockerfile --build-arg UPDATE_PAYARA_DEPLOYER_DOCKER_TAG=${docker_tag}")
-                image.push()
+    stages {
+        stage("Deploy production") {
+            when {
+                branch "master"
             }
+            steps {
+                script {
+                    def docker_tag = sh(
+                            script: "curl -f --globoff \"https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()=\'DOCKER_TAG\']/following-sibling::value\" | sed -rn 's|<value>(.+)</value>|\\1|p'",
+                            returnStdout: true
+                    ).trim()
+                    def image = docker.build("docker-i.dbc.dk/update-payara-deployer-prod:${env.BRANCH_NAME}-${env.BUILD_NUMBER}", ". -f docker/deploy/Dockerfile --build-arg UPDATE_PAYARA_DEPLOYER_DOCKER_TAG=${docker_tag}")
+                    image.push()
+                }
 
 
-            //deploy("prod-boblebad-bks")
-            //deploy("staging-fbs")
+                //deploy("prod-boblebad-bks")
+                //deploy("staging-fbs")
+            }
         }
     }
 }
