@@ -1,0 +1,50 @@
+#!groovy
+
+def workerNode = "devel8"
+
+void deploy(String deployEnvironment) {
+    dir("deploy") {
+        git(url: "gitlab@git-platform.dbc.dk:metascrum/deploy.git", credentialsId: "gitlab-meta")
+    }
+    sh """
+		virtualenv -p python3 .
+		. bin/activate
+		pip3 install --upgrade pip
+		pip3 install -U -e \"git+https://github.com/DBCDK/mesos-tools.git#egg=mesos-tools\"
+		marathon-config-producer update-${deployEnvironment} --root deploy/marathon --template-keys DOCKER_TAG=${env.BRANCH_NAME}-${env.BUILD_NUMBER} -o update-service-${deployEnvironment}.json
+		marathon-deployer -a ${MARATHON_TOKEN} -b https://mcp1.dbc.dk:8443 deploy update-service-${deployEnvironment}.json
+	"""
+}
+
+
+pipeline {
+    agent { label workerNode }
+
+    environment {
+        MARATHON_TOKEN = credentials("METASCRUM_MARATHON_TOKEN")
+    }
+
+    options {
+        timestamps()
+    }
+
+    stage("Deploy production") {
+        when {
+            branch "master"
+        }
+        steps {
+            script {
+                def docker_tag = sh(
+                        script: "curl -f --globoff \"https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()=\'DOCKER_TAG\']/following-sibling::value\" | sed -rn 's|<value>(.+)</value>|\\1|p'",
+                        returnStdout: true
+                ).trim()
+                def image = docker.build("docker-i.dbc.dk/update-payara-deployer-prod:${env.BRANCH_NAME}-${env.BUILD_NUMBER}", ". -f docker/deploy/Dockerfile --build-arg UPDATE_PAYARA_DEPLOYER_DOCKER_TAG=${docker_tag}")
+                image.push()
+            }
+
+
+            //deploy("prod-boblebad-bks")
+            //deploy("staging-fbs")
+        }
+    }
+}
