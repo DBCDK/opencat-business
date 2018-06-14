@@ -75,7 +75,8 @@ services:
     volumes:
       - "../logs/update/app:/data/logs"
       - "../logs/update/server:/usr/local/payara41/glassfish/domains/domain1/logs"
-      - "../../../opencat-business:/data/opencat-business"
+      - "../../distributions:/data/opencat-business/distributions"
+      - "../../template-transpiler:/data/opencat-business/tenplate-transpiler"
     expose:
       - "8080"
       - "8686"
