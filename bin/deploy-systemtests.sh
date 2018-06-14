@@ -136,5 +136,5 @@ echo "rawrepo.provider.name.ph.holdings = dataio-ph-holding-update" >> ${HOME}/.
 
 echo "export SOLR_PORT_NR=${SOLR_PORT_NR}"
 
-echo "Sleeping 20 seconds while updateservice is deploying"
-sleep 20
+echo "Sleeping 60 seconds while updateservice is deploying"
+sleep 60
