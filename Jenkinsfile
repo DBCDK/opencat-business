@@ -36,6 +36,8 @@ pipeline {
         stage("Run scripts") {
             steps {
                 sh "./bin/run-js-tests.sh ${env.GIT_COMMIT}"
+                sh "./bin/deploy-systemtests.sh"
+                sh "./bin/run-ocb-tests.sh"
                 sh "./bin/create_artifact_tarball.sh ${env.GIT_COMMIT}"
             }
         }
