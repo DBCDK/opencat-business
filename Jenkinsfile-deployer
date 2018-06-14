@@ -11,8 +11,8 @@ void deploy(String deployEnvironment) {
 		. bin/activate
 		pip3 install --upgrade pip
 		pip3 install -U -e \"git+https://github.com/DBCDK/mesos-tools.git#egg=mesos-tools\"
-		marathon-config-producer update-${deployEnvironment} --root deploy/marathon --template-keys DOCKER_TAG=${env.BRANCH_NAME}-${env.BUILD_NUMBER} -o update-service-${deployEnvironment}.json
-		marathon-deployer -a ${MARATHON_TOKEN} -b https://mcp1.dbc.dk:8443 deploy update-service-${deployEnvironment}.json
+		marathon-config-producer updateservice-${deployEnvironment} --root deploy/marathon --template-keys DOCKER_TAG=${env.BRANCH_NAME}-${env.BUILD_NUMBER} -o updateservice-${deployEnvironment}.json
+		marathon-deployer -a ${MARATHON_TOKEN} -b https://mcp1.dbc.dk:8443 deploy updateservice-${deployEnvironment}.json
 	"""
 }
 
@@ -29,6 +29,13 @@ pipeline {
     }
 
     stages {
+        stage("Clear workspace") {
+            steps {
+                deleteDir()
+                checkout scm
+            }
+        }
+
         stage("Build docker") {
             steps {
                 script {
@@ -48,9 +55,12 @@ pipeline {
                 branch "master"
             }
             steps {
-                echo "idle"
-                //deploy("prod-boblebad-bks")
-                //deploy("staging-fbs")
+                deploy("prod-boblebad-bks")
+                deploy("prod-boblebad-fbs")
+                deploy("prod-boblebad-dataio")
+
+                //deploy("prod-cisterne-fbs")
+                //deploy("prod-cisterne-dataio")
             }
         }
     }
