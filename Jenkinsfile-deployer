@@ -59,8 +59,8 @@ pipeline {
                 deploy("prod-boblebad-fbs")
                 deploy("prod-boblebad-dataio")
 
-                //deploy("prod-cisterne-fbs")
-                //deploy("prod-cisterne-dataio")
+                deploy("prod-cisterne-fbs")
+                deploy("prod-cisterne-dataio")
             }
         }
     }
