@@ -142,6 +142,7 @@
     },
     "PH": {
       "templates": [
+        "ph-artikel",
         "ph-bog",
         "ph-bogbind",
         "ph-boghoved",
