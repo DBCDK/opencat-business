@@ -44,6 +44,7 @@ pipeline {
                             returnStdout: true
                     ).trim()
                     echo "New docker tag: ${docker_tag}"
+                    sh "./bin/run-js-tests.sh ${env.GIT_COMMIT}"
                     def image = docker.build("docker-i.dbc.dk/update-payara-deployer-prod:${env.BRANCH_NAME}-${env.BUILD_NUMBER}", ". -f docker/deploy/Dockerfile --build-arg UPDATE_PAYARA_DEPLOYER_DOCKER_TAG=${docker_tag}")
                     image.push()
                 }
