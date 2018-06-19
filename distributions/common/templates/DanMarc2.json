@@ -1225,7 +1225,6 @@
         },
         "222":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.36.htm",
-            "repeatable":false,
             "subfields":{
                 "a":{
                     "mandatory":true,
