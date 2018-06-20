@@ -1,0 +1,39 @@
+[
+  {
+    "name": "agency-mismatch",
+    "bugs": [
+      ""
+    ],
+    "description": "Tester om et FBS bibliotek kan sende en lokalpost ind med andet agency id end dem selv",
+    "request": {
+      "authentication": {
+        "group": "830380",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "ph-generel",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": []
+    },
+    "expected": {
+      "validation": {
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Du har ikke ret til at rette posten '125445101' da den er ejet af et andet bibliotek"
+          }
+        ],
+        "rawrepo": []
+      }
+    }
+  }
+]
