@@ -41,6 +41,13 @@ fi
 USER=${USER:-"unknown"}
 export COMPOSE_PROJECT_NAME="${USER}_ocb"
 
+BRANCH=$1
+
+if [ ! $# -eq 0 ]; then
+    echo "Arg given";
+    export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME}_${BRANCH}"
+fi;
+
 #Find the correct outbound ip-address regardless of host configuration
 if [ "$(uname)" == "Darwin" ]
 then

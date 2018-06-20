@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="run-js-tests.sh" type="BashConfigurationType" factoryName="Bash">
+  <configuration default="false" name="run-js-tests" type="BashConfigurationType" factoryName="Bash">
     <module name="opencat-business" />
     <option name="INTERPRETER_OPTIONS" value="-x" />
     <option name="INTERPRETER_PATH" value="/bin/bash" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="PARENT_ENVS" value="true" />
-    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/run-js-tests-in-docker.sh" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/run-js-tests.sh" />
     <option name="PARAMETERS" value="" />
     <method />
   </configuration>
