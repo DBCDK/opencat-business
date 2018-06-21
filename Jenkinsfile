@@ -35,7 +35,7 @@ pipeline {
 
         stage("Run scripts") {
             steps {
-                lock('meta-opencat-business-systemtest-pool') {
+                lock('meta-opencat-business-systemtest') {
                     sh "./bin/run-js-tests.sh ${env.GIT_COMMIT}"
                     sh "./bin/deploy-systemtests.sh"
                     sh "./bin/run-ocb-tests.sh"
