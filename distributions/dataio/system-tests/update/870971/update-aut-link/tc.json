@@ -1,0 +1,143 @@
+[
+  {
+    "name": "870971-update-aut-link",
+    "description": "Tester at hvis man udskifter et autoritetslink med et andet, så opdateres relationerne korrekt",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcartanm",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-19405664-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-19405664-191919.marc"
+          ],
+          "children": [
+            "rawrepo-37885096-870971.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-19405664-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-68147824-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-68147824-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-68147824-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-03308332-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-03308332-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-03308332-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-37885096-870971.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-37885096-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-37885096-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-19405664-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-19405664-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-19405664-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-68147824-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-68147824-191919.marc"
+            ],
+            "children": [
+              "rawrepo-37885096-870971.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-68147824-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": false,
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-03308332-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-03308332-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-03308332-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "expected-37885096-870971.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-37885096-191919.marc"
+            ]
+          },
+          {
+            "record": "expected-37885096-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]

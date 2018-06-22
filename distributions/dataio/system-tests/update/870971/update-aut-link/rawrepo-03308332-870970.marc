@@ -1,0 +1,22 @@
+001 00 *a 03308332 *b 870970 *c 20060629003801 *d 19830421 *f a
+002 00 *b 810010 *d 00459607 *x 81001000459607
+004 00 *r c *a e
+008 00 *t p *u c *a 1971 *b dk *c m *h p *i b *l dan *v 0
+009 00 *a a *g xx
+022 00 *a 0045-9607 *d gratis for medlemmer
+032 00 *a DBR191972 *a DPF197680 *x DAT199906 *x DAT200626
+082 00 *a 636.5
+245 00 *a Dansk erhvervsfjerkræ
+255 00 *a [1, 1. årgang (1971)]-
+260 00 *a Hjerm *d Martin Merrild, Kvirumvej 9, 7560 *b Dansk Erhvervsfjerkræ *c [1971]-
+500 00 *a Månedlig
+505 00 *& 1 *a Tidsskrift
+512 00 *i Varianttitel *t Gemensam nordisk fjäderfätidskrift
+512 00 *a Nr. 11 i hver årgang med titel: Gemensam nordisk fjäderfätidskrift / Foreningen Dansk Erhvervsfjerkræ : Norsk Fjørfelag : Föreningen Svensk Fäderfäskötsel
+526 00 *i Delvis fortsættelse af *t Tidsskrift for fjerkræavl
+539 00 *a Nr. 12, 33. årgang (15. december 2004)
+652 00 *m 63.65
+710 00 *a Dansk Erhvervsfjerkræ
+710 00 *a Norsk Fjørfelag
+710 00 *a Föreningen Svensk Fäderfäskötsel
+996 00 *a 810010
