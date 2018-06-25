@@ -105,6 +105,7 @@
                         }
                     ]
                 },
+                "c": "DanMarc2.fields.008.subfields.c",
                 "d": {
                     "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
                         "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "w",
@@ -272,6 +273,7 @@
         "531": "DanMarc2.fields.531",
         "532": "bog.fields.532",
         "534": "bog.fields.534",
+        "539": "DanMarc2.fields.539",
         "555": "bog.fields.555",
         "596": "DanMarc2.fields.596",
         "600": "bog.fields.600",

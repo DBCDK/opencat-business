@@ -52,6 +52,7 @@
                     "repeatable": false
                 },
                 "u": "DanMarc2.fields.008.subfields.u",
+                "c": "DanMarc2.fields.008.subfields.c",
                 "a": "boghoved.fields.008.subfields.a",
                 "z": "boghoved.fields.008.subfields.z",
                 "b": "boghoved.fields.008.subfields.b",
@@ -149,6 +150,7 @@
         "242": "DanMarc2.fields.242",
         "245": "netpub.fields.245",
         "250": "DanMarc2.fields.250",
+        "255": "DanMarc2.fields.255",
 		"256": "DanMarc2.fields.256",
         "260": "bog.fields.260",
         "300": "DanMarc2.fields.300",
@@ -175,6 +177,7 @@
         "531": "DanMarc2.fields.531",
         "532": "bog.fields.532",
         "534": "bog.fields.534",
+        "539": "DanMarc2.fields.539",
         "555": "bog.fields.555",
         "596":"DanMarc2.fields.596",
         "600": "bog.fields.600",
