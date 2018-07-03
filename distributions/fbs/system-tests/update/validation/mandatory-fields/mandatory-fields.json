@@ -970,7 +970,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "lokalpost",
+            "templateName": "lokal-generel",
             "record": "empty.marc"
         },
         "expected": {

@@ -8,7 +8,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "lokalpostbind",
+            "templateName": "lokal-bogbind",
             "record": "request.marc"
         },
         "setup": {
