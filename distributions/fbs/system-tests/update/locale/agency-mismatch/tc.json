@@ -7,11 +7,11 @@
     "description": "Tester om et FBS bibliotek kan sende en lokalpost ind med andet agency id end dem selv",
     "request": {
       "authentication": {
-        "group": "830380",
+        "group": "710100",
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "ph-generel",
+      "templateName": "bog",
       "record": "request.marc"
     },
     "setup": {

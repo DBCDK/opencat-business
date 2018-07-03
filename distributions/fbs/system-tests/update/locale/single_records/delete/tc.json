@@ -11,7 +11,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "lokalpost",
+            "templateName": "lokal-film",
             "record": "request.marc"
         },
         "setup": {
@@ -50,7 +50,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "lokalpost",
+            "templateName": "lokal-film",
             "record": "request.marc"
         },
         "setup": {
