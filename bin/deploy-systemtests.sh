@@ -49,6 +49,10 @@ else
     export HOST_IP=$( ip -o addr show | grep "inet " | cut -d: -f2- | cut -c2- | egrep -v "^docker|^br" | grep "$(ip route list | grep default | cut -d' ' -f5) " | cut -d' ' -f6 | cut -d/ -f1)
 fi
 
+# For Mac users this command won't work! Neither 'curl -f' nor 'envsubst' commands are supported in Darwin. Instead you have to manually set PROD_VERSION in the compose file
+export PROD_VERSION=$(curl -f --globoff "https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()='DOCKER_TAG']/following-sibling::value" | sed -rn 's|<value>(.+)</value>|\1|p')
+/bin/bash bin/envsubst.sh ${PROD_VERSION}
+
 DEV_OPENAGENCY_URL=${DEV_OPENAGENCY_URL:-NOTSET}
 if [ ${DEV_OPENAGENCY_URL} = "NOTSET" ]
 then
