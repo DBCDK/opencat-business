@@ -28,7 +28,7 @@ services:
       - "5432"
 
   updateserviceDb:
-    image: docker-i.dbc.dk/update-postgres:${PROD_VERSION}
+    image: docker-i.dbc.dk/update-postgres:master-459
     environment:
       - POSTGRES_DB=updateservice
       - POSTGRES_USER=updateservice
@@ -44,7 +44,7 @@ services:
       - "../logs/fakesmtp:/output"
 
   updateservice:
-    image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
+    image: docker-i.dbc.dk/update-payara-deployer:master-459
     env_file:
       - ./settings.env
       - ./db.env
