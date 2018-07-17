@@ -49,12 +49,11 @@ else
     export HOST_IP=$( ip -o addr show | grep "inet " | cut -d: -f2- | cut -c2- | egrep -v "^docker|^br" | grep "$(ip route list | grep default | cut -d' ' -f5) " | cut -d' ' -f6 | cut -d/ -f1)
 fi
 
-# For Mac users this command won't work! Neither 'curl -f' nor 'envsubst' commands are supported in Darwin. Instead you have to manually set PROD_VERSION in the compose file
-export PROD_VERSION=$(curl -f --silent --globoff "https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()='DOCKER_TAG']/following-sibling::value" | sed -rn 's|<value>(.+)</value>|\1|p')
+export PROD_VERSION=$(curl -f --silent --globoff "https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()='DOCKER_TAG']/following-sibling::value" | sed -En 's|<value>(.+)</value>|\1|p')
 echo "Using prod version ${PROD_VERSION} of updateservice"
 
-envsubst '${PROD_VERSION}' < docker-compose.yml > docker-compose.tmp
-mv docker-compose.tmp docker-compose.yml
+# On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
+envsubst '${PROD_VERSION}' < docker-compose.yml.tmpl > docker-compose.yml
 
 DEV_OPENAGENCY_URL=${DEV_OPENAGENCY_URL:-NOTSET}
 if [ ${DEV_OPENAGENCY_URL} = "NOTSET" ]
