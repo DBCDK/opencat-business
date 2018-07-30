@@ -36,7 +36,7 @@
     "fields":{
         "001": "lokal-generel.fields.001",
         "004": "lokal-generel.fields.004",
-        "006": "DanMarc2.fields.006",
+        "006": "lokal-generel.fields.006",
         "008": "lokal-generel.fields.008",
         "009":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
@@ -133,6 +133,11 @@
         "538": "DanMarc2.fields.538",
         "555": "DanMarc2.fields.555",
         "559": "DanMarc2.fields.559",
+        "563": "DanMarc2.fields.563",
+        "565": "DanMarc2.fields.565",
+        "570": "DanMarc2.fields.570",
+        "580": "DanMarc2.fields.580",
+        "583": "DanMarc2.fields.583",
         "596": "DanMarc2.fields.596",
         "600": "lokal-generel.fields.600",
         "610": "lokal-generel.fields.610",
