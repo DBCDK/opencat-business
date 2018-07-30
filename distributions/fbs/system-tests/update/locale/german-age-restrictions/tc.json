@@ -1,0 +1,29 @@
+[
+    {
+        "name": "fbs-local-film-with-german-age-restrictions",
+        "description": "Tester oprettelse af ny lokal post med tyske aldersbegrænsninger i 006d",
+        "request": {
+            "authentication": {
+                "group": "700400",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokal-film",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-new-local.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
