@@ -75,7 +75,7 @@
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>cataloging_template_set</oa:name>
-                    <oa:string>ffu</oa:string>
+                    <oa:string>fbs</oa:string>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_add_dk5_to_phd</oa:name>
