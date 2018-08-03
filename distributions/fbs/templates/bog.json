@@ -54,7 +54,11 @@
                         }
                     ]
                 },
-                "b": "DanMarc2.fields.001.subfields.b",
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values":[ "870970" ]
+                },
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
                 "f": "DanMarc2.fields.001.subfields.f",
