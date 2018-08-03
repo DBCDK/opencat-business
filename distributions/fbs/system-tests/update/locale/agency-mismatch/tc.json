@@ -11,7 +11,7 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "bog",
+      "templateName": "lokal-bog",
       "record": "request.marc"
     },
     "setup": {
