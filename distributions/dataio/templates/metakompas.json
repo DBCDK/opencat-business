@@ -1,0 +1,66 @@
+{
+    "defaults":{
+        "field":{
+            "indicator":"00",
+            "mandatory":false,
+            "repeatable":true
+        },
+        "subfield":{
+            "mandatory":false,
+            "repeatable":true
+        }
+    },
+    "fields": {
+        "001": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdfgot",
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+					"values": [ "870970" ]
+                },
+                "c": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": true
+                            }
+                        }
+                    ]
+                },
+                "d": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                },
+                "f": "DanMarc2.fields.001.subfields.f",
+                "g": "DanMarc2.fields.001.subfields.g",
+                "o": "DanMarc2.fields.001.subfields.o",
+                "t": "DanMarc2.fields.001.subfields.t"
+            }
+        },
+        "665": "DanMarc2.fields.665"
+    }
+}

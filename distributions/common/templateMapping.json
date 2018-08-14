@@ -21,7 +21,8 @@
         "dbcartanm",
         "dbcautoritet",
         "delete",
-        "invalid"
+        "invalid",
+        "metakompas"
       ],
       "folder": "dataio"
     },
