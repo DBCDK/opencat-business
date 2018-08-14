@@ -1339,6 +1339,29 @@
                 "7": "DanMarc2.fields.795.subfields.7"
             }
         },
+        "796":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8a1.htm",
+            "subfields":{
+                "\u00E5":{
+                    "mandatory":true,
+                    "repeatable":false
+                },
+                "a":{
+                    "mandatory":true
+                },
+                "l":{},
+                "z":{
+                    "rules":[{
+                        "type":"SubfieldRules.checkLength",
+                        "params":{
+                            "min":15,
+                            "max":15
+                        }
+                    }
+                    ]
+                }
+            }
+        },
         "840":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b.htm",
             "subfields":{
