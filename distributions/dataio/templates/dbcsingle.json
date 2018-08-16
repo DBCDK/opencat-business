@@ -1355,8 +1355,8 @@
                     "rules":[{
                         "type":"SubfieldRules.checkLength",
                         "params":{
-                            "min":15,
-                            "max":15
+                            "min":12,
+                            "max":12
                         }
                     }
                     ]

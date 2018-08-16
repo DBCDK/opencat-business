@@ -32,7 +32,6 @@
 					"values": [ "870970" ]
                 },
                 "c": {
-                    "mandatory": true,
                     "repeatable": false,
                     "rules": [
                         {
@@ -44,7 +43,6 @@
                     ]
                 },
                 "d": {
-                    "mandatory": true,
                     "repeatable": false,
                     "rules": [
                         {
@@ -55,7 +53,10 @@
                         }
                     ]
                 },
-                "f": "DanMarc2.fields.001.subfields.f",
+                "f": {
+                    "repeatable": false,
+                    "values": [ "a" ]
+                },
                 "g": "DanMarc2.fields.001.subfields.g",
                 "o": "DanMarc2.fields.001.subfields.o",
                 "t": "DanMarc2.fields.001.subfields.t"
