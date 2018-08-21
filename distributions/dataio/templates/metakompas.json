@@ -66,6 +66,21 @@
                 "t": "DanMarc2.fields.001.subfields.t"
             }
         },
+        "004": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "r": {
+                    "mandatory": true,
+                    "values":[ "n", "c" ]
+                },
+                "a": {
+                    "mandatory": true,
+                    "values":[ "e" ]
+                }
+            }
+        },
         "665": "DanMarc2.fields.665"
     }
 }
