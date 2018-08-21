@@ -1,0 +1,86 @@
+[
+  {
+    "name": "metacompass-metakompas-template-no-existing-record",
+    "bugs": [],
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "150077",
+        "user": "netpunkt",
+        "password": "password"
+      },
+      "templateName": "metakompas",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type" : "ERROR",
+            "code" : null,
+            "urlForDocumentation" : null,
+            "ordinalPositionOfField" : null,
+            "ordinalPositionOfSubfield" : null,
+            "ordinalPositionInSubfield" : null,
+            "message" : "Posten 90004158:870970 findes ikke eller er slettet"
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  },
+  {
+    "name": "metacompass-metakompas-template-no-permission",
+    "bugs": [],
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "810010",
+        "user": "netpunkt",
+        "password": "password"
+      },
+      "templateName": "metakompas",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "'metakompas' er ikke en valid skabelon"
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "'metakompas' er ikke en valid skabelon"
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  }
+]

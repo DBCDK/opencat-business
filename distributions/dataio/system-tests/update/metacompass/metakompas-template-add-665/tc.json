@@ -1,6 +1,6 @@
 [
     {
-        "name": "update-common-rec-with-665-field-from-Metakompasset",
+        "name": "metacompass-metakompas-template-add-665",
         "bugs": [],
         "description": "Tester om fællesskabspost bliver opdateret med 665-felt(er) modtaget i en minipost fra Metakompasset",
         "request": {
