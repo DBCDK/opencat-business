@@ -27,7 +27,7 @@
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_dbc_records</oa:name>
-                    <oa:bool>0</oa:bool>
+                    <oa:bool>1</oa:bool>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_public_lib_common_record</oa:name>
