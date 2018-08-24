@@ -17,33 +17,27 @@ var AuthenticateTemplate = function () {
         try {
             var featureIsOk = false;
             if (!template.hasOwnProperty('template')) {
+                Log.info("Validating schema '" + templateName + "' failed because the property 'template' is missing in the schema");
                 return result = false;
             }
 
             var templateSettings = template.template;
             if (!templateSettings.hasOwnProperty('features')) {
+                Log.info("Validating schema '" + templateName + "' failed because the property 'template.features' is missing in the schema");
                 return result = false;
             }
 
             var featureNames = templateSettings.features;
             for (var i = 0; i < featureNames.length; i++) {
                 var name = featureNames[i];
-                if (name === "all") {
-                    featureIsOk = true;
-                    break;
-                }
 
-                if (OpenAgencyClient.hasFeature(groupId, name)) {
-                    featureIsOk = true;
-                    break;
+                if (name !== "all" && !OpenAgencyClient.hasFeature(groupId, name)) {
+                    Log.info("Validating schema '" + templateName + "' failed because '" + name + "' for agency '" + groupId + "' is false");
+                    return result = false;
                 }
             }
 
-            if (featureIsOk) {
-                return result = _groupUseTemplate(templateName, templateGroup, settings);
-            } else {
-                return result = false;
-            }
+            return result = _groupUseTemplate(templateName, templateGroup, settings);
         } finally {
             Log.trace("Exit - AuthenticateTemplate.canAuthenticate(): ", result);
         }
