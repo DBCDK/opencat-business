@@ -698,16 +698,33 @@
                 "f": "DanMarc2.fields.900.subfields.f",
                 "c": "DanMarc2.fields.900.subfields.c",
                 "x": "DanMarc2.fields.900.subfields.x",
-                "z": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkReference"
-                        }
-                    ]
+                "z":{
+                    "repeatable":false
+                },
+                "1":"DanMarc2.fields.900.subfields.1"
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "900z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "900w" ]
+                    }
                 }
-            }
+            ]
         },
         "910":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
@@ -722,16 +739,33 @@
                 "k":"DanMarc2.fields.910.subfields.k",
                 "j":"DanMarc2.fields.910.subfields.j",
                 "x":"DanMarc2.fields.910.subfields.x",
-                "z": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkReference"
-                        }
-                    ]
+                "z":{
+                    "repeatable":false
+                },
+                "1":"DanMarc2.fields.910.subfields.1"
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "w", "z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "w",
+                        "not_presented_subfield": [ "910z" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "z",
+                        "not_presented_subfield": [ "910w" ]
+                    }
                 }
-            }
+            ]
         },
         "930": "DanMarc2.fields.930",
         "933": "DanMarc2.fields.933",
