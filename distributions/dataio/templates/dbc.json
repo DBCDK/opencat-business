@@ -1224,8 +1224,15 @@
             }
         },
         "f05": {
+            "repeatable": false,
             "subfields": {
-                "b": {}
+                "b": {
+                    "repeatable": false
+                },
+                "s":{
+                    "repeatable":false,
+                    "values":[ "s", "u" ]
+                }
             }
         },
         "f06": {

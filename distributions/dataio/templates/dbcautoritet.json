@@ -362,15 +362,7 @@
                 "a": {}
             }
         },
-        "z98": {
-            "subfields": {
-                "a": {}
-            }
-        },
-        "z99": {
-            "subfields": {
-                "a": {}
-            }
-        }
+        "z98": "dbcsingle.fields.z98",
+        "z99": "dbcsingle.fields.z99"
     }
 }
