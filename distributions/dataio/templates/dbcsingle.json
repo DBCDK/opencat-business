@@ -1732,8 +1732,13 @@
             }
         },
         "f05": {
+            "repeatable": false,
             "subfields": {
-                "b": {}
+                "b": {},
+                "s":{
+                    "repeatable":false,
+                    "values":[ "s", "u" ]
+                }
             }
         },
         "f06": {
