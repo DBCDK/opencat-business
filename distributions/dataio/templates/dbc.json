@@ -1226,9 +1226,7 @@
         "f05": {
             "repeatable": false,
             "subfields": {
-                "b": {
-                    "repeatable": false
-                },
+                "b": {},
                 "s":{
                     "repeatable":false,
                     "values":[ "s", "u" ]
