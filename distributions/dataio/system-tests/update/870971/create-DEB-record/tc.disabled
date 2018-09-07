@@ -64,7 +64,8 @@
             "type": "ARTICLE",
             "deleted": false,
             "enqueued": false,
-            "enrichments": [ "debatteret-doc-971-enrichment.marc" ]
+            "enrichments": [ "debatteret-doc-971-enrichment.marc" ],
+            "children": [ "rawrepo-common.marc" ]
           },
           {
             "record": "debatteret-doc-971-enrichment.marc",
