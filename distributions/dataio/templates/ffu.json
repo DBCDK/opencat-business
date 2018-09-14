@@ -152,6 +152,7 @@
         "095": "DanMarc2.fields.095",
         "096":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.32.htm",
+            "mandatory": true,
             "subfields":{
                 "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{},
                 "i":{}, "j":{}, "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{},
