@@ -1560,7 +1560,7 @@
                         {
                             "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
                             "params": {
-                                "fields": [ "032", "630", "d01", "d02", "d03", "d04", "d51", "d52", "d53", "d54" ],
+                                "fields": [ "032", "d01", "d02", "d03", "d04", "d51", "d52", "d53", "d54" ],
                                 "values": [ "DBC", "RET" ]
                             }
                         }
