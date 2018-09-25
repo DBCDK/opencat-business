@@ -16,6 +16,22 @@ void deploy(String deployEnvironment) {
 	"""
 }
 
+void notifyOfdeploy() {
+    final String subject = "Updateservice has been deployed to prod"
+    final String details = """
+    <p>Team: MetaScrum</p>
+    <p>Server: mesos/marathon</p>
+    <p>Komponent: Updateservice</p>
+    <p>${env.JOB_NAME} - Build # ${env.BUILD_NUMBER}</p>
+    <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.BUILD_URL}</a>&QUOT; to view the results.</p>
+    """
+    emailext(
+            subject: "$subject",
+            body: "$details",
+            mimeType: "text/html",
+            to: "it-change@dbc.dk"
+    )
+}
 
 pipeline {
     agent { label workerNode }
@@ -62,6 +78,7 @@ pipeline {
 
                 deploy("prod-cisterne-fbs")
                 deploy("prod-cisterne-dataio")
+                notifyOfdeploy()
             }
         }
     }
