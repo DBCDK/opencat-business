@@ -1,8 +1,8 @@
 {
-        "template": {
+    "template": {
         "description":"Skabelon til indsendelse af metakompasdata til læsekompasset.",
         "features": [ "all" ]
-        },
+    },
 	"defaults":{
         "field":{
             "indicator":"00",
