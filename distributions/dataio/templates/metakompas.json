@@ -1,8 +1,8 @@
 {
-        "template": {
+    "template": {
         "description":"Skabelon til indsendelse af metakompasdata til læsekompasset.",
         "features": [ "all" ]
-        },
+    },
 	"defaults":{
         "field":{
             "indicator":"00",
@@ -81,6 +81,27 @@
                 }
             }
         },
-        "665": "DanMarc2.fields.665"
+        "665": {
+            "subfields": {
+                "&": {},
+                "a": "DanMarc2.fields.665.subfields.a",
+                "i": "DanMarc2.fields.665.subfields.i",
+                "q": "DanMarc2.fields.665.subfields.q",
+                "p": "DanMarc2.fields.665.subfields.p",
+                "m": "DanMarc2.fields.665.subfields.m",
+                "g": "DanMarc2.fields.665.subfields.g",
+                "u": "DanMarc2.fields.665.subfields.u",
+                "e": "DanMarc2.fields.665.subfields.e",
+                "h": "DanMarc2.fields.665.subfields.h",
+                "j": "DanMarc2.fields.665.subfields.j",
+                "k": "DanMarc2.fields.665.subfields.k",
+                "l": "DanMarc2.fields.665.subfields.l",
+                "f": "DanMarc2.fields.665.subfields.f",
+                "s": "DanMarc2.fields.665.subfields.s",
+                "r": "DanMarc2.fields.665.subfields.r",
+                "t": "DanMarc2.fields.665.subfields.t",
+                "n": "DanMarc2.fields.665.subfields.n"
+            }
+        }
     }
 }
