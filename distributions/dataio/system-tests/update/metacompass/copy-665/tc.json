@@ -1,0 +1,52 @@
+[
+    {
+        "name": "metacompass-minimal-record-copy-665",
+        "bugs": [],
+        "description": "Tester om man kan sende en minimal post som metakompas ind, og få opdateret posten korrekt",
+        "request": {
+            "authentication": {
+                "group": "150077",
+                "user": "netpunkt",
+                "password": "password"
+            },
+            "templateName": "metakompas",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "enqueued": true,
+                        "deleted": false,
+                        "enrichments": [ "result-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]
