@@ -3667,21 +3667,15 @@
                 "h":{
                     "repeatable":false
                 },
-                "j":{
-                    "repeatable":false
-                },
+                "j":{},
                 "k":{
                     "repeatable":false
                 },
                 "m":{
                     "repeatable":false
                 },
-                "n":{
-                    "repeatable":false
-                },
-                "o":{
-                    "repeatable":false
-                },
+                "n":{},
+                "o":{},
                 "w":{
                     "repeatable":false
                 },
