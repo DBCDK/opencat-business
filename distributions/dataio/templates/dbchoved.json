@@ -37,8 +37,18 @@
             "subfields": {
                 "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
+                    "mandatory": true,
                     "repeatable": false,
-                    "values": [ "h" ]
+                    "values":[ "h" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkChangedValue",
+                            "params": {
+                                "fromValues": [ "h", "s" ],
+                                "toValues": [ "h", "s" ]
+                            }
+                        }
+                    ]
                 },
                 "n": "DanMarc2.fields.004.subfields.n",
                 "x": "DanMarc2.fields.004.subfields.x"
@@ -196,7 +206,6 @@
 		"023": "DanMarc2.fields.023",
 		"024": "DanMarc2.fields.024",
 		"028": "DanMarc2.fields.028",
-        "032": "DanMarc2.fields.032",
 		"035": "DanMarc2.fields.035",
         "038": "dbcsingle.fields.038",
 		"039": "DanMarc2.fields.039",
@@ -277,7 +286,7 @@
         "651": "DanMarc2.fields.651",
         "652": "dbcsingle.fields.652",
         "654": "dbcsingle.fields.654",
-        "665": "DanMarc2.fields.665",
+        "665": "dbcsingle.fields.665",
         "666": "dbcsingle.fields.666",
         "668": "DanMarc2.fields.668",
         "670": "DanMarc2.fields.670",
@@ -291,6 +300,7 @@
         "770": "dbcsingle.fields.770",
         "780": "dbcsingle.fields.780",
         "795": "dbcsingle.fields.795",
+        "796": "dbcsingle.fields.796",
         "840": "dbcsingle.fields.840",
         "856": "dbcsingle.fields.856",
         "880": "DanMarc2.fields.880",
@@ -300,8 +310,6 @@
         "952": "dbcsingle.fields.952",
         "966": "dbcsingle.fields.966",
         "968": "DanMarc2.fields.968",
-        "990": "dbcsingle.fields.990",
-        "991": "dbcsingle.fields.991",
         "996": "dbcsingle.fields.996",
         "d08": "dbcsingle.fields.d08",
         "d09": "dbcsingle.fields.d09",

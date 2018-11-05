@@ -82,9 +82,9 @@
             "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt025.htm",
             "sorting": "a2&",
             "subfields": {
-                "a": {},
-                "2": {},
-                "&": {}
+                "&": {},
+                "a": "DanMarc2.fields.025.subfields.a",
+                "2": "DanMarc2.fields.025.subfields.2"
             }
         },
         "040":{
@@ -97,7 +97,7 @@
                     "values": [ "DBC" ]
                 },
                 "b": {
-                    "values": "Lister.fields.codes.subfields.language.current.values"
+                    "values": [ "dan" ]
                 }
             }
         },
@@ -143,6 +143,9 @@
                 },
                 "c": {
                     "repeatable": false
+                },
+                "d": {
+                    "repeatable": false
                 }
             }
         },
@@ -173,12 +176,13 @@
         "375":{
             "url": "",
             "subfields": {
+                "&": {
+                },
                 "a": {
                     "values": [ "0", "1", "2", "9" ]
                 },
                 "2": {
-                },
-                "&": {
+                    "values": [ "iso5218" ]
                 }
             }
         },
@@ -199,6 +203,9 @@
                 },
                 "c": {
                     "repeatable": false
+                },
+                "d": {
+                    "repeatable": false
                 }
             }
         },
@@ -218,6 +225,9 @@
                     "repeatable": false
                 },
                 "c": {
+                    "repeatable": false
+                },
+                "d": {
                     "repeatable": false
                 },
                 "x": {
