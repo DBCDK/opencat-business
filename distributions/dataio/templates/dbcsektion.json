@@ -24,7 +24,16 @@
                 "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
                     "repeatable": false,
-                    "values": [ "s" ]
+                    "values": [ "s" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkChangedValue",
+                            "params": {
+                                "fromValues": [ "h", "s" ],
+                                "toValues": [ "h", "s" ]
+                            }
+                        }
+                    ]
                 },
                 "n": "DanMarc2.fields.004.subfields.n",
                 "x": "DanMarc2.fields.004.subfields.x"
@@ -58,7 +67,7 @@
                             "type": "SubfieldRules.lookupRecord",
                             "params": {
                                 "requiredFieldAndSubfield": "004a",
-                                "allowedSubfieldValues": [ "h", "s" ]
+                                "allowedSubfieldValues": [ "h" ]
                             }
                         }
                     ]
@@ -73,7 +82,6 @@
 		"023": "DanMarc2.fields.023",
 		"024": "DanMarc2.fields.024",
 		"028": "DanMarc2.fields.028",
-        "032": "DanMarc2.fields.032",
 		"035": "DanMarc2.fields.035",
         "038": "dbcsingle.fields.038",
 		"039": "DanMarc2.fields.039",
@@ -83,9 +91,6 @@
         "050": "DanMarc2.fields.050",
         "080": "DanMarc2.fields.080",
         "082": "DanMarc2.fields.082",
-        "210": "DanMarc2.fields.210",
-        "222": "DanMarc2.fields.222",
-        "239": "dbcsingle.fields.239",
         "240": "dbcsingle.fields.240",
         "241": "dbcsingle.fields.241",
         "242": "dbcsingle.fields.242",
@@ -231,7 +236,7 @@
                 "0":"DanMarc2.fields.654.subfields.0"
             }
         },
-        "665": "DanMarc2.fields.665",
+        "665": "dbcsingle.fields.665",
         "666": "dbcsingle.fields.666",
         "668": "DanMarc2.fields.668",
         "670": "DanMarc2.fields.670",
@@ -254,8 +259,6 @@
         "952": "dbcsingle.fields.952",
         "966": "dbcsingle.fields.966",
         "968": "DanMarc2.fields.968",
-        "990": "dbcsingle.fields.990",
-        "991": "dbcsingle.fields.991",
         "996": "dbcsingle.fields.996",
         "d08": "dbcsingle.fields.d08",
         "d09": "dbcsingle.fields.d09",

@@ -2214,7 +2214,6 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.5e.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "u":{},
