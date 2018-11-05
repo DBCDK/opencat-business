@@ -1,0 +1,15 @@
+001 00 *a 23675994 *b 870970 *c 20111203082136 *d 20010913 *f a
+004 00 *r n *a b
+008 00 *t m *x 06 *v 0
+014 00 *a 23675528
+032 00 *x ACC200136 *a DBF200217 *x SFD200217 *x ACC200212 *x DAT991149
+245 00 *& b *g Bind 2 *a Hegel og Marx
+250 00 *a 1. udgave *b ÷ *x 2. oplag
+260 00 *c 2002
+300 00 *a 447 sider
+520 00 *a Tidligere: 1. udgave. 2001
+521 00 *a [1. oplag]
+521 00 *b 2. oplag
+530 00 *& 1 *a Indhold: Orakelfilosofiens fremkomst ; Marx' metode ; Marx' profeti ; Marx' etik ; Eftervirkningerne
+990 00 *a SFD *o 200217 *c A
+996 00 *a DBC

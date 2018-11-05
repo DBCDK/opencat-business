@@ -684,7 +684,6 @@
         },
         "034":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.20.htm",
-            "repeatable":false,
             "subfields":{
                 "a":{
                     "repeatable":false
@@ -3667,21 +3666,15 @@
                 "h":{
                     "repeatable":false
                 },
-                "j":{
-                    "repeatable":false
-                },
+                "j":{},
                 "k":{
                     "repeatable":false
                 },
                 "m":{
                     "repeatable":false
                 },
-                "n":{
-                    "repeatable":false
-                },
-                "o":{
-                    "repeatable":false
-                },
+                "n":{},
+                "o":{},
                 "w":{
                     "repeatable":false
                 },
