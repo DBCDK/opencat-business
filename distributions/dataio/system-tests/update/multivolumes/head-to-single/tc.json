@@ -1,0 +1,213 @@
+[
+  {
+    "name": "basis-update-head-to-single-t01",
+    "description": "Omkatalogisering af en eksisterende hovedpost til enkeltstående post skal fejle da den tidligere hovedpost har underliggende poster",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-aut-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "rawrepo-head-870970.marc"
+          ],
+          "enrichments": [
+            "rawrepo-aut-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-head-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "children": [
+            "rawrepo-bind-870970.marc"
+          ],
+          "enrichments": [
+            "rawrepo-head-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-head-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-bind-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-bind-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-bind-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Posten 23675528:870970 kan ikke ændres fra hoved- eller sektionspost til enkeltstående post da posten har underliggende poster"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-aut-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "children": [
+              "rawrepo-head-870970.marc"
+            ],
+            "enrichments": [
+              "rawrepo-aut-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-aut-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-head-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "children": [
+              "rawrepo-bind-870970.marc"
+            ],
+            "enrichments": [
+              "rawrepo-head-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-head-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-bind-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-bind-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-bind-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "basis-update-head-to-single-t02",
+    "description": "Omkatalogisering af en eksisterende hovedpost til enkeltstående post skal gå godt da den tidligere hovedpost ikke har underliggende poster",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-aut-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "rawrepo-head-870970.marc"
+          ],
+          "enrichments": [
+            "rawrepo-aut-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-head-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-head-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-head-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-aut-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "children": [
+              "rawrepo-head-870970.marc"
+            ],
+            "enrichments": [
+              "rawrepo-aut-191919.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-aut-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "result-head-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-head-191919.marc"
+            ]
+          },
+          {
+            "record": "result-head-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
