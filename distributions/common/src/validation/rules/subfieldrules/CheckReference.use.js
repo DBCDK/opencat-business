@@ -68,7 +68,7 @@ var CheckReference = function () {
             var errorMessage;
 
             if (matchingFields.length < 1) {
-                errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.field", fieldNameToCheck);
+                errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.field", field.name);
                 return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
             // if the length of the subfield val is only 3, we have a subfield val matching case 1, meaning its a pure field name eg : 710

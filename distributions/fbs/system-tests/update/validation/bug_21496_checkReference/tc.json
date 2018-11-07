@@ -21,7 +21,7 @@
                         "ordinalPositionOfField": 18,
                         "ordinalPositionOfSubfield": 2,
                         "ordinalPositionInSubfield": null,
-                        "message": "Felt '600' findes ikke i posten"
+                        "message": "Felt '900' indeholder fejlagtig henvisning"
                     }
                 ]
             },
@@ -34,7 +34,7 @@
                         "ordinalPositionOfField": 18,
                         "ordinalPositionOfSubfield": 2,
                         "ordinalPositionInSubfield": null,
-                        "message": "Felt '600' findes ikke i posten"
+                        "message": "Felt '900' indeholder fejlagtig henvisning"
                     }
                 ],
                 "rawrepo": []
