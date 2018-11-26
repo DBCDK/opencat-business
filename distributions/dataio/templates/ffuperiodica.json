@@ -522,7 +522,21 @@
         "621": "DanMarc2.fields.621",
         "622": "DanMarc2.fields.622",
         "630": "DanMarc2.fields.630",
-        "631": "DanMarc2.fields.631",
+        "631":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.73.htm",
+            "subfields":{
+                "a":{},
+                "b":{},
+                "f":{},
+                "g":{},
+                "s":{},
+                "t":{},
+                "8": {
+                    "repeatable":false,
+                    "values": "Lister.fields.codes.subfields.language.all_iso_639_2.values"
+                }
+            }
+        },
         "632": "DanMarc2.fields.632",
         "633": "DanMarc2.fields.633",
         "634": "DanMarc2.fields.634",
@@ -612,7 +626,32 @@
         "662": "DanMarc2.fields.662",
         "665": "DanMarc2.fields.665",
         "666": "DanMarc2.fields.666",
-        "667": "DanMarc2.fields.667",
+        "667":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7g.htm",
+            "subfields":{
+                "f":{},
+                "t":{},
+                "e":{},
+                "s":{},
+                "r":{},
+                "q":{},
+                "m":{},
+                "n":{},
+                "p":{},
+                "l":{},
+                "i":{},
+                "o":{},
+                "u":{},
+                "5":{
+                    "repeatable": false
+                },
+                "6":{},
+                "8": {
+                    "repeatable":false,
+                    "values": "Lister.fields.codes.subfields.language.all_iso_639_2.values"
+                }
+            }
+        },
         "668": "DanMarc2.fields.668",
         "670": "DanMarc2.fields.670",
         "690": "DanMarc2.fields.690",
