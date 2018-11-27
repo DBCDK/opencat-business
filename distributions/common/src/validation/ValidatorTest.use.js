@@ -400,3 +400,174 @@ UnitTest.addFixture("Subfield å must contain a number", function () {
         Validator.__validateSubfield(record, record[0], record[0]['subfields'][0], templateProvider, GenericSettings),
         []);
 });
+UnitTest.addFixture("Check self reference", function () {
+    var bundle = ResourceBundleFactory.getBundle(Validator.BUNDLE_NAME);
+
+    var record = {
+        fields: [
+            {
+                name: "001",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "011",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "013",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "014",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "015",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "016",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "017",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "018",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "520",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "n",
+                        value: "12345678"
+                    }
+                ]
+            }
+        ]
+    };
+
+    Assert.equal("Find all errors",
+        Validator.__checkSelfReference(record),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "011", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "013", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "014", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "015", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "016", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "017", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "018", "a")),
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "520", "n"))]);
+
+
+    record = {
+        fields: [
+            {
+                name: "001",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "011",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "11111111"
+                    }
+                ]
+            },
+            {
+                name: "011",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "22222222"
+                    }
+                ]
+            },
+            {
+                name: "011",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "12345678"
+                    }
+                ]
+            },
+            {
+                name: "011",
+                indicator: "00",
+                subfields: [
+                    {
+                        name: "a",
+                        value: "33333333"
+                    }
+                ]
+            }
+        ]
+    };
+
+
+    Assert.equal("Find error in duplicate field",
+        Validator.__checkSelfReference(record),
+        [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "011", "a"))]);
+
+});

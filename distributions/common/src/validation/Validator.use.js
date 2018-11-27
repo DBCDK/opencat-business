@@ -55,6 +55,48 @@ var Validator = function () {
     }
 
     /**
+     * This function validates that a record is not referencing itself.
+     *
+     * @param record
+     * @returns {Array} An array of validation errors. Empty list means no errors.
+     */
+    function __checkSelfReference(record) {
+        var result = [];
+        var subfield001a = null;
+        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+
+        record.fields.forEach(function (field) {
+            if ("001" === field.name) {
+                field.subfields.forEach(function (subfield) {
+                    if ("a" === subfield.name) {
+                        subfield001a = subfield.value;
+                    }
+                });
+            }
+        });
+
+        record.fields.forEach(function (field) {
+            if (["011", "013", "014", "015", "016", "017", "018"].indexOf(field.name) > -1) {
+                field.subfields.forEach(function (subfield) {
+                    if ("a" === subfield.name && subfield001a === subfield.value) {
+                        result = result.concat(ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", field.name, "a")));
+                    }
+                });
+            }
+
+            if ("520" === field.name) {
+                field.subfields.forEach(function (subfield) {
+                    if ("n" === subfield.name && subfield001a === subfield.value) {
+                        result = result.concat(ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "520", "n")));
+                    }
+                });
+            }
+        });
+
+        return result;
+    }
+
+    /**
      * Validates an entire record.
      *
      * @param {Object} record The record that contains the subfield.
@@ -74,6 +116,7 @@ var Validator = function () {
                 isDelete = isLegalDeleteRecord(record, templateProvider, settings);
                 // Validation should only be performed if it isn't a legal delete record
                 if (!isDelete) {
+                    __checkSelfReference(record);
                     for (var i = 0; i < record.fields.length; i++) {
                         var subResult = __validateField(record, record.fields[i], templateProvider, settings);
                         for (var j = 0; j < subResult.length; j++) {
@@ -202,7 +245,7 @@ var Validator = function () {
                 }
             }
 
-            if(subfield.name === 'å' && !matchNumber.test(subfield.value)) {
+            if (subfield.name === 'å' && !matchNumber.test(subfield.value)) {
                 return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "subfield.value.must.be.number", field.name, subfield.value))];
             }
 
@@ -257,6 +300,7 @@ var Validator = function () {
         'BUNDLE_NAME': BUNDLE_NAME,
         'doValidateRecord': doValidateRecord,
         '__validateField': __validateField,
-        '__validateSubfield': __validateSubfield
+        '__validateSubfield': __validateSubfield,
+        '__checkSelfReference': __checkSelfReference
     };
 }();
