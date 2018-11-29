@@ -92,7 +92,7 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["broend-sync", "oai-set-matcher"]
+            "queueWorkers": ["broend-sync", "oai-set-matcher", "socl-sync"]
           },
           {
             "record": "expected-870970-763000.marc",
