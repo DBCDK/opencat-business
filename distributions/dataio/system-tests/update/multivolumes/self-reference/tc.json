@@ -1,0 +1,49 @@
+[
+  {
+    "name": "volume-self-reference",
+    "description": "Oprettelse af et nyt bind til eksisterende hovedpost.",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": "",
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Referencen i delfelt '014a' må ikke pege på sig selv."
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": "",
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Referencen i delfelt '014a' må ikke pege på sig selv."
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  }
+]
