@@ -50,6 +50,15 @@
                     {
                         "type" : "ERROR",
                         "code" : null,
+                        "urlForDocumentation" : "",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Referencen i delfelt '014a' må ikke pege på sig selv."
+                    },
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
                         "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
                         "ordinalPositionOfField" : 2,
                         "ordinalPositionOfSubfield" : 2,
@@ -78,6 +87,15 @@
             },
             "update": {
                 "errors": [
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "",
+                        "ordinalPositionOfField" : null,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Referencen i delfelt '014a' må ikke pege på sig selv."
+                    },
                     {
                         "type" : "ERROR",
                         "code" : null,
