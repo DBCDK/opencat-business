@@ -116,7 +116,7 @@ var Validator = function () {
                 isDelete = isLegalDeleteRecord(record, templateProvider, settings);
                 // Validation should only be performed if it isn't a legal delete record
                 if (!isDelete) {
-                    __checkSelfReference(record);
+                    result = result.concat(__checkSelfReference(record));
                     for (var i = 0; i < record.fields.length; i++) {
                         var subResult = __validateField(record, record.fields[i], templateProvider, settings);
                         for (var j = 0; j < subResult.length; j++) {
