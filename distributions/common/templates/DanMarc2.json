@@ -296,9 +296,7 @@
                     "values": [ "b", "s" ]
                 },
                 "q": {
-                    "values": [ "aa", "ab", "ac", "ad", "ae", "af", "ba", "bb", "bc",
-                                "bd", "be", "bf", "bg", "bh", "bm", "bn", "bo", "bp",
-                                "bu", "ca", "cb", "cc" ]
+                    "values": "Lister.fields.codes.subfields.file_type.values"
                 },
                 "r": {
                     "repeatable": false,

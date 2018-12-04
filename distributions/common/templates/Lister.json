@@ -254,6 +254,11 @@
 						]
 					}
                 },
+				"file_type": {
+					"values": [ "aa", "ab", "ac", "ad", "ae", "af",
+						"ba", "bb", "bc", "bd", "be", "bf", "bg", "bh", "bm", "bn", "bo", "bp",
+						"bu", "ca", "cb", "cc" ]
+				},
                 "general_mattype": {
                     "values": [
                         "a", "b", "c", "d", "e", "f", "g", "m", "p", "r", "s", "t", "u", "v"

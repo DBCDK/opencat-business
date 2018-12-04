@@ -158,6 +158,14 @@
                         }
                     ]
                 },
+                "q": {
+                    "values": "Lister.fields.codes.subfields.file_type.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+                },
                 "x": {
                     "values": [ "01", "02", "03", "04", "05", "06", "07", "99",
                         "a", "b", "c", "d", "e", "f", "g", "j" ],
@@ -295,6 +303,7 @@
         },
         "250": "DanMarc2.fields.250",
         "256": "DanMarc2.fields.256",
+        "259": "DanMarc2.fields.259",
         "260": "DanMarc2.fields.260",
         "264": "DanMarc2.fields.264",
         "300": "DanMarc2.fields.300",
@@ -309,6 +318,7 @@
         "347": "DanMarc2.fields.347",
         "440": "DanMarc2.fields.440",
         "500": "DanMarc2.fields.500",
+        "501": "DanMarc2.fields.501",
         "502": "DanMarc2.fields.502",
         "504": "DanMarc2.fields.504",
         "505": "DanMarc2.fields.505",
