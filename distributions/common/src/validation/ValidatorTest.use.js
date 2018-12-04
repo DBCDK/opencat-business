@@ -484,16 +484,6 @@ UnitTest.addFixture("Check self reference", function () {
                         value: "12345678"
                     }
                 ]
-            },
-            {
-                name: "520",
-                indicator: "00",
-                subfields: [
-                    {
-                        name: "n",
-                        value: "12345678"
-                    }
-                ]
             }
         ]
     };
@@ -506,8 +496,8 @@ UnitTest.addFixture("Check self reference", function () {
             ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "015", "a")),
             ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "016", "a")),
             ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "017", "a")),
-            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "018", "a")),
-            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "520", "n"))]);
+            ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "018", "a"))
+        ]);
 
 
     record = {
