@@ -83,14 +83,6 @@ var Validator = function () {
                     }
                 });
             }
-
-            if ("520" === field.name) {
-                field.subfields.forEach(function (subfield) {
-                    if ("n" === subfield.name && subfield001a === subfield.value) {
-                        result = result.concat(ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", "520", "n")));
-                    }
-                });
-            }
         });
 
         return result;
