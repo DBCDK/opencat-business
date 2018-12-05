@@ -196,7 +196,29 @@
                 "v": "dbcsingle.fields.008.subfields.v"
             }
         },
-        "009": "dbcsingle.fields.009",
+        "009":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+            "mandatory": true,
+            "repeatable":false,
+            "subfields":{
+                "a": {
+                    "mandatory": true,
+                    "values": "Lister.fields.codes.subfields.general_mattype.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
+                            "params": {
+                                "fields": [ "991" ],
+                                "values": [ "m" ]
+                            }
+                        }
+                    ]
+                },
+                "g": "dbcsingle.fields.009.subfields.g",
+                "b": "DanMarc2.fields.009.subfields.b",
+                "h": "DanMarc2.fields.009.subfields.h"
+            }
+        },
         "011": "dbcsingle.fields.011",
         "017": "dbcsingle.fields.017",
         "018": "dbcsingle.fields.018",
@@ -310,6 +332,7 @@
         "952": "dbcsingle.fields.952",
         "966": "dbcsingle.fields.966",
         "968": "DanMarc2.fields.968",
+        "991": "dbcsingle.fields.991",
         "996": "dbcsingle.fields.996",
         "d08": "dbcsingle.fields.d08",
         "d09": "dbcsingle.fields.d09",

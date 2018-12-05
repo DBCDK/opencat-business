@@ -235,8 +235,14 @@
             "mandatory": true,
             "repeatable":false,
             "subfields":{
-                "a": "DanMarc2.fields.009.subfields.a",
-                "g": "DanMarc2.fields.009.subfields.g",
+                "a": {
+                    "mandatory": true,
+                    "values": "Lister.fields.codes.subfields.general_mattype.values"
+                },
+                "g": {
+                    "mandatory": true,
+                    "values": "Lister.fields.codes.subfields.specific_mattype.values"
+                },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
             }
