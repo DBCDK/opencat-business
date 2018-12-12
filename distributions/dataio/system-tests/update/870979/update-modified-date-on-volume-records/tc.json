@@ -1,0 +1,370 @@
+[
+  {
+    "name": "870979-update-modified-date-on-volume-records",
+    "description": "Når en autoritetspost bliver opdateret skal alle afhængige poster have opdateret ajour dato. Denne test verificere at bindposter bliver håndteret korrekt",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request-aut-vol.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-volume-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-volume-191919.marc"
+          ],
+          "children": [
+            "rawrepo-art-870971.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-volume-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-head-870970.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-head-191919.marc"
+          ],
+          "children": [
+            "rawrepo-volume-870970.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-head-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-art-870971.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-art-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-art-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-aut-vol-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-aut-vol-191919.marc"
+          ],
+          "children": [
+            "rawrepo-volume-870970.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-vol-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-aut-art-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-aut-art-191919.marc"
+          ],
+          "children": [
+            "rawrepo-art-870971.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-art-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-volume-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-volume-191919.marc"
+            ],
+            "children": [
+              "rawrepo-art-870971.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-volume-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-head-870970.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-head-191919.marc"
+            ],
+            "children": [
+              "rawrepo-volume-870970.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-head-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-art-870971.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-art-191919.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-art-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-aut-vol-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-aut-vol-191919.marc"
+            ],
+            "children": [
+              "rawrepo-volume-870970.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-aut-vol-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-aut-art-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-aut-art-191919.marc"
+            ],
+            "children": [
+              "rawrepo-art-870971.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-aut-art-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "870979-update-modified-date-on-article-records",
+    "description": "Når en autoritetspost bliver opdateret skal alle afhængige poster have opdateret ajour dato. Denne test verificere at artikelposter bliver håndteret korrekt",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request-aut-art.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-volume-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-volume-191919.marc"
+          ],
+          "children": [
+            "rawrepo-art-870971.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-volume-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-head-870970.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-head-191919.marc"
+          ],
+          "children": [
+            "rawrepo-volume-870970.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-head-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-art-870971.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-art-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-art-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-aut-vol-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-aut-vol-191919.marc"
+          ],
+          "children": [
+            "rawrepo-volume-870970.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-vol-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-aut-art-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-aut-art-191919.marc"
+          ],
+          "children": [
+            "rawrepo-art-870971.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-art-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-volume-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-volume-191919.marc"
+            ],
+            "children": [
+              "rawrepo-art-870971.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-volume-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-head-870970.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-head-191919.marc"
+            ],
+            "children": [
+              "rawrepo-volume-870970.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-head-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-art-870971.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-art-191919.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-art-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-aut-vol-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-aut-vol-191919.marc"
+            ],
+            "children": [
+              "rawrepo-volume-870970.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-aut-vol-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "rawrepo-aut-art-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-aut-art-191919.marc"
+            ],
+            "children": [
+              "rawrepo-art-870971.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-aut-art-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

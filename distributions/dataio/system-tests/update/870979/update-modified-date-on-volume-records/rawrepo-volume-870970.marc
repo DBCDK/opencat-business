@@ -1,0 +1,13 @@
+001 00 *a 27341772 *b 870970 *c 20181123181922 *d 20080721 *f a
+004 00 *r n *a b
+008 00 *t m *v 0 *u f
+014 00 *a 27341489
+023 00 *a 5701862001192
+032 00 *a DBI200833 *x BKM200833 *x DAT201327
+245 00 *g 1 *a Egypten *p Egypt *e produced, written and directed by Christopher Cassel
+300 00 *n 1 dvd-video *l 90 min.
+666 00 *0  *e Egypten
+666 00 *0  *f oldtiden
+700 00 *5 870979 *6 69416659
+990 00 *o 200833 *b v *u nt
+996 00 *a DBC
