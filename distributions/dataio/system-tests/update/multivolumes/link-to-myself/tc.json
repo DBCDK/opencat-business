@@ -59,24 +59,6 @@
                     {
                         "type" : "ERROR",
                         "code" : null,
-                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                        "ordinalPositionOfField" : 2,
-                        "ordinalPositionOfSubfield" : 2,
-                        "ordinalPositionInSubfield" : null,
-                        "message" : "Delfelt 008a må ikke anvendes i posten '58442895', da delfeltet allerede er anvendt i flerbindsværket"
-                    },
-                    {
-                        "type" : "ERROR",
-                        "code" : null,
-                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                        "ordinalPositionOfField" : 2,
-                        "ordinalPositionOfSubfield" : 3,
-                        "ordinalPositionInSubfield" : null,
-                        "message" : "Delfelt 008z må ikke anvendes i posten '58442895', da delfeltet allerede er anvendt i flerbindsværket"
-                    },
-                    {
-                        "type" : "ERROR",
-                        "code" : null,
                         "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
                         "ordinalPositionOfField" : 3,
                         "ordinalPositionOfSubfield" : 0,
@@ -95,24 +77,6 @@
                         "ordinalPositionOfSubfield" : null,
                         "ordinalPositionInSubfield" : null,
                         "message" : "Referencen i delfelt '014a' må ikke pege på sig selv."
-                    },
-                    {
-                        "type" : "ERROR",
-                        "code" : null,
-                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                        "ordinalPositionOfField" : 2,
-                        "ordinalPositionOfSubfield" : 2,
-                        "ordinalPositionInSubfield" : null,
-                        "message" : "Delfelt 008a må ikke anvendes i posten '58442895', da delfeltet allerede er anvendt i flerbindsværket"
-                    },
-                    {
-                        "type" : "ERROR",
-                        "code" : null,
-                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-                        "ordinalPositionOfField" : 2,
-                        "ordinalPositionOfSubfield" : 3,
-                        "ordinalPositionInSubfield" : null,
-                        "message" : "Delfelt 008z må ikke anvendes i posten '58442895', da delfeltet allerede er anvendt i flerbindsværket"
                     },
                     {
                         "type" : "ERROR",
