@@ -201,7 +201,28 @@
         "980": "DanMarc2.fields.980",
         "990": "dbcsingle.fields.990",
         "991": "dbcsingle.fields.991",
-        "996": "dbcsingle.fields.996",
+        "996":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+            "repeatable":false,
+            "subfields":{
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": "Lister.fields.codes.subfields.libraries.996a.values",
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
+                            "params": {
+                                "fields": [ "032", "d01", "d02", "d03", "d04", "d51", "d52", "d53", "d54" ],
+                                "values": [ "DBC", "RET", "810010" ]
+                            }
+                        }
+                    ]
+                },
+                "m":"Lister.fields.codes.subfields.libraries.996m",
+                "o":"Lister.fields.codes.subfields.libraries.996o"
+            }
+        },
         "d08": "dbcsingle.fields.d08",
         "d09": "dbcsingle.fields.d09",
         "d21": "dbcsingle.fields.d21",
