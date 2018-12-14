@@ -52,6 +52,10 @@
             "repeatable": false,
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
+                "t": {
+                    "repeatable": false,
+                    "values": [ "m", "s", "p" ]
+                },
                 "u": "DanMarc2.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
                 "z": "DanMarc2.fields.008.subfields.z",
