@@ -1116,9 +1116,7 @@
         },
         "665":{
             "subfields":{
-                "&": {
-                    "repeatable": false
-                },
+                "&": {},
                 "a": "DanMarc2.fields.665.subfields.a",
                 "i": "DanMarc2.fields.665.subfields.i",
                 "q": "DanMarc2.fields.665.subfields.q",
