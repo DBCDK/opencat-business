@@ -4,7 +4,7 @@
 SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
-RAWREPO_VERSION=1.12-snapshot
+RAWREPO_VERSION=1.13-snapshot
 HOLDINGS_ITEMS_VERSION=1.1.1-snapshot
 
 cd ${PROJECT_ROOT}/docker
