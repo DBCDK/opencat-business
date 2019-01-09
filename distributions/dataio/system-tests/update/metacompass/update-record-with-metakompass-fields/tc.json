@@ -1,0 +1,52 @@
+[
+    {
+        "name": "update-record-with-metakompass-fields",
+        "bugs": [],
+        "description": "Tester om man kan opdatere en eksisterende post med metakompass felter via dbckat - dvs der skal ikke ske noget med 665",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "password"
+            },
+            "templateName": "dbcsingle",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-45964981-870970.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-45964981-191919.marc" ]
+                },
+                {
+                    "record": "rawrepo-45964981-191919.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-45964981-870970.marc",
+                        "type": "MARCXCHANGE",
+                        "enqueued": true,
+                        "deleted": false,
+                        "enrichments": [ "result-45964981-191919.marc" ]
+                    },
+                    {
+                        "record": "result-45964981-191919.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]

@@ -1,0 +1,24 @@
+001 00 *a 45964981 *b 870970 *c 20190107123500 *d 20181204 *f a
+004 00 *r n *a e
+008 00 *t m *v 7
+009 00 *a a *g xx
+021 00 *e 9788797099209 *c hf.
+032 00 *x ACC201849
+245 00 *a Mig og min olding
+260 00 *b Grodin Gagnon
+300 00 *a sider
+652 00 *m NY TITEL
+665 00 *& positiv *& lektor *n optimistisk
+665 00 *& humoristisk *& lektor *n humoristisk
+665 00 *& dramatisk *& lektor *n bevægende
+665 00 *& trist *& lektor *n vemodig
+665 00 *& lektor *a Humoristisk, vemodig og bevægende *e alderdom *e venskab *e mænd *i 2000-2009 *q Canada *r jeg-fortæller *s lettilgængeligt sprog *t fremadskridende *u realistisk
+665 00 *& lektor *h mand *h midaldrende *k sympatisk *k sød *k god *k tolerant *l andre
+665 00  *& lektor *h ældre *h mand *k optimistisk *k sympatisk
+666 00 *0 *s alderdom
+666 00 *0 *s venskab
+666 00 *0 *s mænd
+666 00 *0 *q Canada
+666 00 *0 *i 2000-2009
+990 00 *b l *b v
+996 00 *a DBC
