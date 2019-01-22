@@ -220,9 +220,8 @@
             "repeatable":false,
             "sorting": "ga",
             "subfields":{
-                "a":{
-                    "mandatory":true
-                },
+                "g":"DanMarc2.fields.245.subfields.g",
+                "a":"DanMarc2.fields.245.subfields.a",
                 "b":"DanMarc2.fields.245.subfields.b",
                 "\u00f8":"DanMarc2.fields.245.subfields.\u00f8",
                 "c":"DanMarc2.fields.245.subfields.c",
