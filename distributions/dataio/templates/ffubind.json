@@ -27,6 +27,7 @@
                 "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
                     "mandatory": true,
+                    "repeatable": false,
                     "values":[ "b" ]
                 },
                 "n": "DanMarc2.fields.004.subfields.n"
