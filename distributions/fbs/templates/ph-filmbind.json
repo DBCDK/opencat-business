@@ -440,29 +440,7 @@
                 "\u00f8": "DanMarc2.fields.739.subfields.\u00f8"
             }
         },
-        "740":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.86.htm",
-            "subfields":{
-                "a": "DanMarc2.fields.740.subfields.a",
-                "\u00f8": "DanMarc2.fields.740.subfields.\u00f8",
-                "s": "DanMarc2.fields.740.subfields.s",
-                "r": "DanMarc2.fields.740.subfields.r",
-                "q": "DanMarc2.fields.740.subfields.q",
-                "u": "DanMarc2.fields.740.subfields.u",
-                "d": "DanMarc2.fields.740.subfields.d",
-                "e": "DanMarc2.fields.740.subfields.e",
-                "f": "DanMarc2.fields.740.subfields.f",
-                "g": "DanMarc2.fields.740.subfields.g",
-                "h": "DanMarc2.fields.740.subfields.h",
-                "j": "DanMarc2.fields.740.subfields.j",
-                "k": "DanMarc2.fields.740.subfields.k",
-                "m": "DanMarc2.fields.740.subfields.m",
-                "n": "DanMarc2.fields.740.subfields.n",
-                "o": "DanMarc2.fields.740.subfields.o",
-                "w": "DanMarc2.fields.740.subfields.w",
-                "1": "DanMarc2.fields.740.subfields.1"
-            }
-        },
+        "740": "ph-generel.fields.740",
         "745": "DanMarc2.fields.745",
         "770": "DanMarc2.fields.770",
         "780": "DanMarc2.fields.780",
