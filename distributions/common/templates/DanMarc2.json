@@ -3399,9 +3399,7 @@
                 "d":{
 					"repeatable": false
 				},
-                "e":{
-					"repeatable": false
-				},
+                "e":{},
                 "v":{}
             }
         },
