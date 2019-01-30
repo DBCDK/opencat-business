@@ -167,32 +167,7 @@
                 "\u00f8": "DanMarc2.fields.239.subfields.\u00f8"
             }
         },
-        "240":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.38.htm",
-            "repeatable":false,
-            "subfields":{
-                "a": "DanMarc2.fields.240.subfields.a",
-                "\u00f8": "DanMarc2.fields.240.subfields.\u00f8",
-                "s": "DanMarc2.fields.240.subfields.s",
-                "r": "DanMarc2.fields.240.subfields.r",
-                "q": "DanMarc2.fields.240.subfields.q",
-                "u": "DanMarc2.fields.240.subfields.u",
-                "d": "DanMarc2.fields.240.subfields.d",
-                "e": "DanMarc2.fields.240.subfields.e",
-                "f": "DanMarc2.fields.240.subfields.f",
-                "g": "DanMarc2.fields.240.subfields.g",
-                "h": "DanMarc2.fields.240.subfields.h",
-                "j": "DanMarc2.fields.240.subfields.j",
-                "k": "DanMarc2.fields.240.subfields.k",
-                "l": "DanMarc2.fields.240.subfields.l",
-                "m": "DanMarc2.fields.240.subfields.m",
-                "n": "DanMarc2.fields.240.subfields.n",
-                "o": "DanMarc2.fields.240.subfields.o",
-                "w": "DanMarc2.fields.240.subfields.w",
-                "1": "DanMarc2.fields.240.subfields.1",
-                "5": "DanMarc2.fields.240.subfields.5"
-            }
-        },
+        "240": "ph-generel.fields.240",
         "241": "DanMarc2.fields.241",
         "242": "DanMarc2.fields.242",
         "243": "DanMarc2.fields.243",

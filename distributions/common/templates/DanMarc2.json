@@ -711,9 +711,9 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.20a.htm",
             "subfields":{
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
-                }
+                },
+                "x":{}
             }
         },
         "036":{
@@ -1276,7 +1276,9 @@
                 "a":{
 					"repeatable": false
 				},
-                "\u00f8":{},
+                "\u00f8":{
+                    "repeatable": false
+                },
                 "s":{},
                 "r":{
 					"repeatable": false
