@@ -36,17 +36,20 @@
             }
         }
     ],
+    "comment": "DETTE ER EN TEST-KOMMENTAR",
     "fields":{
         "001": "lokal-generel.fields.001",
         "004": "lokal-generel.fields.004",
         "006": "lokal-generel.fields.006",
         "008": "lokal-generel.fields.008",
         "009":{
+            "comment": "DETTE ER EN TEST-KOMMENTAR",
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
             "mandatory":true,
             "repeatable":false,
             "subfields":{
                 "a":{
+                    "comment": "DETTE ER EN TEST-KOMMENTAR",
                     "mandatory":true,
                     "repeatable":false,
                     "values":[ "e", "f", "g", "u" ]
