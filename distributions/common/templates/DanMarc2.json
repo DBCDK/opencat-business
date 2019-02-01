@@ -2045,17 +2045,17 @@
                 },
                 "z":{
                     "rules":[
-			{
+			            {
                             "type":"SubfieldRules.checkISSN"
                         }
-		    ]
+		            ]
                 }
             },
-	    "rules": [
-		{
+	        "rules": [
+		        {
                     "type": "FieldRules.exclusiveSubfield"
                 }
-	    ]
+	        ]
         },
         "521":{
             "url":"www.kat-format.dk/danMARC2/Danmarc2.57.htm",
@@ -2818,30 +2818,30 @@
                 "5":{
 					"repeatable": false
 				},
-                "6":{},
-                "rules": [
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "a",
-                            "not_presented_subfield": [ "6006" ]
-                        }
-                    },
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "6",
-                            "not_presented_subfield": [ "600a" ]
-                        }
-                    },
-                    {
-                        "type": "FieldRules.exclusiveSubfieldParameterized",
-                        "params": {
-                            "subfields": [ "a", "6" ]
-                        }
+                "6":{}
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "a",
+                        "not_presented_subfield": [ "6006" ]
                     }
-                ]
-            }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "6",
+                        "not_presented_subfield": [ "600a" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "a", "6" ]
+                    }
+                }
+            ]
         },
         "610":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6e.htm",
@@ -3198,24 +3198,24 @@
 					"repeatable": false
 				},
                 "0":{},
-                "1":{},
-                "rules": [
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "m",
-                            "not_presented_subfield": [ "654o", "652m", "652o" ]
-                        }
-                    },
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "o",
-                            "not_presented_subfield": [ "654m", "652m", "652o" ]
-                        }
+                "1":{}
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "m",
+                        "not_presented_subfield": [ "654o", "652m", "652o" ]
                     }
-                ]
-            }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "o",
+                        "not_presented_subfield": [ "654m", "652m", "652o" ]
+                    }
+                }
+            ]
         },
         "655":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7b.htm",
@@ -3734,17 +3734,17 @@
                 "5":{},
                 "6":{
                     "repeatable":false
-                },
-				"rules": [
-				    {
-				        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
-				        "params": {
-				            "field": "795",
-			    	        "subfields": [ "a" ]
-				        }
-				    }
-				]
-            }
+                }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+                    "params": {
+                        "field": "795",
+                        "subfields": [ "a" ]
+                    }
+                }
+            ]
         },
         "780":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.89.htm",
@@ -3778,17 +3778,17 @@
                 "5":{
 					"repeatable": false
 				},
-                "6":{},
-				"rules": [
-				    {
-				        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
-				        "params": {
-				            "field": "795",
-			    	        "subfields": [ "a" ]
-				        }
-				    }
-				]
-            }
+                "6":{}
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+                    "params": {
+                        "field": "795",
+                        "subfields": [ "a" ]
+                    }
+                }
+            ]
         },
         "795":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8a.htm",
@@ -4421,7 +4421,6 @@
                 "1":{}
             },
             "rules": [
-
                 {
                     "type": "FieldRules.exclusiveSubfieldParameterized",
                     "params": {

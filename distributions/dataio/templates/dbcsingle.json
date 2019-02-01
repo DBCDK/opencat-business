@@ -1186,37 +1186,37 @@
                             "type": "SubfieldRules.checkFaust"
                         }
                     ]
-                },
-                "rules": [
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "a",
-                            "not_presented_subfield": [ "7006" ]
-                        }
-                    },
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "5",
-                            "not_presented_subfield": [ "700a" ]
-                        }
-                    },
-                    {
-                        "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                        "params": {
-                            "subfield": "6",
-                            "not_presented_subfield": [ "700a" ]
-                        }
-                    },
-                    {
-                        "type": "FieldRules.exclusiveSubfieldParameterized",
-                        "params": {
-                            "subfields": [ "a", "6" ]
-                        }
+                }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "a",
+                        "not_presented_subfield": [ "7006" ]
                     }
-                ]
-            }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "5",
+                        "not_presented_subfield": [ "700a" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
+                    "params": {
+                        "subfield": "6",
+                        "not_presented_subfield": [ "700a" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "a", "6" ]
+                    }
+                }
+            ]
         },
         "710":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.84.htm",
@@ -1305,17 +1305,17 @@
                 "f": "DanMarc2.fields.770.subfields.f",
                 "c": "DanMarc2.fields.770.subfields.c",
                 "0": "DanMarc2.fields.770.subfields.0",
-                "4": "DanMarc2.fields.770.subfields.4",
-                "rules": [
-                    {
-                        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
-                        "params": {
-                            "field": "795",
-                            "subfields": [ "a" ]
-                        }
+                "4": "DanMarc2.fields.770.subfields.4"
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+                    "params": {
+                        "field": "795",
+                        "subfields": [ "a" ]
                     }
-                ]
-            }
+                }
+            ]
         },
         "780":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.89.htm",
@@ -1332,17 +1332,17 @@
                 "k": "DanMarc2.fields.780.subfields.k",
                 "j": "DanMarc2.fields.780.subfields.j",
                 "0": "DanMarc2.fields.780.subfields.0",
-                "4": "DanMarc2.fields.780.subfields.4",
-                "rules": [
-                    {
-                        "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
-                        "params": {
-                            "field": "795",
-                            "subfields": [ "a" ]
-                        }
+                "4": "DanMarc2.fields.780.subfields.4"
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.fieldDemandsOtherFieldAndSubfields",
+                    "params": {
+                        "field": "795",
+                        "subfields": [ "a" ]
                     }
-                ]
-            }
+                }
+            ]
         },
         "795":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8a.htm",
