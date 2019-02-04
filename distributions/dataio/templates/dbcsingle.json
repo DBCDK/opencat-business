@@ -1571,13 +1571,14 @@
                 "b": "DanMarc2.fields.990.subfields.b",
                 "c": "DanMarc2.fields.990.subfields.c",
                 "m": "DanMarc2.fields.990.subfields.m",
-                "k":{},
-                "p":{},
-                "q":{},
-                "s":{},
+                "k": {},
+                "p": {},
+                "q": {},
+                "s": {},
                 "t": "DanMarc2.fields.990.subfields.t",
                 "n": "DanMarc2.fields.990.subfields.n",
-                "u": "DanMarc2.fields.990.subfields.u"
+                "u": "DanMarc2.fields.990.subfields.u",
+                "&": {}
             }
         },
         "991":{
