@@ -71,7 +71,7 @@
                 "z": "DanMarc2.fields.008.subfields.z",
                 "b": "DanMarc2.fields.008.subfields.b",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
+                "l": "ph-generel.fields.008.subfields.l",
                 "v": "DanMarc2.fields.008.subfields.v"
             },
         	"rules": [
@@ -156,7 +156,7 @@
         "024": "DanMarc2.fields.024",
         "035": "DanMarc2.fields.035",
         "039": "DanMarc2.fields.039",
-        "041": "DanMarc2.fields.041",
+        "041": "ph-bog.fields.041",
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
         "048": "DanMarc2.fields.048",

@@ -108,15 +108,7 @@
                     ]
                 },
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": {
-                    "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
+                "l": "ph-generelhoved.fields.008.subfields.l",
                 "o": {
                     "repeatable": false,
                     "values": [ "b", "s" ],
@@ -177,20 +169,7 @@
         "021": "DanMarc2.fields.023",
         "023": "DanMarc2.fields.023",
         "035": "DanMarc2.fields.035",
-        "041":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
-            "repeatable":false,
-            "sorting":"asbcpeu",
-            "subfields":{
-                "a": "DanMarc2.fields.041.subfields.a",
-                "p": "DanMarc2.fields.041.subfields.p",
-                "b": "DanMarc2.fields.041.subfields.b",
-                "c": "DanMarc2.fields.041.subfields.c",
-                "e": "DanMarc2.fields.041.subfields.e",
-                "s": "DanMarc2.fields.041.subfields.s",
-                "u": "DanMarc2.fields.041.subfields.u"
-            }
-        },
+        "041": "ph-generelhoved.fields.041",
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
         "048": "DanMarc2.fields.048",

@@ -71,26 +71,11 @@
                     "repeatable": false,
                     "rules": [
                         {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
+                            "type": "SubfieldRules.checkYear"
                         }
                     ]
                 },
-                "z": {
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 4,
-                                "max": 4
-                            }
-                        }
-                    ]
-                },
+                "z": "DanMarc2.fields.008.subfields.z",
                 "b": "DanMarc2.fields.008.subfields.b",
                 "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
@@ -101,7 +86,7 @@
                 "i": "DanMarc2.fields.008.subfields.i",
                 "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
+                "l": "ph-generel.fields.008.subfields.l",
                 "m": "DanMarc2.fields.008.subfields.m",
                 "n": "DanMarc2.fields.008.subfields.n",
                 "o": "DanMarc2.fields.008.subfields.o",
@@ -156,17 +141,7 @@
         "023": "DanMarc2.fields.023",
         "032": "DanMarc2.fields.032",
         "035": "DanMarc2.fields.035",
-        "041":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
-            "subfields":{
-                "a":{},
-                "b":{},
-                "c":{},
-                "p":{},
-                "d":{},
-                "e":{}
-            }
-        },
+        "041": "ph-bog.fields.041",
         "042": "DanMarc2.fields.042",
         "044": "DanMarc2.fields.044",
         "050": "DanMarc2.fields.050",

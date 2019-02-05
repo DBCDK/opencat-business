@@ -147,7 +147,7 @@
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": {
                     "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values",
                     "rules": [
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
@@ -208,7 +208,7 @@
         "035": "DanMarc2.fields.035",
         "038": "DanMarc2.fields.038",
         "039": "DanMarc2.fields.039",
-        "041": "DanMarc2.fields.041",
+        "041": "ph-generel.fields.041",
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
         "048": "DanMarc2.fields.048",
