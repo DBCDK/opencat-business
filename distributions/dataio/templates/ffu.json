@@ -77,7 +77,7 @@
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": {
                     "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.language.all_iso_639_2.values",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values",
                     "comment": "Anden sprogkodetabel end DanMarc2.json."
                 },
                 "m": "DanMarc2.fields.008.subfields.m",
@@ -126,14 +126,30 @@
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "subfields":{
-                "a":{},
-                "b":{},
-                "c":{},
-                "s":{},
-                "p":{},
-                "d":{},
-                "e":{},
-                "u":{}
+                "a":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "b":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "c":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "s":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "p":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "d":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "e":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "u":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                }
             }
         },
         "042": "DanMarc2.fields.042",
@@ -192,7 +208,6 @@
         "099": "DanMarc2.fields.099",
         "100":{
             "comment1": "*4: funktionskoder valideres ikke.",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.33.htm",
             "repeatable": false,
             "subfields":{
@@ -203,6 +218,7 @@
                 "f": "DanMarc2.fields.100.subfields.f",
                 "c": "DanMarc2.fields.100.subfields.c",
                 "b": "DanMarc2.fields.100.subfields.b",
+                "0": "DanMarc2.fields.100.subfields.0",
                 "1": "DanMarc2.fields.100.subfields.1",
                 "4":{
                     "rules":[{
@@ -220,7 +236,6 @@
         },
         "110":{
             "comment1": "*4: funktionskoder valideres ikke.",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.34.htm",
             "repeatable": false,
             "subfields":{
@@ -232,6 +247,7 @@
                 "k": "DanMarc2.fields.110.subfields.k",
                 "j": "DanMarc2.fields.110.subfields.j",
                 "b": "DanMarc2.fields.110.subfields.b",
+                "0": "DanMarc2.fields.110.subfields.0",
                 "1": "DanMarc2.fields.110.subfields.1",
                 "4":{
                     "rules":[{
@@ -251,7 +267,6 @@
         "222": "DanMarc2.fields.222",
         "239":{
             "comment1": "*4: funktionskoder valideres ikke.",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.37.htm",
             "repeatable": false,
             "subfields":{
@@ -265,6 +280,7 @@
                 "\u00f8": "DanMarc2.fields.239.subfields.\u00f8",
                 "u": "DanMarc2.fields.239.subfields.u",
                 "v": "DanMarc2.fields.239.subfields.v",
+                "0": "DanMarc2.fields.239.subfields.0",
                 "1": "DanMarc2.fields.239.subfields.1",
                 "4":{
                     "rules":[{
@@ -280,7 +296,6 @@
             }
         },
         "240":{
-            "comment": "*0: udeladt, da den er forbeholdt DBC.",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.38.htm",
             "repeatable":false,
             "subfields":{
@@ -302,6 +317,7 @@
                 "n": "DanMarc2.fields.240.subfields.n",
                 "o": "DanMarc2.fields.240.subfields.o",
                 "w": "DanMarc2.fields.240.subfields.w",
+                "0": "DanMarc2.fields.240.subfields.0",
                 "1": "DanMarc2.fields.240.subfields.1",
                 "5": "DanMarc2.fields.240.subfields.5"
             }
@@ -600,7 +616,6 @@
             }
         },
         "652":{
-            "comment": "*0 udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "subfields":{
                 "m":"DanMarc2.fields.652.subfields.m",
@@ -620,11 +635,11 @@
                 "o":"DanMarc2.fields.652.subfields.o",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r",
+                "0": "DanMarc2.fields.652.subfields.0",
                 "1":"DanMarc2.fields.652.subfields.1"
             }
         },
         "654":{
-            "comment": "*0 udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "subfields":{
                 "m":"DanMarc2.fields.654.subfields.m",
@@ -644,6 +659,7 @@
                 "o":"DanMarc2.fields.654.subfields.o",
                 "q":"DanMarc2.fields.654.subfields.q",
                 "r":"DanMarc2.fields.654.subfields.r",
+                "0":"DanMarc2.fields.654.subfields.0",
                 "1":"DanMarc2.fields.654.subfields.1"
             }
         },
@@ -675,7 +691,7 @@
                 "6":{},
                 "8": {
                     "repeatable":false,
-                    "values": "Lister.fields.codes.subfields.language.all_iso_639_2.values"
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
                 }
             }
         },
@@ -684,7 +700,6 @@
         "690": "DanMarc2.fields.690",
         "700":{
             "comment1": "*4: funktionskoder valideres ikke",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",
             "subfields":{
                 "a":"DanMarc2.fields.700.subfields.a",
@@ -708,6 +723,7 @@
                 "q":"DanMarc2.fields.700.subfields.q",
                 "\u00f8":"DanMarc2.fields.700.subfields.q",
                 "g":"DanMarc2.fields.700.subfields.g",
+                "0": "DanMarc2.fields.700.subfields.0",
                 "1":"DanMarc2.fields.700.subfields.1",
                 "4":{
                     "rules":[{
@@ -725,7 +741,6 @@
         },
         "710":{
             "comment1": "*4: funktionskoder valideres ikke",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.84.htm",
             "subfields":{
                 "a":"DanMarc2.fields.710.subfields.a",
@@ -788,7 +803,6 @@
         },
         "739":{
             "comment1": "*4: funktionskoder valideres ikke",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85.htm",
             "subfields":{
                 "a":"DanMarc2.fields.739.subfields.a",
@@ -801,6 +815,7 @@
                 "\u00f8":"DanMarc2.fields.739.subfields.\u00f8",
                 "u":"DanMarc2.fields.739.subfields.u",
                 "v":"DanMarc2.fields.739.subfields.v",
+                "0":"DanMarc2.fields.739.subfields.0",
                 "1":"DanMarc2.fields.739.subfields.1",
                 "4":{
                     "rules":[{
@@ -820,7 +835,6 @@
         "745": "DanMarc2.fields.745",
         "770":{
             "comment1": "*4: funktionskoder valideres ikke",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.88.htm",
             "subfields":{
                 "a":"DanMarc2.fields.770.subfields.a",
@@ -829,6 +843,7 @@
                 "e":"DanMarc2.fields.770.subfields.e",
                 "f":"DanMarc2.fields.770.subfields.f",
                 "c":"DanMarc2.fields.770.subfields.c",
+                "0":"DanMarc2.fields.770.subfields.0",
                 "1":"DanMarc2.fields.770.subfields.1",
                 "4":{
                     "rules":[{
@@ -855,7 +870,6 @@
         },
         "780":{
             "comment1": "*4: funktionskoder valideres ikke",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.89.htm",
             "subfields":{
                 "a":"DanMarc2.fields.780.subfields.a",
@@ -865,6 +879,7 @@
                 "i":"DanMarc2.fields.780.subfields.i",
                 "k":"DanMarc2.fields.780.subfields.k",
                 "j":"DanMarc2.fields.780.subfields.j",
+                "0":"DanMarc2.fields.780.subfields.0",
                 "1":"DanMarc2.fields.780.subfields.1",
                 "4":{
                     "rules":[{
@@ -890,7 +905,6 @@
             ]
         },
         "795":{
-            "comment": "*0: udeladt, da den er forbeholdt DBC",
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8a.htm",
             "subfields":{
                 "\u00E5":{
@@ -914,6 +928,7 @@
                 "y":"DanMarc2.fields.795.subfields.y",
                 "z":"DanMarc2.fields.795.subfields.z",
                 "\u00f8":"DanMarc2.fields.795.subfields.\u00f8",
+                "0":"DanMarc2.fields.795.subfields.0",
                 "1":"DanMarc2.fields.795.subfields.1",
                 "7":"DanMarc2.fields.795.subfields.7"
             }
@@ -937,7 +952,6 @@
         "887": "DanMarc2.fields.887",
         "900":{
             "comment1": "*z: 'checkReference' udeladt, da for mange poster fejler på den.",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
             "subfields":{
                 "a":"DanMarc2.fields.900.subfields.a",
@@ -951,6 +965,7 @@
                 "z":{
                     "repeatable":false
                 },
+                "0":"DanMarc2.fields.900.subfields.0",
                 "1":"DanMarc2.fields.900.subfields.1"
             },
             "rules": [
@@ -978,7 +993,6 @@
         },
         "910":{
             "comment1": "*z: 'checkReference' udeladt, da for mange poster fejler på den.",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9a.htm",
             "subfields":{
                 "a": "DanMarc2.fields.910.subfields.a",
@@ -995,6 +1009,7 @@
                 "z":{
                     "repeatable":false
                 },
+                "0":"DanMarc2.fields.910.subfields.0",
                 "1":"DanMarc2.fields.910.subfields.1"
             },
             "rules": [
@@ -1211,7 +1226,6 @@
         },
         "966":{
             "comment1": "*z: 'checkReference' udeladt, da for mange poster fejler på den.",
-            "comment2": "*0: udeladt, da den er forbeholdt DBC",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a0.htm",
             "subfields":{
                 "f": "DanMarc2.fields.966.subfields.f",
@@ -1231,7 +1245,8 @@
                 "w": "DanMarc2.fields.966.subfields.w",
                 "z":{
                     "repeatable":false
-                }
+                },
+                "0": "DanMarc2.fields.966.subfields.0"
             },
             "rules": [
                 {

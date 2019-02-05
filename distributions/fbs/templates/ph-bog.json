@@ -87,7 +87,7 @@
                 "i": "DanMarc2.fields.008.subfields.i",
                 "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
+                "l": "ph-generel.fields.008.subfields.l",
                 "m": "DanMarc2.fields.008.subfields.m",
                 "o": "DanMarc2.fields.008.subfields.o",
                 "x": "DanMarc2.fields.008.subfields.x",
@@ -139,12 +139,12 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "sorting": "apbcde",
             "subfields": {
-                "a": "DanMarc2.fields.041.subfields.a",
-                "b": "DanMarc2.fields.041.subfields.b",
-                "c": "DanMarc2.fields.041.subfields.c",
-                "d": "DanMarc2.fields.041.subfields.d",
-                "e": "DanMarc2.fields.041.subfields.e",
-                "p": "DanMarc2.fields.041.subfields.p"
+                "a": "ph-generel.fields.041.subfields.a",
+                "b": "ph-generel.fields.041.subfields.b",
+                "c": "ph-generel.fields.041.subfields.c",
+                "d": "ph-generel.fields.041.subfields.d",
+                "e": "ph-generel.fields.041.subfields.e",
+                "p": "ph-generel.fields.041.subfields.p"
             }
         },
         "042": "DanMarc2.fields.042",

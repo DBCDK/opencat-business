@@ -69,7 +69,7 @@
                 "b": "DanMarc2.fields.008.subfields.b",               
                 "e": "DanMarc2.fields.008.subfields.e",
                 "k": "DanMarc2.fields.008.subfields.k",
-                "l": "DanMarc2.fields.008.subfields.l",
+                "l": "ph-generel.fields.008.subfields.l",
                 "t":{
                     "mandatory":true,
                     "repeatable":false,
@@ -172,7 +172,7 @@
         "021": "DanMarc2.fields.021",
         "023": "DanMarc2.fields.023",
         "035": "DanMarc2.fields.035",
-        "041": "DanMarc2.fields.041",
+        "041": "ph-generel.fields.041",
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
         "048": "DanMarc2.fields.048",
