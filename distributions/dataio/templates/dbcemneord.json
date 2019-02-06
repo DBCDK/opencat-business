@@ -22,15 +22,7 @@
             "repeatable": false,
             "sorting": "abcdft",
             "subfields": {
-                "a": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkFaust"
-                        }
-                    ]
-                },
+                "a": "dbcsingle.fields.001.subfields.a",
                 "b": {
                     "mandatory": true,
                     "repeatable": false,
@@ -115,7 +107,9 @@
                 "a": {
                     "repeatable": false
                 },
-                "e": {},
+                "e": {
+                    "repeatable": false
+                },
                 "c": {},
                 "i": {
                     "repeatable": false
@@ -245,10 +239,10 @@
                 "a": {
                     "repeatable": false
                 },
-                "c": {},
-                "f": {
+                "e": {
                     "repeatable": false
                 },
+                "c": {},
                 "h": {
                     "repeatable": false
                 },
@@ -264,10 +258,10 @@
                 "j": {
                     "repeatable": false
                 },
-                "x": {
+                "w": {
                     "repeatable": false
                 },
-                "w": {
+                "x": {
                     "repeatable": false
                 }
             }
@@ -379,10 +373,10 @@
                 "u": {
                     "repeatable": false
                 },
-                "x": {
+                "w": {
                     "repeatable": false
                 },
-                "w": {
+                "x": {
                     "repeatable": false
                 }
             }
@@ -396,10 +390,10 @@
                 "a": {
                     "repeatable": false
                 },
-                "c": {},
-                "f": {
+                "e": {
                     "repeatable": false
                 },
+                "c": {},
                 "h": {
                     "repeatable": false
                 },
@@ -415,10 +409,10 @@
                 "j": {
                     "repeatable": false
                 },
-                "x": {
+                "w": {
                     "repeatable": false
                 },
-                "w": {
+                "x": {
                     "repeatable": false
                 }
             }
@@ -530,10 +524,10 @@
                 "u": {
                     "repeatable": false
                 },
-                "x": {
+                "w": {
                     "repeatable": false
                 },
-                "w": {
+                "x": {
                     "repeatable": false
                 }
             }
@@ -551,6 +545,9 @@
                     "repeatable": false
                 },
                 "y": {
+                    "repeatable": false
+                },
+                "2": {
                     "repeatable": false
                 }
             }
@@ -570,7 +567,10 @@
                 },
                 "g": {},
                 "u": {},
-                "y": {}
+                "y": {},
+                "2": {
+                    "repeatable": false
+                }
             }
         },
         "680":{
@@ -583,6 +583,9 @@
                     "repeatable": false
                 },
                 "t": {
+                    "repeatable": false
+                },
+                "2": {
                     "repeatable": false
                 }
             }
@@ -601,8 +604,11 @@
         "d08": {
             "subfields": {
                 "a": {},
-                "d": {},
-                "c": {}
+                "b": {},
+                "c": {},
+                "o": {},
+                "k": {},
+                "r": {}
             }
         },
         "d09": {
@@ -611,6 +617,7 @@
             }
         },
         "x08": {
+            "repeatable": false,
             "subfields": {
                 "p": {
                     "values": [ "f", "s", "m" ]
@@ -618,11 +625,27 @@
             }
         },
         "x09": {
+            "repeatable": false,
             "subfields": {
                 "p": {}
             }
         },
-        "z98": "dbcsingle.fields.z98",
-        "z99": "dbcsingle.fields.z99"
+        "z98": {
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                }
+
+            }
+        },
+        "z99": {
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                }
+            }
+        }
     }
 }

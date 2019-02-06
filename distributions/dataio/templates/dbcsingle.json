@@ -577,7 +577,6 @@
         "259": "DanMarc2.fields.259",
         "260":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
-            "mandatory":true,
             "repeatable":false,
             "subfields":{
                 "&":{},
@@ -2387,6 +2386,5 @@
                 
             }
         }
-        
     }
 }
