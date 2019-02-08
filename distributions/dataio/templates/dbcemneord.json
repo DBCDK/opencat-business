@@ -616,6 +616,21 @@
                 "z": {}
             }
         },
+        "n55":{
+            "url":"",
+            "subfields":{
+                "a":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                }
+            }
+        },
         "x08": {
             "repeatable": false,
             "subfields": {
