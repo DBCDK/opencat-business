@@ -50,7 +50,7 @@
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "xx, xe" ]
+                    "values":[ "xx", "xe" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"

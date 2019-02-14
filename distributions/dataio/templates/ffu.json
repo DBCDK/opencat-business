@@ -326,7 +326,6 @@
         "242": "DanMarc2.fields.242",
         "243": "DanMarc2.fields.243",
         "245":{
-            "comment": "Musikdelfelterne *i *j *k *l *z udeladt.",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
 			"mandatory":true,
             "repeatable":false,
@@ -342,10 +341,11 @@
                 "o": "DanMarc2.fields.245.subfields.o",
                 "c": "DanMarc2.fields.245.subfields.c",
                 "u": "DanMarc2.fields.245.subfields.u",
-                "l": "DanMarc2.fields.245.subfields.l",
                 "e": "DanMarc2.fields.245.subfields.e",
                 "f": "DanMarc2.fields.245.subfields.f",
-                "k": "DanMarc2.fields.245.subfields.k",
+                "i": "DanMarc2.fields.245.subfields.i",
+                "j": "DanMarc2.fields.245.subfields.j",
+                "l": "DanMarc2.fields.245.subfields.l",
                 "p": "DanMarc2.fields.245.subfields.p",
                 "q": "DanMarc2.fields.245.subfields.q",
                 "r": "DanMarc2.fields.245.subfields.r",
@@ -353,7 +353,8 @@
                 "t": "DanMarc2.fields.245.subfields.t",
                 "x": "DanMarc2.fields.245.subfields.x",
                 "w": "DanMarc2.fields.245.subfields.w",
-                "y": "DanMarc2.fields.245.subfields.y"
+                "y": "DanMarc2.fields.245.subfields.y",
+                "z": "DanMarc2.fields.245.subfields.z"
             }
         },
         "247": "DanMarc2.fields.247",
