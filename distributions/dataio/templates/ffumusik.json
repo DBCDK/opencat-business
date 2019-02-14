@@ -1,5 +1,6 @@
 {
     "template": {
+        "comment": "OBS! Denne skabelon ANVENDES VISTNOK IKKE!! /hue 20120214",
         "description":"Skabelon til optrettelse af ffu-singlepost - alle materialetyper.",
         "features": [ "all" ]
     },

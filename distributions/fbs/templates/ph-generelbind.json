@@ -351,10 +351,10 @@
                 "c": "DanMarc2.fields.652.subfields.c",
                 "t": "DanMarc2.fields.652.subfields.t",
                 "b": "DanMarc2.fields.652.subfields.b",
-                "1": "DanMarc2.fields.652.subfields.1",
                 "z": "DanMarc2.fields.652.subfields.z",
                 "q": "DanMarc2.fields.652.subfields.q",
-                "r": "DanMarc2.fields.652.subfields.r"
+                "r": "DanMarc2.fields.652.subfields.r",
+                "1": "DanMarc2.fields.652.subfields.1"
             }
         },
         "654": "DanMarc2.fields.654",
