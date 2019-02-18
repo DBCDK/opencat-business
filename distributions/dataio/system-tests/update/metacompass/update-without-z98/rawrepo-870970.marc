@@ -1,0 +1,15 @@
+001 00 *a 46178483 *b 870970 *c 20190204150039 *d 20190204 *f a
+004 00 *r n *a e
+008 00 *t m *v 7
+009 00 *a a *g xx
+021 00 *e 9788799607372 *c hf.
+032 00 *x ACC201920
+245 00 *a Rejseklar til Algarve & Alentejo Sydportugal
+260 00 *b Jensen & Lund *a Kbh. *c 2019
+300 00 *a sider
+652 00 *m NY TITEL
+665 00 *& lektor *i besættelsestiden *q New York
+666 00 *0  *s besættelsestiden
+666 00 *0  *q New York
+990 00 *b v
+996 00 *a DBC
