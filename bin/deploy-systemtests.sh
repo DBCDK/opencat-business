@@ -5,6 +5,7 @@ SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
 RAWREPO_VERSION=1.13-snapshot
+RAWREPO_DIT_TAG=DIT-5016
 HOLDINGS_ITEMS_VERSION=1.1.1-snapshot
 
 cd ${PROJECT_ROOT}/docker
@@ -83,15 +84,15 @@ docker-compose down
 docker-compose ps
 echo "docker ps : $?"
 
-docker rmi -f docker-os.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
+docker rmi -f docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
 docker rmi -f docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
 docker rmi -f docker-i.dbc.dk/update-postgres:${USER}
 docker rmi -f docker-i.dbc.dk/update-payara-deployer:${USER}
 docker-compose pull
 docker-compose up -d rawrepoDb updateserviceDb holdingsitemsDb fakeSmtp
 sleep 3
-docker tag docker-os.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:latest docker-os.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
-docker rmi docker-os.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:latest
+docker tag docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG} docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
+docker rmi docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG}
 docker tag docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
 docker rmi docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest
 docker tag docker-i.dbc.dk/update-postgres:staging docker-i.dbc.dk/update-postgres:${USER}
