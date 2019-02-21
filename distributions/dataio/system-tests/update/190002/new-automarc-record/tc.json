@@ -1,0 +1,41 @@
+[
+    {
+        "name": "190002-new-automarc-record",
+        "description": "Tester at man oprette en automarc post",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "allowall",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [                ],
+                "rawrepo": [
+                    {
+                        "record": "expected-190002.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "expected-191919.marc" ]
+                    },
+                    {
+                        "record": "expected-191919.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
