@@ -1,0 +1,122 @@
+[
+    {
+        "name": "fbs-new-local-genstand-ok",
+        "description": "Tester oprettelse af ny lokal post samt sortering af felter og delfelter i 008",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokal-genstand",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-new-local.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-new-local-genstand-bad",
+        "description": "Tester oprettelse af ny lokal genstand - med fejl",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokal-genstand",
+            "record": "request-bad.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 0,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt '&' kan ikke anvendes i felt '008' i denne skabelon/posttype."
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "TODO:url",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 't' mangler i felt '008'"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+                        "ordinalPositionOfField": 3,
+                        "ordinalPositionOfSubfield": 0,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Værdien 'a' er ikke en del af de valide værdier: 'e', 'f', 'g', 'u'"
+                    },
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "TODO:url",
+                        "ordinalPositionOfField": 3,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 'g' mangler i felt '009'"
+                    }
+                ]
+            }
+        ,
+            "update": {
+                "errors": [
+                    {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField" : 2,
+                        "ordinalPositionOfSubfield" : 0,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt '&' kan ikke anvendes i felt '008' i denne skabelon/posttype."
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "TODO:url",
+                        "ordinalPositionOfField" : 2,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 't' mangler i felt '008'"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+                        "ordinalPositionOfField" : 3,
+                        "ordinalPositionOfSubfield" : 0,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Værdien 'a' er ikke en del af de valide værdier: 'e', 'f', 'g', 'u'"
+                    }, {
+                        "type" : "ERROR",
+                        "code" : null,
+                        "urlForDocumentation" : "TODO:url",
+                        "ordinalPositionOfField" : 3,
+                        "ordinalPositionOfSubfield" : null,
+                        "ordinalPositionInSubfield" : null,
+                        "message" : "Delfelt 'g' mangler i felt '009'"
+                    }
+                ]
+            }
+        }
+    }
+]

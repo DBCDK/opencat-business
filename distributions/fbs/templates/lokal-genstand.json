@@ -26,10 +26,6 @@
             }
         },
         {
-            "type": "RecordRules.mustContainOneOfFields",
-            "params": { "fields": [ "652", "654" ] }
-        },
-        {
             "type": "RecordRules.conflictingSubfields",
             "params": {
                 "subfields": [ "652m", "652o", "654m", "654o" ]
