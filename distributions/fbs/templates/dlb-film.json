@@ -1,0 +1,208 @@
+{
+    "template": {
+        "description": "Skabelon Dansk Lokalbibliografi. Film på fysiske medier (dvd, videobånd m.m.) - enkeltstående post.",
+        "features": [ "all" ]
+    },
+    "settings": {
+        "lookupfaust": true,
+        "extrafields": [ "008a", "008b", "008l", "023b", "041u", "245c", "260a", "260b", "260c",
+            "300n", "300l", "652m", "666f", "666e","700h", "7004", "900h", "900z"  ]
+    },
+    "defaults":{
+        "field":{
+            "indicator":"00",
+            "mandatory":false,
+            "repeatable":true
+        },
+        "subfield":{
+            "mandatory":false,
+            "repeatable":true
+        }
+    },
+    "rules":[
+        {
+            "type":"RecordRules.conflictingFields",
+            "params": {
+                "fields":[ "100", "110" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "652m", "652o", "654m", "654o" ]
+            }
+        }
+    ],
+    "fields":{
+        "001": "lokal-generel.fields.001",
+        "004": "lokal-generel.fields.004",
+        "006": "lokal-generel.fields.006",
+        "008": "lokal-generel.fields.008",
+        "009":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+            "mandatory":true,
+            "repeatable":false,            
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "values":[ "m", "n", "g"]
+                },
+                "g":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "values":[ "xa", "xb", "xd", "xj", "xy", "mj", "th", "nh", "np",
+                               "ga", "gb", "gc", "gg", "gk", "gm", "gp", "gr", "gt", "gx",
+                               "ha", "hb", "hd", "hf", "hg", "hl", "hm", "ho", "hp", "hr", "hs", "ht", "hy",
+                               "kb", "kt" ]
+                },
+                "b": "DanMarc2.fields.009.subfields.b",
+                "h": "DanMarc2.fields.009.subfields.h"
+            }
+        },
+        "011": "lokal-generel.fields.011",
+        "017": "lokal-generel.fields.017",
+        "018": "lokal-generel.fields.018",
+        "021": "DanMarc2.fields.021",
+        "023": "DanMarc2.fields.023",
+        "032": "dlb-bog.fields.032",
+        "033": "dlb-bog.fields.033",
+        "035": "DanMarc2.fields.035",
+        "041":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
+            "repeatable":false,
+            "sorting":"asbcpeu",
+            "subfields":{
+                "a": "DanMarc2.fields.041.subfields.a",
+                "b": "DanMarc2.fields.041.subfields.b",
+                "c": "DanMarc2.fields.041.subfields.c",
+                "e": "DanMarc2.fields.041.subfields.e",
+                "p": "DanMarc2.fields.041.subfields.p",
+                "s": "DanMarc2.fields.041.subfields.s",
+                "u": "DanMarc2.fields.041.subfields.u"
+            }
+        },
+        "044": "DanMarc2.fields.044",
+        "050": "DanMarc2.fields.050",
+        "060": "DanMarc2.fields.060",
+        "070": "DanMarc2.fields.070",
+        "079": "DanMarc2.fields.079",
+        "080": "DanMarc2.fields.080",
+        "082": "DanMarc2.fields.082",
+        "085": "DanMarc2.fields.085",
+        "086": "DanMarc2.fields.086",
+        "087": "DanMarc2.fields.087",
+        "088": "DanMarc2.fields.088",
+        "089": "DanMarc2.fields.089",
+        "100": "lokal-generel.fields.100",
+        "110": "lokal-generel.fields.110",
+        "239":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.37.htm",          
+            "repeatable":false,
+            "sorting":"tb\u00f8",
+            "subfields":{
+                "t": "DanMarc2.fields.239.subfields.t",
+                "b": "DanMarc2.fields.239.subfields.b",
+                "\u00f8": "DanMarc2.fields.239.subfields.\u00f8"
+            }
+        },
+        "241": "DanMarc2.fields.241",
+        "245": "lokal-generel.fields.245",
+        "250": "DanMarc2.fields.250",
+        "256": "DanMarc2.fields.256",
+        "260": "DanMarc2.fields.260",
+        "264": "DanMarc2.fields.264",
+        "300": "DanMarc2.fields.300",
+        "320": "DanMarc2.fields.320",
+        "322": "DanMarc2.fields.322",
+        "336": "DanMarc2.fields.336",
+        "337": "DanMarc2.fields.337",
+        "338": "DanMarc2.fields.338",
+        "344": "DanMarc2.fields.344",
+        "345": "DanMarc2.fields.345",
+        "346": "DanMarc2.fields.346",
+        "347": "DanMarc2.fields.347",
+        "440": "DanMarc2.fields.440",
+        "500": "DanMarc2.fields.500",
+        "502": "DanMarc2.fields.502",
+        "504": "DanMarc2.fields.504",
+        "505": "DanMarc2.fields.505",
+        "506": "DanMarc2.fields.506",
+        "507": "DanMarc2.fields.507",
+        "508": "DanMarc2.fields.508",
+        "509": "DanMarc2.fields.509",
+        "512": "DanMarc2.fields.512",
+        "517": "DanMarc2.fields.517",
+        "518": "DanMarc2.fields.518",
+        "520": "DanMarc2.fields.520",
+        "521": "DanMarc2.fields.521",
+        "523": "DanMarc2.fields.523",
+        "526": "DanMarc2.fields.526",
+        "529": "DanMarc2.fields.529",
+        "530": "DanMarc2.fields.530",
+        "532": "DanMarc2.fields.532",
+        "534": "DanMarc2.fields.534",
+        "538": "DanMarc2.fields.538",
+        "555": "DanMarc2.fields.555",
+        "559": "DanMarc2.fields.559",
+        "563": "DanMarc2.fields.563",
+        "565": "DanMarc2.fields.565",
+        "570": "DanMarc2.fields.570",
+        "580": "DanMarc2.fields.580",
+        "583": "DanMarc2.fields.583",
+        "596": "DanMarc2.fields.596",
+        "600": "lokal-generel.fields.600",
+        "610": "lokal-generel.fields.610",
+        "620": "DanMarc2.fields.620",
+        "621": "DanMarc2.fields.621",
+        "622": "DanMarc2.fields.622",
+        "630": "DanMarc2.fields.630",
+        "631": "DanMarc2.fields.631",
+        "632": "DanMarc2.fields.632",
+        "633": "DanMarc2.fields.633",
+        "634": "DanMarc2.fields.634",
+        "645": "DanMarc2.fields.645",
+        "650": "DanMarc2.fields.650",
+        "651": "DanMarc2.fields.651",
+        "652": "lokal-generel.fields.652",
+        "654": "DanMarc2.fields.654",
+        "655": "DanMarc2.fields.655",
+        "660": "DanMarc2.fields.660",
+        "661": "DanMarc2.fields.661",
+        "662": "DanMarc2.fields.662",
+        "666": "lokal-generel.fields.666",
+        "667": "DanMarc2.fields.667",
+        "668": "DanMarc2.fields.668",
+        "670": "DanMarc2.fields.670",
+        "690": "DanMarc2.fields.690",
+        "700": "lokal-generel.fields.700",
+        "710": "lokal-generel.fields.710",
+        "720": "DanMarc2.fields.720",
+        "739":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85.htm",
+            "subfields":{
+                "t": "DanMarc2.fields.739.subfields.t",
+                "b": "DanMarc2.fields.739.subfields.b",
+                "\u00f8": "DanMarc2.fields.739.subfields.\u00f8"
+            }
+        },
+        "740": "lokal-generel.fields.740",
+        "745": "DanMarc2.fields.745",
+        "770": "lokal-generel.fields.770",
+        "780": "lokal-generel.fields.780",
+        "795": "lokal-generel.fields.795",
+        "840": "DanMarc2.fields.840",
+        "856": "DanMarc2.fields.856",
+        "880": "DanMarc2.fields.880",
+        "887": "DanMarc2.fields.887",
+        "900": "lokal-generel.fields.900",
+        "910": "lokal-generel.fields.910",
+        "930": "DanMarc2.fields.930",
+        "933": "DanMarc2.fields.933",
+        "934": "DanMarc2.fields.934",
+        "945": "DanMarc2.fields.945",
+        "952": "DanMarc2.fields.952",
+        "966": "DanMarc2.fields.966",
+        "968": "DanMarc2.fields.968"
+    }
+}
