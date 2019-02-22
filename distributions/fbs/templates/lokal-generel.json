@@ -757,6 +757,7 @@
                 "f": "DanMarc2.fields.900.subfields.f",
                 "c": "DanMarc2.fields.900.subfields.c",
                 "x": "DanMarc2.fields.900.subfields.x",
+                "w": "DanMarc2.fields.900.subfields.w",
                 "z":{
                     "repeatable":false
                 },
