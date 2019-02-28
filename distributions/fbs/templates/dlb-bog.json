@@ -7,7 +7,8 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008d", "008l", "021e", "100h", "1004", "245c", "260a", "260b", "260c", "300a", "652m", "666f", "666e","700h", "7004", "900h", "900z" ]
+        "extrafields": [ "008a", "008b", "008d", "008l", "021e", "100h", "1004", "245c", "260a", "260b", "260c",
+            "300a", "652m", "666f", "666e", "700h", "7004", "900h", "900z" ]
     },
     "defaults": {
         "field": {
@@ -79,12 +80,12 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "a", "e" ]
+                    "values": [ "a" ]
                 },
                 "g": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "xx", "xe" ],
+                    "values": [ "xx" ],
                     "rules": [
                         {
                             "type": "SubfieldRules.subfieldConditionalMandatoryField",

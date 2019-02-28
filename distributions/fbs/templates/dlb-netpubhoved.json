@@ -1,11 +1,11 @@
 {
     "template": {
-        "description": "Skabelon til Dansk Lokalbibliografi. Bøger - hovedpost.",
+        "description": "Skabelon til netpublikationer - hovedpost.",
         "features": [ "all" ]
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008d", "021e", "100h", "1004", "245c", "260a", "260b", "260c", "300a", "652m" ]
+        "extrafields": [ "008a", "008b", "008l", "008n", "008w", "021e", "100h", "1004", "260b", "260c", "652m", "666f", "666e","700h", "7004", "900h", "900z" ]
     },
     "defaults":{
         "field":{
@@ -42,14 +42,14 @@
                 "r": "DanMarc2.fields.004.subfields.r",
                 "a": {
 					"mandatory": true,
-                    "repeatable": false,
+                    "repeatable":false,
                     "values":[ "h" ],
                     "rules": [
                         {
                             "type": "SubfieldRules.checkChangedValue",
                             "params": {
-                                "fromValues": [ "h", "s" ],
-                                "toValues": [ "h", "s" ]
+                                "fromValues": [ "h" ],
+                                "toValues": [ "h" ]
                             }
                         }
                     ]
@@ -57,55 +57,21 @@
                 "n": "DanMarc2.fields.004.subfields.n"
             }
         },
-        "008": {
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-            "mandatory":true,
-            "repeatable":false,
-            "sorting":"uazbcdefghijklmorxv",
-            "subfields":{
-                "u": {
-                    "repeatable": false,
-                    "values": [ "?", "r", "o", "f", "u" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
-                        }
-                    ]
-                },
-                "a": "lokal-generelhoved.fields.008.subfields.a",
-                "z": "lokal-generelhoved.fields.008.subfields.z",
-                "b": "lokal-generelhoved.fields.008.subfields.b",
-                "c": "DanMarc2.fields.008.subfields.c",
-                "d": "DanMarc2.fields.008.subfields.d",
-                "e": "lokal-generelhoved.fields.008.subfields.e",
-                "f": "lokal-generelhoved.fields.008.subfields.f",
-                "g": "lokal-generelhoved.fields.008.subfields.g",
-                "j": "lokal-generelhoved.fields.008.subfields.j",
-                "k": "DanMarc2.fields.008.subfields.k",
-                "l": "lokal-generelhoved.fields.008.subfields.l",
-                "m": "DanMarc2.fields.008.subfields.m",
-                "n": "DanMarc2.fields.008.subfields.n",
-                "o": "DanMarc2.fields.008.subfields.o",
-                "w": "DanMarc2.fields.008.subfields.w",
-                "x": "DanMarc2.fields.008.subfields.x",
-                "v": "DanMarc2.fields.008.subfields.v"
-            }
-		},
+        "008": "lokal-generelhoved.fields.008",
         "009": "dlb-bog.fields.009",
         "011": "lokal-generel.fields.011",
         "017": "lokal-generel.fields.017",
         "018": "lokal-generel.fields.018",
         "020": "DanMarc2.fields.020",
         "021": "DanMarc2.fields.021",
-		"022": "DanMarc2.fields.022",
-		"023": "DanMarc2.fields.023",
-        "027": "DanMarc2.fields.027",
+        "030": "DanMarc2.fields.030",
         "034": "DanMarc2.fields.034",
         "035": "DanMarc2.fields.035",
         "036": "DanMarc2.fields.036",
         "038": "DanMarc2.fields.038",
-        "041": "lokal-bog.fields.041",
+        "041": "DanMarc2.fields.041",
         "042": "DanMarc2.fields.042",
+        "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
         "050": "DanMarc2.fields.050",
         "060": "DanMarc2.fields.060",
@@ -127,24 +93,22 @@
         "245": "lokal-generel.fields.245",
         "250": "DanMarc2.fields.250",
         "256": "DanMarc2.fields.256",
+        "259": "DanMarc2.fields.259",
         "260": "DanMarc2.fields.260",
         "264": "DanMarc2.fields.264",
-        "300":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-            "repeatable":false,
-            "subfields":{
-                "n": "DanMarc2.fields.300.subfields.n",
-                "a": "DanMarc2.fields.300.subfields.a",
-                "b": "DanMarc2.fields.300.subfields.b",
-                "c": "DanMarc2.fields.300.subfields.c",
-                "d": "DanMarc2.fields.300.subfields.d",
-                "e": "DanMarc2.fields.300.subfields.e"
-            }
-        },
+        "300": "DanMarc2.fields.300",
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
+        "336": "DanMarc2.fields.336",
+        "337": "DanMarc2.fields.337",
+        "338": "DanMarc2.fields.338",
+        "344": "DanMarc2.fields.344",
+        "345": "DanMarc2.fields.345",
+        "346": "DanMarc2.fields.346",
+        "347": "DanMarc2.fields.347",
         "440": "DanMarc2.fields.440",
         "500": "DanMarc2.fields.500",
+        "501": "DanMarc2.fields.501",
         "502": "DanMarc2.fields.502",
         "504": "DanMarc2.fields.504",
         "505": "DanMarc2.fields.505",
@@ -161,6 +125,7 @@
         "526": "DanMarc2.fields.526",
         "529": "DanMarc2.fields.529",
         "530": "DanMarc2.fields.530",
+        "531": "DanMarc2.fields.531",
         "532": "DanMarc2.fields.532",
         "534": "DanMarc2.fields.534",
         "538": "DanMarc2.fields.538",
@@ -201,8 +166,10 @@
         "720": "DanMarc2.fields.720",
         "740": "lokal-generel.fields.740",
         "745": "DanMarc2.fields.745",
+        "770": "DanMarc2.fields.770",
+        "780": "DanMarc2.fields.780",
+        "795": "DanMarc2.fields.795",
         "840": "DanMarc2.fields.840",
-        "856": "DanMarc2.fields.856",
         "880": "DanMarc2.fields.880",
         "887": "DanMarc2.fields.887",
         "900": "lokal-generel.fields.900",
