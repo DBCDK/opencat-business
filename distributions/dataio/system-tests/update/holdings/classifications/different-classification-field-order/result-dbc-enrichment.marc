@@ -1,0 +1,14 @@
+001 00 *a 27287247 *b 191919 *c 20190221154818 *d 20080610 *f a
+004 00 *r n *a e
+d08 00 *o mbf *o ehw *k ahf
+d08 00 *a masserettet i forb. med tilføjelse af niveaukoder
+d09 00 *z MVC200829
+d09 00 *z REX200831
+d31 00 *b 138 *h 216 *t 12
+d32 00 *b 135 *h 216 *t 11
+d33 00 *c b
+d35 00 *a I *i 03 *n 06 *p 01 *q 06
+f06 00 *b l *b v
+n51 00 *a 20080714
+s12 00 *t TeamFi200827
+z99 00 *a Admin

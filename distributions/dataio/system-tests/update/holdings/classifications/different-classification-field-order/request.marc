@@ -1,0 +1,40 @@
+001 00 *a 27287247 *b 870970 *c 20190221154817 *d 20080610 *f a
+004 00 *r n *a e
+008 00 *t s *u f *a 2008 *b dk *d y *g 1 *k b *l dan *x 06 *v 0
+009 00 *a a *g xx
+021 00 *e 9788775142026 *c hf. *d kr. 198,00
+032 00 *a DBF200829 *x ACC200824 *x BKM200829 *x DAT201715
+245 00 *a Til Poul med kærlig hilsen *e redigeret af Marina Hoffmann, Mette M.S. Rugꜳrd og Trine Hammershøy *f tegninger: Roald Als *e bidragyderne er: Bill Clinton ... [et al.]
+250 00 *a 1. udgave *b ÷ *x 1. oplag
+260 00 *& 1 *a Kbh. *b Informations Forlag *c 2008 *k AKA-PRINT
+300 00 *a 160 sider *b ill.
+504 00 *& 1 *a En række personer beskriver i en række bidrag deres personlige oplevelser med Poul Nyrup Rasmussen (f. 1943)
+507 00 *a Udgivet i forbindelse med Poul Nyrup Rasmussens 65-års fødselsdag
+521 00 *& REX *b 1. oplag *c 2008
+530 00 *& 1 *a Indhold: Blah blah
+600 00 *1  *a Nyrup Rasmussen *h Poul
+610 00 *1  *a Socialdemokratiet
+652 00 *å 1 *m 99.4 *a Nyrup Rasmussen *h Poul
+652 00 *p 32.269 *a Socialdemokraterne
+666 00 *0  *f politikere
+666 00 *0  *f statsministre
+666 00 *0  *f politik
+666 00 *0  *e Danmark
+666 00 *0  *i 2000-2009
+666 00 *0  *i 1900-1999
+666 00 *0  *o biografier
+900 00 *a Rasmussen *h Poul Nyrup *z 652/1(a,h)
+990 00 *o 200829 *b l *b v *c a *u nt
+996 00 *a DBC
+d08 00 *o mbf *o ehw *k ahf
+d08 00 *a masserettet i forb. med tilføjelse af niveaukoder
+d09 00 *z MVC200829
+d09 00 *z REX200831
+d31 00 *b 138 *h 216 *t 12
+d32 00 *b 135 *h 216 *t 11
+d33 00 *c b
+d35 00 *a I *i 03 *n 06 *p 01 *q 06
+f06 00 *b l *b v
+n51 00 *a 20080714
+s12 00 *t TeamFi200827
+z99 00 *a Admin
