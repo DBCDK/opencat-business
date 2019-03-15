@@ -411,7 +411,10 @@
                     }
                     ]
                 },
-                "z": "DanMarc2.fields.526.subfields.z"
+                "z": "DanMarc2.fields.526.subfields.z",
+                "n": "DanMarc2.fields.526.subfields.n",
+                "q": "DanMarc2.fields.526.subfields.q",
+                "s": "DanMarc2.fields.526.subfields.s"
             },
 			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },

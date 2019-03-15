@@ -2139,7 +2139,19 @@
                     "rules":[{
                         "type":"SubfieldRules.checkISSN"
                     }]
+                },
+                "n": {
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+                "q":{},
+                "s":{
+                    "repeatable":false
                 }
+
             },
             "rules": [
                 {
