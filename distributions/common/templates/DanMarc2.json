@@ -3339,6 +3339,8 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
             "subfields":{
                 "f": {},
+                "g": {},
+                "h": {},
                 "t": {},
                 "e": {},
                 "s": {},
@@ -3364,6 +3366,8 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7g.htm",
             "subfields":{
                 "f":{},
+                "g":{},
+                "h":{},
                 "t":{},
                 "e":{},
                 "s":{},

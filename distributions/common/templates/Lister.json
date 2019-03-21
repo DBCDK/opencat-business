@@ -805,7 +805,6 @@
                 },
 				"local_bibliography": {
 					"community_number": {
-						"repeatable": false,
 						"values": [
 							"015", "020", "025", "030", "035", "040", "042", "050", "055",
 							"060", "065", "070", "076", "080", "081", "082", "083", "084", "085", "099",
@@ -841,7 +840,6 @@
 						]
 					},
 					"community_name": {
-						"repeatable": false,
 						"values": [
 							"Albertslund Kommune",
 							"Aller\u00f8d Kommune",

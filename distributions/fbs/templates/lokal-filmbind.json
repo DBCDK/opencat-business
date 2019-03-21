@@ -329,24 +329,7 @@
         "660": "DanMarc2.fields.660",
         "661": "DanMarc2.fields.661",
         "662": "DanMarc2.fields.662",
-        "666":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7f.htm",
-            "subfields":{
-                "f": "DanMarc2.fields.666.subfields.f",
-                "t": "DanMarc2.fields.666.subfields.t",
-                "e": "DanMarc2.fields.666.subfields.e",
-                "s": "DanMarc2.fields.666.subfields.s",
-                "r": "DanMarc2.fields.666.subfields.r",
-                "q": "DanMarc2.fields.666.subfields.q",
-                "m": "DanMarc2.fields.666.subfields.m",
-                "n": "DanMarc2.fields.666.subfields.n",
-                "p": "DanMarc2.fields.666.subfields.p",
-                "l": "DanMarc2.fields.666.subfields.l",
-                "i": "DanMarc2.fields.666.subfields.i",
-                "o": "DanMarc2.fields.666.subfields.o",
-                "u": "DanMarc2.fields.666.subfields.u"
-            }
-        },
+        "666": "lokal-generel.fields.666",
         "667": "DanMarc2.fields.667",
         "668": "DanMarc2.fields.668",
         "670": "DanMarc2.fields.670",
