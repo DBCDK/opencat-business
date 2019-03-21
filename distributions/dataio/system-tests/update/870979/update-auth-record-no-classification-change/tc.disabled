@@ -120,7 +120,6 @@
             "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
-            "queueWorkers": ["socl-sync"],
             "enrichments": [
               "expected-870979-191919.marc"
             ],
@@ -132,8 +131,7 @@
             "record": "expected-870979-191919.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true,
-            "queueWorkers": ["socl-sync"]
+            "enqueued": true
           }
         ]
       }

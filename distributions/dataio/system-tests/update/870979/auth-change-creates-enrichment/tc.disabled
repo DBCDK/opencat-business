@@ -1,7 +1,7 @@
 [
   {
-    "name": "870979-update-auth-record-classification-change",
-    "description": "Tester at afhængige poster bliver behandlet korrekt ved opdatering af authoritetsposten ved opstillingsændring",
+    "name": "auth-change-creates-enrichment",
+    "description": "Tester om ændret felt 100 i autoritetspost medfører dannelse af påhængspost for bibliotek med beholdning",
     "request": {
       "authentication": {
         "group": "010100",
@@ -18,23 +18,12 @@
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
-            "setup-870970-191919.marc",
-            "setup-870970-763000.marc"
+            "setup-870970-191919.marc"
           ],
-          "holdings": [
-            700400,
-            700500,
-            700600,
-            763000
-          ]
+          "holdings": [710100]
         },
         {
           "record": "setup-870970-191919.marc",
-          "type": "ENRICHMENT",
-          "deleted": false
-        },
-        {
-          "record": "setup-870970-763000.marc",
           "type": "ENRICHMENT",
           "deleted": false
         },
@@ -68,9 +57,7 @@
             "enqueued": true,
             "enrichments": [
               "expected-870970-191919.marc",
-              "expected-870970-763000.marc",
-              "expected-870970-700500.marc",
-              "expected-870970-700600.marc"
+              "expected-870970-enrichment.marc"
             ]
           },
           {
@@ -80,19 +67,7 @@
             "enqueued": true
           },
           {
-            "record": "expected-870970-763000.marc",
-            "type": "ENRICHMENT",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "expected-870970-700500.marc",
-            "type": "ENRICHMENT",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "expected-870970-700600.marc",
+            "record": "expected-870970-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
@@ -107,15 +82,13 @@
             ],
             "children": [
               "expected-870970.marc"
-            ],
-            "queueWorkers": ["socl-sync"]
+            ]
           },
           {
             "record": "expected-870979-191919.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true,
-            "queueWorkers": ["socl-sync"]
+            "enqueued": true
           }
         ]
       }

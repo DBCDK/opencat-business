@@ -1,7 +1,7 @@
 [
   {
-    "name": "auth-change-creates-enrichment",
-    "description": "Tester om ændret felt 100 i autoritetspost medfører dannelse af påhængspost for bibliotek med beholdning",
+    "name": "auth-change-secondary-relation-no-enrichment",
+    "description": "Tester at ændring i autoritetspost felt 100 ikke medfører dannelse af påhængspost ved sekundære relationer (600 og 700)",
     "request": {
       "authentication": {
         "group": "010100",
@@ -56,18 +56,11 @@
             "deleted": false,
             "enqueued": true,
             "enrichments": [
-              "expected-870970-191919.marc",
-              "expected-870970-enrichment.marc"
+              "expected-870970-191919.marc"
             ]
           },
           {
             "record": "expected-870970-191919.marc",
-            "type": "ENRICHMENT",
-            "deleted": false,
-            "enqueued": true
-          },
-          {
-            "record": "expected-870970-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
@@ -82,15 +75,13 @@
             ],
             "children": [
               "expected-870970.marc"
-            ],
-            "queueWorkers": ["socl-sync"]
+            ]
           },
           {
             "record": "expected-870979-191919.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true,
-            "queueWorkers": ["socl-sync"]
+            "enqueued": true
           }
         ]
       }
