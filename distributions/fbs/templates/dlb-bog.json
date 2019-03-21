@@ -124,10 +124,17 @@
         "033":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1f.htm",
             "mandatory" : true,
-            "repeatable":false,
             "subfields":{
-                "a": "Lister.fields.codes.subfields.local_bibliography.community_number",
-                "b": "Lister.fields.codes.subfields.local_bibliography.community_name"
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": "Lister.fields.codes.subfields.local_bibliography.community_number.values"
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values":"Lister.fields.codes.subfields.local_bibliography.community_name.values"
+                }
             }
         },
         "035": "DanMarc2.fields.035",
