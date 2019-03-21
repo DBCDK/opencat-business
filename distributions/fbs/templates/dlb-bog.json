@@ -36,7 +36,32 @@
         }
     ],
     "fields": {
-        "001": "lokal-generel.fields.001",
+        "001": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdefgot",
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": "Lister.fields.codes.subfields.libraries.lokalbibliografier.values"
+                },
+                "c": "DanMarc2.fields.001.subfields.c",
+                "d": "DanMarc2.fields.001.subfields.d",
+                "f": "DanMarc2.fields.001.subfields.f",
+                "o": "DanMarc2.fields.001.subfields.o"
+            }
+        },
         "004": "lokal-generel.fields.004",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",

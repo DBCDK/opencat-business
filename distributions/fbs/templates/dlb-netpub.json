@@ -34,7 +34,7 @@
         }
     ],
     "fields":{
-        "001": "lokal-generel.fields.001",
+        "001": "dlb-bog.fields.001",
         "004": "lokal-generel.fields.004",
         "008": "lokal-generel.fields.008",
         "009":{
