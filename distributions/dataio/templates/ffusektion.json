@@ -1,6 +1,6 @@
 {
     "template": {
-        "description":"Skabelon til optrettelse af ffu-bindpost - alle materialetyper.",
+        "description":"Skabelon til optrettelse af ffu-sektionspost - alle materialetyper.",
         "features": [ "all" ]
     },
     "defaults":{
@@ -40,10 +40,8 @@
             "repeatable": false,
             "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
-                "u": {
-                    "repeatable": false,
-                    "values": [ "?", "r", "o", "f", "u" ]
-                },
+                "t": "ffu.fields.008.subfields.t",
+                "u": "ffu.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
                 "z": "DanMarc2.fields.008.subfields.z",
                 "b": "ffu.fields.008.subfields.b",
