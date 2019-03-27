@@ -48,10 +48,17 @@
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,
-                        "enrichments": [ "result-common-enrichment.marc" ]
+                        "enrichments": [ "result-common-enrichment.marc",
+                        "result-common-710100-enrichment.marc" ]
                     },
                     {
                         "record": "result-common-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-common-710100-enrichment.marc",
                         "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
