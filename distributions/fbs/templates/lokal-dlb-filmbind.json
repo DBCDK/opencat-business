@@ -19,7 +19,7 @@
         }
     },
     "fields":{
-        "001": "dlb-bog.fields.001",
+        "001": "lokal-dlb-bog.fields.001",
         "004": "lokal-generelbind.fields.004",
         "006": "lokal-generel.fields.006",
         "008": {
@@ -121,8 +121,8 @@
         },
         "021": "DanMarc2.fields.021",
         "023": "DanMarc2.fields.023",
-        "032": "dlb-bog.fields.032",
-        "033": "dlb-bog.fields.033",
+        "032": "lokal-dlb-bog.fields.032",
+        "033": "lokal-dlb-bog.fields.033",
         "035": "DanMarc2.fields.035",
         "041":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",

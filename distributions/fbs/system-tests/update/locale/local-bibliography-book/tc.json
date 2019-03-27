@@ -1,6 +1,6 @@
 [
     {
-        "name": "dlb-new-local-book-local-bibliography",
+        "name": "lokal-dlb-new-local-book-local-bibliography",
         "description": "Tester oprettelse af ny lokalbibliografisk bogpost",
         "request": {
             "authentication": {
@@ -8,7 +8,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dlb-bog",
+            "templateName": "lokal-dlb-bog",
             "record": "request.marc"
         },
         "expected": {
@@ -27,7 +27,7 @@
         }
     },
     {
-        "name": "dlb-bad-local-book-local-bibliography",
+        "name": "lokal-dlb-bad-local-book-local-bibliography",
         "description": "Tester oprettelse af ny lokalbibliografisk bogpost",
         "request": {
             "authentication": {
@@ -35,7 +35,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dlb-bog",
+            "templateName": "lokal-dlb-bog",
             "record": "request-bad.marc"
         },
         "expected": {

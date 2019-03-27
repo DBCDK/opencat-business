@@ -1,11 +1,11 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.",
+        "description": "Skabelon til Dansk Lokalbibliografi. Bøger - bindpost.",
         "features": [ "all" ]
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "008a", "008b", "008l", "008n", "008w", "021e", "245g", "245a", "260c", "666f", "666e", "700h", "7004" ]
+        "extrafields": [ "008a", "008b", "008d", "008l", "021e", "245g", "245a", "260c", "300a" ]
     },
     "defaults":{
         "field":{
@@ -19,9 +19,46 @@
         }
     },
     "fields":{
-        "001": "dlb-bog.fields.001",
+        "001": "lokal-dlb-bog.fields.001",
         "004": "lokal-generelbind.fields.004",
-        "008": "lokal-generelbind.fields.008",
+        "008": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "sorting":"tuazbcdefghijklmnoqrxv",
+            "subfields":{
+                "t":{
+					"mandatory": true,
+                	"repeatable": false,
+                    "values":[ "m", "s", "p" ]
+                },
+                "u": {
+                    "repeatable": false,
+                    "values": [ "?", "r", "o", "f", "u" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                        }
+                    ]
+                },
+                "a": "lokal-generelbind.fields.008.subfields.a",
+				"z": "lokal-generelbind.fields.008.subfields.z",
+                "b": "lokal-generelbind.fields.008.subfields.b",
+                "d": "DanMarc2.fields.008.subfields.d",
+                "e": "lokal-generelbind.fields.008.subfields.e",
+                "f": "lokal-generelbind.fields.008.subfields.f",
+                "g": "lokal-generelbind.fields.008.subfields.g",
+                "j": "lokal-generelbind.fields.008.subfields.j",
+                "k": "DanMarc2.fields.008.subfields.k",
+                "l": "lokal-generelbind.fields.008.subfields.l",
+                "m": "lokal-generelbind.fields.008.subfields.m",
+                "n": "lokal-generelbind.fields.008.subfields.n",
+                "o": "lokal-generelbind.fields.008.subfields.o",
+                "x": "lokal-generelbind.fields.008.subfields.x",
+                "w": "lokal-generelbind.fields.008.subfields.w",
+                "v": "DanMarc2.fields.008.subfields.v"
+            }
+		},
         "009": "lokal-generelbind.fields.009",
         "011": "lokal-generel.fields.011",
         "013": "lokal-generel.fields.013",
@@ -29,34 +66,18 @@
         "017": "lokal-generel.fields.017",
         "018": "lokal-generel.fields.018",
         "021": "DanMarc2.fields.021",
-        "022": "DanMarc2.fields.022",
-        "023": "DanMarc2.fields.023",
+		"022": "DanMarc2.fields.022",
+		"023": "DanMarc2.fields.023",
         "027": "DanMarc2.fields.027",
-        "032": "dlb-bog.fields.032",
-        "033": "dlb-bog.fields.033",
+        "032": "lokal-dlb-bog.fields.032",
+        "033": "lokal-dlb-bog.fields.033",
         "035": "DanMarc2.fields.035",
         "038": "DanMarc2.fields.028",
-        "041":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
-            "sorting":"apbcde",
-            "subfields":{
-                "a": "DanMarc2.fields.041.subfields.a",
-                "b": "DanMarc2.fields.041.subfields.b",
-                "c": "DanMarc2.fields.041.subfields.c",
-                "d": "DanMarc2.fields.041.subfields.d",
-                "e": "DanMarc2.fields.041.subfields.e",
-                "p": "DanMarc2.fields.041.subfields.p"
-            },
-            "rules": [
-                {
-                    "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
-                }
-            ]
-        },
+        "041": "lokal-bog.fields.041",
         "042": "DanMarc2.fields.042",
         "044": "DanMarc2.fields.044",
-        "210": "DanMarc2.fields.210",
-        "222": "DanMarc2.fields.222",
+		"210": "DanMarc2.fields.210",
+		"222": "DanMarc2.fields.222",
         "240": "lokal-generel.fields.240",
         "241": "DanMarc2.fields.241",
         "242": "DanMarc2.fields.242",
@@ -69,13 +90,6 @@
         "300": "DanMarc2.fields.300",
         "320": "DanMarc2.fields.320",
         "322": "DanMarc2.fields.322",
-        "336": "DanMarc2.fields.336",
-        "337": "DanMarc2.fields.337",
-        "338": "DanMarc2.fields.338",
-        "344": "DanMarc2.fields.344",
-        "345": "DanMarc2.fields.345",
-        "346": "DanMarc2.fields.346",
-        "347": "DanMarc2.fields.347",
         "440": "DanMarc2.fields.440",
         "500": "DanMarc2.fields.500",
         "502": "DanMarc2.fields.502",
@@ -94,7 +108,6 @@
         "526": "DanMarc2.fields.526",
         "529": "DanMarc2.fields.529",
         "530": "DanMarc2.fields.530",
-        "531": "DanMarc2.fields.531",
         "532": "DanMarc2.fields.532",
         "534": "DanMarc2.fields.534",
         "538": "DanMarc2.fields.538",
@@ -139,9 +152,8 @@
         "770": "DanMarc2.fields.770",
         "780": "DanMarc2.fields.780",
         "795": "DanMarc2.fields.795",
-        "796": "DanMarc2.fields.796",
         "840": "DanMarc2.fields.840",
-        "856": "lokal-netpub.fields.856",
+        "856": "DanMarc2.fields.856",
         "880": "DanMarc2.fields.880",
         "887": "DanMarc2.fields.887",
         "900": "lokal-generel.fields.900",

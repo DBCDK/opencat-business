@@ -130,19 +130,19 @@
     },
     "Lokalbibliografi": {
       "templates": [
-        "dlb-artikel-online",
-        "dlb-artikel-trykt",
-        "dlb-bog",
-        "dlb-bogbind",
-        "dlb-boghoved",
-        "dlb-musik",
-        "dlb-netpub",
-        "dlb-netpubbind",
-        "dlb-netpubhoved",
-        "dlb-film",
-        "dlb-filmbind",
-        "dlb-filmhoved",
-        "dlb-periodicum"
+        "lokal-dlb-artikel-online",
+        "lokal-dlb-artikel-trykt",
+        "lokal-dlb-bog",
+        "lokal-dlb-bogbind",
+        "lokal-dlb-boghoved",
+        "lokal-dlb-musik",
+        "lokal-dlb-netpub",
+        "lokal-dlb-netpubbind",
+        "lokal-dlb-netpubhoved",
+        "lokal-dlb-film",
+        "lokal-dlb-filmbind",
+        "lokal-dlb-filmhoved",
+        "lokal-dlb-periodicum"
 
       ],
       "folder": "fbs"
