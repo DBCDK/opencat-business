@@ -33,7 +33,7 @@
         }
     ],
     "fields":{
-        "001": "dlb-bog.fields.001",
+        "001": "lokal-dlb-bog.fields.001",
         "004": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
             "mandatory":true,
@@ -58,7 +58,7 @@
             }
         },
         "008": "lokal-generelhoved.fields.008",
-        "009": "dlb-bog.fields.009",
+        "009": "lokal-dlb-bog.fields.009",
         "011": "lokal-generel.fields.011",
         "017": "lokal-generel.fields.017",
         "018": "lokal-generel.fields.018",

@@ -1,6 +1,6 @@
 [
     {
-        "name": "dlb-new-local-article-local-bibliography",
+        "name": "lokal-dlb-new-local-article-local-bibliography",
         "description": "Tester oprettelse af ny lokalbibliografiartikel",
         "request": {
             "authentication": {
@@ -8,7 +8,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "dlb-artikel-trykt",
+            "templateName": "lokal-dlb-artikel-trykt",
             "record": "request.marc"
         },
         "expected": {
