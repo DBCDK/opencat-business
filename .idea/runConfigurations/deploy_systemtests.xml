@@ -7,6 +7,7 @@
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bin/deploy-systemtests.sh" />
     <option name="PARAMETERS" value="" />
     <module name="" />
+    <envs />
     <method />
   </configuration>
 </component>
