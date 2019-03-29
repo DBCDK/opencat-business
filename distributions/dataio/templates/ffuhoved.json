@@ -126,7 +126,36 @@
         "093": "DanMarc2.fields.093",
         "094": "DanMarc2.fields.094",
         "095": "DanMarc2.fields.095",
-        "096": "ffu.fields.096",
+        "096":{
+            "comment": "felt 096 er for FFU-poster kun obligatorisk i bind- og singleposter/BDM 20190328",
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.32.htm",
+            "subfields":{
+                "a":{}, "b":{}, "c":{}, "d":{}, "e":{}, "f":{}, "g":{}, "h":{},
+                "i":{}, "j":{}, "k":{}, "l":{}, "m":{}, "n":{}, "o":{}, "p":{},
+                "q":{},
+                "r":{
+                    "repeatable": false,
+                    "values": [ "a", "b", "c", "d", "e", "f", "g" ]
+                },
+                "s":{},
+                "t":{},
+                "u":{
+                    "repeatable": false
+                },
+                "v":{}, "w":{}, "x":{}, "y":{},
+                "z":{
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 6,
+                            "max": 6
+                        }
+                    }]
+                }
+            }
+        },
         "097": "DanMarc2.fields.097",
         "098": "DanMarc2.fields.098",
         "099": "DanMarc2.fields.099",
