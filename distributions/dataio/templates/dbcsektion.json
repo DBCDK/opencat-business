@@ -287,6 +287,7 @@
         "f08": "dbcsingle.fields.f08",
         "f21": "dbcsingle.fields.f21",
         "f50": "dbcsingle.fields.f50",
+        "f51": "dbcsingle.fields.f51",
         "f53": "dbcsingle.fields.f53",
         "f56": "dbcsingle.fields.f56",
         "f57": "dbcsingle.fields.f57",
