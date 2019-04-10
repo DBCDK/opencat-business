@@ -1,0 +1,22 @@
+001 00 *a 46297393 *b 870970 *c 20190321133317 *d 20190304 *f a
+004 00 *r n *a b
+008 00 *t m *u f *a 2018 *v 0
+014 00 *a 46381599
+021 00 *e 9788772043609
+032 00 *x ACC201910 *a DLF201914 *x BKM201914 *x NLL201916
+245 00 *g Bog 2 *a En ¤metafor forandrer sig
+260 00 *c 2018
+300 00 *l 14 t., 30 min.
+520 00 *a Gengivelse af bogen
+520 00 *a Indlæst efter 1. udgave. 2018 *n 54246935 *r 9788772041032
+856 00 *z Adgang til lån hos eReolen.dk *u https://ereolen.dk/ting/
+990 00 *b v *b l *u nt
+996 00 *a DBC
+d08 00 *f dra *o dra
+d70 00 *b Publizon
+f07 00 *a 54246935 *n autoLU *c 2018
+f21 00 *a http://dmat.dbc.dk/eVALU/get.php *l Publizon *f http://someurl
+f21 00 *l eReolen *n 9788772043609
+n55 00 *a 20190304
+s12 00 *t TeamBAC201912
+z99 00 *a dra

@@ -1,0 +1,49 @@
+[
+  {
+    "name": "parent-record-missing",
+    "description": "Tester at preprocessing action giver en fornuftig fejl hvis parent record ikke findes",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Den overliggende post (46381599:870970) findes ikke"
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Den overliggende post (46381599:870970) findes ikke"
+          }
+        ],
+        "rawrepo": [
+        ]
+      }
+    }
+  }
+]
