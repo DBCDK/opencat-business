@@ -21,6 +21,12 @@
     },
     "rules":[
         {
+            "type": "RecordRules.conflictingFields",
+            "params": {
+                "fields": [ "100", "110" ]
+            }
+        },
+        {
             "type":"RecordRules.conflictingFields",
             "params": {
                 "fields":[ "557", "558" ]
@@ -33,6 +39,7 @@
             }
         }
     ],
+    "comment": " OBS! Felt 100 og 110 er tilladt i analyseposter i Dansk Lokalbibliografi.",
     "fields": {
         "001": "lokal-dlb-bog.fields.001",
         "002": "DanMarc2.fields.002",
@@ -132,6 +139,8 @@
             }
         },
         "086": "DanMarc2.fields.086",
+        "100": "lokal-generel.fields.100",
+        "110": "lokal-generel.fields.110",
         "245":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
 			"mandatory":true,
