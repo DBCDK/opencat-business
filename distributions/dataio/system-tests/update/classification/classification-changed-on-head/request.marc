@@ -6,7 +6,7 @@
 022 00 *a 1901-7847
 082 00 *a 305.562 075 *c 21
 222 00 *a Årbog *b Arbejdermuseet & Arbejderbevægelsens Bibliotek og Arkiv
-245 00 *a Årbog *æ Arbejdermuseet & Arbejderbevægelsens Bibliotek og Arkiv nu med ændring
+245 00 *a Årbog *æ Arbejdermuseet & Arbejderbevægelsens Bibliotek og Arkiv Changed
 255 00 *a 2005-2010
 260 00 *a [København] *b Arbejdermuseet & Arbejderbevægelsens Bibliotek og Arkiv *c 2006-2011
 652 00 *m 30.1626
@@ -15,3 +15,8 @@
 910 00 *a Arbejdermuseet og Arbejderbevægelsens Bibliotek og Arkiv, Fonden *z 710
 910 00 *a Fonden Arbejdermuseet og Arbejderbevægelsens Bibliotek og Arkiv *z 710
 996 00 *a DBC
+d08 00 *a ejs *a 710: Arb.mus og ABA kører stadig videre i egne navne og hver for sig selv om de siden 2005 har boet sammen og været ejet af Fonden/pbh
+d08 00 *a ejs/cj
+d08 00 *a ejs/cj/kms
+z98 00 *a Minus korrekturprint
+z99 00 *a kga

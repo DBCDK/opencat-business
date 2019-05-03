@@ -1,7 +1,7 @@
 [
   {
-    "name": "bug-22378-create-enrichment-on-head-classification-change",
-    "description": "Testcase to fix bug 22378",
+    "name": "classification-changed-on-head",
+    "description": "Tester at hvis man ændre opstilling på en hovedpost, så kommer der påhængsposter for alle bind med opstilling",
     "request": {
       "authentication": {
         "group": "010100",
@@ -37,7 +37,7 @@
             "rawrepo-volume-enrichment.marc"
           ],
           "holdings": [
-            761500
+            763000
           ]
         },
         {
@@ -56,35 +56,43 @@
             "type": "MARCXCHANGE",
             "deleted": false,
             "enrichments": [
-              "expected-head-enrichment.marc"
+              "expected-head-enrichment.marc",
+              "expected-head-fbs-enrichment.marc"
             ],
             "children": [
               "expected-volume-common.marc"
-            ]
+            ],
+            "enqueued": true
           },
           {
             "record": "expected-head-enrichment.marc",
             "type": "ENRICHMENT",
-            "deleted": false
+            "deleted": false,
+            "enqueued": true
           },
           {
             "record": "expected-volume-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enrichments": [
-              "expected-volume-enrichment.marc",
-              "expected-volume-fbs-enrichment.marc"
+              "expected-volume-enrichment.marc"
+            ],
+            "enqueued": true,
+            "holdings": [
+              763000
             ]
           },
           {
             "record": "expected-volume-enrichment.marc",
             "type": "ENRICHMENT",
-            "deleted": false
+            "deleted": false,
+            "enqueued": true
           },
           {
-            "record": "expected-volume-fbs-enrichment.marc",
+            "record": "expected-head-fbs-enrichment.marc",
             "type": "ENRICHMENT",
-            "deleted": false
+            "deleted": false,
+            "enqueued": true
           }
         ]
       }
