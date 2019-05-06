@@ -1,7 +1,7 @@
 [
   {
-    "name": "classification-changed-on-head",
-    "description": "Tester at hvis man ændre opstilling på en hovedpost, så kommer der påhængsposter for alle bind med opstilling",
+    "name": "classification-changed-on-head-two-level-hierarchy",
+    "description": "Tester at hvis man ændre opstilling på en hovedpost, så dannes der påhængsposter på hovedposten for alle biblioteker som har beholdning på bindposter",
     "request": {
       "authentication": {
         "group": "010100",
