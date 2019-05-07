@@ -265,6 +265,9 @@
                 "c":"DanMarc2.fields.245.subfields.c",
                 "e":"DanMarc2.fields.245.subfields.e",
                 "f":"DanMarc2.fields.245.subfields.f",
+                "i":"DanMarc2.fields.245.subfields.i",
+                "j":"DanMarc2.fields.245.subfields.j",
+                "k":"DanMarc2.fields.245.subfields.k",
                 "m":"DanMarc2.fields.245.subfields.m",
                 "n":"DanMarc2.fields.245.subfields.n",
                 "o":"DanMarc2.fields.245.subfields.o",
@@ -683,8 +686,12 @@
                 "g":"DanMarc2.fields.720.subfields.g"
             }
         },
+        "739": "DanMarc2.fields.739",
         "740": "bog.fields.740",
         "745": "DanMarc2.fields.745",
+        "770": "fonogram.fields.770",
+        "780": "fonogram.fields.780",
+        "795": "fonogram.fields.795",
         "840":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b.htm",
             "subfields":{

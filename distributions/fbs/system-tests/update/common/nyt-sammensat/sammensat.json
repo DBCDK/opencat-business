@@ -34,6 +34,40 @@
         }
     },
     {
+        "name": "fbs-test-opret-bogplusmusikcd-sammensat",
+        "description": "Tester oprettelse af nyt sammensat materiale fra et FBS-bibliotek",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "sammensat",
+            "record": "request2.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result2-new-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result2-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result2-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
         "name": "fbs-test-opret-common-klassesaet",
         "description": "Tester oprettelse af nyt sammensat materiale fra et FBS-bibliotek",
         "request": {
