@@ -140,19 +140,7 @@
             "mandatory": true,
             "repeatable":false,
             "subfields":{
-                "a": {
-                    "mandatory": true,
-                    "values": "Lister.fields.codes.subfields.general_mattype.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
-                            "params": {
-                                "fields": [ "991" ],
-                                "values": [ "m" ]
-                            }
-                        }
-                    ]
-                },
+                "a": "dbcsingle.fields.009.subfields.a",
                 "g": "dbcsingle.fields.009.subfields.g",
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
