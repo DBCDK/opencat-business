@@ -38,6 +38,9 @@ pipeline {
 
     environment {
         MARATHON_TOKEN = credentials("METASCRUM_MARATHON_TOKEN")
+        DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+        GITOPS_DEPLOY_TAG = "master-3"
+        GITLAB_PRIVATE_TOKEN = credentials("metascrum-gitlab-api-token")
     }
 
     options {
@@ -61,7 +64,7 @@ pipeline {
                     ).trim()
                     echo "New docker tag: ${docker_tag}"
                     sh "./bin/run-js-tests.sh ${env.GIT_COMMIT}"
-                    def image = docker.build("docker-i.dbc.dk/update-payara-deployer-prod:${env.BRANCH_NAME}-${env.BUILD_NUMBER}", ". -f docker/deploy/Dockerfile --build-arg UPDATE_PAYARA_DEPLOYER_DOCKER_TAG=${docker_tag}")
+                    def image = docker.build("docker-i.dbc.dk/update-payara-deployer-prod:${DOCKER_IMAGE_VERSION}", ". -f docker/deploy/Dockerfile --build-arg UPDATE_PAYARA_DEPLOYER_DOCKER_TAG=${docker_tag}")
                     image.push()
                 }
             }
@@ -79,6 +82,37 @@ pipeline {
                 deploy("prod-cisterne-fbs")
                 deploy("prod-cisterne-dataio")
                 notifyOfdeploy()
+            }
+        }
+
+        stage("Deploy production k8s") {
+            agent {
+                docker {
+                    label workerNode
+                    image "docker.dbc.dk/gitops-deploy-env:${env.GITOPS_DEPLOY_TAG}"
+                    alwaysPull true
+                }
+            }
+            when {
+                expression {
+                    (currentBuild.result == null || currentBuild.result == 'SUCCESS') && env.BRANCH_NAME == 'master'
+                }
+            }
+            steps {
+                script {
+                    dir("deploy") {
+                        git(url: "gitlab@gitlab.dbc.dk:metascrum/updateservice-deploy.git", credentialsId: "gitlab-meta",
+                                branch: "boblebad", poll: false)
+                        sh """
+							set-new-version update-bks-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
+                            set-new-version update-fbs-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
+                            set-new-version update-dataio-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
+                            
+                            set-new-version update-fbs-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b cisterne
+                            set-new-version update-dataio-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b cisterne
+						"""
+                    }
+                }
             }
         }
     }
