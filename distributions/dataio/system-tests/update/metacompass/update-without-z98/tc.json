@@ -1,52 +1,87 @@
 [
-    {
-        "name": "metacompass-update-without-z98",
-        "bugs": [],
-        "description": "",
-        "request": {
-            "authentication": {
-                "group": "150077",
-                "user": "netpunkt",
-                "password": "password"
-            },
-            "templateName": "metakompas",
-            "record": "request.marc"
+  {
+    "name": "metacompass-update-without-z98",
+    "bugs": [],
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "150077",
+        "user": "netpunkt",
+        "password": "password"
+      },
+      "templateName": "metakompas",
+      "record": "request.marc",
+      "ignoreFieldsInMatch": "d09"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919.marc"
+          ]
         },
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "rawrepo-870970.marc",
-                    "type": "MARCXCHANGE",
-                    "deleted": false,
-                    "enrichments": [ "rawrepo-191919.marc" ]
-                },
-                {
-                    "record": "rawrepo-191919.marc",
-                    "type": "ENRICHMENT",
-                    "deleted": false
-                }
-            ]
-        },
-        "expected": {
-            "validation": {},
-            "update": {
-                "errors": [],
-                "rawrepo": [
-                    {
-                        "record": "expected-870970.marc",
-                        "type": "MARCXCHANGE",
-                        "enqueued": true,
-                        "deleted": false,
-                        "enrichments": [ "expected-191919.marc" ]
-                    },
-                    {
-                        "record": "expected-191919.marc",
-                        "type": "ENRICHMENT",
-                        "enqueued": true,
-                        "deleted": false
-                    }
-                ]
-            }
+        {
+          "record": "rawrepo-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
         }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970.marc",
+            "type": "MARCXCHANGE",
+            "enqueued": true,
+            "deleted": false,
+            "enrichments": [
+              "expected-191919.marc"
+            ]
+          },
+          {
+            "record": "expected-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-besaettelsestiden-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-besaettelsestiden-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-besaettelsestiden-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-New-York-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-New-York-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-New-York-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
     }
+  }
 ]
