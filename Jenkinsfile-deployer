@@ -101,8 +101,6 @@ pipeline {
             steps {
                 script {
                     dir("deploy") {
-                        git(url: "gitlab@gitlab.dbc.dk:metascrum/updateservice-deploy.git", credentialsId: "gitlab-meta",
-                                branch: "boblebad", poll: false)
                         sh """
 							set-new-version update-bks-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
                             set-new-version update-fbs-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
