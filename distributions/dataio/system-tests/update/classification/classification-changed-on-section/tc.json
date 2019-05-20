@@ -1,0 +1,268 @@
+[
+  {
+    "name": "classification-changed-on-head-three-level-hierarchy",
+    "description": "Tester at hvis man ændre opstilling på en hovedpost i et tre niveau hierarki, så dannes der påhængsposter på hovedposten for alle biblioteker som har beholdning på bindposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbchoved",
+      "record": "request-head.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-head-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-head-enrichment.marc"
+          ],
+          "children": [
+            "rawrepo-section-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-head-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-section-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-section-enrichment.marc"
+          ],
+          "children": [
+            "rawrepo-volume-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-section-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-volume-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-volume-enrichment.marc"
+          ],
+          "holdings": [
+            763000
+          ]
+        },
+        {
+          "record": "rawrepo-volume-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "rawrepo": [
+          {
+            "record": "expected-head-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "expected-head-enrichment.marc",
+              "expected-head-fbs-enrichment.marc"
+            ],
+            "children": [
+              "rawrepo-section-common.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "expected-head-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-head-fbs-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-section-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-section-enrichment.marc"
+            ],
+            "children": [
+              "rawrepo-volume-common.marc"
+            ],
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-section-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-volume-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-volume-enrichment.marc"
+            ],
+            "holdings": [
+              763000
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-volume-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "classification-changed-on-section-three-level-hierarchy",
+    "description": "Tester at hvis man ændre opstilling på en sektionspost i et tre niveau hierarki, så dannes der påhængsposter på sektionsposten for alle biblioteker som har beholdning på bindposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsektion",
+      "record": "request-section.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-head-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-head-enrichment.marc"
+          ],
+          "children": [
+            "rawrepo-section-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-head-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-section-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-section-enrichment.marc"
+          ],
+          "children": [
+            "rawrepo-volume-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-section-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-volume-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-volume-enrichment.marc"
+          ],
+          "holdings": [
+            763000
+          ]
+        },
+        {
+          "record": "rawrepo-volume-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "rawrepo": [
+          {
+            "record": "rawrepo-head-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-head-enrichment.marc"
+            ],
+            "children": [
+              "rawrepo-section-common.marc"
+            ],
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-head-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-section-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "expected-section-enrichment.marc",
+              "expected-section-fbs-enrichment.marc"
+            ],
+            "children": [
+              "rawrepo-volume-common.marc"
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "expected-section-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-section-fbs-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-volume-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-volume-enrichment.marc"
+            ],
+            "holdings": [
+              763000
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-volume-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
