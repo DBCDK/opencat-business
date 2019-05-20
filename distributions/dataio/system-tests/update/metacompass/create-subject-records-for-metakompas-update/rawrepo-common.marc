@@ -1,0 +1,33 @@
+001 00 *a 45964981 *b 870970 *c 20190114133656 *d 20181204 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2018 *b dk *d x *j f *l dan *v 0
+009 00 *a a *g xx
+021 00 *e 9788797099209 *c hf.
+032 00 *x ACC201849 *a DBF201904 *x BKM201904
+041 00 *a dan *c fre
+100 00 *a Gagnon *h Pierre *c f. 1957 *6 46073452 *4 aut
+241 00 *a Mon vieux et moi
+245 00 *a Mig og min olding *c roman
+250 00 *a 1. udgave *b ÷
+260 00 *& 1 *a [Kbh.] *b Grodin Gagnon *f [Køge] *g [eksp. DBK] *c 2018
+300 00 *a 81 sider
+504 00 *& 1 *a En midaldrende mand er gået på tidlig pension. Han er ugift og barnløs og adopterer den 99-årige Léo fra et plejehjem. Léo flytter hjem til manden, og de har en fredsommelig og venskabelig hverdag. Efter nogen tid bliver Léo dårligere og dement og må vende tilbage til plejehjemmet
+521 00 *b 1. oplag *c 2018
+652 00 *n 82 *z 26
+652 00 *o sk
+665 00 *& positiv *& lektor *n optimistisk
+665 00 *& humoristisk *& lektor *n humoristisk
+665 00 *& dramatisk *& lektor *n bevægende
+665 00 *& trist *& lektor *n vemodig
+665 00 *& lektor *a Humoristisk, vemodig og bevægende *e alderdom *e venskab *e mænd *i 2000-2009 *q Canada *r jeg-fortæller *s lettilgængeligt sprog *t fremadskridende *u realistisk
+665 00 *& lektor *h mand *h midaldrende *k sympatisk *k sød *k god *k tolerant *l andre
+665 00 *& lektor *h ældre *h mand *k optimistisk *k sympatisk
+666 00 *0 *s alderdom
+666 00 *0 *s venskab
+666 00 *0 *s mænd
+666 00 *0 *s ældre
+666 00 *0 *q Canada
+720 00 *o François-Eric Grodin *4 trl
+720 00 *o Juliane Wammen *4 edt
+990 00 *b l *b v *u nt
+996 00 *a DBC
