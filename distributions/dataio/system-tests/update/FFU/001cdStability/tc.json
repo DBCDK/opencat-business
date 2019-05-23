@@ -10,7 +10,8 @@
             },
             "templateName": "ffu",
             "record": "request.marc",
-            "check001cd": "true"
+            "check001c": "true",
+            "check001d": "true"
         },
         "expected": {
             "validation": {},
