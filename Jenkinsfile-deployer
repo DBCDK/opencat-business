@@ -53,20 +53,6 @@ pipeline {
             }
         }
 
-        stage("Deploy production") {
-            when {
-                branch "master"
-            }
-            steps {
-                deploy("prod-boblebad-bks")
-                deploy("prod-boblebad-fbs")
-                deploy("prod-boblebad-dataio")
-
-                deploy("prod-cisterne-fbs")
-                deploy("prod-cisterne-dataio")
-            }
-        }
-
         stage("Deploy production k8s") {
             agent {
                 docker {
