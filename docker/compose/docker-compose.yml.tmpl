@@ -70,6 +70,9 @@ services:
       - SETTINGS_OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
       - SETTINGS_OPENAGENCY_CACHE_AGE=0
       - INSTANCE_NAME=${USER}_dev
+      - SETTINGS_OPENNUMBERROLL_URL=http://opennumberroll.addi.dk/1.0/
+      - SETTINGS_OPENNUMBERROLL_NAME_FAUST_8=faust
+      - SETTINGS_OPENNUMBERROLL_NAME_FAUST=faust
     extra_hosts:
       - "solrserver:${HOST_IP}"
     volumes:
