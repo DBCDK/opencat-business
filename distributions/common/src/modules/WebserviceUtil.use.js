@@ -21,6 +21,8 @@ var WebserviceUtil = function () {
 
         numberRollNameFaust8 = String(settings.get('opennumberroll.name.faust8'));
         numberRollNameFaust = String(settings.get('opennumberroll.name.faust'));
+        Log.info("number roll URL <" + openNumberRollUrl + "> faust <" +
+            numberRollNameFaust + "> faust8 <" + numberRollNameFaust8 + ">");
     }
 
     /**

@@ -1,52 +1,582 @@
 [
-    {
-        "name": "metacompass-acc-code",
-        "bugs": [],
-        "description": "Tester om 665 bliver overført til 666 uden der er en produktionskode i fremtiden",
-        "request": {
-            "authentication": {
-                "group": "150077",
-                "user": "netpunkt",
-                "password": "password"
-            },
-            "templateName": "metakompas",
-            "record": "request.marc"
+  {
+    "name": "metacompass-acc-code",
+    "bugs": [],
+    "description": "Tester om 665 bliver overført til 666 uden der er en produktionskode i fremtiden",
+    "request": {
+      "authentication": {
+        "group": "150077",
+        "user": "netpunkt",
+        "password": "password"
+      },
+      "templateName": "metakompas",
+      "record": "request.marc",
+      "ignoreFieldsInMatch": "d09"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
         },
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "rawrepo-common.marc",
-                    "type": "MARCXCHANGE",
-                    "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
-                },
-                {
-                    "record": "rawrepo-dbc-enrichment.marc",
-                    "type": "ENRICHMENT",
-                    "deleted": false
-                }
-            ]
-        },
-        "expected": {
-            "validation": {},
-            "update": {
-                "errors": [],
-                "rawrepo": [
-                    {
-                        "record": "result-common.marc",
-                        "type": "MARCXCHANGE",
-                        "enqueued": true,
-                        "deleted": false,
-                        "enrichments": [ "result-dbc-enrichment.marc" ]
-                    },
-                    {
-                        "record": "result-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "enqueued": true,
-                        "deleted": false
-                    }
-                ]
-            }
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
         }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "enqueued": true,
+            "deleted": false,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-hyggelig-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-hyggelig-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-hyggelig-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-varm-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-varm-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-varm-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-dramatisk-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-dramatisk-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-dramatisk-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-gribende-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-gribende-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-gribende-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-parforhold-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-parforhold-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-parforhold-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-foelelser-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-foelelser-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-foelelser-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-kvinder-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-kvinder-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-kvinder-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-kvindeliv-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-kvindeliv-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-kvindeliv-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-kaerlighed-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-kaerlighed-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-kaerlighed-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-samfundsskildringer-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-samfundsskildringer-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-samfundsskildringer-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-1930-1939-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-1930-1939-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-1930-1939-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-1940-1949-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-1940-1949-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-1940-1949-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-mellemkrigstiden-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-mellemkrigstiden-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-mellemkrigstiden-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-overklassen-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-overklassen-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-overklassen-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-Danmark-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-Danmark-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-Danmark-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-alvidende-fortaeller-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-alvidende-fortaeller-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-alvidende-fortaeller-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-lettilgaengeligt-sprog-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-lettilgaengeligt-sprog-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-lettilgaengeligt-sprog-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-lukket-slutning-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-lukket-slutning-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-lukket-slutning-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-fremadskridende-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-fremadskridende-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-fremadskridende-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-realistisk-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-realistisk-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-realistisk-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-kvinde-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-kvinde-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-kvinde-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-voksen-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-voksen-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-voksen-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-forfaengelig-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-forfaengelig-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-forfaengelig-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-kreativ-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-kreativ-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-kreativ-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-mild-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-mild-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-mild-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-andre-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-andre-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-andre-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-sig-selv-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-sig-selv-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-sig-selv-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-mand-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-mand-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-mand-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-voksen-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-voksen-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-voksen-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-soed-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-soed-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-soed-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-passiv-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-passiv-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-passiv-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-mild-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-mild-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-mild-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-andre-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-andre-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-andre-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-familien-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-familien-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-familien-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-sig-selv-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-sig-selv-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-sig-selv-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
     }
+  }
 ]
