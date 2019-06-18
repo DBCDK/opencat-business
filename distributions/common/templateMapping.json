@@ -12,6 +12,9 @@
     "DBC": {
       "templates": [
         "allowall",
+        "BCIbog",
+        "BCIbogbind",
+        "BCIboghoved",
         "dbc",
         "dbcemneord",
         "dbcsingle",
