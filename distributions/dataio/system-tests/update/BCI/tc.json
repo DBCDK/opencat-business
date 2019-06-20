@@ -1,7 +1,7 @@
 [
     {
-        "name": "fbs-update-common-record-from-other-library",
-        "description": "Tester SBCI-opdatering af andet biblioteks fællesskabspost (de skal IKKE dannes 996*m og *o med tidligere ejeres biblnummer)",
+        "name": "bci-new-common-record",
+        "description": "Tester oprettelse af ny fællesskabspost fra BCI (700300)",
         "request": {
             "authentication": {
                 "group": "700300",
@@ -11,28 +11,13 @@
             "templateName": "BCIbog",
             "record": "request.marc"
         },
-        "setup": {
-            "rawrepo": [
-                {
-                    "record": "rawrepo-common.marc",
-                    "type": "MARCXCHANGE",
-                    "deleted": false,
-                    "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
-                },
-                {
-                    "record": "rawrepo-dbc-enrichment.marc",
-                    "type": "ENRICHMENT",
-                    "deleted": false
-                }
-            ]
-        },
         "expected": {
             "validation": {},
             "update": {
                 "errors": [],
                 "rawrepo": [
                     {
-                        "record": "result-common.marc",
+                        "record": "result-new-common.marc",
                         "type": "MARCXCHANGE",
                         "deleted": false,
                         "enqueued": true,

@@ -350,9 +350,9 @@
         "250": "DanMarc2.fields.250",
 		"256": "DanMarc2.fields.256",
         "260":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
             "mandatory":true,
             "repeatable":false,
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
             "subfields":{
                 "&":{
                     "repeatable":false
