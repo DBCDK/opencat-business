@@ -11,7 +11,7 @@
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>use_enrichments</oa:name>
-                    <oa:bool>0</oa:bool>
+                    <oa:bool>1</oa:bool>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_root</oa:name>
@@ -19,11 +19,11 @@
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_common_subjects</oa:name>
-                    <oa:bool>0</oa:bool>
+                    <oa:bool>1</oa:bool>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_common_notes</oa:name>
-                    <oa:bool>0</oa:bool>
+                    <oa:bool>1</oa:bool>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>auth_dbc_records</oa:name>
@@ -67,7 +67,7 @@
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>cataloging_template_set</oa:name>
-                    <oa:string>fbs</oa:string>
+                    <oa:string>dbc</oa:string>
                 </oa:libraryRule>
                 <oa:libraryRule>
                     <oa:name>worldcat_synchronize</oa:name>
