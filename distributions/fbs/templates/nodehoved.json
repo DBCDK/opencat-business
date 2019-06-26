@@ -617,17 +617,7 @@
         },
         "739":"DanMarc2.fields.739",
         "740": "bog.fields.740",
-        "745":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
-            "subfields":{
-                "A":{
-                    "repeatable":false
-                },
-                "a":{
-                    "repeatable":false
-                }
-            }
-        },
+        "745": "bog.fields.745",
         "770":"DanMarc2.fields.770",
         "780":"DanMarc2.fields.780",
         "795":{
