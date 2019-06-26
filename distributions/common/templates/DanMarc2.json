@@ -3699,6 +3699,7 @@
             }
         },
         "745":{
+            "comment": "jklm tilfoejet 'foer tid' aht KB/hue 26.6.2019",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
             "subfields":{
                 "i":{
@@ -3708,6 +3709,18 @@
                     "repeatable":false
                 },
                 "b":{
+                    "repeatable":false
+                },
+                "j":{
+                    "repeatable":false
+                },
+                "k":{
+                    "repeatable":false
+                },
+                "l":{
+                    "repeatable":false
+                },
+                "m":{
                     "repeatable":false
                 },
                 "\u00E6":{
