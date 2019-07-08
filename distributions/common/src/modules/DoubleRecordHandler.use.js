@@ -28,8 +28,8 @@ var DoubleRecordHandler = function () {
     function checkAndSendMails(record, settings) {
         Log.trace("Enter - DoubleRecordHandler.checkAndSendMails()");
         try {
-            if (!settings.containsKey('solr.url')) {
-                Log.error("SOLR has not been configured. Missing key 'solr.url' in settings.");
+            if (!settings.containsKey('solr.url') && !settings.containsKey('SOLR_URL')) {
+                Log.error("SOLR has not been configured. Missing key 'SOLR_URL' in settings.");
                 return;
             }
             /*
@@ -37,7 +37,12 @@ var DoubleRecordHandler = function () {
              TODO opdatering og ved forced skal find kaldes. Yderligere skal der kun sendes mail ved forced.
              TODO Ved intern opdatering skal find kaldes.
              */
-            var records = DoubleRecordFinder.find(record, settings.get('solr.url'));
+            var url = settings.get('SOLR_URL');
+            //TODO Remove temp hack
+            if (url === null) {
+                url = settings.get('solr.url');
+            }
+            var records = DoubleRecordFinder.find(record, url);
             var idField = record.getFirstFieldAsField(/001/);
             if (idField === "") {
                 return;
@@ -66,13 +71,18 @@ var DoubleRecordHandler = function () {
         Log.trace("Enter - DoubleRecordHandler.checkDoubleRecordFrontend()");
         var res = {status: "ok"};
         try {
-            if (!settings.containsKey('solr.url')) {
-                var msg = "SOLR has not been configured. Missing key 'solr.url' in settings.";
+            if (!settings.containsKey('solr.url') && !settings.containsKey('SOLR_URL')) {
+                var msg = "SOLR has not been configured. Missing key 'SOLR_URL' in settings.";
                 Log.error(msg);
                 res.status = "error";
                 res.doubleRecordFrontendDTOs = [{message: msg}];
             } else {
-                var records = DoubleRecordFinder.findGeneral(record, settings.get('solr.url'));
+                var url = settings.get('SOLR_URL');
+                //TODO Remove temp hack
+                if (url === null) {
+                    url = settings.get('solr.url');
+                }
+                var records = DoubleRecordFinder.findGeneral(record, url);
                 var idField = record.getFirstFieldAsField(/001/);
                 if (idField !== "" && records.length > 0) {
                     res.status = "doublerecord";
@@ -141,14 +151,6 @@ var DoubleRecordHandler = function () {
         Log.trace("Enter - FrontendDoubleRecordHandler.checkGeneral()");
         var res = {status: ok, message: ""};
         try {
-            if (!settings.containsKey('solr.url')) {
-                var msg = "SOLR has not been configured. Missing key 'solr.url' in settings.";
-                Log.error(msg);
-                res.status = "failed";
-                res.message = msg;
-                return res;
-            }
-            // var records = DoubleRecordFinder.findGeneral(record, settings.getAbsolutePath('solr.url'));
             var records = [];
             var idField = record.getFirstFieldAsField(/001/);
             if (idField === "") {
