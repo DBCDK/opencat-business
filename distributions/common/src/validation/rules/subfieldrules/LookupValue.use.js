@@ -21,7 +21,7 @@ var LookupValue = function () {
      *                        to lookup in solr as a String. "exist" is a boolean value.
      *                        If true when the sub field value must have hits in solr; false
      *                        means there must be 0 hits in solr.
-     * @param {object} settings Settings object with the settings: solr.url.
+     * @param {object} settings Settings object with the settings: SOLR_URL.
      *                          This should point to the base url of the
      *                          solr to perform the lookup against.
      * @return {Array} An array of validation errors in case the value of the
@@ -38,11 +38,15 @@ var LookupValue = function () {
         ValueCheck.checkThat("settings", params).type("object");
         try {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-            if (!settings.containsKey('solr.url')) {
+            if (!settings.containsKey('SOLR_URL') && !settings.containsKey('solr.url')) {
                 throw ResourceBundle.getString(bundle, "lookup.value.missing.solr.url");
             }
 
-            var url = settings.get('solr.url');
+            //TODO Remove temp hack
+            var url = settings.get('SOLR_URL');
+            if (url === null) {
+                url = settings.get('solr.url');
+            }
             if (url === undefined) {
                 throw ResourceBundle.getString(bundle, "lookup.value.undefined.solr.url");
             }
