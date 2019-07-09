@@ -1,10 +1,7 @@
-version: '2'
-networks:
-  default:
-    external:
-        name: update-compose-network
+version: '3.2'
 
 services:
+
   rawrepoDb:
     image: docker-io.dbc.dk/rawrepo-postgres-1.13-snapshot:DIT-5016
     environment:
@@ -15,6 +12,8 @@ services:
       - "5432"
     ports:
       - "5432"
+    networks:
+      - update-compose-network
 
   holdingsitemsDb:
     image: docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest
@@ -26,6 +25,8 @@ services:
       - "5432"
     ports:
       - "5432"
+    networks:
+      - update-compose-network
 
   updateserviceDb:
     image: docker-i.dbc.dk/update-postgres:${PROD_VERSION}
@@ -37,11 +38,15 @@ services:
       - "5432"
     ports:
       - "5432"
+    networks:
+      - update-compose-network
 
   fakeSmtp:
     image: docker-i.dbc.dk/fakesmtp
     volumes:
       - "../logs/fakesmtp:/output"
+    networks:
+      - update-compose-network
 
   updateservice:
     image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
@@ -49,37 +54,21 @@ services:
       - ./settings.env
       - ./db.env
     environment:
-      - LOGBACK_FILE=file:///data/update-logback-include.xml
-      - SETTINGS_RAWREPO_ALLOW_EXTRA_RECORD_DATA=True
-      - THREAD_POOL_SIZE=1
-      - RAWREPO_PORT_5432_TCP_ADDR=${HOST_IP}
-      - RAWREPO_PORT_5432_TCP_PORT=${RAWREPO_PORT}
-      - SETTINGS_RAWREPO_PROVIDER_ID_DBC=dataio-update
-      - SETTINGS_RAWREPO_PROVIDER_ID_DBC_SOLR=update-rawrepo-solr-sync
-      - SETTINGS_RAWREPO_PROVIDER_ID_FBS=opencataloging-update
-      - SETTINGS_RAWREPO_PROVIDER_ID_PH=fbs-ph-update
-      - SETTINGS_RAWREPO_PROVIDER_ID_PH_HOLDINGS=dataio-ph-holding-update
-      - HOLDINGSITEMS_PORT_5432_TCP_ADDR=${HOST_IP}
-      - HOLDINGSITEMS_PORT_5432_TCP_PORT=${HOLDINGSITEMSDB_PORT}
-      - UPDATE_DB_PORT_5432_TCP_ADDR=${HOST_IP}
-      - UPDATE_DB_PORT_5432_TCP_PORT=${UPDATESERVICEDB_PORT}
-      - SOLR_PORT_8080_TCP_ADDR=${DEV_SOLR_ADDR}
-      - SOLR_PORT_8080_TCP_PORT=${DEV_SOLR_PORT}
-      - SOLR_PATH=${DEV_SOLR_PATH}
-      - MAX_HEAP_IN_GB=4
-      - SETTINGS_OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
-      - SETTINGS_OPENAGENCY_CACHE_AGE=0
       - INSTANCE_NAME=${USER}_dev
-      - SETTINGS_OPENNUMBERROLL_URL=http://opennumberroll.addi.dk/1.0/
-      - SETTINGS_OPENNUMBERROLL_NAME_FAUST_8=faust
-      - SETTINGS_OPENNUMBERROLL_NAME_FAUST=faust
+      - OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
+      - INSTANCE_NAME=${USER}_dev
+      - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
+      - JAVA_MAX_HEAP_SIZE=8G
+      - RAWREPO_DB_URL=${DEV_RAWREPO_DB_URL}
+      - HOLDINGS_ITEMS_DB_URL=${DEV_HOLDINGS_ITEMS_DB_URL}
+      - UPDATE_DB_URL=${DEV_UPDATE_DB_URL}
+      - SOLR_URL=${DEV_SOLR_URL}
+      - SOLR_BASIS_URL=${DEV_SOLR_BASIS_URL}
     extra_hosts:
       - "solrserver:${HOST_IP}"
+      - "solrbasis:${HOST_IP}"
     volumes:
-      - "../logs/update/app:/data/logs"
-      - "../logs/update/server:/usr/local/payara41/glassfish/domains/domain1/logs"
-      - "../../distributions:/data/opencat-business/distributions"
-      - "../../template-transpiler:/data/opencat-business/tenplate-transpiler"
+      - "../../distributions:/opt/payara5/deployments/opencat-business/distributions"
     expose:
       - "8080"
       - "8686"
@@ -88,3 +77,8 @@ services:
       - "8080"
       - "8686"
       - "4848"
+    networks:
+      - update-compose-network
+
+networks:
+  update-compose-network:

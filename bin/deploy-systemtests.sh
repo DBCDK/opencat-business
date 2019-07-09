@@ -62,11 +62,18 @@ echo "Using prod version ${PROD_VERSION} of updateservice"
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
 envsubst '${PROD_VERSION}' < docker-compose.yml.tmpl > docker-compose.yml
 
+DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-NOTSET}
+if [ ${DEV_NUMBERROLL_URL} = "NOTSET" ]
+then
+    export DEV_NUMBERROLL_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
+fi
 DEV_OPENAGENCY_URL=${DEV_OPENAGENCY_URL:-NOTSET}
 if [ ${DEV_OPENAGENCY_URL} = "NOTSET" ]
 then
     export DEV_OPENAGENCY_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
 fi
+
+# Solr FBS settings
 DEV_SOLR_ADDR=${DEV_SOLR_ADDR:-NOTSET}
 if [ ${DEV_SOLR_ADDR} = "NOTSET" ]
 then
@@ -82,6 +89,27 @@ if [ ${DEV_SOLR_PATH} = "NOTSET" ]
 then
     export DEV_SOLR_PATH="solr/raapost-index"
 fi
+
+export DEV_SOLR_URL="http://${DEV_SOLR_ADDR}:${DEV_SOLR_PORT}/${DEV_SOLR_PATH}"
+
+#Solr basis settings
+DEV_SOLR_BASIS_ADDR=${DEV_SOLR_BASIS_ADDR:-NOTSET}
+if [ ${DEV_SOLR_BASIS_ADDR} = "NOTSET" ]
+then
+    export DEV_SOLR_BASIS_ADDR="solrbasis"
+fi
+DEV_SOLR_BASIS_PORT=${DEV_SOLR_BASIS_PORT:-NOTSET}
+if [ ${DEV_SOLR_BASIS_PORT} = "NOTSET" ]
+then
+    export DEV_SOLR_BASIS_PORT="${SOLR_PORT_NR}"
+fi
+DEV_SOLR_BASIS_PATH=${DEV_SOLR_BASIS_PATH:-NOTSET}
+if [ ${DEV_SOLR_BASIS_PATH} = "NOTSET" ]
+then
+    export DEV_SOLR_BASIS_PATH="solr/basis-index"
+fi
+
+export DEV_SOLR_BASIS_URL="http://${DEV_SOLR_BASIS_ADDR}:${DEV_SOLR_BASIS_PORT}/${DEV_SOLR_BASIS_PATH}"
 
 docker-compose down
 docker-compose ps
@@ -114,6 +142,10 @@ echo -e "HOLDINGSITEMSDB_PORT is $HOLDINGSITEMSDB_PORT\n"
 UPDATESERVICEDB_IMAGE=`docker-compose ps -q updateserviceDb`
 export UPDATESERVICEDB_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${UPDATESERVICEDB_IMAGE} `
 echo -e "UPDATESERVICEDB_PORT is $UPDATESERVICEDB_PORT\n"
+
+export DEV_RAWREPO_DB_URL="rawrepo:thePassword@${HOST_IP}:${RAWREPO_PORT}/rawrepo"
+export DEV_HOLDINGS_ITEMS_DB_URL="rawrepo:thePassword@${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems"
+export DEV_UPDATE_DB_URL="rawrepo:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
 
 docker-compose up -d updateservice
 
