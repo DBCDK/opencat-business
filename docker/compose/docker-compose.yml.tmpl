@@ -51,13 +51,14 @@ services:
   updateservice:
     image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
     env_file:
-      - ./settings.env
-      - ./db.env
+      - db.env
+      - providers.env
+      - settings.env
     environment:
       - INSTANCE_NAME=${USER}_dev
       - OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
       - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
-      - JAVA_MAX_HEAP_SIZE=8G
+      - JAVA_MAX_HEAP_SIZE=4G
       - RAWREPO_DB_URL=rawrepo:thePassword@rawrepoDb:5432/rawrepo
       - HOLDINGS_ITEMS_DB_URL=holdingsitems:thePassword@holdingsitemsDb:5432/holdingsitems
       - UPDATE_DB_URL=updateservice:thePassword@updateserviceDb:5432/updateservice
