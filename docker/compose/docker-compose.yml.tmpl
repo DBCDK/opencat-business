@@ -58,9 +58,9 @@ services:
       - OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
       - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
       - JAVA_MAX_HEAP_SIZE=8G
-      - RAWREPO_DB_URL=${DEV_RAWREPO_DB_URL}
-      - HOLDINGS_ITEMS_DB_URL=${DEV_HOLDINGS_ITEMS_DB_URL}
-      - UPDATE_DB_URL=${DEV_UPDATE_DB_URL}
+      - RAWREPO_DB_URL=rawrepo:thePassword@rawrepoDb:5432/rawrepo
+      - HOLDINGS_ITEMS_DB_URL=holdingsitems:thePassword@holdingsitemsDb:5432/holdingsitems
+      - UPDATE_DB_URL=updateservice:thePassword@updateserviceDb:5432/updateservice
       - SOLR_URL=${DEV_SOLR_URL}
       - SOLR_BASIS_URL=${DEV_SOLR_BASIS_URL}
     extra_hosts:
