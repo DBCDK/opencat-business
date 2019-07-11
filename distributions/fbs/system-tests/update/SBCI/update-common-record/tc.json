@@ -1,14 +1,14 @@
 [
     {
         "name": "fbs-update-common-record-from-other-library",
-        "description": "Tester SBCI-opdatering af andet biblioteks fællesskabspost (ejerkode 700300)",
+        "description": "Tester SBCI-opdatering af andet biblioteks fællesskabspost (de skal IKKE dannes 996*m og *o med tidligere ejeres biblnummer)",
         "request": {
             "authentication": {
                 "group": "700300",
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "bog",
+            "templateName": "BCIbog",
             "record": "request.marc"
         },
         "setup": {

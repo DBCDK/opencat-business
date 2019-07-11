@@ -214,7 +214,24 @@
         "028": "DanMarc2.fields.028",
         "035": "DanMarc2.fields.035",
         "038": "DanMarc2.fields.028",
-        "041": "bog.fields.041",
+        "041":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
+            "repeatable":false,
+            "sorting":"apbcde",
+            "subfields":{
+                "a": "DanMarc2.fields.041.subfields.a",
+                "b": "DanMarc2.fields.041.subfields.b",
+                "c": "DanMarc2.fields.041.subfields.c",
+                "d": "DanMarc2.fields.041.subfields.d",
+                "e": "DanMarc2.fields.041.subfields.e",
+                "p": "DanMarc2.fields.041.subfields.p"
+            },
+            "rules": [
+                {
+                    "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                }
+            ]
+        },
         "042": "bog.fields.042",
         "044": "DanMarc2.fields.044",
 		"082": "DanMarc2.fields.082",
@@ -270,6 +287,7 @@
         },
         "250": "DanMarc2.fields.250",
         "260":{
+            "comment": "Ikke obligatorisk i bindposter",
             "repeatable":false,
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
             "subfields":{
@@ -289,6 +307,7 @@
             }
         },
         "300":{
+            "comment": "Ikke obligatorisk i bindposter",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
             "repeatable":false,
             "subfields":{
@@ -377,7 +396,7 @@
         "740": "bog.fields.740",
         "745": "bog.fields.745",
         "840": "bog.fields.840",
-        "856": "DanMarc2.fields.856",
+        "856": "bog.fields.856",
         "880": "DanMarc2.fields.880",
         "900": "bog.fields.900",
         "910": "bog.fields.910",

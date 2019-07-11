@@ -1,10 +1,10 @@
 ARG UPDATE_PAYARA_DEPLOYER_DOCKER_TAG
 FROM docker-i.dbc.dk/update-payara-deployer:$UPDATE_PAYARA_DEPLOYER_DOCKER_TAG
 
-COPY distributions/ /data/opencat-business/distributions
+COPY distributions/ /opt/payara5/deployments/opencat-business/distributions
 
 USER root
-RUN chown -R $PAYARA_USER:$PAYARA_USER /data/opencat-business/distributions
+RUN chown -R $PAYARA_USER:$PAYARA_USER /opt/payara5/deployments/opencat-business/distributions
 USER $PAYARA_USER
 
 # ARG must be specified again because an ARG placed before the FROM

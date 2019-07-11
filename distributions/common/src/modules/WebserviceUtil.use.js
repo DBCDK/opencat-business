@@ -17,10 +17,20 @@ var WebserviceUtil = function () {
 
     function init(settings) {
         Log.trace("init");
-        openNumberRollUrl = String(settings.get('opennumberroll.url'));
 
-        numberRollNameFaust8 = String(settings.get('opennumberroll.name.faust8'));
-        numberRollNameFaust = String(settings.get('opennumberroll.name.faust'));
+        //TODO Remove temp hack
+        if (settings.containsKey('SOLR_URL')) {
+            openNumberRollUrl = String(settings.get('OPENNUMBERROLL_URL'));
+            numberRollNameFaust8 = String(settings.get('OPENNUMBERROLL_NAME_FAUST_8'));
+            numberRollNameFaust = String(settings.get('OPENNUMBERROLL_NAME_FAUST'));
+        } else {
+            openNumberRollUrl = String(settings.get('opennumberroll.url'));
+            numberRollNameFaust8 = String(settings.get('opennumberroll.name.faust8'));
+            numberRollNameFaust = String(settings.get('opennumberroll.name.faust'));
+        }
+
+        Log.info("number roll URL <" + openNumberRollUrl + "> faust <" +
+            numberRollNameFaust + "> faust8 <" + numberRollNameFaust8 + ">");
     }
 
     /**
