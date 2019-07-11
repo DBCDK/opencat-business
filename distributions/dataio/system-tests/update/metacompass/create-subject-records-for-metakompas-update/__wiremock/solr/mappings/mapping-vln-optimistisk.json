@@ -1,6 +1,6 @@
 {
   "request" : {
-    "urlPattern" : "/solr/raapost-index/select\\?q=phrase\\.vln%3A%22optimistisk%22\\+AND\\+marc\\.001b%3A190004&wt=json",
+    "urlPattern" : "/solr/basis-index/select\\?q=phrase\\.vln%3A%22optimistisk%22\\+AND\\+marc\\.001b%3A190004&wt=json",
     "method" : "GET"
   },
   "response" : {
