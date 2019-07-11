@@ -37,7 +37,7 @@ UnitTest.addFixture( "LookupValue.validateSubfield", function() {
     ***************/
     return;
 
-    settings[ 'solr.url' ] = "http://localhost:12100/solr/raw-repo-index";
+    settings[ 'SOLR_URL' ] = "http://localhost:12100/solr/raw-repo-index";
     GenericSettings.setSettings( settings );
 
     var record = {};
