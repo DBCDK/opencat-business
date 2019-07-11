@@ -2,7 +2,6 @@
 #set -x
 
 SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
-SOLR_BASIS_PORT_NR=${SOLR_BASIS_PORT_NR:-WHAT}
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
 RAWREPO_VERSION=1.13-snapshot
@@ -63,13 +62,18 @@ echo "Using prod version ${PROD_VERSION} of updateservice"
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
 envsubst '${PROD_VERSION}' < docker-compose.yml.tmpl > docker-compose.yml
 
+DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-NOTSET}
+if [ ${DEV_NUMBERROLL_URL} = "NOTSET" ]
+then
+    export DEV_NUMBERROLL_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
+fi
 DEV_OPENAGENCY_URL=${DEV_OPENAGENCY_URL:-NOTSET}
 if [ ${DEV_OPENAGENCY_URL} = "NOTSET" ]
 then
     export DEV_OPENAGENCY_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
 fi
 
-#Solr raapost settings
+# Solr FBS settings
 DEV_SOLR_ADDR=${DEV_SOLR_ADDR:-NOTSET}
 if [ ${DEV_SOLR_ADDR} = "NOTSET" ]
 then
@@ -86,6 +90,8 @@ then
     export DEV_SOLR_PATH="solr/raapost-index"
 fi
 
+export DEV_SOLR_URL="http://${DEV_SOLR_ADDR}:${DEV_SOLR_PORT}/${DEV_SOLR_PATH}"
+
 #Solr basis settings
 DEV_SOLR_BASIS_ADDR=${DEV_SOLR_BASIS_ADDR:-NOTSET}
 if [ ${DEV_SOLR_BASIS_ADDR} = "NOTSET" ]
@@ -95,13 +101,15 @@ fi
 DEV_SOLR_BASIS_PORT=${DEV_SOLR_BASIS_PORT:-NOTSET}
 if [ ${DEV_SOLR_BASIS_PORT} = "NOTSET" ]
 then
-    export DEV_SOLR_BASIS_PORT="${SOLR_BASIS_PORT_NR}"
+    export DEV_SOLR_BASIS_PORT="${SOLR_PORT_NR}"
 fi
 DEV_SOLR_BASIS_PATH=${DEV_SOLR_BASIS_PATH:-NOTSET}
 if [ ${DEV_SOLR_BASIS_PATH} = "NOTSET" ]
 then
     export DEV_SOLR_BASIS_PATH="solr/basis-index"
 fi
+
+export DEV_SOLR_BASIS_URL="http://${DEV_SOLR_BASIS_ADDR}:${DEV_SOLR_BASIS_PORT}/${DEV_SOLR_BASIS_PATH}"
 
 docker-compose down
 docker-compose ps

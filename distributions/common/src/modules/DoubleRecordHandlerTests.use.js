@@ -9,7 +9,7 @@ UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
     var __bundle = ResourceBundleFactory.getBundle(DoubleRecordHandler.__BUNDLE_NAME);
 
     GenericSettings.setSettings({
-        'solr.url': "http://unknown.dbc.dk:8080/solr/raapost-index"
+        'SOLR_URL': "http://unknown.dbc.dk:8080/solr/raapost-index"
     });
 
     var record;
