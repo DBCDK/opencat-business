@@ -196,10 +196,21 @@
                         "type":"SubfieldRules.checkFaust"
                         },
                         {
-                        "type": "SubfieldRules.lookupRecord",
-                        "params": {
-                            "agencyId": [ "870971", "870970" ]
-                        }
+                            "type": "SubfieldRules.lookupRecord",
+                            "params": {
+                                "agencyId": [
+                                    {
+                                        "agencyId": "870971",
+                                        "fieldAndSubfield": "0165",
+                                        "matchValues": ["870971"]
+                                    },
+                                    {
+                                        "agencyId":"870970",
+                                        "fieldAndSubfield": "0165",
+                                        "matchValues": ["870970"]
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
@@ -226,7 +237,18 @@
                         {
                          "type": "SubfieldRules.lookupRecord",
                          "params": {
-                             "agencyId": ["870970", "870971" ]
+                             "agencyId": [
+                                 {
+                                     "agencyId": "870971",
+                                     "fieldAndSubfield": "0185",
+                                     "matchValues": ["870971"]
+                                 },
+                                 {
+                                     "agencyId":"870970",
+                                     "fieldAndSubfield": "0185",
+                                     "matchValues": ["870970"]
+                                 }
+                             ]
                          }
                          }
                     ]
