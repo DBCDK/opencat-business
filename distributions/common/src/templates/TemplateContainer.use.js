@@ -268,13 +268,13 @@ var TemplateContainer = function () {
                     try {
                         // Load template from 'install.name' directory.
                         filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), "dataio", name);
-                        Log.info("Trying to load template file: ", filename);
+                        Log.debug("Trying to load template file: ", filename);
 
                         templateContent = System.readFile(filename);
                     } catch (ex) {
-                        Log.info("Loading from dataio failed - trying under fbs instead");
+                        Log.debug("Loading from dataio failed - trying under fbs instead");
                         filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), "fbs", name);
-                        Log.info("Trying to load template file: ", filename);
+                        Log.debug("Trying to load template file: ", filename);
 
                         templateContent = System.readFile(filename);
                     }
@@ -285,7 +285,7 @@ var TemplateContainer = function () {
                     // Load template from 'common' directory.
                     filename = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'), "common", name);
                     templateContent = System.readFile(filename);
-                    Log.info("Using template file: " + filename);
+                    Log.debug("Using template file: " + filename);
                 }
 
                 if (templateContent !== null) {

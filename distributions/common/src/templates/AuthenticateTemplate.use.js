@@ -44,24 +44,24 @@ var AuthenticateTemplate = function () {
     }
 
     function _groupUseTemplate(templateName, templateGroup, settings) {
-        Log.info('Checking if templateGroup ' + templateGroup + ' can use template ' + templateName);
+        Log.debug('Checking if templateGroup ' + templateGroup + ' can use template ' + templateName);
         if (templateMapping === null) {
-            Log.info('Template mappings are not loaded, so do that now');
+            Log.debug('Template mappings are not loaded, so do that now');
             templateMapping = _loadTemplateMapping(settings);
         }
 
         var allowedTemplateGroups = templateMapping['libraryToTemplateGroups'][templateGroup]['templateGroups'];
-        Log.info('Allowed templateGroup for ' + templateGroup + ': ' + allowedTemplateGroups);
+        Log.debug('Allowed templateGroup for ' + templateGroup + ': ' + allowedTemplateGroups);
         var templateGroups = templateMapping['templateGroups'];
 
         for (var i = 0; i < allowedTemplateGroups.length; i++) {
             if (templateGroups[allowedTemplateGroups[i]]['templates'].indexOf(templateName) > -1) {
-                Log.info('Template group found! LibraryGroup ' + templateGroup + ' can use template ' + templateName);
+                Log.debug('Template group found! LibraryGroup ' + templateGroup + ' can use template ' + templateName);
                 return true;
             }
         }
 
-        Log.info('Template group NOT found! ' + templateGroup + ' cannot use template ' + templateName);
+        Log.debug('Template group NOT found! ' + templateGroup + ' cannot use template ' + templateName);
         return false;
     }
 
