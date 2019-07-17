@@ -38,10 +38,6 @@ var DoubleRecordHandler = function () {
              TODO Ved intern opdatering skal find kaldes.
              */
             var url = settings.get('SOLR_URL');
-            //TODO Remove temp hack
-            if (url === null) {
-                url = settings.get('solr.url');
-            }
             var records = DoubleRecordFinder.find(record, url);
             var idField = record.getFirstFieldAsField(/001/);
             if (idField === "") {
@@ -78,10 +74,6 @@ var DoubleRecordHandler = function () {
                 res.doubleRecordFrontendDTOs = [{message: msg}];
             } else {
                 var url = settings.get('SOLR_URL');
-                //TODO Remove temp hack
-                if (url === null) {
-                    url = settings.get('solr.url');
-                }
                 var records = DoubleRecordFinder.findGeneral(record, url);
                 var idField = record.getFirstFieldAsField(/001/);
                 if (idField !== "" && records.length > 0) {
