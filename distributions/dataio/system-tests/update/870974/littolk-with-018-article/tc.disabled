@@ -56,7 +56,7 @@
           },
           {
             "record": "expected-littolk-common.marc",
-            "type": "MARCXCHANGE",
+            "type": "LITANALYSIS",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
