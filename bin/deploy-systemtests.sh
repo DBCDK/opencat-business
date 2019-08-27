@@ -143,6 +143,10 @@ UPDATESERVICEDB_IMAGE=`docker-compose ps -q updateserviceDb`
 export UPDATESERVICEDB_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${UPDATESERVICEDB_IMAGE} `
 echo -e "UPDATESERVICEDB_PORT is $UPDATESERVICEDB_PORT\n"
 
+export DEV_RAWREPO_DB_URL="rawrepo:thePassword@${HOST_IP}:${RAWREPO_PORT}/rawrepo"
+export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems"
+export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
+
 docker-compose up -d updateservice
 
 UPDATESERVICE_IMAGE=`docker-compose ps -q updateservice`
