@@ -1,4 +1,8 @@
 version: '3.2'
+networks:
+  default:
+    external:
+      name: update-compose-network
 
 services:
 
@@ -12,8 +16,6 @@ services:
       - "5432"
     ports:
       - "5432"
-    networks:
-      - update-compose-network
 
   holdingsitemsDb:
     image: docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest
@@ -25,8 +27,6 @@ services:
       - "5432"
     ports:
       - "5432"
-    networks:
-      - update-compose-network
 
   updateserviceDb:
     image: docker-i.dbc.dk/update-postgres:${PROD_VERSION}
@@ -38,15 +38,11 @@ services:
       - "5432"
     ports:
       - "5432"
-    networks:
-      - update-compose-network
 
   fakeSmtp:
     image: docker-i.dbc.dk/fakesmtp
     volumes:
       - "../logs/fakesmtp:/output"
-    networks:
-      - update-compose-network
 
   updateservice:
     image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
@@ -59,9 +55,9 @@ services:
       - OPENAGENCY_URL=${DEV_OPENAGENCY_URL}
       - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
       - JAVA_MAX_HEAP_SIZE=4G
-      - RAWREPO_DB_URL=rawrepo:thePassword@rawrepoDb:5432/rawrepo
-      - HOLDINGS_ITEMS_DB_URL=holdingsitems:thePassword@holdingsitemsDb:5432/holdingsitems
-      - UPDATE_DB_URL=updateservice:thePassword@updateserviceDb:5432/updateservice
+      - RAWREPO_DB_URL=${DEV_RAWREPO_DB_URL}
+      - HOLDINGS_ITEMS_DB_URL=${DEV_HOLDINGS_ITEMS_DB_URL}
+      - UPDATE_DB_URL=${DEV_UPDATE_DB_URL}
       - SOLR_URL=${DEV_SOLR_URL}
       - SOLR_BASIS_URL=${DEV_SOLR_BASIS_URL}
     extra_hosts:
@@ -77,8 +73,3 @@ services:
       - "8080"
       - "8686"
       - "4848"
-    networks:
-      - update-compose-network
-
-networks:
-  update-compose-network:
