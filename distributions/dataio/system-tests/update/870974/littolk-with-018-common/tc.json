@@ -28,6 +28,21 @@
           "type": "ENRICHMENT",
           "deleted": false,
           "enqueued": false
+        },
+        {
+          "record": "rawrepo-aut-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-aut-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
         }
       ]
     },
@@ -36,6 +51,24 @@
       "update": {
         "errors": [],
         "rawrepo": [
+          {
+            "record": "rawrepo-aut-common.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-aut-enrichment.marc"
+            ],
+            "children": [
+              "expected-littolk-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-aut-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
           {
             "record": "rawrepo-55147469-common.marc",
             "type": "MARCXCHANGE",
