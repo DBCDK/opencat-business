@@ -193,6 +193,9 @@
                 "c": {
                     "repeatable": false
                 },
+                "d": {
+                    "repeatable": false
+                },
                 "f": {
                     "repeatable": false
                 },
@@ -336,6 +339,9 @@
                     "repeatable": false
                 },
                 "c": {
+                    "repeatable": false
+                },
+                "d": {
                     "repeatable": false
                 },
                 "f": {
@@ -487,6 +493,9 @@
                     "repeatable": false
                 },
                 "c": {
+                    "repeatable": false
+                },
+                "d": {
                     "repeatable": false
                 },
                 "f": {
