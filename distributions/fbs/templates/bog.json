@@ -784,7 +784,10 @@
         "745":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
             "subfields":{
-                "a": "DanMarc2.fields.745.subfields.a",
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false
+                },
                 "\u00E6": "DanMarc2.fields.745.subfields.\u00E6",
                 "\u00f8": "DanMarc2.fields.745.subfields.\u00f8",
                 "n": "DanMarc2.fields.745.subfields.n",
