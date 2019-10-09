@@ -1,0 +1,56 @@
+[
+  {
+    "name": "decentral-to-central",
+    "bugs": [],
+    "description": "Tester om den tidligere ejer bliver bevaret i 996 efter DBC overtager posten",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
