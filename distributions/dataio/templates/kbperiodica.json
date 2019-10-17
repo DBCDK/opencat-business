@@ -28,7 +28,24 @@
         }
     ],
     "fields": {
-        "001": "dbcsingle.fields.001",
+        "001": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdf",
+            "subfields": {
+                "a": "dbcsingle.fields.001.subfields.a",
+                "b": "dbcsingle.fields.001.subfields.b",
+                "c": {
+                    "repeatable": false
+                },
+                "d": "dbcsingle.fields.001.subfields.d",
+                "f": "DanMarc2.fields.001.subfields.f",
+                "g": "DanMarc2.fields.001.subfields.g",
+                "o": "DanMarc2.fields.001.subfields.o",
+                "t": "DanMarc2.fields.001.subfields.t"
+            }
+        },
         "002": "dbcsingle.fields.002",
         "004": "dbcsingle.fields.004",
 		"005": "DanMarc2.fields.005",
@@ -37,11 +54,8 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory": true,
             "repeatable": false,
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
-                "&": {
-                    "values": [ "b", "f", "n", "u" ]
-                },
                 "t": {
                     "repeatable": false,
                     "values": [ "p" ]
@@ -73,7 +87,7 @@
                 "v": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "0", "1", "4", "5", "7", "8", "9" ]
+                    "values": [ "0" ]
                 }
             }
         },
@@ -94,7 +108,6 @@
 		"029": "DanMarc2.fields.029",
 		"030": "DanMarc2.fields.030",
         "032": "DanMarc2.fields.032",
-		"033": "DanMarc2.fields.033",
 		"034": "DanMarc2.fields.034",
 		"035": "DanMarc2.fields.035",
 		"036": "DanMarc2.fields.036",
@@ -105,6 +118,7 @@
         "050": "DanMarc2.fields.050",
         "080": "DanMarc2.fields.080",
         "082": "DanMarc2.fields.082",
+        "100": "dbcsingle.fields.100",
         "110": "dbcsingle.fields.110",
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
@@ -149,6 +163,7 @@
         "538": "DanMarc2.fields.538",
         "539": "dbcsingle.fields.539",
         "555": "dbcsingle.fields.555",
+        "559": "DanMarc2.fields.559",
         "596": "dbcsingle.fields.596",
         "600": "dbcsingle.fields.600",
         "610": "dbcsingle.fields.610",
@@ -170,19 +185,7 @@
         "720": "dbcsingle.fields.720",
         "739": "dbcsingle.fields.739",
         "740": "dbcsingle.fields.740",
-        "745":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false
-                },
-                "\u00E6": "DanMarc2.fields.745.subfields.\u00E6",
-                "\u00f8": "DanMarc2.fields.745.subfields.\u00f8",
-                "n": "DanMarc2.fields.745.subfields.n",
-                "o": "DanMarc2.fields.745.subfields.o"
-            }
-        },
+        "745": "DanMarc2.fields.745",
         "770": "dbcsingle.fields.770",
         "780": "dbcsingle.fields.780",
         "795": "dbcsingle.fields.795",
@@ -220,90 +223,13 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.libraries.996a.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
-                            "params": {
-                                "fields": [ "032", "d01", "d02", "d03", "d04", "d51", "d52", "d53", "d54" ],
-                                "values": [ "DBC", "RET", "810010" ]
-                            }
-                        }
-                    ]
+                    "values": [ "800010" ]
                 },
                 "m":"Lister.fields.codes.subfields.libraries.996m",
                 "o":"Lister.fields.codes.subfields.libraries.996o"
             }
         },
         "d08": "dbcsingle.fields.d08",
-        "d09": "dbcsingle.fields.d09",
-        "d21": "dbcsingle.fields.d21",
-        "d22": "dbcsingle.fields.d22",
-        "d30": "dbcsingle.fields.d30",
-        "d31": "dbcsingle.fields.d31",
-        "d32": "dbcsingle.fields.d32",
-        "d33": "dbcsingle.fields.d33",
-        "d35": "dbcsingle.fields.d35",
-        "d51": "dbcsingle.fields.d51",
-        "d52": "dbcsingle.fields.d52",
-        "d53": "dbcsingle.fields.d53",
-        "d54": "dbcsingle.fields.d54",
-        "d64": "dbcsingle.fields.d64",
-        "d70": "dbcsingle.fields.d70",
-        "d90": "dbcsingle.fields.d90",
-        "d91": "dbcsingle.fields.d91",
-        "e01": "dbcsingle.fields.e01",
-        "e98": "dbcsingle.fields.e98",
-        "e99": "dbcsingle.fields.e99",
-        "f01": "dbcsingle.fields.f01",
-        "f05": "dbcsingle.fields.f05",
-        "f06": "dbcsingle.fields.f06",
-        "f07": "dbcsingle.fields.f07",
-        "f08": "dbcsingle.fields.f08",
-        "f21": "dbcsingle.fields.f21",
-        "f50": "dbcsingle.fields.f50",
-        "f53": "dbcsingle.fields.f53",
-        "f56": "dbcsingle.fields.f56",
-        "f57": "dbcsingle.fields.f57",
-        "f70": "dbcsingle.fields.f70",
-        "f71": "dbcsingle.fields.f71",
-        "f75": "dbcsingle.fields.f75",
-        "n01": "dbcsingle.fields.n01",
-        "n50": "dbcsingle.fields.n50",
-        "n51": "dbcsingle.fields.n51",
-        "n55": "dbcsingle.fields.n55",
-        "r01": "dbcsingle.fields.r01",
-        "r02": "dbcsingle.fields.r02",
-        "r03": "dbcsingle.fields.r03",
-        "s10": "dbcsingle.fields.s10",
-        "s11": "dbcsingle.fields.s11",
-        "s12": "dbcsingle.fields.s12",
-        "t00": "dbcsingle.fields.t00",
-        "t60": "dbcsingle.fields.t60",
-        "t61": "dbcsingle.fields.t61",
-        "t62": "dbcsingle.fields.t62",
-        "t70": "dbcsingle.fields.t70",
-        "t71": "dbcsingle.fields.t71",
-        "t72": "dbcsingle.fields.t72",
-        "t77": "dbcsingle.fields.t77",
-        "t78": "dbcsingle.fields.t78",
-        "t79": "dbcsingle.fields.t79",
-        "t90": "dbcsingle.fields.t90",
-        "t91": "dbcsingle.fields.t91",
-        "t92": "dbcsingle.fields.t92",
-        "t97": "dbcsingle.fields.t97",
-        "t98": "dbcsingle.fields.t98",
-        "t99": "dbcsingle.fields.t99",
-        "z00": "dbcsingle.fields.z00",
-        "z02": "dbcsingle.fields.z02",
-        "z10": "dbcsingle.fields.z10",
-        "z12": "dbcsingle.fields.z12",
-        "z16": "dbcsingle.fields.z16",
-        "z17": "dbcsingle.fields.z17",
-        "z43": "dbcsingle.fields.z43",
-        "z50": "dbcsingle.fields.z50",
-        "z57": "dbcsingle.fields.z57",
-        "z98": "dbcsingle.fields.z98",
         "z99": "dbcsingle.fields.z99"
     }
 }
