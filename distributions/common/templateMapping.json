@@ -41,7 +41,8 @@
         "ffuhoved",
         "ffumusik",
         "ffuperiodica",
-        "ffusektion"
+        "ffusektion",
+        "kbperiodica"
       ],
       "folder": "dataio"
     },
