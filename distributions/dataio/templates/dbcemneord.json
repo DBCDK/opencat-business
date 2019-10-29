@@ -595,6 +595,9 @@
                 "i": {
                     "repeatable": false
                 },
+                "p": {
+                    "repeatable": false
+                },
                 "t": {
                     "repeatable": false
                 },
@@ -655,7 +658,10 @@
         "x09": {
             "repeatable": false,
             "subfields": {
-                "p": {}
+                "o": {},
+                "p": {},
+                "q": {},
+                "r": {}
             }
         },
         "z98": {
