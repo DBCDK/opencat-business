@@ -260,8 +260,7 @@
                 "w": "DanMarc2.fields.245.subfields.w",
                 "x": "DanMarc2.fields.245.subfields.x",
                 "y": "DanMarc2.fields.245.subfields.y",
-                "\u00f8": "DanMarc2.fields.245.subfields.\u00f8",
-                "\u00E6": "DanMarc2.fields.245.subfields.\u00E6"
+                "\u00f8": "DanMarc2.fields.245.subfields.\u00f8"
             },
             "rules": [
                 {
@@ -378,6 +377,7 @@
         "795": "DanMarc2.fields.795",
         "796": "DanMarc2.fields.796",
         "840": "DanMarc2.fields.840",
+        "856": "ph-generel.fields.856",
         "880": "DanMarc2.fields.880",
         "887": "DanMarc2.fields.887",
         "900": "ph-generel.fields.900",
