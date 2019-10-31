@@ -5,3 +5,4 @@ target/
 !.idea/runConfigurations
 *.iml
 *.war
+**/compiled_templates
