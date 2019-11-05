@@ -105,6 +105,7 @@
         "050": "DanMarc2.fields.050",
         "080": "DanMarc2.fields.080",
         "082": "DanMarc2.fields.082",
+        "100": "dbcsingle.fields.100",
         "110": "dbcsingle.fields.110",
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
