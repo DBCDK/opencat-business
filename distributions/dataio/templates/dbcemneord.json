@@ -656,7 +656,6 @@
             }
         },
         "x09": {
-            "repeatable": false,
             "subfields": {
                 "o": {},
                 "p": {},
