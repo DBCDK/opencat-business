@@ -8,7 +8,7 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "kbperiodica",
+            "templateName": "dbcperiodica",
             "record": "request.marc"
         },
         "expected": {

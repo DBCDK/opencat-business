@@ -37,11 +37,8 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory": true,
             "repeatable": false,
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "sorting": "tuazbcdefghijklmnoqrxwv",
             "subfields": {
-                "&": {
-                    "values": [ "b", "f", "n", "u" ]
-                },
                 "t": {
                     "repeatable": false,
                     "values": [ "p" ]
@@ -73,7 +70,7 @@
                 "v": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "0", "1", "4", "5", "7", "8", "9" ]
+                    "values": [ "0", "4" ]
                 }
             }
         },
@@ -150,6 +147,7 @@
         "538": "DanMarc2.fields.538",
         "539": "dbcsingle.fields.539",
         "555": "dbcsingle.fields.555",
+        "559": "DanMarc2.fields.559",
         "596": "dbcsingle.fields.596",
         "600": "dbcsingle.fields.600",
         "610": "dbcsingle.fields.610",
@@ -171,19 +169,7 @@
         "720": "dbcsingle.fields.720",
         "739": "dbcsingle.fields.739",
         "740": "dbcsingle.fields.740",
-        "745":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.87.htm",
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false
-                },
-                "\u00E6": "DanMarc2.fields.745.subfields.\u00E6",
-                "\u00f8": "DanMarc2.fields.745.subfields.\u00f8",
-                "n": "DanMarc2.fields.745.subfields.n",
-                "o": "DanMarc2.fields.745.subfields.o"
-            }
-        },
+        "745": "DanMarc2.fields.745",
         "770": "dbcsingle.fields.770",
         "780": "dbcsingle.fields.780",
         "795": "dbcsingle.fields.795",
@@ -221,16 +207,7 @@
                 "a": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": "Lister.fields.codes.subfields.libraries.996a.values",
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
-                            "params": {
-                                "fields": [ "032", "d01", "d02", "d03", "d04", "d51", "d52", "d53", "d54" ],
-                                "values": [ "DBC", "RET", "810010" ]
-                            }
-                        }
-                    ]
+                    "values": [ "DBC", "RET", "800010", "810010" ]
                 },
                 "m":"Lister.fields.codes.subfields.libraries.996m",
                 "o":"Lister.fields.codes.subfields.libraries.996o"
@@ -279,22 +256,6 @@
         "s10": "dbcsingle.fields.s10",
         "s11": "dbcsingle.fields.s11",
         "s12": "dbcsingle.fields.s12",
-        "t00": "dbcsingle.fields.t00",
-        "t60": "dbcsingle.fields.t60",
-        "t61": "dbcsingle.fields.t61",
-        "t62": "dbcsingle.fields.t62",
-        "t70": "dbcsingle.fields.t70",
-        "t71": "dbcsingle.fields.t71",
-        "t72": "dbcsingle.fields.t72",
-        "t77": "dbcsingle.fields.t77",
-        "t78": "dbcsingle.fields.t78",
-        "t79": "dbcsingle.fields.t79",
-        "t90": "dbcsingle.fields.t90",
-        "t91": "dbcsingle.fields.t91",
-        "t92": "dbcsingle.fields.t92",
-        "t97": "dbcsingle.fields.t97",
-        "t98": "dbcsingle.fields.t98",
-        "t99": "dbcsingle.fields.t99",
         "z00": "dbcsingle.fields.z00",
         "z02": "dbcsingle.fields.z02",
         "z10": "dbcsingle.fields.z10",

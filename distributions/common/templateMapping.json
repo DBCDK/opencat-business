@@ -28,7 +28,6 @@
         "dbcmatvurd",
         "delete",
         "invalid",
-        "kbperiodica",
         "metakompas"
       ],
       "folder": "dataio"
@@ -42,8 +41,7 @@
         "ffuhoved",
         "ffumusik",
         "ffuperiodica",
-        "ffusektion",
-        "kbperiodica"
+        "ffusektion"
       ],
       "folder": "dataio"
     },
