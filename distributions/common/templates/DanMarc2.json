@@ -3092,6 +3092,7 @@
         },
         "652":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
+            "sorting": "\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "m":{
 					"repeatable": false
@@ -3100,33 +3101,85 @@
 					"repeatable": false
 				},
                 "i":{},
-                "v":{},
+                "v":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "a":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "h":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "k":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "e":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "f":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "c":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "t":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "b":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "z":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
 				},
                 "n":{
 					"repeatable": false
@@ -3140,8 +3193,21 @@
                 "r":{
 					"repeatable": false
 				},
-                "0":{},
-                "1":{}
+                "0":{
+                    "rules": [
+                       {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "1":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+
+                }
             },
             "rules": [
                 {
@@ -3162,56 +3228,122 @@
         },
         "654":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
+            "sorting": "\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "m":{
-					"repeatable": false
-				},
-                "p":{
-					"repeatable": false
-				},
-                "i":{},
-                "v":{},
-                "a":{
-					"repeatable": false
-				},
-                "h":{
                     "repeatable": false
                 },
+                "p":{
+                    "repeatable": false
+                },
+                "i":{},
+                "v":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "a":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "h":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "k":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "e":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "f":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "c":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "t":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "b":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "z":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "n":{
-					"repeatable": false
-				},
+                    "repeatable": false
+                },
                 "o":{
-					"repeatable": false
-				},
+                    "repeatable": false
+                },
                 "q":{
-					"repeatable": false
-				},
+                    "repeatable": false
+                },
                 "r":{
-					"repeatable": false
-				},
-                "0":{},
-                "1":{}
+                    "repeatable": false
+                },
+                "0":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "1":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+
+                }
             },
             "rules": [
                 {
@@ -3232,46 +3364,118 @@
         },
         "655":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7b.htm",
+            "sorting": "\u00E5mipahkefctbvyz01",
             "subfields":{
                 "m":{
-					"repeatable": false
-				},
+                    "repeatable": false
+                },
                 "p":{
-					"repeatable": false
-				},
+                    "repeatable": false
+                },
                 "i":{},
-                "v":{
-					"repeatable": false
-				},
                 "y":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "v":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "a":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "h":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "k":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "e":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "f":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "c":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "t":{
-					"repeatable": false
-				},
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
                 "b":{
-					"repeatable": false
-				},
-                "0":{},
-                "1":{}
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "z":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "0":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+                },
+                "1":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
+                        }
+                    ]
+
+                }
             }
         },
         "660":{
