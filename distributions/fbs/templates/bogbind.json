@@ -307,8 +307,8 @@
             }
         },
         "300":{
-            "comment": "Ikke obligatorisk i bindposter",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
+            "comment": "Felt 300 er ikke obligatorisk i bindposter",
             "repeatable":false,
             "subfields":{
                 "n": "DanMarc2.fields.300.subfields.n",
@@ -347,9 +347,9 @@
         "610": "bog.fields.610",
         "630": "bog.fields.630",
         "631": "bog.fields.631",
-        "632":"DanMarc2.fields.632",
-        "650":"DanMarc2.fields.650",
-        "651":"DanMarc2.fields.651",
+        "632": "DanMarc2.fields.632",
+        "650": "DanMarc2.fields.650",
+        "651": "DanMarc2.fields.651",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "sorting":"\u00E5pqrivzAaHhkEeFfCcTtBb0",
@@ -365,8 +365,7 @@
                 "t": "DanMarc2.fields.652.subfields.t",
                 "b": "DanMarc2.fields.652.subfields.b",
 				"q": "DanMarc2.fields.652.subfields.q",
-                "r": "DanMarc2.fields.652.subfields.r",
-                "0": "DanMarc2.fields.652.subfields.0"
+                "r": "DanMarc2.fields.652.subfields.r"
             }
         },
         "654":{
@@ -383,8 +382,7 @@
                 "t": "DanMarc2.fields.654.subfields.t",
                 "b": "DanMarc2.fields.654.subfields.b",
 				"q": "DanMarc2.fields.654.subfields.q",
-                "r": "DanMarc2.fields.654.subfields.r",
-                "0": "DanMarc2.fields.654.subfields.0"
+                "r": "DanMarc2.fields.654.subfields.r"
             }
         },
         "665": "DanMarc2.fields.665",

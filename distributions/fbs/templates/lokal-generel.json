@@ -26,9 +26,21 @@
             }
         },
         {
+            "type":"RecordRules.conflictingFields",
+            "params": {
+                "fields": [ "652", "654" ]
+            }
+        },
+        {
             "type": "RecordRules.conflictingSubfields",
             "params": {
-                "subfields": [ "652m", "652o", "654m", "654o" ]
+                "subfields": [ "652m", "652n" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "652m", "652o" ]
             }
         }
     ],
@@ -522,6 +534,7 @@
         "651": "DanMarc2.fields.651",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
+            "sorting": "\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",

@@ -23,7 +23,7 @@
         {
             "type":"RecordRules.conflictingFields",
             "params": {
-                "subfields": [ "652", "654" ]
+                "fields": [ "652", "654" ]
             }
         },
         {
