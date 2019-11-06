@@ -3209,6 +3209,8 @@
 
                 }
             },
+            "comment_1": "Delfelt *m eller *o er obligatorisk",
+            "comment_2": "Delfelt *m og *n/*o må ikke forekomme i samme felt",
             "rules": [
                 {
                     "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
