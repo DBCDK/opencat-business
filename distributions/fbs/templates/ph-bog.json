@@ -33,7 +33,7 @@
         {
             "type": "RecordRules.conflictingSubfields",
             "params": {
-                "subfields": [ "652m", "652o" ]
+                "subfields": [ "652m", "652n" ]
             }
         },
         {
