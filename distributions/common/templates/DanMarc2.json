@@ -4166,7 +4166,13 @@
         },
         "860":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8d.htm",
-            "indicator": [ "00", "01", "03", "04", "06", "07" ],
+            "rules": [
+                {
+                    "type": "FieldRules.fieldsIndicator",
+                    "params": {
+                        "indicator": [ "00", "01", "03", "04", "06", "07" ]
+                    }
+                } ],
             "subfields":{
                 "i":{
                     "repeatable":false,
