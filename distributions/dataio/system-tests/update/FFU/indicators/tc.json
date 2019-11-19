@@ -1,0 +1,45 @@
+[
+    {
+        "name": "ffu-check-indicators-periodical",
+        "description": "Tester at skabelonen 'ffuperiodica' kan fejle på invalide indicatorer",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ffuperiodica",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors":
+[ {
+  "type" : "ERROR",
+  "code" : null,
+  "urlForDocumentation" : "TODO:url",
+  "ordinalPositionOfField" : 21,
+  "ordinalPositionOfSubfield" : null,
+  "ordinalPositionInSubfield" : null,
+  "message" : "Indicator er '08', men skal være en af værdierne 00, 01, 03, 04, 06, 07"
+} ]
+
+},
+            "update": {
+                "errors": 
+[ {
+  "type" : "ERROR",
+  "code" : null,
+  "urlForDocumentation" : "TODO:url",
+  "ordinalPositionOfField" : 21,
+  "ordinalPositionOfSubfield" : null,
+  "ordinalPositionInSubfield" : null,
+  "message" : "Indicator er '08', men skal være en af værdierne 00, 01, 03, 04, 06, 07"
+} ],
+
+                "rawrepo": [
+                ]
+            }
+        }
+    }
+]
