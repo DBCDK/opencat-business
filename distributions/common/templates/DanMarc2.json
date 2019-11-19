@@ -4197,7 +4197,13 @@
         },
         "861":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8e.htm",
-            "indicator": [ "00", "01", "02", "03", "04", "05", "06", "07" ],
+            "rules": [
+                {
+                    "type": "FieldRules.fieldsIndicator",
+                    "params": {
+                        "indicator": [ "00", "01", "02", "03", "04", "05", "06", "07" ]
+                    }
+                } ],
             "subfields":{
                 "i":{
                     "repeatable":false,
@@ -4222,7 +4228,13 @@
         },
         "863":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8f.htm",
-            "indicator": [ "00", "01", "02" ],
+            "rules": [
+                {
+                    "type": "FieldRules.fieldsIndicator",
+                    "params": {
+                        "indicator": [ "00", "01", "02" ]
+                    }
+                } ],
             "subfields":{
                 "i":{
                     "repeatable":false,
