@@ -47,6 +47,8 @@
             "repeatable": false,
             "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
+                "u": "DanMarc2.fields.008.subfields.u",
+                "a": "DanMarc2.fields.008.subfields.a",
                 "v": "dbcsingle.fields.008.subfields.v"
             }
         },
