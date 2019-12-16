@@ -159,6 +159,8 @@ echo -e "UPDATESERVICE_PORT_4848 is ${UPDATESERVICE_PORT_4848}\n"
 
 echo "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}" > ${HOME}/.ocb-tools/testrun.properties
 echo "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}" >> ${HOME}/.ocb-tools/testrun.properties
+echo "doublerecordcheck.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest/api/v1/doublerecordcheck" >> ${HOME}/.ocb-tools/testrun.properties
+echo "classificationcheck.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest/api/v1/classificationcheck" >> ${HOME}/.ocb-tools/testrun.properties
 
 echo "rawrepo.jdbc.driver = org.postgresql.Driver" >> ${HOME}/.ocb-tools/testrun.properties
 echo "rawrepo.jdbc.conn.url = jdbc:postgresql://${HOST_IP}:${RAWREPO_PORT}/rawrepo" >> ${HOME}/.ocb-tools/testrun.properties

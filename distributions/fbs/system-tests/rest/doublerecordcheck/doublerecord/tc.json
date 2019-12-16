@@ -8,8 +8,9 @@
                 "user": "netpunkt",
                 "password": "20Koster"
             },
-            "templateName": "bogbind",
-            "record": "new-volume.marc"
+            "templateName": "bog",
+            "record": "new-volume.marc",
+            "restType": "doublerecordcheck.url"
         },
         "setup": {
             "rawrepo": [
@@ -37,30 +38,6 @@
                     "ordinalPositionInSubfield" : null,
                     "message" : "Delfeltet: 'G'\" skal efterfølges af et 'g'\" i felt '245'"
                 } ]
-            },
-            "update": {
-                "errors": [{
-                    "type" : "ERROR",
-                    "code" : null,
-                    "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
-                    "ordinalPositionOfField" : 4,
-                    "ordinalPositionOfSubfield" : null,
-                    "ordinalPositionInSubfield" : null,
-                    "message" : "Delfeltet: 'G'\" skal efterfølges af et 'g'\" i felt '245'"
-                } ],
-                "rawrepo": [
-                    {
-                        "record": "rawrepo-main.marc",
-                        "type": "MARCXCHANGE",
-                        "deleted": false,
-                        "enrichments": [ "rawrepo-dbc-enrichment.marc" ]
-                    },
-                    {
-                        "record": "rawrepo-dbc-enrichment.marc",
-                        "type": "ENRICHMENT",
-                        "deleted": false
-                    }
-                ]
             }
         }
     }
