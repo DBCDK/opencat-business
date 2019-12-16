@@ -18,7 +18,7 @@ var NonRepeatableFieldSubfieldCombination = function() {
      * @syntax RecordRules.NonRepeatableFieldSubfieldCombination( record, params )
      *
      * @param {Object} record A DanMarc2 record as descriped in DanMarc2Converter
-     * @param {Object} params Object of parameters. The property 'subfields' is an
+     * @param {Object} params Object of parameters. The property 'subfield' is an
      *                 Array of field/subfield names on the form <fieldname><subfieldname>.
      *
      * @return {Array}
@@ -27,7 +27,7 @@ var NonRepeatableFieldSubfieldCombination = function() {
      * @method
      */
     function validateRecord( record, params ) {
-        Log.trace( "Enter - RecordRules.NonRepeatableFieldSubfieldCombination( ", record, ", ", params, " )" );
+        Log.trace( "Entering RecordRules.NonRepeatableFieldSubfieldCombination" );
 
         var result = [];
         try {
@@ -47,11 +47,13 @@ var NonRepeatableFieldSubfieldCombination = function() {
                 throw ResourceBundle.getStringFormat( bundle, "conflictingSubfields.params.subfields.error", arg, params.subfield );
             }
 
-            var fieldName = arg.substr( 0, 3 );
+            var fieldName = arg.slice( 0, 3 );
             var subfieldName = arg[ 3 ];
 
-            marc.eachField( new RegExp( fieldName ), function( field ) {
-                field.eachSubField( new RegExp( subfieldName ), function( field, subfield ) {
+            //marc.eachField( new RegExp( fieldName ), function( field ) {
+            marc.eachField( fieldName , function( field ) {
+                //field.eachSubField( new RegExp( subfieldName ), function( field, subfield ) {
+                    field.eachSubField( subfieldName , function( field, subfield ) {
                     count = count + 1;
                 } )
             } );
@@ -64,7 +66,7 @@ var NonRepeatableFieldSubfieldCombination = function() {
 
             return result;
         } finally {
-            Log.trace( "Exit - RecordRules.NonRepeatableFieldSubfieldCombination(): ", result );
+            Log.trace( "Leaving RecordRules.NonRepeatableFieldSubfieldCombination" );
         }
     }
 
