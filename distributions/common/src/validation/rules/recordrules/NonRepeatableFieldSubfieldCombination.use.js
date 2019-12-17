@@ -50,9 +50,7 @@ var NonRepeatableFieldSubfieldCombination = function() {
             var fieldName = arg.slice( 0, 3 );
             var subfieldName = arg[ 3 ];
 
-            //marc.eachField( new RegExp( fieldName ), function( field ) {
             marc.eachField( fieldName , function( field ) {
-                //field.eachSubField( new RegExp( subfieldName ), function( field, subfield ) {
                     field.eachSubField( subfieldName , function( field, subfield ) {
                     count = count + 1;
                 } )
