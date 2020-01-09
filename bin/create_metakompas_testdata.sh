@@ -15,7 +15,7 @@
 # The æøå chars gives problems in the url matching in wiremock.
 #
 # If there are no __wiremock in the testcase, then remember to copy body-002a-nohits.json
-# and mapping-002a-nohits.json from some other testcase - it will be needed.
+# and mapping-002a-nohits.jsonnot from some other testcase - it will be needed.
 #
 # copy :
 #       new/id_numbers -> <testcase>/__wiremock/solr
