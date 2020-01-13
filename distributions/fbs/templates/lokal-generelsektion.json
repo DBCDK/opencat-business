@@ -64,6 +64,8 @@
             "mandatory":true,
             "repeatable":false,
             "subfields":{
+                "u": "DanMarc2.fields.008.subfields.u",
+                "a": "DanMarc2.fields.008.subfields.a",
                 "v": "DanMarc2.fields.008.subfields.v"
             }
         },
