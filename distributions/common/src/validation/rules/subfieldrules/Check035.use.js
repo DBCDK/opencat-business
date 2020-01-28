@@ -4,7 +4,7 @@ use("ResourceBundleFactory");
 use("ValidateErrors");
 use("ValidationUtil");
 
-EXPORTED_SYMBOLS = ['CheckISBN10'];
+EXPORTED_SYMBOLS = ['Check035'];
 
 var Check035 = function () {
     var __BUNDLE_NAME = "validation";
@@ -21,75 +21,35 @@ var Check035 = function () {
      * @name Check035.validateSubfield
      * @method
      */
-    function validateSubfield035(record, field, subfield, params) {
+    function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- Check035.validateSubfield");
         try {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
 
 
             var result = [];
-            var pos = 0;
-            var weight = 10;
-            var value = 0;
+
+
             var subfieldName035 = subfield['name'];
             var subfieldValue035 = subfield['value'];
-            var len = subfieldValue.length;
+            var len = subfieldValue035.length;
+            var subfield035LastIndexOf = subfieldValue035.lastIndexOf(")");
             var msg;
 
-            var firstParenthesesFrom035 = subfieldValue035.replace(/^\((.+?)\).*$/, "$1" );
-            var isValidFirstParentheses = false;
-            isValidFirstParentheses = !firstParenthesesFrom035.match(/\(/);
 
-
-        //    var secondParenthesesFrom035 = subfieldValue035.lastIndexOf(")");
-            var secondParenthesesFrom035 = subfieldValue035.replace(/^(\(.*\)).*$/,"$2");
-            var isValidSecondParentheses = false;
-
-            isValidSecondParentheses = !secondParenthesesFrom035.match(/\(/);
-
-            if (isValidFirstParentheses = false;) {
-                msg = ResourceBundle.getStringFormat(bundle, "035error", subfieldName);
+            if (subfieldValue035.charAt(0) !== '(') {
+                msg = ResourceBundle.getStringFormat(bundle, "check035.validation.error");
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
-            else {
-                if (isValidSecondParentheses = false;) {
-                    msg = ResourceBundle.getStringFormat(bundle, "035.error", subfieldName);
-                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
-                    return result;
-                }
+
+            if (!(subfield035LastIndexOf >= 2 && subfield035LastIndexOf <= len-2 )) {
+                msg = ResourceBundle.getStringFormat(bundle, "check035.validation.error");
+                result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
+                return result;
             }
 
 
-
-            /*
-
-            for (var ix = 0; ix < len; ix++) {
-                var ch = subfieldValue.charAt(ix);
-                if (ch >= '0' && ch <= '9') {
-                    value += parseInt(ch) * weight; // 4, 5, 6
-                    weight--;
-                    pos++;
-                } else {
-                    if (ch === '-' || ch === ' ') {
-                        continue;
-                    }
-                    if (ch.toLowerCase() === 'x') {
-                        if (ix != len - 1) {
-                            msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.length.error", subfieldName);
-                            result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
-                            return result;
-                        }
-                        value += 10; // 8
-                        pos++;
-                    } else {
-                        msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.numbers.error", subfieldName);
-                        result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
-                        return result;
-                    }
-                }
-            }
-            */
 
             return result;
         } finally {
@@ -98,7 +58,7 @@ var Check035 = function () {
     }
 
     return {
-        'validateSubfield035': validateSubfield035,
+        'validateSubfield': validateSubfield,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }();

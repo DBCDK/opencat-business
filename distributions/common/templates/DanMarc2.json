@@ -711,7 +711,12 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.20a.htm",
             "subfields":{
                 "a":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.check035"
+                        }
+                    ]
                 },
                 "x":{}
             }
