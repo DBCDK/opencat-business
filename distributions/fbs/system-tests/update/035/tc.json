@@ -1,0 +1,30 @@
+[
+    {
+        "name": "fbs-035",
+        "description": "Tester indhold af 035a",
+        "request": {
+            "authentication": {
+                "group": "831020",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ph-periodicum",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.20a.htm",
+                        "ordinalPositionOfField": 5,
+                        "ordinalPositionOfSubfield": 0,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 035 *a overholder ikke syntaksen. Skal være *a(præfiks)systemnummer"
+                    }
+                ]
+            }
+        }
+    }
+]
