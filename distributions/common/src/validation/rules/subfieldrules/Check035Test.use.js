@@ -32,7 +32,7 @@ UnitTest.addFixture( "Test Check035", function() {
     field = record.fields[1];
     subfield = field.subfields[0];
     Assert.equalValue( "Record with illegal field 035a",
-        Check035.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", "Delfelt 035 *a overholder ikke syntaksen. Skal være *a(præfiks)systemnummer" )] );
+        Check035.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", "Felt 035 delfelt a overholder ikke syntaksen. Skal være (præfiks)systemnummer" )] );
 
     marcRecord = new Record();
     marcRecord.fromString(
