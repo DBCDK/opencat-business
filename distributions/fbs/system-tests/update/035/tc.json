@@ -21,7 +21,7 @@
                         "ordinalPositionOfField": 5,
                         "ordinalPositionOfSubfield": 0,
                         "ordinalPositionInSubfield": null,
-                        "message": "Delfelt 035 *a overholder ikke syntaksen. Skal være *a(præfiks)systemnummer"
+                        "message": "Felt 035 delfelt a overholder ikke syntaksen. Skal være (præfiks)systemnummer"
                     }
                 ]
             }
