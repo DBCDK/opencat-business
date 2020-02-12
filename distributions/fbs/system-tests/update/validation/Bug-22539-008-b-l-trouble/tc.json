@@ -1,0 +1,355 @@
+[
+    {
+        "name": "710100-add-parent-008-subfields-that-are-not-present-in-volume-870971-problem",
+        "description": "Test that check 870971 records doesnt influence the check",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "boghoved",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "children": [
+                        "rawrepo-volume-1.marc",
+                        "rawrepo-volume-2.marc",
+                        "rawrepo-volume-3.marc",
+                        "rawrepo-volume-4.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-1.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-volume-1-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-volume-1-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-1-710100-deleted.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": true
+                },
+                {
+                    "record": "rawrepo-volume-2.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-volume-2-dbc-enrichment.marc",
+                        "rawrepo-volume-2-710100.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-volume-2-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-2-710100.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-3.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "children": [
+                        "rawrepo-870971.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-volume-3-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-volume-3-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-4.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-volume-4-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-volume-4-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-870971.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-870971-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-870971-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main-result.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "children": [
+                            "rawrepo-volume-1.marc",
+                            "rawrepo-volume-2.marc",
+                            "rawrepo-volume-3.marc",
+                            "rawrepo-volume-4.marc"
+                        ],
+                        "enrichments": [
+                            "rawrepo-main-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume-1.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-volume-1-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-volume-1-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume-1-710100-deleted.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true
+                    },
+                    {
+                        "record": "rawrepo-volume-2.marc",
+                        "type": "MARCXCHANGE",
+                        "enqueued": true,
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-volume-2-dbc-enrichment.marc",
+                            "rawrepo-volume-2-710100.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-volume-2-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume-2-710100.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume-3.marc",
+                        "type": "MARCXCHANGE",
+                        "enqueued": true,
+                        "deleted": false,
+                        "children": [
+                            "rawrepo-870971.marc"
+                        ],
+                        "enrichments": [
+                            "rawrepo-volume-3-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-volume-3-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume-4.marc",
+                        "type": "MARCXCHANGE",
+                        "enqueued": true,
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-volume-4-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-volume-4-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-870971.marc",
+                        "type": "MARCXCHANGE",
+                        "enqueued": true,
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-870971-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-870971-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "enqueued": true,
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "710100-add-parent-008-subfields-that-are-not-present-in-volume-failure",
+        "description": "Test that check 870971 records doesnt influence the check",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "boghoved",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-main.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "children": [
+                        "rawrepo-volume-1-with-008bl.marc"
+                    ],
+                    "enrichments": [
+                        "rawrepo-main-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-main-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-1-with-008bl.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-volume-1-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-volume-1-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 1,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 008b må kun anvendes i én post i et flerbindsværk"
+                    },
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 4,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 008l må kun anvendes i én post i et flerbindsværk"
+                    }
+                ]
+            },
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 1,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 008b må kun anvendes i én post i et flerbindsværk"
+                    },
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+                        "ordinalPositionOfField": 2,
+                        "ordinalPositionOfSubfield": 4,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Delfelt 008l må kun anvendes i én post i et flerbindsværk"
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-main.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "children": [
+                            "rawrepo-volume-1-with-008bl.marc"
+                        ],
+                        "enrichments": [
+                            "rawrepo-main-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-main-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-volume-1-with-008bl.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-volume-1-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-volume-1-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]
