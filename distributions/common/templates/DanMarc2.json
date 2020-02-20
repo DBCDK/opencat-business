@@ -496,6 +496,7 @@
                     "values": "Lister.fields.codes.subfields.country.field_020a.values"
                 },
                 "b":{},
+                "c":{},
                 "x":{},
                 "2":{
                     "repeatable":false
@@ -644,9 +645,7 @@
                 "r":{
                     "repeatable":false
 				},
-                "s":{
-					"mandatory":true
-				}
+                "s":{}
             }
         },
         "030":{
@@ -764,7 +763,7 @@
         },
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
-            "sorting":"apbcdesu",
+            "sorting":"apbcdesuqt2",
             "subfields":{
                 "a": {
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
@@ -789,6 +788,15 @@
                 },
                 "u": {
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                },
+                "q": {
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                },
+                "t": {
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                },
+                "2": {
+                    "repeatable": false
                 }
             }
         },
