@@ -209,6 +209,15 @@
                 },
                 "u":{
                     "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "q":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "t":{
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                },
+                "2":{
+                    "repeatable":false
                 }
             }
         },
