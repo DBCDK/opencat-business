@@ -496,7 +496,9 @@
                     "values": "Lister.fields.codes.subfields.country.field_020a.values"
                 },
                 "b":{},
-                "c":{},
+                "c":{
+                    "repeatable": false
+                },
                 "x":{},
                 "2":{
                     "repeatable":false
