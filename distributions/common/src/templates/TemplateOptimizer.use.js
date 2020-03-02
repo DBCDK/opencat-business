@@ -5,7 +5,7 @@ use("CheckSubfieldNotUsedInChildrenRecords");
 use("LookupValue");
 use("SubfieldMandatoryIfSubfieldNotPresentRule");
 use("Check035");
-use("Check042a");
+use("CheckLix");
 use("CheckISMN");
 use("CheckISSN");
 use("CheckISBN10");
@@ -382,8 +382,8 @@ var TemplateOptimizer = function () {
                     return SubfieldsDemandsOtherSubfields.validateSubfield;
                 case "SubfieldRules.check035":
                     return Check035.validateSubfield;
-                case "SubfieldRules.check042a":
-                    return Check042a.validateSubfield;
+                case "SubfieldRules.checkLix":
+                    return CheckLix.validateSubfield;
                 case "SubfieldRules.checkReference":
                     return CheckReference.validateSubfield;
                 case "SubfieldRules.checkLength":

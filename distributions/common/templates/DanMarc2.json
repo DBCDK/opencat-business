@@ -807,7 +807,7 @@
                     "repeatable":false,
                     "rules": [
                         {
-                            "type": "SubfieldRules.check042a"
+                            "type": "SubfieldRules.checkLix"
                         }
                     ]
 				},

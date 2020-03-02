@@ -1,9 +1,9 @@
-use( "Check042a" );
+use( "CheckLix" );
 use( "GenericSettings" );
 use( "ResourceBundle" );
 use( "UnitTest" );
 
-UnitTest.addFixture( "Test Check042a", function() {
+UnitTest.addFixture( "Test CheckLix", function() {
     var bundle = ResourceBundleFactory.getBundle( OptionalFields.__BUNDLE_NAME );
 
     var params = { 'subfield': '042a' };
@@ -20,7 +20,7 @@ UnitTest.addFixture( "Test Check042a", function() {
     field = record.fields[1];
     subfield = field.subfields[0];
     Assert.equalValue( "Record with legal 042a",
-        Check042a.validateSubfield(record, field, subfield, params), []);
+        CheckLix.validateSubfield(record, field, subfield, params), []);
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -32,7 +32,7 @@ UnitTest.addFixture( "Test Check042a", function() {
     field = record.fields[1];
     subfield = field.subfields[0];
     Assert.equalValue( "Record with illegal field 042a",
-        Check042a.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", "Felt 042 delfelt a overholder ikke syntaksen. Skal være heltal" )] );
+        CheckLix.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", "Felt 042 delfelt a overholder ikke syntaksen. Skal være heltal" )] );
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -44,7 +44,7 @@ UnitTest.addFixture( "Test Check042a", function() {
     field = record.fields[1];
     subfield = field.subfields[0];
     Assert.equalValue( "Record with illegal field 042a",
-        Check042a.validateSubfield( record, field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check042a.validation.error") )] );
+        CheckLix.validateSubfield( record, field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "checkLix.validation.error") )] );
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -56,7 +56,7 @@ UnitTest.addFixture( "Test Check042a", function() {
     field = record.fields[1];
     subfield = field.subfields[0];
     Assert.equalValue( "Record with illegal field 042a",
-        Check042a.validateSubfield( record, field, subfield,  params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check042a.validation.error" ) )] );
+        CheckLix.validateSubfield( record, field, subfield,  params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "checkLix.validation.error" ) )] );
 
 } );
 
