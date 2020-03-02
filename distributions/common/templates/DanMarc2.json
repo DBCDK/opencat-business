@@ -804,7 +804,12 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",
             "subfields":{
                 "a":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.check042a"
+                        }
+                    ]
 				},
                 "b":{
                     "repeatable":false
