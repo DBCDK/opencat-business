@@ -1,0 +1,30 @@
+[
+    {
+        "name": "fbs-042",
+        "description": "Tester indhold af 042a",
+        "request": {
+            "authentication": {
+                "group": "831020",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ph-periodicum",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",
+                        "ordinalPositionOfField": 6,
+                        "ordinalPositionOfSubfield": 0,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Felt 042 delfelt a overholder ikke syntaksen. Skal være heltal"
+                    }
+                ]
+            }
+        }
+    }
+]
