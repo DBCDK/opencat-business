@@ -24,7 +24,7 @@ var CheckValueUnlessHasSubfield = function () {
         Log.trace("Enter --- CheckValueUnlessHasSubfield.validateSubfield");
         try {
             ValueCheck.checkThat("params", params).type("object");
-            ValueCheck.checkThat("params['subfield']", params['subfield']).instanceOf(String);
+            ValueCheck.checkThat("params['subfield']", params['subfield']).type("string");
             ValueCheck.checkThat("params['values']", params['values']).instanceOf(Array);
 
 

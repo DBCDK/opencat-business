@@ -6,7 +6,7 @@ use( "UnitTest" );
 UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
     var bundle = ResourceBundleFactory.getBundle( OptionalFields.__BUNDLE_NAME );
 
-    var params = { 'subfield': '041a' };
+    var params = { subfield: "041a" , values: []};
     var field;
     var subfield;
 
@@ -30,7 +30,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[1];
     subfield = field.subfields[0];
-    Assert.equalValue( "Record with illegal field 041a", CheckValueUnlessHasSubfield.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getSting(bundle, "Record with illegal field 041a"))]);
+    Assert.equalValue( "Record with illegal field 041a", CheckValueUnlessHasSubfield.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getString(bundle, "Record with illegal field 041a"))]);
 
 
     marcRecord = new Record();
@@ -55,6 +55,6 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
     field = record.fields[1];
     subfield = field.subfields[0];
-    Assert.equalValue( "Record with one illegal field 041a, but subfield 2 present so no validation and one illegal subfield a to be validated illegal ", CheckValueUnlessHasSubfield.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getSting(bundle, "Record with illegal field 041a"))]);
+    Assert.equalValue( "Record with one illegal field 041a, but subfield 2 present so no validation and one illegal subfield a to be validated illegal ", CheckValueUnlessHasSubfield.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getString(bundle, "Record with illegal field 041a"))]);
 } );
 
