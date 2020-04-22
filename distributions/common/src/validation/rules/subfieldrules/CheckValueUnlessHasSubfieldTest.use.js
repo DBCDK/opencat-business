@@ -49,7 +49,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00*a jik*2\n" +
-        "041 00*ddam
+        "041 00*ddam"
     );
 
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
