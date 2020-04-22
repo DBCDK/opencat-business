@@ -1,0 +1,30 @@
+[
+    {
+        "name": "fbs-041",
+        "description": "Tester indhold af sprogkoder i 041",
+        "request": {
+            "authentication": {
+                "group": "831020",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ph-periodicum",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
+                        "ordinalPositionOfField": 5,
+                        "ordinalPositionOfSubfield": 0,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Værdien '%s' er ikke en del af de valide værdier: '%s'"
+                    }
+                ]
+            }
+        }
+    }
+]
