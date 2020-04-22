@@ -768,34 +768,95 @@
             "sorting":"apbcdesuqt2",
             "subfields":{
                 "a": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
+
                 },
                 "b": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "c": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "s": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "p": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "d": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "e": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "u": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "q": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "t": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                    "rules": [{
+                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                        "params": {
+                            "subfield": "2",
+                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                        }
+                    }]
                 },
                 "2": {
                     "repeatable": false
