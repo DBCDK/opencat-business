@@ -13,6 +13,7 @@ use("CheckISBN13");
 use("CheckYear");
 use("LookUpRecord");
 use("CheckValue");
+use("CheckValueUnlessHasSubfield");
 use("MandatorySubfieldInVolumeWorkRule");
 use("CheckLength");
 use("CheckFaust");
@@ -391,6 +392,8 @@ var TemplateOptimizer = function () {
                 case "SubfieldRules.checkValue":  // intended fall true
                 case "CheckValue.validateSubfield":
                     return CheckValue.validateSubfield;
+                case "SubfieldRules.checkValueUnlessHasSubfield":
+                    return CheckValueUnlessHasSubfield.validateSubfield;
                 case "SubfieldRules.checkDateFormat":
                     return CheckDateFormat.validateSubfield;
                 case "SubfieldRules.checkFaust":
