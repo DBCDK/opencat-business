@@ -1,7 +1,7 @@
 [
     {
         "name": "fbs-041",
-        "description": "Tester indhold af sprogkoder i 041",
+        "description": "Tester indhold af sprogkoder i 041 med og uden delfelt 2",
         "request": {
             "authentication": {
                 "group": "831020",
@@ -27,4 +27,6 @@
             }
         }
     }
+
+
 ]
