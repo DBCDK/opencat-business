@@ -2,6 +2,7 @@ use("Log");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
+use("ValidationUtil");
 
 EXPORTED_SYMBOLS = ['CheckValueUnlessHasSubfield'];
 
