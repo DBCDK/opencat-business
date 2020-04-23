@@ -767,101 +767,27 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "sorting":"apbcdesuqt2",
             "subfields":{
-                "a": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-
-                },
-                "b": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "c": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "s": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "p": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "d": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "e": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "u": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "q": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "t": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkValueUnlessHasSubfield",
-                        "params": {
-                            "subfield": "2",
-                            "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                        }
-                    }]
-                },
-                "2": {
-                    "repeatable": false
+                "a": {},
+                "b":{},
+                "c":{},
+                "s":{},
+                "p":{},
+                "d":{},
+                "e":{},
+                "u":{},
+                "q":{},
+                "t":{},
+                "2":{
+                    "repeatable":false
                 }
-            }
+            },
+            "rules": [{
+                "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                }
+            }]
         },
         "042":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",
