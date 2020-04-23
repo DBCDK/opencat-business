@@ -33,12 +33,17 @@ var CheckValueUnlessHasSubfield = function () {
             }
 
             for (var f = 0; f < field.subfields.length; ++f) {
+                var found = false;
                 for (var v = 0; v < params.values.length; v++) {
-                    if (field.subfields[f].value !== params.values[v]) {
-                        var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                        var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", field.subfields[f].value, params.values.join("', '"));
-                        return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
+                    if (field.subfields[f].value === params.values[v]) {
+                        found = true;
+                        break;
                     }
+                }
+                if (found !== true) {
+                    var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                    var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", field.subfields[f].value, field.name, field.subfields[f].name ,params.values.join("', '"));
+                    return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
                 }
             }
 
