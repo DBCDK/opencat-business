@@ -20,7 +20,7 @@ var CheckValueUnlessHasSubfield = function () {
      * @name CheckValueUnlessHasSubfield.validateSubfield
      * @method
      */
-    function validateSubfield(record, field, subfield, params) {
+    function validateField(record, field, params) {
         Log.trace("Enter --- CheckValueUnlessHasSubfield.validateSubfield");
         try {
             ValueCheck.checkThat("params", params).type("object");
@@ -31,15 +31,18 @@ var CheckValueUnlessHasSubfield = function () {
             if (ValidationUtil.doesFieldContainSubfield(field, params.subfield) === true) {
                 return [];
             }
-            for (var i = 0; i < params.values.length; i++) {
-                if (subfield.value === params.values[i]) {
-                    return [];
+
+            for (var f = 0; f < field.subfields.length; ++f) {
+                for (var v = 0; v < params.values.length; v++) {
+                    if (field.subfields[f].value !== params.values[v]) {
+                        var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                        var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", field.subfields[f].value, params.values.join("', '"));
+                        return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
+                    }
                 }
             }
 
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", subfield.value, params.values.join("', '"));
-            return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
+            return [];
         } finally {
             Log.trace("Exit --- CheckValueUnlessHasSubfield.validateSubfield");
         }
@@ -50,7 +53,7 @@ var CheckValueUnlessHasSubfield = function () {
 
 
     return {
-        'validateSubfield': validateSubfield,
+        'validateField': validateField,
         '__BUNDLE_NAME': __BUNDLE_NAME
     }
 }();

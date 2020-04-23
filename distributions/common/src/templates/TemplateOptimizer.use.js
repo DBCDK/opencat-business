@@ -13,7 +13,6 @@ use("CheckISBN13");
 use("CheckYear");
 use("LookUpRecord");
 use("CheckValue");
-use("CheckValueUnlessHasSubfield");
 use("MandatorySubfieldInVolumeWorkRule");
 use("CheckLength");
 use("CheckFaust");
@@ -29,6 +28,7 @@ use("SubfieldValueMakesFieldsAllowed");
 use("SubfieldAllowedIfSubfieldValueInOtherFieldExists");
 
 //field rules
+use("CheckValueUnlessHasSubfield");
 use("FieldDemandsOtherFieldAndSubfield");
 use("SubfieldConditionalMandatory");
 use("RepeatableSubfields");
@@ -352,6 +352,8 @@ var TemplateOptimizer = function () {
                 case "RecordRules.subfieldsHaveValuesDemandsOtherSubfield":
                     return SubfieldsHaveValuesDemandsOtherSubfield.validateRecord;
 
+                case "FieldRules.checkValueUnlessHasSubfield":
+                    return CheckValueUnlessHasSubfield.validateField;
                 case "FieldRules.fieldsIndicator":
                     return FieldsIndicator.validateField;
                 case "FieldRules.subfieldsMandatory":  // intended fall tru
@@ -392,8 +394,6 @@ var TemplateOptimizer = function () {
                 case "SubfieldRules.checkValue":  // intended fall true
                 case "CheckValue.validateSubfield":
                     return CheckValue.validateSubfield;
-                case "SubfieldRules.checkValueUnlessHasSubfield":
-                    return CheckValueUnlessHasSubfield.validateSubfield;
                 case "SubfieldRules.checkDateFormat":
                     return CheckDateFormat.validateSubfield;
                 case "SubfieldRules.checkFaust":
