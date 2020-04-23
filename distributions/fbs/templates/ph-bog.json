@@ -154,7 +154,7 @@
                 "2": "ph-generel.fields.041.subfields.2"
             },
             "rules": [{
-                "type": "SubfieldRules.checkValueUnlessHasSubfield",
+                "type": "FieldRules.checkValueUnlessHasSubfield",
                 "params": {
                     "subfield": "2",
                     "values": "Lister.fields.codes.subfields.language.all_codes.values"
