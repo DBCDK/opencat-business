@@ -42,7 +42,7 @@
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
                         "ordinalPositionOfField": 1,
                         "ordinalPositionOfSubfield": 0,
-                        "message": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
+                        "message": "Værdien 'd' i felt '004' delfelt 'r' er ikke en del af de valide værdier: 'n', 'c'"
                     }
                 ]
             },
@@ -53,7 +53,7 @@
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
                         "ordinalPositionOfField": 1,
                         "ordinalPositionOfSubfield": 0,
-                        "message": "Værdien 'd' er ikke en del af de valide værdier: 'n', 'c'"
+                        "message": "Værdien 'd' i felt '004' delfelt 'r' er ikke en del af de valide værdier: 'n', 'c'"
                     }
                 ],
                 "rawrepo": [
