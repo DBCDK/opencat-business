@@ -1,0 +1,103 @@
+[
+  {
+    "name": "new-870976-matvurd-record",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcmatvurd",
+      "record": "request.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-book-54945124-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-book-54945124-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-book-54945124-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-online-55100594-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-online-55100594-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-online-55100594-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-book-54945124-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-book-54945124-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-book-54945124-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-online-55100594-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-online-55100594-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-online-55100594-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "result-matvurd-record.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-matvurd-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-matvurd-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

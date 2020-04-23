@@ -172,7 +172,18 @@
         "690": "DanMarc2.fields.690",
         "700": "dbcsingle.fields.700",
         "710": "dbcsingle.fields.710",
-        "720": "dbcsingle.fields.720",
+        "720":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85a.htm",
+            "subfields":{
+                "&": {},
+                "a": "DanMarc2.fields.720.subfields.a",
+                "h": "DanMarc2.fields.720.subfields.h",
+                "k": "DanMarc2.fields.720.subfields.k",
+                "o": "DanMarc2.fields.720.subfields.o",
+                "g": "DanMarc2.fields.720.subfields.g",
+                "4": "DanMarc2.fields.720.subfields.4"
+            }
+        },
         "739": "dbcsingle.fields.739",
         "740": "dbcsingle.fields.740",
         "745": "DanMarc2.fields.745",
