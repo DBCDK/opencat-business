@@ -152,8 +152,16 @@
                 "e": "ph-generel.fields.041.subfields.e",
                 "p": "ph-generel.fields.041.subfields.p",
                 "2": "ph-generel.fields.041.subfields.2"
-            }
-        },
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                }
+            }]
+
+    },
         "042": "DanMarc2.fields.042",
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",

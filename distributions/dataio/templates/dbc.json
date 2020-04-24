@@ -214,7 +214,14 @@
                 "t": "DanMarc2.fields.041.subfields.t",
                 "u": "DanMarc2.fields.041.subfields.u",
                 "2": "DanMarc2.fields.041.subfields.2"
-            }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                }
+            }]
         },
         "042":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",

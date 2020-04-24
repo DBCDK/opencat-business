@@ -88,7 +88,14 @@
                 "q": "DanMarc2.fields.041.subfields.q",
                 "t": "DanMarc2.fields.041.subfields.t",
                 "2": "DanMarc2.fields.041.subfields.2"
-            }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                }
+            }]
         },
         "044": "DanMarc2.fields.044",
         "050": "DanMarc2.fields.050",

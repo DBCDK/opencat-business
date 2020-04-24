@@ -66,6 +66,18 @@ var TemplateLoader = function () {
                                     }
                                 }
                             }
+                            if (fieldObj.hasOwnProperty('rules')) {
+                                var fieldObjectRules = fieldObj.rules;
+                                for (var f = 0; f < fieldObjectRules.length; f++) {
+                                    var fieldObjectRule = fieldObjectRules[f];
+                                    if (fieldObjectRule.hasOwnProperty('params') && fieldObjectRule.params.hasOwnProperty('values')) {
+                                        var fieldObjectRuleValues = fieldObjectRule.params.values;
+                                        if (typeof( fieldObjectRuleValues ) === "string") {
+                                            fieldObjectRule.params.values = __getObjectFromTemplate(fieldObjectRuleValues, templateProvider);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

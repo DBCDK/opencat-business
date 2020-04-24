@@ -767,40 +767,27 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "sorting":"apbcdesuqt2",
             "subfields":{
-                "a": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "b": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "c": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "s": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "p": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "d": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "e": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "u": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "q": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "t": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "2": {
-                    "repeatable": false
+                "a": {},
+                "b":{},
+                "c":{},
+                "s":{},
+                "p":{},
+                "d":{},
+                "e":{},
+                "u":{},
+                "q":{},
+                "t":{},
+                "2":{
+                    "repeatable":false
                 }
-            }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                }
+            }]
         },
         "042":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",

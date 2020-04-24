@@ -174,7 +174,14 @@
                 "e": "DanMarc2.fields.041.subfields.e",
                 "u": "DanMarc2.fields.041.subfields.u",
                 "2": "DanMarc2.fields.041.subfields.2"
-            }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                }
+            }]
         },
         "042": "DanMarc2.fields.042",
         "044": "DanMarc2.fields.044",

@@ -186,40 +186,27 @@
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "subfields":{
-                "a":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "b":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "c":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "s":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "p":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "d":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "e":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "u":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "q":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
-                "t":{
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
-                },
+                "a":"DanMarc2.fields.041.subfields.a",
+                "b":"DanMarc2.fields.041.subfields.b",
+                "c":"DanMarc2.fields.041.subfields.c",
+                "s":"DanMarc2.fields.041.subfields.s",
+                "p":"DanMarc2.fields.041.subfields.p",
+                "d":"DanMarc2.fields.041.subfields.d",
+                "e":"DanMarc2.fields.041.subfields.e",
+                "u":"DanMarc2.fields.041.subfields.u",
+                "q":"DanMarc2.fields.041.subfields.q",
+                "t":"DanMarc2.fields.041.subfields.t",
                 "2":{
                     "repeatable":false
                 }
-            }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                }
+            }]
         },
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
