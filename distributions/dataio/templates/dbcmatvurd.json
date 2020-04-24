@@ -122,7 +122,6 @@
                 "y": {}
             }
         },
-
         "700": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",
             "subfields": {
@@ -130,6 +129,15 @@
                 "h": "DanMarc2.fields.700.subfields.h",
                 "f": "DanMarc2.fields.700.subfields.f",
                 "4": "DanMarc2.fields.700.subfields.4"
+            }
+        },
+        "900": {
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
+            "subfields": {
+                "a": "DanMarc2.fields.900.subfields.a",
+                "h": "DanMarc2.fields.900.subfields.h",
+                "f": "DanMarc2.fields.900.subfields.f",
+                "z": "DanMarc2.fields.900.subfields.z"
             }
         },
         "996": {
