@@ -785,7 +785,7 @@
                 "type": "FieldRules.checkValueUnlessHasSubfield",
                 "params": {
                     "subfield": "2",
-                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 }
             }]
         },
