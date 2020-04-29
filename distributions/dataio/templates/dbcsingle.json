@@ -1194,6 +1194,8 @@
                 "e": "DanMarc2.fields.700.subfields.e",
                 "f": "DanMarc2.fields.700.subfields.f",
                 "c": "DanMarc2.fields.700.subfields.c",
+                "t": "DanMarc2.fields.700.subfields.t",
+                "q": "DanMarc2.fields.700.subfields.q",
                 "g": "DanMarc2.fields.700.subfields.g",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "4": "DanMarc2.fields.700.subfields.4",
@@ -1248,6 +1250,7 @@
                 "k": "DanMarc2.fields.710.subfields.k",
                 "j": "DanMarc2.fields.710.subfields.j",
                 "t": "DanMarc2.fields.710.subfields.t",
+                "q": "DanMarc2.fields.710.subfields.q",
                 "g": "DanMarc2.fields.710.subfields.g",
                 "0": "DanMarc2.fields.710.subfields.0",
                 "4": "DanMarc2.fields.710.subfields.4"
