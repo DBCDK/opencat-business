@@ -170,62 +170,7 @@
         "668": "DanMarc2.fields.668",
         "670": "DanMarc2.fields.670",
         "690": "DanMarc2.fields.690",
-        "700":{
-            "comment": "forskel fra dbcsingle: *t",
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",
-            "subfields":{
-                "&": {},
-                "a":{
-                    "repeatable": false
-                },
-                "h": "DanMarc2.fields.700.subfields.h",
-                "e": "DanMarc2.fields.700.subfields.e",
-                "f": "DanMarc2.fields.700.subfields.f",
-                "c": "DanMarc2.fields.700.subfields.c",
-                "t": "DanMarc2.fields.700.subfields.t",
-                "g": "DanMarc2.fields.700.subfields.g",
-                "0": "DanMarc2.fields.700.subfields.0",
-                "4": "DanMarc2.fields.700.subfields.4",
-                "5": "DanMarc2.fields.700.subfields.5",
-                "6":{
-                    "repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkFaust"
-                        }
-                    ]
-                }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                    "params": {
-                        "subfield": "a",
-                        "not_presented_subfield": [ "7006" ]
-                    }
-                },
-                {
-                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                    "params": {
-                        "subfield": "5",
-                        "not_presented_subfield": [ "700a" ]
-                    }
-                },
-                {
-                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                    "params": {
-                        "subfield": "6",
-                        "not_presented_subfield": [ "700a" ]
-                    }
-                },
-                {
-                    "type": "FieldRules.exclusiveSubfieldParameterized",
-                    "params": {
-                        "subfields": [ "a", "6" ]
-                    }
-                }
-            ]
-        },
+        "700": "DanMarc2.fields.700",
         "710": "dbcsingle.fields.710",
         "720":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85a.htm",
