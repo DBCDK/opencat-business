@@ -83,7 +83,7 @@
           },
           {
             "record": "result-matvurd-record.marc",
-            "type": "MARCXCHANGE",
+            "type": "MATVURD",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
