@@ -743,6 +743,8 @@
                 "e": "DanMarc2.fields.700.subfields.e",
                 "f": "DanMarc2.fields.700.subfields.f",
                 "c": "DanMarc2.fields.700.subfields.c",
+                "t": "DanMarc2.fields.700.subfields.t",
+                "q": "DanMarc2.fields.700.subfields.q",
                 "\u00f8": "DanMarc2.fields.700.subfields.\u00f8",
                 "g": "DanMarc2.fields.700.subfields.g",
                 "4": "DanMarc2.fields.700.subfields.4"
@@ -760,6 +762,7 @@
                 "k": "DanMarc2.fields.710.subfields.k",
                 "s": "DanMarc2.fields.710.subfields.s",
                 "t": "DanMarc2.fields.710.subfields.t",
+                "q": "DanMarc2.fields.710.subfields.q",
                 "4": "DanMarc2.fields.710.subfields.4"
             }
         },
