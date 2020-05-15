@@ -20,6 +20,7 @@ var TemplateContainer = function () {
 
     var templates = {};
     var templatesUnoptimized = {};
+    var templateMapping = null;
     var settings;
 
     function setSettings(newSettings) {
@@ -42,8 +43,7 @@ var TemplateContainer = function () {
             for (var j = 0; j < templates.length; j++) {
                 getCompiledTemplateByFolder(templates[j].schemaName, "fbs");
             }
-        }
-        finally {
+        } finally {
             Log.trace("Exit - TemplateContainer.initTemplates()");
         }
     }
@@ -54,15 +54,8 @@ var TemplateContainer = function () {
         try {
             var result = [];
 
-            var templates = getTemplateNames("dataio");
-            for (var i = 0; i < templates.length; i++) {
-                result.push(templates[i]);
-            }
-
-            templates = getTemplateNames("fbs");
-            for (var j = 0; j < templates.length; j++) {
-                result.push(templates[j]);
-            }
+            result.concat(getTemplateNames("dataio"));
+            result.concat(getTemplateNames("fbs"));
 
             return result;
         } finally {
@@ -113,8 +106,7 @@ var TemplateContainer = function () {
             }
 
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - getTemplateNames()");
         }
     }
@@ -137,8 +129,7 @@ var TemplateContainer = function () {
             var template = loadTemplateUnoptimized(name);
 
             return TemplateOptimizer.optimize(template);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - TemplateContainer.loadTemplate()");
         }
     }
@@ -164,8 +155,7 @@ var TemplateContainer = function () {
             }
 
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - TemplateContainer.get()");
         }
     }
@@ -183,10 +173,98 @@ var TemplateContainer = function () {
             }
 
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - TemplateContainer.get()");
         }
+    }
+
+    function getSchemas(templateSet, libraryRules, settings) {
+        Log.trace("Enter - TemplateContainer.getSchemas()");
+
+        var schemas = [];
+
+        try {
+            if (templateMapping === null) {
+                Log.debug('templateMapping is null - loading template mappings');
+                templateMapping = __loadTemplateMapping(settings);
+            }
+
+            var libraryTemplateGroups = templateMapping['libraryToTemplateGroups'][templateSet]['templateGroups'];
+            var templateGroups = templateMapping['templateGroups'];
+            var templateNames = [];
+
+            for (var i = 0; i < libraryTemplateGroups.length; i++) {
+                templateNames = templateNames.concat(templateGroups[libraryTemplateGroups[i]]['templates']);
+            }
+
+            // Now we have all the potential templates the templateSet can use.
+            // Next we have to load those templates and filter on library rules.
+            for (var j = 0; j < templateNames.length; j++) {
+                var templateName = templateNames[j];
+                var template = loadTemplateUnoptimized(templateName);
+
+                if (__checkTemplateFeatures(templateName, template, libraryRules)) {
+                    var schema = {schemaName: templateName, schemaInfo: ""};
+
+                    if (template.template.hasOwnProperty('description')) {
+                        schema.schemaInfo = template.template.description;
+                    }
+
+                    schemas.push(schema);
+                }
+            }
+
+            return schemas;
+        } finally {
+            Log.trace("Exit - TemplateContainer.getSchemas()");
+        }
+    }
+
+    function __checkTemplateFeatures(templateName, template, libraryRules) {
+        if (!template.hasOwnProperty('template')) {
+            Log.info("Schema '" + templateName + "' can not be used because the property 'template' is missing in the schema");
+            return false;
+        }
+        var templateSettings = template.template;
+        if (!templateSettings.hasOwnProperty('features')) {
+            Log.info("Schema '" + templateName + "' can not be used because the property 'template.features' is missing in the schema");
+            return false;
+        }
+        var featureNames = templateSettings.features;
+        for (var k = 0; k < featureNames.length; k++) {
+            var name = featureNames[k];
+
+            if (name !== "all" && !libraryRules.contains(name)) {
+                Log.info("Schema '" + templateName + "' can not be used because feature '" + name + "' is not in the library rules: " + libraryRules);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function __loadTemplateMapping(settings) {
+        var templateFileNamePattern = "%s/distributions/common/templateMapping.json";
+        var result = null;
+
+        var fileName = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'));
+        Log.debug("Trying to load templateMapping file: ", fileName);
+        var templateContent = System.readFile(fileName);
+        Log.debug('Loaded templateMapping');
+
+        if (templateContent !== null) {
+            try {
+                result = JSON.parse(templateContent);
+                Log.debug('Content from templateMappings: ' + JSON.stringify(result));
+            } catch (ex) {
+                var message = StringUtil.sprintf("Syntax error in file '%s': %s", fileName, ex);
+                Log.error(message);
+                throw message;
+            }
+        } else {
+            throw StringUtil.sprintf("Unable to read content from '%s'", filename);
+        }
+        return result;
     }
 
     /**
@@ -386,7 +464,9 @@ var TemplateContainer = function () {
         'loadTemplateUnoptimized': loadTemplateUnoptimized,
         'getUnoptimized': getUnoptimized,
         'testLoadOfTemplateDoNotUse': testLoadOfTemplateDoNotUse,
-        'onlyForTest__addDanishLetterAaToTemplate': __addDanishLetterAaToTemplate
+        'onlyForTest__addDanishLetterAaToTemplate': __addDanishLetterAaToTemplate,
+        'getSchemas': getSchemas,
+        'templateMappings': templateMapping
     }
 
 }();
