@@ -1,0 +1,15 @@
+{
+  "appName": "opencatbusiness",
+  "profiles": [
+    "long-running-requests"
+  ],
+  "logger": {
+    "dk.dbc.jslib": {
+      "level": "INFO"
+    },
+    "dk.dbc": {
+      "level": "DEBUG"
+    }
+
+  }
+}
