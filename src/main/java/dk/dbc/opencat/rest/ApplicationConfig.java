@@ -3,7 +3,7 @@
  *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
  */
 
-package dk.dbc.opencat.dk.rest;
+package dk.dbc.opencat.rest;
 
 import javax.ws.rs.core.Application;
 import java.util.Arrays;

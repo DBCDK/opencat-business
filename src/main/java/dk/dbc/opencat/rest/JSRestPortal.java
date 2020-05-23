@@ -1,4 +1,4 @@
-package dk.dbc.opencat.dk.rest;
+package dk.dbc.opencat.rest;
 
 import dk.dbc.util.Timed;
 import javax.ejb.Stateless;
