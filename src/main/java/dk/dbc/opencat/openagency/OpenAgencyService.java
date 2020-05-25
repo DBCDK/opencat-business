@@ -8,8 +8,9 @@ package dk.dbc.opencat.openagency;
 import dk.dbc.openagency.client.LibraryRuleHandler;
 import dk.dbc.openagency.client.OpenAgencyException;
 import dk.dbc.openagency.client.OpenAgencyServiceFromURL;
-import dk.dbc.updateservice.json.JsonMapper;
-import dk.dbc.updateservice.ws.JNDIResources;
+import dk.dbc.opencat.OpenCatException;
+import dk.dbc.opencat.json.JsonMapper;
+import dk.dbc.opencat.ws.JNDIResources;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Set;
@@ -25,7 +26,7 @@ import org.slf4j.ext.XLoggerFactory;
  */
 @Singleton
 public class OpenAgencyService {
-    private static final XLogger logger = XLoggerFactory.getXLogger(dk.dbc.updateservice.update.OpenAgencyService.class);
+    private static final XLogger logger = XLoggerFactory.getXLogger(OpenAgencyService.class);
     private static final int CONNECT_TIMEOUT = 1 * 60 * 1000;
     private static final int REQUEST_TIMEOUT = 3 * 60 * 1000;
 
@@ -117,7 +118,7 @@ public class OpenAgencyService {
         }
     }
 
-    public LibraryGroup getLibraryGroup(String agencyId) throws OpenAgencyException, UpdateException {
+    public LibraryGroup getLibraryGroup(String agencyId) throws OpenAgencyException, OpenCatException {
         logger.entry(agencyId);
         StopWatch watch = new Log4JStopWatch("service.openagency.getCatalogingTemplate");
 
@@ -126,7 +127,7 @@ public class OpenAgencyService {
             String reply = service.libraryRules().getCatalogingTemplate(agencyId);
 
             if (reply == null || reply.isEmpty()) {
-                throw new UpdateException("Couldn't find cataloging template group for agency " + agencyId);
+                throw new OpenCatException("Couldn't find cataloging template group for agency " + agencyId);
             }
 
             switch (reply) {
@@ -144,7 +145,7 @@ public class OpenAgencyService {
                     result = LibraryGroup.FBS;
                     break;
                 default:
-                    throw new UpdateException("Unknown library group: " + reply);
+                    throw new OpenCatException("Unknown library group: " + reply);
             }
 
             logger.info("Agency '{}' has LibraryGroup {}", agencyId, result.toString());

@@ -3,7 +3,7 @@ use("Log");
 EXPORTED_SYMBOLS = ['OpenAgencyClientCore'];
 
 var OpenAgencyClientCore = function () {
-    var JNDI_NAME = "java:global/updateservice-2.0-SNAPSHOT/OpenAgencyService";
+    var JNDI_NAME = "java:global/opencat-business-1.0-SNAPSHOT/OpenAgencyService";
 
     var features = {
         create_enrichments: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.CREATE_ENRICHMENTS,
