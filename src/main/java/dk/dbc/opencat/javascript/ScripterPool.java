@@ -98,48 +98,36 @@ public class ScripterPool {
             }
         }
         logger.entry();
-        try {
-            logger.debug("Starting creation of javascript environments.");
-            int javaScriptPoolSize = Integer.parseInt(settings.getProperty(JNDIResources.JAVASCRIPT_POOL_SIZE));
-            if (javaScriptPoolSize < MIN_NUMBER_OF_ENVIROMENTS) {
-                javaScriptPoolSize = MIN_NUMBER_OF_ENVIROMENTS;
-            }
-            if (javaScriptPoolSize > MAX_NUMBER_OF_ENVIROMENTS) {
-                javaScriptPoolSize = MAX_NUMBER_OF_ENVIROMENTS;
-            }
-            logger.info("Pool size: {}", javaScriptPoolSize);
-            active_javaScriptPoolSize = javaScriptPoolSize;
-            final ScripterEnvironmentFactory scripterEnvironmentFactory = new ScripterEnvironmentFactory();
-
-            // Not the JAVAEE way...glassfish is broken.
-            // Just start as Daemon Thread
-            // Thread jsInitThreads=managedThreadFactory.newThread(() -> {
-            Thread jsInitThreads = new Thread(() -> {
-                //final XLogger logger = XLoggerFactory.getXLogger("ScripterPool.PostConstruct.InitThread");
-                final XLogger logger = XLoggerFactory.getXLogger(this.getClass());
-                logger.info("Started creating {} JS environment(s) ", active_javaScriptPoolSize);
-                Profiler profiler = new Profiler("JS init thread");
-                for (int i = 0; i < active_javaScriptPoolSize; i++) {
-                    try {
-                        profiler.start("JS enviroment " + i);
-                        ScripterEnvironment scripterEnvironment = scripterEnvironmentFactory.newEnvironment(settings);
-                        environments.put(scripterEnvironment);
-                        initializedEnvironments.incrementAndGet();
-                        logger.info("Environment " + (i + 1) + "/" + active_javaScriptPoolSize + " added to ready queue");
-                    } catch (Exception e) {
-                        logger.error("JavaScript environment creation failed ", e);
-                        e.printStackTrace();
-                    } finally {
-                        logger.exit();
-                    }
-                }
-                logger.info("JS init thread done:\n{}", profiler.stop());
-            });
-            jsInitThreads.setDaemon(true);
-            jsInitThreads.start();
-        } finally {
-            logger.exit();
+        logger.debug("Starting creation of javascript environments.");
+        int javaScriptPoolSize = Integer.parseInt(settings.getProperty(JNDIResources.JAVASCRIPT_POOL_SIZE));
+        if (javaScriptPoolSize < MIN_NUMBER_OF_ENVIROMENTS) {
+            javaScriptPoolSize = MIN_NUMBER_OF_ENVIROMENTS;
         }
+        if (javaScriptPoolSize > MAX_NUMBER_OF_ENVIROMENTS) {
+            javaScriptPoolSize = MAX_NUMBER_OF_ENVIROMENTS;
+        }
+        logger.info("Pool size: {}", javaScriptPoolSize);
+        active_javaScriptPoolSize = javaScriptPoolSize;
+        final ScripterEnvironmentFactory scripterEnvironmentFactory = new ScripterEnvironmentFactory();
+
+        logger.info("Started creating {} JS environment(s) ", active_javaScriptPoolSize);
+        Profiler profiler = new Profiler("JS init thread");
+        for (int i = 0; i < active_javaScriptPoolSize; i++) {
+            try {
+                profiler.start("JS enviroment " + i);
+                ScripterEnvironment scripterEnvironment = scripterEnvironmentFactory.newEnvironment(settings);
+                environments.put(scripterEnvironment);
+                initializedEnvironments.incrementAndGet();
+                logger.info("Environment " + (i + 1) + "/" + active_javaScriptPoolSize + " added to ready queue");
+            } catch (Exception e) {
+                logger.error("JavaScript environment creation failed ", e);
+                e.printStackTrace();
+            } finally {
+                logger.exit();
+            }
+        }
+        logger.info("JS init thread done:\n{}", profiler.stop());
+
     }
 
     /**
