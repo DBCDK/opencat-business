@@ -58,6 +58,9 @@
             "enqueued": false,
             "enrichments": [
               "rawrepo-book-54945124-enrichment.marc"
+            ],
+            "children": [
+              "result-matvurd-record.marc"
             ]
           },
           {
@@ -73,6 +76,9 @@
             "enqueued": false,
             "enrichments": [
               "rawrepo-online-55100594-enrichment.marc"
+            ],
+            "children": [
+              "result-matvurd-record.marc"
             ]
           },
           {
@@ -83,7 +89,7 @@
           },
           {
             "record": "result-matvurd-record.marc",
-            "type": "MARCXCHANGE",
+            "type": "MATVURD",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
