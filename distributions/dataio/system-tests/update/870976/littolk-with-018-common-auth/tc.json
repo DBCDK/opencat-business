@@ -1,6 +1,6 @@
 [
   {
-    "name": "new-870976-matvurd-record",
+    "name": "870974-littolk-with-018-common-auth",
     "description": "",
     "request": {
       "authentication": {
@@ -8,38 +8,41 @@
         "user": "netpunkt",
         "password": "20Koster"
       },
-      "templateName": "dbcmatvurd",
+      "templateName": "allowall",
       "record": "request.marc",
       "check001d": true
     },
     "setup": {
       "rawrepo": [
         {
-          "record": "rawrepo-book-54945124-common.marc",
-          "type": "MARCXCHANGE",
+          "record": "rawrepo-68831024-common.marc",
+          "type": "AUTHORITY",
           "deleted": false,
           "enqueued": false,
           "enrichments": [
-            "rawrepo-book-54945124-enrichment.marc"
+            "rawrepo-68831024-enrichment.marc"
+          ],
+          "children": [
+            "rawrepo-46120302-common.marc"
           ]
         },
         {
-          "record": "rawrepo-book-54945124-enrichment.marc",
+          "record": "rawrepo-68831024-enrichment.marc",
           "type": "ENRICHMENT",
           "deleted": false,
           "enqueued": false
         },
         {
-          "record": "rawrepo-online-55100594-common.marc",
+          "record": "rawrepo-46120302-common.marc",
           "type": "MARCXCHANGE",
           "deleted": false,
           "enqueued": false,
           "enrichments": [
-            "rawrepo-online-55100594-enrichment.marc"
+            "rawrepo-46120302-enrichment.marc"
           ]
         },
         {
-          "record": "rawrepo-online-55100594-enrichment.marc",
+          "record": "rawrepo-46120302-enrichment.marc",
           "type": "ENRICHMENT",
           "deleted": false,
           "enqueued": false
@@ -52,52 +55,53 @@
         "errors": [],
         "rawrepo": [
           {
-            "record": "rawrepo-book-54945124-common.marc",
-            "type": "MARCXCHANGE",
+            "record": "rawrepo-68831024-common.marc",
+            "type": "AUTHORITY",
             "deleted": false,
             "enqueued": false,
             "enrichments": [
-              "rawrepo-book-54945124-enrichment.marc"
+              "rawrepo-68831024-enrichment.marc"
             ],
             "children": [
-              "result-matvurd-record.marc"
+              "rawrepo-46120302-common.marc",
+              "expected-littolk-common.marc"
             ]
           },
           {
-            "record": "rawrepo-book-54945124-enrichment.marc",
+            "record": "rawrepo-68831024-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": false
           },
           {
-            "record": "rawrepo-online-55100594-common.marc",
+            "record": "rawrepo-46120302-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": false,
             "enrichments": [
-              "rawrepo-online-55100594-enrichment.marc"
+              "rawrepo-46120302-enrichment.marc"
             ],
             "children": [
-              "result-matvurd-record.marc"
+              "expected-littolk-common.marc"
             ]
           },
           {
-            "record": "rawrepo-online-55100594-enrichment.marc",
+            "record": "rawrepo-46120302-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": false
           },
           {
-            "record": "result-matvurd-record.marc",
-            "type": "MATVURD",
+            "record": "expected-littolk-common.marc",
+            "type": "LITANALYSIS",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
-              "result-matvurd-enrichment.marc"
+              "expected-littolk-enrichment.marc"
             ]
           },
           {
-            "record": "result-matvurd-enrichment.marc",
+            "record": "expected-littolk-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
