@@ -233,6 +233,36 @@ public class OpenAgencyService {
         }
     }
 
+    public Set<String> getAllowedLibraryRules(String agencyId) throws OpenAgencyException {
+        logger.entry(agencyId);
+
+        StopWatch watch = new Log4JStopWatch("service.openagency.getAllowedLibraryRules");
+
+        Set<String> result = null;
+        try {
+            result = service.libraryRules().getAllowedLibraryRules(agencyId);
+
+            return result;
+        } catch (OpenAgencyException ex) {
+            logger.error("Failed to read set from OpenAgency: {}", ex.getMessage());
+            try {
+                if (ex.getRequest() != null) {
+                    logger.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
+                }
+                if (ex.getResponse() != null) {
+                    logger.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
+                }
+            } catch (IOException ioError) {
+                logger.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
+            }
+
+            throw ex;
+        } finally {
+            watch.stop();
+            logger.exit(result);
+        }
+    }
+
     private Set<String> getLibrariesByCatalogingTemplateSet(String catalogingTemplateSet) throws OpenAgencyException {
         logger.entry(catalogingTemplateSet);
 
