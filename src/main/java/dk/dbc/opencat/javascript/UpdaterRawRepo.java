@@ -7,24 +7,17 @@ package dk.dbc.opencat.javascript;
 
 import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.utils.RecordContentTransformer;
-import dk.dbc.rawrepo.RawRepoDAO;
-import dk.dbc.rawrepo.RawRepoException;
-import dk.dbc.rawrepo.Record;
 import dk.dbc.rawrepo.RecordId;
+import dk.dbc.rawrepo.RecordServiceConnector;
+import dk.dbc.rawrepo.RecordServiceConnectorException;
+import dk.dbc.rawrepo.RecordServiceConnectorFactory;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * This class exports a RawRepo instance to the JavaScript environment.
@@ -33,6 +26,27 @@ import java.util.Set;
  */
 public class UpdaterRawRepo {
     private static final XLogger logger = XLoggerFactory.getXLogger(UpdaterRawRepo.class);
+    private static final RecordServiceConnector recordServiceConnector =
+            RecordServiceConnectorFactory.create(System.getenv("RAWREPO_RECORD_SERVICE_URL"));
+
+    /**
+     * Checks if a record exists in the rawrepo.
+     *
+     * @param recordId  The record id from 001a to identify the record.
+     * @param libraryNo The library no from 001b to identify the record.
+     * @return <code>true</code> if the record exists, <code>false</code>
+     * otherwise.
+     * @throws RecordServiceConnectorException  RecordServiceConnectorException
+     */
+    public static Boolean recordExists(String recordId, String libraryNo) throws RecordServiceConnectorException {
+        logger.entry(recordId, libraryNo);
+        boolean result;
+        StopWatch watch = new Log4JStopWatch("rawrepo.recordExists");
+        result =  recordServiceConnector.recordExists(libraryNo, recordId);
+        watch.stop();
+        logger.exit(result);
+        return result;
+    }
 
     /**
      * Fetch a record from the rawrepo.
@@ -42,53 +56,22 @@ public class UpdaterRawRepo {
      * @param recordId  The record id from 001a to identify the record.
      * @param libraryNo The library no from 001b to identify the record.
      * @return The record.
-     * @throws NamingException              NamingException
-     * @throws SQLException                 SQLException
-     * @throws RawRepoException             RawRepoException
+     * @throws RecordServiceConnectorException RecordServiceConnectorException
      * @throws UnsupportedEncodingException UnsupportedEncodingException
      */
-    public static MarcRecord fetchRecord(String recordId, String libraryNo) throws SQLException, NamingException, RawRepoException, UnsupportedEncodingException {
+    public static MarcRecord fetchRecord(String recordId, String libraryNo) throws UnsupportedEncodingException, RecordServiceConnectorException {
         logger.entry(recordId, libraryNo);
         StopWatch watch = new Log4JStopWatch("rawrepo.fetchRecord");
-        MarcRecord result = null;
-        try (Connection con = getConnection()) {
-            RawRepoDAO rawRepoDAO = RawRepoDAO.builder(con).build();
-            Record record = rawRepoDAO.fetchRecord(recordId, Integer.valueOf(libraryNo));
-            if (record.getContent() == null) {
-                result = new MarcRecord();
-            } else {
-                result = RecordContentTransformer.decodeRecord(record.getContent());
-            }
-            return result;
-        } finally {
-            watch.stop();
-            logger.exit(result);
+        MarcRecord result;
+        if (recordExists(libraryNo, recordId)) {
+            byte[] content  = recordServiceConnector.getRecordContent(Integer.parseInt(libraryNo), recordId);
+            result = RecordContentTransformer.decodeRecord(content);
+        } else {
+            result = new MarcRecord();
         }
-    }
-
-    /**
-     * Checks if a record exists in the rawrepo.
-     *
-     * @param recordId  The record id from 001a to identify the record.
-     * @param libraryNo The library no from 001b to identify the record.
-     * @return <code>true</code> if the record exists, <code>false</code>
-     * otherwise.
-     * @throws NamingException  NamingException
-     * @throws SQLException     SQLException
-     * @throws RawRepoException RawRepoException
-     */
-    public static Boolean recordExists(String recordId, String libraryNo) throws SQLException, NamingException, RawRepoException {
-        logger.entry(recordId, libraryNo);
-        StopWatch watch = new Log4JStopWatch("rawrepo.recordExists");
-        boolean result = false;
-        try (Connection con = getConnection()) {
-            RawRepoDAO rawRepoDAO = RawRepoDAO.builder(con).build();
-            result = rawRepoDAO.recordExists(recordId, Integer.valueOf(libraryNo));
-            return result;
-        } finally {
-            watch.stop();
-            logger.exit(result);
-        }
+        watch.stop();
+        logger.exit(result);
+        return result;
     }
 
     /**
@@ -97,42 +80,19 @@ public class UpdaterRawRepo {
      * @param recordId  String
      * @param libraryNo String
      * @return List of MarcRecords
-     * @throws SQLException                 SQLException
-     * @throws NamingException              NamingException
-     * @throws RawRepoException             RawRepoException
      * @throws UnsupportedEncodingException UnsupportedEncodingException
+     * @throws RecordServiceConnectorException RecordServiceConnectorException
      */
-    public static List<MarcRecord> getRelationsChildren(String recordId, String libraryNo) throws SQLException, NamingException, RawRepoException, UnsupportedEncodingException {
+    public static List<MarcRecord> getRelationsChildren(String recordId, String libraryNo) throws UnsupportedEncodingException, RecordServiceConnectorException {
         logger.entry(recordId, libraryNo);
         StopWatch watch = new Log4JStopWatch("rawrepo.getRelationsChildren");
-        List<MarcRecord> result = null;
-        try (Connection con = getConnection()) {
-            result = new ArrayList<>();
-            RawRepoDAO rawRepoDAO = RawRepoDAO.builder(con).build();
-            Set<RecordId> records = rawRepoDAO.getRelationsChildren(new RecordId(recordId, Integer.valueOf(libraryNo)));
-            for (RecordId rawRepoRecordId : records) {
-                result.add(fetchRecord(rawRepoRecordId.getBibliographicRecordId(), String.valueOf(rawRepoRecordId.getAgencyId())));
-            }
-            return result;
-        } finally {
-            watch.stop();
-            logger.exit(result);
+        RecordId[] recordIds = recordServiceConnector.getRecordChildren(libraryNo, recordId);
+        List<MarcRecord> children = new ArrayList<MarcRecord>();
+        for (RecordId childRecordId: recordIds) {
+            children.add(fetchRecord(childRecordId.getBibliographicRecordId(), String.valueOf(childRecordId.getAgencyId())));
         }
-    }
-
-    /**
-     * Lookup a sql connection for the rawrepo database from the Java EE container.
-     * <p>
-     * Remember to close the connection, when you are done using it.
-     *
-     * @return The SQL connection.
-     * @throws NamingException Throwned if the datasource can not be looked up in
-     *                         the container.
-     * @throws SQLException    Throwned if the datasource can not open a connection.
-     */
-    private static Connection getConnection() throws NamingException, SQLException {
-        InitialContext ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("jdbc/rawrepo");
-        return ds.getConnection();
+        watch.stop();
+        logger.exit(children);
+        return children;
     }
 }
