@@ -34,14 +34,21 @@ var TemplateContainer = function () {
         Log.trace("Enter - TemplateContainer.initTemplates()");
 
         try {
+            // Load template mappings during startup so the values are cached
+            __loadTemplateMapping(settings);
+
             var templates = getTemplateNames("dataio");
             for (var i = 0; i < templates.length; i++) {
                 getCompiledTemplateByFolder(templates[i].schemaName, "dataio");
+                // loadTemplateUnoptimized caches the templates to this.templatesUnoptimized
+                loadTemplateUnoptimized(templates[i].schemaName);
             }
 
             templates = getTemplateNames("fbs");
             for (var j = 0; j < templates.length; j++) {
                 getCompiledTemplateByFolder(templates[j].schemaName, "fbs");
+                // loadTemplateUnoptimized caches the templates to this.templatesUnoptimized
+                loadTemplateUnoptimized(templates[i].schemaName);
             }
         } finally {
             Log.trace("Exit - TemplateContainer.initTemplates()");
@@ -244,6 +251,7 @@ var TemplateContainer = function () {
     }
 
     function __loadTemplateMapping(settings) {
+        Log.info('__loadTemplateMapping');
         var templateFileNamePattern = "%s/distributions/common/templateMapping.json";
         var result = null;
 
