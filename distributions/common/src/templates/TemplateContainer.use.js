@@ -151,9 +151,11 @@ var TemplateContainer = function () {
      */
     function get(name) {
         Log.trace("Enter - TemplateContainer.get()");
+        var start = new Date().getTime();
 
         try {
             var result = templates[name];
+            Log.debug('Template was cached? ' + (result !== undefined))
             if (result === undefined) {
                 result = __load_compiled_template(name);
                 if (result !== undefined) {
@@ -163,6 +165,7 @@ var TemplateContainer = function () {
 
             return result;
         } finally {
+            Log.debug('TemplateContainer.get took ' + (new Date().getTime() - start) + ' ms')
             Log.trace("Exit - TemplateContainer.get()");
         }
     }

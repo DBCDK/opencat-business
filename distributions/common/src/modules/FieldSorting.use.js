@@ -22,6 +22,7 @@ var FieldSorting = function () {
      */
     function sort(field, sortOrder) {
         Log.trace("Enter - FieldSorting.sort", field);
+        var start = new Date().getTime();
         try {
 
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
@@ -49,6 +50,7 @@ var FieldSorting = function () {
 
             return field;
         } finally {
+            Log.debug('FieldSorting.sort took ' + (new Date().getTime() - start) + ' ms');
             Log.trace("Exit -- FieldSorting.sort");
         }
     }
