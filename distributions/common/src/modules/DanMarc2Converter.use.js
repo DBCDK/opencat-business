@@ -135,7 +135,6 @@ var DanMarc2Converter = function () {
      */
     function convertFromDanMarc2Field(field) {
         Log.trace("Enter - DanMarc2Converter.convertFromDanMarc2Field()");
-        var start = new Date().getTime();
         var result = {
             name: field.name.toString() + '',
             indicator: field.indicator.toString() + '',
@@ -154,7 +153,6 @@ var DanMarc2Converter = function () {
             return result;
         }
         finally {
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.DanMarc2Converter.convertFromDanMarc2Field]');
             Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2Field() - " + result);
         }
     }

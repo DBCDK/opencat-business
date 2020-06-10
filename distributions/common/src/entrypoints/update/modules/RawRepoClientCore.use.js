@@ -69,6 +69,7 @@ var RawRepoClientCore = function () {
      */
     function __convertRecord(javaRecord) {
         Log.trace("Enter - RawRepoClientCore.__convertRecord");
+        var start = new Date().getTime();
         var result = new Record();
         try {
             for (var i = 0; i < javaRecord.getFields().size(); i++) {
@@ -82,6 +83,7 @@ var RawRepoClientCore = function () {
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RawRepoClientCore.__convertRecord]');
             Log.trace("Exit - RawRepoClientCore.__convertRecord");
         }
     }

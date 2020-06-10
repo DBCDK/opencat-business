@@ -90,6 +90,7 @@ var RecordUtil = function () {
      */
     function createFromString(s) {
         Log.trace("Enter - RecordUtil.createFromString");
+        var start = new Date().getTime();
         try {
             var record = new Record();
             if (s !== "") {
@@ -98,6 +99,7 @@ var RecordUtil = function () {
             }
             return record;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordUtil.createFromString]');
             Log.trace("Exit - RecordUtil.createFromString");
         }
     }
