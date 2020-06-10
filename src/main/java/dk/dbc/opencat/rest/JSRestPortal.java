@@ -1,5 +1,7 @@
 package dk.dbc.opencat.rest;
 
+import dk.dbc.common.records.MarcConverter;
+import dk.dbc.common.records.MarcRecord;
 import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.opencat.javascript.ScripterEnvironment;
@@ -7,16 +9,24 @@ import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
+import dk.dbc.updateservice.dto.DoubleRecordFrontendDTO;
+import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.util.Timed;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,29 +37,71 @@ public class JSRestPortal {
     private final Properties settings = JNDIResources.getProperties();
     private static final JSONBContext jsonbContext = new JSONBContext();
 
+    @EJB
+    ScripterPool scripterPool;
 
     @POST
     @Path("v1/validateRecord")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public String validateRecord(ValidateRecordRequestDTO validateRecordRequestDTO) throws InterruptedException, ScripterException, JSONBException {
-        ScripterPool scripterPool = new ScripterPool();
+    public Response validateRecord(ValidateRecordRequestDTO validateRecordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
             scripterEnvironment = scripterPool.take();
+            LOGGER.info("validateRecord incoming request:{}",validateRecordRequestDTO);
             result = (String) scripterEnvironment.callMethod("validateRecord",
                     validateRecordRequestDTO.getTemplateName(),
                     validateRecordRequestDTO.getRecord(),
                     settings);
+            sanityCheck(result, MessageEntryDTO[].class);
+            LOGGER.info("ValidateRecord result:{}", result);
+            return Response.ok().entity(result).build();
+        } catch (ScripterException | JSONBException | InterruptedException e) {
+            return Response.serverError().build();
+
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (Exception e) {
+                LOGGER.error("validateRecord", e);
+            }
         }
-        finally {
-            scripterPool.put(scripterEnvironment);
+    }
+
+    @POST
+    @Path("v1/checkDoubleRecordFrontend")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Timed
+    public Response checkDoubleRecordFrontend(MarcRecord record) throws OCBException {
+        ScripterEnvironment scripterEnvironment = null;
+        String result;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.info("checkDoubleRecordFrontend. Incoming is:{}", record);
+            result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
+                    jsonbContext.marshall(record),
+                    settings);
+
+            sanityCheck(result, DoubleRecordFrontendStatusDTO.class);
+            LOGGER.info("checkDoubleRecordFrontend result:{}", result);
+
+            return Response.ok().entity(result).build();
+        } catch (ScripterException | JSONBException | InterruptedException e) {
+            LOGGER.error("checkDoubleRecordFrontend error", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("checkDoubleRecordFrontend error", e);
+            }
         }
-        MessageEntryDTO messageEntryDTO = new MessageEntryDTO();
-        String messString = jsonbContext.marshall(messageEntryDTO);
-        LOGGER.info("Tester:{}", jsonbContext.unmarshall(messString, MessageEntryDTO.class));
-        return result;
+    }
+
+    private void sanityCheck(String objectAsJson, Class t) throws JSONBException {
+        jsonbContext.unmarshall(objectAsJson, t);
     }
 }
