@@ -99,6 +99,7 @@ var Validator = function () {
      */
     function doValidateRecord(record, templateProvider, settings) {
         Log.trace("Enter - Validator.doValidateRecord()");
+        var start = new Date().getTime();
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
@@ -134,6 +135,7 @@ var Validator = function () {
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.Validator.doValidateRecord]');
             Log.trace("Exit - Validator.doValidateRecord()");
         }
     }
@@ -150,6 +152,7 @@ var Validator = function () {
      */
     function __validateField(record, field, templateProvider, settings) {
         Log.trace("Enter - Validator.__validateField()");
+        var start = new Date().getTime();
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result;
@@ -200,6 +203,7 @@ var Validator = function () {
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.Validator.__validateField(' + field.name + ')]');
             Log.trace("Exit - Validator.__validateField()");
         }
     }
@@ -217,7 +221,7 @@ var Validator = function () {
      */
     function __validateSubfield(record, field, subfield, templateProvider, settings) {
         Log.trace("Enter - Validator.__validateSubfield()");
-
+        var start = new Date().getTime();
         try {
             var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
@@ -269,6 +273,7 @@ var Validator = function () {
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.Validator.__validateSubfield(' + field.name + ' *' + subfield.name +')]');
             Log.trace("Exit - Validator.__validateSubfield()");
         }
     }

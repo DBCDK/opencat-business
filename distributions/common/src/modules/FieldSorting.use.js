@@ -50,7 +50,7 @@ var FieldSorting = function () {
 
             return field;
         } finally {
-            Log.debug('FieldSorting.sort took ' + (new Date().getTime() - start) + ' ms');
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.FieldSorting.sort]');
             Log.trace("Exit -- FieldSorting.sort");
         }
     }
