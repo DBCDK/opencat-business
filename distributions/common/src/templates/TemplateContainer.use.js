@@ -35,21 +35,34 @@ var TemplateContainer = function () {
 
         try {
             // Load template mappings during startup so the values are cached
-            __loadTemplateMapping(settings);
+            templateMapping = __loadTemplateMapping(settings);
 
-            var templates = getTemplateNames("dataio");
-            for (var i = 0; i < templates.length; i++) {
-                getCompiledTemplateByFolder(templates[i].schemaName, "dataio");
+            var templateNames = getTemplateNames("dataio");
+            for (var i = 0; i < templateNames.length; i++) {
+                getCompiledTemplateByFolder(templateNames[i].schemaName, "dataio");
                 // loadTemplateUnoptimized caches the templates to this.templatesUnoptimized
-                loadTemplateUnoptimized(templates[i].schemaName);
+                loadTemplateUnoptimized(templateNames[i].schemaName);
             }
 
-            templates = getTemplateNames("fbs");
-            for (var j = 0; j < templates.length; j++) {
-                getCompiledTemplateByFolder(templates[j].schemaName, "fbs");
+            templateNames = getTemplateNames("fbs");
+            for (var j = 0; j < templateNames.length; j++) {
+                getCompiledTemplateByFolder(templateNames[j].schemaName, "fbs");
                 // loadTemplateUnoptimized caches the templates to this.templatesUnoptimized
-                loadTemplateUnoptimized(templates[i].schemaName);
+                loadTemplateUnoptimized(templateNames[j].schemaName);
             }
+
+            Log.debug('--------------------- initTemplates ---------------------');
+            Log.debug('templates:');
+            Log.debug(Object.keys(templates));
+            Log.debug('');
+            Log.debug('templateMapping:');
+            Log.debug(JSON.stringify(templateMapping));
+            Log.debug('');
+            Log.debug('templatesUnoptimized');
+            Log.debug(Object.keys(templatesUnoptimized));
+            Log.debug('');
+            Log.debug('--------------------- initTemplates ---------------------');
+
         } finally {
             Log.trace("Exit - TemplateContainer.initTemplates()");
         }
@@ -165,7 +178,7 @@ var TemplateContainer = function () {
 
             return result;
         } finally {
-            Log.debug('TemplateContainer.get took ' + (new Date().getTime() - start) + ' ms')
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.TemplateContainer.get]');
             Log.trace("Exit - TemplateContainer.get()");
         }
     }

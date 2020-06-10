@@ -84,7 +84,7 @@ var DanMarc2Converter = function () {
             throw ex;
         }
         finally {
-            Log.debug('DanMarc2Converter.convertToDanMarc2 took ' + (new Date().getTime() - start) + ' ms')
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.DanMarc2Converter.convertToDanMarc2]');
             Log.trace("Exit - DanMarc2Converter.convertToDanMarc2() - " + result.toString());
         }
     }
@@ -117,7 +117,7 @@ var DanMarc2Converter = function () {
             return result;
         }
         finally {
-            Log.debug('DanMarc2Converter.convertFromDanMarc2 took ' + (new Date().getTime() - start) + ' ms');
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.DanMarc2Converter.convertFromDanMarc2]');
             Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2() - " + result);
         }
     }
@@ -154,7 +154,7 @@ var DanMarc2Converter = function () {
             return result;
         }
         finally {
-            Log.debug('DanMarc2Converter.convertFromDanMarc2Field took ' + (new Date().getTime() - start) + ' ms')
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.DanMarc2Converter.convertFromDanMarc2Field]');
             Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2Field() - " + result);
         }
     }

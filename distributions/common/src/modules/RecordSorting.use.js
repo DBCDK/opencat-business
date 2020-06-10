@@ -29,7 +29,7 @@ var RecordSorting = function () {
 
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
         } finally {
-            Log.debug('RecordSorting.sortRecord took ' + (new Date().getTime() - start) + ' ms')
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + ' tag[js.RecordSorting.sortRecord]');
             Log.trace("Exit - RecordSorting.sortRecord");
         }
     }
@@ -71,7 +71,7 @@ var RecordSorting = function () {
 
             return record;
         } finally {
-            Log.debug('RecordSorting.sort took ' + (new Date().getTime() - start) + ' ms')
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sort]')
             Log.trace("Exit - RecordSorting.sort");
         }
     }
