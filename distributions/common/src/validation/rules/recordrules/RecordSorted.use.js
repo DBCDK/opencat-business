@@ -23,7 +23,6 @@ var RecordSorted = function () {
     function validateRecord(record, params) {
         Log.trace("Enter - recordSorted.validateRecord( ", record, ", ", params, " )");
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
             ValueCheck.check("record.fields", record.fields).instanceOf(Array);
 
@@ -31,6 +30,7 @@ var RecordSorted = function () {
             var previous = "000";
             for (var i = 0; i < record.fields.length; ++i) {
                 if (record.fields[i].name < previous) {
+                    var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     var url = TemplateUrl.getUrlForField(record.fields[i].name, params.template);
                     var msg = ResourceBundle.getStringFormat(bundle, "record.sorted.error", record.fields[i].name);
                     return result = [ValidateErrors.recordError(url, msg)];

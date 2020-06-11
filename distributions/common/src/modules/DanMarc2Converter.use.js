@@ -47,7 +47,7 @@ var DanMarc2Converter = function () {
      * @name DanMarc2Converter#convertToDanMarc2
      */
     function convertToDanMarc2(obj) {
-        Log.trace("Enter - DanMarc2Converter.convertToDanMarc2( " + uneval(obj) + " ");
+        Log.trace("Enter - DanMarc2Converter.convertToDanMarc2()");
         var start = new Date().getTime();
         var result = new Record();
         try {
@@ -69,8 +69,8 @@ var DanMarc2Converter = function () {
             Log.debug("Catch exception: ", ex);
             throw ex;
         } finally {
+            Log.trace("Exit - DanMarc2Converter.convertToDanMarc2()");
             Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.DanMarc2Converter.convertToDanMarc2]');
-            Log.trace("Exit - DanMarc2Converter.convertToDanMarc2() - " + result.toString());
         }
     }
 
@@ -98,8 +98,8 @@ var DanMarc2Converter = function () {
             });
             return result;
         } finally {
+            Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2()");
             Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.DanMarc2Converter.convertFromDanMarc2]');
-            Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2() - " + result);
         }
     }
 
@@ -131,7 +131,7 @@ var DanMarc2Converter = function () {
             });
             return result;
         } finally {
-            Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2Field() - " + result);
+            Log.trace("Exit - DanMarc2Converter.convertFromDanMarc2Field()");
         }
     }
 

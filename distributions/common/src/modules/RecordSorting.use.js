@@ -29,8 +29,8 @@ var RecordSorting = function () {
 
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
         } finally {
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord]');
             Log.trace("Exit - RecordSorting.sortRecord");
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord]');
         }
     }
 
@@ -71,8 +71,8 @@ var RecordSorting = function () {
 
             return record;
         } finally {
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sort]')
             Log.trace("Exit - RecordSorting.sort");
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sort]')
         }
     }
 

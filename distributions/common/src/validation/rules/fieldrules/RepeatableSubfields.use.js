@@ -38,9 +38,9 @@ var RepeatableSubfields = function () {
                     }
                 }
             }
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             for (var i = 0; i < params.subfields.length; ++i) {
                 if (counter[params.subfields[i]] > 1) {
+                    var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     var errorMessage = ResourceBundle.getStringFormat(bundle, "repeatable.subfields.rule.error", params.subfields[i], counter[params.subfields[i]]);
                     result.push(ValidateErrors.fieldError("TODO:url", errorMessage));
                 }

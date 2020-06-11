@@ -25,7 +25,7 @@ var CheckISMN = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckISMN.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             var result = [];
             var subfieldValue = subfield['value'];
             var subfieldName = subfield['name'];
@@ -40,7 +40,7 @@ var CheckISMN = function () {
                 var len = subfieldValue.length;
                 for (ix = 1; ix < len; ix++) {
                     var ch = subfieldValue.charAt(ix);
-                    if (!( ch >= '0' && ch <= '9' )) {
+                    if (!(ch >= '0' && ch <= '9')) {
                         if (ch === '-') {
                             if (ix === 1 || ix === 11) {
                                 hyphens++;
@@ -50,10 +50,12 @@ var CheckISMN = function () {
                                 hyphens++;
                                 continue;
                             }
+                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                             msg = ResourceBundle.getStringFormat(bundle, "check.ismn.hyphenpos.error", subfieldName);
                             result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                             return result;
                         } else {
+                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                             msg = ResourceBundle.getStringFormat(bundle, "check.ismn.numbers.error", subfieldName);
                             result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                             return result;
@@ -62,16 +64,19 @@ var CheckISMN = function () {
 
                 }
                 if (hyphens !== 3) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.ismn.hyphens.error", subfieldName);
                     result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 }
                 if (ix !== 13) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.ismn.length.error", subfieldName);
                     result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 }
             } else {
                 // Moderne ISMN nummer - behandles som et ISBN13
-                result = CheckEAN13.makeCheck(subfield, bundle, 'M', record);
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                result = CheckEAN13.makeCheck(subfield, 'M');
             }
             return result;
         } finally {

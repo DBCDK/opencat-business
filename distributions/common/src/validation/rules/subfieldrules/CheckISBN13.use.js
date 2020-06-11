@@ -28,7 +28,7 @@ var CheckISBN13 = function () {
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             //ValueCheck.checkUndefined( "params", params );
             var result = [];
-            result = CheckEAN13.makeCheck(subfield, bundle, 'B', record);
+            result = CheckEAN13.makeCheck(subfield, 'B');
             return result;
         } finally {
             Log.trace("Exit --- CheckISBN13.validateSubfield");

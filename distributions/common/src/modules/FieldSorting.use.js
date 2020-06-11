@@ -24,16 +24,13 @@ var FieldSorting = function () {
         Log.trace("Enter - FieldSorting.sort", field);
         var start = new Date().getTime();
         try {
-
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-
             if (sortOrder === undefined || sortOrder === null) {
-                Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.sorting.error"));
+                Log.debug("sortOrder indeholder ikke en valid sorteringsrækkefølge");
                 return field;
             }
 
             if (field.subfields === undefined || field.subfields === null) {
-                Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.subfields.error"));
+                Log.debug("Feltet indeholder ikke delfelter");
                 return field;
             }
 

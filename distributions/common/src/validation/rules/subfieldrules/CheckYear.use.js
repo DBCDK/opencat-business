@@ -27,14 +27,15 @@ var CheckYear = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckYear.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             var YEAR_LENGTH = 4;
             var result = [];
             var gotQmark = false;
             var subfieldValue = subfield['value'].replace(/\s/g, "");
             var subfieldName = subfield['name'];
             var msg;
-            if (subfieldValue.length != YEAR_LENGTH) {
+            if (subfieldValue.length !== YEAR_LENGTH) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.year.length.error", subfieldName, YEAR_LENGTH);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
@@ -42,14 +43,16 @@ var CheckYear = function () {
             for (var i = 0; i < subfieldValue.length; ++i) {
                 if (subfieldValue[i] >= '0' && subfieldValue[i] <= '9') {
                     if (gotQmark) {
+                        bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                         msg = ResourceBundle.getStringFormat(bundle, "check.year.order.error", subfieldName);
                         result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                         return result;
                     }
                 } else {
-                    if (subfieldValue[i] == '?') {
+                    if (subfieldValue[i] === '?') {
                         gotQmark = true;
                     } else {
+                        bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                         msg = ResourceBundle.getStringFormat(bundle, "check.year.content.error", subfieldName);
                         result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                         return result;

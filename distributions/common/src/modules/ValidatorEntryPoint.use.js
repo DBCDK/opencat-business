@@ -14,6 +14,12 @@ EXPORTED_SYMBOLS = ['ValidatorEntryPoint'];
 var ValidatorEntryPoint = function () {
     function initTemplates(settings) {
         ResourceBundleFactory.init(settings);
+        ResourceBundleFactory.getBundle('categorization-codes');
+        ResourceBundleFactory.getBundle('default-auth');
+        ResourceBundleFactory.getBundle('double-record');
+        ResourceBundleFactory.getBundle('enrichments');
+        ResourceBundleFactory.getBundle('templates');
+        ResourceBundleFactory.getBundle('validation');
         TemplateContainer.setSettings(settings);
         TemplateContainer.initTemplates();
     }

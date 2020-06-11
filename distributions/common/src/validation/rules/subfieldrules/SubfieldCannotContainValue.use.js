@@ -35,8 +35,6 @@ var SubfieldCannotContainValue = function () {
                 var fieldname = params.notcondition.subfield.substr(0, 3);
                 var subfieldname = params.notcondition.subfield.substr(3, 1);
                 var foundCondition = false;
-                Log.debug("Validating subfield: ", field.name, subfield.name, ": ", subfield.value);
-                Log.debug("Record: " + JSON.stringify(record));
                 for (var i = 0; i < record.fields.length; i++) {
                     if (record.fields[i].name === fieldname) {
                         for (var j = 0; j < record.fields[i].subfields.length; j++) {
