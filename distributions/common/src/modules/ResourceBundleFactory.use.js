@@ -12,9 +12,7 @@ var ResourceBundleFactory = function () {
     var bundles = {};
 
     function init(settings) {
-        var start = new Date().getTime();
         setDistributionPaths(settings.get('javascript.basedir'), "common");
-        Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.init]');
     }
 
     function getBundle(bundleName) {
@@ -23,6 +21,7 @@ var ResourceBundleFactory = function () {
 
     function getBundleByLocale(bundleName, locale) {
         Log.trace("Enter - ResourceBundleFactory.getBundleByLocale");
+        var start = new Date().getTime();
         var result = null;
         try {
             var filename = __calcResourceFilename(bundleName, locale);
@@ -43,6 +42,7 @@ var ResourceBundleFactory = function () {
             throw StringUtil.sprintf("Unable to load resource bundle %s for locale %s in paths %s", bundleName, Locale.toString(locale), resourcePaths);
         } finally {
             Log.trace("Exit - ResourceBundleFactory.getBundleByLocale(): ", result);
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.getBundleByLocale]');
         }
     }
 

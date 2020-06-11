@@ -20,17 +20,20 @@ var RecordSorting = function () {
             TemplateContainer.setSettings(settings);
             return TemplateContainer.get(templateName);
         };
-
+        Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord - init TemplateProvider]');
         try {
             ResourceBundleFactory.init(settings);
-
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord - init ResourceBundle]');
             var recordSorted = sort(templateProvider, JSON.parse(record));
+            Log.debug(recordSorted);
             var marc = DanMarc2Converter.convertToDanMarc2(recordSorted);
-
-            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
+            Log.debug(marc);
+            var s = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
+            Log.debug(s);
+            return s;
         } finally {
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord]');
             Log.trace("Exit - RecordSorting.sortRecord");
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord]');
         }
     }
 
@@ -71,8 +74,8 @@ var RecordSorting = function () {
 
             return record;
         } finally {
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sort]')
             Log.trace("Exit - RecordSorting.sort");
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sort]')
         }
     }
 
