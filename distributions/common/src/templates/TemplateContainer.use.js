@@ -357,9 +357,9 @@ var TemplateContainer = function () {
             var result = templatesUnoptimized[name];
 
             if (result === undefined) {
-                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
                 if (!settings.containsKey('javascript.basedir')) {
+                    var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     throw ResourceBundle.getStringFormat(bundle, "templates.settings.missing.key", "javascript.basedir");
                 }
 

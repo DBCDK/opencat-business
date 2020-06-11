@@ -39,11 +39,14 @@ var ExclusiveSubfield = function () {
             var aExclusiveFields = ['i', 't', 'e', 'x', 'b'];
             // if there are any 'a's
             if (counts.hasOwnProperty(a)) {
-                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                var bundle = null;
                 // then check for aExclusiveFields
                 for (var j = 0; j < aExclusiveFields.length; ++j) {
                     var name_ = aExclusiveFields[j];
                     if (counts.hasOwnProperty(name_)) {
+                        if (bundle === null) {
+                            bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                        }
                         result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.rule.error", "a", name_)));
                     }
                 }

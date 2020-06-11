@@ -25,7 +25,6 @@ var OptionalFields = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
 
             var positiveFields = params;
@@ -36,6 +35,7 @@ var OptionalFields = function () {
                 }
             }
             if (negativeFields.length > 0) {
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var msg = ResourceBundle.getStringFormat(bundle, "fields.optional.error", negativeFields);
                 result = [ValidateErrors.recordError("", msg)];
             }

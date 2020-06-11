@@ -25,7 +25,6 @@ var SubfieldAllowedIfSubfieldValueInOtherFieldExists = function () {
      */
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubField");
-        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
         var result = [];
 
         try {
@@ -54,6 +53,7 @@ var SubfieldAllowedIfSubfieldValueInOtherFieldExists = function () {
             });
 
             if (!hasRequiredSubfieldValue) {
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var message = ResourceBundle.getStringFormat(bundle, "subfield.requires.other.subfield.value",
                     field.name, subfield.name, requiredField, requiredSubfield, requiredSubfieldValues);
                 result.push(ValidateErrors.recordError("TODO:fixurl", message));

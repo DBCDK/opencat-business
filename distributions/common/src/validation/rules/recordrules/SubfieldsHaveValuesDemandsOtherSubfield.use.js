@@ -23,7 +23,6 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
      */
     function validateRecord(record, params) {
         Log.trace("Enter - SubfieldsHaveValuesDemandsOtherSubfield.validateField");
-        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
         var result = [];
 
         try {
@@ -54,6 +53,7 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
             });
 
             if (__allDemandsFound(params)) {
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var errorMessage = ResourceBundle.getStringFormat(bundle, "subfield.mandatory.because.of.other.fields",
                     params.mandatoryFieldName, params.mandatorySubfieldName, __prettyPrintDemands(params));
                 result.push(ValidateErrors.fieldError("TODO:url", errorMessage));

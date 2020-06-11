@@ -13,15 +13,20 @@ var ResourceBundleFactory = function () {
 
     function init(settings) {
         var start = new Date().getTime();
-        setDistributionPaths(settings.get('javascript.basedir'), "common");
+        if (resourcePaths.length === 0) {
+            var pathFormat = "%s/distributions/%s/resources";
+            setResourcePaths([
+                StringUtil.sprintf(pathFormat, settings.get('javascript.basedir'), "common")
+            ]);
+        }
         Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.init]');
     }
 
     function getBundle(bundleName) {
-        return getBundleByLocale(bundleName, DEFAULT_LOCALE);
+        return __getBundleByLocale(bundleName, DEFAULT_LOCALE);
     }
 
-    function getBundleByLocale(bundleName, locale) {
+    function __getBundleByLocale(bundleName, locale) {
         Log.trace("Enter - ResourceBundleFactory.getBundleByLocale");
         var start = new Date().getTime();
         var result = null;
@@ -52,14 +57,6 @@ var ResourceBundleFactory = function () {
         resourcePaths = paths;
     }
 
-    function setDistributionPaths(basedir, distributionName) {
-        var pathFormat = "%s/distributions/%s/resources";
-        setResourcePaths([
-            StringUtil.sprintf(pathFormat, basedir, distributionName),
-            StringUtil.sprintf(pathFormat, basedir, "common")
-        ]);
-    }
-
     function __calcResourceFilename(bundleName, locale) {
         return StringUtil.sprintf('%s_%s.properties', bundleName, Locale.toString(locale))
     }
@@ -86,8 +83,6 @@ var ResourceBundleFactory = function () {
     return {
         'init': init,
         'setResourcePaths': setResourcePaths,
-        'setDistributionPaths': setDistributionPaths,
-        'getBundle': getBundle,
-        'getBundleByLocale': getBundleByLocale
+        'getBundle': getBundle
     }
 }();

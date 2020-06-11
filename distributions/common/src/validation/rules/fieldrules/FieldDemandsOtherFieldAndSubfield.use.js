@@ -33,7 +33,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+            var bundle;
 
             ValueCheck.check("record.fields", record.fields).instanceOf(Array);
             ValueCheck.check("params.field", params.field);
@@ -45,6 +45,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             var collectedFields = ValidationUtil.getFields(record, params.field);
 
             if (collectedFields.length === 0) {
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
                 result = [ValidateErrors.fieldError("", message)];
                 return result;
@@ -66,6 +67,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
                     }
                 }
             }
+            bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
             return result = [ValidateErrors.fieldError("", message)];
         }
