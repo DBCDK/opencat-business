@@ -49,7 +49,7 @@ var ResourceBundleFactory = function () {
             throw StringUtil.sprintf("Unable to load resource bundle %s for locale %s in paths %s", bundleName, Locale.toString(locale), resourcePaths);
         } finally {
             Log.trace("Exit - ResourceBundleFactory.getBundleByLocale(): ", result);
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.getBundleByLocale]');
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.getBundleByLocale(' + locale + ')]');
         }
     }
 
