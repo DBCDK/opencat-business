@@ -12,7 +12,9 @@ var ResourceBundleFactory = function () {
     var bundles = {};
 
     function init(settings) {
+        var start = new Date().getTime();
         setDistributionPaths(settings.get('javascript.basedir'), "common");
+        Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.init]');
     }
 
     function getBundle(bundleName) {

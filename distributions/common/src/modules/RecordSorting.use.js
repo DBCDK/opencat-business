@@ -13,9 +13,9 @@ var RecordSorting = function () {
     var BUNDLE_NAME = "validation";
 
     function sortRecord(templateName, record, settings) {
-        Log.trace("Enter - RecordSorting.sortRecord");
+        Log.debug("Enter - RecordSorting.sortRecord");
         var start = new Date().getTime();
-
+        Log.debug("Right before templateProvider");
         var templateProvider = function () {
             TemplateContainer.setSettings(settings);
             return TemplateContainer.get(templateName);
