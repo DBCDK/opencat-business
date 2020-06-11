@@ -28,8 +28,6 @@ var FieldDemandsOtherFieldAndSubfield = function () {
      */
     function validateField(record, field, params) {
         Log.trace("Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)");
-        Log.debug("record ", record !== undefined ? JSON.stringify(record) : "undef");
-        Log.debug("field ", field !== undefined ? JSON.stringify(field) : "undef");
 
         var result = [];
         try {
