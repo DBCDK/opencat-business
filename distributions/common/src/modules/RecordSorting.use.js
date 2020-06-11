@@ -13,24 +13,21 @@ var RecordSorting = function () {
     var BUNDLE_NAME = "validation";
 
     function sortRecord(templateName, record, settings) {
-        Log.debug("Enter - RecordSorting.sortRecord");
+        Log.trace("Enter - RecordSorting.sortRecord");
         var start = new Date().getTime();
-        Log.debug("Right before templateProvider");
+
         var templateProvider = function () {
             TemplateContainer.setSettings(settings);
             return TemplateContainer.get(templateName);
         };
-        Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord - init TemplateProvider]');
+
         try {
             ResourceBundleFactory.init(settings);
-            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord - init ResourceBundle]');
+
             var recordSorted = sort(templateProvider, JSON.parse(record));
-            Log.debug(recordSorted);
             var marc = DanMarc2Converter.convertToDanMarc2(recordSorted);
-            Log.debug(marc);
-            var s = JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
-            Log.debug(s);
-            return s;
+
+            return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
         } finally {
             Log.trace("Exit - RecordSorting.sortRecord");
             Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord]');
