@@ -8,19 +8,14 @@ import dk.dbc.opencat.javascript.ScripterEnvironment;
 import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
+import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
-import dk.dbc.updateservice.dto.DoubleRecordFrontendDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.util.Timed;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -56,7 +51,7 @@ public class JSRestPortal {
                     validateRecordRequestDTO.getRecord(),
                     settings);
             sanityCheck(result, MessageEntryDTO[].class);
-            LOGGER.info("ValidateRecord result:{}", result);
+            LOGGER.info("validateRecord result:{}", result);
             return Response.ok().entity(result).build();
         } catch (ScripterException | JSONBException | InterruptedException e) {
             return Response.serverError().build();
@@ -75,16 +70,16 @@ public class JSRestPortal {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response checkDoubleRecordFrontend(MarcRecord record) throws OCBException {
+    public Response checkDoubleRecordFrontend(CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO) throws OCBException {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("checkDoubleRecordFrontend. Incoming is:{}", record);
+            LOGGER.info("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
+            MarcRecord record = MarcConverter.convertFromMarcXChange(checkDoubleRecordFrontendRequestDTO.getRecordContent());
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
                     jsonbContext.marshall(record),
                     settings);
-
             sanityCheck(result, DoubleRecordFrontendStatusDTO.class);
             LOGGER.info("checkDoubleRecordFrontend result:{}", result);
 
