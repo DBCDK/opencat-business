@@ -28,9 +28,9 @@ var SubfieldsMandatory = function () {
         var result = [];
         try {
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             for (var i = 0; i < params.subfields.length; ++i) {
                 if (ValidationUtil.doesFieldContainSubfield(field, params.subfields[i]) === false) {
+                    var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     var msg = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", params.subfields[i], field.name);
                     result.push(ValidateErrors.fieldError("TODO:url", msg));
                 }
