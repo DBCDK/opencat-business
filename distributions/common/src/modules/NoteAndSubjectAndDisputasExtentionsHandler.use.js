@@ -35,6 +35,7 @@ var NoteAndSubjectAndDisputasExtentionsHandler = function () {
         var result = null;
         try {
             var recId = record.getValue(/001/, /a/);
+            var bundle;
             if (!RawRepoClient.recordExists(recId, UpdateConstants.COMMON_AGENCYID)) {
                 return result = [];
             }
@@ -43,12 +44,13 @@ var NoteAndSubjectAndDisputasExtentionsHandler = function () {
                 return result = [];
             }
             curRecord.field("001").subfield("b").value = record.getValue(/001/, /b/);
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+
             var authResult = [];
             var extentableFieldsRx = __createExtentableFieldsRx(groupId);
             record.eachField(/./, function (field) {
                 if (!( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) )) {
                     if (__isFieldChangedInOtherRecord(field, curRecord)) {
+                        bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         var message = ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", groupId, field.name, recId);
                         authResult.push(ValidateErrors.recordError("", message));
                     }
@@ -58,6 +60,7 @@ var NoteAndSubjectAndDisputasExtentionsHandler = function () {
                 if (!( extentableFieldsRx !== undefined && extentableFieldsRx.test(field.name) )) {
                     if (__isFieldChangedInOtherRecord(field, record)) {
                         if (curRecord.count(field.name) !== record.count(field.name)) {
+                            bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                             var message = ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", groupId, field.name, recId);
                             authResult.push(ValidateErrors.recordError("", message));
                         }

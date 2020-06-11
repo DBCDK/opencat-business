@@ -27,7 +27,6 @@ var ConflictingFields = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
             var foundFields = {};
             result = [];
@@ -43,6 +42,7 @@ var ConflictingFields = function () {
                 if (foundFields.hasOwnProperty(params.fields[j])) {
                     found.counter++;
                     if (found.counter > 1) {
+                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         var msg = ResourceBundle.getStringFormat(bundle, "fields.conflicting.error", params.fields[j], found.name);
                         result.push(ValidateErrors.recordError("", msg));
                     } else {

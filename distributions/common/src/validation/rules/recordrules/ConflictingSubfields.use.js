@@ -31,7 +31,7 @@ var ConflictingSubfields = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+            var bundle;
 
             ValueCheck.checkThat("params", params).type("object");
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
@@ -46,6 +46,7 @@ var ConflictingSubfields = function () {
             for (var i = 0; i < params.subfields.length; i++) {
                 var arg = params.subfields[i];
                 if (arg.length !== 4) {
+                    bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     Log.debug(ResourceBundle.getString(bundle, "conflictingSubfields.params.subfields.error"), arg, params.subfields);
                     throw ResourceBundle.getStringFormat(bundle, "conflictingSubfields.params.subfields.error", arg, params.subfields);
                 }
@@ -61,6 +62,7 @@ var ConflictingSubfields = function () {
                 });
 
                 if (foundSubfields.length > 1) {
+                    bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     var message = ResourceBundle.getStringFormat(bundle, "conflictingSubfields.validation.error", foundSubfields[0], foundSubfields[1]);
                     return result = [ValidateErrors.recordError("TODO:fixurl", message)];
                 }

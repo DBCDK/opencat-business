@@ -45,7 +45,7 @@ var CheckDateFormat = function () {
             var SimpleDateFormat = Java.type('java.text.SimpleDateFormat');
             var formatter;
 
-            if (value.length == 8) {
+            if (value.length === 8) {
                 formatter = new SimpleDateFormat('yyyyMMdd');
             } else {
                 formatter = new SimpleDateFormat('yyyyMMddHHmmss');

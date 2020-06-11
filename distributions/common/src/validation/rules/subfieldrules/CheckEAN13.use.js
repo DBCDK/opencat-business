@@ -9,24 +9,29 @@ EXPORTED_SYMBOLS = ['CheckEAN13'];
 var CheckEAN13 = function () {
     var __BUNDLE_NAME = "validation";
 
-    function makeCheck(subfield, bundle, ISBNorISMN, record) {
+    function makeCheck(subfield, ISBNorISMN) {
         var result = [];
+        var bundle;
         var subfieldValue = subfield['value'];
         var subfieldName = subfield['name'];
         var msg;
         if (!ValidationUtil.isNumber(subfieldValue)) {
             if (ISBNorISMN === 'B') {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.numbers.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             } else {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.ismn.numbers.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
         } else if (subfieldValue.length !== 13) {
             if (ISBNorISMN === 'B') {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.length.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             } else {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.ismn.length.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
@@ -58,9 +63,11 @@ var CheckEAN13 = function () {
             var x13 = ( 10 - productSum % 10 ) % 10;
             if (checksum !== x13) { // 7
                 if (ISBNorISMN === 'B') {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.invalid.error", subfieldName, subfieldValue);
                     result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 } else {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.ismn.invalid.error", subfieldName, subfieldValue);
                     result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 }

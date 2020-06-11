@@ -25,10 +25,10 @@ var MustContainOneOfFields = function () {
         Log.trace("Enter - MustContainOneOfFields.validateRecord( ", record, ", ", params, " )");
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
             ValueCheck.checkThat("params.fields", params.fields.length).is.greaterThan(0);
-            if (!__checkRecordForField (record, params)) {
+            if (!__checkRecordForField(record, params)) {
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 var msg = ResourceBundle.getStringFormat(bundle, "record.must.contain.one.of.fields.error", params.fields);
                 result.push(ValidateErrors.recordError("", msg));
             }
