@@ -70,7 +70,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             return result = [ValidateErrors.fieldError("", message)];
         }
         finally {
-            Log.trace("Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.trace("Exit - FieldDemandsOtherFieldAndSubfield.validateField()");
         }
     }
 

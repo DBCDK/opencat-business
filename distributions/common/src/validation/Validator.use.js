@@ -165,7 +165,7 @@ var Validator = function () {
             result = UpperCaseCheck.validateField(record, field, null);
             var i;
             if (field.subfields !== undefined) {
-                Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields: ", JSON.stringify(field));
+                Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields");
                 if (field.subfields.length === 0) {
                     bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
