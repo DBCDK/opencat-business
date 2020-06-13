@@ -70,7 +70,7 @@ var CheckReference = function () {
                 // array of fields which matches the fieldNameToCheck
                 // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
                 matchingFields = ValidationUtil.getFields(record, fieldNameToCheck);
-                ContextUtil.setValue(context, matchingFields, 'CheckReference', fieldNameToCheck)
+                ContextUtil.setValue(context, matchingFields, 'CheckReference', fieldNameToCheck);
             }
             var errorMessage;
 
@@ -81,11 +81,15 @@ var CheckReference = function () {
             }
             // if the length of the subfield val is only 3, we have a subfield val matching case 1, meaning its a pure field name eg : 710
             if (subfield.value.length === 3) {
-                var hasDanishaa = __getFieldCountWithDanishaa(matchingFields);
-                if (hasDanishaa === matchingFields.length) {
+                var fieldCountWithDanishaa = ContextUtil.getValue(context, 'fieldCountWithDanishaa', fieldNameToCheck);
+                if (fieldCountWithDanishaa === undefined) {
+                    fieldCountWithDanishaa = __getFieldCountWithDanishaa(matchingFields);
+                    ContextUtil.setValue(context, fieldCountWithDanishaa, 'fieldCountWithDanishaa', fieldNameToCheck);
+                }
+                if (fieldCountWithDanishaa === matchingFields.length) {
                     bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck))];
-                } else if (matchingFields.length > 1 && hasDanishaa === 0) {
+                } else if (matchingFields.length > 1 && fieldCountWithDanishaa === 0) {
                     bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.ambiguous",
                         field.name, subfield.name, fieldNameToCheck))];
@@ -99,11 +103,15 @@ var CheckReference = function () {
                 return []
             }
 
-            var fieldsWithSubfieldContainingDanishaa = __matchValueFromForwardSlashToSubfieldValue(forwardslashValue.value, matchingFields);
+            var fieldsWithSubfieldContainingDanishaa = ContextUtil.getValue(context, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
+            if (fieldsWithSubfieldContainingDanishaa === undefined) {
+                fieldsWithSubfieldContainingDanishaa = __matchValueFromForwardSlashToSubfieldValue(forwardslashValue.value, matchingFields);
+                ContextUtil.setValue(context, fieldCountWithDanishaa, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
+            }
             if (fieldsWithSubfieldContainingDanishaa.length > 0) {
                 var subfieldValuesToCheck = __getValuesToCheckFromparenthesis(subfield.value);// Array: String
                 if (subfieldValuesToCheck.length > 0) {
-                    return (__checkSubFieldValues(fieldsWithSubfieldContainingDanishaa, subfieldValuesToCheck, record));
+                    return (__checkSubFieldValues(fieldsWithSubfieldContainingDanishaa, subfieldValuesToCheck));
                 }
             } else {
                 bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
@@ -378,31 +386,32 @@ var CheckReference = function () {
 
     // helper function which returns an array of errors
     // checks if the fields supplied does not contain the subfields in the subfieldValuesToCheck
-    function __checkSubFieldValues(fieldsWithSubfieldDanishaa, subfieldValuesToCheck, record) {
+    function __checkSubFieldValues(fieldsWithSubfieldDanishaa, subfieldValuesToCheck) {
         Log.trace("Enter --- CheckReference.validateSubfield.__checkSubFieldValues");
         try {
             var ret = [];
             var bundle;
             var found = {};
+            var errorMessage;
             for (var i = 0; i < fieldsWithSubfieldDanishaa.length; ++i) {
                 for (var j = 0; j < fieldsWithSubfieldDanishaa[i].subfields.length; ++j) {
                     found[fieldsWithSubfieldDanishaa[i].subfields[j].name] = true;
                 }
                 subfieldValuesToCheck.forEach(function (val) {
-                    var val = val.trim();
+                    val = val.trim();
                     if (val.length > 1) {
                         var nbr = val.slice(1);
                         var subfield = val.slice(0, 1);
                         var count = __countSubfieldOccurrences(fieldsWithSubfieldDanishaa[i], subfield);
                         if (count < nbr) {
                             bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr);
+                            errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr);
                             ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     } else {
                         if (!found.hasOwnProperty(val)) {
                             bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, val);
+                            errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, val);
                             ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     }
