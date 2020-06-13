@@ -149,7 +149,7 @@ var Validator = function () {
      * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
-     * @param {Object} context Context dictonary for cached values
+     * @param {Object} context Context dictionary for cached values
      * @return {Array} An array of validation errors.
      */
     function __validateField(record, field, templateProvider, settings, context) {
@@ -173,7 +173,7 @@ var Validator = function () {
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
-                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings);
+                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings, context);
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].ordinalPositionOfSubfield = i;
                     }
@@ -223,7 +223,7 @@ var Validator = function () {
      * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
-     * @param {Object} context Context dictonary for cached values
+     * @param {Object} context Context dictionary for cached values
      * @return {Array} An array of validation errors.
      */
     function __validateSubfield(record, field, subfield, templateProvider, settings, context) {
@@ -276,7 +276,7 @@ var Validator = function () {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
                         TemplateOptimizer.setContextPropertyOnRule(rule, context);
 
-                        var valErrors = rule.type(record, field, subfield, rule.params, settings, context);
+                        var valErrors = rule.type(record, field, subfield, rule.params, settings);
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (e) {

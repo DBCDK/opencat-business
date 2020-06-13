@@ -22,7 +22,7 @@ UnitTest.addFixture("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSu
 
     var errMsg = ResourceBundle.getStringFormat(bundle, "subfield.requires.other.subfield.value", "245", "k", "009", "a", "a,c,d");
     Assert.equalValue("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubfield missing required field",
-        SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubfield(record, field245, subfield245, params, context), [ValidateErrors.subfieldError("TODO:fixurl", errMsg)]);
+        SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubfield(record, field245, subfield245, params), [ValidateErrors.subfieldError("TODO:fixurl", errMsg)]);
 
     subfield009 = {'name': 'b'};
     field009 = {'name': '009', 'subfields': [subfield009]};
