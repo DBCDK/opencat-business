@@ -21,9 +21,10 @@ var SubfieldAllowedIfSubfieldValueInOtherFieldExists = function () {
      * @param field
      * @param subfield
      * @param params Must contain the following attributes: field, subfield and values
+     * @param context
      * @returns {Array} Validation messages. Empty list means ok
      */
-    function validateSubfield(record, field, subfield, params) {
+    function validateSubfield(record, field, subfield, params, context) {
         Log.trace("Enter SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubField");
         var result = [];
 
@@ -40,17 +41,28 @@ var SubfieldAllowedIfSubfieldValueInOtherFieldExists = function () {
             var requiredSubfieldValues = params.values;
             var hasRequiredSubfieldValue = false;
 
-            record.fields.forEach(function (recordField) {
-                if (recordField.name === requiredField) {
-                    recordField.subfields.forEach(function (recordSubfield) {
-                        if (recordSubfield.name === requiredSubfield) {
-                            if (requiredSubfieldValues.indexOf(recordSubfield.value) > -1) {
-                                hasRequiredSubfieldValue = true;
-                            }
+            var fields = ContextUtil.getValue(context, 'fields', requiredField);
+
+            if (fields === undefined) {
+                fields = [];
+                record.fields.forEach(function (recordField) {
+                    if (recordField.name === requiredField) {
+                        fields.push(recordField);
+                    }
+                });
+                ContextUtil.setValue(context, fields, 'fields', requiredField);
+            }
+
+            for (var i = 0; i < fields.length; i++) {
+                var recordField = fields[i];
+                recordField.subfields.forEach(function (recordSubfield) {
+                    if (recordSubfield.name === requiredSubfield) {
+                        if (requiredSubfieldValues.indexOf(recordSubfield.value) > -1) {
+                            hasRequiredSubfieldValue = true;
                         }
-                    })
-                }
-            });
+                    }
+                });
+            }
 
             if (!hasRequiredSubfieldValue) {
                 var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);

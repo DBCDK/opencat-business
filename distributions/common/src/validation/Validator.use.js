@@ -101,6 +101,7 @@ var Validator = function () {
         Log.trace("Enter - Validator.doValidateRecord()");
         var start = new Date().getTime();
         try {
+            var context = {};
             var result = [];
             var template = templateProvider();
             var isDelete = false;
@@ -110,7 +111,7 @@ var Validator = function () {
                 if (!isDelete) {
                     result = result.concat(__checkSelfReference(record));
                     for (var i = 0; i < record.fields.length; i++) {
-                        var subResult = __validateField(record, record.fields[i], templateProvider, settings);
+                        var subResult = __validateField(record, record.fields[i], templateProvider, settings, context);
                         for (var j = 0; j < subResult.length; j++) {
                             subResult[j].ordinalPositionOfField = i;
                         }
@@ -148,9 +149,10 @@ var Validator = function () {
      * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
+     * @param {Object} context Context dictonary for cached values
      * @return {Array} An array of validation errors.
      */
-    function __validateField(record, field, templateProvider, settings) {
+    function __validateField(record, field, templateProvider, settings, context) {
         Log.trace("Enter - Validator.__validateField()");
         var start = new Date().getTime();
         try {
@@ -171,7 +173,7 @@ var Validator = function () {
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
-                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings);
+                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings, context);
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].ordinalPositionOfSubfield = i;
                     }
@@ -187,7 +189,7 @@ var Validator = function () {
                         try {
                             TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
-                            var valErrors = rule.type(record, field, rule.params, settings);
+                            var valErrors = rule.type(record, field, rule.params, settings, context);
                             valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                             result = result.concat(valErrors);
                         } catch (ex) {
@@ -220,9 +222,10 @@ var Validator = function () {
      * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
+     * @param {Object} context Context dictonary for cached values
      * @return {Array} An array of validation errors.
      */
-    function __validateSubfield(record, field, subfield, templateProvider, settings) {
+    function __validateSubfield(record, field, subfield, templateProvider, settings, context) {
         Log.trace("Enter - Validator.__validateSubfield()");
         var start = new Date().getTime();
         try {
@@ -271,7 +274,7 @@ var Validator = function () {
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
 
-                        var valErrors = rule.type(record, field, subfield, rule.params, settings);
+                        var valErrors = rule.type(record, field, subfield, rule.params, settings, context);
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (e) {

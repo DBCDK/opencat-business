@@ -280,7 +280,7 @@ var TemplateOptimizer = function () {
             }
             rule.params.template = template;
         } finally {
-            Log.trace("Exit -- TemplateOptimizer.setTemplatePropertyOnRule(): ", rule);
+            Log.trace("Exit -- TemplateOptimizer.setTemplatePropertyOnRule(): ");
         }
     }
 

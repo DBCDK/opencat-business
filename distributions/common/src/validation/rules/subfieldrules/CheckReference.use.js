@@ -43,11 +43,12 @@ var CheckReference = function () {
      * @param {object} field
      * @param {object} subfield
      * @param {object} params is not used
+     * @param context
      * @return {object}
      * @name CheckReference.validateSubfield
      * @method
      */
-    function validateSubfield(record, field, subfield, params) {
+    function validateSubfield(record, field, subfield, params, context) {
         Log.trace("Enter --- CheckReference.validateSubfield");
         try {
             var bundle;
@@ -62,9 +63,14 @@ var CheckReference = function () {
             }
 
             var fieldNameToCheck = subfield.value.slice(0, 3);// String
-            // array of fields which matches the fieldNameToCheck
-            // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
-            var matchingFields = ValidationUtil.getFields(record, fieldNameToCheck);
+
+            var matchingFields = ContextUtil.getValue(context, 'CheckReference', fieldNameToCheck);
+            if (matchingFields === undefined) {
+                // array of fields which matches the fieldNameToCheck
+                // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
+                matchingFields = ValidationUtil.getFields(record, fieldNameToCheck);
+                ContextUtil.setValue(context, matchingFields, 'CheckReference', fieldNameToCheck)
+            }
             var errorMessage;
 
             if (matchingFields.length < 1) {
@@ -447,7 +453,7 @@ var CheckReference = function () {
                     value.value = subfieldValue.slice(subfieldValue.indexOf("/") + 1);
                 }
             }
-            return ( value );
+            return (value);
         } finally {
             Log.trace("Exit --- CheckReference.validateSubfield.__getValueFromForwardSlash");
         }
