@@ -4,6 +4,7 @@ use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
 use("ValueCheck");
+use("ContextUtil")
 
 EXPORTED_SYMBOLS = ['SubfieldAllowedIfSubfieldValueInOtherFieldExists'];
 

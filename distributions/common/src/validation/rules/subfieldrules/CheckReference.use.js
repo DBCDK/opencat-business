@@ -3,6 +3,7 @@ use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
 use("ValidationUtil");
+use("ContextUtil")
 
 EXPORTED_SYMBOLS = ['CheckReference'];
 
