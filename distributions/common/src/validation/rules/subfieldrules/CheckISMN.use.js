@@ -75,6 +75,7 @@ var CheckISMN = function () {
                 }
             } else {
                 // Moderne ISMN nummer - behandles som et ISBN13
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 result = CheckEAN13.makeCheck(subfield, 'M');
             }
             return result;
