@@ -173,7 +173,7 @@ var Validator = function () {
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
-                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings, context);
+                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings);
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].ordinalPositionOfSubfield = i;
                     }
@@ -188,8 +188,9 @@ var Validator = function () {
                     if (rule.name !== undefined) {
                         try {
                             TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
+                            TemplateOptimizer.setContextPropertyOnRule(rule, context);
 
-                            var valErrors = rule.type(record, field, rule.params, settings, context);
+                            var valErrors = rule.type(record, field, rule.params, settings);
                             valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                             result = result.concat(valErrors);
                         } catch (ex) {
@@ -273,6 +274,7 @@ var Validator = function () {
                     Log.debug("rule ", rule.name === undefined ? "rule undefined" : rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
+                        TemplateOptimizer.setContextPropertyOnRule(rule, context);
 
                         var valErrors = rule.type(record, field, subfield, rule.params, settings, context);
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);

@@ -44,12 +44,11 @@ var CheckReference = function () {
      * @param {object} field
      * @param {object} subfield
      * @param {object} params is not used
-     * @param context
      * @return {object}
      * @name CheckReference.validateSubfield
      * @method
      */
-    function validateSubfield(record, field, subfield, params, context) {
+    function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckReference.validateSubfield");
         try {
             var bundle;
@@ -63,6 +62,7 @@ var CheckReference = function () {
                 throw e;
             }
 
+            var context = params.context;
             var fieldNameToCheck = subfield.value.slice(0, 3);// String
 
             var matchingFields = ContextUtil.getValue(context, 'CheckReference', fieldNameToCheck);

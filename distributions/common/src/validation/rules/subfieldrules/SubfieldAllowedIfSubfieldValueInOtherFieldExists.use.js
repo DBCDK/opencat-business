@@ -22,10 +22,9 @@ var SubfieldAllowedIfSubfieldValueInOtherFieldExists = function () {
      * @param field
      * @param subfield
      * @param params Must contain the following attributes: field, subfield and values
-     * @param context
      * @returns {Array} Validation messages. Empty list means ok
      */
-    function validateSubfield(record, field, subfield, params, context) {
+    function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSubField");
         var result = [];
 
@@ -36,12 +35,15 @@ var SubfieldAllowedIfSubfieldValueInOtherFieldExists = function () {
             ValueCheck.check("params.subfield", params.subfield);
             ValueCheck.check("params.values", params.values);
             ValueCheck.check("params.values.isArray", params.values).instanceOf(Array);
+            ValueCheck.check("params.context", params.context);
+            ValueCheck.check("params.context.isObject", params.context).instanceOf(Object);
 
             var requiredField = params.field;
             var requiredSubfield = params.subfield;
             var requiredSubfieldValues = params.values;
             var hasRequiredSubfieldValue = false;
 
+            var context = params.context;
             var fields = ContextUtil.getValue(context, 'fields', requiredField);
 
             if (fields === undefined) {

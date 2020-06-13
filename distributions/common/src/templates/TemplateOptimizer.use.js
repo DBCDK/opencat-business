@@ -284,6 +284,22 @@ var TemplateOptimizer = function () {
         }
     }
 
+    function setContextPropertyOnRule(rule, context) {
+        Log.trace("Enter -- TemplateOptimizer.setContextPropertyOnRule()");
+        try {
+            if (rule === undefined) {
+                return;
+            }
+            if (rule.params === undefined) {
+                rule.params = {context: context};
+                return;
+            }
+            rule.params.context = context;
+        } finally {
+            Log.trace("Exit -- TemplateOptimizer.setContextPropertyOnRule(): ");
+        }
+    }
+
     function __formatRuleNames(rules) {
         var names = [];
         if (rules !== undefined) {
@@ -456,6 +472,7 @@ var TemplateOptimizer = function () {
         'optimizeField': optimizeField,
         'optimizeSubfield': optimizeSubfield,
         'setTemplatePropertyOnRule': setTemplatePropertyOnRule,
+        'setContextPropertyOnRule': setContextPropertyOnRule,
         'convertRuleTypeNameToFunction': convertRuleTypeNameToFunction
     };
 }();
