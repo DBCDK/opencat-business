@@ -21,18 +21,18 @@ var InitializeRecordRules = function () {
         Log.info("Initializing record rules");
 
         var tmp;
-        tmp = AllFieldsMandatoryIfOneExist;
-        tmp = ConflictingFields;
-        tmp = ConflictingSubfields;
-        tmp = FieldDemandsOtherFields;
-        tmp = FieldsMandatory;
-        tmp = IdFieldExists;
-        tmp = MustContainOneOfFields;
-        tmp = NonRepeatableFieldSubfieldCombination;
-        tmp = OptionalFields;
-        tmp = RecordSorted;
-        tmp = RepeatableFields;
-        tmp = SubfieldsHaveValuesDemandsOtherSubfield;
+        tmp = AllFieldsMandatoryIfOneExist.__BUNDLE_NAME;
+        tmp = ConflictingFields.__BUNDLE_NAME;
+        tmp = ConflictingSubfields.__BUNDLE_NAME;
+        tmp = FieldDemandsOtherFields.__BUNDLE_NAME;
+        tmp = FieldsMandatory.__BUNDLE_NAME;
+        tmp = IdFieldExists.__BUNDLE_NAME;
+        tmp = MustContainOneOfFields.__BUNDLE_NAME;
+        tmp = NonRepeatableFieldSubfieldCombination.__BUNDLE_NAME;
+        tmp = OptionalFields.__BUNDLE_NAME;
+        tmp = RecordSorted.__BUNDLE_NAME;
+        tmp = RepeatableFields.__BUNDLE_NAME;
+        tmp = SubfieldsHaveValuesDemandsOtherSubfield.__BUNDLE_NAME;
     }
 
     return {

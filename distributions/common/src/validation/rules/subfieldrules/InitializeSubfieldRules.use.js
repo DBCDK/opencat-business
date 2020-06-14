@@ -35,32 +35,32 @@ var InitializeSubfieldRules = function () {
         Log.info("Initializing subfield rules");
 
         var tmp;
-        tmp = Check035;
-        tmp = CheckChangedValue;
-        tmp = CheckDateFormat;
-        tmp = CheckEAN13;
-        tmp = CheckFaust;
-        tmp = CheckISBN10;
-        tmp = CheckISBN13;
-        tmp = CheckISMN;
-        tmp = CheckISSN;
-        tmp = CheckLength;
-        tmp = CheckLix;
-        tmp = CheckReference;
-        tmp = CheckSubfieldNotUsedInChildrenRecords;
-        tmp = CheckSubfieldNotUsedInParentRecord;
-        tmp = CheckValue;
-        tmp = CheckYear;
-        tmp = LookUpRecord;
-        tmp = LookupValue;
-        tmp = MandatorySubfieldInVolumeWorkRule;
-        tmp = SubfieldAllowedIfSubfieldValueInOtherFieldExists;
-        tmp = SubfieldCannotContainValue;
-        tmp = SubfieldConditionalMandatoryField;
-        tmp = SubfieldMandatoryIfSubfieldNotPresentRule;
-        tmp = SubfieldsDemandsOtherSubfields;
-        tmp = SubfieldValueExcludesField;
-        tmp = SubfieldValueMakesFieldsAllowed;
+        tmp = Check035.__BUNDLE_NAME;
+        tmp = CheckChangedValue.__BUNDLE_NAME;
+        tmp = CheckDateFormat.__BUNDLE_NAME;
+        tmp = CheckEAN13.__BUNDLE_NAME;
+        tmp = CheckFaust.__BUNDLE_NAME;
+        tmp = CheckISBN10.__BUNDLE_NAME;
+        tmp = CheckISBN13.__BUNDLE_NAME;
+        tmp = CheckISMN.__BUNDLE_NAME;
+        tmp = CheckISSN.__BUNDLE_NAME;
+        tmp = CheckLength.__BUNDLE_NAME;
+        tmp = CheckLix.__BUNDLE_NAME;
+        tmp = CheckReference.__BUNDLE_NAME;
+        tmp = CheckSubfieldNotUsedInChildrenRecords.__BUNDLE_NAME;
+        tmp = CheckSubfieldNotUsedInParentRecord.__BUNDLE_NAME;
+        tmp = CheckValue.__BUNDLE_NAME;
+        tmp = CheckYear.__BUNDLE_NAME;
+        tmp = LookUpRecord.__BUNDLE_NAME;
+        tmp = LookupValue.__BUNDLE_NAME;
+        tmp = MandatorySubfieldInVolumeWorkRule.__BUNDLE_NAME;
+        tmp = SubfieldAllowedIfSubfieldValueInOtherFieldExists.__BUNDLE_NAME;
+        tmp = SubfieldCannotContainValue.__BUNDLE_NAME;
+        tmp = SubfieldConditionalMandatoryField.__BUNDLE_NAME;
+        tmp = SubfieldMandatoryIfSubfieldNotPresentRule.__BUNDLE_NAME;
+        tmp = SubfieldsDemandsOtherSubfields.__BUNDLE_NAME;
+        tmp = SubfieldValueExcludesField.__BUNDLE_NAME;
+        tmp = SubfieldValueMakesFieldsAllowed.__BUNDLE_NAME;
     }
 
     return {

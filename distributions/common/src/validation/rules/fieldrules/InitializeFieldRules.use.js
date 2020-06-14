@@ -20,17 +20,17 @@ var InitializeFieldRules = function () {
         Log.info("Initializing field rules");
 
         var tmp;
-        tmp = CheckValueUnlessHasSubfield;
-        tmp = ExclusiveSubfield;
-        tmp = ExclusiveSubfieldParameterized;
-        tmp = FieldDemandsOtherFieldAndSubfield;
-        tmp = FieldsIndicator;
-        tmp = FieldsIndicatorMakesSubfieldRepeatable;
-        tmp = RepeatableSubfields;
-        tmp = SubfieldConditionalMandatoryField;
-        tmp = SubfieldHasValueDemandsOtherSubfield;
-        tmp = SubfieldsMandatory;
-        tmp = UpperCaseCheck;
+        tmp = CheckValueUnlessHasSubfield.__BUNDLE_NAME;
+        tmp = ExclusiveSubfield.BUNDLE_NAME;
+        tmp = ExclusiveSubfieldParameterized.BUNDLE_NAME;
+        tmp = FieldDemandsOtherFieldAndSubfield.BUNDLE_NAME;
+        tmp = FieldsIndicator.BUNDLE_NAME;
+        tmp = FieldsIndicatorMakesSubfieldRepeatable.BUNDLE_NAME;
+        tmp = RepeatableSubfields.BUNDLE_NAME;
+        tmp = SubfieldConditionalMandatoryField.__BUNDLE_NAME;
+        tmp = SubfieldHasValueDemandsOtherSubfield.__BUNDLE_NAME;
+        tmp = SubfieldsMandatory.BUNDLE_NAME;
+        tmp = UpperCaseCheck.__BUNDLE_NAME;
     }
 
     return {
