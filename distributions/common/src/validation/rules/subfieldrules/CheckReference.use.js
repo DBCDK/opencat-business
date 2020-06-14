@@ -98,20 +98,23 @@ var CheckReference = function () {
             }
 
             var forwardslashValue = __getValueFromForwardSlash(subfield.value); // { containsValidValue: Boolean, Value: String }
-            // if the forwardslashvalue doesnt contain a valid value, the subfield.value is formatted without a a forward slash and no parenthesis
+            // if the forwardslashvalue doesn't contain a valid value, the subfield.value is formatted without a forward slash and no parenthesis
             if (forwardslashValue.containsValidValue === false) {
                 return []
             }
 
-            var fieldsWithSubfieldContainingDanishaa = ContextUtil.getValue(context, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
-            if (fieldsWithSubfieldContainingDanishaa === undefined) {
-                fieldsWithSubfieldContainingDanishaa = __matchValueFromForwardSlashToSubfieldValue(forwardslashValue.value, matchingFields);
-                ContextUtil.setValue(context, fieldsWithSubfieldContainingDanishaa, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
+            var fieldsByForwardSlash = ContextUtil.getValue(context, 'fieldsByForwardSlash', fieldNameToCheck);
+            if (fieldsByForwardSlash === undefined) {
+                fieldsByForwardSlash = __fieldsByForwardSlash(matchingFields);
+                ContextUtil.setValue(context, fieldsByForwardSlash, 'fieldsByForwardSlash', fieldNameToCheck);
             }
-            if (fieldsWithSubfieldContainingDanishaa.length > 0) {
+
+            var referencedFields = fieldsByForwardSlash[forwardslashValue.value];
+
+            if (referencedFields === undefined || referencedFields.length > 0) {
                 var subfieldValuesToCheck = __getValuesToCheckFromparenthesis(subfield.value);// Array: String
                 if (subfieldValuesToCheck.length > 0) {
-                    return (__checkSubFieldValues(fieldsWithSubfieldContainingDanishaa, subfieldValuesToCheck));
+                    return (__checkSubFieldValues(referencedFields, subfieldValuesToCheck));
                 }
             } else {
                 bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
@@ -124,6 +127,27 @@ var CheckReference = function () {
         }
     }
 
+    /*
+      This function divides a list of files into a dict where the key is the value from subfield *å (\u00E5)
+     */
+    function __fieldsByForwardSlash(fields) {
+        var ret = {};
+
+        for (var i = 0; i < fields.length; ++i) {
+            var field = fields[i];
+            for (var j = 0; j < field.subfields.length; ++j) {
+                var subfieldaa = field.subfields[j];
+                if (subfieldaa.name === '\u00E5') {
+                    if (ret[subfieldaa.value] === undefined) {
+                        ret[subfieldaa.value] = []
+                    }
+                    ret[subfieldaa.value].push(field);
+                }
+            }
+        }
+
+        return ret;
+    }
 
     function __getFieldCountWithDanishaa(fields) {
         Log.trace("Enter --- CheckReference.validateSubfield.__getFieldCountWithDanishaa");
@@ -420,30 +444,6 @@ var CheckReference = function () {
             return ret;
         } finally {
             Log.trace("Exit --- CheckReference.validateSubfield.__checkSubFieldValues");
-        }
-    }
-
-    //helper function
-    // takes two arguments
-    // matchValue , String with the value that the å subfield must match
-    // fields : array of fields to serahc through
-    // returns an array of fields which has an å value
-    function __matchValueFromForwardSlashToSubfieldValue(matchValue, fields) {
-        Log.trace("Enter --- CheckReference.validateSubfield.__matchValueFromForwardSlashToSubfieldValue");
-        try {
-            var ret = [];
-            for (var i = 0; i < fields.length; ++i) {
-                for (var j = 0; j < fields[i].subfields.length; ++j) {
-                    if (fields[i].subfields[j].name === '\u00E5') {
-                        if (fields[i].subfields[j].value === matchValue) {
-                            ret.push(fields[i]);
-                        }
-                    }
-                }
-            }
-            return ret;
-        } finally {
-            Log.trace("Exit --- CheckReference.validateSubfield.__matchValueFromForwardSlashToSubfieldValue");
         }
     }
 
