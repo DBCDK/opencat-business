@@ -13,6 +13,8 @@ var ContextUtil = function () {
         for (var i = 1; i < arguments.length; i++) {
             var arg = arguments[i];
             if (tmp[arg] === undefined) {
+                var argsList = Array.prototype.slice.call(arguments, 1);
+                Log.debug("Cache miss on context." + argsList.join('.'));
                 return undefined;
             } else {
                 tmp = tmp[arg];
