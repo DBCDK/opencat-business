@@ -20,19 +20,26 @@ var InitializeRecordRules = function () {
     function initialize() {
         Log.info("Initializing record rules");
 
-        var tmp;
-        tmp = AllFieldsMandatoryIfOneExist.__BUNDLE_NAME;
-        tmp = ConflictingFields.__BUNDLE_NAME;
-        tmp = ConflictingSubfields.__BUNDLE_NAME;
-        tmp = FieldDemandsOtherFields.__BUNDLE_NAME;
-        tmp = FieldsMandatory.__BUNDLE_NAME;
-        tmp = IdFieldExists.__BUNDLE_NAME;
-        tmp = MustContainOneOfFields.__BUNDLE_NAME;
-        tmp = NonRepeatableFieldSubfieldCombination.__BUNDLE_NAME;
-        tmp = OptionalFields.__BUNDLE_NAME;
-        tmp = RecordSorted.__BUNDLE_NAME;
-        tmp = RepeatableFields.__BUNDLE_NAME;
-        tmp = SubfieldsHaveValuesDemandsOtherSubfield.__BUNDLE_NAME;
+        __callWithTryCatch(AllFieldsMandatoryIfOneExist.validateRecord);
+        __callWithTryCatch(ConflictingFields.validateRecord);
+        __callWithTryCatch(ConflictingSubfields.validateRecord);
+        __callWithTryCatch(FieldDemandsOtherFields.validateRecord);
+        __callWithTryCatch(FieldsMandatory.validateRecord);
+        __callWithTryCatch(IdFieldExists.validateRecord);
+        __callWithTryCatch(MustContainOneOfFields.validateRecord);
+        __callWithTryCatch(NonRepeatableFieldSubfieldCombination.validateRecord);
+        __callWithTryCatch(OptionalFields.validateRecord);
+        __callWithTryCatch(RecordSorted.validateRecord);
+        __callWithTryCatch(RepeatableFields.validateRecord);
+        __callWithTryCatch(SubfieldsHaveValuesDemandsOtherSubfield.validateRecord);
+    }
+
+    function __callWithTryCatch(func) {
+        try {
+            func();
+        } catch (ex) {
+            // Do nothing
+        }
     }
 
     return {
