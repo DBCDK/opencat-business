@@ -5,6 +5,7 @@ use("ResourceBundleFactory");
 use("ValidateErrors");
 use("ValueCheck");
 use("ValidationUtil");
+use("ContextUtil");
 
 EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
 
@@ -40,7 +41,13 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             var message = "";
-            var collectedFields = ValidationUtil.getFields(record, params.field);
+            var context = params.context;
+
+            var collectedFields = ContextUtil.getValue(context, 'getFields', params.field);
+            if (collectedFields === undefined) {
+                collectedFields = ValidationUtil.getFields(record, params.field);
+                ContextUtil.setValue(context, collectedFields, 'getFields', params.field);
+            }
 
             if (collectedFields.length === 0) {
                 bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);

@@ -26,7 +26,8 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
         "subfieldConditional": "a",
         "subfieldConditionalValue": "b",
         "fieldMandatory": "002",
-        "subfieldMandatory": "d"
+        "subfieldMandatory": "d",
+        context: {}
     };
     Assert.equalValue("1 subfieldHasValueDemandsOtherSubfield - ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), []);
 
@@ -40,6 +41,7 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
         }]
     };
     record.fields = [field3];
+    params.context = {};
     var msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
     var errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
     Assert.equalValue("2 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
@@ -54,12 +56,14 @@ UnitTest.addFixture("SubfieldHasValueDemandsOtherSubfield", function () {
         }]
     };
     record.fields = [field4];
+    params.context = {};
     msg = ResourceBundle.getStringFormat(bundle, "subfield.has.value.demands.other.subfield.rule.error", "a", "001", "b", "002", "d");
     errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
     Assert.equalValue("3 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 
     record = {};
     record.fields = [field1];
+    params.context = {};
     errorMsg = [ValidateErrors.fieldError("TODO:fixurl", msg)];
     Assert.equalValue("4 subfieldHasValueDemandsOtherSubfield - not ok", SubfieldHasValueDemandsOtherSubfield.validateField(record, field1, params), errorMsg);
 });
