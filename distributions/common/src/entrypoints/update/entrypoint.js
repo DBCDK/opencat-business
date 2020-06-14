@@ -14,7 +14,7 @@ use("InitializeValidationRules");
 function initTemplates(settings) {
     ValidatorEntryPoint.initTemplates(settings);
 
-    InitializeValidationRules.initialize();
+    InitializeValidationRules.initialize(settings);
 }
 
 function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
