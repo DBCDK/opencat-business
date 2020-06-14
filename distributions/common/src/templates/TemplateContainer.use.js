@@ -184,7 +184,7 @@ var TemplateContainer = function () {
     }
 
     function getCompiledTemplateByFolder(name, templateFolder) {
-        Log.trace("Enter - TemplateContainer.get()");
+        Log.trace("Enter - TemplateContainer.getCompiledTemplateByFolder()");
 
         try {
             var result = templates[name];
@@ -197,7 +197,7 @@ var TemplateContainer = function () {
 
             return result;
         } finally {
-            Log.trace("Exit - TemplateContainer.get()");
+            Log.trace("Exit - TemplateContainer.getCompiledTemplateByFolder()");
         }
     }
 
