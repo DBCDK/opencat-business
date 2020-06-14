@@ -6,9 +6,9 @@ use("FieldDemandsOtherFieldAndSubfield");
 use("FieldsIndicator");
 use("FieldsIndicatorMakesSubfieldRepeatable");
 use("RepeatableSubfields");
-use("SubfieldConditionalMandatoryField");
 use("SubfieldHasValueDemandsOtherSubfield");
 use("SubfieldsMandatory");
+use("SubfieldMandatoryIfSubfieldNotPresentRule");
 use("UpperCaseCheck");
 
 EXPORTED_SYMBOLS = ['InitializeFieldRules'];
@@ -19,18 +19,25 @@ var InitializeFieldRules = function () {
     function initialize() {
         Log.info("Initializing field rules");
 
-        var tmp;
-        tmp = CheckValueUnlessHasSubfield.__BUNDLE_NAME;
-        tmp = ExclusiveSubfield.BUNDLE_NAME;
-        tmp = ExclusiveSubfieldParameterized.BUNDLE_NAME;
-        tmp = FieldDemandsOtherFieldAndSubfield.BUNDLE_NAME;
-        tmp = FieldsIndicator.BUNDLE_NAME;
-        tmp = FieldsIndicatorMakesSubfieldRepeatable.BUNDLE_NAME;
-        tmp = RepeatableSubfields.BUNDLE_NAME;
-        tmp = SubfieldConditionalMandatoryField.__BUNDLE_NAME;
-        tmp = SubfieldHasValueDemandsOtherSubfield.__BUNDLE_NAME;
-        tmp = SubfieldsMandatory.BUNDLE_NAME;
-        tmp = UpperCaseCheck.__BUNDLE_NAME;
+        __callWithTryCatch(CheckValueUnlessHasSubfield.validateField);
+        __callWithTryCatch(ExclusiveSubfield.validateField);
+        __callWithTryCatch(ExclusiveSubfieldParameterized.validateField);
+        __callWithTryCatch(FieldDemandsOtherFieldAndSubfield.validateField);
+        __callWithTryCatch(FieldsIndicator.validateField);
+        __callWithTryCatch(FieldsIndicatorMakesSubfieldRepeatable.validateField);
+        __callWithTryCatch(RepeatableSubfields.validateField);
+        __callWithTryCatch(SubfieldHasValueDemandsOtherSubfield.validateField);
+        __callWithTryCatch(SubfieldsMandatory.validateField);
+        __callWithTryCatch(SubfieldMandatoryIfSubfieldNotPresentRule.validateField);
+        __callWithTryCatch(UpperCaseCheck.validateField);
+    }
+
+    function __callWithTryCatch(func) {
+        try {
+            func();
+        } catch (ex) {
+            // Do nothing
+        }
     }
 
     return {
