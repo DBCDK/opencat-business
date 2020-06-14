@@ -20,18 +20,19 @@ var InitializeRecordRules = function () {
     function initialize() {
         Log.info("Initializing record rules");
 
-        AllFieldsMandatoryIfOneExist();
-        ConflictingFields();
-        ConflictingSubfields();
-        FieldDemandsOtherFields();
-        FieldsMandatory();
-        IdFieldExists();
-        MustContainOneOfFields();
-        NonRepeatableFieldSubfieldCombination();
-        OptionalFields();
-        RecordSorted();
-        RepeatableFields();
-        SubfieldsHaveValuesDemandsOtherSubfield();
+        var tmp;
+        tmp = AllFieldsMandatoryIfOneExist;
+        tmp = ConflictingFields;
+        tmp = ConflictingSubfields;
+        tmp = FieldDemandsOtherFields;
+        tmp = FieldsMandatory;
+        tmp = IdFieldExists;
+        tmp = MustContainOneOfFields;
+        tmp = NonRepeatableFieldSubfieldCombination;
+        tmp = OptionalFields;
+        tmp = RecordSorted;
+        tmp = RepeatableFields;
+        tmp = SubfieldsHaveValuesDemandsOtherSubfield;
     }
 
     return {

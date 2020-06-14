@@ -19,17 +19,18 @@ var InitializeFieldRules = function () {
     function initialize() {
         Log.info("Initializing field rules");
 
-        CheckValueUnlessHasSubfield();
-        ExclusiveSubfield();
-        ExclusiveSubfieldParameterized();
-        FieldDemandsOtherFieldAndSubfield();
-        FieldsIndicator();
-        FieldsIndicatorMakesSubfieldRepeatable();
-        RepeatableSubfields();
-        SubfieldConditionalMandatoryField();
-        SubfieldHasValueDemandsOtherSubfield();
-        SubfieldsMandatory();
-        UpperCaseCheck();
+        var tmp;
+        tmp = CheckValueUnlessHasSubfield;
+        tmp = ExclusiveSubfield;
+        tmp = ExclusiveSubfieldParameterized;
+        tmp = FieldDemandsOtherFieldAndSubfield;
+        tmp = FieldsIndicator;
+        tmp = FieldsIndicatorMakesSubfieldRepeatable;
+        tmp = RepeatableSubfields;
+        tmp = SubfieldConditionalMandatoryField;
+        tmp = SubfieldHasValueDemandsOtherSubfield;
+        tmp = SubfieldsMandatory;
+        tmp = UpperCaseCheck;
     }
 
     return {

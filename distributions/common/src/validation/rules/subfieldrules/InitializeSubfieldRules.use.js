@@ -34,32 +34,33 @@ var InitializeSubfieldRules = function () {
     function initialize() {
         Log.info("Initializing subfield rules");
 
-        Check035();
-        CheckChangedValue();
-        CheckDateFormat();
-        CheckEAN13();
-        CheckFaust();
-        CheckISBN10();
-        CheckISBN13();
-        CheckISMN();
-        CheckISSN();
-        CheckLength();
-        CheckLix();
-        CheckReference();
-        CheckSubfieldNotUsedInChildrenRecords();
-        CheckSubfieldNotUsedInParentRecord();
-        CheckValue();
-        CheckYear();
-        LookUpRecord();
-        LookupValue();
-        MandatorySubfieldInVolumeWorkRule();
-        SubfieldAllowedIfSubfieldValueInOtherFieldExists();
-        SubfieldCannotContainValue();
-        SubfieldConditionalMandatoryField();
-        SubfieldMandatoryIfSubfieldNotPresentRule();
-        SubfieldsDemandsOtherSubfields();
-        SubfieldValueExcludesField();
-        SubfieldValueMakesFieldsAllowed();
+        var tmp;
+        tmp = Check035;
+        tmp = CheckChangedValue;
+        tmp = CheckDateFormat;
+        tmp = CheckEAN13;
+        tmp = CheckFaust;
+        tmp = CheckISBN10;
+        tmp = CheckISBN13;
+        tmp = CheckISMN;
+        tmp = CheckISSN;
+        tmp = CheckLength;
+        tmp = CheckLix;
+        tmp = CheckReference;
+        tmp = CheckSubfieldNotUsedInChildrenRecords;
+        tmp = CheckSubfieldNotUsedInParentRecord;
+        tmp = CheckValue;
+        tmp = CheckYear;
+        tmp = LookUpRecord;
+        tmp = LookupValue;
+        tmp = MandatorySubfieldInVolumeWorkRule;
+        tmp = SubfieldAllowedIfSubfieldValueInOtherFieldExists;
+        tmp = SubfieldCannotContainValue;
+        tmp = SubfieldConditionalMandatoryField;
+        tmp = SubfieldMandatoryIfSubfieldNotPresentRule;
+        tmp = SubfieldsDemandsOtherSubfields;
+        tmp = SubfieldValueExcludesField;
+        tmp = SubfieldValueMakesFieldsAllowed;
     }
 
     return {
