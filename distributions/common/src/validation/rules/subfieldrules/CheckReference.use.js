@@ -65,12 +65,12 @@ var CheckReference = function () {
             var context = params.context;
             var fieldNameToCheck = subfield.value.slice(0, 3);// String
 
-            var matchingFields = ContextUtil.getValue(context, 'CheckReference', fieldNameToCheck);
+            var matchingFields = ContextUtil.getValue(context, 'getFields', fieldNameToCheck);
             if (matchingFields === undefined) {
                 // array of fields which matches the fieldNameToCheck
                 // meaning thew first three letters in subfield.value, ie 700/1(a,b,c) --> 700
                 matchingFields = ValidationUtil.getFields(record, fieldNameToCheck);
-                ContextUtil.setValue(context, matchingFields, 'CheckReference', fieldNameToCheck);
+                ContextUtil.setValue(context, matchingFields, 'getFields', fieldNameToCheck);
             }
             var errorMessage;
 
@@ -106,7 +106,7 @@ var CheckReference = function () {
             var fieldsWithSubfieldContainingDanishaa = ContextUtil.getValue(context, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
             if (fieldsWithSubfieldContainingDanishaa === undefined) {
                 fieldsWithSubfieldContainingDanishaa = __matchValueFromForwardSlashToSubfieldValue(forwardslashValue.value, matchingFields);
-                ContextUtil.setValue(context, fieldCountWithDanishaa, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
+                ContextUtil.setValue(context, fieldsWithSubfieldContainingDanishaa, 'fieldsWithSubfieldContainingDanishaa', fieldNameToCheck);
             }
             if (fieldsWithSubfieldContainingDanishaa.length > 0) {
                 var subfieldValuesToCheck = __getValuesToCheckFromparenthesis(subfield.value);// Array: String
