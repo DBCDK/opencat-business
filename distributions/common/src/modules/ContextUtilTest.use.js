@@ -37,6 +37,33 @@ UnitTest.addFixture("ContextUtil.getValue", function () {
     Assert.equalValue("getValue 12", ContextUtil.getValue(context, -1), undefined);
     Assert.equalValue("getValue 13", ContextUtil.getValue(context, undefined), undefined);
     Assert.equalValue("getValue 14", ContextUtil.getValue(context, null), undefined);
+
+    // Key as array
+    context = {
+        "FieldDemandsOtherFieldAndSubfield": {
+            "770": {
+                "795": {
+                    "a": []
+                }
+            }
+        }
+    }
+
+    var subfields = ['a'];
+    Assert.equalValue("getValue 15", ContextUtil.getValue(context, 'FieldDemandsOtherFieldAndSubfield', "770", "795", subfields.join()), []);
+
+    context = {
+        "FieldDemandsOtherFieldAndSubfield": {
+            "770": {
+                "795": {
+                    "a,b": ["test"]
+                }
+            }
+        }
+    }
+
+    subfields = ['a', 'b'];
+    Assert.equalValue("getValue 16", ContextUtil.getValue(context, 'FieldDemandsOtherFieldAndSubfield', "770", "795", subfields.join()), ["test"]);
 });
 UnitTest.addFixture("ContextUtil.setValue", function () {
     var context = {};
