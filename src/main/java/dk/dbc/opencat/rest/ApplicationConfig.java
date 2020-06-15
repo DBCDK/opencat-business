@@ -14,7 +14,8 @@ import java.util.Set;
 public class ApplicationConfig extends Application {
     private static final Set<Class<?>> classes = new HashSet<>(
             Arrays.asList(
-                    JSRestPortal.class)
+                    JSRestPortal.class,
+                    StatusBean.class)
     );
 
     @Override
