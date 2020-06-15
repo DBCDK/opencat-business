@@ -2,10 +2,14 @@ package dk.dbc.opencat.service;
 
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
+import dk.dbc.jsonb.JSONBContext;
 import dk.dbc.jsonb.JSONBException;
 import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
+import dk.dbc.updateservice.dto.DoubleRecordFrontendDTO;
+import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import java.sql.Connection;
+import java.util.Collections;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,7 +28,8 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
     static void initDB() throws Exception {
         final Connection rawrepoConnection = connectToRawrepoDb();
         resetRawrepoDb(rawrepoConnection);
-        saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records", MIMETYPE_MARCXCHANGE);
+        saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records/50938409.xml", MIMETYPE_MARCXCHANGE);
+        saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records/52958857.xml", MIMETYPE_MARCXCHANGE);
     }
 
 
@@ -184,8 +189,53 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                 .withJsonData(JSONB_CONTEXT.marshall(checkDoubleRecordFrontendRequestDTO));
 
         Response response = httpClient.execute(httpPost);
+
+        // Bad solution: response.readEntity() should work
+        DoubleRecordFrontendStatusDTO actual =
+                JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DoubleRecordFrontendStatusDTO.class);
+
+        assertThat("Response code", response.getStatus(), is(200));
+        assertThat("Status", actual.getStatus(), is("ok"));
+    }
+
+    @Test
+    public void checkDoubleRecordFrontend_Returns_doublerecords() throws JSONBException {
+        CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO = new CheckDoubleRecordFrontendRequestDTO();
+        String marcRecord = "<record xmlns=\"info:lc/xmlns/marcxchange-v1\">\n" +
+                "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
+                "        <subfield code=\"a\">52958858</subfield>\n" +
+                "        <subfield code=\"b\">870970</subfield>\n" +
+                "        <subfield code=\"c\">20170616143600</subfield>\n" +
+                "        <subfield code=\"d\">20180628</subfield>\n" +
+                "        <subfield code=\"f\">a</subfield>\n" +
+                "    </datafield>\n" +
+                "    <datafield ind1=\"0\" ind2=\"0\" tag=\"021\">\n" +
+                "        <subfield code=\"e\">9782843090387</subfield>\n" +
+                "    </datafield>\n" +
+                "</record>";
+        checkDoubleRecordFrontendRequestDTO.setRecordContent(marcRecord);
+        final HttpPost httpPost = new HttpPost(httpClient)
+                .withBaseUrl(openCatBusinessBaseURL)
+                .withPathElements(new PathBuilder("/api/v1/checkDoubleRecordFrontend")
+                        .build())
+                .withJsonData(JSONB_CONTEXT.marshall(checkDoubleRecordFrontendRequestDTO));
+
+        DoubleRecordFrontendStatusDTO expected = new DoubleRecordFrontendStatusDTO();
+        expected.setStatus("doublerecord");
+
+        DoubleRecordFrontendDTO doubleRecordFrontendDTO = new DoubleRecordFrontendDTO();
+        doubleRecordFrontendDTO.setMessage("Double record for record 52958858, reason: 021e");
+        doubleRecordFrontendDTO.setPid("52958857:870970");
+        expected.setDoubleRecordFrontendDTOs(Collections.singletonList(doubleRecordFrontendDTO));
+
+        Response response = httpClient.execute(httpPost);
         assertThat("Response code", response.getStatus(), is(200));
 
-        assertThat(1, is(1));
+        // Bad solution: response.readEntity() should work
+        DoubleRecordFrontendStatusDTO actual =
+                JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DoubleRecordFrontendStatusDTO.class);
+
+        assertThat("Returns proper list of doublerecords", actual, is(expected));
     }
+
 }
