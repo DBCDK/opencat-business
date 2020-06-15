@@ -1,7 +1,5 @@
 package dk.dbc.opencat.service;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import dk.dbc.httpclient.HttpClient;
 import dk.dbc.jsonb.JSONBContext;
 import dk.dbc.marc.binding.MarcRecord;
@@ -33,10 +31,6 @@ import org.testcontainers.containers.Network;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.configureFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.editStub;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
-
 public class AbstractOpencatBusinessContainerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
     static final String MIMETYPE_MARCXCHANGE = "text/marcxchange";
@@ -59,8 +53,9 @@ public class AbstractOpencatBusinessContainerTest {
     private static final String holdingsItemsDbUrl;
     private static final String recordServiceBaseUrl;
     private static final String openAgencyURL = "http://openagency.addi.dk/2.34/";
-    private static String solrURL = "";
     private static final String forsrightsURL = "http://forsrights.addi.dk/1.2/";
+    private  static final String solrURL = "http://solr:9090";
+
     static final String openCatBusinessBaseURL;
 
 
@@ -84,7 +79,6 @@ public class AbstractOpencatBusinessContainerTest {
                 .withExposedPorts(9090)
                 .withStartupTimeout(Duration.ofMinutes(1));
         wiremockSolrServiceContainer.start();
-        solrURL =  "http://solr:9090";
 
         rawrepoDbContainer = new GenericContainer(RAWREPODB_IMAGE)
                 .withNetwork(network)
@@ -205,14 +199,6 @@ public class AbstractOpencatBusinessContainerTest {
 
     static MarcRecord getMarcRecordFromFile(String fileName) throws MarcReaderException {
         final InputStream inputStream = AbstractOpencatBusinessContainerTest.class.getResourceAsStream(fileName);
-        final BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-        final MarcXchangeV1Reader reader = new MarcXchangeV1Reader(bufferedInputStream, StandardCharsets.UTF_8);
-
-        return reader.read();
-    }
-
-    static MarcRecord getMarcRecordFromString(byte[] content) throws MarcReaderException {
-        final InputStream inputStream = new ByteArrayInputStream(content);
         final BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
         final MarcXchangeV1Reader reader = new MarcXchangeV1Reader(bufferedInputStream, StandardCharsets.UTF_8);
 
