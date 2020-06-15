@@ -1,0 +1,11 @@
+{
+  "responseHeader":{
+    "zkConnected":true,
+    "status":0,
+    "QTime":3,
+    "params":{
+      "q":"(( match.008a:\"2013\" OR match.008a:\"2014\" OR match.008a:\"2015\" ) AND match.009a:\"a\" AND match.009g:\"xx\" AND match.245a:iberetæggehoved AND match.260b:to*) AND marc.001b:870970",
+      "indent":"true",
+      "wt":"json"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }}

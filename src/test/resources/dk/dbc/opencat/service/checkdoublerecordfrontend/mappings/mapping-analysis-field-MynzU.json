@@ -1,0 +1,15 @@
+{
+  "id" : "2af24c63-299c-3d91-92bf-09c0be9abe9a",
+  "request" : {
+    "url" : "/analysis/field?analysis.fieldvalue=a&analysis.fieldname=match.009a&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-analysis-field-MynzU.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "2af24c63-299c-3d91-92bf-09c0be9abe9a"
+}
