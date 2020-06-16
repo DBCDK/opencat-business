@@ -7,12 +7,8 @@ import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.marc.reader.MarcXchangeV1Reader;
 import dk.dbc.marc.writer.MarcXchangeV1Writer;
 import dk.dbc.openagency.client.OpenAgencyServiceFromURL;
-import dk.dbc.rawrepo.RawRepoDAO;
-import dk.dbc.rawrepo.RawRepoException;
-import dk.dbc.rawrepo.Record;
 import dk.dbc.rawrepo.RelationHintsOpenAgency;
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
@@ -20,8 +16,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.Duration;
-import java.time.Instant;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +36,7 @@ public class AbstractOpencatBusinessContainerTest {
     private static final GenericContainer rawrepoDbContainer;
     private static final GenericContainer holdingsItemsDbContainer;
     private static final GenericContainer openCatBusinessContainer;
-    private static final String JAVA8_IMAGE = "docker.dbc.dk/dbc-java8";
+    private static final String JAVA_BASE_IMAGE = "docker.dbc.dk/dbc-java8";
     private static final String RAWREPODB_IMAGE = "docker-io.dbc.dk/rawrepo-postgres-1.13-snapshot:DIT-5016";
     private static final String HOLDINGITEMSDB_IMAGE = "docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest";
     private static final String RECORDSERVICE_IMAGE = "docker-io.dbc.dk/rawrepo-record-service:DIT-238";
@@ -70,7 +66,7 @@ public class AbstractOpencatBusinessContainerTest {
 
         Network network = Network.newNetwork();
 
-        wiremockSolrServiceContainer = new GenericContainer(JAVA8_IMAGE)
+        wiremockSolrServiceContainer = new GenericContainer(JAVA_BASE_IMAGE)
                 .withNetwork(network)
                 .withNetworkAliases("solr")
                 .withClasspathResourceMapping(".", "currentWorkDir", BindMode.READ_ONLY)
@@ -144,12 +140,6 @@ public class AbstractOpencatBusinessContainerTest {
 
     }
 
-    private static RawRepoDAO createDAO(Connection conn) throws RawRepoException {
-        final RawRepoDAO.Builder rawRepoBuilder = RawRepoDAO.builder(conn);
-        rawRepoBuilder.relationHints(relationHints);
-        return rawRepoBuilder.build();
-    }
-
     static Connection connectToRawrepoDb() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -175,7 +165,10 @@ public class AbstractOpencatBusinessContainerTest {
     }
 
     static void saveRecord(Connection connection, String fileName, String mimeType) throws Exception {
-        final RawRepoDAO dao = createDAO(connection);
+        final String INSERT_SQL = "insert into records(bibliographicrecordid, agencyid, " +
+                "deleted, mimetype, content, created, modified, trackingid) " +
+                "values (?, ?, ?, ?, ?, now(), now(), ?)";
+
         final MarcXchangeV1Writer writer = new MarcXchangeV1Writer();
 
         final MarcRecord marcRecord = getMarcRecordFromFile(fileName);
@@ -186,15 +179,15 @@ public class AbstractOpencatBusinessContainerTest {
         final byte[] content = writer.write(marcRecord, StandardCharsets.UTF_8);
         final String trackingId = "";
 
-        final Record record = dao.fetchRecord(bibliographicRecordId, agencyId);
-        record.setDeleted(deleted);
-        record.setMimeType(mimeType);
-        record.setContent(content);
-        record.setCreated(Instant.now());
-        record.setModified(Instant.now());
-        record.setTrackingId(trackingId);
-
-        dao.saveRecord(record);
+        try(PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
+            stmt.setString(1, bibliographicRecordId);
+            stmt.setInt(2, agencyId);
+            stmt.setBoolean(3, deleted);
+            stmt.setString(4, mimeType);
+            stmt.setString(5, Base64.getEncoder().encodeToString(content));
+            stmt.setString(6, String.format("%d:%s", agencyId, bibliographicRecordId));
+            stmt.execute();
+        }
     }
 
     static MarcRecord getMarcRecordFromFile(String fileName) throws MarcReaderException {
