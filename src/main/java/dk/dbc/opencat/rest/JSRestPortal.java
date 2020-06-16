@@ -88,7 +88,7 @@ public class JSRestPortal {
         try {
             scripterEnvironment = scripterPool.take();
             LOGGER.info("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
-            MarcRecord record = MarcConverter.convertFromMarcXChange(checkDoubleRecordFrontendRequestDTO.getRecordContent());
+            MarcRecord record = MarcConverter.convertFromMarcXChange(checkDoubleRecordFrontendRequestDTO.getRecord());
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
                     jsonbContext.marshall(record),
                     settings);
