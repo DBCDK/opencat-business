@@ -2,7 +2,6 @@ package dk.dbc.opencat.service;
 
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBContext;
 import dk.dbc.jsonb.JSONBException;
 import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
@@ -11,8 +10,8 @@ import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import java.sql.Connection;
 import java.util.Collections;
 import javax.ws.rs.core.Response;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +23,8 @@ import static org.hamcrest.CoreMatchers.is;
 public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContainerTest {
     private static final Logger LOGGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
 
-    @BeforeAll
-    static void initDB() throws Exception {
+    @Before
+    public void initDB() throws Exception {
         final Connection rawrepoConnection = connectToRawrepoDb();
         resetRawrepoDb(rawrepoConnection);
         saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records/50938409.xml", MIMETYPE_MARCXCHANGE);
@@ -181,7 +180,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                 "        <subfield code=\"a\">DBC</subfield>\n" +
                 "    </datafield>\n" +
                 "</record>\n";
-        checkDoubleRecordFrontendRequestDTO.setRecordContent(marcRecord);
+        checkDoubleRecordFrontendRequestDTO.setRecord(marcRecord);
         final HttpPost httpPost = new HttpPost(httpClient)
                 .withBaseUrl(openCatBusinessBaseURL)
                 .withPathElements(new PathBuilder("/api/v1/checkDoubleRecordFrontend")
@@ -190,7 +189,6 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
 
         Response response = httpClient.execute(httpPost);
 
-        // Bad solution: response.readEntity() should work
         DoubleRecordFrontendStatusDTO actual =
                 JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DoubleRecordFrontendStatusDTO.class);
 
@@ -213,7 +211,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                 "        <subfield code=\"e\">9782843090387</subfield>\n" +
                 "    </datafield>\n" +
                 "</record>";
-        checkDoubleRecordFrontendRequestDTO.setRecordContent(marcRecord);
+        checkDoubleRecordFrontendRequestDTO.setRecord(marcRecord);
         final HttpPost httpPost = new HttpPost(httpClient)
                 .withBaseUrl(openCatBusinessBaseURL)
                 .withPathElements(new PathBuilder("/api/v1/checkDoubleRecordFrontend")
@@ -231,7 +229,6 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
         Response response = httpClient.execute(httpPost);
         assertThat("Response code", response.getStatus(), is(200));
 
-        // Bad solution: response.readEntity() should work
         DoubleRecordFrontendStatusDTO actual =
                 JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DoubleRecordFrontendStatusDTO.class);
 
