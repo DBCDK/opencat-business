@@ -17,6 +17,7 @@ import java.util.Properties;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -34,6 +35,17 @@ public class JSRestPortal {
 
     @EJB
     ScripterPool scripterPool;
+
+    // REMOVE!
+    // CONVENIENCE METHOD FOR RELOADING JS ENVIRONMENT IN DEBUG
+    @GET
+    @Path(("v1/reloadjs"))
+    public Response reloadJS() {
+        scripterPool.destroyAllEnvironments();
+        scripterPool.postConstruct();
+        return Response.ok().build();
+    }
+    // END REMOVE
 
     @POST
     @Path("v1/validateRecord")
