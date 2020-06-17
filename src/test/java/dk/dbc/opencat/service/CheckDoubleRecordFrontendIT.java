@@ -10,7 +10,7 @@ import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import java.sql.Connection;
 import java.util.Collections;
 import javax.ws.rs.core.Response;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +18,11 @@ import org.slf4j.LoggerFactory;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
-
-
 public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContainerTest {
     private static final Logger LOGGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
 
-    @Before
-    public void initDB() throws Exception {
+    @BeforeClass
+    public static void initDB() throws Exception {
         final Connection rawrepoConnection = connectToRawrepoDb();
         resetRawrepoDb(rawrepoConnection);
         saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records/50938409.xml", MIMETYPE_MARCXCHANGE);
