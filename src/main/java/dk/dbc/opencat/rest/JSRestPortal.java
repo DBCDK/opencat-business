@@ -58,14 +58,17 @@ public class JSRestPortal {
         try {
             scripterEnvironment = scripterPool.take();
             LOGGER.info("validateRecord incoming request:{}",validateRecordRequestDTO);
+            MarcRecord record = MarcConverter.convertFromMarcXChange(validateRecordRequestDTO.getRecord());
+
             result = (String) scripterEnvironment.callMethod("validateRecord",
                     validateRecordRequestDTO.getTemplateName(),
-                    validateRecordRequestDTO.getRecord(),
+                    jsonbContext.marshall(record),
                     settings);
             sanityCheck(result, MessageEntryDTO[].class);
             LOGGER.info("validateRecord result:{}", result);
             return Response.ok().entity(result).build();
         } catch (ScripterException | JSONBException | InterruptedException e) {
+            LOGGER.error("Error in validateRecord.", e);
             return Response.serverError().build();
 
         } finally {
