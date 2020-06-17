@@ -107,10 +107,12 @@ public class ScripterEnvironmentFactory {
     }
 
     private void addSearchPathsFromSettingsFile(ModuleHandler handler, String schemeName, InputStream is) throws IOException {
+        logger.info("Trying to load:{}, {} from inputstream", handler, schemeName);
         logger.entry(handler, schemeName, is);
         try {
             Properties props = new Properties();
             props.load(is);
+            logger.info("Properties loaded!");
             if (!props.containsKey("modules.search.path")) {
                 logger.warn("Search path for modules is not specified");
                 return;
@@ -122,7 +124,9 @@ public class ScripterEnvironmentFactory {
                     handler.addSearchPath(new SchemeURI(schemeName + ":" + s));
                 }
             }
+            logger.info("Klask. Done.");
         } finally {
+            logger.info("Klask. Exeitnf.");
             logger.exit();
         }
     }

@@ -85,6 +85,10 @@ public class ScripterPool {
         ST_OK
     }
 
+    public void destroyAllEnvironments() {
+        environments.clear();
+    }
+
     /**
      * Constructs engines for a pool in separate threads.
      */

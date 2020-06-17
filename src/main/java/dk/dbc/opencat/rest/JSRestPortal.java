@@ -9,6 +9,7 @@ import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
+import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
@@ -85,7 +86,7 @@ public class JSRestPortal {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response checkDoubleRecordFrontend(CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO) throws OCBException {
+    public Response checkDoubleRecordFrontend(CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
@@ -107,6 +108,36 @@ public class JSRestPortal {
                 scripterPool.put(scripterEnvironment);
             } catch (InterruptedException e) {
                 LOGGER.error("checkDoubleRecordFrontend error", e);
+            }
+        }
+    }
+
+    @POST
+    @Path("v1/checkTemplate")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Timed
+    public Response checkTemplate(CheckTemplateRequestDTO checkTemplateRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+        boolean result;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.info("checkTemplate. Incoming request: {}", checkTemplateRequestDTO);
+            result = (boolean) scripterEnvironment.callMethod("checkTemplate",
+                    checkTemplateRequestDTO.getName(),
+                    checkTemplateRequestDTO.getGroupId(),
+                    checkTemplateRequestDTO.getLibraryType(),
+                    settings);
+            return Response.ok().entity(result).build();
+        } catch (InterruptedException | ScripterException e) {
+            LOGGER.error("checkTemplate", e);
+            return Response.serverError().build();
+        }
+        finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("checkTemplate", e);
             }
         }
     }
