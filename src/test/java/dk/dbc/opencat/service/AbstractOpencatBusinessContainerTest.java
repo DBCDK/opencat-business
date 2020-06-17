@@ -7,7 +7,6 @@ import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.marc.reader.MarcXchangeV1Reader;
 import dk.dbc.marc.writer.MarcXchangeV1Writer;
 import dk.dbc.openagency.client.OpenAgencyServiceFromURL;
-import dk.dbc.rawrepo.RelationHintsOpenAgency;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -43,7 +42,6 @@ public class AbstractOpencatBusinessContainerTest {
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";
 
     private static final OpenAgencyServiceFromURL openAgency;
-    private static final RelationHintsOpenAgency relationHints;
 
     private static final String rawrepoDbBaseUrl;
     private static final String holdingsItemsDbUrl;
@@ -61,8 +59,6 @@ public class AbstractOpencatBusinessContainerTest {
 
     static {
         openAgency = OpenAgencyServiceFromURL.builder().build("http://openagency.addi.dk/2.34/");
-
-        relationHints = new RelationHintsOpenAgency(openAgency);
 
         Network network = Network.newNetwork();
 
@@ -177,7 +173,7 @@ public class AbstractOpencatBusinessContainerTest {
         final int agencyId = Integer.parseInt(marcRecord.getSubFieldValue("001", 'b').get());
         final boolean deleted = "d".equalsIgnoreCase(marcRecord.getSubFieldValue("004", 'r').get());
         final byte[] content = writer.write(marcRecord, StandardCharsets.UTF_8);
-        final String trackingId = "";
+        final String trackingId = String.format("%d:%s", agencyId, bibliographicRecordId);
 
         try(PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
             stmt.setString(1, bibliographicRecordId);
@@ -185,7 +181,7 @@ public class AbstractOpencatBusinessContainerTest {
             stmt.setBoolean(3, deleted);
             stmt.setString(4, mimeType);
             stmt.setString(5, Base64.getEncoder().encodeToString(content));
-            stmt.setString(6, String.format("%d:%s", agencyId, bibliographicRecordId));
+            stmt.setString(6, trackingId);
             stmt.execute();
         }
     }
@@ -197,5 +193,4 @@ public class AbstractOpencatBusinessContainerTest {
 
         return reader.read();
     }
-
 }
