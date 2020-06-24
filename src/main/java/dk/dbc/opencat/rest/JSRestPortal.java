@@ -2,6 +2,7 @@ package dk.dbc.opencat.rest;
 
 import dk.dbc.common.records.MarcConverter;
 import dk.dbc.common.records.MarcRecord;
+import dk.dbc.common.records.utils.RecordContentTransformer;
 import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.opencat.javascript.ScripterEnvironment;
@@ -10,10 +11,12 @@ import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
+import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.util.Timed;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,6 +27,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,6 +132,7 @@ public class JSRestPortal {
                     checkTemplateRequestDTO.getGroupId(),
                     checkTemplateRequestDTO.getLibraryType(),
                     settings);
+            LOGGER.info("checkTemplate result:{}", result);
             return Response.ok().entity(result).build();
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplate", e);
@@ -140,6 +145,43 @@ public class JSRestPortal {
                 LOGGER.error("checkTemplate", e);
             }
         }
+    }
+
+    @POST
+    @Path("v1/doRecategorizationThings")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Timed
+    public Response doRecategorizationThings(DoRecategorizationThingsRequestDTO doRecategorizationThingsRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+
+        String result;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.info("doRecategorizationThings. Incoming request:{}", doRecategorizationThingsRequestDTO);
+            result = (String) scripterEnvironment.callMethod( "doRecategorizationThings",
+                    marcXMLtoJson(doRecategorizationThingsRequestDTO.getCurrentRecord()),
+                    marcXMLtoJson(doRecategorizationThingsRequestDTO.getUpdateRecord()),
+                    marcXMLtoJson(doRecategorizationThingsRequestDTO.getNewRecord()));
+            MarcRecord resultMarcRecord = jsonbContext.unmarshall(result, MarcRecord.class);
+            String resultMarcXChange = new String(RecordContentTransformer.encodeRecord(resultMarcRecord));
+            LOGGER.info("doRecategorizationThings result:{}", resultMarcXChange);
+            return Response.ok().entity(resultMarcXChange).build();
+        } catch (InterruptedException | ScripterException | JSONBException | UnsupportedEncodingException | JAXBException e) {
+            LOGGER.error("doRecategorizationThings", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("doRecategorizationThings", e);
+            }
+        }
+    }
+
+    private String marcXMLtoJson(String marcxml) throws UnsupportedEncodingException, JSONBException {
+        MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcxml.getBytes());
+        return jsonbContext.marshall(marcRecord);
     }
 
     private void sanityCheck(String objectAsJson, Class t) throws JSONBException {
