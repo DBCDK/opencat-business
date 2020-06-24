@@ -29,6 +29,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 public class AbstractOpencatBusinessContainerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
     static final String MIMETYPE_MARCXCHANGE = "text/marcxchange";
+    static final String MIMETYPE_ENRICHMENT = " text/enrichment+marcxchange";
 
     private static final GenericContainer wiremockSolrServiceContainer;
     private static final GenericContainer recordServiceContainer;
@@ -47,7 +48,7 @@ public class AbstractOpencatBusinessContainerTest {
     private static final String holdingsItemsDbUrl;
     private static final String recordServiceBaseUrl;
     private static final String openAgencyURL = "http://openagency.addi.dk/2.34/";
-    private static final String forsrightsURL = "http://forsrights.addi.dk/1.2/";
+    private static final String forsrightsURL = "http://forsrights.addi.dk/2.0/";
     private  static final String solrURL = "http://solr:9090";
 
     static final String openCatBusinessBaseURL;
