@@ -3,7 +3,6 @@ package dk.dbc.opencat.service;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
-import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
@@ -12,14 +11,11 @@ import java.util.Collections;
 import javax.ws.rs.core.Response;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContainerTest {
-    private static final Logger LOGGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
 
     @BeforeClass
     public static void initDB() throws Exception {
@@ -31,7 +27,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
 
 
     @Test
-    public void checkDoubleRecordFront_OK() throws MarcReaderException, JSONBException {
+    public void checkDoubleRecordFront_OK() throws JSONBException {
         final CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO = new CheckDoubleRecordFrontendRequestDTO();
         String marcRecord = "<?xml version=\"1.0\" encoding=\"UTF-16\"?>\n" +
                 "<record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +

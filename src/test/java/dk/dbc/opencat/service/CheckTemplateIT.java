@@ -2,7 +2,6 @@ package dk.dbc.opencat.service;
 
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBContext;
 import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import javax.ws.rs.core.Response;
