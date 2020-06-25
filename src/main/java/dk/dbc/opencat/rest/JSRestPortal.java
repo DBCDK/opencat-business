@@ -204,8 +204,33 @@ public class JSRestPortal {
         } finally {
             try {
                 scripterPool.put(scripterEnvironment);
-            } catch ( InterruptedException e) {
+            } catch (InterruptedException e) {
                 LOGGER.error("recategorizationNoteFieldFactory", e);
+            }
+        }
+    }
+
+    @POST
+    @Path("v1/checkTemplateBuild")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response checkTemplateBuild(String name) {
+        ScripterEnvironment scripterEnvironment = null;
+        boolean result;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.info("checkTemplateBuild. Incoming request:{}", name);
+            result = (boolean) scripterEnvironment.callMethod("checkTemplateBuild", name, settings);
+            LOGGER.info("checkTemplateBuild result:{}", result);
+            return Response.ok().entity(result).build();
+        } catch (InterruptedException | ScripterException e) {
+            LOGGER.error("checkTemplateBuild", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("checkTemplateBuild", e);
             }
         }
     }
