@@ -16,22 +16,20 @@ var CheckEAN13 = function () {
         var subfieldName = subfield['name'];
         var msg;
         if (!ValidationUtil.isNumber(subfieldValue)) {
+            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             if (ISBNorISMN === 'B') {
-                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.numbers.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             } else {
-                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.ismn.numbers.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
         } else if (subfieldValue.length !== 13) {
+            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             if (ISBNorISMN === 'B') {
-                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.length.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             } else {
-                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.ismn.length.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
@@ -42,7 +40,7 @@ var CheckEAN13 = function () {
             while (subfieldValue.length > weight.length) {
                 weight = singleWeight.concat(weight);
             }
-            for (var i = 0; i < ( subfieldValue.length - 1 ); ++i) {
+            for (var i = 0; i < (subfieldValue.length - 1); ++i) {
                 // https://www.isbn-international.org/
                 // Algorithm: http://en.wikipedia.org/wiki/International_Standard_Book_Number#Check_digits
                 // We must iterate over all number and multiply them with n
@@ -60,14 +58,13 @@ var CheckEAN13 = function () {
                 productSum += parseInt(subfieldValue.charAt(i)) * weight[i]; //4
             }
             var checksum = parseInt(subfieldValue.charAt(subfieldValue.length - 1)); // 2
-            var x13 = ( 10 - productSum % 10 ) % 10;
+            var x13 = (10 - productSum % 10) % 10;
             if (checksum !== x13) { // 7
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 if (ISBNorISMN === 'B') {
-                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.isbn13.invalid.error", subfieldName, subfieldValue);
                     result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 } else {
-                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.ismn.invalid.error", subfieldName, subfieldValue);
                     result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 }
