@@ -1,6 +1,7 @@
 package dk.dbc.opencat.rest;
 
 import dk.dbc.common.records.MarcConverter;
+import dk.dbc.common.records.MarcField;
 import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.utils.RecordContentTransformer;
 import dk.dbc.commons.jsonb.JSONBContext;
@@ -150,7 +151,7 @@ public class JSRestPortal {
     @POST
     @Path("v1/doRecategorizationThings")
     @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
     @Timed
     public Response doRecategorizationThings(DoRecategorizationThingsRequestDTO doRecategorizationThingsRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
@@ -175,6 +176,36 @@ public class JSRestPortal {
                 scripterPool.put(scripterEnvironment);
             } catch (InterruptedException e) {
                 LOGGER.error("doRecategorizationThings", e);
+            }
+        }
+    }
+
+    @POST
+    @Path("v1/recategorizationNoteFieldFactory")
+    @Consumes({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Timed
+    public Response recategorizationNoteFieldFactory(String record) {
+        ScripterEnvironment scripterEnvironment = null;
+
+        String result;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.info("recategorizationNoteFieldFactory. Incoming request:{}", record);
+            result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
+                    marcXMLtoJson(record));
+            sanityCheck(result, MarcField.class);
+            LOGGER.info("recategorizationNoteFieldFactory result:{}", result);
+            return Response.ok().entity(result).build();
+
+        } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException e) {
+            LOGGER.error("recategorizationNoteFieldFactory", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch ( InterruptedException e) {
+                LOGGER.error("recategorizationNoteFieldFactory", e);
             }
         }
     }
