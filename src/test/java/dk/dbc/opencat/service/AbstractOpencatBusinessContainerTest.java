@@ -31,7 +31,7 @@ public class AbstractOpencatBusinessContainerTest {
     static final String MIMETYPE_MARCXCHANGE = "text/marcxchange";
     static final String MIMETYPE_ENRICHMENT = " text/enrichment+marcxchange";
 
-    private static final GenericContainer wiremockSolrServiceContainer;
+    private static final GenericContainer wiremockContainer;
     private static final GenericContainer recordServiceContainer;
     private static final GenericContainer rawrepoDbContainer;
     private static final GenericContainer holdingsItemsDbContainer;
@@ -49,7 +49,8 @@ public class AbstractOpencatBusinessContainerTest {
     private static final String recordServiceBaseUrl;
     private static final String openAgencyURL = "http://openagency.addi.dk/2.34/";
     private static final String forsrightsURL = "http://forsrights.addi.dk/2.0/";
-    private  static final String solrURL = "http://solr:9090";
+    private static final String solrURL = "http://solr:9090";
+    private static final String opennumberrollUrl = "http://opennumberroll:9090";
 
     static final String openCatBusinessBaseURL;
 
@@ -63,15 +64,15 @@ public class AbstractOpencatBusinessContainerTest {
 
         Network network = Network.newNetwork();
 
-        wiremockSolrServiceContainer = new GenericContainer(JAVA_BASE_IMAGE)
+        wiremockContainer = new GenericContainer(JAVA_BASE_IMAGE)
                 .withNetwork(network)
-                .withNetworkAliases("solr")
+                .withNetworkAliases("solr", "opennumberroll")
                 .withClasspathResourceMapping(".", "currentWorkDir", BindMode.READ_ONLY)
                 .withWorkingDirectory("/currentWorkDir")
                 .withCommand(String.format("java -jar lib/%s --port 9090 --verbose", WIREMOCK_JAR))
                 .withExposedPorts(9090)
                 .withStartupTimeout(Duration.ofMinutes(1));
-        wiremockSolrServiceContainer.start();
+        wiremockContainer.start();
 
         rawrepoDbContainer = new GenericContainer(RAWREPODB_IMAGE)
                 .withNetwork(network)
@@ -126,6 +127,9 @@ public class AbstractOpencatBusinessContainerTest {
                 .withEnv("SOLR_URL", solrURL)
                 .withEnv("FORSRIGHTS_URL", forsrightsURL)
                 .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
+                .withEnv("OPENNUMBERROLL_URL", opennumberrollUrl)
+                .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
+                .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
                 .withExposedPorts(8080)
                 .waitingFor(Wait.forHttp("/api/status"))
                 .withStartupTimeout(Duration.ofMinutes(2));
@@ -134,7 +138,6 @@ public class AbstractOpencatBusinessContainerTest {
                 ":" + openCatBusinessContainer.getMappedPort(8080);
 
         httpClient = HttpClient.create(HttpClient.newClient());
-
     }
 
     static Connection connectToRawrepoDb() {

@@ -10,6 +10,7 @@ import dk.dbc.opencat.javascript.ScripterEnvironment;
 import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
+import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
@@ -164,8 +165,7 @@ public class JSRestPortal {
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getCurrentRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getUpdateRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getNewRecord()));
-            MarcRecord resultMarcRecord = jsonbContext.unmarshall(result, MarcRecord.class);
-            String resultMarcXChange = new String(RecordContentTransformer.encodeRecord(resultMarcRecord));
+            String resultMarcXChange = marcJsonToMarcXml(result);
             LOGGER.info("doRecategorizationThings result:{}", resultMarcXChange);
             return Response.ok().entity(resultMarcXChange).build();
         } catch (InterruptedException | ScripterException | JSONBException | UnsupportedEncodingException | JAXBException e) {
@@ -214,6 +214,7 @@ public class JSRestPortal {
     @Path("v1/checkTemplateBuild")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
+    @Timed
     public Response checkTemplateBuild(String name) {
         ScripterEnvironment scripterEnvironment = null;
         boolean result;
@@ -235,6 +236,42 @@ public class JSRestPortal {
         }
     }
 
+    @POST
+    @Path("v1/buildRecord")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
+    @Timed
+    public Response buildRecord(BuildRecordRequestDTO buildRecordRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+        String record = null;
+        String result;
+        String marcXml;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.info("buildRecord. Incoming request:{}", buildRecordRequestDTO);
+            if (buildRecordRequestDTO.getRecord() != null) {
+                record = marcXMLtoJson(buildRecordRequestDTO.getRecord());
+            }
+            result = (String) scripterEnvironment.callMethod("buildRecord",
+                    buildRecordRequestDTO.getTemplateName(),
+                    record,
+                    settings);
+            marcXml = marcJsonToMarcXml(result);
+            LOGGER.info("buildRecord result:{}", marcXml);
+            return Response.ok().entity(marcXml).build();
+
+        } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
+            LOGGER.error("buildRecord", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("buildRecord", e);
+            }
+        }
+    }
+
     private String marcXMLtoJson(String marcxml) throws UnsupportedEncodingException, JSONBException {
         MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcxml.getBytes());
         return jsonbContext.marshall(marcRecord);
@@ -242,5 +279,10 @@ public class JSRestPortal {
 
     private void sanityCheck(String objectAsJson, Class t) throws JSONBException {
         jsonbContext.unmarshall(objectAsJson, t);
+    }
+
+    private String marcJsonToMarcXml( String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
+        MarcRecord resultMarcRecord = jsonbContext.unmarshall(marcJson, MarcRecord.class);
+        return new String(RecordContentTransformer.encodeRecord(resultMarcRecord));
     }
 }
