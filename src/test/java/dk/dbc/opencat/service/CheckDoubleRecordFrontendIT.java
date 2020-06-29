@@ -22,7 +22,6 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
         final Connection rawrepoConnection = connectToRawrepoDb();
         resetRawrepoDb(rawrepoConnection);
         saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records/50938409.xml", MIMETYPE_MARCXCHANGE);
-        saveRecord(rawrepoConnection, "checkdoublerecordfrontend/records/52958857.xml", MIMETYPE_MARCXCHANGE);
     }
 
 
