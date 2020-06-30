@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 rm -rf target || true
 rm -rf deploy/* || true
-docker rmi docker-io.dbc.dk/opencatbusiness:devel || true
+docker rmi docker-io.dbc.dk/opencat-business:devel || true
 echo "Finished cleaning"

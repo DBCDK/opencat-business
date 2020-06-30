@@ -2,9 +2,9 @@
 echo "### opencat docker ###"
 cd target/docker || exit 1
 # Bakc in place: --pull --no-cache
-docker build . -t docker-io.dbc.dk/opencatbusiness:devel  || exit 1
+docker build . -t docker-io.dbc.dk/opencat-business:devel  || exit 1
 if [[ ! -z "$BUILD_NUMBER" ]]; then
-    docker tag docker-io.dbc.dk/opencatbusiness:devel docker-io.dbc.dk/opencatbusiness:${BRANCH_NAME}-${BUILD_NUMBER}
+    docker tag docker-io.dbc.dk/opencat-business:devel docker-io.dbc.dk/opencat-business:${BRANCH_NAME}-${BUILD_NUMBER}
 fi
 
 cd ../..
