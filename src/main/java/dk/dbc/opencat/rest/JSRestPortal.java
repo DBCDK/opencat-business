@@ -14,6 +14,7 @@ import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
@@ -182,18 +183,18 @@ public class JSRestPortal {
 
     @POST
     @Path("v1/recategorizationNoteFieldFactory")
-    @Consumes({MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response recategorizationNoteFieldFactory(String record) {
+    public Response recategorizationNoteFieldFactory(RecategorizationNoteFieldFactoryRequestDTO recategorizationNoteFieldFactoryRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
 
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("recategorizationNoteFieldFactory. Incoming request:{}", record);
+            LOGGER.info("recategorizationNoteFieldFactory. Incoming request:{}", recategorizationNoteFieldFactoryRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
-                    marcXMLtoJson(record));
+                    marcXMLtoJson(recategorizationNoteFieldFactoryRequestDTO.getRecord()));
             sanityCheck(result, MarcField.class);
             LOGGER.info("recategorizationNoteFieldFactory result:{}", result);
             return Response.ok().entity(result).build();

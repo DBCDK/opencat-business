@@ -5,6 +5,7 @@ import dk.dbc.common.records.MarcSubField;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
+import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
 import java.util.Arrays;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,12 +18,15 @@ public class RecategorizationNoteFieldFactoryIT extends AbstractOpencatBusinessC
 
     @Test
     public void recategorizationNoteFieldFactory_sanitytest() throws JSONBException {
-        final String record = getRecord();
+        final RecategorizationNoteFieldFactoryRequestDTO recategorizationNoteFieldFactoryRequestDTO =
+                new RecategorizationNoteFieldFactoryRequestDTO();
+        recategorizationNoteFieldFactoryRequestDTO.setRecord(getRecord());
+
         final HttpPost httpPost = new HttpPost(httpClient)
                 .withBaseUrl(openCatBusinessBaseURL)
                 .withPathElements(new PathBuilder("/api/v1/recategorizationNoteFieldFactory")
                         .build())
-                .withData(record, MediaType.APPLICATION_XML);
+                .withJsonData(JSONB_CONTEXT.marshall(recategorizationNoteFieldFactoryRequestDTO));
         MarcField expected = new MarcField();
         expected.setName("512");
         expected.setIndicator("00");
