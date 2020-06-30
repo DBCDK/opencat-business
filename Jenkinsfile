@@ -58,7 +58,7 @@ pipeline {
             }
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'ms2681-ocb-til-egen-service') {
+                    if (env.BRANCH_NAME == 'master') {
                         sh """
                             docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_DIT_VERSION}
                             docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_DIT_VERSION}
