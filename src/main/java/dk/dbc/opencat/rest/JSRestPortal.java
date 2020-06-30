@@ -15,6 +15,7 @@ import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
+import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
@@ -269,6 +270,37 @@ public class JSRestPortal {
                 scripterPool.put(scripterEnvironment);
             } catch (InterruptedException e) {
                 LOGGER.error("buildRecord", e);
+            }
+        }
+    }
+
+    @POST
+    @Path("v1/sortRecord")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_XML})
+    @Timed
+    public Response sortRecord(SortRecordRequestDTO sortRecordRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+        String result;
+        String marcXml;
+        LOGGER.info("sortRecord. Incomin request:{}", sortRecordRequestDTO);
+        try {
+            scripterEnvironment = scripterPool.take();
+            result = (String) scripterEnvironment.callMethod("sortRecord",
+                    sortRecordRequestDTO.getTemplateProvider(),
+                    marcXMLtoJson(sortRecordRequestDTO.getRecord()),
+                    settings);
+            marcXml = marcJsonToMarcXml(result);
+            LOGGER.info("sortRecord result:{}", marcXml);
+            return Response.ok().entity(marcXml).build();
+        } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
+            LOGGER.error("sortRecord", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("sortError", e);
             }
         }
     }
