@@ -200,6 +200,16 @@
                 <version>1.3.1</version>
                 <executions>
                     <execution>
+                        <id>transpile-templates</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>transpiletemplates</executable>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>gzip-js</id>
                         <phase>compile</phase>
                         <goals>
