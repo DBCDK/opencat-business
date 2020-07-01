@@ -1,6 +1,5 @@
 package dk.dbc.opencat.service;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.utils.RecordContentTransformer;
 import dk.dbc.httpclient.HttpPost;
@@ -9,17 +8,11 @@ import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
 import java.io.UnsupportedEncodingException;
 import javax.ws.rs.core.Response;
-import org.junit.Rule;
 import org.junit.Test;
-
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
-
-    @Rule
-    public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().httpsPort(8443));
 
     @Test
     public void test_that_a_record_is_built_with_another_record_as_template() throws JSONBException, UnsupportedEncodingException {
