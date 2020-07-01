@@ -37,8 +37,9 @@ var LookupValue = function () {
         ValueCheck.checkThat("params['exist']", params['exist']).type("boolean");
         ValueCheck.checkThat("settings", params).type("object");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             if (!settings.containsKey('SOLR_URL') && !settings.containsKey('solr.url')) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 throw ResourceBundle.getString(bundle, "lookup.value.missing.solr.url");
             }
 
@@ -48,6 +49,7 @@ var LookupValue = function () {
                 url = settings.get('solr.url');
             }
             if (url === undefined) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 throw ResourceBundle.getString(bundle, "lookup.value.undefined.solr.url");
             }
 
@@ -58,9 +60,11 @@ var LookupValue = function () {
 
             var message;
             if (params.exist === true && hits === 0) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 message = ResourceBundle.getStringFormat(bundle, "lookup.value.expected.value", subfield.value, field.name, subfield.name);
                 return [ValidateErrors.subfieldError("TODO:fixurl", message)];
             } else if (params.exist === false && hits !== 0) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 message = ResourceBundle.getStringFormat(bundle, "lookup.value.unexpected.value", subfield.value, field.name, subfield.name);
                 return [ValidateErrors.subfieldError("TODO:fixurl", message)];
             }

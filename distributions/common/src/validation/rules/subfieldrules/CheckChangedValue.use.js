@@ -32,10 +32,11 @@ var CheckChangedValue = function () {
             var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             var msg;
 
             if (!ValidationUtil.isNumber(libNo)) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME)
                 msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
@@ -50,6 +51,7 @@ var CheckChangedValue = function () {
             var oldValue = oldRecord.getValue(new RegExp(field.name), new RegExp(subfield.name));
             Log.debug(field.name + subfield.name + ": " + oldValue + " -> " + subfield.value);
             if (params.fromValues.indexOf(oldValue) === -1 || params.toValues.indexOf(subfield.value) === -1) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME)
                 msg = ResourceBundle.getStringFormat(bundle, "check.changed.value.error", field.name, subfield.name, oldValue, subfield.value);
                 Log.debug("Found validation error: " + msg);
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];

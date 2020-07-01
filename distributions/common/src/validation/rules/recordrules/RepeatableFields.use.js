@@ -29,7 +29,6 @@ var RepeatableFields = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
             ValueCheck.check("params.fields", params['fields']).instanceOf(Array);
 
@@ -48,9 +47,13 @@ var RepeatableFields = function () {
                 paramsValues[paramsFields[j]] = 1;
             }
             // saves an iteration , via Object.keys
+            var bundle = null;
             for (var key in foundFields) {
                 if (foundFields.hasOwnProperty(key)) {
                     if (paramsValues[key] === undefined && foundFields[key] > 1) {
+                        if (bundle == null) {
+                            bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                        }
                         var msg = ResourceBundle.getStringFormat(bundle, "fields.repeatable.error", key, foundFields[key]);
                         result.push(ValidateErrors.recordError("TODO:fixurl", msg));
                     }

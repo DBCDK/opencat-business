@@ -24,7 +24,7 @@ var CheckISBN10 = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckISBN10.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             //ValueCheck.checkUndefined( "params", params );
             // https://www.isbn-international.org/
             // we must iterate the ISBN10 number string and multiply each number
@@ -57,7 +57,8 @@ var CheckISBN10 = function () {
                         continue;
                     }
                     if (ch.toLowerCase() === 'x') {
-                        if (ix != len - 1) {
+                        if (ix !== len - 1) {
+                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                             msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.length.error", subfieldName);
                             result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                             return result;
@@ -65,18 +66,21 @@ var CheckISBN10 = function () {
                         value += 10; // 8
                         pos++;
                     } else {
+                        bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                         msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.numbers.error", subfieldName);
                         result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                         return result;
                     }
                 }
             }
-            if (pos != 10) {
+            if (pos !== 10) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.length.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
             if (value % 11 !== 0) { // 7
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.isbn10.invalid.error", subfieldName, subfield['value']);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }

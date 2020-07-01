@@ -24,26 +24,16 @@ var CheckLix = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckLix.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-
-
             var result = [];
-
-
-            var subfieldName042a = subfield['name'];
             var subfieldValue042a = subfield['value'];
             var msg;
 
-
-            if (!subfieldValue042a.match (/^[0-9]*$/)){
+            if (!subfieldValue042a.match(/^[0-9]*$/)) {
+                var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "checkLix.validation.error");
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
-
-
-
-
 
             return result;
         } finally {

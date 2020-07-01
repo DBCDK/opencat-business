@@ -1,0 +1,109 @@
+[
+  {
+    "name": "870974-littolk-with-018-common",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-55147469-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-55147469-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-55147469-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-aut-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-aut-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-aut-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-aut-common.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-aut-enrichment.marc"
+            ],
+            "children": [
+              "expected-littolk-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-aut-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-55147469-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-55147469-enrichment.marc"
+            ],
+            "children": [
+              "expected-littolk-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-55147469-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-littolk-common.marc",
+            "type": "LITANALYSIS",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-littolk-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-littolk-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

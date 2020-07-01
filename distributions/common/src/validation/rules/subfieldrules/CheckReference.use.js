@@ -50,10 +50,10 @@ var CheckReference = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckReference.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
 
             try {
-                __checkSyntax(field, subfield, bundle);
+                __checkSyntax(field, subfield);
             } catch (e) {
                 if (e instanceof SubfieldSyntaxError) {
                     return [ValidateErrors.subfieldError('TODO:fixurl', e.message)];
@@ -68,15 +68,18 @@ var CheckReference = function () {
             var errorMessage;
 
             if (matchingFields.length < 1) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.field", field.name);
                 return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
             // if the length of the subfield val is only 3, we have a subfield val matching case 1, meaning its a pure field name eg : 710
             if (subfield.value.length === 3) {
-                var hasDanishaa = __getFieldCountWithDanishaa(matchingFields, fieldNameToCheck, bundle, record);
+                var hasDanishaa = __getFieldCountWithDanishaa(matchingFields);
                 if (hasDanishaa === matchingFields.length) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield.å", fieldNameToCheck))];
                 } else if (matchingFields.length > 1 && hasDanishaa === 0) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     return [ValidateErrors.subfieldError('TODO:fixurl', ResourceBundle.getStringFormat(bundle, "check.ref.ambiguous",
                         field.name, subfield.name, fieldNameToCheck))];
                 }
@@ -96,6 +99,7 @@ var CheckReference = function () {
                     return (__checkSubFieldValues(fieldsWithSubfieldContainingDanishaa, subfieldValuesToCheck, record));
                 }
             } else {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.value", forwardslashValue.value, matchingFields[0].name);
                 return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
             }
@@ -106,7 +110,7 @@ var CheckReference = function () {
     }
 
 
-    function __getFieldCountWithDanishaa(fields, fieldNameToCheck, bundle, record) {
+    function __getFieldCountWithDanishaa(fields) {
         Log.trace("Enter --- CheckReference.validateSubfield.__getFieldCountWithDanishaa");
         try {
             var count = 0;
@@ -123,19 +127,21 @@ var CheckReference = function () {
 
     // Helper function which checks the syntax of a subfield referencing another,
     // throwing SubfieldSyntaxError on invalid syntax
-    function __checkSyntax(field, subfield, bundle) {
+    function __checkSyntax(field, subfield) {
         Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax");
+
         try {
             var tokens = __tokenize(subfield.value);
-            __checkFieldNameSyntax(__getNextToken(), field, subfield, bundle);
+            __checkFieldNameSyntax(__getNextToken(), field, subfield);
             if (tokens.length > 0 && tokens[0].type === __TOKEN_TYPE.DELIMITER) {
-                __checkNumeratorSyntax(tokens, field, subfield, bundle);
+                __checkNumeratorSyntax(tokens, field, subfield);
             }
             if (tokens.length > 0 && tokens[0].type === __TOKEN_TYPE.LEFT_PARENTHESIS) {
-                __checkSubfieldListSyntax(tokens, field, subfield, bundle);
+                __checkSubfieldListSyntax(tokens, field, subfield);
             }
             if (tokens.length > 0) {
                 var token = __getNextToken();
+                var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                     "check.ref.invalid.syntax.illegal.character", token.value, field.name, subfield.name));
             }
@@ -212,6 +218,7 @@ var CheckReference = function () {
         function __getNextToken() {
             var token = tokens.shift();
             if (token.type === __TOKEN_TYPE.WHITESPACE) {
+                var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                     "check.ref.invalid.syntax.whitespace", field.name, subfield.name));
             }
@@ -221,6 +228,7 @@ var CheckReference = function () {
         function __getLastToken() {
             var token = tokens.pop();
             if (token.type === __TOKEN_TYPE.WHITESPACE) {
+                var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                     "check.ref.invalid.syntax.whitespace", field.name, subfield.name));
             }
@@ -231,17 +239,21 @@ var CheckReference = function () {
         // throwing SubfieldSyntaxError on invalid syntax
         function __checkFieldNameSyntax(referencedFieldNameToken) {
             Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkFieldNameSyntax");
+            var bundle;
             try {
                 var tokenValue = referencedFieldNameToken.value;
                 if (referencedFieldNameToken.type !== __TOKEN_TYPE.LITERAL) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.field.name", tokenValue, field.name, subfield.name));
                 }
                 if (tokenValue.length < 3) {    // e.g. 60
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.field.name", tokenValue, field.name, subfield.name));
                 }
                 if (tokenValue.slice(3)) {  // e.g. 6001 gives remainder 1
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.numerator.delimiter.missing", tokenValue, field.name, subfield.name));
                 }
@@ -254,18 +266,22 @@ var CheckReference = function () {
         // throwing SubfieldSyntaxError on invalid syntax
         function __checkNumeratorSyntax() {
             Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkNumeratorSyntax");
+            var bundle;
             try {
                 __getNextToken(); // discard delimiter token
                 if (tokens.length === 0) {   // e.g. 600/
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.numerator.missing", field.name, subfield.name));
                 }
                 var numeratorToken = __getNextToken();
                 if (numeratorToken.type !== __TOKEN_TYPE.LITERAL) { // e.g. 600/(a,b)
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.numerator.missing", field.name, subfield.name));
                 }
                 if (!__isNumeric(numeratorToken.value)) {  // e.g. 600/a
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.numerator.non.numeric", field.name, subfield.name));
                 }
@@ -278,11 +294,13 @@ var CheckReference = function () {
         // throwing on invalid syntax
         function __checkSubfieldListSyntax() {
             Log.trace("Enter --- CheckReference.validateSubfield.__checkSyntax.__checkSubfieldListSyntax");
+            var bundle;
             try {
                 __getNextToken(); // discard left parenthesis
                 var rightParenthesisToken = __getLastToken();
                 if (rightParenthesisToken === undefined
                     || rightParenthesisToken.type !== __TOKEN_TYPE.RIGHT_PARENTHESIS) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.list.parenthesis.missing", field.name, subfield.name));
                 }
@@ -291,6 +309,7 @@ var CheckReference = function () {
                     while (tokens.length !== 0) {
                         token = __getNextToken();
                         if (token.type !== __TOKEN_TYPE.LITERAL) {
+                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                             throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                                 "check.ref.invalid.syntax.list.subfield.missing", field.name, subfield.name));
                         }
@@ -300,6 +319,7 @@ var CheckReference = function () {
                         if (tokens.length > 0) {
                             token = __getNextToken();
                             if (token.type !== __TOKEN_TYPE.COMMA) {
+                                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                                 throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                                     "check.ref.invalid.syntax.list.comma.missing", field.name, subfield.name));
                             }
@@ -307,6 +327,7 @@ var CheckReference = function () {
                     }
                     // last token must be a literal
                     if (token.type !== __TOKEN_TYPE.LITERAL) {
+                        bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                         throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                             "check.ref.invalid.syntax.list.subfield.missing", field.name, subfield.name));
                     }
@@ -323,6 +344,7 @@ var CheckReference = function () {
             try {
                 if (token.value.length > 2                                                      // e.g. 600(abc)
                     || (token.value.length === 2 && !__isNumeric(token.value.charAt(1)))) {     // e.g. 600(ab)
+                    var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     throw new SubfieldSyntaxError(ResourceBundle.getStringFormat(bundle,
                         "check.ref.invalid.syntax.list.comma.missing", field.name, subfield.name));
                 }
@@ -353,25 +375,32 @@ var CheckReference = function () {
         Log.trace("Enter --- CheckReference.validateSubfield.__checkSubFieldValues");
         try {
             var ret = [];
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle = null;
             var found = {};
+            var errorMessage;
             for (var i = 0; i < fieldsWithSubfieldDanishaa.length; ++i) {
                 for (var j = 0; j < fieldsWithSubfieldDanishaa[i].subfields.length; ++j) {
                     found[fieldsWithSubfieldDanishaa[i].subfields[j].name] = true;
                 }
                 subfieldValuesToCheck.forEach(function (val) {
-                    var val = val.trim();
-                    if (val.length > 1) {
-                        var nbr = val.slice(1);
-                        var subfield = val.slice(0, 1);
+                    var valTrimmed = val.trim();
+                    if (valTrimmed.length > 1) {
+                        var nbr = valTrimmed.slice(1);
+                        var subfield = valTrimmed.slice(0, 1);
                         var count = __countSubfieldOccurrences(fieldsWithSubfieldDanishaa[i], subfield);
                         if (count < nbr) {
-                            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr);
+                            if (bundle == null) {
+                                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                            }
+                            errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr);
                             ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     } else {
-                        if (!found.hasOwnProperty(val)) {
-                            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, val);
+                        if (!found.hasOwnProperty(valTrimmed)) {
+                            if (bundle == null) {
+                                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                            }
+                            errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, valTrimmed);
                             ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     }
@@ -423,7 +452,7 @@ var CheckReference = function () {
                     value.value = subfieldValue.slice(subfieldValue.indexOf("/") + 1);
                 }
             }
-            return ( value );
+            return (value);
         } finally {
             Log.trace("Exit --- CheckReference.validateSubfield.__getValueFromForwardSlash");
         }

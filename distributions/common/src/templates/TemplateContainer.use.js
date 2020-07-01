@@ -20,6 +20,7 @@ var TemplateContainer = function () {
 
     var templates = {};
     var templatesUnoptimized = {};
+    var templateMapping = null;
     var settings;
 
     function setSettings(newSettings) {
@@ -33,17 +34,36 @@ var TemplateContainer = function () {
         Log.trace("Enter - TemplateContainer.initTemplates()");
 
         try {
-            var templates = getTemplateNames("dataio");
-            for (var i = 0; i < templates.length; i++) {
-                getCompiledTemplateByFolder(templates[i].schemaName, "dataio");
+            // Load template mappings during startup so the values are cached
+            templateMapping = __loadTemplateMapping(settings);
+
+            var templateNames = getTemplateNames("dataio");
+            for (var i = 0; i < templateNames.length; i++) {
+                getCompiledTemplateByFolder(templateNames[i].schemaName, "dataio");
+                // loadTemplateUnoptimized caches the templates to this.templatesUnoptimized
+                loadTemplateUnoptimized(templateNames[i].schemaName);
             }
 
-            templates = getTemplateNames("fbs");
-            for (var j = 0; j < templates.length; j++) {
-                getCompiledTemplateByFolder(templates[j].schemaName, "fbs");
+            templateNames = getTemplateNames("fbs");
+            for (var j = 0; j < templateNames.length; j++) {
+                getCompiledTemplateByFolder(templateNames[j].schemaName, "fbs");
+                // loadTemplateUnoptimized caches the templates to this.templatesUnoptimized
+                loadTemplateUnoptimized(templateNames[j].schemaName);
             }
-        }
-        finally {
+
+            Log.debug('--------------------- initTemplates ---------------------');
+            Log.debug('templates:');
+            Log.debug(Object.keys(templates));
+            Log.debug('');
+            Log.debug('templateMapping:');
+            Log.debug(JSON.stringify(templateMapping));
+            Log.debug('');
+            Log.debug('templatesUnoptimized');
+            Log.debug(Object.keys(templatesUnoptimized));
+            Log.debug('');
+            Log.debug('--------------------- initTemplates ---------------------');
+
+        } finally {
             Log.trace("Exit - TemplateContainer.initTemplates()");
         }
     }
@@ -54,15 +74,8 @@ var TemplateContainer = function () {
         try {
             var result = [];
 
-            var templates = getTemplateNames("dataio");
-            for (var i = 0; i < templates.length; i++) {
-                result.push(templates[i]);
-            }
-
-            templates = getTemplateNames("fbs");
-            for (var j = 0; j < templates.length; j++) {
-                result.push(templates[j]);
-            }
+            result.concat(getTemplateNames("dataio"));
+            result.concat(getTemplateNames("fbs"));
 
             return result;
         } finally {
@@ -113,8 +126,7 @@ var TemplateContainer = function () {
             }
 
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - getTemplateNames()");
         }
     }
@@ -137,8 +149,7 @@ var TemplateContainer = function () {
             var template = loadTemplateUnoptimized(name);
 
             return TemplateOptimizer.optimize(template);
-        }
-        finally {
+        } finally {
             Log.trace("Exit - TemplateContainer.loadTemplate()");
         }
     }
@@ -153,9 +164,11 @@ var TemplateContainer = function () {
      */
     function get(name) {
         Log.trace("Enter - TemplateContainer.get()");
+        var start = new Date().getTime();
 
         try {
             var result = templates[name];
+            Log.debug('Template was cached? ' + (result !== undefined))
             if (result === undefined) {
                 result = __load_compiled_template(name);
                 if (result !== undefined) {
@@ -164,8 +177,8 @@ var TemplateContainer = function () {
             }
 
             return result;
-        }
-        finally {
+        } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.TemplateContainer.get]');
             Log.trace("Exit - TemplateContainer.get()");
         }
     }
@@ -183,10 +196,99 @@ var TemplateContainer = function () {
             }
 
             return result;
-        }
-        finally {
+        } finally {
             Log.trace("Exit - TemplateContainer.get()");
         }
+    }
+
+    function getSchemas(templateSet, libraryRules, settings) {
+        Log.trace("Enter - TemplateContainer.getSchemas()");
+
+        var schemas = [];
+
+        try {
+            if (templateMapping === null) {
+                Log.debug('templateMapping is null - loading template mappings');
+                templateMapping = __loadTemplateMapping(settings);
+            }
+
+            var libraryTemplateGroups = templateMapping['libraryToTemplateGroups'][templateSet]['templateGroups'];
+            var templateGroups = templateMapping['templateGroups'];
+            var templateNames = [];
+
+            for (var i = 0; i < libraryTemplateGroups.length; i++) {
+                templateNames = templateNames.concat(templateGroups[libraryTemplateGroups[i]]['templates']);
+            }
+
+            // Now we have all the potential templates the templateSet can use.
+            // Next we have to load those templates and filter on library rules.
+            for (var j = 0; j < templateNames.length; j++) {
+                var templateName = templateNames[j];
+                var template = loadTemplateUnoptimized(templateName);
+
+                if (__checkTemplateFeatures(templateName, template, libraryRules)) {
+                    var schema = {schemaName: templateName, schemaInfo: ""};
+
+                    if (template.template.hasOwnProperty('description')) {
+                        schema.schemaInfo = template.template.description;
+                    }
+
+                    schemas.push(schema);
+                }
+            }
+
+            return schemas;
+        } finally {
+            Log.trace("Exit - TemplateContainer.getSchemas()");
+        }
+    }
+
+    function __checkTemplateFeatures(templateName, template, libraryRules) {
+        if (!template.hasOwnProperty('template')) {
+            Log.info("Schema '" + templateName + "' can not be used because the property 'template' is missing in the schema");
+            return false;
+        }
+        var templateSettings = template.template;
+        if (!templateSettings.hasOwnProperty('features')) {
+            Log.info("Schema '" + templateName + "' can not be used because the property 'template.features' is missing in the schema");
+            return false;
+        }
+        var featureNames = templateSettings.features;
+        for (var k = 0; k < featureNames.length; k++) {
+            var name = featureNames[k];
+
+            if (name !== "all" && !libraryRules.contains(name)) {
+                Log.info("Schema '" + templateName + "' can not be used because feature '" + name + "' is not in the library rules: " + libraryRules);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function __loadTemplateMapping(settings) {
+        Log.info('__loadTemplateMapping');
+        var templateFileNamePattern = "%s/distributions/common/templateMapping.json";
+        var result = null;
+
+        var fileName = StringUtil.sprintf(templateFileNamePattern, settings.get('javascript.basedir'));
+        Log.debug("Trying to load templateMapping file: ", fileName);
+        var templateContent = System.readFile(fileName);
+        Log.debug('Loaded templateMapping');
+
+        if (templateContent !== null) {
+            try {
+                result = JSON.parse(templateContent);
+                Log.debug('Content from templateMappings: ' + JSON.stringify(result));
+            } catch (ex) {
+                var message = StringUtil.sprintf("Syntax error in file '%s': %s", fileName, ex);
+                Log.error(message);
+                throw message;
+            }
+        } else {
+            throw StringUtil.sprintf("Unable to read content from '%s'", filename);
+        }
+        return result;
     }
 
     /**
@@ -255,9 +357,9 @@ var TemplateContainer = function () {
             var result = templatesUnoptimized[name];
 
             if (result === undefined) {
-                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
                 if (!settings.containsKey('javascript.basedir')) {
+                    var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     throw ResourceBundle.getStringFormat(bundle, "templates.settings.missing.key", "javascript.basedir");
                 }
 
@@ -386,7 +488,9 @@ var TemplateContainer = function () {
         'loadTemplateUnoptimized': loadTemplateUnoptimized,
         'getUnoptimized': getUnoptimized,
         'testLoadOfTemplateDoNotUse': testLoadOfTemplateDoNotUse,
-        'onlyForTest__addDanishLetterAaToTemplate': __addDanishLetterAaToTemplate
+        'onlyForTest__addDanishLetterAaToTemplate': __addDanishLetterAaToTemplate,
+        'getSchemas': getSchemas,
+        'templateMappings': templateMapping
     }
 
 }();

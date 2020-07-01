@@ -33,11 +33,12 @@ var MandatorySubfieldInVolumeWorkRule = function () {
         Log.trace("Enter - MandatorySubfieldInVolumeWorkRule.__validateHeadRecord()");
 
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             var volumes = __getVolumeRecords(record);
             var msg;
             if (volumes.length === 0) {
                 if (!__checkSubfieldIsUsed([record], field, params.subfield)) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield);
                     return [ValidateErrors.subfieldError("", msg)];
                 }
@@ -45,6 +46,7 @@ var MandatorySubfieldInVolumeWorkRule = function () {
 
             for (var i = 0; i < volumes.length; i++) {
                 if (!__checkSubfieldIsUsed([volumes[i], record], field, params.subfield)) {
+                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", field.name, params.subfield);
                     return [ValidateErrors.subfieldError("", msg)];
                 }

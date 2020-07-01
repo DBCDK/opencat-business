@@ -24,13 +24,14 @@ var ExclusiveSubfieldParameterized = function () {
         Log.trace("Enter -- ExclusiveSubfieldParameterized.validateField");
         try {
             var result = [];
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+            var bundle = null;
 
             ValueCheck.checkThat("params", params).type("object");
 
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             if (!params.subfields.length >= 2) {
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 Log.debug(ResourceBundle.getString(bundle, "conflictingSubfieldsParameterized.params.subfields.error"), params.subfields.length);
                 throw ResourceBundle.getStringFormat(bundle, "conflictingSubfieldsParameterized.params.subfields.error", params.subfields.length);
             }
@@ -47,6 +48,7 @@ var ExclusiveSubfieldParameterized = function () {
             for (var f = 0; f < field.subfields.length; f++) {
                 if (subfieldsMap.hasOwnProperty(field.subfields[f].name)) {
                     if (foundFirstSubfield) { // second match -> return error
+                        bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         result.push(ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "exclusive.subfield.parameterized.rule.error", field.subfields[f].name, params.subfields)));
                         return result;
                     } else {

@@ -340,7 +340,14 @@
                 "q": "DanMarc2.fields.041.subfields.q",
                 "t": "DanMarc2.fields.041.subfields.t",
                 "2": "DanMarc2.fields.041.subfields.2"
-            }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                }
+            }]
         },
         "042":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",
@@ -465,6 +472,7 @@
                 "j": "DanMarc2.fields.240.subfields.j",
                 "k": "DanMarc2.fields.240.subfields.k",
                 "m": "DanMarc2.fields.240.subfields.m",
+                "n": "DanMarc2.fields.240.subfields.n",
                 "0": "DanMarc2.fields.240.subfields.0",
                 "1": "DanMarc2.fields.240.subfields.1"
             }
@@ -1047,8 +1055,10 @@
         "650": "DanMarc2.fields.650",
         "651": "DanMarc2.fields.651",
         "652":{
+            "comment": "forskel fra dM2: *v m\u00E5 gentages. Der findes DBC-musikposter med gentagne 652 *i + *v",
+            "comment2": "*i og *v udeladt i delfeltsorteringen",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting": "\u00E5mnopqrahkefctbz01",
             "subfields":{
                 "&": {
                     "repeatable": false
@@ -1056,7 +1066,7 @@
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
-                "v":"DanMarc2.fields.652.subfields.v",
+                "v":{},
                 "a":"DanMarc2.fields.652.subfields.a",
                 "h":"DanMarc2.fields.652.subfields.h",
                 "e":"DanMarc2.fields.652.subfields.e",
@@ -1186,6 +1196,8 @@
                 "e": "DanMarc2.fields.700.subfields.e",
                 "f": "DanMarc2.fields.700.subfields.f",
                 "c": "DanMarc2.fields.700.subfields.c",
+                "t": "DanMarc2.fields.700.subfields.t",
+                "q": "DanMarc2.fields.700.subfields.q",
                 "g": "DanMarc2.fields.700.subfields.g",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "4": "DanMarc2.fields.700.subfields.4",
@@ -1240,6 +1252,7 @@
                 "k": "DanMarc2.fields.710.subfields.k",
                 "j": "DanMarc2.fields.710.subfields.j",
                 "t": "DanMarc2.fields.710.subfields.t",
+                "q": "DanMarc2.fields.710.subfields.q",
                 "g": "DanMarc2.fields.710.subfields.g",
                 "0": "DanMarc2.fields.710.subfields.0",
                 "4": "DanMarc2.fields.710.subfields.4"

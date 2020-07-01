@@ -28,6 +28,7 @@ var CheckSubfieldNotUsedInParentRecord = function () {
 
         try {
             var msg;
+            var bundle;
             var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
             // If the point does not has a parent, when we are fine.
             if (!marcRecord.existField(/014/)) {
@@ -36,8 +37,8 @@ var CheckSubfieldNotUsedInParentRecord = function () {
 
             var recId = marcRecord.getValue(/014/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
             if (!ValidationUtil.isNumber(libNo)) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getString(bundle, "agencyid.not.a.number");
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
@@ -51,6 +52,7 @@ var CheckSubfieldNotUsedInParentRecord = function () {
             // Load parent record and check if this subfield is used.
             var parentRecord = RawRepoClient.fetchRecord(recId, libNo);
             if (parentRecord.existField(new MatchField(new RegExp(field.name), undefined, new RegExp(subfield.name)))) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", field.name, subfield.name, recId);
                 return [ValidateErrors.subfieldError("TODO:fixurl", msg)];
             }
