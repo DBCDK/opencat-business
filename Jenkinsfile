@@ -55,7 +55,7 @@ pipeline {
                     sh "./bin/run-ocb-tests.sh"
                 }
 
-                junit "**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
+                junit "**/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
             }
         }
 
