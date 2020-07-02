@@ -4,6 +4,21 @@ EXPORTED_SYMBOLS = ['OpenAgencyClientCore'];
 
 var OpenAgencyClientCore = function () {
     var JNDI_NAME = "java:global/opencat-business-1.0-SNAPSHOT/OpenAgencyService";
+    var JNDI_NAME_DEPRECATED = "java:global/updateservice-2.0-SNAPSHOT/OpenAgencyService";
+    var SERVICE_PROVIDER = getServiceProvider();
+
+    function getServiceProvider() {
+        var context = new Packages.javax.naming.InitialContext();
+        var serviceProvider;
+
+        try {
+            serviceProvider = context.lookup(JNDI_NAME);
+        } catch (e) {
+            Log.debug(JNDI_NAME+" not found. Trying "+JNDI_NAME_DEPRECATED)
+            serviceProvider = context.lookup(JNDI_NAME_DEPRECATED);
+        }
+        return serviceProvider;
+    }
 
     var features = {
         create_enrichments: Packages.dk.dbc.openagency.client.LibraryRuleHandler.Rule.CREATE_ENRICHMENTS,
@@ -20,9 +35,8 @@ var OpenAgencyClientCore = function () {
         Log.trace("Enter - OpenAgencyClientCore.hasFeature()");
         var result;
         try {
-            var context = new Packages.javax.naming.InitialContext();
-            var serviceProvider = context.lookup(JNDI_NAME);
-            return result = serviceProvider.hasFeature(agencyId, features[featureName]);
+
+            return result = SERVICE_PROVIDER.hasFeature(agencyId, features[featureName]);
         } finally {
             Log.trace("Exit - OpenAgencyClientCore.hasFeature(): " + result);
         }
