@@ -36,6 +36,8 @@ pipeline {
         DOCKER_IMAGE_NAME = "docker-io.dbc.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
         DOCKER_IMAGE_DIT_VERSION = "DIT-${env.BUILD_NUMBER}"
+        OCBTEST_EXECUTABLE="java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
+
     }
 
     stages {
@@ -50,9 +52,11 @@ pipeline {
             steps {
                 sh "mvn verify pmd:pmd"
                 lock('meta-opencat-business-systemtest') {
-                    sh "./bin/run-js-tests.sh ${env.GIT_COMMIT}"
-                    sh "./bin/deploy-systemtests.sh"
-                    sh "./bin/run-ocb-tests.sh"
+                    sh """
+                        ${OCBTEST_EXECUTABLE} js-tests
+                        ./bin/deploy-systemtests.sh
+                        ${OCBTEST_EXECUTABLE} run -c testrun --summary 
+                    """
                 }
 
                 junit "**/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
@@ -76,6 +80,7 @@ pipeline {
             }
             steps {
                 script {
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
                     if (env.BRANCH_NAME == 'master') {
                         sh """
                             docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_DIT_VERSION}
