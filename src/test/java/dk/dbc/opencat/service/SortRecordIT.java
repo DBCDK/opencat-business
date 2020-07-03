@@ -5,6 +5,7 @@ import dk.dbc.common.records.utils.RecordContentTransformer;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
+import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import java.io.UnsupportedEncodingException;
 import javax.ws.rs.core.Response;
@@ -26,7 +27,8 @@ public class SortRecordIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(sortRecordRequestDTO));
         Response response = httpClient.execute(httpPost);
-        MarcRecord actual = RecordContentTransformer.decodeRecord(response.readEntity(String.class).getBytes());
+        RecordResponseDTO recordResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), RecordResponseDTO.class);
+        MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         MarcRecord expected = RecordContentTransformer.decodeRecord(getExpectedResult().getBytes());
         assertThat("Response code", response.getStatus(), is(200));
         assertThat("Subfield are sorted accoring to template", actual, is(expected));

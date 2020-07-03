@@ -6,6 +6,7 @@ import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import java.io.UnsupportedEncodingException;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
@@ -27,8 +28,9 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
                 .withJsonData(JSONB_CONTEXT.marshall(buildRecordRequestDTO));
 
         Response response = httpClient.execute(httpPost);
+        RecordResponseDTO recordResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), RecordResponseDTO.class);
         MarcRecord expected = RecordContentTransformer.decodeRecord(getExpectedResultFromFirstTest().getBytes());
-        MarcRecord actual = RecordContentTransformer.decodeRecord(response.readEntity(String.class).getBytes());
+        MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         assertThat("Response code", response.getStatus(), is(200));
         assertThat("New record as expected", actual, is(expected));
     }
@@ -45,8 +47,9 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
                 .withJsonData(JSONB_CONTEXT.marshall(buildRecordRequestDTO));
 
         Response response = httpClient.execute(httpPost);
+        RecordResponseDTO recordResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), RecordResponseDTO.class);
         MarcRecord expected = RecordContentTransformer.decodeRecord(getExpectedResultFromSecondTest().getBytes());
-        MarcRecord actual = RecordContentTransformer.decodeRecord(response.readEntity(String.class).getBytes());
+        MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         assertThat("Response code", response.getStatus(), is(200));
         assertThat("New record as expected", actual, is(expected));
     }

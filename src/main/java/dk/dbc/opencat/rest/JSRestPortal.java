@@ -14,7 +14,9 @@ import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
+import dk.dbc.opencatbusiness.dto.GetValidateSchemasRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
@@ -168,8 +170,10 @@ public class JSRestPortal {
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getUpdateRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getNewRecord()));
             String resultMarcXChange = marcJsonToMarcXml(result);
-            LOGGER.info("doRecategorizationThings result:{}", resultMarcXChange);
-            return Response.ok().entity(resultMarcXChange).build();
+            RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
+            recordResponseDTO.setRecord(resultMarcXChange);
+            LOGGER.info("doRecategorizationThings result:{}", recordResponseDTO);
+            return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
         } catch (InterruptedException | ScripterException | JSONBException | UnsupportedEncodingException | JAXBException e) {
             LOGGER.error("doRecategorizationThings", e);
             return Response.serverError().build();
@@ -241,7 +245,7 @@ public class JSRestPortal {
     @POST
     @Path("v1/buildRecord")
     @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     @Timed
     public Response buildRecord(BuildRecordRequestDTO buildRecordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
@@ -259,8 +263,10 @@ public class JSRestPortal {
                     record,
                     settings);
             marcXml = marcJsonToMarcXml(result);
-            LOGGER.info("buildRecord result:{}", marcXml);
-            return Response.ok().entity(marcXml).build();
+            RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
+            recordResponseDTO.setRecord(marcXml);
+            LOGGER.info("buildRecord result:{}", recordResponseDTO);
+            return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
 
         } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
             LOGGER.error("buildRecord", e);
@@ -277,7 +283,7 @@ public class JSRestPortal {
     @POST
     @Path("v1/sortRecord")
     @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     @Timed
     public Response sortRecord(SortRecordRequestDTO sortRecordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
@@ -291,8 +297,10 @@ public class JSRestPortal {
                     marcXMLtoJson(sortRecordRequestDTO.getRecord()),
                     settings);
             marcXml = marcJsonToMarcXml(result);
-            LOGGER.info("sortRecord result:{}", marcXml);
-            return Response.ok().entity(marcXml).build();
+            RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
+            recordResponseDTO.setRecord(marcXml);
+            LOGGER.info("sortRecord result:{}", recordResponseDTO);
+            return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
         } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
             LOGGER.error("sortRecord", e);
             return Response.serverError().build();

@@ -6,6 +6,7 @@ import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import java.io.UnsupportedEncodingException;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
@@ -41,7 +42,8 @@ public class DoRecategorizationThingsIT extends AbstractOpencatBusinessContainer
                 .withJsonData(JSONB_CONTEXT.marshall(doRecategorizationThingsRequestDTO));
 
         Response response = httpClient.execute(httpPost);
-        MarcRecord actual = RecordContentTransformer.decodeRecord(response.readEntity(String.class).getBytes());
+        RecordResponseDTO recordResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), RecordResponseDTO.class);
+        MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         MarcRecord expected = RecordContentTransformer.decodeRecord(getResult().getBytes());
         assertThat("Response code", response.getStatus(), is(200));
         assertThat("Returned marcrecord is OK", actual, is(expected));
