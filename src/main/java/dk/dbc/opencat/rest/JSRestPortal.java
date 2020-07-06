@@ -21,6 +21,7 @@ import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
+import dk.dbc.updateservice.dto.SchemaDTO;
 import dk.dbc.util.Timed;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -289,7 +290,7 @@ public class JSRestPortal {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         String marcXml;
-        LOGGER.info("sortRecord. Incomin request:{}", sortRecordRequestDTO);
+        LOGGER.info("sortRecord. Incoming request:{}", sortRecordRequestDTO);
         try {
             scripterEnvironment = scripterPool.take();
             result = (String) scripterEnvironment.callMethod("sortRecord",
@@ -309,6 +310,34 @@ public class JSRestPortal {
                 scripterPool.put(scripterEnvironment);
             } catch (InterruptedException e) {
                 LOGGER.error("sortError", e);
+            }
+        }
+    }
+
+    @POST
+    @Path("v1/getValidateSchemas")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getValidateSchemas(GetValidateSchemasRequestDTO getValidateSchemasRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+        String result;
+        LOGGER.info("getValidateSchemas. Incoming request:{}", getValidateSchemasRequestDTO);
+        try {
+            scripterEnvironment = scripterPool.take();
+            result = (String) scripterEnvironment.callMethod("getValidateSchemas",
+                    getValidateSchemasRequestDTO.getTemplateGroup(),
+                    getValidateSchemasRequestDTO.getAllowedLibraryRules());
+            sanityCheck(result, SchemaDTO[].class);
+            LOGGER.info("getValidateSchemas result:{}", result);
+            return Response.ok().entity(result).build();
+        } catch (InterruptedException | ScripterException | JSONBException e) {
+            LOGGER.error("getValidateSchemas", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("getValidateSchemas", e);
             }
         }
     }
