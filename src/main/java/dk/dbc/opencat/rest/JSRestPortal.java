@@ -70,16 +70,14 @@ public class JSRestPortal {
         try {
             scripterEnvironment = scripterPool.take();
             LOGGER.info("validateRecord incoming request:{}",validateRecordRequestDTO);
-            MarcRecord record = MarcConverter.convertFromMarcXChange(validateRecordRequestDTO.getRecord());
-
             result = (String) scripterEnvironment.callMethod("validateRecord",
                     validateRecordRequestDTO.getTemplateName(),
-                    jsonbContext.marshall(record),
+                    marcXMLtoJson(validateRecordRequestDTO.getRecord()),
                     settings);
             sanityCheck(result, MessageEntryDTO[].class);
             LOGGER.info("validateRecord result:{}", result);
             return Response.ok().entity(result).build();
-        } catch (ScripterException | JSONBException | InterruptedException e) {
+        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
             LOGGER.error("Error in validateRecord.", e);
             return Response.serverError().build();
 
@@ -103,15 +101,14 @@ public class JSRestPortal {
         try {
             scripterEnvironment = scripterPool.take();
             LOGGER.info("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
-            MarcRecord record = MarcConverter.convertFromMarcXChange(checkDoubleRecordFrontendRequestDTO.getRecord());
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
-                    jsonbContext.marshall(record),
+                    marcXMLtoJson(checkDoubleRecordFrontendRequestDTO.getRecord()),
                     settings);
             sanityCheck(result, DoubleRecordFrontendStatusDTO.class);
             LOGGER.info("checkDoubleRecordFrontend result:{}", result);
 
             return Response.ok().entity(result).build();
-        } catch (ScripterException | JSONBException | InterruptedException e) {
+        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
             LOGGER.error("checkDoubleRecordFrontend error", e);
             return Response.serverError().build();
         } finally {
