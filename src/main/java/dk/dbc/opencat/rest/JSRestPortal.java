@@ -1,6 +1,5 @@
 package dk.dbc.opencat.rest;
 
-import dk.dbc.common.records.MarcConverter;
 import dk.dbc.common.records.MarcField;
 import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.utils.RecordContentTransformer;
