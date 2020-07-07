@@ -25,7 +25,7 @@ public class StatusBean implements ServiceStatus {
     @EJB
     ScripterPool scripterPool;
 
-    String OK_ENTITY = (new HowRU()).withStatus(200).toJson();
+    String OK_ENTITY = new HowRU().withStatus(200).toJson();
 
     @GET
     @Path("status")
