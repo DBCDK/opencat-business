@@ -1,0 +1,32 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0},
+  "analysis":{
+    "field_types":{},
+    "field_names":{
+      "match.021e":{
+        "index":[
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","9788771690651",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","9788771690651",
+          "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
+              "text":"9788771690651",
+              "raw_bytes":"[39 37 38 38 37 37 31 36 39 30 36 35 31]",
+              "start":0,
+              "end":13,
+              "org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute#positionLength":1,
+              "type":"word",
+              "org.apache.lucene.analysis.tokenattributes.TermFrequencyAttribute#termFrequency":1,
+              "position":1,
+              "positionHistory":[1]}],
+          "org.apache.lucene.analysis.core.LowerCaseFilter",[{
+              "text":"9788771690651",
+              "raw_bytes":"[39 37 38 38 37 37 31 36 39 30 36 35 31]",
+              "start":0,
+              "end":13,
+              "org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute#positionLength":1,
+              "type":"word",
+              "org.apache.lucene.analysis.tokenattributes.TermFrequencyAttribute#termFrequency":1,
+              "position":1,
+              "positionHistory":[1,
+                1]}]]}}}}

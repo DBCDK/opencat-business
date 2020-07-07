@@ -1,0 +1,15 @@
+{
+  "id" : "1c64d687-d929-365d-a604-1a7206d9ba12",
+  "request" : {
+    "url" : "/select?q=%28match.021e%3A%229788771691078%22+OR+match.021e%3A%229788771690651%22%29+AND+marc.001b%3A870970&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-select-4zZqV.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "1c64d687-d929-365d-a604-1a7206d9ba12"
+}
