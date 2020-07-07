@@ -68,13 +68,13 @@ public class JSRestPortal {
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("validateRecord incoming request:{}",validateRecordRequestDTO);
+            LOGGER.debug("validateRecord incoming request:{}",validateRecordRequestDTO);
             result = (String) scripterEnvironment.callMethod("validateRecord",
                     validateRecordRequestDTO.getTemplateName(),
                     marcXMLtoJson(validateRecordRequestDTO.getRecord()),
                     settings);
             sanityCheck(result, MessageEntryDTO[].class);
-            LOGGER.info("validateRecord result:{}", result);
+            LOGGER.debug("validateRecord result:{}", result);
             return Response.ok().entity(result).build();
         } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
             LOGGER.error("Error in validateRecord.", e);
@@ -99,12 +99,12 @@ public class JSRestPortal {
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
+            LOGGER.debug("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
                     marcXMLtoJson(checkDoubleRecordFrontendRequestDTO.getRecord()),
                     settings);
             sanityCheck(result, DoubleRecordFrontendStatusDTO.class);
-            LOGGER.info("checkDoubleRecordFrontend result:{}", result);
+            LOGGER.debug("checkDoubleRecordFrontend result:{}", result);
 
             return Response.ok().entity(result).build();
         } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
@@ -129,13 +129,13 @@ public class JSRestPortal {
         boolean result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("checkTemplate. Incoming request: {}", checkTemplateRequestDTO);
+            LOGGER.debug("checkTemplate. Incoming request: {}", checkTemplateRequestDTO);
             result = (boolean) scripterEnvironment.callMethod("checkTemplate",
                     checkTemplateRequestDTO.getName(),
                     checkTemplateRequestDTO.getGroupId(),
                     checkTemplateRequestDTO.getLibraryType(),
                     settings);
-            LOGGER.info("checkTemplate result:{}", result);
+            LOGGER.debug("checkTemplate result:{}", result);
             return Response.ok().entity(result).build();
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplate", e);
@@ -161,7 +161,7 @@ public class JSRestPortal {
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("doRecategorizationThings. Incoming request:{}", doRecategorizationThingsRequestDTO);
+            LOGGER.debug("doRecategorizationThings. Incoming request:{}", doRecategorizationThingsRequestDTO);
             result = (String) scripterEnvironment.callMethod( "doRecategorizationThings",
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getCurrentRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getUpdateRecord()),
@@ -169,7 +169,7 @@ public class JSRestPortal {
             String resultMarcXChange = marcJsonToMarcXml(result);
             RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(resultMarcXChange);
-            LOGGER.info("doRecategorizationThings result:{}", recordResponseDTO);
+            LOGGER.debug("doRecategorizationThings result:{}", recordResponseDTO);
             return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
         } catch (InterruptedException | ScripterException | JSONBException | UnsupportedEncodingException | JAXBException e) {
             LOGGER.error("doRecategorizationThings", e);
@@ -194,11 +194,11 @@ public class JSRestPortal {
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("recategorizationNoteFieldFactory. Incoming request:{}", recategorizationNoteFieldFactoryRequestDTO);
+            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recategorizationNoteFieldFactoryRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
                     marcXMLtoJson(recategorizationNoteFieldFactoryRequestDTO.getRecord()));
             sanityCheck(result, MarcField.class);
-            LOGGER.info("recategorizationNoteFieldFactory result:{}", result);
+            LOGGER.debug("recategorizationNoteFieldFactory result:{}", result);
             return Response.ok().entity(result).build();
 
         } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException e) {
@@ -223,9 +223,9 @@ public class JSRestPortal {
         boolean result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("checkTemplateBuild. Incoming request:{}", name);
+            LOGGER.debug("checkTemplateBuild. Incoming request:{}", name);
             result = (boolean) scripterEnvironment.callMethod("checkTemplateBuild", name, settings);
-            LOGGER.info("checkTemplateBuild result:{}", result);
+            LOGGER.debug("checkTemplateBuild result:{}", result);
             return Response.ok().entity(result).build();
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplateBuild", e);
@@ -251,7 +251,7 @@ public class JSRestPortal {
         String marcXml;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.info("buildRecord. Incoming request:{}", buildRecordRequestDTO);
+            LOGGER.debug("buildRecord. Incoming request:{}", buildRecordRequestDTO);
             if (buildRecordRequestDTO.getRecord() != null) {
                 record = marcXMLtoJson(buildRecordRequestDTO.getRecord());
             }
@@ -262,7 +262,7 @@ public class JSRestPortal {
             marcXml = marcJsonToMarcXml(result);
             RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(marcXml);
-            LOGGER.info("buildRecord result:{}", recordResponseDTO);
+            LOGGER.debug("buildRecord result:{}", recordResponseDTO);
             return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
 
         } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
@@ -286,7 +286,7 @@ public class JSRestPortal {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         String marcXml;
-        LOGGER.info("sortRecord. Incoming request:{}", sortRecordRequestDTO);
+        LOGGER.debug("sortRecord. Incoming request:{}", sortRecordRequestDTO);
         try {
             scripterEnvironment = scripterPool.take();
             result = (String) scripterEnvironment.callMethod("sortRecord",
@@ -296,7 +296,7 @@ public class JSRestPortal {
             marcXml = marcJsonToMarcXml(result);
             RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(marcXml);
-            LOGGER.info("sortRecord result:{}", recordResponseDTO);
+            LOGGER.debug("sortRecord result:{}", recordResponseDTO);
             return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
         } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
             LOGGER.error("sortRecord", e);
@@ -317,14 +317,14 @@ public class JSRestPortal {
     public Response getValidateSchemas(GetValidateSchemasRequestDTO getValidateSchemasRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         String result;
-        LOGGER.info("getValidateSchemas. Incoming request:{}", getValidateSchemasRequestDTO);
+        LOGGER.debug("getValidateSchemas. Incoming request:{}", getValidateSchemasRequestDTO);
         try {
             scripterEnvironment = scripterPool.take();
             result = (String) scripterEnvironment.callMethod("getValidateSchemas",
                     getValidateSchemasRequestDTO.getTemplateGroup(),
                     getValidateSchemasRequestDTO.getAllowedLibraryRules());
             sanityCheck(result, SchemaDTO[].class);
-            LOGGER.info("getValidateSchemas result:{}", result);
+            LOGGER.debug("getValidateSchemas result:{}", result);
             return Response.ok().entity(result).build();
         } catch (InterruptedException | ScripterException | JSONBException e) {
             LOGGER.error("getValidateSchemas", e);
