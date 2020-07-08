@@ -56,7 +56,6 @@ public class ScripterEnvironmentFactory {
             doRecategorizationThings(scripterEnvironment, COMMON_RECORD);
             recategorizationNoteFieldFactory(scripterEnvironment, COMMON_RECORD);
             checkTemplateBuild(scripterEnvironment, settings);
-            buildRecord(scripterEnvironment, COMMON_RECORD, settings);
             sortRecord(scripterEnvironment, COMMON_RECORD);
             getValidateSchemas(scripterEnvironment);
             return result = scripterEnvironment;
@@ -193,14 +192,7 @@ public class ScripterEnvironmentFactory {
     private void checkTemplateBuild(ScripterEnvironment scripterEnvironment, Properties settings) throws ScripterException {
         scripterEnvironment.callMethod("checkTemplateBuild", "allowall", settings);
     }
-
-    private void  buildRecord(ScripterEnvironment scripterEnvironment, String record, Properties settings) throws ScripterException {
-        scripterEnvironment.callMethod("buildRecord",
-                "dbcsingle",
-                record,
-                settings);
-    }
-
+    
     private void sortRecord(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
         scripterEnvironment.callMethod("sortRecord",
                 "bogbind",
