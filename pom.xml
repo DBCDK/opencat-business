@@ -17,7 +17,7 @@
     <properties>
         <openagency.ws.client.version>2.34-SNAPSHOT</openagency.ws.client.version>
         <wiremock.version>2.26.3</wiremock.version>
-        <ocb.tools.artifact>https://is.dbc.dk/view/metascrum/job/updateservice/job/ocb-tools/job/master/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz</ocb.tools.artifact>
+        <ocb.tools.artifact>https://is.dbc.dk/job/updateservice/job/ocb-tools/job/master/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz</ocb.tools.artifact>
     </properties>
 
     <dependencyManagement>
