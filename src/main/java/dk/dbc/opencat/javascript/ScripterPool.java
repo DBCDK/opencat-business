@@ -72,8 +72,6 @@ public class ScripterPool {
     // defencive code.. make room for double size of MAX to avoid blocking on put
     private static final BlockingQueue<ScripterEnvironment> environments = new ArrayBlockingQueue(2 * MAX_NUMBER_OF_ENVIROMENTS);
 
-    private static final ScripterEnvironmentWarmUp warmup = new ScripterEnvironmentWarmUp();
-
     // replace with atomic int
     private static final AtomicInteger initializedEnvironments = new AtomicInteger();
 
@@ -122,7 +120,6 @@ public class ScripterPool {
             try {
                 profiler.start("JS enviroment " + i);
                 ScripterEnvironment scripterEnvironment = scripterEnvironmentFactory.newEnvironment(settings);
-                warmup.warm(scripterEnvironment, i);
                 environments.put(scripterEnvironment);
                 initializedEnvironments.incrementAndGet();
                 logger.info("Environment " + (i + 1) + "/" + active_javaScriptPoolSize + " added to ready queue");

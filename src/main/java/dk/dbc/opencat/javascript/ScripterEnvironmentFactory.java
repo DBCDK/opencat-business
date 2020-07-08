@@ -7,6 +7,10 @@ package dk.dbc.opencat.javascript;
 
 import dk.dbc.jslib.*;
 import dk.dbc.opencat.ws.JNDIResources;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.HashSet;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
@@ -36,6 +40,9 @@ public class ScripterEnvironmentFactory {
      * @throws ScripterException on errors from JS.
      */
     public ScripterEnvironment newEnvironment(Properties settings) throws Exception {
+        final URL commonRecord = ScripterEnvironmentFactory.class.getResource("/warmup/commonRecord.json");
+        final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()));
+
         logger.entry(settings);
         StopWatch watch = new Log4JStopWatch("javascript.env.create");
         ScripterEnvironment result = null;
@@ -43,6 +50,15 @@ public class ScripterEnvironmentFactory {
             Environment environment = createEnvironment(settings);
             ScripterEnvironment scripterEnvironment = new ScripterEnvironment(environment);
             initTemplates(scripterEnvironment, settings);
+            validateRecord(scripterEnvironment, COMMON_RECORD, settings);
+            checkDoubleRecordFrontend(scripterEnvironment, COMMON_RECORD, settings);
+            checkTemplate(scripterEnvironment, settings);
+            doRecategorizationThings(scripterEnvironment, COMMON_RECORD);
+            recategorizationNoteFieldFactory(scripterEnvironment, COMMON_RECORD);
+            checkTemplateBuild(scripterEnvironment, settings);
+            buildRecord(scripterEnvironment, COMMON_RECORD, settings);
+            sortRecord(scripterEnvironment, COMMON_RECORD);
+            getValidateSchemas(scripterEnvironment);
             return result = scripterEnvironment;
         } finally {
             watch.stop();
@@ -136,5 +152,64 @@ public class ScripterEnvironmentFactory {
             watch.stop();
             logger.exit();
         }
+    }
+
+    private void validateRecord(ScripterEnvironment scripterEnvironment, String record, Properties settings) throws ScripterException {
+        scripterEnvironment.callMethod("validateRecord",
+                "dbc",
+                record,
+                settings);
+    }
+
+    private void checkDoubleRecordFrontend(ScripterEnvironment scripterEnvironment, String record, Properties settings) throws ScripterException {
+        scripterEnvironment.callMethod("checkDoubleRecordFrontend",
+                record,
+                settings);
+    }
+
+    private void checkTemplate(ScripterEnvironment scripterEnvironment, Properties settings) throws ScripterException {
+        scripterEnvironment.callMethod("checkTemplate",
+                "netlydbog",
+                "710101",
+                "fbs",
+                settings);
+
+    }
+
+    private void doRecategorizationThings(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
+        scripterEnvironment.callMethod( "doRecategorizationThings",
+                record,
+                record,
+                record);
+
+    }
+
+    private void recategorizationNoteFieldFactory(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
+        scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
+                record);
+
+    }
+
+    private void checkTemplateBuild(ScripterEnvironment scripterEnvironment, Properties settings) throws ScripterException {
+        scripterEnvironment.callMethod("checkTemplateBuild", "allowall", settings);
+    }
+
+    private void  buildRecord(ScripterEnvironment scripterEnvironment, String record, Properties settings) throws ScripterException {
+        scripterEnvironment.callMethod("buildRecord",
+                "dbcsingle",
+                record,
+                settings);
+    }
+
+    private void sortRecord(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
+        scripterEnvironment.callMethod("sortRecord",
+                "bogbind",
+                record);
+    }
+
+    private void getValidateSchemas(ScripterEnvironment scripterEnvironment) throws ScripterException {
+        scripterEnvironment.callMethod("getValidateSchemas",
+                "dbc",
+                new HashSet<>(Arrays.asList("RecordRules.conflictingFields", "RecordRules.conflictingSubfields", "auth_root")));
     }
 }
