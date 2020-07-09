@@ -1,0 +1,15 @@
+{
+  "id" : "4c19bce9-4b9f-3af7-8afe-d28cf99ef3d7",
+  "request" : {
+    "url" : "/analysis/field?analysis.fieldvalue=9782843090387&analysis.fieldname=match.021e&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-analysis-field-PeU9v.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "4c19bce9-4b9f-3af7-8afe-d28cf99ef3d7"
+}

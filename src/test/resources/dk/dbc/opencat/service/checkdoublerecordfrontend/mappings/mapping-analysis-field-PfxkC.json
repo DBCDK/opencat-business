@@ -1,0 +1,15 @@
+{
+  "id" : "8e984636-f340-3ebe-b042-5b50c47f8906",
+  "request" : {
+    "url" : "/analysis/field?analysis.fieldvalue=2014&analysis.fieldname=match.008a&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-analysis-field-PfxkC.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "8e984636-f340-3ebe-b042-5b50c47f8906"
+}

@@ -1,0 +1,15 @@
+{
+  "id" : "7b3b6061-6148-306d-85be-2b3a7466584a",
+  "request" : {
+    "url" : "/analysis/field?analysis.fieldvalue=2013&analysis.fieldname=match.008a&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-analysis-field-H7NhT.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "7b3b6061-6148-306d-85be-2b3a7466584a"
+}

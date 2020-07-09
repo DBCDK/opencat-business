@@ -1,0 +1,32 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0},
+  "analysis":{
+    "field_types":{},
+    "field_names":{
+      "match.245a":{
+        "index":[
+          "org.apache.lucene.analysis.charfilter.MappingCharFilter","Ib er et æggehoved",
+          "org.apache.lucene.analysis.pattern.PatternReplaceCharFilter","Iberetæggehoved",
+          "org.apache.lucene.analysis.pattern.PatternTokenizer",[{
+              "text":"Iberetæggehoved",
+              "raw_bytes":"[49 62 65 72 65 74 c3 a6 67 67 65 68 6f 76 65 64]",
+              "start":0,
+              "end":18,
+              "org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute#positionLength":1,
+              "type":"word",
+              "org.apache.lucene.analysis.tokenattributes.TermFrequencyAttribute#termFrequency":1,
+              "position":1,
+              "positionHistory":[1]}],
+          "org.apache.lucene.analysis.core.LowerCaseFilter",[{
+              "text":"iberetæggehoved",
+              "raw_bytes":"[69 62 65 72 65 74 c3 a6 67 67 65 68 6f 76 65 64]",
+              "start":0,
+              "end":18,
+              "org.apache.lucene.analysis.tokenattributes.PositionLengthAttribute#positionLength":1,
+              "type":"word",
+              "org.apache.lucene.analysis.tokenattributes.TermFrequencyAttribute#termFrequency":1,
+              "position":1,
+              "positionHistory":[1,
+                1]}]]}}}}
