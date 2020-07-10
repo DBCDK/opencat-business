@@ -92,6 +92,28 @@ pipeline {
             }
         }
 
+        stage("Bump image-versions in opencat-business-secrets") {
+            agent {
+                docker {
+                    label workerNode
+                    image "docker.dbc.dk/build-env:latest"
+                    alwaysPull true
+                }
+            }
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    sh """
+                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b metascrum-staging
+                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b fbstest
+                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b basismig
+                """
+                }
+            }
+        }
+
     }
     post {
         unstable {
