@@ -20,6 +20,7 @@ var RawRepoClientCore = function () {
             return Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
         }
         catch (ex) {
+            Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists(0,0);
             return Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo;
         }
     }
