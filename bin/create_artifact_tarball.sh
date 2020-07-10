@@ -19,4 +19,14 @@ if [ -n "$1" ];
 fi
 
 cd deploy || die "cd deploy"
-tar --exclude-vcs --exclude=.idea -czf opencat-business.tar.gz opencat-business || die "tar --exclude-vcs --exclude=.idea -czf opencat-business.tar.gz opencat-business"
+
+TAR=tar
+
+# Special case handling for macOS. The built-in "tar" command of macOS doesn't support the --exclude-vcs argument.
+# Instead gnu-tar or gtar have to be used. Install wth "brew install gnu-tar"
+if [ "$(uname)" == "Darwin" ]
+then
+    TAR=gtar
+fi
+
+${TAR} --exclude-vcs --exclude=.idea -czf opencat-business.tar.gz opencat-business || die "tar --exclude-vcs --exclude=.idea -czf opencat-business.tar.gz opencat-business"

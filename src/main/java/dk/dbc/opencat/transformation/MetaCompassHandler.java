@@ -11,7 +11,6 @@ import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.MarcRecordReader;
 import dk.dbc.common.records.MarcRecordWriter;
 import dk.dbc.common.records.MarcSubField;
-import dk.dbc.marc.writer.MarcXchangeV1Writer;
 import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
 import dk.dbc.rawrepo.RecordServiceConnectorException;
@@ -27,7 +26,6 @@ import java.util.stream.Collectors;
 public class MetaCompassHandler {
     private final static XLogger logger = XLoggerFactory.getXLogger(MetaCompassHandler.class);
     private final static List<String> metakompasSubFieldsToCopy = Arrays.asList("e", "g", "p");
-    private final static MarcXchangeV1Writer marcRecordWriter = new MarcXchangeV1Writer();
     private final RecordService recordService;
 
     public MetaCompassHandler(RecordService recordService) {
