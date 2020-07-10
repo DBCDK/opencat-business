@@ -1,0 +1,14 @@
+001 00 *a 27384641 *b 870970 *c 20181015081133 *d 20080825 *f a
+004 00 *r n *a b
+008 00 *t m *x 06 *v 0
+014 00 *a 27430961
+032 00 *a DBF200843 *x ACC200835 *x BKM200843 *x DAT201729
+245 00 *g [Bind] 1
+300 00 *a 272 sider
+520 00 *a Tidligere udgave *n 50953033
+521 00 *& REX *b [1. oplag] *c 2008
+600 00 *a Karens Søster *h Sisse *6 54951124
+990 00 *o 200843 *b v *c a *u nt
+991 00 *o Bogbestillingen omfatter også: 2. Den hårde kerne. Bind 2-3
+991 00 *o Tidligere bind omkatalogiseret fra flerbindværk til sektionsopdelt værk
+996 00 *a DBC
