@@ -15,6 +15,7 @@ public class ApplicationConfig extends Application {
     private static final Set<Class<?>> classes = new HashSet<>(
             Arrays.asList(
                     JSRestPortal.class,
+                    TransformationService.class,
                     StatusBean.class)
     );
 
