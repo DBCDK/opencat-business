@@ -109,6 +109,7 @@ pipeline {
                      set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b metascrum-staging
                      set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b fbstest
                      set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b basismig
+                     set-new-version services/opencat-business-tmpl.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/dit-gitops-secrets DIT-${env.BUILD_NUMBER} -b master
                 """
                 }
             }
