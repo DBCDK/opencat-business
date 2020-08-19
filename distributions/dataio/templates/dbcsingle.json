@@ -186,6 +186,13 @@
                                 "fromValues": [ "e", "b" ],
                                 "toValues": [ "e", "b" ]
                             }
+                        },
+                        {
+                            "type": "SubfieldRules.subfieldValueExcludesField",
+                            "params": {
+                                "values": [ "e" ],
+                                "excludedFields": [ "014" ]
+                            }
                         }
                     ]
                 },
