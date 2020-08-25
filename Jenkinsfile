@@ -35,7 +35,6 @@ pipeline {
         GITLAB_PRIVATE_TOKEN = credentials("metascrum-gitlab-api-token")
         DOCKER_IMAGE_NAME = "docker-io.dbc.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
-        DOCKER_IMAGE_DIT_VERSION = "DIT-${env.BUILD_NUMBER}"
         OCBTEST_EXECUTABLE="java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
 
     }
@@ -83,8 +82,8 @@ pipeline {
                     sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
                     if (env.BRANCH_NAME == 'master') {
                         sh """
-                            docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_DIT_VERSION}
-                            docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_DIT_VERSION}
+                            docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:latest
+                            docker push ${DOCKER_IMAGE_NAME}:latest
                         """
                         archiveArtifacts(artifacts: "deploy/*.tar.gz")
                     }
@@ -106,10 +105,10 @@ pipeline {
             steps {
                 script {
                     sh """
-                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b metascrum-staging
-                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b fbstest
-                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets DIT-${env.BUILD_NUMBER} -b basismig
-                     set-new-version services/opencat-business-tmpl.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/dit-gitops-secrets DIT-${env.BUILD_NUMBER} -b master
+                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets master-${env.BUILD_NUMBER} -b metascrum-staging
+                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets master-${env.BUILD_NUMBER} -b fbstest
+                     set-new-version services ${env.GITLAB_PRIVATE_TOKEN} metascrum/opencat-business-secrets master-${env.BUILD_NUMBER} -b basismig
+                     set-new-version services/opencat-business-tmpl.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/dit-gitops-secrets master-${env.BUILD_NUMBER} -b master
                 """
                 }
             }
