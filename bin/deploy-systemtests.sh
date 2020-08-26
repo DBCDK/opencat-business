@@ -7,6 +7,11 @@ export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 RAWREPO_VERSION=1.13-snapshot
 RAWREPO_DIT_TAG=DIT-5016
 HOLDINGS_ITEMS_VERSION=1.1.4-snapshot
+RAWREPO_RECORD_SERVICE_TAG=DIT-253
+UPDATE_FACADE_TAG=master-32
+
+# Maven builds the opencat-business-service docker image
+mvn clean package
 
 cd ${PROJECT_ROOT}/docker
 mkdir -p logs/update/app logs/update/server logs/fakesmtp
@@ -147,8 +152,26 @@ export DEV_RAWREPO_DB_URL="rawrepo:thePassword@${HOST_IP}:${RAWREPO_PORT}/rawrep
 export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems"
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
 
-docker-compose up -d updateservice
+docker-compose up -d rawrepo-record-service
+sleep 3
 
+RAWREPO_RECORD_SERVICE_CONTAINER=`docker-compose ps -q rawrepo-record-service`
+export RAWREPO_RECORD_SERVICE_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_CONTAINER} `
+echo -e "RAWREPO_RECORD_SERVICE_PORT is ${RAWREPO_RECORD_SERVICE_PORT}\n"
+echo "rawrepo.record.service.url = http://${HOST_IP}:${RAWREPO_RECORD_SERVICE_PORT}" >> ${HOME}/.ocb-tools/testrun.properties
+export DEV_RAWREPO_RECORD_SERVICE_URL="http://${HOST_IP}:${RAWREPO_RECORD_SERVICE_PORT}"
+docker tag docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_TAG} docker-io.dbc.dk/rawrepo-record-service:${USER}
+docker rmi docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_TAG}
+
+docker-compose up -d opencat-business-service
+sleep 3
+OPENCAT_BUSINESS_SERVICE_CONTAINER=`docker-compose ps -q opencat-business-service`
+export OPENCAT_BUSINESS_SERVICE_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_CONTAINER} `
+echo -e "OPENCAT_BUSINESS_SERVICE_PORT is ${OPENCAT_BUSINESS_SERVICE_PORT}\n"
+echo "opencat.business.service.url = http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT}" >> ${HOME}/.ocb-tools/testrun.properties
+
+docker-compose up -d updateservice
+sleep 3
 UPDATESERVICE_IMAGE=`docker-compose ps -q updateservice`
 UPDATESERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
 echo -e "UPDATESERVICE_PORT_8080 is ${UPDATESERVICE_PORT_8080}\n"
@@ -157,10 +180,24 @@ echo -e "UPDATESERVICE_PORT_8686 is ${UPDATESERVICE_PORT_8686}\n"
 UPDATESERVICE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
 echo -e "UPDATESERVICE_PORT_4848 is ${UPDATESERVICE_PORT_4848}\n"
 
-echo "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}" > ${HOME}/.ocb-tools/testrun.properties
-echo "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}" >> ${HOME}/.ocb-tools/testrun.properties
-echo "doublerecordcheck.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest/api/v1/doublerecordcheck" >> ${HOME}/.ocb-tools/testrun.properties
-echo "classificationcheck.url = http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest/api/v1/classificationcheck" >> ${HOME}/.ocb-tools/testrun.properties
+export UPDATE_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest"
+export BUILD_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest"
+
+docker-compose up -d updateservice-facade
+sleep 3
+UPDATESERVICE_FACADE_IMAGE=`docker-compose ps -q updateservice-facade`
+UPDATESERVICE_FACADE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
+echo -e "UPDATESERVICE_FACADE_PORT_8080 is ${UPDATESERVICE_FACADE_PORT_8080}\n"
+UPDATESERVICE_FACADE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
+echo -e "UPDATESERVICE_FACADE_PORT_8686 is ${UPDATESERVICE_FACADE_PORT_8686}\n"
+UPDATESERVICE_FACADE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
+echo -e "UPDATESERVICE_FACADE_PORT_4848 is ${UPDATESERVICE_FACADE_PORT_4848}\n"
+
+docker tag docker-io.dbc.dk/updateservice-facade:${RAWREPO_RECORD_SERVICE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
+docker rmi docker-io.dbc.dk/updateservice-facade:${RAWREPO_RECORD_SERVICE_TAG}
+
+echo "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" > ${HOME}/.ocb-tools/testrun.properties
+echo "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" >> ${HOME}/.ocb-tools/testrun.properties
 
 echo "rawrepo.jdbc.driver = org.postgresql.Driver" >> ${HOME}/.ocb-tools/testrun.properties
 echo "rawrepo.jdbc.conn.url = jdbc:postgresql://${HOST_IP}:${RAWREPO_PORT}/rawrepo" >> ${HOME}/.ocb-tools/testrun.properties
@@ -174,7 +211,7 @@ echo "holdings.jdbc.conn.passwd = thePassword" >> ${HOME}/.ocb-tools/testrun.pro
 
 echo "solr.port = ${SOLR_PORT_NR}" >> ${HOME}/.ocb-tools/testrun.properties
 
-echo "request.headers.x.forwarded.for = ${HOST_IP}" >> ${HOME}/.ocb-tools/testrun.properties
+echo "request.headers.x.forwarded.for = 172.17.20.165" >> ${HOME}/.ocb-tools/testrun.properties
 
 echo "rawrepo.provider.name.dbc = dataio-update" >> ${HOME}/.ocb-tools/testrun.properties
 echo "rawrepo.provider.name.fbs = opencataloging-update" >> ${HOME}/.ocb-tools/testrun.properties
