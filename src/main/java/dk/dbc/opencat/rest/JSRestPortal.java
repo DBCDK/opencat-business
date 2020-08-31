@@ -10,11 +10,10 @@ import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
-import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
 import dk.dbc.opencatbusiness.dto.GetValidateSchemasRequestDTO;
-import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
@@ -91,18 +90,45 @@ public class JSRestPortal {
     }
 
     @POST
+    @Path("v1/checkDoubleRecord")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Timed
+    public Response checkDoubleRecord(RecordRequestDTO recordRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.debug("checkDoubleRecord. Incoming request: {}", recordRequestDTO);
+            scripterEnvironment.callMethod("checkDoubleRecord",
+                    marcXMLtoJson(recordRequestDTO.getRecord()),
+                    settings);
+
+            return Response.ok().build();
+        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
+            LOGGER.error("checkDoubleRecord error", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("checkDoubleRecord error", e);
+            }
+        }
+    }
+
+    @POST
     @Path("v1/checkDoubleRecordFrontend")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response checkDoubleRecordFrontend(CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO) {
+    public Response checkDoubleRecordFrontend(RecordRequestDTO recordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
+            LOGGER.debug("checkDoubleRecordFrontend. Incoming request: {}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
-                    marcXMLtoJson(checkDoubleRecordFrontendRequestDTO.getRecord()),
+                    marcXMLtoJson(recordRequestDTO.getRecord()),
                     settings);
             sanityCheck(result, DoubleRecordFrontendStatusDTO.class);
             LOGGER.debug("checkDoubleRecordFrontend result:{}", result);
@@ -188,15 +214,15 @@ public class JSRestPortal {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response recategorizationNoteFieldFactory(RecategorizationNoteFieldFactoryRequestDTO recategorizationNoteFieldFactoryRequestDTO) {
+    public Response recategorizationNoteFieldFactory(RecordRequestDTO recordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
 
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recategorizationNoteFieldFactoryRequestDTO);
+            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
-                    marcXMLtoJson(recategorizationNoteFieldFactoryRequestDTO.getRecord()));
+                    marcXMLtoJson(recordRequestDTO.getRecord()));
             sanityCheck(result, MarcField.class);
             LOGGER.debug("recategorizationNoteFieldFactory result:{}", result);
             return Response.ok().entity(result).build();
