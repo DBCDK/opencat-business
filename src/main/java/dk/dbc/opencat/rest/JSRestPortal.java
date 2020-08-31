@@ -22,8 +22,9 @@ import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.updateservice.dto.SchemaDTO;
 import dk.dbc.util.Timed;
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -34,8 +35,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 @Stateless
 @Path("/api")
@@ -68,7 +69,7 @@ public class JSRestPortal {
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("validateRecord incoming request:{}",validateRecordRequestDTO);
+            LOGGER.debug("validateRecord incoming request:{}", validateRecordRequestDTO);
             result = (String) scripterEnvironment.callMethod("validateRecord",
                     validateRecordRequestDTO.getTemplateName(),
                     marcXMLtoJson(validateRecordRequestDTO.getRecord()),
@@ -140,8 +141,7 @@ public class JSRestPortal {
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplate", e);
             return Response.serverError().build();
-        }
-        finally {
+        } finally {
             try {
                 scripterPool.put(scripterEnvironment);
             } catch (InterruptedException e) {
@@ -162,7 +162,7 @@ public class JSRestPortal {
         try {
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("doRecategorizationThings. Incoming request:{}", doRecategorizationThingsRequestDTO);
-            result = (String) scripterEnvironment.callMethod( "doRecategorizationThings",
+            result = (String) scripterEnvironment.callMethod("doRecategorizationThings",
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getCurrentRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getUpdateRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getNewRecord()));
@@ -347,7 +347,7 @@ public class JSRestPortal {
         jsonbContext.unmarshall(objectAsJson, t);
     }
 
-    private String marcJsonToMarcXml( String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
+    private String marcJsonToMarcXml(String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
         MarcRecord resultMarcRecord = jsonbContext.unmarshall(marcJson, MarcRecord.class);
         return new String(RecordContentTransformer.encodeRecord(resultMarcRecord));
     }
