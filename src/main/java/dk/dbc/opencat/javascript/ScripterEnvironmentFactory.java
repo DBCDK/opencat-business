@@ -50,14 +50,14 @@ public class ScripterEnvironmentFactory {
             Environment environment = createEnvironment(settings);
             ScripterEnvironment scripterEnvironment = new ScripterEnvironment(environment);
             initTemplates(scripterEnvironment, settings);
-            validateRecord(scripterEnvironment, COMMON_RECORD, settings);
-            checkDoubleRecordFrontend(scripterEnvironment, COMMON_RECORD, settings);
-            checkTemplate(scripterEnvironment, settings);
-            doRecategorizationThings(scripterEnvironment, COMMON_RECORD);
-            recategorizationNoteFieldFactory(scripterEnvironment, COMMON_RECORD);
-            checkTemplateBuild(scripterEnvironment, settings);
-            sortRecord(scripterEnvironment, COMMON_RECORD);
-            getValidateSchemas(scripterEnvironment);
+//            validateRecord(scripterEnvironment, COMMON_RECORD, settings);
+//            checkDoubleRecordFrontend(scripterEnvironment, COMMON_RECORD, settings);
+//            checkTemplate(scripterEnvironment, settings);
+//            doRecategorizationThings(scripterEnvironment, COMMON_RECORD);
+//            recategorizationNoteFieldFactory(scripterEnvironment, COMMON_RECORD);
+//            checkTemplateBuild(scripterEnvironment, settings);
+//            sortRecord(scripterEnvironment, COMMON_RECORD);
+//            getValidateSchemas(scripterEnvironment);
             return result = scripterEnvironment;
         } finally {
             watch.stop();
