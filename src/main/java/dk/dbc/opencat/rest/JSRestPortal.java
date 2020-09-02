@@ -365,7 +365,15 @@ public class JSRestPortal {
     }
 
     private String marcXMLtoJson(String marcxml) throws UnsupportedEncodingException, JSONBException {
-        MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcxml.getBytes());
+        final String marcToConvert;
+        if (marcxml == null|| marcxml.isEmpty()) {
+            marcToConvert = "<?xml version=\"1.0\" encoding=\"UTF-16\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1\">" +
+                    "<leader>00000n    2200000   4500</leader></record>";
+        } else {
+            marcToConvert = marcxml;
+        }
+
+        final MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcToConvert.getBytes());
         return jsonbContext.marshall(marcRecord);
     }
 
