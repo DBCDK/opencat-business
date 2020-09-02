@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class MetaCompassHandler {
     private final static XLogger logger = XLoggerFactory.getXLogger(MetaCompassHandler.class);
-    private final static List<String> metakompasSubFieldsToCopy = Arrays.asList("e", "g", "p");
+    private final static List<String> metakompasSubFieldsToCopy = Arrays.asList("e", "p");
     private final RecordService recordService;
 
     public MetaCompassHandler(RecordService recordService) {
@@ -112,9 +112,14 @@ public class MetaCompassHandler {
                         }
                     }
 
-                    // 665 *e/*g/*p -> 666 *s
+                    // 665 *e/*p -> 666 *s
                     if (metakompasSubFieldsToCopy.contains(subfield.getName())) {
                         subfieldsToCopy.add(new MarcSubField("s", subfield.getValue()));
+                    }
+
+                    // 665 *g -> 666 *o
+                    if ("g".equals(subfield.getName())) {
+                        subfieldsToCopy.add(new MarcSubField("o", subfield.getValue()));
                     }
                 }
             }
