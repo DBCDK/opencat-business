@@ -10,6 +10,8 @@ import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
+import dk.dbc.opencatbusiness.dto.CheckTemplateBuildRequestDTO;
+import dk.dbc.opencatbusiness.dto.CheckTemplateBuildResponseDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
 import dk.dbc.opencatbusiness.dto.GetValidateSchemasRequestDTO;
@@ -244,15 +246,18 @@ public class JSRestPortal {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response checkTemplateBuild(String name) {
+    public Response checkTemplateBuild(CheckTemplateBuildRequestDTO checkTemplateBuildRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         boolean result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("checkTemplateBuild. Incoming request:{}", name);
+            final String name = checkTemplateBuildRequestDTO.getName();
+            LOGGER.debug("checkTemplateBuild. Incoming request:{}", checkTemplateBuildRequestDTO);
             result = (boolean) scripterEnvironment.callMethod("checkTemplateBuild", name, settings);
-            LOGGER.debug("checkTemplateBuild result:{}", result);
-            return Response.ok().entity(result).build();
+            final CheckTemplateBuildResponseDTO checkTemplateBuildResponseDTO = new CheckTemplateBuildResponseDTO();
+            checkTemplateBuildResponseDTO.setResult(result);
+            LOGGER.debug("checkTemplateBuild result:{}", checkTemplateBuildResponseDTO);
+            return Response.ok().entity(checkTemplateBuildResponseDTO).build();
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplateBuild", e);
             return Response.serverError().build();
