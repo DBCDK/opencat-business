@@ -7,6 +7,7 @@ import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.updateservice.dto.TypeEnumDTO;
 import java.sql.Connection;
+import java.util.Arrays;
 import javax.ws.rs.core.Response;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -348,6 +349,59 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
         expected.setOrdinalPositionOfSubfield(8);
 
         assertThat("Structured error message is correct", actual[0], is(expected));
+    }
+
+    @Test
+    public void validateRecord_empty_record() throws JSONBException {
+        final ValidateRecordRequestDTO validateRecordRequestDTO = new ValidateRecordRequestDTO();
+        validateRecordRequestDTO.setTemplateName("dbcsingle");
+        validateRecordRequestDTO.setRecord(null);
+
+        final HttpPost httpPost = new HttpPost(httpClient)
+                .withBaseUrl(openCatBusinessBaseURL)
+                .withPathElements(new PathBuilder("/api/v1/validateRecord")
+                        .build())
+                .withJsonData(JSONB_CONTEXT.marshall(validateRecordRequestDTO));
+
+        final Response response = httpClient.execute(httpPost);
+        assertThat("Response code", response.getStatus(), is(200));
+
+        final MessageEntryDTO[] actual =
+                JSONB_CONTEXT.unmarshall(response.readEntity(String.class), MessageEntryDTO[].class);
+        assertThat("List of messages is one", actual.length, is(5));
+
+        LOGGGER.info("Actual: {}", Arrays.asList(actual));
+
+        final MessageEntryDTO expected001 = new MessageEntryDTO();
+        expected001.setType(TypeEnumDTO.ERROR);
+        expected001.setMessage("Felt '001' mangler i posten");
+        expected001.setUrlForDocumentation("http://www.kat-format.dk/danMARC2/Danmarc2.5.htm");
+
+        final MessageEntryDTO expected004 = new MessageEntryDTO();
+        expected004.setType(TypeEnumDTO.ERROR);
+        expected004.setMessage("Felt '004' mangler i posten");
+        expected004.setUrlForDocumentation("http://www.kat-format.dk/danMARC2/Danmarc2.7.htm");
+
+        final MessageEntryDTO expected008 = new MessageEntryDTO();
+        expected008.setType(TypeEnumDTO.ERROR);
+        expected008.setMessage("Felt '008' mangler i posten");
+        expected008.setUrlForDocumentation("http://www.kat-format.dk/danMARC2/Danmarc2.9.htm");
+
+        final MessageEntryDTO expected009 = new MessageEntryDTO();
+        expected009.setType(TypeEnumDTO.ERROR);
+        expected009.setMessage("Felt '009' mangler i posten");
+        expected009.setUrlForDocumentation("http://www.kat-format.dk/danMARC2/Danmarc2.a.htm");
+
+        final MessageEntryDTO expected245 = new MessageEntryDTO();
+        expected245.setType(TypeEnumDTO.ERROR);
+        expected245.setMessage("Felt '245' mangler i posten");
+        expected245.setUrlForDocumentation("http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm");
+
+        assertThat("Structured error message is correct", actual[0], is(expected001));
+        assertThat("Structured error message is correct", actual[1], is(expected004));
+        assertThat("Structured error message is correct", actual[2], is(expected008));
+        assertThat("Structured error message is correct", actual[3], is(expected009));
+        assertThat("Structured error message is correct", actual[4], is(expected245));
     }
 }
 

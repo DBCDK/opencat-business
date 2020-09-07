@@ -10,11 +10,12 @@ import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
-import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
+import dk.dbc.opencatbusiness.dto.CheckTemplateBuildRequestDTO;
+import dk.dbc.opencatbusiness.dto.CheckTemplateBuildResponseDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateRequestDTO;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
 import dk.dbc.opencatbusiness.dto.GetValidateSchemasRequestDTO;
-import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
@@ -22,8 +23,9 @@ import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.updateservice.dto.SchemaDTO;
 import dk.dbc.util.Timed;
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -34,8 +36,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 @Stateless
 @Path("/api")
@@ -68,7 +70,7 @@ public class JSRestPortal {
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("validateRecord incoming request:{}",validateRecordRequestDTO);
+            LOGGER.debug("validateRecord incoming request:{}", validateRecordRequestDTO);
             result = (String) scripterEnvironment.callMethod("validateRecord",
                     validateRecordRequestDTO.getTemplateName(),
                     marcXMLtoJson(validateRecordRequestDTO.getRecord()),
@@ -90,18 +92,45 @@ public class JSRestPortal {
     }
 
     @POST
+    @Path("v1/checkDoubleRecord")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Timed
+    public Response checkDoubleRecord(RecordRequestDTO recordRequestDTO) {
+        ScripterEnvironment scripterEnvironment = null;
+        try {
+            scripterEnvironment = scripterPool.take();
+            LOGGER.debug("checkDoubleRecord. Incoming request: {}", recordRequestDTO);
+            scripterEnvironment.callMethod("checkDoubleRecord",
+                    marcXMLtoJson(recordRequestDTO.getRecord()),
+                    settings);
+
+            return Response.ok().build();
+        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
+            LOGGER.error("checkDoubleRecord error", e);
+            return Response.serverError().build();
+        } finally {
+            try {
+                scripterPool.put(scripterEnvironment);
+            } catch (InterruptedException e) {
+                LOGGER.error("checkDoubleRecord error", e);
+            }
+        }
+    }
+
+    @POST
     @Path("v1/checkDoubleRecordFrontend")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response checkDoubleRecordFrontend(CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO) {
+    public Response checkDoubleRecordFrontend(RecordRequestDTO recordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("checkDoubleRecordFrontend. Incoming request: {}", checkDoubleRecordFrontendRequestDTO);
+            LOGGER.debug("checkDoubleRecordFrontend. Incoming request: {}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
-                    marcXMLtoJson(checkDoubleRecordFrontendRequestDTO.getRecord()),
+                    marcXMLtoJson(recordRequestDTO.getRecord()),
                     settings);
             sanityCheck(result, DoubleRecordFrontendStatusDTO.class);
             LOGGER.debug("checkDoubleRecordFrontend result:{}", result);
@@ -140,8 +169,7 @@ public class JSRestPortal {
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplate", e);
             return Response.serverError().build();
-        }
-        finally {
+        } finally {
             try {
                 scripterPool.put(scripterEnvironment);
             } catch (InterruptedException e) {
@@ -162,7 +190,7 @@ public class JSRestPortal {
         try {
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("doRecategorizationThings. Incoming request:{}", doRecategorizationThingsRequestDTO);
-            result = (String) scripterEnvironment.callMethod( "doRecategorizationThings",
+            result = (String) scripterEnvironment.callMethod("doRecategorizationThings",
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getCurrentRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getUpdateRecord()),
                     marcXMLtoJson(doRecategorizationThingsRequestDTO.getNewRecord()));
@@ -188,15 +216,15 @@ public class JSRestPortal {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response recategorizationNoteFieldFactory(RecategorizationNoteFieldFactoryRequestDTO recategorizationNoteFieldFactoryRequestDTO) {
+    public Response recategorizationNoteFieldFactory(RecordRequestDTO recordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
 
         String result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recategorizationNoteFieldFactoryRequestDTO);
+            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
-                    marcXMLtoJson(recategorizationNoteFieldFactoryRequestDTO.getRecord()));
+                    marcXMLtoJson(recordRequestDTO.getRecord()));
             sanityCheck(result, MarcField.class);
             LOGGER.debug("recategorizationNoteFieldFactory result:{}", result);
             return Response.ok().entity(result).build();
@@ -218,15 +246,18 @@ public class JSRestPortal {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Timed
-    public Response checkTemplateBuild(String name) {
+    public Response checkTemplateBuild(CheckTemplateBuildRequestDTO checkTemplateBuildRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         boolean result;
         try {
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("checkTemplateBuild. Incoming request:{}", name);
+            final String name = checkTemplateBuildRequestDTO.getName();
+            LOGGER.debug("checkTemplateBuild. Incoming request:{}", checkTemplateBuildRequestDTO);
             result = (boolean) scripterEnvironment.callMethod("checkTemplateBuild", name, settings);
-            LOGGER.debug("checkTemplateBuild result:{}", result);
-            return Response.ok().entity(result).build();
+            final CheckTemplateBuildResponseDTO checkTemplateBuildResponseDTO = new CheckTemplateBuildResponseDTO();
+            checkTemplateBuildResponseDTO.setResult(result);
+            LOGGER.debug("checkTemplateBuild result:{}", checkTemplateBuildResponseDTO);
+            return Response.ok().entity(checkTemplateBuildResponseDTO).build();
         } catch (InterruptedException | ScripterException e) {
             LOGGER.error("checkTemplateBuild", e);
             return Response.serverError().build();
@@ -339,7 +370,15 @@ public class JSRestPortal {
     }
 
     private String marcXMLtoJson(String marcxml) throws UnsupportedEncodingException, JSONBException {
-        MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcxml.getBytes());
+        final String marcToConvert;
+        if (marcxml == null|| marcxml.isEmpty()) {
+            marcToConvert = "<?xml version=\"1.0\" encoding=\"UTF-16\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1\">" +
+                    "<leader>00000n    2200000   4500</leader></record>";
+        } else {
+            marcToConvert = marcxml;
+        }
+
+        final MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcToConvert.getBytes());
         return jsonbContext.marshall(marcRecord);
     }
 
@@ -347,7 +386,7 @@ public class JSRestPortal {
         jsonbContext.unmarshall(objectAsJson, t);
     }
 
-    private String marcJsonToMarcXml( String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
+    private String marcJsonToMarcXml(String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
         MarcRecord resultMarcRecord = jsonbContext.unmarshall(marcJson, MarcRecord.class);
         return new String(RecordContentTransformer.encodeRecord(resultMarcRecord));
     }

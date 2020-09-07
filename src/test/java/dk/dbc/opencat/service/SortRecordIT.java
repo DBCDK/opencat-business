@@ -184,7 +184,6 @@ public class SortRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"a\">710100</subfield>\n" +
                 "    </datafield>\n" +
                 "</record>\n";
-
     }
 
 }
