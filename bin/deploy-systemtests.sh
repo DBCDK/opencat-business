@@ -7,7 +7,7 @@ export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 RAWREPO_VERSION=1.13-snapshot
 RAWREPO_DIT_TAG=DIT-5016
 HOLDINGS_ITEMS_VERSION=1.1.4-snapshot
-UPDATE_FACADE_TAG=master-32
+UPDATE_FACADE_TAG=master-31
 
 cd ${PROJECT_ROOT}/docker
 mkdir -p logs/update/app logs/update/server logs/fakesmtp
@@ -171,8 +171,8 @@ echo -e "UPDATESERVICE_FACADE_PORT_8686 is ${UPDATESERVICE_FACADE_PORT_8686}\n"
 UPDATESERVICE_FACADE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
 echo -e "UPDATESERVICE_FACADE_PORT_4848 is ${UPDATESERVICE_FACADE_PORT_4848}\n"
 
-docker tag docker-io.dbc.dk/updateservice-facade:${RAWREPO_RECORD_SERVICE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
-docker rmi docker-io.dbc.dk/updateservice-facade:${RAWREPO_RECORD_SERVICE_TAG}
+docker tag docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
+docker rmi docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG}
 
 echo "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" > ${HOME}/.ocb-tools/testrun.properties
 echo "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" >> ${HOME}/.ocb-tools/testrun.properties
