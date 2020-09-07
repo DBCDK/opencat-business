@@ -5,18 +5,27 @@
 
 package dk.dbc.opencat.javascript;
 
-import dk.dbc.jslib.*;
+import dk.dbc.jslib.ClasspathSchemeHandler;
+import dk.dbc.jslib.Environment;
+import dk.dbc.jslib.FileSchemeHandler;
+import dk.dbc.jslib.ModuleHandler;
+import dk.dbc.jslib.SchemeURI;
 import dk.dbc.opencat.ws.JNDIResources;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.HashSet;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Properties;
 
 /**
@@ -40,24 +49,14 @@ public class ScripterEnvironmentFactory {
      * @throws ScripterException on errors from JS.
      */
     public ScripterEnvironment newEnvironment(Properties settings) throws Exception {
-        final URL commonRecord = ScripterEnvironmentFactory.class.getResource("/warmup/commonRecord.json");
-        final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()));
-
         logger.entry(settings);
-        StopWatch watch = new Log4JStopWatch("javascript.env.create");
+        final StopWatch watch = new Log4JStopWatch("javascript.env.create");
         ScripterEnvironment result = null;
         try {
-            Environment environment = createEnvironment(settings);
-            ScripterEnvironment scripterEnvironment = new ScripterEnvironment(environment);
+            final Environment environment = createEnvironment(settings);
+            final ScripterEnvironment scripterEnvironment = new ScripterEnvironment(environment);
             initTemplates(scripterEnvironment, settings);
-//            validateRecord(scripterEnvironment, COMMON_RECORD, settings);
-//            checkDoubleRecordFrontend(scripterEnvironment, COMMON_RECORD, settings);
-//            checkTemplate(scripterEnvironment, settings);
-//            doRecategorizationThings(scripterEnvironment, COMMON_RECORD);
-//            recategorizationNoteFieldFactory(scripterEnvironment, COMMON_RECORD);
-//            checkTemplateBuild(scripterEnvironment, settings);
-//            sortRecord(scripterEnvironment, COMMON_RECORD);
-//            getValidateSchemas(scripterEnvironment);
+
             return result = scripterEnvironment;
         } finally {
             watch.stop();
@@ -68,11 +67,11 @@ public class ScripterEnvironmentFactory {
     private Environment createEnvironment(Properties settings) throws Exception {
         logger.entry();
         try {
-            String baseDir = settings.getProperty(JNDIResources.JAVASCRIPT_BASEDIR);
-            Environment envir = new Environment();
-            envir.registerUseFunction(createModulesHandler(baseDir));
-            envir.evalFile(String.format(ENTRYPOINTS_PATTERN_UPDATE, baseDir));
-            return envir;
+            final String baseDir = settings.getProperty(JNDIResources.JAVASCRIPT_BASEDIR);
+            final Environment environment = new Environment();
+            environment.registerUseFunction(createModulesHandler(baseDir));
+            environment.evalFile(String.format(ENTRYPOINTS_PATTERN_UPDATE, baseDir));
+            return environment;
         } catch (Exception e) {
             logger.catching(e);
             throw e;
@@ -84,8 +83,8 @@ public class ScripterEnvironmentFactory {
     private ModuleHandler createModulesHandler(String baseDir) {
         logger.entry();
         try {
-            ModuleHandler handler = new ModuleHandler();
-            String modulesDir;
+            final ModuleHandler handler = new ModuleHandler();
+            final String modulesDir;
 
             modulesDir = String.format(MODULES_PATH_PATTERN, baseDir);
             handler.registerHandler("file", new FileSchemeHandler(modulesDir));
@@ -106,9 +105,9 @@ public class ScripterEnvironmentFactory {
 
     private void addSearchPathsFromSettingsFile(ModuleHandler handler, String schemeName, String modulesDir) {
         logger.entry(handler, schemeName, modulesDir);
-        String fileName = modulesDir + "/settings.properties";
+        final String fileName = modulesDir + "/settings.properties";
         try {
-            File file = new File(fileName);
+            final File file = new File(fileName);
             addSearchPathsFromSettingsFile(handler, schemeName, new FileInputStream(file));
         } catch (FileNotFoundException e1) {
             logger.catching(e1);
@@ -124,15 +123,15 @@ public class ScripterEnvironmentFactory {
     private void addSearchPathsFromSettingsFile(ModuleHandler handler, String schemeName, InputStream is) throws IOException {
         logger.entry(handler, schemeName, is);
         try {
-            Properties props = new Properties();
+            final Properties props = new Properties();
             props.load(is);
             if (!props.containsKey("modules.search.path")) {
                 logger.warn("Search path for modules is not specified");
                 return;
             }
-            String moduleSearchPathString = props.getProperty("modules.search.path");
+            final String moduleSearchPathString = props.getProperty("modules.search.path");
             if (moduleSearchPathString != null && !moduleSearchPathString.isEmpty()) {
-                String[] moduleSearchPath = moduleSearchPathString.split(";");
+                final String[] moduleSearchPath = moduleSearchPathString.split(";");
                 for (String s : moduleSearchPath) {
                     handler.addSearchPath(new SchemeURI(schemeName + ":" + s));
                 }
@@ -144,9 +143,34 @@ public class ScripterEnvironmentFactory {
 
     void initTemplates(ScripterEnvironment environment, Properties settings) throws ScripterException {
         logger.entry();
-        StopWatch watch = new Log4JStopWatch("javascript.env.create.templates");
+        final StopWatch watch = new Log4JStopWatch("javascript.env.create.templates");
         try {
             environment.callMethod("initTemplates", settings);
+        } finally {
+            watch.stop();
+            logger.exit();
+        }
+    }
+
+    /*
+        Warm up function. Not currently used as it requires a working openagency.
+        Should be used by kubernetes readiness check in the future.
+     */
+    void initFunctions(ScripterEnvironment environment, Properties settings) throws ScripterException, URISyntaxException, IOException {
+        logger.entry();
+        final StopWatch watch = new Log4JStopWatch("javascript.env.init.functions");
+        try {
+            final URL commonRecord = ScripterEnvironmentFactory.class.getResource("/warmup/commonRecord.json");
+            final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()));
+
+            validateRecord(environment, COMMON_RECORD, settings);
+            checkDoubleRecordFrontend(environment, COMMON_RECORD, settings);
+            checkTemplate(environment, settings);
+            doRecategorizationThings(environment, COMMON_RECORD);
+            recategorizationNoteFieldFactory(environment, COMMON_RECORD);
+            checkTemplateBuild(environment, settings);
+            sortRecord(environment, COMMON_RECORD);
+            getValidateSchemas(environment);
         } finally {
             watch.stop();
             logger.exit();
@@ -176,7 +200,7 @@ public class ScripterEnvironmentFactory {
     }
 
     private void doRecategorizationThings(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
-        scripterEnvironment.callMethod( "doRecategorizationThings",
+        scripterEnvironment.callMethod("doRecategorizationThings",
                 record,
                 record,
                 record);
@@ -192,7 +216,7 @@ public class ScripterEnvironmentFactory {
     private void checkTemplateBuild(ScripterEnvironment scripterEnvironment, Properties settings) throws ScripterException {
         scripterEnvironment.callMethod("checkTemplateBuild", "allowall", settings);
     }
-    
+
     private void sortRecord(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
         scripterEnvironment.callMethod("sortRecord",
                 "bogbind",
