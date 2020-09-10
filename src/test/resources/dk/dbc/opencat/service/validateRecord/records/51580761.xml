@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><marcx:record xmlns:marcx="info:lc/xmlns/marcxchange-v1" format="danMARC2" type="Bibliographic">
+    <marcx:leader>00000n    2200000   4500</marcx:leader>
+    <marcx:datafield tag="001" ind1="0" ind2="0">
+        <marcx:subfield code="a">51580761</marcx:subfield>
+        <marcx:subfield code="b">870970</marcx:subfield>
+        <marcx:subfield code="c">20150304180759</marcx:subfield>
+        <marcx:subfield code="d">20150209</marcx:subfield>
+        <marcx:subfield code="f">a</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="004" ind1="0" ind2="0">
+        <marcx:subfield code="r">n</marcx:subfield>
+        <marcx:subfield code="a">e</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="008" ind1="0" ind2="0">
+        <marcx:subfield code="t">m</marcx:subfield>
+        <marcx:subfield code="u">f</marcx:subfield>
+        <marcx:subfield code="a">2015</marcx:subfield>
+        <marcx:subfield code="b">dk</marcx:subfield>
+        <marcx:subfield code="d">å</marcx:subfield>
+        <marcx:subfield code="d">x</marcx:subfield>
+        <marcx:subfield code="j">f</marcx:subfield>
+        <marcx:subfield code="l">ger</marcx:subfield>
+        <marcx:subfield code="o">s</marcx:subfield>
+        <marcx:subfield code="v">0</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="009" ind1="0" ind2="0">
+        <marcx:subfield code="a">a</marcx:subfield>
+        <marcx:subfield code="g">xx</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="021" ind1="0" ind2="0">
+        <marcx:subfield code="e">9788771691078</marcx:subfield>
+        <marcx:subfield code="c">hf.</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="021" ind1="0" ind2="0">
+        <marcx:subfield code="e">9788771690651</marcx:subfield>
+        <marcx:subfield code="b">bogpakken DigiLesen nybegyndertysk</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="032" ind1="0" ind2="0">
+        <marcx:subfield code="x">ACC201507</marcx:subfield>
+        <marcx:subfield code="a">DBF201511</marcx:subfield>
+        <marcx:subfield code="x">BKM201511</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="100" ind1="0" ind2="0">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="a">Møller</marcx:subfield>
+        <marcx:subfield code="h">Karl Henrik</marcx:subfield>
+        <marcx:subfield code="4">aut</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="245" ind1="0" ind2="0">
+        <marcx:subfield code="a">Lilly macht einen Ausflug</marcx:subfield>
+        <marcx:subfield code="c">QR bog</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="250" ind1="0" ind2="0">
+        <marcx:subfield code="a">1. udgave</marcx:subfield>
+        <marcx:subfield code="b">÷</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="260" ind1="0" ind2="0">
+        <marcx:subfield code="&amp;">1</marcx:subfield>
+        <marcx:subfield code="a">[Værløse]</marcx:subfield>
+        <marcx:subfield code="b">DigTea</marcx:subfield>
+        <marcx:subfield code="c">2015</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="300" ind1="0" ind2="0">
+        <marcx:subfield code="a">23 sider</marcx:subfield>
+        <marcx:subfield code="b">alle ill. i farver</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="440" ind1="0" ind2="0">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="a">Digilesen</marcx:subfield>
+        <marcx:subfield code="o">Lillys Leben - Niveau B</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="504" ind1="0" ind2="0">
+        <marcx:subfield code="&amp;">1</marcx:subfield>
+        <marcx:subfield code="a">Lilly og hendes far tager på udflugt, og hendes far bestemmer at de skal ud i naturen, men Lilly ville hellere have været på shoppetur i byen. Desværre forløber turen ikke helt som planlagt</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="512" ind1="0" ind2="0">
+        <marcx:subfield code="a">På titelsiden: Hören und lesen</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="520" ind1="0" ind2="0">
+        <marcx:subfield code="&amp;">1</marcx:subfield>
+        <marcx:subfield code="a">Originaludgave: 2015</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="521" ind1="0" ind2="0">
+        <marcx:subfield code="b">1. oplag</marcx:subfield>
+        <marcx:subfield code="c">2015</marcx:subfield>
+        <marcx:subfield code="k">Lasertryk</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="526" ind1="0" ind2="0">
+        <marcx:subfield code="a">Heri QR-koder til bogens tekst indlæst</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="652" ind1="0" ind2="0">
+        <marcx:subfield code="n">86.4</marcx:subfield>
+        <marcx:subfield code="z">096</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="652" ind1="0" ind2="0">
+        <marcx:subfield code="o">84</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="666" ind1="0" ind2="0">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="s">udflugter</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="666" ind1="0" ind2="0">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">for 11 år</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="666" ind1="0" ind2="0">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">for 12 år</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="666" ind1="0" ind2="0">
+        <marcx:subfield code="0"/>
+        <marcx:subfield code="u">let at læse</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="720" ind1="0" ind2="0">
+        <marcx:subfield code="o">Mette Bødker</marcx:subfield>
+        <marcx:subfield code="4">ill</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="945" ind1="0" ind2="0">
+        <marcx:subfield code="a">Digi lesen</marcx:subfield>
+        <marcx:subfield code="z">440(a)</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="945" ind1="0" ind2="0">
+        <marcx:subfield code="a">Lillys Leben - Niveau B</marcx:subfield>
+        <marcx:subfield code="z">440(a,o)</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="990" ind1="0" ind2="0">
+        <marcx:subfield code="o">201511</marcx:subfield>
+        <marcx:subfield code="b">b</marcx:subfield>
+        <marcx:subfield code="b">s</marcx:subfield>
+        <marcx:subfield code="u">nt</marcx:subfield>
+    </marcx:datafield>
+    <marcx:datafield tag="996" ind1="0" ind2="0">
+        <marcx:subfield code="a">DBC</marcx:subfield>
+    </marcx:datafield>
+</marcx:record>

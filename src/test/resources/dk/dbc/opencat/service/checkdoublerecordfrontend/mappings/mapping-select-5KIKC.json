@@ -1,0 +1,15 @@
+{
+  "id" : "2864a262-ef47-301c-a029-ad2d6e1e0995",
+  "request" : {
+    "url" : "/select?q=%28match.021e%3A%229782843090387%22%29+AND+marc.001b%3A870970&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-select-5KIKC.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "2864a262-ef47-301c-a029-ad2d6e1e0995"
+}

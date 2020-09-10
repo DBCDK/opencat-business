@@ -12,16 +12,23 @@ var ResourceBundleFactory = function () {
     var bundles = {};
 
     function init(settings) {
-        Log.info('javascript.basedir = ' + settings.get('javascript.basedir'));
-        setDistributionPaths(settings.get('javascript.basedir'), "common");
+        var start = new Date().getTime();
+        if (resourcePaths.length === 0) {
+            var pathFormat = "%s/distributions/%s/resources";
+            setResourcePaths([
+                StringUtil.sprintf(pathFormat, settings.get('javascript.basedir'), "common")
+            ]);
+        }
+        Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.init]');
     }
 
     function getBundle(bundleName) {
-        return getBundleByLocale(bundleName, DEFAULT_LOCALE);
+        return __getBundleByLocale(bundleName, DEFAULT_LOCALE);
     }
 
-    function getBundleByLocale(bundleName, locale) {
+    function __getBundleByLocale(bundleName, locale) {
         Log.trace("Enter - ResourceBundleFactory.getBundleByLocale");
+        var start = new Date().getTime();
         var result = null;
         try {
             var filename = __calcResourceFilename(bundleName, locale);
@@ -42,19 +49,12 @@ var ResourceBundleFactory = function () {
             throw StringUtil.sprintf("Unable to load resource bundle %s for locale %s in paths %s", bundleName, Locale.toString(locale), resourcePaths);
         } finally {
             Log.trace("Exit - ResourceBundleFactory.getBundleByLocale(): ", result);
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.ResourceBundleFactory.getBundleByLocale(' + bundleName + ')]');
         }
     }
 
     function setResourcePaths(paths) {
         resourcePaths = paths;
-    }
-
-    function setDistributionPaths(basedir, distributionName) {
-        var pathFormat = "%s/distributions/%s/resources";
-        setResourcePaths([
-            StringUtil.sprintf(pathFormat, basedir, distributionName),
-            StringUtil.sprintf(pathFormat, basedir, "common")
-        ]);
     }
 
     function __calcResourceFilename(bundleName, locale) {
@@ -83,8 +83,6 @@ var ResourceBundleFactory = function () {
     return {
         'init': init,
         'setResourcePaths': setResourcePaths,
-        'setDistributionPaths': setDistributionPaths,
-        'getBundle': getBundle,
-        'getBundleByLocale': getBundleByLocale
+        'getBundle': getBundle
     }
 }();

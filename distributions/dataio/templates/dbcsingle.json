@@ -186,6 +186,13 @@
                                 "fromValues": [ "e", "b" ],
                                 "toValues": [ "e", "b" ]
                             }
+                        },
+                        {
+                            "type": "SubfieldRules.subfieldValueExcludesField",
+                            "params": {
+                                "values": [ "e" ],
+                                "excludedFields": [ "014" ]
+                            }
                         }
                     ]
                 },
@@ -1055,8 +1062,10 @@
         "650": "DanMarc2.fields.650",
         "651": "DanMarc2.fields.651",
         "652":{
+            "comment": "forskel fra dM2: *v m\u00E5 gentages. Der findes DBC-musikposter med gentagne 652 *i + *v",
+            "comment2": "*i og *v udeladt i delfeltsorteringen",
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting":"0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
                 "&": {
                     "repeatable": false
@@ -1064,7 +1073,7 @@
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
-                "v":"DanMarc2.fields.652.subfields.v",
+                "v":{},
                 "a":"DanMarc2.fields.652.subfields.a",
                 "h":"DanMarc2.fields.652.subfields.h",
                 "e":"DanMarc2.fields.652.subfields.e",

@@ -11,12 +11,26 @@ use("Log");
 EXPORTED_SYMBOLS = ['RawRepoClientCore'];
 
 var RawRepoClientCore = function () {
+    var UPDATER_RAW_REPO_PACKAGE = getUpdaterRawRepoPackage();
+
+    function getUpdaterRawRepoPackage() {
+        Log.info("Getting UpdaterRawRepoPackage..")
+        try {
+            Packages.dk.dbc.opencat.javascript.UpdaterRawRepo.recordExists(0,0);
+            return Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
+        }
+        catch (ex) {
+            Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists(0,0);
+            return Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo;
+        }
+    }
+
     function recordExists(recordId, libraryNo) {
         Log.trace("Enter RawRepoClientCore.recordExists()");
 
         var result = false;
         try {
-            result = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists(recordId, libraryNo).booleanValue();
+            result = UPDATER_RAW_REPO_PACKAGE.recordExists(recordId, libraryNo).booleanValue();
             return result;
         } catch (ex) {
             Log.warn(ex);
@@ -29,7 +43,7 @@ var RawRepoClientCore = function () {
     function fetchRecord(recordId, libraryNo) {
         Log.trace("Enter RawRepoClientCore.fetchRecord()");
         try {
-            var record = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.fetchRecord(recordId, libraryNo);
+            var record = UPDATER_RAW_REPO_PACKAGE.fetchRecord(recordId, libraryNo);
             var result = __convertRecord(record);
             Log.trace("Exit RawRepoClientCore.fetchRecord(): " + result);
             return result;
@@ -45,7 +59,7 @@ var RawRepoClientCore = function () {
         Log.trace("Enter RawRepoClientCore.getRelationsChildren()");
         var result = [];
         try {
-            var records = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.getRelationsChildren(recordId, libraryNo);
+            var records = UPDATER_RAW_REPO_PACKAGE.getRelationsChildren(recordId, libraryNo);
             for (var i = 0; i < records.size(); i++) {
                 result.push(__convertRecord(records.get(i)));
             }
@@ -69,6 +83,7 @@ var RawRepoClientCore = function () {
      */
     function __convertRecord(javaRecord) {
         Log.trace("Enter - RawRepoClientCore.__convertRecord");
+        var start = new Date().getTime();
         var result = new Record();
         try {
             for (var i = 0; i < javaRecord.getFields().size(); i++) {
@@ -82,6 +97,7 @@ var RawRepoClientCore = function () {
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RawRepoClientCore.__convertRecord]');
             Log.trace("Exit - RawRepoClientCore.__convertRecord");
         }
     }

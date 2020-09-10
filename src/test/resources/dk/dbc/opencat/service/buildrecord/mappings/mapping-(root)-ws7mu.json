@@ -1,0 +1,17 @@
+{
+  "id" : "c3d8b0e2-0955-3a0e-ac88-4037ee8d78ea",
+  "request" : {
+    "url" : "/?action=numberRoll&numberRollName=faust&outputType=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-(root)-ws7mu.json",
+    "headers" : {
+      "Date" : "Mon, 29 Jun 2020 07:14:52 GMT",
+      "Server" : "Apache/2.4.25 (Debian)",
+      "Content-Type" : "application/json"
+    }
+  },
+  "uuid" : "c3d8b0e2-0955-3a0e-ac88-4037ee8d78ea"
+}

@@ -1,0 +1,21 @@
+001 00 *a 29603057 *b 870970 *c 20181124044431 *d 20121010 *f a
+004 00 *r n *a e
+008 00 *t m *u r *a 2012 *z 2015 *b dk *& f *d y *l dan *o b *x 01 *x 02 *v 0
+009 00 *a a *g xx
+021 00 *e 9788764108811 *c ib.
+032 00 *x ACC201241 *a DBF191536 *x BKM201536 *x DAT991605
+100 00 *a Bendixen *h Grete *4 aut *4 ccp *4 dkmon *4 ill
+245 00 *a Jul med perleplader
+260 00 *& 1 *a [Risskov] *b Klematis *c 2012
+300 00 *a 53 sider *b alle ill. i farver
+504 00 *& 1 *a Hobbybog med julemotiver lavet i plastikperler
+512 00 *a 2. oplag fejlagtigt med udgavebetegnelsen: 2
+521 00 *b 4. oplag *c 2015
+652 00 *m 76.9
+666 00 *0 *f perleplader
+666 00 *0 *f perler
+666 00 *0 *f julemotiver
+666 00 *0 *f julepynt
+666 00 *0 *o vejledninger
+990 00 *o 201536 *b b *b s *u op
+996 00 *a DBC

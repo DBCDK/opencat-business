@@ -73,3 +73,14 @@ services:
       - "8080"
       - "8686"
       - "4848"
+
+  updateservice-facade:
+    image: docker-io.dbc.dk/updateservice-facade:master-31
+    environment:
+      - UPDATE_SERVICE_URL=${UPDATE_SERVICE_URL}
+      - BUILD_SERVICE_URL=${BUILD_SERVICE_URL}
+      - JAVA_MAX_HEAP_SIZE=2G
+    ports:
+      - "8080"
+      - "8686"
+      - "4848"

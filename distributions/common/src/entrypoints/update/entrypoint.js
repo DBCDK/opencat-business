@@ -60,6 +60,7 @@ function checkDoubleRecordFrontend(record, settings) {
 }
 
 function sortRecord(templateName, record, settings) {
+    Log.debug("Enter entrypoint.sortRecord");
     return RecordSorting.sortRecord(templateName, record, settings);
 }
 

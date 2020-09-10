@@ -24,7 +24,7 @@ var CheckISSN = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckISSN.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+            var bundle;
             //ValueCheck.checkUndefined( "params", params );
             // http://www.issn.org/understanding-the-issn/assignment-rules/issn-manual/
             // we must iterate the ISSN number string and multiply each number
@@ -57,7 +57,8 @@ var CheckISSN = function () {
                         continue;
                     }
                     if (ch.toLowerCase() === 'x') {
-                        if (ix != len - 1) {
+                        if (ix !== len - 1) {
+                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                             msg = ResourceBundle.getStringFormat(bundle, "check.issn.length.error", subfieldName);
                             result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                             return result;
@@ -65,18 +66,21 @@ var CheckISSN = function () {
                         value += 10; // 8
                         pos++;
                     } else {
+                        bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                         msg = ResourceBundle.getStringFormat(bundle, "check.issn.numbers.error", subfieldName);
                         result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                         return result;
                     }
                 }
             }
-            if (pos != 8) {
+            if (pos !== 8) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.issn.length.error", subfieldName);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
             if (value % 11 !== 0) { // 7
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "check.issn.invalid.error", subfieldName, subfield['value']);
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
             }
