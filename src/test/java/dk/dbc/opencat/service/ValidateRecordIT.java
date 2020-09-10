@@ -368,7 +368,7 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
 
         final MessageEntryDTO[] actual =
                 JSONB_CONTEXT.unmarshall(response.readEntity(String.class), MessageEntryDTO[].class);
-        assertThat("List of messages is one", actual.length, is(5));
+        assertThat("List of messages is five", actual.length, is(5));
 
         LOGGGER.info("Actual: {}", Arrays.asList(actual));
 
