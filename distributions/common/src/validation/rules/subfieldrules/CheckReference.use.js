@@ -414,7 +414,7 @@ var CheckReference = function () {
         Log.trace("Enter --- CheckReference.validateSubfield.__checkSubFieldValues");
         try {
             var ret = [];
-            var bundle;
+            var bundle = null;
             var found = {};
             var errorMessage;
             for (var i = 0; i < fieldsWithSubfieldDanishaa.length; ++i) {
@@ -422,20 +422,24 @@ var CheckReference = function () {
                     found[fieldsWithSubfieldDanishaa[i].subfields[j].name] = true;
                 }
                 subfieldValuesToCheck.forEach(function (val) {
-                    val = val.trim();
-                    if (val.length > 1) {
-                        var nbr = val.slice(1);
-                        var subfield = val.slice(0, 1);
+                    var valTrimmed = val.trim();
+                    if (valTrimmed.length > 1) {
+                        var nbr = valTrimmed.slice(1);
+                        var subfield = valTrimmed.slice(0, 1);
                         var count = __countSubfieldOccurrences(fieldsWithSubfieldDanishaa[i], subfield);
                         if (count < nbr) {
-                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                            if (bundle == null) {
+                                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                            }
                             errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.subfield.not.repeated", subfield, fieldsWithSubfieldDanishaa[i].name, nbr);
                             ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     } else {
-                        if (!found.hasOwnProperty(val)) {
-                            bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                            errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, val);
+                        if (!found.hasOwnProperty(valTrimmed)) {
+                            if (bundle == null) {
+                                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+                            }
+                            errorMessage = ResourceBundle.getStringFormat(bundle, "check.ref.missing.subfield", i + 1, fieldsWithSubfieldDanishaa[0].name, valTrimmed);
                             ret.push(ValidateErrors.subfieldError('TODO:fixurl', errorMessage));
                         }
                     }

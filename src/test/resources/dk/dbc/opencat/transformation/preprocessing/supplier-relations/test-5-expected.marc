@@ -1,0 +1,12 @@
+001 00 *a 45750574 *b 870970 *c 20181123112225 *d 20160127154929 *f a
+002 00 *b 710100 *c 93098412 *x 71010093098412
+004 00 *r c *a e
+008 00 *t m *u u *a 1867 *b dk *j d *l dan *n a *v 0
+009 00 *a a *g xe
+100 00 *a Ibsen *h Henrik *4 aut
+245 00 *a Kjærlighedens Komedie *c Komedie i tre Akter
+250 00 *a 2. gjennemsete udgave *b 2. udgave
+260 00 *a Kjøbenhavn *b Gyldendalske Boghandel *c 1867
+512 00 *a KBHDIG, del af Københavns Kilder
+652 00 *m sk
+996 00 *a 710100

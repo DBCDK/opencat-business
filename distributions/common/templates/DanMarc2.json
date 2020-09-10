@@ -265,7 +265,7 @@
                 },
                 "h": {
                     "repeatable": false,
-                    "values": [ "m", "n", "p", "z", "d", "?" ]
+                    "values": [ "m", "n", "p", "z", "d", "l", "w", "?" ]
                 },
                 "i": {
                     "repeatable": false,
@@ -3067,9 +3067,7 @@
                 "d":{
 					"repeatable": false
 				},
-                "e":{
-					"repeatable": false
-				},
+                "e":{},
                 "v":{},
                 "x":{},
                 "y":{},

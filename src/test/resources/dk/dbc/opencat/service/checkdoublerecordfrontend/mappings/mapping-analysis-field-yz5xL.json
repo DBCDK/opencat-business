@@ -1,0 +1,15 @@
+{
+  "id" : "bcad328c-3d25-34af-b401-7447599cfda2",
+  "request" : {
+    "url" : "/analysis/field?analysis.fieldvalue=Ib+er+et+%C3%A6ggehoved&analysis.fieldname=match.245a&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-analysis-field-yz5xL.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "bcad328c-3d25-34af-b401-7447599cfda2"
+}

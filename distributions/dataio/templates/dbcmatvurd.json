@@ -20,12 +20,13 @@
     "rules":[],
     "fields": {
         "001": {
+            "comment": "001a skal i drift være: dbcsingle.fields.001.subfields.a",
             "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt001.htm",
             "mandatory": true,
             "repeatable": false,
             "sorting": "abcdf",
             "subfields": {
-                "a": "dbcsingle.fields.001.subfields.a",
+                "a": "DanMarc2.fields.001.subfields.a",
                 "b": {
                     "mandatory": true,
                     "repeatable": false,
@@ -163,6 +164,21 @@
             "repeatable": false,
             "subfields": {
                 "a": {}
+            }
+        },
+        "n55":{
+            "url":"",
+            "subfields":{
+                "a":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                }
             }
         },
         "r01":{

@@ -24,7 +24,7 @@ var RawRepoClient = function () {
      * @name RawRepoClient#recordExists
      */
     function recordExists(recordId, libraryNo) {
-        Log.trace("Enter - RawRepoClient.recordExists()");
+        Log.debug("Enter - RawRepoClient.recordExists()");
         var result = null;
         try {
             Log.debug("Check if record [", recordId, ":", libraryNo, "] exists.");

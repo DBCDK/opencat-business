@@ -1,0 +1,22 @@
+001 00 *a 27667902 *b 870970 *c 20181124035523 *d 20090316094934 *f a
+004 00 *r n *a e
+008 00 *t m *u r *a 2009 *z 2019 *b dk *d x *j f *l dan *o b *v 0
+009 00 *a a *g xx
+032 00 *x ACC220912 *a DBF190918 *x BKM220918 *x BKR201720
+041 00 *a dan *c swe
+100 00 *a Angerborn *h Ingelin
+241 00 *a Kramar och krångel
+245 00 *a Knus & kaos *e Ingelin Angerborn *f på dansk ved Camilla Schierbeck
+260 00 *& 1 *a [Kbh.] *b Gyldendal *c 2009 *k Narayana Press, Gylling
+300 00 *a 143 sider
+504 00 *& 1 *a De to hjerteveninder Emma og Johanne fortæller i deres dagbøger om, hvordan det er at være forelsket i den samme dreng
+520 00 *& 1 *a Originaludgave: 2007
+521 00 *& REX *a [1. oplag] *c 2009
+521 00 *b [2. oplag] *c 2019
+526 00 *& 1 *i 2. del af *t Kys & knus *b . Seriens indhold se denne
+652 00 *n 87 *z 296
+652 00 *o sk
+990 00 *r 201720 *b b *b s *m Rettelse *u nt
+990 00 *b l *b b *b s *u op
+996 00 *a DBC
+d90 00 *b l *b b *b s *c a *u nt
