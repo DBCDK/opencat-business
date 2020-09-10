@@ -4,6 +4,8 @@ use("UnitTest");
 use("CheckSubfieldNotUsedInChildrenRecords");
 use("LookupValue");
 use("SubfieldMandatoryIfSubfieldNotPresentRule");
+use("Check035");
+use("CheckLix");
 use("CheckISMN");
 use("CheckISSN");
 use("CheckISBN10");
@@ -26,6 +28,7 @@ use("SubfieldValueMakesFieldsAllowed");
 use("SubfieldAllowedIfSubfieldValueInOtherFieldExists");
 
 //field rules
+use("CheckValueUnlessHasSubfield");
 use("FieldDemandsOtherFieldAndSubfield");
 use("SubfieldConditionalMandatory");
 use("RepeatableSubfields");
@@ -349,6 +352,8 @@ var TemplateOptimizer = function () {
                 case "RecordRules.subfieldsHaveValuesDemandsOtherSubfield":
                     return SubfieldsHaveValuesDemandsOtherSubfield.validateRecord;
 
+                case "FieldRules.checkValueUnlessHasSubfield":
+                    return CheckValueUnlessHasSubfield.validateField;
                 case "FieldRules.fieldsIndicator":
                     return FieldsIndicator.validateField;
                 case "FieldRules.subfieldsMandatory":  // intended fall tru
@@ -378,6 +383,10 @@ var TemplateOptimizer = function () {
                     return SubfieldCannotContainValue.validateSubfield;
                 case "SubfieldRules.subfieldsDemandsOtherSubfields":
                     return SubfieldsDemandsOtherSubfields.validateSubfield;
+                case "SubfieldRules.check035":
+                    return Check035.validateSubfield;
+                case "SubfieldRules.checkLix":
+                    return CheckLix.validateSubfield;
                 case "SubfieldRules.checkReference":
                     return CheckReference.validateSubfield;
                 case "SubfieldRules.checkLength":

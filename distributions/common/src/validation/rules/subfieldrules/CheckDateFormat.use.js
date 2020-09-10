@@ -26,7 +26,7 @@ var CheckDateFormat = function () {
 
         var result = [];
         var msg;
-        var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
+        var bundle;
 
         try {
             var validLengths = [8];
@@ -36,7 +36,8 @@ var CheckDateFormat = function () {
             }
 
             var value = subfield.value;
-            if (validLengths.indexOf(value.length) == -1) {
+            if (validLengths.indexOf(value.length) === -1) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME)
                 msg = ResourceBundle.getStringFormat(bundle, "check.date.format.invalid.length", subfield.value, validLengths.join(", "));
                 return [ValidateErrors.subfieldError('TODO:fixurl', msg)];
             }
@@ -44,7 +45,7 @@ var CheckDateFormat = function () {
             var SimpleDateFormat = Java.type('java.text.SimpleDateFormat');
             var formatter;
 
-            if (value.length == 8) {
+            if (value.length === 8) {
                 formatter = new SimpleDateFormat('yyyyMMdd');
             } else {
                 formatter = new SimpleDateFormat('yyyyMMddHHmmss');
@@ -55,6 +56,7 @@ var CheckDateFormat = function () {
             try {
                 formatter.parse(value);
             } catch (error) {
+                bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME)
                 msg = ResourceBundle.getStringFormat(bundle, "check.date.format.invalid.format", subfield.value);
                 return [ValidateErrors.subfieldError('TODO:fixurl', msg)];
             }

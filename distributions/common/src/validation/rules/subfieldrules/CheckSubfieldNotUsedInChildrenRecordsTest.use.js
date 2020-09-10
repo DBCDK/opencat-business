@@ -31,7 +31,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 2 256 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a i\n" +
+        "004 00 *a b\n" +
         "014 00 *a 1 234 567 8"
     );
     RawRepoClientCore.addRecord(marcRecord);
@@ -39,7 +39,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a i\n" +
+        "004 00 *a b\n" +
         "014 00 *a 1 234 567 8"
     );
     RawRepoClientCore.addRecord(marcRecord);
@@ -47,7 +47,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a i\n" +
+        "004 00 *a h\n" +
         "008 00 *t xx"
     );
 
@@ -62,7 +62,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 2 256 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a i\n" +
+        "004 00 *a b\n" +
         "014 00 *a 1 234 567 8"
     );
     RawRepoClientCore.addRecord(marcRecord);
@@ -70,7 +70,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a i\n" +
+        "004 00 *a b\n" +
         "008 00 *t xx\n" +
         "014 00 *a 1 234 567 8"
     );
@@ -79,7 +79,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", fu
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a i\n" +
+        "004 00 *a h\n" +
         "008 00 *t xx"
     );
 

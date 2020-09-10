@@ -1,0 +1,15 @@
+{
+  "id" : "3aeeaebb-aa76-3668-92d0-40a36f9a0424",
+  "request" : {
+    "url" : "/analysis/field?analysis.fieldvalue=2015&analysis.fieldname=match.008a&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-analysis-field-CctDe.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "3aeeaebb-aa76-3668-92d0-40a36f9a0424"
+}

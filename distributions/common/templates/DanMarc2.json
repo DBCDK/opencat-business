@@ -265,7 +265,7 @@
                 },
                 "h": {
                     "repeatable": false,
-                    "values": [ "m", "n", "p", "z", "d", "?" ]
+                    "values": [ "m", "n", "p", "z", "d", "l", "w", "?" ]
                 },
                 "i": {
                     "repeatable": false,
@@ -496,6 +496,9 @@
                     "values": "Lister.fields.codes.subfields.country.field_020a.values"
                 },
                 "b":{},
+                "c":{
+                    "repeatable": false
+                },
                 "x":{},
                 "2":{
                     "repeatable":false
@@ -644,9 +647,7 @@
                 "r":{
                     "repeatable":false
 				},
-                "s":{
-					"mandatory":true
-				}
+                "s":{}
             }
         },
         "030":{
@@ -711,7 +712,12 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.20a.htm",
             "subfields":{
                 "a":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.check035"
+                        }
+                    ]
                 },
                 "x":{}
             }
@@ -759,39 +765,40 @@
         },
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
-            "sorting":"apbcdesu",
+            "sorting":"apbcdesuqt2",
             "subfields":{
-                "a": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "b": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "c": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "s": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "p": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "d": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "e": {
-                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
-                },
-                "u": {
+                "a": {},
+                "b":{},
+                "c":{},
+                "s":{},
+                "p":{},
+                "d":{},
+                "e":{},
+                "u":{},
+                "q":{},
+                "t":{},
+                "2":{
+                    "repeatable":false
+                }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 }
-            }
+            }]
         },
         "042":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.24.htm",
             "subfields":{
                 "a":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLix"
+                        }
+                    ]
 				},
                 "b":{
                     "repeatable":false
@@ -3060,9 +3067,7 @@
                 "d":{
 					"repeatable": false
 				},
-                "e":{
-					"repeatable": false
-				},
+                "e":{},
                 "v":{},
                 "x":{},
                 "y":{},

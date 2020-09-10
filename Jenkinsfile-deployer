@@ -2,25 +2,10 @@
 
 def workerNode = "devel8"
 
-void deploy(String deployEnvironment) {
-    dir("deploy") {
-        git(url: "gitlab@git-platform.dbc.dk:metascrum/deploy.git", credentialsId: "gitlab-meta")
-    }
-    sh """
-		virtualenv -p python3 .
-		. bin/activate
-		pip3 install --upgrade pip
-		pip3 install -U -e \"git+https://github.com/DBCDK/mesos-tools.git#egg=mesos-tools\"
-		marathon-config-producer updateservice-${deployEnvironment} --root deploy/marathon --template-keys DOCKER_TAG=${env.BRANCH_NAME}-${env.BUILD_NUMBER} -o updateservice-${deployEnvironment}.json
-		marathon-deployer -a ${MARATHON_TOKEN} -b https://mcp1.dbc.dk:8443 deploy updateservice-${deployEnvironment}.json
-	"""
-}
-
 pipeline {
     agent { label workerNode }
 
     environment {
-        MARATHON_TOKEN = credentials("METASCRUM_MARATHON_TOKEN")
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
         GITOPS_DEPLOY_TAG = "master-3"
         GITLAB_PRIVATE_TOKEN = credentials("metascrum-gitlab-api-token")
@@ -70,12 +55,12 @@ pipeline {
                 script {
                     dir("deploy") {
                         sh """
-							set-new-version update-bks-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
                             set-new-version update-fbs-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
                             set-new-version update-dataio-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b boblebad
                             
-                            set-new-version update-fbs-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b cisterne
                             set-new-version update-dataio-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b cisterne
+                            set-new-version update-dbckat-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b cisterne
+                            set-new-version update-fbs-service.yml ${env.GITLAB_PRIVATE_TOKEN} metascrum/updateservice-deploy ${DOCKER_IMAGE_VERSION} -b cisterne
 						"""
                     }
                 }

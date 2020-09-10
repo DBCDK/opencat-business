@@ -32,7 +32,6 @@ var SubfieldValueExcludesField = function () {
      */
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter SubfieldValueExcludesField.validateSubField");
-        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
         var result = [];
 
         try {
@@ -49,9 +48,10 @@ var SubfieldValueExcludesField = function () {
             if (matchValues.indexOf(subfield.value) > -1) {
                 record.fields.forEach(function (recordField) {
                     if (excludedFields.indexOf(recordField.name) > -1) {
+                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         var message = ResourceBundle.getStringFormat(bundle, "excluded.field", recordField.name, field.name, subfield.name);
                         result.push(ValidateErrors.recordError("TODO:fixurl", message));
-                   }
+                    }
                 });
             }
 

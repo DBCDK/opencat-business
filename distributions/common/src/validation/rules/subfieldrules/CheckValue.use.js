@@ -34,7 +34,7 @@ var CheckValue = function () {
                 }
             }
             var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", subfield.value, params.values.join("', '"));
+            var errorMessage = ResourceBundle.getStringFormat(bundle, "check.value.rule.error", subfield.value, field.name, subfield.name, params.values.join("', '"));
             return [ValidateErrors.subfieldError('TODO:fixurl', errorMessage)];
         } finally {
             Log.trace("Exit --- CheckValue.validateSubfield");

@@ -135,8 +135,18 @@
                 "c":{},
                 "p":{},
                 "d":{},
-                "e":{}
-            }
+                "e":{},
+                "2":{
+                    "repeatable": false
+                }
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.all_codes.values"
+                }
+            }]
         },
         "042": "DanMarc2.fields.042",
         "044": "DanMarc2.fields.044",

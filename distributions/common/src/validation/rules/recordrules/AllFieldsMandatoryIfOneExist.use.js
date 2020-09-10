@@ -28,7 +28,6 @@ var AllFieldsMandatoryIfOneExist = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
             ValueCheck.checkThat("params", params).type("object");
             ValueCheck.check("params.fields", params.fields).instanceOf(Array);
@@ -48,6 +47,7 @@ var AllFieldsMandatoryIfOneExist = function () {
             }
             if (totalFieldsFound > 0 && totalFieldsFound < totalFieldsToCheckFor) {
                 foundFields.forEach(function (f) {
+                    var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     var message = ResourceBundle.getStringFormat(bundle, "field.mandatory.error", f);
                     result.push(ValidateErrors.recordError("TODO:fixurl", message));
                 });

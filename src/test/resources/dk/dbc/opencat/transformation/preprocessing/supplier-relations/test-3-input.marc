@@ -1,0 +1,16 @@
+001 00 *a 29725799 *b 870970 *c 20181124044650 *d 20121210 *f a
+004 00 *r n *a e
+008 00 *& u *t m *u r *a 2012 *z 2018 *b dk *d y *l dan *x 04 *x 05 *v 0
+009 00 *a a *g xx
+032 00 *a DBF191820 *x BKM221820 *x ACC221250
+100 00 *a Habermas *h Jürgen *4 aut
+241 00 *a Strukturwandel der Öffentlichkeit
+245 00 *a Borgerlig offentlighed *c offentlighedens strukturændring *c undersøgelser af en kategori i det borgerlige samfund
+250 00 *a 2. udgave
+260 00 *& 1 *a Kbh. *b Information *c 2012
+300 00 *a 367 sider
+521 00 *& REX *a 1. oplag *c 2012
+521 00 *b 2. oplag *c 2018
+652 00 *m 32.15
+990 00 *b l *b v *b b
+996 00 *a DBC

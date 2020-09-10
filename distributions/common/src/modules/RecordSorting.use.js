@@ -14,6 +14,7 @@ var RecordSorting = function () {
 
     function sortRecord(templateName, record, settings) {
         Log.trace("Enter - RecordSorting.sortRecord");
+        var start = new Date().getTime();
 
         var templateProvider = function () {
             TemplateContainer.setSettings(settings);
@@ -29,6 +30,7 @@ var RecordSorting = function () {
             return JSON.stringify(DanMarc2Converter.convertFromDanMarc2(marc));
         } finally {
             Log.trace("Exit - RecordSorting.sortRecord");
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sortRecord]');
         }
     }
 
@@ -48,7 +50,7 @@ var RecordSorting = function () {
      */
     function sort(templateProvider, record) {
         Log.trace("Enter - RecordSorting.sort");
-
+        var start = new Date().getTime();
         try {
             if (record !== null && record !== undefined && record.fields !== undefined) {
                 record.fields.sort(function (a, b) {
@@ -70,6 +72,7 @@ var RecordSorting = function () {
             return record;
         } finally {
             Log.trace("Exit - RecordSorting.sort");
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.RecordSorting.sort]')
         }
     }
 

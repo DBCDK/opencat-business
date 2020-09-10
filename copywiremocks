@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+basedir=$(pwd)
+mkdir -p  ${basedir}/target/test-classes/mappings
+mkdir -p  ${basedir}/target/test-classes/__files
+find ${basedir}/src/test/resources -name "mapping-*.json" -exec cp {} ${basedir}/target/test-classes/mappings \;
+find ${basedir}/src/test/resources -name "body-*.txt" -exec cp {} ${basedir}/target/test-classes/__files \;
+find ${basedir}/src/test/resources -name "body-*.json" -exec cp {} ${basedir}/target/test-classes/__files \;

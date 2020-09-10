@@ -1,0 +1,15 @@
+{
+  "id" : "a7f1bced-046c-307c-aa8b-55a82e70db9f",
+  "request" : {
+    "url" : "/select?q=%28%28+match.008a%3A%222013%22+OR+match.008a%3A%222014%22+OR+match.008a%3A%222015%22+%29+AND+match.009a%3A%22a%22+AND+match.009g%3A%22xx%22+AND+match.245a%3Aiberet%C3%A6ggehoved+AND+match.260b%3Ato%2A%29+AND+marc.001b%3A870970&indent=true&wt=json",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-select-uiTOe.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=utf-8"
+    }
+  },
+  "uuid" : "a7f1bced-046c-307c-aa8b-55a82e70db9f"
+}

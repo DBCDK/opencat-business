@@ -1,0 +1,11 @@
+001 00 *a 29746214 *b 870970 *c 20130123130111 *d 20121220 *f a
+004 00 *r n *a e
+008 00 *t m *u u *a 2019 *b dk *d m *d y *l eng *x 05 *v 0
+009 00 *a a *g xx
+032 00 *x ACC221251 *a DBF191306 *x BKM221306
+100 00 *a Zimmermann *h Esther *4 aut
+245 00 *a Morbidity and mortality throughout life in men entering adult life as obese
+260 00 *a [Kbh.] *b Department of Biomedical Sciences, University of Copenhagen *c 2012
+652 00 *m 61.6
+990 00 *b v *b s
+996 00 *a DBC

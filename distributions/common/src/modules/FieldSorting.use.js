@@ -22,17 +22,15 @@ var FieldSorting = function () {
      */
     function sort(field, sortOrder) {
         Log.trace("Enter - FieldSorting.sort", field);
+        var start = new Date().getTime();
         try {
-
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-
             if (sortOrder === undefined || sortOrder === null) {
-                Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.sorting.error"));
+                Log.debug("sortOrder indeholder ikke en valid sorteringsrækkefølge");
                 return field;
             }
 
             if (field.subfields === undefined || field.subfields === null) {
-                Log.debug(ResourceBundle.getString(bundle, "fieldSorting.sort.subfields.error"));
+                Log.debug("Feltet indeholder ikke delfelter");
                 return field;
             }
 
@@ -49,6 +47,7 @@ var FieldSorting = function () {
 
             return field;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.FieldSorting.sort]');
             Log.trace("Exit -- FieldSorting.sort");
         }
     }

@@ -1,0 +1,25 @@
+001 00 *a5 410 905 9*b870970*c20180418140000*d20180418*fa
+004 00 *rn*ae
+008 00 *tm*uo*a2011*bdk*dy*ldan*na*x02*x03*v0
+009 00 *aa*gxe
+032 00 *aDBF201818*xBKM201818
+245 00 *aAnalysesiden
+260 00 *bAnalysesiden*c2011-
+504 00 *&1*aOpslagsværk med analysemodeller til blandt andet tekst, billeder, film og hjemmesider
+512 00 *aAjourføres
+512 00 *aRegistreret 18.04.2018
+652 00 *m37.131
+666 00 *0*fanalysemodeller
+666 00 *0*ftekstanalyse
+666 00 *0*flitteraturanalyse
+666 00 *0*ffilmanalyse
+666 00 *0*fbilledanalyse
+666 00 *0*ufor folkeskolen
+666 00 *0*ufor ungdomsuddannelse
+666 00 *0*ufor videregående uddannelse
+856 00 *zAdgangsmåde: Internet*uhttp://analysesiden.dk/
+996 00 *aDBC
+d70 00 *bNetpub
+f06 00 *bv*ss
+s12 00 *tTeamBAM201816
+z99 00 *asvl

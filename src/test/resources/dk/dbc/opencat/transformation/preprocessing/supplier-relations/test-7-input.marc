@@ -1,0 +1,13 @@
+001 00 *a 29590656 *b 870970 *c 20121213084129 *d 20121003 *f a
+004 00 *r n *a e
+008 00 *t m *u r *a 201? *z 2012 *b dk *d x *j f *l dan *v 0
+009 00 *a a *g xx
+032 00 *x ACC221240 *a DBF191245 *x BKM221245
+100 00 *a Holst *h Hanne-Vibeke *4 aut
+245 00 *a Undskyldningen *c roman
+250 00 *a 2. udgave
+260 00 *& 1 *a [Kbh.] *b Gyldendal *c 2012
+652 00 *n 86 *z 06
+652 00 *o sk
+990 00 *& 1 *b v *u op
+996 00 *a DBC

@@ -1,0 +1,483 @@
+{
+  "fields": [
+    {
+      "name": "001",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "5 158 076 1"
+        },
+        {
+          "name": "b",
+          "value": "870970"
+        },
+        {
+          "name": "c",
+          "value": "20150304180759"
+        },
+        {
+          "name": "d",
+          "value": "20150209"
+        },
+        {
+          "name": "f",
+          "value": "a"
+        },
+        {
+          "name": "t",
+          "value": "FAUST"
+        }
+      ]
+    },
+    {
+      "name": "004",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "r",
+          "value": "n"
+        },
+        {
+          "name": "a",
+          "value": "e"
+        }
+      ]
+    },
+    {
+      "name": "008",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "t",
+          "value": "m"
+        },
+        {
+          "name": "u",
+          "value": "f"
+        },
+        {
+          "name": "a",
+          "value": "2015"
+        },
+        {
+          "name": "b",
+          "value": "dk"
+        },
+        {
+          "name": "d",
+          "value": "å"
+        },
+        {
+          "name": "d",
+          "value": "x"
+        },
+        {
+          "name": "j",
+          "value": "f"
+        },
+        {
+          "name": "l",
+          "value": "ger"
+        },
+        {
+          "name": "o",
+          "value": ""
+        },
+        {
+          "name": "v",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "name": "009",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "a"
+        },
+        {
+          "name": "g",
+          "value": "xx"
+        }
+      ]
+    },
+    {
+      "name": "021",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "e",
+          "value": "9788771691078"
+        },
+        {
+          "name": "c",
+          "value": "hf."
+        }
+      ]
+    },
+    {
+      "name": "021",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "e",
+          "value": "9788771690651"
+        },
+        {
+          "name": "b",
+          "value": "bogpakken DigiLesen nybegyndertysk"
+        }
+      ]
+    },
+    {
+      "name": "032",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "DBF201511"
+        },
+        {
+          "name": "x",
+          "value": "BKM201511"
+        },
+        {
+          "name": "a",
+          "value": "DBF"
+        },
+        {
+          "name": "x",
+          "value": "BKM"
+        },
+        {
+          "name": "x",
+          "value": "SKO"
+        }
+      ]
+    },
+    {
+      "name": "100",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "0",
+          "value": ""
+        },
+        {
+          "name": "a",
+          "value": "Møller"
+        },
+        {
+          "name": "h",
+          "value": "Karl Henrik"
+        },
+        {
+          "name": "4",
+          "value": "aut"
+        }
+      ]
+    },
+    {
+      "name": "245",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "Lilly macht einen Ausflug"
+        },
+        {
+          "name": "c",
+          "value": "QR bog"
+        }
+      ]
+    },
+    {
+      "name": "250",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "1. udgave"
+        },
+        {
+          "name": "b",
+          "value": "÷"
+        }
+      ]
+    },
+    {
+      "name": "260",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "[Værløse]"
+        },
+        {
+          "name": "b",
+          "value": "DigTea"
+        },
+        {
+          "name": "c",
+          "value": "2015"
+        }
+      ]
+    },
+    {
+      "name": "300",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "23 sider"
+        },
+        {
+          "name": "b",
+          "value": "alle ill. i farver"
+        }
+      ]
+    },
+    {
+      "name": "440",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "0",
+          "value": ""
+        },
+        {
+          "name": "a",
+          "value": "Digilesen"
+        },
+        {
+          "name": "o",
+          "value": "Lillys Leben - Niveau B"
+        }
+      ]
+    },
+    {
+      "name": "504",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "Lilly og hendes far tager på udflugt, og hendes far bestemmer at de skal ud i naturen, men Lilly ville hellere have været på shoppetur i byen. Desværre forløber turen ikke helt som planlagt"
+        }
+      ]
+    },
+    {
+      "name": "512",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "På titelsiden: Hören und lesen"
+        }
+      ]
+    },
+    {
+      "name": "520",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "Originaludgave: 2015"
+        }
+      ]
+    },
+    {
+      "name": "521",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "b",
+          "value": "1. oplag"
+        },
+        {
+          "name": "c",
+          "value": "2015"
+        },
+        {
+          "name": "k",
+          "value": "Lasertryk"
+        }
+      ]
+    },
+    {
+      "name": "526",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "Heri QR-koder til bogens tekst indlæst"
+        }
+      ]
+    },
+    {
+      "name": "652",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "n",
+          "value": "86.4"
+        },
+        {
+          "name": "z",
+          "value": "096"
+        }
+      ]
+    },
+    {
+      "name": "652",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "o",
+          "value": "84"
+        }
+      ]
+    },
+    {
+      "name": "666",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "0",
+          "value": ""
+        },
+        {
+          "name": "s",
+          "value": "udflugter"
+        }
+      ]
+    },
+    {
+      "name": "666",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "0",
+          "value": ""
+        },
+        {
+          "name": "u",
+          "value": "for 11 år"
+        }
+      ]
+    },
+    {
+      "name": "666",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "0",
+          "value": ""
+        },
+        {
+          "name": "u",
+          "value": "for 12 år"
+        }
+      ]
+    },
+    {
+      "name": "666",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "0",
+          "value": ""
+        },
+        {
+          "name": "u",
+          "value": "let at læse"
+        }
+      ]
+    },
+    {
+      "name": "720",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "o",
+          "value": "Mette Bødker"
+        },
+        {
+          "name": "4",
+          "value": "ill"
+        }
+      ]
+    },
+    {
+      "name": "945",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "Digi lesen"
+        },
+        {
+          "name": "x",
+          "value": "se"
+        },
+        {
+          "name": "z",
+          "value": "440(a)"
+        }
+      ]
+    },
+    {
+      "name": "945",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "Lillys Leben - Niveau B"
+        },
+        {
+          "name": "x",
+          "value": "se"
+        },
+        {
+          "name": "z",
+          "value": "440(a,o)"
+        }
+      ]
+    },
+    {
+      "name": "990",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "o",
+          "value": "201511"
+        },
+        {
+          "name": "b",
+          "value": "b"
+        },
+        {
+          "name": "b",
+          "value": "s"
+        },
+        {
+          "name": "u",
+          "value": "nt"
+        }
+      ]
+    },
+    {
+      "name": "996",
+      "indicator": "00",
+      "subfields": [
+        {
+          "name": "a",
+          "value": "DBC"
+        }
+      ]
+    }
+  ],
+  "empty": false
+}

@@ -160,6 +160,7 @@
         "023": "DanMarc2.fields.023",
         "032": "DanMarc2.fields.032",
         "035": "DanMarc2.fields.035",
+        "038": "DanMarc2.fields.038",
         "041":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "repeatable":false,
@@ -171,8 +172,16 @@
                 "p": "DanMarc2.fields.041.subfields.p",
                 "d": "DanMarc2.fields.041.subfields.d",
                 "e": "DanMarc2.fields.041.subfields.e",
-                "u": "DanMarc2.fields.041.subfields.u"
-            }
+                "u": "DanMarc2.fields.041.subfields.u",
+                "2": "DanMarc2.fields.041.subfields.2"
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                }
+            }]
         },
         "042": "DanMarc2.fields.042",
         "044": "DanMarc2.fields.044",
@@ -274,7 +283,7 @@
         "651": "DanMarc2.fields.651",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting":"0\u00E5mnopqrivzAaHhkEeFfCcTtBb",
+            "sorting":"0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",

@@ -137,7 +137,8 @@
                 "e": "DanMarc2.fields.041.subfields.e",
                 "p": "DanMarc2.fields.041.subfields.p",
                 "s": "DanMarc2.fields.041.subfields.s",
-                "u": "DanMarc2.fields.041.subfields.u"
+                "u": "DanMarc2.fields.041.subfields.u",
+                "2": "DanMarc2.fields.041.subfields.2"
             },
             "rules": [
                 {
@@ -200,7 +201,7 @@
         "668": "DanMarc2.fields.668",
         "700": "bog.fields.700",
         "710": "bog.fields.710",
-        "720": "bog.fields.720",
+        "720": "boghoved.fields.720",
         "739": "DanMarc2.fields.739",
         "740": "bog.fields.740",
         "745": "bog.fields.745",

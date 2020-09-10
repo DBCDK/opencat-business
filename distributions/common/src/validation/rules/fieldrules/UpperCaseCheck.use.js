@@ -26,11 +26,11 @@ var UpperCaseCheck = function () {
 
         var result = [];
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             for (var i = 0; i < field.subfields.length; i++) {
                 var name = field.subfields[i].name;
                 if ((name >= 'A' && name <= 'Z') || name === 'Æ' || name === 'Ø') {
                     if (field.subfields[i + 1] === undefined || name.toLowerCase() !== field.subfields[i + 1].name) {
+                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         var errorMessage = ResourceBundle.getStringFormat(bundle, "uppercase.rule.error", name, name.toLowerCase(), field.name);
                         result.push(ValidateErrors.fieldError('TODO:fixurl', errorMessage));
                     }

@@ -234,7 +234,7 @@
             "ordinalPositionOfField" : 1,
             "ordinalPositionOfSubfield" : 1,
             "ordinalPositionInSubfield" : null,
-            "message" : "Værdien 'e' er ikke en del af de valide værdier: 'h'"
+            "message" : "Værdien 'e' i felt '004' delfelt 'a' er ikke en del af de valide værdier: 'h'"
           }
         ]
       },
@@ -256,7 +256,7 @@
             "ordinalPositionOfField" : 1,
             "ordinalPositionOfSubfield" : 1,
             "ordinalPositionInSubfield" : null,
-            "message" : "Værdien 'e' er ikke en del af de valide værdier: 'h'"
+            "message" : "Værdien 'e' i felt '004' delfelt 'a' er ikke en del af de valide værdier: 'h'"
           }
         ],
         "rawrepo": [

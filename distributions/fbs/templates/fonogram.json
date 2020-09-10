@@ -189,7 +189,7 @@
         "041":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "repeatable":false,
-            "sorting":"asbcpeu",
+            "sorting":"asbcpe2",
             "subfields":{
                 "a": "DanMarc2.fields.041.subfields.a",
                 "b": "DanMarc2.fields.041.subfields.b",
@@ -197,8 +197,15 @@
                 "e": "DanMarc2.fields.041.subfields.e",
                 "p": "DanMarc2.fields.041.subfields.p",
                 "s": "DanMarc2.fields.041.subfields.s",
-                "u": "DanMarc2.fields.041.subfields.u"
-            }
+                "2": "DanMarc2.fields.041.subfields.2"
+            },
+            "rules": [{
+                "type": "FieldRules.checkValueUnlessHasSubfield",
+                "params": {
+                    "subfield": "2",
+                    "values": "Lister.fields.codes.subfields.language.current_and_old.values"
+                }
+            }]
         },
         "100":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.33.htm",
@@ -500,13 +507,15 @@
         },
         "631":"DanMarc2.fields.631",
         "652":{
+            "comment": "forskel fra dM2: *v m\u00E5 gentages. Der findes DBC-musikposter med gentagne 652 *i + *v",
+            "comment2": "*i og *v udeladt i delfeltsorteringen",
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting":"\u00E5mnopqrivzAaHhkEeFfCcTtBb",
+            "sorting":"0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
                 "m":"DanMarc2.fields.652.subfields.m",
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
-                "v":"DanMarc2.fields.652.subfields.v",
+                "v":{},
                 "a":"DanMarc2.fields.652.subfields.a",
                 "h":"DanMarc2.fields.652.subfields.h",
                 "e":"DanMarc2.fields.652.subfields.e",

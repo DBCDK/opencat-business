@@ -166,7 +166,7 @@
             "ordinalPositionOfField" : 1,
             "ordinalPositionOfSubfield" : 1,
             "ordinalPositionInSubfield" : null,
-            "message" : "Værdien 'h' er ikke en del af de valide værdier: 'e'"
+            "message" : "Værdien 'h' i felt '004' delfelt 'a' er ikke en del af de valide værdier: 'e'"
           },
           {
             "type" : "ERROR",
@@ -197,7 +197,7 @@
             "ordinalPositionOfField" : 1,
             "ordinalPositionOfSubfield" : 1,
             "ordinalPositionInSubfield" : null,
-            "message" : "Værdien 'h' er ikke en del af de valide værdier: 'e'"
+            "message" : "Værdien 'h' i felt '004' delfelt 'a' er ikke en del af de valide værdier: 'e'"
           },
           {
             "type" : "ERROR",

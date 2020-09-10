@@ -63,7 +63,6 @@ var Validator = function () {
     function __checkSelfReference(record) {
         var result = [];
         var subfield001a = null;
-        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
 
         record.fields.forEach(function (field) {
             if ("001" === field.name) {
@@ -79,6 +78,7 @@ var Validator = function () {
             if (["011", "013", "014", "015", "016", "017", "018"].indexOf(field.name) > -1) {
                 field.subfields.forEach(function (subfield) {
                     if ("a" === subfield.name && subfield001a === subfield.value) {
+                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         result = result.concat(ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "record.self.reference", field.name, "a")));
                     }
                 });
@@ -99,8 +99,8 @@ var Validator = function () {
      */
     function doValidateRecord(record, templateProvider, settings) {
         Log.trace("Enter - Validator.doValidateRecord()");
+        var start = new Date().getTime();
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             var result = [];
             var template = templateProvider();
             var isDelete = false;
@@ -128,12 +128,14 @@ var Validator = function () {
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (e) {
+                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         throw ResourceBundle.getStringFormat(bundle, "record.execute.error", e);
                     }
                 }
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.Validator.doValidateRecord]');
             Log.trace("Exit - Validator.doValidateRecord()");
         }
     }
@@ -150,12 +152,14 @@ var Validator = function () {
      */
     function __validateField(record, field, templateProvider, settings) {
         Log.trace("Enter - Validator.__validateField()");
+        var start = new Date().getTime();
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+            var bundle = null;
             var result;
             var template = templateProvider();
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name))];
             }
             result = UpperCaseCheck.validateField(record, field, null);
@@ -163,6 +167,7 @@ var Validator = function () {
             if (field.subfields !== undefined) {
                 Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields: ", JSON.stringify(field));
                 if (field.subfields.length === 0) {
+                    bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
@@ -186,6 +191,7 @@ var Validator = function () {
                             valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                             result = result.concat(valErrors);
                         } catch (ex) {
+                            bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                             throw ResourceBundle.getStringFormat(bundle, "field.execute.error", field.name, ex);
                         }
                     }
@@ -200,6 +206,7 @@ var Validator = function () {
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.Validator.__validateField(' + field.name + ')]');
             Log.trace("Exit - Validator.__validateField()");
         }
     }
@@ -217,13 +224,14 @@ var Validator = function () {
      */
     function __validateSubfield(record, field, subfield, templateProvider, settings) {
         Log.trace("Enter - Validator.__validateSubfield()");
-
+        var start = new Date().getTime();
         try {
-            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+            var bundle;
             var result = [];
             var template = templateProvider();
             var templateField = template.fields[field.name];
             if (templateField === undefined) {
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "wrong.field", field.name))];
             }
             // Skip validation if subfield.name is upper case.
@@ -233,20 +241,24 @@ var Validator = function () {
 
             for (var charIndex = 0; charIndex < subfield.value.length; charIndex++) {
                 if (subfield.value.charCodeAt(charIndex) < 32) {
+                    bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "invalid.char", subfield.name, field.name))];
                 }
             }
 
             if (subfield.name === 'å' && !matchNumber.test(subfield.value)) {
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "subfield.value.must.be.number", field.name, subfield.value))];
             }
 
             var templateSubfield = templateField.subfields[subfield.name];
             if (templateSubfield === undefined) {
+                bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "wrong.subfield", subfield.name, field.name))];
             }
             if (subfield.value === "") {
                 if (UpdateConstants.EMPTY_SUBFIELDS.indexOf(subfield.name) === -1) {
+                    bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     return [ValidateErrors.subfieldError("", ResourceBundle.getStringFormat(bundle, "empty.subfield", field.name, subfield.name))];
                 }
             }
@@ -263,12 +275,14 @@ var Validator = function () {
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
                         result = result.concat(valErrors);
                     } catch (e) {
+                        bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                         throw ResourceBundle.getStringFormat(bundle, "subfield.execute.error", field.name, subfield.name, e);
                     }
                 }
             }
             return result;
         } finally {
+            Log.debug('start[' + start + '] time[' + (new Date().getTime() - start) + '] tag[js.Validator.__validateSubfield(' + field.name + ' *' + subfield.name + ')]');
             Log.trace("Exit - Validator.__validateSubfield()");
         }
     }
