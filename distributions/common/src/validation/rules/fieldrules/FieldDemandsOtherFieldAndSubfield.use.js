@@ -43,7 +43,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             var message = "";
             var context = params.context;
 
-            // There is not reason to execute this validation for the same field multiple times,
+            // There is no reason to execute this validation for the same field multiple times,
             // so if the value is in context then simply return that value
             var contextResult = ContextUtil.getValue(context, 'FieldDemandsOtherFieldAndSubfield', field.name, params.field, params.subfields.join());
             if (contextResult !== undefined) {

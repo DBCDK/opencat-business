@@ -128,7 +128,7 @@ var CheckReference = function () {
     }
 
     /*
-      This function divides a list of files into a dict where the key is the value from subfield *å (\u00E5)
+      This function divides a list of fields into a dict where the key is the value from subfield *å (\u00E5)
      */
     function __fieldsByForwardSlash(fields) {
         var ret = {};
