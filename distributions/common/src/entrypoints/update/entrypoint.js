@@ -8,13 +8,10 @@ use("Builder");
 use("Print");
 use("TemplateContainer");
 use("WebserviceUtil");
-use("InitializeValidationRules");
 
 
 function initTemplates(settings) {
     ValidatorEntryPoint.initTemplates(settings);
-
-    InitializeValidationRules.initialize(settings);
 }
 
 function doRecategorizationThings(currentRecord, updateRecord, newRecord) {
