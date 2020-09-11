@@ -6,10 +6,6 @@ use("UnitTest");
 UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", function () {
     var bundle = ResourceBundleFactory.getBundle(SubfieldMandatoryIfSubfieldNotPresentRule.__BUNDLE_NAME);
 
-    var exceptCallFormat = "SubfieldMandatoryIfSubfieldNotPresentRule.validateField( %s, %s, %s )";
-
-    var recordArg;
-
 /***************
  * US2139 For now we comment out the test of validateSubField
  * a more general solution of these exception asserts should be found
@@ -47,11 +43,11 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
         ]
     };
     var fieldArg = recordArg.fields[0];
-    var paramsArg = {subfield: "a", not_presented_subfield: ["001b"]};
+    var paramsArg = {subfield: "a", not_presented_subfield: ["001b"], context: {}};
     Assert.equalValue("001a: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
-    paramsArg = {subfield: "m", not_presented_subfield: ["001a"]};
+    paramsArg = {subfield: "m", not_presented_subfield: ["001a"], context: {}};
     Assert.equalValue("001m: Not mandatory with 001a", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
-    paramsArg = {subfield: "m", not_presented_subfield: ["001b"]};
+    paramsArg = {subfield: "m", not_presented_subfield: ["001b"], context: {}};
     var msg = ResourceBundle.getStringFormat(bundle, "mandatory.subfields.rule.error", "m", "001");
     Assert.equalValue("001m: Mandatory without 001b", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg),
         [ValidateErrors.fieldError("TODO:url", msg)]);
@@ -73,10 +69,10 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
         ]
     };
     fieldArg = recordArg.fields[0];
-    paramsArg = {subfield: "a", not_presented_subfield: ["042abc", "002z", "001b"]};
+    paramsArg = {subfield: "a", not_presented_subfield: ["042abc", "002z", "001b"], context: {}};
     Assert.equalValue("Test 1", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 
-    paramsArg = {subfield: "m", not_presented_subfield: ["042abc", "002z", "001a"]};
+    paramsArg = {subfield: "m", not_presented_subfield: ["042abc", "002z", "001a"], context: {}};
     Assert.equalValue("Test 2", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 
     recordArg = {
@@ -99,11 +95,11 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
             }
         ]
     };
-    paramsArg = {subfield: "m", not_presented_subfield: ["002o"]};
+    paramsArg = {subfield: "m", not_presented_subfield: ["002o"], context: {}};
     fieldArg = recordArg.fields[1];
     Assert.equalValue("Test 3", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 
-    paramsArg = {subfield: "o", not_presented_subfield: ["002m"]};
+    paramsArg = {subfield: "o", not_presented_subfield: ["002m"], context: {}};
     fieldArg = recordArg.fields[1];
     Assert.equalValue("Test 4", SubfieldMandatoryIfSubfieldNotPresentRule.validateField(recordArg, fieldArg, paramsArg), []);
 });

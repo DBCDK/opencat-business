@@ -5,6 +5,7 @@ use("ResourceBundleFactory");
 use("ValidateErrors");
 use("ValueCheck");
 use("ValidationUtil");
+use("ContextUtil");
 
 EXPORTED_SYMBOLS = ['FieldDemandsOtherFieldAndSubfield'];
 
@@ -27,7 +28,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
      * @method
      */
     function validateField(record, field, params) {
-        Log.trace("Enter - FieldDemandsOtherFieldAndSubfield.validateField( record, field,params,settings)");
+        Log.trace("Enter - FieldDemandsOtherFieldAndSubfield.validateField()");
 
         var result = [];
         try {
@@ -40,15 +41,28 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             var message = "";
-            var collectedFields = ValidationUtil.getFields(record, params.field);
+            var context = params.context;
+
+            // There is no reason to execute this validation for the same field multiple times,
+            // so if the value is in context then simply return that value
+            var contextResult = ContextUtil.getValue(context, 'FieldDemandsOtherFieldAndSubfield', field.name, params.field, params.subfields.join());
+            if (contextResult !== undefined) {
+                return contextResult;
+            }
+
+            var collectedFields = ContextUtil.getValue(context, 'getFields', params.field);
+            if (collectedFields === undefined) {
+                collectedFields = ValidationUtil.getFields(record, params.field);
+                ContextUtil.setValue(context, collectedFields, 'getFields', params.field);
+            }
 
             if (collectedFields.length === 0) {
                 bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                 message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
                 result = [ValidateErrors.fieldError("", message)];
+                ContextUtil.setValue(context, result, 'FieldDemandsOtherFieldAndSubfield', field.name, params.field, params.subfields.join())
                 return result;
             } else {
-
                 for (var i = 0; i < collectedFields.length; ++i) {
                     var collectedSubFields = {};
                     for (var j = 0; j < collectedFields[i].subfields.length; ++j) {
@@ -60,6 +74,7 @@ var FieldDemandsOtherFieldAndSubfield = function () {
                             ct++;
                         }
                         if (ct === params.subfields.length) {
+                            ContextUtil.setValue(context, result, 'FieldDemandsOtherFieldAndSubfield', field.name, params.field, params.subfields.join())
                             return result;
                         }
                     }
@@ -67,10 +82,12 @@ var FieldDemandsOtherFieldAndSubfield = function () {
             }
             bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
             message = ResourceBundle.getStringFormat(bundle, "field.demands.other.field.and.subfield.rule.error", field.name, params.field, params.subfields);
-            return result = [ValidateErrors.fieldError("", message)];
+            result = [ValidateErrors.fieldError("", message)]
+            ContextUtil.setValue(context, result, 'FieldDemandsOtherFieldAndSubfield', field.name, params.field, params.subfields.join())
+            return result;
         }
         finally {
-            Log.trace("Exit - FieldDemandsOtherFieldAndSubfield.validateField(): ", result !== undefined ? JSON.stringify(result) : "undef");
+            Log.trace("Exit - FieldDemandsOtherFieldAndSubfield.validateField()");
         }
     }
 

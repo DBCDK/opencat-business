@@ -5,6 +5,7 @@ use("ResourceBundleFactory");
 use("ValidateErrors");
 use("ValueCheck");
 use("ValidationUtil");
+use("ContextUtil");
 
 EXPORTED_SYMBOLS = ['SubfieldHasValueDemandsOtherSubfield'];
 
@@ -32,9 +33,14 @@ var SubfieldHasValueDemandsOtherSubfield = function () {
         try {
             var errorMsg = null;
             var result = [];
+            var context = params.context;
             for (var i = 0; i < field.subfields.length; ++i) {
                 if (field.subfields[i].name === params.subfieldConditional && field.subfields[i].value === params.subfieldConditionalValue) {
-                    var conditionalField = ValidationUtil.getFields(record, params.fieldMandatory);
+                    var conditionalField = ContextUtil.getValue(context, 'getFields', params.fieldMandatory);
+                    if (conditionalField === undefined) {
+                        conditionalField = ValidationUtil.getFields(record, params.fieldMandatory);
+                        ContextUtil.setValue(context, conditionalField, 'getFields', params.fieldMandatory);
+                    }
                     // TODO move this
                     var foundSubfield = false;
                     if (conditionalField.length > 0) {
