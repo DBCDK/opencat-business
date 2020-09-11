@@ -8,7 +8,6 @@ UnitTest.addFixture("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSu
     var bundle = ResourceBundleFactory.getBundle(SubfieldAllowedIfSubfieldValueInOtherFieldExists.__BUNDLE_NAME);
     var field009, field245, subfield009, subfield245, record, params;
 
-
     subfield245 = {'name': 'k'};
     field245 = {'name': '245', 'subfields': [subfield245]};
 
@@ -17,7 +16,8 @@ UnitTest.addFixture("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSu
     params = {
         "field": "009",
         "subfield": "a",
-        "values": ["a", "c", "d"]
+        "values": ["a", "c", "d"],
+        "context": {}
     };
 
     var errMsg = ResourceBundle.getStringFormat(bundle, "subfield.requires.other.subfield.value", "245", "k", "009", "a", "a,c,d");
@@ -35,7 +35,8 @@ UnitTest.addFixture("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSu
     params = {
         "field": "009",
         "subfield": "a",
-        "values": ["a", "c", "d"]
+        "values": ["a", "c", "d"],
+        "context": {}
     };
 
     errMsg = ResourceBundle.getStringFormat(bundle, "subfield.requires.other.subfield.value", "245", "k", "009", "a", "a,c,d");
@@ -53,7 +54,8 @@ UnitTest.addFixture("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSu
     params = {
         "field": "009",
         "subfield": "a",
-        "values": ["a", "c", "d"]
+        "values": ["a", "c", "d"],
+        "context": {}
     };
 
     errMsg = ResourceBundle.getStringFormat(bundle, "subfield.requires.other.subfield.value", "245", "k", "009", "a", "a,c,d");
@@ -71,7 +73,8 @@ UnitTest.addFixture("SubfieldAllowedIfSubfieldValueInOtherFieldExists.validateSu
     params = {
         "field": "009",
         "subfield": "a",
-        "values": ["a", "c", "d"]
+        "values": ["a", "c", "d"],
+        "context": {}
     };
 
     //errMsg = ResourceBundle.getStringFormat(bundle, "subfield.requires.other.subfield.value", "245", "k", "009", "a", "a,c,d");

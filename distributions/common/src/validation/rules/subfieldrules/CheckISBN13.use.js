@@ -25,11 +25,7 @@ var CheckISBN13 = function () {
     function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter --- CheckISBN13.validateSubfield");
         try {
-            var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-            //ValueCheck.checkUndefined( "params", params );
-            var result = [];
-            result = CheckEAN13.makeCheck(subfield, 'B');
-            return result;
+            return CheckEAN13.makeCheck(subfield, 'B');
         } finally {
             Log.trace("Exit --- CheckISBN13.validateSubfield");
         }

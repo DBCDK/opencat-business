@@ -101,6 +101,7 @@ var Validator = function () {
         Log.trace("Enter - Validator.doValidateRecord()");
         var start = new Date().getTime();
         try {
+            var context = {};
             var result = [];
             var template = templateProvider();
             var isDelete = false;
@@ -110,7 +111,7 @@ var Validator = function () {
                 if (!isDelete) {
                     result = result.concat(__checkSelfReference(record));
                     for (var i = 0; i < record.fields.length; i++) {
-                        var subResult = __validateField(record, record.fields[i], templateProvider, settings);
+                        var subResult = __validateField(record, record.fields[i], templateProvider, settings, context);
                         for (var j = 0; j < subResult.length; j++) {
                             subResult[j].ordinalPositionOfField = i;
                         }
@@ -148,9 +149,10 @@ var Validator = function () {
      * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
+     * @param {Object} context Context dictionary for cached values
      * @return {Array} An array of validation errors.
      */
-    function __validateField(record, field, templateProvider, settings) {
+    function __validateField(record, field, templateProvider, settings, context) {
         Log.trace("Enter - Validator.__validateField()");
         var start = new Date().getTime();
         try {
@@ -165,13 +167,13 @@ var Validator = function () {
             result = UpperCaseCheck.validateField(record, field, null);
             var i;
             if (field.subfields !== undefined) {
-                Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields: ", JSON.stringify(field));
+                Log.debug("Field ", field.name, " has ", field.subfields.length, " subfields");
                 if (field.subfields.length === 0) {
                     bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
                     return [ValidateErrors.fieldError("", ResourceBundle.getStringFormat(bundle, "empty.field", field.name))];
                 }
                 for (i = 0; i < field.subfields.length; i++) {
-                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings);
+                    var subResult = __validateSubfield(record, field, field.subfields[i], templateProvider, settings, context);
                     for (var j = 0; j < subResult.length; j++) {
                         subResult[j].ordinalPositionOfSubfield = i;
                     }
@@ -186,6 +188,7 @@ var Validator = function () {
                     if (rule.name !== undefined) {
                         try {
                             TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
+                            TemplateOptimizer.setContextPropertyOnRule(rule, context);
 
                             var valErrors = rule.type(record, field, rule.params, settings);
                             valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
@@ -220,9 +223,10 @@ var Validator = function () {
      * @param {function} templateProvider A function that returns the
      *                 optimized template to use for the validation.
      * @param settings properties object
+     * @param {Object} context Context dictionary for cached values
      * @return {Array} An array of validation errors.
      */
-    function __validateSubfield(record, field, subfield, templateProvider, settings) {
+    function __validateSubfield(record, field, subfield, templateProvider, settings, context) {
         Log.trace("Enter - Validator.__validateSubfield()");
         var start = new Date().getTime();
         try {
@@ -270,6 +274,7 @@ var Validator = function () {
                     Log.debug("rule ", rule.name === undefined ? "rule undefined" : rule.name);
                     try {
                         TemplateOptimizer.setTemplatePropertyOnRule(rule, template);
+                        TemplateOptimizer.setContextPropertyOnRule(rule, context);
 
                         var valErrors = rule.type(record, field, subfield, rule.params, settings);
                         valErrors = __updateErrorTypeOnValidationResults(rule, valErrors);
