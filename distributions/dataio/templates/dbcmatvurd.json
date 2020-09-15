@@ -105,13 +105,7 @@
                     "repeatable": false
                 },
                 "5": {
-                    "rules": [{
-                        "type": "SubfieldRules.checkLength",
-                        "params": {
-                            "min": 6,
-                            "max": 6
-                        }
-                    }]
+                    "values": [ "870970" ]
                 },
                 "6": {
                     "rules": [
