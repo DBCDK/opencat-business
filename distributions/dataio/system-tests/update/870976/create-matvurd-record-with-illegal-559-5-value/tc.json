@@ -1,0 +1,44 @@
+[
+  {
+    "name": "870976-matvurd-record-with-illegal-559-5-value",
+    "description": "Test der skal fejle.",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcmatvurd",
+      "record": "request.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": []
+    },
+    "expected": {
+      "validation": {
+        "errors": [ {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : "TODO:fixurl",
+          "ordinalPositionOfField" : 3,
+          "ordinalPositionOfSubfield" : 1,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Værdien '870971' i felt '559' delfelt '5' er ikke en del af de valide værdier: '870970'"
+        } ]
+      },
+      "update": {
+        "errors": [ {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : "TODO:fixurl",
+          "ordinalPositionOfField" : 3,
+          "ordinalPositionOfSubfield" : 1,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Værdien '870971' i felt '559' delfelt '5' er ikke en del af de valide værdier: '870970'"
+        } ],
+        "rawrepo": []
+      }
+    }
+  }
+]
