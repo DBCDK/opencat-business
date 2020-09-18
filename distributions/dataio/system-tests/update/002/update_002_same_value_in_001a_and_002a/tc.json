@@ -1,0 +1,118 @@
+[
+    {
+        "name": "update-002-record-same-value-in-001a-existing-record",
+        "description": "Tester om det er muligt at rette en post med et 002 felt der har samme værdi som 001a",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "allowall",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-common-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-common-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common-002target.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "holdings": [ 710100 ],
+                    "enrichments": [ "rawrepo-common-002target-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-common-002target-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Posten kan ikke oprettes eller opdateres, da værdien af felt 001a ikke må forekomme i et felt 002a"
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "rawrepo-common-enrichment.marc"]
+                    },
+                    {
+                        "record": "rawrepo-common-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "rawrepo-common-002target.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "holdings": [ 710100 ],
+                        "enrichments": [ "rawrepo-common-002target-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-common-002target-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "update-002-record-same-value-in-001a-nonexisting-record",
+        "description": "Tester om det er muligt at oprette en post med et 002 felt der har samme værdi som 001a",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "allowall",
+            "record": "request.marc"
+        },
+        "setup": {
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Posten kan ikke oprettes eller opdateres, da værdien af felt 001a ikke må forekomme i et felt 002a"
+                    }
+                ],
+                "rawrepo": [
+                ]
+            }
+        }
+    }
+]
