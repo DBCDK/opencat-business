@@ -1,0 +1,87 @@
+[
+  {
+    "name": "MS3060-update-record-with-bad-aa-content",
+    "description": "Tester om en eksisterende post med noninteger værdi i *å kan opdateres",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "setup-870979-191919.marc"
+          ],
+          "children": [
+            "rawrepo-common.marc"
+          ]
+        },
+        {
+          "record": "setup-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "setup-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "setup-870979-191919.marc"
+            ],
+            "children": [
+              "rawrepo-common.marc"
+            ]
+          },
+          {
+            "record": "setup-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

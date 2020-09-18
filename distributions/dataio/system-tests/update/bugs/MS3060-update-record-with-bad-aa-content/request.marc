@@ -1,0 +1,40 @@
+001 00 *a 43914804 *b 870970 *c 20170830030300 *d 20060713 *f a
+002 00 *b 763100 *c 91690896 *x 76310091690896
+004 00 *r c *a e
+008 00 *t s *u f *a 2005 *b dk *l dan *v 0
+009 00 *a a *g xx *b m *h th
+021 00 *a 87-91503-02-7 *c hf. *d gratis + porto *b videobenyttelse: 1,3,4,5a,6
+032 00 *a DBF200722 *x SFD200722 *x ACC200703 *x DAT200737
+041 00 *a dan *d eng
+245 00 *a Ord uden hest *c æstetiske processer i et omrejsende fabulatorium *e redaktion: Claus Reiche ... [et al.]
+260 00 *a Viborg *d Rødevej 3, 8800 *b KulturPrinsen *e eksp. *a Odense *b Syddansk Universitetsforlag *a Kolding *b Børne- og UngdomsKulturSammenslutningen *c [2005] *k Special-Tr., Viborg
+300 00 *a 128 sider *b ill. (nogle i farver) *d 1 dvd-video
+440 00 *0 *a Tidsskrift for børne- & ungdomskultur *z 0907-6581 *V 49 *v nummer 49
+440 00 *a Skrifter fra KulturPrinsen *V 3 *v nummer 3
+507 00 *a Udgivet i forbindelse med KulturPrinsens projekt Fabulatorium
+508 00 *a Med resumé på engelsk
+512 00 *i Dvd-video med titel *t Jeg er en vandrende pind
+530 00 *& 1 *a Indhold: Louis Jensen: Et lille menneske der lyser. Claus Carlsen: Instrumenter. Lars Henningsen: Film uden ord på : perspektiver på begejstring i et digteværksted. Kalakolo - koso : børns tekster. Fabulerende sprogfornemmelser : om udviklingen af et fabulatorium for børn og unge / Claus Reiche & Anne Line Svelle. "Jeg er med Real Madrid" : billedafsnit. Ilse Klink Jakobsen: "Jeg er en slange - jeg sniger mig ad et S!". Flemming Mouritsen: Fabu-la-hva for noget? - Fabulatorium : æstetiske processer og børns kultur, performance, arenaer og forskningsperspektiver. Anne Mette Langmach: Jeg er forfatter, jeg skriver bøger. Beth Juncker: Det meningsløses meningsfuldhed. Viskelæder og blyanter blev glohede : tanker og notater om fabulatoriet
+532 00 *& 1 *a Med litteraturhenvisninger
+652 00 *m 80.8
+666 00 *0 *f børn
+666 00 *0 *f skrivekunst
+666 00 *0 *f skriveværksteder
+700 00 *5 870979 *6 68860717
+710 00 *a KulturPrinsen *e institution
+710 00 *å 1 *a Børne- og Ungdomskultursammenslutningen
+710 00 *a Fabulatorium *e projekt
+910 00 *a BUKS *z 710/1
+990 00 *a SFD *b S *b B *c A *o 200722
+991 00 *o Materialet også optaget i Av-fortegnelse 200722
+996 00 *a DBC
+d08 00 *a BØK/SKO kode fjernet ved masserettelse og 990b tilføjet
+d08 00 *o sah *o ea *k bsj *r ehw *a 700 rettet
+d08 00 *o jj
+d31 00 *b 164 *h 235 *t 8
+d32 00 *b 164 *h 235 *t 8
+d33 00 *b l *a 1
+d35 00 *a P *i 01 *n 09 *p 01 *q 09
+f06 00 *b S *b B
+s12 00 *t TeamFi200713
+z99 00 *a mib
