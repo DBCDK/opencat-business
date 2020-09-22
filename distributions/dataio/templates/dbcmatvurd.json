@@ -67,28 +67,15 @@
                 "a": {
                     "repeatable": false
                 },
-                "b": {
-                    "repeatable": false
-                },
-                "c": {
-                    "repeatable": false
-                },
-                "d": {
-                    "repeatable": false
-                },
+                "b": {},
+                "c": {},
+                "d": {},
                 "e": {},
                 "f": {
                     "repeatable": false
                 },
-                "g": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
+                "g": {},
+                "i": {},
                 "j": {
                     "repeatable": false
                 },
