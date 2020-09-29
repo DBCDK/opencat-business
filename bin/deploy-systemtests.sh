@@ -6,26 +6,11 @@ export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
 RAWREPO_VERSION=1.13-snapshot
 RAWREPO_DIT_TAG=DIT-5016
+RAWREPO_RECORD_SERVICE_VERSION=DIT-264
 HOLDINGS_ITEMS_VERSION=1.1.4-snapshot
 UPDATE_FACADE_TAG=master-31
 
-cd ${PROJECT_ROOT}/docker
-mkdir -p logs/update/app logs/update/server logs/fakesmtp
-res=$?
-if [ ${res} -ne 0 ]
-then
-    echo "Could not create ${PROJECT_ROOT}/docker/logs/update/app ${PROJECT_ROOT}/docker/logs/update/server"
-    exit 1
-fi
-chmod ugo+rw logs logs/update/app logs/update/server logs/fakesmtp
-res=$?
-if [ ${res} -ne 0 ]
-then
-    echo "Could not set o+rw for ${PROJECT_ROOT}/logs and subdirectories"
-    exit 1
-fi
-
-
+docker build target/docker -t docker-io.dbc.dk/opencat-business-service:devel
 
 cd ${PROJECT_ROOT}/docker/compose
 
@@ -120,6 +105,8 @@ docker rmi -f docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
 docker rmi -f docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
 docker rmi -f docker-i.dbc.dk/update-postgres:${USER}
 docker rmi -f docker-i.dbc.dk/update-payara-deployer:${USER}
+docker rmi -f docker-io.dbc.dk/opencat-business-service:${USER}
+docker rmi -f docker-io.dbc.dk/rawrepo-record-service:${USER}
 docker-compose pull
 docker-compose up -d rawrepoDb updateserviceDb holdingsitemsDb fakeSmtp
 sleep 3
@@ -129,8 +116,6 @@ docker tag docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:la
 docker rmi docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest
 docker tag docker-i.dbc.dk/update-postgres:staging docker-i.dbc.dk/update-postgres:${USER}
 docker rmi docker-i.dbc.dk/update-postgres:staging
-docker tag docker-i.dbc.dk/update-payara-deployer:staging docker-i.dbc.dk/update-payara-deployer:${USER}
-docker rmi docker-i.dbc.dk/update-payara-deployer:staging
 
 RAWREPO_IMAGE=`docker-compose ps -q rawrepoDb`
 export RAWREPO_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${RAWREPO_IMAGE} `
@@ -148,7 +133,40 @@ export DEV_RAWREPO_DB_URL="rawrepo:thePassword@${HOST_IP}:${RAWREPO_PORT}/rawrep
 export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems"
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
 
+docker-compose up -d rawrepo-record-service
+sleep 3
+docker tag docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-io.dbc.dk/rawrepo-record-service:${USER}
+docker rmi docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION}
+
+RAWREPO_RECORD_SERVICE_IMAGE=`docker-compose ps -q rawrepo-record-service`
+RAWREPO_RECORD_SERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_IMAGE} `
+echo -e "RAWREPO_RECORD_SERVICE_PORT_8080 is ${RAWREPO_RECORD_SERVICE_PORT_8080}\n"
+RAWREPO_RECORD_SERVICE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_IMAGE} `
+echo -e "RAWREPO_RECORD_SERVICE_PORT_8686 is ${RAWREPO_RECORD_SERVICE_PORT_8686}\n"
+RAWREPO_RECORD_SERVICE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_IMAGE} `
+echo -e "RAWREPO_RECORD_SERVICE_PORT_4848 is ${RAWREPO_RECORD_SERVICE_PORT_4848}\n"
+
+export DEV_RAWREPO_RECORD_SERVICE_URL="http://${HOST_IP}:${RAWREPO_RECORD_SERVICE_PORT_8080}"
+
+docker-compose up -d opencat-business-service
+sleep 3
+docker tag docker-io.dbc.dk/opencat-business-service:devel docker-io.dbc.dk/opencat-business-service:${USER}
+docker rmi docker-io.dbc.dk/opencat-business-service:devel
+
+OPENCAT_BUSINESS_SERVICE_IMAGE=`docker-compose ps -q opencat-business-service`
+OPENCAT_BUSINESS_SERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_IMAGE} `
+echo -e "OPENCAT_BUSINESS_SERVICE_PORT_8080 is ${OPENCAT_BUSINESS_SERVICE_PORT_8080}\n"
+OPENCAT_BUSINESS_SERVICE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_IMAGE} `
+echo -e "OPENCAT_BUSINESS_SERVICE_PORT_8686 is ${OPENCAT_BUSINESS_SERVICE_PORT_8686}\n"
+OPENCAT_BUSINESS_SERVICE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_IMAGE} `
+echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4848}\n"
+
+export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
+
 docker-compose up -d updateservice
+sleep 3
+docker tag docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION} docker-i.dbc.dk/update-payara-deployer:${USER}
+docker rmi docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
 
 UPDATESERVICE_IMAGE=`docker-compose ps -q updateservice`
 UPDATESERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
@@ -162,6 +180,9 @@ export UPDATE_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateSe
 export BUILD_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest"
 
 docker-compose up -d updateservice-facade
+docker tag docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
+docker rmi docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG}
+
 sleep 3
 UPDATESERVICE_FACADE_IMAGE=`docker-compose ps -q updateservice-facade`
 UPDATESERVICE_FACADE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
@@ -170,9 +191,6 @@ UPDATESERVICE_FACADE_PORT_8686=`docker inspect --format='{{(index (index .Networ
 echo -e "UPDATESERVICE_FACADE_PORT_8686 is ${UPDATESERVICE_FACADE_PORT_8686}\n"
 UPDATESERVICE_FACADE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
 echo -e "UPDATESERVICE_FACADE_PORT_4848 is ${UPDATESERVICE_FACADE_PORT_4848}\n"
-
-docker tag docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
-docker rmi docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG}
 
 echo "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" > ${HOME}/.ocb-tools/testrun.properties
 echo "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" >> ${HOME}/.ocb-tools/testrun.properties
