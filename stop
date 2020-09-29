@@ -1,0 +1,3 @@
+echo "### Stopping opencat-business-service docker ###"
+
+docker stop opencat-business-service || exit 1

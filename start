@@ -1,0 +1,34 @@
+./stop || true
+./build docker || exit 1
+
+echo "### Starting opencat-business-service docker ###"
+
+opencat_business_service_port=${OPENCAT_BUSINESS_SERVICE_PORT:-8080}
+docker run --rm --name opencat-business-service -d -p ${opencat_business_service_port}:8080 \
+    -e INSTANCE_NAME=${USER}_dev \
+    -e RAWREPO_RECORD_SERVICE_URL=${RAWREPO_RECORD_SERVICE_URL} \
+    -e OPENAGENCY_CACHE_AGE="1" \
+    -e OPENAGENCY_URL="http://openagency.addi.dk/test_2.34/" \
+    -e OPENNUMBERROLL_URL="https://opennumberroll.addi.dk/1.1/" \
+    -e OPENNUMBERROLL_NAME_FAUST_8="faust" \
+    -e OPENNUMBERROLL_NAME_FAUST="faust" \
+    -e FORSRIGHTS_URL="https://forsrights.addi.dk/2.0/" \
+    -e JAVA_MAX_HEAP_SIZE=2G \
+    -e SOLR_URL="8" \
+    docker-io.dbc.dk/opencat-business-service:devel
+attempts=0
+max_attempts=60
+until $(curl --output /dev/null --silent --head --fail http://localhost:${opencat_business_service_port}/api/status); do
+    if [ ${attempts} -eq ${max_attempts} ]; then
+        break
+    fi
+
+    printf '.'
+    attempts=$(($attempts+1))
+    sleep 0.5
+done
+
+echo ""
+echo "### Status for opencat-business-service service ###"
+curl -vs http://localhost:${opencat_business_service_port}/api/status
+echo ""
