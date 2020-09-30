@@ -41,8 +41,6 @@ services:
 
   fakeSmtp:
     image: docker-i.dbc.dk/fakesmtp
-    volumes:
-      - "../logs/fakesmtp:/output"
 
   updateservice:
     image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
