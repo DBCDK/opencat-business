@@ -53,7 +53,7 @@ public class MetaCompassHandler {
         final MarcRecordReader reader = new MarcRecordReader(minimalMetaCompassRecord);
 
         if (!recordService.recordExists(reader.getRecordId(), reader.getAgencyIdAsInt())) {
-            throw new OpenCatException("In order to update field 665 the record must exist");
+            throw new OpenCatException(String.format("Posten %s:%s findes ikke eller er slettet", reader.getRecordId(), reader.getAgencyId()));
         }
         final MarcRecord fullMetakompassRecord = recordService.fetchMergedDBCRecord(reader.getRecordId(), RecordService.DBC_ENRICHMENT);
         final MarcRecordWriter fullMetakompassRecordWriter = new MarcRecordWriter(fullMetakompassRecord);
