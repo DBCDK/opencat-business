@@ -56,7 +56,8 @@ public class RecordService {
         final StopWatch watch = new Log4JStopWatch("RecordService.fetchRecord");
         MarcRecord result;
         final RecordServiceConnector.Params params = new RecordServiceConnector.Params()
-                .withMode(RecordServiceConnector.Params.Mode.RAW);
+                .withMode(RecordServiceConnector.Params.Mode.RAW)
+                .withAllowDeleted(true);
 
         final byte[] content = recordServiceConnector.getRecordContent(agencyId, bibliographicRecordId, params);
         result = RecordContentTransformer.decodeRecord(content);
