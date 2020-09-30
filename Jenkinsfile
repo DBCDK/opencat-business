@@ -36,7 +36,6 @@ pipeline {
         DOCKER_IMAGE_NAME = "docker-io.dbc.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
         OCBTEST_EXECUTABLE="java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
-
     }
 
     stages {
@@ -79,7 +78,9 @@ pipeline {
             }
             steps {
                 script {
-                    sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
+                    def image = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}", "./target/docker")
+                    image.push()
+
                     if (env.BRANCH_NAME == 'master') {
                         sh """
                             docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:latest
@@ -121,6 +122,9 @@ pipeline {
         }
         failure {
             notifyOfBuildStatus("build failed")
+        }
+        always {
+            cleanWs()
         }
     }
 }
