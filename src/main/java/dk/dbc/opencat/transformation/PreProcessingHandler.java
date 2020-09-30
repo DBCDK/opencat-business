@@ -84,9 +84,6 @@ public class PreProcessingHandler {
                 record.getFields().add(getNewMarcField666(String.format("%s %s %s", forString, year, yearString)));
                 year++;
             }
-
-            // The new fields are added to the bottom of the field list, so we have to do a simple sort on field name
-            new MarcRecordWriter(record).sort();
         }
     }
 
