@@ -118,7 +118,7 @@ public class AbstractOpencatBusinessContainerTest {
         recordServiceContainer.start();
         recordServiceBaseUrl = "http://recordservice:8080";
 
-        openCatBusinessContainer = new GenericContainer("docker-io.dbc.dk/opencat-business:devel")
+        openCatBusinessContainer = new GenericContainer("docker-io.dbc.dk/opencat-business-service:devel")
                 .withNetwork(network)
                 .withLogConsumer(new Slf4jLogConsumer(LOGGER))
                 .withEnv("LOG_FORMAT", "text")

@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+mvn clean
 rm -rf deploy/* || true
-docker rmi docker-io.dbc.dk/opencat-business:devel || true
+git pull --ff-only || true
+docker rm -f docker-io.dbc.dk/opencat-business-service:devel &>/dev/null || true
+docker rmi docker-io.dbc.dk/opencat-business-service:devel || true
 echo "Finished cleaning"

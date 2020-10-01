@@ -1,0 +1,3 @@
+echo "### testing opencat-business project ###"
+
+mvn verify || exit 1

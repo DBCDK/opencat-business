@@ -238,16 +238,9 @@
                         </goals>
                         <configuration>
                             <executable>build</executable>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>clean-docker-image</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>clean</executable>
+                            <arguments>
+                                <argument>docker</argument>
+                            </arguments>
                         </configuration>
                     </execution>
                     <execution>

@@ -73,10 +73,10 @@ public class TransformationService {
             LOGGER.info("preProcess result:{}", recordResponseDTO);
 
             return Response.ok().entity(recordResponseDTO).build();
-        } catch (OpenCatException | RecordServiceConnectorException e) {
+        } catch (OpenCatException e) {
             LOGGER.error("Validation error in preProcess.", e);
-            return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build();
-        } catch (UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).type(MediaType.TEXT_PLAIN).build();
+        } catch (RecordServiceConnectorException | UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
             LOGGER.error("Error in preProcess.", e);
             return Response.serverError().build();
         }
@@ -98,10 +98,10 @@ public class TransformationService {
 
             LOGGER.info("metaCompass result:{}", recordResponseDTO);
             return Response.ok().entity(recordResponseDTO).build();
-        } catch (OpenCatException | RecordServiceConnectorException e) {
+        } catch (OpenCatException e) {
             LOGGER.error("Validation error in metaCompass.", e);
-            return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build();
-        } catch (UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).type(MediaType.TEXT_PLAIN).build();
+        } catch (RecordServiceConnectorException | UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
             LOGGER.error("Error in metaCompass.", e);
             return Response.serverError().build();
         }
