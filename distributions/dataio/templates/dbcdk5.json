@@ -281,9 +281,7 @@
         },
         "d09": {
             "subfields": {
-                "z": {
-                    "repeatable": false
-                                   }
+                "z": {}
             }
 
         },
