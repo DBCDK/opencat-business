@@ -212,5 +212,8 @@ echo "rawrepo.provider.name.ph.holdings = dataio-ph-holding-update" >> ${HOME}/.
 
 echo "export SOLR_PORT_NR=${SOLR_PORT_NR}"
 
-echo "Sleeping 60 seconds while updateservice is deploying"
-sleep 60
+../../bin/healthcheck-opencat-business-service.sh ${HOST_IP} ${OPENCAT_BUSINESS_SERVICE_PORT_8080} 220 || die "could not start opencat-business-service"
+../../bin/healthcheck-rawrepo-record-service.sh ${HOST_IP} ${RAWREPO_RECORD_SERVICE_PORT_8080} 220 || die "could not start rawrepo-record-service"
+../../bin/healthcheck-update-service.sh ${HOST_IP} ${UPDATESERVICE_PORT_8080} 220 || die "could not start update-service"
+../../bin/healthcheck-update-facade-service.sh ${HOST_IP} ${UPDATESERVICE_FACADE_PORT_8080} 220 || die "could not start update-facade-service"
+
