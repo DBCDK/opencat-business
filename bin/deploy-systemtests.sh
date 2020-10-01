@@ -134,7 +134,6 @@ export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDING
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
 
 docker-compose up -d rawrepo-record-service
-sleep 3
 docker tag docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-io.dbc.dk/rawrepo-record-service:${USER}
 docker rmi docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION}
 
@@ -149,7 +148,6 @@ echo -e "RAWREPO_RECORD_SERVICE_PORT_4848 is ${RAWREPO_RECORD_SERVICE_PORT_4848}
 export DEV_RAWREPO_RECORD_SERVICE_URL="http://${HOST_IP}:${RAWREPO_RECORD_SERVICE_PORT_8080}"
 
 docker-compose up -d opencat-business-service
-sleep 3
 docker tag docker-io.dbc.dk/opencat-business-service:devel docker-io.dbc.dk/opencat-business-service:${USER}
 docker rmi docker-io.dbc.dk/opencat-business-service:devel
 
@@ -164,7 +162,6 @@ echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4
 export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
 
 docker-compose up -d updateservice
-sleep 3
 docker tag docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION} docker-i.dbc.dk/update-payara-deployer:${USER}
 docker rmi docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
 
@@ -183,7 +180,6 @@ docker-compose up -d updateservice-facade
 docker tag docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
 docker rmi docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG}
 
-sleep 3
 UPDATESERVICE_FACADE_IMAGE=`docker-compose ps -q updateservice-facade`
 UPDATESERVICE_FACADE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
 echo -e "UPDATESERVICE_FACADE_PORT_8080 is ${UPDATESERVICE_FACADE_PORT_8080}\n"
