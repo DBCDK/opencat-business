@@ -1,0 +1,37 @@
+[
+    {
+        "name": "dk5-new-record",
+        "description": "Tester om man kan oprette en post i dk5basen",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "password"
+            },
+            "templateName": "dbcdk5",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-dk5.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dk5-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dk5-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+
+]

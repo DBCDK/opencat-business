@@ -1,0 +1,54 @@
+[
+    {
+        "name": "dk5-update-record",
+        "description": "Tester om man kan opdatere en post i dk5basen",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "password"
+            },
+            "templateName": "dbcdk5",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-dk5.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-dk5-dbc-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-dk5-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common-dk5.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-dk5-dbc-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-dk5-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+
+]
+

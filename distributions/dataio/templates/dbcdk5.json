@@ -1,0 +1,321 @@
+{
+    "template": {
+        "description": "Skabelon til dk5poster, submitter: 190007",
+        "features": [ "auth_root" ]
+    },
+
+    "defaults":{
+        "field":{
+            "indicator":"00",
+            "mandatory":false,
+            "repeatable":true
+        },
+        "subfield":{
+            "mandatory":false,
+            "repeatable":true
+        }
+    },
+    "rules":[],
+    "fields": {
+        "001": {
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt001.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdf",
+            "subfields": {
+                "a": "DanMarc2.fields.001.subfields.a",
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+					"values": [ "190007" ]
+                },
+                "c": "DanMarc2.fields.001.subfields.c",
+                "d": "DanMarc2.fields.001.subfields.d",
+                "f": {
+                    "repeatable": false,
+                    "values": [ "b" ]
+                }
+
+            }
+        },
+        "004": {
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt004.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "rx",
+            "subfields": {
+                "r": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "n" ]
+                },
+                "x": {
+                    "mandatory": true,
+                    "values": [ "x" ]
+                }
+            }
+        },
+        "008": {
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt008.htm",
+            "repeatable": false,
+            "sorting": "tv",
+            "subfields": {
+                "t": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "xk", "xe", "xv" ]
+                },
+                "v": {
+                    "repeatable": false,
+                    "values": [ "0" ]
+                }
+            }
+        },
+
+        "600":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6d.htm",
+
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "h": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "f": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                }
+            }
+        },
+        "610":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6e.htm",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "c": {},
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {}
+
+            }
+        },
+        "630":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.72.htm",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                }
+
+            }
+        },
+        "633":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.74.htm",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                }
+            }
+        },
+        "645":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.76.htm",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                }
+            }
+        },
+        "651":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.78.htm",
+                "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "b": {
+                    "repeatable": false
+                }
+            }
+        },
+        "652":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
+            "repeatable": false,
+            "subfields":{
+                "x":{
+                    "repeatable": false,
+                    "values": ["2"]
+                },
+                "m":{
+                    "repeatable": false
+                },
+                "n":{
+                    "repeatable": false
+                },
+                "d":{
+                    "repeatable": false
+                },
+                "g":{
+                    "repeatable": false
+                },
+                "u":{
+                    "repeatable": false
+                },
+                "s":{
+                    "repeatable": false
+                },
+                "j":{
+                "repeatable": false
+                }
+
+            }
+        },
+        "996":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": ["DBC"]
+                }
+
+            }
+        },
+        "a30": {
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "b": {
+                    "repeatable": false
+                }
+            }
+        },
+        "a40": {
+            "subfields": {
+                "a": {},
+                "b": {}
+            }
+
+
+        },
+        "b00": {
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "b": {
+                    "repeatable": false
+                }
+            }
+        },
+        "b51": {
+            "subfields": {
+                "å": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "b": {
+                    "repeatable": false
+                }
+            }
+        },
+        "b52": {
+            "subfields": {
+                "å": {
+                    "repeatable": false
+                },
+                "y": {
+                    "repeatable": false
+                },
+                "m": {
+                    "repeatable": false
+                },
+                "d": {
+                    "repeatable": false
+                }
+            }
+        },
+
+
+        "d08": {
+            "subfields": {
+                "o": {},
+                "k": {},
+                "r": {},
+                "a": {},
+                "c": {}
+            }
+        },
+        "d09": {
+            "subfields": {
+                "z": {}
+            }
+
+        },
+        "n55":{
+            "url":"",
+            "subfields":{
+                "a":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+
+        "z98": {
+                "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": ["Minus korrekturprint"]
+                }
+
+            }
+        },
+        "z99": {
+                "subfields": {
+                "a": {
+                    "repeatable": false
+
+                }
+            }
+        }
+    }
+}
