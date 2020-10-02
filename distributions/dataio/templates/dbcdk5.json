@@ -161,7 +161,7 @@
                 "a": {
                     "repeatable": false
                 },
-                "e": {
+                "b": {
                     "repeatable": false
                 }
             }
@@ -221,13 +221,11 @@
         },
         "a40": {
             "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                }
+                "a": {},
+                "b": {}
             }
+
+
         },
         "b00": {
             "subfields": {
