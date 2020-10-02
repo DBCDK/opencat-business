@@ -1,8 +1,5 @@
 #!/bin/bash
 
-UPDATE_READY="ST_OK"
-UPDATE_READYISH="ST_CREATE_ENVS"
-
 if [[ $# -ge 3 ]] ; then
     HOST=$1
     PORT=$2
