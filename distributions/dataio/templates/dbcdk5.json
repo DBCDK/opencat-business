@@ -211,12 +211,10 @@
         },
         "a30": {
             "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                }
+                "a": {},
+
+                "b": {}
+
             }
         },
         "a40": {
@@ -229,12 +227,8 @@
         },
         "b00": {
             "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                }
+                "a": {},
+                "b": {}
             }
         },
         "b51": {
@@ -242,13 +236,11 @@
                 "å": {
                     "repeatable": false
                 },
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
+                "a": {},
+
+                "b": {}
+
                 }
-            }
         },
         "b52": {
             "subfields": {
