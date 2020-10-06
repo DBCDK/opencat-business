@@ -158,12 +158,8 @@
         "651":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.78.htm",
                 "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                }
+                "a": {},
+                "b": {}
             }
         },
         "652":{
