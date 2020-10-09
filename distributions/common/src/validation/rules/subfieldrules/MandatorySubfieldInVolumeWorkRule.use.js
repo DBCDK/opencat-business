@@ -4,6 +4,7 @@ use("RawRepoClient");
 use("ResourceBundle");
 use("ResourceBundleFactory");
 use("ValidateErrors");
+use("ContextUtil");
 
 EXPORTED_SYMBOLS = ['MandatorySubfieldInVolumeWorkRule'];
 
@@ -34,7 +35,7 @@ var MandatorySubfieldInVolumeWorkRule = function () {
 
         try {
             var bundle;
-            var volumes = __getVolumeRecords(record);
+            var volumes = __getVolumeRecords(record, params);
             var msg;
             if (volumes.length === 0) {
                 if (!__checkSubfieldIsUsed([record], field, params.subfield)) {
@@ -103,28 +104,7 @@ var MandatorySubfieldInVolumeWorkRule = function () {
         }
     }
 
-    function __getHeadRecord(record) {
-        Log.trace("Enter - MandatorySubfieldInVolumeWorkRule.__getHeadRecord()");
-        try {
-            var type = record.getValue(/004/, /a/);
-
-            if (type === "h") {
-                return record;
-            } else if (type === "b") {
-                var agencyId = record.getValue(/001/, /b/);
-                var parentId = record.getValue(/014/, /a/);
-                if (!RawRepoClient.recordExists(parentId, agencyId)) {
-                    return null;
-                }
-                return __getHeadRecord(RawRepoClient.fetchRecord(parentId, agencyId));
-            }
-            return null;
-        } finally {
-            Log.trace("Exit - MandatorySubfieldInVolumeWorkRule.__getHeadRecord()");
-        }
-    }
-
-    function __getVolumeRecords(record) {
+    function __getVolumeRecords(record, params) {
         Log.trace("Enter - MandatorySubfieldInVolumeWorkRule.__getVolumeRecords()");
         try {
             var type = record.getValue(/004/, /a/);
@@ -133,8 +113,15 @@ var MandatorySubfieldInVolumeWorkRule = function () {
             }
 
             var recId = record.getValue(/001/, /a/);
-            var agencyId = record.getValue(/001/, /b/);
-            var children = RawRepoClient.getRelationsChildren(recId, agencyId);
+            var context = params.context;
+
+            var children;
+
+            children = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
+            if (children === undefined) {
+                children = RawRepoClient.getRelationsChildren(recId, libNo);
+                ContextUtil.setValue(context, children, 'getRelationsChildren', recId, libNo);
+            }
 
             var result = [];
             for (var i = 0; i < children.length; i++) {
