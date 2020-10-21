@@ -109,7 +109,7 @@ public class ScripterEnvironmentFactory {
         final String fileName = modulesDir + "/settings.properties";
         try {
             final File file = new File(fileName);
-            try (final FileInputStream fileInputStream = new FileInputStream(file)) {
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
                 addSearchPathsFromSettingsFile(handler, schemeName, fileInputStream);
             }
         } catch (FileNotFoundException e1) {
