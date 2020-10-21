@@ -29,11 +29,9 @@ public class Scripter {
      * A JavaScript engine is obtained from the singleton ScripterPool. After
      * execution it is returned to the pool. We want for an engine to be
      * available if the pool is empty.
-     * <p/>
      * <p>
      * The engine is always returned to the pool, even in case of JavaScript
      * exceptions.
-     * </p>
      *
      * @param methodName Name of the function to call.
      * @param args       Arguments to the function.

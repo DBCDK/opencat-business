@@ -41,10 +41,12 @@ public class MetaCompassHandler {
      * <p>
      * Additionally certain 665 subfields are copied to 666 subfields.
      *
+     * @param minimalMetaCompassRecord The record to process
      * @return The record to be used for the rest if the execution
-     * @throws UnsupportedEncodingException Thrown if the record has wrong encoding
-     * @throws OpenCatException             Thrown when the record doesn't exist - don't expect it to happen because the
-     *                                      enrichMetakompasRecord function will catch this too.
+     * @throws UnsupportedEncodingException    Thrown if the record has wrong encoding
+     * @throws OpenCatException                Thrown when the record doesn't exist - don't expect it to happen because the
+     *                                         enrichMetakompasRecord function will catch this too.
+     * @throws RecordServiceConnectorException Thrown if unexpected exception in RecordServiceConnector
      */
     public MarcRecord enrichMetaCompassRecord(MarcRecord minimalMetaCompassRecord) throws UnsupportedEncodingException, OpenCatException, RecordServiceConnectorException {
         logger.info("Got metakompas template so updated the request record.");

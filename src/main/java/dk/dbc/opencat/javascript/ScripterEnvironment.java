@@ -25,7 +25,6 @@ public class ScripterEnvironment {
 
     /**
      * Calls a function in a JavaScript environment and returns the result.
-     * <p/>
      * The JavaScript environment is created and cached by the filename.
      *
      * @param methodName Name of the function to call.

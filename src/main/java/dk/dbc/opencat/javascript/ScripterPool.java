@@ -36,9 +36,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * </p>
  * <p>
  * Basic usage of the EJB will be:
- * <code>
- * <pre>
- *             @EJB
+ * <pre> {@code
+ *             \@EJB
  *             ScripterPool pool;
  *
  *             void f() throws InterruptedException, ScripterException {
@@ -52,10 +51,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  *                        }
  *                    }
  *              }
+ * }
  * </pre>
- * </code>
  * Remember handling of exceptions so ypu always put the environment back into the pool.
- * </p>
  */
 
 @Singleton
@@ -138,7 +136,6 @@ public class ScripterPool {
      * Retrieves and removes the head of this queue, waiting if necessary until an element becomes available.
      * <p>
      * <b>Description copied from class:</b> {@link java.util.concurrent.LinkedBlockingQueue}
-     * </p>
      *
      * @return the head of this pool
      * @throws InterruptedException if interrupted while waiting
