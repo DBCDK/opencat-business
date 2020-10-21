@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -106,9 +107,11 @@ public class ScripterEnvironmentFactory {
     private void addSearchPathsFromSettingsFile(ModuleHandler handler, String schemeName, String modulesDir) {
         logger.entry(handler, schemeName, modulesDir);
         final String fileName = modulesDir + "/settings.properties";
+        FileInputStream fileInputStream = null;
         try {
             final File file = new File(fileName);
-            addSearchPathsFromSettingsFile(handler, schemeName, new FileInputStream(file));
+            fileInputStream = new FileInputStream(file);
+            addSearchPathsFromSettingsFile(handler, schemeName, fileInputStream);
         } catch (FileNotFoundException e1) {
             logger.catching(e1);
             logger.warn("The file '{}' does not exist.", fileName);
@@ -116,6 +119,13 @@ public class ScripterEnvironmentFactory {
             logger.catching(e2);
             logger.warn("Unable to load properties from file '{}'", fileName);
         } finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    logger.error("Failed to close FileInputStream", e);
+                }
+            }
             logger.exit();
         }
     }
@@ -161,7 +171,7 @@ public class ScripterEnvironmentFactory {
         final StopWatch watch = new Log4JStopWatch("javascript.env.init.functions");
         try {
             final URL commonRecord = ScripterEnvironmentFactory.class.getResource("/warmup/commonRecord.json");
-            final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()));
+            final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()), StandardCharsets.UTF_8);
 
             validateRecord(environment, COMMON_RECORD, settings);
             checkDoubleRecordFrontend(environment, COMMON_RECORD, settings);

@@ -37,6 +37,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 @Stateless
@@ -83,10 +84,12 @@ public class JSRestPortal {
             return Response.serverError().build();
 
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (Exception e) {
-                LOGGER.error("validateRecord", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("validateRecord error", e);
+                }
             }
         }
     }
@@ -110,10 +113,12 @@ public class JSRestPortal {
             LOGGER.error("checkDoubleRecord error", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("checkDoubleRecord error", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("checkDoubleRecord error", e);
+                }
             }
         }
     }
@@ -140,10 +145,12 @@ public class JSRestPortal {
             LOGGER.error("checkDoubleRecordFrontend error", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("checkDoubleRecordFrontend error", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("checkDoubleRecordFrontend error", e);
+                }
             }
         }
     }
@@ -170,10 +177,12 @@ public class JSRestPortal {
             LOGGER.error("checkTemplate", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("checkTemplate", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("checkTemplate error", e);
+                }
             }
         }
     }
@@ -203,10 +212,12 @@ public class JSRestPortal {
             LOGGER.error("doRecategorizationThings", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("doRecategorizationThings", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("doRecategorizationThings error", e);
+                }
             }
         }
     }
@@ -233,10 +244,12 @@ public class JSRestPortal {
             LOGGER.error("recategorizationNoteFieldFactory", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("recategorizationNoteFieldFactory", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("recategorizationNoteFieldFactory error", e);
+                }
             }
         }
     }
@@ -262,10 +275,12 @@ public class JSRestPortal {
             LOGGER.error("checkTemplateBuild", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("checkTemplateBuild", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("checkTemplateBuild error", e);
+                }
             }
         }
     }
@@ -300,10 +315,12 @@ public class JSRestPortal {
             LOGGER.error("buildRecord", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("buildRecord", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("buildRecord error", e);
+                }
             }
         }
     }
@@ -333,10 +350,12 @@ public class JSRestPortal {
             LOGGER.error("sortRecord", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("sortError", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("sortRecord error", e);
+                }
             }
         }
     }
@@ -361,24 +380,26 @@ public class JSRestPortal {
             LOGGER.error("getValidateSchemas", e);
             return Response.serverError().build();
         } finally {
-            try {
-                scripterPool.put(scripterEnvironment);
-            } catch (InterruptedException e) {
-                LOGGER.error("getValidateSchemas", e);
+            if (scripterPool != null) {
+                try {
+                    scripterPool.put(scripterEnvironment);
+                } catch (InterruptedException e) {
+                    LOGGER.error("getValidateSchemas error", e);
+                }
             }
         }
     }
 
     private String marcXMLtoJson(String marcxml) throws UnsupportedEncodingException, JSONBException {
         final String marcToConvert;
-        if (marcxml == null|| marcxml.isEmpty()) {
+        if (marcxml == null || marcxml.isEmpty()) {
             marcToConvert = "<?xml version=\"1.0\" encoding=\"UTF-16\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1\">" +
                     "<leader>00000n    2200000   4500</leader></record>";
         } else {
             marcToConvert = marcxml;
         }
 
-        final MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcToConvert.getBytes());
+        final MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcToConvert.getBytes(StandardCharsets.UTF_8));
         return jsonbContext.marshall(marcRecord);
     }
 
@@ -388,6 +409,6 @@ public class JSRestPortal {
 
     private String marcJsonToMarcXml(String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
         MarcRecord resultMarcRecord = jsonbContext.unmarshall(marcJson, MarcRecord.class);
-        return new String(RecordContentTransformer.encodeRecord(resultMarcRecord));
+        return new String(RecordContentTransformer.encodeRecord(resultMarcRecord), StandardCharsets.UTF_8);
     }
 }
