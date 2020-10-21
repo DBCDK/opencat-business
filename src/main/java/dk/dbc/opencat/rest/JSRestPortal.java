@@ -190,7 +190,7 @@ public class JSRestPortal {
     @POST
     @Path("v1/doRecategorizationThings")
     @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON})
     @Timed
     public Response doRecategorizationThings(DoRecategorizationThingsRequestDTO doRecategorizationThingsRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
