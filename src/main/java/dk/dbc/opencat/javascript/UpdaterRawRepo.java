@@ -7,16 +7,20 @@ package dk.dbc.opencat.javascript;
 
 import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.utils.RecordContentTransformer;
-import dk.dbc.rawrepo.RecordId;
-import dk.dbc.rawrepo.RecordServiceConnector;
-import dk.dbc.rawrepo.RecordServiceConnectorException;
-import dk.dbc.rawrepo.RecordServiceConnectorFactory;
+import dk.dbc.rawrepo.dto.RecordCollectionDTOv2;
+import dk.dbc.rawrepo.dto.RecordDTO;
+import dk.dbc.rawrepo.dto.RecordIdDTO;
+import dk.dbc.rawrepo.record.RecordServiceConnector;
+import dk.dbc.rawrepo.record.RecordServiceConnectorException;
+import dk.dbc.rawrepo.record.RecordServiceConnectorFactory;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,13 +40,13 @@ public class UpdaterRawRepo {
      * @param libraryNo The library no from 001b to identify the record.
      * @return <code>true</code> if the record exists, <code>false</code>
      * otherwise.
-     * @throws RecordServiceConnectorException  RecordServiceConnectorException
+     * @throws RecordServiceConnectorException RecordServiceConnectorException
      */
     public static Boolean recordExists(String recordId, String libraryNo) throws RecordServiceConnectorException {
         logger.entry(recordId, libraryNo);
-        boolean result;
-        StopWatch watch = new Log4JStopWatch("rawrepo.recordExists");
-        result =  recordServiceConnector.recordExists(libraryNo, recordId);
+        final boolean result;
+        final StopWatch watch = new Log4JStopWatch("rawrepo.recordExists");
+        result = recordServiceConnector.recordExists(libraryNo, recordId);
         watch.stop();
         logger.exit(result);
         return result;
@@ -57,14 +61,14 @@ public class UpdaterRawRepo {
      * @param libraryNo The library no from 001b to identify the record.
      * @return The record.
      * @throws RecordServiceConnectorException RecordServiceConnectorException
-     * @throws UnsupportedEncodingException UnsupportedEncodingException
+     * @throws UnsupportedEncodingException    UnsupportedEncodingException
      */
     public static MarcRecord fetchRecord(String recordId, String libraryNo) throws UnsupportedEncodingException, RecordServiceConnectorException {
         logger.entry(recordId, libraryNo);
-        StopWatch watch = new Log4JStopWatch("rawrepo.fetchRecord");
-        MarcRecord result;
+        final StopWatch watch = new Log4JStopWatch("rawrepo.fetchRecord");
+        final MarcRecord result;
         if (recordExists(recordId, libraryNo)) {
-            byte[] content = recordServiceConnector.getRecordContent(Integer.parseInt(libraryNo), recordId);
+            final byte[] content = recordServiceConnector.getRecordContent(Integer.parseInt(libraryNo), recordId);
             result = RecordContentTransformer.decodeRecord(content);
         } else {
             result = new MarcRecord();
@@ -77,20 +81,23 @@ public class UpdaterRawRepo {
     /**
      * List of MarcRecords
      *
-     * @param recordId  String
-     * @param libraryNo String
+     * @param bibliographicRecordId String
+     * @param agencyId              String
      * @return List of MarcRecords
-     * @throws UnsupportedEncodingException UnsupportedEncodingException
+     * @throws UnsupportedEncodingException    UnsupportedEncodingException
      * @throws RecordServiceConnectorException RecordServiceConnectorException
      */
-    public static List<MarcRecord> getRelationsChildren(String recordId, String libraryNo) throws UnsupportedEncodingException, RecordServiceConnectorException {
-        logger.entry(recordId, libraryNo);
-        StopWatch watch = new Log4JStopWatch("rawrepo.getRelationsChildren");
-        RecordId[] recordIds = recordServiceConnector.getRecordChildren(libraryNo, recordId);
-        List<MarcRecord> children = new ArrayList<MarcRecord>();
-        for (RecordId childRecordId: recordIds) {
-            children.add(fetchRecord(childRecordId.getBibliographicRecordId(), String.valueOf(childRecordId.getAgencyId())));
+    public static List<MarcRecord> getRelationsChildren(String bibliographicRecordId, String agencyId) throws RecordServiceConnectorException, UnsupportedEncodingException {
+        logger.entry(bibliographicRecordId, agencyId);
+        final StopWatch watch = new Log4JStopWatch("rawrepo.getRelationsChildren");
+        final List<RecordIdDTO> recordIds = Arrays.asList(recordServiceConnector.getRecordChildren(agencyId, bibliographicRecordId));
+        final List<MarcRecord> children = new ArrayList<>();
+
+        final RecordCollectionDTOv2 recordCollectionDTO = recordServiceConnector.fetchRecordList(recordIds);
+        for (RecordDTO recordDTO : recordCollectionDTO.getFound()) {
+            children.add(RecordContentTransformer.decodeRecord(recordDTO.getContent()));
         }
+
         watch.stop();
         logger.exit(children);
         return children;

@@ -13,7 +13,7 @@ import dk.dbc.common.records.MarcRecordWriter;
 import dk.dbc.common.records.MarcSubField;
 import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
-import dk.dbc.rawrepo.RecordServiceConnectorException;
+import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 

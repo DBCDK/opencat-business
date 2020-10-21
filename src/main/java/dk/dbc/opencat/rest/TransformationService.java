@@ -13,7 +13,7 @@ import dk.dbc.opencat.transformation.MetaCompassHandler;
 import dk.dbc.opencat.transformation.PreProcessingHandler;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
-import dk.dbc.rawrepo.RecordServiceConnectorException;
+import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import dk.dbc.util.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
