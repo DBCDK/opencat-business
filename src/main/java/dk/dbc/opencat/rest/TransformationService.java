@@ -11,15 +11,14 @@ import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
 import dk.dbc.opencat.transformation.MetaCompassHandler;
 import dk.dbc.opencat.transformation.PreProcessingHandler;
+import dk.dbc.opencat.xml.MarcXChangeXmlTransformer;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.rawrepo.RecordServiceConnectorException;
 import dk.dbc.util.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -29,13 +28,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 
 @Stateless
@@ -45,17 +38,7 @@ public class TransformationService {
     private static final RecordService recordService = new RecordService();
     private static final PreProcessingHandler preProcessingHandler = new PreProcessingHandler(recordService);
     private static final MetaCompassHandler metaCompassHandler = new MetaCompassHandler(recordService);
-    private static Transformer transformer;
-
-    @PostConstruct
-    public void postConstruct() {
-        try {
-            final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            transformer = transformerFactory.newTransformer();
-        } catch (TransformerConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private static final MarcXChangeXmlTransformer transformer = new MarcXChangeXmlTransformer();
 
     @POST
     @Path("v1/preprocess")
@@ -67,7 +50,7 @@ public class TransformationService {
             LOGGER.info("preProcess incoming request:{}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             preProcessingHandler.preProcess(record);
-            final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(record));
+            final String recordAsString = transformer.convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(record));
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
             LOGGER.info("preProcess result:{}", recordResponseDTO);
@@ -92,7 +75,7 @@ public class TransformationService {
             LOGGER.info("metaCompass incoming request:{}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             final MarcRecord result = metaCompassHandler.enrichMetaCompassRecord(record);
-            final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(result));
+            final String recordAsString = transformer.convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(result));
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
 
@@ -105,13 +88,6 @@ public class TransformationService {
             LOGGER.error("Error in metaCompass.", e);
             return Response.serverError().build();
         }
-    }
-
-    private static String convertDocumentToString(Document doc) throws TransformerException {
-        final StringWriter writer = new StringWriter();
-        transformer.transform(new DOMSource(doc), new StreamResult(writer));
-
-        return writer.getBuffer().toString();
     }
 
 }
