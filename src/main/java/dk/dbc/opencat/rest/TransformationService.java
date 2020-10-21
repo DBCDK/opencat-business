@@ -45,13 +45,25 @@ public class TransformationService {
     private static final RecordService recordService = new RecordService();
     private static final PreProcessingHandler preProcessingHandler = new PreProcessingHandler(recordService);
     private static final MetaCompassHandler metaCompassHandler = new MetaCompassHandler(recordService);
-    private static Transformer transformer;
+
+    /*
+        Here be unthreadsafe dragons!
+        Every function on Transformer and TransformerFactory objects should be assumed to be not thread safe.
+        Because of this each instance of TransformationService will get its own Transformer object but initialization
+        should be done synchronized across all instances of TransformationService.
+
+        A @Stateless bean will only execute a single thread at a time so the later transformer.transform call does not
+        have to explicitly synchronized
+     */
+    private Transformer transformer;
 
     @PostConstruct
     public void postConstruct() {
         try {
-            final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            transformer = transformerFactory.newTransformer();
+            synchronized (this) {
+                final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                transformer = transformerFactory.newTransformer();
+            }
         } catch (TransformerConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -107,7 +119,7 @@ public class TransformationService {
         }
     }
 
-    private static String convertDocumentToString(Document doc) throws TransformerException {
+    private String convertDocumentToString(Document doc) throws TransformerException {
         final StringWriter writer = new StringWriter();
         transformer.transform(new DOMSource(doc), new StreamResult(writer));
 
