@@ -107,11 +107,11 @@ public class ScripterEnvironmentFactory {
     private void addSearchPathsFromSettingsFile(ModuleHandler handler, String schemeName, String modulesDir) {
         logger.entry(handler, schemeName, modulesDir);
         final String fileName = modulesDir + "/settings.properties";
-        FileInputStream fileInputStream = null;
         try {
             final File file = new File(fileName);
-            fileInputStream = new FileInputStream(file);
-            addSearchPathsFromSettingsFile(handler, schemeName, fileInputStream);
+            try (final FileInputStream fileInputStream = new FileInputStream(file)) {
+                addSearchPathsFromSettingsFile(handler, schemeName, fileInputStream);
+            }
         } catch (FileNotFoundException e1) {
             logger.catching(e1);
             logger.warn("The file '{}' does not exist.", fileName);
@@ -119,13 +119,6 @@ public class ScripterEnvironmentFactory {
             logger.catching(e2);
             logger.warn("Unable to load properties from file '{}'", fileName);
         } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    logger.error("Failed to close FileInputStream", e);
-                }
-            }
             logger.exit();
         }
     }
