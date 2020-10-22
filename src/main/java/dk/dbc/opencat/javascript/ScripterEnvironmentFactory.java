@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -108,7 +109,9 @@ public class ScripterEnvironmentFactory {
         final String fileName = modulesDir + "/settings.properties";
         try {
             final File file = new File(fileName);
-            addSearchPathsFromSettingsFile(handler, schemeName, new FileInputStream(file));
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
+                addSearchPathsFromSettingsFile(handler, schemeName, fileInputStream);
+            }
         } catch (FileNotFoundException e1) {
             logger.catching(e1);
             logger.warn("The file '{}' does not exist.", fileName);
@@ -161,7 +164,7 @@ public class ScripterEnvironmentFactory {
         final StopWatch watch = new Log4JStopWatch("javascript.env.init.functions");
         try {
             final URL commonRecord = ScripterEnvironmentFactory.class.getResource("/warmup/commonRecord.json");
-            final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()));
+            final String COMMON_RECORD = new String(Files.readAllBytes(new File(commonRecord.toURI()).toPath()), StandardCharsets.UTF_8);
 
             validateRecord(environment, COMMON_RECORD, settings);
             checkDoubleRecordFrontend(environment, COMMON_RECORD, settings);

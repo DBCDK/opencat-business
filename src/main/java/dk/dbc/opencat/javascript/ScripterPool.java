@@ -36,9 +36,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * </p>
  * <p>
  * Basic usage of the EJB will be:
- * <code>
- * <pre>
- *             @EJB
+ * <pre> {@code
+ *             \@EJB
  *             ScripterPool pool;
  *
  *             void f() throws InterruptedException, ScripterException {
@@ -52,10 +51,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  *                        }
  *                    }
  *              }
+ * }
  * </pre>
- * </code>
  * Remember handling of exceptions so ypu always put the environment back into the pool.
- * </p>
  */
 
 @Singleton
@@ -75,8 +73,6 @@ public class ScripterPool {
     // replace with atomic int
     private static final AtomicInteger initializedEnvironments = new AtomicInteger();
 
-    private static final AtomicInteger bugxxxx = new AtomicInteger(0);
-
     private final Properties settings = JNDIResources.getProperties();
 
     public enum Status {
@@ -94,13 +90,6 @@ public class ScripterPool {
      */
     @PostConstruct
     public void postConstruct() {
-        synchronized (bugxxxx) {
-            if (bugxxxx.get() > 0) {
-                bugxxxx.incrementAndGet();
-                logger.warn("Ups.. postConstruct called multiple time on Singleton " + ScripterPool.class.getName() + " .. ignoring");
-                return;
-            }
-        }
         logger.entry();
         logger.debug("Starting creation of javascript environments.");
         int javaScriptPoolSize = Integer.parseInt(settings.getProperty(JNDIResources.JAVASCRIPT_POOL_SIZE));
@@ -138,7 +127,6 @@ public class ScripterPool {
      * Retrieves and removes the head of this queue, waiting if necessary until an element becomes available.
      * <p>
      * <b>Description copied from class:</b> {@link java.util.concurrent.LinkedBlockingQueue}
-     * </p>
      *
      * @return the head of this pool
      * @throws InterruptedException if interrupted while waiting
