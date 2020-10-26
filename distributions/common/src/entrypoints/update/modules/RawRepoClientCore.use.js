@@ -11,12 +11,12 @@ use("Log");
 EXPORTED_SYMBOLS = ['RawRepoClientCore'];
 
 var RawRepoClientCore = function () {
-    var UPDATER_RAW_REPO_PACKAGE = getUpdaterRawRepoPackage();
+    var SERVICE_PROVIDER = getServiceProvider();
 
-    function getUpdaterRawRepoPackage() {
+    function getServiceProvider() {
         Log.info("Getting UpdaterRawRepoPackage..")
         try {
-            Packages.dk.dbc.opencat.javascript.UpdaterRawRepo.recordExists(0,0);
+            Packages.dk.dbc.opencat.javascript.UpdaterRawRepo.exists();
             return Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
         }
         catch (ex) {
@@ -30,7 +30,7 @@ var RawRepoClientCore = function () {
 
         var result = false;
         try {
-            result = UPDATER_RAW_REPO_PACKAGE.recordExists(recordId, libraryNo).booleanValue();
+            result = SERVICE_PROVIDER.recordExists(recordId, libraryNo).booleanValue();
             return result;
         } catch (ex) {
             Log.warn(ex);
@@ -43,7 +43,7 @@ var RawRepoClientCore = function () {
     function fetchRecord(recordId, libraryNo) {
         Log.trace("Enter RawRepoClientCore.fetchRecord()");
         try {
-            var record = UPDATER_RAW_REPO_PACKAGE.fetchRecord(recordId, libraryNo);
+            var record = SERVICE_PROVIDER.fetchRecord(recordId, libraryNo);
             var result = __convertRecord(record);
             Log.trace("Exit RawRepoClientCore.fetchRecord(): " + result);
             return result;
@@ -59,7 +59,7 @@ var RawRepoClientCore = function () {
         Log.trace("Enter RawRepoClientCore.getRelationsChildren()");
         var result = [];
         try {
-            var records = UPDATER_RAW_REPO_PACKAGE.getRelationsChildren(recordId, libraryNo);
+            var records = SERVICE_PROVIDER.getRelationsChildren(recordId, libraryNo);
             for (var i = 0; i < records.size(); i++) {
                 result.push(__convertRecord(records.get(i)));
             }
