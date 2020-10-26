@@ -8,79 +8,64 @@ package dk.dbc.opencat.openagency;
 import dk.dbc.openagency.client.LibraryRuleHandler;
 import dk.dbc.openagency.client.OpenAgencyException;
 import dk.dbc.openagency.client.OpenAgencyServiceFromURL;
-import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.json.JsonMapper;
-import dk.dbc.opencat.ws.JNDIResources;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.Set;
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * EJB to access the OpenAgency web service.
  */
 @Singleton
 public class OpenAgencyService {
-    private static final XLogger logger = XLoggerFactory.getXLogger(OpenAgencyService.class);
-    private static final int CONNECT_TIMEOUT = 1 * 60 * 1000;
-    private static final int REQUEST_TIMEOUT = 3 * 60 * 1000;
-
-    private Properties settings = JNDIResources.getProperties();
+    private static final XLogger LOGGER = XLoggerFactory.getXLogger(OpenAgencyService.class);
 
     private OpenAgencyServiceFromURL service;
 
-    public enum LibraryGroup {
-        DBC("dbc"), FBS("fbs"), PH("ph");
+    @Inject
+    @ConfigProperty(name = "OPENAGENCY_CONNECT_TIMEOUT", defaultValue = "60000") // 60 seconds
+    private String OPENAGENCY_CONNECT_TIMEOUT;
 
-        private final String value;
+    @Inject
+    @ConfigProperty(name = "OPENAGENCY_REQUEST_TIMEOUT", defaultValue = "180000") // 180 seconds
+    private String OPENAGENCY_REQUEST_TIMEOUT;
 
-        LibraryGroup(final String value) {
-            this.value = value;
-        }
+    @Inject
+    @ConfigProperty(name = "OPENAGENCY_CACHE_AGE", defaultValue = "8") // 8 hours
+    private String OPENAGENCY_CACHE_AGE;
 
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return this.getValue();
-        }
-
-        public boolean isDBC() {
-            return DBC.getValue().equals(this.getValue());
-        }
-
-        // PH is also a FBS library
-        public boolean isFBS() {
-            return FBS.getValue().equals(this.getValue()) || PH.getValue().equals(this.getValue());
-        }
-
-        public boolean isPH() {
-            return PH.getValue().equals(this.getValue());
-        }
-    }
+    @Inject
+    @ConfigProperty(name = "OPENAGENCY_URL", defaultValue = "OPENAGENCY_URL not set")
+    private String OPENAGENCY_URL;
 
     @PostConstruct
     public void init() {
-        logger.entry();
+        LOGGER.entry();
         StopWatch watch = new Log4JStopWatch("service.openagency.init");
 
         try {
-            OpenAgencyServiceFromURL.Builder builder = OpenAgencyServiceFromURL.builder();
-            builder = builder.connectTimeout(CONNECT_TIMEOUT).
-                    requestTimeout(REQUEST_TIMEOUT).
-                    setCacheAge(Integer.parseInt(settings.getProperty(JNDIResources.OPENAGENCY_CACHE_AGE)));
+            LOGGER.info("Initializing open agency with the following parameters:");
+            LOGGER.info("OPENAGENCY_URL: {}", OPENAGENCY_URL);
+            LOGGER.info("OPENAGENCY_CONNECT_TIMEOUT: {}", Integer.parseInt(OPENAGENCY_CONNECT_TIMEOUT));
+            LOGGER.info("OPENAGENCY_REQUEST_TIMEOUT: {}", Integer.parseInt(OPENAGENCY_REQUEST_TIMEOUT));
+            LOGGER.info("OPENAGENCY_CACHE_AGE: {}", Integer.parseInt(OPENAGENCY_CACHE_AGE));
 
-            service = builder.build(settings.getProperty(JNDIResources.OPENAGENCY_URL));
+            OpenAgencyServiceFromURL.Builder builder = OpenAgencyServiceFromURL.builder();
+            builder = builder.connectTimeout(Integer.parseInt(OPENAGENCY_CONNECT_TIMEOUT)).
+                    requestTimeout(Integer.parseInt(OPENAGENCY_REQUEST_TIMEOUT)).
+                    setCacheAge(Integer.parseInt(OPENAGENCY_CACHE_AGE));
+            service = builder.build(OPENAGENCY_URL);
         } finally {
             watch.stop();
-            logger.exit();
+            LOGGER.exit();
         }
     }
 
@@ -89,152 +74,70 @@ public class OpenAgencyService {
     }
 
     public boolean hasFeature(String agencyId, LibraryRuleHandler.Rule feature) throws OpenAgencyException {
-        logger.entry(agencyId, feature);
+        LOGGER.entry(agencyId, feature);
         StopWatch watch = new Log4JStopWatch("service.openagency.hasFeature");
 
         Boolean result = null;
         try {
             result = service.libraryRules().isAllowed(agencyId, feature);
 
-            logger.info("Agency '{}' is allowed to use feature '{}': {}", agencyId, feature, result);
+            LOGGER.info("Agency '{}' is allowed to use feature '{}': {}", agencyId, feature, result);
             return result;
         } catch (OpenAgencyException ex) {
-            logger.error("Failed to read feature from OpenAgency for ['{}':'{}']: {}", agencyId, feature, ex.getMessage());
+            LOGGER.error("Failed to read feature from OpenAgency for ['{}':'{}']: {}", agencyId, feature, ex.getMessage());
             try {
                 if (ex.getRequest() != null) {
-                    logger.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
+                    LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
                 }
                 if (ex.getResponse() != null) {
-                    logger.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
+                    LOGGER.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
                 }
             } catch (IOException ioError) {
-                logger.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
+                LOGGER.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
             }
 
             throw ex;
         } finally {
             watch.stop();
-            logger.exit(result);
-        }
-    }
-
-    public LibraryGroup getLibraryGroup(String agencyId) throws OpenAgencyException, OpenCatException {
-        logger.entry(agencyId);
-        StopWatch watch = new Log4JStopWatch("service.openagency.getCatalogingTemplate");
-
-        LibraryGroup result = null;
-        try {
-            String reply = service.libraryRules().getCatalogingTemplate(agencyId);
-
-            if (reply == null || reply.isEmpty()) {
-                throw new OpenCatException("Couldn't find cataloging template group for agency " + agencyId);
-            }
-
-            switch (reply) {
-                case "dbc":
-                case "ffu":
-                case "lokbib":
-                    result = LibraryGroup.DBC;
-                    break;
-                case "ph":
-                    result = LibraryGroup.PH;
-                    break;
-                case "fbs":
-                case "fbslokal":
-                case "skole":
-                    result = LibraryGroup.FBS;
-                    break;
-                default:
-                    throw new OpenCatException("Unknown library group: " + reply);
-            }
-
-            logger.info("Agency '{}' has LibraryGroup {}", agencyId, result.toString());
-            return result;
-        } catch (OpenAgencyException ex) {
-            logger.error("Failed to read CatalogingTemplate for ['{}']: {}", agencyId, ex.getMessage());
-            try {
-                if (ex.getRequest() != null) {
-                    logger.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
-                }
-                if (ex.getResponse() != null) {
-                    logger.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
-                }
-            } catch (IOException ioError) {
-                logger.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
-            }
-
-            throw ex;
-        } finally {
-            watch.stop();
-            logger.exit(result);
-        }
-    }
-
-    public String getTemplateGroup(String agencyId) throws OpenAgencyException {
-        logger.entry(agencyId);
-        StopWatch watch = new Log4JStopWatch("service.openagency.getCatalogingTemplate");
-
-        String result = null;
-        try {
-            result = service.libraryRules().getCatalogingTemplate(agencyId);
-
-            logger.info("Agency '{}' has CatalogingTemplate {}", agencyId, result);
-            return result;
-        } catch (OpenAgencyException ex) {
-            logger.error("Failed to read CatalogingTemplate for ['{}']: {}", agencyId, ex.getMessage());
-            try {
-                if (ex.getRequest() != null) {
-                    logger.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
-                }
-                if (ex.getResponse() != null) {
-                    logger.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
-                }
-            } catch (IOException ioError) {
-                logger.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
-            }
-
-            throw ex;
-        } finally {
-            watch.stop();
-            logger.exit(result);
+            LOGGER.exit(result);
         }
     }
 
     public Set<String> getLokbibLibraries() throws OpenAgencyException {
-        logger.entry();
+        LOGGER.entry();
         Set<String> result = null;
         try {
             result = getLibrariesByCatalogingTemplateSet("lokbib");
             return result;
         } finally {
-            logger.exit(result);
+            LOGGER.exit(result);
         }
     }
 
     public Set<String> getPHLibraries() throws OpenAgencyException {
-        logger.entry();
+        LOGGER.entry();
         Set<String> result = null;
         try {
             result = getLibrariesByCatalogingTemplateSet("ph");
             return result;
         } finally {
-            logger.exit(result);
+            LOGGER.exit(result);
         }
     }
 
     public Set<String> getFFULibraries() throws OpenAgencyException {
-        logger.entry();
+        LOGGER.entry();
         Set<String> result = null;
         try {
             result = getLibrariesByCatalogingTemplateSet("ffu");
             return result;
         } finally {
-            logger.exit(result);
+            LOGGER.exit(result);
         }
     }
 
     public Set<String> getAllowedLibraryRules(String agencyId) throws OpenAgencyException {
-        logger.entry(agencyId);
+        LOGGER.entry(agencyId);
 
         StopWatch watch = new Log4JStopWatch("service.openagency.getAllowedLibraryRules");
 
@@ -244,27 +147,27 @@ public class OpenAgencyService {
 
             return result;
         } catch (OpenAgencyException ex) {
-            logger.error("Failed to read set from OpenAgency: {}", ex.getMessage());
+            LOGGER.error("Failed to read set from OpenAgency: {}", ex.getMessage());
             try {
                 if (ex.getRequest() != null) {
-                    logger.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
+                    LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
                 }
                 if (ex.getResponse() != null) {
-                    logger.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
+                    LOGGER.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
                 }
             } catch (IOException ioError) {
-                logger.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
+                LOGGER.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
             }
 
             throw ex;
         } finally {
             watch.stop();
-            logger.exit(result);
+            LOGGER.exit(result);
         }
     }
 
     private Set<String> getLibrariesByCatalogingTemplateSet(String catalogingTemplateSet) throws OpenAgencyException {
-        logger.entry(catalogingTemplateSet);
+        LOGGER.entry(catalogingTemplateSet);
 
         StopWatch watch = new Log4JStopWatch("service.openagency.getLibrariesByCatalogingTemplateSet");
 
@@ -274,23 +177,29 @@ public class OpenAgencyService {
 
             return result;
         } catch (OpenAgencyException ex) {
-            logger.error("Failed to read catalogingTemplateSet: {}", ex.getMessage());
+            LOGGER.error("Failed to read catalogingTemplateSet: {}", ex.getMessage());
             try {
                 if (ex.getRequest() != null) {
-                    logger.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
+                    LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
                 }
                 if (ex.getResponse() != null) {
-                    logger.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
+                    LOGGER.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
                 }
             } catch (IOException ioError) {
-                logger.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
+                LOGGER.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
             }
 
             throw ex;
         } finally {
             watch.stop();
-            logger.exit(result);
+            LOGGER.exit(result);
         }
+    }
+
+    // Dummy function used by javascript to detect if this class and function is present
+    // TODO Remove once all javascript it removed from update-service
+    public static boolean exists() {
+        return true;
     }
 
 }
