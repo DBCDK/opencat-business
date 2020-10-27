@@ -37,6 +37,7 @@ use("ExclusiveSubfieldParameterized");
 use("SubfieldHasValueDemandsOtherSubfield");
 use("FieldsIndicator");
 use("SubfieldsMandatory");
+use("CheckFieldNotUsedInChildrenRecords");
 
 //record rules
 use("OptionalFields");
