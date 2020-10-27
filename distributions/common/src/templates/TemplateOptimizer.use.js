@@ -368,6 +368,9 @@ var TemplateOptimizer = function () {
                 case "RecordRules.subfieldsHaveValuesDemandsOtherSubfield":
                     return SubfieldsHaveValuesDemandsOtherSubfield.validateRecord;
 
+
+                case "FieldRules.checkFieldNotUsedInChildrenRecords":
+                    return CheckFieldNotUsedInChildrenRecords.validateField;
                 case "FieldRules.checkValueUnlessHasSubfield":
                     return CheckValueUnlessHasSubfield.validateField;
                 case "FieldRules.fieldsIndicator":
