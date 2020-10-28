@@ -37,6 +37,7 @@ use("ExclusiveSubfieldParameterized");
 use("SubfieldHasValueDemandsOtherSubfield");
 use("FieldsIndicator");
 use("SubfieldsMandatory");
+use("CheckFieldNotUsedInChildrenRecords");
 
 //record rules
 use("OptionalFields");
@@ -368,6 +369,9 @@ var TemplateOptimizer = function () {
                 case "RecordRules.subfieldsHaveValuesDemandsOtherSubfield":
                     return SubfieldsHaveValuesDemandsOtherSubfield.validateRecord;
 
+
+                case "FieldRules.checkFieldNotUsedInChildrenRecords":
+                    return CheckFieldNotUsedInChildrenRecords.validateField;
                 case "FieldRules.checkValueUnlessHasSubfield":
                     return CheckValueUnlessHasSubfield.validateField;
                 case "FieldRules.fieldsIndicator":

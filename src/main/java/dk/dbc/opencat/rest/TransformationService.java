@@ -13,7 +13,7 @@ import dk.dbc.opencat.transformation.MetaCompassHandler;
 import dk.dbc.opencat.transformation.PreProcessingHandler;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
-import dk.dbc.rawrepo.RecordServiceConnectorException;
+import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import dk.dbc.util.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,13 +45,25 @@ public class TransformationService {
     private static final RecordService recordService = new RecordService();
     private static final PreProcessingHandler preProcessingHandler = new PreProcessingHandler(recordService);
     private static final MetaCompassHandler metaCompassHandler = new MetaCompassHandler(recordService);
-    private static Transformer transformer;
+
+    /*
+        Here be unthreadsafe dragons!
+        Every function on Transformer and TransformerFactory objects should be assumed to be not thread safe.
+        Because of this each instance of TransformationService will get its own Transformer object but initialization
+        should be done synchronized across all instances of TransformationService.
+
+        A @Stateless bean will only execute a single thread at a time so the later transformer.transform call does not
+        have to explicitly synchronized
+     */
+    private Transformer transformer;
 
     @PostConstruct
     public void postConstruct() {
         try {
-            final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            transformer = transformerFactory.newTransformer();
+            synchronized (this) {
+                final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                transformer = transformerFactory.newTransformer();
+            }
         } catch (TransformerConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -64,13 +76,13 @@ public class TransformationService {
     @Timed
     public Response preProcess(RecordRequestDTO recordRequestDTO) {
         try {
-            LOGGER.info("preProcess incoming request:{}", recordRequestDTO);
+            LOGGER.debug("preProcess incoming request: {}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             preProcessingHandler.preProcess(record);
             final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(record));
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
-            LOGGER.info("preProcess result:{}", recordResponseDTO);
+            LOGGER.debug("preProcess result: {}", recordResponseDTO);
 
             return Response.ok().entity(recordResponseDTO).build();
         } catch (OpenCatException e) {
@@ -89,14 +101,14 @@ public class TransformationService {
     @Timed
     public Response metaCompass(RecordRequestDTO recordRequestDTO) {
         try {
-            LOGGER.info("metaCompass incoming request:{}", recordRequestDTO);
+            LOGGER.debug("metaCompass incoming request: {}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             final MarcRecord result = metaCompassHandler.enrichMetaCompassRecord(record);
             final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(result));
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
 
-            LOGGER.info("metaCompass result:{}", recordResponseDTO);
+            LOGGER.debug("metaCompass result: {}", recordResponseDTO);
             return Response.ok().entity(recordResponseDTO).build();
         } catch (OpenCatException e) {
             LOGGER.error("Validation error in metaCompass.", e);
@@ -107,7 +119,7 @@ public class TransformationService {
         }
     }
 
-    private static String convertDocumentToString(Document doc) throws TransformerException {
+    private String convertDocumentToString(Document doc) throws TransformerException {
         final StringWriter writer = new StringWriter();
         transformer.transform(new DOMSource(doc), new StreamResult(writer));
 

@@ -13,7 +13,7 @@ import dk.dbc.common.records.MarcRecordWriter;
 import dk.dbc.common.records.MarcSubField;
 import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
-import dk.dbc.rawrepo.RecordServiceConnectorException;
+import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
@@ -41,10 +41,12 @@ public class MetaCompassHandler {
      * <p>
      * Additionally certain 665 subfields are copied to 666 subfields.
      *
+     * @param minimalMetaCompassRecord The record to process
      * @return The record to be used for the rest if the execution
-     * @throws UnsupportedEncodingException Thrown if the record has wrong encoding
-     * @throws OpenCatException             Thrown when the record doesn't exist - don't expect it to happen because the
-     *                                      enrichMetakompasRecord function will catch this too.
+     * @throws UnsupportedEncodingException    Thrown if the record has wrong encoding
+     * @throws OpenCatException                Thrown when the record doesn't exist - don't expect it to happen because the
+     *                                         enrichMetakompasRecord function will catch this too.
+     * @throws RecordServiceConnectorException Thrown if unexpected exception in RecordServiceConnector
      */
     public MarcRecord enrichMetaCompassRecord(MarcRecord minimalMetaCompassRecord) throws UnsupportedEncodingException, OpenCatException, RecordServiceConnectorException {
         logger.info("Got metakompas template so updated the request record.");
