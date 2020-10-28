@@ -30,8 +30,17 @@ var CheckFieldNotUsedInChildrenRecords = function () {
             // There can be no interesting records below single and volume records
             // Though, technically we only look at levels head and section
             if (!(recordLevel === "h" || recordLevel === "s")) return [];
-            var children = RawRepoClient.getRelationsChildren(recId, libNo);
-            Log.trace("Children: ", uneval(children));
+
+            var context = params.context;
+
+            var children;
+
+            children = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
+            if (children === undefined) {
+                children = RawRepoClient.getRelationsChildren(recId, libNo);
+                ContextUtil.setValue(context, children, 'getRelationsChildren', recId, libNo);
+            }
+
             if (children.length === 0) {
                 Log.trace("Returns []: No children found.");
                 return [];
