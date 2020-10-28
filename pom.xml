@@ -24,6 +24,7 @@
     <properties>
         <openagency.ws.client.version>2.34-SNAPSHOT</openagency.ws.client.version>
         <wiremock.version>2.26.3</wiremock.version>
+        <javax.mail.version>1.5.0</javax.mail.version>
         <ocb.tools.artifact>
             https://is.dbc.dk/job/updateservice/job/ocb-tools/job/master/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz
         </ocb.tools.artifact>
@@ -44,6 +45,12 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>1.3</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>dk.dbc</groupId>
             <artifactId>common-records</artifactId>
@@ -73,6 +80,11 @@
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>${javax.mail.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>

@@ -76,13 +76,13 @@ public class TransformationService {
     @Timed
     public Response preProcess(RecordRequestDTO recordRequestDTO) {
         try {
-            LOGGER.info("preProcess incoming request:{}", recordRequestDTO);
+            LOGGER.debug("preProcess incoming request: {}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             preProcessingHandler.preProcess(record);
             final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(record));
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
-            LOGGER.info("preProcess result:{}", recordResponseDTO);
+            LOGGER.debug("preProcess result: {}", recordResponseDTO);
 
             return Response.ok().entity(recordResponseDTO).build();
         } catch (OpenCatException e) {
@@ -101,14 +101,14 @@ public class TransformationService {
     @Timed
     public Response metaCompass(RecordRequestDTO recordRequestDTO) {
         try {
-            LOGGER.info("metaCompass incoming request:{}", recordRequestDTO);
+            LOGGER.debug("metaCompass incoming request: {}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             final MarcRecord result = metaCompassHandler.enrichMetaCompassRecord(record);
             final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(result));
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
 
-            LOGGER.info("metaCompass result:{}", recordResponseDTO);
+            LOGGER.debug("metaCompass result: {}", recordResponseDTO);
             return Response.ok().entity(recordResponseDTO).build();
         } catch (OpenCatException e) {
             LOGGER.error("Validation error in metaCompass.", e);

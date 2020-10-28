@@ -14,9 +14,10 @@ var OpenAgencyClientCore = function () {
         try {
             serviceProvider = context.lookup(JNDI_NAME);
         } catch (e) {
-            Log.debug(JNDI_NAME+" not found. Trying "+JNDI_NAME_DEPRECATED)
+            Log.debug(JNDI_NAME + " not found. Trying " + JNDI_NAME_DEPRECATED)
             serviceProvider = context.lookup(JNDI_NAME_DEPRECATED);
         }
+        Log.info("Using OpenAgencyService provider: ", serviceProvider);
         return serviceProvider;
     }
 
@@ -35,7 +36,6 @@ var OpenAgencyClientCore = function () {
         Log.trace("Enter - OpenAgencyClientCore.hasFeature()");
         var result;
         try {
-
             return result = SERVICE_PROVIDER.hasFeature(agencyId, features[featureName]);
         } finally {
             Log.trace("Exit - OpenAgencyClientCore.hasFeature(): " + result);
