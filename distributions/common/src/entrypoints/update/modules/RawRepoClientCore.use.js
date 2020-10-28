@@ -14,15 +14,17 @@ var RawRepoClientCore = function () {
     var SERVICE_PROVIDER = getServiceProvider();
 
     function getServiceProvider() {
-        Log.info("Getting UpdaterRawRepoPackage..")
+        var serviceProvider;
         try {
-            Packages.dk.dbc.opencat.javascript.UpdaterRawRepo.exists();
-            return Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
+            Packages.dk.dbc.opencat.javascript.UpdaterRawRepo.recordExists(0,0);
+            serviceProvider = Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
         }
         catch (ex) {
             Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists(0,0);
-            return Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo;
+            serviceProvider = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo;
         }
+        Log.info("Using UpdaterRawRepo provider: ", serviceProvider);
+        return serviceProvider;
     }
 
     function recordExists(recordId, libraryNo) {

@@ -196,10 +196,4 @@ public class OpenAgencyService {
         }
     }
 
-    // Dummy function used by javascript to detect if this class and function is present
-    // TODO Remove once all javascript it removed from update-service
-    public static boolean exists() {
-        return true;
-    }
-
 }
