@@ -5,7 +5,7 @@ use("UnitTest");
 
 UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.NotHeadOrVolumeRecord", function () {
     function callRule(record, field, params) {
-        return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params, undefined);
+        return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params);
     }
 
     var record;
@@ -13,18 +13,18 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.NotHeadOrVo
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n"
     ));
-    Assert.equalValue("No type in record", callRule(record, record.fields[1], {subfield: "t"}), []);
+    Assert.equalValue("No type in record", callRule(record, record.fields[1], {subfield: "t", context: {}}), []);
 
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *r n *a e\n"
     ));
-    Assert.equalValue("Record is not head or volume", callRule(record, record.fields[1], {subfield: "t"}), []);
+    Assert.equalValue("Record is not head or volume", callRule(record, record.fields[1], {subfield: "t", context: {}}), []);
 });
 
 UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord", function () {
     function callRule(record, field, params) {
-        return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params, undefined);
+        return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params);
     }
 
     var record;
@@ -36,7 +36,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
         "004 00 *r n *a h\n" +
         "008 00 *t ggg\n"
     ));
-    Assert.equalValue("Head record with no children: OK", callRule(record, record.fields[2], {subfield: "t"}), []);
+    Assert.equalValue("Head record with no children: OK", callRule(record, record.fields[2], {subfield: "t", context: {}}), []);
 
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
@@ -45,7 +45,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
     ));
     var msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Head record with no children: Missing subfield",
-        callRule(record, record.fields[2], {subfield: "t"}),
+        callRule(record, record.fields[2], {subfield: "t", context: {}}),
         [ValidateErrors.subfieldError("", msg)]);
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -64,7 +64,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
         "008 00 *t ggg\n"
     ));
     Assert.equalValue("Update Head record: Subfield in head record",
-        callRule(record, record.fields[2], {subfield: "t"}), []);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), []);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -89,7 +89,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
         "008 00 *g ggg\n"
     ));
     Assert.equalValue("Update Head record: Subfield in all volumes",
-        callRule(record, record.fields[2], {subfield: "t"}), []);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), []);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -115,13 +115,13 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.HeadRecord"
     ));
     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Update Head record: Remove subfield. Subfield missing in one volume",
-        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg)]);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), [ValidateErrors.subfieldError("", msg)]);
     RawRepoClientCore.clear();
 });
 
 UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecord", function () {
     function callRule(record, field, params) {
-        return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params, undefined);
+        return MandatorySubfieldInVolumeWorkRule.validateField(record, field, params);
     }
 
     var record;
@@ -140,7 +140,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
     ));
     var msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Volume record: Missing subfield",
-        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg)]);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), [ValidateErrors.subfieldError("", msg)]);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -155,7 +155,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
         "014 00 *a 2 234 567 8"
     ));
     Assert.equalValue("Volume record OK: Subfield in head record",
-        callRule(record, record.fields[2], {subfield: "t"}), []);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), []);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -170,7 +170,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
         "014 00 *a 2 234 567 8"
     ));
     Assert.equalValue("Volume record OK: Subfield in volume record",
-        callRule(record, record.fields[2], {subfield: "t"}), []);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), []);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -185,7 +185,7 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
         "014 00 *a 2 234 567 8"
     ));
     Assert.equalValue("Volume record OK: Subfield in both records",
-        callRule(record, record.fields[2], {subfield: "t"}), []);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), []);
     RawRepoClientCore.clear();
 
     RawRepoClientCore.addRecord(RecordUtil.createFromString(
@@ -206,6 +206,6 @@ UnitTest.addFixture("MandatorySubfieldInVolumeWorkRule.validateField.VolumeRecor
     ));
     msg = ResourceBundle.getStringFormat(bundle, "volume.work.mandatory.subfield.rule.error", "008", "t");
     Assert.equalValue("Mandatory subfield removed from volume record",
-        callRule(record, record.fields[2], {subfield: "t"}), [ValidateErrors.subfieldError("", msg)]);
+        callRule(record, record.fields[2], {subfield: "t", context: {}}), [ValidateErrors.subfieldError("", msg)]);
     RawRepoClientCore.clear();
 });
