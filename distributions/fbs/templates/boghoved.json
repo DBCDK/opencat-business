@@ -238,7 +238,7 @@
             },
             "rules": [
                 {
-                    "type": "SubfieldRules.checkSubfieldNotUsedInChildrenRecords"
+                    "type": "FieldRules.checkFieldNotUsedInChildrenRecords"
                 }
             ]
         },
