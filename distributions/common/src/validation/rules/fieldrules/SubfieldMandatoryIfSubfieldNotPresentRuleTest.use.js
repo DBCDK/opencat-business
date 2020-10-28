@@ -7,7 +7,7 @@ UnitTest.addFixture("SubfieldMandatoryIfSubfieldNotPresentRule.validateField", f
     var bundle = ResourceBundleFactory.getBundle(SubfieldMandatoryIfSubfieldNotPresentRule.__BUNDLE_NAME);
 
 /***************
- * US2139 For now we comment out the test of validateSubField
+ * US2139 For now we comment out the test of validateField
  * a more general solution of these exception asserts should be found
     recordArg = {
         fields: [

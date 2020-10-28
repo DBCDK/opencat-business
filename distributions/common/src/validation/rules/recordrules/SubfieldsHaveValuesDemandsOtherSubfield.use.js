@@ -22,7 +22,7 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
      * @returns {Array}
      */
     function validateRecord(record, params) {
-        Log.trace("Enter - SubfieldsHaveValuesDemandsOtherSubfield.validateField");
+        Log.trace("Enter - SubfieldsHaveValuesDemandsOtherSubfield.validateRecord");
         var result = [];
 
         try {
@@ -61,7 +61,7 @@ var SubfieldsHaveValuesDemandsOtherSubfield = function () {
 
             return result;
         } finally {
-            Log.trace("Exit - SubfieldsMandatory.validateField(): ", result);
+            Log.trace("Exit - SubfieldsMandatory.validateRecord(): ", result);
         }
     }
 
