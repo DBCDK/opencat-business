@@ -41,29 +41,65 @@ var DanMarc2Converter = function () {
      *
      * @param {Object} obj The pure JavaScript Object. See the module description of a
      *                       definition of the content of this obj.
-     *
+     * @param {params} params Optional element with context cache
      * @return {Record} The new Record object.
      *
      * @name DanMarc2Converter#convertToDanMarc2
      */
-    function convertToDanMarc2(obj) {
+    function convertToDanMarc2(obj, params) {
         Log.trace("Enter - DanMarc2Converter.convertToDanMarc2()");
-        var start = new Date().getTime();
-        var result = new Record();
-        try {
-            for (var i = 0; i < obj.fields.length; i++) {
-                var objField = obj.fields[i];
+        var result = undefined;
+        var bibliographicRecordId = undefined;
+        var agencyId = undefined;
+        var context;
 
-                var field = new Field(objField.name.toString() + '', objField.indicator.toString() + '');
+        if (params !== undefined && params.context !== undefined) {
+            // If the context object exists then we need to find the keys to look for the record.
+            // That is done by finding 001 *a and *b in the incoming JSON record
+            var field001Post = obj.fields.map(function (x) {return x.name;}).indexOf("001");
+            if (field001Post > -1) {
+                var field001 = obj.fields[field001Post];
 
-                for (var j = 0; j < objField.subfields.length; j++) {
-                    var objSubfield = objField.subfields[j];
-                    field.append(new Subfield(objSubfield.name.toString() + '', objSubfield.value.toString() + ''));
+                var subfield001aPos = field001.subfields.map(function (x) {return x.name;}).indexOf("a");
+                if (subfield001aPos > -1) {
+                    bibliographicRecordId = field001.subfields[subfield001aPos].value;
                 }
 
-                result.append(field);
+                var subfield001bPos = field001.subfields.map(function (x) {return x.name;}).indexOf("b");
+                if (subfield001bPos > -1) {
+                    agencyId = field001.subfields[subfield001bPos].value;
+                }
             }
 
+            context = params.context;
+            if (bibliographicRecordId !== undefined && agencyId !== undefined) {
+                result = ContextUtil.getValue(context, 'convertToDanMarc2', bibliographicRecordId, agencyId);
+            }
+        }
+
+        var start = new Date().getTime();
+
+        try {
+            if (result === undefined) {
+                result = new Record();
+                for (var i = 0; i < obj.fields.length; i++) {
+                    var objField = obj.fields[i];
+
+                    var field = new Field(objField.name.toString() + '', objField.indicator.toString() + '');
+
+                    for (var j = 0; j < objField.subfields.length; j++) {
+                        var objSubfield = objField.subfields[j];
+                        field.append(new Subfield(objSubfield.name.toString() + '', objSubfield.value.toString() + ''));
+                    }
+
+                    result.append(field);
+                }
+
+                if (params !== undefined && params.context !== undefined && bibliographicRecordId !== undefined && agencyId !== undefined) {
+                    context = params.context;
+                    ContextUtil.setValue(context, result, 'convertToDanMarc2', bibliographicRecordId, agencyId);
+                }
+            }
             return result;
         } catch (ex) {
             Log.debug("Catch exception: ", ex);

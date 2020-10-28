@@ -25,7 +25,7 @@ var CheckSubfieldNotUsedInChildrenRecords = function () {
         Log.trace("Enter - CheckSubfieldNotUsedInChildrenRecords.validateSubfield");
 
         try {
-            var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
+            var marcRecord = DanMarc2Converter.convertToDanMarc2(record, params);
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
             var recordLevel = marcRecord.getValue(/004/, /a/);

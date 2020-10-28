@@ -17,7 +17,7 @@ var MandatorySubfieldInVolumeWorkRule = function () {
             ValueCheck.check("params", params).type("object");
             ValueCheck.check("params.subfield", params.subfield).type("string");
 
-            var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
+            var marcRecord = DanMarc2Converter.convertToDanMarc2(record, params);
 
             if (marcRecord.matchValue(/004/, /a/, /h/)) {
                 return __validateHeadRecord(marcRecord, field, params);

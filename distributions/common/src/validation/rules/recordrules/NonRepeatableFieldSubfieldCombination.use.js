@@ -36,7 +36,7 @@ var NonRepeatableFieldSubfieldCombination = function () {
             ValueCheck.checkThat("params", params).type("object");
 
             // Convert to Record so we can use its utility functions.
-            var marc = DanMarc2Converter.convertToDanMarc2(record);
+            var marc = DanMarc2Converter.convertToDanMarc2(record, params);
 
             // Array of found subfields. If this array contains 2 or more items, when we
             // have a validation error.

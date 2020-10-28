@@ -64,7 +64,7 @@ UnitTest.addFixture("DanMarc2Converter.convertToDanMarc2.validArguments", functi
         fields: [
             {
                 name: "001", indicator: "00",
-                subfields: [{name: "a", value: "1 234 567 9"}]
+                subfields: [{name: "a", value: "1 234 567 9"}, {name: "b", value: "123456"}]
             },
             {
                 name: "004", indicator: "00",
@@ -72,9 +72,11 @@ UnitTest.addFixture("DanMarc2Converter.convertToDanMarc2.validArguments", functi
                     {name: "r", value: "c"}]
             }]
     };
-    expect = "001 00 *a 1 234 567 9 \n" +
+    expect = "001 00 *a 1 234 567 9 *b 123456 \n" +
         "004 00 *a e *r c \n";
-    Assert.equalValue("Record with 2 fields", DanMarc2Converter.convertToDanMarc2(arg).toString(), expect);
+    var params = {context: {}}
+    Assert.equalValue("Record with 2 fields", DanMarc2Converter.convertToDanMarc2(arg, params).toString(), expect);
+    Assert.equalValue("Context is set", params.context["convertToDanMarc2"]["1 234 567 9"]["123456"].toString(), expect);
 });
 
 UnitTest.addFixture("DanMarc2Converter.convertFromDanMarc2", function () {

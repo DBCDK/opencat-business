@@ -29,7 +29,7 @@ var CheckChangedValue = function () {
         ValueCheck.checkThat("params['fromValues']", params['fromValues']).instanceOf(Array);
         ValueCheck.checkThat("params['toValues']", params['toValues']).instanceOf(Array);
         try {
-            var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
+            var marcRecord = DanMarc2Converter.convertToDanMarc2(record, params);
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
             var bundle;

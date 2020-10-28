@@ -29,7 +29,7 @@ var CheckSubfieldNotUsedInParentRecord = function () {
         try {
             var msg;
             var bundle;
-            var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
+            var marcRecord = DanMarc2Converter.convertToDanMarc2(record, params);
             // If the point does not has a parent, when we are fine.
             if (!marcRecord.existField(/014/)) {
                 return [];

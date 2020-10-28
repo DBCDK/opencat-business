@@ -37,7 +37,7 @@ var ConflictingSubfields = function () {
             ValueCheck.check("params.subfields", params.subfields).instanceOf(Array);
 
             // Convert to Record so we can use its utility functions.
-            var marc = DanMarc2Converter.convertToDanMarc2(record);
+            var marc = DanMarc2Converter.convertToDanMarc2(record, params);
 
             // Array of found subfields. If this array contains 2 or more items, when we
             // have a validation error.

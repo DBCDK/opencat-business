@@ -44,7 +44,7 @@ var CheckFaust = function () {
                 return result;
             }
             if (subfieldValue.length !== 8) {
-                var marc = DanMarc2Converter.convertToDanMarc2(record);
+                var marc = DanMarc2Converter.convertToDanMarc2(record, params);
                 if (marc.matchValue(/001/, /b/, RegExp(UpdateConstants.COMMON_AGENCYID))) {
                     bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                     msg = ResourceBundle.getStringFormat(bundle, "check.faust.common.records.length.error", subfieldName);
