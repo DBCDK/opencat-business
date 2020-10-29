@@ -22,7 +22,33 @@ UnitTest.addFixture( "Test Check035", function() {
     Assert.equalValue( "Record with legal 035a",
         Check035.validateSubfield(record, field, subfield, params), []);
 
-   marcRecord = new Record();
+    var marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "035 00 *a(8709-70kjik)"
+    );
+
+
+    var record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
+    field = record.fields[1];
+    subfield = field.subfields[0];
+    Assert.equalValue( "Record with legal 035a",
+        Check035.validateSubfield(record, field, subfield, params), []);
+
+    var marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "035 00 *a(8709-70kjik)klp(jk.)"
+    );
+
+    var record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
+    field = record.fields[1];
+    subfield = field.subfields[0];
+    Assert.equalValue( "Record with legal 035a",
+        Check035.validateSubfield(record, field, subfield, params), []);
+
+
+    marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "035 00*a (870970kjik"
@@ -32,19 +58,9 @@ UnitTest.addFixture( "Test Check035", function() {
     field = record.fields[1];
     subfield = field.subfields[0];
     Assert.equalValue( "Record with illegal field 035a",
-        Check035.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", "Felt 035 delfelt a overholder ikke syntaksen. Skal være (præfiks)systemnummer" )] );
+        Check035.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check035.validation.error") )] );
 
-    marcRecord = new Record();
-    marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "035 00 *a (8709-70kjik)"
-    );
 
-    record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
-    field = record.fields[1];
-    subfield = field.subfields[0];
-    Assert.equalValue( "Record with illegal field 035a",
-        Check035.validateSubfield( record, field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "check035.validation.error") )] );
 
     marcRecord = new Record();
     marcRecord.fromString(
