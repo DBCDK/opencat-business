@@ -14,14 +14,13 @@ var ContextUtil = function () {
             var arg = arguments[i];
             if (tmp[arg] === undefined) {
                 var argsList = Array.prototype.slice.call(arguments, 1);
-                Log.info("Cache MISS on context." + argsList.join('.'));
+                Log.debug("Cache miss on context." + argsList.join('.'));
                 return undefined;
             } else {
                 tmp = tmp[arg];
             }
         }
 
-        Log.info("Cache HIT on context." + Array.prototype.slice.call(arguments, 1).join('.'));
         return tmp;
     }
 
