@@ -5,7 +5,7 @@ use("UnitTest");
 
 UnitTest.addFixture("CheckSubfieldNotUsedInChildrenRecords.validateSubfield", function () {
     function callRule(record, field, subfield) {
-        return CheckSubfieldNotUsedInChildrenRecords.validateSubfield(record, field, subfield, undefined, undefined);
+        return CheckSubfieldNotUsedInChildrenRecords.validateSubfield(record, field, subfield, {'context': {}}, undefined);
     }
 
     var bundle = ResourceBundleFactory.getBundle(CheckSubfieldNotUsedInChildrenRecords.__BUNDLE_NAME);

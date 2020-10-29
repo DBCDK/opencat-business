@@ -11,17 +11,16 @@ var CheckValueUnlessHasSubfield = function () {
 
     /**
      *
-     * @syntax CheckValueUnlessHasSubfield.validateSubfield( record, field, subfield, params )
+     * @syntax CheckValueUnlessHasSubfield.validateField( record, field, subfield, params )
      * @param {object} record
      * @param {object} field
-     * @param {object} subfield
      * @param {object} params should contain an array of valid values named 'values'
      * @return {object}
-     * @name CheckValueUnlessHasSubfield.validateSubfield
+     * @name CheckValueUnlessHasSubfield.validateField
      * @method
      */
     function validateField(record, field, params) {
-        Log.trace("Enter --- CheckValueUnlessHasSubfield.validateSubfield");
+        Log.trace("Enter --- CheckValueUnlessHasSubfield.validateField");
         try {
             ValueCheck.checkThat("params", params).type("object");
             ValueCheck.checkThat("params['subfield']", params['subfield']).type("string");
@@ -49,7 +48,7 @@ var CheckValueUnlessHasSubfield = function () {
 
             return [];
         } finally {
-            Log.trace("Exit --- CheckValueUnlessHasSubfield.validateSubfield");
+            Log.trace("Exit --- CheckValueUnlessHasSubfield.validateField");
         }
     }
 

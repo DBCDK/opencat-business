@@ -39,7 +39,7 @@ var LookUpRecord = function () {
             var bundle;
             var recordId = subfield.value;
             var agencyId = "";
-            var marc = DanMarc2Converter.convertToDanMarc2(record);
+            var marc = DanMarc2Converter.convertToDanMarc2(record, params);
             if (params !== undefined) {
                 if (Array.isArray(params.agencyId)) {
                     for (var i = 0; i < params.agencyId.length; ++i) {

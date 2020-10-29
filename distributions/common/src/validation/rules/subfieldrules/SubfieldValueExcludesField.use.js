@@ -57,7 +57,7 @@ var SubfieldValueExcludesField = function () {
 
             return result;
         } finally {
-            Log.trace("Exit SubfieldValueExcludesField.validateField");
+            Log.trace("Exit SubfieldValueExcludesField.validateSubfield");
         }
     }
 

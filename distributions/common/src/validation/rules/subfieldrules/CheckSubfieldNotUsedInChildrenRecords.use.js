@@ -5,6 +5,7 @@ use("ValidateErrors");
 use("Marc");
 use("DanMarc2Converter");
 use("RawRepoClient");
+use("ContextUtil");
 
 EXPORTED_SYMBOLS = ['CheckSubfieldNotUsedInChildrenRecords'];
 
@@ -24,15 +25,23 @@ var CheckSubfieldNotUsedInChildrenRecords = function () {
         Log.trace("Enter - CheckSubfieldNotUsedInChildrenRecords.validateSubfield");
 
         try {
-            var marcRecord = DanMarc2Converter.convertToDanMarc2(record);
+            var marcRecord = DanMarc2Converter.convertToDanMarc2(record, params);
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
             var recordLevel = marcRecord.getValue(/004/, /a/);
             // There can be no interesting records below single and volume records
             // Though, technically we only look at levels head and section
             if (!(recordLevel === "h" || recordLevel === "s")) return [];
-            var children = RawRepoClient.getRelationsChildren(recId, libNo);
-            Log.trace("Children: ", uneval(children));
+            var context = params.context;
+
+            var children;
+
+            children = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
+            if (children === undefined) {
+                children = RawRepoClient.getRelationsChildren(recId, libNo);
+                ContextUtil.setValue(context, children, 'getRelationsChildren', recId, libNo);
+            }
+
             if (children.length === 0) {
                 Log.trace("Returns []: No children found.");
                 return [];
@@ -52,9 +61,9 @@ var CheckSubfieldNotUsedInChildrenRecords = function () {
                 // Only dive deeper if it's a section record
                 var loopLevel = rec.getValue(/004/, /a/);
                 if (loopLevel === "s") {
-                    var result = CheckSubfieldNotUsedInChildrenRecords.validateSubfield( DanMarc2Converter.convertFromDanMarc2( rec ), field, subfield, params );
-                    if ( result.length !== 0 ) {
-                        Log.trace( "Validation errors found in children records: ", uneval( result ) );
+                    var result = CheckSubfieldNotUsedInChildrenRecords.validateSubfield(DanMarc2Converter.convertFromDanMarc2(rec), field, subfield, params);
+                    if (result.length !== 0) {
+                        Log.trace("Validation errors found in children records: ", uneval(result));
                         return result;
                     }
                 }

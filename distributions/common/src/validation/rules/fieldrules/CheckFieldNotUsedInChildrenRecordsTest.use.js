@@ -5,7 +5,7 @@ use("UnitTest");
 
 UnitTest.addFixture("CheckFieldNotUsedInChildrenRecords.validateField", function () {
     function callRule(record, field) {
-        return CheckFieldNotUsedInChildrenRecords.validateField(record, field);
+        return CheckFieldNotUsedInChildrenRecords.validateField(record, field, {context: {}});
     }
 
     var bundle = ResourceBundleFactory.getBundle(CheckFieldNotUsedInChildrenRecords.__BUNDLE_NAME);
