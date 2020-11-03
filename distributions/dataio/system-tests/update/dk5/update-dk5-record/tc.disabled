@@ -15,7 +15,7 @@
             "rawrepo": [
                 {
                     "record": "rawrepo-common-dk5.marc",
-                    "type": "MARCXCHANGE",
+                    "type": "SIMPLE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-dk5-dbc-enrichment.marc" ]
                 },
@@ -34,7 +34,7 @@
                 "rawrepo": [
                     {
                         "record": "result-common-dk5.marc",
-                        "type": "MARCXCHANGE",
+                        "type": "SIMPLE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dk5-dbc-enrichment.marc" ]
