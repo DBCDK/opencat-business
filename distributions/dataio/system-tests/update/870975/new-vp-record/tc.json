@@ -1,0 +1,90 @@
+[
+  {
+    "name": "870975-new-vp-record",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcvp",
+      "record": "request.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-05511658-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-05511658-enrichment.marc",
+            "rawrepo-05511658-fbs.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-05511658-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-05511658-fbs.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-05511658-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-05511658-enrichment.marc",
+              "rawrepo-05511658-fbs.marc"
+            ],
+            "children": [
+              "expected-vp-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-05511658-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-05511658-fbs.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-vp-common.marc",
+            "type": "HOSTPUB",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-vp-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-vp-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
