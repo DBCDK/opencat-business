@@ -1,0 +1,83 @@
+[
+  {
+    "name": "190007-new-dk5-record-1",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcdk5",
+      "record": "request-1.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-dk5-common-1.marc",
+            "type": "SIMPLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-dk5-enrichment-1.marc"
+            ]
+          },
+          {
+            "record": "expected-dk5-enrichment-1.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "190007-new-dk5-record-2",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcdk5",
+      "record": "request-2.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-dk5-common-2.marc",
+            "type": "SIMPLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-dk5-enrichment-2.marc"
+            ]
+          },
+          {
+            "record": "expected-dk5-enrichment-2.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

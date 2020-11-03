@@ -1,0 +1,56 @@
+[
+  {
+    "name": "190007-update-dk-record",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcdk5",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-dk5-common.marc",
+          "type": "SIMPLE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dk5-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dk5-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-dk5-common.marc",
+            "type": "SIMPLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-dk5-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-dk5-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
