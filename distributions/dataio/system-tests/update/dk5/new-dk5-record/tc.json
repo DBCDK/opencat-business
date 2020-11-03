@@ -18,7 +18,7 @@
                 "rawrepo": [
                     {
                         "record": "result-dk5.marc",
-                        "type": "MARCXCHANGE",
+                        "type": "SIMPLE",
                         "deleted": false,
                         "enqueued": true,
                         "enrichments": [ "result-dk5-dbc-enrichment.marc" ]
