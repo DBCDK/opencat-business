@@ -10,6 +10,12 @@
     "dk.dbc": {
       "level": "DEBUG"
     }
-
+  },
+  "mail": {
+    "jdbc/mail": {
+      "mailhost": "<MAIL_HOST>",
+      "from": "<MAIL_FROM>",
+      "user": "<MAIL_USER>"
+    }
   }
 }

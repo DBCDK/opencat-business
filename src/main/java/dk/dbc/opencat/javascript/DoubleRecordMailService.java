@@ -11,6 +11,7 @@ import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.mail.Message;
@@ -19,6 +20,9 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.sql.DataSource;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -28,30 +32,30 @@ import java.util.Properties;
 public class DoubleRecordMailService {
     private final static XLogger LOGGER = XLoggerFactory.getXLogger(DoubleRecordMailService.class);
 
-    private final static String MAIL_HOST_PROPERTY = "mail.smtp.host";
-    private final static String MAIL_PORT_PROPERTY = "mail.smtp.port";
-    private final static String MAIL_USER_PROPERTY = "mail.user";
-    private final static String MAIL_PASSWORD_PROPERTY = "mail.password";
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_HOST")
-    private String DOUBLE_RECORD_MAIL_HOST;
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PORT")
-    private String DOUBLE_RECORD_MAIL_PORT;
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_USER")
-    private String DOUBLE_RECORD_MAIL_USER;
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PASSWORD")
-    private String DOUBLE_RECORD_MAIL_PASSWORD;
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_FROM")
-    private String DOUBLE_RECORD_MAIL_FROM;
+//    private final static String MAIL_HOST_PROPERTY = "mail.smtp.host";
+//    private final static String MAIL_PORT_PROPERTY = "mail.smtp.port";
+//    private final static String MAIL_USER_PROPERTY = "mail.user";
+//    private final static String MAIL_PASSWORD_PROPERTY = "mail.password";
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_HOST")
+//    private String DOUBLE_RECORD_MAIL_HOST;
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PORT")
+//    private String DOUBLE_RECORD_MAIL_PORT;
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_USER")
+//    private String DOUBLE_RECORD_MAIL_USER;
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PASSWORD")
+//    private String DOUBLE_RECORD_MAIL_PASSWORD;
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_FROM")
+//    private String DOUBLE_RECORD_MAIL_FROM;
 
     @Inject
     @ConfigProperty(name = "DOUBLE_RECORD_MAIL_RECIPIENT")
@@ -60,6 +64,9 @@ public class DoubleRecordMailService {
     @Inject
     @ConfigProperty(name = "INSTANCE_NAME", defaultValue = "Update")
     private String INSTANCE_NAME;
+
+//    @Resource(lookup = "jdbc/mail")
+//    private DataSource dataSource;
 
     /**
      * Send the actual mail message.
@@ -82,23 +89,27 @@ public class DoubleRecordMailService {
 
             // Setup Mail server properties
             final Properties properties = System.getProperties();
-            properties.setProperty(MAIL_HOST_PROPERTY, DOUBLE_RECORD_MAIL_HOST);
-            properties.setProperty(MAIL_PORT_PROPERTY, DOUBLE_RECORD_MAIL_PORT);
-            properties.setProperty(MAIL_USER_PROPERTY, DOUBLE_RECORD_MAIL_USER);
-            properties.setProperty(MAIL_PASSWORD_PROPERTY, DOUBLE_RECORD_MAIL_PASSWORD);
+//            properties.setProperty(MAIL_HOST_PROPERTY, DOUBLE_RECORD_MAIL_HOST);
+//            properties.setProperty(MAIL_PORT_PROPERTY, DOUBLE_RECORD_MAIL_PORT);
+//            properties.setProperty(MAIL_USER_PROPERTY, DOUBLE_RECORD_MAIL_USER);
+//            properties.setProperty(MAIL_PASSWORD_PROPERTY, DOUBLE_RECORD_MAIL_PASSWORD);
+            properties.setProperty("mail.smtp.connectiontimeout", "1000");
+            properties.setProperty("mail.smtp.timeout", "1000");
+            properties.setProperty("mail.smtp.writetimeout", "1000");
+            properties.setProperty("mail.host", "mailhost.dbc.dk");
+            properties.setProperty("mail.port", "25");
             // Create a new Session object for the mail message.
             final Session session = Session.getInstance(properties);
             try {
-                final MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
+                final MimeMessage message = new MimeMessage(session, new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)));
                 final String recipientAddresses = DOUBLE_RECORD_MAIL_RECIPIENT;
                 for (String addr : recipientAddresses.split(";")) {
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
+                    Transport.send(message);
+                    LOGGER.info("DoubleRecordMailService: Sent message with subject '{}' successfully.", adjustedSubject);
                 }
-                message.setSubject(adjustedSubject);
-                message.setText(body);
-                Transport.send(message);
-                LOGGER.info("DoubleRecordMailService: Sent message with subject '{}' successfully.", adjustedSubject);
+                //message.setSubject(adjustedSubject);
+
             } catch (MessagingException ex) {
                 LOGGER.warn("DoubleRecordMailService: Unable to send mail message to {}: {}", DOUBLE_RECORD_MAIL_RECIPIENT, ex.getMessage());
                 LOGGER.warn("Mail message: {}\n{}", adjustedSubject, body);
