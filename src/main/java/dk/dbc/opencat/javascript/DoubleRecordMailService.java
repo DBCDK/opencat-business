@@ -94,13 +94,19 @@ public class DoubleRecordMailService {
             // Create a new Session object for the mail message.
             final Session session = Session.getInstance(properties);
             try {
-                final MimeMessage message = new MimeMessage(session, new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)));
-                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
-//                message.setSubject(adjustedSubject);
-                final String recipientAddresses = DOUBLE_RECORD_MAIL_RECIPIENT;
-                for (String addr : recipientAddresses.split(";")) {
-                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
-                }
+                String rawMessage = String.format("From: %s\r\n"
+                        + "To: %s\r\n"
+                        + "Subject: %s\r\n"
+                        + "\r\n"
+                        + "%s", DOUBLE_RECORD_MAIL_FROM, DOUBLE_RECORD_MAIL_RECIPIENT, adjustedSubject, body);
+
+                final MimeMessage message = new MimeMessage(session, new ByteArrayInputStream(rawMessage.getBytes(StandardCharsets.UTF_8)));
+                //message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
+                //message.setSubject(adjustedSubject);
+//                final String recipientAddresses = DOUBLE_RECORD_MAIL_RECIPIENT;
+//                for (String addr : recipientAddresses.split(";")) {
+//                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
+//                }
                 Transport.send(message);
                 LOGGER.info("DoubleRecordMailService: Sent message with subject '{}' successfully.", adjustedSubject);
 
