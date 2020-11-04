@@ -19,6 +19,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -86,17 +88,16 @@ public class DoubleRecordMailService {
             properties.setProperty(MAIL_PORT_PROPERTY, DOUBLE_RECORD_MAIL_PORT);
             properties.setProperty(MAIL_USER_PROPERTY, DOUBLE_RECORD_MAIL_USER);
             properties.setProperty(MAIL_PASSWORD_PROPERTY, DOUBLE_RECORD_MAIL_PASSWORD);
-            // Create a new Session object for the mail message.
+
             final Session session = Session.getInstance(properties);
             try {
-                final MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
-                final String recipientAddresses = DOUBLE_RECORD_MAIL_RECIPIENT;
-                for (String addr : recipientAddresses.split(";")) {
-                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
-                }
-                message.setSubject(adjustedSubject);
-                message.setText(body);
+                final String mimeBody = String.format("From: %s\r\n"
+                        + "To: %s\r\n"
+                        + "Subject: %s\r\n"
+                        + "\r\n"
+                        + "%s", DOUBLE_RECORD_MAIL_FROM, DOUBLE_RECORD_MAIL_RECIPIENT, adjustedSubject, body);
+
+                final MimeMessage message = new MimeMessage(session, new ByteArrayInputStream(mimeBody.getBytes(StandardCharsets.UTF_8)));
                 Transport.send(message);
                 LOGGER.info("DoubleRecordMailService: Sent message with subject '{}' successfully.", adjustedSubject);
             } catch (MessagingException ex) {

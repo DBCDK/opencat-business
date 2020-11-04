@@ -13,6 +13,10 @@ docker run --rm --name opencat-business-service -d -p ${opencat_business_service
     -e OPENNUMBERROLL_NAME_FAUST_8="faust" \
     -e OPENNUMBERROLL_NAME_FAUST="faust" \
     -e FORSRIGHTS_URL="https://forsrights.addi.dk/2.0/" \
+    -e DOUBLE_RECORD_MAIL_HOST="${DOUBLE_RECORD_MAIL_HOST}" \
+    -e DOUBLE_RECORD_MAIL_PORT="${DOUBLE_RECORD_MAIL_PORT}" \
+    -e DOUBLE_RECORD_MAIL_FROM="${DOUBLE_RECORD_MAIL_FROM}" \
+    -e DOUBLE_RECORD_MAIL_RECIPIENT="${DOUBLE_RECORD_MAIL_RECIPIENT}" \
     -e JAVA_MAX_HEAP_SIZE=2G \
     -e SOLR_URL="8" \
     docker-io.dbc.dk/opencat-business-service:devel
