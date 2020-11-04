@@ -52,6 +52,8 @@ pipeline {
                 lock('meta-opencat-business-systemtest') {
                     sh """
                         ${OCBTEST_EXECUTABLE} js-tests
+                        ./bin/deploy-systemtests.sh
+                        ${OCBTEST_EXECUTABLE} run -c testrun --summary 
                     """
                 }
 
