@@ -24,7 +24,9 @@
     <properties>
         <openagency.ws.client.version>2.34-SNAPSHOT</openagency.ws.client.version>
         <wiremock.version>2.26.3</wiremock.version>
-        <javax.mail.version>1.5.0</javax.mail.version>
+        <apache.commons.version>4.0</apache.commons.version>
+        <org.apache.email.version>1.5</org.apache.email.version>
+        <apache.commons.io.version>2.6</apache.commons.io.version>
         <ocb.tools.artifact>
             https://is.dbc.dk/job/updateservice/job/ocb-tools/job/master/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz
         </ocb.tools.artifact>
@@ -170,6 +172,21 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>${org.apache.email.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${apache.commons.io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${apache.commons.version}</version>
         </dependency>
     </dependencies>
     <build>
