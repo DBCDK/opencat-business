@@ -19,6 +19,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -84,19 +86,21 @@ public class DoubleRecordMailService {
             final Properties properties = System.getProperties();
             properties.setProperty(MAIL_HOST_PROPERTY, DOUBLE_RECORD_MAIL_HOST);
             properties.setProperty(MAIL_PORT_PROPERTY, DOUBLE_RECORD_MAIL_PORT);
-            properties.setProperty(MAIL_USER_PROPERTY, DOUBLE_RECORD_MAIL_USER);
-            properties.setProperty(MAIL_PASSWORD_PROPERTY, DOUBLE_RECORD_MAIL_PASSWORD);
+//            properties.setProperty(MAIL_USER_PROPERTY, DOUBLE_RECORD_MAIL_USER);
+//            properties.setProperty(MAIL_PASSWORD_PROPERTY, DOUBLE_RECORD_MAIL_PASSWORD);
+            properties.setProperty("mail.smtp.connectiontimeout", "1000");
+            properties.setProperty("mail.smtp.timeout", "1000");
+            properties.setProperty("mail.smtp.writetimeout", "1000");
             // Create a new Session object for the mail message.
             final Session session = Session.getInstance(properties);
             try {
-                final MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
+                final MimeMessage message = new MimeMessage(session, new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)));
+//                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
+//                message.setSubject(adjustedSubject);
                 final String recipientAddresses = DOUBLE_RECORD_MAIL_RECIPIENT;
                 for (String addr : recipientAddresses.split(";")) {
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress(addr));
                 }
-                message.setSubject(adjustedSubject);
-                message.setText(body);
                 Transport.send(message);
                 LOGGER.info("DoubleRecordMailService: Sent message with subject '{}' successfully.", adjustedSubject);
 
