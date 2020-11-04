@@ -32,8 +32,8 @@ public class DoubleRecordMailService {
 
     private final static String MAIL_HOST_PROPERTY = "mail.smtp.host";
     private final static String MAIL_PORT_PROPERTY = "mail.smtp.port";
-    private final static String MAIL_USER_PROPERTY = "mail.user";
-    private final static String MAIL_PASSWORD_PROPERTY = "mail.password";
+//    private final static String MAIL_USER_PROPERTY = "mail.user";
+//    private final static String MAIL_PASSWORD_PROPERTY = "mail.password";
 
     @Inject
     @ConfigProperty(name = "DOUBLE_RECORD_MAIL_HOST")
@@ -43,17 +43,17 @@ public class DoubleRecordMailService {
     @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PORT")
     private String DOUBLE_RECORD_MAIL_PORT;
 
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_USER")
-    private String DOUBLE_RECORD_MAIL_USER;
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PASSWORD")
-    private String DOUBLE_RECORD_MAIL_PASSWORD;
-
-    @Inject
-    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_FROM")
-    private String DOUBLE_RECORD_MAIL_FROM;
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_USER")
+//    private String DOUBLE_RECORD_MAIL_USER;
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PASSWORD")
+//    private String DOUBLE_RECORD_MAIL_PASSWORD;
+//
+//    @Inject
+//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_FROM")
+//    private String DOUBLE_RECORD_MAIL_FROM;
 
     @Inject
     @ConfigProperty(name = "DOUBLE_RECORD_MAIL_RECIPIENT")
