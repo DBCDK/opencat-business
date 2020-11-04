@@ -51,9 +51,9 @@ public class DoubleRecordMailService {
 //    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_PASSWORD")
 //    private String DOUBLE_RECORD_MAIL_PASSWORD;
 //
-//    @Inject
-//    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_FROM")
-//    private String DOUBLE_RECORD_MAIL_FROM;
+    @Inject
+    @ConfigProperty(name = "DOUBLE_RECORD_MAIL_FROM")
+    private String DOUBLE_RECORD_MAIL_FROM;
 
     @Inject
     @ConfigProperty(name = "DOUBLE_RECORD_MAIL_RECIPIENT")
@@ -95,7 +95,7 @@ public class DoubleRecordMailService {
             final Session session = Session.getInstance(properties);
             try {
                 final MimeMessage message = new MimeMessage(session, new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)));
-//                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
+                message.setFrom(new InternetAddress(DOUBLE_RECORD_MAIL_FROM));
 //                message.setSubject(adjustedSubject);
                 final String recipientAddresses = DOUBLE_RECORD_MAIL_RECIPIENT;
                 for (String addr : recipientAddresses.split(";")) {
