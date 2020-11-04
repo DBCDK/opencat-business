@@ -13,11 +13,9 @@ import org.slf4j.ext.XLoggerFactory;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
