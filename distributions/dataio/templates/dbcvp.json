@@ -79,7 +79,6 @@
         },
         "032":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.6e.htm",
-            "repeatable": false,
             "subfields": {
                 "a": {}
             }
