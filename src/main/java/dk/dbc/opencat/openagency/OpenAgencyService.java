@@ -19,7 +19,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * EJB to access the OpenAgency web service.
