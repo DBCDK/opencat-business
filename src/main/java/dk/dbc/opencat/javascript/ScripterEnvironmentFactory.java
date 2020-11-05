@@ -49,14 +49,14 @@ public class ScripterEnvironmentFactory {
      * <code>false</code> - some error occurred.
      * @throws ScripterException on errors from JS.
      */
-    public ScripterEnvironment newEnvironment(Properties settings) throws Exception {
+    public ScripterEnvironment newEnvironment(Properties settings, boolean doInitFunctions) throws Exception {
         logger.entry(settings);
         final StopWatch watch = new Log4JStopWatch("javascript.env.create");
         ScripterEnvironment result = null;
         try {
             final Environment environment = createEnvironment(settings);
             final ScripterEnvironment scripterEnvironment = new ScripterEnvironment(environment);
-            initTemplates(scripterEnvironment, settings);
+            initTemplates(scripterEnvironment, settings, doInitFunctions);
 
             return result = scripterEnvironment;
         } finally {
@@ -144,11 +144,14 @@ public class ScripterEnvironmentFactory {
         }
     }
 
-    void initTemplates(ScripterEnvironment environment, Properties settings) throws ScripterException {
+    void initTemplates(ScripterEnvironment environment, Properties settings, boolean doInitFunctions) throws ScripterException {
         logger.entry();
         final StopWatch watch = new Log4JStopWatch("javascript.env.create.templates");
         try {
             environment.callMethod("initTemplates", settings);
+            if (doInitFunctions) {
+                initFunctions(environment, settings);
+            }
         } finally {
             watch.stop();
             logger.exit();
@@ -159,7 +162,7 @@ public class ScripterEnvironmentFactory {
         Warm up function. Not currently used as it requires a working openagency.
         Should be used by kubernetes readiness check in the future.
      */
-    void initFunctions(ScripterEnvironment environment, Properties settings) throws ScripterException, URISyntaxException, IOException {
+    void initFunctions(ScripterEnvironment environment, Properties settings) throws ScripterException {
         logger.entry();
         final StopWatch watch = new Log4JStopWatch("javascript.env.init.functions");
         try {
@@ -174,6 +177,8 @@ public class ScripterEnvironmentFactory {
             checkTemplateBuild(environment, settings);
             sortRecord(environment, COMMON_RECORD);
             getValidateSchemas(environment);
+        } catch (URISyntaxException | IOException e) {
+            throw new ScripterException("Failed to initialize environment");
         } finally {
             watch.stop();
             logger.exit();
@@ -199,7 +204,6 @@ public class ScripterEnvironmentFactory {
                 "710101",
                 "fbs",
                 settings);
-
     }
 
     private void doRecategorizationThings(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
@@ -207,13 +211,11 @@ public class ScripterEnvironmentFactory {
                 record,
                 record,
                 record);
-
     }
 
     private void recategorizationNoteFieldFactory(ScripterEnvironment scripterEnvironment, String record) throws ScripterException {
         scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
                 record);
-
     }
 
     private void checkTemplateBuild(ScripterEnvironment scripterEnvironment, Properties settings) throws ScripterException {
