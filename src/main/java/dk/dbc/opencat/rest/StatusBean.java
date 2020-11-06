@@ -7,7 +7,6 @@ package dk.dbc.opencat.rest;
 
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.serviceutils.HowRU;
-import dk.dbc.serviceutils.ServiceStatus;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -19,7 +18,7 @@ import javax.ws.rs.core.Response;
 
 @Stateless
 @Path("/api")
-public class StatusBean implements ServiceStatus {
+public class StatusBean {
 
     @EJB
     ScripterPool scripterPool;
@@ -32,6 +31,19 @@ public class StatusBean implements ServiceStatus {
     public Response getStatus() {
         if (scripterPool.isAllEnviromentsLoaded()) {
             return Response.ok().entity(OK_ENTITY).build();
+        } else {
+            return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
+        }
+    }
+
+    @GET
+    @Path("isready")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response isReady() {
+        final OpencatBusinessWarmup opencatBusinessWarmup = new OpencatBusinessWarmup();
+        final boolean isReady = opencatBusinessWarmup.isReady();
+        if (isReady) {
+            return Response.ok(OK_ENTITY).build();
         } else {
             return Response.status(Response.Status.SERVICE_UNAVAILABLE).build();
         }

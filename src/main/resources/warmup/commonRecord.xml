@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><record xmlns="info:lc/xmlns/marcxchange-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd">
+    <leader>00000     22000000 4500 </leader>
+    <datafield ind1="0" ind2="0" tag="001">
+        <subfield code="a">51580761</subfield>
+        <subfield code="b">870970</subfield>
+        <subfield code="c">20150324171702</subfield>
+        <subfield code="d">20150209</subfield>
+        <subfield code="f">a</subfield>
+        <subfield code="t">FAUST</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="004">
+        <subfield code="r">n</subfield>
+        <subfield code="a">e</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="008">
+        <subfield code="t">m</subfield>
+        <subfield code="u">f</subfield>
+        <subfield code="a">2015</subfield>
+        <subfield code="b">dk</subfield>
+        <subfield code="d">å</subfield>
+        <subfield code="d">x</subfield>
+        <subfield code="j">f</subfield>
+        <subfield code="l">ger</subfield>
+        <subfield code="o">s</subfield>
+        <subfield code="v">0</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="009">
+        <subfield code="a">a</subfield>
+        <subfield code="g">xx</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="010">
+        <subfield code="a">D74099520X</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="021">
+        <subfield code="e">9788771691078</subfield>
+        <subfield code="c">hf.</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="021">
+        <subfield code="e">9788771690651</subfield>
+        <subfield code="b">bogpakken DigiLesen nybegyndertysk</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="032">
+        <subfield code="a">DBF201511</subfield>
+        <subfield code="x">BKM201511</subfield>
+        <subfield code="a">DBF</subfield>
+        <subfield code="x">BKM</subfield>
+        <subfield code="x">SKO</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="100">
+        <subfield code="0"/>
+        <subfield code="a">Møller</subfield>
+        <subfield code="h">Karl Henrik</subfield>
+        <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="245">
+        <subfield code="a">[Common P1] Lilly macht einen Ausflug</subfield>
+        <subfield code="c">QR bog</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="250">
+        <subfield code="a">1. udgave</subfield>
+        <subfield code="b">÷</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="260">
+        <subfield code="a">[Værløse]</subfield>
+        <subfield code="b">DigTea</subfield>
+        <subfield code="c">2015</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="300">
+        <subfield code="a">23 sider</subfield>
+        <subfield code="b">alle ill. i farver</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="440">
+        <subfield code="0"/>
+        <subfield code="a">Digilesen</subfield>
+        <subfield code="o">Lillys Leben - Niveau B</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="504">
+        <subfield code="a">Lilly og hendes far tager på udflugt, og hendes far bestemmer at de skal ud i naturen, men Lilly ville hellere have været på shoppetur i byen. Desværre forløber turen ikke helt som planlagt</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="512">
+        <subfield code="a">På titelsiden: Hören und lesen</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="520">
+        <subfield code="a">Originaludgave: 2015</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="521">
+        <subfield code="b">1. oplag</subfield>
+        <subfield code="c">2015</subfield>
+        <subfield code="k">Lasertryk</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="526">
+        <subfield code="a">Heri QR-koder til bogens tekst indlæst</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="652">
+        <subfield code="n">86.4</subfield>
+        <subfield code="z">096</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="652">
+        <subfield code="o">84</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="666">
+        <subfield code="0"/>
+        <subfield code="s">udflugter</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="666">
+        <subfield code="0"/>
+        <subfield code="u">for 11 år</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="666">
+        <subfield code="0"/>
+        <subfield code="u">for 12 år</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="666">
+        <subfield code="0"/>
+        <subfield code="u">let at læse</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="720">
+        <subfield code="o">Mette Bødker</subfield>
+        <subfield code="4">ill</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="945">
+        <subfield code="a">Digi lesen</subfield>
+        <subfield code="x">se</subfield>
+        <subfield code="z">440(a)</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="945">
+        <subfield code="a">Lillys Leben - Niveau B</subfield>
+        <subfield code="x">se</subfield>
+        <subfield code="z">440(a,o)</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="990">
+        <subfield code="o">201511</subfield>
+        <subfield code="b">b</subfield>
+        <subfield code="b">s</subfield>
+        <subfield code="u">nt</subfield>
+    </datafield>
+    <datafield ind1="0" ind2="0" tag="996">
+        <subfield code="a">DBC</subfield>
+    </datafield>
+</record>
