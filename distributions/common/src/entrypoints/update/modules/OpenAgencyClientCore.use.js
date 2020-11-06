@@ -17,7 +17,6 @@ var OpenAgencyClientCore = function () {
             Log.debug(JNDI_NAME + " not found. Trying " + JNDI_NAME_DEPRECATED)
             serviceProvider = context.lookup(JNDI_NAME_DEPRECATED);
         }
-        Log.info("Using OpenAgencyService provider: ", serviceProvider);
         return serviceProvider;
     }
 
