@@ -47,7 +47,7 @@ public class TransformationService {
     private static final MetaCompassHandler metaCompassHandler = new MetaCompassHandler(recordService);
 
     /*
-        Here be unthreadsafe dragons!
+        Here be thread unsafe dragons!
         Every function on Transformer and TransformerFactory objects should be assumed to be not thread safe.
         Because of this each instance of TransformationService will get its own Transformer object but initialization
         should be done synchronized across all instances of TransformationService.
