@@ -1,0 +1,110 @@
+[
+  {
+    "name": "870976-matvurd-record-with-legal-r01-r02-LED-in-exisiting-two",
+    "description": "There is a 700*fskole in existing record",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcmatvurd",
+      "record": "request.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-05555353-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "children": [
+            "rawrepo-18447762-matvurd.marc"
+          ],
+          "enrichments": [
+            "rawrepo-05555353-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-05555353-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-18447762-matvurd.marc",
+          "type": "MATVURD",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-18447762-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-18447762-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-05555353-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-05555353-enrichment.marc"
+            ],
+            "children": [
+              "rawrepo-18447762-matvurd.marc",
+              "expected-18447754-matvurd.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-05555353-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-18447762-matvurd.marc",
+            "type": "MATVURD",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-18447762-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-18447762-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-18447754-matvurd.marc",
+            "type": "MATVURD",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-18447754-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-18447754-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
