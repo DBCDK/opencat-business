@@ -1,0 +1,30 @@
+001 00 *a 05511658 *b 870970 *c 20200612104025 *d 19800421 *f a
+004 00 *r c *a e
+008 00 *t p *u c *a 1979 *b dk *c a *h z *i b *l dan *v 0
+009 00 *a a *g xx
+022 00 *a 0106-3324
+032 00 *a DPF197680 *x SFD198019 *x DAT200930 *x DAT201223 *x DAT201409 *x DAT
+035 00 *a (DK-870970)05511658
+035 00 *a (DPFHOVED)25395999
+035 00 *a (DK-800010)99122925495005763
+041 00 *a dan *d eng
+082 00 *a 725.409 489
+082 00 *a 728.310 948 9
+245 00 *a Fabrik og bolig *c det industrielle miljø i Norden
+255 00 *a 1, 1979-
+260 00 *a [Frederiksværk] *b Selskabet til Bevaring af Industrimiljøer *c 1979-
+500 00 *a Årlig
+505 00 *& 1 *a Årspublikation
+539 00 *a 2018
+559 00 *a 2 numre årligt (1979-2003), årlig (2004-)
+559 00 *a 1, 1979-1, 1980 udgivet: København : Nationalmuseet
+559 00 *a Danish Society for the Conservation of the Industrial Heritage
+559 00 *a Årgang 2004 ff. med titel: Fabrik & bolig
+652 00 *m 60.96
+652 00 *p 33.95
+652 00 *p 71.6
+710 00 *a Selskabet til Bevaring af Industrimiljøer
+745 00 *k Fabrik & bolig
+860 00 *t Industrialismens bygninger og boliger *z 0106-4975
+865 00 *i Også på internettet *t Fabrik & bolig *z 2596-8106
+996 00 *a 800010
