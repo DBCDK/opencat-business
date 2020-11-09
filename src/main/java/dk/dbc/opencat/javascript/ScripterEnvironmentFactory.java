@@ -200,9 +200,9 @@ public class ScripterEnvironmentFactory {
 
     private void checkTemplate(ScripterEnvironment scripterEnvironment, Properties settings) throws ScripterException {
         scripterEnvironment.callMethod("checkTemplate",
-                "netlydbog",
-                "710101",
-                "fbs",
+                "paahaengspost",
+                "300151",
+                "fbslokal",
                 settings);
     }
 
