@@ -25,8 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class OpencatBusinessWarmup {
     private static final XLogger LOGGER = XLoggerFactory.getXLogger(OpencatBusinessWarmup.class);
     private static final String BASE_URL = "http://localhost:8080";
-    private static final String PATH_PREPROCESS = "/api/v1/preProcess";
-    private static final String PATH_METACOMPASS = "/api/v1/metacompass";
+    private static final String PATH_PREPROCESS = "/api/v1/preprocess";
     private static final String PATH_RECATEGORIZATION_NOTE_FIELD_FACTORY = "/api/v1/recategorizationNoteFieldFactory";
     private static final RetryPolicy RETRY_POLICY = new RetryPolicy()
             .retryOn(Collections.singletonList(ProcessingException.class))
@@ -38,27 +37,27 @@ public class OpencatBusinessWarmup {
 
     private static boolean isReady;
     private static boolean isPreProcessReady;
-    private static boolean isMetaCompassReady;
     private static boolean isRecategorizationNoteFieldFactoryReady;
 
     public boolean isReady() {
         try {
             if (!isReady) {
-                synchronized (this) {
-                    if (!isPreProcessReady) {
+                if (!isPreProcessReady) {
+                    LOGGER.debug("!isPreProcessReady - calling callEndpoint({})", PATH_PREPROCESS);
+                    synchronized (this) {
                         isPreProcessReady = callEndpoint(PATH_PREPROCESS);
                     }
+                }
 
-                    if (!isMetaCompassReady) {
-                        isMetaCompassReady = callEndpoint(PATH_METACOMPASS);
-                    }
-
-                    if (!isRecategorizationNoteFieldFactoryReady) {
+                if (!isRecategorizationNoteFieldFactoryReady) {
+                    LOGGER.debug("!isRecategorizationNoteFieldFactoryReady - calling callEndpoint({})", PATH_RECATEGORIZATION_NOTE_FIELD_FACTORY);
+                    synchronized (this) {
                         isRecategorizationNoteFieldFactoryReady = callEndpoint(PATH_RECATEGORIZATION_NOTE_FIELD_FACTORY);
                     }
                 }
+
+                isReady = isPreProcessReady && isRecategorizationNoteFieldFactoryReady;
             }
-            isReady = isPreProcessReady && isMetaCompassReady && isRecategorizationNoteFieldFactoryReady;
 
             return isReady;
         } catch (Exception e) {
@@ -90,6 +89,7 @@ public class OpencatBusinessWarmup {
 
             return true;
         } catch (Exception e) {
+            LOGGER.error(String.format("Caught exception when calling callEndpoint(%s)", path),e);
             return false;
         }
     }

@@ -24,6 +24,7 @@ public class StatusBean {
     ScripterPool scripterPool;
 
     private final static String OK_ENTITY = new HowRU().withStatus(200).toJson();
+    private static final OpencatBusinessWarmup WARMUP = new OpencatBusinessWarmup();
 
     @GET
     @Path("status")
@@ -40,8 +41,7 @@ public class StatusBean {
     @Path("isready")
     @Produces(MediaType.TEXT_PLAIN)
     public Response isReady() {
-        final OpencatBusinessWarmup opencatBusinessWarmup = new OpencatBusinessWarmup();
-        final boolean isReady = opencatBusinessWarmup.isReady();
+        final boolean isReady = WARMUP.isReady();
         if (isReady) {
             return Response.ok(OK_ENTITY).build();
         } else {
