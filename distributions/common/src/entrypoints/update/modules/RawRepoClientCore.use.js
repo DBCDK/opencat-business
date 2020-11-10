@@ -23,7 +23,6 @@ var RawRepoClientCore = function () {
             Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists(0,0);
             serviceProvider = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo;
         }
-        Log.info("Using UpdaterRawRepo provider: ", serviceProvider);
         return serviceProvider;
     }
 

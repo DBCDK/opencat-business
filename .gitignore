@@ -6,3 +6,4 @@ target/
 *.iml
 *.war
 **/compiled_templates
+deploy/

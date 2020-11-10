@@ -19,7 +19,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * EJB to access the OpenAgency web service.
@@ -85,99 +84,6 @@ public class OpenAgencyService {
             return result;
         } catch (OpenAgencyException ex) {
             LOGGER.error("Failed to read feature from OpenAgency for ['{}':'{}']: {}", agencyId, feature, ex.getMessage());
-            try {
-                if (ex.getRequest() != null) {
-                    LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
-                }
-                if (ex.getResponse() != null) {
-                    LOGGER.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
-                }
-            } catch (IOException ioError) {
-                LOGGER.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
-            }
-
-            throw ex;
-        } finally {
-            watch.stop();
-            LOGGER.exit(result);
-        }
-    }
-
-    public Set<String> getLokbibLibraries() throws OpenAgencyException {
-        LOGGER.entry();
-        Set<String> result = null;
-        try {
-            result = getLibrariesByCatalogingTemplateSet("lokbib");
-            return result;
-        } finally {
-            LOGGER.exit(result);
-        }
-    }
-
-    public Set<String> getPHLibraries() throws OpenAgencyException {
-        LOGGER.entry();
-        Set<String> result = null;
-        try {
-            result = getLibrariesByCatalogingTemplateSet("ph");
-            return result;
-        } finally {
-            LOGGER.exit(result);
-        }
-    }
-
-    public Set<String> getFFULibraries() throws OpenAgencyException {
-        LOGGER.entry();
-        Set<String> result = null;
-        try {
-            result = getLibrariesByCatalogingTemplateSet("ffu");
-            return result;
-        } finally {
-            LOGGER.exit(result);
-        }
-    }
-
-    public Set<String> getAllowedLibraryRules(String agencyId) throws OpenAgencyException {
-        LOGGER.entry(agencyId);
-
-        StopWatch watch = new Log4JStopWatch("service.openagency.getAllowedLibraryRules");
-
-        Set<String> result = null;
-        try {
-            result = service.libraryRules().getAllowedLibraryRules(agencyId);
-
-            return result;
-        } catch (OpenAgencyException ex) {
-            LOGGER.error("Failed to read set from OpenAgency: {}", ex.getMessage());
-            try {
-                if (ex.getRequest() != null) {
-                    LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
-                }
-                if (ex.getResponse() != null) {
-                    LOGGER.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
-                }
-            } catch (IOException ioError) {
-                LOGGER.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
-            }
-
-            throw ex;
-        } finally {
-            watch.stop();
-            LOGGER.exit(result);
-        }
-    }
-
-    private Set<String> getLibrariesByCatalogingTemplateSet(String catalogingTemplateSet) throws OpenAgencyException {
-        LOGGER.entry(catalogingTemplateSet);
-
-        StopWatch watch = new Log4JStopWatch("service.openagency.getLibrariesByCatalogingTemplateSet");
-
-        Set<String> result = null;
-        try {
-            result = service.libraryRules().getLibrariesByCatalogingTemplateSet(catalogingTemplateSet);
-
-            return result;
-        } catch (OpenAgencyException ex) {
-            LOGGER.error("Failed to read catalogingTemplateSet: {}", ex.getMessage());
             try {
                 if (ex.getRequest() != null) {
                     LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));

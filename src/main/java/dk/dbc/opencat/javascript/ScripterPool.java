@@ -6,6 +6,7 @@
 package dk.dbc.opencat.javascript;
 
 import dk.dbc.opencat.ws.JNDIResources;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
@@ -17,6 +18,7 @@ import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -60,20 +62,28 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Startup
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class ScripterPool {
-    private static final XLogger logger = XLoggerFactory.getXLogger(ScripterPool.class);
-    private int active_javaScriptPoolSize = 5;
+    private static final XLogger LOGGER = XLoggerFactory.getXLogger(ScripterPool.class);
+    private int actualJavaScriptPoolSize;
 
     // Hardcoded Max size of environments
     private final static int MAX_NUMBER_OF_ENVIROMENTS = 100;
     private final static int MIN_NUMBER_OF_ENVIROMENTS = 1;
 
     // defencive code.. make room for double size of MAX to avoid blocking on put
-    private static final BlockingQueue<ScripterEnvironment> environments = new ArrayBlockingQueue(2 * MAX_NUMBER_OF_ENVIROMENTS);
+    private static final BlockingQueue<ScripterEnvironment> environments = new ArrayBlockingQueue<>(2 * MAX_NUMBER_OF_ENVIROMENTS);
 
     // replace with atomic int
     private static final AtomicInteger initializedEnvironments = new AtomicInteger();
 
     private final Properties settings = JNDIResources.getProperties();
+
+    @Inject
+    @ConfigProperty(name = "JAVASCRIPT_POOL_SIZE", defaultValue = "1")
+    private int JAVASCRIPT_POOL_SIZE;
+
+    @Inject
+    @ConfigProperty(name = "IS_K8S_DEPLOY", defaultValue = "false")
+    private boolean IS_K8S_DEPLOY;
 
     public enum Status {
         ST_NA,
@@ -90,36 +100,35 @@ public class ScripterPool {
      */
     @PostConstruct
     public void postConstruct() {
-        logger.entry();
-        logger.debug("Starting creation of javascript environments.");
-        int javaScriptPoolSize = Integer.parseInt(settings.getProperty(JNDIResources.JAVASCRIPT_POOL_SIZE));
-        if (javaScriptPoolSize < MIN_NUMBER_OF_ENVIROMENTS) {
-            javaScriptPoolSize = MIN_NUMBER_OF_ENVIROMENTS;
+        LOGGER.entry();
+        LOGGER.debug("Starting creation of javascript environments.");
+        actualJavaScriptPoolSize = JAVASCRIPT_POOL_SIZE;
+        if (actualJavaScriptPoolSize < MIN_NUMBER_OF_ENVIROMENTS) {
+            actualJavaScriptPoolSize = MIN_NUMBER_OF_ENVIROMENTS;
         }
-        if (javaScriptPoolSize > MAX_NUMBER_OF_ENVIROMENTS) {
-            javaScriptPoolSize = MAX_NUMBER_OF_ENVIROMENTS;
+        if (actualJavaScriptPoolSize > MAX_NUMBER_OF_ENVIROMENTS) {
+            actualJavaScriptPoolSize = MAX_NUMBER_OF_ENVIROMENTS;
         }
-        logger.info("Pool size: {}", javaScriptPoolSize);
-        active_javaScriptPoolSize = javaScriptPoolSize;
+        LOGGER.info("Pool size: {}", actualJavaScriptPoolSize);
         final ScripterEnvironmentFactory scripterEnvironmentFactory = new ScripterEnvironmentFactory();
 
-        logger.info("Started creating {} JS environment(s) ", active_javaScriptPoolSize);
+        LOGGER.info("Started creating {} JS environment(s) ", actualJavaScriptPoolSize);
         Profiler profiler = new Profiler("JS init thread");
-        for (int i = 0; i < active_javaScriptPoolSize; i++) {
+        for (int i = 0; i < actualJavaScriptPoolSize; i++) {
             try {
                 profiler.start("JS enviroment " + i);
-                ScripterEnvironment scripterEnvironment = scripterEnvironmentFactory.newEnvironment(settings);
+                ScripterEnvironment scripterEnvironment = scripterEnvironmentFactory.newEnvironment(settings, IS_K8S_DEPLOY);
                 environments.put(scripterEnvironment);
                 initializedEnvironments.incrementAndGet();
-                logger.info("Environment " + (i + 1) + "/" + active_javaScriptPoolSize + " added to ready queue");
+                LOGGER.info("Environment {}/{} added to ready queue", i + 1, actualJavaScriptPoolSize);
             } catch (Exception e) {
-                logger.error("JavaScript environment creation failed ", e);
+                LOGGER.error("JavaScript environment creation failed", e);
                 e.printStackTrace();
             } finally {
-                logger.exit();
+                LOGGER.exit();
             }
         }
-        logger.info("JS init thread done:\n{}", profiler.stop());
+        LOGGER.info("JS init thread done:\n{}", profiler.stop());
 
     }
 
@@ -133,14 +142,14 @@ public class ScripterPool {
      */
     @SuppressWarnings("Duplicates")
     public ScripterEnvironment take() throws InterruptedException {
-        logger.entry();
+        LOGGER.entry();
         StopWatch watch = new Log4JStopWatch("javascript.env.take");
         try {
-            logger.info("Take environment from queue with size: {}", environments.size());
+            LOGGER.info("Take environment from queue with size: {}", environments.size());
             return environments.take();
         } finally {
             watch.stop();
-            logger.exit();
+            LOGGER.exit();
         }
     }
 
@@ -156,16 +165,15 @@ public class ScripterPool {
      * @throws NullPointerException if the specified element is null
      */
     public void put(ScripterEnvironment environment) throws InterruptedException {
-        logger.entry();
+        LOGGER.entry();
         StopWatch watch = new Log4JStopWatch("javascript.env.put");
         try {
             environments.put(environment);
         } finally {
             watch.stop();
-            logger.exit();
+            LOGGER.exit();
         }
     }
-
 
     /**
      * Return a bool denoting whether all js enviroments has been initialized
@@ -173,15 +181,14 @@ public class ScripterPool {
      * @return scripterPool startup status
      */
     public Boolean isAllEnviromentsLoaded() {
-        logger.entry();
+        LOGGER.entry();
         boolean res = false;
         try {
             return res = initializedEnvironments.intValue() >= Integer.parseInt(System.getenv(JNDIResources.JAVASCRIPT_POOL_SIZE));
         } finally {
-            logger.exit(res);
+            LOGGER.exit(res);
         }
     }
-
 
     /**
      * Return scripterPool startup status
@@ -191,7 +198,7 @@ public class ScripterPool {
     public Status getStatus() {
         if (initializedEnvironments.intValue() == 0) {
             return Status.ST_NA;
-        } else if (initializedEnvironments.intValue() < active_javaScriptPoolSize) {
+        } else if (initializedEnvironments.intValue() < actualJavaScriptPoolSize) {
             return Status.ST_CREATE_ENVS;
         } else {
             return Status.ST_OK;

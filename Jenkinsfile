@@ -53,7 +53,8 @@ pipeline {
                     sh """
                         ${OCBTEST_EXECUTABLE} js-tests
                         ./bin/deploy-systemtests.sh
-                        ${OCBTEST_EXECUTABLE} run -c testrun --summary 
+                        ${OCBTEST_EXECUTABLE} run -c testrun --summary
+                        ./bin/stop-systemtests.sh 
                     """
                 }
 
