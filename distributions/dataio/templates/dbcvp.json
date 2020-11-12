@@ -46,7 +46,7 @@
                 "r": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "n" ]
+                    "values": [ "n", "d" ]
                 },
                 "a": {
                     "mandatory": true,
