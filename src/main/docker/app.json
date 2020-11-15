@@ -5,7 +5,7 @@
   ],
   "logger": {
     "dk.dbc.jslib": {
-      "level": "INFO"
+      "level": "DEBUG"
     },
     "dk.dbc": {
       "level": "DEBUG"
