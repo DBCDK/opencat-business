@@ -68,17 +68,7 @@
     "expected": {
       "validation": {},
       "update": {
-        "errors": [
-          {
-            "type" : "ERROR",
-            "code" : null,
-            "urlForDocumentation" : null,
-            "ordinalPositionOfField" : null,
-            "ordinalPositionOfSubfield" : null,
-            "ordinalPositionInSubfield" : null,
-            "message" : "Værket 05555353 har ingen eller mere end en skolevurdering og der er flere matvurd poster"
-          }
-        ],
+        "errors": [],
         "rawrepo": [
           {
             "record": "rawrepo-05555353-common.marc",
@@ -90,6 +80,7 @@
             ],
             "children": [
               "rawrepo-18447762-matvurd.marc",
+              "expected-18447754-matvurd.marc",
               "rawrepo-17706292-matvurd.marc"
             ]
           },
@@ -98,6 +89,21 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": false
+          },
+          {
+            "record": "expected-18447754-matvurd.marc",
+            "type": "MATVURD",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-18447754-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-18447754-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
           },
           {
             "record": "rawrepo-18447762-matvurd.marc",
