@@ -75,7 +75,7 @@
             "ordinalPositionOfField" : null,
             "ordinalPositionOfSubfield" : null,
             "ordinalPositionInSubfield" : null,
-            "message" : "Værket 05555353 har ingen eller mere end en skolevurdering og der er flere matvurd poster"
+            "message" : "Værket 05555353 har ingen skolevurdering og der er to matvurd poster"
           }
         ],
         "rawrepo": [

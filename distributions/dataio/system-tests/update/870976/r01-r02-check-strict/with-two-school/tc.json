@@ -1,0 +1,136 @@
+[
+  {
+    "name": "870976-matvurd-record-with-two-school",
+    "description": "There is two 700*fskole in existing and request record",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcmatvurd",
+      "record": "request.marc",
+      "check001d": true
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-55147469-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-55147469-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-55147469-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-05555353-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "children": [
+            "rawrepo-18447762-matvurd.marc"
+          ],
+          "enrichments": [
+            "rawrepo-05555353-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-05555353-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-18447762-matvurd.marc",
+          "type": "MATVURD",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-18447762-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-18447762-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type" : "ERROR",
+            "code" : null,
+            "urlForDocumentation" : null,
+            "ordinalPositionOfField" : null,
+            "ordinalPositionOfSubfield" : null,
+            "ordinalPositionInSubfield" : null,
+            "message" : "Værket 05555353 har to skolevurderinger på to matvurd poster"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-55147469-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "children": [
+            ],
+            "enrichments": [
+              "rawrepo-55147469-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-55147469-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-05555353-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "children": [
+              "rawrepo-18447762-matvurd.marc"
+            ],
+            "enrichments": [
+              "rawrepo-05555353-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-05555353-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-18447762-matvurd.marc",
+            "type": "MATVURD",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-18447762-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-18447762-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]

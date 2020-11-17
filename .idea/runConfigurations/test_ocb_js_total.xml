@@ -1,12 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="test-ocb-js total" type="JarApplication" factoryName="JAR Application">
-    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+  <configuration default="false" name="test-ocb-js total" type="JarApplication">
     <option name="JAR_PATH" value="$PROJECT_DIR$/../ocb-tools/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar" />
     <option name="PROGRAM_PARAMETERS" value="run -c testrun --summary " />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
-    <envs />
-    <method />
+    <option name="ALTERNATIVE_JRE_PATH" value="1.8.0_222" />
+    <method v="2" />
   </configuration>
 </component>

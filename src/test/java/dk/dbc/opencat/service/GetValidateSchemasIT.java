@@ -36,10 +36,6 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
     private String getExpectedResult() {
         return "[\n" +
                 "  {\n" +
-                "    \"schemaName\": \"allowall\",\n" +
-                "    \"schemaInfo\": \"\"\n" +
-                "  },\n" +
-                "  {\n" +
                 "    \"schemaName\": \"BCIbog\",\n" +
                 "    \"schemaInfo\": \"Skabelon til katalogisering af fysiske bøger - enkeltstående post.\"\n" +
                 "  },\n" +
@@ -50,10 +46,6 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
                 "  {\n" +
                 "    \"schemaName\": \"BCIboghoved\",\n" +
                 "    \"schemaInfo\": \"Skabelon til katalogisering af flerbindsværk af fysiske bøger - hovedpost.\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"schemaName\": \"dbclittolk\",\n" +
-                "    \"schemaInfo\": \"\"\n" +
                 "  },\n" +
                 "  {\n" +
                 "    \"schemaName\": \"delete\",\n" +
