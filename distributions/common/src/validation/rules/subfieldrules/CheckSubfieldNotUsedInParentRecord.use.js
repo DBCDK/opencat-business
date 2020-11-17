@@ -51,6 +51,8 @@ var CheckSubfieldNotUsedInParentRecord = function () {
 
             // Load parent record and check if this subfield is used.
             var parentRecord = RawRepoClient.fetchRecord(recId, libNo);
+            Log.info("CheckSubfieldNotUsedInParentRecord - parent record:");
+            Log.info(parentRecord.toString());
             if (parentRecord.existField(new MatchField(new RegExp(field.name), undefined, new RegExp(subfield.name)))) {
                 bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
                 msg = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", field.name, subfield.name, recId);

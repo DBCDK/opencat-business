@@ -68,7 +68,9 @@ public class UpdaterRawRepo {
         final StopWatch watch = new Log4JStopWatch("rawrepo.fetchRecord");
         final MarcRecord result;
         if (recordExists(recordId, libraryNo)) {
-            final byte[] content = recordServiceConnector.getRecordContent(Integer.parseInt(libraryNo), recordId);
+            RecordServiceConnector.Params params = new RecordServiceConnector.Params();
+            params.withMode(RecordServiceConnector.Params.Mode.RAW);
+            final byte[] content = recordServiceConnector.getRecordContent(Integer.parseInt(libraryNo), recordId, params);
             result = RecordContentTransformer.decodeRecord(content);
         } else {
             result = new MarcRecord();
