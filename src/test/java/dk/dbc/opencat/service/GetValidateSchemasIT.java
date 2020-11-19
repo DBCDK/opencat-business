@@ -36,6 +36,10 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
     private String getExpectedResult() {
         return "[\n" +
                 "  {\n" +
+                "    \"schemaName\": \"allowall\",\n" +
+                "    \"schemaInfo\": \"\"\n" +
+                "  },\n" +
+                "  {\n" +
                 "    \"schemaName\": \"BCIbog\",\n" +
                 "    \"schemaInfo\": \"Skabelon til katalogisering af fysiske bøger - enkeltstående post.\"\n" +
                 "  },\n" +
