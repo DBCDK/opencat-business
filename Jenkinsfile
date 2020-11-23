@@ -123,10 +123,13 @@ pipeline {
     }
     post {
         unstable {
-            notifyOfBuildStatus("build became unstable")
+            notifyOfBuildStatus("Jenkins build became unstable")
         }
         failure {
-            notifyOfBuildStatus("build failed")
+            notifyOfBuildStatus("Jenkins build failed")
+        }
+        fixed {
+            notifyOfBuildStatus("Jenkins build is back to normal")
         }
         always {
             cleanWs()
