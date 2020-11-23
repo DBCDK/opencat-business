@@ -42,7 +42,7 @@ fi
 # Create docker network if it doesn't exists
 [[ ! "$(docker network ls | grep update-compose-network)" ]] && docker network create --subnet=192.180.0.0/22 update-compose-network
 
-export PROD_VERSION=$(curl -f --silent --globoff "https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()='DOCKER_TAG']/following-sibling::value" | sed -En 's|<value>(.+)</value>|\1|p')
+#export PROD_VERSION=$(curl -f --silent --globoff "https://is.dbc.dk/view/metascrum/job/updateservice/job/tag-updateservice-for-prod/lastSuccessfulBuild/api/xml?xpath=//action/parameter/name[text()='DOCKER_TAG']/following-sibling::value" | sed -En 's|<value>(.+)</value>|\1|p')
 echo "Using prod version ${PROD_VERSION} of updateservice"
 
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
