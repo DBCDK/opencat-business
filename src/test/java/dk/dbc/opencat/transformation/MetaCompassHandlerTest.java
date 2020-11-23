@@ -61,7 +61,7 @@ public class MetaCompassHandlerTest {
 
     @Test
     public void test_isYearInterval() {
-        assertThat(MetaCompassHandler.isYearInterval("999-0"), is(false));
+        assertThat(MetaCompassHandler.isYearInterval("999-0"), is(true));
         assertThat(MetaCompassHandler.isYearInterval("0-10"), is(true));
         assertThat(MetaCompassHandler.isYearInterval("10-90"), is(true));
         assertThat(MetaCompassHandler.isYearInterval("500-600"), is(true));
