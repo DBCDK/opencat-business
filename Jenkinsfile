@@ -48,8 +48,8 @@ pipeline {
 
         stage("Verify") {
             steps {
-                sh "mvn verify pmd:pmd"
                 lock('meta-opencat-business-systemtest') {
+                    sh "mvn verify pmd:pmd"
                     sh """
                         ${OCBTEST_EXECUTABLE} js-tests
                         ./bin/deploy-systemtests.sh
