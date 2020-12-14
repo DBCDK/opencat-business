@@ -7,8 +7,8 @@ ENV AUTH_PRODUCT_NAME netpunkt.dk
 ENV AUTH_USE_IP True
 ENV FORSRIGHTS_URL http://forsrights.addi.dk/1.2/
 
-ENV OPENAGENCY_URL http://openagency.addi.dk/test_2.34/
-ENV OPENAGENCY_CACHE_AGE 8
+ENV VIPCORE_ENDPOINT http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk
+ENV VIPCORE_CACHE_AGE 8
 
 ENV SOLR_URL empty
 

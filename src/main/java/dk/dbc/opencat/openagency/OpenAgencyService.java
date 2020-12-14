@@ -5,20 +5,15 @@
 
 package dk.dbc.opencat.openagency;
 
-import dk.dbc.openagency.client.LibraryRuleHandler;
-import dk.dbc.openagency.client.OpenAgencyException;
-import dk.dbc.openagency.client.OpenAgencyServiceFromURL;
-import dk.dbc.opencat.json.JsonMapper;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import dk.dbc.vipcore.exception.VipCoreException;
+import dk.dbc.vipcore.libraryrules.VipCoreLibraryRulesConnector;
 import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import java.io.IOException;
 
 /**
  * EJB to access the OpenAgency web service.
@@ -27,73 +22,21 @@ import java.io.IOException;
 public class OpenAgencyService {
     private static final XLogger LOGGER = XLoggerFactory.getXLogger(OpenAgencyService.class);
 
-    private OpenAgencyServiceFromURL service;
-
     @Inject
-    @ConfigProperty(name = "OPENAGENCY_CONNECT_TIMEOUT", defaultValue = "60000") // 60 seconds
-    private String OPENAGENCY_CONNECT_TIMEOUT;
+    private VipCoreLibraryRulesConnector vipCoreLibraryRulesConnector;
 
-    @Inject
-    @ConfigProperty(name = "OPENAGENCY_REQUEST_TIMEOUT", defaultValue = "180000") // 180 seconds
-    private String OPENAGENCY_REQUEST_TIMEOUT;
-
-    @Inject
-    @ConfigProperty(name = "OPENAGENCY_CACHE_AGE", defaultValue = "8") // 8 hours
-    private String OPENAGENCY_CACHE_AGE;
-
-    @Inject
-    @ConfigProperty(name = "OPENAGENCY_URL", defaultValue = "OPENAGENCY_URL not set")
-    private String OPENAGENCY_URL;
-
-    @PostConstruct
-    public void init() {
-        LOGGER.entry();
-        StopWatch watch = new Log4JStopWatch("service.openagency.init");
-
-        try {
-            LOGGER.info("Initializing open agency with the following parameters:");
-            LOGGER.info("OPENAGENCY_URL: {}", OPENAGENCY_URL);
-            LOGGER.info("OPENAGENCY_CONNECT_TIMEOUT: {}", Integer.parseInt(OPENAGENCY_CONNECT_TIMEOUT));
-            LOGGER.info("OPENAGENCY_REQUEST_TIMEOUT: {}", Integer.parseInt(OPENAGENCY_REQUEST_TIMEOUT));
-            LOGGER.info("OPENAGENCY_CACHE_AGE: {}", Integer.parseInt(OPENAGENCY_CACHE_AGE));
-
-            OpenAgencyServiceFromURL.Builder builder = OpenAgencyServiceFromURL.builder();
-            builder = builder.connectTimeout(Integer.parseInt(OPENAGENCY_CONNECT_TIMEOUT)).
-                    requestTimeout(Integer.parseInt(OPENAGENCY_REQUEST_TIMEOUT)).
-                    setCacheAge(Integer.parseInt(OPENAGENCY_CACHE_AGE));
-            service = builder.build(OPENAGENCY_URL);
-        } finally {
-            watch.stop();
-            LOGGER.exit();
-        }
-    }
-
-    public OpenAgencyServiceFromURL getService() {
-        return service;
-    }
-
-    public boolean hasFeature(String agencyId, LibraryRuleHandler.Rule feature) throws OpenAgencyException {
+    public boolean hasFeature(String agencyId, VipCoreLibraryRulesConnector.Rule feature) throws VipCoreException {
         LOGGER.entry(agencyId, feature);
         StopWatch watch = new Log4JStopWatch("service.openagency.hasFeature");
 
         Boolean result = null;
         try {
-            result = service.libraryRules().isAllowed(agencyId, feature);
+            result = vipCoreLibraryRulesConnector.hasFeature(agencyId, feature);
 
             LOGGER.info("Agency '{}' is allowed to use feature '{}': {}", agencyId, feature, result);
             return result;
-        } catch (OpenAgencyException ex) {
-            LOGGER.error("Failed to read feature from OpenAgency for ['{}':'{}']: {}", agencyId, feature, ex.getMessage());
-            try {
-                if (ex.getRequest() != null) {
-                    LOGGER.error("Request to OpenAgency:\n{}", JsonMapper.encodePretty(ex.getRequest()));
-                }
-                if (ex.getResponse() != null) {
-                    LOGGER.error("Response from OpenAgency:\n{}", JsonMapper.encodePretty(ex.getResponse()));
-                }
-            } catch (IOException ioError) {
-                LOGGER.error("Error with encoding request/response from OpenAgency: " + ioError.getMessage(), ioError);
-            }
+        } catch (VipCoreException ex) {
+            LOGGER.error("Failed to read feature from VipCore for ['{}':'{}']: {}", agencyId, feature, ex.getMessage());
 
             throw ex;
         } finally {

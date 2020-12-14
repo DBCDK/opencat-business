@@ -37,20 +37,20 @@ public class AbstractOpencatBusinessContainerTest {
     private static final GenericContainer holdingsItemsDbContainer;
     private static final GenericContainer openCatBusinessContainer;
     private static final String JAVA_BASE_IMAGE = "docker.dbc.dk/dbc-java8";
-    private static final String RAWREPODB_IMAGE = "docker-io.dbc.dk/rawrepo-postgres-1.13-snapshot:DIT-5016";
-    private static final String HOLDINGITEMSDB_IMAGE = "docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest";
-    private static final String RECORDSERVICE_IMAGE = "docker-io.dbc.dk/rawrepo-record-service:DIT-238";
+    private static final String RAWREPO_DB_IMAGE = "docker-io.dbc.dk/rawrepo-postgres-1.13-snapshot:DIT-5016";
+    private static final String HOLDINGITEMS_DB_IMAGE = "docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest";
+    private static final String RECORD_SERVICE_IMAGE = "docker-io.dbc.dk/rawrepo-record-service:DIT-287";
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";
 
     private static final OpenAgencyServiceFromURL openAgency;
 
-    private static final String rawrepoDbBaseUrl;
-    private static final String holdingsItemsDbUrl;
-    private static final String recordServiceBaseUrl;
-    private static final String openAgencyURL = "http://openagency.addi.dk/2.34/";
-    private static final String forsrightsURL = "http://forsrights.addi.dk/2.0/";
-    private static final String solrURL = "http://solr:9090";
-    private static final String opennumberrollUrl = "http://opennumberroll:9090";
+    private static final String RAWREPO_DB_BASE_URL;
+    private static final String HOLDINGS_ITEMS_DB_URL;
+    private static final String RECORD_SERVICE_BASE_URL;
+    private static final String VIPCORE_ENDPOINT = "http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk";
+    private static final String FORSRIGHTS_URL = "http://forsrights.addi.dk/2.0/";
+    private static final String SOLR_URL = "http://solr:9090";
+    private static final String OPENNUMBERROLL_URL = "http://opennumberroll:9090";
 
     static final String openCatBusinessBaseURL;
 
@@ -74,7 +74,7 @@ public class AbstractOpencatBusinessContainerTest {
                 .withStartupTimeout(Duration.ofMinutes(1));
         wiremockContainer.start();
 
-        rawrepoDbContainer = new GenericContainer(RAWREPODB_IMAGE)
+        rawrepoDbContainer = new GenericContainer(RAWREPO_DB_IMAGE)
                 .withNetwork(network)
                 .withNetworkAliases("rawrepoDb")
                 .withLogConsumer(new Slf4jLogConsumer(LOGGER))
@@ -84,9 +84,9 @@ public class AbstractOpencatBusinessContainerTest {
                 .withExposedPorts(5432)
                 .withStartupTimeout(Duration.ofMinutes(1));
         rawrepoDbContainer.start();
-        rawrepoDbBaseUrl = "rawrepo:rawrepo@rawrepoDb:5432/rawrepo";
+        RAWREPO_DB_BASE_URL = "rawrepo:rawrepo@rawrepoDb:5432/rawrepo";
 
-        holdingsItemsDbContainer = new GenericContainer(HOLDINGITEMSDB_IMAGE)
+        holdingsItemsDbContainer = new GenericContainer(HOLDINGITEMS_DB_IMAGE)
                 .withNetwork(network)
                 .withNetworkAliases("holdingsItemsDb")
                 .withLogConsumer(new Slf4jLogConsumer(LOGGER))
@@ -96,18 +96,18 @@ public class AbstractOpencatBusinessContainerTest {
                 .withExposedPorts(5432)
                 .withStartupTimeout(Duration.ofMinutes(1));
         holdingsItemsDbContainer.start();
-        holdingsItemsDbUrl = "holdings:holdings@holdingsItemsDb:5432/holdings";
+        HOLDINGS_ITEMS_DB_URL = "holdings:holdings@holdingsItemsDb:5432/holdings";
 
-        recordServiceContainer = new GenericContainer(RECORDSERVICE_IMAGE)
+        recordServiceContainer = new GenericContainer(RECORD_SERVICE_IMAGE)
                 .withNetwork(network)
                 .withNetworkAliases("recordservice")
                 .withLogConsumer(new Slf4jLogConsumer(LOGGER))
                 .withEnv("INSTANCE", "it")
                 .withEnv("LOG_FORMAT", "text")
                 .withEnv("OPENAGENCY_CACHE_AGE", "0")
-                .withEnv("OPENAGENCY_URL", openAgencyURL)
-                .withEnv("RAWREPO_URL", rawrepoDbBaseUrl)
-                .withEnv("HOLDINGS_URL", holdingsItemsDbUrl)
+                .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
+                .withEnv("RAWREPO_URL", RAWREPO_DB_BASE_URL)
+                .withEnv("HOLDINGS_URL", HOLDINGS_ITEMS_DB_URL)
                 .withEnv("DUMP_THREAD_COUNT", "8")
                 .withEnv("DUMP_SLIZE_SIZE", "1000")
                 .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
@@ -116,18 +116,18 @@ public class AbstractOpencatBusinessContainerTest {
                 .waitingFor(Wait.forHttp("/api/status"))
                 .withStartupTimeout(Duration.ofMinutes(2));
         recordServiceContainer.start();
-        recordServiceBaseUrl = "http://recordservice:8080";
+        RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
 
         openCatBusinessContainer = new GenericContainer("docker-io.dbc.dk/opencat-business-service:devel")
                 .withNetwork(network)
                 .withLogConsumer(new Slf4jLogConsumer(LOGGER))
                 .withEnv("LOG_FORMAT", "text")
-                .withEnv("RAWREPO_RECORD_SERVICE_URL", recordServiceBaseUrl)
-                .withEnv("OPENAGENCY_URL", openAgencyURL)
-                .withEnv("SOLR_URL", solrURL)
-                .withEnv("FORSRIGHTS_URL", forsrightsURL)
+                .withEnv("RAWREPO_RECORD_SERVICE_URL", RECORD_SERVICE_BASE_URL)
+                .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
+                .withEnv("SOLR_URL", SOLR_URL)
+                .withEnv("FORSRIGHTS_URL", FORSRIGHTS_URL)
                 .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
-                .withEnv("OPENNUMBERROLL_URL", opennumberrollUrl)
+                .withEnv("OPENNUMBERROLL_URL", OPENNUMBERROLL_URL)
                 .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
                 .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
                 .withExposedPorts(8080)
