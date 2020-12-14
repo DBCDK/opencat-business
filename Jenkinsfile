@@ -54,11 +54,13 @@ pipeline {
                         ${OCBTEST_EXECUTABLE} js-tests
                         ./bin/deploy-systemtests.sh false
                         ${OCBTEST_EXECUTABLE} run -c testrun --summary
+                        ./bin/logs-systemtests.sh
                         ./bin/stop-systemtests.sh 
                     """
                 }
 
                 junit "**/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
+                archiveArtifacts(artifacts: "ocb-test.log, logs/*.log")
             }
         }
 
