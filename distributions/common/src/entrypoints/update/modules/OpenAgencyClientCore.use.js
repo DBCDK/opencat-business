@@ -28,7 +28,7 @@ var OpenAgencyClientCore = function () {
         auth_dbc_records: Packages.dk.dbc.vipcore.libraryrules.VipCoreLibraryRulesConnector.Rule.AUTH_DBC_RECORDS,
         auth_public_lib_common_record: Packages.dk.dbc.vipcore.libraryrules.VipCoreLibraryRulesConnector.Rule.AUTH_PUBLIC_LIB_COMMON_RECORD,
         auth_ret_record: Packages.dk.dbc.vipcore.libraryrules.VipCoreLibraryRulesConnector.Rule.AUTH_RET_RECORD,
-        auth_root: Packages.dk.dbc.vipcore.libraryrules.VipCoreLibraryRulesConnector.Rule.Rule.AUTH_ROOT
+        auth_root: Packages.dk.dbc.vipcore.libraryrules.VipCoreLibraryRulesConnector.Rule.AUTH_ROOT
     };
 
     function hasFeature(agencyId, featureName) {
