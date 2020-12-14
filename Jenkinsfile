@@ -36,10 +36,6 @@ pipeline {
         DOCKER_IMAGE_NAME = "docker-io.dbc.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
         OCBTEST_EXECUTABLE="java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
-        PROD_VERSION = sh (
-                script: "curl -s --header \"PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}\" https://gitlab.dbc.dk/api/v4/projects/297/repository/files/update-fbs-service.yml/raw?ref=cisterne 2>&1 | grep --no-filename image: | cut -f2-3 -d: | tr -d ' ' | cut -d : -f 2",
-                returnStdout: true
-        ).trim()
     }
 
     stages {
@@ -56,7 +52,7 @@ pipeline {
                     sh "mvn verify pmd:pmd"
                     sh """
                         ${OCBTEST_EXECUTABLE} js-tests
-                        ./bin/deploy-systemtests.sh
+                        ./bin/deploy-systemtests.sh false
                         ${OCBTEST_EXECUTABLE} run -c testrun --summary
                         ./bin/stop-systemtests.sh 
                     """
