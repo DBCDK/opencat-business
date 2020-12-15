@@ -29,13 +29,14 @@ pipeline {
 
     options {
         timestamps()
+        disableConcurrentBuilds()
     }
 
     environment {
         GITLAB_PRIVATE_TOKEN = credentials("metascrum-gitlab-api-token")
         DOCKER_IMAGE_NAME = "docker-io.dbc.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
-        OCBTEST_EXECUTABLE="java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
+        OCBTEST_EXECUTABLE = "java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
     }
 
     stages {
@@ -48,19 +49,20 @@ pipeline {
 
         stage("Verify") {
             steps {
-                lock('meta-opencat-business-systemtest') {
-                    sh "mvn verify pmd:pmd"
-                    sh """
-                        ${OCBTEST_EXECUTABLE} js-tests
-                        ./bin/deploy-systemtests.sh false
-                        ${OCBTEST_EXECUTABLE} run -c testrun --summary
-                        ./bin/logs-systemtests.sh
-                        ./bin/stop-systemtests.sh 
-                    """
+                sh "mvn verify pmd:pmd"
+                sh """
+                    ${OCBTEST_EXECUTABLE} js-tests
+                    ./bin/deploy-systemtests.sh false
+                """
+                script {
+                    try {
+                        sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
+                    } catch (error) {
+                        currentBuild.result = 'UNSTABLE'
+                    }
                 }
 
                 junit "**/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
-                archiveArtifacts(artifacts: "ocb-test.log, logs/*.log")
             }
         }
 
@@ -73,10 +75,24 @@ pipeline {
             }
         }
 
+        stage("Save logs") {
+            steps {
+                sh """
+                    mkdir logs
+                    docker logs isworkerocb_updateservice-facade_1 > logs/updateservice-facade.log 2>&1
+                    docker logs isworkerocb_updateservice_1 > logs/updateservice.log 2>&1
+                    docker logs isworkerocb_opencat-business-service_1 > logs/opencat-business-service.log 2>&1
+                    docker logs isworkerocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
+                """
+
+                archiveArtifacts(artifacts: "ocb-test.log, logs/*.log")
+            }
+        }
+
         stage("Archive artifacts") {
             when {
                 expression {
-                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                    currentBuild.result == 'SUCCESS'
                 }
             }
             steps {
@@ -130,6 +146,7 @@ pipeline {
             notifyOfBuildStatus("Jenkins build is back to normal")
         }
         always {
+            sh "./bin/stop-systemtests.sh"
             cleanWs()
         }
     }
