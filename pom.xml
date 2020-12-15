@@ -22,7 +22,6 @@
     </repositories>
 
     <properties>
-        <openagency.ws.client.version>2.34-SNAPSHOT</openagency.ws.client.version>
         <wiremock.version>2.26.3</wiremock.version>
         <ocb.tools.artifact>
             https://is.dbc.dk/job/updateservice/job/ocb-tools/job/vipcore-improvements/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz
@@ -34,11 +33,6 @@
             <dependency>
                 <groupId>dk.dbc</groupId>
                 <artifactId>dbc-jslib</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>dk.dbc</groupId>
-                <artifactId>openagency-ws-client</artifactId>
-                <version>${openagency.ws.client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -109,6 +103,7 @@
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock</artifactId>
             <version>${wiremock.version}</version>
+            <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>junit</groupId>
@@ -146,16 +141,6 @@
             <groupId>dk.dbc</groupId>
             <artifactId>httpclient</artifactId>
             <version>0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
