@@ -25,7 +25,7 @@
         <openagency.ws.client.version>2.34-SNAPSHOT</openagency.ws.client.version>
         <wiremock.version>2.26.3</wiremock.version>
         <ocb.tools.artifact>
-            https://is.dbc.dk/job/updateservice/job/ocb-tools/job/master/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz
+            https://is.dbc.dk/job/updateservice/job/ocb-tools/job/vipcore-improvements/lastSuccessfulBuild/artifact/target/dist/ocb-tools-1.0.0.tar.gz
         </ocb.tools.artifact>
     </properties>
 
@@ -64,11 +64,6 @@
             <groupId>org.perf4j</groupId>
             <artifactId>perf4j</artifactId>
             <version>0.9.16</version>
-        </dependency>
-        <dependency>
-            <groupId>dk.dbc</groupId>
-            <artifactId>openagency-ws-client</artifactId>
-            <version>${openagency.ws.client.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
@@ -146,6 +141,11 @@
             <groupId>dk.dbc</groupId>
             <artifactId>vipcore-connector</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.dbc</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>0.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
