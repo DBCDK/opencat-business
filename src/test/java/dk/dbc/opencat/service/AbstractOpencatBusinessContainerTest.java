@@ -6,7 +6,14 @@ import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.marc.reader.MarcXchangeV1Reader;
 import dk.dbc.marc.writer.MarcXchangeV1Writer;
-import dk.dbc.openagency.client.OpenAgencyServiceFromURL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.BindMode;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.Network;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
+import org.testcontainers.containers.wait.strategy.Wait;
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -18,13 +25,6 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testcontainers.containers.BindMode;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.Network;
-import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.strategy.Wait;
 
 public class AbstractOpencatBusinessContainerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
@@ -42,8 +42,6 @@ public class AbstractOpencatBusinessContainerTest {
     private static final String RECORD_SERVICE_IMAGE = "docker-io.dbc.dk/rawrepo-record-service:DIT-287";
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";
 
-    private static final OpenAgencyServiceFromURL openAgency;
-
     private static final String RAWREPO_DB_BASE_URL;
     private static final String HOLDINGS_ITEMS_DB_URL;
     private static final String RECORD_SERVICE_BASE_URL;
@@ -54,15 +52,11 @@ public class AbstractOpencatBusinessContainerTest {
 
     static final String openCatBusinessBaseURL;
 
-
     static final HttpClient httpClient;
     static final JSONBContext JSONB_CONTEXT = new JSONBContext();
 
-
     static {
-        openAgency = OpenAgencyServiceFromURL.builder().build("http://openagency.addi.dk/2.34/");
-
-        Network network = Network.newNetwork();
+        final Network network = Network.newNetwork();
 
         wiremockContainer = new GenericContainer(JAVA_BASE_IMAGE)
                 .withNetwork(network)
@@ -179,7 +173,7 @@ public class AbstractOpencatBusinessContainerTest {
         final byte[] content = writer.write(marcRecord, StandardCharsets.UTF_8);
         final String trackingId = String.format("%d:%s", agencyId, bibliographicRecordId);
 
-        try(PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
+        try (PreparedStatement stmt = connection.prepareStatement(INSERT_SQL)) {
             stmt.setString(1, bibliographicRecordId);
             stmt.setInt(2, agencyId);
             stmt.setBoolean(3, deleted);
