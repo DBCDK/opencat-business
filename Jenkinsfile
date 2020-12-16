@@ -29,7 +29,7 @@ pipeline {
 
     options {
         timestamps()
-        disableConcurrentBuilds()
+        lock('meta-opencat-business-systemtest')
     }
 
     environment {
@@ -85,7 +85,7 @@ pipeline {
                     docker logs isworkerocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
                 """
 
-                archiveArtifacts(artifacts: "ocb-test.log, logs/*.log")
+                archiveArtifacts(artifacts: "logs/*.log")
             }
         }
 
