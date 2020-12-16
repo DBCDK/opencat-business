@@ -43,19 +43,13 @@ public class UpdaterRawRepo {
      * @throws RecordServiceConnectorException RecordServiceConnectorException
      */
     public static Boolean recordExists(String recordId, String libraryNo) throws RecordServiceConnectorException {
-        try {
-            logger.info("recordExists");
-            logger.entry(recordId, libraryNo);
-            final boolean result;
-            final StopWatch watch = new Log4JStopWatch("rawrepo.recordExists");
-            result = recordServiceConnector.recordExists(libraryNo, recordId);
-            watch.stop();
-            logger.exit(result);
-            return result;
-        } catch (RecordServiceConnectorException e) {
-            logger.error("Got RecordServiceConnectorException in recordExists", e);
-                throw e;
-        }
+        logger.entry(recordId, libraryNo);
+        final boolean result;
+        final StopWatch watch = new Log4JStopWatch("rawrepo.recordExists");
+        result = recordServiceConnector.recordExists(libraryNo, recordId);
+        watch.stop();
+        logger.exit(result);
+        return result;
     }
 
     /**
