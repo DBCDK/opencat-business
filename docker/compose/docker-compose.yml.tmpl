@@ -90,7 +90,7 @@ services:
     environment:
       - INSTANCE_NAME=${USER}_dev
       - FORSRIGHTS_URL=https://forsrights.addi.dk/2.0/
-      - VIPCORE_ENDPOINT=http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk
+      - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
       - VIPCORE_CACHE_AGE=0
       - RAWREPO_RECORD_SERVICE_URL=${DEV_RAWREPO_RECORD_SERVICE_URL}
       - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
@@ -118,7 +118,7 @@ services:
     image: docker-io.dbc.dk/rawrepo-record-service:DIT-287
     environment:
       - INSTANCE_NAME=${USER}_dev
-      - VIPCORE_ENDPOINT=http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk
+      - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
       - VIPCORE_CACHE_AGE=0
       - RAWREPO_URL=${DEV_RAWREPO_DB_URL}
       - HOLDINGS_URL=${DEV_HOLDINGS_ITEMS_DB_URL}
