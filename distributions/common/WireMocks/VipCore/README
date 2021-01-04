@@ -1,0 +1,19 @@
+Files in this directory is used to mock requests to vipcore.
+
+Files under construction can be placed in ignored.
+
+There are two main requests - LibraryRules on agency and LibraryRules on library group.
+
+Files named cataloging_template_set.<library group>.json contains a list of library rules for libraries in <library group>.
+
+cataloging_template_set.ph.json : contains the PH libraries - modification needed when final vip config done.
+
+Files named agencyId.<library number>.json contains library rules for a specific library.
+
+Current list of agencyIds are way too big - can be reduced.
+
+agencyId.299999.json : Special case - used when "Agency not found" is wanted.
+agencyId.010100.json : Dataio/dbc user
+agencyId.870970.json : DBC agency code
+agencyId.191919.json : DBC enrichment agency code
+agencyId.746100.json : Special library that doesn't have the right to create notes and subject fields

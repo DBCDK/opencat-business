@@ -7,3 +7,4 @@ target/
 *.war
 **/compiled_templates
 deploy/
+logs/

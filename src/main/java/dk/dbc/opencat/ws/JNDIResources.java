@@ -14,9 +14,6 @@ import java.util.Properties;
  * This also includes keys from Properties resources.
  */
 public class JNDIResources {
-    public static final String OPENAGENCY_URL = "OPENAGENCY_URL";
-    public static final String OPENAGENCY_CACHE_AGE = "OPENAGENCY_CACHE_AGE";
-
     public static final String JAVASCRIPT_BASEDIR = "JAVASCRIPT_BASEDIR";
     public static final String JAVASCRIPT_POOL_SIZE = "JAVASCRIPT_POOL_SIZE";
 
