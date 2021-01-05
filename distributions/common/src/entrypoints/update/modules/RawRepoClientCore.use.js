@@ -11,20 +11,7 @@ use("Log");
 EXPORTED_SYMBOLS = ['RawRepoClientCore'];
 
 var RawRepoClientCore = function () {
-    var SERVICE_PROVIDER = getServiceProvider();
-
-    function getServiceProvider() {
-        var serviceProvider;
-        try {
-            Packages.dk.dbc.opencat.javascript.UpdaterRawRepo.recordExists(0,0);
-            serviceProvider = Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
-        }
-        catch (ex) {
-            Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo.recordExists(0,0);
-            serviceProvider = Packages.dk.dbc.updateservice.javascript.UpdaterRawRepo;
-        }
-        return serviceProvider;
-    }
+    var SERVICE_PROVIDER = Packages.dk.dbc.opencat.javascript.UpdaterRawRepo;
 
     function recordExists(recordId, libraryNo) {
         Log.trace("Enter RawRepoClientCore.recordExists()");
