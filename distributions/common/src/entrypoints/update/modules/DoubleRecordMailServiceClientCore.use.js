@@ -9,20 +9,12 @@ EXPORTED_SYMBOLS = ['DoubleRecordMailServiceClientCore'];
  */
 var DoubleRecordMailServiceClientCore = function () {
     var JNDI_NAME = "java:global/opencat-business-1.0-SNAPSHOT/DoubleRecordMailService";
-    var JNDI_NAME_DEPRECATED = "java:global/updateservice-2.0-SNAPSHOT/DoubleRecordMailService";
     var SERVICE_PROVIDER = getServiceProvider();
 
     function getServiceProvider() {
         var context = new Packages.javax.naming.InitialContext();
-        var serviceProvider;
 
-        try {
-            serviceProvider = context.lookup(JNDI_NAME);
-        } catch (e) {
-            Log.debug(JNDI_NAME + " not found. Trying " + JNDI_NAME_DEPRECATED)
-            serviceProvider = context.lookup(JNDI_NAME_DEPRECATED);
-        }
-        return serviceProvider;
+        return context.lookup(JNDI_NAME);
     }
 
     function sendMessage(subject, body) {
