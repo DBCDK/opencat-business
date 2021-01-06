@@ -93,7 +93,7 @@
                     "ordinalPositionOfField" : null,
                     "ordinalPositionOfSubfield" : null,
                     "ordinalPositionInSubfield" : null,
-                    "message" : "Postens rettigheder kunne ikke checkes pga følgende fejl: Webservice RESPONDS with content: Agency not found"
+                    "message" : "Postens rettigheder kunne ikke checkes pga følgende fejl fra vipcore: agency_not_found"
                 } ],
                 "rawrepo": [
                     {
