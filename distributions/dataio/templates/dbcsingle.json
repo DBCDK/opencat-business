@@ -649,8 +649,25 @@
                 "&": {
                     "repeatable": false
                 },
-                "a": "DanMarc2.fields.500.subfields.a"
-            }
+                "a": "DanMarc2.fields.500.subfields.a",
+                "b": "DanMarc2.fields.500.subfields.b",
+                "c": "DanMarc2.fields.500.subfields.c",
+                "2": "DanMarc2.fields.500.subfields.2"
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "a", "b" ]
+                    }
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "a", "c" ]
+                    }
+                }
+            ]
         },
         "501":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.49.htm",
