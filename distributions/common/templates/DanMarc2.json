@@ -812,15 +812,9 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.25.htm",
             "subfields":{
                 "a":{},
-                "b":{
-                    "repeatable":false
-				},
-                "c":{
-                    "repeatable":false
-				},
-                "2":{
-                    "repeatable":false
-				},
+                "b":{},
+                "c":{},
+                "2":{},
                 "6":{}
             }
         },
@@ -3137,7 +3131,6 @@
 				},
                 "i":{},
                 "v":{
-                    "repeatable": false,
                     "rules": [
                         {
                             "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
@@ -3275,7 +3268,6 @@
                 },
                 "i":{},
                 "v":{
-                    "repeatable": false,
                     "rules": [
                         {
                             "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
