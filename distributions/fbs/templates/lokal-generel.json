@@ -276,6 +276,7 @@
                 "c": "DanMarc2.fields.100.subfields.c",
                 "b": "DanMarc2.fields.100.subfields.b",
                 "1": "DanMarc2.fields.100.subfields.1",
+                "2": "DanMarc2.fields.100.subfields.2",
                 "4": "DanMarc2.fields.100.subfields.4"
             }
         },
@@ -291,6 +292,7 @@
                 "k": "DanMarc2.fields.110.subfields.k",
                 "j": "DanMarc2.fields.110.subfields.j",
                 "1": "DanMarc2.fields.110.subfields.1",
+                "2": "DanMarc2.fields.110.subfields.2",
                 "4": "DanMarc2.fields.110.subfields.4"
             }
         },
@@ -336,6 +338,7 @@
                 "o": "DanMarc2.fields.240.subfields.o",
                 "w": "DanMarc2.fields.240.subfields.w",
                 "1": "DanMarc2.fields.240.subfields.1",
+                "2": "DanMarc2.fields.240.subfields.2",
                 "5": "DanMarc2.fields.240.subfields.5"
             }
         },
@@ -612,6 +615,7 @@
                 "c": "DanMarc2.fields.700.subfields.c",
                 "t": "DanMarc2.fields.700.subfields.t",
                 "1": "DanMarc2.fields.700.subfields.1",
+                "2": "DanMarc2.fields.700.subfields.2",
                 "4": "DanMarc2.fields.700.subfields.4",
                 "g": "DanMarc2.fields.700.subfields.g"
             }
@@ -628,6 +632,7 @@
                 "s": "DanMarc2.fields.710.subfields.s",
                 "t": "DanMarc2.fields.710.subfields.t",
                 "1": "DanMarc2.fields.710.subfields.1",
+                "2": "DanMarc2.fields.710.subfields.2",
                 "4": "DanMarc2.fields.710.subfields.4",
                 "g": "DanMarc2.fields.710.subfields.g"
             }
@@ -672,7 +677,8 @@
                 "n": "DanMarc2.fields.740.subfields.n",
                 "o": "DanMarc2.fields.740.subfields.o",
                 "w": "DanMarc2.fields.740.subfields.w",
-                "1": "DanMarc2.fields.740.subfields.1"
+                "1": "DanMarc2.fields.740.subfields.1",
+                "2": "DanMarc2.fields.740.subfields.2"
             }
         },
         "745": "DanMarc2.fields.745",
