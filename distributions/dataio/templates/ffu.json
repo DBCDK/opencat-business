@@ -222,6 +222,7 @@
                 "b": "DanMarc2.fields.100.subfields.b",
                 "0": "DanMarc2.fields.100.subfields.0",
                 "1": "DanMarc2.fields.100.subfields.1",
+                "2": "DanMarc2.fields.100.subfields.2",
                 "4":{
                     "rules":[{
                         "type":"SubfieldRules.checkLength",
@@ -251,6 +252,7 @@
                 "b": "DanMarc2.fields.110.subfields.b",
                 "0": "DanMarc2.fields.110.subfields.0",
                 "1": "DanMarc2.fields.110.subfields.1",
+                "2": "DanMarc2.fields.110.subfields.2",
                 "4":{
                     "rules":[{
                         "type":"SubfieldRules.checkLength",
@@ -321,6 +323,7 @@
                 "w": "DanMarc2.fields.240.subfields.w",
                 "0": "DanMarc2.fields.240.subfields.0",
                 "1": "DanMarc2.fields.240.subfields.1",
+                "2": "DanMarc2.fields.240.subfields.2",
                 "5": "DanMarc2.fields.240.subfields.5"
             }
         },
@@ -736,6 +739,7 @@
                 "g":"DanMarc2.fields.700.subfields.g",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "1":"DanMarc2.fields.700.subfields.1",
+                "2":"DanMarc2.fields.700.subfields.2",
                 "4":{
                     "rules":[{
                         "type":"SubfieldRules.checkLength",
@@ -777,6 +781,7 @@
                 "g":"DanMarc2.fields.710.subfields.g",
                 "0":"DanMarc2.fields.710.subfields.0",
                 "1":"DanMarc2.fields.710.subfields.1",
+                "2":"DanMarc2.fields.710.subfields.2",
                 "4":{
                     "rules":[{
                         "type":"SubfieldRules.checkLength",
