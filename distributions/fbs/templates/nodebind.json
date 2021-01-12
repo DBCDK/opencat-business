@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af fonogrammer og noder - enkeltstående post",
+        "description": "Skabelon til katalogisering af noder - bindpost",
         "features": [ "all" ]
     },
     "settings": {

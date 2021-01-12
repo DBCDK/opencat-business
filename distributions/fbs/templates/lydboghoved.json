@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til lydbog (fyfisk) - hovedpost.",
+        "description": "Skabelon til katalogisering af lydbøger (fysisk) - hovedpost.",
         "features": [ "all" ]
     },
     "settings": {

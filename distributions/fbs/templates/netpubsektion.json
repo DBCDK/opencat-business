@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - sektionspost.",
+        "description": "Skabelon til katalogisering af sektionspost til netpublikation (alle materialetyper (009a))",
         "features": [ "all" ]
     },
     "settings": {

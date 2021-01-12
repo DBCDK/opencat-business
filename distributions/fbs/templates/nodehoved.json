@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af fonogrammer og noder - hovedpost",
+        "description": "Skabelon til katalogisering af noder - hovedpost",
         "features": [ "all" ]
     },
     "settings": {

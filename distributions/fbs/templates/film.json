@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af film på fysiske medier (dvd, videobånd m.m.) - enkeltstående post.",
+        "description": "Skabelon til katalogisering af film på fysiske medier (dvd, blu-ray m.m.) - enkeltstående post.",
         "features": [ "all" ]
     },
     "settings": {
