@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.",
+        "description": "Skabelon til katalogisering af flerbindsværk af netpublikation (alle materialetyper) - bindpost.",
         "features": [ "all" ]
     },
     "settings": {

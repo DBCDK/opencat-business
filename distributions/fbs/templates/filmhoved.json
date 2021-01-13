@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af flerbindsværk af film på fysiske medier (dvd, videobånd m.m.) - hovedpost.",
+        "description": "Skabelon til katalogisering af flerbindsværk af film på fysiske medier (dvd, blu-ray m.m.) - hovedpost.",
         "features": [ "all" ]
     },
     "settings": {
