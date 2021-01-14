@@ -232,7 +232,6 @@
                 "c":"DanMarc2.fields.100.subfields.c",
                 "0":"DanMarc2.fields.100.subfields.0",
                 "1":"DanMarc2.fields.100.subfields.1",
-                "2":"DanMarc2.fields.100.subfields.2",
                 "4":"DanMarc2.fields.100.subfields.4"
             }
         },
@@ -245,12 +244,11 @@
                 "e":"DanMarc2.fields.110.subfields.e",
                 "0":"DanMarc2.fields.110.subfields.0",
                 "1": "DanMarc2.fields.110.subfields.1",
-                "2": "DanMarc2.fields.110.subfields.2",
-                "4":"DanMarc2.fields.100.subfields.4"				
+                "4":"DanMarc2.fields.100.subfields.4"
             }
         },
         "239": "DanMarc2.fields.239",
-        "240": "DanMarc2.fields.240",
+        "240": "fonogram.fields.240",
         "241":{
                 "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",
                 "subfields":{                
@@ -324,7 +322,7 @@
                 "e":"DanMarc2.fields.300.subfields.e"
             }
         },
-        "440": "DanMarc2.fields.440",
+        "440": "bog.fields.440",
         "502": "DanMarc2.fields.502",
         "504":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.4c.htm",
@@ -578,7 +576,6 @@
                 "h": "DanMarc2.fields.700.subfields.h",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "1": "DanMarc2.fields.700.subfields.1",
-                "2": "DanMarc2.fields.700.subfields.2",
                 "4": "DanMarc2.fields.700.subfields.4"
             }
         },
@@ -596,7 +593,6 @@
                 "t": "DanMarc2.fields.710.subfields.t",
                 "0": "DanMarc2.fields.710.subfields.0",
                 "1": "DanMarc2.fields.710.subfields.1",
-                "2": "DanMarc2.fields.710.subfields.2",
                 "4": "DanMarc2.fields.710.subfields.4"
             }
         },
@@ -606,7 +602,7 @@
         "770": "fonogram.fields.770",
         "780": "fonogram.fields.780",
         "795": "fonogram.fields.795",
-        "840": "DanMarc2.fields.840",
+        "840": "bog.fields.840",
         "880": "DanMarc2.fields.880",
         "900":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.99.htm",
