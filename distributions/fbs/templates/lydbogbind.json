@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til lydbog (fysisk) - bindpost.",
+        "description": "Skabelon til katalogisering af lydbøger (fysisk) - bindpost.",
         "features": [ "all" ]
     },
     "settings": {

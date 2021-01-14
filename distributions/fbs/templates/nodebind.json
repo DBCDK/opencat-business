@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til katalogisering af fonogrammer og noder - enkeltstående post",
+        "description": "Skabelon til katalogisering af noder - bindpost",
         "features": [ "all" ]
     },
     "settings": {
@@ -516,6 +516,7 @@
                 "h": "DanMarc2.fields.700.subfields.h",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "1": "DanMarc2.fields.700.subfields.1",
+                "2": "DanMarc2.fields.700.subfields.2",
                 "4": "DanMarc2.fields.700.subfields.4"
             }
         },
@@ -533,6 +534,7 @@
                 "t": "DanMarc2.fields.710.subfields.t",
                 "0": "DanMarc2.fields.710.subfields.0",
                 "1": "DanMarc2.fields.710.subfields.1",
+                "2": "DanMarc2.fields.710.subfields.2",
                 "4": "DanMarc2.fields.710.subfields.4"
             }
         },

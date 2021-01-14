@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til onlinelydbog - bindpost.",
+        "description": "Skabelon til katalogisering af onlinelydbog - bindpost.",
         "features": [ "all" ]
     },
     "settings": {

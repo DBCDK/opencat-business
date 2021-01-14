@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til onlinelydbog - hovedpost.",
+        "description": "Skabelon til katalogisering af onlinelydbog - hovedpost.",
         "features": [ "all" ]
     },
     "settings": {

@@ -1,6 +1,6 @@
 {
     "template": {
-        "description": "Skabelon til netpublikationer - hovedpost.",
+        "description": "Skabelon til netpublikationer (alle materialetyper)- hovedpost.",
         "features": [ "all" ]
     },
     "settings": {
