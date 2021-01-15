@@ -276,7 +276,6 @@
                 "b": "DanMarc2.fields.100.subfields.b",
                 "0": "DanMarc2.fields.100.subfields.0",
                 "1": "DanMarc2.fields.100.subfields.1",
-                "2": "DanMarc2.fields.100.subfields.2",
                 "4": "DanMarc2.fields.100.subfields.4",
                 "5": "DanMarc2.fields.100.subfields.5",
                 "6": "DanMarc2.fields.100.subfields.6"
@@ -286,7 +285,7 @@
         "210": "DanMarc2.fields.210",
         "222": "DanMarc2.fields.222",
         "239": "DanMarc2.fields.239",
-        "240": "DanMarc2.fields.240",
+        "240": "dbcsingle.fields.240",
         "241": "DanMarc2.fields.241",    
         "242": "DanMarc2.fields.242",
         "243": "DanMarc2.fields.243",
@@ -391,8 +390,7 @@
                 "z": "DanMarc2.fields.440.subfields.z",
                 "v": "DanMarc2.fields.440.subfields.v",
                 "0": "DanMarc2.fields.440.subfields.0",
-                "1": "DanMarc2.fields.440.subfields.1",
-                "2": "DanMarc2.fields.440.subfields.2"
+                "1": "DanMarc2.fields.440.subfields.1"
             }
         },
         "500": "DanMarc2.fields.500",
@@ -860,13 +858,12 @@
                 "g": "DanMarc2.fields.700.subfields.g",
                 "0": "DanMarc2.fields.700.subfields.0",
                 "1": "DanMarc2.fields.700.subfields.1",
-                "2": "DanMarc2.fields.700.subfields.2",
                 "4": "DanMarc2.fields.700.subfields.4",
                 "5": "DanMarc2.fields.700.subfields.5",
                 "6": "DanMarc2.fields.700.subfields.6"
             }
         },
-        "710": "DanMarc2.fields.710",
+        "710": "dbcsingle.fields.710",
         "720":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85a.htm",
             "subfields":{
@@ -881,10 +878,7 @@
                     "repeatable":false
                 },
                 "4": "Lister.fields.codes.subfields.relator_code",
-                "g":{
-                    "repeatable":false,
-                    "values":[ "1" ]
-                }
+                "g": "DanMarc2.fields.720.subfields.g"
             }
         },
         "739": "DanMarc2.fields.739",
