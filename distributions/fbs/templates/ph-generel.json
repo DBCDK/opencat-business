@@ -94,7 +94,7 @@
 				"t":{
                     "mandatory":true,
                 	"repeatable": false,
-                    "values":[ "m", "s" ]
+                    "values":[ "m", "s", "p" ]
                 },
                 "u": "DanMarc2.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
@@ -179,7 +179,9 @@
         "020": "DanMarc2.fields.020",
         "021": "DanMarc2.fields.021",
         "022": "DanMarc2.fields.022",
+        "023": "DanMarc2.fields.023",
         "024": "DanMarc2.fields.024",
+        "032": "DanMarc2.fields.032",
         "035": "DanMarc2.fields.035",
         "038": "DanMarc2.fields.038",
         "039": "DanMarc2.fields.039",
@@ -208,6 +210,7 @@
                 }
             }]
         },
+        "042": "DanMarc2.fields.042",
         "043": "DanMarc2.fields.043",
         "044": "DanMarc2.fields.044",
         "048": "DanMarc2.fields.048",
@@ -264,6 +267,8 @@
                 "4": "DanMarc2.fields.110.subfields.4"
             }
         },
+        "210": "DanMarc2.fields.210",
+        "222": "DanMarc2.fields.222",
         "239":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.37.htm",
             "repeatable": false,
@@ -839,6 +844,41 @@
         "945": "DanMarc2.fields.945",
         "952": "DanMarc2.fields.952",
         "966": "DanMarc2.fields.966",
-        "968": "DanMarc2.fields.968"
+        "968": "DanMarc2.fields.968",
+        "980":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a2.htm",
+            "subfields":{
+                "y":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "rules": [{
+                        "type": "SubfieldRules.checkLength",
+                        "params": {
+                            "min": 6,
+                            "max": 6
+                        }
+                    }]
+                },
+                "u":"DanMarc2.fields.980.subfields.u",
+                "x":"DanMarc2.fields.980.subfields.x",
+                "a":"DanMarc2.fields.980.subfields.a",
+                "v":"DanMarc2.fields.980.subfields.v",
+                "b":"DanMarc2.fields.980.subfields.b",
+                "p":"DanMarc2.fields.980.subfields.p",
+                "c":"DanMarc2.fields.980.subfields.c",
+                "q":"DanMarc2.fields.980.subfields.q",
+                "d":"DanMarc2.fields.980.subfields.d",
+                "r":"DanMarc2.fields.980.subfields.r",
+                "e":"DanMarc2.fields.980.subfields.e",
+                "t":"DanMarc2.fields.980.subfields.t",
+                "f":"DanMarc2.fields.980.subfields.f",
+                "g":"DanMarc2.fields.980.subfields.g",
+                "i":"DanMarc2.fields.980.subfields.i",
+                "m":"DanMarc2.fields.980.subfields.m",
+                "n":"DanMarc2.fields.980.subfields.n",
+                "o":"DanMarc2.fields.980.subfields.o",
+                "s":"DanMarc2.fields.980.subfields.s"
+            }
+        }
     }
 }
