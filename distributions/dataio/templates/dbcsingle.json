@@ -484,17 +484,7 @@
                 "1": "DanMarc2.fields.240.subfields.1"
             }
         },
-        "241":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",
-            "subfields":{
-                "i": "DanMarc2.fields.241.subfields.i",
-                "a": "DanMarc2.fields.241.subfields.a",
-                "\u00f8": "DanMarc2.fields.241.subfields.\u00f8",
-                "n": "DanMarc2.fields.241.subfields.n",
-                "o": "DanMarc2.fields.241.subfields.o",
-                "r": "DanMarc2.fields.241.subfields.r"
-            }
-        },
+        "241": "DanMarc2.fields.241",
         "242":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39a.htm",
             "subfields":{
