@@ -61,7 +61,7 @@
             "subfields": {
                 "n": {
                     "repeatable": false,
-                    "values": [ "b" ]
+                    "values": [ "a", "b" ]
                 },
                 "x": {}
             }
