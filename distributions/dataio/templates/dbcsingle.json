@@ -1191,6 +1191,8 @@
                     "repeatable": false
                 },
                 "f": "DanMarc2.fields.666.subfields.f",
+                "g": "DanMarc2.fields.666.subfields.g",
+                "h": "DanMarc2.fields.666.subfields.h",
                 "t": "DanMarc2.fields.666.subfields.t",
                 "e": "DanMarc2.fields.666.subfields.e",
                 "s": "DanMarc2.fields.666.subfields.s",

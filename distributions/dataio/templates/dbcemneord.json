@@ -199,6 +199,12 @@
                 "f": {
                     "repeatable": false
                 },
+                "g": {
+                    "repeatable": false
+                },
+                "h": {
+                    "repeatable": false
+                },
                 "t": {
                     "repeatable": false
                 },
@@ -345,6 +351,12 @@
                     "repeatable": false
                 },
                 "f": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "h": {
                     "repeatable": false
                 },
                 "t": {
@@ -499,6 +511,12 @@
                     "repeatable": false
                 },
                 "f": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "h": {
                     "repeatable": false
                 },
                 "t": {
