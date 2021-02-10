@@ -100,10 +100,12 @@
                 "a": "DanMarc2.fields.008.subfields.a",
                 "z": "DanMarc2.fields.008.subfields.z",
                 "b": "DanMarc2.fields.008.subfields.b",
+                "c": "DanMarc2.fields.008.subfields.c",
                 "d": "DanMarc2.fields.008.subfields.d",
                 "e": "DanMarc2.fields.008.subfields.e",
                 "f": "DanMarc2.fields.008.subfields.f",
                 "g": "DanMarc2.fields.008.subfields.g",
+                "h": "DanMarc2.fields.008.subfields.h",
                 "i": "DanMarc2.fields.008.subfields.i",
                 "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
@@ -114,6 +116,8 @@
                 },
                 "m": "DanMarc2.fields.008.subfields.m",
                 "o": "DanMarc2.fields.008.subfields.o",
+                "q": "DanMarc2.fields.008.subfields.q",
+                "w": "DanMarc2.fields.008.subfields.w",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v": "DanMarc2.fields.008.subfields.v"
             }
