@@ -1865,21 +1865,8 @@
                 "2":{
                     "repeatable":false
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.exclusiveSubfieldParameterized",
-                    "params": {
-                        "subfields": [ "a", "b" ]
-                    }
-                },
-                {
-                    "type": "FieldRules.exclusiveSubfieldParameterized",
-                    "params": {
-                        "subfields": [ "a", "c" ]
-                    }
-                }
-            ]
+            }
+
         },
         "501":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.49.htm",
