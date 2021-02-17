@@ -30,6 +30,18 @@
         {
             "type": "RecordRules.conflictingSubfields",
             "params": {
+                "subfields": [ "500a", "500b" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "500a", "500c" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
                 "subfields": [ "652m", "652n" ]
             }
         },

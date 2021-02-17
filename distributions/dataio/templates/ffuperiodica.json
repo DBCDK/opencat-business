@@ -24,6 +24,18 @@
         {
             "type": "RecordRules.conflictingSubfields",
             "params": {
+                "subfields": [ "500a", "500b" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "500a", "500c" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
                 "subfields": [ "652m", "652n" ]
             }
         },
@@ -167,7 +179,23 @@
         "346": "DanMarc2.fields.346",
         "347": "DanMarc2.fields.347",
         "440": "DanMarc2.fields.440",
-        "500": "DanMarc2.fields.500",
+
+        "500":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.48.htm",
+            "subfields":{
+                "a":{
+                    "repeatable":false
+                },
+                "b":{},
+                "c":{
+                    "repeatable":false
+                },
+                "2":{
+                    "repeatable":false
+                }
+            }
+
+        },
         "501": "DanMarc2.fields.501",
         "502": "DanMarc2.fields.502",
         "504": "DanMarc2.fields.504",

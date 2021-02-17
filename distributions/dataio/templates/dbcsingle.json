@@ -23,6 +23,18 @@
         {
             "type": "RecordRules.conflictingSubfields",
             "params": {
+                "subfields": [ "500a", "500b" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
+                "subfields": [ "500a", "500c" ]
+            }
+        },
+        {
+            "type": "RecordRules.conflictingSubfields",
+            "params": {
                 "subfields": [ "652m", "652n" ]
             }
         },
@@ -643,21 +655,8 @@
                 "b": "DanMarc2.fields.500.subfields.b",
                 "c": "DanMarc2.fields.500.subfields.c",
                 "2": "DanMarc2.fields.500.subfields.2"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.exclusiveSubfieldParameterized",
-                    "params": {
-                        "subfields": [ "a", "b" ]
-                    }
-                },
-                {
-                    "type": "FieldRules.exclusiveSubfieldParameterized",
-                    "params": {
-                        "subfields": [ "a", "c" ]
-                    }
-                }
-            ]
+            }
+
         },
         "501":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.49.htm",
