@@ -2217,6 +2217,9 @@
                     "rules": [ { "type": "SubfieldRules.subfieldsDemandsOtherSubfields" } ]
 				},
                 "t":{},
+                "c":{},
+                "p":{},
+                "g":{},
                 "e":{},
                 "d":{},
                 "x":{},

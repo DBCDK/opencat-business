@@ -492,6 +492,9 @@
                     "repeatable":false
                 },
                 "t": "DanMarc2.fields.530.subfields.t",
+                "c": "DanMarc2.fields.530.subfields.c",
+                "p": "DanMarc2.fields.530.subfields.p",
+                "g": "DanMarc2.fields.530.subfields.g",
                 "e": "DanMarc2.fields.530.subfields.e",
                 "d": "DanMarc2.fields.530.subfields.d",
                 "x": "DanMarc2.fields.530.subfields.x",
