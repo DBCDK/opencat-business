@@ -82,7 +82,6 @@
                 "o": "DanMarc2.fields.008.subfields.o",
                 "q": "DanMarc2.fields.008.subfields.q",
                 "r": {
-                    "mandatory":true,
                     "repeatable": false,
                     "values": [ "a", "b", "c", "d", "e", "f", "g", "m", "p", "r", "s", "t", "u", "v",
                         "am", "an", "ap", "az", "ad", "a?" ]
