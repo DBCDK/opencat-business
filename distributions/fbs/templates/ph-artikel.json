@@ -123,6 +123,7 @@
         "035": "DanMarc2.fields.035",
         "041": "ph-bog.fields.041",
         "086": "DanMarc2.fields.086",
+        "096": "ph-generel.fields.096",
         "245":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
 			"mandatory":true,
