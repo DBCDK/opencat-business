@@ -47,6 +47,16 @@
       ],
       "folder": "dataio"
     },
+    "PH": {
+      "templates": [
+        "ph-generel-uden-faust",
+        "ph-generelhoved-uden-faust",
+        "ph-generelbind-uden-faust",
+        "ph-generelsektion-uden-faust",
+        "ph-artikel-uden-faust"
+      ],
+      "folder": "dataio"
+    },
     "FBS": {
       "templates": [
         "bog",
