@@ -1,0 +1,29 @@
+[
+    {
+        "name": "fbs-new-local-ph-article_not-faust",
+        "description": "Tester oprettelse af ny artikelpost med et ikke-faustnummer fra ph'er",
+        "request": {
+            "authentication": {
+                "group": "830480",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "ph-artikel-uden-faust",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-local-article.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
