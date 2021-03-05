@@ -6,6 +6,7 @@
     "ffu":                  {"templateGroups": ["FFU"]},
     "lokbib":               {"templateGroups": ["Lokalbibliografi"]},
     "ph":                   {"templateGroups": ["PH"]},
+    "phio":                 {"templateGroups": ["PHio"]},
     "skole":                {"templateGroups": ["FBS", "Skolepaahaengsposter (p.t. ikke synlige i drift)"]}
   },
   "templateGroups": {
@@ -47,7 +48,7 @@
       ],
       "folder": "dataio"
     },
-    "PH": {
+    "PHio": {
       "templates": [
         "ph-generel-uden-faust",
         "ph-generelhoved-uden-faust",
