@@ -707,6 +707,7 @@
                 },
                 "6":"DanMarc2.fields.667.subfields.6",
                 "8": {
+                    "mandatory":true,
                     "repeatable":false,
                     "values": "Lister.fields.codes.subfields.language.all_codes.values"
                 }
