@@ -126,7 +126,7 @@
         },
         "100":{
             "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt100.htm",
-            "mandatory": true,
+            "mandatory": false,
             "repeatable": false,
             "subfields": {
                 "a": {
@@ -147,6 +147,28 @@
                 "d": {
                     "repeatable": false
                 }
+            }
+        },
+        "110":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt110.htm",
+            "mandatory": false,
+            "repeatable": false,
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "e": {},
+                "c": {},
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {}
             }
         },
         "372":{
@@ -209,6 +231,32 @@
                 }
             }
         },
+        "410":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt410.htm",
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "e": {},
+                "c": {},
+                "h": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {}
+            }
+        },
         "500":{
             "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt500.htm",
             "subfields": {
@@ -233,6 +281,35 @@
                 "x": {
                     "repeatable": false
                 },
+                "w": {
+                    "repeatable": false
+                }
+            }
+        },
+        "510":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt510.htm",
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "e": {},
+                "c": {},
+                "h": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {},
                 "w": {
                     "repeatable": false
                 }
