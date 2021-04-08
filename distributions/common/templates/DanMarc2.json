@@ -1878,9 +1878,7 @@
                 "a":{
                     "repeatable":false
                 },
-                "b":{
-                    "repeatable":false
-                },
+                "b":{},
                 "u":{
                     "repeatable":false
                 },
