@@ -70,6 +70,11 @@ UnitTest.addFixture("CheckDateFormat.validateSubfield - check *c", function () {
     field = record.fields[0];
     subfield = field.subfields[2];
     Assert.equalValue("Check *c - OK 4", CheckDateFormat.validateSubfield(record, field, subfield, params), []);
+
+    record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 50984508 *b 710100 *c 20210328020044"));
+    field = record.fields[0];
+    subfield = field.subfields[2];
+    Assert.equalValue("Check *c - OK 5", CheckDateFormat.validateSubfield(record, field, subfield, params), []);
 });
 
 UnitTest.addFixture("CheckDateFormat.validateSubfield - check *d", function () {

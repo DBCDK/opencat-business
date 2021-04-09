@@ -43,6 +43,7 @@ var CheckDateFormat = function () {
             }
 
             var SimpleDateFormat = Java.type('java.text.SimpleDateFormat');
+            var TimeZone = Java.type('java.util.TimeZone');
             var formatter;
 
             if (value.length === 8) {
@@ -51,6 +52,7 @@ var CheckDateFormat = function () {
                 formatter = new SimpleDateFormat('yyyyMMddHHmmss');
             }
 
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC")); // Ignore timezone when checking format
             formatter.setLenient(false); // Use strict formatting
 
             try {
