@@ -5,10 +5,11 @@ import dk.dbc.common.records.MarcSubField;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
-import dk.dbc.opencatbusiness.dto.RecategorizationNoteFieldFactoryRequestDTO;
+
 import java.util.Arrays;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -18,23 +19,22 @@ public class RecategorizationNoteFieldFactoryIT extends AbstractOpencatBusinessC
 
     @Test
     public void recategorizationNoteFieldFactory_sanitytest() throws JSONBException {
-        final RecategorizationNoteFieldFactoryRequestDTO recategorizationNoteFieldFactoryRequestDTO =
-                new RecategorizationNoteFieldFactoryRequestDTO();
-        recategorizationNoteFieldFactoryRequestDTO.setRecord(getRecord());
+        final RecordRequestDTO recordRequestDTO = new RecordRequestDTO();
+        recordRequestDTO.setRecord(getRecord());
 
         final HttpPost httpPost = new HttpPost(httpClient)
                 .withBaseUrl(openCatBusinessBaseURL)
                 .withPathElements(new PathBuilder("/api/v1/recategorizationNoteFieldFactory")
                         .build())
-                .withJsonData(JSONB_CONTEXT.marshall(recategorizationNoteFieldFactoryRequestDTO));
+                .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
         MarcField expected = new MarcField();
         expected.setName("512");
         expected.setIndicator("00");
         expected.setSubfields(Arrays.asList(
                 new MarcSubField("i", "Materialet er opstillet under"),
-                new MarcSubField("d","Powell, Eric"),
-                new MarcSubField("t","The ¤Goon, nothin' but misery"),
-                new MarcSubField("b","# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
+                new MarcSubField("d", "Powell, Eric"),
+                new MarcSubField("t", "The ¤Goon, nothin' but misery"),
+                new MarcSubField("b", "# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
 
         Response response = httpClient.execute(httpPost);
 
