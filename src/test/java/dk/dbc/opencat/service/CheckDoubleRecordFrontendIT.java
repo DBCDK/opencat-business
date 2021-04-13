@@ -3,7 +3,7 @@ package dk.dbc.opencat.service;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.jsonb.JSONBException;
-import dk.dbc.opencatbusiness.dto.CheckDoubleRecordFrontendRequestDTO;
+import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import java.sql.Connection;
@@ -27,7 +27,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
 
     @Test
     public void checkDoubleRecordFront_OK() throws JSONBException {
-        final CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO = new CheckDoubleRecordFrontendRequestDTO();
+        final RecordRequestDTO recordRequestDTO = new RecordRequestDTO();
         String marcRecord = "<?xml version=\"1.0\" encoding=\"UTF-16\"?>\n" +
                 "<record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
                 "    <leader>00000n    2200000   4500</leader>\n" +
@@ -173,12 +173,12 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                 "        <subfield code=\"a\">DBC</subfield>\n" +
                 "    </datafield>\n" +
                 "</record>\n";
-        checkDoubleRecordFrontendRequestDTO.setRecord(marcRecord);
+        recordRequestDTO.setRecord(marcRecord);
         final HttpPost httpPost = new HttpPost(httpClient)
                 .withBaseUrl(openCatBusinessBaseURL)
                 .withPathElements(new PathBuilder("/api/v1/checkDoubleRecordFrontend")
                         .build())
-                .withJsonData(JSONB_CONTEXT.marshall(checkDoubleRecordFrontendRequestDTO));
+                .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
 
         Response response = httpClient.execute(httpPost);
 
@@ -191,7 +191,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
 
     @Test
     public void checkDoubleRecordFrontend_Returns_doublerecords() throws JSONBException {
-        CheckDoubleRecordFrontendRequestDTO checkDoubleRecordFrontendRequestDTO = new CheckDoubleRecordFrontendRequestDTO();
+        RecordRequestDTO recordRequestDTO = new RecordRequestDTO();
         String marcRecord = "<record xmlns=\"info:lc/xmlns/marcxchange-v1\">\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
                 "        <subfield code=\"a\">52958858</subfield>\n" +
@@ -204,12 +204,12 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                 "        <subfield code=\"e\">9782843090387</subfield>\n" +
                 "    </datafield>\n" +
                 "</record>";
-        checkDoubleRecordFrontendRequestDTO.setRecord(marcRecord);
+        recordRequestDTO.setRecord(marcRecord);
         final HttpPost httpPost = new HttpPost(httpClient)
                 .withBaseUrl(openCatBusinessBaseURL)
                 .withPathElements(new PathBuilder("/api/v1/checkDoubleRecordFrontend")
                         .build())
-                .withJsonData(JSONB_CONTEXT.marshall(checkDoubleRecordFrontendRequestDTO));
+                .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
 
         DoubleRecordFrontendStatusDTO expected = new DoubleRecordFrontendStatusDTO();
         expected.setStatus("doublerecord");

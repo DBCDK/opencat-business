@@ -5,6 +5,7 @@ import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.utils.RecordContentTransformer;
 import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.commons.jsonb.JSONBException;
+import dk.dbc.opencat.MDCUtil;
 import dk.dbc.opencat.javascript.ScripterEnvironment;
 import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
@@ -25,6 +26,7 @@ import dk.dbc.updateservice.dto.SchemaDTO;
 import dk.dbc.util.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -39,6 +41,8 @@ import javax.xml.bind.JAXBException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
+
+import static dk.dbc.opencat.MDCUtil.MDC_TRACKING_ID_LOG_CONTEXT;
 
 @Stateless
 @Path("/api")
@@ -70,6 +74,7 @@ public class JSRestPortal {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(validateRecordRequestDTO.getTrackingId(), "validateRecord"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("validateRecord incoming request:{}", validateRecordRequestDTO);
             result = (String) scripterEnvironment.callMethod("validateRecord",
@@ -91,6 +96,7 @@ public class JSRestPortal {
                     LOGGER.error("validateRecord error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -102,6 +108,7 @@ public class JSRestPortal {
     public Response checkDoubleRecord(RecordRequestDTO recordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "checkDoubleRecord"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("checkDoubleRecord. Incoming request: {}", recordRequestDTO);
             scripterEnvironment.callMethod("checkDoubleRecord",
@@ -120,6 +127,7 @@ public class JSRestPortal {
                     LOGGER.error("checkDoubleRecord error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -132,6 +140,7 @@ public class JSRestPortal {
         ScripterEnvironment scripterEnvironment = null;
         String result;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "checkDoubleRecordFrontend"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("checkDoubleRecordFrontend. Incoming request: {}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("checkDoubleRecordFrontend",
@@ -152,6 +161,7 @@ public class JSRestPortal {
                     LOGGER.error("checkDoubleRecordFrontend error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -164,6 +174,7 @@ public class JSRestPortal {
         ScripterEnvironment scripterEnvironment = null;
         boolean result;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(checkTemplateRequestDTO.getTrackingId(), "checkTemplate"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("checkTemplate. Incoming request: {}", checkTemplateRequestDTO);
             result = (boolean) scripterEnvironment.callMethod("checkTemplate",
@@ -184,6 +195,7 @@ public class JSRestPortal {
                     LOGGER.error("checkTemplate error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -197,6 +209,7 @@ public class JSRestPortal {
 
         String result;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(doRecategorizationThingsRequestDTO.getTrackingId(), "doRecategorizationThings"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("doRecategorizationThings. Incoming request:{}", doRecategorizationThingsRequestDTO);
             result = (String) scripterEnvironment.callMethod("doRecategorizationThings",
@@ -219,6 +232,7 @@ public class JSRestPortal {
                     LOGGER.error("doRecategorizationThings error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -232,6 +246,7 @@ public class JSRestPortal {
 
         String result;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "recategorizationNoteFieldFactory"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
@@ -251,6 +266,7 @@ public class JSRestPortal {
                     LOGGER.error("recategorizationNoteFieldFactory error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -263,6 +279,7 @@ public class JSRestPortal {
         ScripterEnvironment scripterEnvironment = null;
         boolean result;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(checkTemplateBuildRequestDTO.getTrackingId(), "checkTemplateBuild"));
             scripterEnvironment = scripterPool.take();
             final String name = checkTemplateBuildRequestDTO.getName();
             LOGGER.debug("checkTemplateBuild. Incoming request:{}", checkTemplateBuildRequestDTO);
@@ -282,6 +299,7 @@ public class JSRestPortal {
                     LOGGER.error("checkTemplateBuild error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -296,6 +314,7 @@ public class JSRestPortal {
         String result;
         String marcXml;
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(buildRecordRequestDTO.getTrackingId(), "buildRecord"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("buildRecord. Incoming request:{}", buildRecordRequestDTO);
             if (buildRecordRequestDTO.getRecord() != null) {
@@ -322,6 +341,7 @@ public class JSRestPortal {
                     LOGGER.error("buildRecord error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -336,6 +356,7 @@ public class JSRestPortal {
         String marcXml;
         LOGGER.debug("sortRecord. Incoming request:{}", sortRecordRequestDTO);
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(sortRecordRequestDTO.getTrackingId(), "sortRecord"));
             scripterEnvironment = scripterPool.take();
             result = (String) scripterEnvironment.callMethod("sortRecord",
                     sortRecordRequestDTO.getTemplateProvider(),
@@ -357,6 +378,7 @@ public class JSRestPortal {
                     LOGGER.error("sortRecord error", e);
                 }
             }
+            MDC.clear();
         }
     }
 
@@ -369,6 +391,7 @@ public class JSRestPortal {
         String result;
         LOGGER.debug("getValidateSchemas. Incoming request:{}", getValidateSchemasRequestDTO);
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(getValidateSchemasRequestDTO.getTrackingId(), "getValidateSchemas"));
             scripterEnvironment = scripterPool.take();
             result = (String) scripterEnvironment.callMethod("getValidateSchemas",
                     getValidateSchemasRequestDTO.getTemplateGroup(),
@@ -387,6 +410,7 @@ public class JSRestPortal {
                     LOGGER.error("getValidateSchemas error", e);
                 }
             }
+            MDC.clear();
         }
     }
 

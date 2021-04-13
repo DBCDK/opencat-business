@@ -77,6 +77,7 @@ public class OpencatBusinessWarmup {
 
             final RecordRequestDTO recordRequestDTO = new RecordRequestDTO();
             recordRequestDTO.setRecord(COMMON_RECORD);
+            recordRequestDTO.setTrackingId("warmup");
 
             final HttpPost post = new HttpPost(failSafeHttpClient)
                     .withBaseUrl(BASE_URL)

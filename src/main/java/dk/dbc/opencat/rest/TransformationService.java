@@ -7,6 +7,7 @@ package dk.dbc.opencat.rest;
 
 import dk.dbc.common.records.MarcConverter;
 import dk.dbc.common.records.MarcRecord;
+import dk.dbc.opencat.MDCUtil;
 import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
 import dk.dbc.opencat.transformation.MetaCompassHandler;
@@ -17,6 +18,7 @@ import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import dk.dbc.util.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.w3c.dom.Document;
 
 import javax.annotation.PostConstruct;
@@ -37,6 +39,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+
+import static dk.dbc.opencat.MDCUtil.MDC_TRACKING_ID_LOG_CONTEXT;
 
 @Stateless
 @Path("/api")
@@ -76,6 +80,7 @@ public class TransformationService {
     @Timed
     public Response preProcess(RecordRequestDTO recordRequestDTO) {
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "preProcess"));
             LOGGER.debug("preProcess incoming request: {}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             preProcessingHandler.preProcess(record);
@@ -91,6 +96,8 @@ public class TransformationService {
         } catch (RecordServiceConnectorException | UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
             LOGGER.error("Error in preProcess.", e);
             return Response.serverError().build();
+        } finally {
+            MDC.clear();
         }
     }
 
@@ -101,6 +108,7 @@ public class TransformationService {
     @Timed
     public Response metaCompass(RecordRequestDTO recordRequestDTO) {
         try {
+            MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "metacompass"));
             LOGGER.debug("metaCompass incoming request: {}", recordRequestDTO);
             final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
             final MarcRecord result = metaCompassHandler.enrichMetaCompassRecord(record);
@@ -116,6 +124,8 @@ public class TransformationService {
         } catch (RecordServiceConnectorException | UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
             LOGGER.error("Error in metaCompass.", e);
             return Response.serverError().build();
+        } finally {
+            MDC.clear();
         }
     }
 
