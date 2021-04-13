@@ -13,7 +13,7 @@ public class MDCUtil {
     public static final String MDC_TRACKING_ID_LOG_CONTEXT = "trackingId";
 
     public static String getTrackingId(String trackingId, String functionName) {
-        if (trackingId != null) {
+        if (trackingId != null && !trackingId.isEmpty()) {
             return String.format(TRACKING_ID_FORMAT, trackingId, functionName);
         } else {
             return String.format(TRACKING_ID_FORMAT, UUID.randomUUID(), functionName);
