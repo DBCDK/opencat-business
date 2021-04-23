@@ -755,8 +755,8 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.66.htm",
             "subfields":{
                 "a": "DanMarc2.fields.559.subfields.a",
-                "u": "DanMarc2.fields.558.subfields.u",
-                "y": "DanMarc2.fields.558.subfields.y"
+                "u": "DanMarc2.fields.559.subfields.u",
+                "y": "DanMarc2.fields.559.subfields.y"
             }
         },
         "563": "DanMarc2.fields.563",
