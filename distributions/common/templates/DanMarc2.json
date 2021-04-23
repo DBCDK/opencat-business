@@ -1863,6 +1863,10 @@
                 "c":{
                     "repeatable":false
                 },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                },
                 "2":{
                     "repeatable":false
                 }
@@ -1886,6 +1890,10 @@
                 },
                 "y":{
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1895,6 +1903,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1907,6 +1919,10 @@
                 "u":{},
                 "y":{
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1916,6 +1932,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1925,6 +1945,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1934,6 +1958,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1943,6 +1971,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -1954,7 +1986,11 @@
 				},
                 "b":{
                     "repeatable":false
-				}
+				},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "512":{
@@ -1978,7 +2014,10 @@
                 "b":{},
                 "u":{},
                 "y":{},
-                "0":{}
+                "0":{
+                "repeatable": false,
+                "values": [ "pro" ]
+            }
             },
 			"rules": [
                 {
@@ -1995,7 +2034,11 @@
                 "e":{},
                 "f":{},
                 "i":{},
-                "j":{}
+                "j":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "517":{
@@ -2012,7 +2055,11 @@
 				},
                 "d":{
                     "repeatable":false
-				}
+				},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "518":{
@@ -2022,7 +2069,11 @@
                     "repeatable":false
 				},
                 "u":{},
-                "y":{}
+                "y":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "520":{
@@ -2070,6 +2121,10 @@
                             "type":"SubfieldRules.checkISSN"
                         }
 		            ]
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             },
 	        "rules": [
@@ -2104,7 +2159,11 @@
 				},
                 "x":{
                     "repeatable":false
-				}
+				},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "523":{
@@ -2117,7 +2176,11 @@
                     "repeatable":false
                 },
                 "u":{},
-                "y":{}
+                "y":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "525":{
@@ -2126,6 +2189,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -2171,6 +2238,10 @@
                 "q":{},
                 "s":{
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
 
             },
@@ -2204,7 +2275,11 @@
                     "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 },
                 "u":{},
-                "y":{}
+                "y":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "530":{
@@ -2228,7 +2303,11 @@
                 "b":{},
                 "u":{},
                 "y":{},
-                "z":{}
+                "z":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             },
             "rules": [
                 {
@@ -2242,6 +2321,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -2252,7 +2335,11 @@
                     "repeatable":false
                 },
                 "u":{},
-                "y":{}
+                "y":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "534":{
@@ -2271,7 +2358,11 @@
                 "x":{},
                 "b":{},
                 "u":{},
-                "y":{}
+                "y":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             },
             "rules": [
                 {
@@ -2308,7 +2399,11 @@
                 "s":{
                     "repeatable":false
 				},
-                "t":{}
+                "t":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "539":{
@@ -2317,6 +2412,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -2334,6 +2433,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -2343,6 +2446,10 @@
                 "a":{
                     "mandatory":true,
                     "repeatable":false
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -2380,6 +2487,10 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type":"SubfieldRules.checkISSN" } ]
+                },
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
                 }
             }
         },
@@ -2419,7 +2530,11 @@
                 "r":{
                 	"repeatable":false,
                     "rules":[ { "type":"SubfieldRules.checkISBN13" } ]
-				}
+				},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "559":{
@@ -2429,7 +2544,11 @@
                     "repeatable":false
                 },
                 "u":{},
-                "y":{}
+                "y":{},
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             }
         },
         "560":{
