@@ -461,7 +461,11 @@
                 "x": "DanMarc2.fields.512.subfields.x",
                 "b": "DanMarc2.fields.512.subfields.b",
                 "u": "DanMarc2.fields.512.subfields.u",
-                "y": "DanMarc2.fields.512.subfields.y"
+                "y": "DanMarc2.fields.512.subfields.y",
+                "0":{
+                    "repeatable": false,
+                    "values": [ "pro" ]
+                }
             },
 			"rules": [
                 {
