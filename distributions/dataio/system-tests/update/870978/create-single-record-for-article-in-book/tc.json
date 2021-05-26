@@ -1,0 +1,59 @@
+[
+    {
+        "name": "870978-create-single-record-for-article-in-book",
+        "description": "Testcase to verify creation of a 870978 record for article in a book is possible",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbcartanm",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "hostpub-doc-970.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enqueued": false,
+                    "enrichments": [ "hostpub-doc-970-enrichment.marc" ]
+                },
+                {
+                    "record": "hostpub-doc-970-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enqueued": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [                ],
+                "rawrepo": [
+                    {
+                        "record": "hostpub-doc-970.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "hostpub-doc-970-enrichment.marc" ]
+                    },
+                    {
+                        "record": "hostpub-doc-970-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "rawrepo-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
