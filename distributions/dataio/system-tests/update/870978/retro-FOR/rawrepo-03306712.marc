@@ -1,0 +1,28 @@
+001 00 *a 03306712 *b 870970 *c 20200612103943 *d 19830420 *f a
+004 00 *r c *a e
+008 00 *t p *u d *a 1914 *z 1992 *b dk *c b *e 2 *h p *i b *l mul *v 0
+009 00 *a a *g xx
+022 00 *a 0040-7135 *c hf.
+032 00 *a DPF197680 *x SFD198716 *a DBÅ199344 *x DAT990036
+035 00 *a (DK-870970)03306712
+035 00 *a (DK-800010)99122899591405763
+041 00 *a dan *a eng
+082 00 *a 633
+210 00 *a Tidsskr. planteavl
+245 00 *a Tidsskrift for planteavl *p Danish journal of plant and soil science
+255 00 *a 21 Bind (1914)-bind 96, nr. 5 (1992)
+260 00 *a Lyngby *b Statens Planteavlsforsøg *c 1914-1992
+500 00 *a 4-6 numre årligt
+505 00 *& 1 *a Tidsskrift
+508 00 *a Bidrag på dansk og engelsk
+539 00 *a Bind 96, nr. 5 (1992)
+559 00 *a Tidligere med undertitel: organ for Statens Forsøgsvirksomhed i Plante
+    kultur
+559 00 *a Tidligere udgivet: Kbh. : Statens Planteavlsudvalg
+559 00 *a Statens Forsøgsvirksomhed i Plantekultur
+652 00 *m 63.3
+710 00 *a Statens Planteavlsudvalg
+710 00 *a Statens Planteavlsforsøg
+745 00 *k Danish journal of plant and soil science
+860 00 *t Tidsskrift for Landbrugets Planteavl *z 0909-3516
+996 00 *a 800010
