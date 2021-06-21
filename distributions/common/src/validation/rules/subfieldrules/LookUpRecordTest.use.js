@@ -1,4 +1,3 @@
-
 use("RawRepoClient");
 use("UnitTest");
 use("Marc");
@@ -26,6 +25,30 @@ UnitTest.addFixture("LookUpRecord", function () {
     field001 = new Field("001", "00");
     field001.append(new Subfield("a", "a1Val"));
     field001.append(new Subfield("b", "400800"));
+    trueMarcRec.append(field001);
+    field004 = new Field("004", "00");
+    field004.append(new Subfield("a", "a1"));
+    field004.append(new Subfield("a", "a2"));
+    field004.append(new Subfield("b", "b1"));
+    trueMarcRec.append(field004);
+    RawRepoClientCore.addRecord(trueMarcRec);
+
+    trueMarcRec = new Record();
+    field001 = new Field("001", "00");
+    field001.append(new Subfield("a", "a2Val"));
+    field001.append(new Subfield("b", "870971"));
+    trueMarcRec.append(field001);
+    field004 = new Field("004", "00");
+    field004.append(new Subfield("a", "a1"));
+    field004.append(new Subfield("a", "a2"));
+    field004.append(new Subfield("b", "b1"));
+    trueMarcRec.append(field004);
+    RawRepoClientCore.addRecord(trueMarcRec);
+
+    trueMarcRec = new Record();
+    field001 = new Field("001", "00");
+    field001.append(new Subfield("a", "a3Val"));
+    field001.append(new Subfield("b", "870978"));
     trueMarcRec.append(field001);
     field004 = new Field("004", "00");
     field004.append(new Subfield("a", "a1"));
@@ -283,6 +306,162 @@ UnitTest.addFixture("LookUpRecord", function () {
     errorMessage = 'Params attributten requiredFieldAndSubfield er ikke af typen string';
     err = [{type: "ERROR", urlForDocumentation: "", message: errorMessage}];
     Assert.equalValue("med valid allowedSubfieldValues men ikke valid requiredFieldAndSubfield type", LookUpRecord.validateSubfield(record, field, subfield, params), err);
+
+
+    params = {
+        "agencyId": [
+            {
+                "agencyId": "870970",
+                "fieldAndSubfield": "014x",
+                "matchValues": ["ANM"]
+            }
+        ]
+    };
+
+    record = {
+        fields: [
+            {
+                name: '001', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "12345678"
+                    },
+                    {
+                        name: "b", value: "8970970"
+                    }
+                ]
+            },
+            {
+                name: '014', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "a1Val"
+                    },
+                    {
+                        name: "x", value: "ANM"
+                    }
+                ]
+            }
+        ]
+    };
+    field = record.fields[1];
+    subfield = field.subfields[0];
+
+    Assert.equalValue("870970 ANM", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+
+    record = {
+        fields: [
+            {
+                name: '001', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "12345678"
+                    },
+                    {
+                        name: "b", value: "870971"
+                    }
+                ]
+            },
+            {
+                name: '014', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "a1Val"
+                    },
+                    {
+                        name: "x", value: "ANM"
+                    }
+                ]
+            }
+        ]
+    };
+    field = record.fields[1];
+    subfield = field.subfields[0];
+
+    Assert.equalValue("870971 ANM", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+
+    record = {
+        fields: [
+            {
+                name: '001', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "12345678"
+                    },
+                    {
+                        name: "b", value: "870971"
+                    }
+                ]
+            },
+            {
+                name: '014', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "a2Val"
+                    },
+                    {
+                        name: "x", value: "DEB"
+                    }
+                ]
+            }
+        ]
+    };
+    field = record.fields[1];
+    subfield = field.subfields[0];
+
+    Assert.equalValue("870971 DEB", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+
+    record = {
+        fields: [
+            {
+                name: '001', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "12345678"
+                    },
+                    {
+                        name: "b", value: "870971"
+                    }
+                ]
+            },
+            {
+                name: '014', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "a1Val"
+                    },
+                    {
+                        name: "x", value: "ANM"
+                    }
+                ]
+            }
+        ]
+    };
+    field = record.fields[1];
+    subfield = field.subfields[0];
+
+    Assert.equalValue("870978 ANM", LookUpRecord.validateSubfield(record, field, subfield, params), []);
+
+    record = {
+        fields: [
+            {
+                name: '001', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "12345678"
+                    },
+                    {
+                        name: "b", value: "870978"
+                    }
+                ]
+            },
+            {
+                name: '014', indicator: '00', subfields: [
+                    {
+                        name: "a", value: "a3Val"
+                    },
+                    {
+                        name: "x", value: "DEB"
+                    }
+                ]
+            }
+        ]
+    };
+    field = record.fields[1];
+    subfield = field.subfields[0];
+
+    Assert.equalValue("870978 DEB", LookUpRecord.validateSubfield(record, field, subfield, params), []);
 
     RawRepoClientCore.clear();
 });
