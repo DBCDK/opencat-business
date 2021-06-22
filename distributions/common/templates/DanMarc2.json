@@ -4099,8 +4099,10 @@
         "770":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.88.htm",
             "subfields":{
+                "\u00E5":{
+                    "repeatable":false
+                },
                 "a":{
-                    "mandatory":true,
                     "repeatable":false
                 },
                 "h":{
@@ -4143,6 +4145,9 @@
         "780":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.89.htm",
             "subfields":{
+                "\u00E5":{
+                    "repeatable":false
+                },
                 "a":{
 					"repeatable": false
 				},
