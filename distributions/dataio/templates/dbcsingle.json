@@ -1397,7 +1397,7 @@
                 "&": {
                     "repeatable": false
                 },
-                "\u00E5":{
+                "\u00E5": {
                     "mandatory":true,
                     "repeatable":false
                 },

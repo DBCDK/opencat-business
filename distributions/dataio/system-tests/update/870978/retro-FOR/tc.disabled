@@ -1,0 +1,102 @@
+[
+  {
+    "name": "870978-retro-FOR",
+    "description": "Tester at retroposter kan have 014 fortsættelse uden at der dannes relationer ",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcartanm",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-77598383.marc",
+          "type": "ARTICLE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-77598383-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-77598383-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        },
+        {
+          "record": "rawrepo-03306712.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": false,
+          "enrichments": [
+            "rawrepo-03306712-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-03306712-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-77598383.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-77598383-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-77598383-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-03306712.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-03306712-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-03306712-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-retro.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-retro-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-retro-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

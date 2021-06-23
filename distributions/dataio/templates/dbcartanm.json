@@ -37,7 +37,7 @@
                         {
                             "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
                             "params": {
-                                "fields": [ "654" ],
+                                "fields": [ "559", "654" ],
                                 "values": [ "870978" ]
                             }
                         }
@@ -144,11 +144,6 @@
                                         "agencyId": "870970",
                                         "fieldAndSubfield": "014x",
                                         "matchValues": ["ANM"]
-                                    },
-                                    {
-                                        "agencyId": "870971",
-                                        "fieldAndSubfield": "014x",
-                                        "matchValues": ["DEB", "FOR", "SMS"]
                                     }
                                 ]
                             }
@@ -410,6 +405,7 @@
         },
         "557": "DanMarc2.fields.557",
         "558": "DanMarc2.fields.558",
+        "559": "DanMarc2.fields.559",
         "600": "dbcsingle.fields.600",
         "610":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.6e.htm",

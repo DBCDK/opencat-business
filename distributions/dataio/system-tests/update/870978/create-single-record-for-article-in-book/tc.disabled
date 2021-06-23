@@ -48,7 +48,16 @@
                     },
                     {
                         "record": "rawrepo-common.marc",
-                        "type": "MARCXCHANGE",
+                        "type": "ARTICLE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-enrichment.marc",
+                        "type": "ENRICHMENT",
                         "deleted": false,
                         "enqueued": true
                     }
