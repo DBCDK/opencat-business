@@ -1,6 +1,7 @@
 {
   "libraryToTemplateGroups": {
     "dbc":                  {"templateGroups": ["DBC", "FFU"]},
+    "sbci":                 {"templateGroups":  ["SBCI"]},
     "fbs":                  {"templateGroups": ["FBS"]},
     "fbslokal":             {"templateGroups": ["FBSlokal"]},
     "ffu":                  {"templateGroups": ["FFU"]},
@@ -31,6 +32,14 @@
         "delete",
         "invalid",
         "metakompas"
+      ],
+      "folder": "dataio"
+    },
+    "SBCI": {
+      "templates": [
+        "BCIbog",
+        "BCIbogbind",
+        "BCIboghoved"
       ],
       "folder": "dataio"
     },
