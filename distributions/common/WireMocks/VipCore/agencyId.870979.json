@@ -1,7 +1,7 @@
 {
   "libraryRules": [
     {
-      "agencyId": "870970",
+      "agencyId": "870979",
       "libraryRule": [
         {
           "name": "create_enrichments",
@@ -65,7 +65,7 @@
         },
         {
           "name": "worldcat_synchronize",
-          "bool": true
+          "bool": false
         },
         {
           "name": "worldcat_resource_sharing",
