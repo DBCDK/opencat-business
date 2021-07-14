@@ -30,21 +30,25 @@
                 },
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
-                "f": "DanMarc2.fields.001.subfields.f",
+                "f": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "b" ]
+                }
             }
         },
         "004": {
             "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt004.htm",
             "mandatory": true,
             "repeatable": false,
-            "sorting": "rax",
+            "sorting": "rx",
             "subfields": {
                 "r": {
                     "mandatory": true,
                     "values": [ "n", "d" ]
                 },
                 "x": {
-                    "mandatory": true,
+                    "repeatable": false,
                     "values": [ "u" ]
                 }
             }
@@ -58,564 +62,152 @@
                 "t": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "h" ]
+                    "values": [ "x", "u" ]
                 },
                 "v": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "0", "4", "9" ]
+                    "values": [ "0" ]
                 }
             }
         },
-        "040":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt040.htm",
+        "021": {
+            "subfields": {
+                "a": {}
+            }
+        },
+        "260":{
+            "repeatable": false,
+            "sorting": "xb",
+            "subfields":{
+                "x": {
+                    "repeatable": false,
+                    "values": [ "1" ]
+                },
+                "b": {
+                    "repeatable": false
+                }
+            }
+        },
+        "261":{
             "repeatable": false,
             "subfields":{
-                "b": {
-                    "repeatable": false,
-                    "values": [ "dan" ]
-                },
-                "f": {
-                    "repeatable": false,
-                    "values": [ "DBC" ]
-                }
-            }
-        },
-        "083":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt083.htm",
-            "subfields":{
-                "a": {
-                    "mandatory": true,
-                    "repeatable": false
-                },
-                "9": {
-                    "repeatable": false,
-                    "values": [ "DK5" ]
-                }
-            }
-        },
-        "110":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt110.htm",
-            "repeatable": false,
-            "sorting": "saceikj",
-            "subfields": {
-                "s": {
-                    "repeatable": false
-                },
                 "a": {
                     "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "c": {},
-                "i": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "j": {
-                    "repeatable": false
                 }
             }
         },
-        "165":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt165.htm",
+        "262": {
             "repeatable": false,
             "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "q": {
-                    "repeatable": false
-                },
-                "p": {
-                    "repeatable": false
-                },
-                "m": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "j": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "l": {
-                    "repeatable": false
-                },
-                "s": {
-                    "repeatable": false
-                },
-                "r": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                },
-                "n": {
-                    "repeatable": false
-                }
+                "d": {},
+                "a": {}
             }
         },
-        "166":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt166.htm",
+        "263":{
             "repeatable": false,
             "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                },
-                "c": {
-                    "repeatable": false
-                },
-                "d": {
-                    "repeatable": false
-                },
-                "f": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "s": {
-                    "repeatable": false
-                },
-                "r": {
-                    "repeatable": false
-                },
-                "q": {
-                    "repeatable": false
-                },
-                "m": {
-                    "repeatable": false
-                },
-                "n": {
-                    "repeatable": false
-                },
-                "p": {
-                    "repeatable": false
-                },
-                "l": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "o": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                }
-            }
-        },
-        "410":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt410.htm",
-            "subfields": {
-                "s": {
-                    "repeatable": false
-                },
-                "a": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "c": {},
-                "h": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "j": {
-                    "repeatable": false
-                },
-                "w": {
-                    "repeatable": false
-                },
-                "x": {
-                    "repeatable": false
-                }
-            }
-        },
-        "465":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt465.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "q": {
-                    "repeatable": false
-                },
-                "p": {
-                    "repeatable": false
-                },
-                "m": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "j": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "l": {
-                    "repeatable": false
-                },
-                "s": {
-                    "repeatable": false
-                },
-                "r": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                },
-                "n": {
-                    "repeatable": false
-                },
-                "x": {
-                    "repeatable": false
-                }
-            }
-        },
-        "466":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt466.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                },
-                "c": {
-                    "repeatable": false
-                },
-                "d": {
-                    "repeatable": false
-                },
-                "f": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "s": {
-                    "repeatable": false
-                },
-                "r": {
-                    "repeatable": false
-                },
-                "q": {
-                    "repeatable": false
-                },
-                "m": {
-                    "repeatable": false
-                },
-                "n": {
-                    "repeatable": false
-                },
-                "p": {
-                    "repeatable": false
-                },
-                "l": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "o": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                },
-                "w": {
-                    "repeatable": false
-                },
-                "x": {
-                    "repeatable": false
-                }
-            }
-        },
-        "510":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt510.htm",
-            "subfields": {
-                "s": {
-                    "repeatable": false
-                },
-                "a": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "c": {},
-                "h": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "j": {
-                    "repeatable": false
-                },
-                "w": {
-                    "repeatable": false
-                },
-                "x": {
-                    "repeatable": false
-                }
-            }
-        },
-        "565":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt565.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "q": {
-                    "repeatable": false
-                },
-                "p": {
-                    "repeatable": false
-                },
-                "m": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "j": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "l": {
-                    "repeatable": false
-                },
-                "s": {
-                    "repeatable": false
-                },
-                "r": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                },
-                "n": {
-                    "repeatable": false
-                },
-                "x": {
-                    "repeatable": false
-                }
-            }
-        },
-        "566":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt566.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                },
-                "c": {
-                    "repeatable": false
-                },
-                "d": {
-                    "repeatable": false
-                },
-                "f": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "s": {
-                    "repeatable": false
-                },
-                "r": {
-                    "repeatable": false
-                },
-                "q": {
-                    "repeatable": false
-                },
-                "m": {
-                    "repeatable": false
-                },
-                "n": {
-                    "repeatable": false
-                },
-                "p": {
-                    "repeatable": false
-                },
-                "l": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "o": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                },
-                "w": {
-                    "repeatable": false
-                },
-                "x": {
-                    "repeatable": false
-                }
-            }
-        },
-        "670":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt670.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "b": {
-                    "repeatable": false
-                },
-                "u": {
-                    "repeatable": false
-                },
-                "y": {
-                    "repeatable": false
-                },
-                "2": {
-                    "repeatable": false
-                }
-            }
-        },
-        "678":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt678.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "f": {},
-                "l": {
-                    "values": "Lister.fields.codes.subfields.language.current.values"
-                },
-                "n": {
-                    "values": "Lister.fields.codes.subfields.country.general.values"
-                },
                 "g": {},
-                "u": {},
+                "d": {},
+                "t": {},
                 "y": {},
-                "2": {
-                    "repeatable": false
-                }
+                "z": {}
             }
         },
-        "680":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt680.htm",
+        "265":{
+            "repeatable": false,
+            "subfields": {
+                "i": {},
+                "g": {},
+                "d": {}
+            }
+        },
+        "266":{
+            "repeatable": false,
+            "subfields": {
+                "t": {},
+                "y": {},
+                "z": {},
+                "d": {},
+                "g": {}
+            }
+        },
+        "269":{
+            "repeatable": false,
             "subfields": {
                 "a": {
+                    "repeatable": false,
+                    "values": [
+                        "1"
+                    ]
+                },
+                "d": {}
+            }
+        },
+        // TODO delfelt 270*b skal der kodes for datoformater
+        "270":{
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "b": {
                     "repeatable": false
                 },
-                "i": {
+                "c": {
                     "repeatable": false
                 },
-                "p": {
-                    "repeatable": false
-                },
+                "d": {},
+                "z": {},
+                "u": {}
+            }
+        },
+        // TODO delfelt 271*b skal der kodes for datoformater
+        // TODO delfelt 271*f skal der kodes for antal cifre
+        "271":{
+            "subfields": {
                 "t": {
                     "repeatable": false
                 },
-                "2": {
+                "f": {
                     "repeatable": false
+                },
+                "a": {
+                    "repeatable": false,
+                    "values": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "b": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "d": {},
+                "z": {},
+                "u": {}
+            }
+        },
+        "272": {
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [ "J", "N" ]
                 }
+            }
+        },
+        "760": {
+            "subfields": {
+                "a": {}
             }
         },
         "996": {
@@ -631,15 +223,18 @@
         },
         "d08": {
             "subfields": {
-                "a": {},
-                "b": {},
-                "c": {},
                 "o": {},
                 "k": {},
                 "r": {}
             }
         },
         "d09": {
+            "subfields": {
+                "z": {}
+            }
+        },
+        "f63": {
+            "repeatable": false,
             "subfields": {
                 "z": {}
             }
@@ -657,31 +252,6 @@
                         }
                     ]
                 }
-            }
-        },
-        "x08": {
-            "repeatable": false,
-            "subfields": {
-                "p": {
-                    "values": [ "f", "s", "m" ]
-                }
-            }
-        },
-        "x09": {
-            "subfields": {
-                "o": {},
-                "p": {},
-                "q": {},
-                "r": {}
-            }
-        },
-        "z98": {
-            "repeatable": false,
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                }
-
             }
         },
         "z99": {
