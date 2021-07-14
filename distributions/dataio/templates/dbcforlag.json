@@ -39,13 +39,13 @@
             "repeatable": false,
             "sorting": "rax",
             "subfields": {
-                "r": "{
-                "mandatory": true,
-                "values": [ "n", "d" ]
-            },
+                "r": {
+                    "mandatory": true,
+                    "values": [ "n", "d" ]
+                },
                 "x": {
                     "mandatory": true,
-                    "values": [ "m" ]
+                    "values": [ "u" ]
                 }
             }
         },
