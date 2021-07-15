@@ -62,7 +62,7 @@
                 "t": {
                     "mandatory": true,
                     "repeatable": false,
-                    "values": [ "x", "u" ]
+                    "values": [ "xu" ]
                 },
                 "v": {
                     "mandatory": true,
@@ -222,7 +222,8 @@
             "subfields": {
                 "o": {},
                 "k": {},
-                "r": {}
+                "r": {},
+                "a": {}
             }
         },
         "d09": {
