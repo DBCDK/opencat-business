@@ -1,0 +1,263 @@
+{
+    "template": {
+        "description": "Skabelon til forlagsposter, submitter: 190008",
+        "features": [ "auth_root" ]
+    },
+    "defaults":{
+        "field":{
+            "indicator":"00",
+            "mandatory":false,
+            "repeatable":true
+        },
+        "subfield":{
+            "mandatory":false,
+            "repeatable":true
+        }
+    },
+    "rules":[],
+    "fields": {
+        "001": {
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt001.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdf",
+            "subfields": {
+                "a": "dbcsingle.fields.001.subfields.a",
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+					"values": [ "190008" ]
+                },
+                "c": "DanMarc2.fields.001.subfields.c",
+                "d": "DanMarc2.fields.001.subfields.d",
+                "f": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "b" ]
+                }
+            }
+        },
+        "004": {
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt004.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "rx",
+            "subfields": {
+                "r": {
+                    "mandatory": true,
+                    "values": [ "n", "d" ]
+                },
+                "x": {
+                    "repeatable": false,
+                    "values": [ "u" ]
+                }
+            }
+        },
+        "008": {
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt008.htm",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "tv",
+            "subfields": {
+                "t": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "x", "u" ]
+                },
+                "v": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "0" ]
+                }
+            }
+        },
+        "021": {
+            "subfields": {
+                "a": {}
+            }
+        },
+        "260":{
+            "repeatable": false,
+            "sorting": "xb",
+            "subfields":{
+                "x": {
+                    "repeatable": false,
+                    "values": [ "1" ]
+                },
+                "b": {
+                    "repeatable": false
+                }
+            }
+        },
+        "261":{
+            "repeatable": false,
+            "subfields":{
+                "a": {
+                    "repeatable": false
+                }
+            }
+        },
+        "262": {
+            "repeatable": false,
+            "subfields": {
+                "d": {},
+                "a": {}
+            }
+        },
+        "263":{
+            "repeatable": false,
+            "subfields": {
+                "g": {},
+                "d": {},
+                "t": {},
+                "y": {},
+                "z": {}
+            }
+        },
+        "265":{
+            "repeatable": false,
+            "subfields": {
+                "i": {},
+                "g": {},
+                "d": {}
+            }
+        },
+        "266":{
+            "repeatable": false,
+            "subfields": {
+                "t": {},
+                "y": {},
+                "z": {},
+                "d": {},
+                "g": {}
+            }
+        },
+        "269":{
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [
+                        "1"
+                    ]
+                },
+                "d": {}
+            }
+        },
+        "270":{
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "b": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "d": {},
+                "z": {},
+                "u": {}
+            }
+        },
+        "271":{
+            "subfields": {
+                "t": {
+                    "repeatable": false
+                },
+                "f": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false,
+                    "values": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "b": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "d": {},
+                "z": {},
+                "u": {}
+            }
+        },
+        "272": {
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [ "J", "N" ]
+                }
+            }
+        },
+        "760": {
+            "subfields": {
+                "a": {}
+            }
+        },
+        "996": {
+            "mandatory": true,
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "DBC" ]
+                }
+            }
+        },
+        "d08": {
+            "subfields": {
+                "o": {},
+                "k": {},
+                "r": {}
+            }
+        },
+        "d09": {
+            "subfields": {
+                "z": {}
+            }
+        },
+        "f63": {
+            "repeatable": false,
+            "subfields": {
+                "z": {}
+            }
+        },
+        "n55":{
+            "url":"",
+            "subfields":{
+                "a":{
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "z99": {
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                }
+            }
+        }
+    }
+}
