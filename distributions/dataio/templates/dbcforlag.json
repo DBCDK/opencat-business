@@ -144,7 +144,6 @@
                 "d": {}
             }
         },
-        // TODO delfelt 270*b skal der kodes for datoformater
         "270":{
             "subfields": {
                 "a": {
@@ -167,8 +166,6 @@
                 "u": {}
             }
         },
-        // TODO delfelt 271*b skal der kodes for datoformater
-        // TODO delfelt 271*f skal der kodes for antal cifre
         "271":{
             "subfields": {
                 "t": {
