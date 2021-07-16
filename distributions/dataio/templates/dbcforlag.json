@@ -232,7 +232,6 @@
             }
         },
         "f63": {
-            "repeatable": false,
             "subfields": {
                 "z": {}
             }
