@@ -163,7 +163,7 @@
           },
           {
             "record": "expected-littolk-common-deleted.marc",
-            "type": "MARCXCHANGE",
+            "type": "LITANALYSIS",
             "deleted": true,
             "enqueued": true
           },
@@ -246,7 +246,7 @@
           },
           {
             "record": "expected-littolk-common-deleted.marc",
-            "type": "MARCXCHANGE",
+            "type": "LITANALYSIS",
             "deleted": true,
             "enqueued": true
           },
