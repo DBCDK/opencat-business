@@ -40,18 +40,6 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
                 "    \"schemaInfo\": \"\"\n" +
                 "  },\n" +
                 "  {\n" +
-                "    \"schemaName\": \"BCIbog\",\n" +
-                "    \"schemaInfo\": \"Skabelon til katalogisering af fysiske bøger - enkeltstående post.\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"schemaName\": \"BCIbogbind\",\n" +
-                "    \"schemaInfo\": \"Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.\"\n" +
-                "  },\n" +
-                "  {\n" +
-                "    \"schemaName\": \"BCIboghoved\",\n" +
-                "    \"schemaInfo\": \"Skabelon til katalogisering af flerbindsværk af fysiske bøger - hovedpost.\"\n" +
-                "  },\n" +
-                "  {\n" +
                 "    \"schemaName\": \"delete\",\n" +
                 "    \"schemaInfo\": \"Skabelon til sletteposter - alle post- og materialetyper.\"\n" +
                 "  },\n" +
