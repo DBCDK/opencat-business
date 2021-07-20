@@ -15,7 +15,7 @@
       "rawrepo": [
         {
           "record": "rawrepo-dbc.marc",
-          "type": "MARCXCHANGE",
+          "type": "AUTHORITY",
           "deleted": false,
           "enrichments": [
             "rawrepo-dbc-enrichment.marc"
@@ -35,7 +35,7 @@
         "rawrepo": [
           {
             "record": "expected-dbc.marc",
-            "type": "MARCXCHANGE",
+            "type": "AUTHORITY",
             "deleted": true,
             "enqueued": true
           },
