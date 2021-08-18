@@ -15,11 +15,9 @@
       "rawrepo": [
         {
           "record": "rawrepo-forlag-common.marc",
-          "type": "SIMPLE",
+          "type": "MARCXCHANGE",
           "deleted": false,
-          "enrichments": [
-            "rawrepo-forlag-enrichment.marc"
-          ]
+          "enrichments": []
         },
         {
           "record": "rawrepo-forlag-enrichment.marc",
@@ -38,10 +36,7 @@
             "record": "expected-forlag-common.marc",
             "type": "MARCXCHANGE",
             "deleted": true,
-            "enqueued": true,
-            "enrichments": [
-              "expected-forlag-enrichment.marc"
-            ]
+            "enqueued": true
           },
           {
             "record": "expected-forlag-enrichment.marc",
