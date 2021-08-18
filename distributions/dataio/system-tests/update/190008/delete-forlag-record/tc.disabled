@@ -36,7 +36,7 @@
         "rawrepo": [
           {
             "record": "expected-forlag-common.marc",
-            "type": "SIMPLE",
+            "type": "MARCXCHANGE",
             "deleted": true,
             "enqueued": true,
             "enrichments": [

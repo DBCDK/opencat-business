@@ -22,7 +22,7 @@
         "rawrepo": [
           {
             "record": "expected-forlag-common-1.marc",
-            "type": "SIMPLE",
+            "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": true,
             "enrichments": [
