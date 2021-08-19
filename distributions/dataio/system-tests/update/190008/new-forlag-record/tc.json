@@ -11,10 +11,6 @@
       "templateName": "dbcforlag",
       "record": "request-1.marc"
     },
-    "setup": {
-      "rawrepo": [
-      ]
-    },
     "expected": {
       "validation": {},
       "update": {
