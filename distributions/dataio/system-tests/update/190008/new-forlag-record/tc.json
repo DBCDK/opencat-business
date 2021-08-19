@@ -1,0 +1,38 @@
+[
+  {
+    "name": "190008-new-forlag-record-1",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcforlag",
+      "record": "request-1.marc"
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-forlag-common-1.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-forlag-enrichment-1.marc"
+            ]
+          },
+          {
+            "record": "expected-forlag-enrichment-1.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

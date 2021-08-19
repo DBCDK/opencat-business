@@ -1,0 +1,13 @@
+001 00 *a 132052182 *b 190008 *c 20210811141315 *d 19830720 *f b
+004 00 *r n *x u
+008 00 *t xu *v 0
+021 00 *a 429
+021 00 *a 11
+260 00 *x 1 *b Grafisk Ishus
+261 00 *a Grafisk Forlag, Gad & Grafisk I/S
+262 00 *d Postboks 2152 *a 1016 København K
+263 00 *t 33 91 17 46
+265 00 *i Eksp: *g DBK
+266 00 *t 32 69 77 88 *y dbk@@dbk.dk *z http://www.dbk.dk
+269 00 *a 1 *d Forlaget ophørt. Restoplaget overtaget af Alinea
+996 00 *a DBC

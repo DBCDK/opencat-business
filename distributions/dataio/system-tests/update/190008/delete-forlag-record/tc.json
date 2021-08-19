@@ -1,0 +1,51 @@
+[
+  {
+    "name": "190008-delete-forlag-record",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcforlag",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-forlag-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": []
+        },
+        {
+          "record": "rawrepo-forlag-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-forlag-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true,
+            "enqueued": true
+          },
+          {
+            "record": "expected-forlag-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": true,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

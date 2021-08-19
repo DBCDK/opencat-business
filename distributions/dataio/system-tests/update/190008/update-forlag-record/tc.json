@@ -1,0 +1,56 @@
+[
+  {
+    "name": "190008-update-forlag-record",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcforlag",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-forlag-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-forlag-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-forlag-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-forlag-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-forlag-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-forlag-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
