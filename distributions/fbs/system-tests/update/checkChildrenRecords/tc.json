@@ -55,7 +55,7 @@
                         "ordinalPositionOfField": 4,
                         "ordinalPositionOfSubfield": null,
                         "ordinalPositionInSubfield": null,
-                        "message": "Felt '041' må kun anvendes i én post i et flerbindsværk"
+                        "message": "Felt '041' må kun anvendes på enten hovedpost eller bindpost(er) i et flerbindsværk."
                     }
                 ]
             }

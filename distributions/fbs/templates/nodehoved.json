@@ -245,7 +245,12 @@
                 "p": "DanMarc2.fields.041.subfields.p",
                 "s": "DanMarc2.fields.041.subfields.s",
                 "u": "DanMarc2.fields.041.subfields.u"
-            }
+            },
+            "rules": [
+                {
+                    "type": "FieldRules.checkFieldNotUsedInChildrenRecords"
+                }
+            ]
         },
         "100":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.33.htm",
