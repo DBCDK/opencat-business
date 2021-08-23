@@ -27,14 +27,33 @@ var CheckFieldNotUsedInParentRecords = function () {
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
             var recordLevel = marcRecord.getValue(/004/, /a/);
+
+            var context = params.context;
+
+            //get parent record
+            var parent;
+
+            if (recordLevel === "h" ){
+                parent = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
+                if (parent === undefined) {
+                    parent = RawRepoClient.getRelationsChildren(recId, libNo);
+                    ContextUtil.setValue(context, parent, 'getRelationsChildren', recId, libNo);
+                }
+
+            }
+
+            if (parent.length === 0) {
+                Log.trace("Returns []: No parent record found.");
+                return [];
+            }
+
             // There can be no interesting records below single and volume records
             // Though, technically we only look at levels head and section
             if (!(recordLevel === "h" || recordLevel === "s")) return [];
 
-            var context = params.context;
-
             var children;
 
+            // get child records
             children = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
             if (children === undefined) {
                 children = RawRepoClient.getRelationsChildren(recId, libNo);
