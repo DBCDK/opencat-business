@@ -10,7 +10,8 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     var bundle = ResourceBundleFactory.getBundle(CheckFieldNotUsedInParentRecords.__BUNDLE_NAME);
 
-    // Case: Not volume record.
+
+    // Test 0 - Case: Not volume record.
     RawRepoClientCore.clear();
 
     var marcRecord = new Record();
@@ -22,27 +23,11 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     var record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
     var field = record.fields[2];
-    var subfield = field.subfields[0];
-    Assert.equalValue("Not volume record", callRule(record, field, subfield), []);
+    Assert.equalValue("Not volume record", callRule(record, field), []);
 
-    // Case: Field used in parent record, no child records.
+
+    // Test 1 - Case: Field used in parent record, no child records.
     RawRepoClientCore.clear();
-
-    marcRecord = new Record();
-    marcRecord.fromString(
-        "001 00 *a 2 256 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8"
-    );
-    RawRepoClientCore.addRecord(marcRecord);
-
-    marcRecord = new Record();
-    marcRecord.fromString(
-        "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8"
-    );
-    RawRepoClientCore.addRecord(marcRecord);
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -50,21 +35,13 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
         "004 00 *a h\n" +
         "041 00 *a eng"
     );
-
-    record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
-    field = record.fields[2];
-    subfield = field.subfields[0];
-    Assert.equalValue("Field used in parent record, no child records", callRule(record, field), []);
-
-    // Case: Field not used in parent record, but in child records.
-    RawRepoClientCore.clear();
+    RawRepoClientCore.addRecord(marcRecord);
 
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 2 256 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8" +
-        "041 00 *a eng"
+        "014 00 *a 1 234 567 8"
     );
     RawRepoClientCore.addRecord(marcRecord);
 
@@ -72,24 +49,48 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
     marcRecord.fromString(
         "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8" +
-        "041 00 *a eng"
+        "014 00 *a 1 234 567 8"
     );
-    RawRepoClientCore.addRecord(marcRecord);
+
+    record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
+    field = record.fields[2];
+    Assert.equalValue("Field used in parent record, no child records", callRule(record, field), []);
+
+
+    // Test 2 - Case: Field not used in parent record, but in child records.
+    RawRepoClientCore.clear();
 
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n"
     );
+    RawRepoClientCore.addRecord(marcRecord);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "004 00 *a b\n" +
+        "014 00 *a 1 234 567 8\n" +
+        "041 00 *a eng"
+    );
 
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
-    field = record.fields[2];
-    subfield = field.subfields[0];
+    field = record.fields[3];
+
     Assert.equalValue("Field not used in parent record, but in child records", callRule(record, field), []);
 
-    // Case: Field used in both parent and child record.
+
+    // Test 3 - Case: Field used in both parent and child record.
     RawRepoClientCore.clear();
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "004 00 *a h\n" +
+        "041 00 *a eng"
+    );
+    RawRepoClientCore.addRecord(marcRecord);
 
     marcRecord = new Record();
     marcRecord.fromString(
@@ -97,14 +98,6 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
         "004 00 *a b\n" +
         "041 00 *s eng\n" +
         "014 00 *a 1 234 567 8"
-    );
-    RawRepoClientCore.addRecord(marcRecord);
-
-    marcRecord = new Record();
-    marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "004 00 *a h\n" +
-        "041 00 *a eng"
     );
 
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);

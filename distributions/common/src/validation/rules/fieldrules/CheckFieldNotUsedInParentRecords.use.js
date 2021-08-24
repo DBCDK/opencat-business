@@ -27,62 +27,37 @@ var CheckFieldNotUsedInParentRecords = function () {
             var recId = marcRecord.getValue(/001/, /a/);
             var libNo = marcRecord.getValue(/001/, /b/);
             var recordLevel = marcRecord.getValue(/004/, /a/);
+            var parentFaust = marcRecord.getValue(/014/, /a/);
 
             var context = params.context;
 
-            //get parent record
-            var parent;
+            // input record is child record
+            // only look at record levels head and section
+            if (!(recordLevel === "b" || recordLevel === "s")) return [];
 
-            if (recordLevel === "h" ){
-                parent = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
-                if (parent === undefined) {
-                    parent = RawRepoClient.getRelationsChildren(recId, libNo);
-                    ContextUtil.setValue(context, parent, 'getRelationsChildren', recId, libNo);
-                }
+            // check if parentFaust not empty
+            if (0 !== parentFaust) {
 
-            }
+                // get parent record from parentFaust
+                var parentRecord = RawRepoClient.fetchRecord(parentFaust, libNo);
 
-            if (parent.length === 0) {
-                Log.trace("Returns []: No parent record found.");
-                return [];
-            }
-
-            // There can be no interesting records below single and volume records
-            // Though, technically we only look at levels head and section
-            if (!(recordLevel === "h" || recordLevel === "s")) return [];
-
-            var children;
-
-            // get child records
-            children = ContextUtil.getValue(context, 'getRelationsChildren', recId, libNo);
-            if (children === undefined) {
-                children = RawRepoClient.getRelationsChildren(recId, libNo);
-                ContextUtil.setValue(context, children, 'getRelationsChildren', recId, libNo);
-            }
-
-            if (children.length === 0) {
-                Log.trace("Returns []: No children found.");
-                return [];
-            }
-            for (var i = 0; i < children.length; i++) {
-                var rec = children[i];
-                var loopAgency = rec.getValue(/001/, /b/);
-                // Skip record if it is from another base
-                if (loopAgency !== libNo) continue;
-            //    if (rec.existField(new MatchField(new RegExp(field.name), undefined, new RegExp(field.name)))) {
-                  if (rec.existField(new MatchField(new RegExp(field.name)))) {
+                // check if input field exists in parent record
+                if (parentRecord.existField(new MatchField(new RegExp(field.name)))) {
                     var bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                    var message = ResourceBundle.getStringFormat(bundle, "field.in.children.record.error", field.name);
+                    var message = ResourceBundle.getStringFormat(bundle, "field.in.parent.record.error", field.name);
 
                     Log.trace("Found error in record [", recId, ":", libNo, "]: ", message);
                     return [ValidateErrors.fieldError("TODO:fixurl", message)];
                 }
-                // Only dive deeper if it's a section record
-                var loopLevel = rec.getValue(/004/, /a/);
+
+                // go further up in record level if parent record is a section record
+                var loopLevel = parentRecord.getValue(/004/, /a/);
+
                 if (loopLevel === "s") {
-                    var result = CheckFieldNotUsedInParentRecords.validateField( DanMarc2Converter.convertFromDanMarc2( rec ), field, params );
-                    if ( result.length !== 0 ) {
-                        Log.trace( "Validation errors found in children records: ", uneval( result ) );
+                    // run validation rule on section record
+                    var result = CheckFieldNotUsedInParentRecords.validateField(DanMarc2Converter.convertFromDanMarc2(parentRecord), field, params);
+                    if (result.length !== 0) {
+                        Log.trace("Validation errors found in section records: ", uneval(result));
                         return result;
                     }
                 }
