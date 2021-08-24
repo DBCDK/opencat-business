@@ -200,6 +200,7 @@
 		"023": "DanMarc2.fields.023",
         "024": "DanMarc2.fields.024",
         "028": "DanMarc2.fields.028",
+        "032": "DanMarc2.fields.032",
         "041":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
             "sorting":"asbcpeu2",
