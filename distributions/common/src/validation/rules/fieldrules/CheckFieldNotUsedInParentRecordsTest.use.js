@@ -12,6 +12,7 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
 
     // Test 0 - Case: Not volume record.
+    // validation rule will never be run, because input record has empty parentFaust
     RawRepoClientCore.clear();
 
     var marcRecord = new Record();
@@ -23,10 +24,12 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     var record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
     var field = record.fields[2];
+
     Assert.equalValue("Not volume record", callRule(record, field), []);
 
 
     // Test 1 - Case: Field used in parent record, no child records.
+    // validation rule will never be run, because input record don't have field and will not meet validation rule
     RawRepoClientCore.clear();
 
     marcRecord = new Record();
@@ -54,10 +57,12 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
     field = record.fields[2];
+
     Assert.equalValue("Field used in parent record, no child records", callRule(record, field), []);
 
 
     // Test 2 - Case: Field not used in parent record, but in child records.
+    // validation rule runs and validates ok, returns empty string
     RawRepoClientCore.clear();
 
     marcRecord = new Record();
@@ -82,6 +87,7 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
 
     // Test 3 - Case: Field used in both parent and child record.
+    // validation rule runs and validates error, returns string with validation message
     RawRepoClientCore.clear();
 
     marcRecord = new Record();
@@ -96,12 +102,13 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
     marcRecord.fromString(
         "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "041 00 *s eng\n" +
+        "041 00 *a eng *c dan \n" +
         "014 00 *a 1 234 567 8"
     );
 
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
     field = record.fields[2];
+
     Assert.equalValue("Field used in both parent and child record", callRule(record, field),
         [ValidateErrors.fieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "field.in.parent.record.error", "041"))]);
 
