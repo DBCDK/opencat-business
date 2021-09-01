@@ -213,7 +213,12 @@
                 "s": "DanMarc2.fields.041.subfields.s",
                 "u": "DanMarc2.fields.041.subfields.u",
                 "2": "DanMarc2.fields.041.subfields.2"
-            }
+            },
+            "rules": [
+                {
+                    "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
+                }
+            ]
         },
         "239": "DanMarc2.fields.239",
         "240": "fonogram.fields.240",

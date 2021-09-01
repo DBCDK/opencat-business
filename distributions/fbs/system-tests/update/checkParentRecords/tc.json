@@ -1,0 +1,65 @@
+[
+    {
+        "name": "checkParentRecords",
+        "description": "Tester indhold af 041 i hoved/bind-poster",
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-head-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments":[
+                        "rawrepo-head-enrichment.marc"
+                    ],
+                    "children": [
+                        "rawrepo-volume-common.marc"
+                    ]
+
+                },
+                {
+                    "record": "rawrepo-head-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-volume-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments":[
+                        "rawrepo-volume-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-volume-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bogbind",
+            "record": "result.marc"
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.23.htm",
+                        "ordinalPositionOfField": 4,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Felt '041' må kun anvendes på enten hovedpost eller bindpost(er) i et flerbindsværk."
+                    }
+                ]
+            }
+        }
+    }
+]
+

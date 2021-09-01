@@ -38,6 +38,7 @@ use("SubfieldHasValueDemandsOtherSubfield");
 use("FieldsIndicator");
 use("SubfieldsMandatory");
 use("CheckFieldNotUsedInChildrenRecords");
+use("CheckFieldNotUsedInParentRecords");
 
 //record rules
 use("OptionalFields");
