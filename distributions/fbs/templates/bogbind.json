@@ -232,9 +232,6 @@
                     "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
                 },
                 {
-                    "type": "FieldRules.checkFieldNotUsedInParentRecords"
-                },
-                {
                     "type": "FieldRules.checkValueUnlessHasSubfield",
                     "params": {
                         "subfield": "2",
