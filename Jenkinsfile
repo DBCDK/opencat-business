@@ -120,7 +120,9 @@ pipeline {
                 }
             }
             when {
-                branch 'master'
+                expression {
+                    currentBuild.result == 'SUCCESS' && env.BRANCH_NAME == 'master'
+                }
             }
             steps {
                 script {
