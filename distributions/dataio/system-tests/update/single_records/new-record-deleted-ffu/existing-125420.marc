@@ -1,0 +1,18 @@
+001 00 *a 09373837 *b 125420 *c 20120726120500 *d 20120726 *f a
+002 00 *d vtls000937383
+004 00 *r c *a e
+008 00 *t p *u d *a 1989 *z 1996 *b de *c w *h p *i b *l ger *v 0
+009 00 *a a *g xx
+022 00 *a 0937-3837 *l 0937-3837
+035 00 *a (ISSN)09373837
+080 00 *a 502.6 *2 [current]
+096 00 *z 125420
+210 00 *a Ökol. Briefe *b Frankf.
+222 00 *a Ökologische Briefe *b Frankfurt
+245 00 *a Ökologische Briefe
+260 00 *a [Frankfurt] *b Öko-Test-Verl
+861 04 *t Umwelt kommunal *z 0932-5816
+861 04 *t Kommunale Briefe für Ökologie *z 0937-3829
+861 04 *t Umwelt, kommunale ökologische Briefe *z 1431-7184
+879 00 *i Related item *t Ökologische Hefte *z 0944-0682
+$

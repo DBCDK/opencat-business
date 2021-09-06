@@ -1,0 +1,63 @@
+[
+  {
+    "name": "new-record-deleted-ffu",
+    "bugs": [],
+    "description": "Tester at man kan oprette fællesskabspost når der en slettet post for et slettet FFU bibliotek",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcartanm",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "existing-125420.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false
+        },
+        {
+          "record": "existing-820040.marc",
+          "type": "MARCXCHANGE",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "existing-125420.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false
+          },
+          {
+            "record": "existing-820040.marc",
+            "type": "MARCXCHANGE",
+            "deleted": true
+          },
+          {
+            "record": "result-common.marc",
+            "type": "ARTICLE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
