@@ -189,9 +189,7 @@
                 "b": {
                     "repeatable": false
                 },
-                "c": {
-                    "repeatable": false
-                },
+                "c": {},
                 "d": {},
                 "z": {},
                 "u": {}
