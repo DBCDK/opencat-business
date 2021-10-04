@@ -252,6 +252,12 @@
                 }
             }
         },
+        "z98": {
+            "subfields": {
+                "a": {},
+                "b": {}
+            }
+        },
         "z99": {
             "repeatable": false,
             "subfields": {
