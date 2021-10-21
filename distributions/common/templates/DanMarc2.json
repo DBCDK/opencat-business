@@ -2309,7 +2309,8 @@
                 "0":{
                     "repeatable": false,
                     "values": [ "pro" ]
-                }
+                },
+                "7":{}
             },
             "rules": [
                 {
