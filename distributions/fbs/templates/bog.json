@@ -635,7 +635,8 @@
                 "b": "DanMarc2.fields.530.subfields.b",
                 "u": "DanMarc2.fields.530.subfields.u",
                 "y": "DanMarc2.fields.530.subfields.y",
-                "z": "DanMarc2.fields.530.subfields.z"
+                "z": "DanMarc2.fields.530.subfields.z",
+                "7": "DanMarc2.fields.530.subfields.7"
             },
 			"rules": [ { "type": "FieldRules.exclusiveSubfield" } ]
         },
