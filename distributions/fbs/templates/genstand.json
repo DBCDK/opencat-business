@@ -91,17 +91,7 @@
                     "repeatable": false,
                     "values": [ "?", "r", "o", "f", "u" ]
                 },
-                "a": {
-                    "repeatable": false,
-                    "rules": [{
-                        "type": "SubfieldRules.checkLength",
-                        "params": {
-                            "min": 4,
-                            "max": 4
-                        }
-                    }
-                    ]
-                },
+                "a": "DanMarc2.fields.008.subfields.a",
                 "z": "DanMarc2.fields.008.subfields.z",
                 "b": {
                     "mandatory":true,
