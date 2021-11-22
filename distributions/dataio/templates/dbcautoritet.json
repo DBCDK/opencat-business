@@ -64,7 +64,7 @@
             "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt008.htm",
             "mandatory": true,
             "repeatable": false,
-            "sorting": "tv",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "t": {
                     "mandatory": true,
