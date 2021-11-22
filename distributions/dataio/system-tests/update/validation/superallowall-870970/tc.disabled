@@ -1,7 +1,7 @@
 [
   {
     "name": "superallowall-dbc",
-    "description": "Tester at man som dbc 010100 kan anvende skabelonen 'superallowall' som spring skabelon validring over",
+    "description": "Tester at man som dbc 010100 kan anvende skabelonen 'superallowall' som springer skabelon validring over",
     "request": {
       "authentication": {
         "group": "010100",
