@@ -89,7 +89,8 @@
                 "a": {
                     "repeatable": false,
                     "values": [ "i" ]
-                }
+                },
+                "n": "DanMarc2.fields.004.subfields.n"
             }
         },
         "008": {
