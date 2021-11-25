@@ -1,0 +1,67 @@
+[
+  {
+    "name": "lokbib-masseret-010100",
+    "description": "Tester at man kan rette en 870970 post korrekt uden at det påvirker ffu/lokbib post post med samme id når man anvender superallowall",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "superallowall",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-159003.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false,
+          "enqueued": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-159003.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-dbc.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

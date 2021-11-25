@@ -14,7 +14,7 @@
     "setup": {
       "rawrepo": [
         {
-          "record": "rawrepo-159077.marc",
+          "record": "rawrepo-150077.marc",
           "type": "MARCXCHANGE",
           "deleted": false
         }
@@ -26,7 +26,7 @@
         "errors": [],
         "rawrepo": [
           {
-            "record": "expected-159077.marc",
+            "record": "expected-150077.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued":true
