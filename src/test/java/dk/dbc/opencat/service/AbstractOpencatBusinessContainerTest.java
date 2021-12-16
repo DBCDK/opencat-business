@@ -148,7 +148,7 @@ public class AbstractOpencatBusinessContainerTest {
     }
 
     static void resetRawrepoDb(Connection connection) throws Exception {
-        final List<String> tables = Arrays.asList("relations", "records", "records_cache", "records_archive", "queue", "jobdiag");
+        final List<String> tables = Arrays.asList("relations", "records", "records_archive", "queue", "jobdiag");
 
         PreparedStatement stmt;
 
