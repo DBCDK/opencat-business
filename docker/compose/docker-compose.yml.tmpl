@@ -43,7 +43,7 @@ services:
     image: docker-i.dbc.dk/fakesmtp
 
   updateservice:
-    image: docker-i.dbc.dk/update-payara-deployer:DIT-1181
+    image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
     env_file:
       - db.env
       - providers.env

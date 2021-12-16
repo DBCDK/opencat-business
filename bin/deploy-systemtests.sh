@@ -49,7 +49,8 @@ fi
 # Create docker network if it doesn't exists
 [[ ! "$(docker network ls | grep update-compose-network)" ]] && docker network create --subnet=192.180.0.0/22 update-compose-network
 
-export PROD_VERSION=$(curl -s https://is.dbc.dk/view/metascrum/job/updateservice/job/updateservice-deploy/job/cisterne/lastSuccessfulBuild/artifact/UPDATE_DOCKER_IMAGE | cut -f2-3 -d:)
+#export PROD_VERSION=$(curl -s https://is.dbc.dk/view/metascrum/job/updateservice/job/updateservice-deploy/job/cisterne/lastSuccessfulBuild/artifact/UPDATE_DOCKER_IMAGE | cut -f2-3 -d:)
+PROD_VERSION=DIT-1181
 echo "Using prod version ${PROD_VERSION} of updateservice"
 
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
