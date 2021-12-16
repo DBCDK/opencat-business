@@ -7,7 +7,7 @@ networks:
 services:
 
   rawrepoDb:
-    image: docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5155
+    image: docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5156
     environment:
       - POSTGRES_DB=rawrepo
       - POSTGRES_USER=rawrepo
@@ -43,7 +43,7 @@ services:
     image: docker-i.dbc.dk/fakesmtp
 
   updateservice:
-    image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
+    image: docker-i.dbc.dk/update-payara-deployer:DIT-1181
     env_file:
       - db.env
       - providers.env
@@ -115,7 +115,7 @@ services:
       - "4848"
 
   rawrepo-record-service:
-    image: docker-io.dbc.dk/rawrepo-record-service:DIT-319
+    image: docker-io.dbc.dk/rawrepo-record-service:DIT-321
     environment:
       - INSTANCE_NAME=${USER}_dev
       - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
