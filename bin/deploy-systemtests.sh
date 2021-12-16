@@ -5,8 +5,8 @@ SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
 RAWREPO_VERSION=1.15-snapshot
-RAWREPO_DIT_TAG=DIT-5155
-RAWREPO_RECORD_SERVICE_VERSION=DIT-281
+RAWREPO_DIT_TAG=DIT-5156
+RAWREPO_RECORD_SERVICE_VERSION=DIT-321
 HOLDINGS_ITEMS_VERSION=1.1.4-snapshot
 UPDATE_FACADE_TAG=master-31
 
@@ -50,7 +50,7 @@ fi
 [[ ! "$(docker network ls | grep update-compose-network)" ]] && docker network create --subnet=192.180.0.0/22 update-compose-network
 
 #export PROD_VERSION=$(curl -s https://is.dbc.dk/view/metascrum/job/updateservice/job/updateservice-deploy/job/cisterne/lastSuccessfulBuild/artifact/UPDATE_DOCKER_IMAGE | cut -f2-3 -d:)
-PROD_VERSION=DIT-1181
+export PROD_VERSION=DIT-1181
 echo "Using prod version ${PROD_VERSION} of updateservice"
 
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
