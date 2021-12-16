@@ -37,7 +37,7 @@ public class AbstractOpencatBusinessContainerTest {
     private static final GenericContainer holdingsItemsDbContainer;
     private static final GenericContainer openCatBusinessContainer;
     private static final String JAVA_BASE_IMAGE = "docker.dbc.dk/dbc-java8";
-    private static final String RAWREPO_DB_IMAGE = "docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5155";
+    private static final String RAWREPO_DB_IMAGE = "docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5156";
     private static final String HOLDINGITEMS_DB_IMAGE = "docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest";
     private static final String RECORD_SERVICE_IMAGE = "docker-io.dbc.dk/rawrepo-record-service:DIT-287";
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";
