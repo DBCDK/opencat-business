@@ -29,8 +29,7 @@
         {
           "record": "rawrepo-191919.marc",
           "type": "ENRICHMENT",
-          "deleted": false,
-          "enqueued": true
+          "deleted": false
         }
       ]
     },
