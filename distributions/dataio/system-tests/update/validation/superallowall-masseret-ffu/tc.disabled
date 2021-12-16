@@ -1,0 +1,38 @@
+[
+  {
+    "name": "superallowall-masseret-ffu",
+    "description": "Tester at man som dbc 010100 kan anvende skabelonen 'superallowall' i forbindelse med at ffu poster opdateres",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "superallowall",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-150077.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-150077.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued":true
+          }
+        ]
+      }
+    }
+  }
+]

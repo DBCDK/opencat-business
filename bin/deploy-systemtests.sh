@@ -4,8 +4,8 @@
 SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
-RAWREPO_VERSION=1.13-snapshot
-RAWREPO_DIT_TAG=DIT-5016
+RAWREPO_VERSION=1.15-snapshot
+RAWREPO_DIT_TAG=DIT-5156
 RAWREPO_RECORD_SERVICE_VERSION=DIT-281
 HOLDINGS_ITEMS_VERSION=1.1.4-snapshot
 UPDATE_FACADE_TAG=master-31
