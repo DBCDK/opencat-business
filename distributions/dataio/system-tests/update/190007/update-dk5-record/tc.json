@@ -24,8 +24,7 @@
         {
           "record": "rawrepo-dk5-enrichment.marc",
           "type": "ENRICHMENT",
-          "deleted": false,
-          "enqueued": true
+          "deleted": false
         }
       ]
     },
