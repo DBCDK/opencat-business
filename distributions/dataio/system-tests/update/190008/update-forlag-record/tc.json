@@ -24,8 +24,7 @@
         {
           "record": "rawrepo-forlag-enrichment.marc",
           "type": "ENRICHMENT",
-          "deleted": false,
-          "enqueued": true
+          "deleted": false
         }
       ]
     },
