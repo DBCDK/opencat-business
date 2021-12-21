@@ -4285,27 +4285,10 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{
                 "a":{},
-                "b":{},
                 "c":{},
                 "d":{},
                 "f":{},
-                "h":{
-                    "repeatable":false
-                },
-                "i":{},
-                "j":{
-                    "repeatable":false
-                },
-                "k":{
-                    "repeatable":false
-                },
-                "l":{
-                    "repeatable":false
-                },
                 "m":{},
-                "n":{
-                    "repeatable":false
-                },
                 "o":{
                     "repeatable":false
                 },
@@ -4315,11 +4298,7 @@
                 "q":{
                     "repeatable":false
                 },
-                "r":{
-                    "repeatable":false
-                },
                 "s":{},
-                "t":{},
                 "u":{},
                 "y":{},
                 "v":{},

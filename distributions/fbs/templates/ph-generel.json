@@ -725,23 +725,14 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{
                 "a": "DanMarc2.fields.856.subfields.a",
-                "b": "DanMarc2.fields.856.subfields.b",
                 "c": "DanMarc2.fields.856.subfields.c",
                 "d": "DanMarc2.fields.856.subfields.d",
                 "f": "DanMarc2.fields.856.subfields.f",
-                "h": "DanMarc2.fields.856.subfields.h",
-                "i": "DanMarc2.fields.856.subfields.i",
-                "j": "DanMarc2.fields.856.subfields.j",
-                "k": "DanMarc2.fields.856.subfields.k",
-                "l": "DanMarc2.fields.856.subfields.l",
                 "m": "DanMarc2.fields.856.subfields.m",
-                "n": "DanMarc2.fields.856.subfields.n",
                 "o": "DanMarc2.fields.856.subfields.o",
                 "p": "DanMarc2.fields.856.subfields.p",
                 "q": "DanMarc2.fields.856.subfields.q",
-                "r": "DanMarc2.fields.856.subfields.r",
                 "s": "DanMarc2.fields.856.subfields.s",
-                "t": "DanMarc2.fields.856.subfields.t",
                 "u":{
                     "mandatory":true,
                     "repeatable":false
