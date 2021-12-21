@@ -1029,6 +1029,9 @@
                 "h":{
                     "repeatable":false
                 },
+                "c":{
+                    "repeatable":false
+                },
                 "o":{
                     "repeatable":false
                 },

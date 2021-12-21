@@ -3954,6 +3954,9 @@
                 "h":{
                     "repeatable":false
                 },
+                "c":{
+                    "repeatable":false
+                },
                 "k":{
                     "repeatable":false
                 },
