@@ -705,6 +705,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.85a.htm",
             "subfields":{
                 "o":"DanMarc2.fields.720.subfields.o",
+                "c":"DanMarc2.fields.720.subfields.c",
                 "4":"DanMarc2.fields.720.subfields.4",
                 "g":"DanMarc2.fields.720.subfields.g"
             }
