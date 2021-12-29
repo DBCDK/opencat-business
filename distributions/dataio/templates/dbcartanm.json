@@ -75,8 +75,7 @@
                     ]
                 },
                 "f": "DanMarc2.fields.001.subfields.f",
-                "o": "DanMarc2.fields.001.subfields.o",
-                "t": "DanMarc2.fields.001.subfields.t"
+                "o": "DanMarc2.fields.001.subfields.o"
             }
         },
         "002": "dbcsingle.fields.002",

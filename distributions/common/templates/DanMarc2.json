@@ -60,9 +60,6 @@
                 },
                 "o": {
                     "repeatable": false
-                },
-                "t": {
-                    "repeatable": false
                 }
             }
         },
