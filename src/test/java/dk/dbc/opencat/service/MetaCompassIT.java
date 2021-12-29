@@ -51,7 +51,6 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "    <subfield code=\"c\">20150304180759</subfield>\n" +
             "    <subfield code=\"d\">20150209</subfield>\n" +
             "    <subfield code=\"f\">a</subfield>\n" +
-            "    <subfield code=\"t\">FAUST</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"004\">\n" +
             "    <subfield code=\"r\">n</subfield>\n" +
