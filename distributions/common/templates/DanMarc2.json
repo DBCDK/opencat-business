@@ -2363,6 +2363,15 @@
                 "d":{},
                 "x":{},
                 "b":{},
+                "c":{
+                    "repeatable":false
+                },
+                "p":{
+                    "repeatable":false
+                },
+                "g":{
+                    "repeatable":false
+                },
                 "u":{},
                 "y":{},
                 "0":{
