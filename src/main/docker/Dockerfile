@@ -4,8 +4,6 @@ ENV JAVASCRIPT_BASEDIR /opt/payara5/deployments/opencat-business
 ENV JAVASCRIPT_POOL_SIZE 1
 
 ENV AUTH_PRODUCT_NAME netpunkt.dk
-ENV AUTH_USE_IP True
-ENV FORSRIGHTS_URL http://forsrights.addi.dk/1.2/
 
 ENV VIPCORE_ENDPOINT http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk
 ENV VIPCORE_CACHE_AGE 8
