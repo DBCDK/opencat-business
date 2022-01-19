@@ -1,0 +1,10 @@
+{
+  "authenticated": true,
+  "rights": [
+    {
+      "productName": "netpunkt.dk",
+      "name": "READ",
+      "description": ""
+    }
+  ]
+}

@@ -46,7 +46,6 @@ public class AbstractOpencatBusinessContainerTest {
     private static final String HOLDINGS_ITEMS_DB_URL;
     private static final String RECORD_SERVICE_BASE_URL;
     private static final String VIPCORE_ENDPOINT = "http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk";
-    private static final String FORSRIGHTS_URL = "http://forsrights.addi.dk/2.0/";
     private static final String SOLR_URL = "http://solr:9090";
     private static final String OPENNUMBERROLL_URL = "http://opennumberroll:9090";
 
@@ -119,7 +118,6 @@ public class AbstractOpencatBusinessContainerTest {
                 .withEnv("RAWREPO_RECORD_SERVICE_URL", RECORD_SERVICE_BASE_URL)
                 .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
                 .withEnv("SOLR_URL", SOLR_URL)
-                .withEnv("FORSRIGHTS_URL", FORSRIGHTS_URL)
                 .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
                 .withEnv("OPENNUMBERROLL_URL", OPENNUMBERROLL_URL)
                 .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
