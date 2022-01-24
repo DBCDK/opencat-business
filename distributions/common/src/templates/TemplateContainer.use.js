@@ -220,14 +220,22 @@ var TemplateContainer = function () {
                 templateNames = templateNames.concat(templateGroups[libraryTemplateGroups[i]]['templates']);
             }
 
+            var uniqueTemplateNames = [];
+            for (var r = 0; r < templateNames.length; r++) {
+                var templateName = templateNames[r];
+                if (uniqueTemplateNames.indexOf(templateName) === -1) {
+                    uniqueTemplateNames.push(templateName);
+                }
+            }
+
             // Now we have all the potential templates the templateSet can use.
             // Next we have to load those templates and filter on library rules.
-            for (var j = 0; j < templateNames.length; j++) {
-                var templateName = templateNames[j];
-                var template = loadTemplateUnoptimized(templateName);
+            for (var j = 0; j < uniqueTemplateNames.length; j++) {
+                var uniqueTemplateName = uniqueTemplateNames[j];
+                var template = loadTemplateUnoptimized(uniqueTemplateName);
 
-                if (__checkTemplateFeatures(templateName, template, libraryRules)) {
-                    var schema = {schemaName: templateName, schemaInfo: ""};
+                if (__checkTemplateFeatures(uniqueTemplateName, template, libraryRules)) {
+                    var schema = {schemaName: uniqueTemplateName, schemaInfo: ""};
 
                     if (template.template.hasOwnProperty('description')) {
                         schema.schemaInfo = template.template.description;

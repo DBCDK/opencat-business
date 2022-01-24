@@ -48,10 +48,6 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
                 "    \"schemaInfo\": \"Skabelon til indsendelse af metakompasdata til læsekompasset.\"\n" +
                 "  },\n" +
                 "  {\n" +
-                "    \"schemaName\": \"delete\",\n" +
-                "    \"schemaInfo\": \"Skabelon til sletteposter - alle post- og materialetyper.\"\n" +
-                "  },\n" +
-                "  {\n" +
                 "    \"schemaName\": \"ffu\",\n" +
                 "    \"schemaInfo\": \"Skabelon til optrettelse af ffu-singlepost - alle materialetyper.\"\n" +
                 "  },\n" +
