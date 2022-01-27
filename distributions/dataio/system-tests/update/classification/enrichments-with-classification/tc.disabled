@@ -1,0 +1,105 @@
+[
+  {
+    "name": "enrichment-with-classification",
+    "description": "Tester at en påhængspost med opstilling ikke blive opdateret når der sker opstillingsændring i 870970 posten",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "auth-870979.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "auth-191919.marc"
+          ],
+          "children": [
+            "common-870970.marc"
+          ]
+        },
+        {
+          "record": "auth-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "common-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "common-191919.marc",
+            "common-710100.marc"
+          ],
+          "holdings": [
+            710100
+          ]
+        },
+        {
+          "record": "common-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "common-710100.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "rawrepo": [
+          {
+            "record": "auth-870979.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "auth-191919.marc"
+            ],
+            "children": [
+              "common-870970.marc"
+            ]
+          },
+          {
+            "record": "auth-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "expected-common-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+              "expected-common-191919.marc",
+              "common-710100.marc"
+            ],
+            "holdings": [
+              710100
+            ],
+            "enqueued": true
+          },
+          {
+            "record": "expected-common-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "common-710100.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
