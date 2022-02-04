@@ -123,6 +123,11 @@ public class MetaCompassHandler {
                     if ("g".equals(subfield.getName())) {
                         subfieldsToCopy.add(new MarcSubField("o", subfield.getValue()));
                     }
+
+                    // 665 *v -> 666 *h
+                    if ("v".equals(subfield.getName())) {
+                        subfieldsToCopy.add(new MarcSubField("h", subfield.getValue()));
+                    }
                 }
             }
         }

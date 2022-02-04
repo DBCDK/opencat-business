@@ -1,0 +1,10 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "indent":"true",
+      "q":"phrase.vla:%22Line%22",
+      "wt":"json"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }}

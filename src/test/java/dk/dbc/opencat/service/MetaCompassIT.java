@@ -89,6 +89,10 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "    <subfield code=\"&amp;\">LEKTOR</subfield>\n" +
             "    <subfield code=\"e\">døden</subfield>\n" +
             "  </datafield>\n" +
+            "  <datafield ind1=\"0\" ind2=\"0\" tag=\"665\">\n" +
+            "    <subfield code=\"&amp;\">LEKTOR</subfield>\n" +
+            "    <subfield code=\"v\">Line</subfield>\n" +
+            "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
             "    <subfield code=\"s\">kvinder</subfield>\n" +
             "  </datafield>\n" +
@@ -245,6 +249,10 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"665\">\n" +
             "    <subfield code=\"&amp;\">LEKTOR</subfield>\n" +
             "    <subfield code=\"e\">døden</subfield>\n" +
+            "  </datafield>\n" +
+            "  <datafield ind1=\"0\" ind2=\"0\" tag=\"665\">\n" +
+            "    <subfield code=\"&amp;\">LEKTOR</subfield>\n" +
+            "    <subfield code=\"v\">Line</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
             "    <subfield code=\"0\"/>\n" +
