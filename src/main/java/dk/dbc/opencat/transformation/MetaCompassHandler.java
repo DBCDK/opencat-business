@@ -1,7 +1,3 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
 
 package dk.dbc.opencat.transformation;
 
@@ -122,6 +118,11 @@ public class MetaCompassHandler {
                     // 665 *g -> 666 *o
                     if ("g".equals(subfield.getName())) {
                         subfieldsToCopy.add(new MarcSubField("o", subfield.getValue()));
+                    }
+
+                    // 665 *v -> 666 *h
+                    if ("v".equals(subfield.getName())) {
+                        subfieldsToCopy.add(new MarcSubField("h", subfield.getValue()));
                     }
                 }
             }

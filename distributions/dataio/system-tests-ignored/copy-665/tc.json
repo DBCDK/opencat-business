@@ -66,6 +66,21 @@
             "deleted": false
           },
           {
+            "record": "expected-Line-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-Line-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-Line-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
             "record": "expected-istiden-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
