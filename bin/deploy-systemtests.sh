@@ -46,11 +46,7 @@ else
     export HOST_IP=$( ip -o addr show | grep "inet " | cut -d: -f2- | cut -c2- | egrep -v "^docker|^br" | grep "$(ip route list | grep default | cut -d' ' -f5) " | cut -d' ' -f6 | cut -d/ -f1)
 fi
 
-# Create docker network if it doesn't exists
-[[ ! "$(docker network ls | grep update-compose-network)" ]] && docker network create --subnet=192.180.0.0/22 update-compose-network
-
-#export PROD_VERSION=$(curl -s https://is.dbc.dk/view/metascrum/job/updateservice/job/updateservice-deploy/job/cisterne/lastSuccessfulBuild/artifact/UPDATE_DOCKER_IMAGE | cut -f2-3 -d:)
-export PROD_VERSION=DIT-1181
+export PROD_VERSION=$(curl -s https://is.dbc.dk/view/metascrum/job/updateservice/job/updateservice-deploy/job/cisterne/lastSuccessfulBuild/artifact/UPDATE_DOCKER_IMAGE | cut -f2-3 -d:)
 echo "Using prod version ${PROD_VERSION} of updateservice"
 
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
@@ -60,11 +56,6 @@ DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-NOTSET}
 if [ ${DEV_NUMBERROLL_URL} = "NOTSET" ]
 then
     export DEV_NUMBERROLL_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
-fi
-DEV_OPENAGENCY_URL=${DEV_OPENAGENCY_URL:-NOTSET}
-if [ ${DEV_OPENAGENCY_URL} = "NOTSET" ]
-then
-    export DEV_OPENAGENCY_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
 fi
 
 DEV_VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT:-NOTSET}
@@ -229,4 +220,3 @@ echo "export SOLR_PORT_NR=${SOLR_PORT_NR}"
 ../../bin/healthcheck-rawrepo-record-service.sh ${HOST_IP} ${RAWREPO_RECORD_SERVICE_PORT_8080} 220 || die "could not start rawrepo-record-service"
 ../../bin/healthcheck-update-service.sh ${HOST_IP} ${UPDATESERVICE_PORT_8080} 220 || die "could not start update-service"
 ../../bin/healthcheck-update-facade-service.sh ${HOST_IP} ${UPDATESERVICE_FACADE_PORT_8080} 220 || die "could not start update-facade-service"
-

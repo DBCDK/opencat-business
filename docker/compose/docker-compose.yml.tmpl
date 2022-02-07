@@ -1,11 +1,5 @@
 version: '3.2'
-networks:
-  default:
-    external:
-      name: update-compose-network
-
 services:
-
   rawrepoDb:
     image: docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5156
     environment:
