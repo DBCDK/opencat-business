@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-    <S:Body>
-        <oa:libraryRulesResponse xmlns:oa="http://oss.dbc.dk/ns/openagency" xmlns="http://oss.dbc.dk/ns/openagency">
-        </oa:libraryRulesResponse>
-    </S:Body>
-</S:Envelope>
-

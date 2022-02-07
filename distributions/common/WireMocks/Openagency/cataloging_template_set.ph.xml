@@ -1,6 +1,0 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-                   xmlns:oa="http://oss.dbc.dk/ns/openagency">
-    <SOAP-ENV:Body>
-        <oa:libraryRulesResponse/>
-    </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
