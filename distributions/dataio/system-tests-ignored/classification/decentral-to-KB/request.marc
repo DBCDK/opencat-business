@@ -1,0 +1,21 @@
+001 00 *a 47495741 *b 870970 *c 20200706125046 *d 20191205 *f a
+004 00 *r n *a e
+008 00 *t p *u c *a 2019 *b dk *c m *h p *i b *l dan *v 0
+009 00 *a a *g xx
+022 00 *a 2596-9633
+032 00 *a DPF252030
+035 00 *a (DK-800010)99122212370505763
+035 00 *a (DK-870970)47495741
+082 00 *a 641.3 *c 21
+245 00 *a Politiken Mad
+255 00 *a #1 (november 2019)-
+260 00 *a København *b Politiken Mad *c 2019-
+500 00 *a Månedlig
+505 00 *& 1 *a Tidsskrift
+539 00 *a #5 (marts 2020)
+652 00 *m 64.101
+996 00 *a 800010 *o 700400 *m 700400
+d08 00 *a kmsc
+d08 00 *r dra *a Double record for record INSERTNEWFAUST, reason: 022a. Overtaget
+    decentral post (47495741), DPF202030 tilf.
+z99 00 *a dra

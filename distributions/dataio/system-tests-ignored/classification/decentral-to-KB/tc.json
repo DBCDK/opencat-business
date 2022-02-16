@@ -1,0 +1,80 @@
+[
+  {
+    "name": "decentral-to-KB",
+    "description": "Tester at hvis DBC ændre ejer på en decentral post til KB, så bliver der dannet påhængsposter selvom ugekoden er i fremtiden (dvs posten er under produktion)",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbc",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-47495741-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "holdings": ["785100", "715700"],
+          "enrichments": [
+            "rawrepo-47495741-191919.marc",
+            "rawrepo-47495741-715700.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-47495741-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-47495741-715700.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-47495741-785100.marc",
+          "type": "ENRICHMENT",
+          "deleted": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "rawrepo": [
+          {
+            "record": "expected-47495741-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-47495741-191919.marc",
+              "expected-47495741-715700.marc",
+              "expected-47495741-785100.marc"
+            ]
+          },
+          {
+            "record": "expected-47495741-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-47495741-715700.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-47495741-785100.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
