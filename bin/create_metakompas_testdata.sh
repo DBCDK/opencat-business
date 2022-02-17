@@ -153,7 +153,7 @@ common() {
     add_common_id="21177083"
   fi
   
-  echo "001 00*a${common_001id}*b190004*c20080125114024*d20080125*fa*tFAUST
+  echo "001 00*a${common_001id}*b190004*c20080125114024*d20080125*fa
 004 00*rn*ae*xm
 008 00*th*v0
 040 00*bdan*fDBC
@@ -163,7 +163,7 @@ common() {
 
   if [ "${create_update}" != "NO" ]; then
     file_name=expected-${file}-common.marc
-    echo "001 00*a${common_001id}*b190004*c20080125114024*d20080125*fa*tFAUST
+    echo "001 00*a${common_001id}*b190004*c20080125114024*d20080125*fa
 004 00*rn*ae*xm
 008 00*th*v0
 040 00*bdan*fDBC
@@ -196,7 +196,7 @@ enrich() {
   fi
   newid=${number_roll}
   x09add="*p${code_or_sub}*q${newid}"
-  echo "001 00*a${enrich_id}*b191919*c20080125114024*d20080125*fa*tFAUST
+  echo "001 00*a${enrich_id}*b191919*c20080125114024*d20080125*fa
 004 00*rn*ae*xm
 d08 00*aMetakompas
 d09 00*zEMK201919
@@ -207,7 +207,7 @@ x09 00${x09add}" > ${file_name}
     get_number Y
     realnewid=${number_roll}
     realx09add="*p${code_or_sub}*q${realnewid}"
-    echo "001 00*a${enrich_id}*b191919*c20080125114024*d20080125*fa*tFAUST
+    echo "001 00*a${enrich_id}*b191919*c20080125114024*d20080125*fa
 004 00*rn*ae*xm
 d08 00*aMetakompas
 d09 00*zEMK201919*zEMK201920
