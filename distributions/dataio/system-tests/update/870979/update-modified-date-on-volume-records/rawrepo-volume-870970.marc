@@ -6,8 +6,8 @@
 032 00 *a DBI200833 *x BKM200833 *x DAT201327
 245 00 *g 1 *a Egypten *p Egypt *e produced, written and directed by Christopher Cassel
 300 00 *n 1 dvd-video *l 90 min.
-666 00 *0  *e Egypten
-666 00 *0  *f oldtiden
+666 00*e Egypten
+666 00*f oldtiden
 700 00 *5 870979 *6 69416659
 990 00 *o 200833 *b v *u nt
 996 00 *a DBC

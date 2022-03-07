@@ -16,7 +16,7 @@
 338 00 *a volume *2 rdacarrier
 539 00 *a Latest issue consulted: Vol. 64, part 3 (Nov. 2011)
 600 00 *0*aDalgaard-Møller*hBodil
-666 00 *0*ftestemneord
+666 00*ftestemneord
 710 00 *0*a British Psychological Society
 745 00 *a British journal of mathematical and statistical psychology
 860 00 *t British journal of statistical psychology *z 0950-561X

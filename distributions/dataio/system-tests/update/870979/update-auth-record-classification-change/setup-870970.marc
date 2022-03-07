@@ -14,15 +14,15 @@
 651 00 *a Europe *x History *y 1871-1918
 651 00 *a Europe *x Politics and government *y 1871-1918
 652 00 *m 91.91
-666 00 *0 *f den ¤1. verdenskrig
-666 00 *0 *f historie
-666 00 *0 *f international politik
-666 00 *0 *e Europa
-666 00 *0 *i 1870-1879
-666 00 *0 *i 1880-1889
-666 00 *0 *i 1890-1899
-666 00 *0 *i 1900-1909
-666 00 *0 *i 1910-1919
+666 00*f den ¤1. verdenskrig
+666 00*f historie
+666 00*f international politik
+666 00*e Europa
+666 00*i 1870-1879
+666 00*i 1880-1889
+666 00*i 1890-1899
+666 00*i 1900-1909
+666 00*i 1910-1919
 700 00 *a Clark *h Christopher M.
 900 00 *a Clark *h Christopher *z 100
 996 00 *a 710100

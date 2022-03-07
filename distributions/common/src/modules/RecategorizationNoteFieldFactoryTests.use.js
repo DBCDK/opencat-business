@@ -402,11 +402,11 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
             "520 00 *& 1 *a Originaludgave: 1967",
             "520 00 *a Tidligere: 1. bogklubudgave i.e. 2. udgave. Kbh. : Bogklubben 12 Bøger, 1998. - 1. udgave. 1998",
             "652 00 *m 35.1",
-            "666 00 *0 *s kærlighed",
-            "666 00 *0 *s England",
-            "666 00 *0 *s Ibiza",
-            "666 00 *0 *s 1960-1969",
-            "666 00 *0 *s Spanien",
+            "666 00*s kærlighed",
+            "666 00*s England",
+            "666 00*s Ibiza",
+            "666 00*s 1960-1969",
+            "666 00*s Spanien",
             "990 00 *a SFD *c A *o 199917",
             "996 00 *a DBC"
         ].join("\n")
@@ -481,11 +481,11 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
             "520 00 *& 1 *a Originaludgave: 1967",
             "520 00 *a Tidligere: 1. bogklubudgave i.e. 2. udgave. Kbh. : Bogklubben 12 Bøger, 1998. - 1. udgave. 1998",
             "652 00 *m 35.1",
-            "666 00 *0 *s kærlighed",
-            "666 00 *0 *s England",
-            "666 00 *0 *s Ibiza",
-            "666 00 *0 *s 1960-1969",
-            "666 00 *0 *s Spanien",
+            "666 00*s kærlighed",
+            "666 00*s England",
+            "666 00*s Ibiza",
+            "666 00*s 1960-1969",
+            "666 00*s Spanien",
             "990 00 *a SFD *c A *o 199917",
             "996 00 *a DBC"
         ].join("\n")

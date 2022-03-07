@@ -8,8 +8,8 @@
 532 00 *& 1 *a Med litteraturhenvisninger
 610 00 *a KFUM og KFUK i Danmark
 652 00 *m 26.3
-666 00 *0  *f kirkeåret
-666 00 *0  *f forkyndelse
-666 00 *0  *f kristendom
-666 00 *0  *o idematerialer
+666 00*f kirkeåret
+666 00*f forkyndelse
+666 00*f kristendom
+666 00*o idematerialer
 996 00 *a DBC

@@ -17,14 +17,14 @@
 520 00 *& 1 *a Bogens originaludgave: 2017
 652 00 *n 86 *z 06
 652 00 *o sk
-666 00 *0 *s unge
-666 00 *0 *s omsorgssvigt
-666 00 *0 *s hævn
-666 00 *0 *s hash
-666 00 *0 *s kriminalitet
-666 00 *0 *s socialrealisme
-666 00 *0 *s boligkvarterer
-666 00 *0 *s ghettoer
-666 00 *0 *q Danmark
+666 00*s unge
+666 00*s omsorgssvigt
+666 00*s hævn
+666 00*s hash
+666 00*s kriminalitet
+666 00*s socialrealisme
+666 00*s boligkvarterer
+666 00*s ghettoer
+666 00*q Danmark
 700 00 *5 870979 *6 68458560 *4 dkind
 996 00 *a DBC

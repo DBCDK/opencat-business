@@ -16,14 +16,14 @@
 521 00 *b 1. oplag *c 2019
 652 00 *n 86 *z 05
 652 00 *o sk
-666 00 *0  *s udviklingsromaner
-666 00 *0  *s historie
-666 00 *0  *s samfundsforhold
-666 00 *0  *s mænd
-666 00 *0  *s personlighedsudvikling
-666 00 *0  *s kærlighed
-666 00 *0  *q Danmark
-666 00 *0  *i 1800-1899
+666 00*s udviklingsromaner
+666 00*s historie
+666 00*s samfundsforhold
+666 00*s mænd
+666 00*s personlighedsudvikling
+666 00*s kærlighed
+666 00*q Danmark
+666 00*i 1800-1899
 720 00 *o Preben Lilhav *4 edt *4 aui
 745 00 *a Lykke-Per
 990 00 *b v *u nt

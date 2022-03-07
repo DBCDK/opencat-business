@@ -15,14 +15,14 @@
 665 00 *& lektor *a Kaerlig og romantisk roman *a Realistisk og dramatisk *e parforhold *e foelelser *e kvinder *e kvindeliv *e kaerlighed *g samfundsskildringer *i 1930-1939 *i 1940-1949 *i mellemkrigstiden *m overklassen *q Danmark *r alvidende fortaeller *s lettilgaengeligt sprog *s lukket slutning *t fremadskridende *u realistisk
 665 00 *& lektor *h kvinde *h voksen *k forfaengelig *k kreativ *k mild *l andre *l sig selv
 665 00 *& lektor *h mand *h voksen *k soed *k passiv *k mild *l andre *l familien *l sig selv
-666 00 *0  *s parforhold
-666 00 *0  *s foelelser
-666 00 *0  *s kvinder
-666 00 *0  *s kvindeliv
-666 00 *0  *s kaerlighed
-666 00 *0  *o samfundsskildringer
-666 00 *0  *i 1930-1939
-666 00 *0  *i 1940-1949
-666 00 *0  *s mellemkrigstiden
-666 00 *0  *q Danmark
+666 00*s parforhold
+666 00*s foelelser
+666 00*s kvinder
+666 00*s kvindeliv
+666 00*s kaerlighed
+666 00*o samfundsskildringer
+666 00*i 1930-1939
+666 00*i 1940-1949
+666 00*s mellemkrigstiden
+666 00*q Danmark
 996 00 *a DBC

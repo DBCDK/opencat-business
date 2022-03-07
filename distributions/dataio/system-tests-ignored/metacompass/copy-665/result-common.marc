@@ -16,15 +16,15 @@
 665 00 *& LEKTOR *e julemand
 665 00 *&LEKTOR*vLine
 665 00 *g 42
-666 00 *0 *s julemand
+666 00*s julemand
 666 00 *f den ¤2. verdenskrig
 666 00 *f litteratur
 666 00 *f skønlitteratur
 666 00 *f romaner
 666 00 *f krigsromaner
-666 00 *0 *q Koebenhavn
-666 00 *0 *s istiden
-666 00 *0 *h Line
+666 00*q Koebenhavn
+666 00*s istiden
+666 00*h Line
 700 00 *a Hegelund *h Karin *4 dkind
 710 00 *a Københavns Biblioteker *4 isb
 745 00 *a Den ¤1. store krig

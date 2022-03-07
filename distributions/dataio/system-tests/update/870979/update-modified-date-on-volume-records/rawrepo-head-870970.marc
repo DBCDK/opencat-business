@@ -16,8 +16,8 @@
 520 00 *a Produceret af KPI, History Television Network Productions og A&E Television Networks for History Channel i 2005-2006
 652 00 *m 90
 652 00 *p 71.1
-666 00 *0  *f verdenshistorie
-666 00 *0  *f arkitektur
-666 00 *0  *f bygningsværker
+666 00*f verdenshistorie
+666 00*f arkitektur
+666 00*f bygningsværker
 700 00 *5 870979 *6 69413447
 996 00 *a DBC

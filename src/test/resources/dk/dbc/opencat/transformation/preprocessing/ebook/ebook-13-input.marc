@@ -9,14 +9,14 @@
 512 00 *aAjourføres
 512 00 *aRegistreret 18.04.2018
 652 00 *m37.131
-666 00 *0*fanalysemodeller
-666 00 *0*ftekstanalyse
-666 00 *0*flitteraturanalyse
-666 00 *0*ffilmanalyse
-666 00 *0*fbilledanalyse
-666 00 *0*ufor folkeskolen
-666 00 *0*ufor ungdomsuddannelse
-666 00 *0*ufor videregående uddannelse
+666 00*fanalysemodeller
+666 00*ftekstanalyse
+666 00*flitteraturanalyse
+666 00*ffilmanalyse
+666 00*fbilledanalyse
+666 00*ufor folkeskolen
+666 00*ufor ungdomsuddannelse
+666 00*ufor videregående uddannelse
 856 00 *zAdgangsmåde: Internet*uhttp://analysesiden.dk/
 996 00 *aDBC
 d70 00 *bNetpub

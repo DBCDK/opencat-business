@@ -16,6 +16,6 @@
 521 00 *a 2. danske udgave *c 1994
 521 00 *b nyt oplag *c 1997
 652 00 *m ny Titel
-666 00 *0  *s gys
-666 00 *0  *s psykisk syge
+666 00*s gys
+666 00*s psykisk syge
 996 00 *a DBC

@@ -12,10 +12,10 @@
 512 00 *a 2. oplag fejlagtigt med udgavebetegnelsen: 2
 521 00 *b 4. oplag *c 2015
 652 00 *m 76.9
-666 00 *0 *f perleplader
-666 00 *0 *f perler
-666 00 *0 *f julemotiver
-666 00 *0 *f julepynt
-666 00 *0 *o vejledninger
+666 00*f perleplader
+666 00*f perler
+666 00*f julemotiver
+666 00*f julepynt
+666 00*o vejledninger
 990 00 *o 201536 *b b *b s *u op
 996 00 *a DBC

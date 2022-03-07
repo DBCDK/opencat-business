@@ -9,8 +9,8 @@
 508 00 *a Dansk og engelsk tekst
 526 00 *i Afløser *t Geometriske produktspecifikationer (GPS) (5-binds-udgave) *b . 1997-1999
 652 00 *m 74.909
-666 00 *0 *f teknisk tegning
-666 00 *0 *o standarder
-666 00 *0 *o håndbøger
+666 00*f teknisk tegning
+666 00*o standarder
+666 00*o håndbøger
 710 00 *a Dansk Standard
 910 00 *a DS *z 710

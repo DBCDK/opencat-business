@@ -17,8 +17,8 @@
 521 00 *b nyt oplag *c 2000
 652 00 *n 83.8 *z 26
 652 00 *o sk
-666 00 *0  *s gys
-666 00 *0  *s psykisk syge
+666 00*s gys
+666 00*s psykisk syge
 d08 00 *a stp
 996 00 *a DBC
 z98 00 *b Minus påhængspost

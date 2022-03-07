@@ -12,11 +12,11 @@
 557 00 *a Weekendavisen *j 2019 *z 0106-4142 *V 2019-03-01 *v 2019-03-01
 600 00 *5 870979 *6 68175933
 652 00 *m 99.4 *a Brontë *h Emily
-666 00 *0  *f engelsk litteratur
-666 00 *0  *f romaner
-666 00 *0  *f litterære motiver
-666 00 *0  *t Stormfulde højder
-666 00 *0  *o litteraturanalyser
-666 00 *0  *o analyser
+666 00*f engelsk litteratur
+666 00*f romaner
+666 00*f litterære motiver
+666 00*t Stormfulde højder
+666 00*o litteraturanalyser
+666 00*o analyser
 700 00 *5 870979 *6 19187462 *4 aut
 996 00 *a DBC

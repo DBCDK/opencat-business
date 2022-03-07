@@ -16,6 +16,7 @@ import org.slf4j.ext.XLoggerFactory;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class MetaCompassHandler {
      * <p>
      * When metakompas template is used we need to load the existing record and then use that with replaced 665 field from the input
      * <p>
-     * Additionally certain 665 subfields are copied to 666 subfields.
+     * Additionally, certain 665 subfields are copied to 666 subfields.
      *
      * @param minimalMetaCompassRecord The record to process
      * @return The record to be used for the rest if the execution
@@ -60,7 +61,7 @@ public class MetaCompassHandler {
 
         boolean hasAdded666Subfield = false;
         /*
-         * If the record is not yet published and the record is send from metakompas then copy relevant 665 subfields to 666.
+         * If the record is not yet published and the record is sent from metakompas then copy relevant 665 subfields to 666.
          *
          * Note that in order to be able manually edit the copied 666 subfields the copy only happens when using the
          * metakompas schema.
@@ -130,8 +131,6 @@ public class MetaCompassHandler {
 
         if (subfieldsToCopy.size() > 0) {
             logger.info("Found {} number of 665 subfield to copy", subfieldsToCopy);
-            // Fields added by automation should always have an empty *0
-            final MarcSubField subfield0 = new MarcSubField("0", "");
             final List<MarcField> fields666 = record.getFields().stream().
                     filter(field -> "666".equals(field.getName())).
                     collect(Collectors.toList());
@@ -140,18 +139,13 @@ public class MetaCompassHandler {
                 boolean hasSubfield = false;
                 for (MarcField field666 : fields666) {
                     if (field666.getSubfields().contains(subfieldToCopy)) {
-                        // If the field has the subfield to copy but doesn't have *0 subfield then *0 must be added
-                        if (!field666.getSubfields().contains(subfield0)) {
-                            field666.getSubfields().add(0, subfield0);
-                        }
-
                         hasSubfield = true;
                         break;
                     }
                 }
 
                 if (!hasSubfield) {
-                    record.getFields().add(new MarcField("666", "00", Arrays.asList(subfield0, subfieldToCopy)));
+                    record.getFields().add(new MarcField("666", "00", Collections.singletonList(subfieldToCopy)));
                     hasAdded666Subfield = true;
                 }
             }

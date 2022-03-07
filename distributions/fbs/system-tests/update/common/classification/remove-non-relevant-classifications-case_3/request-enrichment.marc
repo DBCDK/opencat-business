@@ -14,10 +14,10 @@
 652 00 *n 86 *z 096
 652 00 *o sk
 666 00 *s sjove historier
-666 00 *0 *s historier
-666 00 *0 *s løgnehistorier
-666 00 *0 *s fantasi
-666 00 *0 *s mødre
-666 00 *0 *s skilsmisse
-666 00 *0 *s gamle dage
+666 00*s historier
+666 00*s løgnehistorier
+666 00*s fantasi
+666 00*s mødre
+666 00*s skilsmisse
+666 00*s gamle dage
 720 00 *o Nis Jakob *4 ill

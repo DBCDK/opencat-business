@@ -11,13 +11,13 @@
 504 00 *a Undervisningen i læsning i folkeskolen er umådelig gammeldags og ekspertstyret. Læsning burde være en langt mere integreret del af opdragelse og familieliv
 557 00 *a Politiken *j 2018 *z 0907-1814 *V 2018-06-07 *v 2018-06-07
 652 00 *m 37.14896
-666 00 *0  *f folkeskolen
-666 00 *0  *f børn
-666 00 *0  *f førskolebørn
-666 00 *0  *f læsning
-666 00 *0  *f læseindlæring
-666 00 *0  *f læseundervisning
-666 00 *0  *f læseteorier
-666 00 *0  *o kronikker
+666 00*f folkeskolen
+666 00*f børn
+666 00*f førskolebørn
+666 00*f læsning
+666 00*f læseindlæring
+666 00*f læseundervisning
+666 00*f læseteorier
+666 00*o kronikker
 700 00 *5 870979 *6 68556759 *4 aut
 996 00 *a DBC

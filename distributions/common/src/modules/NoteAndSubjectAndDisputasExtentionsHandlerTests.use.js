@@ -67,7 +67,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue("No existing record in rawrepo",
@@ -79,7 +79,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -93,7 +93,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -104,7 +104,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue("National common record with no changes, but with different order of subfields",
@@ -116,7 +116,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -128,7 +128,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
         "600 00 *a xxx\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue("New extension field",
@@ -288,7 +288,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue("No existing record in rawrepo",
@@ -299,7 +299,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -312,7 +312,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -322,7 +322,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         StringUtil.sprintf("001 00 *b %s *a 1 234 567 8 \n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue("National common record with no changes, but with different order of subfields",
@@ -334,7 +334,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     RawRepoClientCore.addRecord(curRecord);
@@ -345,7 +345,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *a xxx\n" +
-        "666 00 *0 *e emneord\n" +
+        "666 00*e emneord\n" +
         "996 00 *a DBC"
     );
     Assert.equalValue("New extension field", NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"), []);
