@@ -1848,7 +1848,8 @@
                 },
                 "v":{},
                 "0":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "values": [ "norm" ]
                 },
                 "1":{
                     "repeatable":false
