@@ -17,12 +17,12 @@
 512 00 *a Beskrivelsen baseret på det fysiske forlæg
 517 00 *& 1 *a Mærkning: Tilladt for børn over 15 år
 652 00 *m 77.7
-666 00 *0 *s krig
-666 00 *0 *s den ¤2. verdenskrig
-666 00 *0 *s ondskab
-666 00 *0 *q Ungarn
-666 00 *0 *i 1940-1949
-666 00 *0 *o ungarske film
+666 00*s krig
+666 00*s den ¤2. verdenskrig
+666 00*s ondskab
+666 00*q Ungarn
+666 00*i 1940-1949
+666 00*o ungarske film
 700 00 *a Szász *h János *4 aus *4 drt
 700 00 *a Szekér *h András *4 aus
 700 00 *a Kristof *h Agota *4 ant

@@ -17,16 +17,16 @@
 631 00 *f terrorisme
 631 00 *f PFLP
 652 00 *m 34.31
-666 00 *0  *e Danmark
-666 00 *0  *f kriminalsager
-666 00 *0  *f kriminelle
-666 00 *0  *f politik
-666 00 *0  *f venstrefløjen
-666 00 *0  *f forbrydelser
-666 00 *0  *i 1960-1969
-666 00 *0  *i 1970-1979
-666 00 *0  *i 1980-1989
-666 00 *0  *o biografier
+666 00*e Danmark
+666 00*f kriminalsager
+666 00*f kriminelle
+666 00*f politik
+666 00*f venstrefløjen
+666 00*f forbrydelser
+666 00*i 1960-1969
+666 00*i 1970-1979
+666 00*i 1980-1989
+666 00*o biografier
 856 00 *z Adgang til lån hos eReolen.dk *u https://ereolen.dk/ting/object/870970-basis:50953033
 990 00 *o 201418 *b v *u nt
 996 00 *a DBC

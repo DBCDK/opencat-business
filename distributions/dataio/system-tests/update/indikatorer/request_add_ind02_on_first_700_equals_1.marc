@@ -11,11 +11,11 @@
 440 00 *0 *a ARoS focus - new Nordic *v 6
 610 00 *1 *a The ¤Icelandic Love Corporation
 652 00 *m 70.02
-666 00 *0 *f installationskunst
-666 00 *0 *f islandsk kunst
-666 00 *0 *i 2010-2019
-666 00 *0 *o billedværker
-666 00 *0 *o udstillingskataloger
+666 00*f installationskunst
+666 00*f islandsk kunst
+666 00*i 2010-2019
+666 00*o billedværker
+666 00*o udstillingskataloger
 700 00 *5 870979 *6 68206928 *4 aut *4 led *g 1
 710 00 *a The ¤Icelandic Love Corporation *4 aut *4 art
 996 00 *a DBC

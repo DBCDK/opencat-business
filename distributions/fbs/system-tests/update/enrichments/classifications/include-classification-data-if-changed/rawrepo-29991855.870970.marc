@@ -20,12 +20,12 @@
 517 00 *& 1 *a Mærkning: Tilladt for børn over 15 år
 538 00 *a Nordic 8293437 *a Nordic 8294411
 652 00 *m 77.7
-666 00 *0  *i 1920-1929
-666 00 *0  *q England
-666 00 *0  *s tv-serier
-666 00 *0  *s overklassen
-666 00 *0  *s tjenestefolk
-666 00 *0  *s landsteder
+666 00*i 1920-1929
+666 00*q England
+666 00*s tv-serier
+666 00*s overklassen
+666 00*s tjenestefolk
+666 00*s landsteder
 700 00 *0  *a Fellowes *h Julian *4 aus *4 cre
 700 00 *0  *a Goddard *h Andy *4 drt
 720 00 *o Hugh Bonneville *4 act

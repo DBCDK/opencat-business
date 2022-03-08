@@ -94,7 +94,6 @@ public class PreProcessIT extends AbstractOpencatBusinessContainerTest {
             "    <subfield code=\"k\">Specialtrykkeriet, Viborg</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"o\">idebøger</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
@@ -197,15 +196,12 @@ public class PreProcessIT extends AbstractOpencatBusinessContainerTest {
             "    <subfield code=\"k\">Specialtrykkeriet, Viborg</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"o\">idebøger</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"u\">for 9 år</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"u\">for 10 år</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"720\">\n" +

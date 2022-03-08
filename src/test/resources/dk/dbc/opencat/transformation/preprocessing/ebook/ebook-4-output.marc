@@ -9,9 +9,9 @@
 512 00 *aBeskrivelsen baseret på det fysiske forlæg
 532 00 *&1*aMed litteraturhenvisninger og links
 652 00 *m37.14635
-666 00 *0*fskolehaver
-666 00 *0*ffagintegration
-666 00 *0*fundervisningsmetodik
+666 00*fskolehaver
+666 00*ffagintegration
+666 00*fundervisningsmetodik
 700 00 *5870979*619368890*4aut
 700 00 *5870979*669097332*4aut
 710 00 *aDanmarks Institut for Pædagogik og Uddannelse

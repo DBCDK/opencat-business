@@ -10,14 +10,14 @@
 504 00 *a For nylig fremlagde oppositionen et landbrugsudspil, som både gambler med fremtiden for vores rene drikkevand og vores natur
 557 00 *a Jyllands-posten *j 2014 *z 0109-1182 *V 2014-12-30 *v 2014-12-30
 652 00 *m 63.01
-666 00 *0 *f landbrugspolitik
-666 00 *0 *f oppositionspartier
-666 00 *0 *f landbrug
-666 00 *0 *f naturen
-666 00 *0 *f naturbeskyttelse
-666 00 *0 *f landbrugsøkonomi
-666 00 *0 *e Danmark
-666 00 *0 *o kronikker
+666 00*f landbrugspolitik
+666 00*f oppositionspartier
+666 00*f landbrug
+666 00*f naturen
+666 00*f naturbeskyttelse
+666 00*f landbrugsøkonomi
+666 00*e Danmark
+666 00*o kronikker
 700 00 *a Jørgensen *h Dan *4 aut
 700 00 *a Brosbøl *h Kirsten *4 aut
 996 00 *a IDX

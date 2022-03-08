@@ -14,9 +14,9 @@
 521 00 *& REX *b 1. oplag *c 2016 *k SDPtryk
 652 00 *n 86 *z 06
 652 00 *o sk
-666 00 *0 *s samfund
-666 00 *0 *q Danmark
-666 00 *0 *i 2010-2019
+666 00*s samfund
+666 00*q Danmark
+666 00*i 2010-2019
 990 00 *o 201614 *b l *b v *u nt
 996 00 *a DBC
 d08 00 *o jdy *o ehw

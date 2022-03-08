@@ -13,10 +13,10 @@
 520 00 *a Tidligere: 2. udgave. 2010 *n 2 846 936 5 *r 9788791502729
 521 00 *b 1. oplag *c 2015 *k Hornslet Bogtrykkeri
 652 00 *m 64.15
-666 00 *0 *f bælgfrugter
-666 00 *0 *f bønner
-666 00 *0 *o vegetariske kogebøger
-666 00 *0 *o kogebøger
-666 00 *0 *o opskrifter
+666 00*f bælgfrugter
+666 00*f bønner
+666 00*o vegetariske kogebøger
+666 00*o kogebøger
+666 00*o opskrifter
 990 00 *o 201526 *b v *u nu
 996 00 *a DBC

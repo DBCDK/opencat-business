@@ -9,7 +9,7 @@
 300 00 *a sider
 652 00 *m NY TITEL
 665 00 *& lektor *i besaettelsestiden *q New York
-666 00 *0  *s besaettelsestiden
-666 00 *0  *q New York
+666 00*s besaettelsestiden
+666 00*q New York
 990 00 *b v
 996 00 *a DBC

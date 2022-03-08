@@ -20,10 +20,10 @@
 526 00 *a Heri QR-koder til bogens tekst indlæst
 652 00 *n 86.4 *z 096
 652 00 *o 84
-666 00 *0  *s udflugter
-666 00 *0  *u for 11 år
-666 00 *0  *u for 12 år
-666 00 *0  *u let at læse
+666 00*s udflugter
+666 00*u for 11 år
+666 00*u for 12 år
+666 00*u let at læse
 720 00 *o Mette Bødker *4 ill
 945 00 *a Digi lesen *x se *z 440(a)
 945 00 *a Lillys Leben - Niveau B *x se *z 440(a,o)
