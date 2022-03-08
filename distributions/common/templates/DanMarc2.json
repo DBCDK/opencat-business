@@ -2363,15 +2363,9 @@
                 "d":{},
                 "x":{},
                 "b":{},
-                "c":{
-                    "repeatable":false
-                },
-                "p":{
-                    "repeatable":false
-                },
-                "g":{
-                    "repeatable":false
-                },
+                "c":{},
+                "p":{},
+                "g":{},
                 "u":{},
                 "y":{},
                 "0":{
