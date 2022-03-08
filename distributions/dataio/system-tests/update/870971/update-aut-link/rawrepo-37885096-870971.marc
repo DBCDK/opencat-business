@@ -9,11 +9,11 @@
 300 00 *a S. 66-68 *b ill.
 557 00 *a Dansk erhvervsfjerkræ *j 2018 *z 0045-9607 *V Årg. 0047, nr. 0005 (2018) *v Årg. 47, nr. 5 (2018)
 652 00 *m 63.651
-666 00 *0  *f slagtekyllinger
-666 00 *0  *f fjerkræavl
-666 00 *0  *f fjerkræproduktion
-666 00 *0  *f kyllinger
-666 00 *0  *f høns
-666 00 *0  *f vækst
+666 00*f slagtekyllinger
+666 00*f fjerkræavl
+666 00*f fjerkræproduktion
+666 00*f kyllinger
+666 00*f høns
+666 00*f vækst
 700 00 *5 870979 *6 19405664 *4 aut
 996 00 *a DBC

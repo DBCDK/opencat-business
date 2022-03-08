@@ -12,13 +12,13 @@
 504 00 *& 1 *a En uheldig vikar er indirekte skyld i, at overskuddet fra skolefesten bliver stjålet, og i at Anders løber hjemmefra
 652 00 *n 86 *z 096
 652 00 *o sk
-666 00 *0 *s børn skriver
-666 00 *0 *s tyveri
-666 00 *0 *s skolen
-666 00 *0 *s lærere
-666 00 *0 *u for 10 år
-666 00 *0 *u for 11 år
-666 00 *0 *u for 12 år
+666 00*s børn skriver
+666 00*s tyveri
+666 00*s skolen
+666 00*s lærere
+666 00*u for 10 år
+666 00*u for 11 år
+666 00*u for 12 år
 700 00 *a Kristensen *h Tommy *c f. 1949
 710 00 *a Haldum-Hinnerup Skole *c 7. A, 1979/80
 990 00 *b b

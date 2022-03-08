@@ -9,10 +9,10 @@
 300 00 *a 66 sider *b ill. (nogle i farver) *c 30 cm
 521 00 *b 1. oplag *c 2017
 652 00 *m 91.93
-666 00 *0 *f historie
-666 00 *0 *f den ¤2. verdenskrig
-666 00 *0 *f nazisme
-666 00 *0 *e Europa
-666 00 *0 *i 1940-1949
+666 00*f historie
+666 00*f den ¤2. verdenskrig
+666 00*f nazisme
+666 00*e Europa
+666 00*i 1940-1949
 700 01 *5 870979 *6 68206928 *4 aut *g 1
 996 00 *a DBC

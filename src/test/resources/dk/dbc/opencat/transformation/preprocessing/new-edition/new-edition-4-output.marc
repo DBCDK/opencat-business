@@ -16,12 +16,12 @@
 532 00 *&1*aMed diskografi
 600 00 *5870979*668322030
 652 00 *m99.4*aFrederik*fkronprins af Danmark
-666 00 *0*fprinser
-666 00 *0*fkongehuset
-666 00 *0*eDanmark
-666 00 *0*i1900-1999
-666 00 *0*i2000-2009
-666 00 *0*i2010-2019
-666 00 *0*obiografier
+666 00*fprinser
+666 00*fkongehuset
+666 00*eDanmark
+666 00*i1900-1999
+666 00*i2000-2009
+666 00*i2010-2019
+666 00*obiografier
 990 00 *o201803*bv*uop
 996 00 *aDBC

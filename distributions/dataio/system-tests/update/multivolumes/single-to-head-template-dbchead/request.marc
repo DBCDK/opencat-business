@@ -12,10 +12,10 @@
 532 00 *& 1 *a Med litteraturhenvisninger
 631 00 *f historicisme
 652 00 *m 32.1
-666 00 *0  *f politisk filosofi
-666 00 *0  *f filosofi
-666 00 *0  *f ideologier
-666 00 *0  *f politiske ideologier
-666 00 *0  *f totalitarisme
-666 00 *0  *f civilisationskritik
+666 00*f politisk filosofi
+666 00*f filosofi
+666 00*f ideologier
+666 00*f politiske ideologier
+666 00*f totalitarisme
+666 00*f civilisationskritik
 996 00 *a DBC

@@ -17,12 +17,12 @@
 512 00 *a På omslaget: Dine valg, din historie
 521 00 *b 1. oplag *c 2018
 652 00 *m 79.49
-666 00 *0 *o du er selv hovedpersonen
-666 00 *0 *u for 12 år
-666 00 *0 *u for 13 år
-666 00 *0 *u for 14 år
-666 00 *0 *u for 15 år
-666 00 *0 *u for 16 år
+666 00*o du er selv hovedpersonen
+666 00*u for 12 år
+666 00*u for 13 år
+666 00*u for 14 år
+666 00*u for 15 år
+666 00*u for 16 år
 720 00 *o Mie Møller Bie *4 edt
 945 00 *a Tvær-veje *z 440
 990 00 *o 201849 *b l *b b *b s *u nt

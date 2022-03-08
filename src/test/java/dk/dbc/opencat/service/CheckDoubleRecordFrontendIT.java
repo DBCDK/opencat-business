@@ -119,43 +119,33 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                 "        <subfield code=\"o\">sk</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">alene</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">ensomhed</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">venskab</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">kærlighed</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">tapperhed</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">mod</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 4 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 5 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 6 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 7 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"720\">\n" +

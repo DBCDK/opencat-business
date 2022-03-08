@@ -18,10 +18,10 @@
 521 00 *b 1. oplag *c 2015 *k Lasertryk
 526 00 *a Heri QR-koder til bogens tekst indlæst
 652 00 *m NY TITEL
-666 00 *0  *s udflugter
-666 00 *0  *u for 11 år
-666 00 *0  *u for 12 år
-666 00 *0  *u let at læse
+666 00*s udflugter
+666 00*u for 11 år
+666 00*u for 12 år
+666 00*u let at læse
 720 00 *o Mette Bødker *4 ill
 945 00 *a Digi lesen *x se *w Digilesen *z 440(a)
 945 00 *a Lillys Leben - Niveau B *x se *w Digilesen. Lillys Leben - Niveau B *z 440(a,o)

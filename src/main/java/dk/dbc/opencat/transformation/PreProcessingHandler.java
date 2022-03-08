@@ -56,7 +56,7 @@ public class PreProcessingHandler {
      * Rule:
      * If there is a 666 *u subfield that matches 'For x-y år' then
      * 1) Remove all 666 *u subfields
-     * 2)add new '666 00 *0 *u For z år' subfield for each year between x and y (including both)
+     * 2)add new '666 00 *u For z år' subfield for each year between x and y (including both)
      * <p>
      * If there is no matching subfield then nothing is done to the record
      *
@@ -67,8 +67,9 @@ public class PreProcessingHandler {
         final List<Matcher> matchers = reader.getSubfieldValueMatchers("666", "u", AGE_INTERVAL_PATTERN);
 
         if (matchers.size() > 0) {
-            // First remove all existing 666 *u subfields
-            remove666UFields(record);
+            // First remove all 666 *u subfields that are in the matchers - there are a large number of 666*u that has content
+            // not containing year information. Not, it will be the users' responsibility to clean up existing year fields (cleared with LJL)
+            remove666UFields(record, matchers);
         }
 
         for (Matcher m : matchers) {
@@ -79,7 +80,7 @@ public class PreProcessingHandler {
 
             while (year <= endYear) {
                 // The message could have been 'For %s år' instead of '%s %s %s' however the capitalization of
-                // 'for' in the age subfield must be the same as in the original 666 *u subfield
+                // 'for' in the age subfield must be the same as in the original 666 *u subfield,
                 // so we reuse text from the input instead
                 record.getFields().add(getNewMarcField666(String.format("%s %s %s", forString, year, yearString)));
                 year++;
@@ -377,14 +378,20 @@ public class PreProcessingHandler {
         }
     }
 
-    private void remove666UFields(MarcRecord record) {
+    private void remove666UFields(MarcRecord record, List<Matcher> matchers) {
         final List<MarcField> fieldsToRemove = new ArrayList<>();
 
         for (MarcField field : record.getFields()) {
             if ("666".equals(field.getName())) {
                 MarcFieldReader fieldReader = new MarcFieldReader(field);
-                if (fieldReader.hasSubfield("u") && !fieldReader.hasSubfield("0")) {
-                    fieldsToRemove.add(field);
+                if (fieldReader.hasSubfield("u")) {
+                    String subFieldValue = fieldReader.getValue("u");
+                    for (Matcher matcher : matchers) {
+                        if (subFieldValue.equalsIgnoreCase(matcher.group(1) + " " + matcher.group(2) + "-"+ matcher.group(3) + " " + matcher.group(4))) {
+                            fieldsToRemove.add(field);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -393,11 +400,9 @@ public class PreProcessingHandler {
     }
 
     private MarcField getNewMarcField666(String value) {
-        final MarcSubField subfield0 = new MarcSubField("0", "");
         final MarcSubField subfieldU = new MarcSubField("u", value);
 
         final List<MarcSubField> subfields = new ArrayList<>();
-        subfields.add(subfield0);
         subfields.add(subfieldU);
 
         return new MarcField("666", "00", subfields);

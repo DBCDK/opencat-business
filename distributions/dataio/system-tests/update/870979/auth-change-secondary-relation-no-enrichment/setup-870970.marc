@@ -20,14 +20,14 @@
 600 00 *5 870979 *6 68586275
 652 00 *n 82 *z 26
 652 00 *o sk
-666 00 *0 *s brødre
-666 00 *0 *s barndom
-666 00 *0 *s vold
-666 00 *0 *s familien
-666 00 *0 *s savn
-666 00 *0 *s krig
-666 00 *0 *s diktatur
-666 00 *0 *s eksil
+666 00*s brødre
+666 00*s barndom
+666 00*s vold
+666 00*s familien
+666 00*s savn
+666 00*s krig
+666 00*s diktatur
+666 00*s eksil
 700 00 *5 870979 *6 68586275 *4 aut
 720 00 *o Nina Lautrup-Larsen *4 trl
 720 00 *o Jonas T. Bengtsson *4 aui

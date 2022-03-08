@@ -20,15 +20,15 @@
 600 00 *5870979*668048605
 652 00 *m94.9
 652 00 *p99.4*aAlbright*hMadeleine
-666 00 *0*fden ¤2. verdenskrig
-666 00 *0*fholocaust
-666 00 *0*fhistorie
-666 00 *0*fjøder
-666 00 *0*eTjekkoslovakiet
-666 00 *0*ePrag
-666 00 *0*i1930-1939
-666 00 *0*i1940-1949
-666 00 *0*oerindringer
+666 00*fden ¤2. verdenskrig
+666 00*fholocaust
+666 00*fhistorie
+666 00*fjøder
+666 00*eTjekkoslovakiet
+666 00*ePrag
+666 00*i1930-1939
+666 00*i1940-1949
+666 00*oerindringer
 700 00 *5870979*669101097*4aut
 720 00 *oFrank Esmann*4trl
 720 00 *oLaura Lee*4ctg

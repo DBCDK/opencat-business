@@ -10,14 +10,14 @@
 600 00 *a Erik den Røde
 652 00 *n 86 *z 06
 652 00 *o sk
-666 00 *0 *s vikinger
-666 00 *0 *s asatro
-666 00 *0 *s kristendom
-666 00 *0 *s historie
-666 00 *0 *s middelalderen
-666 00 *0 *q Norge
-666 00 *0 *q Island
-666 00 *0 *q Grønland
-666 00 *0 *i 900-999
+666 00*s vikinger
+666 00*s asatro
+666 00*s kristendom
+666 00*s historie
+666 00*s middelalderen
+666 00*q Norge
+666 00*q Island
+666 00*q Grønland
+666 00*i 900-999
 720 00 *o Inge Møller-Nielsen *4 edt
 996 00 *a DBC

@@ -14,10 +14,10 @@
 521 00 *a 1. oplag *c 2015 *k Hornslet Bogtrykkeri
 521 00 *b 2. oplag *c 2015 *k Hornslet Bogtrykkeri
 652 00 *m 64.15
-666 00 *0 *f bælgfrugter
-666 00 *0 *f bønner
-666 00 *0 *o vegetariske kogebøger
-666 00 *0 *o kogebøger
-666 00 *0 *o opskrifter
+666 00*f bælgfrugter
+666 00*f bønner
+666 00*o vegetariske kogebøger
+666 00*o kogebøger
+666 00*o opskrifter
 990 00 *o 201526 *b v *u nu
 996 00 *a DBC

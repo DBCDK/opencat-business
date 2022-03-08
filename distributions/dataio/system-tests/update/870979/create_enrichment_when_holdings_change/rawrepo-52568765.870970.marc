@@ -14,18 +14,18 @@
 600 00 *1 *a Pedersen *h Karina *c f. 1976
 652 00 *m 99.4 *a Pedersen *h Karina *c f. 1976
 652 00 *p 30.1628
-666 00 *0 *f socialt udsatte
-666 00 *0 *f familier
-666 00 *0 *f mor-datter forholdet
-666 00 *0 *f underklassen
-666 00 *0 *e Danmark
-666 00 *0 *i 1980-1989
-666 00 *0 *i 1990-1999
-666 00 *0 *i 2000-2009
-666 00 *0 *i 2010-2019
-666 00 *0 *o barndomserindringer
-666 00 *0 *o erindringer
-666 00 *0 *o breve
+666 00*f socialt udsatte
+666 00*f familier
+666 00*f mor-datter forholdet
+666 00*f underklassen
+666 00*e Danmark
+666 00*i 1980-1989
+666 00*i 1990-1999
+666 00*i 2000-2009
+666 00*i 2010-2019
+666 00*o barndomserindringer
+666 00*o erindringer
+666 00*o breve
 990 00 *o 201638 *b l *b v *u nt
 991 00 *o Ekspres 201637
 991 00 *o Onlineversion optaget i denne uges BKM (5 254 638 9)

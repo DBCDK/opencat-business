@@ -11,12 +11,12 @@
 600 00 *a Krumpen *h Stygge *6 19137449
 652 00 *n 86 *z 06
 652 00 *o sk
-666 00 *0 *s historie
-666 00 *0 *s historiske romaner
-666 00 *0 *s middelalderen
-666 00 *0 *s reformationen
-666 00 *0 *q Danmark
-666 00 *0 *i 1500-1599
+666 00*s historie
+666 00*s historiske romaner
+666 00*s middelalderen
+666 00*s reformationen
+666 00*q Danmark
+666 00*i 1500-1599
 996 00 *a DBC
 d08 00 *o khb *k ehw *k cra
 z99 00 *a khb
