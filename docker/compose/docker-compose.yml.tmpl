@@ -6,8 +6,6 @@ services:
       - POSTGRES_DB=rawrepo
       - POSTGRES_USER=rawrepo
       - POSTGRES_PASSWORD=thePassword
-    expose:
-      - "5432"
     ports:
       - "5432"
 
@@ -17,8 +15,6 @@ services:
       - POSTGRES_DB=holdingsitems
       - POSTGRES_USER=holdingsitems
       - POSTGRES_PASSWORD=thePassword
-    expose:
-      - "5432"
     ports:
       - "5432"
 
@@ -28,8 +24,6 @@ services:
       - POSTGRES_DB=updateservice
       - POSTGRES_USER=updateservice
       - POSTGRES_PASSWORD=thePassword
-    expose:
-      - "5432"
     ports:
       - "5432"
 
@@ -39,13 +33,15 @@ services:
   updateservice:
     image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
     env_file:
+      - settings.env
       - db.env
       - providers.env
-      - settings.env
     environment:
       - INSTANCE_NAME=${USER}_dev
       - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
       - VIPCORE_CACHE_AGE=0
+      - IDP_SERVICE_URL=${DEV_IDP_SERVICE_URL}
+      - IDP_CACHE_AGE=0
       - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
       - JAVA_MAX_HEAP_SIZE=4G
       - RAWREPO_DB_URL=${DEV_RAWREPO_DB_URL}
@@ -57,12 +53,6 @@ services:
     extra_hosts:
       - "solrserver:${HOST_IP}"
       - "solrbasis:${HOST_IP}"
-    volumes:
-      - "../../distributions:/opt/payara5/deployments/opencat-business/distributions"
-    expose:
-      - "8080"
-      - "8686"
-      - "4848"
     ports:
       - "8080"
       - "8686"
