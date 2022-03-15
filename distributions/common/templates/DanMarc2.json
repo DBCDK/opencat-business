@@ -1848,7 +1848,8 @@
                 },
                 "v":{},
                 "0":{
-                    "repeatable":false
+                    "repeatable":false,
+                    "values": [ "norm" ]
                 },
                 "1":{
                     "repeatable":false
@@ -2363,15 +2364,9 @@
                 "d":{},
                 "x":{},
                 "b":{},
-                "c":{
-                    "repeatable":false
-                },
-                "p":{
-                    "repeatable":false
-                },
-                "g":{
-                    "repeatable":false
-                },
+                "c":{},
+                "p":{},
+                "g":{},
                 "u":{},
                 "y":{},
                 "0":{
