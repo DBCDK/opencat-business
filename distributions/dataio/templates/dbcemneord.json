@@ -33,10 +33,7 @@
                 },
                 "c": "DanMarc2.fields.001.subfields.c",
                 "d": "DanMarc2.fields.001.subfields.d",
-                "f": "DanMarc2.fields.001.subfields.f",
-                "t": {
-                    "repeatable": false
-                }
+                "f": "DanMarc2.fields.001.subfields.f"
             }
         },
         "004": {
