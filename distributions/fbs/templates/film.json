@@ -223,12 +223,7 @@
             }
         },
         "534": "bog.fields.534",
-        "538":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.60.htm",            
-            "subfields":{                
-                "a":"DanMarc2.fields.538.subfields.a"                                                             
-            }
-        },              
+        "538": "fonogram.fields.538",
         "596": "DanMarc2.fields.596",
         "600": "bog.fields.600",
         "610": "bog.fields.610",
