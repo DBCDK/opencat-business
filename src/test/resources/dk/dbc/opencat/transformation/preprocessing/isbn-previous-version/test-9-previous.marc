@@ -1,0 +1,32 @@
+001 00 *a 23175339 *b 870970 *c 20111202231918 *d 20001018 *f a
+004 00 *r n *a e
+008 00 *t m *u r *a 2000 *z 2004 *b dk *l dan *x 04 *v 0
+009 00 *a a *g xx
+021 00 *e 978-87-628-0174-5 *c hf. *d kr. 259,00
+021 00 *a 87-16-12305-0 *b 1. oplag
+032 00 *a DBF200421 *x SFD200421 *x ACC200042 *x ACC200416 *x DAT990941 *x DAT991149
+100 00 *a Vagtborg *h Hans *6 69047882
+245 00 *a Samfundet, borgeren og den professionelle hjælper *e Hans Vagtborg *f tegninger: Per Jørgensen ... [et al.]
+250 00 *a 1. udgave *b ÷ *x 4. [i.e. 6.] oplag
+260 00 *& 1 *a Kbh. *b Munksgꜳrd Danmark *c 2004 *k Special-Trykkeriet Viborg
+300 00 *a 263 sider *b ill.
+440 00 *0 *a Social og sundhedsassistenter
+512 00 *a På omslaget: Uddannelse
+520 00 *a Tidligere: 1. udgave. 2000. (1. oplag: Kbh. : Munksgꜳrd)
+521 00 *a [1. oplag] *c 2000
+521 00 *a 2. oplag *c 2001
+521 00 *a 3. oplag *c 2002
+521 00 *a 4. oplag *c 2003
+521 00 *a 5. oplag *c 2003
+521 00 *b 4. [i.e. 6.] oplag *c 2004
+652 00 *m 38.4
+666 00 *0 *f omsorgsarbejde
+666 00 *0 *f samfund
+666 00 *0 *f borgere
+666 00 *0 *f plejepersonale
+666 00 *0 *f socialt arbejde
+666 00 *0 *f social- og sundhedsassistenter
+666 00 *0 *u for social- og sundhedsassistentuddannelse
+666 00 *0 *o lærebøger
+990 00 *a SFD *o 200421 *c H
+996 00 *a DBC

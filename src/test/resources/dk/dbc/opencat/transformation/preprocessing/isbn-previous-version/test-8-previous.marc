@@ -1,0 +1,20 @@
+001 00 *a 21963208 *b 870970 *c 20160520145304 *d 19971230 *f a
+004 00 *r n *a e
+008 00 *& f *t m *u r *a 1997 *z 1998 *b dk *d y *l dan *v 0
+009 00 *a a *g xx
+021 00 *a 87-7759-117-8 *c hf. *d kr. 198,00
+032 00 *a DBF199848 *x SFD199848 *x SFD199848 *x DAT201606
+100 00 *a Golodnoff *h Ulrik *6 68355346
+245 00 *a Tarot ABC *e Ulrik Golodnoff
+250 00 *a 1. udgave *x 2. oplag *b ÷
+260 00 *& 1 *a [Kbh.] *b Sphinx *c 1998 *k Narayana Press, Gylling
+300 00 *a 227 sider *b ill.
+520 00 *a Tidligere: 1. udgave. 1997
+521 00 *a 1. oplag *c 1997
+521 00 *b 2. oplag *c 1998
+526 00 *i Hertil knytter sig hans *t Kære brevkasse
+532 00 *& 1 *a Med litteraturhenvisninger
+652 00 *m 14.1
+666 00 *0 *f tarot
+990 00 *a SFD *o 199848 *c A *p P 16,25 *t 01.02.99 *t 11.01.99
+996 00 *a DBC

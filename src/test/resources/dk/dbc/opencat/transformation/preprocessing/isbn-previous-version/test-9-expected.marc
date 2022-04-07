@@ -1,0 +1,30 @@
+001 00 *a 25276329 *b 870970 *c 20111203014456 *d 20040617 *f a
+004 00 *r n *a e
+005 00 *z p
+008 00 *t m *u f *a 2004 *b dk *l dan *x 04 *v 0
+009 00 *a r *g xc *b a *h xx
+021 00 *n CD/S-072 *d kr. 2750,00
+032 00 *a DLF200428 *x SFA200428 *x DAT990941 *x DAT991149
+100 00 *5 870979 *6 69047882
+245 00 *a Social- og samfundsfag *e Hans Vagtborg *e indlæser: Heidi Roesen
+260 00 *a Tønder *b INFOKO *c 2004
+300 00 *n 16 cd'er *d [40] blade
+517 00 *& 1 *a For social- og sundhedsassistentuddannelserne
+520 00 *a Gengivelse af bogen
+520 00 *a Indlæst efter udgaven: Kbh. : Munksgꜳrd Danmark, 2004
+526 00 *i Bogen afløser hans *t Samfundet, borgeren og den professionelle hjælper *b . 2000 *n 23175339 *r 978-87-628-0174-5 *r 87-16-12305-0
+526 00 *a Hertil findes supplerende materiale på internettet
+532 00 *& 1 *a Med internetadresser
+652 00 *m 38.4
+666 00 *0 *f omsorgsarbejde
+666 00 *0 *f samfund
+666 00 *0 *f borgere
+666 00 *0 *f plejepersonale
+666 00 *0 *f socialt arbejde
+666 00 *0 *f social- og sundhedsassistenter
+666 00 *0 *u for social- og sundhedsassistentuddannelse
+666 00 *0 *o lærebøger
+700 00 *5 870979 *6 68876567
+990 00 *a SFA *o 200428 *b F
+991 00 *o Bogen optaget i H-fortegnelse 200424 (2 520 258 9)
+996 00 *a DBC

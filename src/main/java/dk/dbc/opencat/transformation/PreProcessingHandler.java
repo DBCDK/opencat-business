@@ -196,13 +196,13 @@ public class PreProcessingHandler {
     }
 
     /**
-     * All text (009 *a a) and sound (009 a* r) must be pre-processed so ISBN from previous records (520 *n) are written
-     * to this record as well. If a previous edition is found in 520*n then all values from 021*a and *e must be copied
+     * All text (009 *a a) and sound (009 a* r) must be pre-processed so ISBN from previous records (520 *n or 526 *n) are written
+     * to this record as well. If a previous edition is found in 520*n or 526*n then all values from 021*a and *e must be copied
      * from the previous record.
      * <p>
      * A couple of things to note:
-     * Field 520 is repeatable
-     * Subfield 520*n is repeatable
+     * Field 520 and 526 are repeatable
+     * Subfield 520*n and 526*n are repeatable
      * Subfield 021*a and *e are repeatable
      *
      * @param record The record to be processed
@@ -211,17 +211,17 @@ public class PreProcessingHandler {
      * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
     private void processISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
-        // This record has field 520 which means it might be a text or sound record
-        if (reader.hasSubfield("520", "n")) {
+        // This record has field 520 or 526 which means it might be a text or sound record
+        if (reader.hasSubfield("520", "n") || reader.hasSubfield("526", "n")) {
             // This record is indeed a text or sound record
             if (reader.hasValue("009", "a", "a") || reader.hasValue("009", "a", "r")) {
-                update520WithISBNFromPreviousEdition(record, reader);
+                updateWithISBNFromPreviousEdition(record, reader);
             } else if (reader.hasValue("004", "a", "b")) {
-                // If the record has a head volume and that head volume is text or sound, then process the 520 field anyway
+                // If the record has a head volume and that head volume is text or sound, then process the 520 and 526 field anyway
                 final MarcRecordReader parentReader = getHeadVolumeId(reader);
 
                 if (parentReader != null && (parentReader.hasValue("009", "a", "a") || parentReader.hasValue("009", "a", "r"))) {
-                    update520WithISBNFromPreviousEdition(record, reader);
+                    updateWithISBNFromPreviousEdition(record, reader);
                 }
             }
         }
@@ -268,34 +268,39 @@ public class PreProcessingHandler {
     }
 
     /**
-     * This function loops over all 520 field in the input record and add 520 *r subfield for each ISBN found in the
-     * records in 520 *n references
+     * This function loops over all 520 and 526 fields in the input record and add *r subfield to those field for each ISBN found in the
+     * records in 520/526 *n references
      *
      * @param record The record to update
      * @param reader MarcRecordReader of the record
      * @throws OpenCatException             If rawrepo throws exception
      * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private void update520WithISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
-        final List<MarcField> newSubfield520List = new ArrayList<>();
-        for (MarcField field520 : reader.getFieldAll("520")) {
-            final MarcField newSubfield520 = new MarcField(field520); // Clone the field so we can manipulate it while looping
-            for (MarcSubField subField : field520.getSubfields()) {
+    private void updateWithISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
+        final List<MarcField> newMarcFieldList = new ArrayList<>();
+        final List<MarcField> originalMarcFieldList = new ArrayList<>();
+        originalMarcFieldList.addAll(reader.getFieldAll("520"));
+        originalMarcFieldList.addAll(reader.getFieldAll("526"));
+
+        for (MarcField originalMarcField : originalMarcFieldList) {
+            final MarcField newMarcField = new MarcField(originalMarcField); // Clone the field so we can manipulate it while looping
+            for (MarcSubField subField : originalMarcField.getSubfields()) {
                 if ("n".equals(subField.getName()) && recordService.recordExists(subField.getValue(), RecordService.COMMON_AGENCY)) {
                     final List<String> isbnFromCommonRecord = getISBNFromCommonRecord(subField.getValue());
                     for (String isbn : isbnFromCommonRecord) {
                         final MarcSubField subfieldR = new MarcSubField("r", isbn);
-                        if (!field520.getSubfields().contains(subfieldR)) {
-                            newSubfield520.getSubfields().add(subfieldR);
+                        if (!originalMarcField.getSubfields().contains(subfieldR)) {
+                            newMarcField.getSubfields().add(subfieldR);
                         }
                     }
                 }
             }
-            newSubfield520List.add(newSubfield520);
+            newMarcFieldList.add(newMarcField);
         }
 
         new MarcRecordWriter(record).removeField("520");
-        record.getFields().addAll(newSubfield520List);
+        new MarcRecordWriter(record).removeField("526");
+        record.getFields().addAll(newMarcFieldList);
     }
 
     /**
@@ -309,15 +314,15 @@ public class PreProcessingHandler {
      */
     private List<String> getISBNFromCommonRecord(String bibliographicRecordId) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
         final List<String> result = new ArrayList<>();
-        final MarcRecord record520 = recordService.fetchRecord(bibliographicRecordId, RecordService.COMMON_AGENCY);
-        final MarcRecordReader record520Reader = new MarcRecordReader(record520);
+        final MarcRecord marcRecord = recordService.fetchRecord(bibliographicRecordId, RecordService.COMMON_AGENCY);
+        final MarcRecordReader marcRecordReader = new MarcRecordReader(marcRecord);
 
         // If this record has the ISBN fields then get ISBN from this record
-        if (record520Reader.hasSubfield("021", "a") || record520Reader.hasSubfield("021", "e")) {
-            return getISBNsFromRecord(record520Reader);
-        } else if (record520Reader.hasValue("004", "a", "b")) {
+        if (marcRecordReader.hasSubfield("021", "a") || marcRecordReader.hasSubfield("021", "e")) {
+            return getISBNsFromRecord(marcRecordReader);
+        } else if (marcRecordReader.hasValue("004", "a", "b")) {
             // If this record doesn't have ISBN field and it is a volume record then look at the parent head volume
-            final MarcRecordReader parentReader = getHeadVolumeId(record520Reader);
+            final MarcRecordReader parentReader = getHeadVolumeId(marcRecordReader);
 
             if (parentReader != null && (parentReader.hasSubfield("021", "a") || parentReader.hasSubfield("021", "e"))) {
                 return getISBNsFromRecord(parentReader);
