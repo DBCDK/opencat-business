@@ -466,6 +466,38 @@ public class PreProcessingHandlerTest {
         assertThat(request, equalTo(expected));
     }
 
+    @Test
+    public void testPreviousISBN8() throws Exception {
+        final MarcRecord request = loadRecord("isbn-previous-version/test-8-request.marc");
+        final MarcRecord expected = loadRecord("isbn-previous-version/test-8-expected.marc");
+        final MarcRecord previous = loadRecord("isbn-previous-version/test-8-previous.marc");
+
+        when(recordService.recordExists("21963208", 870970)).thenReturn(true);
+        when(recordService.fetchRecord("21963208", 870970)).thenReturn(previous);
+
+        final PreProcessingHandler preProcessingHandler = new PreProcessingHandler(recordService);
+        preProcessingHandler.preProcess(request);
+
+        new MarcRecordWriter(request).sort();
+        assertThat(request, equalTo(expected));
+    }
+
+    @Test
+    public void testPreviousISBN9() throws Exception {
+        final MarcRecord request = loadRecord("isbn-previous-version/test-9-request.marc");
+        final MarcRecord expected = loadRecord("isbn-previous-version/test-9-expected.marc");
+        final MarcRecord previous = loadRecord("isbn-previous-version/test-9-previous.marc");
+
+        when(recordService.recordExists("23175339", 870970)).thenReturn(true);
+        when(recordService.fetchRecord("23175339", 870970)).thenReturn(previous);
+
+        final PreProcessingHandler preProcessingHandler = new PreProcessingHandler(recordService);
+        preProcessingHandler.preProcess(request);
+
+        new MarcRecordWriter(request).sort();
+        assertThat(request, equalTo(expected));
+    }
+
     private void testExample(String inputFileName, String expectedFileName) throws Exception {
         final MarcRecord actual = loadRecord(inputFileName);
         final MarcRecord expected = loadRecord(expectedFileName);
