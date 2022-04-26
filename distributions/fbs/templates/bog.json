@@ -915,6 +915,17 @@
                 "e":"DanMarc2.fields.900.subfields.e",
                 "f":"DanMarc2.fields.900.subfields.f",
                 "c":"DanMarc2.fields.900.subfields.c",
+                "w":{
+                    "repeatable":false,
+                    "rules":[ {
+                        "type": "SubfieldRules.subfieldAllowedIfSubfieldValueInOtherFieldExists",
+                        "params": {
+                            "field": "996",
+                            "subfield": "a",
+                            "values": [ "DBC" ]
+                        }
+                    }]
+                },
                 "x":"DanMarc2.fields.900.subfields.x",
                 "z":{
                     "mandatory":true,
@@ -935,6 +946,17 @@
                 "i": "DanMarc2.fields.910.subfields.i",
                 "k": "DanMarc2.fields.910.subfields.k",
                 "j": "DanMarc2.fields.910.subfields.j",
+                "w":{
+                    "repeatable":false,
+                    "rules":[ {
+                            "type": "SubfieldRules.subfieldAllowedIfSubfieldValueInOtherFieldExists",
+                            "params": {
+                                "field": "996",
+                                "subfield": "a",
+                                "values": [ "DBC" ]
+                            }
+                    }]
+                },
                 "x": "DanMarc2.fields.910.subfields.x",
                 "z":{
                     "mandatory":true,
