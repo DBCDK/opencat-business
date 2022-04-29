@@ -3256,7 +3256,12 @@
             "sorting": "\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "m":{
-					"repeatable": false
+					"repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
 				},
                 "p":{
 					"repeatable": false
