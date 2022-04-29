@@ -31,7 +31,7 @@ var CheckDK5Syntax = function () {
 
             var subfieldValueStripped = subfieldValue.replace( /[\d\.]/g, "" );
 
-            if( subfieldValue.match( /uden klassem|ny titel/i ) ) {
+            if( subfieldValue.match( /uden klassem|ny titel|^sk$/i ) ) {
                 error = false;
             }
             // Check if subfield value contains other chars than numbers and full stop

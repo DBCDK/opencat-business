@@ -58,6 +58,18 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
     Assert.equalValue( "Record with valid 652m",
         CheckDK5Syntax.validateSubfield(record, field, subfield, params), []);
 
+    var marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "652 00 *m sk"
+    );
+
+    var record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
+    field = record.fields[1];
+    subfield = field.subfields[0];
+    Assert.equalValue( "Record with valid 652m",
+        CheckDK5Syntax.validateSubfield(record, field, subfield, params), []);
+
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
