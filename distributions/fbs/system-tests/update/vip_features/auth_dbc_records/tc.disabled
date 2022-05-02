@@ -36,7 +36,7 @@
                     {
                         "type": "ERROR",
                         "urlForDocumentation": "",
-                        "message": "Du har ikke ret til at opdatere en fællesskabspost som er ejet af DBC"
+                        "message": "Du har ikke ret til at opdatere denne fællespost, da den er under produktion"
                     }
                 ],
                 "rawrepo": [
