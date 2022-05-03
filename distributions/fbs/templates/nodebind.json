@@ -116,7 +116,7 @@
                 },
                 "z": "DanMarc2.fields.008.subfields.z",
                 "x": "DanMarc2.fields.008.subfields.x",
-                "a": "DanMarc2.fields.008.subfields.a",                
+                "a": "DanMarc2.fields.008.subfields.a",
                 "b": "DanMarc2.fields.008.subfields.b",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "DanMarc2.fields.008.subfields.l",
@@ -224,7 +224,7 @@
         "240": "fonogram.fields.240",
         "241":{
                 "url":"http://www.kat-format.dk/danMARC2/Danmarc2.39.htm",
-                "subfields":{                
+                "subfields":{
                 "a":{
                     "mandatory":true,
                     "repeatable":false
@@ -274,10 +274,10 @@
                 "a":"DanMarc2.fields.260.subfields.a",
                 "d":"DanMarc2.fields.260.subfields.d",
                 "f":"DanMarc2.fields.260.subfields.f",
-                "g":"DanMarc2.fields.260.subfields.g",                
+                "g":"DanMarc2.fields.260.subfields.g",
                 "e":"DanMarc2.fields.260.subfields.e",
                 "b":"DanMarc2.fields.260.subfields.b",
-                "c":"DanMarc2.fields.260.subfields.c"                                                                                               
+                "c":"DanMarc2.fields.260.subfields.c"
             }
         },
         "300":{
@@ -344,8 +344,8 @@
                     "mandatory":true,
                     "repeatable":false
                 }
-            }      
-                       
+            }
+
         },
         "520":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.56.htm",
@@ -485,7 +485,7 @@
         "631":"DanMarc2.fields.631",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting": "&\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",

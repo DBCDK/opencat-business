@@ -48,7 +48,7 @@
         "002": "bog.fields.002",
         "004": "bog.fields.004",
         "006":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",           
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
             "subfields": {
                 "a": "DanMarc2.fields.006.subfields.a",
                 "b": "DanMarc2.fields.006.subfields.b",
@@ -106,7 +106,7 @@
         "009":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
             "mandatory":true,
-            "repeatable":false,            
+            "repeatable":false,
             "subfields":{
                 "a":{
                     "mandatory":true,
@@ -118,7 +118,7 @@
                     "repeatable":false,
                     "values":[ "mj", "nh", "np", "th" ]
                 },
-                "b":"DanMarc2.fields.009.subfields.b",                  
+                "b":"DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
             }
         },
@@ -150,7 +150,7 @@
             }]
         },
         "239":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.37.htm",          
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.37.htm",
             "repeatable":false,
             "sorting":"tb\u00f8",
             "subfields":{
@@ -185,7 +185,7 @@
         },
         "250": "DanMarc2.fields.250",
         "260": "bog.fields.260",
-        "300":{            
+        "300":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
             "mandatory":true,
             "repeatable":false,
@@ -194,7 +194,7 @@
                 "n":"DanMarc2.fields.300.subfields.n",
                 "a":"DanMarc2.fields.300.subfields.a",
                 "l":"DanMarc2.fields.300.subfields.l",
-                "b":"DanMarc2.fields.300.subfields.b",                
+                "b":"DanMarc2.fields.300.subfields.b",
                 "d":"DanMarc2.fields.300.subfields.d",
                 "e":"DanMarc2.fields.300.subfields.e"
             }
@@ -237,7 +237,7 @@
         "631": "bog.fields.631",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting":"0\u00E5mqrivzAaHhkEeFfCcTtBb",
+            "sorting":"&0\u00E5mqrivzAaHhkEeFfCcTtBb",
             "subfields":{
                 "m": "DanMarc2.fields.652.subfields.m",
                 "p": "DanMarc2.fields.652.subfields.p",
@@ -276,9 +276,9 @@
         "710": "bog.fields.710",
         "720": "bog.fields.720",
         "739":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85.htm",                    
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.85.htm",
             "repeatable":false,
-            "subfields":{                
+            "subfields":{
                 "t":{
                     "repeatable":false
 				},

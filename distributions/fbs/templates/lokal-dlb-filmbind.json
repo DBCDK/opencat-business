@@ -66,7 +66,7 @@
        						"type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
 						}
                     ]
-                },            
+                },
                 "b": "DanMarc2.fields.008.subfields.b",
                 "d": "DanMarc2.fields.008.subfields.d",
                 "k": "DanMarc2.fields.008.subfields.k",
@@ -77,9 +77,9 @@
 		},
         "009":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
-            "repeatable":false,            
-            "subfields":{               
-                "b":"DanMarc2.fields.009.subfields.b",                  
+            "repeatable":false,
+            "subfields":{
+                "b":"DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
             }
         },
@@ -289,7 +289,7 @@
         "651": "DanMarc2.fields.651",
         "652":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting": "&\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "p": "DanMarc2.fields.652.subfields.p",
                 "i": "DanMarc2.fields.652.subfields.i",
