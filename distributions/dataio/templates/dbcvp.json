@@ -113,49 +113,6 @@
         "996":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
             "repeatable": false,
-                "subfields": {
-                "a": {
-                    "repeatable": false,
-                    "values": [ "DBC" ]
-
-                }
-              }
-        },
-        "d08":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "repeatable": false,
-            "subfields":{
-                "x":{
-                    "repeatable": false,
-                    "values": ["2"]
-                },
-                "m":{
-                    "repeatable": false
-                },
-                "n":{
-                    "repeatable": false
-                },
-                "d":{
-                    "repeatable": false
-                },
-                "g":{
-                    "repeatable": false
-                },
-                "u":{
-                    "repeatable": false
-                },
-                "s":{
-                    "repeatable": false
-                },
-                "j":{
-                "repeatable": false
-                }
-
-            }
-        },
-        "996":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
-            "repeatable": false,
             "subfields": {
                 "a": {
                     "repeatable": false,
@@ -164,7 +121,6 @@
 
             }
         },
-
         "d08": {
             "subfields": {
                 "o": {},

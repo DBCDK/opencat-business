@@ -294,8 +294,7 @@
                 "b":"DanMarc2.fields.652.subfields.b",
                 "z":"DanMarc2.fields.654.subfields.z",
                 "q":"DanMarc2.fields.652.subfields.q",
-                "r":"DanMarc2.fields.652.subfields.r",
-                "1":"DanMarc2.fields.652.subfields.1"
+                "r":"DanMarc2.fields.652.subfields.r"
             }
         },
         "654":{
@@ -314,8 +313,7 @@
                 "b":"DanMarc2.fields.654.subfields.b",
                 "z":"DanMarc2.fields.654.subfields.z",
                 "q":"DanMarc2.fields.654.subfields.q",
-                "r":"DanMarc2.fields.654.subfields.r",
-                "1":"DanMarc2.fields.652.subfields.1"
+                "r":"DanMarc2.fields.654.subfields.r"
             }
         },
         "655": "DanMarc2.fields.655",

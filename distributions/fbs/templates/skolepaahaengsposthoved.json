@@ -329,7 +329,7 @@
         "651": "DanMarc2.fields.651",
         "652":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting": "&\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "p":"DanMarc2.fields.652.subfields.p",
                 "i":"DanMarc2.fields.652.subfields.i",
@@ -342,7 +342,6 @@
                 "c":"DanMarc2.fields.652.subfields.c",
                 "t":"DanMarc2.fields.652.subfields.t",
                 "b":"DanMarc2.fields.652.subfields.b",
-                "0":"DanMarc2.fields.652.subfields.0",
                 "r":"DanMarc2.fields.652.subfields.r"
             }
         },
@@ -360,7 +359,6 @@
                 "c":"DanMarc2.fields.654.subfields.c",
                 "t":"DanMarc2.fields.654.subfields.t",
                 "b":"DanMarc2.fields.654.subfields.b",
-                "0":"DanMarc2.fields.654.subfields.0",
                 "r":"DanMarc2.fields.654.subfields.r"
             }
         },

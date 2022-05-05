@@ -116,7 +116,6 @@
                 "s": "DanMarc2.fields.243.subfields.s",
                 "h": "DanMarc2.fields.243.subfields.h",
                 "q": "DanMarc2.fields.243.subfields.q",
-                "1": "DanMarc2.fields.243.subfields.1",
                 "5": "DanMarc2.fields.243.subfields.5"
             }
         },
@@ -223,7 +222,6 @@
                 "u": "DanMarc2.fields.600.subfields.u",
                 "b": "DanMarc2.fields.600.subfields.b",
                 "v": "DanMarc2.fields.600.subfields.v",
-                "1": "DanMarc2.fields.600.subfields.1",
                 "2": "DanMarc2.fields.600.subfields.2"
             }
         },
@@ -244,7 +242,6 @@
                 "u": "DanMarc2.fields.610.subfields.u",
                 "b": "DanMarc2.fields.610.subfields.b",
                 "v": "DanMarc2.fields.610.subfields.v",
-                "1": "DanMarc2.fields.610.subfields.1",
                 "2": "DanMarc2.fields.610.subfields.2"
             }
         },
@@ -261,7 +258,7 @@
         "651": "DanMarc2.fields.651",
         "652":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting": "&\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "p": "DanMarc2.fields.652.subfields.p",
                 "i": "DanMarc2.fields.652.subfields.i",
@@ -274,7 +271,6 @@
                 "c": "DanMarc2.fields.652.subfields.c",
                 "t": "DanMarc2.fields.652.subfields.t",
                 "b": "DanMarc2.fields.652.subfields.b",
-                "1": "DanMarc2.fields.652.subfields.1",
                 "z": "DanMarc2.fields.652.subfields.z",
                 "q": "DanMarc2.fields.652.subfields.q",
                 "r": "DanMarc2.fields.652.subfields.r"
@@ -314,7 +310,6 @@
                 "l": "DanMarc2.fields.700.subfields.l",
                 "q": "DanMarc2.fields.700.subfields.q",
                 "g": "DanMarc2.fields.700.subfields.g",
-                "1": "DanMarc2.fields.700.subfields.1",
                 "2": "DanMarc2.fields.700.subfields.2",
                 "4": "DanMarc2.fields.700.subfields.4"
             }
@@ -343,7 +338,6 @@
                 "l": "DanMarc2.fields.710.subfields.l",
                 "q": "DanMarc2.fields.710.subfields.q",
                 "g": "DanMarc2.fields.710.subfields.g",
-                "1": "DanMarc2.fields.710.subfields.1",
                 "2": "DanMarc2.fields.710.subfields.2",
                 "4": "DanMarc2.fields.710.subfields.4"
             }

@@ -25,10 +25,66 @@
         "004": "bogbind.fields.004",
         "008": "bogbind.fields.008",
         "009": "bogbind.fields.009",
-        "011": "bog.fields.011",
-        "014": "bogbind.fields.014",
-        "017": "bog.fields.017",
-        "018": "bog.fields.018",
+        "011":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.c.htm",
+            "repeatable":false,
+            "subfields":{
+                "a":{
+                    "repeatable": false,
+                    "rules":[{
+                        "type":"SubfieldRules.checkFaust"
+                    }
+                    ]
+                }
+            }
+        },
+        "014":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "rules":[{
+                        "type":"SubfieldRules.checkFaust"
+                    },
+                        {
+                            "type": "SubfieldRules.lookupRecord",
+                            "params": {
+                                "requiredFieldAndSubfield": "004a",
+                                "allowedSubfieldValues": [ "h", "s" ]
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "017":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.12.htm",
+            "repeatable":false,
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "rules":[{
+                        "type":"SubfieldRules.checkFaust"
+                    }
+                    ]
+                }
+            }
+        },
+        "018":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.13.htm",
+            "subfields":{
+                "a":{
+                    "rules":[{
+                        "type":"SubfieldRules.checkFaust"
+                    }
+                    ]
+                }
+            }
+        },
         "021": "DanMarc2.fields.021",
 		"022": "DanMarc2.fields.022",
 		"023": "DanMarc2.fields.023",

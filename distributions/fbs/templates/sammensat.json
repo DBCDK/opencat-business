@@ -239,8 +239,6 @@
                 "e": "DanMarc2.fields.100.subfields.e",
                 "f": "DanMarc2.fields.100.subfields.f",
                 "c": "DanMarc2.fields.100.subfields.c",
-                "0": "DanMarc2.fields.100.subfields.0",
-                "1": "DanMarc2.fields.100.subfields.1",
                 "4": "DanMarc2.fields.100.subfields.4"
             }
         },
@@ -255,8 +253,6 @@
                 "i": "DanMarc2.fields.110.subfields.i",
                 "k": "DanMarc2.fields.110.subfields.k",
                 "j": "DanMarc2.fields.110.subfields.j",
-                "0": "DanMarc2.fields.110.subfields.0",
-                "1": "DanMarc2.fields.110.subfields.1",
                 "4": "DanMarc2.fields.110.subfields.4"
             }
         },
@@ -361,8 +357,7 @@
                 "z": "DanMarc2.fields.440.subfields.z",
                 "\u00f8": "DanMarc2.fields.440.subfields.\u00f8",
                 "\u00E6": "DanMarc2.fields.440.subfields.\u00E6",
-                "0": "DanMarc2.fields.440.subfields.0",
-                "1": "DanMarc2.fields.440.subfields.1"
+                "0": "DanMarc2.fields.440.subfields.0"
             }
         },
         "500": "bog.fields.500",
@@ -589,8 +584,6 @@
                 "e":"DanMarc2.fields.600.subfields.e",
                 "f":"DanMarc2.fields.600.subfields.f",
                 "h":"DanMarc2.fields.600.subfields.h",
-                "0":"DanMarc2.fields.600.subfields.0",
-				"1":"DanMarc2.fields.600.subfields.1",
                 "2":"DanMarc2.fields.600.subfields.2"
             }
         },
@@ -607,8 +600,6 @@
                 "i":"DanMarc2.fields.610.subfields.i",
                 "k":"DanMarc2.fields.610.subfields.k",
                 "j":"DanMarc2.fields.610.subfields.j",
-                "0":"DanMarc2.fields.610.subfields.0",
-				"1":"DanMarc2.fields.610.subfields.1",
                 "2":"DanMarc2.fields.610.subfields.2"
             }
         },
@@ -645,7 +636,6 @@
                 "c":"DanMarc2.fields.652.subfields.c",
                 "t":"DanMarc2.fields.652.subfields.t",
                 "b":"DanMarc2.fields.652.subfields.b",
-                "0":"DanMarc2.fields.652.subfields.0",
 				"z":"DanMarc2.fields.652.subfields.z",
                 "n":"DanMarc2.fields.652.subfields.n",
                 "o":"DanMarc2.fields.652.subfields.o",
@@ -682,8 +672,6 @@
                 "f": "DanMarc2.fields.700.subfields.f",
                 "g": "DanMarc2.fields.700.subfields.g",
                 "h": "DanMarc2.fields.700.subfields.h",
-                "0": "DanMarc2.fields.700.subfields.0",
-                "1": "DanMarc2.fields.700.subfields.1",
                 "4": "DanMarc2.fields.700.subfields.4"
             }
         },
@@ -699,8 +687,6 @@
                 "k": "DanMarc2.fields.710.subfields.k",
                 "s": "DanMarc2.fields.710.subfields.s",
                 "t": "DanMarc2.fields.710.subfields.t",
-                "0": "DanMarc2.fields.710.subfields.0",
-                "1": "DanMarc2.fields.710.subfields.1",
                 "4": "DanMarc2.fields.710.subfields.4"
             }
         },
@@ -731,8 +717,7 @@
                 "n": "DanMarc2.fields.840.subfields.n",
                 "o": "DanMarc2.fields.840.subfields.o",
                 "z": "DanMarc2.fields.840.subfields.z",
-                "v": "DanMarc2.fields.840.subfields.v",
-                "0": "DanMarc2.fields.840.subfields.0"
+                "v": "DanMarc2.fields.840.subfields.v"
             }
         },
         "856":{
@@ -772,8 +757,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "0":"DanMarc2.fields.900.subfields.0"
+                }
             }
         },
         "910":{
@@ -793,8 +777,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "0":"DanMarc2.fields.910.subfields.0"
+                }
             }
         },
         "945":{

@@ -307,7 +307,6 @@
                 "c":"DanMarc2.fields.652.subfields.c",
                 "t":"DanMarc2.fields.652.subfields.t",
                 "b":"DanMarc2.fields.652.subfields.b",
-                "0":"DanMarc2.fields.652.subfields.0",
                 "z":"DanMarc2.fields.652.subfields.z",
                 "n":"DanMarc2.fields.652.subfields.n",
                 "o":"DanMarc2.fields.652.subfields.o",
@@ -369,8 +368,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "0":"DanMarc2.fields.900.subfields.0"
+                }
             }
         },
         "910":{
@@ -390,8 +388,7 @@
                     "mandatory":true,
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "0":"DanMarc2.fields.910.subfields.0"
+                }
             }
         },
         "945":{

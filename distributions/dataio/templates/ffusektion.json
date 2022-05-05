@@ -64,10 +64,25 @@
                 "v": "DanMarc2.fields.008.subfields.v"
             }
 		},
-        "009": "ffubind.fields.009",
+        "009":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+            "repeatable":false,
+            "subfields":{
+                "b": "Lister.fields.codes.subfields.general_mattype",
+                "h": "Lister.fields.codes.subfields.specific_mattype"
+            }
+        },
         "011": "DanMarc2.fields.011",
         "012": "DanMarc2.fields.012",
-        "014": "ffubind.fields.014",
+        "014":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
+            "repeatable":false,
+            "mandatory":true,
+            "subfields":{
+                "a": "DanMarc2.fields.014.subfields.a",
+                "x": "DanMarc2.fields.014.subfields.x"
+            }
+        },
         "015": "DanMarc2.fields.015",
         "017": "DanMarc2.fields.017",
         "018": "DanMarc2.fields.018",
