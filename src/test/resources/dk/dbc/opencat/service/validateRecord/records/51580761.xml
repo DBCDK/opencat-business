@@ -41,7 +41,6 @@
         <marcx:subfield code="x">BKM201511</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="100" ind1="0" ind2="0">
-        <marcx:subfield code="0"/>
         <marcx:subfield code="a">Møller</marcx:subfield>
         <marcx:subfield code="h">Karl Henrik</marcx:subfield>
         <marcx:subfield code="4">aut</marcx:subfield>
@@ -65,7 +64,7 @@
         <marcx:subfield code="b">alle ill. i farver</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="440" ind1="0" ind2="0">
-        <marcx:subfield code="0"/>
+        <marcx:subfield code="0">norm</marcx:subfield>
         <marcx:subfield code="a">Digilesen</marcx:subfield>
         <marcx:subfield code="o">Lillys Leben - Niveau B</marcx:subfield>
     </marcx:datafield>
@@ -96,19 +95,15 @@
         <marcx:subfield code="o">84</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="666" ind1="0" ind2="0">
-        <marcx:subfield code="0"/>
         <marcx:subfield code="s">udflugter</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="666" ind1="0" ind2="0">
-        <marcx:subfield code="0"/>
         <marcx:subfield code="u">for 11 år</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="666" ind1="0" ind2="0">
-        <marcx:subfield code="0"/>
         <marcx:subfield code="u">for 12 år</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="666" ind1="0" ind2="0">
-        <marcx:subfield code="0"/>
         <marcx:subfield code="u">let at læse</marcx:subfield>
     </marcx:datafield>
     <marcx:datafield tag="720" ind1="0" ind2="0">

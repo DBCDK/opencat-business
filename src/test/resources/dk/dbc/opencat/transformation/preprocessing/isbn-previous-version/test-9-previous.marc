@@ -20,13 +20,13 @@
 521 00 *a 5. oplag *c 2003
 521 00 *b 4. [i.e. 6.] oplag *c 2004
 652 00 *m 38.4
-666 00 *0 *f omsorgsarbejde
-666 00 *0 *f samfund
-666 00 *0 *f borgere
-666 00 *0 *f plejepersonale
-666 00 *0 *f socialt arbejde
-666 00 *0 *f social- og sundhedsassistenter
-666 00 *0 *u for social- og sundhedsassistentuddannelse
-666 00 *0 *o lærebøger
+666 00 *f omsorgsarbejde
+666 00 *f samfund
+666 00 *f borgere
+666 00 *f plejepersonale
+666 00 *f socialt arbejde
+666 00 *f social- og sundhedsassistenter
+666 00 *u for social- og sundhedsassistentuddannelse
+666 00 *o lærebøger
 990 00 *a SFD *o 200421 *c H
 996 00 *a DBC

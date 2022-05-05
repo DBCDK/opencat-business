@@ -174,7 +174,7 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"440\">\n" +
             "    <subfield code=\"å\">2</subfield>\n" +
-            "    <subfield code=\"0\"/>\n" +
+            "    <subfield code=\"0\">norm</subfield>\n" +
             "    <subfield code=\"a\">QR bog</subfield>\n" +
             "    <subfield code=\"V\">246</subfield>\n" +
             "    <subfield code=\"v\">nr. 246</subfield>\n" +
