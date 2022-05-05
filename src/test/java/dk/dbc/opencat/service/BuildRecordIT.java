@@ -107,7 +107,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"b\">ill. i farver</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"440\">\n" +
-                "        <subfield code=\"0\"/>\n" +
+                "        <subfield code=\"0\">norm</subfield>\n" +
                 "        <subfield code=\"a\">The ¤Goon</subfield>\n" +
                 "        <subfield code=\"V\">1</subfield>\n" +
                 "        <subfield code=\"v\">Volume 1</subfield>\n" +
@@ -185,7 +185,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"b\">ill. i farver</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield tag=\"440\" ind1=\"0\" ind2=\"0\">\n" +
-                "        <subfield code=\"0\"></subfield>\n" +
+                "        <subfield code=\"0\">norm</subfield>\n" +
                 "        <subfield code=\"a\">The ¤Goon</subfield>\n" +
                 "        <subfield code=\"v\">Volume 1</subfield>\n" +
                 "    </datafield>\n" +
