@@ -67,7 +67,7 @@
         <subfield code="b">alle ill. i farver</subfield>
     </datafield>
     <datafield ind1="0" ind2="0" tag="440">
-        <subfield code="0"/>
+        <subfield code="0">norm</subfield>
         <subfield code="å">1</subfield>
         <subfield code="a">Digilesen</subfield>
         <subfield code="o">Lillys Leben - Niveau B</subfield>
