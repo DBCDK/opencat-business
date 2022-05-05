@@ -94,20 +94,7 @@
             }
         },
         "005": "DanMarc2.fields.005",
-        "006":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
-            "subfields": {
-                "a": "DanMarc2.fields.006.subfields.a",
-                "b": "DanMarc2.fields.006.subfields.b",
-                "c": "DanMarc2.fields.006.subfields.c",
-                "d": {
-                    "repeatable": false,
-                    "values": [ "0", "6", "7", "11", "12", "15", "16", "18" ]
-                },
-                "e": "DanMarc2.fields.006.subfields.e",
-                "2": "DanMarc2.fields.006.subfields.2"
-            }
-        },
+        "006": "paahaengspost.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "sorting": "tuazbcdefghijklmnoqrxwv",
@@ -136,80 +123,10 @@
                 "v": "DanMarc2.fields.008.subfields.v"
             }
 		},
-        "009":{
-		    "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "values": "Lister.fields.codes.subfields.general_mattype.values"
-                },
-                "g":{
-                    "mandatory":true,
-                    "values": "Lister.fields.codes.subfields.specific_mattype.values"
-                },
-                "b": "Lister.fields.codes.subfields.general_mattype",
-                "h": "Lister.fields.codes.subfields.specific_mattype"
-			}
-		},
+        "009": "paahaengspost.fields.009",
         "010": "DanMarc2.fields.010",
-        "011":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.c.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "repeatable": false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
-        "012":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.d.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "repeatable":false
-                },
-                "b":{
-                    "repeatable":false
-                }
-            }
-        },
-        "013":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.e.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
-        "014":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.f.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                },
-                "x":{
-                    "repeatable":false,
-                    "values": [ "ANM", "DEB", "FOR", "SMS" ]
-                }
-            }
-        },
+        "011": "paahaengspost.fields.011",
+        "012": "paahaengspost.fields.012",
         "015":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.10.htm",
             "subfields":{
@@ -223,45 +140,8 @@
                 }
             }
         },
-        "016":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.11.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
-        "017":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.12.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
-        "018":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.13.htm",
-            "subfields":{
-                "a":{
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
+        "017": "paahaengspost.fields.017",
+        "018": "paahaengspost.fields.018",
         "020": "DanMarc2.fields.020",
         "021": "DanMarc2.fields.021",
         "022": "DanMarc2.fields.022",

@@ -80,20 +80,7 @@
             }
         },
         "005": "DanMarc2.fields.005",
-        "006":{
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.8g.htm",
-            "subfields": {
-                "a": "DanMarc2.fields.006.subfields.a",
-                "b": "DanMarc2.fields.006.subfields.b",
-                "c": "DanMarc2.fields.006.subfields.c",
-                "d": {
-                    "repeatable": false,
-                    "values": [ "0", "6", "7", "11", "12", "15", "16", "18" ]
-                },
-                "e": "DanMarc2.fields.006.subfields.e",
-                "2": "DanMarc2.fields.006.subfields.2"
-            }
-        },
+        "006": "paahaengspost.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "sorting": "tuazbcdefghijklmnoqrxwv",
@@ -171,47 +158,15 @@
                         "type":"SubfieldRules.checkFaust"
                     }
                     ]
-                }
-            }
-        },
-        "015":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.10.htm",
-            "subfields":{
-                "a":{
-                    "mandatory":true
                 },
-                "v":{},
                 "x":{
                     "repeatable":false,
                     "values": [ "ANM", "DEB", "FOR", "SMS" ]
                 }
             }
         },
-        "017":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.12.htm",
-            "repeatable":false,
-            "subfields":{
-                "a":{
-                    "mandatory":true,
-                    "repeatable":false,
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
-        "018":{
-            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.13.htm",
-            "subfields":{
-                "a":{
-                    "rules":[{
-                        "type":"SubfieldRules.checkFaust"
-                    }
-                    ]
-                }
-            }
-        },
+        "017": "paahaengspost.fields.017",
+        "018": "paahaengspost.fields.018",
         "020": "DanMarc2.fields.020",
         "021": "DanMarc2.fields.021",
         "022": "DanMarc2.fields.022",
@@ -368,7 +323,6 @@
                 "c":"DanMarc2.fields.652.subfields.c",
                 "t":"DanMarc2.fields.652.subfields.t",
                 "b":"DanMarc2.fields.652.subfields.b",
-                "0":"DanMarc2.fields.652.subfields.0",
 				"z":"DanMarc2.fields.652.subfields.z",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
@@ -388,7 +342,6 @@
                 "c":"DanMarc2.fields.654.subfields.c",
                 "t":"DanMarc2.fields.654.subfields.t",
                 "b":"DanMarc2.fields.654.subfields.b",
-                "0":"DanMarc2.fields.654.subfields.0",
                 "q":"DanMarc2.fields.652.subfields.q",
                 "r":"DanMarc2.fields.652.subfields.r"
             }

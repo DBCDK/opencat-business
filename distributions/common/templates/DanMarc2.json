@@ -1154,12 +1154,6 @@
 					"repeatable": false
 				},
                 "b":{},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
-					"repeatable": false
-				},
                 "2":{
                     "repeatable": false
                 },
@@ -1194,12 +1188,6 @@
 					"repeatable": false
 				},
                 "b":{
-					"repeatable": false
-				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
 					"repeatable": false
 				},
                 "2":{
@@ -1267,12 +1255,6 @@
 				},
                 "u":{},
                 "v":{},
-                "0":{
-                    "repeatable":false
-				},
-                "1":{
-                    "repeatable":false
-				},
                 "4": "Lister.fields.codes.subfields.relator_code",
                 "7":{}
             }
@@ -1325,12 +1307,6 @@
                 "n":{},
                 "o":{},
                 "w":{
-					"repeatable": false
-				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
 					"repeatable": false
 				},
                 "2":{
@@ -1410,12 +1386,6 @@
 					"repeatable": false
 				},
                 "q":{
-					"repeatable": false
-				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
 					"repeatable": false
 				},
                 "5":{
@@ -1850,9 +1820,6 @@
                 "0":{
                     "repeatable":false,
                     "values": [ "norm" ]
-                },
-                "1":{
-                    "repeatable":false
                 },
                 "2":{
                     "repeatable": false
@@ -2982,12 +2949,6 @@
 					"repeatable": false
 				},
                 "v":{},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
-					"repeatable": false
-				},
                 "2":{
 					"repeatable": false
 				},
@@ -3052,12 +3013,6 @@
 				},
                 "b":{},
                 "v":{},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
-					"repeatable": false
-				},
                 "2":{
 					"repeatable": false
 				},
@@ -3357,22 +3312,7 @@
 				},
                 "r":{
 					"repeatable": false
-				},
-                "0":{
-                    "rules": [
-                       {
-                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
-                        }
-                    ]
-                },
-                "1":{
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
-                        }
-                    ]
-
-                }
+				}
             },
             "comment_1": "Delfelt *m eller *o er obligatorisk",
             "comment_2": "Delfelt *m og *n/*o må ikke forekomme i samme felt",
@@ -3395,7 +3335,7 @@
         },
         "654":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7a.htm",
-            "sorting": "\u00E5mnoipqrahkefctbvz01",
+            "sorting": "&\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "m":{
                     "repeatable": false
@@ -3494,21 +3434,6 @@
                 },
                 "r":{
                     "repeatable": false
-                },
-                "0":{
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
-                        }
-                    ]
-                },
-                "1":{
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
-                        }
-                    ]
-
                 }
             },
             "rules": [
@@ -3530,7 +3455,7 @@
         },
         "655":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.7b.htm",
-            "sorting": "\u00E5mipahkefctbvyz01",
+            "sorting": "&\u00E5mipahkefctbvyz01",
             "subfields":{
                 "m":{
                     "repeatable": false
@@ -3626,21 +3551,6 @@
                             "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
                         }
                     ]
-                },
-                "0":{
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
-                        }
-                    ]
-                },
-                "1":{
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.subfieldsDemandsOtherSubfields"
-                        }
-                    ]
-
                 }
             }
         },
@@ -3725,9 +3635,6 @@
                 "i": {},
                 "o": {},
                 "u": {},
-                "0": {
-                    "repeatable": false
-                },
                 "5":{
                     "repeatable": false
                 },
@@ -3873,12 +3780,6 @@
 					"repeatable": false,
 					"values": [ "1" ]
 				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
-					"repeatable": false
-				},
                 "2":{
                     "repeatable": false
                 },
@@ -3942,12 +3843,6 @@
 					"repeatable": false,
 					"values": [ "1" ]
 				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
-					"repeatable": false
-				},
                 "2":{
                     "repeatable": false
                 },
@@ -4010,12 +3905,6 @@
 				},
                 "u":{},
                 "v":{},
-                "0":{
-                    "repeatable":false
-				},
-                "1":{
-                    "repeatable":false
-				},
                 "4": "Lister.fields.codes.subfields.relator_code",
                 "7":{},
                 "g":{
@@ -4068,12 +3957,6 @@
                 "n":{},
                 "o":{},
                 "w":{
-                    "repeatable":false
-                },
-                "0":{
-                    "repeatable":false
-                },
-                "1":{
                     "repeatable":false
                 },
                 "2":{
@@ -4140,12 +4023,6 @@
                 "c":{
                     "repeatable":false
                 },
-                "0":{
-                    "repeatable":false
-                },
-                "1":{
-                    "repeatable":false
-                },
                 "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{},
                 "6":{
@@ -4185,12 +4062,6 @@
 					"repeatable": false
 				},
                 "j":{
-					"repeatable": false
-				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
 					"repeatable": false
 				},
                 "4": "Lister.fields.codes.subfields.relator_code",
@@ -4240,12 +4111,6 @@
                 "y":{
 					"repeatable": false
 				},
-                "0":{
-					"repeatable": false
-				},
-                "1":{
-					"repeatable": false
-				},
                 "7":{}
             }
         },
@@ -4286,12 +4151,6 @@
                     "rules":[ { "type":"SubfieldRules.checkISSN" } ]
                 },
                 "v":{},
-                "0":{
-                    "repeatable":false
-                },
-                "1":{
-                    "repeatable":false
-                },
                 "2":{
                     "repeatable": false
                 }
@@ -4773,9 +4632,7 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "0":{},
-                "1":{}
+                }
             },
             "rules": [
                 {
@@ -4835,9 +4692,7 @@
                 "z":{
                     "repeatable":false,
                     "rules":[ { "type": "SubfieldRules.checkReference" } ]
-                },
-                "0":{},
-                "1":{}
+                }
             },
             "rules": [
                 {
