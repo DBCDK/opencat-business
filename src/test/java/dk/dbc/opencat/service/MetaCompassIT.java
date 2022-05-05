@@ -167,7 +167,7 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "    <subfield code=\"b\">alle ill. i farver</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"440\">\n" +
-            "    <subfield code=\"0\"/>\n" +
+            "    <subfield code=\"0\">norm</subfield>\n" +
             "    <subfield code=\"å\">1</subfield>\n" +
             "    <subfield code=\"a\">Digilesen</subfield>\n" +
             "    <subfield code=\"o\">Lillys Leben - Niveau B</subfield>\n" +
@@ -255,19 +255,15 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "    <subfield code=\"v\">Line</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"s\">udflugter</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"u\">for 11 år</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"u\">for 12 år</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-            "    <subfield code=\"0\"/>\n" +
             "    <subfield code=\"u\">let at læse</subfield>\n" +
             "  </datafield>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"720\">\n" +

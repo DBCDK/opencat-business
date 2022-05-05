@@ -76,7 +76,6 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"x\">SKO</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"100\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"a\">Møller</subfield>\n" +
                 "        <subfield code=\"h\">Karl Henrik</subfield>\n" +
                 "        <subfield code=\"4\">aut</subfield>\n" +
@@ -128,19 +127,15 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"o\">84</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">udflugter</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 11 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 12 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">let at læse</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"720\">\n" +
@@ -232,7 +227,6 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"x\">SKO</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"100\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"a\">Møller</subfield>\n" +
                 "        <subfield code=\"h\">Karl Henrik</subfield>\n" +
                 "        <subfield code=\"4\">aut</subfield>\n" +
@@ -284,19 +278,15 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"o\">84</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"s\">udflugter</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 11 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">for 12 år</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"666\">\n" +
-                "        <subfield code=\"0\"/>\n" +
                 "        <subfield code=\"u\">let at læse</subfield>\n" +
                 "    </datafield>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"720\">\n" +
