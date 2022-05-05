@@ -74,7 +74,7 @@
     </datafield>
     <datafield ind1="0" ind2="0" tag="440">
         <subfield code="å">2</subfield>
-        <subfield code="0"/>
+        <subfield code="0">norm</subfield>
         <subfield code="a">QR bog</subfield>
         <subfield code="V">246</subfield>
         <subfield code="v">nr. 246</subfield>
@@ -118,19 +118,15 @@
         <subfield code="o">84</subfield>
     </datafield>
     <datafield ind1="0" ind2="0" tag="666">
-        <subfield code="0"/>
         <subfield code="s">udflugter</subfield>
     </datafield>
     <datafield ind1="0" ind2="0" tag="666">
-        <subfield code="0"/>
         <subfield code="u">for 11 år</subfield>
     </datafield>
     <datafield ind1="0" ind2="0" tag="666">
-        <subfield code="0"/>
         <subfield code="u">for 12 år</subfield>
     </datafield>
     <datafield ind1="0" ind2="0" tag="666">
-        <subfield code="0"/>
         <subfield code="u">let at læse</subfield>
     </datafield>
     <datafield ind1="0" ind2="0" tag="720">
