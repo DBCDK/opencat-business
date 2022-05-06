@@ -34,7 +34,7 @@ pipeline {
 
     environment {
         GITLAB_PRIVATE_TOKEN = credentials("metascrum-gitlab-api-token")
-        DOCKER_IMAGE_NAME = "docker-io.dbc.dk/opencat-business"
+        DOCKER_IMAGE_NAME = "docker-metascrum.artifacts.dbccloud.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
         OCBTEST_EXECUTABLE = "java -jar target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar"
     }
@@ -115,7 +115,7 @@ pipeline {
             agent {
                 docker {
                     label workerNode
-                    image "docker.dbc.dk/build-env:latest"
+                    image "docker-dbc.artifacts.dbccloud.dk/build-env:latest"
                     alwaysPull true
                 }
             }

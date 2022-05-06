@@ -1,4 +1,4 @@
-FROM docker.dbc.dk/payara5-micro:latest
+FROM docker-dbc.artifacts.dbccloud.dk/payara5-micro:latest
 
 ENV JAVASCRIPT_BASEDIR /opt/payara5/deployments/opencat-business
 ENV JAVASCRIPT_POOL_SIZE 1

@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   rawrepoDb:
-    image: docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5156
+    image: docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-1.15-snapshot:DIT-5165
     environment:
       - POSTGRES_DB=rawrepo
       - POSTGRES_USER=rawrepo
@@ -10,7 +10,7 @@ services:
       - "5432"
 
   holdingsitemsDb:
-    image: docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest
+    image: docker-de.artifacts.dbccloud.dk/holdings-items-postgres-1.3:latest
     environment:
       - POSTGRES_DB=holdingsitems
       - POSTGRES_USER=holdingsitems
@@ -19,7 +19,7 @@ services:
       - "5432"
 
   updateserviceDb:
-    image: docker-i.dbc.dk/update-postgres:${PROD_VERSION}
+    image: docker-metascrum.artifacts.dbccloud.dk/update-postgres:${PROD_VERSION}
     environment:
       - POSTGRES_DB=updateservice
       - POSTGRES_USER=updateservice
@@ -28,10 +28,10 @@ services:
       - "5432"
 
   fakeSmtp:
-    image: docker-i.dbc.dk/fakesmtp
+    image: docker-externals.artifacts.dbccloud.dk/fakesmtp
 
   updateservice:
-    image: docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
+    image: docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION}
     env_file:
       - settings.env
       - db.env
@@ -59,7 +59,7 @@ services:
       - "4848"
 
   updateservice-facade:
-    image: docker-io.dbc.dk/updateservice-facade:master-31
+    image: docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:master-34
     environment:
       - UPDATE_SERVICE_URL=${UPDATE_SERVICE_URL}
       - BUILD_SERVICE_URL=${BUILD_SERVICE_URL}
@@ -70,7 +70,7 @@ services:
       - "4848"
 
   opencat-business-service:
-    image: docker-io.dbc.dk/opencat-business-service:devel
+    image: docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel
     environment:
       - INSTANCE_NAME=${USER}_dev
       - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
@@ -98,7 +98,7 @@ services:
       - "4848"
 
   rawrepo-record-service:
-    image: docker-io.dbc.dk/rawrepo-record-service:DIT-321
+    image: docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-330
     environment:
       - INSTANCE_NAME=${USER}_dev
       - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
