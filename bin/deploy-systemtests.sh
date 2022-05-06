@@ -5,10 +5,10 @@ SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
 RAWREPO_VERSION=1.15-snapshot
-RAWREPO_DIT_TAG=DIT-5156
+RAWREPO_DIT_TAG=DIT-5165
 RAWREPO_RECORD_SERVICE_VERSION=DIT-321
-HOLDINGS_ITEMS_VERSION=1.1.4-snapshot
-UPDATE_FACADE_TAG=master-31
+HOLDINGS_ITEMS_VERSION=1.3-snapshot
+UPDATE_FACADE_TAG=master-34
 
 if [ ! "$1" == "false" ]
 then
@@ -17,7 +17,7 @@ then
   mvn clean package
 fi
 
-docker build target/docker -t docker-io.dbc.dk/opencat-business-service:devel
+docker build target/docker -t docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel
 
 cd ${PROJECT_ROOT}/docker/compose
 
@@ -110,21 +110,21 @@ docker-compose down
 docker-compose ps
 echo "docker ps : $?"
 
-docker rmi -f docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
-docker rmi -f docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
-docker rmi -f docker-i.dbc.dk/update-postgres:${USER}
-docker rmi -f docker-i.dbc.dk/update-payara-deployer:${USER}
-docker rmi -f docker-io.dbc.dk/opencat-business-service:${USER}
-docker rmi -f docker-io.dbc.dk/rawrepo-record-service:${USER}
+docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
+docker rmi -f docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
+docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
+docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}
+docker rmi -f docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:${USER}
+docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
 docker-compose pull
 docker-compose up -d rawrepoDb updateserviceDb holdingsitemsDb fakeSmtp
 sleep 3
-docker tag docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG} docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
-docker rmi docker-io.dbc.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG}
-docker tag docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
-docker rmi docker-os.dbc.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest
-docker tag docker-i.dbc.dk/update-postgres:staging docker-i.dbc.dk/update-postgres:${USER}
-docker rmi docker-i.dbc.dk/update-postgres:staging
+docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG} docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
+docker rmi docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG}
+docker tag docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
+docker rmi docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest
+docker tag docker-metascrum.artifacts.dbccloud.dk/update-postgres:staging docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
+docker docker-metascrum.artifacts.dbccloud.dkc.dk/update-postgres:staging
 
 RAWREPO_IMAGE=`docker-compose ps -q rawrepoDb`
 export RAWREPO_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${RAWREPO_IMAGE} `
@@ -143,8 +143,8 @@ export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDING
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
 
 docker-compose up -d rawrepo-record-service
-docker tag docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-io.dbc.dk/rawrepo-record-service:${USER}
-docker rmi docker-io.dbc.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION}
+docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
+docker rmi docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION}
 
 RAWREPO_RECORD_SERVICE_IMAGE=`docker-compose ps -q rawrepo-record-service`
 RAWREPO_RECORD_SERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_IMAGE} `
@@ -157,8 +157,8 @@ echo -e "RAWREPO_RECORD_SERVICE_PORT_4848 is ${RAWREPO_RECORD_SERVICE_PORT_4848}
 export DEV_RAWREPO_RECORD_SERVICE_URL="http://${HOST_IP}:${RAWREPO_RECORD_SERVICE_PORT_8080}"
 
 docker-compose up -d opencat-business-service
-docker tag docker-io.dbc.dk/opencat-business-service:devel docker-io.dbc.dk/opencat-business-service:${USER}
-docker rmi docker-io.dbc.dk/opencat-business-service:devel
+docker tag docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:${USER}
+docker rmi docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel
 
 OPENCAT_BUSINESS_SERVICE_IMAGE=`docker-compose ps -q opencat-business-service`
 OPENCAT_BUSINESS_SERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_IMAGE} `
@@ -171,8 +171,8 @@ echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4
 export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
 
 docker-compose up -d updateservice
-docker tag docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION} docker-i.dbc.dk/update-payara-deployer:${USER}
-docker rmi docker-i.dbc.dk/update-payara-deployer:${PROD_VERSION}
+docker tag docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION} docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}
+docker rmi docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION}
 
 UPDATESERVICE_IMAGE=`docker-compose ps -q updateservice`
 UPDATESERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
@@ -186,8 +186,8 @@ export UPDATE_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateSe
 export BUILD_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest"
 
 docker-compose up -d updateservice-facade
-docker tag docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-io.dbc.dk/updateservice-facade:${USER}
-docker rmi docker-io.dbc.dk/updateservice-facade:${UPDATE_FACADE_TAG}
+docker tag docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:${USER}
+docker rmi docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:${UPDATE_FACADE_TAG}
 
 UPDATESERVICE_FACADE_IMAGE=`docker-compose ps -q updateservice-facade`
 UPDATESERVICE_FACADE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `

@@ -36,10 +36,10 @@ public class AbstractOpencatBusinessContainerTest {
     private static final GenericContainer rawrepoDbContainer;
     private static final GenericContainer holdingsItemsDbContainer;
     private static final GenericContainer openCatBusinessContainer;
-    private static final String JAVA_BASE_IMAGE = "docker.dbc.dk/dbc-java8";
-    private static final String RAWREPO_DB_IMAGE = "docker-io.dbc.dk/rawrepo-postgres-1.15-snapshot:DIT-5155";
-    private static final String HOLDINGITEMS_DB_IMAGE = "docker-os.dbc.dk/holdings-items-postgres-1.1.4:latest";
-    private static final String RECORD_SERVICE_IMAGE = "docker-io.dbc.dk/rawrepo-record-service:DIT-321";
+    private static final String JAVA_BASE_IMAGE = "docker-dbc.artifacts.dbccloud.dk/dbc-java8";
+    private static final String RAWREPO_DB_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-1.15-snapshot:DIT-5165";
+    private static final String HOLDINGITEMS_DB_IMAGE = "docker-de.artifacts.dbccloud.dk/holdings-items-postgres-1.3:latest";
+    private static final String RECORD_SERVICE_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-330";
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";
 
     private static final String RAWREPO_DB_BASE_URL;
@@ -111,7 +111,8 @@ public class AbstractOpencatBusinessContainerTest {
         recordServiceContainer.start();
         RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
 
-        openCatBusinessContainer = new GenericContainer("docker-io.dbc.dk/opencat-business-service:devel")
+        // Please note that the docker image only exists temporarily, so don't look after it at the artifactory site
+        openCatBusinessContainer = new GenericContainer("docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel")
                 .withNetwork(network)
                 .withLogConsumer(new Slf4jLogConsumer(LOGGER))
                 .withEnv("LOG_FORMAT", "text")

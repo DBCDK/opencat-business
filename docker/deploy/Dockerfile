@@ -1,5 +1,5 @@
 ARG UPDATE_PAYARA_DEPLOYER_DOCKER_TAG
-FROM docker-i.dbc.dk/update-payara-deployer:$UPDATE_PAYARA_DEPLOYER_DOCKER_TAG
+FROM docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:$UPDATE_PAYARA_DEPLOYER_DOCKER_TAG
 
 COPY distributions/ /opt/payara5/deployments/opencat-business/distributions
 

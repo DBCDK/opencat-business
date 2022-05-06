@@ -18,7 +18,7 @@ docker run --rm --name opencat-business-service -d -p ${opencat_business_service
     -e DOUBLE_RECORD_MAIL_RECIPIENT="${DOUBLE_RECORD_MAIL_RECIPIENT}" \
     -e JAVA_MAX_HEAP_SIZE=2G \
     -e SOLR_URL="8" \
-    docker-io.dbc.dk/opencat-business-service:devel
+    docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel
 attempts=0
 max_attempts=60
 until $(curl --output /dev/null --silent --head --fail http://localhost:${opencat_business_service_port}/api/status); do
