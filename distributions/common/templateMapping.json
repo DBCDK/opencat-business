@@ -102,7 +102,8 @@
         "paahaengspostbind",
         "paahaengsposthoved",
         "paahaengspostsektion",
-        "sammensat"
+        "sammensat",
+        "zyztem-masseret"
       ],
       "folder": "fbs"
     },
@@ -133,7 +134,8 @@
         "lokalpost",
         "lokalpostbind",
         "lokalposthoved",
-        "lokalpostsektion"
+        "lokalpostsektion",
+        "zyztem-masseret"
       ],
       "folder": "fbs"
     },
@@ -151,7 +153,8 @@
         "lokal-dlb-film",
         "lokal-dlb-filmbind",
         "lokal-dlb-filmhoved",
-        "lokal-dlb-periodicum"
+        "lokal-dlb-periodicum",
+        "zyztem-masseret"
 
       ],
       "folder": "fbs"
@@ -178,7 +181,8 @@
         "paahaengspost",
         "paahaengspostbind",
         "paahaengsposthoved",
-        "paahaengspostsektion"
+        "paahaengspostsektion",
+        "zyztem-masseret"
       ],
       "folder": "fbs"
     },

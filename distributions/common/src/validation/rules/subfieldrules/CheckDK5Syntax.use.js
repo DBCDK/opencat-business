@@ -29,7 +29,7 @@ var CheckDK5Syntax = function () {
             var error = false;
             var msg;
 
-            var subfieldValueStripped = subfieldValue.replace( /[\d\.]/g, "" );
+            var subfieldValueStripped = subfieldValue.replace( /[\d\.\-:]/g, "" );
 
             if( subfieldValue.match( /uden klassem|ny titel|^sk$/i ) ) {
                 error = false;
