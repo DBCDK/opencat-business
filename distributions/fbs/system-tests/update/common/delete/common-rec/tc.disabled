@@ -39,10 +39,12 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-                        "ordinalPositionOfField": 1,
-                        "ordinalPositionOfSubfield": 0,
-                        "message": "Værdien 'd' i felt '004' delfelt 'r' er ikke en del af de valide værdier: 'n', 'c'"
+                        "code" : null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Dit bibliotek har ikke rettigheder til at slette fællesposter"
                     }
                 ]
             },
@@ -50,10 +52,12 @@
                 "errors": [
                     {
                         "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
-                        "ordinalPositionOfField": 1,
-                        "ordinalPositionOfSubfield": 0,
-                        "message": "Værdien 'd' i felt '004' delfelt 'r' er ikke en del af de valide værdier: 'n', 'c'"
+                        "code": null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Dit bibliotek har ikke rettigheder til at slette fællesposter"
                     }
                 ],
                 "rawrepo": [
