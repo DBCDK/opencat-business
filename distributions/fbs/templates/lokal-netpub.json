@@ -188,6 +188,8 @@
         "795": "DanMarc2.fields.795",
         "796": "DanMarc2.fields.796",
         "840": "DanMarc2.fields.840",
+        "845": "lokal-generel.fields.845",
+        "846": "lokal-generel.fields.846",
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "mandatory": true,

@@ -199,6 +199,8 @@
         "795": "fonogram.fields.795",
         "796": "fonogram.fields.796",
         "840": "bog.fields.840",
+        "845": "bog.fields.845",
+        "846": "bog.fields.846",
         "856": "netpub.fields.856",
         "880": "DanMarc2.fields.880",
         "900": "bog.fields.900",

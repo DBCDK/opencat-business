@@ -720,6 +720,8 @@
                 "v": "DanMarc2.fields.840.subfields.v"
             }
         },
+        "845": "bog.fields.845",
+        "846": "bog.fields.846",
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{

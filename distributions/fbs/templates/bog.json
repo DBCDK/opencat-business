@@ -881,6 +881,27 @@
                 "v": "DanMarc2.fields.840.subfields.v"
             }
         },
+        "845":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b1.htm",
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "b": "DanMarc2.fields.845.subfields.b",
+                "c": "DanMarc2.fields.845.subfields.c",
+                "v": "DanMarc2.fields.845.subfields.v"
+            }
+        },
+        "846":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b2.htm",
+            "subfields":{
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{
