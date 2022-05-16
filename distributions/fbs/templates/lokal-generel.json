@@ -750,6 +750,27 @@
         },
         "796": "DanMarc2.fields.796",
         "840": "DanMarc2.fields.840",
+        "845":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b1.htm",
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false
+                },
+                "b": "DanMarc2.fields.845.subfields.b",
+                "c": "DanMarc2.fields.845.subfields.c",
+                "v": "DanMarc2.fields.845.subfields.v"
+            }
+        },
+        "846":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b2.htm",
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false
+                }
+            }
+        },
         "856": "DanMarc2.fields.856",
         "860": "DanMarc2.fields.860",
         "861": "DanMarc2.fields.861",

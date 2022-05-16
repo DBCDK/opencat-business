@@ -4156,6 +4156,39 @@
                 }
             }
         },
+        "845":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b1.htm",
+            "subfields":{
+                "a":{
+                    "repeatable": false
+                },
+                "b":{
+                    "repeatable": false
+                },
+                "c":{
+                    "repeatable": false
+                },
+                "v":{
+                    "repeatable": false
+                },
+                "5":{
+                    "repeatable": false
+                },
+                "6":{}
+            }
+        },
+        "846":{
+            "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b2.htm",
+            "subfields":{
+                "a":{
+                    "repeatable": false
+                },
+                "5":{
+                    "repeatable": false
+                },
+                "6":{}
+            }
+        },
         "856":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8c.htm",
             "subfields":{
