@@ -781,6 +781,8 @@
                 }
             }
         },
+        "990": "DanMarc2.fields.990",
+        "991": "DanMarc2.fields.991",
         "996":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.100.htm",
             "repeatable":false,
