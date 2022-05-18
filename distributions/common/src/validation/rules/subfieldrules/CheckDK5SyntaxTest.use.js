@@ -49,7 +49,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
     marcRecord = new Record();
     marcRecord.fromString(
         "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
-        "652 00 *m 78.421.3"
+        "652 00 *m 78.421:3"
     );
 
     record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
@@ -143,6 +143,30 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
     subfield = field.subfields[0];
     Assert.equalValue( "Iinvalid: Record with blank in field 652n",
         CheckDK5Syntax.validateSubfield( record,field, subfield, params ), [ValidateErrors.subfieldError( "TODO:fixurl", "Syntaksfejl i DK5-klassemærke" )] );
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "652 00 *m 33.26:2"
+    );
+
+    record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
+    field = record.fields[1];
+    subfield = field.subfields[0];
+    Assert.equalValue( "Record with valid 652m including :",
+        CheckDK5Syntax.validateSubfield(record, field, subfield, params), []);
+
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "652 00 *m 86-094"
+    );
+
+    record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
+    field = record.fields[1];
+    subfield = field.subfields[0];
+    Assert.equalValue( "Record with valid 652m including - as separator",
+        CheckDK5Syntax.validateSubfield(record, field, subfield, params), []);
 
 } );
 
