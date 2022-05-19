@@ -29,7 +29,7 @@ var CheckDK5Syntax = function () {
             var error = false;
             var msg;
 
-            var subfieldValueStripped = subfieldValue.replace( /[\d\.\-:]/g, "" );
+            var subfieldValueStripped = subfieldValue.replace( /[0-9\.\-:]/g, "" );
 
             if( subfieldValue.match( /uden klassem|ny titel|^sk$/i ) ) {
                 error = false;
@@ -43,10 +43,10 @@ var CheckDK5Syntax = function () {
                 error = true;
             }
             else if( 2 < subfieldValue.length ) {
-                if( !subfieldValue.match( /^\d\d\.\d/ ) ) {
+                if( !subfieldValue.match( /^[0-9][0-9][\.\-][0-9]/ ) ) {
                     error = true;
                 }
-                else if( !subfieldValue.match( /\./ ) ) {
+                else if( !subfieldValue.match( /[\.\-]/ ) ) {
                     error = true;
                 }
             }
