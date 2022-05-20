@@ -168,5 +168,18 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
     Assert.equalValue( "Record with valid 652m including - as separator",
         CheckDK5Syntax.validateSubfield(record, field, subfield, params), []);
 
+    marcRecord = new Record();
+    marcRecord.fromString(
+        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "652 00 *m 51:66"
+    );
+
+    record = DanMarc2Converter.convertFromDanMarc2( marcRecord );
+    field = record.fields[1];
+    subfield = field.subfields[0];
+    Assert.equalValue( "Record with valid 652m including : as separator",
+        CheckDK5Syntax.validateSubfield(record, field, subfield, params), []);
+
+
 } );
 

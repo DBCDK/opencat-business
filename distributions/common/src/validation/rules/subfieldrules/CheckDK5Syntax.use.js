@@ -43,10 +43,10 @@ var CheckDK5Syntax = function () {
                 error = true;
             }
             else if( 2 < subfieldValue.length ) {
-                if( !subfieldValue.match( /^[0-9][0-9][\.\-][0-9]/ ) ) {
+                if( !subfieldValue.match( /^[0-9][0-9][\.\-:][0-9]/ ) ) {
                     error = true;
                 }
-                else if( !subfieldValue.match( /[\.\-]/ ) ) {
+                else if( !subfieldValue.match( /[\.\-:]/ ) ) {
                     error = true;
                 }
             }
