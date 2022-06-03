@@ -742,9 +742,30 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "sorting":"&0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
-                "m": "DanMarc2.fields.652.subfields.m",
-                "p": "DanMarc2.fields.652.subfields.p",
-                "i": "DanMarc2.fields.652.subfields.i",
+                "m":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
+                "p":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
+                "i":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
                 "v": "DanMarc2.fields.652.subfields.v",
                 "a": "DanMarc2.fields.652.subfields.a",
                 "h": "DanMarc2.fields.652.subfields.h",
@@ -754,10 +775,31 @@
                 "t": "DanMarc2.fields.652.subfields.t",
                 "b": "DanMarc2.fields.652.subfields.b",
 				"z": "DanMarc2.fields.652.subfields.z",
-                "n": "DanMarc2.fields.652.subfields.n",
+                "n":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
                 "o": "DanMarc2.fields.652.subfields.o",
-                "q": "DanMarc2.fields.652.subfields.q",
-                "r": "DanMarc2.fields.652.subfields.r"
+                "q":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
+                "r":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                }
             },
             "rules": [
                 {

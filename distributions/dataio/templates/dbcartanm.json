@@ -442,7 +442,12 @@
             "subfields":{
                 "m":{
                     "mandatory": true,
-                    "repeatable": false
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
                 },
                 "v":"DanMarc2.fields.652.subfields.v",
                 "a":"DanMarc2.fields.652.subfields.a",

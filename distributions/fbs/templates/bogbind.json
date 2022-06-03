@@ -363,8 +363,22 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "sorting":"&0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
-                "p": "DanMarc2.fields.652.subfields.p",
-                "i": "DanMarc2.fields.652.subfields.i",
+                "p":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
+                "i":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
                 "v": "DanMarc2.fields.652.subfields.v",
                 "a": "DanMarc2.fields.652.subfields.a",
                 "h": "DanMarc2.fields.652.subfields.h",
@@ -373,8 +387,22 @@
                 "c": "DanMarc2.fields.652.subfields.c",
                 "t": "DanMarc2.fields.652.subfields.t",
                 "b": "DanMarc2.fields.652.subfields.b",
-				"q": "DanMarc2.fields.652.subfields.q",
-                "r": "DanMarc2.fields.652.subfields.r"
+                "q":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                },
+                "r":{
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDK5Syntax"
+                        }
+                    ]
+                }
             }
         },
         "654":{

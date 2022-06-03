@@ -539,42 +539,9 @@
                 "2":"DanMarc2.fields.610.subfields.2"
             }
         },
-        "631":"DanMarc2.fields.631",
-        "652":{
-            "comment": "forskel fra dM2: *v m\u00E5 gentages. Der findes DBC-musikposter med gentagne 652 *i + *v",
-            "comment2": "*i og *v udeladt i delfeltsorteringen",
-            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
-            "sorting":"0\u00E5mnopqrvAaHhkEeFfCcTtBb1",
-            "subfields":{
-                "m":"DanMarc2.fields.652.subfields.m",
-                "p":"DanMarc2.fields.652.subfields.p",
-                "i":"DanMarc2.fields.652.subfields.i",
-                "v":"DanMarc2.fields.652.subfields.v",
-                "a":"DanMarc2.fields.652.subfields.a",
-                "h":"DanMarc2.fields.652.subfields.h",
-                "e":"DanMarc2.fields.652.subfields.e",
-                "f":"DanMarc2.fields.652.subfields.f",
-                "c":"DanMarc2.fields.652.subfields.c",
-                "t":"DanMarc2.fields.652.subfields.t"
-			 },
-            "rules": [
-                {
-                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                    "params": {
-                        "subfield": "m",
-                        "not_presented_subfield": [ "652o", "654m", "654o" ]
-                    }
-                },
-                {
-                    "type": "FieldRules.subfieldMandatoryIfSubfieldNotPresent",
-                    "params": {
-                        "subfield": "o",
-                        "not_presented_subfield": [ "652m", "654m", "654o" ]
-                    }
-                }
-            ]
-        },
-        "654":"DanMarc2.fields.654",
+        "631": "DanMarc2.fields.631",
+        "652": "fonogram.fields.652",
+        "654": "DanMarc2.fields.654",
         "666": "bog.fields.666",
         "700":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.83.htm",

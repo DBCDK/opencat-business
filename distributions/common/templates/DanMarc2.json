@@ -3211,12 +3211,7 @@
             "sorting": "&\u00E5mnoipqrahkefctbvz01",
             "subfields":{
                 "m":{
-					"repeatable": false,
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.checkDK5Syntax"
-                        }
-                    ]
+					"repeatable": false
 				},
                 "p":{
 					"repeatable": false
