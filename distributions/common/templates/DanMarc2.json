@@ -1184,9 +1184,7 @@
                 "k":{
 					"repeatable": false
 				},
-                "j":{
-					"repeatable": false
-				},
+                "j":{},
                 "b":{
 					"repeatable": false
 				},
@@ -2999,9 +2997,7 @@
                 "k":{
 					"repeatable": false
 				},
-                "j":{
-					"repeatable": false
-				},
+                "j":{},
                 "t":{
 					"repeatable": false
 				},
