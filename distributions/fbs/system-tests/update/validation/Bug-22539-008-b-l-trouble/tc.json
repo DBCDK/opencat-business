@@ -100,7 +100,7 @@
                 },
                 {
                     "record": "rawrepo-870971.marc",
-                    "type": "MARCXCHANGE",
+                    "type": "ARTICLE",
                     "deleted": false,
                     "enrichments": [
                         "rawrepo-870971-enrichment.marc"
@@ -216,7 +216,7 @@
                     },
                     {
                         "record": "rawrepo-870971.marc",
-                        "type": "MARCXCHANGE",
+                        "type": "ARTICLE",
                         "enqueued": true,
                         "deleted": false,
                         "enrichments": [

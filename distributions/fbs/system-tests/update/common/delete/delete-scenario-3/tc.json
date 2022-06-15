@@ -1,0 +1,49 @@
+[
+    {
+        "name": "delete-scenario-3",
+        "description": "Tester at et bibliotek må slette en lokalpost",
+        "request": {
+            "authentication": {
+                "group": "159003",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "lokal-dlb-bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-99359757-159003.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                },
+                {
+                    "record": "expected-99359765-159003.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "expected-99359757-159003.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "expected-99359765-159003.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": true,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
