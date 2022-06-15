@@ -43,15 +43,6 @@ var CheckFaust = function () {
                 result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
                 return result;
             }
-            if (subfieldValue.length !== 8) {
-                var marc = DanMarc2Converter.convertToDanMarc2(record, params);
-                if (marc.matchValue(/001/, /b/, RegExp(UpdateConstants.COMMON_AGENCYID))) {
-                    bundle = ResourceBundleFactory.getBundle(__BUNDLE_NAME);
-                    msg = ResourceBundle.getStringFormat(bundle, "check.faust.common.records.length.error", subfieldName);
-                    result.push(ValidateErrors.subfieldError("TODO:fixurl", msg));
-                    return result;
-                }
-            }
             var singleWeight = [7, 6, 5, 4, 3, 2];
             var weight = [];
             while (subfieldValue.length > weight.length) {
