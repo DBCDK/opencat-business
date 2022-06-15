@@ -64,6 +64,5 @@ UnitTest.addFixture("CheckFaust.validateSubfield", function () {
     record = DanMarc2Converter.convertFromDanMarc2(RecordUtil.createFromString("001 00 *a 497290236 *b 870970"));
     field = record.fields[0];
     subfield = field.subfields[0];
-    error = [ValidateErrors.subfieldError("TODO:fixurl", ResourceBundle.getStringFormat(bundle, "check.faust.common.records.length.error", subfield.name))];
-    Assert.equalValue("10 CheckFaust.validateSubfield with failed faust number with 9 digits for common records", CheckFaust.validateSubfield(record, field, subfield, params), error);
+    Assert.equalValue("10 CheckFaust.validateSubfield with valid faust number with 9 digits for common records", CheckFaust.validateSubfield(record, field, subfield, params), []);
 });
