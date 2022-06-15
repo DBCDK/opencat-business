@@ -1,0 +1,80 @@
+[
+    {
+        "name": "delete-scenario-2",
+        "description": "Tester at DBC må slette en decentral fællespost",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "dbc",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-62584351-870970.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-62584351-191919.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-62584351-191919.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-61886575-870970.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-61886575-191919.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-61886575-191919.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "expected-62584351-870970.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": true,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "expected-62584351-191919.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": true,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "expected-61886575-870970.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "expected-61886575-191919.marc"
+                        ]
+                    },
+                    {
+                        "record": "expected-61886575-191919.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]

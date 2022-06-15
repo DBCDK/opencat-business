@@ -1,0 +1,18 @@
+001 00 *a 04139143 *b 870970 *c 20170517131712 *d 19850903 *f a *o c
+004 00 *r n *a e
+008 00 *t m *u u *a 1945 *b dk *d x *j f *l dan *v 1
+009 00 *a a *g xx
+032 00 *x SFD197075 *x DAT201722
+041 00 *a dan *c rus
+100 00 *a Tolstoj *h Lev
+245 00 *a Kreutzersonaten *e af Leo Tolstoj *f oversat af Gudrun Sterner Petersen
+250 00 *b Ꜳmodt
+260 00 *a Kbh. *b Ꜳmodt *c 1945
+300 00 *a 159 sider
+504 00 *a Angreb på den forløjede ægteskabsmoral i firsernes Rusland
+652 00 *m sk
+900 00 *a Tolstoj *h Leo *x se *w Tolstoj, Lev *z 100
+900 00 *a Tolstoy *h Leo *x se *w Tolstoj, Lev *z 100
+900 00 *a Tolstöy *h Leo *x se *w Tolstoj, Lev *z 100
+900 00 *a Tolstoj *h Lev Nikolajevitj *x se *w Tolstoj, Lev *z 100
+996 00 *a DBC
