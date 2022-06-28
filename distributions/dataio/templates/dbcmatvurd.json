@@ -3,9 +3,6 @@
         "description": "Skabelon til materialevurderingsposter, submitter: 870976",
         "features": [ "auth_root" ]
     },
-    "settings": {
-        "usefaust8": true
-    },
     "defaults":{
         "field":{
             "indicator":"00",
