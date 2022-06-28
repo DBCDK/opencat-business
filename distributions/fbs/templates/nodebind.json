@@ -5,7 +5,6 @@
     },
     "settings": {
         "lookupfaust": true,
-        "usefaust8": true,
         "extrafields": [ "008a", "021e", "028a",
             "260c", "300n", "531", "538b", "538d", "770\u00E5", "770h", "780\u00E5", "780a", "795\u00E5", "795a", "996a" ]
     },
