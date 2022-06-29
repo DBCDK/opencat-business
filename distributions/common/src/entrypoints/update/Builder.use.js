@@ -277,7 +277,7 @@ var Builder = function() {
         };
         if (subfieldName !== undefined && subfieldName !== "") {
             if (fieldName === "001" && subfieldName === "a" && isFaustEnabledForTemplate(template)) {
-                subfield.value = faustProvider(__getNumberRollName(template));
+                subfield.value = faustProvider();
             } else {
                 if (template["fields"] !== undefined
                     && template["fields"][fieldName] !== undefined
@@ -385,20 +385,6 @@ var Builder = function() {
         return res;
     }
 
-    // Reads the settings in the template to determine whether to use old 8 digit faust number or the new 9+ numbers.
-    // Default is to use the 9+ digit numbers.
-    function __getNumberRollName(template) {
-        Log.trace("-> __getNumberRollName");
-        var res = 'faust';
-        if (template.hasOwnProperty("settings")
-            && template["settings"].hasOwnProperty("usefaust8")
-            && Util.getType(template["settings"]["usefaust8"]) === "boolean"
-            && template["settings"]["usefaust8"]) {
-            res = 'faust8';
-        }
-        return res;
-    }
-
     // returns an array with any extra fields defined in the template
     function getExtraFieldsList(template) {
         Log.trace("-> getExtraFieldsList");
@@ -455,7 +441,6 @@ var Builder = function() {
         '__isFunction': isFunction,
         '__isFaustEnabledForTemplate': isFaustEnabledForTemplate,
         '__getExtraFieldsList': getExtraFieldsList,
-        '__removeDuplicatesFromArray': removeDuplicatesFromArray,
-        '__getNumberRollName': __getNumberRollName
+        '__removeDuplicatesFromArray': removeDuplicatesFromArray
     };
 }();
