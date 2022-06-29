@@ -96,9 +96,9 @@ function buildRecord(templateName, record, settings) {
         TemplateContainer.setSettings(settings);
         return TemplateContainer.getUnoptimized(templateName);
     };
-    var faustProvider = function (type) {
+    var faustProvider = function () {
         WebserviceUtil.init(settings);
-        return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll(type);
+        return WebserviceUtil.getNewFaustNumberFromOpenNumberRoll();
     };
     if (record === undefined || record === null) {
         Log.debug("new record");

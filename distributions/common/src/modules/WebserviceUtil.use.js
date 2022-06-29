@@ -12,7 +12,6 @@ EXPORTED_SYMBOLS = ['WebserviceUtil'];
  */
 var WebserviceUtil = function () {
     var openNumberRollUrl;
-    var numberRollNameFaust8;
     var numberRollNameFaust;
 
     function init(settings) {
@@ -20,7 +19,6 @@ var WebserviceUtil = function () {
 
         if (settings.containsKey('SOLR_URL')) {
             openNumberRollUrl = String(settings.get('OPENNUMBERROLL_URL'));
-            numberRollNameFaust8 = String(settings.get('OPENNUMBERROLL_NAME_FAUST_8'));
             numberRollNameFaust = String(settings.get('OPENNUMBERROLL_NAME_FAUST'));
         }
     }
@@ -33,21 +31,14 @@ var WebserviceUtil = function () {
      * @name WebserviceUtil.getNewFaustNumberFromOpenNumberRoll
      * @method
      */
-    function getNewFaustNumberFromOpenNumberRoll(type) {
+    function getNewFaustNumberFromOpenNumberRoll() {
         Log.trace("getNewFaustNumberFromOpenNumberRoll");
         var headers = {
             'Content-type': 'application/xml;charset=utf-8'
         };
         var params = {};
 
-        var numberRollName;
-        if (type === "faust8") {
-            numberRollName = numberRollNameFaust8;
-        } else {
-            numberRollName = numberRollNameFaust;
-        }
-
-        var url = openNumberRollUrl + '?action=numberRoll&numberRollName=' + numberRollName + '&outputType=json';
+        var url = openNumberRollUrl + '?action=numberRoll&numberRollName=' + numberRollNameFaust + '&outputType=json';
         var responseString = Http.getNoProxy(url, params, headers, false);
         var response = JSON.parse(responseString);
         var res = "";
