@@ -228,9 +228,11 @@
             "repeatable": false,
             "subfields": {
                 "a": {
+                    "mandatory": true,
                     "repeatable": false
                 },
                 "1": {
+                    "mandatory": true,
                     "repeatable": false
                 },
                 "8": {
@@ -241,116 +243,29 @@
                 }
             }
         },
-        "110":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt110.htm",
-            "mandatory": false,
+        "134":{
+            "url": "",
             "repeatable": false,
             "subfields": {
-                "s": {
-                    "repeatable": false
-                },
                 "a": {
+                    "mandatory": true,
                     "repeatable": false
                 },
-                "e": {},
-                "c": {},
-                "i": {
+                "1": {
+                    "mandatory": true,
                     "repeatable": false
                 },
-                "k": {
+                "8": {
                     "repeatable": false
                 },
-                "j": {}
+                "9": {
+                    "repeatable": false
+                }
             }
         },
-        "372":{
+        "200":{
             "url": "",
-            "subfields": {
-                "a": {
-                    "mandatory": true
-                }
-            }
-        },
-        "373":{
-            "url": "",
-            "subfields": {
-                "a": {
-                    "mandatory": true
-                }
-            }
-        },
-        "374":{
-            "url": "",
-            "subfields": {
-                "a": {
-                    "mandatory": true
-                }
-            }
-        },
-        "375":{
-            "url": "",
-            "subfields": {
-                "&": {
-                },
-                "a": {
-                    "values": [ "0", "1", "2", "9" ]
-                },
-                "2": {
-                    "values": [ "iso5218" ]
-                }
-            }
-        },
-        "400":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt400.htm",
-            "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "h": {
-                    "repeatable": false
-                },
-                "e": {
-                    "repeatable": false
-                },
-                "f": {
-                    "repeatable": false
-                },
-                "c": {
-                    "repeatable": false
-                },
-                "d": {
-                    "repeatable": false
-                }
-            }
-        },
-        "410":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt410.htm",
-            "subfields": {
-                "s": {
-                    "repeatable": false
-                },
-                "a": {
-                    "repeatable": false
-                },
-                "e": {},
-                "c": {},
-                "h": {
-                    "repeatable": false
-                },
-                "g": {
-                    "repeatable": false
-                },
-                "i": {
-                    "repeatable": false
-                },
-                "k": {
-                    "repeatable": false
-                },
-                "j": {}
-            }
-        },
-        "500":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt500.htm",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "a": {
                     "repeatable": false
@@ -370,16 +285,29 @@
                 "d": {
                     "repeatable": false
                 },
-                "x": {
+                "g": {
+                    "repeatable": false,
+                    "values": [ "1" ]
+                },
+                "w": {},
+                "1": {
+                    "mandatory": true,
                     "repeatable": false
                 },
-                "w": {
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "9": {
                     "repeatable": false
                 }
             }
         },
-        "510":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt510.htm",
+        "210":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "s": {
                     "repeatable": false
@@ -387,12 +315,8 @@
                 "a": {
                     "repeatable": false
                 },
-                "e": {},
                 "c": {},
-                "h": {
-                    "repeatable": false
-                },
-                "g": {
+                "e": {
                     "repeatable": false
                 },
                 "i": {
@@ -402,7 +326,125 @@
                     "repeatable": false
                 },
                 "j": {},
+                "g": {
+                    "repeatable": false,
+                    "values": [ "1" ]
+                },
+                "w": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "233":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "234":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "433":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
                 "w": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "7": {
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "434":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "w": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "7": {
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
                     "repeatable": false
                 }
             }
@@ -412,108 +454,97 @@
             "repeatable": false,
             "subfields": {
                 "a": {},
-                "b": {}
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "667":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
             }
         },
         "670":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt670.htm",
+            "url": "",
             "subfields": {
-                "a": {
-                    "repeatable": false
-                },
-                "w": {
-                    "repeatable": false
-                },
-                "&": {
+                "a": {},
+                "b": {},
+                "u": {},
+                "y": {},
+                "1": {
+                    "mandatory": true,
                     "repeatable": false
                 }
             }
         },
         "678":{
-            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt678.htm",
+            "url": "",
+            "subfields": {
+                "a": {},
+                "u": {},
+                "y": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "680":{
+            "url": "",
             "subfields": {
                 "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                }
+            }
+        },
+        "683":{
+            "url": "",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "u": {},
+                "y": {},
+                "1": {
+                    "mandatory": true,
                     "repeatable": false
                 }
             }
         },
         "996": {
+            "mandatory": true,
             "repeatable": false,
             "subfields": {
                 "a": {
                     "repeatable": false,
-                    "values": [ "DBCAUT" ]
+                    "values": [ "DBC" ]
+                },
+                "m":{},
+                "o":{
+                    "repeatable":false
                 }
             }
         },
         "d08": {
             "subfields": {
                 "a": {},
-                "f": {},
                 "o": {},
                 "k": {},
                 "r": {}
-            }
-        },
-        "g10": {
-            "repeatable": false,
-            "subfields": {
-                "a": {
-                },
-                "h": {
-                },
-                "k": {
-                },
-                "e": {
-                },
-                "f": {
-                },
-                "c": {
-                },
-                "x": {
-                },
-                "w": {
-                }
-            }
-        },
-        "g40": {
-            "subfields": {
-                "a": {
-                },
-                "h": {
-                },
-                "k": {
-                },
-                "e": {
-                },
-                "f": {
-                },
-                "c": {
-                },
-                "x": {
-                },
-                "w": {
-                }
-            }
-        },
-        "g50": {
-            "subfields": {
-                "a": {
-                },
-                "h": {
-                },
-                "k": {
-                },
-                "e": {
-                },
-                "f": {
-                },
-                "c": {
-                },
-                "x": {
-                },
-                "w": {
-                }
             }
         },
         "n55": {
@@ -522,26 +553,21 @@
 
             }
         },
-         "s13": {
-             "repeatable": false,
-             "subfields": {
-                 "a": {
-                     "repeatable": false
-                 }
-             }
+        "s12": {
+            "subfields": {
+                "t": {}
+            }
         },
-         "xyz": {
-             "subfields": {
-                 "a": {},
-                 "u": {}
-             }
+        "z98": {
+            "subfields": {
+                "a": {},
+                "b": {}
+            }
         },
-        "z80": {
+        "z99": {
             "subfields": {
                 "a": {}
             }
-        },
-        "z98": "dbcsingle.fields.z98",
-        "z99": "dbcsingle.fields.z99"
+        }
     }
 }
