@@ -179,9 +179,7 @@
         "043":{
             "url": "",
             "subfields":{
-                "c": {
-                    "values": "Lister.fields.codes.subfields.country.general.values"
-                }
+                "c": {}
             }
         },
         "046":{
