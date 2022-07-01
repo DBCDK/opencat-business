@@ -1,0 +1,547 @@
+{
+    "template": {
+        "description": "Skabelon til vaerk autoritetsposter, RDA entiteter (danMarc3 870979)",
+        "features": [ "auth_root" ]
+    },
+    "defaults":{
+        "field":{
+            "indicator":"00",
+            "mandatory":false,
+            "repeatable":true
+        },
+        "subfield":{
+            "mandatory":false,
+            "repeatable":true
+        }
+    },
+    "rules":[],
+    "fields": {
+        "001": {
+            "url": "",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdfto",
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+					"values": [ "870979" ]
+                },
+                "c": {
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": true
+                            }
+                        }
+                    ]
+                },
+                "d": {
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                },
+                "f": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "e" ]
+                },
+                "o": {
+                    "repeatable": false,
+                    "values": [ "a" ]
+                }
+            }
+        },
+        "004": {
+            "url": "",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "rx",
+            "subfields": {
+                "r": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "n", "d" ]
+                },
+                "x": {
+                    "mandatory": true,
+                    "values": [ "e" ]
+                }
+            }
+        },
+        "008": {
+            "url": "",
+            "repeatable": false,
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "t": {
+                    "repeatable": false,
+                    "values": [ "s", "p" ]
+                },
+                "c": {
+                    "repeatable": false,
+                    "values": [ "k", "d", "i", "c", "w", "j", "e", "s", "m", "b", "q",
+                        "t", "f", "a", "g", "h", "l", "z", "?" ]
+                },
+                "d": {
+                    "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+                        "l", "m", "n", "o", "p", "q", "r", "s", "t","u", "w",
+                        "z", "x", "y", "1", "2" ]
+                },
+                "h": {
+                    "repeatable": false,
+                    "values": [ "m", "n", "p", "z", "d", "l", "w", "?" ]
+                },
+                "j": {
+                    "repeatable": false,
+                    "values": [ "d", "e", "f", "i", "j", "m", "p" ]
+                },
+                "k": {
+                    "repeatable": false,
+                    "values": [ "a", "b", "c" ]
+                },
+                "v": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "a", "b", "c", "d", "e", "u", "z" ]
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "009": {
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+		"025": {
+            "url": "",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "2": {
+                    "repeatable": false
+                }
+            }
+        },
+        "040":{
+            "url": "",
+            "repeatable": false,
+            "subfields":{
+                "b": {
+                    "repeatable": false,
+                    "values": [ "dan" ]
+                },
+                "e": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "rda", "dkrda", "kbsdb", "local" ]
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "043":{
+            "url": "",
+            "subfields":{
+                "c": {
+                    "values": "Lister.fields.codes.subfields.country.general.values"
+                }
+            }
+        },
+        "046":{
+            "url": "",
+            "subfields":{
+                "f": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "l": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "075":{
+            "url": "",
+            "repeatable": false,
+            "subfields":{
+                "a": {
+                    "repeatable": false
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "p", "k", "v", "g", "s", "u" ]
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "133":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "110":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt110.htm",
+            "mandatory": false,
+            "repeatable": false,
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "e": {},
+                "c": {},
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {}
+            }
+        },
+        "372":{
+            "url": "",
+            "subfields": {
+                "a": {
+                    "mandatory": true
+                }
+            }
+        },
+        "373":{
+            "url": "",
+            "subfields": {
+                "a": {
+                    "mandatory": true
+                }
+            }
+        },
+        "374":{
+            "url": "",
+            "subfields": {
+                "a": {
+                    "mandatory": true
+                }
+            }
+        },
+        "375":{
+            "url": "",
+            "subfields": {
+                "&": {
+                },
+                "a": {
+                    "values": [ "0", "1", "2", "9" ]
+                },
+                "2": {
+                    "values": [ "iso5218" ]
+                }
+            }
+        },
+        "400":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt400.htm",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "h": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "f": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "d": {
+                    "repeatable": false
+                }
+            }
+        },
+        "410":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt410.htm",
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "e": {},
+                "c": {},
+                "h": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {}
+            }
+        },
+        "500":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt500.htm",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "h": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "f": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "d": {
+                    "repeatable": false
+                },
+                "x": {
+                    "repeatable": false
+                },
+                "w": {
+                    "repeatable": false
+                }
+            }
+        },
+        "510":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt510.htm",
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "e": {},
+                "c": {},
+                "h": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {},
+                "w": {
+                    "repeatable": false
+                }
+            }
+        },
+        "663":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {},
+                "b": {}
+            }
+        },
+        "670":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt670.htm",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "w": {
+                    "repeatable": false
+                },
+                "&": {
+                    "repeatable": false
+                }
+            }
+        },
+        "678":{
+            "url": "http://www.kat-format.dk/danMARC2/bilag_h/felt678.htm",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                }
+            }
+        },
+        "996": {
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [ "DBCAUT" ]
+                }
+            }
+        },
+        "d08": {
+            "subfields": {
+                "a": {},
+                "f": {},
+                "o": {},
+                "k": {},
+                "r": {}
+            }
+        },
+        "g10": {
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                },
+                "h": {
+                },
+                "k": {
+                },
+                "e": {
+                },
+                "f": {
+                },
+                "c": {
+                },
+                "x": {
+                },
+                "w": {
+                }
+            }
+        },
+        "g40": {
+            "subfields": {
+                "a": {
+                },
+                "h": {
+                },
+                "k": {
+                },
+                "e": {
+                },
+                "f": {
+                },
+                "c": {
+                },
+                "x": {
+                },
+                "w": {
+                }
+            }
+        },
+        "g50": {
+            "subfields": {
+                "a": {
+                },
+                "h": {
+                },
+                "k": {
+                },
+                "e": {
+                },
+                "f": {
+                },
+                "c": {
+                },
+                "x": {
+                },
+                "w": {
+                }
+            }
+        },
+        "n55": {
+            "subfields": {
+                "a": {}
+
+            }
+        },
+         "s13": {
+             "repeatable": false,
+             "subfields": {
+                 "a": {
+                     "repeatable": false
+                 }
+             }
+        },
+         "xyz": {
+             "subfields": {
+                 "a": {},
+                 "u": {}
+             }
+        },
+        "z80": {
+            "subfields": {
+                "a": {}
+            }
+        },
+        "z98": "dbcsingle.fields.z98",
+        "z99": "dbcsingle.fields.z99"
+    }
+}
