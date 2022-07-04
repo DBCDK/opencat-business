@@ -1,0 +1,121 @@
+[
+  {
+    "name": "auth-related",
+    "description": "Tester om man kan koble eksisterende relaterede auth poster sammen (f.eks. 234) og tilknytte univers og serier (845 & 846)",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-870979-univ.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "setup-univ-191919.marc"
+          ]
+        },
+        {
+          "record": "setup-univ-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870979-series.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "setup-series-191919.marc"
+          ],
+          "children": [
+            "setup-870979-univ.marc"
+          ]
+        },
+        {
+          "record": "setup-series-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-870970.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870970-191919.marc"
+          ]
+        },
+        {
+          "record": "setup-870970-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "setup-870979-univ.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "setup-univ-191919.marc"
+            ],
+            "children": [
+              "expected-870970.marc"
+            ]
+          },
+          {
+            "record": "setup-univ-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-series-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "setup-series-191919.marc"
+            ],
+            "children": [
+              "expected-870970.marc",
+              "setup-870979-univ.marc"
+            ]
+          },
+          {
+            "record": "setup-series-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-870970.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "setup-870970-191919.marc"
+            ]
+          },
+          {
+            "record": "setup-870970-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
