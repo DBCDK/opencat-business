@@ -1,0 +1,571 @@
+{
+    "template": {
+        "description": "Skabelon til vaerk autoritetsposter, RDA entiteter (danMarc3 870979)",
+        "features": [ "auth_root" ]
+    },
+    "defaults":{
+        "field":{
+            "indicator":"00",
+            "mandatory":false,
+            "repeatable":true
+        },
+        "subfield":{
+            "mandatory":false,
+            "repeatable":true
+        }
+    },
+    "rules":[],
+    "fields": {
+        "001": {
+            "url": "",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "abcdfto",
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkFaust"
+                        }
+                    ]
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+					"values": [ "870979" ]
+                },
+                "c": {
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": true
+                            }
+                        }
+                    ]
+                },
+                "d": {
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                },
+                "f": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "e" ]
+                },
+                "o": {
+                    "repeatable": false,
+                    "values": [ "a" ]
+                }
+            }
+        },
+        "004": {
+            "url": "",
+            "mandatory": true,
+            "repeatable": false,
+            "sorting": "rx",
+            "subfields": {
+                "r": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "n", "d" ]
+                },
+                "x": {
+                    "mandatory": true,
+                    "values": [ "e" ]
+                }
+            }
+        },
+        "008": {
+            "url": "",
+            "repeatable": false,
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "t": {
+                    "repeatable": false,
+                    "values": [ "s", "p" ]
+                },
+                "c": {
+                    "repeatable": false,
+                    "values": [ "k", "d", "i", "c", "w", "j", "e", "s", "m", "b", "q",
+                        "t", "f", "a", "g", "h", "l", "z", "?" ]
+                },
+                "d": {
+                    "values": [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+                        "l", "m", "n", "o", "p", "q", "r", "s", "t","u", "w",
+                        "z", "x", "y", "1", "2" ]
+                },
+                "h": {
+                    "repeatable": false,
+                    "values": [ "m", "n", "p", "z", "d", "l", "w", "?" ]
+                },
+                "j": {
+                    "repeatable": false,
+                    "values": [ "d", "e", "f", "i", "j", "m", "p" ]
+                },
+                "k": {
+                    "repeatable": false,
+                    "values": [ "a", "b", "c" ]
+                },
+                "v": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "a", "b", "c", "d", "e", "u", "z" ]
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "009": {
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+		"025": {
+            "url": "",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "2": {
+                    "repeatable": false
+                }
+            }
+        },
+        "040":{
+            "url": "",
+            "repeatable": false,
+            "subfields":{
+                "b": {
+                    "repeatable": false,
+                    "values": [ "dan" ]
+                },
+                "e": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "rda", "dkrda", "kbsdb", "local" ]
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "043":{
+            "url": "",
+            "subfields":{
+                "c": {}
+            }
+        },
+        "046":{
+            "url": "",
+            "subfields":{
+                "f": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "l": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "075":{
+            "url": "",
+            "repeatable": false,
+            "subfields":{
+                "a": {
+                    "repeatable": false
+                },
+                "b": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "values": [ "p", "k", "v", "g", "s", "u" ]
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "133":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "134":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "200":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "h": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "f": {
+                    "repeatable": false
+                },
+                "c": {
+                    "repeatable": false
+                },
+                "d": {
+                    "repeatable": false
+                },
+                "g": {
+                    "repeatable": false,
+                    "values": [ "1" ]
+                },
+                "w": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "210":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "s": {
+                    "repeatable": false
+                },
+                "a": {
+                    "repeatable": false
+                },
+                "c": {},
+                "e": {
+                    "repeatable": false
+                },
+                "i": {
+                    "repeatable": false
+                },
+                "k": {
+                    "repeatable": false
+                },
+                "j": {},
+                "g": {
+                    "repeatable": false,
+                    "values": [ "1" ]
+                },
+                "w": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "233":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "234":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "4": "Lister.fields.codes.subfields.relator_code",
+                "5":{
+                    "repeatable": false
+                },
+                "6": {},
+                "7": {},
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "433":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "w": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "7": {
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "434":{
+            "url": "",
+            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "w": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "7": {
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                },
+                "9": {
+                    "repeatable": false
+                }
+            }
+        },
+        "663":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "667":{
+            "url": "",
+            "repeatable": false,
+            "subfields": {
+                "a": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "670":{
+            "url": "",
+            "subfields": {
+                "a": {},
+                "b": {},
+                "u": {},
+                "y": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "678":{
+            "url": "",
+            "subfields": {
+                "a": {},
+                "u": {},
+                "y": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "680":{
+            "url": "",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
+                }
+            }
+        },
+        "683":{
+            "url": "",
+            "subfields": {
+                "a": {
+                    "repeatable": false
+                },
+                "u": {},
+                "y": {},
+                "1": {
+                    "mandatory": true,
+                    "repeatable": false
+                }
+            }
+        },
+        "996": {
+            "mandatory": true,
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "repeatable": false,
+                    "values": [ "DBC" ]
+                },
+                "m":{},
+                "o":{
+                    "repeatable":false
+                }
+            }
+        },
+        "d08": {
+            "subfields": {
+                "a": {},
+                "o": {},
+                "k": {},
+                "r": {}
+            }
+        },
+        "n55": {
+            "subfields": {
+                "a": {}
+
+            }
+        },
+        "s12": {
+            "subfields": {
+                "t": {}
+            }
+        },
+        "z98": {
+            "subfields": {
+                "a": {},
+                "b": {}
+            }
+        },
+        "z99": {
+            "subfields": {
+                "a": {}
+            }
+        }
+    }
+}
