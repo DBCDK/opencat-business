@@ -60,7 +60,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "038 00 *a dr"
     );
 
@@ -69,7 +69,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
 
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "038 00 *a dr"
     );
 
@@ -83,7 +83,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "039 00 *a fol"
     );
 
@@ -91,7 +91,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("039a found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "039 00 *b dk"
     );
 
@@ -99,7 +99,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("039b found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "039 00 *a fol *b dk"
     );
 
@@ -115,7 +115,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "100 00 *a Troelsen *h Jens"
     );
 
@@ -126,7 +126,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("100ah found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "100 00 *a Margrethe *E 2 *e II *f dronning af Danmark"
     );
 
@@ -141,7 +141,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "110 00 *a NOAH *e musikgruppe"
     );
 
@@ -152,7 +152,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("110ae found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "110 00 *a Koebenhavns Universitet *c Romansk Institut"
     );
 
@@ -163,7 +163,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("110ac found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "110 00 *a Nordic Prosody *i 4 *k 1986 *j Middelfart"
     );
 
@@ -178,7 +178,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "239 00 *a Troelsen *h Jens"
     );
 
@@ -189,7 +189,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("239ah found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "239 00 *a Margrethe *E 2 *e II *f dronning af Danmark"
     );
 
@@ -200,7 +200,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("239aef found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "239 00 *t Kvartet for 2 violiner, viola og violoncel nr. 3 *u Grido *ø Arditti-Kvartetten, London"
     );
 
@@ -215,7 +215,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "245 00 *a Skatteret *n Speciel del"
     );
 
@@ -226,7 +226,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("Single: 245an found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "245 00 *a Skat *o Erhverv"
     );
 
@@ -237,7 +237,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("Single: 245ao found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "245 00 *a Lego dimensions *e produced by TT Games *ø Xbox One"
     );
 
@@ -248,7 +248,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("Single: 245aeø found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "245 00 *a Verden handler - etisk og fair? *y Lærervejledning"
     );
 
@@ -260,24 +260,24 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 3 234 567 8 *b 191919\n" +
+            "001 00 *a 32345678 *b 191919\n" +
             "004 00 *r n *a h\n" +
             "245 00 *a Danmarks kirker"
         )
     );
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a s\n" +
-            "014 00 *a 3 234 567 8\n" +
+            "014 00 *a 32345678\n" +
             "245 00 *n [Bind] 18 *a Ringkøbing Amt *f mit deutschen Resümees"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8\n" +
+        "014 00 *a 22345678\n" +
         "245 00 *g 5. bind, hft. 30 *a Brændekilde, Bellinge, Stenløse, Fangel"
     );
 
@@ -289,16 +289,16 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 3 234 567 8 *b 191919\n" +
+            "001 00 *a 32345678 *b 191919\n" +
             "004 00 *r n *a h\n" +
             "245 00 *a Technical report *æ Datalogisk Institut, DIKU"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8\n" +
+        "014 00 *a 22345678\n" +
         "245 00 *G nr. 2012 3 *g No. 2012/03 *a Design of reversible logic circuits using standard cells *c standard cells and functional programming"
     );
 
@@ -313,7 +313,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "652 00 *m 47.44 *b Barcelona"
     );
 
@@ -325,7 +325,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Assert.equalValue("652mb found", callFunction(record, record).toString(), createNote(parts).toString());
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "652 00 *n 86 *z 06\n" +
         "652 00 *o sk\n"
     );

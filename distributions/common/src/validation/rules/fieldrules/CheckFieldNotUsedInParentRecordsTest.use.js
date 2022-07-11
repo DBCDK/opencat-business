@@ -17,7 +17,7 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     var marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a e\n" +
         "041 00 *a eng"
     );
@@ -34,7 +34,7 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n" +
         "041 00 *a eng"
     );
@@ -42,17 +42,17 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 256 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 22565678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8"
+        "014 00 *a 12345678"
     );
     RawRepoClientCore.addRecord(marcRecord);
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 25125678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8"
+        "014 00 *a 12345678"
     );
 
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -67,16 +67,16 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n"
     );
     RawRepoClientCore.addRecord(marcRecord);
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 25125678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8\n" +
+        "014 00 *a 12345678\n" +
         "041 00 *a eng"
     );
 
@@ -92,7 +92,7 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n" +
         "041 00 *a eng"
     );
@@ -100,10 +100,10 @@ UnitTest.addFixture("CheckFieldNotUsedInParentRecords.validateField", function (
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 512 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 25125678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
         "041 00 *a eng *c dan \n" +
-        "014 00 *a 1 234 567 8"
+        "014 00 *a 12345678"
     );
 
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);

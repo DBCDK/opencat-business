@@ -14,7 +14,7 @@ UnitTest.addFixture( "Test IdFieldExists.validateRecord", function( ) {
             indicator : "00",
             subfields : [{
                 name : "a",
-                value : "1 234 567 8"
+                value : "12345678"
             }]
         }]
     } ) );

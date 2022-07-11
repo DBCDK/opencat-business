@@ -20,7 +20,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
         "038 00 *a dr"
     );
@@ -29,7 +29,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
     Assert.equalValue("Field not found in single record", callFunction(bundle, record, "245", /a/), expected);
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
         "038 00 *b dr"
     );
@@ -38,7 +38,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
     Assert.equalValue("Field found and subfield not found in single record", callFunction(bundle, record, "038", /a/), expected);
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
         "038 00 *a dr"
     );
@@ -52,15 +52,15 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8\n" +
+        "014 00 *a 22345678\n" +
         "038 00 *a dr"
     );
 
@@ -70,15 +70,15 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8\n" +
+        "014 00 *a 22345678\n" +
         "038 00 *b dr"
     );
 
@@ -88,15 +88,15 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8\n" +
+        "014 00 *a 22345678\n" +
         "038 00 *a dr"
     );
 
@@ -110,16 +110,16 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h\n" +
             "038 00 *a dr"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8\n"
+        "014 00 *a 22345678\n"
     );
 
     expected = undefined;
@@ -128,16 +128,16 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h\n" +
             "038 00 *b dr"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8"
+        "014 00 *a 22345678"
     );
 
     expected = undefined;
@@ -146,16 +146,16 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadFieldRecursiveReplace
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h\n" +
             "038 00 *a dr"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a b\n" +
-        "014 00 *a 2 234 567 8"
+        "014 00 *a 22345678"
     );
 
     expected = RecordUtil.createFieldFromString("038 00 *a " + ResourceBundle.getString(bundle, "code.038a.dr"));
@@ -177,7 +177,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
     //-----------------------------------------------------------------------------
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
         "038 00 *a dr"
     );
@@ -186,7 +186,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
     Assert.equalValue("Field not found in single record", callFunction(record, "245", /a/), expected);
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
         "038 00 *b dr"
     );
@@ -195,7 +195,7 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
     Assert.equalValue("Field found and subfield not found in single record", callFunction(record, "038", /a/), expected);
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
         "652 00 *n 85 *z 26\n" +
         "652 00 *o sk"
@@ -210,16 +210,16 @@ UnitTest.addFixture("RecategorizationNoteFieldProvider.loadMergeFieldRecursive",
 
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString(
-            "001 00 *a 2 234 567 8 *b 191919\n" +
+            "001 00 *a 22345678 *b 191919\n" +
             "004 00 *r n *a h\n" +
             "652 00 *n 15 *z 46\n"
         )
     );
 
     record = RecordUtil.createFromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *r n *a e\n" +
-        "014 00 *a 2 234 567 8\n" +
+        "014 00 *a 22345678\n" +
         "652 00 *n 85 *z 26\n" +
         "652 00 *o sk"
     );

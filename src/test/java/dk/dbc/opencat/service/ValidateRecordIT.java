@@ -34,7 +34,7 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
         String record = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
                 "    <leader>00000     22000000 4500 </leader>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
-                "        <subfield code=\"a\">5 158 076 1</subfield>\n" +
+                "        <subfield code=\"a\">51580761</subfield>\n" +
                 "        <subfield code=\"b\">870970</subfield>\n" +
                 "        <subfield code=\"c\">20150304180759</subfield>\n" +
                 "        <subfield code=\"d\">20150209</subfield>\n" +
@@ -185,7 +185,7 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
         String record = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
                 "    <leader>00000     22000000 4500 </leader>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
-                "        <subfield code=\"a\">5 158 076 1</subfield>\n" +
+                "        <subfield code=\"a\">51580761</subfield>\n" +
                 "        <subfield code=\"b\">870970</subfield>\n" +
                 "        <subfield code=\"c\">20150304180759</subfield>\n" +
                 "        <subfield code=\"d\">20150209</subfield>\n" +

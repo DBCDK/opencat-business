@@ -12,7 +12,7 @@ UnitTest.addFixture( "Test CheckLix", function() {
 
     var marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "042 00 *a10"
     );
 
@@ -24,7 +24,7 @@ UnitTest.addFixture( "Test CheckLix", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "042 00*a10.2"
     );
 
@@ -36,7 +36,7 @@ UnitTest.addFixture( "Test CheckLix", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "035 00 *a 8-10"
     );
 
@@ -48,7 +48,7 @@ UnitTest.addFixture( "Test CheckLix", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "035 00*a 2,5"
     );
 

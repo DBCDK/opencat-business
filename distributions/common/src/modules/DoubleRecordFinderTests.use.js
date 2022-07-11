@@ -9,21 +9,21 @@ UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
 
     record = RecordUtil.createFromString([
         "004 00 *r n",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, but no *a", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a e",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a but no b", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with b", DoubleRecordFinder.__matchVolumes(record), true);
@@ -35,21 +35,21 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSections", function () {
 
     record = RecordUtil.createFromString([
         "004 00 *r n",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, but no *a", DoubleRecordFinder.__matchSections(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a e",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a but no s", DoubleRecordFinder.__matchSections(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with s", DoubleRecordFinder.__matchSections(record), true);
@@ -1005,7 +1005,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCore.addAnalyse("match.014a:5 000 259 4", {
+    SolrCore.addAnalyse("match.014a:50002594", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
     });
@@ -1019,7 +1019,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     });
     var record = RecordUtil.createFromString([
         "004 00 *r n *a s",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *n 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1045,7 +1045,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1063,7 +1063,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections", function () {
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *n 3. Band *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1093,7 +1093,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "b"}]]}}}
     });
-    SolrCore.addAnalyse("match.014a:5 000 259 4", {
+    SolrCore.addAnalyse("match.014a:50002594", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
     });
@@ -1107,7 +1107,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     });
     var record = RecordUtil.createFromString([
         "004 00 *r n *a b",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *g 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1133,7 +1133,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1151,7 +1151,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *g 3. Band *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1513,7 +1513,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections 2", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCore.addAnalyse("match.014a:5 000 259 4", {
+    SolrCore.addAnalyse("match.014a:50002594", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
     });
@@ -1527,7 +1527,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections 2", function () {
     });
     var record = RecordUtil.createFromString([
         "004 00 *r n *a s",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *n 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1553,7 +1553,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections 2", function () {
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1584,7 +1584,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes 2", function () {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "b"}]]}}}
     });
-    SolrCore.addAnalyse("match.014a:5 000 259 4", {
+    SolrCore.addAnalyse("match.014a:50002594", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
     });
@@ -1598,7 +1598,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes 2", function () {
     });
     var record = RecordUtil.createFromString([
         "004 00 *r n *a b",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *g 3. Band *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"
@@ -1624,7 +1624,7 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes 2", function () {
     );
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
-        "014 00 *a 5 000 259 4",
+        "014 00 *a 50002594",
         "009 00 *a r *g xe",
         "245 00 *a Griechenland *c die hellenistische Welt",
         "260 00 *a Seattle, Wash. *b Fantagraphic Books"

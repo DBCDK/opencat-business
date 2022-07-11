@@ -66,7 +66,7 @@ UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
     });
 
     record = RecordUtil.createFromString([
-        "001 00 *a 3 458 795 6 *b 191919",
+        "001 00 *a 34587956 *b 191919",
         "008 00 *t m *u f *a 2015 *b dk *d aa *d y *l dan *o b *x 02 *v 0",
         "009 00 *a a *g xx",
         "245 00 *a Anton til soes",
@@ -76,8 +76,8 @@ UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
     DoubleRecordHandler.checkAndSendMails(record, GenericSettings);
     Assert.equalValue("Full record", JSON.stringify(DoubleRecordMailServiceClientCore.receivedMessages()),
         JSON.stringify([{
-            subject: ResourceBundle.getStringFormat(__bundle, "mail.subject", "3 458 795 6", "191919"),
-            body: ResourceBundle.getStringFormat(__bundle, "mail.body.header", "3 458 795 6", "191919") +
+            subject: ResourceBundle.getStringFormat(__bundle, "mail.subject", "34587956", "191919"),
+            body: ResourceBundle.getStringFormat(__bundle, "mail.body.header", "34587956", "191919") +
             ResourceBundle.getStringFormat(__bundle, "mail.body.double.record.line", "12345678", "008a, 009a, 009g, 245a, 260b") +
             ResourceBundle.getString(__bundle, "mail.body.footer")
         }]));

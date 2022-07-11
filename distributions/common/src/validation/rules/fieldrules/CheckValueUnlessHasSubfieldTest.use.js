@@ -11,7 +11,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     var marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00 *aeng"
     );
 
@@ -21,7 +21,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00 *abob"
     );
 
@@ -31,7 +31,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00 *abob*deng"
     );
 
@@ -42,7 +42,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00*akkk"
             );
 
@@ -52,7 +52,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00 *a eng *d kkk"
     );
 
@@ -62,7 +62,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00*a 870970kjik*2"
     );
 
@@ -73,7 +73,7 @@ UnitTest.addFixture( "Test CheckValueUnlessHasSubfield", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "041 00*a jik*2\n" +
         "041 00*ddam"
     );
