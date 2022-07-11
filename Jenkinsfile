@@ -33,6 +33,8 @@ pipeline {
     }
 
     environment {
+        ARTIFACTORY_LOGIN = credentials("artifactory_login")
+        ARTY_URL = "https://artifactory.dbccloud.dk/artifactory/generic-metascrum-production/opencat-business/${BUILD_NUMBER}"
         GITLAB_PRIVATE_TOKEN = credentials("metascrum-gitlab-api-token")
         DOCKER_IMAGE_NAME = "docker-metascrum.artifacts.dbccloud.dk/opencat-business"
         DOCKER_IMAGE_VERSION = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
@@ -104,6 +106,8 @@ pipeline {
                         sh """
                             docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:latest
                             docker push ${DOCKER_IMAGE_NAME}:latest
+
+                            curl -u ${ARTIFACTORY_LOGIN_USR}:${ARTIFACTORY_LOGIN_PSW} -T deploy/opencat-business.tar.gz ${ARTY_URL}/opencat-business.tar.gz
                         """
                         archiveArtifacts(artifacts: "deploy/*.tar.gz")
                     }
