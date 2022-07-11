@@ -23,7 +23,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b xxx\n" +
+        "001 00 *a 12345678 *b xxx\n" +
         "004 00 *a i"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -35,7 +35,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a i"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -46,7 +46,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -57,7 +57,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *a e"
     );
     RawRepoClientCore.clear();
@@ -65,7 +65,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
 
@@ -77,7 +77,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *a i"
     );
     RawRepoClientCore.clear();
@@ -85,7 +85,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -99,7 +99,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *a b"
     );
     RawRepoClientCore.clear();
@@ -107,7 +107,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
 
@@ -122,7 +122,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 191919\n" +
+        "001 00 *a 12345678 *b 191919\n" +
         "004 00 *a i"
     );
     RawRepoClientCore.clear();
@@ -130,7 +130,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a h"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -144,7 +144,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
     RawRepoClientCore.clear();
@@ -152,7 +152,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a s"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -164,7 +164,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
     RawRepoClientCore.clear();
@@ -172,7 +172,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a b"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -184,7 +184,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a h"
     );
     RawRepoClientCore.clear();
@@ -192,7 +192,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a b"
     );
     Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", "Delfelt 004a må ikke ændre sig fra h til b")]);
@@ -200,7 +200,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a b"
     );
     RawRepoClientCore.clear();
@@ -208,14 +208,14 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
     Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a e"
     );
     RawRepoClientCore.clear();
@@ -223,14 +223,14 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a b"
     );
     Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a b"
     );
     RawRepoClientCore.clear();
@@ -238,7 +238,7 @@ UnitTest.addFixture("CheckChangedValue.validateSubfield", function () {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970\n" +
+        "001 00 *a 12345678 *b 870970\n" +
         "004 00 *a b"
     );
     Assert.equal("Update record with wrong record type", CheckChangedValue.validateSubfield(record, field, subfield, params), []);

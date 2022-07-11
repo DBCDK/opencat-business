@@ -17,7 +17,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     // Case: No parent record.
     var marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a i\n" +
         "008 00 *t xx"
     );
@@ -30,9 +30,9 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     // Case: Parent record -> 001b Not-A-Number
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 234 567 8 *b 870qqq *c xxx *d yyy *f a\n" +
+        "001 00 *a 22345678 *b 870qqq *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8\n" +
+        "014 00 *a 12345678\n" +
         "008 00 *t xx"
     );
     record = DanMarc2Converter.convertFromDanMarc2(marcRecord);
@@ -45,7 +45,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     // Case: Parent record -> Subfield not used.
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 191919 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 191919 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n"
     );
     RawRepoClientCore.clear();
@@ -53,9 +53,9 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 22345678 *b 870970 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8\n" +
+        "014 00 *a 12345678\n" +
         "008 00 *t xx"
     );
 
@@ -68,7 +68,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     // Case: Parent record -> Subfield is used in parent record.
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 191919 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 191919 *c xxx *d yyy *f a\n" +
         "004 00 *a h\n" +
         "008 00 *t xx"
     );
@@ -76,9 +76,9 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 2 234 567 8 *b 191919 *c xxx *d yyy *f a\n" +
+        "001 00 *a 22345678 *b 191919 *c xxx *d yyy *f a\n" +
         "004 00 *a b\n" +
-        "014 00 *a 1 234 567 8\n" +
+        "014 00 *a 12345678\n" +
         "008 00 *t xx"
     );
 
@@ -86,7 +86,7 @@ UnitTest.addFixture("CheckSubfieldNotUsedInParentRecord.validateSubfield", funct
     field = record.fields[3];
     subfield = field.subfields[0];
 
-    message = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", "008", "t", "1 234 567 8");
+    message = ResourceBundle.getStringFormat(bundle, "subfield.in.parent.record.error", "008", "t", "12345678");
     Assert.equalValue("Parent record: Subfield is used in parent record", callRule(record, field, subfield), [ValidateErrors.subfieldError("TODO:fixurl", message)]);
 
     RawRepoClientCore.clear();

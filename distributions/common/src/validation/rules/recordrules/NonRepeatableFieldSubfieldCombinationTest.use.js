@@ -10,7 +10,7 @@ UnitTest.addFixture( "Test NonRepeatableFieldSubfieldCombination.validateRecord 
 
     var marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 44.2\n"
     );
 
@@ -20,7 +20,7 @@ UnitTest.addFixture( "Test NonRepeatableFieldSubfieldCombination.validateRecord 
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 44.2\n" +
         "652 00 *m 42.2\n"
     );

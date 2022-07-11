@@ -55,7 +55,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     RawRepoClientCore.clear();
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 12345678 *b 700400\n" +
         "004 00 *a e *r n"
     );
     Assert.equalValue("Not national common record",
@@ -63,7 +63,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -75,7 +75,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -89,7 +89,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -100,7 +100,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *b %s *a 1 234 567 8 \n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *b %s *a 12345678 \n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -113,7 +113,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00*e emneord\n" +
@@ -123,7 +123,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -134,14 +134,14 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     Assert.equalValue("New extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
         [
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "1 234 567 8")),
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "1 234 567 8"))
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "12345678")),
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "12345678"))
         ]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a note\n" +
@@ -152,7 +152,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a ny note\n" +
@@ -162,14 +162,14 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     Assert.equalValue("Edit extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
         [
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "1 234 567 8")),
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "1 234 567 8"))
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "504", "12345678")),
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "600", "12345678"))
         ]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a note\n" +
@@ -180,7 +180,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "996 00 *a DBC"
@@ -188,14 +188,14 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     Assert.equalValue("Delete extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
         [
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "504", "1 234 567 8")),
-            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "600", "1 234 567 8"))
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "504", "12345678")),
+            ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "600", "12345678"))
         ]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -205,7 +205,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -214,12 +214,12 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("New non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -230,7 +230,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a yyy *x\n" +
@@ -239,12 +239,12 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("Edit non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -255,7 +255,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -263,7 +263,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("Delete non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 });
 
@@ -277,7 +277,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 12345678 *b 700400\n" +
         "004 00 *a e *r n"
     );
     Assert.equalValue("Not national common record",
@@ -285,7 +285,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00*e emneord\n" +
@@ -296,7 +296,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00*e emneord\n" +
@@ -309,7 +309,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00*e emneord\n" +
@@ -319,7 +319,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *b %s *a 1 234 567 8 \n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *b %s *a 12345678 \n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
         "666 00*e emneord\n" +
@@ -331,7 +331,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "666 00*e emneord\n" +
@@ -341,7 +341,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *a xxx\n" +
@@ -353,7 +353,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -363,7 +363,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *a yyy\n" +
@@ -374,7 +374,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -384,7 +384,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "996 00 *a DBC"
@@ -394,7 +394,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -404,7 +404,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -413,12 +413,12 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("New non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -429,7 +429,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a yyy *x\n" +
@@ -438,12 +438,12 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("Edit non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -454,7 +454,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -462,7 +462,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("Delete non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     OpenAgencyClientCore.clearFeatures();
@@ -478,7 +478,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        "001 00 *a 1 234 567 8 *b 700400\n" +
+        "001 00 *a 12345678 *b 700400\n" +
         "004 00 *a e *r n"
     );
     Assert.equalValue("Not national common record",
@@ -486,7 +486,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -497,7 +497,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -510,7 +510,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -520,7 +520,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *b %s *a 1 234 567 8 \n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *b %s *a 12345678 \n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *r n *a e\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -532,7 +532,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -542,7 +542,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a note\n" +
@@ -554,7 +554,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -564,7 +564,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *a yyy\n" +
@@ -575,7 +575,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "504 00 *& 751000 *a xxx\n" +
@@ -585,7 +585,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "996 00 *a DBC"
@@ -595,7 +595,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -605,7 +605,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -614,12 +614,12 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("New non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -630,7 +630,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a yyy *x\n" +
@@ -639,12 +639,12 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("Edit non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.edit.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     curRecord = new Record();
     curRecord.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "300 00 *a xxx *x\n" +
@@ -655,7 +655,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
 
     record = new Record();
     record.fromString(
-        StringUtil.sprintf("001 00 *a 1 234 567 8 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
+        StringUtil.sprintf("001 00 *a 12345678 *b %s\n", UpdateConstants.COMMON_AGENCYID) +
         "004 00 *a e *r n\n" +
         "032 00 *a xxx *x\n" +
         "600 00 *& 751000 *a xxx\n" +
@@ -663,7 +663,7 @@ UnitTest.addFixture("NoteAndSubjectAndDisputasExtentionsHandler.authenticateExte
     );
     Assert.equalValue("Delete non extension field",
         NoteAndSubjectAndDisputasExtentionsHandler.authenticateExtentions(record, "700400"),
-        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "1 234 567 8"))]);
+        [ValidateErrors.recordError("", ResourceBundle.getStringFormat(bundle, "notes.subjects.delete.field.error", "700400", "300", "12345678"))]);
     RawRepoClientCore.clear();
 
     OpenAgencyClientCore.clearFeatures();

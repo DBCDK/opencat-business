@@ -25,12 +25,12 @@
 745 00*a7 sind
 990 00*o201848*bl*bv*unt
 991 00*oEkspres 201847
-991 00*oOnlineversion optaget i denne uges BKM (5 510 059 4)
+991 00*oOnlineversion optaget i denne uges BKM (55100594)
 996 00*aDBC
 d08 00*fhni*aForhåndsoprettet til brug for bibliotekerne, bog IKKE modtaget. Forventet udgivelsesdato ifølge forlaget d. 15.11.18*aonlineversion 55100594*ohsa*klfi
 d90 00*x201847*bl*bv*unt
 f06 00*bv*bl
-f07 00*a5 510 059 4*nautoLU
+f07 00*a55100594*nautoLU
 n51 00*a20181121*bejBKX
 s12 00*tTeamBAM201845
 z98 00*aMinus korrekturprint

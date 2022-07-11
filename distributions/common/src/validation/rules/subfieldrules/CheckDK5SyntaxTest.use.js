@@ -12,7 +12,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     var marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 10"
     );
 
@@ -24,7 +24,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 10.914"
     );
 
@@ -36,7 +36,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *n 85.4-26"
     );
 
@@ -48,7 +48,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 78.421:3"
     );
 
@@ -60,7 +60,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m Uden klassemærke"
     );
 
@@ -72,7 +72,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m NY TITEL"
     );
 
@@ -84,7 +84,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m sk"
     );
 
@@ -96,7 +96,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 1"
     );
 
@@ -108,7 +108,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 102"
     );
 
@@ -120,7 +120,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 109.14"
     );
 
@@ -133,7 +133,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
     params = { 'subfield': '652n' };
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *n 85. 4\n" +
         "652 00 *o sk"
     );
@@ -146,7 +146,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 33.26:2"
     );
 
@@ -158,7 +158,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 86-094"
     );
 
@@ -170,7 +170,7 @@ UnitTest.addFixture( "Test CheckDK5Syntax", function() {
 
     marcRecord = new Record();
     marcRecord.fromString(
-        "001 00 *a 1 234 567 8 *b 870970 *c xxx *d yyy *f a\n" +
+        "001 00 *a 12345678 *b 870970 *c xxx *d yyy *f a\n" +
         "652 00 *m 51:66"
     );
 

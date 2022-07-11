@@ -13,7 +13,7 @@ UnitTest.addFixture("Validator.doValidateRecord (Full test)", function () {
                 subfields: [
                     {
                         name: "a",
-                        value: "1 234 567 8"
+                        value: "12345678"
                     },
                     {
                         name: "b",
@@ -68,7 +68,7 @@ UnitTest.addFixture("Validator.doValidateRecord", function () {
                 subfields: [
                     {
                         name: "a",
-                        value: "1 234 567 8"
+                        value: "12345678"
                     }
                 ]
             }
@@ -148,7 +148,7 @@ UnitTest.addFixture("Validator.__validateField", function () {
                 subfields: [
                     {
                         name: "a",
-                        value: "1 234 567 8"
+                        value: "12345678"
                     }
                 ]
             }
@@ -211,11 +211,11 @@ UnitTest.addFixture("Validator.__validateSubfield", function () {
                 subfields: [
                     {
                         name: "A",
-                        value: "1 234 567 8"
+                        value: "12345678"
                     },
                     {
                         name: "a",
-                        value: "1 234 567 8"
+                        value: "12345678"
                     }
                 ]
             }
