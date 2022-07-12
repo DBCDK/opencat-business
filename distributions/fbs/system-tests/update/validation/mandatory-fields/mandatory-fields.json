@@ -1036,14 +1036,6 @@
             "validation": {
                 "errors": [
                     {
-                        "type" : "ERROR",
-                        "code" : null,
-                        "urlForDocumentation" : "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm",
-                        "ordinalPositionOfField" : 0,
-                        "ordinalPositionOfSubfield" : null,
-                        "ordinalPositionInSubfield" : null,
-                        "message" : "Delfelt 'b' på felt '001' har værdien '870970', derfor er felt '996' og delfelt 'a' obligatorisk"
-                    },{
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.7.htm",
                         "message": "Felt '004' mangler i posten"
