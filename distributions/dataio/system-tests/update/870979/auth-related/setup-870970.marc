@@ -1,0 +1,19 @@
+001 00 *a 61777431 *b 870970 *c 20211221065042 *d 20211125 *f a
+004 00 *r n *a e
+008 00 *t m *u u *a 2021 *b dk *d x *j f *l dan *v 0
+009 00 *a a *g xx
+017 00 *a 07129505
+021 00 *e 9788702347036 *c ib.
+032 00 *x ACC202147 *a DBF202152 *x BKM202152
+041 00 *a dan *c eng
+100 00 *a Hamid *h Salmiah Abdul *4 aut
+241 00 *a The ¤fellowship of the ring
+245 00 *a Eventyret om ringen *ø Ill. Ingahild Grathmer
+250 00 *a 4. udgave
+260 00 *& 1 *a [Kbh.] *b Gyldendal *c 2021
+300 00 *a 563 sider *b ill.
+440 00 *a Ringenes herre *v 1
+652 00 *n 83 *z 26
+652 00 *o sk
+990 00 *b v *b b *b s *u nu
+996 00 *a DBC
