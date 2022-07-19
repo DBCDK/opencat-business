@@ -89,7 +89,7 @@
         "008": {
             "url": "",
             "repeatable": false,
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
+            "sorting": "tcdhjkv1",
             "subfields": {
                 "t": {
                     "repeatable": false,
@@ -123,7 +123,6 @@
                     "values": [ "a", "b", "c", "d", "e", "u", "z" ]
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -133,11 +132,9 @@
             "repeatable": false,
             "subfields": {
                 "a": {
-                    "mandatory": true,
-                    "repeatable": false
+                    "mandatory": true
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -149,7 +146,6 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
                 "2": {
@@ -171,7 +167,6 @@
                     "values": [ "rda", "dkrda", "kbsdb", "local" ]
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -198,7 +193,6 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -216,7 +210,6 @@
                     "values": [ "p", "k", "v", "g", "s", "u" ]
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -230,7 +223,6 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
                 "8": {
@@ -250,7 +242,6 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
                 "8": {
@@ -263,7 +254,6 @@
         },
         "200":{
             "url": "",
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "a": {
                     "repeatable": false
@@ -289,7 +279,6 @@
                 },
                 "w": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
                 "4": "Lister.fields.codes.subfields.relator_code",
@@ -305,7 +294,6 @@
         },
         "210":{
             "url": "",
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "s": {
                     "repeatable": false
@@ -330,7 +318,6 @@
                 },
                 "w": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
                 "4": "Lister.fields.codes.subfields.relator_code",
@@ -349,16 +336,14 @@
         },
         "233":{
             "url": "",
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "a": {
                     "repeatable": false
                 },
+                "w": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
-                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
                     "repeatable": false
                 },
@@ -374,16 +359,14 @@
         },
         "234":{
             "url": "",
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "a": {
                     "repeatable": false
                 },
+                "w": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
-                "4": "Lister.fields.codes.subfields.relator_code",
                 "5":{
                     "repeatable": false
                 },
@@ -399,7 +382,6 @@
         },
         "433":{
             "url": "",
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "a": {
                     "repeatable": false
@@ -408,12 +390,9 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
-                "7": {
-                    "repeatable": false
-                },
+                "7": {},
                 "8": {
                     "repeatable": false
                 },
@@ -424,7 +403,6 @@
         },
         "434":{
             "url": "",
-            "sorting": "&tuazbcdefghijklmnoqrxwv",
             "subfields": {
                 "a": {
                     "repeatable": false
@@ -433,12 +411,9 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
-                "7": {
-                    "repeatable": false
-                },
+                "7": {},
                 "8": {
                     "repeatable": false
                 },
@@ -449,22 +424,18 @@
         },
         "663":{
             "url": "",
-            "repeatable": false,
             "subfields": {
                 "a": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
         },
         "667":{
             "url": "",
-            "repeatable": false,
             "subfields": {
                 "a": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -477,7 +448,6 @@
                 "u": {},
                 "y": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -489,7 +459,6 @@
                 "u": {},
                 "y": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -501,7 +470,6 @@
                     "repeatable": false
                 },
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 },
                 "8": {
@@ -518,7 +486,6 @@
                 "u": {},
                 "y": {},
                 "1": {
-                    "mandatory": true,
                     "repeatable": false
                 }
             }
@@ -529,7 +496,7 @@
             "subfields": {
                 "a": {
                     "repeatable": false,
-                    "values": [ "DBC" ]
+                    "values": [ "DBCAUT" ]
                 },
                 "m":{},
                 "o":{
