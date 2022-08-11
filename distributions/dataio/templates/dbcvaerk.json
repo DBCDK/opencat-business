@@ -487,6 +487,9 @@
                 "y": {},
                 "1": {
                     "repeatable": false
+                },
+                "8": {
+                    "repeatable": false
                 }
             }
         },
