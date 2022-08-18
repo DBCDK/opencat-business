@@ -4155,6 +4155,9 @@
         "845":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.8b1.htm",
             "subfields":{
+                "\u00E5":{
+                    "repeatable":false
+                },
                 "a":{
                     "repeatable": false
                 },
