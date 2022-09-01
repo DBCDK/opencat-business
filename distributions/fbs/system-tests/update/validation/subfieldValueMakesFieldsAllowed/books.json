@@ -15,7 +15,7 @@
     },
     {
         "name": "subfieldValueMakesFieldsAllowedBad",
-        "description": "032 er ikke tilladt da der er 723000 i 996",
+        "description": "630 er ikke tilladt da der er 723000 i 996",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -35,7 +35,7 @@
                         "ordinalPositionOfField": 13,
                         "ordinalPositionOfSubfield": 0,
                         "ordinalPositionInSubfield": null,
-                        "message": "Feltet '032' er ikke tilladt da delfelt 'a' ikke indeholder værdien 'DBC'"
+                        "message": "Feltet '630' er ikke tilladt da delfelt 'a' ikke indeholder værdien 'DBC'"
                     }
                 ]
             }

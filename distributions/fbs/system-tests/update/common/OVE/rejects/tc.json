@@ -1,0 +1,60 @@
+[
+    {
+        "name": "fbs-OVE-code-new-record-032a-reject",
+        "description": "Test rejection of new record due to 032a subfield",
+        "request": {
+            "authentication": {
+                "group": "715700",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-032a-reject.marc"
+        },
+        "setup": {
+            "rawrepo": [
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "Delfelt a i 032 må ikke tilføjes i ikke-nationale poster"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-OVE-code-new-record-non-cb-reject",
+        "description": "Test rejection of new record due to non cb",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-non-cb-reject.marc"
+        },
+        "setup": {
+            "rawrepo": [
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet men bibliotek er ikke et CB"
+                    }
+                ]
+            }
+        }
+    }
+]
