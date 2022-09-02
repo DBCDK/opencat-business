@@ -830,7 +830,7 @@
                         {
                             "type": "SubfieldRules.subfieldValueMakesFieldsAllowed",
                             "params": {
-                                "fields": [ "032", "630" ],
+                                "fields": [ "630" ],
                                 "values": [ "DBC" ]
                             }
                         }
