@@ -1,0 +1,62 @@
+[
+    {
+        "name": "fbs-test-overwrite-fbs-netlydbog-dbc-ownercode",
+        "bugs": [ "18522" ],
+        "description": "Tester rettelse af netlydbog fællesskabspost fra et FBS-bibliotek med DBC ejerkode. It's a bit theoretical, but if some client accidentally put a 996*aDBC, this will give an error",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "netlydbog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "fbs-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enqueued": true,
+                    "enrichments": [ "fbs-enrichment.marc" ]
+                },
+                {
+                    "record": "fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enqueued": true
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [ {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Du har ikke ret til at give ejerskabet for en folkebiblioteksejet fællesskabspost til et andet bibliotek"
+                    }],
+                "rawrepo": [
+                    {
+                        "record": "fbs-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "fbs-enrichment.marc" ]
+                    },
+                    {
+                        "record": "fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]

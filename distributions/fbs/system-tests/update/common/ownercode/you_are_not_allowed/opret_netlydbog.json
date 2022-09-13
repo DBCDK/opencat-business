@@ -1,0 +1,31 @@
+[
+    {
+        "name": "fbs-test-opret-common-netlydbog-DBC-ownercode-forbidden",
+        "bugs": [ "18522" ],
+        "description": "Tester oprettelse af ny netlydbog fællesskabspost me ejerkode DBC",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "netlydbog",
+            "record": "request.marc"
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [ {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Du har ikke ret til at oprette en fællesskabspost for et andet bibliotek"
+                } ],
+                "rawrepo": []
+            }
+        }
+    }
+]

@@ -1,0 +1,54 @@
+[
+    {
+        "name": "fbs-test-overwrite-fbs-netlydbog-fbs-ownercode",
+        "bugs": [ "18522" ],
+        "description": "Tester rettelse af en netlydbog fællesskabspost for et FBS-bibliotek der ikke er ejeren",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "netlydbog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "fbs-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enqueued": true,
+                    "enrichments": [ "fbs-enrichment.marc" ]
+                },
+                {
+                    "record": "fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false,
+                    "enqueued": true
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-fbs-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [ "result-fbs-enrichment.marc" ]
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
