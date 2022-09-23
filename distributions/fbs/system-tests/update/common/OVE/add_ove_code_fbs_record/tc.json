@@ -1,0 +1,174 @@
+[
+    {
+        "name": "fbs-OVE-code_fbs_record",
+        "description": "Test af OVE kode for CB i fbs ejet post",
+        "request": {
+            "authentication": {
+                "group": "763000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-fbs-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-fbs-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "result-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-OVE-code_fbs_record_forbidden_overwrite",
+        "description": "Test af OVE kode for ikke CB i fbs ejet post",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-fbs-common-with-ove.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB "
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "result-fbs-common-with-ove.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "result-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "fbs-OVE-code_fbs_record_forbidden",
+        "description": "Test af OVE kode for ikke CB i fbs ejet post",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-fbs-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+
+                    {
+                        "type": "ERROR",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "result-fbs-common_forbidden.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "result-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]

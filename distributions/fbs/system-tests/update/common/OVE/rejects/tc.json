@@ -51,7 +51,7 @@
                     {
                         "type": "FATAL",
                         "urlForDocumentation": null,
-                        "message": "OVE kode søges tilføjet men bibliotek er ikke et CB"
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
                     }
                 ]
             }
