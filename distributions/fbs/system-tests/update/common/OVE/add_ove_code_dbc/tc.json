@@ -1,0 +1,55 @@
+[
+    {
+        "name": "dbc-OVE-code",
+        "description": "Tester dbc rettelse af OVE kode i biblioteksejet post - skal fejle da 010100 ikke har regional_obligations",
+        "request": {
+            "authentication": {
+                "group": "010100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "superallowall",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-fbs.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-fbs-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-fbs-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [ ],
+                "rawrepo": [
+                    {
+                        "record": "result-common-fbs.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "result-fbs-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-fbs-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

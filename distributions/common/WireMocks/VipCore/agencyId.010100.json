@@ -94,6 +94,10 @@
         {
           "name": "use_central_faust",
           "bool": true
+        },
+        {
+          "name": "regional_obligations",
+          "bool": false
         }
       ]
     }
