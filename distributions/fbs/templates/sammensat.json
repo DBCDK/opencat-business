@@ -322,7 +322,6 @@
         },
         "300":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-            "mandatory":true,
             "repeatable":false,
             "subfields":{
                 "n":"DanMarc2.fields.300.subfields.n",

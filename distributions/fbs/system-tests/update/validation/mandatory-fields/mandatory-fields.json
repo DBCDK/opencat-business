@@ -51,11 +51,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -160,11 +155,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -269,11 +259,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -378,11 +363,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -440,11 +420,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -502,11 +477,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -564,11 +534,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -673,11 +638,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -839,11 +799,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -901,11 +856,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -1010,11 +960,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
@@ -1173,11 +1118,6 @@
                         "type": "ERROR",
                         "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.42.htm",
                         "message": "Felt '260' mangler i posten"
-                    },
-                    {
-                        "type": "ERROR",
-                        "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.43.htm",
-                        "message": "Felt '300' mangler i posten"
                     }
                 ]
             }
