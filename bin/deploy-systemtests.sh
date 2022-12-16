@@ -1,6 +1,11 @@
 #!/bin/bash
 #set -x
 
+function die() {
+  echo "ERROR: $@ failed"
+  exit 1
+}
+
 SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
