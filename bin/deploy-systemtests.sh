@@ -176,7 +176,7 @@ appendOcbProperty "rawrepo.provider.name.ph.holdings = dataio-ph-holding-update"
 
 echo "export SOLR_PORT_NR=${SOLR_PORT_NR}"
 
-../../bin/healthcheck-opencat-business-service.sh ${HOST_IP} ${OPENCAT_BUSINESS_SERVICE_PORT_8080} 220 || die "could not start opencat-business-service"
-../../bin/healthcheck-rawrepo-record-service.sh ${HOST_IP} ${RAWREPO_RECORD_SERVICE_PORT_8080} 220 || die "could not start rawrepo-record-service"
-../../bin/healthcheck-update-service.sh ${HOST_IP} ${UPDATESERVICE_PORT_8080} 220 || die "could not start update-service"
-../../bin/healthcheck-update-facade-service.sh ${HOST_IP} ${UPDATESERVICE_FACADE_PORT_8080} 220 || die "could not start update-facade-service"
+../../bin/healthcheck-opencat-business-service.sh ${HOST_IP} ${OPENCAT_BUSINESS_SERVICE_PORT_8080} 220 || fail "could not start opencat-business-service"
+../../bin/healthcheck-rawrepo-record-service.sh ${HOST_IP} ${RAWREPO_RECORD_SERVICE_PORT_8080} 220 || fail "could not start rawrepo-record-service"
+../../bin/healthcheck-update-service.sh ${HOST_IP} ${UPDATESERVICE_PORT_8080} 220 || fail "could not start update-service"
+../../bin/healthcheck-update-facade-service.sh ${HOST_IP} ${UPDATESERVICE_FACADE_PORT_8080} 220 || fail "could not start update-facade-service"
