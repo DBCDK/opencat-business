@@ -53,15 +53,17 @@ pipeline {
         stage("Verify") {
             steps {
                 script {
+                    String state = 'FAILED'
                     try {
                         sh "mvn verify pmd:pmd"
                         sh """
                             ${OCBTEST_EXECUTABLE} js-tests
                             ./bin/deploy-systemtests.sh false
                         """
+                        state = 'UNSTABLE'
                         sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
                     } catch (error) {
-                        currentBuild.result = 'UNSTABLE'
+                        currentBuild.result = state
                     } finally {
                         sh """
                             mkdir logs

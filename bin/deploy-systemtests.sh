@@ -100,6 +100,7 @@ echo -e "UPDATESERVICEDB_PORT is $UPDATESERVICEDB_PORT\n"
 export DEV_RAWREPO_DB_URL="rawrepo:thePassword@${HOST_IP}:${RAWREPO_PORT}/rawrepo"
 export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems"
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
+export DEV_HOLDINGS_URL="http://${HOST_IP}:${HOLDINGS_PORT}/api"
 
 docker-compose up -d rawrepo-record-service
 docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
@@ -128,7 +129,6 @@ OPENCAT_BUSINESS_SERVICE_PORT_4848=`docker inspect --format='{{(index (index .Ne
 echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4848}\n"
 
 export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
-export DEV_HOLDINGS_URL="http://${HOST_IP}:${HOLDINGS_PORT}/api"
 
 docker-compose up -d updateservice
 docker tag docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION} docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}
