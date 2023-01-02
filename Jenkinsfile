@@ -81,6 +81,7 @@ pipeline {
         stage("Save logs") {
             steps {
                 sh """
+                    pwd
                     mkdir logs
                     docker logs isworkerocb_updateservice-facade_1 > logs/updateservice-facade.log 2>&1
                     docker logs isworkerocb_updateservice_1 > logs/updateservice.log 2>&1
@@ -88,7 +89,7 @@ pipeline {
                     docker logs isworkerocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
                 """
 
-                archiveArtifacts(artifacts: "logs/*.log")
+                archiveArtifacts(artifacts: "logs/*.log", onlyIfSuccessful: false, fingerprint: true)
             }
         }
 
