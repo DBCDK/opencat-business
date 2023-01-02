@@ -128,6 +128,7 @@ OPENCAT_BUSINESS_SERVICE_PORT_4848=`docker inspect --format='{{(index (index .Ne
 echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4848}\n"
 
 export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
+export DEV_HOLDINGS_URL="http://${HOST_IP}:${HOLDINGS_PORT}/api"
 
 docker-compose up -d updateservice
 docker tag docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION} docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}

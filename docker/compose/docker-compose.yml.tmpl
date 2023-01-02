@@ -9,15 +9,6 @@ services:
     ports:
       - "5432"
 
-  holdingsitemsDb:
-    image: docker-de.artifacts.dbccloud.dk/holdings-items-postgres-1.3:latest
-    environment:
-      - POSTGRES_DB=holdingsitems
-      - POSTGRES_USER=holdingsitems
-      - POSTGRES_PASSWORD=thePassword
-    ports:
-      - "5432"
-
   updateserviceDb:
     image: docker-metascrum.artifacts.dbccloud.dk/update-postgres:${PROD_VERSION}
     environment:
@@ -45,7 +36,7 @@ services:
       - OPENNUMBERROLL_URL=${DEV_NUMBERROLL_URL}
       - JAVA_MAX_HEAP_SIZE=4G
       - RAWREPO_DB_URL=${DEV_RAWREPO_DB_URL}
-      - HOLDINGS_ITEMS_DB_URL=${DEV_HOLDINGS_ITEMS_DB_URL}
+      - HOLDING_ITEMS_CONTENT_SERVICE_URL=${DEV_HOLDINGS_URL}
       - UPDATE_DB_URL=${DEV_UPDATE_DB_URL}
       - SOLR_URL=${DEV_SOLR_URL}
       - SOLR_BASIS_URL=${DEV_SOLR_BASIS_URL}
@@ -98,13 +89,13 @@ services:
       - "4848"
 
   rawrepo-record-service:
-    image: docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-330
+    image: docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-349
     environment:
       - INSTANCE_NAME=${USER}_dev
       - VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT}
       - VIPCORE_CACHE_AGE=0
       - RAWREPO_URL=${DEV_RAWREPO_DB_URL}
-      - HOLDINGS_URL=${DEV_HOLDINGS_ITEMS_DB_URL}
+      - HOLDING_ITEMS_CONTENT_SERVICE_URL=${DEV_HOLDINGS_URL}
       - DUMP_THREAD_COUNT=8
       - DUMP_SLICE_SIZE=1000
       - JAVA_MAX_HEAP_SIZE=2G
