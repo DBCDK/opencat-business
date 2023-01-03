@@ -52,16 +52,28 @@ pipeline {
 
         stage("Verify") {
             steps {
-                sh "mvn verify pmd:pmd"
-                sh """
-                    ${OCBTEST_EXECUTABLE} js-tests
-                    ./bin/deploy-systemtests.sh false
-                """
                 script {
+                    String state = 'FAILED'
                     try {
+                        sh "mvn verify pmd:pmd"
+                        sh """
+                            ${OCBTEST_EXECUTABLE} js-tests
+                            ./bin/deploy-systemtests.sh false
+                        """
+                        state = 'UNSTABLE'
                         sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
                     } catch (error) {
-                        currentBuild.result = 'UNSTABLE'
+                        currentBuild.result = state
+                    } finally {
+                        sh """
+                            mkdir logs
+                            docker logs isworkerocb_updateservice-facade_1 > logs/updateservice-facade.log 2>&1
+                            docker logs isworkerocb_updateservice_1 > logs/updateservice.log 2>&1
+                            docker logs isworkerocb_opencat-business-service_1 > logs/opencat-business-service.log 2>&1
+                            docker logs isworkerocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
+                        """
+
+                        archiveArtifacts(artifacts: "logs/*.log", onlyIfSuccessful: false, fingerprint: true)
                     }
                 }
 
@@ -75,20 +87,6 @@ pipeline {
                       pattern         : '**/target/pmd.xml',
                       unstableTotalAll: "0",
                       failedTotalAll  : "0"])
-            }
-        }
-
-        stage("Save logs") {
-            steps {
-                sh """
-                    mkdir logs
-                    docker logs isworkerocb_updateservice-facade_1 > logs/updateservice-facade.log 2>&1
-                    docker logs isworkerocb_updateservice_1 > logs/updateservice.log 2>&1
-                    docker logs isworkerocb_opencat-business-service_1 > logs/opencat-business-service.log 2>&1
-                    docker logs isworkerocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
-                """
-
-                archiveArtifacts(artifacts: "logs/*.log")
             }
         }
 
