@@ -740,6 +740,9 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "sorting":"&0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
+                "&": {
+                    "repeatable": false
+                },
                 "m": "DanMarc2.fields.652.subfields.m",
                 "p": "DanMarc2.fields.652.subfields.p",
                 "i": "DanMarc2.fields.652.subfields.i",
