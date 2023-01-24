@@ -56,5 +56,34 @@
                 ]
             }
         }
+    },
+    {
+        "name": "fbs-OVE-code-new-record-non-cb-as-DBC-reject",
+        "description": "Tester at hvis et ikke-CB bibliotek sender en post ind med 032 *x OVE og ejer = DBC så bliver posten afvist",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-non-cb-as-DBC-reject.marc"
+        },
+        "setup": {
+            "rawrepo": [
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ]
+            }
+        }
     }
 ]
