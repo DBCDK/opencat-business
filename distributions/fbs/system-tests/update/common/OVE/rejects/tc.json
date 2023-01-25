@@ -78,7 +78,7 @@
             "update": {
                 "errors": [
                     {
-                        "type": "FATAL",
+                        "type": "ERROR",
                         "urlForDocumentation": null,
                         "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
                     }
