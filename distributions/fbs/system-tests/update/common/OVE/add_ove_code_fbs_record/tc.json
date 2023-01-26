@@ -144,7 +144,6 @@
             "validation": {},
             "update": {
                 "errors": [
-
                     {
                         "type": "ERROR",
                         "urlForDocumentation": null,
@@ -168,6 +167,122 @@
                         "enqueued": false
                     }
                 ]
+            }
+        }
+    },
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_only_ove_in_032",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },    
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_032a",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden_with_032a.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },    
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_other_032x",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden_with_other_032x.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },    
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_multiple_ove",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden_multi_ove.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
             }
         }
     }
