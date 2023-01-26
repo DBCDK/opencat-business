@@ -7,7 +7,6 @@ import javax.ws.rs.core.Response;
 
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildResponseDTO;
-import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

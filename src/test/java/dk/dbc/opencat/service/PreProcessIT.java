@@ -34,13 +34,6 @@ public class PreProcessIT extends AbstractOpencatBusinessContainerTest {
         assertThat("Returned preprocessed record is as expected", actual, is(expected));
     }
 
-    private RecordResponseDTO getExpectedResponse() {
-        RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
-        recordResponseDTO.setRecord(expectedRecordString);
-
-        return recordResponseDTO;
-    }
-
     private final String actualRecordString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
             "  <leader>00000     22000000 4500 </leader>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
