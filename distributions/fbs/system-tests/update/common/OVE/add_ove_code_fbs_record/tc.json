@@ -256,7 +256,7 @@
                 "rawrepo": []
             }
         }
-    },    
+    },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_multiple_ove",
         "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
@@ -268,6 +268,93 @@
             },
             "templateName": "bog",
             "record": "request_forbidden_multi_ove.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },    
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_032a_as_dbc",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden_with_032a_as_dbc.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },    
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_other_032x_as_dbc",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden_with_other_032x_as_dbc.marc"
+        },
+        "setup": {
+            "rawrepo": []
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "urlForDocumentation": null,
+                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    }
+                ],
+                "rawrepo": []
+            }
+        }
+    },
+    {
+        "name": "fbs-OVE-code_fbs_record_create_forbidden_multiple_ove_as_dbc",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request_forbidden_multi_ove_as_dbc.marc"
         },
         "setup": {
             "rawrepo": []

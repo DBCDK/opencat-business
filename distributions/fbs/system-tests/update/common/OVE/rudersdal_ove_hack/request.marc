@@ -1,0 +1,35 @@
+001 00 *a 135318183 *b 870970 *c 20230104120141 *d 20230104 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2019 *b dk *d x *j f *l dan *v 0
+009 00 *a a *g xy *h xx
+021 00 *e 9788702274745 *c ib.
+032 00 *x ACT201921 *x ACC201925 *a DBF201927 *x BKM201927
+041 00 *a dan *c per
+100 00 *a Pārsı̄'pūr *h Shahrnūsh *4 aut
+245 00 *a Kvinder uden mænd *c roman *ø Læsekredssæt
+250 00 *a 1. udgave *b ÷
+260 00 *a [Kbh.] *b Gyldendal *c 2019
+300 00 *a 187 sider *n læsekredssæt á 8 bøger
+440 00 *0 norm *a Gyldendal skala
+502 00 *a Oversat fra farsi
+504 00 *a En poetisk fortælling om fem iranske kvinder der lever i det mandsdomi
+    nerede Teheran i 1950'erne. I deres søgen efter kærlighed og frihed finder 
+    de sammen i en magisk have i Karaj
+521 00 *b 1. oplag *c 2019
+652 00 *m sk
+666 00 *s ægteskab
+666 00 *s kvindeundertrykkelse
+666 00 *s kvindeliv
+666 00 *o samfundsskildringer
+666 00 *o kollektivromaner
+666 00 *s storbyen
+666 00 *s provinsen
+666 00 *q Karaj
+666 00 *q Teheran
+666 00 *q Iran
+666 00 *i 1950-1959
+720 00 *o Nazila Ghavami Kivi *4 trl *4 aft
+900 00 *a Parsipur *h Shahrnush *x se *w Pārsı̄'pūr, Shahrnūsh *z 100
+990 00 *b v *b l *u nt
+991 00 *o Onlineversion optaget i denne uges BKM (46591763)
+996 00 *a DBC

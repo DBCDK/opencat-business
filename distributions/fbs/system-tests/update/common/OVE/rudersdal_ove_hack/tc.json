@@ -1,0 +1,31 @@
+[
+{
+    "name": "rudersdal_ove_hack",
+    "description": "Tester at Rudersdal ikke kan sende en post ind med 032 (uden over) med DBC som ejer. Udspringer af OVE problematikken",
+    "request": {
+        "authentication": {
+            "group": "723000",
+            "user": "netpunkt",
+            "password": "20Koster"
+        },
+        "templateName": "bog",
+        "record": "request.marc"
+    },
+    "setup": {
+        "rawrepo": []
+    },
+    "expected": {
+        "validation": {},
+        "update": {
+            "errors": [
+                {
+                    "type": "FATAL",
+                    "urlForDocumentation": null,
+                    "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                }
+            ],
+            "rawrepo": []
+        }
+    }
+}
+]
