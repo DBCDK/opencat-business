@@ -1,0 +1,360 @@
+[
+    {
+        "name": "add-dk5-when-disputa-and-have-add-rights",
+        "bugs": [],
+        "description": "Check if an agency with add dk5 to phd can do it",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-no-classmark.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "add-dk5-when-disputa-and-not-have-add-rights",
+        "bugs": [],
+        "description": "Check if an agency without add dk5 to phd can do it",
+        "request": {
+            "authentication": {
+                "group": "746100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-no-classmark.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "code": null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Bibilioteket har ikke rettighed til at tildele klassemærke"
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common-no-classmark.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "rawrepo-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "add-dk5-when-disputa-and-have-classmark",
+        "bugs": [],
+        "description": "Check if an agency with right can add a dk5 when there exists a classmark",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common-with-classmark.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                    {
+                        "type": "FATAL",
+                        "code": null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Posten har et klassemærke der ikke må ændres"
+                    }
+                ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-common-with-classmark.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "rawrepo-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "add-dk5-when-disputa-ordinary-update",
+        "bugs": [],
+        "description": "Check if an agency without add dk5 to phd can do it",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request-ordinary-update.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "19099873-common.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "19099873-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "19099873-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "19336085-common.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "19336085-enrichment.marc"
+                    ],
+                    "children": [
+                        "rawrepo-common-ordinary.marc"
+                    ]
+                },
+                {
+                    "record": "19336085-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "19350061-common.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "19350061-enrichment.marc"
+                    ],
+                    "children": [
+                        "rawrepo-common-ordinary.marc"
+                    ]
+                },
+                {
+                    "record": "19350061-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "134990988-common.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "134990988-enrichment.marc"
+                    ],
+                    "children": [
+                        "rawrepo-common-ordinary.marc"
+                    ]
+                },
+                {
+                    "record": "134990988-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-common-ordinary.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-enrichment-ordinary.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-enrichment-ordinary.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "19099873-common.marc",
+                        "type": "AUTHORITY",
+                        "deleted": false,
+                        "enrichments": [
+                            "19099873-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "19099873-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "19336085-common.marc",
+                        "type": "AUTHORITY",
+                        "deleted": false,
+                        "enrichments": [
+                            "19336085-enrichment.marc"
+                        ],
+                        "children": [
+                            "rawrepo-common-ordinary.marc"
+                        ]
+                    },
+                    {
+                        "record": "19336085-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "19350061-common.marc",
+                        "type": "AUTHORITY",
+                        "deleted": false,
+                        "enrichments": [
+                            "19350061-enrichment.marc"
+                        ],
+                        "children": [
+                            "rawrepo-common-ordinary.marc"
+                        ]
+                    },
+                    {
+                        "record": "19350061-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "134990988-common.marc",
+                        "type": "AUTHORITY",
+                        "deleted": false,
+                        "enrichments": [
+                            "134990988-enrichment.marc"
+                        ],
+                        "children": [
+                            "rawrepo-common-ordinary.marc"
+                        ]
+                    },
+                    {
+                        "record": "134990988-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    },
+                    {
+                        "record": "rawrepo-common-ordinary.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-enrichment-ordinary.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-enrichment-ordinary.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
