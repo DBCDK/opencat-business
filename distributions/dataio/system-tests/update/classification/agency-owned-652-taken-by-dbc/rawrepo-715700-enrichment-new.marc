@@ -1,13 +1,12 @@
 001 00 *a 61440208 *b 715700 *c 20221116142150 *d 20220829 *f a
-004 00 *r d *a e
+004 00 *r n *a e
 008 00 *t m *u f *a 2022 *b dk *l dan *x 06 *v 0 *& n
 009 00 *a m *b s *g th *a s *g xc
 239 00 *t Kandis for livet
 245 00 *a Kandis for livet
-652 00 *m 30.13
-652 00 *p 78.797 *v 6
-652 00 *p 78.9061 *a Kandis
-652 00 *p 78.9067 *v 6
-652 00 *p 99.4 *a Hansen *h Johnny *c f. 1965
+652 00 *m 78.797 *& 716300 *v 6
+652 00 *p 78.9061 *a Kandis *& 716300
+652 00 *p 78.9067 *& 716300 *v 6
+652 00 *p 99.4 *a Hansen *h Johnny *c f. 1965 *& 716300
 y08 00 *a UPDATE opstillingsændring pga. 652m
 
