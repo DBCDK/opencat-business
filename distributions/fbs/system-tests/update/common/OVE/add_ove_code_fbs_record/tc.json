@@ -198,7 +198,7 @@
                 "rawrepo": []
             }
         }
-    },    
+    },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_032a",
         "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
@@ -227,7 +227,7 @@
                 "rawrepo": []
             }
         }
-    },    
+    },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_other_032x",
         "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
@@ -285,7 +285,7 @@
                 "rawrepo": []
             }
         }
-    },    
+    },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_032a_as_dbc",
         "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
@@ -306,15 +306,15 @@
             "update": {
                 "errors": [
                     {
-                        "type": "FATAL",
+                        "type": "ERROR",
                         "urlForDocumentation": null,
-                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                        "message": "Det er ikke tilladt at tilføje/rette 032 delfelter udover OVE kode for CB"
                     }
                 ],
                 "rawrepo": []
             }
         }
-    },    
+    },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_other_032x_as_dbc",
         "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
@@ -335,9 +335,9 @@
             "update": {
                 "errors": [
                     {
-                        "type": "FATAL",
+                        "type": "ERROR",
                         "urlForDocumentation": null,
-                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                        "message": "Det er ikke tilladt at tilføje/rette 032 delfelter udover OVE kode for CB"
                     }
                 ],
                 "rawrepo": []
@@ -364,9 +364,9 @@
             "update": {
                 "errors": [
                     {
-                        "type": "FATAL",
-                        "urlForDocumentation": null,
-                        "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                        "type": "ERROR",
+                        "urlForDocumentation": "",
+                        "message": "Du har ikke ret til at oprette en fællesskabspost for et andet bibliotek"
                     }
                 ],
                 "rawrepo": []

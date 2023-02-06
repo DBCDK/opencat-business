@@ -19,9 +19,9 @@
         "update": {
             "errors": [
                 {
-                    "type": "FATAL",
+                    "type": "ERROR",
                     "urlForDocumentation": null,
-                    "message": "OVE kode søges tilføjet/rettet men bibliotek er ikke et CB"
+                    "message": "Det er ikke tilladt at tilføje/rette 032 delfelter udover OVE kode for CB"
                 }
             ],
             "rawrepo": []
