@@ -201,7 +201,7 @@
     },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_032a",
-        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "description": "Test af OVE kode og andet 032 delfelt i ny post af et ikke-CB bibliotek",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -230,7 +230,7 @@
     },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_other_032x",
-        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "description": "Test af 032 ikke-OVE delfelter i ny post fra ikke-CB",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -259,7 +259,7 @@
     },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_multiple_ove",
-        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "description": "Test af flere OVE koder i ny post af et ikke-CB bibliotek",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -288,7 +288,7 @@
     },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_032a_as_dbc",
-        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "description": "Tester at man ikke kan snyde en post ind med OVE og ejer som DBC",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -317,7 +317,7 @@
     },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_other_032x_as_dbc",
-        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek med DBC som ejer",
         "request": {
             "authentication": {
                 "group": "723000",
@@ -346,7 +346,7 @@
     },
     {
         "name": "fbs-OVE-code_fbs_record_create_forbidden_multiple_ove_as_dbc",
-        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek",
+        "description": "Test af OVE kode i ny post af et ikke-CB bibliotek med DBC som ejer",
         "request": {
             "authentication": {
                 "group": "723000",
