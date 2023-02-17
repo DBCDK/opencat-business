@@ -14,7 +14,7 @@
     "setup": {
       "rawrepo": [
         {
-          "record": "rawrepo-common.marc",
+          "record": "rawrepo-common-prod.marc",
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
@@ -31,22 +31,91 @@
     "expected": {
       "validation": {},
       "update": {
-        "errors": [],
+        "errors": [ {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : "",
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Du har ikke ret til at opdatere denne fællespost, da den er under produktion"
+        } ],
         "rawrepo": [
           {
-            "record": "result-common.marc",
+            "record": "rawrepo-common-prod.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
-            "enqueued": true,
+            "enqueued": false,
             "enrichments": [
-              "result-enrichment.marc"
+              "rawrepo-enrichment.marc"
             ]
           },
           {
-            "record": "result-enrichment.marc",
+            "record": "rawrepo-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "dit-note-subject-problem-in-prod",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "700300",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "BCIbog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common-prod.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [ {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : "",
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Du har ikke ret til at opdatere denne fællespost, da den er under produktion"
+        } ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common-prod.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
           }
         ]
       }
@@ -84,22 +153,30 @@
     "expected": {
       "validation": {},
       "update": {
-        "errors": [],
+        "errors": [ {
+          "type" : "FATAL",
+          "code" : null,
+          "urlForDocumentation" : null,
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Posten må ikke beriges, da den i forvejen er emnebehandlet"
+        } ],
         "rawrepo": [
           {
-            "record": "result-common.marc",
+            "record": "rawrepo-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
-            "enqueued": true,
+            "enqueued": false,
             "enrichments": [
-              "result-enrichment.marc"
+              "rawrepo-enrichment.marc"
             ]
           },
           {
-            "record": "result-enrichment.marc",
+            "record": "rawrepo-enrichment.marc",
             "type": "ENRICHMENT",
             "deleted": false,
-            "enqueued": true
+            "enqueued": false
           }
         ]
       }
