@@ -503,6 +503,7 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     Log.info("FIRST - PRE");
     Log.info("periodica-to-volume" + callFunction(currentRecord, record).toString());
     Assert.equalValue("periodica-to-volume", callFunction(currentRecord, record).toString(), createNote(parts).toString());
+    Log.info("WTF");
     Log.info("FIRST - POST");
 
     RawRepoClientCore.clear();
