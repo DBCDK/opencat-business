@@ -19,6 +19,8 @@
         "dbcbind",
         "dbcdk5",
         "dbcforlag",
+        "dbcglobal",
+        "dbcglobalaut",
         "dbchoved",
         "dbcsektion",
         "dbcperiodica",
