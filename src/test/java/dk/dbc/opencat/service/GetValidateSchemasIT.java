@@ -40,6 +40,14 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
                 "    \"schemaInfo\": \"\"\n" +
                 "  },\n" +
                 "  {\n" +
+                "    \"schemaName\": \"dbcglobal\",\n" +
+                "    \"schemaInfo\": \"Skabelon til teknisk inplementering og modellering af RDA poster (danMarc3)\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"schemaName\": \"dbcglobalaut\",\n" +
+                "    \"schemaInfo\": \"Skabelon til teknisk inplementering og modellering af RDA entiteter (danMarc3)\"\n" +
+                "  },\n" +
+                "  {\n" +
                 "    \"schemaName\": \"delete\",\n" +
                 "    \"schemaInfo\": \"Skabelon til sletteposter - alle post- og materialetyper.\"\n" +
                 "  },\n" +

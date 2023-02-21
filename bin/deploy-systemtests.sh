@@ -1,17 +1,11 @@
 #!/bin/bash
 #set -x
 
-function die() {
-  echo "ERROR: $@ failed"
-  exit 1
-}
-
-SOLR_PORT_NR=${SOLR_PORT_NR:-WHAT}     # silencing annoying intellij quibble
 export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 
-RAWREPO_VERSION=1.15-snapshot
+RAWREPO_VERSION=1.16-snapshot
 RAWREPO_DIT_TAG=DIT-5165
-RAWREPO_RECORD_SERVICE_VERSION=DIT-321
+RAWREPO_RECORD_SERVICE_VERSION=DIT-349
 HOLDINGS_ITEMS_VERSION=1.3-snapshot
 UPDATE_FACADE_TAG=master-34
 
@@ -26,7 +20,11 @@ docker build target/docker -t docker-metascrum.artifacts.dbccloud.dk/opencat-bus
 
 cd ${PROJECT_ROOT}/docker/compose
 
-. ${PROJECT_ROOT}/bin/get_solr_port_nr.sh
+. ${PROJECT_ROOT}/bin/common.sh
+
+SOLR_PORT_NR=${SOLR_PORT_NR:-$(getFreePort)}
+HOLDINGS_PORT=${HOLDINGS_PORT:-$(getFreePort)}
+
 
 if [ ! -d $HOME/.ocb-tools ]
 then
@@ -57,58 +55,21 @@ echo "Using prod version ${PROD_VERSION} of updateservice"
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
 envsubst '${PROD_VERSION}' < docker-compose.yml.tmpl > docker-compose.yml
 
-DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-NOTSET}
-if [ ${DEV_NUMBERROLL_URL} = "NOTSET" ]
-then
-    export DEV_NUMBERROLL_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
-fi
+export DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
 
-DEV_VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT:-NOTSET}
-if [ ${DEV_VIPCORE_ENDPOINT} = "NOTSET" ]
-then
-    export DEV_VIPCORE_ENDPOINT="http://${HOST_IP}:${SOLR_PORT_NR}"
-fi
-DEV_IDP_SERVICE_URL=${DEV_IDP_SERVICE_URL:-NOTSET}
-if [ ${DEV_IDP_SERVICE_URL} = "NOTSET" ]
-then
-    export DEV_IDP_SERVICE_URL="http://${HOST_IP}:${SOLR_PORT_NR}"
-fi
+export DEV_VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
+export DEV_IDP_SERVICE_URL=${DEV_IDP_SERVICE_URL:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
 # Solr FBS settings
-DEV_SOLR_ADDR=${DEV_SOLR_ADDR:-NOTSET}
-if [ ${DEV_SOLR_ADDR} = "NOTSET" ]
-then
-    export DEV_SOLR_ADDR="solrserver"
-fi
-DEV_SOLR_PORT=${DEV_SOLR_PORT:-NOTSET}
-if [ ${DEV_SOLR_PORT} = "NOTSET" ]
-then
-    export DEV_SOLR_PORT="${SOLR_PORT_NR}"
-fi
-DEV_SOLR_PATH=${DEV_SOLR_PATH:-NOTSET}
-if [ ${DEV_SOLR_PATH} = "NOTSET" ]
-then
-    export DEV_SOLR_PATH="solr/raapost-index"
-fi
+DEV_SOLR_ADDR=${DEV_SOLR_ADDR:-"solrserver"}
+DEV_SOLR_PORT=${DEV_SOLR_PORT:-"${SOLR_PORT_NR}"}
+DEV_SOLR_PATH=${DEV_SOLR_PATH:-"solr/raapost-index"}
 
 export DEV_SOLR_URL="http://${DEV_SOLR_ADDR}:${DEV_SOLR_PORT}/${DEV_SOLR_PATH}"
 
 #Solr basis settings
-DEV_SOLR_BASIS_ADDR=${DEV_SOLR_BASIS_ADDR:-NOTSET}
-if [ ${DEV_SOLR_BASIS_ADDR} = "NOTSET" ]
-then
-    export DEV_SOLR_BASIS_ADDR="solrbasis"
-fi
-DEV_SOLR_BASIS_PORT=${DEV_SOLR_BASIS_PORT:-NOTSET}
-if [ ${DEV_SOLR_BASIS_PORT} = "NOTSET" ]
-then
-    export DEV_SOLR_BASIS_PORT="${SOLR_PORT_NR}"
-fi
-DEV_SOLR_BASIS_PATH=${DEV_SOLR_BASIS_PATH:-NOTSET}
-if [ ${DEV_SOLR_BASIS_PATH} = "NOTSET" ]
-then
-    export DEV_SOLR_BASIS_PATH="solr/basis-index"
-fi
-
+DEV_SOLR_BASIS_ADDR=${DEV_SOLR_BASIS_ADDR:-"solrbasis"}
+DEV_SOLR_BASIS_PORT=${DEV_SOLR_BASIS_PORT:-"${SOLR_PORT_NR}"}
+DEV_SOLR_BASIS_PATH=${DEV_SOLR_BASIS_PATH:-"solr/basis-index"}
 export DEV_SOLR_BASIS_URL="http://${DEV_SOLR_BASIS_ADDR}:${DEV_SOLR_BASIS_PORT}/${DEV_SOLR_BASIS_PATH}"
 
 docker-compose down
@@ -116,28 +77,21 @@ docker-compose ps
 echo "docker ps : $?"
 
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
-docker rmi -f docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
 docker-compose pull
-docker-compose up -d rawrepoDb updateserviceDb holdingsitemsDb fakeSmtp
+docker-compose up -d rawrepoDb updateserviceDb fakeSmtp
 sleep 3
 docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG} docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
 docker rmi docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG}
-docker tag docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:${USER}
-docker rmi docker-de.artifacts.dbccloud.dk/holdings-items-postgres-${HOLDINGS_ITEMS_VERSION}:latest
 docker tag docker-metascrum.artifacts.dbccloud.dk/update-postgres:staging docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
 docker docker-metascrum.artifacts.dbccloud.dkc.dk/update-postgres:staging
 
 RAWREPO_IMAGE=`docker-compose ps -q rawrepoDb`
 export RAWREPO_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${RAWREPO_IMAGE} `
 echo -e "RAWREPO_PORT is $RAWREPO_PORT\n"
-
-HOLDINGSITEMSDB_IMAGE=`docker-compose ps -q holdingsitemsDb`
-export HOLDINGSITEMSDB_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${HOLDINGSITEMSDB_IMAGE} `
-echo -e "HOLDINGSITEMSDB_PORT is $HOLDINGSITEMSDB_PORT\n"
 
 UPDATESERVICEDB_IMAGE=`docker-compose ps -q updateserviceDb`
 export UPDATESERVICEDB_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${UPDATESERVICEDB_IMAGE} `
@@ -146,6 +100,7 @@ echo -e "UPDATESERVICEDB_PORT is $UPDATESERVICEDB_PORT\n"
 export DEV_RAWREPO_DB_URL="rawrepo:thePassword@${HOST_IP}:${RAWREPO_PORT}/rawrepo"
 export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems"
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
+export DEV_HOLDINGS_URL="http://${HOST_IP}:${HOLDINGS_PORT}/api"
 
 docker-compose up -d rawrepo-record-service
 docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
@@ -202,31 +157,27 @@ echo -e "UPDATESERVICE_FACADE_PORT_8686 is ${UPDATESERVICE_FACADE_PORT_8686}\n"
 UPDATESERVICE_FACADE_PORT_4848=`docker inspect --format='{{(index (index .NetworkSettings.Ports "4848/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
 echo -e "UPDATESERVICE_FACADE_PORT_4848 is ${UPDATESERVICE_FACADE_PORT_4848}\n"
 
-echo "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" > ${HOME}/.ocb-tools/testrun.properties
-echo "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}" >> ${HOME}/.ocb-tools/testrun.properties
+clearOcbProperties
 
-echo "rawrepo.jdbc.driver = org.postgresql.Driver" >> ${HOME}/.ocb-tools/testrun.properties
-echo "rawrepo.jdbc.conn.url = jdbc:postgresql://${HOST_IP}:${RAWREPO_PORT}/rawrepo" >> ${HOME}/.ocb-tools/testrun.properties
-echo "rawrepo.jdbc.conn.user = rawrepo" >> ${HOME}/.ocb-tools/testrun.properties
-echo "rawrepo.jdbc.conn.passwd = thePassword" >> ${HOME}/.ocb-tools/testrun.properties
+appendOcbProperty "updateservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}"
+appendOcbProperty "buildservice.url = http://${HOST_IP}:${UPDATESERVICE_FACADE_PORT_8080}"
+appendOcbProperty "rawrepo.jdbc.driver = org.postgresql.Driver"
+appendOcbProperty "rawrepo.jdbc.conn.url = jdbc:postgresql://${HOST_IP}:${RAWREPO_PORT}/rawrepo"
+appendOcbProperty "rawrepo.jdbc.conn.user = rawrepo"
+appendOcbProperty "rawrepo.jdbc.conn.passwd = thePassword"
+appendOcbProperty "solr.port = ${SOLR_PORT_NR}"
+appendOcbProperty "holdings.port = ${HOLDINGS_PORT}"
 
-echo "holdings.jdbc.driver = org.postgresql.Driver" >> ${HOME}/.ocb-tools/testrun.properties
-echo "holdings.jdbc.conn.url = jdbc:postgresql://${HOST_IP}:${HOLDINGSITEMSDB_PORT}/holdingsitems" >> ${HOME}/.ocb-tools/testrun.properties
-echo "holdings.jdbc.conn.user = holdingsitems" >> ${HOME}/.ocb-tools/testrun.properties
-echo "holdings.jdbc.conn.passwd = thePassword" >> ${HOME}/.ocb-tools/testrun.properties
+appendOcbProperty "request.headers.x.forwarded.for = 172.17.20.165"
 
-echo "solr.port = ${SOLR_PORT_NR}" >> ${HOME}/.ocb-tools/testrun.properties
-
-echo "request.headers.x.forwarded.for = 172.17.20.165" >> ${HOME}/.ocb-tools/testrun.properties
-
-echo "rawrepo.provider.name.dbc = dataio-update" >> ${HOME}/.ocb-tools/testrun.properties
-echo "rawrepo.provider.name.fbs = opencataloging-update" >> ${HOME}/.ocb-tools/testrun.properties
-echo "rawrepo.provider.name.ph = fbs-ph-update" >> ${HOME}/.ocb-tools/testrun.properties
-echo "rawrepo.provider.name.ph.holdings = dataio-ph-holding-update" >> ${HOME}/.ocb-tools/testrun.properties
+appendOcbProperty "rawrepo.provider.name.dbc = dataio-update"
+appendOcbProperty "rawrepo.provider.name.fbs = opencataloging-update"
+appendOcbProperty "rawrepo.provider.name.ph = fbs-ph-update"
+appendOcbProperty "rawrepo.provider.name.ph.holdings = dataio-ph-holding-update"
 
 echo "export SOLR_PORT_NR=${SOLR_PORT_NR}"
 
-../../bin/healthcheck-opencat-business-service.sh ${HOST_IP} ${OPENCAT_BUSINESS_SERVICE_PORT_8080} 220 || die "could not start opencat-business-service"
-../../bin/healthcheck-rawrepo-record-service.sh ${HOST_IP} ${RAWREPO_RECORD_SERVICE_PORT_8080} 220 || die "could not start rawrepo-record-service"
-../../bin/healthcheck-update-service.sh ${HOST_IP} ${UPDATESERVICE_PORT_8080} 220 || die "could not start update-service"
-../../bin/healthcheck-update-facade-service.sh ${HOST_IP} ${UPDATESERVICE_FACADE_PORT_8080} 220 || die "could not start update-facade-service"
+../../bin/healthcheck-opencat-business-service.sh ${HOST_IP} ${OPENCAT_BUSINESS_SERVICE_PORT_8080} 220 || fail "could not start opencat-business-service"
+../../bin/healthcheck-rawrepo-record-service.sh ${HOST_IP} ${RAWREPO_RECORD_SERVICE_PORT_8080} 220 || fail "could not start rawrepo-record-service"
+../../bin/healthcheck-update-service.sh ${HOST_IP} ${UPDATESERVICE_PORT_8080} 220 || fail "could not start update-service"
+../../bin/healthcheck-update-facade-service.sh ${HOST_IP} ${UPDATESERVICE_FACADE_PORT_8080} 220 || fail "could not start update-facade-service"
