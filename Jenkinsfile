@@ -55,7 +55,7 @@ pipeline {
                 sh "mvn verify pmd:pmd"
                 sh """
                     ${OCBTEST_EXECUTABLE} js-tests
-                    // TODO - retabler ./bin/deploy-systemtests.sh false
+                    ./bin/deploy-systemtests.sh false
                 """
                 script {
                     try {
