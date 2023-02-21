@@ -257,6 +257,9 @@ var RecategorizationNoteFieldFactory = function () {
 
     function __addCategory(currentRecord, updatingRecord, noteField) {
         Log.trace("Enter - RecategorizationNoteFieldFactory.__addCategory()");
+        Log.info("CAT rec cur : " + currentRecord.toString());
+        Log.info("CAT rec update : " + updatingRecord.toString());
+        Log.info("notefield : " + noteField.toString());
         try {
             var field;
             var spec = undefined;
