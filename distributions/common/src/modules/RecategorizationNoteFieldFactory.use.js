@@ -281,6 +281,7 @@ var RecategorizationNoteFieldFactory = function () {
                 Log.info("Data : " + ISBDFieldFormater.formatField(field, spec));
                 Log.info("Formatted message: ", ISBDFieldFormater.formatField(field, spec));
                 message = ResourceBundle.getStringFormat(__loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField(field, spec));
+                Log.info("Message : " + message);
             }
 
             field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue(__loadBundle(), currentRecord, "009", /a|g/);
