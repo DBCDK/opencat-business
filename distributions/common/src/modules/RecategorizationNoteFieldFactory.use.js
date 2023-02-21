@@ -296,6 +296,8 @@ var RecategorizationNoteFieldFactory = function () {
                     }
                 };
 
+                Log.debug("Formatting field: ", field);
+                Log.info("Message pre 009 : " + message);
                 message += ResourceBundle.getStringFormat(__loadBundle(), "note.category.type", ISBDFieldFormater.formatField(field, spec));
             }
 
