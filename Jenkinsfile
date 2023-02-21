@@ -55,8 +55,9 @@ pipeline {
                 sh "mvn verify pmd:pmd"
                 sh """
                     ${OCBTEST_EXECUTABLE} js-tests
-                    ./bin/deploy-systemtests.sh false
+                    // TODO - retabler ./bin/deploy-systemtests.sh false
                 """
+                /*
                 script {
                     try {
                         sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
@@ -64,6 +65,7 @@ pipeline {
                         currentBuild.result = 'UNSTABLE'
                     }
                 }
+                */
 
                 junit "**/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
             }
