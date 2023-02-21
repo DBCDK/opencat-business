@@ -498,7 +498,8 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
         category: "# (DK5 65.821), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering fra periodica til flerbindsværk "
     };
 
-    Assert.equalValue("volume-to-single", callFunction(currentRecord, record).toString(), createNote(parts).toString());
+    Log.info("periodica-to-volume" + callFunction(currentRecord, record).toString());
+    Assert.equalValue("periodica-to-volume", callFunction(currentRecord, record).toString(), createNote(parts).toString());
 
     RawRepoClientCore.clear();
 });
