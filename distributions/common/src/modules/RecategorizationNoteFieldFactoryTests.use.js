@@ -418,7 +418,9 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
         title: "Road signs - geosemiotics and human mobility. Omkatalogiseret fra enkeltstående",
         category: "# (DK5 65.821), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering fra flerbindsværk"
     };
+    Log.info("FIRST - PRE");
     Assert.equalValue("volume-to-single", callFunction(currentRecord, record).toString(), createNote(parts).toString());
+    Log.info("FIRST - POST");
 
     RawRepoClientCore.clear();
     RawRepoClientCore.addRecord(
@@ -498,8 +500,10 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
         category: "# (DK5 65.821), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering fra periodica til flerbindsværk "
     };
 
+    Log.info("FIRST - PRE");
     Log.info("periodica-to-volume" + callFunction(currentRecord, record).toString());
     Assert.equalValue("periodica-to-volume", callFunction(currentRecord, record).toString(), createNote(parts).toString());
+    Log.info("FIRST - POST");
 
     RawRepoClientCore.clear();
 });
