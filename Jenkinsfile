@@ -50,22 +50,12 @@ pipeline {
             }
         }
 
-                    // TODO RESTORE ./bin/deploy-systemtests.sh false
         stage("Verify") {
             steps {
                 sh "mvn verify pmd:pmd"
                 sh """
                     ${OCBTEST_EXECUTABLE} js-tests
                 """
-                /*
-                script {
-                    try {
-                        sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
-                    } catch (error) {
-                        currentBuild.result = 'UNSTABLE'
-                    }
-                }
-                */
 
                 junit "**/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml"
             }
