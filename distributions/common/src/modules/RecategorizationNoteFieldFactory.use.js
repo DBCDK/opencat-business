@@ -46,6 +46,7 @@ var RecategorizationNoteFieldFactory = function () {
      *
      * @returns {Field} The new {__FIELD_NAME} note field.
      */
+    // TODO MYRDE - WTF?????
     function newNoteField(currentRecord, updatingRecord) {
         Log.trace("Enter - RecategorizationNoteFieldFactory.newNoteField()");
         var result = undefined;
