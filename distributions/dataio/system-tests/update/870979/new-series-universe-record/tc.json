@@ -1,7 +1,7 @@
 [
   {
     "name": "870979-new-series-record",
-    "description": "Tester at man kan oprette nye serie entitetsposter",
+    "description": "Tester at man kan oprette nye serie entitetsposter test",
     "request": {
       "authentication": {
         "group": "010100",
