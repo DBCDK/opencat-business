@@ -36,6 +36,16 @@ UnitTest.addFixture( "ExclusiveSubfield", function( ) {
         }, {
             name : "b", value : "bVal"
         }, {
+            name : "d", value : "dVal"
+        }, {
+            name : "c", value : "cVal"
+        }, {
+            name : "g", value : "gVal"
+        }, {
+            name : "p", value : "pVal"
+        }, {
+            name : "f", value : "fVal"
+        }, {
             name : "a", value : "aVal"
         }]
     };
@@ -44,7 +54,12 @@ UnitTest.addFixture( "ExclusiveSubfield", function( ) {
         ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "t" ) ),
         ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "e" ) ),
         ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "x" ) ),
-        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "b" ) )
+        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "b" ) ),
+        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "d" ) ),
+        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "c" ) ),
+        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "g" ) ),
+        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "p" ) ),
+        ValidateErrors.fieldError( "TODO:fixurl", ResourceBundle.getStringFormat( bundle, "exclusive.subfield.rule.error", "a", "f" ) )
     ];
 
     Assert.equalValue( "3 exclusiveSubfield test not-ok", ExclusiveSubfield.validateField( record, field3, undefined ), error3 );
