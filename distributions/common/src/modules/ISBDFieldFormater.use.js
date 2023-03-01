@@ -28,7 +28,6 @@ var ISBDFieldFormater = function () {
     function formatField(field, spec) {
         Log.trace("Enter - ISBDFieldFormater.formatField()");
 
-        Log.info("Field <" + field + "> spec <" + spec + ">");
         var result = "";
         try {
             var previousSubNames = "";

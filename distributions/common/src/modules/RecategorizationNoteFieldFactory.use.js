@@ -46,7 +46,6 @@ var RecategorizationNoteFieldFactory = function () {
      *
      * @returns {Field} The new {__FIELD_NAME} note field.
      */
-    // TODO MYRDE - WTF?????
     function newNoteField(currentRecord, updatingRecord) {
         Log.trace("Enter - RecategorizationNoteFieldFactory.newNoteField()");
         var result = undefined;
@@ -257,9 +256,6 @@ var RecategorizationNoteFieldFactory = function () {
 
     function __addCategory(currentRecord, updatingRecord, noteField) {
         Log.trace("Enter - RecategorizationNoteFieldFactory.__addCategory()");
-        Log.info("CAT rec cur : " + currentRecord.toString());
-        Log.info("CAT rec update : " + updatingRecord.toString());
-        Log.info("notefield : " + noteField.toString());
         try {
             var field;
             var spec = undefined;
@@ -280,12 +276,9 @@ var RecategorizationNoteFieldFactory = function () {
                     valueSpec: {}
                 };
 
-                Log.info("Formatting field: ", field !== undefined ? field : "UNDEFINED");
-                Log.info("Bundle :" + ResourceBundle.getString(__loadBundle(), "note.category.dk5"));
-                Log.info("Data : " + ISBDFieldFormater.formatField(field, spec));
-                Log.info("Formatted message: ", ISBDFieldFormater.formatField(field, spec));
+                Log.debug("Formatting field: ", field !== undefined ? field : "UNDEFINED");
+                Log.debug("Formatted message: ", ISBDFieldFormater.formatField(field, spec));
                 message = ResourceBundle.getStringFormat(__loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField(field, spec));
-                Log.info("Message : " + message);
             }
 
             field = RecategorizationNoteFieldProvider.loadFieldRecursiveReplaceValue(__loadBundle(), currentRecord, "009", /a|g/);
@@ -301,9 +294,7 @@ var RecategorizationNoteFieldFactory = function () {
                 };
 
                 Log.debug("Formatting field: ", field);
-                Log.info("Message pre 009 : " + message);
                 message += ResourceBundle.getStringFormat(__loadBundle(), "note.category.type", ISBDFieldFormater.formatField(field, spec));
-                Log.info("Message post 009 : " + message);
             }
 
             if (message !== "") {
