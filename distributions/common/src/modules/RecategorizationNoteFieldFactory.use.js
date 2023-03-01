@@ -276,10 +276,8 @@ var RecategorizationNoteFieldFactory = function () {
                     valueSpec: {}
                 };
 
-                Log.info("Formatting field: ", field !== undefined ? field : "UNDEFINED");
-                Log.info("Bundle :" + ResourceBundle.getString(__loadBundle(), "note.category.dk5"));
-                Log.info("Data : " + ISBDFieldFormater.formatField(field, spec));
-                Log.info("Formatted message: ", ISBDFieldFormater.formatField(field, spec));
+                Log.debug("Formatting field: ", field !== undefined ? field : "UNDEFINED");
+                Log.debug("Formatted message: ", ISBDFieldFormater.formatField(field, spec));
                 message = ResourceBundle.getStringFormat(__loadBundle(), "note.category.dk5", ISBDFieldFormater.formatField(field, spec));
             }
 

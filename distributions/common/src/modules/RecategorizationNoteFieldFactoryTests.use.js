@@ -352,16 +352,16 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
             "100 00 *a Hamid *h Salmiah Abdul *4 aut",
             "900 00 *a Abdul Hamid *h Salmiah *z 100",
             "245 00 *a Road signs - geosemiotics and human mobility *c dissertation",
-            "260 00 *& 1 *a Ꜳlborg *b Ꜳlborg Universitetsforlag *c 2014",
+            "260 00 *& 1 *a Ålborg *b Ålborg Universitetsforlag *c 2014",
             "300 00 *a 2 bind *b ill. (nogle i farver)",
-            "440 00 *a PhD series *æ Faculty of Engineering and Science, Ꜳlborg University *z 2246-1248",
+            "440 00 *a PhD series *æ Faculty of Engineering and Science, Ålborg University *z 2246-1248",
             "532 00 *& 1 *a Med litteraturhenvisninger og links",
             "652 00 *m 65.821",
-            "710 00 *a Ꜳlborg Universitet *c Det ¤Teknisk-Naturvidenskabelige Fakultet",
-            "840 00 *a Ph.d.-serien for Det Teknisk-Naturvidenskabelige Fakultet, Ꜳlborg Universitet",
-            "910 00 *a Det ¤Teknisk-Naturvidenskabelige Fakultet, Ꜳlborg Universitet *z 710",
-            "910 00 *a Ꜳlborg University *c Faculty of Engineering and Science *z 710",
-            "910 00 *a Faculty of Engineering and Science, Ꜳlborg University *z 710",
+            "710 00 *a Ålborg Universitet *c Det ¤Teknisk-Naturvidenskabelige Fakultet",
+            "840 00 *a Ph.d.-serien for Det Teknisk-Naturvidenskabelige Fakultet, Ålborg Universitet",
+            "910 00 *a Det ¤Teknisk-Naturvidenskabelige Fakultet, Ålborg Universitet *z 710",
+            "910 00 *a Ålborg University *c Faculty of Engineering and Science *z 710",
+            "910 00 *a Faculty of Engineering and Science, Ålborg University *z 710",
             "996 00 *a DBC"
         ].join("\n"))
     );
@@ -424,81 +424,75 @@ UnitTest.addFixture("RecategorizationNoteFieldFactory.newNoteField", function ()
     RawRepoClientCore.addRecord(
         RecordUtil.createFromString([
             "001 00 *a 51591038 *b 191919 *c 20150220131914 *d 20150213 *f a",
-            "004 00 *r n *a e",
-            "008 00 *t p *u f *a 2014 *b dk *d m *d y *l eng *x 05 *v 0",
+            "004 00 *r n *a h",
+            "008 00 *u f *a 2014 *b dk *d m *d y *l eng *x 05 *v 0",
             "009 00 *a a *g xx",
             "021 00 *c Hf.",
             "100 00 *a Hamid *h Salmiah Abdul *4 aut",
             "900 00 *a Abdul Hamid *h Salmiah *z 100",
             "245 00 *a Road signs - geosemiotics and human mobility *c dissertation",
-            "260 00 *& 1 *a Ꜳlborg *b Ꜳlborg Universitetsforlag *c 2014",
+            "260 00 *& 1 *a Ålborg *b Ålborg Universitetsforlag *c 2014",
             "300 00 *a 2 bind *b ill. (nogle i farver)",
-            "440 00 *a PhD series *æ Faculty of Engineering and Science, Ꜳlborg University *z 2246-1248",
+            "440 00 *a PhD series *æ Faculty of Engineering and Science, Ålborg University *z 2246-1248",
             "532 00 *& 1 *a Med litteraturhenvisninger og links",
             "652 00 *m 65.821",
-            "710 00 *a Ꜳlborg Universitet *c Det ¤Teknisk-Naturvidenskabelige Fakultet",
-            "840 00 *a Ph.d.-serien for Det Teknisk-Naturvidenskabelige Fakultet, Ꜳlborg Universitet",
-            "910 00 *a Det ¤Teknisk-Naturvidenskabelige Fakultet, Ꜳlborg Universitet *z 710",
-            "910 00 *a Ꜳlborg University *c Faculty of Engineering and Science *z 710",
-            "910 00 *a Faculty of Engineering and Science, Ꜳlborg University *z 710",
+            "710 00 *a Ålborg Universitet *c Det ¤Teknisk-Naturvidenskabelige Fakultet",
+            "840 00 *a Ph.d.-serien for Det Teknisk-Naturvidenskabelige Fakultet, Ålborg Universitet",
+            "910 00 *a Det ¤Teknisk-Naturvidenskabelige Fakultet, Ålborg Universitet *z 710",
+            "910 00 *a Ålborg University *c Faculty of Engineering and Science *z 710",
+            "910 00 *a Faculty of Engineering and Science, Ålborg University *z 710",
             "996 00 *a DBC"
         ].join("\n"))
     );
 
     currentRecord = RecordUtil.createFromString([
-            "001 00 *a 22413090 *b 191919 *c 19990510220316 *d 19990407 *f a",
-            "004 00 *r n *a e",
-            "008 00 *t p *u u *a 1999 *b dk *j f *l dan *v 0",
-            "014 00 *a 51591038",
-            "021 00 *a 87-7714-324-8 *c hf. *d kr. 78,00",
-            "032 00 *a DBF199917 *x SFD199917 *x BKR201606",
-            "041 00 *a dan *c eng",
-            "245 00 *a Omkatalogiseret fra enkeltstående",
-            "250 00 *a 3. danske udgave *b 3. udgave",
-            "260 00 *c 1999 *k Nørhaven, Viborg",
-            "300 00 *a 189 sider",
-            "990 00 *a SFD *c A *o 199917",
-            "996 00 *a DBC"
+        "001 00 *a 22413090 *b 191919 *c 20150220131914 *d 20150213 *f a",
+        "004 00 *r n *a e",
+        "008 00 *t p *u f *a 2014 *b dk *d m *d y *l eng *x 05 *v 0",
+        "009 00 *a a *g xx",
+        "021 00 *c Hf.",
+        "100 00 *a Hamid *h Salmiah Abdul *4 aut",
+        "900 00 *a Abdul Hamid *h Salmiah *z 100",
+        "245 00 *a Road signs - geosemiotics and human mobility *c dissertation",
+        "260 00 *& 1 *a Ålborg *b Ålborg Universitetsforlag *c 2014",
+        "300 00 *a 2 bind *b ill. (nogle i farver)",
+        "440 00 *a PhD series *æ Faculty of Engineering and Science, Ålborg University *z 2246-1248",
+        "532 00 *& 1 *a Med litteraturhenvisninger og links",
+        "652 00 *m 65.821",
+        "710 00 *a Ålborg Universitet *c Det ¤Teknisk-Naturvidenskabelige Fakultet",
+        "840 00 *a Ph.d.-serien for Det Teknisk-Naturvidenskabelige Fakultet, Ålborg Universitet",
+        "910 00 *a Det ¤Teknisk-Naturvidenskabelige Fakultet, Ålborg Universitet *z 710",
+        "910 00 *a Ålborg University *c Faculty of Engineering and Science *z 710",
+        "910 00 *a Faculty of Engineering and Science, Ålborg University *z 710",
+        "996 00 *a DBC"
         ].join("\n")
     );
     RawRepoClientCore.addRecord(currentRecord);
 
     record = RecordUtil.createFromString([
-            "001 00 *a 22413090 *b 191919 *c 19990510220316 *d 19990407 *f a",
-            "004 00 *r n *a b",
-            "008 00 *t s *u u *a 1999 *b dk *j f *l dan *v 0",
-            "009 00 *a a *g xx",
-            "021 00 *a 87-7714-324-8 *c hf. *d kr. 78,00",
-            "032 00 *a DBF199917 *x SFD199917",
-            "041 00 *a dan *c eng",
-            "100 00 *a Pilcher *h Rosamunde",
-            "241 00 *a Sleeping tiger",
-            "245 00 *a Kærlighed i blåt *e Rosamunde Pilcher *f oversat fra engelsk af Ursula Baum Hansen",
-            "250 00 *a 3. danske udgave *b 3. udgave",
-            "260 00 *& 1 *a Kbh. *b Cicero *c 1999 *k Nørhaven, Viborg",
-            "300 00 *a 189 sider",
-            "504 00 *& 1 *a Kort før sit bryllup med den rædsomt kedelige advokat Rodney Ackland rejser Selina til Ibiza, hvor hun tror at kunne finde sin far, som hun aldrig har kendt",
-            "520 00 *& 1 *a Originaludgave: 1967",
-            "520 00 *a Tidligere: 1. bogklubudgave i.e. 2. udgave. Kbh. : Bogklubben 12 Bøger, 1998. - 1. udgave. 1998",
-            "652 00 *m 35.1",
-            "666 00*s kærlighed",
-            "666 00*s England",
-            "666 00*s Ibiza",
-            "666 00*s 1960-1969",
-            "666 00*s Spanien",
-            "990 00 *a SFD *c A *o 199917",
-            "996 00 *a DBC"
+        "001 00 *a 22413090 *b 191919 *c 19990510220316 *d 19990407 *f a",
+        "004 00 *r n *a b",
+        "008 00 *t m *u u *a 1999 *b dk *j f *l dan *v 0",
+        "014 00 *a 51591038",
+        "021 00 *a 87-7714-324-8 *c hf. *d kr. 78,00",
+        "032 00 *a DBF199917 *x SFD199917 *x BKR201606",
+        "041 00 *a dan *c eng",
+        "245 00 *a Omkatalogiseret fra enkeltstående",
+        "250 00 *a 3. danske udgave *b 3. udgave",
+        "260 00 *c 1999 *k Nørhaven, Viborg",
+        "300 00 *a 189 sider",
+        "990 00 *a SFD *c A *o 199917",
+        "996 00 *a DBC"
         ].join("\n")
     );
 
     parts = {
         recategorization: "Materialet er opstillet under",
         creator: "Hamid, Salmiah Abdul",
-        title: "Road signs - geosemiotics and human mobility. Omkatalogiseret fra enkeltstående",
+        title: "Road signs - geosemiotics and human mobility",
         category: "# (DK5 65.821), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering fra periodica til flerbindsværk "
     };
 
-    Log.info("periodica-to-volume" + callFunction(currentRecord, record).toString());
     Assert.equalValue("periodica-to-volume", callFunction(currentRecord, record).toString(), createNote(parts).toString());
 
     RawRepoClientCore.clear();
