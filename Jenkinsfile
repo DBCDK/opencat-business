@@ -30,7 +30,7 @@ pipeline {
 
     options {
         timestamps()
-        lock("meta-opencat-business-systemtest-${env.BRANCH_NAME}")
+        lock('meta-opencat-business-systemtest')
     }
 
     environment {
