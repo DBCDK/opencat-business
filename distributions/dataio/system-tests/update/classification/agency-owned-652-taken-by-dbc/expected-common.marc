@@ -1,0 +1,59 @@
+001 00 *a 61440208 *b 870970 *c 20221221131826 *d 20210922 *f a
+004 00 *r n *a e
+006 00 *d 7 *2 b
+008 00 *t m *u f *a 2022 *b dk *l dan *x 06 *v 0 *& n
+009 00 *a m *b s *g th *a s *g xc
+021 00 *b Brugsretskategori: A
+023 00 *b 5712192003534
+032 00 *x ACC202203 *a DBI202206 *x BKM202206 *a DMO202206
+041 00 *a dan *u eng
+239 00 *t Kandis for livet
+245 00 *a Kandis for livet
+260 00 *a [Ꜳlborg] *b Sandrew Metronome *c 2022
+300 00 *n 1 dvd-video *l ca. 93 min. *n 1 cd
+440 00 *0 norm *a New Danish screen
+504 00 *& 1 *a Dokumentarfilm der følger Johnny Hansen fra Kandis og flere af Kandis' mange fans. Uanset om du kan lide musikken, så bør du se denne glimrende film. Til dem med interesse i dokumentarfilm og subkulturer
+512 00 *i Dvd *e Jesper Dalgꜳrd, instruktør *e Jesper Dalgꜳrd, Denniz Göl Bertelsen, manuskriptforfattere *b . - Undertekster på engelsk. - Produktion: Frau Film (Danmark), 2021
+512 00 *i Cd (soundtrack fra filmen) *e Kandis (Johnny Hansen, Jens-Erik Jensen, Jørgen Hein, Benny Jensen/Frank Thøgersen ... [et al.]) ... [et al.] *b . Indspilninger hovedsagelig publiceret 1992-2021
+517 00 *& 1 *a Mærkning: Tilladt for alle men frarådes børn under 7 år
+538 00 *n 00353-MM
+600 00 *a 870979 *c 68395712
+610 00 *a 870979 *c 92832961
+652 00 *m 30.13
+652 00 *p 78.797 *v 6
+652 00 *p 78.9061 *a Kandis
+652 00 *p 78.9067 *v 6
+652 00 *p 99.4 *a Hansen *h Johnny *c f. 1965
+666 00 *m dansktop *m pop *n vokal *p 1990-1999 *p 2000-2009 *p 2010-2019 *p 2020-2029 *l Danmark
+666 00 *f fankultur
+666 00 *f idoler
+666 00 *f musikidoler
+666 00 *f idoldyrkelse
+666 00 *f popmusikere
+666 00 *f orkestre
+666 00 *o biografier
+666 00 *o dokumentarfilm
+700 00 *a 870979 *c 68234018
+700 00 *å 1 *a 870979 *c 62054565
+700 00 *a 870979 *c 68395712
+700 00 *a 870979 *c 90959727
+700 00 *a 870979 *c 91107279
+700 00 *a 870979 *c 91104458
+700 00 *a 870979 *c 19132056
+795 00 *å 11 *a Gi'r Tilbage Igen *z DK5C50149420 *l 4:21 min *& spotify:track:5KCKcdFOEYeH973AwvgIGG *i Johnny Hansen/Lonnie Kjer
+795 00 *å 12 *a Hotel Himmel *i Johnny Hansen/Torben Eschen
+795 00 *å 13 *a En ¤lille ring af guld *i Rose-Marie Stråhle-Jørgen de Mylius
+795 00 *å 14 *a Når det regner om dagen *i Domino/Bartholomeu/Flemming "Bamse" Jørgensen
+795 00 *å 15 *a Vi mødes på internet *i Jesper Christoffersen/Dan Adamsen
+795 00 *å 16 *a Hvem tænder stjernerne *i M. Klarman-B. Axelsen-L. Dahlberg/Keld Heick
+795 00 *å 17 *a I Caribien *i Christina Højbjerg/Keld Heick
+795 00 *å 18 *a Ham jeg kan li' *i Børge Müller/Sven Gyldmark *e Gitte Hænning
+795 00 *å 19 *a En ¤SMS fra dig *i Jesper Christoffersen/Keld Heick
+795 00 *å 20 *a Blue Hawaii *i Rose-Marie Strähle/Bjørn Hansen
+795 00 *å 21 *a Det Kan Ikke Bli' Meget Bedre *z DKK031700121 *l 4:16 min *& spotify:track:2BAn4SBEJsixtRNdkeovFo *i Johnny Hansen
+795 00 *å 22 *a Ingenting *z DKK031700120 *l 3:08 min *& spotify:track:1q0qauLkmvuQSNmfKBPCJB *i Mikael Wigström-Henrik Sethsson-Stefan Jonsson-Keld Heick
+795 00 *å 23 *a This Is My Life *z DKK031700122 *l 4:08 min *& spotify:track:4tHZSozch4jwrkViclnCc3 *i Johnny Hansen/Lonnie Kjer
+990 00 *r 202252 *b v *m Rettelse: Opstillingsklassemærke rettet fra: 78.797
+990 00 *b n *b v *u nt
+991 00 *o Agenturholder: SMD Entertainment
+996 00 *a DBC
