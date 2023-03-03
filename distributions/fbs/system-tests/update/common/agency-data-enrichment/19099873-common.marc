@@ -1,0 +1,16 @@
+001 00 *a 19099873 *b 870979 *c 20211202163754 *d 20170616 *f a
+004 00 *r n *a e *x m *x n
+008 00 *t h *v 0
+025 00 *a 110981647 *2 viaf *& VIAF
+025 00 *a 0000000121477893 *2 isni *& VIAF
+025 00 *a Q5588 *2 wikidata *& VIAF
+040 00 *a DBC *b dan
+043 00 *c mx *& VIAF
+046 00 *f 1907 *& VIAF
+046 00 *g 1954 *& VIAF
+100 00 *a Kahlo *h Frida
+375 00 *a 2 *2 iso5218 *& VIAF
+400 00 *a Calderón *h Frida Kahlo y
+670 00 *a 06923828
+678 00 *a Mexikansk maler (1907-1953)
+996 00 *a DBCAUT

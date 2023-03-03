@@ -1,0 +1,82 @@
+[
+  {
+    "name": "870979-new-series-record",
+    "description": "Tester at man kan oprette nye serie entitetsposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcvaerk",
+      "record": "request-series.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-870979-series.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-series.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-series.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "870979-new-universe-record",
+    "description": "Tester at man kan oprette nye univers entitetsposter",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcvaerk",
+      "record": "request-universe.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-870979-universe.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-universe.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-universe.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

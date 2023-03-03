@@ -1,16 +1,16 @@
 {
   "libraryRules": [
     {
-      "agencyId": "746100",
-      "agencyType": "Folkebibliotek",
+      "agencyId": "850050",
+      "agencyType": "Forskningsbibliotek",
       "libraryRule": [
         {
           "name": "create_enrichments",
-          "bool": true
+          "bool": false
         },
         {
           "name": "use_enrichments",
-          "bool": true
+          "bool": false
         },
         {
           "name": "auth_root",
@@ -42,15 +42,15 @@
         },
         {
           "name": "auth_export_holdings",
-          "bool": true
+          "bool": false
         },
         {
           "name": "use_localdata_stream",
-          "bool": true
+          "bool": false
         },
         {
           "name": "use_holdings_item",
-          "bool": true
+          "bool": false
         },
         {
           "name": "part_of_bibliotek_dk",
@@ -58,7 +58,7 @@
         },
         {
           "name": "auth_create_common_record",
-          "bool": true
+          "bool": false
         },
         {
           "name": "ims_library",
@@ -74,11 +74,11 @@
         },
         {
           "name": "cataloging_template_set",
-          "string": "fbs"
+          "string": "ffu"
         },
         {
           "name": "part_of_danbib",
-          "bool": false
+          "bool": true
         },
         {
           "name": "auth_add_dk5_to_phd",
@@ -94,7 +94,7 @@
         },
         {
           "name": "use_central_faust",
-          "bool": true
+          "bool": false
         },
         {
           "name": "part_of_requestorder",
@@ -102,7 +102,7 @@
         },
         {
           "name": "regional_obligations",
-          "bool": true
+          "bool": false
         }
       ]
     }
