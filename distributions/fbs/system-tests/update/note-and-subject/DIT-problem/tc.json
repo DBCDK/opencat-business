@@ -1,0 +1,185 @@
+[
+  {
+    "name": "dit-note-subject-problem",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "700300",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "BCIbog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common-prod.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [ {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : "",
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Du har ikke ret til at opdatere denne fællespost, da den er under produktion"
+        } ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common-prod.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "dit-note-subject-problem-in-prod",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "700300",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "BCIbog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common-prod.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [ {
+          "type" : "ERROR",
+          "code" : null,
+          "urlForDocumentation" : "",
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Du har ikke ret til at opdatere denne fællespost, da den er under produktion"
+        } ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common-prod.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "dit-note-subject-problem-no-subject",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "700300",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "BCIbog",
+      "record": "request-no-subjects.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [ {
+          "type" : "FATAL",
+          "code" : null,
+          "urlForDocumentation" : null,
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Posten må ikke beriges, da den i forvejen er emnebehandlet"
+        } ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "rawrepo-enrichment.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]

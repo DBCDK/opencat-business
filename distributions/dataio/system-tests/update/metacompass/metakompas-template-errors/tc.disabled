@@ -23,11 +23,11 @@
           {
             "type" : "ERROR",
             "code" : null,
-            "urlForDocumentation" : null,
+            "urlForDocumentation" : "",
             "ordinalPositionOfField" : null,
             "ordinalPositionOfSubfield" : null,
             "ordinalPositionInSubfield" : null,
-            "message" : "Posten 90004158:870970 findes ikke eller er slettet"
+            "message" : "Du har ikke ret til at oprette en fællesskabspost"
           }
         ],
         "rawrepo": [
