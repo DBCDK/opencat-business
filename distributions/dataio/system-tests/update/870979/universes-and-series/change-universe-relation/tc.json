@@ -1,0 +1,267 @@
+[
+  {
+    "name": "change-universe-relation",
+    "description": "Tester at der ændres univers forbindelse mellem to A-poster",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcvaerk",
+      "record": "request-series.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-870970-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-870979-series.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-series.marc"
+          ],
+          "children": [
+            "rawrepo-870970-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-series.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-870979-universe.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-universe.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-universe.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-870979-series.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-series.marc"
+            ],
+            "children": [
+              "rawrepo-870970-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-series.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-870979-universe.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-191919-universe.marc"
+            ],
+            "children": [
+              "rawrepo-870979-series.marc",
+              "rawrepo-870970-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-universe.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "change-universe-relation-2",
+    "description": "Tester at der ændres univers forbindelse mellem to A-poster",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcvaerk",
+      "record": "request-series.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-870970-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-2-870970-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-2-191919-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-2-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-870979-series.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-series.marc"
+          ],
+          "children": [
+            "rawrepo-870970-common.marc",
+            "rawrepo-2-870970-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-series.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-870979-universe.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-universe.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-universe.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-2-870970-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-2-191919-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-2-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-870979-series.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "rawrepo-191919-series.marc"
+            ],
+            "children": [
+              "rawrepo-870970-common.marc",
+              "rawrepo-2-870970-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-series.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "rawrepo-870979-universe.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-191919-universe.marc"
+            ],
+            "children": [
+              "rawrepo-870979-series.marc",
+              "rawrepo-870970-common.marc",
+              "rawrepo-2-870970-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-universe.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
