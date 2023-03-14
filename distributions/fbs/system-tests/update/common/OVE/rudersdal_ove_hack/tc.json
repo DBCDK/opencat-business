@@ -20,7 +20,10 @@
             "errors": [
                 {
                     "type": "ERROR",
-                    "urlForDocumentation": null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
                     "message": "Du har ikke ret til at oprette en fællesskabspost for et andet bibliotek"
                 }
             ],
