@@ -1,0 +1,39 @@
+001 00 *a 46400003 *b 870970 *c 20221104084513 *d 20190327 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2019 *b dk *d å *d 2 *d y *k b *l dan *o b *x 01 *v 0
+009 00 *a a *g xx
+021 00 *e 9788793752078 *c hf.
+032 00 *x ACC201913 *a DBF201918 *x BKM201918
+038 00 *a bi
+041 00 *a dan *c spa
+241 00 *a Frida Kahlo *r spansk
+245 00 *a Frida *c min første Frida Kahlo
+250 00 *a 1. udgave *b ÷
+260 00 *& 1 *a [Ꜳrhus] *b Albert *c 2019
+300 00 *a [26] sider *b alle ill. i farver
+440 00 *0 norm *å 1 *a Min første
+440 00 *0 norm *a Små mennesker, store drømme
+504 00 *a flabbergast
+512 00 *i Rygtitel *t Frida Kahlo
+521 00 *b 1. oplag *c 2019
+526 00 *i Forkortet og bearbejdet udgave af hendes *t Frida Kahlo *b . 2018
+530 00 *a Sweet dreams
+652 00 *å 1 *m 99.4 *a Kahlo *h Frida
+652 00 *p 74.865
+666 00 *f malere
+666 00 *f mexicansk malerkunst
+666 00 *e Mexico
+666 00 *i 1900-1999
+666 00 *o biografier
+666 00 *u for 3 år
+666 00 *u for 4 år
+666 00 *u for 5 år
+666 00 *u for højtlæsning
+700 00 *å1001*aVegara*hIsabel Sánchez*4aut*4ccp
+700 00 *å1002*aGee*hFan Eng*4art
+845 00 *å1001*aSmå mennesker, store drømme*cx
+900 00 *a Calderón *h Frida Kahlo y *z 652/1(a,h)
+945 00 *a Min 1. *z 440/1
+990 00 *b l *b b *u nt
+990 00 *r 202129 *b b *b s *m Rettelse: Opstillingselement rettet fra: Vegara, Isabel Sánchez
+996 00 *a DBC

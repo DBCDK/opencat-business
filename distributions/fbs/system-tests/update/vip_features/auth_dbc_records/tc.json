@@ -34,9 +34,8 @@
             "update": {
                 "errors": [
                     {
-                        "type": "ERROR",
-                        "urlForDocumentation": "",
-                        "message": "Du har ikke ret til at opdatere denne fællespost, da den er under produktion"
+                        "type": "FATAL",
+                        "message": "Posten må ikke beriges, da den i forvejen er emnebehandlet"
                     }
                 ],
                 "rawrepo": [

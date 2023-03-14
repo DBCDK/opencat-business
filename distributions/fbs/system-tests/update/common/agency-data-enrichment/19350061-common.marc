@@ -1,0 +1,12 @@
+001 00 *a 19350061 *b 870979 *c 20211202203642 *d 20180316 *f a
+004 00 *r n *a e *x n
+008 00 *t h *v 0
+025 00 *a 315948676 *2 viaf *& VIAF
+025 00 *a 0000000449461721 *2 isni *& VIAF
+040 00 *a DBC *b dan
+043 00 *c my *& VIAF
+100 00 *a Gee *h Fan Eng
+375 00 *a 2 *2 iso5218 *& VIAF
+400 00 *a Eng *h Gee Fan
+400 00 *a Fan Gee *h Eng
+996 00 *a DBCAUT

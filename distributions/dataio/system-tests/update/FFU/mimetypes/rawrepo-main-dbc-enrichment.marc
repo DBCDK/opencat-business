@@ -1,0 +1,14 @@
+001 00 *a 48465609 *b 191919 *c 20220407133913 *d 20200623 *f a
+004 00 *r n *a e
+d08 00 *f lhf *a Forhåndsoprettet til brug for bibliotekerne, bog IKKE modtaget. Forventet udgivelsesdato ifølge forlaget 19-06-2020 - bestilt 03.07.20 *a Onlineversion 4 846 559 5 *o cra *a 900 fra kolofonen *k stj *o kga *o lukj *a 521/2 rettet fra 2021 *k osh
+d08 00 *a Masserettelse, slet delfelter 0 og 1, april 2022
+d90 00 *b v *b l *u nt
+d90 00 *b v *b l *u op
+d90 00 *b v *b l *u op
+d90 00 *b v *b l *u op
+d91 00 *o Onlineversion optaget i denne uges BKM (48465595)
+f07 00 *a 48465595 *n autoLU
+s12 00 *t TeamBMV202146
+z98 00 *a Minus korrekturprint
+z99 00 *a osh
+z99 00 *a masseret

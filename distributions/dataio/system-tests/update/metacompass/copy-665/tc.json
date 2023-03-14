@@ -1,0 +1,117 @@
+[
+  {
+    "name": "metacompass-minimal-record-copy-665",
+    "bugs": [],
+    "description": "Tester om man kan sende en minimal post som metakompas ind, og få opdateret posten korrekt",
+    "request": {
+      "authentication": {
+        "group": "150077",
+        "user": "netpunkt",
+        "password": "password"
+      },
+      "templateName": "metakompas",
+      "record": "request.marc",
+      "ignoreFieldsInMatch": "d09"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-dbc-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-dbc-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "enqueued": true,
+            "deleted": false,
+            "enrichments": [
+              "result-dbc-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-dbc-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-Koebenhavn-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-Koebenhavn-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-Koebenhavn-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-Line-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-Line-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-Line-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-istiden-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-istiden-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-istiden-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "expected-julemand-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-julemand-enrichment.marc"
+            ]
+          },
+          {
+            "record": "expected-julemand-enrichment.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]

@@ -36,7 +36,7 @@ var ExclusiveSubfield = function () {
             }
             var result = [];
             var a = 'a';
-            var aExclusiveFields = ['i', 't', 'e', 'x', 'b'];
+            var aExclusiveFields = ['i', 't', 'e', 'x', 'b', 'd', 'c', 'g', 'p', 'f'];
             // if there are any 'a's
             if (counts.hasOwnProperty(a)) {
                 var bundle = null;

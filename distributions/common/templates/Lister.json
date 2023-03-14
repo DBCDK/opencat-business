@@ -192,7 +192,7 @@
 							"mao", "map", "mar", "mas", "may", "mdf", "mdr", "men", "mga", "mic", "min", "mis", "mkh",
 							"mlg", "mlt", "mnc", "mni", "mno", "moh", "mol", "mon", "mos", "mul", "mun", "mus", "mwl", "mwr",
 							"myn", "myv", "nah", "nai", "nap", "nau", "nav", "nbl", "nde", "ndo", "nds", "neg", "nep", "new", "nia",
-							"nic", "niu", "nno", "nob", "nog", "non", "nor", "nso", "nub", "nwc", "nya", "nym", "nyn", "nyo",
+							"nic", "niu", "nno", "nob", "nog", "non", "nor", "nqo", "nso", "nub", "nwc", "nya", "nym", "nyn", "nyo",
 							"nzi", "oci", "oji", "ori", "orm", "osa", "oss", "ota", "oto", "paa", "pag", "pah",
 							"pal", "pam", "pan", "pap", "pau", "peo", "per", "phi", "phn", "pli", "plz", "pol", "pon",
 							"por", "pra", "pro", "pus", "que", "raj", "rap", "rar", "roa", "roh", "rom", "rum",
@@ -212,7 +212,7 @@
 						"comment": "fællesmængde af nye og gamle dm2-sprogkoder plus iso_639_2, bruges i ffu-skabeloner og lokal-skabeloner",
 						"values": [
 							"aar", "abk", "ace", "ach", "ada", "ady", "afa", "afh", "afr", "ain",
-							"aka", "akk", "alb", "ale", "alg", "alt", "amh", "ang", "anp", "apa",
+							"ajm", "aka", "akk", "alb", "ale", "alg", "alt", "amh", "ang", "anp", "apa",
 							"ara", "arc", "arg", "arm", "arn", "arp", "art", "arw", "asm", "ast",
 							"ath", "aus", "ava", "ave", "awa", "aym", "aze", "bad", "bai", "bak",
 							"bal", "bam", "ban", "baq", "bas", "bat", "bej", "bel", "bem", "ben",

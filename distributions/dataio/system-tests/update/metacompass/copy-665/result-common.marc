@@ -1,0 +1,37 @@
+001 00 *a 90004158 *b 870970 *c 20150304180759 *d 20141209 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2014 *b dk *l dan *x 06 *v 0
+009 00 *a a *g xx
+032 00 *x BKM999999
+100 00 *a Freyheit *h Berit *4 aut *4 dkind
+245 00 *a Netlydbog - fællesskabspost
+260 00 *b Københavns Biblioteker *c 2014
+300 00 *l Ca. 27 min.
+440 00 *0  *a Biblocast *V 1 *v #1
+504 00 *a Podcast til gavn og glæde
+512 00 *i Alternativ titel *t Den ¤første store krig
+512 00 *a Downloades i MP3-format
+652 00 *m 81.08
+665 00 *& LEKTOR *q Koebenhavn *i istiden
+665 00 *& LEKTOR *e julemand
+665 00 *&LEKTOR*vLine
+665 00 *g 42
+666 00*s julemand
+666 00 *f den ¤2. verdenskrig
+666 00 *f litteratur
+666 00 *f skønlitteratur
+666 00 *f romaner
+666 00 *f krigsromaner
+666 00*q Koebenhavn
+666 00*s istiden
+666 00*h Line
+700 00 *a Hegelund *h Karin *4 dkind
+710 00 *a Københavns Biblioteker *4 isb
+745 00 *a Den ¤1. store krig
+856 00 *z Adgangsmåde: Internet *u https://bibliotek.kk.dk/temaer/bibcast/blog/bibcast-22-golden-days-foerste-store-krig
+900 00 *a Hegelund *h Karin Skrydstrup *z 700
+900 00 *a Skrydstrup Hegelund *h Karin *z 700
+900 00 *a Hegelund *h Karin S. *z 700
+900 00 *a Hegelund Hansen *h Karin *x se også under det senere navn *z 700
+910 00 *s Københavns Kommune *c Kultur- og Fritidsforvaltningen *c Københavns Biblioteker *z 710
+996 00 *a DBC

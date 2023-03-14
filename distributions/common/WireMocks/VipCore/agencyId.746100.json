@@ -82,7 +82,7 @@
         },
         {
           "name": "auth_add_dk5_to_phd",
-          "bool": true
+          "bool": false
         },
         {
           "name": "auth_metacompass",
