@@ -11,10 +11,10 @@
       </ENTRIES>
     </extension>
     <option name="JAR_PATH" value="$PROJECT_DIR$/../ocb-tools/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar" />
-    <option name="PROGRAM_PARAMETERS" value="run -c testrun --summary bog-mandatory-fields" />
+    <option name="PROGRAM_PARAMETERS" value="run -c testrun --summary fbs-OVE-code-new-record-non-cb-as-DBC-reject" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="ALTERNATIVE_JRE_PATH" value="1.8.0_222" />
+    <option name="ALTERNATIVE_JRE_PATH" value="11" />
     <method v="2" />
   </configuration>
 </component>
