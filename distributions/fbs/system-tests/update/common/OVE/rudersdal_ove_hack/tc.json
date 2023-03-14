@@ -1,7 +1,7 @@
 [
 {
     "name": "rudersdal_ove_hack",
-    "description": "Tester at Rudersdal ikke kan sende en post ind med 032 (uden over) med DBC som ejer. Udspringer af OVE problematikken",
+    "description": "Tester at Rudersdal ikke kan sende en post ind med 032 (uden ove) med DBC som ejer. Udspringer af OVE problematikken",
     "request": {
         "authentication": {
             "group": "723000",
@@ -21,7 +21,7 @@
                 {
                     "type": "ERROR",
                     "urlForDocumentation": null,
-                    "message": "Det er ikke tilladt at tilføje/rette 032 delfelter udover OVE kode for CB"
+                    "message": "Du har ikke ret til at oprette en fællesskabspost for et andet bibliotek"
                 }
             ],
             "rawrepo": []

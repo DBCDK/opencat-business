@@ -80,7 +80,7 @@
                     {
                         "type": "ERROR",
                         "urlForDocumentation": null,
-                        "message": "Det er ikke tilladt at tilføje/rette 032 delfelter udover OVE kode for CB"
+                        "message": "Du har ikke ret til at oprette en fællesskabspost for et andet bibliotek"
                     }
                 ]
             }
