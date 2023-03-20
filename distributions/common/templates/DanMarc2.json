@@ -1971,12 +1971,7 @@
                     "repeatable": false,
                     "values": [ "pro" ]
                 }
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.exclusiveSubfield"
-                }
-            ]
+            }
         },
         "512":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.52.htm",
