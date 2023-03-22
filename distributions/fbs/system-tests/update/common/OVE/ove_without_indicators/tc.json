@@ -1,0 +1,47 @@
+[
+    {
+        "name": "ove-without-indicators",
+        "description": "Tester at man får fejl hvis man indsender en post med 032 med OVE kode men mangler indikator",
+        "request": {
+            "authentication": {
+                "group": "715700",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {
+                "errors": [
+                    {
+                        "type": "ERROR",
+                        "code": null,
+                        "urlForDocumentation": null,
+                        "ordinalPositionOfField": null,
+                        "ordinalPositionOfSubfield": null,
+                        "ordinalPositionInSubfield": null,
+                        "message": "Posten kan ikke opdateres da der mangler indikator i felt 032"
+                    }
+                ]
+            }
+        }
+    }
+]
