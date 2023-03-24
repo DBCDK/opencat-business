@@ -54,6 +54,23 @@
           "record": "rawrepo-191919-universe.marc",
           "type": "ENRICHMENT",
           "deleted": false
+        },
+        {
+          "record": "universe-870979-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "universe-191919-common.marc"
+          ],
+          "children": [
+            "rawrepo-870979-series.marc",
+            "rawrepo-870970-common.marc"
+          ]
+        },
+        {
+          "record": "universe-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
         }
       ]
     },
@@ -109,6 +126,21 @@
           },
           {
             "record": "rawrepo-191919-universe.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "universe-870979-common.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "universe-191919-common.marc"
+            ],
+            "children": [
+            ]
+          },
+          {
+            "record": "universe-191919-common.marc",
             "type": "ENRICHMENT",
             "deleted": false
           }
@@ -185,6 +217,24 @@
           "record": "rawrepo-191919-universe.marc",
           "type": "ENRICHMENT",
           "deleted": false
+        },
+        {
+          "record": "universe-870979-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "universe-191919-common.marc"
+          ],
+          "children": [
+            "rawrepo-870979-series.marc",
+            "rawrepo-870970-common.marc",
+            "rawrepo-2-870970-common.marc"
+          ]
+        },
+        {
+          "record": "universe-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
         }
       ]
     },
@@ -257,6 +307,21 @@
           },
           {
             "record": "rawrepo-191919-universe.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          },
+          {
+            "record": "universe-870979-common.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "universe-191919-common.marc"
+            ],
+            "children": [
+            ]
+          },
+          {
+            "record": "universe-191919-common.marc",
             "type": "ENRICHMENT",
             "deleted": false
           }
