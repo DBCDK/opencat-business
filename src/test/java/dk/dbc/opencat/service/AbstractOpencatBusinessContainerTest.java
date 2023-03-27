@@ -93,7 +93,7 @@ public class AbstractOpencatBusinessContainerTest {
                     .withEnv("OPENNUMBERROLL_URL", getWiremockUrl())
                     .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
                     .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
-                    .withEnv("REMOTE_DEBUGGING_HOST", "192.168.0.88:5005")
+//                    .withEnv("REMOTE_DEBUGGING_HOST", "192.168.0.88:5005")
                     .withExposedPorts(8080)
                     .waitingFor(Wait.forHttp("/api/status"))
                     .withStartupTimeout(Duration.ofMinutes(2));
