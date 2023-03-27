@@ -65,7 +65,11 @@ public class AbstractOpencatBusinessContainerTest {
             final Network network = Network.newNetwork();
 
             WireMockServer wireMockServer = new WireMockServer(options().fileSource(new SingleRootFileSource("target/test-classes")).dynamicPort());
-            wireMockServer.start();
+            try {
+                wireMockServer.start();
+            } catch (Exception e) {
+                LOGGER.error("ARRRGH", e);
+            }
             WireMock.configureFor("localhost", wireMockServer.port());
             Testcontainers.exposeHostPorts(wireMockServer.port());
 //            wiremockContainer = new GenericContainer(JAVA_BASE_IMAGE).withNetwork(network).withNetworkAliases("solr", "opennumberroll").withClasspathResourceMapping(".", "currentWorkDir", BindMode.READ_ONLY).withWorkingDirectory("/currentWorkDir").withCommand(String.format("java -jar lib/%s --port 9090 --verbose", WIREMOCK_JAR)).withExposedPorts(9090).withStartupTimeout(Duration.ofMinutes(1));
