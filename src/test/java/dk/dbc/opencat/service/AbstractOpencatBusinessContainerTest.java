@@ -37,11 +37,11 @@ public class AbstractOpencatBusinessContainerTest {
     static final String MIMETYPE_MARCXCHANGE = "text/marcxchange";
     static final String MIMETYPE_ENRICHMENT = " text/enrichment+marcxchange";
 
-    private static GenericContainer wiremockContainer;
-    private static GenericContainer recordServiceContainer;
-    private static GenericContainer rawrepoDbContainer;
-    private static GenericContainer holdingsItemsDbContainer;
-    private static GenericContainer openCatBusinessContainer;
+    private static WireMockServer wireMockServer;
+    private static final GenericContainer<?> recordServiceContainer;
+    private static final GenericContainer<?> rawrepoDbContainer;
+    private static final GenericContainer<?> holdingsItemsDbContainer;
+    private static final GenericContainer<?> openCatBusinessContainer;
     private static final String JAVA_BASE_IMAGE = "docker-dbc.artifacts.dbccloud.dk/dbc-java11";
     private static final String RAWREPO_DB_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-1.15-snapshot:DIT-5165";
     private static final String HOLDINGITEMS_DB_IMAGE = "docker-de.artifacts.dbccloud.dk/holdings-items-postgres-1.3:latest";
@@ -52,9 +52,6 @@ public class AbstractOpencatBusinessContainerTest {
     private static String HOLDINGS_ITEMS_DB_URL;
     private static String RECORD_SERVICE_BASE_URL;
     private static final String VIPCORE_ENDPOINT = "http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk";
-    private static final String SOLR_URL = "http://solr:9090";
-    private static final String OPENNUMBERROLL_URL = "http://opennumberroll:9090";
-
     static String openCatBusinessBaseURL;
 
     static HttpClient httpClient;
@@ -64,9 +61,10 @@ public class AbstractOpencatBusinessContainerTest {
         try {
             final Network network = Network.newNetwork();
 
-            WireMockServer wireMockServer = new WireMockServer(options().fileSource(new SingleRootFileSource("target/test-classes")).dynamicPort());
+            wireMockServer = new WireMockServer(options().fileSource(new SingleRootFileSource("target/test-classes")).dynamicPort());
             wireMockServer.start();
             WireMock.configureFor("localhost", wireMockServer.port());
+            WireMock.configureFor("opennumberroll", wireMockServer.port());
             Testcontainers.exposeHostPorts(wireMockServer.port());
 //            wiremockContainer = new GenericContainer(JAVA_BASE_IMAGE).withNetwork(network).withNetworkAliases("solr", "opennumberroll").withClasspathResourceMapping(".", "currentWorkDir", BindMode.READ_ONLY).withWorkingDirectory("/currentWorkDir").withCommand(String.format("java -jar lib/%s --port 9090 --verbose", WIREMOCK_JAR)).withExposedPorts(9090).withStartupTimeout(Duration.ofMinutes(1));
 //            wiremockContainer.start();
@@ -84,14 +82,32 @@ public class AbstractOpencatBusinessContainerTest {
             RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
 
             // Please note that the docker image only exists temporarily, so don't look after it at the artifactory site
-            openCatBusinessContainer = new GenericContainer("docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel").withNetwork(network).withLogConsumer(new Slf4jLogConsumer(LOGGER)).withEnv("LOG_FORMAT", "text").withEnv("RAWREPO_RECORD_SERVICE_URL", RECORD_SERVICE_BASE_URL).withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT).withEnv("SOLR_URL", SOLR_URL).withEnv("JAVA_MAX_HEAP_SIZE", "2G").withEnv("OPENNUMBERROLL_URL", OPENNUMBERROLL_URL).withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust").withEnv("OPENNUMBERROLL_NAME_FAUST", "faust").withExposedPorts(8080).waitingFor(Wait.forHttp("/api/status")).withStartupTimeout(Duration.ofMinutes(2));
+            openCatBusinessContainer = new GenericContainer("docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel")
+                    .withNetwork(network)
+                    .withLogConsumer(new Slf4jLogConsumer(LOGGER))
+                    .withEnv("LOG_FORMAT", "text")
+                    .withEnv("RAWREPO_RECORD_SERVICE_URL", RECORD_SERVICE_BASE_URL)
+                    .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
+                    .withEnv("SOLR_URL", getWiremockUrl())
+                    .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
+                    .withEnv("OPENNUMBERROLL_URL", getWiremockUrl())
+                    .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
+                    .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
+                    .withEnv("REMOTE_DEBUGGING_HOST", "192.168.0.88:5005")
+                    .withExposedPorts(8080)
+                    .waitingFor(Wait.forHttp("/api/status"))
+                    .withStartupTimeout(Duration.ofMinutes(2));
             openCatBusinessContainer.start();
             openCatBusinessBaseURL = "http://" + openCatBusinessContainer.getContainerIpAddress() + ":" + openCatBusinessContainer.getMappedPort(8080);
 
             httpClient = HttpClient.create(HttpClient.newClient());
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             LOGGER.error("ARRRG", e);
+            throw e;
         }
+    }
+    private static String getWiremockUrl() {
+        return "http://host.testcontainers.internal:" + wireMockServer.port();
     }
 
     static Connection connectToRawrepoDb() {
