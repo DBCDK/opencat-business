@@ -1,0 +1,220 @@
+[
+  {
+    "name": "change-universe-volume-relation",
+    "description": "Tester at der oprettes forbindelse mellem to A-poster",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcvaerk",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "head-870970-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "head-191919-common.marc"
+          ],
+          "children": [
+            "volume-1-870970-common.marc",
+            "volume-2-870970-common.marc"
+          ]
+        },
+        {
+          "record": "head-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "volume-1-870970-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "volume-1-191919-common.marc"
+          ]
+        },
+        {
+          "record": "volume-1-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "volume-2-870970-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "volume-2-191919-common.marc"
+          ]
+        },
+        {
+          "record": "volume-2-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "series-870979-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "series-191919-common.marc"
+          ],
+          "children": [
+            "volume-1-870970-common.marc",
+            "volume-2-870970-common.marc"
+          ]
+        },
+        {
+          "record": "series-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "universe-870979-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "universe-191919-common.marc"
+          ]
+        },
+        {
+          "record": "universe-191919-common.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-870979-universe.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-191919-universe.marc"
+          ],
+          "children": [
+            "volume-1-870970-common.marc",
+            "volume-2-870970-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-191919-universe.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "head-870970-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "head-191919-common.marc"
+            ],
+            "children": [
+              "volume-1-870970-result.marc",
+              "volume-2-870970-result.marc"
+            ]
+          },
+          {
+            "record": "head-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "volume-1-870970-result.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "volume-1-191919-common.marc"
+            ]
+          },
+          {
+            "record": "volume-1-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "volume-2-870970-result.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "volume-2-191919-common.marc"
+            ]
+          },
+          {
+            "record": "volume-2-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "series-870979-result.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "series-191919-common.marc"
+            ],
+            "children": [
+              "volume-1-870970-result.marc",
+              "volume-2-870970-result.marc"
+            ]
+          },
+          {
+            "record": "series-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "universe-870979-common.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "universe-191919-common.marc"
+            ],
+            "children": [
+            ]
+          },
+          {
+            "record": "universe-191919-common.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-870979-universe.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enrichments": [
+              "rawrepo-191919-universe.marc"
+            ],
+            "children": [
+              "series-870979-result.marc",
+              "volume-1-870970-common.marc",
+              "volume-2-870970-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-191919-universe.marc",
+            "type": "ENRICHMENT",
+            "deleted": false
+          }
+        ]
+      }
+    }
+  }
+]
