@@ -66,8 +66,6 @@ public class AbstractOpencatBusinessContainerTest {
             WireMock.configureFor("localhost", wireMockServer.port());
             WireMock.configureFor("opennumberroll", wireMockServer.port());
             Testcontainers.exposeHostPorts(wireMockServer.port());
-//            wiremockContainer = new GenericContainer(JAVA_BASE_IMAGE).withNetwork(network).withNetworkAliases("solr", "opennumberroll").withClasspathResourceMapping(".", "currentWorkDir", BindMode.READ_ONLY).withWorkingDirectory("/currentWorkDir").withCommand(String.format("java -jar lib/%s --port 9090 --verbose", WIREMOCK_JAR)).withExposedPorts(9090).withStartupTimeout(Duration.ofMinutes(1));
-//            wiremockContainer.start();
 
             rawrepoDbContainer = new GenericContainer(RAWREPO_DB_IMAGE).withNetwork(network).withNetworkAliases("rawrepoDb").withLogConsumer(new Slf4jLogConsumer(LOGGER)).withEnv("POSTGRES_DB", "rawrepo").withEnv("POSTGRES_USER", "rawrepo").withEnv("POSTGRES_PASSWORD", "rawrepo").withExposedPorts(5432).withStartupTimeout(Duration.ofMinutes(1));
             rawrepoDbContainer.start();
@@ -93,7 +91,6 @@ public class AbstractOpencatBusinessContainerTest {
                     .withEnv("OPENNUMBERROLL_URL", getWiremockUrl())
                     .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
                     .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
-//                    .withEnv("REMOTE_DEBUGGING_HOST", "192.168.0.88:5005")
                     .withExposedPorts(8080)
                     .waitingFor(Wait.forHttp("/api/status"))
                     .withStartupTimeout(Duration.ofMinutes(2));
