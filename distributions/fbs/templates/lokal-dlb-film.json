@@ -3,6 +3,14 @@
         "description": "Skabelon Dansk Lokalbibliografi. Film på fysiske medier (dvd, videobånd m.m.) - enkeltstående post.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-film",
+        "templateDisplay": "Film, enkeltstående post",
+        "templateIndex": 60
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "023b", "041u", "245c", "260a", "260b", "260c",

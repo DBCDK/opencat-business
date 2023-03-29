@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af onlinelydbog - hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "elydboger",
+        "categoryDisplay": "Lydbøger (online)",
+        "templateName": "netlydboghoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "005p", "008a", "008b", "008d", "008j", "008l", "008n", "021e", "023b",

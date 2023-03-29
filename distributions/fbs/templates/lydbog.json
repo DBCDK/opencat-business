@@ -3,6 +3,14 @@
         "description": "Skabelon til lydbog (fysisk) - enkeltstående post",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "lydboger",
+        "categoryDisplay": "Lydbøger",
+        "templateName": "lydbog",
+        "templateDisplay": "Enkeltstående post",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "005z", "008a", "008b", "008d", "008j", "008l", "021e", "023b", "100h", "1004", "245c",

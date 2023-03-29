@@ -3,6 +3,14 @@
         "description":"Skabelon til oprettelse af lokalpost - sektionspost, alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokal",
+        "categoryDisplay": "Lokalpost",
+        "templateName": "lokalpostsektion",
+        "templateDisplay": "Sektionspost",
+        "templateIndex": 40
+    },
     "settings": {
         "lookupfaust": true
     },

@@ -3,6 +3,14 @@
         "description":"Skabelon til Dansk Lokalbibliografi. Artikler i periodika og bøger, trykte",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-artikel-trykt",
+        "templateDisplay": "Artikel",
+        "templateIndex": 90
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008d", "008r", "008l", "016a", "300a", "504a", "557a", "557j", "557z", "557v",

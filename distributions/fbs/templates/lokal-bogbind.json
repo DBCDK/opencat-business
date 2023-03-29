@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "lokal-bogbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "021e", "245g", "245a", "260c", "300a" ]

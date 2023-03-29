@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af lydbøger (fysisk) - hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "lydboger",
+        "categoryDisplay": "Lydbøger",
+        "templateName": "lydboghoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "005z", "008a", "008b", "008d", "008j", "008l", "021e", "023b",

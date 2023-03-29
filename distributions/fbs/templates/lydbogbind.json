@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af lydbøger (fysisk) - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "lydboger",
+        "categoryDisplay": "Lydbøger",
+        "templateName": "lydbogbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "021e", "023b", "245g", "245a", "300n", "300e", "300l", "996a" ]

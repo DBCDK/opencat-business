@@ -3,6 +3,14 @@
         "description": "Skabelon til Dansk Lokalbibliografi. Bøger - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-bogbind",
+        "templateDisplay": "Bog, bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008d", "008l", "021e", "245g", "245a", "260c", "300a" ]

@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af fysiske bøger - enkeltstående post.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "bog",
+        "templateDisplay": "Enkeltstående post",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008u", "008a", "008d", "021e", "100h", "1004", "245c", "260a", "260b", "260c",
