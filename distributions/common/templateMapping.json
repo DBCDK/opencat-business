@@ -9,6 +9,20 @@
     "ph":                   {"templateGroups": ["PH"]},
     "skole":                {"templateGroups": ["FBS", "Skolepaahaengsposter (p.t. ikke synlige i drift)"]}
   },
+  "fbiCategoryIndex": {
+    "boger": 10,
+    "eboger": 20,
+    "lydboger": 30,
+    "elydboger": 40,
+    "film": 50,
+    "node": 60,
+    "andre": 65,
+    "lokal": 70,
+    "lokalbib": 75,
+    "generel": 80
+
+  },
+  "fbiCategories": ["boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre", "lokal", "lokalbib", "generel"],
   "templateGroups": {
     "DBC": {
       "templates": [

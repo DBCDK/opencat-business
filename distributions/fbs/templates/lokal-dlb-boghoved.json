@@ -3,6 +3,14 @@
         "description": "Skabelon til Dansk Lokalbibliografi. Bøger - hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-boghoved",
+        "templateDisplay": "Bog, hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008d", "021e", "100h", "1004", "245c", "260a", "260b", "260c", "300a", "652m" ]

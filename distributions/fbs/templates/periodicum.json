@@ -3,6 +3,14 @@
         "description":"Skabelon til katalogisering af periodica",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "andre",
+        "categoryDisplay": "Andre",
+        "templateName": "periodicum",
+        "templateDisplay": "Periodikum",
+        "templateIndex": 40
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008z", "008b", "008c", "008h", "008l", "022a",

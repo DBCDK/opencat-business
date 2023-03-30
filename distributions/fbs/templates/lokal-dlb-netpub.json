@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af fysiske bøger - enkeltstående post.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-netpub",
+        "templateDisplay": "Enkeltstående e-bog",
+        "templateIndex": 50
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "008n", "008w", "021e", "100h", "1004",

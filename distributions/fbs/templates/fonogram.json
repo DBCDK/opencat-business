@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af fonogrammer (musikcd'er, lp'er m.m.) - enkeltstående post",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "musik",
+        "categoryDisplay": "Musik",
+        "templateName": "fonogram",
+        "templateDisplay": "Musik",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "039a", "100h", "1004", "260b", "260c", "300n", "300d",

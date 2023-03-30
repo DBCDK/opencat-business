@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af noder - hovedpost",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "node",
+        "categoryDisplay": "Noder",
+        "templateName": "nodehoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "005h", "005i", "005k", "008a", "008b", "008l", "021e", "028a",

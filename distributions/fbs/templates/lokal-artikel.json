@@ -3,6 +3,14 @@
         "description":"Skabelon til optrettelse af artikelpost (periodicaartikel og artikel i bog).",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "andre",
+        "categoryDisplay": "Andre",
+        "templateName": "lokal-artikel",
+        "templateDisplay": "Artikel",
+        "templateIndex": 40
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008d", "008r", "008l", "016a","300a", "557a", "557j", "557z", "557v", "557k",

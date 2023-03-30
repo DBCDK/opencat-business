@@ -5,6 +5,14 @@
             "all"
         ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-bog",
+        "templateDisplay": "Bog, enkeltstående post",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008d", "008l", "021e", "100h", "1004", "245c", "260a", "260b", "260c",

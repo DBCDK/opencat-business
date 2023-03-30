@@ -3,6 +3,14 @@
         "description":"Skabelon til Dansk Lokalbibliografi. Periodica",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-periodicum",
+        "templateDisplay": "Periodikum",
+        "templateIndex": 80
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008b", "008c", "008h", "008l", "022a",

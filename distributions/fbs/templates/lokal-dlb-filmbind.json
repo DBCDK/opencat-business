@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af film på fysiske medier (dvd, videobånd m.m.) - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-filmbind",
+        "templateDisplay": "Film, bindpost",
+        "templateIndex": 65
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "023b", "245g", "245a", "300n" ]

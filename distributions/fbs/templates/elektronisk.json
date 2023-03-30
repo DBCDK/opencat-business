@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af elektroniske materialer på fysiske medier (fx computerspil) - enkeltstående post.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "andre",
+        "categoryDisplay": "Andre",
+        "templateName": "elektronisk",
+        "templateDisplay": "Elektronisk matriale (fysisk)",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "260a", "260b", "260c", "300a", "652m", "996a" ]

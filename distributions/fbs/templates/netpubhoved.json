@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af hovedpost til netpublikation (alle materialetyper (009a)).",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "eboger",
+        "categoryDisplay": "E-bøger",
+        "templateName": "netpubhoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008u", "008a", "008b", "008d", "008l", "008n", "008w", "021e", "100h", "1004",

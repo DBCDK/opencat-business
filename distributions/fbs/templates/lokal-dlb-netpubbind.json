@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "lokalbib",
+        "categoryDisplay": "Lokalbibliografi",
+        "templateName": "lokal-dlb-netpubbind",
+        "templateDisplay": "Bindpost e-bog",
+        "templateIndex": 55
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "008n", "008w", "021e", "245g", "245a", "260c", "666f", "666e", "700h", "7004" ]

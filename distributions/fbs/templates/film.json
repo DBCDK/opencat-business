@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af film på fysiske medier (dvd, blu-ray m.m.) - enkeltstående post.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "film",
+        "categoryDisplay": "Film",
+        "templateName": "film",
+        "templateDisplay": "Enkeltstående post",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "260a", "260b", "260c", "300a", "652m", "996a" ]

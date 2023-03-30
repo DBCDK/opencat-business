@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af netpublikationer - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "eboger",
+        "categoryDisplay": "E-bøger",
+        "templateName": "lokal-netpubbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008d", "008j", "008l", "008n", "008x", "008w", "021e",

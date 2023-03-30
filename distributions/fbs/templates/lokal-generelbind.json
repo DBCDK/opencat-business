@@ -3,6 +3,14 @@
         "description": "Generel skabelon til bindpost - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "generel",
+        "categoryDisplay": "Generel",
+        "templateName": "lokal-generelbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "021e", "245g", "245a", "260c", "300a" ]

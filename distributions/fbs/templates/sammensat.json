@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af sammensatte materialer - enkeltstående post.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "andre",
+        "categoryDisplay": "Andre",
+        "templateName": "sammensat",
+        "templateDisplay": "Sammensat materiale",
+        "templateIndex": 90
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008j", "008l", "008o", "008x", "021e", "021b",

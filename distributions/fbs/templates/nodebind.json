@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af noder - bindpost",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "node",
+        "categoryDisplay": "Noder",
+        "templateName": "nodebind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "021e", "028a",

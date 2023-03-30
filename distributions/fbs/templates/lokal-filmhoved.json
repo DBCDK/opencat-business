@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af film på fysiske medier (dvd, videobånd m.m.) - hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "film",
+        "categoryDisplay": "Film",
+        "templateName": "lokal-filmhoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "023b", "041u", "245c", "260a", "260b", "260c",

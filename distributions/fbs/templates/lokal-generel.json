@@ -3,6 +3,14 @@
         "description": "Generel skabelon til enkeltstående post - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "generel",
+        "categoryDisplay": "Generel",
+        "templateName": "lokal-generel",
+        "templateDisplay": "Enkeltstående post",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "021e", "260b", "260c", "631a" ]

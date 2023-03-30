@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af sektionspost til netpublikation (alle materialetyper (009a))",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "eboger",
+        "categoryDisplay": "E-bøger",
+        "templateName": "netpubsektion",
+        "templateDisplay": "Sektionspost",
+        "templateIndex": 40
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "245n", "245o", "245a", "260c", "300a", "996a" ]

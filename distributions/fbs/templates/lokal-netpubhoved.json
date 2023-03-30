@@ -3,6 +3,14 @@
         "description": "Skabelon til netpublikationer - hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "local",
+        "categoryName": "eboger",
+        "categoryDisplay": "E-bøger",
+        "templateName": "lokal-netpubhoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "008n", "008w", "021e", "260c" ]
