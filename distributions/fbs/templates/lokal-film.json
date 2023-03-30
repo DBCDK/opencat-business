@@ -9,7 +9,7 @@
         "categoryDisplay": "Film",
         "templateName": "film",
         "templateDisplay": "Enkeltstående post",
-        "templateIndex": 30
+        "templateIndex": 10
     },
     "settings": {
         "lookupfaust": true,
