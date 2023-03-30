@@ -9,7 +9,7 @@
         "categoryDisplay": "Film",
         "templateName": "filmhoved",
         "templateDisplay": "Hovedpost",
-        "templateIndex": 30
+        "templateIndex": 20
     },
     "settings": {
         "lookupfaust": true,
