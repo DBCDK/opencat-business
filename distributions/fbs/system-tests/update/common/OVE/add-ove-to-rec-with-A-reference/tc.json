@@ -1,0 +1,92 @@
+[
+    {
+        "name": "new-ove-to-common-record-with-a-reference",
+        "bugs": [
+            "18331",
+            "18345"
+        ],
+        "description": "Tester tilføjelse af OVE kode til en post med A-reference i emneord",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-auth-common.marc",
+                    "type": "AUTHORITY",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-auth-enrichment.marc"
+                    ],
+                    "children": [
+                        "rawrepo-common.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-auth-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [
+                ],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "result-dbc-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "rawrepo-auth-common.marc",
+                        "type": "AUTHORITY",
+                        "deleted": false,
+                        "enrichments": [
+                            "rawrepo-auth-enrichment.marc"
+                        ],
+                        "children": [
+                            "result-common.marc"
+                        ]
+                    },
+                    {
+                        "record": "rawrepo-auth-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false
+                    }
+                ]
+            }
+        }
+    }
+]
