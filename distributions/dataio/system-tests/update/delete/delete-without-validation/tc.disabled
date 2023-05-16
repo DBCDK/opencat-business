@@ -17,6 +17,7 @@
           "record": "rawrepo-dbc.marc",
           "type": "AUTHORITY",
           "deleted": false,
+            "children": [],
           "enrichments": [
             "rawrepo-dbc-enrichment.marc"
           ]

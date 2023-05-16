@@ -46,6 +46,7 @@
           "record": "rawrepo-870979-universe.marc",
           "type": "AUTHORITY",
           "deleted": false,
+          "children": [],
           "enrichments": [
             "rawrepo-191919-universe.marc"
           ]
@@ -209,6 +210,7 @@
           "record": "rawrepo-870979-universe.marc",
           "type": "AUTHORITY",
           "deleted": false,
+          "children": [],
           "enrichments": [
             "rawrepo-191919-universe.marc"
           ]

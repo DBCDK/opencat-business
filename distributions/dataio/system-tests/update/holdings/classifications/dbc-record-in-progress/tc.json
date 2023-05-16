@@ -29,6 +29,7 @@
                     "record": "rawrepo-870979.marc",
                     "type": "AUTHORITY",
                     "deleted": false,
+                    "children": [],
                     "enrichments": [
                         "rawrepo-870979-191919.marc"
                     ]

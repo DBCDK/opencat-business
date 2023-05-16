@@ -171,6 +171,7 @@
             "type": "AUTHORITY",
             "deleted": false,
             "enqueued": false,
+            "children": [],
             "enrichments": [
               "universe-191919-common.marc"
             ]
