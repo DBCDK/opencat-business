@@ -1,0 +1,91 @@
+[
+    {
+        "name": "fbs-new-subjects-to-head-record",
+        "bugs": [
+        ],
+        "description": "Tester tilføjelse af noter/emneord til hovedpost",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "boghoved",
+            "record": "request-1.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "current-head-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "children": [
+                        "current-volume-common.marc"
+                    ],
+                    "enrichments": [
+                        "current-head-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "current-head-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "current-volume-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "current-volume-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "current-volume-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-head-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "children": [
+                            "current-volume-common.marc"
+                        ],
+                        "enrichments": [
+                            "current-head-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "current-head-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "current-volume-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "current-volume-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "current-volume-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]

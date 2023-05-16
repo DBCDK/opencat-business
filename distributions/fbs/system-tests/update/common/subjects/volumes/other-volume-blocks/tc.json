@@ -1,0 +1,129 @@
+[
+    {
+        "name": "fbs-new-subjects-to-volume-record-other-blocks",
+        "bugs": [
+        ],
+        "description": "Tester tilføjelse af noter/emneord til bind men andet bind blokerer",
+        "request": {
+            "authentication": {
+                "group": "723000",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bogbind",
+            "record": "request-1.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "current-head-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "children": [
+                        "current-volume-common.marc",
+                        "current-volume-common-3.marc"
+                    ],
+                    "enrichments": [
+                        "current-head-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "current-head-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "current-volume-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "current-volume-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "current-volume-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "current-volume-common-3.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "current-volume-enrichment-3.marc"
+                    ]
+                },
+                {
+                    "record": "current-volume-enrichment-3.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [ {
+                    "type" : "FATAL",
+                    "code" : null,
+                    "urlForDocumentation" : null,
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Posten må ikke beriges, da den i forvejen er emnebehandlet"
+                }],
+                "rawrepo": [
+                    {
+                        "record": "current-head-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "children": [
+                            "current-volume-common.marc",
+                            "current-volume-common-3.marc"
+                        ],
+                        "enrichments": [
+                            "current-head-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "current-head-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "current-volume-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "current-volume-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "current-volume-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    },
+                    {
+                        "record": "current-volume-common-3.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [
+                            "current-volume-enrichment-3.marc"
+                        ]
+                    },
+                    {
+                        "record": "current-volume-enrichment-3.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]
