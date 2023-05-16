@@ -30,6 +30,7 @@
           "record": "setup-870979.marc",
           "type": "AUTHORITY",
           "deleted": false,
+          "children": [],
           "enrichments": [
             "setup-870979-191919.marc"
           ]

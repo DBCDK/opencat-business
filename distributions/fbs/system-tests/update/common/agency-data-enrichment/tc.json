@@ -200,6 +200,7 @@
                     "record": "19099873-common.marc",
                     "type": "AUTHORITY",
                     "deleted": false,
+                    "children": [],
                     "enrichments": [
                         "19099873-enrichment.marc"
                     ]
@@ -281,6 +282,7 @@
                         "record": "19099873-common.marc",
                         "type": "AUTHORITY",
                         "deleted": false,
+                        "children": [],
                         "enrichments": [
                             "19099873-enrichment.marc"
                         ]

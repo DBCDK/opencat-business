@@ -1,0 +1,36 @@
+001 00 *a 135574554 *b 870970 *c 20230411083636 *d 20230213 *f a
+004 00 *r n *a e
+008 00 *t s *u f *a 2022 *b dk *d u *d y *k b *l dan *x 06 *v 0
+009 00 *a a *g xx
+021 00 *e 9788789712062 *c ib.
+032 00 *x ACC202307 *a DBF202317 *x BKM202317
+041 00 *a dan *d eng
+245 00 *a Silver tales *c Karen Blixen fortalt i sølv, perler og diamanter
+260 00 *a Rungsted Kyst *b Karen Blixen Museet *c 2022
+300 00 *a 137 sider *b ill. (nogle i farver)
+507 00 *a Udgivet i forbindelse med udstilling
+508 00 *a Med resumé på engelsk
+521 00 *b 1. oplag *c 2022
+530 00 *& 1 *i Indhold *t Smykke-stilhistorie fra 1880 til 1965 *e Nina Hald *t Perler for livet, Karen Blixens smykker *e Elisabeth Nøjgꜳrd *t Størst er kærligheden, fantasien og kunsten *c smykker i Karen Blixens forfatterskab *e Elisabeth Nøjgꜳrd *t Kurators introduktion til værkerne i Silver tales *e Nina Hald *t Kataloget Silver Tales *e Nina Hald, Elisabeth Nøjgꜳrd, Karen Blixen
+600 00 *å1001*aBlixen*hKaren
+652 00 *å 1 *m 99.4 *a Blixen *h Karen
+652 00 *p 76.333
+652 00 *p 81.68
+666 00 *f dansk litteratur
+666 00 *f forfattere
+666 00 *f smykker
+666 00 *f sølvsmykker
+666 00 *f dansk sølvsmedekunst
+666 00 *e Danmark
+666 00 *i 1900-1999
+666 00 *i 2020-2029
+666 00 *o udstillingskataloger
+700 00 *aHald*hNina*4aut*4edt
+700 00 *aNøjgꜳrd*hElisabeth*cf. 1963*4aut
+710 00 *a Karen Blixen Museet
+900 00 *a Dinesen *h Isak *x se også *z 652/1(a,h)
+900 00 *a Andrézel *h Pierre *x se også *z 652/1(a,h)
+900 00 *a Osceola *x se også *z 652/1(a,h)
+910 00 *a Blixen *h Karen *g Museet *z 710
+990 00 *b v *u nt
+996 00 *a DBC

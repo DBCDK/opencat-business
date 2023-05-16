@@ -35,7 +35,8 @@
           "deleted": false,
           "enrichments": [
             "rawrepo-68147824-191919.marc"
-          ]
+          ],
+          "children": []
         },
         {
           "record": "rawrepo-68147824-191919.marc",
@@ -80,6 +81,7 @@
             "type": "AUTHORITY",
             "deleted": false,
             "enqueued": false,
+            "children": [],
             "enrichments": [
               "rawrepo-19405664-191919.marc"
             ]

@@ -25,6 +25,7 @@
             "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
+            "children": [],
             "enrichments": [
               "rawrepo-191919-series.marc"
             ]
@@ -65,6 +66,7 @@
             "type": "AUTHORITY",
             "deleted": false,
             "enqueued": true,
+            "children": [],
             "enrichments": [
               "rawrepo-191919-universe.marc"
             ]

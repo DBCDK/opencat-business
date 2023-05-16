@@ -34,6 +34,7 @@
           "type": "AUTHORITY",
           "deleted": false,
           "enqueued": false,
+          "children": [],
           "enrichments": [
             "rawrepo-aut-enrichment.marc"
           ]

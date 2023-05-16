@@ -17,6 +17,7 @@
                     "record": "RR-auth-record.marc",
                     "type": "AUTHORITY",
                     "deleted": false,
+                    "children": [],
                     "enrichments": [
                         "RR-auth-record-enrichment.marc"
                     ]
@@ -85,6 +86,7 @@
                     "record": "RR-auth-record.marc",
                     "type": "AUTHORITY",
                     "deleted": false,
+                    "children": [],
                     "enrichments": [
                         "RR-auth-record-enrichment.marc"
                     ]
