@@ -1,0 +1,59 @@
+[
+    {
+        "name": "hostile-takeover",
+        "description": "Tester rettelse af en netlydbog fællesskabspost for et FBS-bibliotek der ikke er ejeren",
+        "request": {
+            "authentication": {
+                "group": "700300",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "BCIbog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "rawrepo": [
+                {
+                    "record": "rawrepo-870970-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [ "rawrepo-870970-enrichment.marc" ]
+                },
+                {
+                    "record": "rawrepo-870970-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [ {
+                    "type" : "ERROR",
+                    "code" : null,
+                    "urlForDocumentation" : "",
+                    "ordinalPositionOfField" : null,
+                    "ordinalPositionOfSubfield" : null,
+                    "ordinalPositionInSubfield" : null,
+                    "message" : "Du har ikke ret til at overtage ejerskabet for en dbcejet fællesskabspost"
+                } ],
+                "rawrepo": [
+                    {
+                        "record": "rawrepo-870970-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": false,
+                        "enrichments": [ "rawrepo-870970-enrichment.marc" ]
+                    },
+                    {
+                        "record": "rawrepo-870970-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": false
+                    }
+                ]
+            }
+        }
+    }
+]

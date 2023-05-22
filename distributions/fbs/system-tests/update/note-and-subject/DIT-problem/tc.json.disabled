@@ -1,7 +1,7 @@
 [
   {
     "name": "dit-note-subject-problem",
-    "description": "",
+    "description": "This test checks if update is rejected when record is in production",
     "request": {
       "authentication": {
         "group": "700300",
