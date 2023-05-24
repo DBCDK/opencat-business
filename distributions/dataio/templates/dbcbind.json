@@ -172,7 +172,7 @@
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting": "ga",
+            "sorting": "g",
             "subfields":{
                 "&":{
                     "repeatable":false
