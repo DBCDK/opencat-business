@@ -86,6 +86,14 @@ var Builder = function() {
 
         // sort the new record before returning it
         result = sortRecord( result );
+
+        // Remove weird undefined subfields because the Java marc parser doesn't like those subfields
+        result.fields.forEach(function(field) {
+            if (field.subfields.length === 1 && field.subfields[0] === undefined) {
+                field.subfields = [];
+            }
+        })
+
         return result;
     }
 
@@ -124,9 +132,7 @@ var Builder = function() {
             var mandatorySubfieldsObject = newSubfieldsObject["mandatorySubfields"];
 
             var missingSubfields;
-            if (newSubfields.length == 0 && Object.keys(mandatorySubfieldsObject).length == 0) {
-                missingSubfields = {name:"", value:""};
-            } else {
+            if (!(newSubfields.length === 0 && Object.keys(mandatorySubfieldsObject).length === 0)) {
                 // add the remaining mandatory subfields not present in the original field
                 missingSubfields = buildMissingSubfields(template, mandatorySubfieldsObject, field, faustProvider);
             }
@@ -247,8 +253,6 @@ var Builder = function() {
                 }
 
             });
-        } else {
-            field.subfields.push(buildSubfield(template, "", fieldName, faustProvider));
         }
         return field;
     }
