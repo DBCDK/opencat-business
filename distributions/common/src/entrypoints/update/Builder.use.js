@@ -1,4 +1,5 @@
 use("Log");
+use("RecordSorting");
 
 EXPORTED_SYMBOLS = [ 'Builder' ];
 
@@ -41,6 +42,9 @@ var Builder = function() {
             })
 
         }
+
+        result = RecordSorting.sort(templateProvider, result);
+
         return result;
     }
 
@@ -84,9 +88,6 @@ var Builder = function() {
         var missingFields = buildMissingFields( templateProvider(), faustProvider, mandatoryFieldsObject );
         result.fields = result.fields.concat( missingFields );
 
-        // sort the new record before returning it
-        result = sortRecord( result );
-
         // Remove weird undefined subfields because the Java marc parser doesn't like those subfields
         result.fields.forEach(function(field) {
             if (field.subfields.length === 1 && field.subfields[0] === undefined) {
@@ -94,21 +95,9 @@ var Builder = function() {
             }
         })
 
-        return result;
-    }
+        result = RecordSorting.sort(templateProvider, result);
 
-    // function to sort the record fields
-    function sortRecord( record ) {
-        Log.trace( "-> sortRecord" );
-        var result = {"fields": []};
-        result.fields = record.fields.sort(sortRecordFunction);
         return result;
-    }
-
-    // sort function used by sortRecord
-    function sortRecordFunction( a, b ){
-        Log.trace( "-> sortRecordFunction" );
-        return a.name.localeCompare(b.name);
     }
 
     // convertField converts a field to the type indicated by the template, by
@@ -427,7 +416,6 @@ var Builder = function() {
     return {
         'buildRecord': buildRecord,
         'convertRecord': convertRecord,
-        '__sortRecord': sortRecord,
         '__convertField': convertField,
         '__verifyIndicator': verifyIndicator,
         '__getIndicatorFromUnoptimizedTemplate': getIndicatorFromUnoptimizedTemplate,
