@@ -441,10 +441,10 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 "indicator": "00",
                 "subfields": [
                     {
-                        "name": "a",
+                        "name": "b",
                         "value": ""
                     }, {
-                        "name": "b",
+                        "name": "a",
                         "value": ""
                     }
                 ]
@@ -452,8 +452,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
         ]
     };
 
-    var template4 =
-    {
+    var template4 = {
         "defaults": {
             "field": {
                 "indicator": "00",
@@ -515,7 +514,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 "url": "http://www.kat-format.dk/danMARC2/Danmarc2.5.htm#pgfId=1532869",
                 "mandatory": false,
                 "repeatable": false,
-                "sorting": "abcdf",
+                "sorting": "ba",
                 "subfields": {
                     "a": {
                         "mandatory": true,
