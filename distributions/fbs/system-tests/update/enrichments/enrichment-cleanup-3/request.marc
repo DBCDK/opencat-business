@@ -1,0 +1,31 @@
+001 00 *a 45021920 *b 870970 *c 20220407131517 *d 20110317 *f a
+002 00 *b 757300 *c 90219065 *x 75730090219065
+004 00 *r n *a e
+008 00 *t m *u f *a 2010 *b dk *d y *l dan *x 04 *v 0
+009 00 *a a *g xx
+021 00 *e 9788792313263 *c spiralryg
+032 00 *x ACC201234 *a DBF201238 *x BKM201238 *x DAT991605
+245 00 *a Madglæde *c en kogebog til dagplejen
+250 00 *a 1. udgave *b ÷
+260 00 *a [Kbh.] *b Meyers Madhus *b Foa - Fag og Arbejde *c 2010
+300 00 *a 156 sider *b ill. i farver
+504 00 *& 1 *a Bogens 60 opskrifter på morgenmad, kold og varm frokost, mellemmåltider, syltevarer, drikke og bagværk er alle udviklet specielt til en hverdag med små børn. Bogen er lavet i samarbejde med dagplejere, der har ønsket, vejledt, testet, smagt og vurderet
+512 00 *a På titelsiden: omslaget: Meyers Madhus, dagplejen, Foa
+521 00 *& REX *b 1. oplag *c 2010 *k FOA
+631 00 *& 757300 *f kostplaner
+631 00 *& 757300 *f mad
+631 00 *& 757300 *f sundhed
+652 00 *m 64.1
+666 00 *f børn
+666 00 *f dagpleje
+666 00 *o kogebøger
+666 00 *o opskrifter
+666 00 *u for dagplejere
+710 00 *å 1 *a Meyers Madhus
+710 00 *å 2 *a FOA - Fag og Arbejde
+720 00 *o Emil Blauert *4 edt *g 1
+720 00 *o Lars Ranek *4 ill
+910 00 *a Fag og Arbejde *z 710/2
+910 00 *a Meyers *e firma *z 710/1
+990 00 *o 201238 *b l *b v *u nt
+996 00 *a DBC
