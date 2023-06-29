@@ -151,13 +151,8 @@
         "032":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.1e.htm",
             "mandatory" : true,
-            "repeatable":false,
             "subfields":{
-                "x":{
-                    "mandatory" : true,
-                    "repeatable":false,
-                    "values": [ "DLB" ]
-                }
+                "x": "DanMarc2.fields.032.subfields.x"
             }
         },
         "033":{
@@ -298,6 +293,11 @@
         "945": "DanMarc2.fields.945",
         "952": "DanMarc2.fields.952",
         "966": "DanMarc2.fields.966",
-        "968": "DanMarc2.fields.968"
+        "968": "DanMarc2.fields.968",
+        "y08": {
+            "subfields": {
+                "a": {}
+            }
+        }
     }
 }
