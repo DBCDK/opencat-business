@@ -19,7 +19,7 @@ getFreePort() {
   # Because macOS is "special"
   if [ "$(uname)" == "Darwin" ]
   then
-      cmd="netstat -ap tcp"
+      cmd="netstat -aLp tcp"
   fi
 
   i=0
