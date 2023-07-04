@@ -8,7 +8,7 @@
         "categoryName": "lokalbib",
         "categoryDisplay": "Lokalbibliografi",
         "templateName": "lokal-dlb-netpubhoved",
-        "templateDisplay": "Hovedpost e-bog",
+        "templateDisplay": "E-bog, hovedpost",
         "templateIndex": 53
     },
     "settings": {
