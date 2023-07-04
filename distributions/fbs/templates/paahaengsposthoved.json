@@ -3,6 +3,14 @@
         "description":"Skabelon til supplementspost - hovedpost.",
         "features": [ "create_enrichments", "use_enrichments" ]
     },
+    "templateValues": {
+        "type": "enrichment",
+        "categoryName": "paahaeng",
+        "categoryDisplay": "Påhangsposter",
+        "templateName": "paahaengsposthoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust":false
     },
