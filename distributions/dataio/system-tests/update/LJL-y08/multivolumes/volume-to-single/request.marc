@@ -26,13 +26,7 @@ d08 00 *o jwp *o sb *k bsj *r sb *a omkatalogiseret, da 2. binds titel ikke er H
 d08 00 *a masserettet i forb. med konvertering af aldersnoter
 d09 00 *z MVB200847 *z MVC200847 *z MSA200847
 d09 00 *z REX200849
-d30 00 *i h
-d31 00 *b 143 *h 219 *t 38
-d32 00 *b 140 *h 215
-d35 00 *a P *i 03 *n 03 *p 01 *q 03
 f06 00 *b b *b s *m Omkatalogiseret fra flerbindsværk. Serie tilføjet. 2. bind udsendt 200919 *m Rettelse
-n50 00 *a 20090504
-n51 00 *a 20081117
 996 00 *a DBC
 s12 00 *t TeamAr200845
 z99 00 *a masseret

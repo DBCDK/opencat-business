@@ -29,7 +29,6 @@ d90 00 *o201748*bl*bv*unt
 d90 00 *x201747*bl*bv*unt
 d91 00 *oEkspres 201747
 f06 00 *bv
-n51 00 *a20180110
 s12 00 *tTeamBAM201801
 z98 00 *aMinus korrekturprint
 z99 00 *als

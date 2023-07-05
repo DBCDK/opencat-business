@@ -30,9 +30,6 @@
 945 00 *a Min 1. bog *z 440
 945 00 *a Min første bog-serien *z 440
 d08 00 *o sah *a Udkommer d. 02.09.15 *o dra *k ljl
-d31 00 *b 155 *h 212 *t 3
-d32 00 *b 155 *h 212 *t 7
-d35 00 *a P *i 04 *n 10 *p 04 *q 10
 f06 00 *b l *b b *b s
 996 00 *a DBC
 s12 00 *t TeamBLY201535

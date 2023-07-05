@@ -1856,54 +1856,6 @@
                 "z": {}
             }
         },
-        "d21": {
-            "subfields": {
-                "a": {},
-                "b": {}
-            }
-        },
-        "d22": {
-            "subfields": {
-                "a": {}
-            }
-        },
-        "d30": {
-            "subfields": {
-                "i": {},
-                "n": {}
-            }
-        },
-        "d31": {
-            "subfields": {
-                "b": {},
-                "h": {},
-                "t": {}
-            }
-        },
-        "d32": {
-            "subfields": {
-                "b": {},
-                "h": {},
-                "t": {}
-            }
-        },
-        "d33": {
-            "subfields": {
-                "b": {},
-                "a": {},
-                "c": {}
-            }
-        },
-        "d35": {
-            "subfields": {
-                "a": {},
-                "b": {},
-                "i": {},
-                "n": {},
-                "p": {},
-                "q": {}
-            }
-        },
         "d51": {
             "subfields": {
                 "a": {},
@@ -1991,15 +1943,6 @@
                 "a": {},
                 "b": {},
                 "c": {}
-            }
-        },
-        "f01": {
-            "subfields": {
-                "a": {},
-                "b": {},
-                "c": {},
-                "h": {},
-                "x": {}
             }
         },
         "f05": {
@@ -2169,43 +2112,9 @@
                 
             }
         },
-        "n50": {
-            "subfields": {
-                "a": {}
-                
-            }
-        },
-        "n51": {
-            "subfields": {
-                "a": {},
-                "b": {}
-                
-            }
-        },
         "n55": {
             "subfields": {
                 "a": {}
-                
-            }
-        },
-        "r01": {
-            "subfields": {
-                "a": {},
-                "b": {}
-                
-            }
-        },
-        "r02": {
-            "subfields": {
-                "a": {},
-                "b": {}
-                
-            }
-        },
-        "r03": {
-            "subfields": {
-                "a": {},
-                "b": {}
                 
             }
         },
@@ -2217,9 +2126,7 @@
         },
          "s12": {
             "subfields": {
-                "a": {},
                 "t": {}
-                
             }
         },
         "t00": {
@@ -2431,56 +2338,6 @@
                 "z": {}
             }
         },
-        "z00":{
-            "subfields":{
-                "&":{},
-                "a":{
-                    "mandatory":true,
-                    "repeatable": false
-                },
-                "h":{
-                    "repeatable": false
-                },
-                "k":{
-                    "repeatable": false
-                },
-                "e":{
-                    "repeatable": false
-                },
-                "f":{
-                    "repeatable": false
-                },
-                "c":{
-                    "repeatable": false
-                },
-                "t":{
-                    "repeatable": false
-                },
-                "x":{},
-                "y":{},
-                "z":{},
-                "u":{
-                    "repeatable": false
-                },
-                "b":{
-                    "repeatable": false
-                },
-                "v":{},
-                "0":{
-                    "repeatable": false
-                },
-                "1":{
-                    "repeatable": false
-                },
-                "2":{
-                    "repeatable": false
-                },
-                "5":{
-                    "repeatable": false
-                },
-                "6":{}
-            }
-        },
         "z02": {
             "subfields": {
                 "a": {
@@ -2569,14 +2426,14 @@
         "z16": {
             "subfields": {
                 "a": {}
-                
+
             }
         },
         "z17": {
             "subfields": {
                 "a": {},
                 "x": {}
-                
+
             }
         },
         "z43": {
