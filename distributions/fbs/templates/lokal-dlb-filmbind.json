@@ -13,7 +13,7 @@
     },
     "settings": {
         "lookupfaust": true,
-        "extrafields": [ "023b", "245g", "245a", "300n" ]
+        "extrafields": [ "023b", "032x", "245g", "245a", "300n" ]
     },
     "defaults":{
         "field":{
