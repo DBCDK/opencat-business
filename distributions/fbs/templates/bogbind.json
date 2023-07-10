@@ -175,6 +175,7 @@
 						}
                     ]
                 },
+                "p": "DanMarc2.fields.008.subfields.p",
                 "v":{
                     "mandatory": true,
                     "repeatable": false,

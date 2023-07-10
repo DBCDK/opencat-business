@@ -117,6 +117,7 @@
                 "b": "DanMarc2.fields.008.subfields.b",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": "DanMarc2.fields.008.subfields.l",
+                "p": "DanMarc2.fields.008.subfields.p",
                 "v":{
                     "mandatory": true,
                     "repeatable": false,

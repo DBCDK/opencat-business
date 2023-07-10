@@ -292,6 +292,10 @@
                     "repeatable": false,
                     "values": [ "b", "s" ]
                 },
+                "p": {
+                    "repeatable": false,
+                    "values": [ "r" ]
+                },
                 "q": {
                     "values": "Lister.fields.codes.subfields.file_type.values"
                 },
