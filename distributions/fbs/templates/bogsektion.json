@@ -53,6 +53,7 @@
             "subfields":{
                 "u": "bog.fields.008.subfields.u",
                 "a": "DanMarc2.fields.008.subfields.a",
+                "p": "DanMarc2.fields.008.subfields.p",
                 "v":{
                     "mandatory": true,
                     "repeatable": false,

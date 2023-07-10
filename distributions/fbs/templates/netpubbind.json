@@ -60,6 +60,7 @@
                     ]
                 },
                 "o": "bogbind.fields.008.subfields.o",
+                "p": "DanMarc2.fields.008.subfields.p",
                 "w": {
                     "repeatable": false,
                     "values": [ "1" ],

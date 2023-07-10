@@ -121,6 +121,7 @@
                 "o": "DanMarc2.fields.008.subfields.o",
                 "m": "DanMarc2.fields.008.subfields.m",
                 "n": "DanMarc2.fields.008.subfields.n",
+                "p": "DanMarc2.fields.008.subfields.p",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v":{
                     "mandatory": true,

@@ -166,6 +166,7 @@
                         }
                     ]
                 },
+                "p": "DanMarc2.fields.008.subfields.p",
                 "q": {
                     "values": "Lister.fields.codes.subfields.file_type.values",
                     "rules": [

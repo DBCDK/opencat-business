@@ -84,7 +84,8 @@
                 "u": {
                     "repeatable":false,
                     "values":[ "f", "u", "r" ]
-                },                
+                },
+                "p": "DanMarc2.fields.008.subfields.p",
                 "z": "DanMarc2.fields.008.subfields.z",
                 "x": "DanMarc2.fields.008.subfields.x",
                 "v":{

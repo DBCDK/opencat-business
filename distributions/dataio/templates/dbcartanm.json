@@ -105,6 +105,7 @@
                 "d": "DanMarc2.fields.008.subfields.d",
                 "j": "DanMarc2.fields.008.subfields.j",
                 "l": "DanMarc2.fields.008.subfields.l",
+                "p": "DanMarc2.fields.008.subfields.p",
                 "r": {
                     "repeatable": false,
                     "values": [ "a", "b", "c", "d", "e", "f", "g", "m", "p", "r", "s", "t", "u", "v",
