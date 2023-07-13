@@ -7,7 +7,7 @@
         "type": "local",
         "categoryName": "film",
         "categoryDisplay": "Film",
-        "templateName": "film",
+        "templateName": "lokal-film",
         "templateDisplay": "Enkeltstående post",
         "templateIndex": 10
     },

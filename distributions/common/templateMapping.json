@@ -22,7 +22,7 @@
     "generel": 80
 
   },
-  "fbiCategories": ["boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre", "lokal", "lokalbib", "generel"],
+  "fbiCategories": ["boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre", "lokal", "lokalbib", "generel", "paahaeng"],
   "templateGroups": {
     "DBC": {
       "templates": [
