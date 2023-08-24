@@ -1,11 +1,5 @@
-001 00 *a 51580761 *b 710100 *c 20150324171702 *d 20150209 *f a
+001 00 *a 51580761 *b 710100 *c 20230824150520 *d 20150209 *f a
 004 00 *r n *a e
-008 00 *t m *u f *a 2012 *b dk *d y *l eng *x 06 *v 0
-009 00 *a a *g xx
 069 00 *a Knæhøj karse
-100 00 *0  *a Møller *h Karl Henrik *4 aut
-245 00 *a Lilly macht einen Ausflug *c QR bog
-652 00 *n 86.4 *z 096
-652 00 *o 84
-652 00 *m 61.615
 996 00 *a DBC
+
