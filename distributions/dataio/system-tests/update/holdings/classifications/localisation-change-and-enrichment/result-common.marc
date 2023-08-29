@@ -1,0 +1,26 @@
+001 00 *a 45090868 *b 870970 *c 20210610132645 *d 20111201 *f a
+002 00 *b 710100 *c 93086309 *x 71010093086309
+004 00 *r c *a e
+008 00 *t m *u f *a 2011 *b us *d x *l eng *v 0
+009 00 *a a *g xx
+021 00 *e 9780785151005
+035 00 *a (OCoLC)688371381
+038 00 *a te
+100 00 *a David *h Peter *4 aut
+245 00 *a Hulk - the end
+250 00 *a Collected editions *x 1. printing
+260 00 *a New York *b Marvel *c 2011
+300 00 *a Ca. 160 sider *b alle ill. (nogle i farver)
+505 00 *a Tegneserier
+520 00 *a Oprindelig udgivet som: The incredible Hulk, the end, og The incredibl e Hulk, future imperfect nr. 1-2
+652 00 *m 83.8
+666 00 *h Hulk
+700 00 *a Keown *h Dale *4 ill
+700 00 *a Perez *h George *4 ill
+720 00 *o Tom Smith *4 clr
+720 00 *o Dan Kemp *4 clr
+720 00 *o Joe Rosen *4 oth
+720 00 *o John Workman *4 oth
+745 00 *a The ¤end
+996 00 *a 710100
+

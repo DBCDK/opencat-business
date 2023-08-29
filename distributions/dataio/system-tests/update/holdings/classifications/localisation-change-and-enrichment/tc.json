@@ -1,0 +1,137 @@
+[
+    {
+        "name": "no-localisation-if-has-enrichment-and-holding",
+        "description": "Post ejet af bibliotek giver ved opstillingsændring kun ændret påhæng for andre med lokalisering",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 710100, 700600 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc",
+                        "rawrepo-710100-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                },
+                {
+                    "record": "rawrepo-710100-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "rawrepo-710100-enrichment.marc",
+                            "result-700600-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-700600-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "rawrepo-710100-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "no-localisation-no-enrichment-and-holding",
+        "description": "Post ejet af bibliotek giver ved opstillingsændring kun ændret påhæng for andre med lokalisering, ingen påhæng for self",
+        "request": {
+            "authentication": {
+                "group": "710100",
+                "user": "netpunkt",
+                "password": "20Koster"
+            },
+            "templateName": "bog",
+            "record": "request.marc"
+        },
+        "setup": {
+            "holdings": [ 710100, 700600 ],
+            "rawrepo": [
+                {
+                    "record": "rawrepo-common.marc",
+                    "type": "MARCXCHANGE",
+                    "deleted": false,
+                    "enrichments": [
+                        "rawrepo-dbc-enrichment.marc"
+                    ]
+                },
+                {
+                    "record": "rawrepo-dbc-enrichment.marc",
+                    "type": "ENRICHMENT",
+                    "deleted": false
+                }
+            ]
+        },
+        "expected": {
+            "validation": {},
+            "update": {
+                "errors": [],
+                "rawrepo": [
+                    {
+                        "record": "result-common.marc",
+                        "type": "MARCXCHANGE",
+                        "deleted": false,
+                        "enqueued": true,
+                        "enrichments": [
+                            "rawrepo-dbc-enrichment.marc",
+                            "result-700600-enrichment.marc"
+                        ]
+                    },
+                    {
+                        "record": "result-dbc-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    },
+                    {
+                        "record": "result-700600-enrichment.marc",
+                        "type": "ENRICHMENT",
+                        "deleted": false,
+                        "enqueued": true
+                    }
+                ]
+            }
+        }
+    }
+]
