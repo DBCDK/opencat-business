@@ -121,7 +121,25 @@
                 }
             ]
 		},
-        "009": "bog.fields.009",
+        "009":{
+            "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
+            "mandatory":true,
+            "repeatable":false,
+            "subfields":{
+                "a":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "values":[ "a", "e" ]
+                },
+                "g":{
+                    "mandatory":true,
+                    "repeatable":false,
+                    "values":[ "xx", "xy" ]
+                },
+                "b": "DanMarc2.fields.009.subfields.b",
+                "h": "DanMarc2.fields.009.subfields.h"
+            }
+        },
         "011": "bog.fields.011",
         "017": "bog.fields.017",
         "018": "bog.fields.018",
