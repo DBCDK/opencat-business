@@ -134,7 +134,7 @@
                 "g":{
                     "mandatory":true,
                     "repeatable":false,
-                    "values":[ "xy" ]
+                    "values":[ "xe" ]
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
                 "h": "DanMarc2.fields.009.subfields.h"
