@@ -19,10 +19,10 @@
     "andre": 65,
     "lokal": 70,
     "lokalbib": 75,
-    "generel": 80
-
+    "generel": 80,
+    "sbci": 90
   },
-  "fbiCategories": ["boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre", "lokal", "lokalbib", "generel", "paahaeng"],
+  "fbiCategories": ["boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre", "lokal", "lokalbib", "generel", "paahaeng", "sbci" ],
   "templateGroups": {
     "DBC": {
       "templates": [

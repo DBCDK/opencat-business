@@ -6,7 +6,7 @@
         ]
     },
     "templateValues": {
-        "type": "local",
+        "type": "common",
         "categoryName": "lokalbib",
         "categoryDisplay": "Lokalbibliografi",
         "templateName": "lokal-dlb-bog",
