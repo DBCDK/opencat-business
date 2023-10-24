@@ -956,7 +956,6 @@ var DoubleRecordFinder = function () {
         }
     }
 
-    // TODO test ?
     function __executeQueryAndFindRecords(record, queryFormatter, andingTogether, excludedFields) {
         Log.trace("Enter - DoubleRecordFinder.__executeQueryAndFindRecords()");
         if (!excludedFields) {
