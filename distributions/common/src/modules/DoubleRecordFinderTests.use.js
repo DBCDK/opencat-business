@@ -1,7 +1,28 @@
+use("Log");
 use("DoubleRecordFinder");
 use("RecordUtil");
 use("SolrCore");
 use("UnitTest");
+
+UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
+    SolrCore.addAnalyse("match.021e:tal", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.021e": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "tal"}]]}}}
+    });
+    SolrCore.addAnalyse("match.021a:nummer", {
+        responseHeader: {status: 0},
+        analysis: {field_names: {"match.021a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "nummer"}]]}}}
+    });
+    var record = new Record;
+    record = RecordUtil.createFromString([
+        "021 00 *a nummer *e"
+    ].join("\n"));
+    var field = record.field(0);
+    var subfield = field.subfield(0);
+    Assert.equalValue("Subfield with content", DoubleRecordFinder.__querySubfieldFormatter(field, subfield), "match.021a:\"nummer\"");
+    subfield = field.subfield(1);
+    Assert.equalValue("Empty subfield", DoubleRecordFinder.__querySubfieldFormatter(field, subfield), "");
+});
 
 UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
     var record = new Record;
@@ -10,21 +31,21 @@ UnitTest.addFixture("DoubleRecordFinder.__matchVolumes", function () {
     record = RecordUtil.createFromString([
         "004 00 *r n",
         "014 00 *a 50002594",
-        "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *g 5 *o The ¤nineteenth century*e edited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, but no *a", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a e",
         "014 00 *a 50002594",
-        "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *g 5 *o The ¤nineteenth century*e edited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a but no b", DoubleRecordFinder.__matchVolumes(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a b",
         "014 00 *a 50002594",
-        "245 00 *g 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *g 5 *o The ¤nineteenth century*e edited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with b", DoubleRecordFinder.__matchVolumes(record), true);
 });
@@ -36,21 +57,21 @@ UnitTest.addFixture("DoubleRecordFinder.__matchSections", function () {
     record = RecordUtil.createFromString([
         "004 00 *r n",
         "014 00 *a 50002594",
-        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *n 5 *o The ¤nineteenth century*e edited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, but no *a", DoubleRecordFinder.__matchSections(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a e",
         "014 00 *a 50002594",
-        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *n 5 *o The ¤nineteenth century*e edited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a but no s", DoubleRecordFinder.__matchSections(record), false);
 
     record = RecordUtil.createFromString([
         "004 00 *r n *a s",
         "014 00 *a 50002594",
-        "245 00 *n 5 *o The ¤nineteenth century*eedited by David Baguley"
+        "245 00 *n 5 *o The ¤nineteenth century*e edited by David Baguley"
     ].join("\n"));
     Assert.equalValue("004, *a with s", DoubleRecordFinder.__matchSections(record), true);
 });
@@ -1121,14 +1142,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes", function () {
             composed: undefined,
             sectioninfo: undefined,
             volumeinfo: undefined
-        }, {
-            id: "12345678",
-            pid: "12345678:870970",
-            reason: "004a, 014a, 245a",
-            edition: undefined,
-            composed: undefined,
-            sectioninfo: undefined,
-            volumeinfo: undefined
         }]
     );
     record = RecordUtil.createFromString([
@@ -1608,14 +1621,6 @@ UnitTest.addFixture("DoubleRecordFinder.__findVolumes 2", function () {
             id: "12345678",
             pid: "12345678:870970",
             reason: "004a, 014a, 245g",
-            edition: undefined,
-            composed: undefined,
-            sectioninfo: undefined,
-            volumeinfo: undefined
-        }, {
-            id: "12345678",
-            pid: "12345678:870970",
-            reason: "004a, 014a, 245a",
             edition: undefined,
             composed: undefined,
             sectioninfo: undefined,
