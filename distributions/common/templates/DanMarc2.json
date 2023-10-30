@@ -4220,9 +4220,7 @@
                 "p":{
                     "repeatable":false
                 },
-                "q":{
-                    "repeatable":false
-                },
+                "q":{},
                 "s":{},
                 "u":{},
                 "y":{},
