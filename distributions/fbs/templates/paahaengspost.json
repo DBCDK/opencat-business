@@ -6,7 +6,7 @@
     "templateValues": {
         "type": "enrichment",
         "categoryName": "paahaeng",
-        "categoryDisplay": "Påhangsposter",
+        "categoryDisplay": "Påhængsposter",
         "templateName": "paahaengspost",
         "templateDisplay": "Enkeltstående post",
         "templateIndex": 10
