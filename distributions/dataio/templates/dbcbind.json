@@ -85,10 +85,7 @@
                     "repeatable": false,
                     "values": [ "1" ]
                 },
-                "j": {
-                    "repeatable": false,
-                    "values": [ "d", "e", "f", "i", "j", "m", "p" ]
-                },
+                "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": {
                     "repeatable": false,
