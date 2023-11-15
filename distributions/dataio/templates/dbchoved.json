@@ -115,10 +115,7 @@
                     "repeatable": false,
                     "values": "Lister.fields.codes.subfields.language.current_and_old.values"
                 },
-                "m": {
-                    "repeatable": false,
-                    "values": [ "1" ]
-                },
+                "m": "DanMarc2.fields.008.subfields.m",
                 "n": {
                     "repeatable": false,
                     "values": [ "a", "b", "c" ]

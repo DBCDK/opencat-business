@@ -282,7 +282,7 @@
                 },
 				"m": {
                     "repeatable": false,
-                    "values": [ "1" ]
+                    "values": [ "1", "2", "3" ]
                 },
                 "n": {
                     "repeatable": false,
