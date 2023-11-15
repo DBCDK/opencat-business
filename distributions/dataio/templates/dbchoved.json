@@ -109,10 +109,7 @@
                 },
                 "h": "DanMarc2.fields.008.subfields.h",
                 "i": "DanMarc2.fields.008.subfields.i",
-                "j": {
-                    "repeatable": false,
-                    "values": [ "d", "e", "f", "i", "j", "m", "p" ]
-                },
+                "j": "DanMarc2.fields.008.subfields.j",
                 "k": "DanMarc2.fields.008.subfields.k",
                 "l": {
                     "repeatable": false,

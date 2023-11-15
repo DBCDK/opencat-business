@@ -121,7 +121,7 @@
                 },
                 "j": {
                     "repeatable": false,
-                    "values": [ "d", "e", "f", "i", "j", "m", "p" ],
+                    "values": [ "d", "f", "i", "j", "m", "p" ],
                     "rules": [
                         {
                             "type": "SubfieldRules.checkSubfieldNotUsedInParentRecord"
