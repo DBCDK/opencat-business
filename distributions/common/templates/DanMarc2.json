@@ -334,6 +334,12 @@
                         "values": [ "1" ],
                         "subfieldMandatory": "a"
                     }
+                },
+                {
+                    "type": "FieldRules.exclusiveSubfieldParameterized",
+                    "params": {
+                        "subfields": [ "o", "m" ]
+                    }
                 }
             ]
 		},
