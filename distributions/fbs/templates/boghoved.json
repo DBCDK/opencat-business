@@ -207,15 +207,7 @@
                     ]
                 },
                 "v": "bog.fields.008.subfields.v"
-            },
-            "rules": [
-                {
-                    "type": "FieldRules.exclusiveSubfieldParameterized",
-                    "params": {
-                        "subfields": [ "o", "m" ]
-                    }
-                }
-            ]
+            }
 		},
         "009":{
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.a.htm",
