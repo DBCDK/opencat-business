@@ -282,7 +282,12 @@
                 },
 				"m": {
                     "repeatable": false,
-                    "values": [ "1", "2", "3" ]
+                    "values": [ "1", "2", "3" ],
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.SubfieldValueExcludesOtherSubfields"
+                        }
+                    ]
                 },
                 "n": {
                     "repeatable": false,
