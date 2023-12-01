@@ -46,12 +46,14 @@ var SubfieldValueExcludesOtherSubfields = function () {
             var excludedSubfields = params.excludedSubfields;
 
             if (matchValues.indexOf(subfield.value) > -1) {
-                record.fields.forEach(function (recordField) {
-                    if (excludedSubfields.indexOf(recordField.name) > -1) {
-                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                        var message = ResourceBundle.getStringFormat(bundle, "excluded.subfields", subfield.name, field.name, subfield.name);
-                        result.push(ValidateErrors.recordError("TODO:fixurl", message));
-                    }
+                record.fields.forEach(function (field) {
+                    field.subfields.forEach(function (subfield) {
+                        if (excludedSubfields === subfield.name) {
+                            var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                            var message = ResourceBundle.getStringFormat(bundle, "excluded.subfields", excludedSubfields, matchValues, subfield.name);
+                            result.push(ValidateErrors.recordError("TODO:fixurl", message));
+                        }
+                    });
                 });
             }
 
