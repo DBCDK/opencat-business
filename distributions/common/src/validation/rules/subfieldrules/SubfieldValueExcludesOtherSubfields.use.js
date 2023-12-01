@@ -49,7 +49,7 @@ var SubfieldValueExcludesOtherSubfields = function () {
                 record.fields.forEach(function (recordField) {
                     if (excludedSubfields.indexOf(recordField.name) > -1) {
                         var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                        var message = ResourceBundle.getStringFormat(bundle, "excluded.subfields", recordField.name, field.name, subfield.name);
+                        var message = ResourceBundle.getStringFormat(bundle, "excluded.subfields", subfield.name, field.name, subfield.name);
                         result.push(ValidateErrors.recordError("TODO:fixurl", message));
                     }
                 });
