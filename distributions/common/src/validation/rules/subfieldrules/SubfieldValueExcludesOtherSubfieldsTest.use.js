@@ -64,10 +64,10 @@ UnitTest.addFixture( "SubfieldValueExcludesOtherSubfields.validateSubfield", fun
     };
 
     params = {'values': ['3'], 'excludedSubfields': ['o']};
-    Assert.equalValue("3 SubfieldValueExcludesOtherSubfields.validateSubfield found no subfields", SubfieldValueExcludesOtherSubfields.validateSubfield(field, subfield, params), []);
+    Assert.equalValue("3 SubfieldValueExcludesOtherSubfields.validateSubfield found no excluded subfields", SubfieldValueExcludesOtherSubfields.validateSubfield(field, subfield, params), []);
 
     params = {'values': ['not'], 'excludedSubfields': ['o']};
-    Assert.equalValue("4 SubfieldValueExcludesOtherSubfields.validateSubfield found no subfields", SubfieldValueExcludesOtherSubfields.validateSubfield(field, subfield, params), []);
+    Assert.equalValue("4 SubfieldValueExcludesOtherSubfields.validateSubfield found no excluded subfields", SubfieldValueExcludesOtherSubfields.validateSubfield(field, subfield, params), []);
 
 
 });
