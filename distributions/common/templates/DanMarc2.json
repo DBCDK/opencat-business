@@ -282,16 +282,7 @@
                 },
 				"m": {
                     "repeatable": false,
-                    "values": [ "1", "2", "3" ],
-                    "rules": [
-                        {
-                            "type": "SubfieldRules.SubfieldValueExcludesOtherSubfields",
-                            "params": {
-                                "values": [ "1", "2" ],
-                                "excludedSubfields": [ "o" ]
-                            }
-                        }
-                    ]
+                    "values": [ "1", "2", "3" ]
                 },
                 "n": {
                     "repeatable": false,
