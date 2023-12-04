@@ -45,18 +45,19 @@ var SubfieldValueExcludesOtherSubfields = function () {
             var matchValues = params.values;
             var excludedSubfields = params.excludedSubfields;
 
-            if (matchValues.indexOf(subfield.value) > -1) {
-                record.fields.forEach(function (field) {
-                    if (excludedSubfields.indexOf(subfield.name) > -1) {
-
-
-                        var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                        var message = ResourceBundle.getStringFormat(bundle, "excluded.subfields", field.name, matchValues, field.name, excludedSubfields);
-                        result.push(ValidateErrors.recordError("TODO:fixurl", message));
-
+            // if matchValue exists
+            if (matchValues.indexOf(subfield.value) > -1 ) {
+                // run through subfields in record to check if excluded subfield name exists
+                field.subfields.forEach(function (subfield) {
+                if (excludedSubfields.indexOf(subfield.name) > -1) {
+                // create error message
+                var bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
+                var message = ResourceBundle.getStringFormat(bundle, "excluded.subfields", matchValues, field.name, excludedSubfields);
+                result.push(ValidateErrors.recordError("TODO:fixurl", message));
                     }
                 });
             }
+
 
             return result;
         } finally {

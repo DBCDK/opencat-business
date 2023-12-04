@@ -285,7 +285,11 @@
                     "values": [ "1", "2", "3" ],
                     "rules": [
                         {
-                            "type": "SubfieldRules.SubfieldValueExcludesOtherSubfields"
+                            "type": "SubfieldRules.SubfieldValueExcludesOtherSubfields",
+                            "params": {
+                                "values": [ "1", "2" ],
+                                "excludedSubfields": [ "o" ]
+                            }
                         }
                     ]
                 },
