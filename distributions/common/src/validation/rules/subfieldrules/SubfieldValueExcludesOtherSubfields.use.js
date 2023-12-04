@@ -41,12 +41,11 @@ var SubfieldValueExcludesOtherSubfields = function () {
             ValueCheck.check("params", params.excludedSubfields);
             ValueCheck.check("params", params.excludedSubfields).instanceOf(Array);
 
-            var subfieldValue008m = subfield['value'];
             var matchValues = params.values;
             var excludedSubfields = params.excludedSubfields;
 
             // if matchValue exists
-            if (subfieldValue008m.match(/1|2/) ) {
+            if ((matchValues.indexOf("1") > -1) || (matchValues.indexOf("2") > -1)) {
                 // run through subfields in record to check if excluded subfield name exists
                 field.subfields.forEach(function (subfield) {
                 if (excludedSubfields.indexOf(subfield.name) > -1) {
