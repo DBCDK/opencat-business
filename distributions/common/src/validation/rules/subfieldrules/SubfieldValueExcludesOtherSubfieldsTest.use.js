@@ -50,8 +50,8 @@ UnitTest.addFixture( "SubfieldValueExcludesOtherSubfields.validateSubfield", fun
         }]
     };
 
-    params = {'values': ['1'], 'excludedSubfields': ['o']};
-    var errMsg2 = ResourceBundle.getStringFormat(bundle, "excluded.subfields", "1", "008", "o");
+    params = {'values': ['1','2'], 'excludedSubfields': ['o']};
+    var errMsg2 = ResourceBundle.getStringFormat(bundle, "excluded.subfields", ["1","2"], "008", "o");
     Assert.equalValue("2 SubfieldValueExcludesOtherSubfields.validateSubfield found excluded subfield o", SubfieldValueExcludesOtherSubfields.validateSubfield(record, field, subfield, params), [ValidateErrors.subfieldError("TODO:fixurl", errMsg2)]);
 
     subfield = {
@@ -69,12 +69,12 @@ UnitTest.addFixture( "SubfieldValueExcludesOtherSubfields.validateSubfield", fun
         }]
     };
 
-    params = {'values': ['3'], 'excludedSubfields': ['o']};
+    params = {'values': ['1','2'], 'excludedSubfields': ['o']};
     Assert.equalValue("3 SubfieldValueExcludesOtherSubfields.validateSubfield found no excluded subfields", SubfieldValueExcludesOtherSubfields.validateSubfield(record, field, subfield, params), []);
 
     subfield = {
-        'name': "m",
-        'value': '3'
+        'name': "o",
+        'value': 'b'
     };
 
     field = {

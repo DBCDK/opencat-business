@@ -46,7 +46,7 @@ var SubfieldValueExcludesOtherSubfields = function () {
             var excludedSubfields = params.excludedSubfields;
 
             // if matchValue exists
-            if ((matchValues.indexOf("1") > -1) || (matchValues.indexOf("2") > -1)) {
+            if (("1" === subfield.value || "2" === subfield.value )) {
                 // run through subfields in record to check if excluded subfield name exists
                 field.subfields.forEach(function (subfield) {
                 if (excludedSubfields.indexOf(subfield.name) > -1) {
