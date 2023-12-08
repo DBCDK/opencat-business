@@ -53,34 +53,6 @@
     }
   },
   {
-    "name": "008m2-with-childrens-material-code-record",
-    "description": "",
-    "request": {
-      "authentication": {
-        "group": "010100",
-        "user": "netpunkt",
-        "password": "20Koster"
-      },
-      "templateName": "dbcsingle",
-      "record": "request-008m2-and-008o.marc"
-    },
-    "expected": {
-      "validation": {
-        "errors": [
-          {
-            "type": "ERROR",
-            "code": null,
-            "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-            "ordinalPositionOfField": 2,
-            "ordinalPositionOfSubfield": 7,
-            "ordinalPositionInSubfield": null,
-            "message": "Værdien '1,2' må ikke forfindes sammen med delfelt '008*o'"
-          }
-        ]
-      }
-    }
-  },
-  {
     "name": "008m3-with-childrens-material-code-record",
     "description": "",
     "request": {
@@ -128,6 +100,34 @@
             "type": "ENRICHMENT",
             "deleted": false,
             "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "008m2-with-childrens-material-code-record",
+    "description": "",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request-008m2-and-008o.marc"
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
+            "ordinalPositionOfField": 2,
+            "ordinalPositionOfSubfield": 7,
+            "ordinalPositionInSubfield": null,
+            "message": "Værdien '1,2' må ikke forfindes sammen med delfelt '008*o'"
           }
         ]
       }
