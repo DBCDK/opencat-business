@@ -24,12 +24,13 @@ var SubfieldValueExcludesOtherSubfields = function () {
      * - excludedSubfields [Array] contains the list of subfields that are excluded on the record if a match is made with
      * the matchValues list
      *
+     * @param record The whole record to perform the validation on
      * @param field The field with the validation rule
      * @param subfield The subfield with the validation rule
      * @param params Contains the values to match and the excluded subfields
      * @returns {Array}
      */
-    function validateSubfield(field, subfield, params) {
+    function validateSubfield(record, field, subfield, params) {
         Log.trace("Enter SubfieldValueExcludesOtherSubfields.validateSubField");
         var result = [];
 
@@ -45,7 +46,7 @@ var SubfieldValueExcludesOtherSubfields = function () {
             var excludedSubfields = params.excludedSubfields;
 
             // if matchValue exists
-            if ((matchValues.indexOf("1") > -1) || (matchValues.indexOf("2") > -1)) {
+            if (("1" === subfield.value || "2" === subfield.value )) {
                 // run through subfields in record to check if excluded subfield name exists
                 field.subfields.forEach(function (subfield) {
                 if (excludedSubfields.indexOf(subfield.name) > -1) {

@@ -1,0 +1,10 @@
+001 00 *a 137529904 *b 191919 *c 20231206081407 *d 20231201 *f a
+004 00 *r n *a e
+d08 00 *f dra *a Forventet udgivelsesdato 05-12-2023 *o lukj *a Drømmetoget er med sto
+    rt "D" i løbende tekst
+d70 00 *b Publizon
+f21 00 *a http://service.dmat.dbc.dk/api/v1/content/faust/137529904 *l Publizon *f h
+    ttps://images.pubhub.dk/01/ec6d6328-a89d-4313-b4ef-963448379c02.jpg *a http:/
+    /samples.pubhub.dk/9788794491204.epub *n 9788794491204
+s12 00 *t TeamBMV202349
+z99 00 *a lukj
