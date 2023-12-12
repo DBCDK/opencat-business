@@ -4222,6 +4222,7 @@
                 "c":{},
                 "d":{},
                 "f":{},
+                "g":{},
                 "m":{},
                 "o":{
                     "repeatable":false
@@ -4236,6 +4237,9 @@
                 "v":{},
                 "x":{},
                 "z":{},
+                "\u00E6":{
+                    "repeatable": false
+                },
                 "2":{
                     "repeatable":false
                 },
