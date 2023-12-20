@@ -5,6 +5,14 @@
             "all"
         ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph boger",
+        "categoryDisplay": "PH Bøger",
+        "templateName": "bog",
+        "templateDisplay": "Enkeltstående post",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008d", "008l", "008x", "021e", "100h", "1004",
