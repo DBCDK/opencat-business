@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph boger",
+        "categoryDisplay": "PH Bøger",
+        "templateName": "bogbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "021e", "245g", "245a", "260c", "300a", "300b", "300d" ]
