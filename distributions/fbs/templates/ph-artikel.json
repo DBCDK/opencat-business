@@ -3,6 +3,14 @@
         "description":"Skabelon til optrettelse af artikelpost - alle materialetyper",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph artikler",
+        "categoryDisplay": "PH artikler",
+        "templateName": "ph-artikel",
+        "templateDisplay": "Artikel",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008d", "008r", "008l", "016a","300a", "557a", "557j", "557z", "557v", "557k",
