@@ -3,6 +3,14 @@
         "description":"Skabelon til katalogisering af periodica",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph periodikum",
+        "categoryDisplay": "PH periodikum",
+        "templateName": "ph-periodicum",
+        "templateDisplay": "Periodikum",
+        "templateIndex": 10
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008b", "008c", "008h", "008l", "022a",

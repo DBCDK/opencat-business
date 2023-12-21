@@ -3,6 +3,14 @@
         "description": "Skabelon til netpublikationer (alle materialetyper)- hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph e-boger",
+        "categoryDisplay": "PH e-bøger",
+        "templateName": "ph-netpubhoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "008n", "008x", "008w", "021e", "100h", "1004",

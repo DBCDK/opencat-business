@@ -3,6 +3,14 @@
         "description": "Generel skabelon til hovedpost - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph generel",
+        "categoryDisplay": "PH generel",
+        "templateName": "ph-generelhoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008l", "021e", "260a", "260b", "260c",
