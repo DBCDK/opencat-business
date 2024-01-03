@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af film på fysiske medier (dvd, blu-ray m.m.) - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph film",
+        "categoryDisplay": "Film",
+        "templateName": "ph-filmbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "023b", "245g", "245a", "300n" ]

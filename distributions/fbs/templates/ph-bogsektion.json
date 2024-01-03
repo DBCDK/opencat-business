@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - sektionspost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "bogsektion",
+        "templateDisplay": "Sektionspost",
+        "templateIndex": 40
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "245n", "245o", "245a", "260c", "300a", "300b" ]

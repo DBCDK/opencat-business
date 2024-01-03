@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af netpublikation (alle materialetyper) - bindpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph e-boger",
+        "categoryDisplay": "E-bøger",
+        "templateName": "ph-netpubbind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008d", "008j", "008l", "008n", "008x", "008w", "021e",

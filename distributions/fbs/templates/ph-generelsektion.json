@@ -3,6 +3,14 @@
         "description": "Generel skabelon til sektionspost - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph generel",
+        "categoryDisplay": "Generel",
+        "templateName": "ph-generelsektion",
+        "templateDisplay": "Sektionspost",
+        "templateIndex": 40
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "245n", "245o", "245a", "260c", "300a" ]

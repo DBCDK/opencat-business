@@ -3,6 +3,14 @@
         "description": "Skabelon til katalogisering af flerbindsværk af fysiske bøger - hovedpost.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ph boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "boghoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "settings": {
         "lookupfaust": true,
         "extrafields": [ "008a", "008b", "008d", "008l", "008x", "021e", "100h", "1004", "245c", "260a", "260b", "260c", "300a",
