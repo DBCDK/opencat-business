@@ -44,6 +44,8 @@ var Validator = function () {
                                 if (subResult !== undefined && subResult instanceof Array && subResult.length === 0) {
                                     return true;
                                 }
+                            } else {
+                                return false;
                             }
                         }
                     }
