@@ -6,7 +6,7 @@
     "templateValues": {
         "type": "common",
         "categoryName": "ph film",
-        "categoryDisplay": "PH film",
+        "categoryDisplay": "Film",
         "templateName": "ph-filmhoved",
         "templateDisplay": "Hovedpost",
         "templateIndex": 20

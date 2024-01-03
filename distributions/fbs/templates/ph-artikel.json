@@ -6,7 +6,7 @@
     "templateValues": {
         "type": "common",
         "categoryName": "ph artikler",
-        "categoryDisplay": "PH artikler",
+        "categoryDisplay": "Artikler",
         "templateName": "ph-artikel",
         "templateDisplay": "Artikel",
         "templateIndex": 10

@@ -6,7 +6,7 @@
     "templateValues": {
         "type": "common",
         "categoryName": "ph film",
-        "categoryDisplay": "PH film",
+        "categoryDisplay": "Film",
         "templateName": "ph-filmbind",
         "templateDisplay": "Bindpost",
         "templateIndex": 30

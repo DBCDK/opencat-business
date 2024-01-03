@@ -6,7 +6,7 @@
     "templateValues": {
         "type": "common",
         "categoryName": "ph boger",
-        "categoryDisplay": "PH Bøger",
+        "categoryDisplay": "Bøger",
         "templateName": "bogsektion",
         "templateDisplay": "Sektionspost",
         "templateIndex": 40
