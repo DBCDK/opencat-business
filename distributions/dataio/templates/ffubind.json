@@ -3,7 +3,14 @@
         "description":"Skabelon til optrettelse af ffu-bindpost - alle materialetyper.",
         "features": [ "all" ]
     },
-
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ffu boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "ffubind",
+        "templateDisplay": "Bindpost",
+        "templateIndex": 30
+    },
     "defaults":{
         "field":{
             "indicator":"00",

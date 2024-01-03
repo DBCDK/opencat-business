@@ -4,6 +4,14 @@
         "description":"Skabelon til optrettelse af ffu-singlepost - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ffu musik",
+        "categoryDisplay": "Musik",
+        "templateName": "ffumusik",
+        "templateDisplay": "Enkeltstående post",
+        "templateIndex": 10
+    },
     "defaults":{
         "field":{
             "indicator":"00",

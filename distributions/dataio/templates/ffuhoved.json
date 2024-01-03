@@ -3,6 +3,14 @@
         "description":"Skabelon til optrettelse af ffu-singlepost - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ffu boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "ffuhoved",
+        "templateDisplay": "Hovedpost",
+        "templateIndex": 20
+    },
     "defaults":{
         "field":{
             "indicator":"00",

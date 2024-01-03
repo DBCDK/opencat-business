@@ -7,7 +7,7 @@
         "type": "common",
         "categoryName": "ph boger",
         "categoryDisplay": "Bøger",
-        "templateName": "bogsektion",
+        "templateName": "ph-bogsektion",
         "templateDisplay": "Sektionspost",
         "templateIndex": 40
     },
