@@ -3,6 +3,14 @@
         "description":"Skabelon til optrettelse af ffu-sektionspost - alle materialetyper.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ffu boger",
+        "categoryDisplay": "Bøger",
+        "templateName": "ffusektion",
+        "templateDisplay": "Sektionspost",
+        "templateIndex": 40
+    },
     "defaults":{
         "field":{
             "indicator":"00",

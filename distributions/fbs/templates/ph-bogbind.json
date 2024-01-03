@@ -7,7 +7,7 @@
         "type": "common",
         "categoryName": "ph boger",
         "categoryDisplay": "Bøger",
-        "templateName": "bogbind",
+        "templateName": "ph-bogbind",
         "templateDisplay": "Bindpost",
         "templateIndex": 30
     },

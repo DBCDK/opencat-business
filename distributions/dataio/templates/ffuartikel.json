@@ -3,6 +3,14 @@
         "description":"Skabelon til optrettelse af ffu-artikelpost (periodicaartikel og artikel i bog",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ffu artikler",
+        "categoryDisplay": "Artikler",
+        "templateName": "ffuartikel",
+        "templateDisplay": "Artikel",
+        "templateIndex": 10
+    },
     "defaults":{
         "field":{
             "indicator":"00",

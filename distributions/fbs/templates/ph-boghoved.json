@@ -7,7 +7,7 @@
         "type": "common",
         "categoryName": "ph boger",
         "categoryDisplay": "Bøger",
-        "templateName": "boghoved",
+        "templateName": "ph-boghoved",
         "templateDisplay": "Hovedpost",
         "templateIndex": 20
     },

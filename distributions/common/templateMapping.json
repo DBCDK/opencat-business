@@ -20,7 +20,16 @@
     "lokal": 70,
     "generel": 80
   },
-  "fbiCategories": ["boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre", "lokal", "lokalbib", "generel", "paahaeng", "sbci" ],
+  "fbiCategories": [
+    "boger", "eboger", "lydboger", "elydboger", "film", "musik", "node", "andre",
+    "lokal",
+    "lokalbib",
+    "generel",
+    "paahaeng",
+    "sbci",
+    "ph artikler", "ph boger", "ph eboger", "ph film", "ph musik", "ph periodika", "ph generel",
+    "ffu artikler", "ffu boger", "ffu musik", "ffu periodika"
+  ],
   "templateGroups": {
     "DBC": {
       "templates": [
