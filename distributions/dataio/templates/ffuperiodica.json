@@ -3,6 +3,14 @@
         "description":"Skabelon til periodicaposter fra ffu-biblioteker.",
         "features": [ "all" ]
     },
+    "templateValues": {
+        "type": "common",
+        "categoryName": "ffu periodika",
+        "categoryDisplay": "Periodika",
+        "templateName": "ffuperiodica",
+        "templateDisplay": "Periodikum",
+        "templateIndex": 10
+    },
     "defaults":{
         "field":{
             "indicator":"00",
