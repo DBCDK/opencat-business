@@ -3614,6 +3614,25 @@
                 "c":{}
             }
         },
+        "664":{
+            "subfields":{
+                "n": {
+                    "repeatable": false
+                },
+                "e": {
+                    "repeatable": false
+                },
+                "s": {
+                    "repeatable": false
+                },
+                "u": {
+                    "repeatable": false
+                },
+                "y": {
+                    "repeatable": false
+                }
+            }
+        },
         "665":{
             "subfields":{
                 "a": {},
