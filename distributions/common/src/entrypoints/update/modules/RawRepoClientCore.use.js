@@ -76,10 +76,14 @@ var RawRepoClientCore = function () {
         try {
             for (var i = 0; i < javaRecord.getFields().size(); i++) {
                 var recField = javaRecord.getFields().get(i);
-                var field = new Field(recField.getName().toString() + '', recField.getIndicator().toString() + '');
-                for (var k = 0; k < recField.getSubfields().size(); k++) {
-                    var subfield = recField.getSubfields().get(k);
-                    field.append(new Subfield(subfield.getName().toString() + '', subfield.getValue().toString() + ''));
+                var field = new Field(recField.getTag().toString() + '',
+                    (recField.getInd1() === null ? '' : recField.getInd1().toString()) + '' +
+                    (recField.getInd2() === null ? '' : recField.getInd2().toString()) + '' +
+                    (recField.getInd3() === null ? '' : recField.getInd3().toString()) + '');
+                recField.g
+                for (var k = 0; k < recField.getSubFields().size(); k++) {
+                    var subfield = recField.getSubFields().get(k);
+                    field.append(new Subfield(subfield.getCode().toString() + '', subfield.getData().toString() + ''));
                 }
                 result.append(field);
             }

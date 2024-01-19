@@ -1,15 +1,13 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
 
 package dk.dbc.opencat.rest;
 
-import dk.dbc.common.records.MarcConverter;
-import dk.dbc.common.records.MarcRecord;
+import dk.dbc.common.records.RecordContentTransformer;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.MDCUtil;
 import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
+import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.transformation.MetaCompassHandler;
 import dk.dbc.opencat.transformation.PreProcessingHandler;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
@@ -21,16 +19,15 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.w3c.dom.Document;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.Stateless;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -38,7 +35,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import static dk.dbc.opencat.MDCUtil.MDC_TRACKING_ID_LOG_CONTEXT;
 
@@ -82,9 +79,12 @@ public class TransformationService {
         try {
             MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "preProcess"));
             LOGGER.debug("preProcess incoming request: {}", recordRequestDTO);
-            final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
+            /* TODO THERE ARE ROTTEN THINGS HERE */
+            // TODO MYRDE final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
+            final MarcRecord record = RecordContentTransformer.decodeRecord(recordRequestDTO.getRecord().getBytes(StandardCharsets.UTF_8));
             preProcessingHandler.preProcess(record);
-            final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(record));
+            // TODO MYRDE final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(record));
+            final String recordAsString = record.getFields().toString();
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
             LOGGER.debug("preProcess result: {}", recordResponseDTO);
@@ -93,7 +93,7 @@ public class TransformationService {
         } catch (OpenCatException e) {
             LOGGER.error("Validation error in preProcess.", e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).type(MediaType.TEXT_PLAIN).build();
-        } catch (RecordServiceConnectorException | UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
+        } catch (Exception e) {
             LOGGER.error("Error in preProcess.", e);
             return Response.serverError().build();
         } finally {
@@ -110,9 +110,14 @@ public class TransformationService {
         try {
             MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "metacompass"));
             LOGGER.debug("metaCompass incoming request: {}", recordRequestDTO);
-            final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
+            /* TODO THERE ARE ROTTEN THINGS HERE */
+            // AT MYRDE final MarcRecord record = MarcConverter.convertFromMarcXChange(recordRequestDTO.getRecord());
+            final MarcRecord record = RecordContentTransformer.decodeRecord(recordRequestDTO.getRecord().getBytes(StandardCharsets.UTF_8));
+            LOGGER.debug("WAKKA {}", record.toString());
             final MarcRecord result = metaCompassHandler.enrichMetaCompassRecord(record);
-            final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(result));
+            // TODO MYRDE final String recordAsString = convertDocumentToString(MarcConverter.convertToMarcXChangeAsDocument(result));
+            final String recordAsString = record.getFields().toString();
+            LOGGER.debug("WUKKA {}", recordAsString);
             final RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(recordAsString);
 
@@ -121,7 +126,7 @@ public class TransformationService {
         } catch (OpenCatException e) {
             LOGGER.error("Validation error in metaCompass.", e);
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).type(MediaType.TEXT_PLAIN).build();
-        } catch (RecordServiceConnectorException | UnsupportedEncodingException | JAXBException | ParserConfigurationException | TransformerException e) {
+        } catch (MarcReaderException | ScripterException | RecordServiceConnectorException e) {
             LOGGER.error("Error in metaCompass.", e);
             return Response.serverError().build();
         } finally {

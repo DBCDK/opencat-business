@@ -1,15 +1,11 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
 
 package dk.dbc.opencat.javascript;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 
 /**
  * Scripter EJB to execute a JavaScript function and returns the result from

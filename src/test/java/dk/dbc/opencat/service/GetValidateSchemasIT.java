@@ -1,13 +1,13 @@
 package dk.dbc.opencat.service;
 
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.GetValidateSchemasRequestDTO;
 import dk.dbc.updateservice.dto.SchemaDTO;
 import java.util.Arrays;
 import java.util.HashSet;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -26,7 +26,7 @@ public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(getValidateSchemasRequestDTO));
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         SchemaDTO[] actual = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), SchemaDTO[].class);
         assertThat("Response code", response.getStatus(), is(200));
         SchemaDTO[] expected = JSONB_CONTEXT.unmarshall(getExpectedResult(), SchemaDTO[].class);

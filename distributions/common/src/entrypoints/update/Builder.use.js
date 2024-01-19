@@ -219,16 +219,44 @@ var Builder = function() {
         return newSubfields;
     }
 
+    function createBasicField(fieldName, indicator) {
+        Log.info("FI " + fieldName);
+        Log.info("IN " + indicator);
+        Log.info("INS " + indicator.length);
+        if (indicator.length === 0) {
+            var field = {
+                "name": fieldName,
+                "subfields": []
+            };
+            return field;
+        }
+        if (indicator.length === 1) {
+            var field = {
+                "name": fieldName,
+                "ind1": indicator[0],
+                "subfields": []
+            };
+            return field;
+        }
+        if (indicator.length === 2) {
+            var field = {
+                "name": fieldName,
+                "subfields": [],
+                "ind1": indicator[0],
+                "ind2": indicator[1]
+            };
+            return field;
+        }
+
+    }
+
     // buildField constructs a single field using the field name given as a parameter.
     function buildField(template, fieldName, faustProvider, extraFields) {
         Log.trace("-> buildField");
         var mandatorySubfields = getMandatorySubfieldsFromUnoptimizedTemplate(template, fieldName);
         var indicator = getIndicatorFromUnoptimizedTemplate(template);
-        var field = {
-            "name": fieldName,
-            "indicator": indicator,
-            "subfields": []
-        };
+        var field = createBasicField(fieldName, indicator);
+        Log.info("WAKKA " + field);
         var alreadyAddedSubfields = [];
         var tmpSubfields = getSubfieldsFromExtraFields(fieldName, extraFields);
         if (mandatorySubfields.length > 0 || tmpSubfields.length > 0) {

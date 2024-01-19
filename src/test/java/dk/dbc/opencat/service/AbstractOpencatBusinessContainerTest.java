@@ -3,8 +3,8 @@ package dk.dbc.opencat.service;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.common.SingleRootFileSource;
+import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.httpclient.HttpClient;
-import dk.dbc.jsonb.JSONBContext;
 import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.marc.reader.MarcXchangeV1Reader;
@@ -33,7 +33,7 @@ import java.util.List;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 public class AbstractOpencatBusinessContainerTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(AbstractOpencatBusinessContainerTest.class);
     static final String MIMETYPE_MARCXCHANGE = "text/marcxchange";
     static final String MIMETYPE_ENRICHMENT = " text/enrichment+marcxchange";
 
@@ -99,7 +99,7 @@ public class AbstractOpencatBusinessContainerTest {
 
             httpClient = HttpClient.create(HttpClient.newClient());
         } catch (RuntimeException e) {
-            LOGGER.error("ARRRG", e);
+            LOGGER.error("Something went wrong : ", e);
             throw e;
         }
     }

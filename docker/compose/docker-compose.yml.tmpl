@@ -80,7 +80,7 @@ services:
       - SOLR_URL=${DEV_SOLR_URL}
       - JAVA_MAX_HEAP_SIZE=2G
     volumes:
-      - "../../distributions:/opt/payara5/deployments/opencat-business/distributions"
+      - "../../distributions:/opt/payara6/deployments/opencat-business/distributions"
     extra_hosts:
       - "solrserver:${HOST_IP}"
     ports:

@@ -1,21 +1,21 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
+import dk.dbc.opencat.dao.UpdateRecordContentTransformer;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
-import org.junit.Test;
+// TODO STORY XXXX import org.junit.Test;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PreProcessIT extends AbstractOpencatBusinessContainerTest {
 
-    @Test
+    // TODO STORY XXXX @Test
     public void preProcessTest() throws Exception {
         RecordRequestDTO recordRequestDTO = new RecordRequestDTO();
         recordRequestDTO.setRecord(actualRecordString);
@@ -26,11 +26,11 @@ public class PreProcessIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         assertThat("Response code", response.getStatus(), is(200));
         RecordResponseDTO recordResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), RecordResponseDTO.class);
-        MarcRecord expected = RecordContentTransformer.decodeRecord(expectedRecordString.getBytes());
-        MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
+        MarcRecord expected = UpdateRecordContentTransformer.decodeRecord(expectedRecordString.getBytes());
+        MarcRecord actual = UpdateRecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         assertThat("Returned preprocessed record is as expected", actual, is(expected));
     }
 

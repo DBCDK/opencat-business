@@ -1,14 +1,14 @@
 package dk.dbc.opencat.service;
 
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendDTO;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import java.sql.Connection;
 import java.util.Collections;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -170,7 +170,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
 
         DoubleRecordFrontendStatusDTO actual =
                 JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DoubleRecordFrontendStatusDTO.class);
@@ -209,7 +209,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
         doubleRecordFrontendDTO.setPid("52958857:870970");
         expected.setDoubleRecordFrontendDTOs(Collections.singletonList(doubleRecordFrontendDTO));
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         assertThat("Response code", response.getStatus(), is(200));
 
         DoubleRecordFrontendStatusDTO actual =

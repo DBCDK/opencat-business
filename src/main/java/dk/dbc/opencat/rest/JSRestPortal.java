@@ -1,11 +1,12 @@
 package dk.dbc.opencat.rest;
 
-import dk.dbc.common.records.MarcField;
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.commons.jsonb.JSONBException;
+import dk.dbc.marc.reader.JsonReader;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.MDCUtil;
+import dk.dbc.opencat.dao.UpdateRecordContentTransformer;
 import dk.dbc.opencat.javascript.ScripterEnvironment;
 import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
@@ -28,16 +29,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBException;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.JAXBException;
+
+import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
@@ -84,7 +87,7 @@ public class JSRestPortal {
             sanityCheck(result, MessageEntryDTO[].class);
             LOGGER.debug("validateRecord result:{}", result);
             return Response.ok().entity(result).build();
-        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
+        } catch (ScripterException | JSONBException | InterruptedException e) {
             LOGGER.error("Error in validateRecord.", e);
             return Response.serverError().build();
 
@@ -116,7 +119,7 @@ public class JSRestPortal {
                     settings);
 
             return Response.ok().build();
-        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
+        } catch (ScripterException | JSONBException | InterruptedException e) {
             LOGGER.error("checkDoubleRecord error", e);
             return Response.serverError().build();
         } finally {
@@ -150,7 +153,7 @@ public class JSRestPortal {
             LOGGER.debug("checkDoubleRecordFrontend result:{}", result);
 
             return Response.ok().entity(result).build();
-        } catch (ScripterException | JSONBException | InterruptedException | UnsupportedEncodingException e) {
+        } catch (ScripterException | JSONBException | InterruptedException e) {
             LOGGER.error("checkDoubleRecordFrontend error", e);
             return Response.serverError().build();
         } finally {
@@ -221,7 +224,7 @@ public class JSRestPortal {
             recordResponseDTO.setRecord(resultMarcXChange);
             LOGGER.debug("doRecategorizationThings result:{}", recordResponseDTO);
             return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
-        } catch (InterruptedException | ScripterException | JSONBException | UnsupportedEncodingException | JAXBException e) {
+        } catch (InterruptedException | ScripterException | JSONBException | JAXBException e) {
             LOGGER.error("doRecategorizationThings", e);
             return Response.serverError().build();
         } finally {
@@ -251,11 +254,11 @@ public class JSRestPortal {
             LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
                     marcXMLtoJson(recordRequestDTO.getRecord()));
-            sanityCheck(result, MarcField.class);
+            // TODO STORY XXXX sanityCheck(result, DataField.class);
             LOGGER.debug("recategorizationNoteFieldFactory result:{}", result);
             return Response.ok().entity(result).build();
 
-        } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException e) {
+        } catch (InterruptedException | JSONBException | ScripterException e) {
             LOGGER.error("recategorizationNoteFieldFactory", e);
             return Response.serverError().build();
         } finally {
@@ -324,13 +327,15 @@ public class JSRestPortal {
                     buildRecordRequestDTO.getTemplateName(),
                     record,
                     settings);
+            LOGGER.debug("buildRecord result:{}", result);
             marcXml = marcJsonToMarcXml(result);
             RecordResponseDTO recordResponseDTO = new RecordResponseDTO();
             recordResponseDTO.setRecord(marcXml);
+            // TODO her er råddent
             LOGGER.debug("buildRecord result:{}", recordResponseDTO);
             return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
 
-        } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
+        } catch (InterruptedException | JSONBException | ScripterException | JAXBException e) {
             LOGGER.error("buildRecord", e);
             return Response.serverError().build();
         } finally {
@@ -367,7 +372,7 @@ public class JSRestPortal {
             recordResponseDTO.setRecord(marcXml);
             LOGGER.debug("sortRecord result:{}", recordResponseDTO);
             return Response.ok().entity(jsonbContext.marshall(recordResponseDTO)).build();
-        } catch (InterruptedException | UnsupportedEncodingException | JSONBException | ScripterException | JAXBException e) {
+        } catch (InterruptedException | JSONBException | ScripterException | JAXBException e) {
             LOGGER.error("sortRecord", e);
             return Response.serverError().build();
         } finally {
@@ -414,7 +419,7 @@ public class JSRestPortal {
         }
     }
 
-    private String marcXMLtoJson(String marcxml) throws UnsupportedEncodingException, JSONBException {
+    private String marcXMLtoJson(String marcxml) throws ScripterException, JSONBException {
         final String marcToConvert;
         if (marcxml == null || marcxml.isEmpty()) {
             marcToConvert = "<?xml version=\"1.0\" encoding=\"UTF-16\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1\">" +
@@ -423,7 +428,7 @@ public class JSRestPortal {
             marcToConvert = marcxml;
         }
 
-        final MarcRecord marcRecord = RecordContentTransformer.decodeRecord(marcToConvert.getBytes(StandardCharsets.UTF_8));
+        final MarcRecord marcRecord = UpdateRecordContentTransformer.decodeRecord(marcToConvert.getBytes(StandardCharsets.UTF_8));
         return jsonbContext.marshall(marcRecord);
     }
 
@@ -431,8 +436,19 @@ public class JSRestPortal {
         jsonbContext.unmarshall(objectAsJson, t);
     }
 
-    private String marcJsonToMarcXml(String marcJson) throws JSONBException, JAXBException, UnsupportedEncodingException {
+    private ByteArrayInputStream toStream(String s) {
+        return new ByteArrayInputStream(s.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private String marcJsonToMarcXmla(String marcJson) throws JSONBException, JAXBException, MarcReaderException {
+        LOGGER.debug("INDI {}", marcJson);
+        JsonReader reader = new JsonReader(toStream(marcJson));
+        MarcRecord mm = reader.read();
+        LOGGER.debug("JUHUU {}", mm.getFields().toString());
+        return mm.getFields().toString();
+    }
+    private String marcJsonToMarcXml(String marcJson) throws JSONBException, JAXBException {
         MarcRecord resultMarcRecord = jsonbContext.unmarshall(marcJson, MarcRecord.class);
-        return new String(RecordContentTransformer.encodeRecord(resultMarcRecord), StandardCharsets.UTF_8);
+        return new String(UpdateRecordContentTransformer.encodeRecord(resultMarcRecord), StandardCharsets.UTF_8);
     }
 }

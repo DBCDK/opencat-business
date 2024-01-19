@@ -12,8 +12,8 @@ import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
-import javax.ejb.Singleton;
-import javax.inject.Inject;
+import jakarta.ejb.Singleton;
+import jakarta.inject.Inject;
 
 /**
  * EJB to access the OpenAgency web service.

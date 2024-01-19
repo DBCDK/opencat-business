@@ -1,9 +1,9 @@
 package dk.dbc.opencat.service;
 
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildResponseDTO;
@@ -26,7 +26,7 @@ public class CheckTemplateBuildIT extends AbstractOpencatBusinessContainerTest {
                 .withJsonData(JSONB_CONTEXT.marshall(checkTemplateBuildRequestDTO));
 
 
-        final Response response = httpClient.execute(httpPost);
+        Response response = httpClient.execute(httpPost);
         assertThat("Response code", response.getStatus(), is(200));
         final CheckTemplateBuildResponseDTO checkTemplateBuildResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), CheckTemplateBuildResponseDTO.class);
         assertThat("Template exists", checkTemplateBuildResponseDTO.isResult(), is(true));
@@ -43,7 +43,7 @@ public class CheckTemplateBuildIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(checkTemplateBuildRequestDTO));
 
-        final Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         assertThat("Response code", response.getStatus(), is(200));
         final CheckTemplateBuildResponseDTO checkTemplateBuildResponseDTO = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), CheckTemplateBuildResponseDTO.class);
         assertThat("Template exists", checkTemplateBuildResponseDTO.isResult(), is(false));

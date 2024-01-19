@@ -1,14 +1,15 @@
 package dk.dbc.opencat.service;
 
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.updateservice.dto.TypeEnumDTO;
 import java.sql.Connection;
 import java.util.Arrays;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
+import org.glassfish.jersey.message.internal.OutboundJaxrsResponse;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -170,7 +171,7 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(validateRecordRequestDTO));
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         assertThat("Response code", response.getStatus(), is(200));
 
         MessageEntryDTO[] actual =
@@ -178,10 +179,7 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
         assertThat("List of messages is empty", actual.length, is(0));
     }
 
-    @Test
-    public void validateRecord_returns_changed_004_subfield() throws JSONBException {
-        ValidateRecordRequestDTO validateRecordRequestDTO = new ValidateRecordRequestDTO();
-        validateRecordRequestDTO.setTemplateName("dbcsingle");
+    private String validateRecord_returns_changed_004_subfield_testRec() {
         String record = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
                 "    <leader>00000     22000000 4500 </leader>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
@@ -313,7 +311,14 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                 "        <subfield code=\"a\">DBC</subfield>\n" +
                 "    </datafield>\n" +
                 "</record>\n";
+        return record;
+    }
 
+    @Test
+    public void validateRecord_returns_changed_004_subfield() throws JSONBException {
+        String record = validateRecord_returns_changed_004_subfield_testRec();
+        ValidateRecordRequestDTO validateRecordRequestDTO = new ValidateRecordRequestDTO();
+        validateRecordRequestDTO.setTemplateName("dbcsingle");
         validateRecordRequestDTO.setRecord(record);
 
         final HttpPost httpPost = new HttpPost(httpClient)
@@ -322,11 +327,14 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(validateRecordRequestDTO));
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         assertThat("Response code", response.getStatus(), is(200));
 
+        // TODO Hmmmmmmmm
+        String wombat = response.readEntity(String.class);
         MessageEntryDTO[] actual =
-                JSONB_CONTEXT.unmarshall(response.readEntity(String.class), MessageEntryDTO[].class);
+                JSONB_CONTEXT.unmarshall(wombat, MessageEntryDTO[].class);
+        // JSONB_CONTEXT.unmarshall(response.readEntity(String.class), MessageEntryDTO[].class);
         assertThat("List of messages is one", actual.length, is(1));
 
         MessageEntryDTO expected = new MessageEntryDTO();
@@ -351,7 +359,7 @@ public class ValidateRecordIT extends AbstractOpencatBusinessContainerTest {
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(validateRecordRequestDTO));
 
-        final Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
         assertThat("Response code", response.getStatus(), is(200));
 
         final MessageEntryDTO[] actual =

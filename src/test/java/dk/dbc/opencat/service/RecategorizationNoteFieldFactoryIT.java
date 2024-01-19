@@ -1,13 +1,10 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcField;
-import dk.dbc.common.records.MarcSubField;
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
 
-import java.util.Arrays;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import org.junit.Test;
@@ -27,20 +24,19 @@ public class RecategorizationNoteFieldFactoryIT extends AbstractOpencatBusinessC
                 .withPathElements(new PathBuilder("/api/v1/recategorizationNoteFieldFactory")
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
-        MarcField expected = new MarcField();
-        expected.setName("512");
-        expected.setIndicator("00");
-        expected.setSubfields(Arrays.asList(
-                new MarcSubField("i", "Materialet er opstillet under"),
-                new MarcSubField("d", "Powell, Eric"),
-                new MarcSubField("t", "The ¤Goon, nothin' but misery"),
-                new MarcSubField("b", "# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
+        String expectedField = "{\"name\":\"512\",\"indicator\":\"00\"," +
+                "\"subfields\":[" +
+                "{\"name\":\"i\",\"value\":\"Materialet er opstillet under\"}," +
+                "{\"name\":\"d\",\"value\":\"Powell, Eric\"}," +
+                "{\"name\":\"t\",\"value\":\"The ¤Goon, nothin' but misery\"}," +
+                "{\"name\":\"b\",\"value\":\"# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering\"}" +
+                "]}";
 
-        Response response = httpClient.execute(httpPost);
+        Response response = httpPost.execute();
 
         assertThat("Response code", response.getStatus(), is(200));
-        MarcField actual = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), MarcField.class);
-        assertThat("Marcfield is returned properly", actual, is(expected));
+        String actual = response.readEntity(String.class);
+        assertThat("Marcfield is returned properly", actual, is(expectedField));
 
     }
 

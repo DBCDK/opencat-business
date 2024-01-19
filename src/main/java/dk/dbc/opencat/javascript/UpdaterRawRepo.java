@@ -1,12 +1,8 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
 
 package dk.dbc.opencat.javascript;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.opencat.dao.UpdateRecordContentTransformer;
 import dk.dbc.rawrepo.dto.RecordCollectionDTOv2;
 import dk.dbc.rawrepo.dto.RecordDTO;
 import dk.dbc.rawrepo.dto.RecordIdDTO;
@@ -63,7 +59,7 @@ public class UpdaterRawRepo {
      * @throws RecordServiceConnectorException RecordServiceConnectorException
      * @throws UnsupportedEncodingException    UnsupportedEncodingException
      */
-    public static MarcRecord fetchRecord(String recordId, String libraryNo) throws UnsupportedEncodingException, RecordServiceConnectorException {
+    public static MarcRecord fetchRecord(String recordId, String libraryNo) throws Exception {
         logger.entry(recordId, libraryNo);
         final StopWatch watch = new Log4JStopWatch("rawrepo.fetchRecord");
         final MarcRecord result;
@@ -71,7 +67,7 @@ public class UpdaterRawRepo {
             RecordServiceConnector.Params params = new RecordServiceConnector.Params();
             params.withMode(RecordServiceConnector.Params.Mode.RAW);
             final byte[] content = recordServiceConnector.getRecordContent(Integer.parseInt(libraryNo), recordId, params);
-            result = RecordContentTransformer.decodeRecord(content);
+            result = UpdateRecordContentTransformer.decodeRecord(content);
         } else {
             result = new MarcRecord();
         }
@@ -89,7 +85,7 @@ public class UpdaterRawRepo {
      * @throws UnsupportedEncodingException    UnsupportedEncodingException
      * @throws RecordServiceConnectorException RecordServiceConnectorException
      */
-    public static List<MarcRecord> getRelationsChildren(String bibliographicRecordId, String agencyId) throws RecordServiceConnectorException, UnsupportedEncodingException {
+    public static List<MarcRecord> getRelationsChildren(String bibliographicRecordId, String agencyId) throws Exception {
         logger.entry(bibliographicRecordId, agencyId);
         final StopWatch watch = new Log4JStopWatch("rawrepo.getRelationsChildren");
         final List<RecordIdDTO> recordIds = Arrays.asList(recordServiceConnector.getRecordChildren(agencyId, bibliographicRecordId));
@@ -97,7 +93,7 @@ public class UpdaterRawRepo {
 
         final RecordCollectionDTOv2 recordCollectionDTO = recordServiceConnector.fetchRecordList(recordIds);
         for (RecordDTO recordDTO : recordCollectionDTO.getFound()) {
-            children.add(RecordContentTransformer.decodeRecord(recordDTO.getContent()));
+            children.add(UpdateRecordContentTransformer.decodeRecord(recordDTO.getContent()));
         }
 
         watch.stop();

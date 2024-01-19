@@ -1,6 +1,6 @@
-FROM docker-dbc.artifacts.dbccloud.dk/payara5-micro:latest
+FROM docker-dbc.artifacts.dbccloud.dk/payara6-micro:latest
 
-ENV JAVASCRIPT_BASEDIR /opt/payara5/deployments/opencat-business
+ENV JAVASCRIPT_BASEDIR /opt/payara6/deployments/opencat-business
 ENV JAVASCRIPT_POOL_SIZE 1
 
 ENV VIPCORE_ENDPOINT http://vipcore.iscrum-vip-extern-test.svc.cloud.dbc.dk
