@@ -205,6 +205,7 @@
                 "e": "DanMarc2.fields.041.subfields.e",
                 "p": "DanMarc2.fields.041.subfields.p",
                 "s": "DanMarc2.fields.041.subfields.s",
+                "u": "DanMarc2.fields.041.subfields.u",
                 "2": "DanMarc2.fields.041.subfields.2"
             },
             "rules": [{
@@ -742,6 +743,17 @@
                 "i": "DanMarc2.fields.910.subfields.i",
                 "k": "DanMarc2.fields.910.subfields.k",
                 "j": "DanMarc2.fields.910.subfields.j",
+                "w":{
+                    "repeatable":false,
+                    "rules":[ {
+                        "type": "SubfieldRules.subfieldAllowedIfSubfieldValueInOtherFieldExists",
+                        "params": {
+                            "field": "996",
+                            "subfield": "a",
+                            "values": [ "DBC" ]
+                        }
+                    }]
+                },
                 "x": "DanMarc2.fields.910.subfields.x",
                 "z":{
                     "mandatory":true,
