@@ -11,7 +11,11 @@ import dk.dbc.common.records.MarcRecordFactory;
 import dk.dbc.common.records.MarcRecordWriter;
 import dk.dbc.common.records.MarcSubField;
 import dk.dbc.common.records.utils.IOUtils;
+import dk.dbc.opencat.dao.RecordService;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +24,34 @@ import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.when;
 
 public class MetaCompassHandlerTest {
+
+    @Mock
+    RecordService recordService;
+
+    @Before
+    public void before() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testEnrichMetaCompassRecord_NoExistingFields() throws Exception {
+        final String bibliographicRecordId = "134798769";
+        final int agencyId = 870970;
+        final MarcRecord existing = loadRecord("enrich-metacompass-1-existing.marc");
+        final MarcRecord expected = loadRecord("enrich-metacompass-1-expected.marc");
+        final MarcRecord input = loadRecord("enrich-metacompass-1-input.marc");
+
+        final MetaCompassHandler metaCompassHandler = new MetaCompassHandler(recordService);
+        when(recordService.recordExists(bibliographicRecordId, agencyId)).thenReturn(true);
+        when(recordService.fetchMergedDBCRecord(bibliographicRecordId, RecordService.DBC_ENRICHMENT)).thenReturn(existing);
+
+        final MarcRecord actual = metaCompassHandler.enrichMetaCompassRecord(input);
+
+        assertThat(actual, is(expected));
+    }
 
     @Test
     public void testMetaCompassCopy_New() throws Exception {

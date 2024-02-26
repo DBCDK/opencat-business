@@ -56,8 +56,18 @@ public class MetaCompassHandler {
         }
         final MarcRecord fullMetakompassRecord = recordService.fetchMergedDBCRecord(reader.getRecordId(), RecordService.DBC_ENRICHMENT);
         final MarcRecordWriter fullMetakompassRecordWriter = new MarcRecordWriter(fullMetakompassRecord);
-        fullMetakompassRecordWriter.removeField("665");
-        fullMetakompassRecord.getFields().addAll(reader.getFieldAll("665"));
+
+        final List<MarcField> fields664 = reader.getFieldAll("664");
+        final List<MarcField> fields665 = reader.getFieldAll("665");
+
+        if (!fields664.isEmpty()) {
+            fullMetakompassRecordWriter.removeField("664");
+            fullMetakompassRecord.getFields().addAll(fields664);
+        }
+        if (!fields665.isEmpty()) {
+            fullMetakompassRecordWriter.removeField("665");
+            fullMetakompassRecord.getFields().addAll(fields665);
+        }
 
         boolean hasAdded666Subfield = false;
         /*

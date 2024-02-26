@@ -1,0 +1,53 @@
+001 00 *a 134798769 *b 870970 *c 20240208105138 *d 20221017 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2022 *b dk *d x *j f *l dan *o b *v 0
+009 00 *a a *g xx
+021 00 *e 9788740689136 *c ib.
+032 00 *x ACC202242 *a DBF202248 *x BKM202248
+100 00 *5 870979 *6 19208036 *4 aut
+245 00 *a Ester Lemlæster og hendes frygtløse veninde Alberte Smerte
+250 00 *a 1. udgave *b ÷
+260 00 *& 1 *a [Ꜳrhus] *b Turbine *c 2022
+300 00 *a 78 sider *b ill.
+504 00 *& 1 *a Kan et nyt navn gøre Ester mere modig? Da lynet slår ned, er Ester
+    ikke mere den artige pige, for nu er hun Ester Lemlæster! Herlig højtlæsnin
+    g om mod for 6-10-årige og til selvlæsning fra 8 år
+517 00 *& 1 *a Højtlæsning fra 6 år. Selvlæsning fra 8 år
+520 00 *& 1 *a Originaludgave: 2022
+521 00 *b 1. oplag *c 2022
+652 00 *n 86 *z 096
+652 00 *o sk
+664 00 *s let/svær *y 3
+664 00 *u virkelig/fantasi *y 3
+664 00 *s tekst/tegninger *y 1
+664 00 *s kort/lang *y 4
+664 00 *n rar *y 5
+664 00 *n sjov *y 3
+664 00 *n spændende *y 3
+664 00 *n tankevækkende *y 3
+664 00 *e dyr *y 4
+664 00 *e venskaber *y 4
+664 00 *e skæve karakterer *y 2
+664 00 *e action *y 2
+666 00 *s mod
+666 00 *s lig
+666 00 *s skeletter
+666 00 *s lyn
+666 00 *s piger
+666 00 *s veninder
+666 00 *o romaner
+666 00 *u for 6 år
+666 00 *u for 7 år
+666 00 *u for 8 år
+666 00 *u for 9 år
+666 00 *u for 10 år
+666 00 *u for højtlæsning
+700 00 *5 870979 *6 69080030 *4 ill
+990 00 *b l *b b *b s *u nt
+996 00 *a DBC
+d08 00 *f jdy *o lukj *k ahf *r pml *a 666s knogler sl.+ lynnedslag ændret til lyn/20224
+    6 *r anro *a ill ændret fra 720 til 700
+s12 00 *t TeamBMV202245
+z98 00 *a Minus korrekturprint
+z99 00 *a anro
+$
