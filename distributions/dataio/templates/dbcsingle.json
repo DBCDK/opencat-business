@@ -110,21 +110,8 @@
                     "repeatable": false,
 					"values": [ "870970" ]
                 },
-                "c": {
-                    "mandatory": true,
-                    "repeatable": false
-                },
-                "d": {
-                    "mandatory": true,
-                    "repeatable": false,
-                    "rules": [{
-                            "type": "SubfieldRules.checkLength",
-                            "params": {
-                                "min": 8
-                            }
-                        }
-                    ]
-                },
+                "c": "DanMarc2.fields.001.subfields.c",
+                "d": "DanMarc2.fields.001.subfields.d",
                 "f": "DanMarc2.fields.001.subfields.f",
                 "g": "DanMarc2.fields.001.subfields.g",
                 "o": "DanMarc2.fields.001.subfields.o"
