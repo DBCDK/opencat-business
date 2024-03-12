@@ -60,8 +60,37 @@
                     "repeatable": false,
 					"values": [ "870970", "870971" ]
                 },
-                "c": "DanMarc2.fields.001.subfields.c",
-                "d": "DanMarc2.fields.001.subfields.d",
+                "c": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": true
+                            }
+                        }
+                    ]
+                },
+                "d": {
+                    "mandatory": true,
+                    "repeatable": false,
+                    "rules": [
+                        {
+                            "type": "SubfieldRules.checkLength",
+                            "params": {
+                                "min": 8,
+                                "max": 8
+                            }
+                        },
+                        {
+                            "type": "SubfieldRules.checkDateFormat",
+                            "params": {
+                                "allowLong": false
+                            }
+                        }
+                    ]
+                },
                 "f": "DanMarc2.fields.001.subfields.f",
                 "g": "DanMarc2.fields.001.subfields.g",
                 "o": "DanMarc2.fields.001.subfields.o"
