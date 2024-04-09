@@ -94,7 +94,7 @@ public class PreProcessingHandler {
      * Rule:
      * Must be a 870790 record
      * The record is not a volume or section record
-     * It is a e-book
+     * It is an e-book
      * The record is not already marked as an e-book
      * <p>
      * If the conditions are not met or 008 *w1 already exists then nothing is done to the record
@@ -126,12 +126,12 @@ public class PreProcessingHandler {
     }
 
     /**
-     * When a record is created the specific type of edition is set in 008*u. However when the record is updated 008*u
+     * When a record is created the specific type of edition is set in 008*u. However, when the record is updated 008*u
      * can be set to the value 'r' which means updated. When the existing record is either a first edition or new edition that
      * indicator must remain visible on the record. This is done by adding 008*&.
      * <p>
      * Rule:
-     * Must be a 870970 record
+     * Must be a 870970 record.
      * Record doesn't already have 008*&
      * Edition is updated (not new or first edition)
      * <p>
@@ -146,7 +146,7 @@ public class PreProcessingHandler {
         // u = new edition
         // f = first edition
         String subfield008u = reader.getValue("008", "u");
-        // *& is repeatable and have different meaning so we have to match the specific values
+        // *& is repeatable and have different meaning, so we have to match the specific values
         final boolean has008AmpersandF = reader.hasValue("008", "&", "f");
         final boolean has008AmpersandU = reader.hasValue("008", "&", "u");
         if ("r".equals(subfield008u) && // Update edition
@@ -188,7 +188,7 @@ public class PreProcessingHandler {
                     }
                 }
             }
-            // If someone updates the a first edition record then 008 *u must be manually changed to the value u
+            // If someone updates the *a first edition record then 008 *u must be manually changed to the value u
             // And in that case the 008 *& should be changed to indicate new edition
         } else if ("u".equals(subfield008u) && reader.hasValue("008", "&", "f")) {
             update008AmpersandEdition(record, "u");
@@ -254,7 +254,7 @@ public class PreProcessingHandler {
             return parentReader;
         } else if (parentReader.hasValue("004", "a", "s")) {
             if (parentReader.getParentRecordId() == null) { // Parent is a section volume - check if that record has a parent
-                // No parent to the section volume - it shouldn't really happen but it might
+                // No parent to the section volume - it shouldn't really happen, but it might
                 return null;
             } else {
                 // Parent to the section volume is found - we assume it is a head volume
@@ -321,7 +321,7 @@ public class PreProcessingHandler {
         if (marcRecordReader.hasSubfield("021", "a") || marcRecordReader.hasSubfield("021", "e")) {
             return getISBNsFromRecord(marcRecordReader);
         } else if (marcRecordReader.hasValue("004", "a", "b")) {
-            // If this record doesn't have ISBN field and it is a volume record then look at the parent head volume
+            // If this record doesn't have ISBN field, and it is a volume record then look at the parent head volume
             final MarcRecordReader parentReader = getHeadVolumeId(marcRecordReader);
 
             if (parentReader != null && (parentReader.hasSubfield("021", "a") || parentReader.hasSubfield("021", "e"))) {
@@ -418,22 +418,50 @@ public class PreProcessingHandler {
                 CatalogExtractionCode.isUnderProduction(record, LIST_OF_CATALOG_CODES_WITHOUT_DBF)) {
             final MarcRecordWriter writer = new MarcRecordWriter(record);
             String subfield008u = reader.getValue("008", "u");
+            String subfield008p = reader.getValue("008", "p");
             // If this record doesn't have 008 *u then see if there is on the parent head volume
-            if (subfield008u == null) {
+            // TODO 008pr check - It's a little bit rotten for now - r is moving from u to p and in a
+            // TODO transition period both subfields may exist in different records. When *ur is dead there are some cleanup to do
+            // We need to do the following :
+            // if there is a *ur all is good and we can set f008upIsr to true
+            // if not, then we have to look for a *pr and set f008upIsr to true or false
+            // if subfield 008u is null we must look after it in parent as usual but:
+            // only if f008upIsr is false we have to look after either *ur or *pr in the parent record
+            // Life isn't easy - there can be both a *u and a *p. If u is f and no p, then add nt -
+            // u is f and p is r (only allowed value) then add op.
+            boolean f008upIsr = false;
+            boolean pCondition = false;
+            if (subfield008u != null) {
+                f008upIsr = "r".equals(subfield008u);
+                if (!f008upIsr && subfield008p != null) {
+                    f008upIsr = "r".equals(subfield008p);
+                    pCondition = true;
+                }
+            } else {
                 MarcRecordReader parentReader = getHeadVolumeId(reader);
                 if (parentReader != null) {
                     subfield008u = parentReader.getValue("008", "u");
+                    f008upIsr = "r".equals(subfield008u);
+                    if (!f008upIsr) {
+                        subfield008p = parentReader.getValue("008", "p");
+                        if (subfield008p != null) {
+                            f008upIsr = "r".equals(subfield008p);
+                            pCondition = true;
+                        }
+                    }
                 }
             }
-            if (Arrays.asList("f", "c", "d", "o").contains(subfield008u) && !reader.hasSubfield("990", "i")) {
+            if ((Arrays.asList("c", "d", "o").contains(subfield008u) ||
+                    "f".equals(subfield008u) && !pCondition) &&
+                    !reader.hasSubfield("990", "i")) {
                 writer.addOrReplaceSubfield("990", "u", "nt"); // First edition
-            } else if ("u".equals(subfield008u) && !reader.hasSubfield("990", "i")) {
+            } else if ("u".equals(subfield008u) && !pCondition && !reader.hasSubfield("990", "i")) {
                 if (reader.hasValue("990", "&", "1")) {
                     writer.removeSubfield("990", "&");
                 } else {
                     writer.addOrReplaceSubfield("990", "u", "nu"); // New edition
                 }
-            } else if ("r".equals(subfield008u) && !reader.hasSubfield("990", "i")) {
+            } else if (f008upIsr && !reader.hasSubfield("990", "i")) {
                 if (reader.hasValue("990", "&", "1")) {
                     writer.removeSubfield("990", "&");
                 } else {

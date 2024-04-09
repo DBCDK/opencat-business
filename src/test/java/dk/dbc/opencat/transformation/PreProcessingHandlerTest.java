@@ -322,6 +322,32 @@ public class PreProcessingHandlerTest {
                 "supplier-relations/test-12-expected.marc");
     }
 
+    // TODO 008pr check - cleanup of test 13 to 16 culd be relevant
+    // Move r from u to p
+    @Test
+    public void testSupplierRelations13() throws Exception {
+        testExample("supplier-relations/test-13-input.marc",
+                "supplier-relations/test-13-expected.marc");
+    }
+
+    @Test
+    public void testSupplierRelations14() throws Exception {
+        testExample("supplier-relations/test-14-input.marc",
+                "supplier-relations/test-14-expected.marc");
+    }
+
+    @Test
+    public void testSupplierRelations15() throws Exception {
+        testExample("supplier-relations/test-15-input.marc",
+                "supplier-relations/test-15-expected.marc");
+    }
+
+    @Test
+    public void testSupplierRelations16() throws Exception {
+        testExample("supplier-relations/test-16-input.marc",
+                "supplier-relations/test-16-expected.marc");
+    }
+
     @Test
     public void testPreviousISBN1() throws Exception {
         final MarcRecord request = loadRecord("isbn-previous-version/test-1-request.marc");
