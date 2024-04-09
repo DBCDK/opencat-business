@@ -433,11 +433,9 @@ public class PreProcessingHandler {
             boolean pCondition = false;
             if (subfield008u != null) {
                 f008upIsr = "r".equals(subfield008u);
-                if (!f008upIsr) {
-                    if (subfield008p != null) {
-                        f008upIsr = "r".equals(subfield008p);
-                        pCondition = true;
-                    }
+                if (!f008upIsr && subfield008p != null) {
+                    f008upIsr = "r".equals(subfield008p);
+                    pCondition = true;
                 }
             } else {
                 MarcRecordReader parentReader = getHeadVolumeId(reader);
