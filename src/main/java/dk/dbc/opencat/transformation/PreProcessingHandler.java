@@ -418,22 +418,52 @@ public class PreProcessingHandler {
                 CatalogExtractionCode.isUnderProduction(record, LIST_OF_CATALOG_CODES_WITHOUT_DBF)) {
             final MarcRecordWriter writer = new MarcRecordWriter(record);
             String subfield008u = reader.getValue("008", "u");
+            String subfield008p = reader.getValue("008", "p");
             // If this record doesn't have 008 *u then see if there is on the parent head volume
-            if (subfield008u == null) {
+            // TODO 008pr check - It's a little bit rotten for now - r is moving from u to p and in a
+            // TODO transition period both subfields may exist in different records. When *ur is dead there are some cleanup to do
+            // We need to do the following :
+            // if there is a *ur all is good and we can set f008upIsr to true
+            // if not, then we have to look for a *pr and set f008upIsr to true or false
+            // if subfield 008u is null we must look after it in parent as usual but:
+            // only if f008upIsr is false we have to look after either *ur or *pr in the parent record
+            // Life isn't easy - there can be both a *u and a *p. If u is f and no p, then add nt -
+            // u is f and p is r (only allowed value) then add op.
+            boolean f008upIsr = false;
+            boolean pCondition = false;
+            if (subfield008u != null) {
+                f008upIsr = "r".equals(subfield008u);
+                if (!f008upIsr) {
+                    if (subfield008p != null) {
+                        f008upIsr = "r".equals(subfield008p);
+                        pCondition = true;
+                    }
+                }
+            } else {
                 MarcRecordReader parentReader = getHeadVolumeId(reader);
                 if (parentReader != null) {
                     subfield008u = parentReader.getValue("008", "u");
+                    f008upIsr = "r".equals(subfield008u);
+                    if (!f008upIsr) {
+                        subfield008p = parentReader.getValue("008", "p");
+                        if (subfield008p != null) {
+                            f008upIsr = "r".equals(subfield008p);
+                            pCondition = true;
+                        }
+                    }
                 }
             }
-            if (Arrays.asList("f", "c", "d", "o").contains(subfield008u) && !reader.hasSubfield("990", "i")) {
+            if ((Arrays.asList("c", "d", "o").contains(subfield008u) ||
+                    "f".equals(subfield008u) && !pCondition) &&
+                    !reader.hasSubfield("990", "i")) {
                 writer.addOrReplaceSubfield("990", "u", "nt"); // First edition
-            } else if ("u".equals(subfield008u) && !reader.hasSubfield("990", "i")) {
+            } else if ("u".equals(subfield008u) && !pCondition && !reader.hasSubfield("990", "i")) {
                 if (reader.hasValue("990", "&", "1")) {
                     writer.removeSubfield("990", "&");
                 } else {
                     writer.addOrReplaceSubfield("990", "u", "nu"); // New edition
                 }
-            } else if ("r".equals(subfield008u) && !reader.hasSubfield("990", "i")) {
+            } else if (f008upIsr && !reader.hasSubfield("990", "i")) {
                 if (reader.hasValue("990", "&", "1")) {
                     writer.removeSubfield("990", "&");
                 } else {
