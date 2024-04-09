@@ -94,7 +94,7 @@ public class PreProcessingHandler {
      * Rule:
      * Must be a 870790 record
      * The record is not a volume or section record
-     * It is a e-book
+     * It is an e-book
      * The record is not already marked as an e-book
      * <p>
      * If the conditions are not met or 008 *w1 already exists then nothing is done to the record
@@ -126,12 +126,12 @@ public class PreProcessingHandler {
     }
 
     /**
-     * When a record is created the specific type of edition is set in 008*u. However when the record is updated 008*u
+     * When a record is created the specific type of edition is set in 008*u. However, when the record is updated 008*u
      * can be set to the value 'r' which means updated. When the existing record is either a first edition or new edition that
      * indicator must remain visible on the record. This is done by adding 008*&.
      * <p>
      * Rule:
-     * Must be a 870970 record
+     * Must be a 870970 record.
      * Record doesn't already have 008*&
      * Edition is updated (not new or first edition)
      * <p>
@@ -146,7 +146,7 @@ public class PreProcessingHandler {
         // u = new edition
         // f = first edition
         String subfield008u = reader.getValue("008", "u");
-        // *& is repeatable and have different meaning so we have to match the specific values
+        // *& is repeatable and have different meaning, so we have to match the specific values
         final boolean has008AmpersandF = reader.hasValue("008", "&", "f");
         final boolean has008AmpersandU = reader.hasValue("008", "&", "u");
         if ("r".equals(subfield008u) && // Update edition
@@ -188,7 +188,7 @@ public class PreProcessingHandler {
                     }
                 }
             }
-            // If someone updates the a first edition record then 008 *u must be manually changed to the value u
+            // If someone updates the *a first edition record then 008 *u must be manually changed to the value u
             // And in that case the 008 *& should be changed to indicate new edition
         } else if ("u".equals(subfield008u) && reader.hasValue("008", "&", "f")) {
             update008AmpersandEdition(record, "u");
@@ -254,7 +254,7 @@ public class PreProcessingHandler {
             return parentReader;
         } else if (parentReader.hasValue("004", "a", "s")) {
             if (parentReader.getParentRecordId() == null) { // Parent is a section volume - check if that record has a parent
-                // No parent to the section volume - it shouldn't really happen but it might
+                // No parent to the section volume - it shouldn't really happen, but it might
                 return null;
             } else {
                 // Parent to the section volume is found - we assume it is a head volume
@@ -321,7 +321,7 @@ public class PreProcessingHandler {
         if (marcRecordReader.hasSubfield("021", "a") || marcRecordReader.hasSubfield("021", "e")) {
             return getISBNsFromRecord(marcRecordReader);
         } else if (marcRecordReader.hasValue("004", "a", "b")) {
-            // If this record doesn't have ISBN field and it is a volume record then look at the parent head volume
+            // If this record doesn't have ISBN field, and it is a volume record then look at the parent head volume
             final MarcRecordReader parentReader = getHeadVolumeId(marcRecordReader);
 
             if (parentReader != null && (parentReader.hasSubfield("021", "a") || parentReader.hasSubfield("021", "e"))) {
