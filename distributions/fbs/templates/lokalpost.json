@@ -88,7 +88,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable": false,
-            "sorting": "tuazbcdefghijklmnoqrxwv",
+            "sorting": "tupazbcdefghijklmnoqrxwv",
             "subfields": {
                 "t":{
                     "mandatory":true,

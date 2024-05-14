@@ -91,7 +91,7 @@
         "006": "paahaengspost.fields.006",
         "008": {
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
-            "sorting": "tuazbcdefghijklmnoqrxwv",
+            "sorting": "tupazbcdefghijklmnoqrxwv",
             "subfields": {
                 "t":{
                     "repeatable": false,
