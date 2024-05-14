@@ -35,7 +35,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"&tuazbcdefghijklmnorwxv",
+            "sorting":"&tupazbcdefghijklmnorwxv",
             "subfields":{
                 "t":{
                     "mandatory": true,

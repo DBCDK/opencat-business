@@ -56,7 +56,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"&tuazbcdefghijklmoqrxv",
+            "sorting":"&tupazbcdefghijklmoqrxv",
             "subfields":{
                 "t": "lokal-generel.fields.008.subfields.t",
                 "u": {

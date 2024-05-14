@@ -77,7 +77,7 @@
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.9.htm",
             "mandatory":true,
             "repeatable":false,
-            "sorting":"tuazbcdefghijklmnoqrxv",
+            "sorting":"tupazbcdefghijklmnoqrxv",
             "subfields":{
                 "a": "DanMarc2.fields.008.subfields.a",
                 "b": "DanMarc2.fields.008.subfields.b",               
