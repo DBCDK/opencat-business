@@ -47,6 +47,7 @@ var EnrichmentRecordHandler = function () {
 
     function __doRecategorizationThings(currentCommonMarc, updatingCommonMarc, enrichmentRecord) {
         var record = enrichmentRecord.clone();
+        record.leader = enrichmentRecord.leader;
         if (__isRecategorization(currentCommonMarc, updatingCommonMarc)) {
             Log.info("Record is a recategorization.");
             record = __removeClassificationsFromRecord(record);
@@ -64,6 +65,7 @@ var EnrichmentRecordHandler = function () {
     function __removeClassificationsFromRecord(record) {
         var result = undefined;
         result = new Record;
+        result.leader = record.leader;
         record.eachField(/./, function (field) {
             if (!UpdateConstants.DEFAULT_CLASSIFICATION_FIELDS.test(field.name)) {
                 result.append(field);

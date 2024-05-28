@@ -1,6 +1,6 @@
 #!groovy
 
-def workerNode = "devel10"
+def workerNode = "devel12"
 
 void notifyOfBuildStatus(final String buildStatus) {
     final String subject = "${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
@@ -24,7 +24,7 @@ pipeline {
 
     triggers {
         pollSCM("H/03 * * * *")
-        upstream(upstreamProjects: "Docker-payara5-bump-trigger",
+        upstream(upstreamProjects: "Docker-payara6-bump-trigger",
                 threshold: hudson.model.Result.SUCCESS)
     }
 

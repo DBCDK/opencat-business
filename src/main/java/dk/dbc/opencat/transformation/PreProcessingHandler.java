@@ -1,17 +1,13 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
-
 package dk.dbc.opencat.transformation;
 
 import dk.dbc.common.records.CatalogExtractionCode;
-import dk.dbc.common.records.MarcField;
-import dk.dbc.common.records.MarcFieldReader;
-import dk.dbc.common.records.MarcRecord;
 import dk.dbc.common.records.MarcRecordReader;
 import dk.dbc.common.records.MarcRecordWriter;
-import dk.dbc.common.records.MarcSubField;
+import dk.dbc.marc.binding.DataField;
+import dk.dbc.marc.binding.Field;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.binding.SubField;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.OpenCatException;
 import dk.dbc.opencat.dao.RecordService;
 import dk.dbc.rawrepo.record.RecordServiceConnectorException;
@@ -35,11 +31,11 @@ public class PreProcessingHandler {
         this.recordService = recordService;
     }
 
-    public void preProcess(MarcRecord record) throws UnsupportedEncodingException, OpenCatException, RecordServiceConnectorException {
+    public void preProcess(MarcRecord record) throws UnsupportedEncodingException, OpenCatException, RecordServiceConnectorException, MarcReaderException {
         final MarcRecordReader reader = new MarcRecordReader(record);
 
         // Pre-processing should only be performed on 870970 records owned by DBC
-        if (RecordService.COMMON_AGENCY == reader.getAgencyIdAsInt() && reader.hasValue("996", "a", "DBC")) {
+        if (RecordService.COMMON_AGENCY == reader.getAgencyIdAsInt() && reader.hasValue("996", 'a', "DBC")) {
             processAgeInterval(record, reader);
             processCodeForEBooks(record, reader);
             processFirstOrNewEdition(record, reader);
@@ -64,7 +60,7 @@ public class PreProcessingHandler {
      * @param reader Reader for record
      */
     private void processAgeInterval(MarcRecord record, MarcRecordReader reader) {
-        final List<Matcher> matchers = reader.getSubfieldValueMatchers("666", "u", AGE_INTERVAL_PATTERN);
+        final List<Matcher> matchers = reader.getSubfieldValueMatchers("666", 'u', AGE_INTERVAL_PATTERN);
 
         if (matchers.size() > 0) {
             // First remove all 666 *u subfields that are in the matchers - there are a large number of 666*u that has content
@@ -104,12 +100,12 @@ public class PreProcessingHandler {
      */
     private void processCodeForEBooks(MarcRecord record, MarcRecordReader reader) {
         // This pre-processing action can only add 008 *w1 - so if the subfield already exists then there is no point in continuing
-        if (reader.hasValue("008", "w", "1")) {
+        if (reader.hasValue("008", 'w', "1")) {
             return;
         }
 
         // This pre-processing is not applicable to volume or section records
-        final String bibliographicRecordType = reader.getValue("004", "a");
+        final String bibliographicRecordType = reader.getValue("004", 'a');
         if ("b".equals(bibliographicRecordType) || "s".equals(bibliographicRecordType)) {
             return;
         }
@@ -118,10 +114,10 @@ public class PreProcessingHandler {
         // 009 *gxe = online
         // 008 *tp = periodica
         // 008 *uo = not complete periodica
-        if ("a".equals(reader.getValue("009", "a")) && "xe".equals(reader.getValue("009", "g")) &&
-                !"p".equals(reader.getValue("008", "t")) && !"o".equals(reader.getValue("008", "u"))) {
+        if ("a".equals(reader.getValue("009", 'a')) && "xe".equals(reader.getValue("009", 'g')) &&
+                !"p".equals(reader.getValue("008", 't')) && !"o".equals(reader.getValue("008", 'u'))) {
             final MarcRecordWriter writer = new MarcRecordWriter(record);
-            writer.addOrReplaceSubfield("008", "w", "1");
+            writer.addOrReplaceSubField("008", 'w', "1");
         }
     }
 
@@ -140,23 +136,23 @@ public class PreProcessingHandler {
      * @param record The record to be processed
      * @param reader Reader for record
      */
-    private void processFirstOrNewEdition(MarcRecord record, MarcRecordReader reader) throws UnsupportedEncodingException, RecordServiceConnectorException {
+    private void processFirstOrNewEdition(MarcRecord record, MarcRecordReader reader) throws UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
         // 008*u = Release status
         // r = updated but unchanged edition
         // u = new edition
         // f = first edition
-        String subfield008u = reader.getValue("008", "u");
+        String subfield008u = reader.getValue("008", 'u');
         // *& is repeatable and have different meaning, so we have to match the specific values
-        final boolean has008AmpersandF = reader.hasValue("008", "&", "f");
-        final boolean has008AmpersandU = reader.hasValue("008", "&", "u");
+        final boolean has008AmpersandF = reader.hasValue("008", '&', "f");
+        final boolean has008AmpersandU = reader.hasValue("008", '&', "u");
         if ("r".equals(subfield008u) && // Update edition
                 !(has008AmpersandF || has008AmpersandU) && // Doesn't already have indicator
                 recordService.recordExistsMaybeDeleted(reader.getRecordId(), reader.getAgencyIdAsInt())) { // Record exists
             // Note that creating a new record with 008 *u = r must be handled manually
             final MarcRecord existingRecord = recordService.fetchRecord(reader.getRecordId(), reader.getAgencyIdAsInt());
             final MarcRecordReader existingReader = new MarcRecordReader(existingRecord);
-            final String existingSubfield008u = existingReader.getValue("008", "u");
-            final String existingSubfield250a = existingReader.getValue("250", "a"); // Edition description
+            final String existingSubfield008u = existingReader.getValue("008", 'u');
+            final String existingSubfield250a = existingReader.getValue("250", 'a'); // Edition description
 
             if ("f".equals(existingSubfield008u)) {
                 update008AmpersandEdition(record, "f");
@@ -177,10 +173,10 @@ public class PreProcessingHandler {
                 } else {
                     // Field 520 contains several subfield which can hold a lot of text
                     // So in order to look for a string "somewhere" in 520 we have to loop through all the subfields
-                    final MarcField field520 = existingReader.getField("520");
+                    final DataField field520 = existingReader.getField("520");
                     if (field520 != null) {
-                        for (MarcSubField subField : field520.getSubfields()) {
-                            if (subField.getValue().contains("idligere")) {
+                        for (SubField subField : field520.getSubFields()) {
+                            if (subField.getData().contains("idligere")) {
                                 update008AmpersandEdition(record, "u");
                                 break;
                             }
@@ -190,7 +186,7 @@ public class PreProcessingHandler {
             }
             // If someone updates the *a first edition record then 008 *u must be manually changed to the value u
             // And in that case the 008 *& should be changed to indicate new edition
-        } else if ("u".equals(subfield008u) && reader.hasValue("008", "&", "f")) {
+        } else if ("u".equals(subfield008u) && reader.hasValue("008", '&', "f")) {
             update008AmpersandEdition(record, "u");
         }
     }
@@ -210,17 +206,17 @@ public class PreProcessingHandler {
      * @throws OpenCatException             If rawrepo throws exception
      * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private void processISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
+    private void processISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
         // This record has field 520 or 526 which means it might be a text or sound record
-        if (reader.hasSubfield("520", "n") || reader.hasSubfield("526", "n")) {
+        if (reader.hasSubfield("520", 'n') || reader.hasSubfield("526", 'n')) {
             // This record is indeed a text or sound record
-            if (reader.hasValue("009", "a", "a") || reader.hasValue("009", "a", "r")) {
+            if (reader.hasValue("009", 'a', "a") || reader.hasValue("009", 'a', "r")) {
                 updateWithISBNFromPreviousEdition(record, reader);
-            } else if (reader.hasValue("004", "a", "b")) {
+            } else if (reader.hasValue("004", 'a', "b")) {
                 // If the record has a head volume and that head volume is text or sound, then process the 520 and 526 field anyway
                 final MarcRecordReader parentReader = getHeadVolumeId(reader);
 
-                if (parentReader != null && (parentReader.hasValue("009", "a", "a") || parentReader.hasValue("009", "a", "r"))) {
+                if (parentReader != null && (parentReader.hasValue("009", 'a', "a") || parentReader.hasValue("009", 'a', "r"))) {
                     updateWithISBNFromPreviousEdition(record, reader);
                 }
             }
@@ -236,7 +232,7 @@ public class PreProcessingHandler {
      * @throws OpenCatException             If rawrepo throws exception
      * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private MarcRecordReader getHeadVolumeId(MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
+    private MarcRecordReader getHeadVolumeId(MarcRecordReader reader) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         // Check if input record even has a parent
         if (reader.getParentRecordId() == null) {
             return null;
@@ -250,9 +246,9 @@ public class PreProcessingHandler {
         final MarcRecord parent = recordService.fetchRecord(reader.getParentRecordId(), RecordService.COMMON_AGENCY);
         final MarcRecordReader parentReader = new MarcRecordReader(parent);
 
-        if (parentReader.hasValue("004", "a", "h")) { // Parent is a head volume - so return that
+        if (parentReader.hasValue("004", 'a', "h")) { // Parent is a head volume - so return that
             return parentReader;
-        } else if (parentReader.hasValue("004", "a", "s")) {
+        } else if (parentReader.hasValue("004", 'a', "s")) {
             if (parentReader.getParentRecordId() == null) { // Parent is a section volume - check if that record has a parent
                 // No parent to the section volume - it shouldn't really happen, but it might
                 return null;
@@ -276,21 +272,21 @@ public class PreProcessingHandler {
      * @throws OpenCatException             If rawrepo throws exception
      * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private void updateWithISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
-        final List<MarcField> newMarcFieldList = new ArrayList<>();
-        final List<MarcField> originalMarcFieldList = new ArrayList<>();
+    private void updateWithISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
+        final List<DataField> newMarcFieldList = new ArrayList<>();
+        final List<DataField> originalMarcFieldList = new ArrayList<>();
         originalMarcFieldList.addAll(reader.getFieldAll("520"));
         originalMarcFieldList.addAll(reader.getFieldAll("526"));
 
-        for (MarcField originalMarcField : originalMarcFieldList) {
-            final MarcField newMarcField = new MarcField(originalMarcField); // Clone the field so we can manipulate it while looping
-            for (MarcSubField subField : originalMarcField.getSubfields()) {
-                if ("n".equals(subField.getName()) && recordService.recordExists(subField.getValue(), RecordService.COMMON_AGENCY)) {
-                    final List<String> isbnFromCommonRecord = getISBNFromCommonRecord(subField.getValue());
+        for (DataField originalMarcField : originalMarcFieldList) {
+            final DataField newMarcField = new DataField(originalMarcField); // Clone the field so we can manipulate it while looping
+            for (SubField subField : originalMarcField.getSubFields()) {
+                if ('n' == subField.getCode() && recordService.recordExists(subField.getData(), RecordService.COMMON_AGENCY)) {
+                    final List<String> isbnFromCommonRecord = getISBNFromCommonRecord(subField.getData());
                     for (String isbn : isbnFromCommonRecord) {
-                        final MarcSubField subfieldR = new MarcSubField("r", isbn);
-                        if (!originalMarcField.getSubfields().contains(subfieldR)) {
-                            newMarcField.getSubfields().add(subfieldR);
+                        final SubField subfieldR = new SubField('r', isbn);
+                        if (!originalMarcField.getSubFields().contains(subfieldR)) {
+                            newMarcField.getSubFields().add(subfieldR);
                         }
                     }
                 }
@@ -312,19 +308,19 @@ public class PreProcessingHandler {
      * @throws OpenCatException             If rawrepo throws exception
      * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private List<String> getISBNFromCommonRecord(String bibliographicRecordId) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
+    private List<String> getISBNFromCommonRecord(String bibliographicRecordId) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
         final List<String> result = new ArrayList<>();
         final MarcRecord marcRecord = recordService.fetchRecord(bibliographicRecordId, RecordService.COMMON_AGENCY);
         final MarcRecordReader marcRecordReader = new MarcRecordReader(marcRecord);
 
         // If this record has the ISBN fields then get ISBN from this record
-        if (marcRecordReader.hasSubfield("021", "a") || marcRecordReader.hasSubfield("021", "e")) {
+        if (marcRecordReader.hasSubfield("021", 'a') || marcRecordReader.hasSubfield("021", 'e')) {
             return getISBNsFromRecord(marcRecordReader);
-        } else if (marcRecordReader.hasValue("004", "a", "b")) {
+        } else if (marcRecordReader.hasValue("004", 'a', "b")) {
             // If this record doesn't have ISBN field, and it is a volume record then look at the parent head volume
             final MarcRecordReader parentReader = getHeadVolumeId(marcRecordReader);
 
-            if (parentReader != null && (parentReader.hasSubfield("021", "a") || parentReader.hasSubfield("021", "e"))) {
+            if (parentReader != null && (parentReader.hasSubfield("021", 'a') || parentReader.hasSubfield("021", 'e'))) {
                 return getISBNsFromRecord(parentReader);
             }
         }
@@ -340,10 +336,10 @@ public class PreProcessingHandler {
      */
     private List<String> getISBNsFromRecord(MarcRecordReader reader) {
         final List<String> result = new ArrayList<>();
-        for (MarcField field21 : reader.getFieldAll("021")) {
-            for (MarcSubField subField21 : field21.getSubfields()) {
-                if ("a".equals(subField21.getName()) || "e".equals(subField21.getName())) {
-                    final String previousISBN = subField21.getValue();
+        for (DataField field21 : reader.getFieldAll("021")) {
+            for (SubField subField21 : field21.getSubFields()) {
+                if ('a' == subField21.getCode() || 'e' == subField21.getCode()) {
+                    final String previousISBN = subField21.getData();
                     result.add(previousISBN);
                 }
             }
@@ -364,35 +360,34 @@ public class PreProcessingHandler {
     private void update008AmpersandEdition(MarcRecord record, String value) {
         final MarcRecordReader reader = new MarcRecordReader(record);
         // There is no reason to continue if the field already has the correct value
-        if (!reader.hasValue("008", "&", value)) {
-            final MarcField field = reader.getField("008");
+        if (!reader.hasValue("008", '&', value)) {
+            final DataField field = reader.getField("008");
             // Here we know that there isn't a 008 *& with the input value
             // However there might be a *& with the opposite value (u <> f)
             final String oppositeValue = "u".equals(value) ? "f" : "u";
-            if (reader.hasValue("008", "&", oppositeValue)) {
-                for (MarcSubField subField : field.getSubfields()) {
-                    if ("&".equals(subField.getName()) && oppositeValue.equals(subField.getValue())) {
-                        subField.setValue(value);
+            if (reader.hasValue("008", '&', oppositeValue)) {
+                for (SubField subField : field.getSubFields()) {
+                    if ('&' == subField.getCode() && oppositeValue.equals(subField.getData())) {
+                        subField.setData(value);
                         break;
                     }
                 }
             } else {
                 // If there isn't a *& for either value or opposite value then just add a new *& subfield
-                field.getSubfields().add(new MarcSubField("&", value));
+                field.getSubFields().add(new SubField('&', value));
             }
         }
     }
 
     private void remove666UFields(MarcRecord record, List<Matcher> matchers) {
-        final List<MarcField> fieldsToRemove = new ArrayList<>();
+        final List<DataField> fieldsToRemove = new ArrayList<>();
 
-        for (MarcField field : record.getFields()) {
-            if ("666".equals(field.getName())) {
-                MarcFieldReader fieldReader = new MarcFieldReader(field);
-                if (fieldReader.hasSubfield("u")) {
-                    String subFieldValue = fieldReader.getValue("u");
+        for (DataField field : record.getFields(DataField.class)) {
+            if ("666".equals(field.getTag())) {
+                if (field.hasSubField(DataField.hasSubFieldCode('u'))) {
+                    String subFieldValue = field.getSubField(DataField.hasSubFieldCode('u')).orElseThrow().getData();
                     for (Matcher matcher : matchers) {
-                        if (subFieldValue.equalsIgnoreCase(matcher.group(1) + " " + matcher.group(2) + "-"+ matcher.group(3) + " " + matcher.group(4))) {
+                        if (subFieldValue.equalsIgnoreCase(matcher.group(1) + " " + matcher.group(2) + "-" + matcher.group(3) + " " + matcher.group(4))) {
                             fieldsToRemove.add(field);
                             break;
                         }
@@ -404,21 +399,21 @@ public class PreProcessingHandler {
         record.getFields().removeAll(fieldsToRemove);
     }
 
-    private MarcField getNewMarcField666(String value) {
-        final MarcSubField subfieldU = new MarcSubField("u", value);
+    private Field getNewMarcField666(String value) {
+        final SubField subfieldU = new SubField('u', value);
 
-        final List<MarcSubField> subfields = new ArrayList<>();
+        final List<SubField> subfields = new ArrayList<>();
         subfields.add(subfieldU);
 
-        return new MarcField("666", "00", subfields);
+        return new DataField("666", "00").addAllSubFields(subfields);
     }
 
-    private void processSupplierRelations(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException {
-        if (reader.hasSubfield("990", "b") &&
+    private void processSupplierRelations(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
+        if (reader.hasSubfield("990", 'b') &&
                 CatalogExtractionCode.isUnderProduction(record, LIST_OF_CATALOG_CODES_WITHOUT_DBF)) {
             final MarcRecordWriter writer = new MarcRecordWriter(record);
-            String subfield008u = reader.getValue("008", "u");
-            String subfield008p = reader.getValue("008", "p");
+            String subfield008u = reader.getValue("008", 'u');
+            String subfield008p = reader.getValue("008", 'p');
             // If this record doesn't have 008 *u then see if there is on the parent head volume
             // TODO 008pr check - It's a little bit rotten for now - r is moving from u to p and in a
             // TODO transition period both subfields may exist in different records. When *ur is dead there are some cleanup to do
@@ -440,10 +435,10 @@ public class PreProcessingHandler {
             } else {
                 MarcRecordReader parentReader = getHeadVolumeId(reader);
                 if (parentReader != null) {
-                    subfield008u = parentReader.getValue("008", "u");
+                    subfield008u = parentReader.getValue("008", 'u');
                     f008upIsr = "r".equals(subfield008u);
                     if (!f008upIsr) {
-                        subfield008p = parentReader.getValue("008", "p");
+                        subfield008p = parentReader.getValue("008", 'p');
                         if (subfield008p != null) {
                             f008upIsr = "r".equals(subfield008p);
                             pCondition = true;
@@ -453,38 +448,38 @@ public class PreProcessingHandler {
             }
             if ((Arrays.asList("c", "d", "o").contains(subfield008u) ||
                     "f".equals(subfield008u) && !pCondition) &&
-                    !reader.hasSubfield("990", "i")) {
-                writer.addOrReplaceSubfield("990", "u", "nt"); // First edition
-            } else if ("u".equals(subfield008u) && !pCondition && !reader.hasSubfield("990", "i")) {
-                if (reader.hasValue("990", "&", "1")) {
-                    writer.removeSubfield("990", "&");
+                    !reader.hasSubfield("990", 'i')) {
+                writer.addOrReplaceSubField("990", 'u', "nt"); // First edition
+            } else if ("u".equals(subfield008u) && !pCondition && !reader.hasSubfield("990", 'i')) {
+                if (reader.hasValue("990", '&', "1")) {
+                    writer.removeSubfield("990", '&');
                 } else {
-                    writer.addOrReplaceSubfield("990", "u", "nu"); // New edition
+                    writer.addOrReplaceSubField("990", 'u', "nu"); // New edition
                 }
-            } else if (f008upIsr && !reader.hasSubfield("990", "i")) {
-                if (reader.hasValue("990", "&", "1")) {
-                    writer.removeSubfield("990", "&");
+            } else if (f008upIsr && !reader.hasSubfield("990", 'i')) {
+                if (reader.hasValue("990", '&', "1")) {
+                    writer.removeSubfield("990", '&');
                 } else {
-                    List<MarcSubField> newSubfields = new ArrayList<>();
+                    List<SubField> newSubfields = new ArrayList<>();
 
                     // Combine all 990 fields without *r into one single 990 field with all *b subfields
-                    for (MarcField field990Original : findField990(reader)) {
+                    for (DataField field990Original : findField990(reader)) {
                         // Add new d90 field
-                        MarcField fieldd90 = new MarcField(field990Original); // Clone field
-                        fieldd90.setName("d90");
+                        DataField fieldd90 = new DataField(field990Original); // Clone field
+                        fieldd90.setTag("d90");
                         record.getFields().add(fieldd90);
 
-                        for (MarcSubField subField : field990Original.getSubfields()) {
-                            if ("b".equals(subField.getName()) && !newSubfields.contains(subField)) {
-                                newSubfields.add(new MarcSubField(subField));
+                        for (SubField subField : field990Original.getSubFields()) {
+                            if ('b' == subField.getCode() && !newSubfields.contains(subField)) {
+                                newSubfields.add(new SubField(subField));
                             }
                         }
 
                         record.getFields().remove(field990Original);
                     }
 
-                    newSubfields.add(new MarcSubField("u", "op"));
-                    record.getFields().add(new MarcField("990", "00", newSubfields));
+                    newSubfields.add(new SubField('u', "op"));
+                    record.getFields().add(new DataField("990", "00").addAllSubFields(newSubfields));
                 }
             }
         }
@@ -498,12 +493,11 @@ public class PreProcessingHandler {
      * @param reader MarcRecordReader object
      * @return MarcField if conditions are met otherwise null
      */
-    private List<MarcField> findField990(MarcRecordReader reader) {
-        final List<MarcField> result = new ArrayList<>();
-        for (MarcField field : reader.getFieldAll("990")) {
-            MarcFieldReader fieldReader = new MarcFieldReader(field);
-            if (!fieldReader.hasSubfield("r")) {
-                result.add(new MarcField(field));
+    private List<DataField> findField990(MarcRecordReader reader) {
+        final List<DataField> result = new ArrayList<>();
+        for (DataField field : reader.getFieldAll("990")) {
+            if (!field.hasSubField(DataField.hasSubFieldCode('r'))) {
+                result.add(new DataField(field));
             }
         }
 

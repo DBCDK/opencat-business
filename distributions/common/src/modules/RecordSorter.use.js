@@ -24,6 +24,7 @@ var RecordSorter = function () {
     function insertField(record, field) {
         Log.trace("Enter - RecordSorter.insertField");
         var result = new Record();
+        result.leader = record.leader;
         try {
             var isFieldAppended = false;
             for (var i = 0; i < record.size(); i++) {

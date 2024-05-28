@@ -1,12 +1,11 @@
 package dk.dbc.opencat.service;
 
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
-import javax.ws.rs.core.Response;
-
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildResponseDTO;
+import jakarta.ws.rs.core.Response;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

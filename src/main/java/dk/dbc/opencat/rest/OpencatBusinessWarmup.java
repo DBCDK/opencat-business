@@ -1,36 +1,36 @@
 package dk.dbc.opencat.rest;
 
+import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.httpclient.FailSafeHttpClient;
 import dk.dbc.httpclient.HttpClient;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBContext;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
+import jakarta.ws.rs.ProcessingException;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.core.Response;
 import net.jodah.failsafe.RetryPolicy;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
-import javax.ws.rs.ProcessingException;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.Response;
 import java.io.File;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Collections;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class OpencatBusinessWarmup {
     private static final XLogger LOGGER = XLoggerFactory.getXLogger(OpencatBusinessWarmup.class);
     private static final String BASE_URL = "http://localhost:8080";
     private static final String PATH_PREPROCESS = "/api/v1/preprocess";
     private static final String PATH_RECATEGORIZATION_NOTE_FIELD_FACTORY = "/api/v1/recategorizationNoteFieldFactory";
-    private static final RetryPolicy RETRY_POLICY = new RetryPolicy()
-            .retryOn(Collections.singletonList(ProcessingException.class))
-            .retryIf((Response response) -> response.getStatus() == 404)
-            .withDelay(10, TimeUnit.SECONDS)
+    private static final RetryPolicy<Response> RETRY_POLICY = new RetryPolicy<Response>()
+            .handle(ProcessingException.class)
+            .handleResultIf(response -> response.getStatus() == 404
+                    || response.getStatus() == 502)
+            .withDelay(Duration.ofSeconds(10))
             .withMaxRetries(1);
 
     private static final JSONBContext jsonbContext = new JSONBContext();
@@ -90,7 +90,7 @@ public class OpencatBusinessWarmup {
 
             return true;
         } catch (Exception e) {
-            LOGGER.error(String.format("Caught exception when calling callEndpoint(%s)", path),e);
+            LOGGER.error(String.format("Caught exception when calling callEndpoint(%s)", path), e);
             return false;
         }
     }

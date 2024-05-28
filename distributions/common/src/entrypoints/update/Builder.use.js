@@ -27,6 +27,7 @@ var Builder = function() {
         Log.trace("-> buildRecord");
 
         var result = {
+            "leader": ["0","0","0","0","0","n"," ","2","2","0","0","0","0","0"," ","4","5","0","0"],
             "fields": []
         };
         var template = templateProvider();
@@ -64,7 +65,10 @@ var Builder = function() {
     function convertRecord( templateProvider, record, faustProvider ) {
         Log.trace( "-> convertRecord" );
 
-        var result = {"fields": []};
+        var result = {
+            "leader": ["0","0","0","0","0","n"," ","2","2","0","0","0","0","0"," ","4","5","0","0"],
+            "fields": []
+        };
 
         // get list of mandatory fields
         var mandatoryFields = getMandatoryFieldsFromUnoptimizedTemplate( templateProvider() );
@@ -151,7 +155,7 @@ var Builder = function() {
         if ( template["defaults"]["field"].hasOwnProperty( "indicator" ) ) {
             indicator = template["defaults"]["field"]["indicator"];
         }
-        return indicator;
+        return indicator.split('');
     }
 
     // buildMissingFields returns a list of mandatory fields not used in the original record

@@ -1,12 +1,8 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
-
 package dk.dbc.opencat.dao;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.common.records.RecordContentTransformer;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.rawrepo.record.RecordServiceConnector;
 import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import dk.dbc.rawrepo.record.RecordServiceConnectorFactory;
@@ -14,8 +10,6 @@ import org.perf4j.StopWatch;
 import org.perf4j.log4j.Log4JStopWatch;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
-
-import java.io.UnsupportedEncodingException;
 
 public class RecordService {
     private static final XLogger logger = XLoggerFactory.getXLogger(RecordService.class);
@@ -51,7 +45,7 @@ public class RecordService {
         return result;
     }
 
-    public MarcRecord fetchRecord(String bibliographicRecordId, int agencyId) throws RecordServiceConnectorException, UnsupportedEncodingException {
+    public MarcRecord fetchRecord(String bibliographicRecordId, int agencyId) throws RecordServiceConnectorException, MarcReaderException {
         logger.entry(bibliographicRecordId, agencyId);
         final StopWatch watch = new Log4JStopWatch("RecordService.fetchRecord");
         MarcRecord result;
@@ -66,7 +60,7 @@ public class RecordService {
         return result;
     }
 
-    public MarcRecord fetchMergedDBCRecord(String bibliographicRecordId, int agencyId) throws RecordServiceConnectorException, UnsupportedEncodingException {
+    public MarcRecord fetchMergedDBCRecord(String bibliographicRecordId, int agencyId) throws RecordServiceConnectorException, MarcReaderException {
         logger.entry(bibliographicRecordId, agencyId);
         final StopWatch watch = new Log4JStopWatch("RecordService.fetchMergedDBCRecord");
         MarcRecord result;

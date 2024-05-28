@@ -1,22 +1,23 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.common.records.RecordContentTransformer;
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
-import java.io.UnsupportedEncodingException;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
 
     @Test
-    public void test_that_a_record_is_built_with_another_record_as_template() throws JSONBException, UnsupportedEncodingException {
+    public void test_that_a_record_is_built_with_another_record_as_template() throws MarcReaderException, JSONBException {
         BuildRecordRequestDTO buildRecordRequestDTO = new BuildRecordRequestDTO();
         buildRecordRequestDTO.setTemplateName("dbcsingle");
         buildRecordRequestDTO.setRecord(getRequest());
@@ -36,7 +37,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
     }
 
     @Test
-    public void test_that_a_record_is_built_from_scratch() throws UnsupportedEncodingException, JSONBException {
+    public void test_that_a_record_is_built_from_scratch() throws MarcReaderException, JSONBException {
         BuildRecordRequestDTO buildRecordRequestDTO = new BuildRecordRequestDTO();
         buildRecordRequestDTO.setTemplateName("dbcsingle");
 

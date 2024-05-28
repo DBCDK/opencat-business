@@ -1,15 +1,15 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.common.records.RecordContentTransformer;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
+import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
+import jakarta.ws.rs.core.Response;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.ws.rs.core.Response;
 import java.sql.Connection;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -44,7 +44,7 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
     }
 
     private final String actualRecordString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
-            "  <leader>00000     22000000 4500 </leader>\n" +
+            "  <leader>00000n    2200000   4500</leader>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
             "    <subfield code=\"a\">51580761</subfield>\n" +
             "    <subfield code=\"b\">870970</subfield>\n" +
@@ -99,7 +99,7 @@ public class MetaCompassIT extends AbstractOpencatBusinessContainerTest {
             "</record>\n";
 
     private final String expectedRecordString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
-            "  <leader>00000     22000000 4500 </leader>\n" +
+            "  <leader>00000n    2200000   4500</leader>\n" +
             "  <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
             "    <subfield code=\"a\">51580761</subfield>\n" +
             "    <subfield code=\"b\">870970</subfield>\n" +

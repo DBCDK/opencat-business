@@ -1,16 +1,15 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcField;
-import dk.dbc.common.records.MarcSubField;
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
+import dk.dbc.marc.binding.DataField;
+import dk.dbc.marc.binding.SubField;
+import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
+import jakarta.ws.rs.core.Response;
+import org.junit.Test;
 
 import java.util.Arrays;
-import javax.ws.rs.core.Response;
-
-import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
-import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -27,21 +26,18 @@ public class RecategorizationNoteFieldFactoryIT extends AbstractOpencatBusinessC
                 .withPathElements(new PathBuilder("/api/v1/recategorizationNoteFieldFactory")
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
-        MarcField expected = new MarcField();
-        expected.setName("512");
-        expected.setIndicator("00");
-        expected.setSubfields(Arrays.asList(
-                new MarcSubField("i", "Materialet er opstillet under"),
-                new MarcSubField("d", "Powell, Eric"),
-                new MarcSubField("t", "The ¤Goon, nothin' but misery"),
-                new MarcSubField("b", "# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
+        DataField expected = new DataField("512", "00");
+        expected.addAllSubFields(Arrays.asList(
+                new SubField('i', "Materialet er opstillet under"),
+                new SubField('d', "Powell, Eric"),
+                new SubField('t', "The ¤Goon, nothin' but misery"),
+                new SubField('b', "# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
 
         Response response = httpClient.execute(httpPost);
 
         assertThat("Response code", response.getStatus(), is(200));
-        MarcField actual = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), MarcField.class);
+        DataField actual = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DataField.class);
         assertThat("Marcfield is returned properly", actual, is(expected));
-
     }
 
     private String getRecord() {

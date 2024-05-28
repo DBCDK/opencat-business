@@ -1,19 +1,21 @@
 package dk.dbc.opencat.service;
 
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
 import dk.dbc.opencatbusiness.dto.GetValidateSchemasRequestDTO;
 import dk.dbc.updateservice.dto.SchemaDTO;
+import jakarta.ws.rs.core.Response;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.HashSet;
-import javax.ws.rs.core.Response;
-import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GetValidateSchemasIT extends AbstractOpencatBusinessContainerTest {
+
     @Test
     public void getValidateSchemas_sanitytest() throws JSONBException {
         GetValidateSchemasRequestDTO getValidateSchemasRequestDTO = new GetValidateSchemasRequestDTO();

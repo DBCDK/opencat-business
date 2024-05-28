@@ -1,27 +1,28 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
-
 package dk.dbc.opencat.transformation;
 
-import dk.dbc.common.records.MarcField;
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.MarcRecordFactory;
 import dk.dbc.common.records.MarcRecordWriter;
-import dk.dbc.common.records.MarcSubField;
-import dk.dbc.common.records.utils.IOUtils;
+import dk.dbc.marc.binding.DataField;
+import dk.dbc.marc.binding.Leader;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.binding.SubField;
+import dk.dbc.marc.reader.DanMarc2LineFormatReader;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.dao.RecordService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
+import static dk.dbc.marc.reader.DanMarc2LineFormatReader.DEFAULT_LEADER;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
@@ -108,22 +109,29 @@ public class MetaCompassHandlerTest {
 
     @Test
     public void test_addMinusProofPrinting() {
-        MarcField field = new MarcField("001", "00", Arrays.asList(
-                new MarcSubField("a", "12345678"),
-                new MarcSubField("b", "870970")));
-        MarcRecord record = new MarcRecord(Collections.singletonList(field));
+        DataField field = new DataField("001", "00").addAllSubFields(Arrays.asList(
+                new SubField('a', "12345678"),
+                new SubField('b', "870970")));
+        MarcRecord record = new MarcRecord()
+                .addAllFields(Collections.singletonList(field))
+                .setLeader(new Leader().setData(DEFAULT_LEADER));
 
         MarcRecord actual = new MarcRecord(record);
         MarcRecord expected = new MarcRecord(record);
-        new MarcRecordWriter(expected).addOrReplaceSubfield("z98", "a", "Minus korrekturprint");
+        new MarcRecordWriter(expected).addOrReplaceSubField("z98", 'a', "Minus korrekturprint");
 
         MetaCompassHandler.addMinusProofPrinting(actual);
 
         assertThat(actual, is(expected));
     }
 
-    private static MarcRecord loadRecord(String filename) throws IOException {
-        InputStream is = MetaCompassHandlerTest.class.getResourceAsStream("/dk/dbc/opencat/transformation/metacompass/" + filename);
-        return MarcRecordFactory.readRecord(IOUtils.readAll(is, "UTF-8"));
+    private static MarcRecord loadRecord(String filename) throws MarcReaderException, FileNotFoundException {
+        final ClassLoader classLoader = MetaCompassHandlerTest.class.getClassLoader();
+        final File file = new File(Objects.requireNonNull(classLoader.getResource("dk/dbc/opencat/transformation/metacompass/" + filename)).getFile());
+        final InputStream is = new FileInputStream(file);
+
+        final DanMarc2LineFormatReader lineFormatReader = new DanMarc2LineFormatReader(is, StandardCharsets.UTF_8);
+
+        return lineFormatReader.read();
     }
 }

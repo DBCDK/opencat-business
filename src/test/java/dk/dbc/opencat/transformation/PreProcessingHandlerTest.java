@@ -1,17 +1,21 @@
 package dk.dbc.opencat.transformation;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.MarcRecordFactory;
 import dk.dbc.common.records.MarcRecordWriter;
-import dk.dbc.common.records.utils.IOUtils;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.reader.DanMarc2LineFormatReader;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.dao.RecordService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -560,9 +564,14 @@ public class PreProcessingHandlerTest {
         assertThat(actual, equalTo(expected));
     }
 
-    private static MarcRecord loadRecord(String filename) throws IOException {
-        InputStream is = MetaCompassHandlerTest.class.getResourceAsStream("/dk/dbc/opencat/transformation/preprocessing/" + filename);
-        return MarcRecordFactory.readRecord(IOUtils.readAll(is, "UTF-8"));
+    private static MarcRecord loadRecord(String filename) throws MarcReaderException, FileNotFoundException {
+        final ClassLoader classLoader = MetaCompassHandlerTest.class.getClassLoader();
+        final File file = new File(Objects.requireNonNull(classLoader.getResource("dk/dbc/opencat/transformation/preprocessing/" + filename)).getFile());
+        final InputStream is = new FileInputStream(file);
+
+        final DanMarc2LineFormatReader lineFormatReader = new DanMarc2LineFormatReader(is, StandardCharsets.UTF_8);
+
+        return lineFormatReader.read();
     }
 
 }

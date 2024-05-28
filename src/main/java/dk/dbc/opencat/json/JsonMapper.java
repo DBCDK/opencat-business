@@ -1,12 +1,10 @@
-/*
- * Copyright Dansk Bibliotekscenter a/s. Licensed under GNU GPL v3
- *  See license text at https://opensource.dbc.dk/licenses/gpl-3.0
- */
-
 package dk.dbc.opencat.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import dk.dbc.marc.binding.DataField;
+import dk.dbc.marc.binding.SubField;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,5 +72,13 @@ public class JsonMapper {
 
     public static String encodePretty(Object value) throws IOException {
         return instance.writePrettyValue(value);
+    }
+
+    public static DataField toDataField(DataFieldDTO dataFieldDTO) {
+        final DataField dataField = new DataField(dataFieldDTO.getName(), String.join("", dataFieldDTO.getIndicator()));
+        for (SubFieldDTO subFieldDTO : dataFieldDTO.getSubfields()) {
+            dataField.addOrReplaceFirstSubField(new SubField(subFieldDTO.getName(), subFieldDTO.getValue()));
+        }
+        return dataField;
     }
 }
