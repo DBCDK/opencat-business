@@ -5,10 +5,11 @@ use( "UnitTest" );
 
 UnitTest.addFixture( "Builder.buildRecord", function() {
     var record = {
+        "leader": ["0", "0", "0", "0", "0", "n", " ", "2", "2", "0", "0", "0", "0", "0", " ", "4", "5", "0", "0"],
         "fields": [
             {
                 "name": "001",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "a",
@@ -90,10 +91,11 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
     };
 
     var record2 = {
+        "leader": ["0", "0", "0", "0", "0", "n", " ", "2", "2", "0", "0", "0", "0", "0", " ", "4", "5", "0", "0"],
         "fields": [
             {
                 "name": "001",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "a",
@@ -102,7 +104,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 ]
             }, {
                 "name": "002",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "z",
@@ -111,11 +113,11 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
                 ]
             }, {
                 "name": "003",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [ ]
             }, {
                 "name": "042",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "c",
@@ -303,10 +305,11 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
     };
 
     var record3 = {
+        "leader": ["0", "0", "0", "0", "0", "n", " ", "2", "2", "0", "0", "0", "0", "0", " ", "4", "5", "0", "0"],
         "fields": [
             {
                 "name": "001",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "a",
@@ -328,7 +331,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
             },
             {
                 "name": "300",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "a",
@@ -413,10 +416,11 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
     };
 
     var record4 = {
+        "leader": ["0", "0", "0", "0", "0", "n", " ", "2", "2", "0", "0", "0", "0", "0", " ", "4", "5", "0", "0"],
         "fields": [
             {
                 "name": "001",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "a",
@@ -438,7 +442,7 @@ UnitTest.addFixture( "Builder.buildRecord", function() {
             },
             {
                 "name": "300",
-                "indicator": "00",
+                "indicator": ["0", "0"],
                 "subfields": [
                     {
                         "name": "b",

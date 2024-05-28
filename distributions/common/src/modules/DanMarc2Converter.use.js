@@ -83,12 +83,23 @@ var DanMarc2Converter = function () {
             if (result === undefined) {
                 result = new Record();
                 if (obj.leader !== undefined) {
-                    result.leader = obj.leader.join('');
+                    if (typeof obj.leader === 'string') {
+                        result.leader = obj.leader;
+                    } else {
+                        result.leader = obj.leader.join('');
+                    }
                 }
                 for (var i = 0; i < obj.fields.length; i++) {
                     var objField = obj.fields[i];
+                    var indicator;
 
-                    var field = new Field(objField.name.toString() + '', objField.indicator.join('') + '');
+                    if (typeof objField.indicator === 'string') {
+                        indicator = objField.indicator;
+                    } else {
+                        indicator = objField.indicator.join('');
+                    }
+
+                    var field = new Field(objField.name.toString() + '', indicator + '');
 
                     for (var j = 0; j < objField.subfields.length; j++) {
                         var objSubfield = objField.subfields[j];
@@ -127,9 +138,12 @@ var DanMarc2Converter = function () {
         Log.trace("Enter - DanMarc2Converter.convertFromDanMarc2()");
         var start = new Date().getTime();
         var result = {
-            fields: [],
-            leader: record.leader.split('')
+            fields: []
         };
+
+        if (record.leader !== undefined) {
+            result.leader = record.leader.split('')
+        }
 
         try {
             record.eachField(/./, function (field) {
