@@ -27,22 +27,27 @@ var FieldsIndicator = function () {
         var bundle;
         var errorMessage;
         var error;
+        var indicator;
         try {
             ValueCheck.check("params.indicator", params.indicator);
+            indicator = field.indicator;
+            if (typeof indicator !== "string") {
+                indicator = indicator.join('');
+            }
             if (typeof( params.indicator ) === "string") {
-                if (field.indicator === params.indicator) {
+                if (indicator === params.indicator) {
                     return result;
                 }
                 bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.string.error", field.indicator, params.indicator);
+                errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.string.error", indicator, params.indicator);
                 error = ValidateErrors.fieldError("TODO:url", errorMessage);
                 return result = [error];
             } else {
-                if (params.indicator.indexOf(field.indicator) > -1) {
+                if (params.indicator.indexOf(indicator) > -1) {
                     return result;
                 }
                 bundle = ResourceBundleFactory.getBundle(BUNDLE_NAME);
-                errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.array.error", field.indicator, params.indicator.join(", "));
+                errorMessage = ResourceBundle.getStringFormat(bundle, "field.indicator.array.error", indicator, params.indicator.join(", "));
                 error = ValidateErrors.fieldError("TODO:url", errorMessage);
                 return result = [error];
             }
