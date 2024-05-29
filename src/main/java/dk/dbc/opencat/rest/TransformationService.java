@@ -130,11 +130,4 @@ public class TransformationService {
         }
     }
 
-    private String convertDocumentToString(Document doc) throws TransformerException {
-        final StringWriter writer = new StringWriter();
-        transformer.transform(new DOMSource(doc), new StreamResult(writer));
-
-        return writer.getBuffer().toString();
-    }
-
 }

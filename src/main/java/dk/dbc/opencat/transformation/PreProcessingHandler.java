@@ -383,8 +383,7 @@ public class PreProcessingHandler {
         final List<DataField> fieldsToRemove = new ArrayList<>();
 
         for (DataField field : record.getFields(DataField.class)) {
-            if ("666".equals(field.getTag())) {
-                if (field.hasSubField(DataField.hasSubFieldCode('u'))) {
+            if ("666".equals(field.getTag()) && field.hasSubField(DataField.hasSubFieldCode('u'))) {
                     String subFieldValue = field.getSubField(DataField.hasSubFieldCode('u')).orElseThrow().getData();
                     for (Matcher matcher : matchers) {
                         if (subFieldValue.equalsIgnoreCase(matcher.group(1) + " " + matcher.group(2) + "-" + matcher.group(3) + " " + matcher.group(4))) {
@@ -393,7 +392,7 @@ public class PreProcessingHandler {
                         }
                     }
                 }
-            }
+
         }
 
         record.getFields().removeAll(fieldsToRemove);
