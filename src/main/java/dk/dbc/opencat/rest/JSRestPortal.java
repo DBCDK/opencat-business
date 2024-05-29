@@ -3,7 +3,6 @@ package dk.dbc.opencat.rest;
 import dk.dbc.common.records.RecordContentTransformer;
 import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.commons.jsonb.JSONBException;
-import dk.dbc.marc.binding.DataField;
 import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.MDCUtil;
@@ -12,6 +11,7 @@ import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
 import dk.dbc.opencat.json.DataFieldDTO;
 import dk.dbc.opencat.json.JsonMapper;
+import dk.dbc.opencat.json.WrapperDataField;
 import dk.dbc.opencat.ws.JNDIResources;
 import dk.dbc.opencatbusiness.dto.BuildRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.CheckTemplateBuildRequestDTO;
@@ -249,15 +249,19 @@ public class JSRestPortal {
         try {
             MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(recordRequestDTO.getTrackingId(), "recategorizationNoteFieldFactory"));
             scripterEnvironment = scripterPool.take();
-            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request:{}", recordRequestDTO);
+            LOGGER.debug("recategorizationNoteFieldFactory. Incoming request: {}", recordRequestDTO);
             result = (String) scripterEnvironment.callMethod("recategorizationNoteFieldFactory",
                     marcXMLtoJson(recordRequestDTO.getRecord()));
             sanityCheck(result, DataFieldDTO.class);
-            final DataFieldDTO dataFieldDTO = jsonbContext.unmarshall(result, DataFieldDTO.class);
-            DataField dataField = JsonMapper.toDataField(dataFieldDTO);
-            LOGGER.debug("recategorizationNoteFieldFactory result:{}", jsonbContext.marshall(dataField));
 
-            return Response.ok().entity(dataField).build();
+            // This is a bit weird. We can't unmarshall to a DataField directly because the output json doesn't have the matching properties.
+            // So we have to use an intermediate object to unmarshall to.
+            // But because the opencat-business connector expected a slightly different DTO we have to map the DTO again.
+            final DataFieldDTO dataFieldDTO = jsonbContext.unmarshall(result, DataFieldDTO.class);
+            final WrapperDataField wrapperDataField = JsonMapper.wrapDataFieldDTO(dataFieldDTO);
+            LOGGER.debug("recategorizationNoteFieldFactory result:{}", jsonbContext.marshall(wrapperDataField));
+
+            return Response.ok().entity(wrapperDataField).build();
         } catch (InterruptedException | JSONBException | ScripterException | MarcReaderException e) {
             LOGGER.error("recategorizationNoteFieldFactory", e);
             return Response.serverError().build();

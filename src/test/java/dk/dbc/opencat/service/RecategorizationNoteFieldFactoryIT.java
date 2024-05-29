@@ -5,6 +5,8 @@ import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
 import dk.dbc.marc.binding.DataField;
 import dk.dbc.marc.binding.SubField;
+import dk.dbc.opencat.json.WrapperDataField;
+import dk.dbc.opencat.json.WrapperSubField;
 import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import jakarta.ws.rs.core.Response;
 import org.junit.Test;
@@ -26,17 +28,17 @@ public class RecategorizationNoteFieldFactoryIT extends AbstractOpencatBusinessC
                 .withPathElements(new PathBuilder("/api/v1/recategorizationNoteFieldFactory")
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
-        DataField expected = new DataField("512", "00");
-        expected.addAllSubFields(Arrays.asList(
-                new SubField('i', "Materialet er opstillet under"),
-                new SubField('d', "Powell, Eric"),
-                new SubField('t', "The ¤Goon, nothin' but misery"),
-                new SubField('b', "# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
+        WrapperDataField expected = new WrapperDataField("512", "00");
+        expected.setSubfields(Arrays.asList(
+                new WrapperSubField("i", "Materialet er opstillet under"),
+                new WrapperSubField("d", "Powell, Eric"),
+                new WrapperSubField("t", "The ¤Goon, nothin' but misery"),
+                new WrapperSubField("b", "# (DK5 83.8), materialekoder [a (xx)]. Postens opstilling ændret på grund af omkatalogisering")));
 
         Response response = httpClient.execute(httpPost);
 
         assertThat("Response code", response.getStatus(), is(200));
-        DataField actual = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DataField.class);
+        WrapperDataField actual = JSONB_CONTEXT.unmarshall(response.readEntity(String.class), WrapperDataField.class);
         assertThat("Marcfield is returned properly", actual, is(expected));
     }
 

@@ -2,8 +2,6 @@ package dk.dbc.opencat.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import dk.dbc.marc.binding.DataField;
-import dk.dbc.marc.binding.SubField;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,10 +72,10 @@ public class JsonMapper {
         return instance.writePrettyValue(value);
     }
 
-    public static DataField toDataField(DataFieldDTO dataFieldDTO) {
-        final DataField dataField = new DataField(dataFieldDTO.getName(), String.join("", dataFieldDTO.getIndicator()));
+    public static WrapperDataField wrapDataFieldDTO(DataFieldDTO dataFieldDTO) {
+        final WrapperDataField dataField = new WrapperDataField(dataFieldDTO.getName(), String.join("", dataFieldDTO.getIndicator()));
         for (SubFieldDTO subFieldDTO : dataFieldDTO.getSubfields()) {
-            dataField.addOrReplaceFirstSubField(new SubField(subFieldDTO.getName(), subFieldDTO.getValue()));
+            dataField.getSubfields().add(new WrapperSubField(String.valueOf(subFieldDTO.getName()), subFieldDTO.getValue()));
         }
         return dataField;
     }
