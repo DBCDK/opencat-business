@@ -1,15 +1,16 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.common.records.RecordContentTransformer;
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
-import java.io.UnsupportedEncodingException;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import org.junit.Test;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -17,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class SortRecordIT extends AbstractOpencatBusinessContainerTest {
 
     @Test
-    public void test_that_field_008_subfields_are_sorted_according_to_template_bogbind() throws JSONBException, UnsupportedEncodingException {
+    public void test_that_field_008_subfields_are_sorted_according_to_template_bogbind() throws JSONBException, MarcReaderException {
         SortRecordRequestDTO sortRecordRequestDTO = new SortRecordRequestDTO();
         sortRecordRequestDTO.setTemplateProvider("bogbind");
         sortRecordRequestDTO.setRecord(getRequest());

@@ -90,11 +90,11 @@ UnitTest.addFixture("DanMarc2Converter.convertFromDanMarc2", function () {
     arg = {
         fields: [
             {
-                name: "001", indicator: "00",
+                name: "001", indicator: ["0", "0"],
                 subfields: [{name: "a", value: "12345679"}]
             },
             {
-                name: "004", indicator: "00",
+                name: "004", indicator: ["0", "0"],
                 subfields: [{name: "a", value: "e"},
                     {name: "r", value: "c"}]
             }]

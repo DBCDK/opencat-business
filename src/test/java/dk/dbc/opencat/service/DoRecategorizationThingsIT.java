@@ -1,16 +1,18 @@
 package dk.dbc.opencat.service;
 
-import dk.dbc.common.records.MarcRecord;
-import dk.dbc.common.records.utils.RecordContentTransformer;
+import dk.dbc.common.records.RecordContentTransformer;
+import dk.dbc.commons.jsonb.JSONBException;
 import dk.dbc.httpclient.HttpPost;
 import dk.dbc.httpclient.PathBuilder;
-import dk.dbc.jsonb.JSONBException;
+import dk.dbc.marc.binding.MarcRecord;
+import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencatbusiness.dto.DoRecategorizationThingsRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
-import java.io.UnsupportedEncodingException;
-import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBException;
+import jakarta.ws.rs.core.Response;
 import org.junit.Test;
+
+import javax.xml.bind.JAXBException;
+import java.io.UnsupportedEncodingException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,12 +23,13 @@ public class DoRecategorizationThingsIT extends AbstractOpencatBusinessContainer
      * The following just tests that javascript layer is called properly,
      * and that a record is returned properly.
      * This is NOT a test at any level of business logic!
+     *
      * @throws UnsupportedEncodingException
      * @throws JAXBException
      * @throws JSONBException
      */
     @Test
-    public void doRecategorizationThings_sanitytest() throws UnsupportedEncodingException, JAXBException, JSONBException {
+    public void doRecategorizationThings_sanitytest() throws JSONBException, MarcReaderException {
         String currentRecord = getCurrentRecord();
         String updateRecord = getUpdateRecord();
         String newRecord = getNewRecord();
@@ -51,7 +54,7 @@ public class DoRecategorizationThingsIT extends AbstractOpencatBusinessContainer
 
     public String getUpdateRecord() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
-                "    <leader>00000     22000000 4500 </leader>\n" +
+                "    <leader>00000n 2200000 4500</leader>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
                 "        <subfield code=\"a\">43645676</subfield>\n" +
                 "        <subfield code=\"b\">870970</subfield>\n" +
@@ -130,7 +133,7 @@ public class DoRecategorizationThingsIT extends AbstractOpencatBusinessContainer
 
     private String getCurrentRecord() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
-                "    <leader>00000     22000000 4500 </leader>\n" +
+                "    <leader>00000n 2200000 4500</leader>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
                 "        <subfield code=\"a\">43645676</subfield>\n" +
                 "        <subfield code=\"b\">870970</subfield>\n" +
@@ -206,7 +209,7 @@ public class DoRecategorizationThingsIT extends AbstractOpencatBusinessContainer
 
     private String getNewRecord() {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><record xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"info:lc/xmlns/marcxchange-v1 http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\">\n" +
-                "    <leader>00000     22000000 4500 </leader>\n" +
+                "    <leader>00000n 2200000 4500</leader>\n" +
                 "    <datafield ind1=\"0\" ind2=\"0\" tag=\"001\">\n" +
                 "        <subfield code=\"a\">43645676</subfield>\n" +
                 "        <subfield code=\"b\">717500</subfield>\n" +
