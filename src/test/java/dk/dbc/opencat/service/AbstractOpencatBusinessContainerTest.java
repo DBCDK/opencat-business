@@ -58,79 +58,75 @@ public class AbstractOpencatBusinessContainerTest {
     static final JSONBContext JSONB_CONTEXT = new JSONBContext();
 
     static {
-        try {
-            final Network network = Network.newNetwork();
+        final Network network = Network.newNetwork();
 
-            wireMockServer = new WireMockServer(options().fileSource(new SingleRootFileSource("target/test-classes")).dynamicPort());
-            wireMockServer.start();
-            WireMock.configureFor("localhost", wireMockServer.port());
-            WireMock.configureFor("opennumberroll", wireMockServer.port());
-            Testcontainers.exposeHostPorts(wireMockServer.port());
+        wireMockServer = new WireMockServer(options().fileSource(new SingleRootFileSource("target/test-classes")).dynamicPort());
+        wireMockServer.start();
+        WireMock.configureFor("localhost", wireMockServer.port());
+        WireMock.configureFor("opennumberroll", wireMockServer.port());
+        Testcontainers.exposeHostPorts(wireMockServer.port());
 
-            rawrepoDbContainer = new GenericContainer(RAWREPO_DB_IMAGE).withNetwork(network)
-                    .withNetworkAliases("rawrepoDb")
-                    .withLogConsumer(new Slf4jLogConsumer(LOGGER))
-                    .withEnv("POSTGRES_DB", "rawrepo")
-                    .withEnv("POSTGRES_USER", "rawrepo")
-                    .withEnv("POSTGRES_PASSWORD", "rawrepo")
-                    .withExposedPorts(5432)
-                    .withStartupTimeout(Duration.ofMinutes(1));
-            rawrepoDbContainer.start();
-            RAWREPO_DB_BASE_URL = "rawrepo:rawrepo@rawrepoDb:5432/rawrepo";
+        rawrepoDbContainer = new GenericContainer(RAWREPO_DB_IMAGE).withNetwork(network)
+                .withNetworkAliases("rawrepoDb")
+                .withLogConsumer(new Slf4jLogConsumer(LOGGER))
+                .withEnv("POSTGRES_DB", "rawrepo")
+                .withEnv("POSTGRES_USER", "rawrepo")
+                .withEnv("POSTGRES_PASSWORD", "rawrepo")
+                .withExposedPorts(5432)
+                .withStartupTimeout(Duration.ofMinutes(1));
+        rawrepoDbContainer.start();
+        RAWREPO_DB_BASE_URL = "rawrepo:rawrepo@rawrepoDb:5432/rawrepo";
 
-            holdingsItemsDbContainer = new GenericContainer(HOLDINGITEMS_DB_IMAGE)
-                    .withNetwork(network)
-                    .withNetworkAliases("holdingsItemsDb")
-                    .withLogConsumer(new Slf4jLogConsumer(LOGGER))
-                    .withEnv("POSTGRES_DB", "holdings")
-                    .withEnv("POSTGRES_USER", "holdings")
-                    .withEnv("POSTGRES_PASSWORD", "holdings")
-                    .withExposedPorts(5432)
-                    .withStartupTimeout(Duration.ofMinutes(1));
-            holdingsItemsDbContainer.start();
-            HOLDINGS_ITEMS_DB_URL = "holdings:holdings@holdingsItemsDb:5432/holdings";
+        holdingsItemsDbContainer = new GenericContainer(HOLDINGITEMS_DB_IMAGE)
+                .withNetwork(network)
+                .withNetworkAliases("holdingsItemsDb")
+                .withLogConsumer(new Slf4jLogConsumer(LOGGER))
+                .withEnv("POSTGRES_DB", "holdings")
+                .withEnv("POSTGRES_USER", "holdings")
+                .withEnv("POSTGRES_PASSWORD", "holdings")
+                .withExposedPorts(5432)
+                .withStartupTimeout(Duration.ofMinutes(1));
+        holdingsItemsDbContainer.start();
+        HOLDINGS_ITEMS_DB_URL = "holdings:holdings@holdingsItemsDb:5432/holdings";
 
-            recordServiceContainer = new GenericContainer(RECORD_SERVICE_IMAGE)
-                    .withNetwork(network).withNetworkAliases("recordservice")
-                    .withLogConsumer(new Slf4jLogConsumer(LOGGER))
-                    .withEnv("INSTANCE", "it")
-                    .withEnv("LOG_FORMAT", "text")
-                    .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
-                    .withEnv("VIPCORE_CACHE_AGE", "0")
-                    .withEnv("RAWREPO_URL", RAWREPO_DB_BASE_URL)
-                    .withEnv("HOLDINGS_URL", HOLDINGS_ITEMS_DB_URL)
-                    .withEnv("DUMP_THREAD_COUNT", "8")
-                    .withEnv("DUMP_SLIZE_SIZE", "1000")
-                    .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
-                    .withClasspathResourceMapping(".", "/currentdir", BindMode.READ_ONLY)
-                    .withExposedPorts(8080)
-                    .waitingFor(Wait.forHttp("/api/status"))
-                    .withStartupTimeout(Duration.ofMinutes(2));
-            recordServiceContainer.start();
-            RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
+        recordServiceContainer = new GenericContainer(RECORD_SERVICE_IMAGE)
+                .withNetwork(network).withNetworkAliases("recordservice")
+                .withLogConsumer(new Slf4jLogConsumer(LOGGER))
+                .withEnv("INSTANCE", "it")
+                .withEnv("LOG_FORMAT", "text")
+                .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
+                .withEnv("VIPCORE_CACHE_AGE", "0")
+                .withEnv("RAWREPO_URL", RAWREPO_DB_BASE_URL)
+                .withEnv("HOLDINGS_URL", HOLDINGS_ITEMS_DB_URL)
+                .withEnv("DUMP_THREAD_COUNT", "8")
+                .withEnv("DUMP_SLIZE_SIZE", "1000")
+                .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
+                .withClasspathResourceMapping(".", "/currentdir", BindMode.READ_ONLY)
+                .withExposedPorts(8080)
+                .waitingFor(Wait.forHttp("/api/status"))
+                .withStartupTimeout(Duration.ofMinutes(2));
+        recordServiceContainer.start();
+        RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
 
-            // Please note that the docker image only exists temporarily, so don't look after it at the artifactory site
-            openCatBusinessContainer = new GenericContainer("docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel")
-                    .withNetwork(network)
-                    .withLogConsumer(new Slf4jLogConsumer(LOGGER))
-                    .withEnv("LOG_FORMAT", "text")
-                    .withEnv("RAWREPO_RECORD_SERVICE_URL", RECORD_SERVICE_BASE_URL)
-                    .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
-                    .withEnv("SOLR_URL", getWiremockUrl())
-                    .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
-                    .withEnv("OPENNUMBERROLL_URL", getWiremockUrl())
-                    .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
-                    .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
-                    .withExposedPorts(8080)
-                    .waitingFor(Wait.forHttp("/api/isready"))
-                    .withStartupTimeout(Duration.ofMinutes(2));
-            openCatBusinessContainer.start();
-            openCatBusinessBaseURL = "http://" + openCatBusinessContainer.getContainerIpAddress() + ":" + openCatBusinessContainer.getMappedPort(8080);
+        // Please note that the docker image only exists temporarily, so don't look after it at the artifactory site
+        openCatBusinessContainer = new GenericContainer("docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel")
+                .withNetwork(network)
+                .withLogConsumer(new Slf4jLogConsumer(LOGGER))
+                .withEnv("LOG_FORMAT", "text")
+                .withEnv("RAWREPO_RECORD_SERVICE_URL", RECORD_SERVICE_BASE_URL)
+                .withEnv("VIPCORE_ENDPOINT", VIPCORE_ENDPOINT)
+                .withEnv("SOLR_URL", getWiremockUrl())
+                .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
+                .withEnv("OPENNUMBERROLL_URL", getWiremockUrl())
+                .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
+                .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
+                .withExposedPorts(8080)
+                .waitingFor(Wait.forHttp("/api/isready"))
+                .withStartupTimeout(Duration.ofMinutes(2));
+        openCatBusinessContainer.start();
+        openCatBusinessBaseURL = "http://" + openCatBusinessContainer.getContainerIpAddress() + ":" + openCatBusinessContainer.getMappedPort(8080);
 
-            httpClient = HttpClient.create(HttpClient.newClient());
-        } catch (RuntimeException e) {
-            throw e;
-        }
+        httpClient = HttpClient.create(HttpClient.newClient());
     }
 
     private static String getWiremockUrl() {
