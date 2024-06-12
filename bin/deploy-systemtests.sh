@@ -78,7 +78,7 @@ echo "docker ps : $?"
 
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
-docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}
+docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-service:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
 docker-compose pull
@@ -131,8 +131,8 @@ echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4
 export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
 
 docker-compose up -d updateservice
-docker tag docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION} docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${USER}
-docker rmi docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION}
+docker tag docker-metascrum.artifacts.dbccloud.dk/update-service:${PROD_VERSION} docker-metascrum.artifacts.dbccloud.dk/update-service:${USER}
+docker rmi docker-metascrum.artifacts.dbccloud.dk/update-service:${PROD_VERSION}
 
 UPDATESERVICE_IMAGE=`docker-compose ps -q updateservice`
 UPDATESERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
