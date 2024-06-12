@@ -21,7 +21,7 @@ services:
     image: docker-externals.artifacts.dbccloud.dk/fakesmtp
 
   updateservice:
-    image: docker-metascrum.artifacts.dbccloud.dk/update-payara-deployer:${PROD_VERSION}
+    image: docker-metascrum.artifacts.dbccloud.dk/update-service:${PROD_VERSION}
     env_file:
       - settings.env
       - db.env
