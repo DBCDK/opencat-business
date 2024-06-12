@@ -135,7 +135,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<record xsi:schemaLocation=\"http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\"\n" +
                 "        xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-                "    <leader>00000n 2200000 4500</leader>\n" +
+                "    <leader>00000n    22000000  4500</leader>\n" +
                 "    <datafield tag=\"001\" ind1=\"0\" ind2=\"0\">\n" +
                 "        <subfield code=\"a\">126900201</subfield>\n" +
                 "        <subfield code=\"b\">870970</subfield>\n" +
@@ -212,7 +212,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<record xsi:schemaLocation=\"http://www.loc.gov/standards/iso25577/marcxchange-1-1.xsd\"\n" +
                 "        xmlns=\"info:lc/xmlns/marcxchange-v1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-                "    <leader>00000n 2200000 4500</leader>\n" +
+                "    <leader>00000n    22000000  4500</leader>\n" +
                 "    <datafield tag=\"001\" ind1=\"0\" ind2=\"0\">\n" +
                 "        <subfield code=\"a\">126900201</subfield>\n" +
                 "        <subfield code=\"b\">870970</subfield>\n" +
