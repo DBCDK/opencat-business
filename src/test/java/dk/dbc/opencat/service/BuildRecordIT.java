@@ -11,10 +11,17 @@ import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import jakarta.ws.rs.core.Response;
 import org.junit.Test;
 
+import java.util.regex.Pattern;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
+    // This is the regex pattern which the Cicero client uses to validate the leader
+    // The original pattern is ‘\d{5}\p{IsBasicLatin}\p{IsBasicLatin}{4}\d\d\d{5}\p{IsBasicLatin}{3}\d\d\d\p{IsBasicLatin}’
+    // but translated to Java and optimized a bit we end up the this.
+    private static final String CICERO_LEADER_MATCH = "\\d{5}[\\u0020-\\u007E]{5}\\d{7}[\\u0020-\\u007E]{3}\\d{3}[\\u0020-\\u007E]";
+    private final static Pattern pattern = Pattern.compile(CICERO_LEADER_MATCH);
 
     @Test
     public void test_that_a_record_is_built_with_another_record_as_template() throws MarcReaderException, JSONBException {
@@ -34,6 +41,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
         MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         assertThat("Response code", response.getStatus(), is(200));
         assertThat("New record as expected", actual, is(expected));
+        assertThat("Leader is as expected", pattern.matcher(actual.getLeader().getData()).matches(), is(true));
     }
 
     @Test
@@ -53,6 +61,7 @@ public class BuildRecordIT extends AbstractOpencatBusinessContainerTest {
         MarcRecord actual = RecordContentTransformer.decodeRecord(recordResponseDTO.getRecord().getBytes());
         assertThat("Response code", response.getStatus(), is(200));
         assertThat("New record as expected", actual, is(expected));
+        assertThat("Leader is as expected", pattern.matcher(actual.getLeader().getData()).matches(), is(true));
     }
 
     private String getRequest() {
