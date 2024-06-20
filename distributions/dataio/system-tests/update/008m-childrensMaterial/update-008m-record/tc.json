@@ -127,7 +127,7 @@
             "ordinalPositionOfField": 2,
             "ordinalPositionOfSubfield": 7,
             "ordinalPositionInSubfield": null,
-            "message": "Værdien '2' må ikke forfindes sammen med delfelt '008*o'"
+            "message": "Værdien '2' må ikke forefindes sammen med delfelt '008*o'"
           }
         ]
       }
