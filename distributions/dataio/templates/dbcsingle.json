@@ -236,7 +236,7 @@
             "sorting": "&tupazbcdefghijklmnoqrxwv",
             "subfields": {
                 "&": {
-                    "values": [ "b", "f", "n", "u" ]
+                    "values": [ "b", "n" ]
                 },
                 "t": {
                     "repeatable": false,
