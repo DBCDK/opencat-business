@@ -1,0 +1,36 @@
+001 00 *a 137398583 *b 870970 *c 20231214131524 *d 20231109 *f a
+004 00 *r n *a e
+008 00 *t s *u f *a 2023 *b dk *d 2 *d x *j j *l dan *o b *v 0
+009 00 *a a *g xx
+021 00 *e 9788792624697 *c ib.
+032 00 *x ACC202345 *a DBF202352 *x BKM202352
+110 00 *5 870979 *6 133961011 *4 aut
+245 00 *a Godnat Ugle *c godnathistorier for de små og store
+250 00 *a 1. udgave
+260 00 *& 1 *a [Vipperød] *b Afart *c 2023
+300 00 *a 47 sider *b ill. i farver
+504 00 *& 1 *a 13 forskellige godnathistorier til de små. Der er både rimede vers og korte historier med helsides illustrationer. Højtlæsning for 3-8-årige
+512 00 *i 76vers pseudonym for *e Jesper Skoubølling
+520 00 *& 1 *a Originaludgave: 2023
+521 00 *b 1. oplag *c 2023
+652 00 *n 86 *z 096
+652 00 *o sk
+666 00 *s venskab
+666 00 *s livet
+666 00 *o nonsensfortællinger
+666 00 *o vrøvlevers
+666 00 *o godnathistorier
+666 00 *o korte historier
+666 00 *u for 3 år
+666 00 *u for 4 år
+666 00 *u for 5 år
+666 00 *u for 6 år
+666 00 *u for 7 år
+666 00 *u for 8 år
+666 00 *u for højtlæsning
+710 00 *5 870979 *6 133961011 *4 art
+720 00 *o Thomas Schrøder *4 edt
+720 00 *o Dianna Lotus Ozol *4 edt
+780 00 *5 870979 *6 133961011 *4 aut
+990 00 *b l *b b *b s *u nt
+996 00 *a DBC

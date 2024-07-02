@@ -1,0 +1,42 @@
+001 00 *a 137024764 *b 870970 *c 20240320112056 *d 20230906 *f a
+004 00 *r n *a e
+008 00 *t m *u f *a 2023 *b dk *d x *j f *l dan *o b *v 0
+009 00 *a a *g xx
+021 00 *e 9788794433563 *c ib.
+032 00 *x ACC202336 *a DBF202340 *x BKM202340
+100 00 *5 870979 *6 133961011 *4 aut
+245 00 *a Svinet
+250 00 *a 1. udgave
+260 00 *& 1 *a [Virum] *b Krabat *c 2023
+300 00 *a 67 sider
+504 00 *& 1 *a Onkel Jimmy har taget Pelle og hans lillesøster Wilma med i Hekkenfeldts Sommerland, hvor uhyggen lurer under radiobilerne og rutsjebanerne. Kort gyser for 10-14-årige
+520 00 *& 1 *a Originaludgave: 2023
+521 00 *b 1. oplag *c 2023
+600 00 *5 870979 *6 133961011 *4 aut
+652 00 *n 86 *z 096
+652 00 *o sk
+664 00 *s let/svær *y 2
+664 00 *u virkelig/fantasi *y 2
+664 00 *s tekst/tegninger *y 1
+664 00 *s kort/lang *y 2
+664 00 *n spændende *y 4
+664 00 *n uhyggelig *y 5
+664 00 *e mit liv *y 1
+664 00 *e gys *y 5
+664 00 *e action *y 3
+666 00 *s uhygge
+666 00 *s forlystelsesparker
+666 00 *s søskende
+666 00 *s grise
+666 00 *o gys
+666 00 *o romaner
+666 00 *u for 10 år
+666 00 *u for 11 år
+666 00 *u for 12 år
+666 00 *u for 13 år
+666 00 *u for 14 år
+700 00 *5 870979 *6 133961011 *4 aut
+720 00 *o Helle Perrier *4 edt
+770 00 *5 870979 *6 133961011 *4 aut
+990 00 *b l *b b *b s *u nt
+996 00 *a DBC

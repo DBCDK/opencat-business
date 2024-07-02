@@ -1,0 +1,119 @@
+[
+  {
+    "name": "switch-110-to-100",
+    "description": "Tester skift fra korporation til forfatter i A-post",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcautoritet",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-133961011-common.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "setup-137024764-common.marc",
+            "setup-137398583-common.marc"
+          ],
+          "enrichments": [
+            "setup-133961011-enrichment.marc"
+          ]
+        },
+        {
+          "record": "setup-133961011-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-137024764-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-137024764-enrichment.marc"
+          ]
+        },
+        {
+          "record": "setup-137024764-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        },
+        {
+          "record": "setup-137398583-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-137398583-enrichment.marc"
+          ]
+        },
+        {
+          "record": "setup-137398583-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-133961011-common.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": true,
+            "children": [
+              "result-137024764-common.marc",
+              "result-137398583-common.marc"
+            ],
+            "enrichments": [
+              "result-133961011-enrichment.marc"
+            ]
+          },
+          {
+            "record": "result-133961011-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result-137024764-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "setup-137024764-enrichment.marc"
+            ]
+          },
+          {
+            "record": "setup-137024764-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "result-137398583-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "setup-137398583-enrichment.marc"
+            ]
+          },
+          {
+            "record": "setup-137398583-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
