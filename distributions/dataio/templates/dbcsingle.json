@@ -1682,9 +1682,7 @@
                 "p": "DanMarc2.fields.856.subfields.p",
                 "q": "DanMarc2.fields.856.subfields.q",
                 "s": "DanMarc2.fields.856.subfields.s",
-                "u":{
-                    "mandatory":true
-                },
+                "u": "DanMarc2.fields.856.subfields.u",
                 "y": "DanMarc2.fields.856.subfields.y",
                 "v": "DanMarc2.fields.856.subfields.v",
                 "x": "DanMarc2.fields.856.subfields.x",
