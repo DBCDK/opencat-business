@@ -786,6 +786,17 @@
                 "e":"DanMarc2.fields.900.subfields.e",
                 "f":"DanMarc2.fields.900.subfields.f",
                 "c":"DanMarc2.fields.900.subfields.c",
+                "w":{
+                    "repeatable":false,
+                    "rules":[ {
+                        "type": "SubfieldRules.subfieldAllowedIfSubfieldValueInOtherFieldExists",
+                        "params": {
+                            "field": "996",
+                            "subfield": "a",
+                            "values": [ "DBC" ]
+                        }
+                    }]
+                },
                 "x":"DanMarc2.fields.900.subfields.x",
                 "z":{
                     "mandatory":true,
