@@ -1,11 +1,12 @@
-001 00 *a 51340213 *b 300000 *c 20041119103519 *d 20000403 *f a
+001 00 *a 04139143 *b 300000 *c 20041119103519 *d 20000403 *f a
 004 00 *r c *a e
 008 00 *t m *u r *b gb *j j *l eng *o b *v 4
 009 00 *a a *g xx
 018 00 *a101534936
+018 00 *a 21177083
 021 00 *a 0-14-038998-9
 100 00 *a Jennings *h Paul *c 1943-
-245 00 *a Unseen! *e Paul Jennings
+245 00 *a Unseen horrors! *e Paul Jennings
 260 00 *a London *b Puffin
 300 00 *a 157 s. *c 20 cm.
 517 00 *a Historier for børn
@@ -14,3 +15,4 @@
 630 00 *a spøgelseshistorier
 652 00 *m 83
 666 00 *f Australien
+996 00 *a 300101

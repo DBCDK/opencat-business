@@ -1,7 +1,7 @@
 [
   {
-    "name": "fix-018-school-record",
-    "description": "A school changes 018 which isn't allowed record",
+    "name": "Update-source-PLC-record",
+    "description": "A school tries to update a local record that is the original for a plc record",
     "request": {
       "authentication": {
         "group": "300101",
@@ -14,21 +14,14 @@
     "setup": {
       "rawrepo": [
         {
-          "record": "300000-record-1.marc",
+          "record": "plc-record.marc",
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
           ]
         },
         {
-          "record": "300000-record.marc",
-          "type": "MARCXCHANGE",
-          "deleted": false,
-          "enrichments": [
-          ]
-        },
-        {
-          "record": "rawrepo-common.marc",
+          "record": "common.marc",
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
@@ -39,17 +32,10 @@
     "expected": {
       "validation": {},
       "update": {
-        "errors": [],
+        "errors": [ ],
         "rawrepo": [
           {
-            "record": "300000-record-1.marc",
-            "type": "MARCXCHANGE",
-            "deleted": false,
-            "enrichments": [
-            ]
-          },
-          {
-            "record": "300000-result-record.marc",
+            "record": "update-plc-record.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": true,
@@ -57,7 +43,7 @@
             ]
           },
           {
-            "record": "result-common.marc",
+            "record": "update-result-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": true,

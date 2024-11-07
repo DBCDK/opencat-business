@@ -14,7 +14,7 @@
     "setup": {
       "rawrepo": [
         {
-          "record": "new-plc-record.marc",
+          "record": "plc-record.marc",
           "type": "MARCXCHANGE",
           "deleted": false,
           "enrichments": [
@@ -28,7 +28,7 @@
         "errors": [ ],
         "rawrepo": [
           {
-            "record": "new-plc-record.marc",
+            "record": "plc-record.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": false,
@@ -37,6 +37,61 @@
           },
           {
             "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Update-copy-PLC-record",
+    "description": "A school tries to update a local record that is a copy of a plc record",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bog",
+      "record": "update-request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "plc-record.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        },
+        {
+          "record": "result-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [ ],
+        "rawrepo": [
+          {
+            "record": "plc-record.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+            ]
+          },
+          {
+            "record": "update-result-common.marc",
             "type": "MARCXCHANGE",
             "deleted": false,
             "enqueued": true,
