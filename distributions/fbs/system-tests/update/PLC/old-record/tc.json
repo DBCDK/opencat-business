@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Update-pre-PLC-record",
+    "description": "A school updates an old non-PLC record",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

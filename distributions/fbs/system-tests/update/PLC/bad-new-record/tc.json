@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Create-PLC-record-two-plc-numbers",
+    "description": "A school tries to create a new local record with two plc ids - that must fail",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "new-plc-record.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        },
+        {
+          "record": "300000-record-1.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [ {
+          "type" : "FATAL",
+          "code" : null,
+          "urlForDocumentation" : null,
+          "ordinalPositionOfField" : null,
+          "ordinalPositionOfSubfield" : null,
+          "ordinalPositionInSubfield" : null,
+          "message" : "Der er mere end et plc id specificeret i 018 i en ny post - det kan man ikke : [04139143, 51340213]"
+        } ],
+        "rawrepo": [
+          {
+            "record": "new-plc-record.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+            ]
+          },
+          {
+            "record": "300000-record-1.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,71 @@
+[
+  {
+    "name": "fix-018-school-record",
+    "description": "A school changes 018 which isn't allowed record",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "300000-record-1.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        },
+        {
+          "record": "300000-record.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        },
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "300000-record-1.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enrichments": [
+            ]
+          },
+          {
+            "record": "300000-record.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          },
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  }
+]
