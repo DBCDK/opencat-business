@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Create-PLC-record",
+    "description": "A school creates a new local record",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "new-plc-record.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          },
+          {
+            "record": "result-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

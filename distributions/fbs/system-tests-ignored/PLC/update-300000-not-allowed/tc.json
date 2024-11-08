@@ -1,0 +1,55 @@
+[
+  {
+    "name": "normal-update-300000-failure",
+    "description": "Updating a PLC record with template lokal-bog must fail",
+    "request": {
+      "authentication": {
+        "group": "300000",
+        "user": "bks",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bog",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common-current.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false
+        },
+        {
+          "record": "rawrepo-common-current-101.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [
+          {
+            "type": "FATAL",
+            "urlForDocumentation": null,
+            "message": "Du har ikke rettigheder til at rette eller oprette en 300000 post"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common-current.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "rawrepo-common-current-101.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]

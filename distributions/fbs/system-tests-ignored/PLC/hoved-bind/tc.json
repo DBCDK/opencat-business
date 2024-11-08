@@ -1,0 +1,87 @@
+[
+  {
+    "name": "new-head-record",
+    "description": "A school create a head record, no plc actions",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-boghoved",
+      "record": "hoved-request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "hoved-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "new-volume-record",
+    "description": "A school create a volume record, no plc actions",
+    "request": {
+      "authentication": {
+        "group": "300101",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "lokal-bogbind",
+      "record": "bind-request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "hoved-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": true,
+          "enrichments": [
+          ]
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "hoved-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "children": [
+              "bind-common.marc"
+            ],
+            "enrichments": [
+            ]
+          },
+          {
+            "record": "bind-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

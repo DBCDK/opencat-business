@@ -1,0 +1,76 @@
+[
+  {
+    "name": "allowall-update-300000",
+    "description": "Updating a PLC record with template allowall",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "bks",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common-current.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "allowall-update-300101",
+    "description": "Updating a local record with template allowall",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "bks",
+        "password": "20Koster"
+      },
+      "templateName": "allowall",
+      "record": "request-101.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "rawrepo-common-current-101.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enqueued": true
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-common-101.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
