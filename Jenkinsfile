@@ -1,6 +1,6 @@
 #!groovy
 
-def workerNode = "devel11"
+def workerNode = "devel11-java11"
 
 void notifyOfBuildStatus(final String buildStatus) {
     final String subject = "${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
@@ -18,7 +18,6 @@ pipeline {
     agent { label workerNode }
 
     tools {
-        jdk 'jdk11'
         maven "Maven 3"
     }
 
