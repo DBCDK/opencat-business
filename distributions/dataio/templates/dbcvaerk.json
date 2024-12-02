@@ -222,6 +222,9 @@
                     "mandatory": true,
                     "repeatable": false
                 },
+                "\u00f8": {
+                    "repeatable": false
+                },
                 "1": {
                     "repeatable": false
                 },
@@ -341,6 +344,9 @@
                     "repeatable": false
                 },
                 "w": {},
+                "\u00f8": {
+                    "repeatable": false
+                },
                 "1": {
                     "repeatable": false
                 },
@@ -387,6 +393,9 @@
                     "repeatable": false
                 },
                 "w": {
+                    "repeatable": false
+                },
+                "\u00f8": {
                     "repeatable": false
                 },
                 "1": {

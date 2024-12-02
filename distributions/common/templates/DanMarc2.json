@@ -4216,6 +4216,9 @@
                 "v":{
                     "repeatable": false
                 },
+                "\u00f8":{
+                    "repeatable":false
+                },
                 "5":{
                     "repeatable": false
                 },
