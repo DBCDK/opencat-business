@@ -23,6 +23,7 @@ var SolrCore = function () {
         Log.trace("Enter - SolrCoreTEST.analyse");
         try {
             Log.debug("Analyse: ", index + ":" + text);
+            Log.debug("WUTSKI ", analysis.length + " " + analysis);
             for (var i = 0; i < analysis.length; i++) {
                 Log.debug("Analyse results: ", analysis[i].query);
                 if (analysis[i].query === index + ":" + text) {

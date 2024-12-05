@@ -1,6 +1,6 @@
 #!groovy
 
-def workerNode = "devel11-java11"
+def workerNode = "devel12"
 
 void notifyOfBuildStatus(final String buildStatus) {
     final String subject = "${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
