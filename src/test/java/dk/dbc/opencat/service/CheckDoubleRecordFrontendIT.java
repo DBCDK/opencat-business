@@ -171,8 +171,8 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
                         .build())
                 .withJsonData(JSONB_CONTEXT.marshall(recordRequestDTO));
 
-        /*
         Response response = httpClient.execute(httpPost);
+        /*
 
         DoubleRecordFrontendStatusDTO actual =
                 JSONB_CONTEXT.unmarshall(response.readEntity(String.class), DoubleRecordFrontendStatusDTO.class);
@@ -181,6 +181,7 @@ public class CheckDoubleRecordFrontendIT extends AbstractOpencatBusinessContaine
         assertThat("Status", actual.getStatus(), is("ok"));
 
          */
+        assertThat("STOPKLODS", true);
     }
 
     @Test

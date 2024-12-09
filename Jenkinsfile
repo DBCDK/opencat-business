@@ -151,7 +151,7 @@ pipeline {
         }
         always {
             sh "./bin/stop-systemtests.sh"
-            cleanWs()
+            // cleanWs()
         }
     }
 }
