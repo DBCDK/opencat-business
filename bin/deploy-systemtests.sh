@@ -72,8 +72,8 @@ DEV_SOLR_BASIS_PORT=${DEV_SOLR_BASIS_PORT:-"${SOLR_PORT_NR}"}
 DEV_SOLR_BASIS_PATH=${DEV_SOLR_BASIS_PATH:-"solr/basis-index"}
 export DEV_SOLR_BASIS_URL="http://${DEV_SOLR_BASIS_ADDR}:${DEV_SOLR_BASIS_PORT}/${DEV_SOLR_BASIS_PATH}"
 
-docker-compose down
-docker-compose ps
+docker compose down
+docker compose ps
 echo "docker ps : $?"
 
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
@@ -81,19 +81,19 @@ docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/update-service:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:${USER}
 docker rmi -f docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
-docker-compose pull
-docker-compose up -d rawrepoDb updateserviceDb fakeSmtp
+docker compose pull
+docker compose up -d rawrepoDb updateserviceDb fakeSmtp
 sleep 3
 docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG} docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${USER}
 docker rmi docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-${RAWREPO_VERSION}:${RAWREPO_DIT_TAG}
 docker tag docker-metascrum.artifacts.dbccloud.dk/update-postgres:staging docker-metascrum.artifacts.dbccloud.dk/update-postgres:${USER}
 docker docker-metascrum.artifacts.dbccloud.dkc.dk/update-postgres:staging
 
-RAWREPO_IMAGE=`docker-compose ps -q rawrepoDb`
+RAWREPO_IMAGE=`docker compose ps -q rawrepoDb`
 export RAWREPO_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${RAWREPO_IMAGE} `
 echo -e "RAWREPO_PORT is $RAWREPO_PORT\n"
 
-UPDATESERVICEDB_IMAGE=`docker-compose ps -q updateserviceDb`
+UPDATESERVICEDB_IMAGE=`docker compose ps -q updateserviceDb`
 export UPDATESERVICEDB_PORT=`docker inspect --format='{{(index (index .NetworkSettings.Ports "5432/tcp") 0).HostPort}}' ${UPDATESERVICEDB_IMAGE} `
 echo -e "UPDATESERVICEDB_PORT is $UPDATESERVICEDB_PORT\n"
 
@@ -102,11 +102,11 @@ export DEV_HOLDINGS_ITEMS_DB_URL="holdingsitems:thePassword@${HOST_IP}:${HOLDING
 export DEV_UPDATE_DB_URL="updateservice:thePassword@${HOST_IP}:${UPDATESERVICEDB_PORT}/updateservice"
 export DEV_HOLDINGS_URL="http://${HOST_IP}:${HOLDINGS_PORT}/api"
 
-docker-compose up -d rawrepo-record-service
+docker compose up -d rawrepo-record-service
 docker tag docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION} docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${USER}
 docker rmi docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:${RAWREPO_RECORD_SERVICE_VERSION}
 
-RAWREPO_RECORD_SERVICE_IMAGE=`docker-compose ps -q rawrepo-record-service`
+RAWREPO_RECORD_SERVICE_IMAGE=`docker compose ps -q rawrepo-record-service`
 RAWREPO_RECORD_SERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_IMAGE} `
 echo -e "RAWREPO_RECORD_SERVICE_PORT_8080 is ${RAWREPO_RECORD_SERVICE_PORT_8080}\n"
 RAWREPO_RECORD_SERVICE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${RAWREPO_RECORD_SERVICE_IMAGE} `
@@ -116,11 +116,11 @@ echo -e "RAWREPO_RECORD_SERVICE_PORT_4848 is ${RAWREPO_RECORD_SERVICE_PORT_4848}
 
 export DEV_RAWREPO_RECORD_SERVICE_URL="http://${HOST_IP}:${RAWREPO_RECORD_SERVICE_PORT_8080}"
 
-docker-compose up -d opencat-business-service
+docker compose up -d opencat-business-service
 docker tag docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:${USER}
 docker rmi docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel
 
-OPENCAT_BUSINESS_SERVICE_IMAGE=`docker-compose ps -q opencat-business-service`
+OPENCAT_BUSINESS_SERVICE_IMAGE=`docker compose ps -q opencat-business-service`
 OPENCAT_BUSINESS_SERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_IMAGE} `
 echo -e "OPENCAT_BUSINESS_SERVICE_PORT_8080 is ${OPENCAT_BUSINESS_SERVICE_PORT_8080}\n"
 OPENCAT_BUSINESS_SERVICE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${OPENCAT_BUSINESS_SERVICE_IMAGE} `
@@ -130,11 +130,11 @@ echo -e "OPENCAT_BUSINESS_SERVICE_PORT_4848 is ${OPENCAT_BUSINESS_SERVICE_PORT_4
 
 export DEV_OPENCAT_BUSINESS_SERVICE_URL="http://${HOST_IP}:${OPENCAT_BUSINESS_SERVICE_PORT_8080}"
 
-docker-compose up -d updateservice
+docker compose up -d updateservice
 docker tag docker-metascrum.artifacts.dbccloud.dk/update-service:${PROD_VERSION} docker-metascrum.artifacts.dbccloud.dk/update-service:${USER}
 docker rmi docker-metascrum.artifacts.dbccloud.dk/update-service:${PROD_VERSION}
 
-UPDATESERVICE_IMAGE=`docker-compose ps -q updateservice`
+UPDATESERVICE_IMAGE=`docker compose ps -q updateservice`
 UPDATESERVICE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
 echo -e "UPDATESERVICE_PORT_8080 is ${UPDATESERVICE_PORT_8080}\n"
 UPDATESERVICE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${UPDATESERVICE_IMAGE} `
@@ -145,11 +145,11 @@ echo -e "UPDATESERVICE_PORT_4848 is ${UPDATESERVICE_PORT_4848}\n"
 export UPDATE_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest"
 export BUILD_SERVICE_URL="http://${HOST_IP}:${UPDATESERVICE_PORT_8080}/UpdateService/rest"
 
-docker-compose up -d updateservice-facade
+docker compose up -d updateservice-facade
 docker tag docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:${UPDATE_FACADE_TAG} docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:${USER}
 docker rmi docker-metascrum.artifacts.dbccloud.dk/updateservice-facade:${UPDATE_FACADE_TAG}
 
-UPDATESERVICE_FACADE_IMAGE=`docker-compose ps -q updateservice-facade`
+UPDATESERVICE_FACADE_IMAGE=`docker compose ps -q updateservice-facade`
 UPDATESERVICE_FACADE_PORT_8080=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
 echo -e "UPDATESERVICE_FACADE_PORT_8080 is ${UPDATESERVICE_FACADE_PORT_8080}\n"
 UPDATESERVICE_FACADE_PORT_8686=`docker inspect --format='{{(index (index .NetworkSettings.Ports "8686/tcp") 0).HostPort}}' ${UPDATESERVICE_FACADE_IMAGE} `
