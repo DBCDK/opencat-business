@@ -16,7 +16,7 @@ var Solr = function () {
         Log.trace("Enter - Solr.analyse, url:" + url + ", text: " + text + ", index: " + index);
         try {
             var solr = SolrCore.analyse(url, text, index);
-            if (solr.responseHeader.status == 0) {
+            if (solr.responseHeader.status === 0) {
                 var solrIndexArray = solr.analysis.field_names[index].index;
                 var solrIndexObject = solrIndexArray[solrIndexArray.length - 1];
 
