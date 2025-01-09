@@ -1192,29 +1192,29 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
      - __findMusic538 on 009a, 009g and 538g (hit)
      */
     SolrCoreTest.clear();
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.110a:kirsebærrød AND match.245a:538g) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.110a:kirsebærrød AND match.245a:538g) AND marc.001b:870970",
         {response: {docs: []}});
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:s", {
+    SolrCoreTest.addAnalyse("match.009a:s", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:xc", {
+    SolrCoreTest.addAnalyse("match.009g:xc", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xc"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.110a:Kirsebærrød", {
+    SolrCoreTest.addAnalyse("match.110a:Kirsebærrød", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.110a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "kirsebærrød"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:538g", {
+    SolrCoreTest.addAnalyse("match.245a:538g", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "538g"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.538g:208", {
+    SolrCoreTest.addAnalyse("match.538g:208", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
     });
@@ -1259,24 +1259,24 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
      - __findMusic245 on 009a, 009g and 245a (no hit)
      - __findMusic538 on 009a, 009g and 538g (hit)
      */
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
         {response: {docs: []}});
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:s", {
+    SolrCoreTest.addAnalyse("match.009a:s", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:xc", {
+    SolrCoreTest.addAnalyse("match.009g:xc", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xc"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:538g", {
+    SolrCoreTest.addAnalyse("match.245a:538g", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "538g"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.538g:208", {
+    SolrCoreTest.addAnalyse("match.538g:208", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
     });
@@ -1309,18 +1309,18 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
 UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster med 300e skal kun matche op imod poster med 300e", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:m", {
+    SolrCoreTest.addAnalyse("match.009a:m", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "m"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:th", {
+    SolrCoreTest.addAnalyse("match.009g:th", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "th"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:Hamlet", {
+    SolrCoreTest.addAnalyse("match.245a:Hamlet", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "hamlet"}]]}}}
     });
@@ -1366,30 +1366,30 @@ UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster
 UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.245ø:1cd) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.245ø:1cd) AND marc.001b:870970",
         {response: {docs: [{id: "11111111:870970"}]}});
-    SolrCoreTestaddQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND match.300e:2mapper402mikrokort) AND marc.001b:870970",
         {response: {docs: [{id: "22222222:870970"}]}});
-    SolrCoreTestaddQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"r\" AND match.009g:\"xe\" AND match.245a:troffelspisernesmare* AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
         {response: {docs: [{id: "33333333:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:r", {
+    SolrCoreTest.addAnalyse("match.009a:r", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "r"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:xe", {
+    SolrCoreTest.addAnalyse("match.009g:xe", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xe"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:Troffelspisernes mareridt", {
+    SolrCoreTest.addAnalyse("match.245a:Troffelspisernes mareridt", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "troffelspisernesmareridt"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245ø:1 cd", {
+    SolrCoreTest.addAnalyse("match.245ø:1 cd", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245ø": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "1cd"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.300e:2 mapper (402 mikrokort)", {
+    SolrCoreTest.addAnalyse("match.300e:2 mapper (402 mikrokort)", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.300e": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "2mapper402mikrokort"}]]}}}
     });
@@ -1517,24 +1517,24 @@ UnitTest.addFixture("DoubleRecordFinder.__findSoundMovieMultimedia", function ()
 UnitTest.addFixture("DoubleRecordFinder.__findSections 2", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245n:3band) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245n:3band) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245a:griechenland) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.004a:\"s\" AND match.014a:\"50002594\" AND match.245a:griechenland) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.004a:s", {
+    SolrCoreTest.addAnalyse("match.004a:s", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.014a:50002594", {
+    SolrCoreTest.addAnalyse("match.014a:50002594", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:Griechenland", {
+    SolrCoreTest.addAnalyse("match.245a:Griechenland", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "griechenland"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245n:3. Band", {
+    SolrCoreTest.addAnalyse("match.245n:3. Band", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245n": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
     });
@@ -1588,24 +1588,24 @@ UnitTest.addFixture("DoubleRecordFinder.__findSections 2", function () {
 UnitTest.addFixture("DoubleRecordFinder.__findVolumes 2", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245g:3band) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245g:3band) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245a:griechenland) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.004a:\"b\" AND match.014a:\"50002594\" AND match.245a:griechenland) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.004a:b", {
+    SolrCoreTest.addAnalyse("match.004a:b", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.004a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "b"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.014a:50002594", {
+    SolrCoreTest.addAnalyse("match.014a:50002594", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.014a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "50002594"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:Griechenland", {
+    SolrCoreTest.addAnalyse("match.245a:Griechenland", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "griechenland"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245g:3. Band", {
+    SolrCoreTest.addAnalyse("match.245g:3. Band", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "3band"}]]}}}
     });
@@ -1656,30 +1656,30 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
      - __findMusic245 on 009a, 009g and 245a (hit)
      - __findMusic538 on 009a, 009g and 538g (hit)
      */
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.110a:kirsebærrød AND match.245a:538g) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.110a:kirsebærrød AND match.245a:538g) AND marc.001b:870970",
         {response: {docs: []}});
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:s", {
+    SolrCoreTest.addAnalyse("match.009a:s", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:xc", {
+    SolrCoreTest.addAnalyse("match.009g:xc", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xc"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.110a:Kirsebærrød", {
+    SolrCoreTest.addAnalyse("match.110a:Kirsebærrød", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.110a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "kirsebærrød"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:538g", {
+    SolrCoreTest.addAnalyse("match.245a:538g", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "538g"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.538g:208", {
+    SolrCoreTest.addAnalyse("match.538g:208", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
     });
@@ -1724,24 +1724,24 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
      - __findMusic245 on 009a, 009g and 245a (no hit)
      - __findMusic538 on 009a, 009g and 538g (hit)
      */
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.245a:538g) AND marc.001b:870970",
         {response: {docs: []}});
-    SolrCoreTestaddQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
+    SolrCoreTest.addQuery("(match.009a:\"s\" AND match.009g:\"xc\" AND match.538g:208) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:s", {
+    SolrCoreTest.addAnalyse("match.009a:s", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "s"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:xc", {
+    SolrCoreTest.addAnalyse("match.009g:xc", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xc"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:538g", {
+    SolrCoreTest.addAnalyse("match.245a:538g", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "538g"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.538g:208", {
+    SolrCoreTest.addAnalyse("match.538g:208", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.538g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "208"}]]}}}
     });
@@ -1776,18 +1776,18 @@ UnitTest.addFixture("DoubleRecordFinder.find", function () {
 UnitTest.addFixture("Bug 20399 - Dobbeltpostkontrol - lyd, film og multi: Poster med 300e skal kun matche op imod poster med 300e", function () {
     var solrUrl = "http://unknown.dbc.dk:8080/solr/raapost-index";
 
-    SolrCoreTestclear();
-    SolrCoreTestaddQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
+    SolrCoreTest.clear();
+    SolrCoreTest.addQuery("(match.009a:\"m\" AND match.009g:\"th\" AND match.245a:hamlet AND NOT match.245ø:* AND NOT match.300e:*) AND marc.001b:870970",
         {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTestaddAnalyse("match.009a:m", {
+    SolrCoreTest.addAnalyse("match.009a:m", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "m"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.009g:th", {
+    SolrCoreTest.addAnalyse("match.009g:th", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "th"}]]}}}
     });
-    SolrCoreTestaddAnalyse("match.245a:Hamlet", {
+    SolrCoreTest.addAnalyse("match.245a:Hamlet", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "hamlet"}]]}}}
     });
