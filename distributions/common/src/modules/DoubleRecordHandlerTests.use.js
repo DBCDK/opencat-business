@@ -22,7 +22,7 @@ UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
     Assert.equalValue("No 001", DoubleRecordMailServiceClientCore.receivedMessages(), []);
 
     DoubleRecordMailServiceClientCore.clearMessages();
-    SolrCoreTest.clear();
+    SolrCore.clear();
 
     record = RecordUtil.createFromString([
         "001 00 *a 12345678 *b 191919",
@@ -33,34 +33,34 @@ UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
     Assert.equalValue("009, but no *a", DoubleRecordMailServiceClientCore.receivedMessages(), []);
 
     DoubleRecordMailServiceClientCore.clearMessages();
-    SolrCoreTest.clear();
+    SolrCore.clear();
 
-    SolrCoreTest.addQuery("(( match.008a:\"2014\" OR match.008a:\"2015\" OR match.008a:\"2016\" ) AND match.009a:\"a\" AND match.009g:\"xx\" AND match.245a:antontilsoes AND match.260b:ca*) AND marc.001b:870970", {response: {docs: [{id: "12345678:870970"}]}});
-    SolrCoreTest.addAnalyse("match.008a:2014", {
+    SolrCore.addQuery("(( match.008a:\"2014\" OR match.008a:\"2015\" OR match.008a:\"2016\" ) AND match.009a:\"a\" AND match.009g:\"xx\" AND match.245a:antontilsoes AND match.260b:ca*) AND marc.001b:870970", {response: {docs: [{id: "12345678:870970"}]}});
+    SolrCore.addAnalyse("match.008a:2014", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.008a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "2014"}]]}}}
     });
-    SolrCoreTest.addAnalyse("match.008a:2015", {
+    SolrCore.addAnalyse("match.008a:2015", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.008a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "2015"}]]}}}
     });
-    SolrCoreTest.addAnalyse("match.008a:2016", {
+    SolrCore.addAnalyse("match.008a:2016", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.008a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "2016"}]]}}}
     });
-    SolrCoreTest.addAnalyse("match.009a:a", {
+    SolrCore.addAnalyse("match.009a:a", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "a"}]]}}}
     });
-    SolrCoreTest.addAnalyse("match.009g:xx", {
+    SolrCore.addAnalyse("match.009g:xx", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.009g": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "xx"}]]}}}
     });
-    SolrCoreTest.addAnalyse("match.245a:Anton til soes", {
+    SolrCore.addAnalyse("match.245a:Anton til soes", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.245a": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "antontilsoes"}]]}}}
     });
-    SolrCoreTest.addAnalyse("match.260b:Cadeau", {
+    SolrCore.addAnalyse("match.260b:Cadeau", {
         responseHeader: {status: 0},
         analysis: {field_names: {"match.260b": {index: ["org.apache.lucene.analysis.core.LowerCaseFilter", [{text: "cadeau"}]]}}}
     });
@@ -83,5 +83,5 @@ UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {
         }]));
 
     DoubleRecordMailServiceClientCore.clearMessages();
-    SolrCoreTest.clear();
+    SolrCore.clear();
 } );
