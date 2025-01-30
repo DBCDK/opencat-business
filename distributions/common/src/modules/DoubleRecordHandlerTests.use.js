@@ -2,7 +2,7 @@ use("DoubleRecordHandler");
 use("DoubleRecordMailServiceClientCore");
 use("GenericSettings");
 use("RecordUtil");
-use("SolrCore");
+use("SolrCoreTest");
 use("UnitTest");
 
 UnitTest.addFixture("DoubleRecordHandler.checkAndSendMails", function () {

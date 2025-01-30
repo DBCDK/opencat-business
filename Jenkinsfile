@@ -1,6 +1,6 @@
 #!groovy
 
-def workerNode = "devel11-java11"
+def workerNode = "devel12"
 
 void notifyOfBuildStatus(final String buildStatus) {
     final String subject = "${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
@@ -66,10 +66,10 @@ pipeline {
                     } finally {
                         sh """
                             mkdir logs
-                            docker logs isworker_ocb_updateservice-facade_1 > logs/updateservice-facade.log 2>&1
-                            docker logs isworker_ocb_updateservice_1 > logs/updateservice.log 2>&1
-                            docker logs isworker_ocb_opencat-business-service_1 > logs/opencat-business-service.log 2>&1
-                            docker logs isworker_ocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
+                            docker logs isworker_ocb-updateservice-facade-1 > logs/updateservice-facade.log 2>&1
+                            docker logs isworker_ocb-updateservice-1 > logs/updateservice.log 2>&1
+                            docker logs isworker_ocb-opencat-business-service-1 > logs/opencat-business-service.log 2>&1
+                            docker logs isworker_ocb-rawrepo-record-service-1 > logs/rawrepo-record-service.log 2>&1
                         """
 
                         archiveArtifacts(artifacts: "logs/*.log", onlyIfSuccessful: false, fingerprint: true)

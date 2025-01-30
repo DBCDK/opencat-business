@@ -1,6 +1,7 @@
 use("Log");
 use("DoubleRecordFinder");
 use("RecordUtil");
+use("SolrCoreTest");
 use("SolrCore");
 use("UnitTest");
 
