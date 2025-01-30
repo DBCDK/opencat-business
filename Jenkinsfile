@@ -54,14 +54,20 @@ pipeline {
                 script {
                     String state = 'FAILED'
                     try {
+
+                        sh "echo BLAA"
                         sh "mvn verify pmd:pmd"
+                        sh "echo BLAB"
                         sh """
                             ${OCBTEST_EXECUTABLE} js-tests
                             ./bin/deploy-systemtests.sh false
                         """
+                        sh "echo BLAC"
                         state = 'UNSTABLE'
                         sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
+                        sh "echo BLAD"
                     } catch (error) {
+                        sh "echo WTF"
                         currentBuild.result = state
                     } finally {
                         sh """
