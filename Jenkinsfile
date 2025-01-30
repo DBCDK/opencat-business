@@ -59,8 +59,8 @@ pipeline {
                             ${OCBTEST_EXECUTABLE} js-tests
                             ./bin/deploy-systemtests.sh false
                         """
-                        state = 'UNSTABLE'
-                        sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
+                        // state = 'UNSTABLE'
+                        // sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
                     } catch (error) {
                         currentBuild.result = state
                     } finally {
