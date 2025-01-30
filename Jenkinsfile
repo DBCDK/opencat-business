@@ -55,30 +55,33 @@ pipeline {
                     String state = 'FAILED'
                     try {
 
-                        sh "echo BLAA"
                         sh "mvn verify pmd:pmd"
-                        sh "echo BLAB"
                         sh """
                             ${OCBTEST_EXECUTABLE} js-tests
                             ./bin/deploy-systemtests.sh false
                         """
-                        sh "echo BLAC"
                         state = 'UNSTABLE'
                         sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
-                        sh "echo BLAD"
                     } catch (error) {
                         sh "echo WTF"
                         currentBuild.result = state
                     } finally {
                         sh """
                             mkdir logs
+                            echo A
                             docker logs isworker_ocb_updateservice-facade_1 > logs/updateservice-facade.log 2>&1
+                            echo B
                             docker logs isworker_ocb_updateservice_1 > logs/updateservice.log 2>&1
+                            echo C
                             docker logs isworker_ocb_opencat-business-service_1 > logs/opencat-business-service.log 2>&1
+                            echo D
                             docker logs isworker_ocb_rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
+                            echo E
                         """
 
+                        sh "echo BLAC"
                         archiveArtifacts(artifacts: "logs/*.log", onlyIfSuccessful: false, fingerprint: true)
+                        sh "echo BLAD"
                     }
                 }
 
