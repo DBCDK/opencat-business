@@ -59,17 +59,17 @@ pipeline {
                             ${OCBTEST_EXECUTABLE} js-tests
                             ./bin/deploy-systemtests.sh false
                         """
-                        // state = 'UNSTABLE'
-                        // sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
+                        state = 'UNSTABLE'
+                        sh "${OCBTEST_EXECUTABLE} run -c testrun --summary"
                     } catch (error) {
                         currentBuild.result = state
                     } finally {
                         sh """
                             mkdir logs
-                            docker logs isworker_ocb-updateservice-facade_1 > logs/updateservice-facade.log 2>&1
-                            docker logs isworker_ocb-updateservice_1 > logs/updateservice.log 2>&1
-                            docker logs isworker_ocb-opencat-business-service_1 > logs/opencat-business-service.log 2>&1
-                            docker logs isworker_ocb-rawrepo-record-service_1 > logs/rawrepo-record-service.log 2>&1
+                            docker logs isworker_ocb-updateservice-facade-1 > logs/updateservice-facade.log 2>&1
+                            docker logs isworker_ocb-updateservice-1 > logs/updateservice.log 2>&1
+                            docker logs isworker_ocb-opencat-business-service-1 > logs/opencat-business-service.log 2>&1
+                            docker logs isworker_ocb-rawrepo-record-service-1 > logs/rawrepo-record-service.log 2>&1
                         """
 
                         archiveArtifacts(artifacts: "logs/*.log", onlyIfSuccessful: false, fingerprint: true)
