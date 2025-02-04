@@ -61,9 +61,9 @@ public class PreProcessingHandler {
     private void processAgeInterval(MarcRecord record, MarcRecordReader reader) {
         final List<Matcher> matchers = reader.getSubfieldValueMatchers("666", 'u', AGE_INTERVAL_PATTERN);
 
-        if (matchers.size() > 0) {
+        if (!matchers.isEmpty()) {
             // First remove all 666 *u subfields that are in the matchers - there are a large number of 666*u that has content
-            // not containing year information. Not, it will be the users' responsibility to clean up existing year fields (cleared with LJL)
+            // not containing year information. Now, it will be the users' responsibility to clean up existing year fields (cleared with LJL)
             remove666UFields(record, matchers);
         }
 
@@ -121,7 +121,7 @@ public class PreProcessingHandler {
     }
 
     /**
-     * All text (009 *a a) and sound (009 a* r) must be pre-processed so ISBN from previous records (520 *n or 526 *n) are written
+     * All text (009 *a a) and sound (009 *a r) must be pre-processed so ISBN from previous records (520 *n or 526 *n) are written
      * to this record as well. If a previous edition is found in 520*n or 526*n then all values from 021*a and *e must be copied
      * from the previous record.
      * <p>
@@ -133,9 +133,8 @@ public class PreProcessingHandler {
      * @param record The record to be processed
      * @param reader Reader for record
      * @throws OpenCatException             If rawrepo throws exception
-     * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private void processISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
+    private void processISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         // This record has field 520 or 526 which means it might be a text or sound record
         if (reader.hasSubfield("520", 'n') || reader.hasSubfield("526", 'n')) {
             // This record is indeed a text or sound record
@@ -159,7 +158,6 @@ public class PreProcessingHandler {
      * @param reader MarcRecordReader of the record to find the parent for
      * @return MarcRecord if there is a head volume in the top parent hierarchy else null
      * @throws OpenCatException             If rawrepo throws exception
-     * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
     private MarcRecordReader getHeadVolumeId(MarcRecordReader reader) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         // Check if input record even has a parent
@@ -199,9 +197,8 @@ public class PreProcessingHandler {
      * @param record The record to update
      * @param reader MarcRecordReader of the record
      * @throws OpenCatException             If rawrepo throws exception
-     * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private void updateWithISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
+    private void updateWithISBNFromPreviousEdition(MarcRecord record, MarcRecordReader reader) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         final List<DataField> newMarcFieldList = new ArrayList<>();
         final List<DataField> originalMarcFieldList = new ArrayList<>();
         originalMarcFieldList.addAll(reader.getFieldAll("520"));
@@ -235,9 +232,8 @@ public class PreProcessingHandler {
      * @param bibliographicRecordId The id of the record to find
      * @return List of values from subfield 021 *a and *e
      * @throws OpenCatException             If rawrepo throws exception
-     * @throws UnsupportedEncodingException If the previous record can't be decoded
      */
-    private List<String> getISBNFromCommonRecord(String bibliographicRecordId) throws OpenCatException, UnsupportedEncodingException, RecordServiceConnectorException, MarcReaderException {
+    private List<String> getISBNFromCommonRecord(String bibliographicRecordId) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         final List<String> result = new ArrayList<>();
         final MarcRecord marcRecord = recordService.fetchRecord(bibliographicRecordId, RecordService.COMMON_AGENCY);
         final MarcRecordReader marcRecordReader = new MarcRecordReader(marcRecord);
@@ -317,12 +313,43 @@ public class PreProcessingHandler {
 
     }
 
+    /**
+     * Collect *b from 990 fields and add them to a new d90 - the 990 fields are removed
+     * @param reader a reader to the record
+     * @param record the marc record
+     * @param newSubfields collector for subfields *b
+     */
+    private void cleanUp990(MarcRecordReader reader, MarcRecord record, List<SubField> newSubfields) {
+        // Combine all 990 fields without *r into one single 990 field with all *b subfields
+        for (DataField field990Original : findField990(reader)) {
+            // Add new d90 field
+            DataField fieldd90 = new DataField(field990Original); // Clone field
+            fieldd90.setTag("d90");
+            record.getFields().add(fieldd90);
+
+            for (SubField subField : field990Original.getSubFields()) {
+                if ('b' == subField.getCode() && !newSubfields.contains(subField)) {
+                    newSubfields.add(new SubField(subField));
+                }
+            }
+            record.getFields().remove(field990Original);
+        }
+
+    }
+
+    /**
+     * Processes the content of 008 *p *u modifying the 990 field and moving earlier 990 fields to d90 historic
+     * @param record the record to handle
+     * @param reader a nice little reader
+     * @throws OpenCatException                If rawrepo throws exception
+     * @throws RecordServiceConnectorException No connection to recordservice
+     * @throws MarcReaderException             Problems reading from therecord
+     */
     private void processSupplierRelations(MarcRecord record, MarcRecordReader reader) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         if (reader.hasSubfield("990", 'b') &&
                 CatalogExtractionCode.isUnderProduction(record, LIST_OF_CATALOG_CODES_WITHOUT_DBF)) {
             final MarcRecordWriter writer = new MarcRecordWriter(record);
             String subfield008u = getSubfieldValue008(reader, 'u');
-            String subfield008p = getSubfieldValue008(reader, 'p');
             // We need to do the following :
             // if there is a *pr all is good, and we can set f008pIsr to true
             // if not, then we have to look for a *pr and set f008pIsr to true or false
@@ -331,44 +358,24 @@ public class PreProcessingHandler {
             // u is f and p is r (only allowed value) then add op.
 
             // The Line has exclaimed that if a 008p exists, it will forever only contain an r.
-            boolean f008pIsr = false;
-            if (subfield008p != null) {
-                f008pIsr = true;
-            }
-            if ((Arrays.asList("c", "d", "o").contains(subfield008u) ||
-                    "f".equals(subfield008u) && !f008pIsr) &&
-                    !reader.hasSubfield("990", 'i')) {
-                writer.addOrReplaceSubField("990", 'u', "nt"); // First edition
-            } else if ("u".equals(subfield008u) && !f008pIsr && !reader.hasSubfield("990", 'i')) {
+            if(getSubfieldValue008(reader, 'p') != null) {
+                List<SubField> newSubfields = new ArrayList<>();
                 if (reader.hasValue("990", '&', "1")) {
                     writer.removeSubfield("990", '&');
                 } else {
-                    writer.addOrReplaceSubField("990", 'u', "nu"); // New edition
-                }
-            } else if (f008pIsr && !reader.hasSubfield("990", 'i')) {
-                if (reader.hasValue("990", '&', "1")) {
-                    writer.removeSubfield("990", '&');
-                } else {
-                    List<SubField> newSubfields = new ArrayList<>();
-
-                    // Combine all 990 fields without *r into one single 990 field with all *b subfields
-                    for (DataField field990Original : findField990(reader)) {
-                        // Add new d90 field
-                        DataField fieldd90 = new DataField(field990Original); // Clone field
-                        fieldd90.setTag("d90");
-                        record.getFields().add(fieldd90);
-
-                        for (SubField subField : field990Original.getSubFields()) {
-                            if ('b' == subField.getCode() && !newSubfields.contains(subField)) {
-                                newSubfields.add(new SubField(subField));
-                            }
-                        }
-
-                        record.getFields().remove(field990Original);
-                    }
-
+                    cleanUp990(reader, record, newSubfields);
                     newSubfields.add(new SubField('u', "op"));
                     record.getFields().add(new DataField("990", "00").addAllSubFields(newSubfields));
+                }
+            } else {
+                if ((Arrays.asList("f", "c", "d", "o").contains(subfield008u))) {
+                    writer.addOrReplaceSubField("990", 'u', "nt"); // First edition
+                } else if ("u".equals(subfield008u)) {
+                    if (reader.hasValue("990", '&', "1")) {
+                        writer.removeSubfield("990", '&');
+                    } else {
+                        writer.addOrReplaceSubField("990", 'u', "nu"); // New edition
+                    }
                 }
             }
         }
