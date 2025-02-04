@@ -368,7 +368,7 @@ public class PreProcessingHandler {
                     record.getFields().add(new DataField("990", "00").addAllSubFields(newSubfields));
                 }
             } else {
-                if ((Arrays.asList("f", "c", "d", "o").contains(subfield008u))) {
+                if (Arrays.asList("f", "c", "d", "o").contains(subfield008u)) {
                     writer.addOrReplaceSubField("990", 'u', "nt"); // First edition
                 } else if ("u".equals(subfield008u)) {
                     if (reader.hasValue("990", '&', "1")) {
