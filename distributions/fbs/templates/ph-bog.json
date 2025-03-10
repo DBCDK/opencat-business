@@ -6,7 +6,7 @@
         ]
     },
     "templateValues": {
-        "type": "common",
+        "type": "local",
         "categoryName": "ph boger",
         "categoryDisplay": "Bøger",
         "templateName": "ph-bog",

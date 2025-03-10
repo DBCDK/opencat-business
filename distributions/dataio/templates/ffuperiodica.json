@@ -4,7 +4,7 @@
         "features": [ "all" ]
     },
     "templateValues": {
-        "type": "common",
+        "type": "local",
         "categoryName": "ffu periodika",
         "categoryDisplay": "Periodika",
         "templateName": "ffuperiodica",
