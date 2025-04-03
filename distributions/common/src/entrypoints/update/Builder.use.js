@@ -189,7 +189,11 @@ var Builder = function() {
         // var subfields = field.subfields;
         field.subfields.forEach(function (currentValue) {
             // subfieldName = currentValue.name;
-            if (availableSubfieldsObject.hasOwnProperty(currentValue.name)) {
+            // TODO hikke
+            if (/[A_ZÆØÅ]/.test(currentValue.name)) {
+                var newBigSubfield = currentValue;
+                newSubfields.push(newBigSubfield);
+            } else if (availableSubfieldsObject.hasOwnProperty(currentValue.name)) {
                 var newSubfield = currentValue;
                 if (field.name === "001" && currentValue.name === "a" && isFaustEnabledForTemplate(template)) {
                     newSubfield.value = faustProvider();

@@ -792,6 +792,36 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
     result2["subfields"] = [];
     result2["mandatorySubfields"] = {};
     Assert.equalValue( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput2, faustProvider ), result2 );
+
+    var fieldInput3= {
+        "name": "005",
+        "indicator": "00",
+        "subfields": [
+            {
+                "name": "k",
+                "value": ""
+            }, {
+                "name": "B",
+                "value": ""
+            }, {
+                "name": "b",
+                "value": ""
+            }, {
+                "name": "c",
+                "value": ""
+            }, {
+                "name": "f",
+                "value": ""
+            }, {
+                "name": "å",
+                "value": ""
+            }
+        ]
+    }
+    var result3 = {};
+    result3["subfields"] = [];
+    result3["mandatorySubfields"] = {};
+    Assert.equalValue( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput3, faustProvider ), result3 );
 });
 
 UnitTest.addFixture( "Builder.__convertSubfields #2 faust tests", function() {
