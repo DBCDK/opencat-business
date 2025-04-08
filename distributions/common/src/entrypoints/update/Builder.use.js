@@ -188,10 +188,8 @@ var Builder = function() {
         // and if not we discard it
         // var subfields = field.subfields;
         field.subfields.forEach(function (currentValue) {
-            // subfieldName = currentValue.name;
-            // TODO hikke
             if (/[A_ZÆØÅ]/.test(currentValue.name)) {
-                var newBigSubfield = currentValue;
+                let newBigSubfield = currentValue;
                 newSubfields.push(newBigSubfield);
             } else if (availableSubfieldsObject.hasOwnProperty(currentValue.name)) {
                 var newSubfield = currentValue;
