@@ -6,6 +6,7 @@ export COMPOSE_PROJECT_NAME="${USER}_ocb"
 
 cd ${PROJECT_ROOT}/docker/compose
 
-docker compose down
+DOCKER_COMPOSE_CMD="$(command -v docker-compose > /dev/null && echo docker-compose || echo docker compose)"
+${DOCKER_COMPOSE_CMD} down
 
 cd -
