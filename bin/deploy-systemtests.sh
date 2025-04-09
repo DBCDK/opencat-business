@@ -54,7 +54,7 @@ export PROD_VERSION=$(curl -s https://is.dbc.dk/view/metascrum/job/updateservice
 echo "Using prod version ${PROD_VERSION} of updateservice"
 
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
-envsubst "${PROD_VERSION}" < docker-compose.yml.tmpl > docker-compose.yml
+envsubst '${PROD_VERSION}' < docker-compose.yml.tmpl > docker-compose.yml
 
 export DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
 
