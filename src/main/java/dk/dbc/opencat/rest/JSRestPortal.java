@@ -58,7 +58,7 @@ public class JSRestPortal {
     // REMOVE!
     // CONVENIENCE METHOD FOR RELOADING JS ENVIRONMENT IN DEBUG
     @GET
-    @Path(("v1/reloadjs"))
+    @Path("v1/reloadjs")
     public Response reloadJS() {
         scripterPool.destroyAllEnvironments();
         scripterPool.postConstruct();
