@@ -86,6 +86,7 @@
         "021": "DanMarc2.fields.021",
 		"022": "DanMarc2.fields.022",
         "028": "DanMarc2.fields.028",
+        "090": "DanMarc2.fields.090",
         "245":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.3a.htm",
             "mandatory":true,
