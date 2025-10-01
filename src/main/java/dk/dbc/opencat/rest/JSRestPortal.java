@@ -1,14 +1,19 @@
 package dk.dbc.opencat.rest;
 
+import dk.dbc.common.records.ExpandCommonMarcRecord;
+import dk.dbc.common.records.MarcRecordReader;
+import dk.dbc.common.records.MarcRecordWriter;
 import dk.dbc.common.records.RecordContentTransformer;
 import dk.dbc.commons.jsonb.JSONBContext;
 import dk.dbc.commons.jsonb.JSONBException;
+import dk.dbc.marc.binding.DataField;
 import dk.dbc.marc.binding.MarcRecord;
 import dk.dbc.marc.reader.MarcReaderException;
 import dk.dbc.opencat.MDCUtil;
 import dk.dbc.opencat.javascript.ScripterEnvironment;
 import dk.dbc.opencat.javascript.ScripterException;
 import dk.dbc.opencat.javascript.ScripterPool;
+import dk.dbc.opencat.javascript.UpdaterRawRepo;
 import dk.dbc.opencat.json.DataFieldDTO;
 import dk.dbc.opencat.json.JsonMapper;
 import dk.dbc.opencat.json.WrapperDataField;
@@ -23,6 +28,7 @@ import dk.dbc.opencatbusiness.dto.RecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.RecordResponseDTO;
 import dk.dbc.opencatbusiness.dto.SortRecordRequestDTO;
 import dk.dbc.opencatbusiness.dto.ValidateRecordRequestDTO;
+import dk.dbc.rawrepo.record.RecordServiceConnectorException;
 import dk.dbc.updateservice.dto.DoubleRecordFrontendStatusDTO;
 import dk.dbc.updateservice.dto.MessageEntryDTO;
 import dk.dbc.updateservice.dto.SchemaDTO;
@@ -41,7 +47,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
+import java.util.*;
 
 import static dk.dbc.opencat.MDCUtil.MDC_TRACKING_ID_LOG_CONTEXT;
 
@@ -73,22 +79,29 @@ public class JSRestPortal {
     @Timed
     public Response validateRecord(ValidateRecordRequestDTO validateRecordRequestDTO) {
         ScripterEnvironment scripterEnvironment = null;
-        String result;
+        String result = "";
         try {
             MDC.put(MDC_TRACKING_ID_LOG_CONTEXT, MDCUtil.getTrackingId(validateRecordRequestDTO.getTrackingId(), "validateRecord"));
             scripterEnvironment = scripterPool.take();
             LOGGER.debug("validateRecord incoming request:{}", validateRecordRequestDTO);
-            result = (String) scripterEnvironment.callMethod("validateRecord",
-                    validateRecordRequestDTO.getTemplateName(),
-                    marcXMLtoJson(validateRecordRequestDTO.getRecord()),
-                    settings);
+            result = checkAuthRecordTypes(validateRecordRequestDTO.getRecord());
+            if (result.isEmpty()) {
+                result = (String) scripterEnvironment.callMethod("validateRecord",
+                        validateRecordRequestDTO.getTemplateName(),
+                        marcXMLtoJson(validateRecordRequestDTO.getRecord()),
+                        settings);
+            }
             sanityCheck(result, MessageEntryDTO[].class);
+            // result = "[{\"type\":\"ERROR\", \"message\": \"HESTEFARS\"}]";
             LOGGER.debug("validateRecord result:{}", result);
             return Response.ok().entity(result).build();
         } catch (ScripterException | JSONBException | InterruptedException | MarcReaderException e) {
             LOGGER.error("Error in validateRecord.", e);
             return Response.serverError().build();
 
+        } catch (RecordServiceConnectorException e) {
+            LOGGER.error("Error in validateRecord when accessing rawrepo.", e);
+            throw new RuntimeException(e);
         } finally {
             if (scripterPool != null) {
                 try {
@@ -441,5 +454,123 @@ public class JSRestPortal {
     private String marcJsonToMarcXml(String marcJson) throws JSONBException {
         MarcRecord resultMarcRecord = jsonbContext.unmarshall(marcJson, MarcRecord.class);
         return new String(RecordContentTransformer.encodeRecord(resultMarcRecord), StandardCharsets.UTF_8);
+    }
+
+    private Map<String, String> getRelationTypes(List<MarcRecord> relations) {
+        Map<String, String> relationMap = new HashMap<>();
+        LOGGER.info("Relations : {}", relations);
+        for (MarcRecord relation : relations) {
+            MarcRecordReader relationReader = new MarcRecordReader(relation);
+            String id = relationReader.getRecordId();
+            if ("870979".equals(relationReader.getAgencyId())) {
+                if (relationReader.getField("100") != null) relationMap.put(id, "100");
+                else if (relationReader.getField("110") != null) relationMap.put(id, "110");
+                else if (relationReader.getField("133") != null) relationMap.put(id, "133");
+                else if (relationReader.getField("134") != null) relationMap.put(id, "134");
+            }
+        }
+        LOGGER.info("Relation Map: {}", relationMap);
+        return relationMap;
+    }
+
+    /**
+     * To speed things up, we get all relations between the record and 870979 records. Then we go through the record and add
+     * eventual missing relations, that is, new relations (we don't care about removed).
+     * @param record
+     * @return
+     * @throws RecordServiceConnectorException
+     * @throws MarcReaderException
+     */
+    private String checkAuthRecordTypes(String record) throws RecordServiceConnectorException, MarcReaderException {
+        LOGGER.info("checkAuthRecordTypes. Incoming request:{}", record);
+        if (record.isEmpty()) {
+            return "";
+        }
+        MarcRecord marcRecord = RecordContentTransformer.decodeRecord(record.getBytes());
+        MarcRecordReader reader = new MarcRecordReader(marcRecord);
+        List<MarcRecord> relations;
+        relations = UpdaterRawRepo.getRelationsChildren(reader.getRecordId(), reader.getAgencyId());
+        List<String> results = new ArrayList<>();
+        Map<String, String> relationMap;
+        relationMap = getRelationTypes(relations);
+        ExpandCommonMarcRecord expandCommonMarcRecord = new ExpandCommonMarcRecord();
+        for (DataField field : marcRecord.getFields(DataField.class)) {
+            LOGGER.info("Field: {}", field);
+            if (field.hasSubField(DataField.hasSubFieldCode('5'))) {
+                String aId = field.getSubField(DataField.hasSubFieldCode('6')).orElseThrow().getData().replace("(DK-870979)", "");
+                LOGGER.info("aId: {}", aId);
+                if (!relationMap.containsKey(aId)) {
+                    LOGGER.info("aId not found");
+                    // Vi skal lige fiske aId posten ud af rr (hvis den ikke er der, så er noget råddent) og putte relevante
+                    // oplysninger ind i relationMap
+                    List<MarcRecord> oneRecord = new ArrayList<>();
+                    Map<String, String> oneMap;
+                    oneRecord.add(UpdaterRawRepo.fetchRecord(aId, "870979"));
+                    LOGGER.info("oneRecord: {}", oneRecord);
+                    oneMap = getRelationTypes(oneRecord);
+                    LOGGER.info("oneMap : {}", oneMap);
+                    relationMap.putAll(oneMap);
+                    LOGGER.info("relationMap : {}", relationMap);
+                }
+                // Gukke på data og se om vi er glade.
+                expandCommonMarcRecord.getModeRefAFieldName(field);
+                String aKey = expandCommonMarcRecord.getAuthFieldName();
+                String value = relationMap.get(aId);
+                LOGGER.info("aKey: {} value {}", aKey, value);
+                if (value != null) {
+                    LOGGER.info("aKey found");
+                    if (!aKey.equals(value)) {
+                        String jString = "{\"type\": \"ERROR\", \"message\": \"Felt " + field.getTag() +
+                                " værdi " + aId + " peger ikke på forventet A-record type\"}";
+                        results.add(jString);
+                        LOGGER.info("Result: {}", results);
+                    }
+                }
+
+            }
+        }
+        LOGGER.info("Return {}", String.join(",", results));
+        return "[" + String.join(",", results) + "]";
+
+    }
+    /**
+     * Get all relations to the record - if they are a 870979 relation, then get the type of the A-record and save that info.
+     * Run through the record and if it's a relation field and if it has subfields 5 and 6, then match it against previous info.
+     * Remember to use getModeRefAFieldName and the getters.
+     *
+     * @param record the record to be evaluated
+     * @return either an empty string or a string filled with error messages.
+     */
+    private String checkAuthRecordTypesWrong(String record) throws RecordServiceConnectorException, MarcReaderException {
+        LOGGER.info("checkAuthRecordTypesWrong. Incoming request:{}", record);
+        if (record == null || record.isEmpty()) {
+            return "";
+        }
+        MarcRecord marcRecord = RecordContentTransformer.decodeRecord(record.getBytes());
+        MarcRecordReader reader = new MarcRecordReader(marcRecord);
+        List<MarcRecord> relations;
+        relations = UpdaterRawRepo.getRelationsChildren(reader.getRecordId(), reader.getAgencyId());
+        Map<String, String> relationMap;
+        relationMap = getRelationTypes(relations);
+        ExpandCommonMarcRecord expandCommonMarcRecord = new ExpandCommonMarcRecord();
+        List<String> results = List.of();
+        for (DataField field : marcRecord.getFields(DataField.class)) {
+            if (field.hasSubField(DataField.hasSubFieldCode('5'))) {
+                String aId = field.getSubField(DataField.hasSubFieldCode('6')).orElseThrow().getData().replace("(DK-870979)", "");
+                expandCommonMarcRecord.getModeRefAFieldName(field);
+                String aKey = expandCommonMarcRecord.getAuthFieldName();
+                String value = relationMap.get(aId);
+                if (value != null) {
+                    if (!aKey.equals(value)) {
+                        String jString = "{type: \"ERROR\", message: \"Felt " + field.getTag() +
+                                " værdi " + aId + " peger ikke på forventet A-record type";
+                        results.add(jString);
+                    }
+                }
+            }
+
+        }
+
+        return String.join(",", results);
     }
 }
