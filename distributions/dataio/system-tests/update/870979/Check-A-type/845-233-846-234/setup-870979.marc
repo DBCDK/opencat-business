@@ -1,0 +1,15 @@
+001 00 *a 68374391 *b 870979 *c 20230617011633 *d 20131129 *f a
+004 00 *r n *a e *x n
+008 00 *t h *v 0
+025 00 *a 120728579 *2 viaf *& VIAF
+025 00 *a 0000000118844496 *2 isni *& VIAF
+025 00 *a Q2851070 *2 wikidata *& VIAF
+040 00 *a DBC *b dan
+043 00 *c be *& VIAF
+046 00 *f 1945 *& VIAF
+046 00 *g 2015 *& VIAF
+134 00 *a Gudule
+375 00 *a 2 *2 iso5218 *& VIAF
+400 00 *a Karali *h Anne
+663 00 *a Gudule er pseudonym for *b Anne Karali
+996 00 *a DBCAUT

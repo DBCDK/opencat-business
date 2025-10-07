@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Check-if-field-and-A-record-are-compatible-1xx-bad",
+    "description": "Tester om A-felter peger på A-poster af korrekt type",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "bad-request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-870979.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870979-191919.marc"
+          ]
+        },
+        {
+          "record": "setup-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "code": null,
+            "urlForDocumentation": null,
+            "ordinalPositionOfField": null,
+            "ordinalPositionOfSubfield": null,
+            "ordinalPositionInSubfield": null,
+            "message": "Felt 110 værdi 68374391 peger ikke på forventet A-record type"
+          },{
+            "type": "ERROR",
+            "message": "Felt 610 værdi 68374391 peger ikke på forventet A-record type"
+          }, {
+            "type": "ERROR",
+            "message": "Felt 780 værdi 68374391 peger ikke på forventet A-record type"
+
+          }
+        ]
+      },
+      "update": {
+        "errors": [
+          {
+            "type": "ERROR",
+            "message": "Felt 110 værdi 68374391 peger ikke på forventet A-record type"
+          },{
+            "type": "ERROR",
+            "message": "Felt 610 værdi 68374391 peger ikke på forventet A-record type"
+          }, {
+            "type": "ERROR",
+            "message": "Felt 780 værdi 68374391 peger ikke på forventet A-record type"
+          }
+        ],
+        "rawrepo": [
+          {
+            "record": "setup-870979.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "setup-870979-191919.marc"
+            ]
+          },
+          {
+            "record": "setup-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Check-if-field-and-A-record-are-compatible-1xx-good",
+    "description": "Tester om A-felter peger på A-poster af korrekt type",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "netpunkt",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "good-request.marc"
+    },
+    "setup": {
+      "rawrepo": [
+        {
+          "record": "setup-870979.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "setup-870979-191919.marc"
+          ]
+        },
+        {
+          "record": "setup-870979-191919.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "expected-870970.marc",
+            "type": "MARCXCHANGE",
+            "enqueued": true,
+            "deleted": false,
+            "enrichments": [
+              "expected-870970-191919.marc"
+            ]
+          },
+          {
+            "record": "expected-870970-191919.marc",
+            "type": "ENRICHMENT",
+            "enqueued": true,
+            "deleted": false
+          },
+          {
+            "record": "setup-870979.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "setup-870979-191919.marc"
+            ],
+            "children": [
+              "expected-870970.marc"
+            ]
+          },
+          {
+            "record": "setup-870979-191919.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          }
+        ]
+      }
+    }
+  }
+]
