@@ -11,10 +11,10 @@
       </ENTRIES>
     </extension>
     <option name="JAR_PATH" value="$PROJECT_DIR$/target/dist/ocb-tools-1.0.0/bin/ocb-test-1.0-SNAPSHOT-jar-with-dependencies.jar" />
-    <option name="PROGRAM_PARAMETERS" value="run -c testrun --summary build-ok-bog-to-bogbind-from-populated-bog" />
+    <option name="PROGRAM_PARAMETERS" value="run -c testrun --summary testnavn" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="ALTERNATIVE_JRE_PATH" value="11.0.7" />
+    <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <method v="2" />
   </configuration>
 </component>
