@@ -510,12 +510,10 @@ public class JSRestPortal {
                 expandCommonMarcRecord.getModeRefAFieldName(field);
                 String aKey = expandCommonMarcRecord.getAuthFieldName();
                 String value = relationMap.get(aId);
-                if (value != null) {
-                    if (!aKey.equals(value)) {
-                        String jString = "{\"type\": \"ERROR\", \"message\": \"Felt " + field.getTag() +
-                                " værdi " + aId + " peger ikke på forventet A-record type\"}";
-                        results.add(jString);
-                    }
+                if (value != null && !aKey.equals(value)) {
+                    String jString = "{\"type\": \"ERROR\", \"message\": \"Felt " + field.getTag() +
+                            " værdi " + aId + " peger ikke på forventet A-record type\"}";
+                    results.add(jString);
                 }
             }
         }
