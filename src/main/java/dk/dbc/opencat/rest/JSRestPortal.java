@@ -485,7 +485,7 @@ public class JSRestPortal {
      */
     private String checkAuthRecordTypes(String record) throws RecordServiceConnectorException, MarcReaderException {
         LOGGER.info("checkAuthRecordTypes. Incoming request:{}", record);
-        if (record.isEmpty()) {
+        if (record == null || record.isEmpty()) {
             return "";
         }
         MarcRecord marcRecord = RecordContentTransformer.decodeRecord(record.getBytes());
