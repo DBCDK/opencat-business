@@ -845,6 +845,7 @@
                 "i":"DanMarc2.fields.910.subfields.i",
                 "k":"DanMarc2.fields.910.subfields.k",
                 "j":"DanMarc2.fields.910.subfields.j",
+                "w":"DanMarc2.fields.910.subfields.w",
                 "x":"DanMarc2.fields.910.subfields.x",
                 "z":{
                     "repeatable":false
