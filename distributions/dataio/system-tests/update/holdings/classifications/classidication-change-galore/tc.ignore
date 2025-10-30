@@ -165,7 +165,7 @@
             "holdings": [ 763000 ],
             "rawrepo": [
                 {
-                    "record": "rawrepo-common.marc",
+                    "record": "rawrepo-common-a-b.marc",
                     "type": "MARCXCHANGE",
                     "deleted": false,
                     "enrichments": [ "rawrepo-enrichment.marc" ]
