@@ -188,7 +188,7 @@ var Builder = function() {
         // and if not we discard it
         // var subfields = field.subfields;
         field.subfields.forEach(function (currentValue) {
-            if (/[A_ZÆØÅ]/.test(currentValue.name)) {
+            if (/[A-ZÆØÅ]/.test(currentValue.name)) {
                 let newBigSubfield = currentValue;
                 newSubfields.push(newBigSubfield);
             } else if (availableSubfieldsObject.hasOwnProperty(currentValue.name)) {
