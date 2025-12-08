@@ -56,8 +56,10 @@ echo "Using prod version ${PROD_VERSION} of updateservice"
 # On macOS you have to install envsubst first. Run these commands: brew install gettext && brew link --force gettext
 envsubst '${PROD_VERSION}' < docker-compose.yml.tmpl > docker-compose.yml
 
-# Skumle - den her linie er regulært vås - enten skal der laves en lokal nummerrulleserver eller også bruges drift
-#export DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
+# Life is complicated - this line is necessary for ocb-tools to function correctly in the wiremock setup
+export DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
+# and then, if you want to make a regular call from outside this setup, then you need access to a real numberroll, in that case
+#the line above needs to be commented out
 export DEV_NUMBERROLL_URL=${DEV_NUMBERROLL_URL:-"http://opennumberroll-service.metascrum-prod.svc.cloud.dbc.dk/1.1"}
 
 export DEV_VIPCORE_ENDPOINT=${DEV_VIPCORE_ENDPOINT:-"http://${HOST_IP}:${SOLR_PORT_NR}"}
