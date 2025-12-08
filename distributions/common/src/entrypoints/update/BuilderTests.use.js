@@ -712,7 +712,12 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
                 "url": "",
                 "mandatory": false,
                 "repeatable": false,
-                "subfields": {}
+                "subfields": {
+                    "B": {
+                        "mandatory": false,
+                        "repeatable": false
+                    }
+                }
             }
         }
     };
@@ -819,8 +824,9 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
         ]
     }
     var result3 = {};
-    result3["subfields"] = [];
+    result3["subfields"] = [({name:"B", value:""})];
     result3["mandatorySubfields"] = {};
+    // TODO MYRDE
     Assert.equalValue( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput3, faustProvider ), result3 );
 });
 
