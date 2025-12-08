@@ -826,7 +826,6 @@ UnitTest.addFixture( "Builder.__convertSubfields", function() {
     var result3 = {};
     result3["subfields"] = [({name:"B", value:""})];
     result3["mandatorySubfields"] = {};
-    // TODO MYRDE
     Assert.equalValue( "3 __convertSubfields test", Builder.__convertSubfields( template, fieldInput3, faustProvider ), result3 );
 });
 
