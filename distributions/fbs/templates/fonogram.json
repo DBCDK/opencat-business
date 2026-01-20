@@ -543,7 +543,7 @@
         },
         "631":"DanMarc2.fields.631",
         "652":{
-            "comment": "*i og *v udeladt i delfeltsorteringen, da er findes DBC-musikposter med gentagne 652 *i + *v, og rækkefoelgen af disse ikke må aendres",
+            "comment": "*i og *v udeladt i delfeltsorteringen, da der findes DBC-musikposter med gentagne 652 *i + *v, og rækkefoelgen af disse ikke må aendres",
             "url": "http://www.kat-format.dk/danMARC2/Danmarc2.79.htm",
             "sorting":"0\u00E5mnopqrzAaHhkEeFfCcTtBb1",
             "subfields":{
@@ -557,7 +557,8 @@
                 "f":"DanMarc2.fields.652.subfields.f",
                 "c":"DanMarc2.fields.652.subfields.c",
                 "b":"DanMarc2.fields.652.subfields.b",
-                "t":"DanMarc2.fields.652.subfields.t"
+                "t":"DanMarc2.fields.652.subfields.t",
+                "z":"DanMarc2.fields.652.subfields.z"
 			 },
             "rules": [
                 {
