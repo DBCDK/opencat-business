@@ -5226,6 +5226,7 @@
         "990":{
             "url":"http://www.kat-format.dk/danMARC2/Danmarc2.a3.htm",
             "subfields":{
+                "&":{},
                 "a":{
                     "repeatable":false
                 },
