@@ -1,0 +1,12 @@
+001 00 *a 68225957 *b 870979 *c 20220726091558 *d 20131129 *f a
+004 00 *r n *a e *x n
+008 00 *t h *v 9
+025 00 *a 56779201 *2 viaf *& VIAF
+025 00 *a 0000000066547990 *2 isni *& VIAF
+025 00 *a Q456616 *2 wikidata *& VIAF
+040 00 *a DBC *b dan
+043 00 *c gb *& VIAF
+046 00 *f 1966 *& VIAF
+100 00 *a Cowell *h Cressida
+375 00 *a 2 *2 iso5218 *& VIAF
+996 00 *a DBCAUT
