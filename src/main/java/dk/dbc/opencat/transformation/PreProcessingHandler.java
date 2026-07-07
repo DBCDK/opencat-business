@@ -18,13 +18,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class PreProcessingHandler {
     private static final Pattern AGE_INTERVAL_PATTERN = Pattern.compile("^(For|for) ([0-9]+)-([0-9]+) (år)");
-    private static final List<String> LIST_OF_CATALOG_CODES_WITHOUT_DBF =
-            CatalogExtractionCode.listOfCatalogCodes.stream().filter(v -> !v.equals("DBF")).collect(Collectors.toList());
-
     private final RecordService recordService;
 
     public PreProcessingHandler(RecordService recordService) {
@@ -342,12 +338,12 @@ public class PreProcessingHandler {
      * @param record the record to handle
      * @param reader a nice little reader
      * @throws OpenCatException                If rawrepo throws exception
-     * @throws RecordServiceConnectorException No connection to recordservice
-     * @throws MarcReaderException             Problems reading from therecord
+     * @throws RecordServiceConnectorException No connection to recordService
+     * @throws MarcReaderException             Problems reading from the record
      */
     private void processSupplierRelations(MarcRecord record, MarcRecordReader reader) throws OpenCatException, RecordServiceConnectorException, MarcReaderException {
         if (reader.hasSubfield("990", 'b') &&
-                CatalogExtractionCode.isUnderProduction(record, LIST_OF_CATALOG_CODES_WITHOUT_DBF)) {
+                CatalogExtractionCode.isUnderProduction(record, CatalogExtractionCode.listOfCatalogCodes)) {
             final MarcRecordWriter writer = new MarcRecordWriter(record);
             String subfield008u = getSubfieldValue008(reader, 'u');
             // We need to do the following :

@@ -326,7 +326,7 @@ public class PreProcessingHandlerTest {
                 "supplier-relations/test-12-expected.marc");
     }
 
-    // TODO 008pr check - cleanup of test 13 to 16 culd be relevant
+    // TODO 008pr check - cleanup of test 13 to 16 could be relevant
     // Move r from u to p
     @Test
     public void testSupplierRelations13() throws Exception {

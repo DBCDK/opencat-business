@@ -1,0 +1,80 @@
+[
+  {
+    "name": "no-100-and-A-link-in-common",
+    "description": "Test if a common record with no ahkef subfields and no 100 in enrichment act like a classification change",
+    "request": {
+      "authentication": {
+        "group": "723000",
+        "user": "bks",
+        "password": "20Koster"
+      },
+      "templateName": "paahaengspost",
+      "record": "request.marc"
+    },
+    "setup": {
+      "holdings": [ 723000 ],
+      "rawrepo": [
+        {
+          "record": "rawrepo-69912923-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "rawrepo-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-69912923-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "children": [
+              "rawrepo-common.marc"
+            ]
+          },
+          {
+            "record": "expected-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": false,
+            "enrichments": [
+              "expected-enrichment.marc",
+              "expected-enrichment-723000.marc"
+            ]
+          },
+          {
+            "record": "expected-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": false
+          },
+          {
+            "record": "expected-enrichment-723000.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]

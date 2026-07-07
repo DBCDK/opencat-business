@@ -43,7 +43,7 @@ public class AbstractOpencatBusinessContainerTest {
     private static final GenericContainer<?> holdingsItemsDbContainer;
     private static final GenericContainer<?> openCatBusinessContainer;
     private static final String JAVA_BASE_IMAGE = "docker-dbc.artifacts.dbccloud.dk/dbc-java11";
-    private static final String RAWREPO_DB_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres-1.15-snapshot:DIT-5165";
+    private static final String RAWREPO_DB_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres:DIT-5195";
     private static final String HOLDINGITEMS_DB_IMAGE = "docker-de.artifacts.dbccloud.dk/holdings-items-postgres-1.3:latest";
     private static final String RECORD_SERVICE_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-330";
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";

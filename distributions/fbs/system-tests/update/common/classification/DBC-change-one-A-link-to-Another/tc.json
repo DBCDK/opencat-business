@@ -1,0 +1,94 @@
+[
+  {
+    "name": "change-100-A-link-to-another",
+    "description": "Test change of an A-link in field 100 to another link",
+    "request": {
+      "authentication": {
+        "group": "010100",
+        "user": "bks",
+        "password": "20Koster"
+      },
+      "templateName": "dbcsingle",
+      "record": "request.marc"
+    },
+    "setup": {
+      "holdings": [ 723000 ],
+      "rawrepo": [
+        {
+          "record": "rawrepo-68225957-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+          ]
+        },
+        {
+          "record": "rawrepo-69912923-870979.marc",
+          "type": "AUTHORITY",
+          "deleted": false,
+          "children": [
+            "rawrepo-common.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-common.marc",
+          "type": "MARCXCHANGE",
+          "deleted": false,
+          "enrichments": [
+            "rawrepo-enrichment.marc"
+          ]
+        },
+        {
+          "record": "rawrepo-enrichment.marc",
+          "type": "ENRICHMENT",
+          "deleted": false
+        }
+      ]
+    },
+    "expected": {
+      "validation": {},
+      "update": {
+        "errors": [],
+        "rawrepo": [
+          {
+            "record": "rawrepo-68225957-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "children": [
+              "rawrepo-common.marc"
+            ]
+          },
+          {
+            "record": "rawrepo-69912923-870979.marc",
+            "type": "AUTHORITY",
+            "deleted": false,
+            "enqueued": false,
+            "children": [
+            ]
+          },
+          {
+            "record": "expected-common.marc",
+            "type": "MARCXCHANGE",
+            "deleted": false,
+            "enqueued": true,
+            "enrichments": [
+              "expected-enrichment.marc",
+              "expected-enrichment-723000.marc"
+            ]
+          },
+          {
+            "record": "expected-enrichment.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          },
+          {
+            "record": "expected-enrichment-723000.marc",
+            "type": "ENRICHMENT",
+            "deleted": false,
+            "enqueued": true
+          }
+        ]
+      }
+    }
+  }
+]
