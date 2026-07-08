@@ -91,7 +91,7 @@
                     "values": "Lister.fields.codes.subfields.specific_mattype.values"
                 },
                 "b": "DanMarc2.fields.009.subfields.b",
-                "h": "DanMarc2.fields.009.subfields.b"
+                "h": "DanMarc2.fields.009.subfields.h"
 			}
         },
         "011": "lokal-generel.fields.011",
