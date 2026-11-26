@@ -11,6 +11,7 @@ if [[ $# -ge 3 ]] ; then
 else
     echo "Must be called with three parameters <host> <port> <timeout> [label]:"
     echo "f.ex.: $0 localhost 8080 60 [label]"
+    echo "Current call : host $HOST port $PORT timeout $TIMEOUT"
     exit 1
 fi
 
@@ -19,8 +20,8 @@ echo -n "Waiting for rawrepo-record-service $3 to be ready ";
 
 echo "curl -m 5 http://${HOST}:${PORT}/api/howru 2>/dev/null"
 for i in $(seq 1 ${TIMEOUT}) ; do
-    RES=$(curl -m 5 http://${HOST}:${PORT}/api/howru 2>/dev/null)
-    if [ "$RES" == "{\"status\":200}" ] ; then
+    RES=$(curl -m 5 http://${HOST}:${PORT}/health/ready 2>/dev/null)
+    if [ "$RES" == "{\"status\":\"UP\",\"checks\":[]}" ] ; then
         echo " Done Waiting -$RES- (" $(( `date '+%s'` - START_TIME)) ")";
         exit 0
     fi

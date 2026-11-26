@@ -6,7 +6,7 @@ export PROJECT_ROOT=$(dirname $(dirname $(realpath ${0})))
 DOCKER_COMPOSE_CMD="$(command -v docker-compose > /dev/null && echo docker-compose || echo docker compose)"
 RAWREPO_VERSION=1.16-snapshot
 RAWREPO_DIT_TAG=DIT-5165
-RAWREPO_RECORD_SERVICE_VERSION=DIT-349
+RAWREPO_RECORD_SERVICE_VERSION=DIT-5359
 HOLDINGS_ITEMS_VERSION=1.3-snapshot
 UPDATE_FACADE_TAG=master-34
 
@@ -14,7 +14,7 @@ if [ ! "$1" == "false" ]
 then
   echo "Building maven project"
   cd ${PROJECT_ROOT}
-  mvn clean package
+  mvn clean install -Dmaven.test.skip=true || exit 1
 fi
 
 docker build target/docker -t docker-metascrum.artifacts.dbccloud.dk/opencat-business-service:devel

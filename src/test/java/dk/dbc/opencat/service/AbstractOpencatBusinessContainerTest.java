@@ -105,7 +105,7 @@ public class AbstractOpencatBusinessContainerTest {
                 .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
                 .withClasspathResourceMapping(".", "/currentdir", BindMode.READ_ONLY)
                 .withExposedPorts(8080)
-                .waitingFor(Wait.forHttp("/api/status"))
+                .waitingFor(Wait.forHttp("/health/ready"))
                 .withStartupTimeout(Duration.ofMinutes(2));
         recordServiceContainer.start();
         RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
@@ -123,7 +123,7 @@ public class AbstractOpencatBusinessContainerTest {
                 .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
                 .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
                 .withExposedPorts(8080)
-                .waitingFor(Wait.forHttp("/api/isready"))
+                .waitingFor(Wait.forHttp("/health/ready"))
                 .withStartupTimeout(Duration.ofMinutes(2));
         openCatBusinessContainer.start();
         openCatBusinessBaseURL = "http://" + openCatBusinessContainer.getContainerIpAddress() + ":" + openCatBusinessContainer.getMappedPort(8080);
