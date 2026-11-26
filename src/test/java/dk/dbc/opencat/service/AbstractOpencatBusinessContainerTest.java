@@ -43,9 +43,9 @@ public class AbstractOpencatBusinessContainerTest {
     private static final GenericContainer<?> holdingsItemsDbContainer;
     private static final GenericContainer<?> openCatBusinessContainer;
     private static final String JAVA_BASE_IMAGE = "docker-dbc.artifacts.dbccloud.dk/dbc-java11";
-    private static final String RAWREPO_DB_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres:DIT-5195";
+    private static final String RAWREPO_DB_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-postgres:DIT-5363";
     private static final String HOLDINGITEMS_DB_IMAGE = "docker-de.artifacts.dbccloud.dk/holdings-items-postgres-1.3:latest";
-    private static final String RECORD_SERVICE_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-330";
+    private static final String RECORD_SERVICE_IMAGE = "docker-metascrum.artifacts.dbccloud.dk/rawrepo-record-service:DIT-5359";
     private static final String WIREMOCK_JAR = "wiremock-standalone-2.5.1.jar";
 
     private static String RAWREPO_DB_BASE_URL;
@@ -88,6 +88,7 @@ public class AbstractOpencatBusinessContainerTest {
                 .withStartupTimeout(Duration.ofMinutes(1));
         holdingsItemsDbContainer.start();
         HOLDINGS_ITEMS_DB_URL = "holdings:holdings@holdingsItemsDb:5432/holdings";
+        String HOLDINGS_ITEMS_CONTENT_URL = "holdings:holdings@holdingsItemsDb:5432/api";
 
         recordServiceContainer = new GenericContainer(RECORD_SERVICE_IMAGE)
                 .withNetwork(network).withNetworkAliases("recordservice")
@@ -98,12 +99,13 @@ public class AbstractOpencatBusinessContainerTest {
                 .withEnv("VIPCORE_CACHE_AGE", "0")
                 .withEnv("RAWREPO_URL", RAWREPO_DB_BASE_URL)
                 .withEnv("HOLDINGS_URL", HOLDINGS_ITEMS_DB_URL)
+                .withEnv("HOLDING_ITEMS_CONTENT_SERVICE_URL", HOLDINGS_ITEMS_CONTENT_URL)
                 .withEnv("DUMP_THREAD_COUNT", "8")
                 .withEnv("DUMP_SLIZE_SIZE", "1000")
                 .withEnv("JAVA_MAX_HEAP_SIZE", "2G")
                 .withClasspathResourceMapping(".", "/currentdir", BindMode.READ_ONLY)
                 .withExposedPorts(8080)
-                .waitingFor(Wait.forHttp("/api/status"))
+                .waitingFor(Wait.forHttp("/health/ready"))
                 .withStartupTimeout(Duration.ofMinutes(2));
         recordServiceContainer.start();
         RECORD_SERVICE_BASE_URL = "http://recordservice:8080";
@@ -121,7 +123,7 @@ public class AbstractOpencatBusinessContainerTest {
                 .withEnv("OPENNUMBERROLL_NAME_FAUST_8", "faust")
                 .withEnv("OPENNUMBERROLL_NAME_FAUST", "faust")
                 .withExposedPorts(8080)
-                .waitingFor(Wait.forHttp("/api/isready"))
+                .waitingFor(Wait.forHttp("/health/ready"))
                 .withStartupTimeout(Duration.ofMinutes(2));
         openCatBusinessContainer.start();
         openCatBusinessBaseURL = "http://" + openCatBusinessContainer.getContainerIpAddress() + ":" + openCatBusinessContainer.getMappedPort(8080);
